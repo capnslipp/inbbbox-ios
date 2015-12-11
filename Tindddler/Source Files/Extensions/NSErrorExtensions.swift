@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+extension NSError {
+    convenience init(domain: String, code: Int, message: String) {
+        self.init(domain: domain, code: code, userInfo: [NSLocalizedDescriptionKey: message])
+    }
+}
