@@ -1,0 +1,26 @@
+PODS:
+  - HockeySDK (3.8.5):
+    - HockeySDK/AllFeaturesLib (= 3.8.5)
+  - HockeySDK/AllFeaturesLib (3.8.5)
+  - KIF (3.3.0):
+    - KIF/Core (= 3.3.0)
+  - KIF/Core (3.3.0)
+  - Nimble (3.0.0)
+  - Quick (0.8.0)
+  - SwiftyJSON (2.3.2)
+
+DEPENDENCIES:
+  - HockeySDK (~> 3.8)
+  - KIF (~> 3.3)
+  - Nimble (~> 3.0)
+  - Quick (~> 0.8)
+  - SwiftyJSON (~> 2.3)
+
+SPEC CHECKSUMS:
+  HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
+  KIF: 0a82046d06f3648799cac522d2d0f7934214caac
+  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+
+COCOAPODS: 0.39.0
