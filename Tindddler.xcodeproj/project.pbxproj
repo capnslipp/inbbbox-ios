@@ -22,6 +22,7 @@
 		BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69611D1C1B46BB000FC5D8 /* SecureNetworkService.swift */; };
 		BF6961201C1B470B000FC5D8 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69611F1C1B470B000FC5D8 /* Query.swift */; };
 		BF6961221C1B4805000FC5D8 /* HeaderAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961211C1B4805000FC5D8 /* HeaderAuthorizable.swift */; };
+		BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961251C1B57A5000FC5D8 /* NSErrorExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		BF69611D1C1B46BB000FC5D8 /* SecureNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecureNetworkService.swift; sourceTree = "<group>"; };
 		BF69611F1C1B470B000FC5D8 /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		BF6961211C1B4805000FC5D8 /* HeaderAuthorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderAuthorizable.swift; sourceTree = "<group>"; };
+		BF6961251C1B57A5000FC5D8 /* NSErrorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorExtensions.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -293,6 +295,7 @@
 		BF47EE2B1B4BBAF8002822D7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BF6961251C1B57A5000FC5D8 /* NSErrorExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				5E3A98501AA73FD500CE2F20 /* ViewController.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
+				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
