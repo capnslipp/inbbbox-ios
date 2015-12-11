@@ -6,6 +6,25 @@ PODS:
     - KIF/Core (= 3.3.0)
   - KIF/Core (3.3.0)
   - Nimble (3.0.0)
+  - OMGHTTPURLRQ (3.0.2):
+    - OMGHTTPURLRQ/RQ (= 3.0.2)
+  - OMGHTTPURLRQ/FormURLEncode (3.0.2)
+  - OMGHTTPURLRQ/RQ (3.0.2):
+    - OMGHTTPURLRQ/FormURLEncode
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (3.0.2)
+  - PromiseKit (3.0.0):
+    - PromiseKit/Foundation (= 3.0.0)
+    - PromiseKit/QuartzCore (= 3.0.0)
+    - PromiseKit/UIKit (= 3.0.0)
+  - PromiseKit/CorePromise (3.0.0)
+  - PromiseKit/Foundation (3.0.0):
+    - OMGHTTPURLRQ (~> 3.0.0)
+    - PromiseKit/CorePromise
+  - PromiseKit/QuartzCore (3.0.0):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (3.0.0):
+    - PromiseKit/CorePromise
   - Quick (0.8.0)
   - SwiftyJSON (2.3.2)
 
@@ -13,6 +32,7 @@ DEPENDENCIES:
   - HockeySDK (~> 3.8)
   - KIF (~> 3.3)
   - Nimble (~> 3.0)
+  - PromiseKit (~> 3.0)
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
 
@@ -20,6 +40,8 @@ SPEC CHECKSUMS:
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KIF: 0a82046d06f3648799cac522d2d0f7934214caac
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  OMGHTTPURLRQ: 8376dc887d76a5a7e2a67881dc788f917a2f437c
+  PromiseKit: 665540a1eb43156446872dcf49ed7dee6ebbe13b
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 

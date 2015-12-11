@@ -14,6 +14,7 @@ use_frameworks!
 
 xcodeproj 'Tindddler', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
 
+pod 'PromiseKit', '~> 3.0'
 pod 'SwiftyJSON', '~> 2.3'
 pod 'HockeySDK', '~> 3.8'
 
