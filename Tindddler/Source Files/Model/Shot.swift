@@ -13,6 +13,7 @@ struct Shot {
     let identifier: String
     let title: String?
     let description: String?
+    let user: User
 }
 
 extension Shot: Mappable {
@@ -20,7 +21,8 @@ extension Shot: Mappable {
         return { json in
             Shot(identifier: json[Key.Identifier.rawValue].stringValue,
                 title: json[Key.Title.rawValue].string,
-                description: json[Key.Description.rawValue].string
+                description: json[Key.Description.rawValue].string,
+                user: User.map(json[Key.User.rawValue])
             )
         }
     }
@@ -29,5 +31,6 @@ extension Shot: Mappable {
         case Identifier = "id"
         case Title = "title"
         case Description = "description"
+        case User = "user"
     }
 }
