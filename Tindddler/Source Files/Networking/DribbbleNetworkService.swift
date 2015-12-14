@@ -10,7 +10,7 @@ import Foundation
 
 struct DribbbleNetworkService: SecureNetworkService, HeaderAuthorizable {
     
-    let host = "api.dribbble.com/v1/"
+    let host = Dribbble.Host
     
     func authorizeRequest(request: NSMutableURLRequest) {
         let header = authorizationHeader(TokenStorage.currentToken)

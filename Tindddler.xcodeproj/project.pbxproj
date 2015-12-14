@@ -35,6 +35,7 @@
 		BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */; };
 		BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */; };
 		BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
+		BF9508521C1F12A300E39242 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508511C1F12A300E39242 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsQuery.swift; sourceTree = "<group>"; };
 		BF95084F1C1F0F7E00E39242 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		BF9508511C1F12A300E39242 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -284,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				BF29C2561B4AA5500053378F /* AppDelegate.swift */,
+				BF9508511C1F12A300E39242 /* Constants.swift */,
 				5E51B79B1AA9C3540018EDA9 /* Custom Views */,
 				BF47EE2B1B4BBAF8002822D7 /* Extensions */,
 				5E51B7981AA9C3280018EDA9 /* Model */,
@@ -690,6 +693,7 @@
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
+				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				5E3A98501AA73FD500CE2F20 /* ViewController.swift in Sources */,
 				BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */,
