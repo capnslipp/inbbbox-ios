@@ -18,6 +18,8 @@ pod 'Async',
     :git => "https://github.com/duemunk/Async.git",
     :tag => "1.4"
 
+pod 'KeychainAccess', '~> 2.3'
+
 pod 'PromiseKit', '~> 3.0'
 
 pod 'SwiftyJSON', '~> 2.3'
