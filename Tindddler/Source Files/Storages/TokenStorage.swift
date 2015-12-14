@@ -7,21 +7,26 @@
 //
 
 import Foundation
+import KeychainAccess
 
 final class TokenStorage {
     
-    private var KeychainService = "co.netguru.tindddler.keychain.token"
+    private static var KeychainService = "co.netguru.tindddler.keychain.token"
+    private static let keychain = Keychain(service: KeychainService)
     
     class var currentToken: String {
-        // NGRTodo: Implement token read from Keychain service
-        return ""
+        return keychain[Key.Token.rawValue] ?? ""
     }
     
     class func storeToken(token: String) {
-        // NGRTodo: Implement secure token storing procedure in Keychain service
+        keychain[Key.Token.rawValue] = token
     }
     
     class func clear() {
-        // NGRTodo: Implement removing stored token in Keychain service
+        keychain[Key.Token.rawValue] = nil
+    }
+    
+    private enum Key: String {
+        case Token = "co.netguru.tindddler.keychain.token.key"
     }
 }
