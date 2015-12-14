@@ -1,5 +1,5 @@
 //
-//  DribbleNetworkService.swift
+//  DribbbleNetworkService.swift
 //  Tindddler
 //
 //  Created by Radoslaw Szeja on 14/12/15.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct DribbleNetworkService: SecureNetworkService, HeaderAuthorizable {
+struct DribbbleNetworkService: SecureNetworkService, HeaderAuthorizable {
     
-    let host = ""
+    let host = "api.dribbble.com/v1/"
     
     func authorizeRequest(request: NSMutableURLRequest) {
         let header = authorizationHeader(TokenStorage.currentToken)
