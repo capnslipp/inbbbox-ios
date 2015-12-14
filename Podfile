@@ -14,8 +14,14 @@ use_frameworks!
 
 xcodeproj 'Tindddler', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
 
+pod 'Async',
+    :git => "https://github.com/duemunk/Async.git",
+    :tag => "1.4"
+
 pod 'PromiseKit', '~> 3.0'
+
 pod 'SwiftyJSON', '~> 2.3'
+
 pod 'HockeySDK', '~> 3.8'
 
 target 'Tests' do link_with 'Unit Tests', 'Functional Tests'

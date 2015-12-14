@@ -1,4 +1,5 @@
 PODS:
+  - Async (1.4.0)
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
@@ -29,6 +30,7 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - Async (from `https://github.com/duemunk/Async.git`, tag `1.4`)
   - HockeySDK (~> 3.8)
   - KIF (~> 3.3)
   - Nimble (~> 3.0)
@@ -36,7 +38,18 @@ DEPENDENCIES:
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
 
+EXTERNAL SOURCES:
+  Async:
+    :git: https://github.com/duemunk/Async.git
+    :tag: '1.4'
+
+CHECKOUT OPTIONS:
+  Async:
+    :git: https://github.com/duemunk/Async.git
+    :tag: '1.4'
+
 SPEC CHECKSUMS:
+  Async: 4221a3bed9b180d95dd01fb07256443124514375
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KIF: 0a82046d06f3648799cac522d2d0f7934214caac
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
