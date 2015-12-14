@@ -9,8 +9,9 @@
 import Foundation
 
 protocol NetworkService {
-    var host: String { get }
     var scheme: String { get }
+    var host: String { get }
+    var version: String { get }
     var serviceType: NSURLRequestNetworkServiceType { get }
     
     func authorizeRequest(request: NSMutableURLRequest)
