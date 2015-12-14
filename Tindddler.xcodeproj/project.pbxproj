@@ -39,6 +39,7 @@
 		BF9508541C1F15A100E39242 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508531C1F15A100E39242 /* Request.swift */; };
 		BF9508561C1F1BD000E39242 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508551C1F1BD000E39242 /* Shot.swift */; };
 		BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508571C1F1D8700E39242 /* Mappable.swift */; };
+		BF95085C1C1F208F00E39242 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95085B1C1F208F00E39242 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		BF9508531C1F15A100E39242 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		BF9508551C1F1BD000E39242 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		BF9508571C1F1D8700E39242 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
+		BF95085B1C1F208F00E39242 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -311,6 +313,7 @@
 			children = (
 				BF9508571C1F1D8700E39242 /* Mappable.swift */,
 				BF9508551C1F1BD000E39242 /* Shot.swift */,
+				BF95085B1C1F208F00E39242 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				BF6A6E101C1ED1E9001EDAB8 /* DateItem.swift in Sources */,
 				BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */,
 				BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */,
+				BF95085C1C1F208F00E39242 /* User.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
