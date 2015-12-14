@@ -33,6 +33,7 @@
 		BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E131C1ED1FD001EDAB8 /* DatePickerItem.swift */; };
 		BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */; };
 		BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */; };
+		BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		BF6A6E131C1ED1FD001EDAB8 /* DatePickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerItem.swift; sourceTree = "<group>"; };
 		BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleNetworkService.swift; sourceTree = "<group>"; };
 		BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
+		BF95084F1C1F0F7E00E39242 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -284,6 +286,7 @@
 				BF47EE2B1B4BBAF8002822D7 /* Extensions */,
 				5E51B7981AA9C3280018EDA9 /* Model */,
 				BF6961181C1B421F000FC5D8 /* Networking */,
+				BF95084E1C1F0F7400E39242 /* Helpers */,
 				BF47EE2C1B4BBAFF002822D7 /* Protocols */,
 				BF6A6E1A1C1F02FA001EDAB8 /* Storages */,
 				5E51B7991AA9C3310018EDA9 /* ViewControllers */,
@@ -371,6 +374,14 @@
 				BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */,
 			);
 			path = Storages;
+			sourceTree = "<group>";
+		};
+		BF95084E1C1F0F7400E39242 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BF95084F1C1F0F7E00E39242 /* Formatter.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -666,6 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6A6E101C1ED1E9001EDAB8 /* DateItem.swift in Sources */,
+				BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
