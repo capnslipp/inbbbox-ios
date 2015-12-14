@@ -27,18 +27,18 @@ extension Requestable {
     
     var foundationRequest: NSURLRequest {
         
-        let queryItems = query.parameters?.queryItems
+        let queryItems = query.parameters.queryItems
                 
         let components = NSURLComponents()
         components.scheme = query.service.scheme
         components.host = query.service.host
-        components.path = query.path
+        components.path = query.service.version + query.path
         components.queryItems = queryItems
         
         // Intentionally force unwrapping optional to get crash when problem occur
         let mutableRequest = NSMutableURLRequest(URL: components.URL!)
         mutableRequest.HTTPMethod = query.method.rawValue
-        mutableRequest.HTTPBody = query.parameters?.body
+        mutableRequest.HTTPBody = query.parameters.body
         
         if mutableRequest.HTTPBody != nil {
             mutableRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -49,7 +49,7 @@ extension Requestable {
         return mutableRequest
     }
     
-    mutating func resume() -> Promise<JSON?> {
+    func resume() -> Promise<JSON?> {
 
         let promise = Promise<JSON?> { fulfill, reject in
             let dataTask = self.session.dataTaskWithRequest(self.foundationRequest) { data, response, error in
