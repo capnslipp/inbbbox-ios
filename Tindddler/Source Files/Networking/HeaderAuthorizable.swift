@@ -8,7 +8,13 @@
 
 import Foundation
 
-typealias HTTPHeader = (header: String, value: String)
+struct HTTPHeader {
+    typealias Name = String
+    typealias Value = String
+    
+    let name: Name
+    let value: Value
+}
 
 /// Use this protocol to authorize with header
 protocol HeaderAuthorizable {
@@ -17,6 +23,6 @@ protocol HeaderAuthorizable {
 
 extension HeaderAuthorizable {
     func authorizationHeader(token: String) -> HTTPHeader {
-        return ("Authorization", "Bearer " + token)
+        return HTTPHeader(name: "Authorization", value: "Bearer " + token)
     }
 }
