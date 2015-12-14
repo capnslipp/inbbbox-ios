@@ -33,6 +33,7 @@
 		BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E131C1ED1FD001EDAB8 /* DatePickerItem.swift */; };
 		BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */; };
 		BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */; };
+		BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */; };
 		BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		BF6A6E131C1ED1FD001EDAB8 /* DatePickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerItem.swift; sourceTree = "<group>"; };
 		BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DribbbleNetworkService.swift; sourceTree = "<group>"; };
 		BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
+		BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsQuery.swift; sourceTree = "<group>"; };
 		BF95084F1C1F0F7E00E39242 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -342,6 +344,7 @@
 				BF6961211C1B4805000FC5D8 /* HeaderAuthorizable.swift */,
 				BF6961231C1B4D9D000FC5D8 /* Requestable.swift */,
 				BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */,
+				BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6A6E101C1ED1E9001EDAB8 /* DateItem.swift in Sources */,
+				BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */,
 				BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
