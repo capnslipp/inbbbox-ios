@@ -37,6 +37,7 @@
 		BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
 		BF9508521C1F12A300E39242 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508511C1F12A300E39242 /* Constants.swift */; };
 		BF9508541C1F15A100E39242 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508531C1F15A100E39242 /* Request.swift */; };
+		BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508571C1F1D8700E39242 /* Mappable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		BF95084F1C1F0F7E00E39242 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		BF9508511C1F12A300E39242 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BF9508531C1F15A100E39242 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		BF9508571C1F1D8700E39242 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -305,6 +307,7 @@
 		5E51B7981AA9C3280018EDA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BF9508571C1F1D8700E39242 /* Mappable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
+				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
