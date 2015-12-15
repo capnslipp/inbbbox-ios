@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3FBDD1B2DABF053615250478 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
-		5E1FF7671AA8A8BA00467837 /* MathSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FF7661AA8A8BA00467837 /* MathSpec.swift */; };
 		5E1FF7691AA8AB5A00467837 /* RootScreenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FF7681AA8AB5A00467837 /* RootScreenSpec.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
@@ -34,12 +33,23 @@
 		BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */; };
 		BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */; };
 		BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */; };
-		BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
 		BF9508521C1F12A300E39242 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508511C1F12A300E39242 /* Constants.swift */; };
 		BF9508541C1F15A100E39242 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508531C1F15A100E39242 /* Request.swift */; };
 		BF9508561C1F1BD000E39242 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508551C1F1BD000E39242 /* Shot.swift */; };
 		BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508571C1F1D8700E39242 /* Mappable.swift */; };
 		BF95085C1C1F208F00E39242 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95085B1C1F208F00E39242 /* User.swift */; };
+		BF95085E1C1F263200E39242 /* ShotsQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */; };
+		BF95085F1C1F26AB00E39242 /* ShotsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */; };
+		BF9508601C1F27B600E39242 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69611F1C1B470B000FC5D8 /* Query.swift */; };
+		BF9508611C1F27BF00E39242 /* SecureNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69611D1C1B46BB000FC5D8 /* SecureNetworkService.swift */; };
+		BF9508621C1F27C200E39242 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961191C1B443E000FC5D8 /* NetworkService.swift */; };
+		BF9508631C1F27C700E39242 /* DribbbleNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */; };
+		BF9508641C1F27D000E39242 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69611B1C1B4551000FC5D8 /* Parameters.swift */; };
+		BF9508651C1F27DE00E39242 /* HeaderAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961211C1B4805000FC5D8 /* HeaderAuthorizable.swift */; };
+		BF9508661C1F27E500E39242 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508511C1F12A300E39242 /* Constants.swift */; };
+		BF9508671C1F27EE00E39242 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */; };
+		BF9508681C1F27F700E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
+		BF9508691C1F27F800E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +76,6 @@
 		5E147CB51AA8B2D300EDD97C /* Tindddler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tindddler-Info.plist"; path = "Supporting Files/Tindddler-Info.plist"; sourceTree = "<group>"; };
 		5E147CB71AA8B2DC00EDD97C /* Unit-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit-Tests-Bridging-Header.h"; path = "Supporting Files/Unit-Tests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		5E147CB81AA8B2DC00EDD97C /* Unit-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit-Tests-Info.plist"; path = "Supporting Files/Unit-Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
-		5E1FF7661AA8A8BA00467837 /* MathSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathSpec.swift; sourceTree = "<group>"; };
 		5E1FF7681AA8AB5A00467837 /* RootScreenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootScreenSpec.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Tindddler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tindddler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98271AA7302B00CE2F20 /* Functional Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Functional Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +117,7 @@
 		BF9508551C1F1BD000E39242 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		BF9508571C1F1D8700E39242 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		BF95085B1C1F208F00E39242 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsQuerySpec.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -269,7 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				5E147CBC1AA8B54100EDD97C /* Helper */,
-				5E1FF7661AA8A8BA00467837 /* MathSpec.swift */,
+				BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -696,7 +706,6 @@
 			files = (
 				BF6A6E101C1ED1E9001EDAB8 /* DateItem.swift in Sources */,
 				BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */,
-				BF9508501C1F0F7E00E39242 /* Formatter.swift in Sources */,
 				BF95085C1C1F208F00E39242 /* User.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
@@ -712,6 +721,7 @@
 				5E3A98501AA73FD500CE2F20 /* ViewController.swift in Sources */,
 				BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
+				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
@@ -735,7 +745,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E1FF7671AA8A8BA00467837 /* MathSpec.swift in Sources */,
+				BF9508681C1F27F700E39242 /* Formatter.swift in Sources */,
+				BF9508621C1F27C200E39242 /* NetworkService.swift in Sources */,
+				BF9508641C1F27D000E39242 /* Parameters.swift in Sources */,
+				BF95085F1C1F26AB00E39242 /* ShotsQuery.swift in Sources */,
+				BF9508601C1F27B600E39242 /* Query.swift in Sources */,
+				BF95085E1C1F263200E39242 /* ShotsQuerySpec.swift in Sources */,
+				BF9508631C1F27C700E39242 /* DribbbleNetworkService.swift in Sources */,
+				BF9508651C1F27DE00E39242 /* HeaderAuthorizable.swift in Sources */,
+				BF9508671C1F27EE00E39242 /* TokenStorage.swift in Sources */,
+				BF9508611C1F27BF00E39242 /* SecureNetworkService.swift in Sources */,
+				BF9508661C1F27E500E39242 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

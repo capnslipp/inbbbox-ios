@@ -53,12 +53,22 @@ struct ShotsQuery: Query {
     /// Parameters accessors
     
     var list: List? {
-        get { return List(rawValue: parameters[Key.List.rawValue] as! String) }
+        get {
+            if let listValue = parameters[Key.List.rawValue] as? String {
+                return List(rawValue: listValue)
+            }
+            return nil
+        }
         set { parameters[Key.List.rawValue] = newValue?.rawValue }
     }
     
     var timeFrame: TimeFrame? {
-        get { return TimeFrame(rawValue: parameters[Key.Timeframe.rawValue] as! String) }
+        get {
+            if let timeFrameValue = parameters[Key.Timeframe.rawValue] as? String {
+                return TimeFrame(rawValue: timeFrameValue)
+            }
+            return nil
+        }
         set { parameters[Key.Timeframe.rawValue] = newValue?.rawValue }
 
     }
@@ -78,7 +88,12 @@ struct ShotsQuery: Query {
     }
     
     var sort: Sort? {
-        get { return Sort(rawValue: parameters[Key.Sort.rawValue] as! String) }
+        get {
+            if let sortValue = parameters[Key.Sort.rawValue] as? String {
+                return Sort(rawValue: sortValue)
+            }
+            return nil
+        }
         set { parameters[Key.Sort.rawValue] = newValue?.rawValue }
     }
 }
