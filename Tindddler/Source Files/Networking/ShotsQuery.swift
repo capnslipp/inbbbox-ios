@@ -70,7 +70,6 @@ struct ShotsQuery: Query {
             return nil
         }
         set { parameters[Key.Timeframe.rawValue] = newValue?.rawValue }
-
     }
     
     var date: NSDate? {

@@ -34,7 +34,6 @@ class ShotsQuerySpec: QuickSpec {
             
             it("should have correct service instance") {
                 expect(sut.service is DribbbleNetworkService).to(beTrue())
-                
             }
             
             it("should have correct parameters encoding") {
