@@ -12,7 +12,6 @@
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
 		5E3A98501AA73FD500CE2F20 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A984B1AA73FD500CE2F20 /* ViewController.swift */; };
-		5E51B7961AA9B9C70018EDA9 /* SwiftKIFExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E51B7951AA9B9C70018EDA9 /* SwiftKIFExtension.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
@@ -91,7 +90,6 @@
 		5E3A98561AA741FA00CE2F20 /* Tests-Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Production.xcconfig"; path = "Configuration/Tests-Production.xcconfig"; sourceTree = "<group>"; };
 		5E3A98571AA741FA00CE2F20 /* Tests-Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Staging.xcconfig"; path = "Configuration/Tests-Staging.xcconfig"; sourceTree = "<group>"; };
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
-		5E51B7951AA9B9C70018EDA9 /* SwiftKIFExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftKIFExtension.swift; path = Helpers/SwiftKIFExtension.swift; sourceTree = "<group>"; };
 		5E51B7971AA9BC040018EDA9 /* Functional-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Functional-Tests-Bridging-Header.h"; path = "Supporting Files/Functional-Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -163,14 +161,6 @@
 				E863DC0075B8561A39153AA0 /* Pods_Tests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5E147CBB1AA8B40C00EDD97C /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				5E51B7951AA9B9C70018EDA9 /* SwiftKIFExtension.swift */,
-			);
-			name = Helper;
 			sourceTree = "<group>";
 		};
 		5E147CBC1AA8B54100EDD97C /* Helper */ = {
@@ -269,7 +259,6 @@
 		5E3A98281AA7302B00CE2F20 /* Functional Tests */ = {
 			isa = PBXGroup;
 			children = (
-				5E147CBB1AA8B40C00EDD97C /* Helper */,
 				5E1FF7681AA8AB5A00467837 /* RootScreenSpec.swift */,
 			);
 			path = "Functional Tests";
@@ -736,7 +725,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E51B7961AA9B9C70018EDA9 /* SwiftKIFExtension.swift in Sources */,
 				5E1FF7691AA8AB5A00467837 /* RootScreenSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

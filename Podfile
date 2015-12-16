@@ -28,9 +28,6 @@ pod 'HockeySDK', '~> 3.8'
 
 target 'Tests' do link_with 'Unit Tests', 'Functional Tests'
 
-    pod 'KIF', '~> 3.3',
-        :configurations => ['Test']
-
     pod 'Quick', '~> 0.8',
         :configurations => ['Test']
 

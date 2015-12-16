@@ -4,9 +4,6 @@ PODS:
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
   - KeychainAccess (2.3.3)
-  - KIF (3.3.0):
-    - KIF/Core (= 3.3.0)
-  - KIF/Core (3.3.0)
   - Nimble (3.0.0)
   - OMGHTTPURLRQ (3.0.2):
     - OMGHTTPURLRQ/RQ (= 3.0.2)
@@ -34,7 +31,6 @@ DEPENDENCIES:
   - Async (from `https://github.com/duemunk/Async.git`, tag `1.4`)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
-  - KIF (~> 3.3)
   - Nimble (~> 3.0)
   - PromiseKit (~> 3.0)
   - Quick (~> 0.8)
@@ -54,7 +50,6 @@ SPEC CHECKSUMS:
   Async: 4221a3bed9b180d95dd01fb07256443124514375
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
-  KIF: 0a82046d06f3648799cac522d2d0f7934214caac
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   OMGHTTPURLRQ: 8376dc887d76a5a7e2a67881dc788f917a2f437c
   PromiseKit: 665540a1eb43156446872dcf49ed7dee6ebbe13b

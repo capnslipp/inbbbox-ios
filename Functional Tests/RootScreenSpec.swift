@@ -17,9 +17,4 @@ class RootScreenSpec: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
-    
-    func testShouldHelloTextBeVisible() {
-        self.tester().waitForViewWithAccessibilityLabel("Hello, worldguru!")
-    }
-    
 }
