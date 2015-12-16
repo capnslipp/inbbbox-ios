@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3FBDD1B2DABF053615250478 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
-		5E1FF7691AA8AB5A00467837 /* RootScreenSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FF7681AA8AB5A00467837 /* RootScreenSpec.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
-		5E3A98501AA73FD500CE2F20 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A984B1AA73FD500CE2F20 /* ViewController.swift */; };
+		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
@@ -75,13 +74,11 @@
 		5E147CB51AA8B2D300EDD97C /* Tindddler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tindddler-Info.plist"; path = "Supporting Files/Tindddler-Info.plist"; sourceTree = "<group>"; };
 		5E147CB71AA8B2DC00EDD97C /* Unit-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit-Tests-Bridging-Header.h"; path = "Supporting Files/Unit-Tests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		5E147CB81AA8B2DC00EDD97C /* Unit-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit-Tests-Info.plist"; path = "Supporting Files/Unit-Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
-		5E1FF7681AA8AB5A00467837 /* RootScreenSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootScreenSpec.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Tindddler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tindddler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98271AA7302B00CE2F20 /* Functional Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Functional Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		5E3A98481AA73FD500CE2F20 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5E3A984B1AA73FD500CE2F20 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5E3A98511AA741FA00CE2F20 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = Configuration/Development.xcconfig; sourceTree = "<group>"; };
 		5E3A98521AA741FA00CE2F20 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Production.xcconfig; path = Configuration/Production.xcconfig; sourceTree = "<group>"; };
 		5E3A98531AA741FA00CE2F20 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Staging.xcconfig; path = Configuration/Staging.xcconfig; sourceTree = "<group>"; };
@@ -91,6 +88,7 @@
 		5E3A98571AA741FA00CE2F20 /* Tests-Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Staging.xcconfig"; path = "Configuration/Tests-Staging.xcconfig"; sourceTree = "<group>"; };
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
 		5E51B7971AA9BC040018EDA9 /* Functional-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Functional-Tests-Bridging-Header.h"; path = "Supporting Files/Functional-Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BF69611B1C1B4551000FC5D8 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				5E3A97EA1AA72F0A00CE2F20 /* Tindddler */,
-				5E3A98281AA7302B00CE2F20 /* Functional Tests */,
 				5E3A98371AA73A6500CE2F20 /* Unit Tests */,
 				5E3A980F1AA72F7C00CE2F20 /* Supporting Files */,
 				5E3A98101AA72F8B00CE2F20 /* Configuraton */,
@@ -256,14 +253,6 @@
 			name = "Functional Tests";
 			sourceTree = "<group>";
 		};
-		5E3A98281AA7302B00CE2F20 /* Functional Tests */ = {
-			isa = PBXGroup;
-			children = (
-				5E1FF7681AA8AB5A00467837 /* RootScreenSpec.swift */,
-			);
-			path = "Functional Tests";
-			sourceTree = "<group>";
-		};
 		5E3A98371AA73A6500CE2F20 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,7 +309,7 @@
 		5E51B7991AA9C3310018EDA9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5E3A984B1AA73FD500CE2F20 /* ViewController.swift */,
+				5E650B401C21884C00F8A192 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -707,7 +696,6 @@
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
-				5E3A98501AA73FD500CE2F20 /* ViewController.swift in Sources */,
 				BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
@@ -717,6 +705,7 @@
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
+				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,7 +714,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E1FF7691AA8AB5A00467837 /* RootScreenSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
