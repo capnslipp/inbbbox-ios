@@ -1,6 +1,6 @@
 //
 //  ParametersSpec.swift
-//  Tindddler
+//  Inbbbox
 //
 //  Created by Radoslaw Szeja on 15/12/15.
 //  Copyright © 2015 Netguru Sp. z o.o. All rights reserved.
@@ -9,9 +9,9 @@
 import Quick
 import Nimble
 
-import Tindddler
+import Inbbbox
 
-@testable import Tindddler
+@testable import Inbbbox
 
 class ParametersSpec: QuickSpec {
     override func spec() {

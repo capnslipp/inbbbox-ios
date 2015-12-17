@@ -12,7 +12,7 @@ platform :ios, '8.0'
 inhibit_all_warnings!
 use_frameworks!
 
-xcodeproj 'Tindddler', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
+xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
 
 pod 'Async',
     :git => "https://github.com/duemunk/Async.git",

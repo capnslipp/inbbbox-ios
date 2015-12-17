@@ -1,6 +1,6 @@
-#  Tindddler
+#  Inbbbox
 
-Tindddler is an application where you can browse shots from Dribbble in easy enjoyable way!
+Inbbbox is an application where you can browse shots from Dribbble in easy enjoyable way!
 
 ### Tools & requirements
 

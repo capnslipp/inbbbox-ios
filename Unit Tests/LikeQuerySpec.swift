@@ -1,6 +1,6 @@
 //
 //  LikeQuerySpec.swift
-//  Tindddler
+//  Inbbbox
 //
 //  Created by Radoslaw Szeja on 17/12/15.
 //  Copyright © 2015 Netguru Sp. z o.o. All rights reserved.
@@ -9,9 +9,9 @@
 import Quick
 import Nimble
 
-import Tindddler
+import Inbbbox
 
-@testable import Tindddler
+@testable import Inbbbox
 
 class LikeQuerySpec: QuickSpec {
     override func spec() {
