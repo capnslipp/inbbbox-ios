@@ -9,6 +9,10 @@
 import Quick
 import Nimble
 
+import Tindddler
+
+@testable import Tindddler
+
 class ShotsQuerySpec: QuickSpec {
     override func spec() {
         
