@@ -17,14 +17,19 @@ class ShotsCollectionViewController: UICollectionViewController {
         collectionView?.registerClass(ShotCollectionViewCell.self, forCellWithReuseIdentifier: shotCollectionViewCellIdentifier)
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        collectionView?.contentInset = UIEdgeInsetsMake(topLayoutGuide.length, 0, bottomLayoutGuide.length, 0)
+    }
+
 //    MARK: - UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 100
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCellWithReuseIdentifier(shotCollectionViewCellIdentifier, forIndexPath: indexPath)
     }
-
 }

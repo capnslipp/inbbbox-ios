@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let shotsCollectionViewController = ShotsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
-        window!.rootViewController = shotsCollectionViewController
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [shotsCollectionViewController]
+        window!.rootViewController = tabBarController 
         window!.makeKeyAndVisible()
         
         return true
