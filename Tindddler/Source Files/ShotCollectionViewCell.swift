@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ShotCollectionViewCell: UICollectionViewCell {
+class ShotCollectionViewCell: UICollectionViewCell, HeightAware {
 
 //    MARK: - Life cycle
 
@@ -16,5 +16,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
 
         contentView.backgroundColor = UIColor.greenColor()
+    }
+
+    static func prefferedHeight() -> CGFloat {
+        return CGFloat(235)
     }
 }
