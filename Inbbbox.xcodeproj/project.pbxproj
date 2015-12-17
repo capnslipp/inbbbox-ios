@@ -15,6 +15,7 @@
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
 		BEEE96237BB8FBFFB2C18C77 /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE96B6F717CD3DF537A098 /* ShotsCollectionViewController.swift */; };
+		BEEE9E74EFDD39DD8D5E2EFE /* ShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE919F1C9DDD2ACBE3007D /* ShotCollectionViewCell.swift */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
 		BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961191C1B443E000FC5D8 /* NetworkService.swift */; };
 		BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69611B1C1B4551000FC5D8 /* Parameters.swift */; };
@@ -93,6 +94,7 @@
 		5E3A98571AA741FA00CE2F20 /* Tests-Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Staging.xcconfig"; path = "Configuration/Tests-Staging.xcconfig"; sourceTree = "<group>"; };
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BEEE919F1C9DDD2ACBE3007D /* ShotCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEEE96B6F717CD3DF537A098 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */,
 				F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */,
 				F09307D11C24208F005F5111 /* AvatarView.swift */,
+				BEEE919F1C9DDD2ACBE3007D /* ShotCollectionViewCell.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
 				BEEE96237BB8FBFFB2C18C77 /* ShotsCollectionViewController.swift in Sources */,
+				BEEE9E74EFDD39DD8D5E2EFE /* ShotCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
