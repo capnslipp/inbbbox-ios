@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ShotsCollectionViewController: UICollectionViewController {
+class ShotsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     let shotCollectionViewCellIdentifier = "ShotCollectionViewCellIdentifier"
 
@@ -31,5 +31,12 @@ class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCellWithReuseIdentifier(shotCollectionViewCellIdentifier, forIndexPath: indexPath)
+    }
+
+//    MARK: - UICollectionViewDelegateFlowLayout
+
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let margin = CGFloat(10.0)
+        return CGSizeMake(CGRectGetWidth(collectionView.bounds) - margin * 2, 100)
     }
 }
