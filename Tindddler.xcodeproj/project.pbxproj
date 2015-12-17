@@ -40,6 +40,8 @@
 		BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95086A1C20790200E39242 /* ParametersSpec.swift */; };
 		BFB30C0A1C23014500DD22BD /* LikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C091C23014500DD22BD /* LikeQuery.swift */; };
 		BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */; };
+		BFB30C0E1C2311CB00DD22BD /* UnlikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0D1C2311CB00DD22BD /* UnlikeQuery.swift */; };
+		BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		BF95086A1C20790200E39242 /* ParametersSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersSpec.swift; sourceTree = "<group>"; };
 		BFB30C091C23014500DD22BD /* LikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuery.swift; sourceTree = "<group>"; };
 		BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuerySpec.swift; sourceTree = "<group>"; };
+		BFB30C0D1C2311CB00DD22BD /* UnlikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuery.swift; sourceTree = "<group>"; };
+		BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -238,6 +242,7 @@
 				BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */,
 				BF95086A1C20790200E39242 /* ParametersSpec.swift */,
 				BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */,
+				BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				BF69611D1C1B46BB000FC5D8 /* SecureNetworkService.swift */,
 				BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */,
 				BFB30C091C23014500DD22BD /* LikeQuery.swift */,
+				BFB30C0D1C2311CB00DD22BD /* UnlikeQuery.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -586,6 +592,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB30C0E1C2311CB00DD22BD /* UnlikeQuery.swift in Sources */,
 				BF6A6E101C1ED1E9001EDAB8 /* DateItem.swift in Sources */,
 				BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */,
 				BF95085C1C1F208F00E39242 /* User.swift in Sources */,
@@ -620,6 +627,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF95085E1C1F263200E39242 /* ShotsQuerySpec.swift in Sources */,
+				BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */,
 				BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */,
 				BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */,
 			);
