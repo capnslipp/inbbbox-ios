@@ -36,8 +36,10 @@ private extension SettingsTableHeaderView {
         backgroundColor = UIColor.clearColor()
         
         avatarView.imageView.image = UIImage() //NGRFix: provide the image
-
+        userName.text = "Scarlett Johansson" //NGRFix: provide the name
+        
         addSubview(avatarView)
+        addSubview(userName)
         
         defineConstraints()
     }
