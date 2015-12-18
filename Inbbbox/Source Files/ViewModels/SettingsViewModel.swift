@@ -52,7 +52,7 @@ class SettingsViewModel: GroupedListViewModel {
             // NGRTodo: make reminderDateCell active or not and setup notification on/off
         }
         
-        reminderDateItem.onValueChanged = {date -> Void in
+        reminderDateItem.onValueChanged = { date -> Void in
             // NGRTodo: plan notifications?
         }
         
