@@ -13,13 +13,12 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     private weak var aView: GroupedBaseTableView?
-    private var viewModel: SettingsViewModel!
+    private let viewModel = SettingsViewModel()
     
     init() {
-        self.viewModel = SettingsViewModel()
         super.init(nibName: nil, bundle: nil)
-        self.viewModel.delegate = self
-        self.title = self.viewModel.title
+        viewModel.delegate = self
+        title = self.viewModel.title
     }
     
     required init?(coder aDecoder: NSCoder) {
