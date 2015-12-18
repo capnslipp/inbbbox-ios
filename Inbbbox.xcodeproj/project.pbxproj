@@ -118,9 +118,9 @@
 		BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuerySpec.swift; sourceTree = "<group>"; };
 		BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedBaseTableView.swift; sourceTree = "<group>"; };
-		F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseTableView.swift; sourceTree = "<group>"; };
-		F0863DBF1C23F2360062EA21 /* EventedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventedTableView.swift; sourceTree = "<group>"; };
+		F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupedBaseTableView.swift; path = Views/GroupedBaseTableView.swift; sourceTree = "<group>"; };
+		F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBaseTableView.swift; path = Views/UIBaseTableView.swift; sourceTree = "<group>"; };
+		F0863DBF1C23F2360062EA21 /* EventedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventedTableView.swift; path = Views/EventedTableView.swift; sourceTree = "<group>"; };
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
 		F0863DC31C23F3DB0062EA21 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
