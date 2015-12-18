@@ -46,7 +46,7 @@ extension Requestable {
         
         query.service.authorizeRequest(mutableRequest)
         
-        return mutableRequest
+        return mutableRequest.copy() as! NSURLRequest
     }
     
     func resume() -> Promise<JSON?> {

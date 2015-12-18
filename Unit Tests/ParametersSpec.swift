@@ -9,8 +9,6 @@
 import Quick
 import Nimble
 
-import Inbbbox
-
 @testable import Inbbbox
 
 class ParametersSpec: QuickSpec {
