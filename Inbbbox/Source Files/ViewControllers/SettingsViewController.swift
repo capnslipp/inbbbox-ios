@@ -28,6 +28,7 @@ class SettingsViewController: UIViewController {
     
     override func loadView() {
         aView = loadViewWithClass(GroupedBaseTableView.self)
+        aView?.tableView.tableHeaderView = SettingsTableHeaderView()
     }
     
     override func viewDidLoad() {
@@ -43,7 +44,12 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: ModelUpdatable {
     
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath]) {
-        // NGRTodo: implement me!
+        for indexPath in indexPaths {
+            if let cell = aView?.tableView.cellForRowAtIndexPath(indexPath) {
+                let item = viewModel[indexPath.section][indexPath.row]
+                configureSettingCell(cell, forItem: item)
+            }
+        }
     }
     
     func addedItemsAtIndexPaths(indexPaths: [NSIndexPath]) {
@@ -68,8 +74,12 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        // NGRTodo: implement me!
-        return UITableViewCell()
+        let item = viewModel[indexPath.section][indexPath.row]
+        let cell = tableView.cellForItemCategory(item.category)
+        
+        configureSettingCell(cell, forItem: item)
+        
+        return cell ?? UITableViewCell()
     }
 }
 
@@ -107,18 +117,50 @@ extension SettingsViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        // NGRTodo: implement me!
-        return CGFloat()
-    }
-    
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        // NGRTodo: implement me!
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? NSLocalizedString("Notifications", comment: "") : ""
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         viewModel.handleSelectionAtIndexPath(indexPath)
         tableView.deselectRowIfSelectedAnimated(true)
+    }
+}
+
+// MARK Configure cells
+
+private extension SettingsViewController {
+    
+    func configureSettingCell(cell: UITableViewCell, forItem item: GroupItem) {
+        if let item = item as? SwitchItem {
+            configureSwitchCell(cell as! SwitchCell, forItem: item)
+        } else if let item = item as? DateItem {
+            configureDateCell(cell as! DateCell, forItem: item)
+        } else if let item = item as? DatePickerItem {
+            configureDatePickerCell(cell as! DatePickerCell, forItem: item)
+        } else if let item = item as? ButtonItem {
+            configureButtonCell(cell as! ButtonCell, forItem: item)
+        }
+    }
+    
+    func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem) {
+        cell.textLabel?.text = item.title
+        cell.selectionStyle = .None
+    }
+    
+    func configureDateCell(cell: DateCell, forItem item: DateItem) {
+        cell.textLabel?.text = item.title
+        cell.setDateText(item.dateString, withValidationError: item.validationError)
+        cell.shouldBeGreyedOut = !item.active
+    }
+    
+    func configureDatePickerCell(cell: DatePickerCell, forItem item: DatePickerItem) {
+        cell.selectionStyle = .None
+    }
+    
+    func configureButtonCell(cell: ButtonCell, forItem item: ButtonItem) {
+        cell.buttonControl.titleLabel?.text = item.title
+        cell.selectionStyle = .None
     }
 }
 

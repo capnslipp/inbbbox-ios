@@ -56,6 +56,8 @@
 		F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
 		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
+		F09307CE1C241A92005F5111 /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */; };
+		F09307D21C24208F005F5111 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307D11C24208F005F5111 /* AvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +134,8 @@
 		F09307C71C240609005F5111 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F09307C91C240656005F5111 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableHeaderView.swift; path = Views/SettingsTableHeaderView.swift; sourceTree = "<group>"; };
+		F09307D11C24208F005F5111 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarView.swift; path = Views/AvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +330,8 @@
 				F0863DCB1C23FB970062EA21 /* SwitchCell.swift */,
 				F0863DCD1C23FBEA0062EA21 /* DateCell.swift */,
 				F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */,
+				F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */,
+				F09307D11C24208F005F5111 /* AvatarView.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
 				F0863DCE1C23FBEA0062EA21 /* DateCell.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
+				F09307D21C24208F005F5111 /* AvatarView.swift in Sources */,
 				F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */,
 				F0863DCA1C23FB7C0062EA21 /* ButtonCell.swift in Sources */,
 				F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */,
@@ -643,6 +650,7 @@
 				F0863DC01C23F2360062EA21 /* EventedTableView.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
+				F09307CE1C241A92005F5111 /* SettingsTableHeaderView.swift in Sources */,
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
