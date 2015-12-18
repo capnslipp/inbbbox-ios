@@ -48,6 +48,7 @@
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
 		F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC31C23F3DB0062EA21 /* Reusable.swift */; };
 		F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */; };
+		F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC71C23F6160062EA21 /* ButtonItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
 		F0863DC31C23F3DB0062EA21 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		F0863DC71C23F6160062EA21 /* ButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,6 +377,7 @@
 				BF6A6E0F1C1ED1E9001EDAB8 /* DateItem.swift */,
 				BF6A6E111C1ED1F6001EDAB8 /* SwitchItem.swift */,
 				BF6A6E131C1ED1FD001EDAB8 /* DatePickerItem.swift */,
+				F0863DC71C23F6160062EA21 /* ButtonItem.swift */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				F0863DBC1C23F20D0062EA21 /* GroupedBaseTableView.swift in Sources */,
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
+				F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				F0863DC01C23F2360062EA21 /* EventedTableView.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
