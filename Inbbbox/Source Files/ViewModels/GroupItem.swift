@@ -7,3 +7,29 @@
 //
 
 import Foundation
+
+protocol Updatable {
+    func update()
+}
+
+protocol Validatable {
+    var valueToValidate: AnyObject { get }
+    var validationError: NSError? { get }
+    func validate(object: AnyObject) -> NSError?
+}
+
+class GroupItem: NSObject {
+    
+    enum Category {
+        case Action, PlainText, LongText, Date, Picker, Boolean
+    }
+    
+    let title: String
+    let category: Category
+    var active = true
+    
+    init(title: String, category: Category) {
+        self.title = title
+        self.category = category
+    }
+}
