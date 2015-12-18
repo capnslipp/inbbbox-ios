@@ -8,6 +8,6 @@
 
 import Foundation
 
-@objc protocol StringConvertible {
+protocol StringConvertible {
     func string() -> String
 }
