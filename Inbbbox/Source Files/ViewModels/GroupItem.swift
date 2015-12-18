@@ -18,7 +18,7 @@ protocol Validatable {
     func validate(object: AnyObject) -> NSError?
 }
 
-class GroupItem: NSObject {
+class GroupItem: Equatable {
     
     enum Category {
         case Action, PlainText, LongText, Date, Picker, Boolean
@@ -31,5 +31,13 @@ class GroupItem: NSObject {
     init(title: String, category: Category) {
         self.title = title
         self.category = category
+    }
+}
+
+func ==(lhs: GroupItem, rhs: GroupItem) -> Bool {
+    if lhs.title == rhs.title && lhs.category == rhs.category && lhs.active == rhs.active {
+        return true
+    } else {
+        return false
     }
 }
