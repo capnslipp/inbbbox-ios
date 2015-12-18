@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let shotsCollectionViewController = ShotsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let shotsCollectionViewController = ShotsCollectionViewController(collectionViewLayout: ShotsCollectionViewFlowLayout())
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [shotsCollectionViewController]
         window!.rootViewController = tabBarController 
