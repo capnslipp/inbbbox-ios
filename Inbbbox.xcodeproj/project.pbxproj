@@ -53,6 +53,8 @@
 		F0863DCC1C23FB970062EA21 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCB1C23FB970062EA21 /* SwitchCell.swift */; };
 		F0863DCE1C23FBEA0062EA21 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCD1C23FBEA0062EA21 /* DateCell.swift */; };
 		F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */; };
+		F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
+		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +128,8 @@
 		F0863DCB1C23FB970062EA21 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchCell.swift; path = Views/SwitchCell.swift; sourceTree = "<group>"; };
 		F0863DCD1C23FBEA0062EA21 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateCell.swift; path = Views/DateCell.swift; sourceTree = "<group>"; };
 		F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerCell.swift; path = Views/DatePickerCell.swift; sourceTree = "<group>"; };
+		F09307C71C240609005F5111 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		F09307C91C240656005F5111 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				5E650B401C21884C00F8A192 /* LoginViewController.swift */,
+				F09307C71C240609005F5111 /* SettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 				BF6A6E061C1ED155001EDAB8 /* Listable.swift */,
 				BF6A6E081C1ED166001EDAB8 /* ListViewModel.swift */,
 				BF6A6E0A1C1ED16E001EDAB8 /* GroupedListViewModel.swift */,
+				F09307C91C240656005F5111 /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -628,6 +634,7 @@
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
 				F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */,
 				F0863DCA1C23FB7C0062EA21 /* ButtonCell.swift in Sources */,
+				F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				F0863DC01C23F2360062EA21 /* EventedTableView.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
@@ -636,6 +643,7 @@
 				BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
+				F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
 				F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */,

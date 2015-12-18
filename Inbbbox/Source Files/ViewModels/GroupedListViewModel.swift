@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 protocol ExtendedIndexPathOperatable: IndexPathOperatable {
     func indexPathsForItems(items: [GroupItem]) -> [NSIndexPath]?
     func indexPathsForItemOfType(itemType: GroupItem.Type) -> [NSIndexPath]?
@@ -46,4 +45,3 @@ extension GroupedListViewModel: ExtendedIndexPathOperatable {
         return indexPaths.isEmpty ? nil : indexPaths
     }
 }
-
