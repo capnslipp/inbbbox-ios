@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ShotsCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ShotsCollectionViewController: UICollectionViewController {
 
     let shotCollectionViewCellIdentifier = "ShotCollectionViewCellIdentifier"
 
@@ -27,7 +27,7 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
 //    MARK: - UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -36,19 +36,18 @@ class ShotsCollectionViewController: UICollectionViewController, UICollectionVie
 
 //    MARK: - UICollectionViewDelegateFlowLayout
 
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+//        let margin = CGFloat(30)
+//        return CGSizeMake(CGRectGetWidth(collectionView.bounds) - margin * 2, ShotCollectionViewCell.prefferedHeight())
+//    }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let margin = CGFloat(30)
-        return CGSizeMake(CGRectGetWidth(collectionView.bounds) - margin * 2, ShotCollectionViewCell.prefferedHeight())
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+//        return CGFloat(CGRectGetHeight(collectionView.bounds) - ShotCollectionViewCell.prefferedHeight())
+//    }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return CGFloat(CGRectGetHeight(collectionView.bounds) - ShotCollectionViewCell.prefferedHeight())
-    }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        let topMargin = round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight() / 2)
-        let bottomMargin = topMargin
-        return UIEdgeInsetsMake(topMargin, 0, bottomMargin, 0)
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+//        let topMargin = round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight() / 2)
+//        let bottomMargin = topMargin
+//        return UIEdgeInsetsMake(topMargin, 0, bottomMargin, 0)
+//    }
 }

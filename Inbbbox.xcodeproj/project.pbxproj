@@ -61,6 +61,7 @@
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
 		F09307CE1C241A92005F5111 /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */; };
 		F09307D21C24208F005F5111 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307D11C24208F005F5111 /* AvatarView.swift */; };
+		FF13A5AC043E0926AE318725 /* ShotsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A1E1ACEB504979E4D298 /* ShotsCollectionViewFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableHeaderView.swift; path = Views/SettingsTableHeaderView.swift; sourceTree = "<group>"; };
 		F09307D11C24208F005F5111 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarView.swift; path = Views/AvatarView.swift; sourceTree = "<group>"; };
+		FF13A1E1ACEB504979E4D298 /* ShotsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +306,7 @@
 				BF6A6E1A1C1F02FA001EDAB8 /* Storages */,
 				5E51B7991AA9C3310018EDA9 /* ViewControllers */,
 				BF6A6E051C1ED147001EDAB8 /* ViewModels */,
+				FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */,
 			);
 			path = "Source Files";
 			sourceTree = "<group>";
@@ -340,7 +343,7 @@
 				F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */,
 				F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */,
 				F09307D11C24208F005F5111 /* AvatarView.swift */,
-				BEEE919F1C9DDD2ACBE3007D /* ShotCollectionViewCell.swift */,
+				BEEE919F1C9DDD2ACBE3007D,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -429,6 +432,14 @@
 				F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				FF13A1E1ACEB504979E4D298 /* ShotsCollectionViewFlowLayout.swift */,
+			);
+			path = "Collection View Layouts";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -695,6 +706,10 @@
 				BEEE96237BB8FBFFB2C18C77 /* ShotsCollectionViewController.swift in Sources */,
 				BEEE9E74EFDD39DD8D5E2EFE /* ShotCollectionViewCell.swift in Sources */,
 				BEEE98ED9FAFDB65F1690FA3 /* HeightAware.swift in Sources */,
+				BEEE96237BB8FBFFB2C18C77,
+				BEEE9E74EFDD39DD8D5E2EFE,
+				BEEE98ED9FAFDB65F1690FA3,
+				FF13A5AC043E0926AE318725 /* ShotsCollectionViewFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
