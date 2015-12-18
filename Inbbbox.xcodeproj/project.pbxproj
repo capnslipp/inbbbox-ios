@@ -308,6 +308,16 @@
 			path = "Source Files";
 			sourceTree = "<group>";
 		};
+		5E498D461C24468200CFD918 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				5E10BFC01C23389C009EF53A /* LikeQuery.swift */,
+				BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */,
+				5E10BFC21C2338A6009EF53A /* UnlikeQuery.swift */,
+			);
+			name = Queries;
+			sourceTree = "<group>";
+		};
 		5E51B7981AA9C3280018EDA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,9 +384,7 @@
 				BF9508531C1F15A100E39242 /* Request.swift */,
 				BF6961231C1B4D9D000FC5D8 /* Requestable.swift */,
 				BF69611D1C1B46BB000FC5D8 /* SecureNetworkService.swift */,
-				BF6A6E1D1C1F0A7D001EDAB8 /* ShotsQuery.swift */,
-				5E10BFC21C2338A6009EF53A /* UnlikeQuery.swift */,
-				5E10BFC01C23389C009EF53A /* LikeQuery.swift */,
+				5E498D461C24468200CFD918 /* Queries */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
