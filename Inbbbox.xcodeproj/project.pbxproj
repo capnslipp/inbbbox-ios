@@ -49,6 +49,10 @@
 		F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC31C23F3DB0062EA21 /* Reusable.swift */; };
 		F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */; };
 		F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC71C23F6160062EA21 /* ButtonItem.swift */; };
+		F0863DCA1C23FB7C0062EA21 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC91C23FB7C0062EA21 /* ButtonCell.swift */; };
+		F0863DCC1C23FB970062EA21 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCB1C23FB970062EA21 /* SwitchCell.swift */; };
+		F0863DCE1C23FBEA0062EA21 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCD1C23FBEA0062EA21 /* DateCell.swift */; };
+		F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +122,10 @@
 		F0863DC31C23F3DB0062EA21 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		F0863DC71C23F6160062EA21 /* ButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonItem.swift; sourceTree = "<group>"; };
+		F0863DC91C23FB7C0062EA21 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCell.swift; path = Views/ButtonCell.swift; sourceTree = "<group>"; };
+		F0863DCB1C23FB970062EA21 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchCell.swift; path = Views/SwitchCell.swift; sourceTree = "<group>"; };
+		F0863DCD1C23FBEA0062EA21 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateCell.swift; path = Views/DateCell.swift; sourceTree = "<group>"; };
+		F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerCell.swift; path = Views/DatePickerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +315,10 @@
 				F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */,
 				F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */,
 				F0863DBF1C23F2360062EA21 /* EventedTableView.swift */,
+				F0863DC91C23FB7C0062EA21 /* ButtonCell.swift */,
+				F0863DCB1C23FB970062EA21 /* SwitchCell.swift */,
+				F0863DCD1C23FBEA0062EA21 /* DateCell.swift */,
+				F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -612,8 +624,10 @@
 				BF6961221C1B4805000FC5D8 /* HeaderAuthorizable.swift in Sources */,
 				F0863DBC1C23F20D0062EA21 /* GroupedBaseTableView.swift in Sources */,
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
+				F0863DCE1C23FBEA0062EA21 /* DateCell.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
 				F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */,
+				F0863DCA1C23FB7C0062EA21 /* ButtonCell.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				F0863DC01C23F2360062EA21 /* EventedTableView.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
@@ -624,11 +638,13 @@
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
+				F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
 				5E10BFC11C23389C009EF53A /* LikeQuery.swift in Sources */,
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				F0863DBE1C23F2220062EA21 /* UIBaseTableView.swift in Sources */,
+				F0863DCC1C23FB970062EA21 /* SwitchCell.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */,
