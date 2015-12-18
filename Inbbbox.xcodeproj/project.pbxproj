@@ -65,7 +65,6 @@
 		5E0759062D32339F0F1B138E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E10BFC01C23389C009EF53A /* LikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuery.swift; sourceTree = "<group>"; };
 		5E10BFC21C2338A6009EF53A /* UnlikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuery.swift; sourceTree = "<group>"; };
-		5E147CB21AA8B2CA00EDD97C /* Functional-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Functional-Tests-Info.plist"; path = "Supporting Files/Functional-Tests-Info.plist"; sourceTree = "<group>"; };
 		5E147CB41AA8B2D300EDD97C /* Inbbbox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Inbbbox-Bridging-Header.h"; path = "Supporting Files/Inbbbox-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E147CB51AA8B2D300EDD97C /* Inbbbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Inbbbox-Info.plist"; path = "Supporting Files/Inbbbox-Info.plist"; sourceTree = "<group>"; };
 		5E147CB71AA8B2DC00EDD97C /* Unit-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit-Tests-Bridging-Header.h"; path = "Supporting Files/Unit-Tests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -82,7 +81,6 @@
 		5E3A98561AA741FA00CE2F20 /* Tests-Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Production.xcconfig"; path = "Configuration/Tests-Production.xcconfig"; sourceTree = "<group>"; };
 		5E3A98571AA741FA00CE2F20 /* Tests-Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Staging.xcconfig"; path = "Configuration/Tests-Staging.xcconfig"; sourceTree = "<group>"; };
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
-		5E51B7971AA9BC040018EDA9 /* Functional-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Functional-Tests-Bridging-Header.h"; path = "Supporting Files/Functional-Tests-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 			children = (
 				5E3A98111AA72FAC00CE2F20 /* Inbbbox */,
 				5E3A98121AA72FB200CE2F20 /* Unit Tests */,
-				5E3A98131AA72FBD00CE2F20 /* Functional Tests */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -238,15 +235,6 @@
 				5E147CB81AA8B2DC00EDD97C /* Unit-Tests-Info.plist */,
 			);
 			name = "Unit Tests";
-			sourceTree = "<group>";
-		};
-		5E3A98131AA72FBD00CE2F20 /* Functional Tests */ = {
-			isa = PBXGroup;
-			children = (
-				5E51B7971AA9BC040018EDA9 /* Functional-Tests-Bridging-Header.h */,
-				5E147CB21AA8B2CA00EDD97C /* Functional-Tests-Info.plist */,
-			);
-			name = "Functional Tests";
 			sourceTree = "<group>";
 		};
 		5E3A98371AA73A6500CE2F20 /* Unit Tests */ = {
@@ -693,6 +681,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
