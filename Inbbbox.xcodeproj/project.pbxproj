@@ -55,6 +55,7 @@
 		F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */; };
 		F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
 		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
+		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerCell.swift; path = Views/DatePickerCell.swift; sourceTree = "<group>"; };
 		F09307C71C240609005F5111 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F09307C91C240656005F5111 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +335,7 @@
 			children = (
 				BF6961251C1B57A5000FC5D8 /* NSErrorExtensions.swift */,
 				F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */,
+				F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				BF6A6E101C1ED1E9001EDAB8 /* DateItem.swift in Sources */,
 				BF6A6E1E1C1F0A7D001EDAB8 /* ShotsQuery.swift in Sources */,
 				BF95085C1C1F208F00E39242 /* User.swift in Sources */,
+				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
