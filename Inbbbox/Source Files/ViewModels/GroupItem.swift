@@ -35,9 +35,5 @@ class GroupItem: Equatable {
 }
 
 func ==(lhs: GroupItem, rhs: GroupItem) -> Bool {
-    if lhs.title == rhs.title && lhs.category == rhs.category && lhs.active == rhs.active {
-        return true
-    } else {
-        return false
-    }
+    return lhs.title == rhs.title && lhs.category == rhs.category && lhs.active == rhs.active
 }
