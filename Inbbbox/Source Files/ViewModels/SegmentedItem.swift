@@ -1,5 +1,5 @@
 //
-//  SegmentItem.swift
+//  SegmentedItem.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 21/12/15.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class SegmentItem: GroupItem {
+class SegmentedItem: GroupItem {
     // NGRTodo: implement me!
 }

@@ -1,5 +1,5 @@
 //
-//  SegmentCell.swift
+//  SegmentedCell.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 21/12/15.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SegmentCell: UITableViewCell, Reusable{
+class SegmentedCell: UITableViewCell, Reusable{
     
     class var reuseIdentifier: String {
-        return "TableViewSegmentCellReuseIdentifier"
+        return "TableViewSegmentedCellReuseIdentifier"
     }
 }
