@@ -43,6 +43,7 @@
 		BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */; };
 		BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */; };
+		F04B1FEE1C282A7300AEEE25 /* SegmentItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FED1C282A7300AEEE25 /* SegmentItem.swift */; };
 		F0863DBC1C23F20D0062EA21 /* GroupedBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */; };
 		F0863DBE1C23F2220062EA21 /* UIBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */; };
 		F0863DC01C23F2360062EA21 /* EventedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DBF1C23F2360062EA21 /* EventedTableView.swift */; };
@@ -122,6 +123,7 @@
 		BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		F04B1FED1C282A7300AEEE25 /* SegmentItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentItem.swift; sourceTree = "<group>"; };
 		F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupedBaseTableView.swift; path = Views/GroupedBaseTableView.swift; sourceTree = "<group>"; };
 		F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBaseTableView.swift; path = Views/UIBaseTableView.swift; sourceTree = "<group>"; };
 		F0863DBF1C23F2360062EA21 /* EventedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventedTableView.swift; path = Views/EventedTableView.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				BF6A6E111C1ED1F6001EDAB8 /* SwitchItem.swift */,
 				BF6A6E131C1ED1FD001EDAB8 /* DatePickerItem.swift */,
 				F0863DC71C23F6160062EA21 /* ButtonItem.swift */,
+				F04B1FED1C282A7300AEEE25 /* SegmentItem.swift */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
+				F04B1FEE1C282A7300AEEE25 /* SegmentItem.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
 				F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
