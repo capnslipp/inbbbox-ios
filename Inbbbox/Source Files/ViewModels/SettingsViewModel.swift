@@ -48,16 +48,21 @@ class SettingsViewModel: GroupedListViewModel {
         
         // MARK: onValueChanged and onButtonTapped blocks
         
-        reminderItem.onValueChanged = { [weak self] text in
-            // NGRTodo: make reminderDateCell active or not and setup notification on/off
+        reminderItem.onValueChanged = { on in
+            // NGRTodo: make reminderDateCell active
+            if on {
+                NotificationManager.registerNotification(forUserID: "userID", time: self.reminderDateItem.date) //NGRTemp: provide userID
+            } else {
+                NotificationManager.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
+            }
         }
         
         reminderDateItem.onValueChanged = { date -> Void in
-            // NGRTodo: plan notifications?
+            NotificationManager.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
         }
         
         logOutButtonItem.onButtonTapped = { _ -> Void in
-            // NGRTodo: log out or pass info that user want to log out
+            // NGRTodo: log out or pass info that user wants to log out
         }
     }
 }
