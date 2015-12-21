@@ -51,6 +51,17 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
         return layoutAttributes
     }
 
+    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+        var boundsChanged = true
+        if let collectionView = collectionView {
+            let oldBounds = collectionView.bounds
+            boundsChanged = !CGSizeEqualToSize(oldBounds.size, newBounds.size)
+        }
+        return boundsChanged
+    }
+
+//    MARK: - Helpers
+
     private func indexPathsOfItemsInRect(rect: CGRect) -> [NSIndexPath] {
         var indexPaths: [NSIndexPath] = []
         for itemIndex in 0..<itemsCount{
