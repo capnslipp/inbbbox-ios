@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 import WebKit.WKNavigationDelegate
 
-final class OAuthViewModel: NSObject {
+final class OAuthViewModel {
     
     let service: OAuthAuthorizable
     private(set) var currentResolvers: (fulfill: String -> Void, reject: ErrorType -> Void)?
@@ -19,7 +19,6 @@ final class OAuthViewModel: NSObject {
     
     init(oAuthAuthorizableService: OAuthAuthorizable) {
         service = oAuthAuthorizableService
-        super.init()
     }
     
     func actionPolicyForRequest(request: NSURLRequest) -> WKNavigationActionPolicy {
@@ -68,7 +67,7 @@ private extension OAuthViewModel {
             self.currentResolvers = (fulfill, reject)
             
             let request = service.accessTokenURLRequestWithRequestToken(token)
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, _, error) -> Void in
                 
                 if let error = error {
                     reject(error); return

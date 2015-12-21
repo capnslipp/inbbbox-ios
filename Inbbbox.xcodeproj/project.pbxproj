@@ -206,6 +206,7 @@
 		5E2070111C27FABB00A4B57F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */,
 				5E4857B41C2805E10027B38A /* Authentication */,
 			);
 			path = Managers;
@@ -318,7 +319,6 @@
 			children = (
 				BF29C2561B4AA5500053378F /* AppDelegate.swift */,
 				BF9508511C1F12A300E39242 /* Constants.swift */,
-				F04B1FEA1C27E46000AEEE25 /* Managers */,
 				5E51B79B1AA9C3540018EDA9 /* Custom Views */,
 				BF47EE2B1B4BBAF8002822D7 /* Extensions */,
 				5E2070111C27FABB00A4B57F /* Managers */,
@@ -468,14 +468,6 @@
 				BF95084F1C1F0F7E00E39242 /* Formatter.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		F04B1FEA1C27E46000AEEE25 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

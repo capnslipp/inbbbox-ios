@@ -67,10 +67,11 @@ final class OAuthViewController: UIViewController {
     }
 
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if keyPath == KeyPathForObservingProgress {
-            progressView?.progress = Float(aView?.webView.estimatedProgress ?? 0)
-            if progressView?.progress >= 1 {
-                progressView?.hidden = true
+        
+        if let progressView = progressView where keyPath == KeyPathForObservingProgress {
+            progressView.progress = Float(aView?.webView.estimatedProgress ?? 0)
+            if progressView.progress >= 1 {
+                progressView.hidden = true
             }
         }
     }

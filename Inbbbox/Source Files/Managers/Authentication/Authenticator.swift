@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-class Authenticator {
+final class Authenticator {
     
     private let interactionHandler: (UIViewController -> Void)
     
