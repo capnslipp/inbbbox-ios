@@ -11,7 +11,7 @@ import KeychainAccess
 
 final class TokenStorage {
     
-    private static var KeychainService = "co.netguru.inbbbox.keychain.token"
+    private static let KeychainService = "co.netguru.inbbbox.keychain.token"
     private static let keychain = Keychain(service: KeychainService)
     
     class var currentToken: String {

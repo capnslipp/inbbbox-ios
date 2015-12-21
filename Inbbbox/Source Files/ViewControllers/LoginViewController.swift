@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 // NGRTemp: temporary implementation
 class LoginViewController: UIViewController {
@@ -37,6 +38,21 @@ class LoginViewController: UIViewController {
     //MARK: Actions
     
     func loginButtonDidTap(_: UIButton) {
-        // intentionally blank
+        
+        let interactionHandler: (UIViewController -> Void) = { controller in
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        
+        let authenticator = Authenticator(interactionHandler: interactionHandler)
+        
+        firstly {
+            authenticator.loginWithService(.Dribbble)
+        }.then { user in
+            //NGRTodo: Handle success
+            print(user)
+        }.error { error in
+            //NGRTodo: Handle error
+            print(error)
+        }
     }
 }

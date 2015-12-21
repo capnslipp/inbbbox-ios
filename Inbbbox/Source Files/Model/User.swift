@@ -9,11 +9,21 @@
 import Foundation
 import SwiftyJSON
 
-struct User {
+struct User: CustomDebugStringConvertible {
     let identifier: String
     let name: String?
     let username: String
     let avatarString: String?
+    
+    var debugDescription: String {
+        return
+            "<Class: " + String(self.dynamicType) + "> " +
+            "{ " +
+                "ID: " + identifier + ", " +
+                "Username: " + username + ", " +
+                "Name: " + (name ?? "unknown") +
+            " }"
+    }
 }
 
 extension User: Mappable {
