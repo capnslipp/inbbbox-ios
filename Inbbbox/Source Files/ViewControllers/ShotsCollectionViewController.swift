@@ -6,8 +6,6 @@ import UIKit
 
 class ShotsCollectionViewController: UICollectionViewController {
 
-    let shotCollectionViewCellIdentifier = "ShotCollectionViewCellIdentifier"
-
 //    MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -15,7 +13,7 @@ class ShotsCollectionViewController: UICollectionViewController {
 
         collectionView?.backgroundColor = UIColor.whiteColor()
         collectionView?.pagingEnabled = true
-        collectionView?.registerClass(ShotCollectionViewCell.self, forCellWithReuseIdentifier: shotCollectionViewCellIdentifier)
+        collectionView?.registerClass(ShotCollectionViewCell.self, forCellWithReuseIdentifier: ShotCollectionViewCell.preferredReuseIdentifier)
     }
 
     override func viewWillLayoutSubviews() {
@@ -27,11 +25,12 @@ class ShotsCollectionViewController: UICollectionViewController {
 //    MARK: - UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // NGRTodo: implement me!
         return 100
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier(shotCollectionViewCellIdentifier, forIndexPath: indexPath)
+        return collectionView.dequeueReusableCellWithReuseIdentifier(ShotCollectionViewCell.preferredReuseIdentifier, forIndexPath: indexPath)
     }
 
 //    MARK: - UICollectionViewDelegateFlowLayout

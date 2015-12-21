@@ -62,6 +62,7 @@
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
 		F09307CE1C241A92005F5111 /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */; };
 		F09307D21C24208F005F5111 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307D11C24208F005F5111 /* AvatarView.swift */; };
+		FF13A217A9D2A0D1CCC811C6 /* ReuseIdentifierAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A2488F59DF089DBF0A63 /* ReuseIdentifierAware.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,7 @@
 		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableHeaderView.swift; path = Views/SettingsTableHeaderView.swift; sourceTree = "<group>"; };
 		F09307D11C24208F005F5111 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarView.swift; path = Views/AvatarView.swift; sourceTree = "<group>"; };
+		FF13A2488F59DF089DBF0A63 /* ReuseIdentifierAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierAware.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +365,7 @@
 				5A4005DF1C2418760010A500 /* HeightAware.swift */,
 				F0863DC11C23F3C10062EA21 /* StringConvertible.swift */,
 				F0863DC31C23F3DB0062EA21 /* Reusable.swift */,
+				FF13A2488F59DF089DBF0A63 /* ReuseIdentifierAware.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
+				FF13A217A9D2A0D1CCC811C6 /* ReuseIdentifierAware.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

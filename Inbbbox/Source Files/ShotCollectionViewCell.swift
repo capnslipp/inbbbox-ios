@@ -18,7 +18,17 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware {
         contentView.backgroundColor = UIColor.greenColor()
     }
 
-    static func prefferedHeight() -> CGFloat {
-        return CGFloat(235)
+//    MARK: - HeightAware
+    static var prefferedHeight: CGFloat {
+        get {
+            return CGFloat(235)
+        }
+    }
+
+//    MARK: - ReuseIdentifierAware
+    static var preferredReuseIdentifier: String {
+        get {
+            return "ShotCollectionViewCellIdentifier"
+        }
     }
 }

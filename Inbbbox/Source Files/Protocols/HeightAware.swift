@@ -5,5 +5,5 @@
 import UIKit
 
 protocol HeightAware {
-    static func prefferedHeight() -> CGFloat
+    static var prefferedHeight: CGFloat { get }
 }
