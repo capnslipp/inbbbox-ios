@@ -15,7 +15,10 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentView.backgroundColor = UIColor.greenColor()
+        contentView.backgroundColor = UIColor(red: CGFloat(arc4random()) / CGFloat(UInt32.max),
+                green: CGFloat(arc4random()) / CGFloat(UInt32.max),
+                blue: CGFloat(arc4random()) / CGFloat(UInt32.max),
+                alpha: 1)
     }
 
 //    MARK: - HeightAware
