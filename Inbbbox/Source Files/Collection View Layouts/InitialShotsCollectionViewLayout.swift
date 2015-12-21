@@ -6,11 +6,12 @@ import UIKit
 
 class InitialShotsCollectionViewLayout: UICollectionViewLayout {
 
-    var itemsCount = 0
+    private(set) var itemsCount = 0
+    var bottomCellOffset = CGFloat(20)
 
 //    MARK: - Life cycle
 
-    convenience init(itemsCount: Int){
+    convenience init(itemsCount: Int) {
         self.init()
         self.itemsCount = itemsCount
     }
@@ -42,10 +43,9 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
         let layoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         if let collectionView = collectionView {
             let margin = CGFloat(30)
-            let offset = CGFloat(20)
             let indexMultiplier = CGFloat(indexPath.item)
             layoutAttributes.size = CGSizeMake(CGRectGetWidth(collectionView.bounds) - margin * 2 * (indexMultiplier + 1), ShotCollectionViewCell.prefferedHeight)
-            layoutAttributes.center = CGPointMake(collectionView.center.x, collectionView.center.y + offset * indexMultiplier)
+            layoutAttributes.center = CGPointMake(collectionView.center.x, collectionView.center.y + bottomCellOffset * indexMultiplier)
             layoutAttributes.zIndex = -indexPath.row
         }
         return layoutAttributes
@@ -64,7 +64,7 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
 
     private func indexPathsOfItemsInRect(rect: CGRect) -> [NSIndexPath] {
         var indexPaths: [NSIndexPath] = []
-        for itemIndex in 0..<itemsCount{
+        for itemIndex in 0 ..< itemsCount {
             indexPaths.append(NSIndexPath(forItem: itemIndex, inSection: 0))
         }
         return indexPaths

@@ -15,6 +15,8 @@ class ShotsCollectionViewController: UICollectionViewController {
             collectionView.backgroundColor = UIColor.whiteColor()
             collectionView.pagingEnabled = true
             collectionView.registerClass(ShotCollectionViewCell.self, forCellWithReuseIdentifier: ShotCollectionViewCell.preferredReuseIdentifier)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapCollectionView:"))
+            collectionView.addGestureRecognizer(tapGestureRecognizer)
         }
     }
 
@@ -33,5 +35,20 @@ class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCellWithReuseIdentifier(ShotCollectionViewCell.preferredReuseIdentifier, forIndexPath: indexPath)
+    }
+
+//    MARK: - Actions
+
+    func didTapCollectionView(sender: AnyObject) {
+//         NGRTemp: temporary implementation
+//         NGRTodo: move to custom view controller transition
+        if let collectionView = collectionView {
+            let initialShotsCollectionViewLayout = collectionView.collectionViewLayout as! InitialShotsCollectionViewLayout
+            collectionView.performBatchUpdates({
+                initialShotsCollectionViewLayout.bottomCellOffset = 1000
+            }, completion: { (finished) in
+                collectionView.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
+            })
+        }
     }
 }
