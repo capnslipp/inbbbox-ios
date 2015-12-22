@@ -54,6 +54,9 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
 //    MARK: - Actions
 
     func didTapCollectionView(_: UITapGestureRecognizer) {
-        presentViewController(ShotsCollectionViewController(), animated: true, completion: nil)
+        let shotsTransitioningDelegate = ShotsTransitioningDelegate()
+        let shotsCollectionViewController = ShotsCollectionViewController()
+        shotsCollectionViewController.transitioningDelegate = shotsTransitioningDelegate
+        presentViewController(shotsCollectionViewController, animated: true, completion: nil)
     }
 }
