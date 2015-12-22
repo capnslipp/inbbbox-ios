@@ -21,6 +21,7 @@ class SettingsViewModel: GroupedListViewModel {
     
     let reminderItem: SwitchItem
     let reminderDateItem: DateItem
+    let streamSourceItem: SegmentedItem
     let logOutButtonItem: ButtonItem
     
     init() {
@@ -37,12 +38,14 @@ class SettingsViewModel: GroupedListViewModel {
         
         reminderItem = SwitchItem(title: reminderTitle)
         reminderDateItem = DateItem(title: reminderDateTitle)
+        streamSourceItem = SegmentedItem()
         logOutButtonItem = ButtonItem(title: logOutTitle)
         
         // MARK: Super init
         
         super.init(items: [
             [reminderItem, reminderDateItem],
+            [streamSourceItem],
             [logOutButtonItem]
             ] as [[GroupItem]])
         
@@ -58,8 +61,16 @@ class SettingsViewModel: GroupedListViewModel {
         }
         
         reminderDateItem.onValueChanged = { date -> Void in
-            NotificationManager.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
+            if self.reminderItem.on {
+                NotificationManager.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
+            }
         }
+        
+        streamSourceItem.onValueChange = { selectedSegmentIndex -> Void in
+            // NGRTodo: change stream source
+        }
+        
+        
         
         logOutButtonItem.onButtonTapped = { _ -> Void in
             // NGRTodo: log out or pass info that user wants to log out
