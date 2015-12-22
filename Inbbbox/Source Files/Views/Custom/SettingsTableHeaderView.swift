@@ -14,7 +14,7 @@ class SettingsTableHeaderView: UIView, Reusable {
         return "SettingsTableHeaderViewReuseIdentifier"
     }
     
-    private let avatarView = AvatarView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+    private var avatarView: AvatarView!
     private let userName = UILabel()
     
     override init(frame: CGRect) {
@@ -32,10 +32,15 @@ private extension SettingsTableHeaderView {
     
     func commonInit() {
         
+        avatarView = AvatarView(frame: CGRect(x: CGRectGetWidth(frame)/2 - 75, y: 10, width: 150, height: 150))// NGRTemp: temp frame
+        
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
         
         avatarView.imageView.image = UIImage() //NGRFix: provide the image
+        avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
+        
+        userName.frame = CGRect(x: CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 160, width: 200, height: 30)) // NGRTemp: temp frame
         userName.text = "Scarlett Johansson" //NGRFix: provide the name
         
         addSubview(avatarView)
