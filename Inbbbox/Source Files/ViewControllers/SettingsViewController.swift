@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 
+// NGRTemp: temporary implementation
 class SettingsViewController: UIViewController {
     
     private weak var aView: GroupedBaseTableView?
@@ -18,7 +19,7 @@ class SettingsViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
         viewModel.delegate = self
-        title = self.viewModel.title
+        title = viewModel.title
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +28,7 @@ class SettingsViewController: UIViewController {
     
     override func loadView() {
         aView = loadViewWithClass(GroupedBaseTableView.self)
-        aView?.tableView.tableHeaderView = SettingsTableHeaderView()
+        aView?.tableView.tableHeaderView = SettingsTableHeaderView(frame: CGRect(x: 0, y: 0, width: CGRectGetWidth((aView?.bounds)!), height: 200)) // NGRTemp: temp frame
     }
     
     override func viewDidLoad() {
@@ -95,6 +96,8 @@ extension SettingsViewController: UITableViewDelegate {
             item.bindSwitchControl(cell.switchControl)
         } else if let item = item as? ButtonItem, cell = cell as? ButtonCell {
             item.bindButtonControl(cell.buttonControl)
+        } else if let item = item as? SegmentedItem, cell = cell as? SegmentedCell {
+            item.bindSegmentedControl(cell.segmentedControl)
         }
     }
     
@@ -106,22 +109,36 @@ extension SettingsViewController: UITableViewDelegate {
         if row < viewModel[section].count {
             let item = viewModel[section][row]
             
-            if let item = item as? SwitchItem, _ = cell as? SwitchCell {
+            if let item = item as? SwitchItem where cell is SwitchCell {
                 item.unbindSwitchControl()
-            } else if let item = item as? DatePickerItem, _ = cell as? DatePickerCell {
+            } else if let item = item as? DatePickerItem where cell is DatePickerCell {
                 item.unbindDatePicker()
-            } else if let item = item as? ButtonItem, _ = cell as? ButtonCell {
+            } else if let item = item as? ButtonItem where cell is ButtonCell {
                 item.unbindButtonControl()
+            } else if let item = item as? SegmentedItem where cell is SegmentedCell {
+                item.unbindSegmentedControl()
             }
         }
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? NSLocalizedString("Notifications", comment: "") : ""
+        switch section {
+        case 0: return NSLocalizedString("NOTIFICATIONS", comment: "")
+        case 1: return NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
+        default: return ""
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        viewModel.handleSelectionAtIndexPath(indexPath)
+        
+        let item = viewModel[indexPath.section][indexPath.row]
+        
+        if let item = item as? DateItem {
+            navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: { date -> Void in
+                item.date = date
+                item.update()
+            }), animated: true)
+        }
         tableView.deselectRowIfSelectedAnimated(true)
     }
 }
@@ -180,6 +197,8 @@ private extension SettingsViewController {
         
         tableView.registerClass(SwitchCell.self)
         tableView.registerClass(DateCell.self)
+        tableView.registerClass(DatePickerCell.self)
+        tableView.registerClass(SegmentedCell.self)
         tableView.registerClass(ButtonCell.self)
         
     }
@@ -198,6 +217,7 @@ private extension UITableView {
         case .Picker: return dequeueReusableCell(DatePickerCell.self)
         case .Action: return dequeueReusableCell(ButtonCell.self)
         case .Boolean: return dequeueReusableCell(SwitchCell.self)
+        case .Segmented: return dequeueReusableCell(SegmentedCell.self)
         default: return UITableViewCell()
         }
     }

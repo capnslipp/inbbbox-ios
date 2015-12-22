@@ -60,6 +60,7 @@
 		BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95086A1C20790200E39242 /* ParametersSpec.swift */; };
 		BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */; };
 		BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */; };
+		F02EDE311C29907C00E57EE8 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */; };
 		F04B1FEE1C282A7300AEEE25 /* SegmentedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FED1C282A7300AEEE25 /* SegmentedItem.swift */; };
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
@@ -149,6 +150,7 @@
 		BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuerySpec.swift; sourceTree = "<group>"; };
 		BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F04B1FED1C282A7300AEEE25 /* SegmentedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedItem.swift; sourceTree = "<group>"; };
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 			children = (
 				5E650B401C21884C00F8A192 /* LoginViewController.swift */,
 				F09307C71C240609005F5111 /* SettingsViewController.swift */,
+				F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 				BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */,
 				5E4857E11C2952D10027B38A /* SegmentedCell.swift in Sources */,
 				5E4857DC1C2952D10027B38A /* SettingsTableHeaderView.swift in Sources */,
+				F02EDE311C29907C00E57EE8 /* DatePickerViewController.swift in Sources */,
 				5E4857DE1C2952D10027B38A /* ButtonCell.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
 				F04B1FEC1C27E4BE00AEEE25 /* NotificationManager.swift in Sources */,
