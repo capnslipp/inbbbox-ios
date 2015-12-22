@@ -18,6 +18,16 @@
 		5E4857C91C2854F80027B38A /* ShotsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857C51C2854F80027B38A /* ShotsQuery.swift */; };
 		5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857C61C2854F80027B38A /* UnlikeQuery.swift */; };
 		5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857C71C2854F80027B38A /* UserQuery.swift */; };
+		5E4857D91C2952D10027B38A /* GroupedBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857CD1C2952D10027B38A /* GroupedBaseTableView.swift */; };
+		5E4857DA1C2952D10027B38A /* UIBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857CE1C2952D10027B38A /* UIBaseTableView.swift */; };
+		5E4857DB1C2952D10027B38A /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857D01C2952D10027B38A /* AvatarView.swift */; };
+		5E4857DC1C2952D10027B38A /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857D11C2952D10027B38A /* SettingsTableHeaderView.swift */; };
+		5E4857DE1C2952D10027B38A /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857D41C2952D10027B38A /* ButtonCell.swift */; };
+		5E4857DF1C2952D10027B38A /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857D51C2952D10027B38A /* DateCell.swift */; };
+		5E4857E01C2952D10027B38A /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857D61C2952D10027B38A /* DatePickerCell.swift */; };
+		5E4857E11C2952D10027B38A /* SegmentedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857D71C2952D10027B38A /* SegmentedCell.swift */; };
+		5E4857E21C2952D10027B38A /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857D81C2952D10027B38A /* SwitchCell.swift */; };
+		5E4857E41C2957080027B38A /* EventedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857E31C2957080027B38A /* EventedTableView.swift */; };
 		5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */; };
 		5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E498D521C24649900CFD918 /* UINavigationControllerExtension.swift */; };
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
@@ -52,23 +62,13 @@
 		BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */; };
 		F04B1FEE1C282A7300AEEE25 /* SegmentedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FED1C282A7300AEEE25 /* SegmentedItem.swift */; };
-		F04B1FF01C282B0700AEEE25 /* SegmentedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEF1C282B0700AEEE25 /* SegmentedCell.swift */; };
-		F0863DBC1C23F20D0062EA21 /* GroupedBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */; };
-		F0863DBE1C23F2220062EA21 /* UIBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */; };
-		F0863DC01C23F2360062EA21 /* EventedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DBF1C23F2360062EA21 /* EventedTableView.swift */; };
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
 		F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC31C23F3DB0062EA21 /* Reusable.swift */; };
 		F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */; };
 		F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC71C23F6160062EA21 /* ButtonItem.swift */; };
-		F0863DCA1C23FB7C0062EA21 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC91C23FB7C0062EA21 /* ButtonCell.swift */; };
-		F0863DCC1C23FB970062EA21 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCB1C23FB970062EA21 /* SwitchCell.swift */; };
-		F0863DCE1C23FBEA0062EA21 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCD1C23FBEA0062EA21 /* DateCell.swift */; };
-		F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */; };
 		F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
 		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
-		F09307CE1C241A92005F5111 /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */; };
-		F09307D21C24208F005F5111 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307D11C24208F005F5111 /* AvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +108,16 @@
 		5E4857C51C2854F80027B38A /* ShotsQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsQuery.swift; sourceTree = "<group>"; };
 		5E4857C61C2854F80027B38A /* UnlikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuery.swift; sourceTree = "<group>"; };
 		5E4857C71C2854F80027B38A /* UserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuery.swift; sourceTree = "<group>"; };
+		5E4857CD1C2952D10027B38A /* GroupedBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedBaseTableView.swift; sourceTree = "<group>"; };
+		5E4857CE1C2952D10027B38A /* UIBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseTableView.swift; sourceTree = "<group>"; };
+		5E4857D01C2952D10027B38A /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		5E4857D11C2952D10027B38A /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableHeaderView.swift; sourceTree = "<group>"; };
+		5E4857D41C2952D10027B38A /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		5E4857D51C2952D10027B38A /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		5E4857D61C2952D10027B38A /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
+		5E4857D71C2952D10027B38A /* SegmentedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedCell.swift; sourceTree = "<group>"; };
+		5E4857D81C2952D10027B38A /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		5E4857E31C2957080027B38A /* EventedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventedTableView.swift; sourceTree = "<group>"; };
 		5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthorizable.swift; sourceTree = "<group>"; };
 		5E498D521C24649900CFD918 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -141,23 +151,13 @@
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F04B1FED1C282A7300AEEE25 /* SegmentedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedItem.swift; sourceTree = "<group>"; };
-		F04B1FEF1C282B0700AEEE25 /* SegmentedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SegmentedCell.swift; path = Views/SegmentedCell.swift; sourceTree = "<group>"; };
-		F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupedBaseTableView.swift; path = Views/GroupedBaseTableView.swift; sourceTree = "<group>"; };
-		F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIBaseTableView.swift; path = Views/UIBaseTableView.swift; sourceTree = "<group>"; };
-		F0863DBF1C23F2360062EA21 /* EventedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventedTableView.swift; path = Views/EventedTableView.swift; sourceTree = "<group>"; };
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
 		F0863DC31C23F3DB0062EA21 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		F0863DC71C23F6160062EA21 /* ButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonItem.swift; sourceTree = "<group>"; };
-		F0863DC91C23FB7C0062EA21 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCell.swift; path = Views/ButtonCell.swift; sourceTree = "<group>"; };
-		F0863DCB1C23FB970062EA21 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchCell.swift; path = Views/SwitchCell.swift; sourceTree = "<group>"; };
-		F0863DCD1C23FBEA0062EA21 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateCell.swift; path = Views/DateCell.swift; sourceTree = "<group>"; };
-		F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerCell.swift; path = Views/DatePickerCell.swift; sourceTree = "<group>"; };
 		F09307C71C240609005F5111 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F09307C91C240656005F5111 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableHeaderView.swift; path = Views/SettingsTableHeaderView.swift; sourceTree = "<group>"; };
-		F09307D11C24208F005F5111 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarView.swift; path = Views/AvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +356,40 @@
 			path = Queries;
 			sourceTree = "<group>";
 		};
+		5E4857CC1C2952D10027B38A /* Controllers View */ = {
+			isa = PBXGroup;
+			children = (
+				5E4857CD1C2952D10027B38A /* GroupedBaseTableView.swift */,
+				5E4857CE1C2952D10027B38A /* UIBaseTableView.swift */,
+			);
+			name = "Controllers View";
+			path = "Views/Controllers View";
+			sourceTree = "<group>";
+		};
+		5E4857CF1C2952D10027B38A /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				5E4857D01C2952D10027B38A /* AvatarView.swift */,
+				5E4857E31C2957080027B38A /* EventedTableView.swift */,
+				5E4857D11C2952D10027B38A /* SettingsTableHeaderView.swift */,
+			);
+			name = Custom;
+			path = Views/Custom;
+			sourceTree = "<group>";
+		};
+		5E4857D31C2952D10027B38A /* UITableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5E4857D41C2952D10027B38A /* ButtonCell.swift */,
+				5E4857D51C2952D10027B38A /* DateCell.swift */,
+				5E4857D61C2952D10027B38A /* DatePickerCell.swift */,
+				5E4857D71C2952D10027B38A /* SegmentedCell.swift */,
+				5E4857D81C2952D10027B38A /* SwitchCell.swift */,
+			);
+			name = UITableViewCell;
+			path = Views/UITableViewCell;
+			sourceTree = "<group>";
+		};
 		5E51B7981AA9C3280018EDA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,16 +412,9 @@
 		5E51B79B1AA9C3540018EDA9 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				F0863DBB1C23F20D0062EA21 /* GroupedBaseTableView.swift */,
-				F0863DBD1C23F2220062EA21 /* UIBaseTableView.swift */,
-				F0863DBF1C23F2360062EA21 /* EventedTableView.swift */,
-				F0863DC91C23FB7C0062EA21 /* ButtonCell.swift */,
-				F0863DCB1C23FB970062EA21 /* SwitchCell.swift */,
-				F0863DCD1C23FBEA0062EA21 /* DateCell.swift */,
-				F0863DCF1C23FC030062EA21 /* DatePickerCell.swift */,
-				F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */,
-				F09307D11C24208F005F5111 /* AvatarView.swift */,
-				F04B1FEF1C282B0700AEEE25 /* SegmentedCell.swift */,
+				5E4857CC1C2952D10027B38A /* Controllers View */,
+				5E4857CF1C2952D10027B38A /* Custom */,
+				5E4857D31C2952D10027B38A /* UITableViewCell */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -692,50 +719,50 @@
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
 				5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
+				5E4857DF1C2952D10027B38A /* DateCell.swift in Sources */,
 				BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */,
 				BF6961221C1B4805000FC5D8 /* HeaderAuthorizable.swift in Sources */,
-				F0863DBC1C23F20D0062EA21 /* GroupedBaseTableView.swift in Sources */,
 				5E4857C81C2854F80027B38A /* LikeQuery.swift in Sources */,
+				5E4857E21C2952D10027B38A /* SwitchCell.swift in Sources */,
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
-				F0863DCE1C23FBEA0062EA21 /* DateCell.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
-				F09307D21C24208F005F5111 /* AvatarView.swift in Sources */,
 				F0863DC81C23F6160062EA21 /* ButtonItem.swift in Sources */,
-				F0863DCA1C23FB7C0062EA21 /* ButtonCell.swift in Sources */,
-				F04B1FF01C282B0700AEEE25 /* SegmentedCell.swift in Sources */,
 				F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				5E4857C21C284AF80027B38A /* AuthenticatorError.swift in Sources */,
-				F0863DC01C23F2360062EA21 /* EventedTableView.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
 				5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */,
+				5E4857E01C2952D10027B38A /* DatePickerCell.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
-				F09307CE1C241A92005F5111 /* SettingsTableHeaderView.swift in Sources */,
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				BF6A6E141C1ED1FD001EDAB8 /* DatePickerItem.swift in Sources */,
+				5E4857E11C2952D10027B38A /* SegmentedCell.swift in Sources */,
+				5E4857DC1C2952D10027B38A /* SettingsTableHeaderView.swift in Sources */,
+				5E4857DE1C2952D10027B38A /* ButtonCell.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
 				F04B1FEC1C27E4BE00AEEE25 /* NotificationManager.swift in Sources */,
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */,
+				5E4857E41C2957080027B38A /* EventedTableView.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
 				F04B1FEE1C282A7300AEEE25 /* SegmentedItem.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
 				5E4857C91C2854F80027B38A /* ShotsQuery.swift in Sources */,
-				F0863DD01C23FC030062EA21 /* DatePickerCell.swift in Sources */,
 				5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
+				5E4857D91C2952D10027B38A /* GroupedBaseTableView.swift in Sources */,
 				5E4857BE1C280AB40027B38A /* OAuthViewController.swift in Sources */,
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				5E4857BC1C28061F0027B38A /* OAuthView.swift in Sources */,
-				F0863DBE1C23F2220062EA21 /* UIBaseTableView.swift in Sources */,
 				5E4857BA1C2805E10027B38A /* OAuthViewModel.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
-				F0863DCC1C23FB970062EA21 /* SwitchCell.swift in Sources */,
+				5E4857DA1C2952D10027B38A /* UIBaseTableView.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
 				5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */,
+				5E4857DB1C2952D10027B38A /* AvatarView.swift in Sources */,
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
