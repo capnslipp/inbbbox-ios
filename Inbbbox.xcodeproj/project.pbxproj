@@ -18,6 +18,7 @@
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
+		BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */; };
 		BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
 		BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961191C1B443E000FC5D8 /* NetworkService.swift */; };
@@ -101,6 +102,7 @@
 		5E3A98571AA741FA00CE2F20 /* Tests-Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Staging.xcconfig"; path = "Configuration/Tests-Staging.xcconfig"; sourceTree = "<group>"; };
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			children = (
 				5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */,
 				5E650B401C21884C00F8A192 /* LoginViewController.swift */,
+				BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
 				FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewLayout.swift in Sources */,
 				BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */,
+				BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

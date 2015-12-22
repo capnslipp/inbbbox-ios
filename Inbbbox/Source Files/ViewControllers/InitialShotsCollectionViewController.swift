@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ShotsCollectionViewController: UICollectionViewController {
+final class InitialShotsCollectionViewController: UICollectionViewController {
 
 //    MARK: - Life cycle
 
@@ -13,7 +13,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     }
 
     convenience init() {
-        self.init(collectionViewLayout: ShotsCollectionViewFlowLayout())
+        self.init(collectionViewLayout: InitialShotsCollectionViewLayout(itemsCount: 3))
     }
 
     override init(collectionViewLayout layout: UICollectionViewLayout) {
