@@ -24,7 +24,7 @@ class SwitchItem: GroupItem {
     }
     
     func unbindSwitchControl() {
-        self.switchControl?.removeTarget(self, action: "didChangeSwitchState:forEvents:", forControlEvents: .ValueChanged)
+        switchControl?.removeTarget(self, action: "didChangeSwitchState:forEvents:", forControlEvents: .ValueChanged)
     }
     
     dynamic func didChangeSwitchState(sender: UISwitch, forEvents events: UIControlEvents) {
