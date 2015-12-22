@@ -6,12 +6,11 @@ import UIKit
 
 class ShotsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
-
 //    Mark: - UICollectionViewLayout
     override func prepareLayout() {
         if let collectionView = collectionView {
             let margin = CGFloat(30)
-            itemSize = CGSizeMake(CGRectGetWidth(collectionView.bounds) - margin * 2, ShotCollectionViewCell.prefferedHeight)
+            itemSize = CGSize(width: CGRectGetWidth(collectionView.bounds) - margin * 2, height: ShotCollectionViewCell.prefferedHeight)
 
             minimumLineSpacing = CGFloat(CGRectGetHeight(collectionView.bounds) - ShotCollectionViewCell.prefferedHeight)
 

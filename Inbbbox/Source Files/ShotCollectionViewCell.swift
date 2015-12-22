@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ShotCollectionViewCell: UICollectionViewCell, HeightAware {
+class ShotCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
 
 //    MARK: - Life cycle
 
@@ -29,7 +29,7 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware {
     }
 
 //    MARK: - ReuseIdentifierAware
-    static var preferredReuseIdentifier: String {
+    static var reuseIdentifier: String {
         get {
             return "ShotCollectionViewCellIdentifier"
         }

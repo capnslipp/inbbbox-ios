@@ -31,8 +31,7 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
     }
 
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-
-        var layoutAttributesForVisibleElements: [UICollectionViewLayoutAttributes] = []
+        var layoutAttributesForVisibleElements = [UICollectionViewLayoutAttributes]()
         for indexPath in indexPathsOfItemsInRect(rect) {
             layoutAttributesForVisibleElements.append(layoutAttributesForItemAtIndexPath(indexPath)!)
         }
@@ -44,8 +43,8 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
         if let collectionView = collectionView {
             let margin = CGFloat(30)
             let indexMultiplier = CGFloat(indexPath.item)
-            layoutAttributes.size = CGSizeMake(CGRectGetWidth(collectionView.bounds) - margin * 2 * (indexMultiplier + 1), ShotCollectionViewCell.prefferedHeight)
-            layoutAttributes.center = CGPointMake(collectionView.center.x, collectionView.center.y + bottomCellOffset * indexMultiplier)
+            layoutAttributes.size = CGSize(width: CGRectGetWidth(collectionView.bounds) - margin * 2 * (indexMultiplier + 1), height: ShotCollectionViewCell.prefferedHeight)
+            layoutAttributes.center = CGPoint(x: collectionView.center.x, y: collectionView.center.y + bottomCellOffset * indexMultiplier)
             layoutAttributes.zIndex = -indexPath.row
         }
         return layoutAttributes

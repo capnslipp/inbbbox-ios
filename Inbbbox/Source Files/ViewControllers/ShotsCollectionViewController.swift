@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ShotsCollectionViewController: UICollectionViewController {
+final class ShotsCollectionViewController: UICollectionViewController {
 
 //    MARK: - UIViewController
 
@@ -14,8 +14,8 @@ class ShotsCollectionViewController: UICollectionViewController {
         if let collectionView = collectionView {
             collectionView.backgroundColor = UIColor.whiteColor()
             collectionView.pagingEnabled = true
-            collectionView.registerClass(ShotCollectionViewCell.self, forCellWithReuseIdentifier: ShotCollectionViewCell.preferredReuseIdentifier)
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapCollectionView:"))
+            collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapCollectionView:")
             collectionView.addGestureRecognizer(tapGestureRecognizer)
         }
     }
@@ -34,19 +34,20 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier(ShotCollectionViewCell.preferredReuseIdentifier, forIndexPath: indexPath)
+        return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
     }
 
 //    MARK: - Actions
 
-    func didTapCollectionView(sender: AnyObject) {
+    func didTapCollectionView(_: UITapGestureRecognizer) {
 //         NGRTemp: temporary implementation
 //         NGRTodo: move to custom view controller transition
         if let collectionView = collectionView {
             let initialShotsCollectionViewLayout = collectionView.collectionViewLayout as! InitialShotsCollectionViewLayout
             collectionView.performBatchUpdates({
                 initialShotsCollectionViewLayout.bottomCellOffset = 1000
-            }, completion: { (finished) in
+            }, completion: {
+                (_) in
                 collectionView.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
             })
         }
