@@ -10,6 +10,8 @@ import UIKit
 
 final class NotificationManager {
     
+    private static let LocalNotificationUserIDKey = "notificationID"
+    
     class func registerNotification(forUserID userID: String, time: NSDate) {
         
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil))
@@ -21,10 +23,8 @@ final class NotificationManager {
     
     class func unregisterNotification(forUserID userID: String) {
         
-        let registeredNotification = isNotificationRegistered(forUserID: userID)
-        
-        if registeredNotification.exists {
-            destroyNotification(notificationID: registeredNotification.notification!)
+        if let registeredNotification = getRegisteredNotification(forUserID: userID) {
+            destroyNotification(notificationID: registeredNotification)
         }
     }
 }
@@ -33,10 +33,10 @@ final class NotificationManager {
 
 private extension NotificationManager {
     
-    private class func createNotification(forUserID userID: String, atTime: NSDate) {
+    class func createNotification(forUserID userID: String, atTime: NSDate) {
         
         let localNotification = UILocalNotification()
-        localNotification.userInfo = ["notificationID": userID]
+        localNotification.userInfo = [LocalNotificationUserIDKey: userID]
         localNotification.fireDate = atTime
         localNotification.alertBody = NSLocalizedString("Check Inbbbox!", comment: "") // NGRTemp: temp text
         localNotification.alertAction = NSLocalizedString("Show", comment: "") // NGRTemp: temp text
@@ -45,20 +45,23 @@ private extension NotificationManager {
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
-    private class func destroyNotification(notificationID notificationToDelete: UILocalNotification) {
+    class func destroyNotification(notificationID notificationToDelete: UILocalNotification) {
         UIApplication.sharedApplication().cancelLocalNotification(notificationToDelete)
     }
     
-    private class func isNotificationRegistered(forUserID userID: String) -> (exists: Bool, notification: UILocalNotification?) {
+    class func getRegisteredNotification(forUserID userID: String) -> UILocalNotification? {
         
-        for localNotification in UIApplication.sharedApplication().scheduledLocalNotifications! {
-            if let userInfo = localNotification.userInfo where localNotification.userInfo is [String: String] {
-                let notificationID = userInfo["notificationID"] as! String
-                if notificationID == userID {
-                    return (true, localNotification)
-                }
-            }
+        guard let scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications else {
+            return nil
         }
-        return (false, nil)
+        
+        let notifications = scheduledLocalNotifications.filter {
+            if let userinfo = $0.userInfo as? [String: String] {
+                return userinfo[LocalNotificationUserIDKey] == userID
+            }
+            return false
+        }
+        
+        return notifications.count > 0 ? notifications.first : nil
     }
 }
