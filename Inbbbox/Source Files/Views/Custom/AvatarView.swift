@@ -27,18 +27,11 @@ private extension AvatarView {
     
     func commonInit() {
         
+        imageView.frame.size = frame.size
+        
         imageView.contentMode = .ScaleAspectFit
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = CGRectGetHeight(frame) * 0.5
-        imageView.layer.borderWidth = 10
-        imageView.layer.borderColor = UIColor.whiteColor().CGColor
-        imageView.layer.shadowColor = UIColor.grayColor().CGColor
         addSubview(imageView)
-        
-        defineConstraints()
-    }
-    
-    func defineConstraints() {
-        // NGRTodo: implement me!
     }
 }
