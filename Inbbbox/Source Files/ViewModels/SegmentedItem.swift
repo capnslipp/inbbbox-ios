@@ -6,8 +6,30 @@
 //  Copyright © 2015 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class SegmentedItem: GroupItem {
-    // NGRTodo: implement me!
+    
+    var selectedSegmentIndex = 1
+    var onValueChange: ((selectedSegmentIndex: Int) -> Void)?
+    private weak var segmentedControl: UISegmentedControl?
+    
+    init() {
+        super.init(title: "", category: .Segmented)
+    }
+    
+    func bindSegmentedControl(segmentedControl: UISegmentedControl) {
+        self.segmentedControl = segmentedControl
+        self.segmentedControl?.addTarget(self, action: "didChangeSegment:forEvents:", forControlEvents: .ValueChanged)
+    }
+    
+    func unbindSegmentedControl() {
+        self.segmentedControl?.removeTarget(self, action: "didChangeSegment:forEvents:", forControlEvents: .ValueChanged)
+    }
+    
+    dynamic func didChangeSegment(sender: UISegmentedControl, forEvents events: UIControlEvents) {
+        selectedSegmentIndex = sender.selectedSegmentIndex
+        onValueChange?(selectedSegmentIndex: sender.selectedSegmentIndex)
+    }
+    
 }

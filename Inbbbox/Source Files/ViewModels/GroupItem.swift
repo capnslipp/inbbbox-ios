@@ -21,7 +21,7 @@ protocol Validatable {
 class GroupItem: Equatable {
     
     enum Category {
-        case Action, PlainText, LongText, Date, Picker, Boolean
+        case Action, PlainText, LongText, Date, Picker, Boolean, Segmented
     }
     
     let title: String
