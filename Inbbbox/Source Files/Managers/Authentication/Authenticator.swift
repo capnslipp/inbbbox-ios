@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-final class Authenticator {
+class Authenticator {
     
     private let interactionHandler: (UIViewController -> Void)
     
@@ -46,13 +46,13 @@ final class Authenticator {
         }
         
         if !trySilent {
-            self.interactionHandler(UINavigationController(rootViewController: controller))
+            interactionHandler(UINavigationController(rootViewController: controller))
         }
         
         return Promise<User?> { fulfill, reject in
             firstly {
                 controller.startAuthentication()
-            }.then { accessToken -> Void in
+            }.then { accessToken in
                 self.persistToken(accessToken)
             }.then {
                 self.fetchUser()
@@ -88,7 +88,7 @@ private extension Authenticator {
                 }
                 fulfill(User.map(json))
                 
-            }.error { error -> Void in
+            }.error { error in
                 reject(error)
             }
         }

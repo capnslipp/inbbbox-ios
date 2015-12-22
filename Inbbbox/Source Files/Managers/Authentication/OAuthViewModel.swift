@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 import WebKit.WKNavigationDelegate
 
-final class OAuthViewModel {
+final class OAuthViewModel: NSObject {
     
     let service: OAuthAuthorizable
     private(set) var currentResolvers: (fulfill: String -> Void, reject: ErrorType -> Void)?
@@ -19,12 +19,13 @@ final class OAuthViewModel {
     
     init(oAuthAuthorizableService: OAuthAuthorizable) {
         service = oAuthAuthorizableService
+        super.init()
     }
     
     func actionPolicyForRequest(request: NSURLRequest) -> WKNavigationActionPolicy {
         
         if service.isRedirectionURL(request.URL) {
-            currentResolvers?.fulfill(request.URL!.query!)            
+            currentResolvers?.fulfill(request.URL!.query!)
             return .Cancel
         }
         
@@ -40,7 +41,7 @@ final class OAuthViewModel {
                 self.decodeRequestTokenFromQuery(query)
             }.then { requestToken in
                 self.gainAccessTokenWithReqestToken(requestToken)
-            }.then { accessToken in
+            }.then { accessToken -> Void in
                 fulfill(accessToken)
             }.error { error in
                 reject(error)
@@ -67,24 +68,24 @@ private extension OAuthViewModel {
             self.currentResolvers = (fulfill, reject)
             
             let request = service.accessTokenURLRequestWithRequestToken(token)
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, _, error) -> Void in
-                
-                if let error = error {
-                    reject(error); return
-                }
-                
-                guard let data = data, let json = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) else {
-                    reject(AuthenticatorError.DataDecodingFailure); return
-                }
-                
-                if let accessToken = json["access_token"] as? String {
-                    fulfill(accessToken)
-                } else {
-                    reject(AuthenticatorError.AccessTokenMissing)
-                }
-            })
             
-            task.resume()
+            firstly {
+                NSURLSession.POST(request.URL!.absoluteString)
+            }.then { data -> Void in
+                
+                guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) else {
+                    throw AuthenticatorError.DataDecodingFailure
+                }
+                
+                guard let accessToken = json["access_token"] as? String else {
+                    throw AuthenticatorError.AccessTokenMissing
+                }
+                
+                fulfill(accessToken)
+                
+            }.error { error in
+                reject(error)
+            }
         }
     }
     
