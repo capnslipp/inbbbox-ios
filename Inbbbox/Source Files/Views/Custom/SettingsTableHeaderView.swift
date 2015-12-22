@@ -40,7 +40,7 @@ private extension SettingsTableHeaderView {
         avatarView.imageView.image = UIImage() //NGRFix: provide the image
         avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
         
-        userName.frame = CGRect(x: CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 160, width: 200, height: 30)) // NGRTemp: temp frame
+        userName.frame = CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 160, width: 200, height: 30) // NGRTemp: temp frame
         userName.text = "Scarlett Johansson" //NGRFix: provide the name
         
         addSubview(avatarView)
