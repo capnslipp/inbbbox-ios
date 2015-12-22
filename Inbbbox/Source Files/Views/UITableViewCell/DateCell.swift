@@ -50,6 +50,9 @@ class DateCell: UITableViewCell, Reusable {
     }
     
     func commonInit() {
+        
+        backgroundColor = UIColor.clearColor()
+        
         dateLabel.text = ""
         dateLabel.textAlignment = .Right
         contentView.addSubview(dateLabel)
