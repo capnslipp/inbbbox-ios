@@ -6,23 +6,7 @@ import UIKit
 
 class InitialShotsCollectionViewLayout: UICollectionViewLayout {
 
-    private(set) var itemsCount = 0
-    var bottomCellOffset = CGFloat(20)
-
-//    MARK: - Life cycle
-
-    convenience init(itemsCount: Int) {
-        self.init()
-        self.itemsCount = itemsCount
-    }
-
-    override init() {
-        super.init()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
+    private var bottomCellOffset = CGFloat(20)
 
 //    MARK: - UICollectionViewLayout
 
@@ -59,12 +43,30 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
         return boundsChanged
     }
 
+    override func initialLayoutAttributesForAppearingItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+        let layoutAttributes = layoutAttributesForItemAtIndexPath(indexPath)
+        if let collectionView = collectionView, layoutAttributes = layoutAttributes {
+            layoutAttributes.center = collectionView.center
+        }
+        return layoutAttributes
+    }
+
+    override func finalLayoutAttributesForDisappearingItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+        let layoutAttributes = layoutAttributesForItemAtIndexPath(indexPath)
+        if let collectionView = collectionView, layoutAttributes = layoutAttributes {
+            layoutAttributes.center = CGPoint(x: CGRectGetMidX(collectionView.bounds), y: CGRectGetMaxY(collectionView.bounds) + CGRectGetMaxY(layoutAttributes.bounds))
+        }
+        return layoutAttributes
+    }
+
 //    MARK: - Helpers
 
     private func indexPathsOfItemsInRect(rect: CGRect) -> [NSIndexPath] {
         var indexPaths: [NSIndexPath] = []
-        for itemIndex in 0 ..< itemsCount {
-            indexPaths.append(NSIndexPath(forItem: itemIndex, inSection: 0))
+        if let collectionView = collectionView {
+            for itemIndex in 0 ..< collectionView.numberOfItemsInSection(0) {
+                indexPaths.append(NSIndexPath(forItem: itemIndex, inSection: 0))
+            }
         }
         return indexPaths
     }

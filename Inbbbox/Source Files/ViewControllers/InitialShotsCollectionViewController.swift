@@ -11,6 +11,7 @@ protocol InitialShotsCollectionViewLayoutDelegate: class {
 final class InitialShotsCollectionViewController: UICollectionViewController {
 
     weak var delegate: InitialShotsCollectionViewLayoutDelegate?
+    var numberOfItems = 0
 
 //    MARK: - Life cycle
 
@@ -19,7 +20,7 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
     }
 
     convenience init() {
-        self.init(collectionViewLayout: InitialShotsCollectionViewLayout(itemsCount: 3))
+        self.init(collectionViewLayout: InitialShotsCollectionViewLayout())
     }
 
     override init(collectionViewLayout layout: UICollectionViewLayout) {
@@ -35,8 +36,36 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
             collectionView.backgroundColor = UIColor.whiteColor()
             collectionView.pagingEnabled = true
             collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapCollectionView:")
-            collectionView.addGestureRecognizer(tapGestureRecognizer)
+        }
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        delay(0.1) {
+            self.insertItem()
+        }
+
+        delay(0.2) {
+            self.insertItem()
+        }
+
+        delay(0.3) {
+            self.insertItem()
+        }
+
+        delay(0.6) {
+            self.deleteItem()
+        }
+
+        delay(0.7) {
+            self.deleteItem()
+        }
+
+        if let delegate = delegate {
+            delay(0.9) {
+                delegate.initialShotsCollectionViewDidFinishAnimations()
+            }
         }
     }
 
@@ -44,18 +73,35 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // NGRTodo: implement me!
-        return 10
+        return numberOfItems
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
     }
 
-//    MARK: - Actions
+//    MARK: - Helpers
 
-    func didTapCollectionView(_: UITapGestureRecognizer) {
-        // NGRTemp: temporary implementation
-        // NGRTodo: will be invoked after animations finish
-        delegate?.initialShotsCollectionViewDidFinishAnimations()
+    private func delay(delay: Double, closure: () -> ()) {
+        dispatch_after(
+        dispatch_time(
+        DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+        ),
+                dispatch_get_main_queue(), closure)
+    }
+
+    private func insertItem() {
+        if let collectionView = collectionView {
+            numberOfItems += 1
+            collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: numberOfItems - 1, inSection: 0)])
+        }
+    }
+
+    private func deleteItem() {
+        if let collectionView = collectionView {
+            numberOfItems -= 1
+            collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: numberOfItems, inSection: 0)])
+        }
     }
 }
