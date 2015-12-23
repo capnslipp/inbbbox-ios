@@ -22,7 +22,7 @@ class DateItem: GroupItem {
         self.date = date
         
         dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.dateStyle = .NoStyle
         
         super.init(title: title, category: .Date)
     }

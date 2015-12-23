@@ -10,7 +10,7 @@ import UIKit
 
 class SegmentedItem: GroupItem {
     
-    var selectedSegmentIndex = 1
+    var selectedSegmentIndex = -1
     var onValueChange: ((selectedSegmentIndex: Int) -> Void)?
     private weak var segmentedControl: UISegmentedControl?
     
