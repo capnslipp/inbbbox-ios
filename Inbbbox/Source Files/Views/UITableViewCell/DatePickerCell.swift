@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DatePickerCell: UITableViewCell, Reusable {
+class DatePickerCell: BaseCell, Reusable {
     
     var date = NSDate()
     

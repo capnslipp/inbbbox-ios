@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwitchCell: UITableViewCell, Reusable {
+class SwitchCell: BaseCell, Reusable {
     
     class var reuseIdentifier: String {
         return "TableViewSwitchCellReuseIdentifier"
@@ -27,11 +27,8 @@ class SwitchCell: UITableViewCell, Reusable {
     }
     
     func commonInit() {
-        
-        backgroundColor = UIColor.backgroundGrayColor()
-        textLabel?.textColor = UIColor.textDarkColor()
-        
-        switchControl.frame = CGRect(x: 300, y: 5, width: 50, height: 40) // NGRTemp: temp frame
+
+        switchControl.frame = CGRect(x: 308, y: 7, width: 51, height: 31) // NGRTemp: temp frame
         
         switchControl.tintColor = UIColor.grayColor() //NGRTemp: color will be defined
         switchControl.backgroundColor = switchControl.tintColor

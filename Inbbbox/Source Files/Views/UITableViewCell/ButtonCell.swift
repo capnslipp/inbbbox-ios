@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonCell: UITableViewCell, Reusable {
+class ButtonCell: BaseCell, Reusable {
     
     class var reuseIdentifier: String {
         return "TableViewButtonCellReuseIdentifier"

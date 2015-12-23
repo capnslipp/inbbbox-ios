@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SegmentedCell: UITableViewCell, Reusable {
+class SegmentedCell: BaseCell, Reusable {
     
     class var reuseIdentifier: String {
         return "TableViewSegmentedCellReuseIdentifier"
@@ -28,14 +28,12 @@ class SegmentedCell: UITableViewCell, Reusable {
     
     func commonInit() {
         
-        backgroundColor = UIColor.backgroundGrayColor()
-        
         segmentedControl.frame = CGRect(x: 265, y: 7, width: 94, height: 29) // NGRTemp: temp frame
         
         segmentedControl.insertSegmentWithTitle(NSLocalizedString("-", comment: ""), atIndex: 0, animated: false)
         segmentedControl.insertSegmentWithTitle(NSLocalizedString("+", comment: ""), atIndex: 1, animated: false)
         
-        segmentedControl.selectedSegmentIndex = 1
+        segmentedControl.selectedSegmentIndex = -1
         
         segmentedControl.tintColor = UIColor.pinkColor()
         contentView.insertSubview(segmentedControl, aboveSubview: textLabel!)
