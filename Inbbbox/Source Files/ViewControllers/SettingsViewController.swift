@@ -30,6 +30,7 @@ class SettingsViewController: UIViewController {
         aView = loadViewWithClass(GroupedBaseTableView.self)
         aView?.tableView.tableHeaderView = SettingsTableHeaderView(frame: CGRect(x: 0, y: 0, width: CGRectGetWidth((aView?.bounds)!), height: 250)) // NGRTemp: temp frame
         aView?.tableView.backgroundColor = UIColor.backgroundGrayColor()
+        aView?.tableView.separatorStyle = .None
     }
     
     override func viewDidLoad() {
