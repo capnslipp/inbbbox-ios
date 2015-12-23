@@ -45,7 +45,7 @@ extension DatePickerViewController {
     
     private func commonInit() {
         
-        view.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        view.backgroundColor = UIColor.backgroundGrayColor()
         
         datePicker.backgroundColor = UIColor.whiteColor()
         datePicker.datePickerMode = .Time

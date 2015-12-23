@@ -29,6 +29,10 @@ class SettingsViewController: UIViewController {
     override func loadView() {
         aView = loadViewWithClass(GroupedBaseTableView.self)
         aView?.tableView.tableHeaderView = SettingsTableHeaderView(frame: CGRect(x: 0, y: 0, width: CGRectGetWidth((aView?.bounds)!), height: 200)) // NGRTemp: temp frame
+        aView?.tableView.backgroundColor = UIColor.backgroundGrayColor()
+        navigationController?.navigationBar.barTintColor = UIColor.pinkColor()
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
     }
     
     override func viewDidLoad() {

@@ -28,7 +28,7 @@ class SegmentedCell: UITableViewCell, Reusable {
     
     func commonInit() {
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.backgroundGrayColor()
         
         segmentedControl.frame = CGRect(x: 10, y: 5, width: 300, height: 30) // NGRTemp: temp frame
         
@@ -38,7 +38,7 @@ class SegmentedCell: UITableViewCell, Reusable {
         
         segmentedControl.selectedSegmentIndex = 1
         
-        segmentedControl.tintColor = UIColor.redColor() //NGRTemp: color will be defined
+        segmentedControl.tintColor = UIColor.pinkColor()
         contentView.addSubview(segmentedControl)
         
         defineConstraints()

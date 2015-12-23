@@ -28,12 +28,12 @@ class SwitchCell: UITableViewCell, Reusable {
     
     func commonInit() {
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.backgroundGrayColor()
         
         switchControl.frame = CGRect(x: 300, y: 5, width: 50, height: 40) // NGRTemp: temp frame
         
         switchControl.tintColor = UIColor.redColor() //NGRTemp: color will be defined
-        switchControl.onTintColor = switchControl.tintColor
+        switchControl.onTintColor = UIColor.pinkColor()
         contentView.addSubview(switchControl)
         
         defineConstraints()

@@ -51,7 +51,7 @@ class DateCell: UITableViewCell, Reusable {
     
     func commonInit() {
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.backgroundGrayColor()
         
         dateLabel.text = ""
         dateLabel.textAlignment = .Right
