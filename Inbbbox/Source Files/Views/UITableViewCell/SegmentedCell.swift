@@ -30,16 +30,15 @@ class SegmentedCell: UITableViewCell, Reusable {
         
         backgroundColor = UIColor.backgroundGrayColor()
         
-        segmentedControl.frame = CGRect(x: 10, y: 5, width: 300, height: 30) // NGRTemp: temp frame
+        segmentedControl.frame = CGRect(x: 265, y: 7, width: 94, height: 29) // NGRTemp: temp frame
         
-        segmentedControl.insertSegmentWithTitle(NSLocalizedString("Followed", comment: ""), atIndex: 0, animated: false)
-        segmentedControl.insertSegmentWithTitle(NSLocalizedString("Popular", comment: ""), atIndex: 1, animated: false)
-        segmentedControl.insertSegmentWithTitle(NSLocalizedString("Popular +50💗", comment: ""), atIndex: 2, animated: false)
+        segmentedControl.insertSegmentWithTitle(NSLocalizedString("-", comment: ""), atIndex: 0, animated: false)
+        segmentedControl.insertSegmentWithTitle(NSLocalizedString("+", comment: ""), atIndex: 1, animated: false)
         
         segmentedControl.selectedSegmentIndex = 1
         
         segmentedControl.tintColor = UIColor.pinkColor()
-        contentView.addSubview(segmentedControl)
+        contentView.insertSubview(segmentedControl, aboveSubview: textLabel!)
         
         defineConstraints()
     }

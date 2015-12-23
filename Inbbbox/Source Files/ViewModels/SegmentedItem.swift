@@ -14,8 +14,8 @@ class SegmentedItem: GroupItem {
     var onValueChange: ((selectedSegmentIndex: Int) -> Void)?
     private weak var segmentedControl: UISegmentedControl?
     
-    init() {
-        super.init(title: "", category: .Segmented)
+    init(title: String) {
+        super.init(title: title, category: .Segmented)
     }
     
     func bindSegmentedControl(segmentedControl: UISegmentedControl) {
