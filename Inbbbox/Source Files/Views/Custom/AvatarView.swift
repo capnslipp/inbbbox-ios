@@ -30,7 +30,7 @@ private extension AvatarView {
         imageView.frame.size = frame.size
         
         imageView.contentMode = .ScaleAspectFit
-        imageView.layer.masksToBounds = false
+        imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = CGRectGetHeight(frame) * 0.5
         addSubview(imageView)
     }

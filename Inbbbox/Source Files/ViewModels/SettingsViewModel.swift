@@ -21,7 +21,11 @@ class SettingsViewModel: GroupedListViewModel {
     
     let reminderItem: SwitchItem
     let reminderDateItem: DateItem
-    let streamSourceItem: SegmentedItem
+    let followingStreamSourceItem: SwitchItem
+    let newTodayStreamSourceItem: SwitchItem
+    let popularTodayStreamSourceItem: SwitchItem
+    let debutsStreamSourceItem: SwitchItem
+    let minimumLikesItem: SegmentedItem
     let logOutButtonItem: ButtonItem
     
     init() {
@@ -32,20 +36,32 @@ class SettingsViewModel: GroupedListViewModel {
         
         let reminderTitle = NSLocalizedString("Enable daily reminder", comment: "")
         let reminderDateTitle = NSLocalizedString("Send daily reminder at", comment: "")
+        
+        let followingStreamSourceTitle = NSLocalizedString("Following", comment: "")
+        let newTodayStreamSourceTitle = NSLocalizedString("New Today", comment: "")
+        let popularTodayStreamSourceTitle = NSLocalizedString("Popular Today", comment: "")
+        let debutsStreamSourceTitle = NSLocalizedString("Debuts", comment: "")
+        let minimumLikesTitle = NSLocalizedString("Minimum Likes: 0", comment: "")
         let logOutTitle = NSLocalizedString("Log out", comment: "")
         
         // MARK: Create items
         
         reminderItem = SwitchItem(title: reminderTitle)
         reminderDateItem = DateItem(title: reminderDateTitle)
-        streamSourceItem = SegmentedItem()
+        
+        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle)
+        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle)
+        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle)
+        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle)
+        minimumLikesItem = SegmentedItem(title: minimumLikesTitle)
         logOutButtonItem = ButtonItem(title: logOutTitle)
+        
         
         // MARK: Super init
         
         super.init(items: [
             [reminderItem, reminderDateItem],
-            [streamSourceItem],
+            [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem, minimumLikesItem],
             [logOutButtonItem]
             ] as [[GroupItem]])
         
@@ -66,8 +82,24 @@ class SettingsViewModel: GroupedListViewModel {
             }
         }
         
-        streamSourceItem.onValueChange = { selectedSegmentIndex -> Void in
-            // NGRTodo: change stream source
+        followingStreamSourceItem.onValueChanged = { on in
+            _ = on ? true : false // NGRTodo: implement me!
+        }
+        
+        newTodayStreamSourceItem.onValueChanged = { on in
+            _ = on ? true : false // NGRTodo: implement me!
+        }
+        
+        popularTodayStreamSourceItem.onValueChanged = { on in
+            _ = on ? true : false // NGRTodo: implement me!
+        }
+        
+        debutsStreamSourceItem.onValueChanged = { on in
+            _ = on ? true : false // NGRTodo: implement me!
+        }
+        
+        minimumLikesItem.onValueChange = { selectedSegmentIndex -> Void in
+            // NGRTodo: add likes number & update label
         }
         
         
