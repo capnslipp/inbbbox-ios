@@ -24,12 +24,11 @@ class SegmentedItem: GroupItem {
     }
     
     func unbindSegmentedControl() {
-        self.segmentedControl?.removeTarget(self, action: "didChangeSegment:forEvents:", forControlEvents: .ValueChanged)
+        segmentedControl?.removeTarget(self, action: "didChangeSegment:forEvents:", forControlEvents: .ValueChanged)
     }
     
     dynamic func didChangeSegment(sender: UISegmentedControl, forEvents events: UIControlEvents) {
         selectedSegmentIndex = sender.selectedSegmentIndex
         onValueChange?(selectedSegmentIndex: sender.selectedSegmentIndex)
     }
-    
 }
