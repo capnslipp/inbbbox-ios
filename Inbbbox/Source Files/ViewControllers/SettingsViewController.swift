@@ -139,6 +139,7 @@ extension SettingsViewController: UITableViewDelegate {
             navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: { date -> Void in
                 item.date = date
                 item.update()
+                self.didChangeItemsAtIndexPaths([indexPath])
             }), animated: true)
         }
         tableView.deselectRowIfSelectedAnimated(true)
