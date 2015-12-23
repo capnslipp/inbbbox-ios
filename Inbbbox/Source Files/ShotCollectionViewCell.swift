@@ -15,6 +15,7 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+//        NGRTemp: temporary implementation
         contentView.backgroundColor = UIColor(red: CGFloat(arc4random()) / CGFloat(UInt32.max),
                 green: CGFloat(arc4random()) / CGFloat(UInt32.max),
                 blue: CGFloat(arc4random()) / CGFloat(UInt32.max),
@@ -28,7 +29,7 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
         }
     }
 
-//    MARK: - ReuseIdentifierAware
+//    MARK: - Reusable
     static var reuseIdentifier: String {
         get {
             return "ShotCollectionViewCellIdentifier"
