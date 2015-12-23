@@ -8,10 +8,11 @@ protocol InitialShotsCollectionViewLayoutDelegate: class {
     func initialShotsCollectionViewDidFinishAnimations()
 }
 
-final class InitialShotsCollectionViewController: UICollectionViewController {
+final class InitialShotsCollectionViewController: UICollectionViewController, InitialShotsAnimationManagerDelegate {
 
     weak var delegate: InitialShotsCollectionViewLayoutDelegate?
-    var numberOfItems = 0
+    var shots = ["shot1", "shot2", "shot3"]
+    var animationManager = InitialShotsAnimationManager()
 
 //    MARK: - Life cycle
 
@@ -32,6 +33,8 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        animationManager.delegate = self
+
         if let collectionView = collectionView {
             collectionView.backgroundColor = UIColor.whiteColor()
             collectionView.pagingEnabled = true
@@ -42,28 +45,9 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        delay(0.1) {
-            self.insertItem()
-        }
 
-        delay(0.2) {
-            self.insertItem()
-        }
-
-        delay(0.3) {
-            self.insertItem()
-        }
-
-        delay(0.6) {
-            self.deleteItem()
-        }
-
-        delay(0.7) {
-            self.deleteItem()
-        }
-
-        if let delegate = delegate {
-            delay(0.9) {
+        animationManager.startAnimationWithCompletion() {
+            if let delegate = self.delegate {
                 delegate.initialShotsCollectionViewDidFinishAnimations()
             }
         }
@@ -73,35 +57,20 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // NGRTodo: implement me!
-        return numberOfItems
+        return animationManager.visibleItems.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
     }
 
-//    MARK: - Helpers
+//    MARK: - InitialShotsAnimationManagerDelegate
 
-    private func delay(delay: Double, closure: () -> ()) {
-        dispatch_after(
-        dispatch_time(
-        DISPATCH_TIME_NOW,
-                Int64(delay * Double(NSEC_PER_SEC))
-        ),
-                dispatch_get_main_queue(), closure)
+    func collectionViewForAnimationManager(_ animationManager: InitialShotsAnimationManager) -> UICollectionView? {
+        return collectionView
     }
 
-    private func insertItem() {
-        if let collectionView = collectionView {
-            numberOfItems += 1
-            collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: numberOfItems - 1, inSection: 0)])
-        }
-    }
-
-    private func deleteItem() {
-        if let collectionView = collectionView {
-            numberOfItems -= 1
-            collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: numberOfItems, inSection: 0)])
-        }
+    func itemsForAnimationManager(_ animationManager: InitialShotsAnimationManager) -> [AnyObject] {
+        return shots
     }
 }

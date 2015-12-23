@@ -65,6 +65,7 @@
 		F09307CE1C241A92005F5111 /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CD1C241A92005F5111 /* SettingsTableHeaderView.swift */; };
 		F09307D21C24208F005F5111 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307D11C24208F005F5111 /* AvatarView.swift */; };
 		FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A569D9CAB25C77AF66BB /* ShotsContainerViewController.swift */; };
+		FF13A574FBBAEF0209C4B722 /* InitialShotsAnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A8DA0DDEA25D954A5F26 /* InitialShotsAnimationManager.swift */; };
 		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -152,6 +153,7 @@
 		F09307D11C24208F005F5111 /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarView.swift; path = Views/AvatarView.swift; sourceTree = "<group>"; };
 		FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		FF13A569D9CAB25C77AF66BB /* ShotsContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsContainerViewController.swift; sourceTree = "<group>"; };
+		FF13A8DA0DDEA25D954A5F26 /* InitialShotsAnimationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsAnimationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */,
+				FF13A8DA0DDEA25D954A5F26 /* InitialShotsAnimationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */,
 				BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */,
 				FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */,
+				FF13A574FBBAEF0209C4B722 /* InitialShotsAnimationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
