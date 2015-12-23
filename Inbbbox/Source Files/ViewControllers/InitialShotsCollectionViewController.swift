@@ -4,7 +4,13 @@
 
 import UIKit
 
+protocol InitialShotsCollectionViewLayoutDelegate: class {
+    func initialShotsCollectionViewDidFinishAnimations()
+}
+
 final class InitialShotsCollectionViewController: UICollectionViewController {
+
+    weak var delegate: InitialShotsCollectionViewLayoutDelegate?
 
 //    MARK: - Life cycle
 
@@ -34,12 +40,6 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
         }
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(topLayoutGuide.length, 0, bottomLayoutGuide.length, 0)
-    }
-
 //    MARK: - UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -54,9 +54,8 @@ final class InitialShotsCollectionViewController: UICollectionViewController {
 //    MARK: - Actions
 
     func didTapCollectionView(_: UITapGestureRecognizer) {
-        let shotsTransitioningDelegate = ShotsTransitioningDelegate()
-        let shotsCollectionViewController = ShotsCollectionViewController()
-        shotsCollectionViewController.transitioningDelegate = shotsTransitioningDelegate
-        presentViewController(shotsCollectionViewController, animated: true, completion: nil)
+        // NGRTemp: temporary implementation
+        // NGRTodo: will be invoked after animations finish
+        delegate?.initialShotsCollectionViewDidFinishAnimations()
     }
 }

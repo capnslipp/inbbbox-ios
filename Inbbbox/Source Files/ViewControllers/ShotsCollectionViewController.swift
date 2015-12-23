@@ -29,8 +29,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
             collectionView.backgroundColor = UIColor.whiteColor()
             collectionView.pagingEnabled = true
             collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTapCollectionView:")
-            collectionView.addGestureRecognizer(tapGestureRecognizer)
         }
     }
 
@@ -49,11 +47,5 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-    }
-
-//    MARK: - Actions
-
-    func didTapCollectionView(_: UITapGestureRecognizer) {
-        dismissViewControllerAnimated(true, completion: nil)
     }
 }

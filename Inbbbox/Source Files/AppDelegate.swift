@@ -15,9 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let shotsCollectionViewController = InitialShotsCollectionViewController()
+        let initialShotsCollectionViewController = InitialShotsCollectionViewController()
+        let shotsContainerViewController = ShotsContainerViewController()
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [shotsCollectionViewController]
+        tabBarController.viewControllers = [shotsContainerViewController]
         window!.rootViewController = tabBarController 
         window!.makeKeyAndVisible()
         
