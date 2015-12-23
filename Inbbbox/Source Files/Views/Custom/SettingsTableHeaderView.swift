@@ -37,12 +37,14 @@ private extension SettingsTableHeaderView {
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
         
-        avatarView.imageView.image = UIImage() //NGRFix: provide the image
+        if let data = NSData(contentsOfURL: NSURL(string: "https://www.gravatar.com/avatar/348f80fa39b3d1d66bd68440ea229192?s=200")!) { // NGRTemp: will be removed
+            avatarView.imageView.image = UIImage(data: data) //NGRFix: provide the image
+        }
         avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
         
         userName.frame = CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 204, width: 200, height: 28) // NGRTemp: temp frame
         userName.textAlignment = .Center
-        userName.text = "Scarlett Johansson" //NGRFix: provide the name
+        userName.text = "joke1410" //NGRFix: provide the name
         userName.textColor = UIColor.textDarkColor()
         
         addSubview(avatarView)
