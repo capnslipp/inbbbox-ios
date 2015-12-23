@@ -157,6 +157,8 @@ private extension SettingsViewController {
             configureDatePickerCell(cell as! DatePickerCell, forItem: item)
         } else if let item = item as? ButtonItem {
             configureButtonCell(cell as! ButtonCell, forItem: item)
+        } else if let item = item as? SegmentedItem {
+            configureSegmentedCell(cell as! SegmentedCell, forItem: item)
         }
     }
     
@@ -177,6 +179,11 @@ private extension SettingsViewController {
     
     func configureButtonCell(cell: ButtonCell, forItem item: ButtonItem) {
         cell.buttonControl.titleLabel?.text = item.title
+        cell.selectionStyle = .None
+    }
+    
+    func configureSegmentedCell(cell: SegmentedCell, forItem item: SegmentedItem) {
+        cell.textLabel?.text = item.title
         cell.selectionStyle = .None
     }
 }
