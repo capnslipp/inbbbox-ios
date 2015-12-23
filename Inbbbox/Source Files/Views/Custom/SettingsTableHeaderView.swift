@@ -32,7 +32,7 @@ private extension SettingsTableHeaderView {
     
     func commonInit() {
         
-        avatarView = AvatarView(frame: CGRect(x: CGRectGetWidth(frame)/2 - 75, y: 10, width: 150, height: 150))// NGRTemp: temp frame
+        avatarView = AvatarView(frame: CGRect(x: CGRectGetWidth(frame)/2 - 75, y: 30, width: 150, height: 150))// NGRTemp: temp frame
         
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
@@ -40,8 +40,10 @@ private extension SettingsTableHeaderView {
         avatarView.imageView.image = UIImage() //NGRFix: provide the image
         avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
         
-        userName.frame = CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 160, width: 200, height: 30) // NGRTemp: temp frame
+        userName.frame = CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 204, width: 200, height: 28) // NGRTemp: temp frame
+        userName.textAlignment = .Center
         userName.text = "Scarlett Johansson" //NGRFix: provide the name
+        userName.textColor = UIColor.textDarkColor()
         
         addSubview(avatarView)
         addSubview(userName)
