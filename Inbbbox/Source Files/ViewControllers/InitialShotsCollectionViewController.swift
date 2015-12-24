@@ -36,7 +36,7 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
         animationManager.delegate = self
 
         if let collectionView = collectionView {
-            collectionView.backgroundColor = UIColor.whiteColor()
+            collectionView.backgroundColor = UIColor.shotsCollectionViewBackgroundColor()
             collectionView.pagingEnabled = true
             collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
         }

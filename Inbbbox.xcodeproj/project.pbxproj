@@ -18,6 +18,8 @@
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
+		BEEE9867B125820EB9871298 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE97AF5FE60F6C45F64E7A /* UIColorExtension.swift */; };
+		BEEE9BD3F2B26D06799DB0D9 /* InitialShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F65EA28BA395105A1D5 /* InitialShotsCollectionViewControllerSpec.swift */; };
 		BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */; };
 		BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
@@ -106,7 +108,9 @@
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewController.swift; sourceTree = "<group>"; };
+		BEEE97AF5FE60F6C45F64E7A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		BEEE9F65EA28BA395105A1D5 /* InitialShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BF69611B1C1B4551000FC5D8 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 				BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */,
 				BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */,
 				FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */,
+				BEEE9F65EA28BA395105A1D5 /* InitialShotsCollectionViewControllerSpec.swift */,
+				BEEE99E30635B698D4E0908C /* Mock Objects */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -362,6 +368,13 @@
 			name = "Custom Views";
 			sourceTree = "<group>";
 		};
+		BEEE99E30635B698D4E0908C /* Mock Objects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Mock Objects";
+			sourceTree = "<group>";
+		};
 		BF47EE2B1B4BBAF8002822D7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +382,7 @@
 				F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */,
 				F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */,
 				BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */,
+				BEEE97AF5FE60F6C45F64E7A /* UIColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -726,6 +740,7 @@
 				BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */,
 				FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */,
 				FF13A574FBBAEF0209C4B722 /* InitialShotsAnimationManager.swift in Sources */,
+				BEEE9867B125820EB9871298 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +753,7 @@
 				BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */,
 				BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
+				BEEE9BD3F2B26D06799DB0D9 /* InitialShotsCollectionViewControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

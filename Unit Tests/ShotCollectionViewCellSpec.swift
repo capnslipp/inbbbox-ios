@@ -20,8 +20,8 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     preferredHeight = ShotCollectionViewCell.prefferedHeight
                 }
 
-                it("should have preferred height 235") {
-                    expect(preferredHeight).to(equal(235))
+                it("should have preferred height 240") {
+                    expect(preferredHeight).to(equal(240))
                 }
             }
         }

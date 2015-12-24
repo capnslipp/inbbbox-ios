@@ -25,7 +25,7 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
 //    MARK: - HeightAware
     static var prefferedHeight: CGFloat {
         get {
-            return CGFloat(235)
+            return CGFloat(240)
         }
     }
 

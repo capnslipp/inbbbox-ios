@@ -10,9 +10,9 @@ class ShotsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepareLayout() {
         if let collectionView = collectionView {
             let cellMargins: UIEdgeInsets = UIEdgeInsets(top: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight / 2),
-                    left: CGFloat(30),
+                    left: CGFloat(28),
                     bottom: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight / 2),
-                    right: CGFloat(30))
+                    right: CGFloat(28))
 
             itemSize = CGSize(width: CGRectGetWidth(collectionView.bounds) - cellMargins.left - cellMargins.right,
                     height: ShotCollectionViewCell.prefferedHeight)

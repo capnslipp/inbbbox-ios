@@ -25,12 +25,13 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let layoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         if let collectionView = collectionView {
-            let margin = CGFloat(30)
+            let cellMargins: UIEdgeInsets = UIEdgeInsets(top: 0, left: CGFloat(28), bottom: 0, right: CGFloat(28))
             let indexMultiplier = CGFloat(indexPath.item)
-            layoutAttributes.size = CGSize(width: CGRectGetWidth(collectionView.bounds) - margin * 2 * (indexMultiplier + 1), height: ShotCollectionViewCell.prefferedHeight)
+            layoutAttributes.size = CGSize(width: CGRectGetWidth(collectionView.bounds) - (cellMargins.left + cellMargins.right) * (indexMultiplier + 1), height: ShotCollectionViewCell.prefferedHeight)
             layoutAttributes.center = CGPoint(x: collectionView.center.x, y: collectionView.center.y + bottomCellOffset * indexMultiplier)
             layoutAttributes.zIndex = -indexPath.row
         }
+
         return layoutAttributes
     }
 
@@ -70,4 +71,5 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
         }
         return indexPaths
     }
+
 }
