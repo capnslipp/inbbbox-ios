@@ -53,7 +53,7 @@ class DateCell: BaseCell, Reusable {
         
         backgroundColor = UIColor.backgroundGrayColor()
         
-        dateLabel.frame = CGRect(x: 270, y: 12, width: 70, height: 21) // NGRTemp: temp frame
+        dateLabel.frame = CGRect(x: 270, y: 12, width: 75, height: 21) // NGRTemp: temp frame
         dateLabel.text = ""
         dateLabel.textAlignment = .Right
         contentView.addSubview(dateLabel)
