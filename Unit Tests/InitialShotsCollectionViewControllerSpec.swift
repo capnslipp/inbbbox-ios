@@ -42,10 +42,6 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
                     collectionView = sut!.collectionView
                 }
 
-                it("should have shots collection view background color") {
-                    expect(collectionView!.backgroundColor).to(equal(UIColor.shotsCollectionViewBackgroundColor()))
-                }
-
                 it("should have paging enabled") {
                     expect(collectionView!.pagingEnabled).to(beTruthy())
                 }

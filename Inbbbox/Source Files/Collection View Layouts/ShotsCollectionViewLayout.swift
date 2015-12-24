@@ -9,7 +9,7 @@ class ShotsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 //    Mark: - UICollectionViewLayout
     override func prepareLayout() {
         if let collectionView = collectionView {
-            let cellMargins: UIEdgeInsets = UIEdgeInsets(top: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight / 2),
+            let cellMargins = UIEdgeInsets(top: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight / 2),
                     left: CGFloat(28),
                     bottom: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight / 2),
                     right: CGFloat(28))
@@ -17,7 +17,7 @@ class ShotsCollectionViewFlowLayout: UICollectionViewFlowLayout {
             itemSize = CGSize(width: CGRectGetWidth(collectionView.bounds) - cellMargins.left - cellMargins.right,
                     height: ShotCollectionViewCell.prefferedHeight)
             minimumLineSpacing = CGFloat(CGRectGetHeight(collectionView.bounds) - ShotCollectionViewCell.prefferedHeight)
-            sectionInset = UIEdgeInsetsMake(cellMargins.top, 0, cellMargins.bottom, 0)
+            sectionInset = UIEdgeInsets(top: cellMargins.top, left: 0, bottom: cellMargins.bottom, right: 0)
         }
     }
 }
