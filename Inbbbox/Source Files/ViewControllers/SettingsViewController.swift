@@ -96,8 +96,6 @@ extension SettingsViewController: UITableViewDelegate {
             item.bindDatePicker(cell.datePicker)
         } else if let item = item as? SwitchItem, cell = cell as? SwitchCell {
             item.bindSwitchControl(cell.switchControl)
-        } else if let item = item as? ButtonItem, cell = cell as? ButtonCell {
-            item.bindButtonControl(cell.buttonControl)
         } else if let item = item as? SegmentedItem, cell = cell as? SegmentedCell {
             item.bindSegmentedControl(cell.segmentedControl)
         }
@@ -115,8 +113,6 @@ extension SettingsViewController: UITableViewDelegate {
                 item.unbindSwitchControl()
             } else if let item = item as? DatePickerItem where cell is DatePickerCell {
                 item.unbindDatePicker()
-            } else if let item = item as? ButtonItem where cell is ButtonCell {
-                item.unbindButtonControl()
             } else if let item = item as? SegmentedItem where cell is SegmentedCell {
                 item.unbindSegmentedControl()
             }
@@ -157,8 +153,6 @@ private extension SettingsViewController {
             configureDateCell(cell as! DateCell, forItem: item)
         } else if let item = item as? DatePickerItem {
             configureDatePickerCell(cell as! DatePickerCell, forItem: item)
-        } else if let item = item as? ButtonItem {
-            configureButtonCell(cell as! ButtonCell, forItem: item)
         } else if let item = item as? SegmentedItem {
             configureSegmentedCell(cell as! SegmentedCell, forItem: item)
         }
@@ -166,6 +160,7 @@ private extension SettingsViewController {
     
     func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem) {
         cell.textLabel?.text = item.title
+        cell.switchControl.on = item.on
         cell.selectionStyle = .None
     }
     
@@ -176,11 +171,6 @@ private extension SettingsViewController {
     }
     
     func configureDatePickerCell(cell: DatePickerCell, forItem item: DatePickerItem) {
-        cell.selectionStyle = .None
-    }
-    
-    func configureButtonCell(cell: ButtonCell, forItem item: ButtonItem) {
-        cell.buttonControl.titleLabel?.text = item.title
         cell.selectionStyle = .None
     }
     
