@@ -23,7 +23,7 @@ final class NotificationManager {
     
     class func unregisterNotification(forUserID userID: String) {
         
-        if let registeredNotification = getRegisteredNotification(forUserID: userID) {
+        if let registeredNotification = registeredNotification(forUserID: userID) {
             destroyNotification(notificationID: registeredNotification)
         }
     }
@@ -49,7 +49,7 @@ private extension NotificationManager {
         UIApplication.sharedApplication().cancelLocalNotification(notificationToDelete)
     }
     
-    class func getRegisteredNotification(forUserID userID: String) -> UILocalNotification? {
+    class func registeredNotification(forUserID userID: String) -> UILocalNotification? {
         
         guard let scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications else {
             return nil
@@ -62,6 +62,6 @@ private extension NotificationManager {
             return false
         }
         
-        return notifications.count > 0 ? notifications.first : nil
+        return notifications.first
     }
 }
