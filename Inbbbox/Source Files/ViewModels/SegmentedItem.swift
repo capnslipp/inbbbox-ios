@@ -10,12 +10,15 @@ import UIKit
 
 class SegmentedItem: GroupItem {
     
-    var selectedSegmentIndex = -1
+    private var staticTitle: String
+    var currentValue: Int
     var onValueChange: ((selectedSegmentIndex: Int) -> Void)?
     private weak var segmentedControl: UISegmentedControl?
     
-    init(title: String) {
-        super.init(title: title, category: .Segmented)
+    init(title: String, currentValue: Int) {
+        self.staticTitle = title
+        self.currentValue = currentValue
+        super.init(title: title + ": \(currentValue)", category: .Segmented)
     }
     
     func bindSegmentedControl(segmentedControl: UISegmentedControl) {
@@ -28,7 +31,22 @@ class SegmentedItem: GroupItem {
     }
     
     dynamic func didChangeSegment(sender: UISegmentedControl, forEvents events: UIControlEvents) {
-        selectedSegmentIndex = sender.selectedSegmentIndex
         onValueChange?(selectedSegmentIndex: sender.selectedSegmentIndex)
+    }
+}
+
+extension SegmentedItem: Updatable {
+    func update() {
+        title = staticTitle + ": \(currentValue)"
+    }
+}
+
+extension SegmentedItem {
+    func increaseValue() {
+        currentValue++
+    }
+    
+    func decreaseValue() {
+        if currentValue > 0 { currentValue-- }
     }
 }

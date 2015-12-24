@@ -41,7 +41,7 @@ class SettingsViewModel: GroupedListViewModel {
         let newTodayStreamSourceTitle = NSLocalizedString("New Today", comment: "")
         let popularTodayStreamSourceTitle = NSLocalizedString("Popular Today", comment: "")
         let debutsStreamSourceTitle = NSLocalizedString("Debuts", comment: "")
-        let minimumLikesTitle = NSLocalizedString("Minimum Likes: 0", comment: "")
+        let minimumLikesTitle = NSLocalizedString("Minimum Likes", comment: "")
         let logOutTitle = NSLocalizedString("Log out", comment: "")
         
         // MARK: Create items
@@ -53,7 +53,7 @@ class SettingsViewModel: GroupedListViewModel {
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle)
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle)
-        minimumLikesItem = SegmentedItem(title: minimumLikesTitle)
+        minimumLikesItem = SegmentedItem(title: minimumLikesTitle, currentValue: 0)
         logOutButtonItem = ButtonItem(title: logOutTitle)
         
         
@@ -100,6 +100,19 @@ class SettingsViewModel: GroupedListViewModel {
         
         minimumLikesItem.onValueChange = { selectedSegmentIndex -> Void in
             // NGRTodo: add likes number & update label
+            switch selectedSegmentIndex {
+                case 0: self.minimumLikesItem.decreaseValue()
+                case 1: self.minimumLikesItem.increaseValue()
+                default: break
+            }
+            
+//            self.minimumLikesItem.clearSelection()
+            
+            self.minimumLikesItem.update()
+            
+            if let indexPaths = self.indexPathsForItems([self.minimumLikesItem]) {
+                self.delegate?.didChangeItemsAtIndexPaths(indexPaths)
+            }
         }
         
         

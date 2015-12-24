@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import UIKit
+import Async
 
 // NGRTemp: temporary implementation
 class SettingsViewController: UIViewController {
@@ -187,6 +187,10 @@ private extension SettingsViewController {
     func configureSegmentedCell(cell: SegmentedCell, forItem item: SegmentedItem) {
         cell.textLabel?.text = item.title
         cell.selectionStyle = .None
+        
+        Async.main(after: 0.2) {
+            cell.clearSelection()
+        }
     }
 }
 

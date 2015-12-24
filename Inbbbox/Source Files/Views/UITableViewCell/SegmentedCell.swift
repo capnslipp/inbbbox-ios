@@ -33,7 +33,7 @@ class SegmentedCell: BaseCell, Reusable {
         segmentedControl.insertSegmentWithTitle(NSLocalizedString("-", comment: ""), atIndex: 0, animated: false)
         segmentedControl.insertSegmentWithTitle(NSLocalizedString("+", comment: ""), atIndex: 1, animated: false)
         
-        segmentedControl.selectedSegmentIndex = -1
+        segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment
         
         segmentedControl.tintColor = UIColor.pinkColor()
         contentView.insertSubview(segmentedControl, aboveSubview: textLabel!)
@@ -43,5 +43,11 @@ class SegmentedCell: BaseCell, Reusable {
     
     func defineConstraints() {
         // NGRTodo: implement me!
+    }
+}
+
+extension SegmentedCell {
+    func clearSelection() {
+        segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment
     }
 }

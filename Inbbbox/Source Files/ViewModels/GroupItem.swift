@@ -24,7 +24,7 @@ class GroupItem: Equatable {
         case Action, PlainText, LongText, Date, Picker, Boolean, Segmented
     }
     
-    let title: String
+    var title: String
     let category: Category
     var active = true
     
