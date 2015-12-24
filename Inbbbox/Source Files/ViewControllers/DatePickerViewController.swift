@@ -47,9 +47,19 @@ extension DatePickerViewController {
         
         view.backgroundColor = UIColor.backgroundGrayColor()
         
+        let contentView = UIView(frame: CGRect(x: CGRectGetMinX(view.frame), y: 64, width: CGRectGetWidth(view.frame), height: 217)) // NGRTemp: temp frame
+        contentView.backgroundColor = UIColor.whiteColor()
+        
         datePicker.backgroundColor = UIColor.whiteColor()
         datePicker.datePickerMode = .Time
-        datePicker.frame = CGRect(x: 0, y: 64, width: CGRectGetWidth(view.bounds), height: 150) // NGRTemp: temp frame
-        view.addSubview(datePicker)
+        datePicker.frame = CGRect(x: 0, y: 20, width: CGRectGetWidth(view.bounds), height: 177) // NGRTemp: temp frame
+        
+        contentView.addSubview(datePicker)
+        
+        let separatorLine = UIView(frame: CGRect(x: 0, y: CGRectGetHeight(contentView.frame)-0.3, width: CGRectGetWidth(contentView.frame), height: 0.3)) // NGRTemp: temp frame
+        separatorLine.backgroundColor = UIColor.textLightColor()
+        contentView.addSubview(separatorLine)
+        
+        view.addSubview(contentView)
     }
 }
