@@ -18,8 +18,8 @@ class DateItem: GroupItem {
     
     var highlighted = false
     
-    init(title: String, date: NSDate = NSDate()) {
-        self.date = date
+    init(title: String, date: NSDate? = NSDate()) {
+        self.date = date ?? NSDate()
         
         dateFormatter.timeStyle = .ShortStyle
         dateFormatter.dateStyle = .NoStyle

@@ -15,10 +15,10 @@ class SegmentedItem: GroupItem {
     var onValueChange: ((selectedSegmentIndex: Int) -> Void)?
     private weak var segmentedControl: UISegmentedControl?
     
-    init(title: String, currentValue: Int) {
+    init(title: String, currentValue: Int? = 10) {
         self.staticTitle = title
-        self.currentValue = currentValue
-        super.init(title: title + ": \(currentValue)", category: .Segmented)
+        self.currentValue = currentValue ?? 10
+        super.init(title: title + ": \(self.currentValue)", category: .Segmented)
     }
     
     func bindSegmentedControl(segmentedControl: UISegmentedControl) {

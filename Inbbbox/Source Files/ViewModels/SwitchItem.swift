@@ -14,7 +14,8 @@ class SwitchItem: GroupItem {
     var onValueChanged: ((bool: Bool) -> Void)?
     private weak var switchControl: UISwitch?
     
-    init(title: String) {
+    init(title: String, on: Bool? = false) {
+        self.on = on ?? false
         super.init(title: title, category: .Boolean)
     }
     
