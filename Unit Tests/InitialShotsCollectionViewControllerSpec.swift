@@ -56,8 +56,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
             beforeEach() {
                 animationManagerMock = InitialShotsAnimationManagerMock()
-                animationManagerMock!.startAnimationWithCompletionStub.on(any()) {
-                    completion in
+                animationManagerMock!.startAnimationWithCompletionStub.on(any()) { completion in
                     capturedCompletion = completion
                 }
                 sut!.animationManager = animationManagerMock!
@@ -77,6 +76,66 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
                 it("should inform delegate that collection view animations did finish") {
                     delegateMock!.initialShotsCollectionViewDidFinishAnimationsMock.verify()
+                }
+            }
+        }
+
+        describe("collection view data source") {
+
+            describe("number of items in section") {
+
+                var numberOfItems: Int?
+
+                beforeEach() {
+                    sut!.animationManager.visibleItems = ["fixture item 1", "fixture item 2"]
+                    numberOfItems = sut!.collectionView(sut!.collectionView!, numberOfItemsInSection: 0)
+                }
+
+                it("have number of items based on animation manager's visible items") {
+                    expect(numberOfItems!).to(equal(2))
+                }
+            }
+
+            describe("cell for item at index path") {
+
+                var item: UICollectionViewCell?
+
+                beforeEach(){
+                    sut!.animationManager.visibleItems = ["fixture item 1"]
+                    item = sut!.collectionView(sut!.collectionView!, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+                }
+
+                it("should dequeue shot collection view cell"){
+                    expect(item!).to(beAKindOf(ShotCollectionViewCell))
+                }
+            }
+        }
+
+        describe("initial shots animation manager delegate") {
+
+            describe("collection view for animation manager") {
+
+                var collectionView: UICollectionView?
+
+                beforeEach() {
+                    collectionView = sut!.collectionViewForAnimationManager(sut!.animationManager)
+                }
+
+                it("should return proper collection view") {
+                    expect(collectionView).to(equal(sut!.collectionView))
+                }
+            }
+
+            describe("items for animation manager") {
+
+                var itemsForAnimationManager: [String]?
+
+                beforeEach() {
+                    itemsForAnimationManager = sut!.itemsForAnimationManager(sut!.animationManager) as! [String]
+                }
+
+                it("should return shots") {
+                    expect(itemsForAnimationManager).to(equal(sut!.shots))
                 }
             }
         }
