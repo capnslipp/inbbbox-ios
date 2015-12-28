@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SwitchCell: BaseCell, Reusable {
+class SwitchCell: UITableViewCell, Reusable {
     
     class var reuseIdentifier: String {
         return "TableViewSwitchCellReuseIdentifier"

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SegmentedCell: BaseCell, Reusable {
+class SegmentedCell: UITableViewCell, Reusable {
     
     class var reuseIdentifier: String {
         return "TableViewSegmentedCellReuseIdentifier"

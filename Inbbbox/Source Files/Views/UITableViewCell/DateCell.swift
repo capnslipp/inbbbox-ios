@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DateCell: BaseCell, Reusable {
+class DateCell: UITableViewCell, Reusable {
     
     class var reuseIdentifier: String {
         return "TableViewDateCellReuseIdentifier"
@@ -39,8 +39,6 @@ class DateCell: BaseCell, Reusable {
     }
     
     func commonInit() {
-        
-        backgroundColor = UIColor.backgroundGrayColor()
         
         dateLabel.frame = CGRect(x: 270, y: 12, width: 75, height: 21) // NGRTemp: temp frame
         dateLabel.text = ""
