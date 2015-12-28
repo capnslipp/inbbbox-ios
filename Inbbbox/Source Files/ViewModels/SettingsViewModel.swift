@@ -71,7 +71,7 @@ class SettingsViewModel: GroupedListViewModel {
         super.init(items: [
             [reminderItem, reminderDateItem],
             [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem, minimumLikesItem]
-            ] as [[GroupItem]])
+        ] as [[GroupItem]])
         
         // MARK: onValueChanged and onButtonTapped blocks
         
