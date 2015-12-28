@@ -12,16 +12,10 @@ protocol Updatable {
     func update()
 }
 
-protocol Validatable {
-    var valueToValidate: AnyObject { get }
-    var validationError: NSError? { get }
-    func validate(object: AnyObject) -> NSError?
-}
-
 class GroupItem: Equatable {
     
     enum Category {
-        case Action, PlainText, LongText, Date, Picker, Boolean, Segmented
+        case Date, Boolean, Segmented
     }
     
     var title: String

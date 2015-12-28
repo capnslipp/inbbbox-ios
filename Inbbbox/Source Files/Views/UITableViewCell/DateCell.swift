@@ -34,19 +34,8 @@ class DateCell: BaseCell, Reusable {
         commonInit()
     }
     
-    func setDateText(text: String, withValidationError error: NSError? = nil) {
-        let strikethroughStyle: NSUnderlineStyle = (error != nil) ? .StyleSingle : .StyleNone
-        textAttributes[NSStrikethroughStyleAttributeName] = strikethroughStyle.rawValue
-        setDateLabelText(text, withAttributes: textAttributes)
-    }
-    
-    func setLabelColor(color: UIColor) {
-        textAttributes[NSForegroundColorAttributeName] = color
-        setDateLabelText(dateLabel.text!, withAttributes: textAttributes)
-    }
-    
-    func setDateLabelText(text: String, withAttributes attributes: [NSObject: AnyObject]) {
-        dateLabel.attributedText = NSAttributedString(string: text, attributes: attributes as? [String: AnyObject])
+    func setDateText(text: String) {
+        dateLabel.text = text
     }
     
     func commonInit() {

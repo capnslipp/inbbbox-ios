@@ -92,9 +92,7 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let item = viewModel[indexPath.section][indexPath.row]
         
-        if let item = item as? DatePickerItem, cell = cell as? DatePickerCell {
-            item.bindDatePicker(cell.datePicker)
-        } else if let item = item as? SwitchItem, cell = cell as? SwitchCell {
+        if let item = item as? SwitchItem, cell = cell as? SwitchCell {
             item.bindSwitchControl(cell.switchControl)
         } else if let item = item as? SegmentedItem, cell = cell as? SegmentedCell {
             item.bindSegmentedControl(cell.segmentedControl)
@@ -111,8 +109,6 @@ extension SettingsViewController: UITableViewDelegate {
             
             if let item = item as? SwitchItem where cell is SwitchCell {
                 item.unbindSwitchControl()
-            } else if let item = item as? DatePickerItem where cell is DatePickerCell {
-                item.unbindDatePicker()
             } else if let item = item as? SegmentedItem where cell is SegmentedCell {
                 item.unbindSegmentedControl()
             }
@@ -151,8 +147,6 @@ private extension SettingsViewController {
             configureSwitchCell(cell as! SwitchCell, forItem: item)
         } else if let item = item as? DateItem {
             configureDateCell(cell as! DateCell, forItem: item)
-        } else if let item = item as? DatePickerItem {
-            configureDatePickerCell(cell as! DatePickerCell, forItem: item)
         } else if let item = item as? SegmentedItem {
             configureSegmentedCell(cell as! SegmentedCell, forItem: item)
         }
@@ -166,12 +160,8 @@ private extension SettingsViewController {
     
     func configureDateCell(cell: DateCell, forItem item: DateItem) {
         cell.textLabel?.text = item.title
-        cell.setDateText(item.dateString, withValidationError: item.validationError)
+        cell.setDateText(item.dateString)
         cell.shouldBeGreyedOut = !item.active
-    }
-    
-    func configureDatePickerCell(cell: DatePickerCell, forItem item: DatePickerItem) {
-        cell.selectionStyle = .None
     }
     
     func configureSegmentedCell(cell: SegmentedCell, forItem item: SegmentedItem) {
@@ -201,10 +191,7 @@ private extension SettingsViewController {
         
         tableView.registerClass(SwitchCell.self)
         tableView.registerClass(DateCell.self)
-        tableView.registerClass(DatePickerCell.self)
         tableView.registerClass(SegmentedCell.self)
-        tableView.registerClass(ButtonCell.self)
-        
     }
     
     func setupBarButtons() {
@@ -218,8 +205,6 @@ private extension UITableView {
         
         switch category {
         case .Date: return dequeueReusableCell(DateCell.self)
-        case .Picker: return dequeueReusableCell(DatePickerCell.self)
-        case .Action: return dequeueReusableCell(ButtonCell.self)
         case .Boolean: return dequeueReusableCell(SwitchCell.self)
         case .Segmented: return dequeueReusableCell(SegmentedCell.self)
         default: return UITableViewCell()
