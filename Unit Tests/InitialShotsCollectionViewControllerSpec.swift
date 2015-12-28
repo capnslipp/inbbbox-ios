@@ -9,6 +9,7 @@ import Dobby
 @testable import Inbbbox
 
 class InitialShotsCollectionViewControllerSpec: QuickSpec {
+
     override func spec() {
 
         var sut: InitialShotsCollectionViewController?
