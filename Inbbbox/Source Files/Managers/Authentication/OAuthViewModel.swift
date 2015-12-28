@@ -105,31 +105,29 @@ private extension OAuthViewModel {
 private extension String {
     
     var dictionary: [String: String] {
-        get {
-            var parameters = [String: String]()
+        var parameters = [String: String]()
+        
+        let scanner = NSScanner(string: self)
+        var name: NSString?
+        var value: NSString?
+        
+        while (!scanner.atEnd) {
             
-            let scanner = NSScanner(string: self)
-            var name: NSString?
-            var value: NSString?
+            name = nil
+            value = nil
             
-            while (!scanner.atEnd) {
-                
-                name = nil
-                value = nil
-                
-                scanner.scanUpToString("=", intoString:&name)
-                scanner.scanString("=", intoString: nil)
-                
-                scanner.scanUpToString("&", intoString:&value)
-                scanner.scanString("&", intoString: nil)
-                
-                if let name = name?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding),
-                    value = value?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
-                        parameters[name] = value
-                }
+            scanner.scanUpToString("=", intoString:&name)
+            scanner.scanString("=", intoString: nil)
+            
+            scanner.scanUpToString("&", intoString:&value)
+            scanner.scanString("&", intoString: nil)
+            
+            if let name = name?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding),
+                value = value?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+                    parameters[name] = value
             }
-            
-            return parameters
         }
+        
+        return parameters
     }
 }

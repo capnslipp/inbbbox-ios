@@ -33,4 +33,13 @@ extension UIColor {
     class func textLightColor() -> UIColor {
         return RGBA(109, 109, 114, 1)
     }
+    
+    class func randomColor() -> UIColor {
+        
+        let red = Int(arc4random() % 256)
+        let green = Int(arc4random() % 256)
+        let blue = Int(arc4random() % 256)
+        
+        return RGBA(red, green, blue, 1)
+    }
 }

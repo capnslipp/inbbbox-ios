@@ -16,11 +16,11 @@ class Authenticator {
     enum Service {
         case Dribbble
         
-        var instance: NetworkService { get {
+        var instance: NetworkService {
             switch self {
                 case .Dribbble: return DribbbleNetworkService()
             }
-        }}
+        }
     }
     
     init(interactionHandler: (UIViewController -> Void)) {
