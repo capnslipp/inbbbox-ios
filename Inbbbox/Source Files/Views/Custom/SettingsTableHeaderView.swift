@@ -32,7 +32,7 @@ private extension SettingsTableHeaderView {
     
     func commonInit() {
         
-        avatarView = AvatarView(frame: CGRect(x: CGRectGetWidth(frame)/2 - 75, y: 30, width: 150, height: 150))// NGRTemp: temp frame
+        avatarView = AvatarView(frame: CGRect(x: CGRectGetWidth(frame)/2 - (176/2), y: 38, width: 176, height: 176))// NGRTemp: temp frame
         
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
@@ -42,7 +42,7 @@ private extension SettingsTableHeaderView {
         }
         avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
         
-        userName.frame = CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 204, width: 200, height: 28) // NGRTemp: temp frame
+        userName.frame = CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 228, width: 200, height: 28) // NGRTemp: temp frame
         userName.textAlignment = .Center
         userName.text = "joke1410" //NGRFix: provide the name
         userName.textColor = UIColor.textDarkColor()
