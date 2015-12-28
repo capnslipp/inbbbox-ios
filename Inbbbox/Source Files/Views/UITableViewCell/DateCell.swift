@@ -15,12 +15,6 @@ class DateCell: UITableViewCell, Reusable {
     }
     
     let dateLabel = UILabel()
-    var shouldBeGreyedOut = false {
-        didSet {
-            let color: UIColor = shouldBeGreyedOut ? .lightGrayColor() : .blackColor()
-            dateLabel.textColor = color
-        }
-    }
     
     private var textAttributes = [NSObject: AnyObject]()
     
@@ -40,7 +34,10 @@ class DateCell: UITableViewCell, Reusable {
     
     func commonInit() {
         
+        accessoryType = .DisclosureIndicator
+        
         dateLabel.frame = CGRect(x: 270, y: 12, width: 75, height: 21) // NGRTemp: temp frame
+        dateLabel.textColor = UIColor.RGBA(164, 180, 188, 1)
         dateLabel.text = ""
         dateLabel.textAlignment = .Right
         contentView.addSubview(dateLabel)
