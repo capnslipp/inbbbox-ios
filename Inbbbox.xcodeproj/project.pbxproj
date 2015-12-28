@@ -25,7 +25,6 @@
 		5E4857F71C2957C90027B38A /* GroupedBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857EA1C2957C90027B38A /* GroupedBaseTableView.swift */; };
 		5E4857F81C2957C90027B38A /* UIBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */; };
 		5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857ED1C2957C90027B38A /* AvatarView.swift */; };
-		5E4857FA1C2957C90027B38A /* EventedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857EE1C2957C90027B38A /* EventedTableView.swift */; };
 		5E4857FB1C2957C90027B38A /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */; };
 		5E4858091C2972E70027B38A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4858081C2972E70027B38A /* UIColorExtension.swift */; };
 		5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */; };
@@ -112,7 +111,6 @@
 		5E4857EA1C2957C90027B38A /* GroupedBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedBaseTableView.swift; sourceTree = "<group>"; };
 		5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseTableView.swift; sourceTree = "<group>"; };
 		5E4857ED1C2957C90027B38A /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
-		5E4857EE1C2957C90027B38A /* EventedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventedTableView.swift; sourceTree = "<group>"; };
 		5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableHeaderView.swift; sourceTree = "<group>"; };
 		5E4858081C2972E70027B38A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthorizable.swift; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 			isa = PBXGroup;
 			children = (
 				5E4857ED1C2957C90027B38A /* AvatarView.swift */,
-				5E4857EE1C2957C90027B38A /* EventedTableView.swift */,
 				5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */,
 			);
 			path = Custom;
@@ -746,7 +743,6 @@
 				5E4857C91C2854F80027B38A /* ShotsQuery.swift in Sources */,
 				5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
-				5E4857FA1C2957C90027B38A /* EventedTableView.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
 				5E4857F71C2957C90027B38A /* GroupedBaseTableView.swift in Sources */,
 				5E4857BE1C280AB40027B38A /* OAuthViewController.swift in Sources */,

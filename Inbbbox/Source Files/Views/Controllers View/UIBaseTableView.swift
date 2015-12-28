@@ -10,15 +10,14 @@ import UIKit
 
 class UIBaseTableView: UIView {
     
-    private(set) var loadingSpinner = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-    private(set) var tableView = EventedTableView()
+    private(set) var tableView = UITableView()
     
     convenience override init(frame: CGRect) {
         self.init(frame: frame, tableViewStyle: .Plain)
     }
     
     init(frame: CGRect = CGRectZero, tableViewStyle: UITableViewStyle) {
-        tableView = EventedTableView(frame: frame, style: tableViewStyle)
+        tableView = UITableView(frame: frame, style: tableViewStyle)
         super.init(frame: frame)
         commonInit()
     }
@@ -31,19 +30,7 @@ class UIBaseTableView: UIView {
     func commonInit() {
         tableView.hideSeparatorForEmptyCells()
         addSubview(tableView)
-        addSubview(loadingSpinner)
         defineConstraints()
-        
-        tableView.didReloadWithData = hideLoadingSpinner
-        tableView.didReloadWithoutData = {
-            if !self.loadingSpinner.isAnimating() {
-                self.loadingSpinner.startAnimating()
-            }
-        }
-    }
-    
-    func hideLoadingSpinner() {
-        self.loadingSpinner.stopAnimating()
     }
     
     func defineConstraints() {
