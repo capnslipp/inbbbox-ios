@@ -17,33 +17,34 @@ class InitialShotsAnimationManager {
 
 //    Interface
 
-    func startAnimationWithCompletion(completion: (() -> Void)?) {
+    func startAnimationWithCompletion(completion: (Void -> Void)?) {
 //        NGRTemp: temporary implementation
+        guard let collectionView = delegate?.collectionViewForAnimationManager(self), items = delegate?.itemsForAnimationManager(self) else {
+            return
+        }
 
-        if let delegate = delegate, collectionView = delegate.collectionViewForAnimationManager(self) {
-            let items = delegate.itemsForAnimationManager(self)
-            let secondMultiplier = 0.1
+        let secondMultiplier = 0.1
 
-            for itemIndex in 1 ... items.count {
-                delay(Double(itemIndex) * secondMultiplier) {
-                    self.insertNewItem()
-                }
+        for itemIndex in 1 ... items.count {
+            delay(Double(itemIndex) * secondMultiplier) {
+                self.insertNewItem()
             }
+        }
 
-            delay(1.0 + Double(items.count) * secondMultiplier) {
+        delay(1.0 + Double(items.count) * secondMultiplier) {
 
-                for itemIndex in (1 ... items.count - 1).reverse() {
+            for itemIndex in (1 ... items.count - 1).reverse() {
 
-                    self.delay(Double(itemIndex) * secondMultiplier) {
-                        if (itemIndex != items.count - 2) {
+                self.delay(Double(itemIndex) * secondMultiplier) {
+                    if (itemIndex != items.count - 2) {
+                        self.deleteLastItem()
+                    } else {
+                        collectionView.performBatchUpdates({
                             self.deleteLastItem()
-                        } else {
-                            collectionView.performBatchUpdates({
-                                self.deleteLastItem()
-                            }, completion: { Bool in
-                                completion?()
-                            })
-                        }
+                        }, completion: {
+                            Bool in
+                            completion?()
+                        })
                     }
                 }
             }
@@ -52,7 +53,7 @@ class InitialShotsAnimationManager {
 
 //    MARK: - Helpers
 
-    private func delay(delay: Double, closure: () -> ()) {
+    private func delay(delay: Double, closure: Void -> Void) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
     }
 
