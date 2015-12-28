@@ -1,5 +1,6 @@
 PODS:
   - Async (1.4.0)
+  - Dobby (0.4.2)
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
@@ -29,6 +30,7 @@ PODS:
 
 DEPENDENCIES:
   - Async (from `https://github.com/duemunk/Async.git`, tag `1.4`)
+  - Dobby (~> 0.4.2)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - Nimble (~> 3.0)
@@ -48,6 +50,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Async: 4221a3bed9b180d95dd01fb07256443124514375
+  Dobby: 66c6fa06aac194f1b8328b2b4c988d59a01fb5f1
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926

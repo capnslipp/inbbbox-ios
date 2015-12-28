@@ -4,6 +4,7 @@
 
 import Quick
 import Nimble
+import Dobby
 
 @testable import Inbbbox
 
@@ -50,11 +51,34 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
         describe("view did appear") {
 
+            var animationManagerMock: InitialShotsAnimationManagerMock?
+            var capturedCompletion: (Void -> Void)?
+
             beforeEach() {
+                animationManagerMock = InitialShotsAnimationManagerMock()
+                animationManagerMock!.startAnimationWithCompletionStub.on(any()) {
+                    completion in
+                    capturedCompletion = completion
+                }
+                sut!.animationManager = animationManagerMock!
                 sut!.viewDidAppear(true)
             }
 
-//            NGRTodo: Find mocking pod
+            describe("animation completion") {
+
+                var delegateMock: InitialShotsCollectionViewLayoutDelegateMock?
+
+                beforeEach() {
+                    delegateMock = InitialShotsCollectionViewLayoutDelegateMock()
+                    delegateMock!.initialShotsCollectionViewDidFinishAnimationsMock.expect(any())
+                    sut!.delegate = delegateMock
+                    capturedCompletion!()
+                }
+
+                it("should inform delegate that collection view animations did finish") {
+                    delegateMock!.initialShotsCollectionViewDidFinishAnimationsMock.verify()
+                }
+            }
         }
     }
 }
