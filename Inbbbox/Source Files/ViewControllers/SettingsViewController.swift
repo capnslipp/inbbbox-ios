@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
     
     override func loadView() {
         aView = loadViewWithClass(GroupedBaseTableView.self)
-        aView?.tableView.tableHeaderView = SettingsTableHeaderView(frame: CGRect(x: 0, y: 0, width: CGRectGetWidth((aView?.bounds)!), height: 250)) // NGRTemp: temp frame
+        aView?.tableView.tableHeaderView = SettingsTableHeaderView(size: CGSize (width: CGRectGetWidth(aView!.bounds), height: 250)) // NGRTemp: temp frame
         aView?.tableView.backgroundColor = UIColor.backgroundGrayColor()
     }
     
@@ -160,7 +160,6 @@ private extension SettingsViewController {
     func configureDateCell(cell: DateCell, forItem item: DateItem) {
         cell.textLabel?.text = item.title
         cell.setDateText(item.dateString)
-        cell.shouldBeGreyedOut = !item.active
     }
     
     func configureSegmentedCell(cell: SegmentedCell, forItem item: SegmentedItem) {

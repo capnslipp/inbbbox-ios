@@ -26,6 +26,11 @@ class SettingsTableHeaderView: UIView, Reusable {
         super.init(coder: aDecoder)
         commonInit()
     }
+    
+    convenience init(size: CGSize) {
+        self.init(frame: CGRect(origin: CGPointZero, size: size))
+
+    }
 }
 
 private extension SettingsTableHeaderView {
