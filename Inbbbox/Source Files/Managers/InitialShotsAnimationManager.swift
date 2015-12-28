@@ -40,8 +40,7 @@ class InitialShotsAnimationManager {
                         } else {
                             collectionView.performBatchUpdates({
                                 self.deleteLastItem()
-                            }, completion: {
-                                Bool in
+                            }, completion: { Bool in
                                 completion?()
                             })
                         }

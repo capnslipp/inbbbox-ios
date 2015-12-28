@@ -289,7 +289,6 @@
 				BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */,
 				FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */,
 				BEEE9F65EA28BA395105A1D5 /* InitialShotsCollectionViewControllerSpec.swift */,
-				BEEE99E30635B698D4E0908C /* Mock Objects */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -366,13 +365,6 @@
 				F09307D11C24208F005F5111 /* AvatarView.swift */,
 			);
 			name = "Custom Views";
-			sourceTree = "<group>";
-		};
-		BEEE99E30635B698D4E0908C /* Mock Objects */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Mock Objects";
 			sourceTree = "<group>";
 		};
 		BF47EE2B1B4BBAF8002822D7 /* Extensions */ = {

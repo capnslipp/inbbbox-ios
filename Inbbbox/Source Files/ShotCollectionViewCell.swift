@@ -24,15 +24,11 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
 
 //    MARK: - HeightAware
     static var prefferedHeight: CGFloat {
-        get {
-            return CGFloat(240)
-        }
+        return CGFloat(240)
     }
 
 //    MARK: - Reusable
     static var reuseIdentifier: String {
-        get {
-            return "ShotCollectionViewCellIdentifier"
-        }
+        return "ShotCollectionViewCellIdentifier"
     }
 }
