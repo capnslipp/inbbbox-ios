@@ -24,7 +24,7 @@ class BaseCell: UITableViewCell {
         backgroundColor = UIColor.clearColor()
         textLabel?.textColor = UIColor.textDarkColor()
         
-        let separatorLine = UIView(frame: CGRect(x: 15, y: CGRectGetMaxY(frame)-0.3, width: CGRectGetWidth(frame)+50, height: 0.3)) // NGRTemp: temp frame
+        let separatorLine = UIView(frame: CGRect(x: 15, y: CGRectGetMaxY(frame) - 0.3, width: CGRectGetWidth(frame)+50, height: 0.3)) // NGRTemp: temp frame
         separatorLine.backgroundColor = UIColor.textLightColor()
         
         contentView.addSubview(separatorLine)

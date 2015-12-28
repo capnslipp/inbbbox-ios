@@ -56,7 +56,7 @@ extension DatePickerViewController {
         
         contentView.addSubview(datePicker)
         
-        let separatorLine = UIView(frame: CGRect(x: 0, y: CGRectGetHeight(contentView.frame)-0.3, width: CGRectGetWidth(contentView.frame), height: 0.3)) // NGRTemp: temp frame
+        let separatorLine = UIView(frame: CGRect(x: 0, y: CGRectGetHeight(contentView.frame) - 0.3, width: CGRectGetWidth(contentView.frame), height: 0.3)) // NGRTemp: temp frame
         separatorLine.backgroundColor = UIColor.textLightColor()
         contentView.addSubview(separatorLine)
         
