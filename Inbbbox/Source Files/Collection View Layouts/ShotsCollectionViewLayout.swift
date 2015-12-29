@@ -7,6 +7,7 @@ import UIKit
 class ShotsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
 //    Mark: - UICollectionViewLayout
+
     override func prepareLayout() {
         if let collectionView = collectionView {
             let cellMargins = UIEdgeInsets(top: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.prefferedHeight / 2),

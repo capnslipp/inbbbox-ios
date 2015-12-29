@@ -112,7 +112,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                     boundsChanged = sut!.shouldInvalidateLayoutForBoundsChange(CGRect(x: 0, y: 0, width: 200, height: 100))
                 }
 
-                it("shold invalidate layout when bounds size changes") {
+                it("should invalidate layout when bounds size changes") {
                     expect(boundsChanged).to(beTruthy())
                 }
             }
