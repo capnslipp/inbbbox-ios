@@ -29,6 +29,12 @@
 		5E4858091C2972E70027B38A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4858081C2972E70027B38A /* UIColorExtension.swift */; };
 		5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */; };
 		5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E498D521C24649900CFD918 /* UINavigationControllerExtension.swift */; };
+		5E5082081C312E2800093191 /* ShotsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5082071C312E2800093191 /* ShotsStorage.swift */; };
+		5E50820A1C31305C00093191 /* AutoScrollableShotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5082091C31305C00093191 /* AutoScrollableShotsView.swift */; };
+		5E50820C1C3131EF00093191 /* AutoScrollableShotsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E50820B1C3131EF00093191 /* AutoScrollableShotsAnimator.swift */; };
+		5E50820E1C3132AF00093191 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E50820D1C3132AF00093191 /* LoginView.swift */; };
+		5E5082101C313DFF00093191 /* AutoScrollableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E50820F1C313DFF00093191 /* AutoScrollableCollectionViewCell.swift */; };
+		5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */; };
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
@@ -116,6 +122,12 @@
 		5E4858081C2972E70027B38A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthorizable.swift; sourceTree = "<group>"; };
 		5E498D521C24649900CFD918 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		5E5082071C312E2800093191 /* ShotsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsStorage.swift; sourceTree = "<group>"; };
+		5E5082091C31305C00093191 /* AutoScrollableShotsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsView.swift; sourceTree = "<group>"; };
+		5E50820B1C3131EF00093191 /* AutoScrollableShotsAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsAnimator.swift; sourceTree = "<group>"; };
+		5E50820D1C3132AF00093191 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5E50820F1C313DFF00093191 /* AutoScrollableCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableCollectionViewCell.swift; sourceTree = "<group>"; };
+		5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSource.swift; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -203,6 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				F04B1FEB1C27E4BE00AEEE25 /* NotificationManager.swift */,
+				5E50820B1C3131EF00093191 /* AutoScrollableShotsAnimator.swift */,
+				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				5E4857B41C2805E10027B38A /* Authentication */,
 			);
 			path = Managers;
@@ -369,6 +383,7 @@
 			children = (
 				5E4857EA1C2957C90027B38A /* GroupedBaseTableView.swift */,
 				5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */,
+				5E50820D1C3132AF00093191 /* LoginView.swift */,
 			);
 			path = "Controllers View";
 			sourceTree = "<group>";
@@ -379,6 +394,7 @@
 				5E4857ED1C2957C90027B38A /* AvatarView.swift */,
 				5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */,
 				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
+				5E5082091C31305C00093191 /* AutoScrollableShotsView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -396,6 +412,7 @@
 		5E4858031C2959E50027B38A /* UICollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				5E50820F1C313DFF00093191 /* AutoScrollableCollectionViewCell.swift */,
 			);
 			path = UICollectionViewCell;
 			sourceTree = "<group>";
@@ -485,6 +502,7 @@
 			isa = PBXGroup;
 			children = (
 				BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */,
+				5E5082071C312E2800093191 /* ShotsStorage.swift */,
 			);
 			path = Storages;
 			sourceTree = "<group>";
@@ -743,23 +761,29 @@
 				F09307C81C240609005F5111 /* SettingsViewController.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
 				F04B1FEE1C282A7300AEEE25 /* SegmentedItem.swift in Sources */,
+				5E50820A1C31305C00093191 /* AutoScrollableShotsView.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
 				5E4857C91C2854F80027B38A /* ShotsQuery.swift in Sources */,
 				5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
+				5E50820E1C3132AF00093191 /* LoginView.swift in Sources */,
 				5E4857F71C2957C90027B38A /* GroupedBaseTableView.swift in Sources */,
 				5E4857BE1C280AB40027B38A /* OAuthViewController.swift in Sources */,
+				5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */,
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				5E4857BC1C28061F0027B38A /* OAuthView.swift in Sources */,
 				5E4857BA1C2805E10027B38A /* OAuthViewModel.swift in Sources */,
+				5E5082101C313DFF00093191 /* AutoScrollableCollectionViewCell.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
 				5E2E730C1C2BF9EF00D5BC80 /* SegmentedCell.swift in Sources */,
 				5E4857F81C2957C90027B38A /* UIBaseTableView.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
+				5E5082081C312E2800093191 /* ShotsStorage.swift in Sources */,
 				5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */,
+				5E50820C1C3131EF00093191 /* AutoScrollableShotsAnimator.swift in Sources */,
 				5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */,
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,

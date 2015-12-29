@@ -12,27 +12,30 @@ import PromiseKit
 // NGRTemp: temporary implementation
 class LoginViewController: UIViewController {
     
-    private let loginButton = UIButton(type: .System)
+    private var shotsAnimator: AutoScrollableShotsAnimator!
+    private weak var aView: LoginView?
+    
+    override func loadView() {
+        aView = loadViewWithClass(LoginView.self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .whiteColor();
-        
-        loginButton.setTitle(NSLocalizedString("Login", comment: ""), forState: .Normal)
-        loginButton.addTarget(self, action: "loginButtonDidTap:", forControlEvents: .TouchUpInside)
-        loginButton.backgroundColor = .redColor()
-        loginButton.setTitleColor(.whiteColor(), forState: .Normal)
-        
-        view.addSubview(loginButton)
+        shotsAnimator = AutoScrollableShotsAnimator(collectionViewsToAnimate: aView?.shotsView.colectionViews ?? [])
+        aView?.loginButton.addTarget(self, action: "loginButtonDidTap:", forControlEvents: .TouchUpInside)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        let inset: CGFloat = 20.0;
-        loginButton.frame = CGRectMake(0, 0, CGRectGetWidth(view.bounds) - 2 * inset, 44)
-        loginButton.center = view.center
+        firstly {
+            after(1)
+        }.then {
+            self.shotsAnimator.scrollToMiddleInstantly()
+        }.then {
+            self.shotsAnimator.startScrollAnimationIndefinitely()
+        }
     }
     
     //MARK: Actions

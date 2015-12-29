@@ -111,7 +111,7 @@ private extension String {
         var name: NSString?
         var value: NSString?
         
-        while (!scanner.atEnd) {
+        while !scanner.atEnd {
             
             name = nil
             value = nil
