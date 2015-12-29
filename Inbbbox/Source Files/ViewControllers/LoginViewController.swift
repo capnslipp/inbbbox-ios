@@ -58,4 +58,8 @@ class LoginViewController: UIViewController {
             print(error)
         }
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 }
