@@ -197,7 +197,14 @@ private extension SettingsViewController {
     }
     
     func setupBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Log Out", comment: ""), style: .Plain, target: self, action: "didTapLogOutButton")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Log Out", comment: ""), style: .Plain, target: self, action: "didTapLogOutButton:")
+    }
+}
+
+extension SettingsViewController {
+    
+    func didTapLogOutButton(_: UIBarButtonItem) {
+        // NGRTodo: implement me!
     }
 }
 
