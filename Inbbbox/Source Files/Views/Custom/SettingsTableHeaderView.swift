@@ -17,14 +17,13 @@ class SettingsTableHeaderView: UIView, Reusable {
     private var avatarView: AvatarView!
     private let userName = UILabel()
     
-    private let avatarWidth = 176
-    private let avatarHeight = 176
+    private let avatarSize = CGSize(width: 176, height: 176)
     
     private var didSetConstraints = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        avatarView = AvatarView(frame: CGRect(x: 0, y: 0, width: avatarWidth, height: avatarHeight))
+        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize))
         commonInit()
     }
     
@@ -42,8 +41,8 @@ class SettingsTableHeaderView: UIView, Reusable {
             didSetConstraints = true
             
             avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 20)
-            avatarView.autoSetDimensionsToSize(CGSize(width: avatarWidth, height: avatarHeight))
-            avatarView.autoAlignAxis(.Vertical, toSameAxisOfView: self)
+            avatarView.autoSetDimensionsToSize(avatarSize)
+            avatarView.autoAlignAxisToSuperviewAxis(.Vertical)
             
             userName.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 14)
             userName.autoSetDimension(.Height, toSize: 28)
