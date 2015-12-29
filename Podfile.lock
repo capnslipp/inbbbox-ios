@@ -24,6 +24,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (3.0.0):
     - PromiseKit/CorePromise
+  - PureLayout (3.0.1)
   - Quick (0.8.0)
   - SwiftyJSON (2.3.2)
 
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - KeychainAccess (~> 2.3)
   - Nimble (~> 3.0)
   - PromiseKit (~> 3.0)
+  - PureLayout (~> 3.0)
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
 
@@ -53,6 +55,7 @@ SPEC CHECKSUMS:
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   OMGHTTPURLRQ: 8376dc887d76a5a7e2a67881dc788f917a2f437c
   PromiseKit: 665540a1eb43156446872dcf49ed7dee6ebbe13b
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
