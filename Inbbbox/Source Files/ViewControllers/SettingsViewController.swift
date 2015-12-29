@@ -209,7 +209,6 @@ private extension UITableView {
         case .Date: return dequeueReusableCell(DateCell.self)
         case .Boolean: return dequeueReusableCell(SwitchCell.self)
         case .Segmented: return dequeueReusableCell(SegmentedCell.self)
-        default: return UITableViewCell()
         }
     }
 }
