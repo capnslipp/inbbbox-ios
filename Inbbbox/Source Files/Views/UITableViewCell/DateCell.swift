@@ -33,10 +33,9 @@ class DateCell: UITableViewCell, Reusable {
         if !didSetConstraints {
             didSetConstraints = true
             
-            dateLabel.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: 0)
-            dateLabel.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 12)
-            dateLabel.autoSetDimension(.Height, toSize: 21)
-            dateLabel.autoSetDimension(.Width, toSize: 80)
+            dateLabel.autoPinEdgeToSuperviewEdge(.Trailing)
+            dateLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 12)
+            dateLabel.autoSetDimensionsToSize(CGSize(width: 80, height: 21))
         }
         
         super.updateConstraints()

@@ -32,8 +32,8 @@ class SwitchCell: UITableViewCell, Reusable {
         if !didSetConstraints {
             didSetConstraints = true
             
-            switchControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
-            switchControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
+            switchControl.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 16)
+            switchControl.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
         }
         
         super.updateConstraints()

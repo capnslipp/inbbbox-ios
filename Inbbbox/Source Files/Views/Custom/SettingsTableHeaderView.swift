@@ -40,7 +40,7 @@ class SettingsTableHeaderView: UIView, Reusable {
         if !didSetConstraints {
             didSetConstraints = true
             
-            avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 20)
+            avatarView.autoPinEdgeToSuperviewEdge(.Top, withInset: 20)
             avatarView.autoSetDimensionsToSize(avatarSize)
             avatarView.autoAlignAxisToSuperviewAxis(.Vertical)
             

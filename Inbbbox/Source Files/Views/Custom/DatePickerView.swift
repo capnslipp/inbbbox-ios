@@ -31,20 +31,19 @@ class DatePickerView: UIView {
         if !didSetConstraints {
             didSetConstraints = true
             
-            contentView.autoAlignAxis(.Vertical, toSameAxisOfView: self)
+            contentView.autoAlignAxisToSuperviewAxis(.Vertical)
             contentView.autoMatchDimension(.Width, toDimension: .Width, ofView: self)
             contentView.autoSetDimension(.Height, toSize: 217)
-            contentView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 0)
+            contentView.autoPinEdgeToSuperviewEdge(.Top)
             
-            datePicker.autoAlignAxis(.Vertical, toSameAxisOfView: contentView)
-            datePicker.autoAlignAxis(.Horizontal, toSameAxisOfView: contentView)
+            datePicker.autoCenterInSuperview()
             datePicker.autoMatchDimension(.Width, toDimension: .Width, ofView: contentView)
             datePicker.autoSetDimension(.Height, toSize: 177)
             
-            separatorLine.autoAlignAxis(.Vertical, toSameAxisOfView: contentView)
+            separatorLine.autoAlignAxisToSuperviewAxis(.Vertical)
             separatorLine.autoMatchDimension(.Width, toDimension: .Width, ofView: contentView)
             separatorLine.autoSetDimension(.Height, toSize: 1)
-            separatorLine.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: contentView, withOffset: -1)
+            separatorLine.autoPinEdgeToSuperviewEdge(.Bottom, withInset: -1)
         }
         
         super.updateConstraints()

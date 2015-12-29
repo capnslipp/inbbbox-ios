@@ -32,10 +32,9 @@ class SegmentedCell: UITableViewCell, Reusable {
         if !didSetConstraints {
             didSetConstraints = true
             
-            segmentedControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
-            segmentedControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
-            segmentedControl.autoSetDimension(.Height, toSize: 29)
-            segmentedControl.autoSetDimension(.Width, toSize: 94)
+            segmentedControl.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 16)
+            segmentedControl.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
+            segmentedControl.autoSetDimensionsToSize(CGSize(width: 94, height: 29))
         }
         
         super.updateConstraints()
