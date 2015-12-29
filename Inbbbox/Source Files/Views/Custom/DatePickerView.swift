@@ -11,8 +11,10 @@ import UIKit
 class DatePickerView: UIView {
     
     let datePicker = UIDatePicker()
-    let contentView = UIView()
-    let separatorLine = UIView()
+    var contentView = UIView()
+    var separatorLine = UIView()
+    
+    private var didSetConstraints = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,28 +26,44 @@ class DatePickerView: UIView {
         commonInit()
     }
     
+    override func updateConstraints() {
+        
+        if !didSetConstraints {
+            didSetConstraints = true
+            
+            contentView.autoAlignAxis(.Vertical, toSameAxisOfView: self)
+            contentView.autoMatchDimension(.Width, toDimension: .Width, ofView: self)
+            contentView.autoSetDimension(.Height, toSize: 217)
+            contentView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 0)
+            
+            datePicker.autoAlignAxis(.Vertical, toSameAxisOfView: contentView)
+            datePicker.autoAlignAxis(.Horizontal, toSameAxisOfView: contentView)
+            datePicker.autoMatchDimension(.Width, toDimension: .Width, ofView: contentView)
+            datePicker.autoSetDimension(.Height, toSize: 177)
+            
+            separatorLine.autoAlignAxis(.Vertical, toSameAxisOfView: contentView)
+            separatorLine.autoMatchDimension(.Width, toDimension: .Width, ofView: contentView)
+            separatorLine.autoSetDimension(.Height, toSize: 1)
+            separatorLine.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: contentView, withOffset: -1)
+        }
+        
+        super.updateConstraints()
+    }
+    
     private func commonInit() {
         
         backgroundColor = UIColor.backgroundGrayColor()
         
-        let contentView = UIView(frame: CGRect(x: CGRectGetMinX(frame), y: 0, width: CGRectGetWidth(frame), height: 217)) // NGRTemp: temp frame
         contentView.backgroundColor = UIColor.whiteColor()
+        addSubview(contentView)
         
         datePicker.backgroundColor = UIColor.whiteColor()
         datePicker.datePickerMode = .Time
-        datePicker.frame = CGRect(x: 0, y: 20, width: CGRectGetWidth(bounds), height: 177) // NGRTemp: temp frame
-        
-        let separatorLine = UIView(frame: CGRect(x: 0, y: CGRectGetHeight(contentView.frame) - 1, width: CGRectGetWidth(contentView.frame), height: 1)) // NGRTemp: temp frame
-        separatorLine.backgroundColor = UIColor.RGBA(224, 224, 224, 1)
-        
         contentView.addSubview(datePicker)
-        contentView.addSubview(separatorLine)
-        addSubview(contentView)
         
-        defineConstraints()
-    }
-    
-    private func defineConstraints() {
-    
+        separatorLine.backgroundColor = UIColor.RGBA(224, 224, 224, 1)
+        contentView.addSubview(separatorLine)
+        
+        setNeedsUpdateConstraints()
     }
 }
