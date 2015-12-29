@@ -28,8 +28,6 @@ class SegmentedCell: UITableViewCell, Reusable {
     
     func commonInit() {
         
-        segmentedControl.frame = CGRect(x: 265, y: 7, width: 94, height: 29) // NGRTemp: temp frame
-        
         segmentedControl.insertSegmentWithTitle(NSLocalizedString("-", comment: ""), atIndex: 0, animated: false)
         segmentedControl.insertSegmentWithTitle(NSLocalizedString("+", comment: ""), atIndex: 1, animated: false)
         
@@ -42,7 +40,11 @@ class SegmentedCell: UITableViewCell, Reusable {
     }
     
     func defineConstraints() {
-        // NGRTodo: implement me!
+        
+        segmentedControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
+        segmentedControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
+        segmentedControl.autoSetDimension(.Height, toSize: 29)
+        segmentedControl.autoSetDimension(.Width, toSize: 94)
     }
 }
 
