@@ -9,7 +9,6 @@
 import UIKit
 import PromiseKit
 
-// NGRTemp: temporary implementation
 class LoginViewController: UIViewController {
     
     private var shotsAnimator: AutoScrollableShotsAnimator!
@@ -24,18 +23,26 @@ class LoginViewController: UIViewController {
         
         shotsAnimator = AutoScrollableShotsAnimator(collectionViewsToAnimate: aView?.shotsView.collectionViews ?? [])
         aView?.loginButton.addTarget(self, action: "loginButtonDidTap:", forControlEvents: .TouchUpInside)
+        aView?.loginAsGuestButton.addTarget(self, action: "loginAsGuestButtonDidTap:", forControlEvents: .TouchUpInside)
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        
+        var token: dispatch_once_t = 0
+        dispatch_once(&token) {
+            self.shotsAnimator.scrollToMiddleInstantly()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        firstly {
-            after(1)
-        }.then {
-            self.shotsAnimator.scrollToMiddleInstantly()
-        }.then {
-            self.shotsAnimator.startScrollAnimationIndefinitely()
-        }
+        shotsAnimator.startScrollAnimationIndefinitely()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     //MARK: Actions
@@ -59,7 +66,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    func loginAsGuestButtonDidTap(_: UIButton) {
+        //NGRTodo: Move to next screen
     }
 }

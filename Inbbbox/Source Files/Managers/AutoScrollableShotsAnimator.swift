@@ -16,6 +16,7 @@ class AutoScrollableShotsAnimator: NSObject {
     
     private var displayLink: CADisplayLink?
     private var lastRunLoopTimestamp = CFTimeInterval(0)
+    private var isAnimating = false
     
     init(collectionViewsToAnimate: [UICollectionView]) {
         self.collectionViewsToAnimate = collectionViewsToAnimate
@@ -32,6 +33,10 @@ class AutoScrollableShotsAnimator: NSObject {
         displayLink?.frameInterval = 1
     }
     
+    deinit {
+        stopAnimation()
+    }
+    
     func scrollToMiddleInstantly() {
         
         for collectionView in collectionViewsToAnimate {
@@ -46,13 +51,19 @@ class AutoScrollableShotsAnimator: NSObject {
     
     func startScrollAnimationIndefinitely() {
         
+        if isAnimating {
+            return
+        }
+        
         dataSource.fitExtendedScrollableContentCountForCollectionViews(collectionViewsToAnimate)
         displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         lastRunLoopTimestamp = displayLink?.timestamp ?? 0
+        isAnimating = true
     }
     
     func stopAnimation() {
         displayLink?.invalidate()
+        isAnimating = false
     }
     
     func displayLinkDidTick(_: CADisplayLink) {
