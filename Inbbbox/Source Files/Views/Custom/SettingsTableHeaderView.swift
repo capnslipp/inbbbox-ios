@@ -17,8 +17,12 @@ class SettingsTableHeaderView: UIView, Reusable {
     private var avatarView: AvatarView!
     private let userName = UILabel()
     
+    private let avatarWidth = 176
+    private let avatarHeight = 176
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        avatarView = AvatarView(frame: CGRect(x: 0, y: 0, width: avatarWidth, height: avatarHeight))
         commonInit()
     }
     
@@ -29,15 +33,12 @@ class SettingsTableHeaderView: UIView, Reusable {
     
     convenience init(size: CGSize) {
         self.init(frame: CGRect(origin: CGPointZero, size: size))
-
     }
 }
 
 private extension SettingsTableHeaderView {
     
     func commonInit() {
-        
-        avatarView = AvatarView(frame: CGRect(x: CGRectGetWidth(frame)/2 - (176/2), y: 38, width: 176, height: 176))// NGRTemp: temp frame
         
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
@@ -47,10 +48,10 @@ private extension SettingsTableHeaderView {
         }
         avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
         
-        userName.frame = CGRect(x: CGRectGetWidth(frame)/2 - 100, y: 228, width: 200, height: 28) // NGRTemp: temp frame
         userName.textAlignment = .Center
         userName.text = "joke1410" //NGRFix: provide the name
         userName.textColor = UIColor.textDarkColor()
+        userName.font = UIFont(name: "HelveticaNeue", size: 23)
         
         addSubview(avatarView)
         addSubview(userName)
@@ -59,6 +60,14 @@ private extension SettingsTableHeaderView {
     }
     
     func defineConstraints() {
-        // NGRTodo: implement me!
+        
+        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 20)
+        avatarView.autoSetDimensionsToSize(CGSize(width: avatarWidth, height: avatarHeight))
+        avatarView.autoAlignAxis(.Vertical, toSameAxisOfView: self)
+        
+        userName.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 14)
+        userName.autoSetDimension(.Height, toSize: 28)
+        userName.autoMatchDimension(.Width, toDimension: .Width, ofView: self)
+        userName.autoAlignAxis(.Vertical, toSameAxisOfView: avatarView)
     }
 }

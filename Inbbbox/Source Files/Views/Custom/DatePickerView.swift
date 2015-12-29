@@ -41,5 +41,11 @@ class DatePickerView: UIView {
         contentView.addSubview(datePicker)
         contentView.addSubview(separatorLine)
         addSubview(contentView)
+        
+        defineConstraints()
+    }
+    
+    private func defineConstraints() {
+    
     }
 }

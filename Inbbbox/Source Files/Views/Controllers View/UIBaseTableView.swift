@@ -30,11 +30,6 @@ class UIBaseTableView: UIView {
     func commonInit() {
         tableView.hideSeparatorForEmptyCells()
         addSubview(tableView)
-        defineConstraints()
-    }
-    
-    func defineConstraints() {
-        // NGRTodo: implement me!
     }
 }
 

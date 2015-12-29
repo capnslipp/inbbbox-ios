@@ -28,15 +28,19 @@ class SettingsViewController: UIViewController {
     
     override func loadView() {
         aView = loadViewWithClass(GroupedBaseTableView.self)
-        aView?.tableView.tableHeaderView = SettingsTableHeaderView(size: CGSize (width: CGRectGetWidth(aView!.bounds), height: 250)) // NGRTemp: temp frame
+        aView?.tableView.tableHeaderView = SettingsTableHeaderView(size: CGSize (width: CGRectGetWidth(aView!.bounds), height: 250))
         aView?.tableView.backgroundColor = UIColor.backgroundGrayColor()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         setupBarButtons()
         setupTableView()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        navigationController?.navigationBar.translucent = true
     }
 }
 
