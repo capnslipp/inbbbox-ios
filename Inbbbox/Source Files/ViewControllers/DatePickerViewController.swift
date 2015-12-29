@@ -31,8 +31,6 @@ class DatePickerViewController: UIViewController {
         
         aView = loadViewWithClass(DatePickerView.self)
         aView?.datePicker.date = initialDate
-        
-        view = aView
     }
     
     override func viewDidLoad() {
