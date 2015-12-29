@@ -28,9 +28,7 @@ class SwitchCell: UITableViewCell, Reusable {
     
     func commonInit() {
 
-        switchControl.frame = CGRect(x: 308, y: 7, width: 51, height: 31) // NGRTemp: temp frame
-        
-        switchControl.tintColor = UIColor.grayColor() //NGRTemp: color will be defined
+        switchControl.tintColor = UIColor.RGBA(143, 142, 148, 1)
         switchControl.backgroundColor = switchControl.tintColor
         switchControl.layer.cornerRadius = 18.0;
         switchControl.thumbTintColor = UIColor.whiteColor()
@@ -42,6 +40,7 @@ class SwitchCell: UITableViewCell, Reusable {
     }
     
     func defineConstraints() {
-        // NGRTodo: implement me!
+        switchControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
+        switchControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
     }
 }

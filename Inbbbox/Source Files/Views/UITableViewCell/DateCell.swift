@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PureLayout
 
 class DateCell: UITableViewCell, Reusable {
     
@@ -36,7 +37,6 @@ class DateCell: UITableViewCell, Reusable {
         
         accessoryType = .DisclosureIndicator
         
-        dateLabel.frame = CGRect(x: 270, y: 12, width: 75, height: 21) // NGRTemp: temp frame
         dateLabel.textColor = UIColor.RGBA(164, 180, 188, 1)
         dateLabel.text = ""
         dateLabel.textAlignment = .Right
@@ -46,6 +46,10 @@ class DateCell: UITableViewCell, Reusable {
     }
     
     func defineConstraints() {
-        // NGRTodo: implement me!
+        
+        dateLabel.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: 0)
+        dateLabel.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 12)
+        dateLabel.autoSetDimension(.Height, toSize: 21)
+        dateLabel.autoSetDimension(.Width, toSize: 80)
     }
 }
