@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     
     private var shotsAnimator: AutoScrollableShotsAnimator!
     private weak var aView: LoginView?
+    private var onceTokenForScrollToMiddleInstantly = dispatch_once_t(0)
     
     override func loadView() {
         aView = loadViewWithClass(LoginView.self)
@@ -29,8 +30,7 @@ class LoginViewController: UIViewController {
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
-        var token: dispatch_once_t = 0
-        dispatch_once(&token) {
+        dispatch_once(&onceTokenForScrollToMiddleInstantly) {
             self.shotsAnimator.scrollToMiddleInstantly()
         }
     }
@@ -43,6 +43,10 @@ class LoginViewController: UIViewController {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
+    }
+    
+    deinit {
+        shotsAnimator.stopAnimation()
     }
     
     //MARK: Actions
