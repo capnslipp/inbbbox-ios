@@ -18,10 +18,12 @@
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
+		BEEE9062EC2A1026D4F58CF4 /* ClosureExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE92F532F05B02FCF9A199 /* ClosureExecutor.swift */; };
 		BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */; };
+		BEEE9447B994CF34F3D5D039 /* InitialShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */; };
 		BEEE9867B125820EB9871298 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE97AF5FE60F6C45F64E7A /* UIColorExtension.swift */; };
-		BEEE9BD3F2B26D06799DB0D9 /* InitialShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F65EA28BA395105A1D5 /* InitialShotsCollectionViewControllerSpec.swift */; };
 		BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */; };
+		BEEE9E016BFDA8F471FC1678 /* ClosureExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F9EC9A50294169CF219 /* ClosureExecutorMock.swift */; };
 		BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
 		BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961191C1B443E000FC5D8 /* NetworkService.swift */; };
@@ -113,11 +115,13 @@
 		5E3A98571AA741FA00CE2F20 /* Tests-Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Staging.xcconfig"; path = "Configuration/Tests-Staging.xcconfig"; sourceTree = "<group>"; };
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BEEE92F532F05B02FCF9A199 /* ClosureExecutor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureExecutor.swift; sourceTree = "<group>"; };
 		BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewController.swift; sourceTree = "<group>"; };
+		BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialShotsCollectionViewControllerSpec.swift; path = "Unit Tests/InitialShotsCollectionViewControllerSpec.swift"; sourceTree = "<group>"; };
 		BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayoutSpec.swift; sourceTree = "<group>"; };
 		BEEE97AF5FE60F6C45F64E7A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
-		BEEE9F65EA28BA395105A1D5 /* InitialShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
+		BEEE9F9EC9A50294169CF219 /* ClosureExecutorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureExecutorMock.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BF69611B1C1B4551000FC5D8 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 		005A401FFFA8DAC0C198A001 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -300,7 +305,6 @@
 				BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */,
 				BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */,
 				FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */,
-				BEEE9F65EA28BA395105A1D5 /* InitialShotsCollectionViewControllerSpec.swift */,
 				FF13AAD2F902BC574DD6F670 /* Mock Objects */,
 				FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */,
 				FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */,
@@ -459,6 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				BF95084F1C1F0F7E00E39242 /* Formatter.swift */,
+				BEEE92F532F05B02FCF9A199 /* ClosureExecutor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -487,6 +492,7 @@
 				FF13A0AF874643193442C4BE /* InitialShotsAnimationManagerMock.swift */,
 				FF13AB67B01560FFA515D3E1 /* InitialShotsCollectionViewLayoutDelegateMock.swift */,
 				FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */,
+				BEEE9F9EC9A50294169CF219 /* ClosureExecutorMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -759,6 +765,7 @@
 				FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */,
 				FF13A574FBBAEF0209C4B722 /* InitialShotsAnimationManager.swift in Sources */,
 				BEEE9867B125820EB9871298 /* UIColorExtension.swift in Sources */,
+				BEEE9062EC2A1026D4F58CF4 /* ClosureExecutor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,13 +778,14 @@
 				BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */,
 				BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
-				BEEE9BD3F2B26D06799DB0D9 /* InitialShotsCollectionViewControllerSpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* InitialShotsAnimationManagerMock.swift in Sources */,
 				FF13A6CBD12C4FF17CAFCFDB /* InitialShotsCollectionViewLayoutDelegateMock.swift in Sources */,
 				FF13AF11CAA2BAB3EFD369E2 /* ShotsCollectionViewControllerSpec.swift in Sources */,
 				FF13AE1673A2D15C58A49606 /* InitialShotsCollectionViewLayoutSpec.swift in Sources */,
 				FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */,
 				BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */,
+				BEEE9E016BFDA8F471FC1678 /* ClosureExecutorMock.swift in Sources */,
+				BEEE9447B994CF34F3D5D039 /* InitialShotsCollectionViewControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
