@@ -16,6 +16,8 @@ class SwitchCell: UITableViewCell, Reusable {
     
     let switchControl = UISwitch()
     
+    private var didSetConstraints = false
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -24,6 +26,17 @@ class SwitchCell: UITableViewCell, Reusable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+    }
+    
+    override func updateConstraints() {
+        if !didSetConstraints {
+            didSetConstraints = true
+            
+            switchControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
+            switchControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
+        }
+        
+        super.updateConstraints()
     }
     
     func commonInit() {
@@ -36,11 +49,6 @@ class SwitchCell: UITableViewCell, Reusable {
         
         contentView.addSubview(switchControl)
         
-        defineConstraints()
-    }
-    
-    func defineConstraints() {
-        switchControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
-        switchControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
+        setNeedsUpdateConstraints()
     }
 }

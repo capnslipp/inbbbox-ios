@@ -17,7 +17,7 @@ class DateCell: UITableViewCell, Reusable {
     
     let dateLabel = UILabel()
     
-    private var textAttributes = [NSObject: AnyObject]()
+    private var didSetConstraints = false
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,6 +27,19 @@ class DateCell: UITableViewCell, Reusable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+    }
+    
+    override func updateConstraints() {
+        if !didSetConstraints {
+            didSetConstraints = true
+            
+            dateLabel.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: 0)
+            dateLabel.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 12)
+            dateLabel.autoSetDimension(.Height, toSize: 21)
+            dateLabel.autoSetDimension(.Width, toSize: 80)
+        }
+        
+        super.updateConstraints()
     }
     
     func setDateText(text: String) {
@@ -42,14 +55,6 @@ class DateCell: UITableViewCell, Reusable {
         dateLabel.textAlignment = .Right
         contentView.addSubview(dateLabel)
         
-        defineConstraints()
-    }
-    
-    func defineConstraints() {
-        
-        dateLabel.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: 0)
-        dateLabel.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 12)
-        dateLabel.autoSetDimension(.Height, toSize: 21)
-        dateLabel.autoSetDimension(.Width, toSize: 80)
+        setNeedsUpdateConstraints()
     }
 }

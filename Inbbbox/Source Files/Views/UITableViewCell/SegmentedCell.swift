@@ -16,6 +16,8 @@ class SegmentedCell: UITableViewCell, Reusable {
     
     let segmentedControl = UISegmentedControl()
     
+    private var didSetConstraints = false
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -24,6 +26,19 @@ class SegmentedCell: UITableViewCell, Reusable {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
+    }
+    
+    override func updateConstraints() {
+        if !didSetConstraints {
+            didSetConstraints = true
+            
+            segmentedControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
+            segmentedControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
+            segmentedControl.autoSetDimension(.Height, toSize: 29)
+            segmentedControl.autoSetDimension(.Width, toSize: 94)
+        }
+        
+        super.updateConstraints()
     }
     
     func commonInit() {
@@ -36,15 +51,7 @@ class SegmentedCell: UITableViewCell, Reusable {
         segmentedControl.tintColor = UIColor.pinkColor()
         contentView.insertSubview(segmentedControl, aboveSubview: textLabel!)
         
-        defineConstraints()
-    }
-    
-    func defineConstraints() {
-        
-        segmentedControl.autoPinEdge(.Trailing, toEdge: .Trailing, ofView: contentView, withOffset: -16)
-        segmentedControl.autoPinEdge(.Top, toEdge: .Top, ofView: contentView, withOffset: 7)
-        segmentedControl.autoSetDimension(.Height, toSize: 29)
-        segmentedControl.autoSetDimension(.Width, toSize: 94)
+        setNeedsUpdateConstraints()
     }
 }
 

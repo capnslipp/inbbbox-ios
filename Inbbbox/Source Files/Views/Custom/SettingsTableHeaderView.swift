@@ -20,6 +20,8 @@ class SettingsTableHeaderView: UIView, Reusable {
     private let avatarWidth = 176
     private let avatarHeight = 176
     
+    private var didSetConstraints = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         avatarView = AvatarView(frame: CGRect(x: 0, y: 0, width: avatarWidth, height: avatarHeight))
@@ -33,6 +35,23 @@ class SettingsTableHeaderView: UIView, Reusable {
     
     convenience init(size: CGSize) {
         self.init(frame: CGRect(origin: CGPointZero, size: size))
+    }
+    
+    override func updateConstraints() {
+        if !didSetConstraints {
+            didSetConstraints = true
+            
+            avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 20)
+            avatarView.autoSetDimensionsToSize(CGSize(width: avatarWidth, height: avatarHeight))
+            avatarView.autoAlignAxis(.Vertical, toSameAxisOfView: self)
+            
+            userName.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 14)
+            userName.autoSetDimension(.Height, toSize: 28)
+            userName.autoMatchDimension(.Width, toDimension: .Width, ofView: self)
+            userName.autoAlignAxis(.Vertical, toSameAxisOfView: avatarView)
+        }
+        
+        super.updateConstraints()
     }
 }
 
@@ -56,18 +75,6 @@ private extension SettingsTableHeaderView {
         addSubview(avatarView)
         addSubview(userName)
         
-        defineConstraints()
-    }
-    
-    func defineConstraints() {
-        
-        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 20)
-        avatarView.autoSetDimensionsToSize(CGSize(width: avatarWidth, height: avatarHeight))
-        avatarView.autoAlignAxis(.Vertical, toSameAxisOfView: self)
-        
-        userName.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 14)
-        userName.autoSetDimension(.Height, toSize: 28)
-        userName.autoMatchDimension(.Width, toDimension: .Width, ofView: self)
-        userName.autoAlignAxis(.Vertical, toSameAxisOfView: avatarView)
+        setNeedsUpdateConstraints()
     }
 }
