@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import PureLayout
 
 class LoginView: UIView {
     
     let loginButton = UIButton(type: .System)
     let shotsView = AutoScrollableShotsView(numberOfColumns: 4)
+    
     private let pinkOverlayView = UIView()
+    private var didSetConstraints = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,11 +35,19 @@ class LoginView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override func updateConstraints() {
         
-        shotsView.frame = bounds
-        pinkOverlayView.frame = bounds
-        loginButton.frame = CGRect(x: CGRectGetMidX(bounds) - 100, y: CGRectGetMaxY(bounds) - 100, width: 200, height: 44)
+        if !didSetConstraints {
+            didSetConstraints = true
+            
+            shotsView.autoPinEdgesToSuperviewEdges()
+            pinkOverlayView.autoPinEdgesToSuperviewEdges()
+            
+            loginButton.autoSetDimensionsToSize(CGSize(width: 200, height: 50))
+            loginButton.autoAlignAxisToSuperviewAxis(.Vertical)
+            loginButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 40)
+        }
+        
+        super.updateConstraints()
     }
 }

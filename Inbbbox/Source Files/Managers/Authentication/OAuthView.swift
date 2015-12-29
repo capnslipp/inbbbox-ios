@@ -8,10 +8,12 @@
 
 import UIKit
 import WebKit
+import PureLayout
 
 final class OAuthView: UIView {
     
     let webView: WKWebView
+    private var didSetConstraints = false
     
     override init(frame: CGRect) {
         
@@ -36,10 +38,15 @@ final class OAuthView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    
+    override func updateConstraints() {
         
-        webView.frame = bounds
+        if !didSetConstraints {
+            didSetConstraints = true
+            
+            webView.autoPinEdgesToSuperviewEdges()
+        }
+        
+        super.updateConstraints()
     }
-
 }

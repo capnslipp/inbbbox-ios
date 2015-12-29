@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        shotsAnimator = AutoScrollableShotsAnimator(collectionViewsToAnimate: aView?.shotsView.colectionViews ?? [])
+        shotsAnimator = AutoScrollableShotsAnimator(collectionViewsToAnimate: aView?.shotsView.collectionViews ?? [])
         aView?.loginButton.addTarget(self, action: "loginButtonDidTap:", forControlEvents: .TouchUpInside)
     }
     

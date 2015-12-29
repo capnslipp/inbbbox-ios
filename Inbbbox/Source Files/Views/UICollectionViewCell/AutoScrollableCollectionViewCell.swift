@@ -7,6 +7,7 @@
 //
 
 import UIKit.UICollectionViewCell
+import PureLayout
 
 class AutoScrollableCollectionViewCell: UICollectionViewCell {
     
@@ -29,17 +30,9 @@ class AutoScrollableCollectionViewCell: UICollectionViewCell {
     override func updateConstraints() {
         
         if !didSetConstraints {
-            
-            let imageViewConstraints = [
-                NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: imageView.superview, attribute: .Bottom, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: imageView, attribute: .Top, relatedBy: .Equal, toItem: imageView.superview, attribute: .Top, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: imageView, attribute: .Left, relatedBy: .Equal, toItem: imageView.superview, attribute: .Left, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: imageView, attribute: .Right, relatedBy: .Equal, toItem: imageView.superview, attribute: .Right, multiplier: 1, constant: 0),
-            ]
-            
-            NSLayoutConstraint.activateConstraints(imageViewConstraints)
-            
             didSetConstraints = true
+            
+            imageView.autoPinEdgesToSuperviewEdges()            
         }
 
         super.updateConstraints()
