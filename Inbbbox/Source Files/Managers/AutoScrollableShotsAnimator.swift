@@ -8,7 +8,7 @@
 
 import UIKit.UICollectionView
 
-class AutoScrollableShotsAnimator: NSObject {
+class AutoScrollableShotsAnimator {
     
     private let animationPointsPerSecond = CGFloat(50)
     private let collectionViewsToAnimate: [UICollectionView]
@@ -26,8 +26,6 @@ class AutoScrollableShotsAnimator: NSObject {
             collectionView.delegate = dataSource
             dataSource.registerClassForCollectionView(collectionView)
         }
-        
-        super.init()
         
         displayLink = CADisplayLink(target: self, selector: "displayLinkDidTick:")
         displayLink?.frameInterval = 1
