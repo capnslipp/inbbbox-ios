@@ -66,11 +66,11 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
 
 //    MARK: - InitialShotsAnimationManagerDelegate
 
-    func collectionViewForAnimationManager(_ animationManager: InitialShotsAnimationManager) -> UICollectionView? {
+    func collectionViewForAnimationManager(animationManager: InitialShotsAnimationManager) -> UICollectionView? {
         return collectionView
     }
 
-    func itemsForAnimationManager(_ animationManager: InitialShotsAnimationManager) -> [AnyObject] {
+    func itemsForAnimationManager(animationManager: InitialShotsAnimationManager) -> [AnyObject] {
         return shots
     }
 }

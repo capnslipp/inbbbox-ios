@@ -5,9 +5,9 @@
 import UIKit
 
 protocol InitialShotsAnimationManagerDelegate: class {
-    func collectionViewForAnimationManager(_ animationManager: InitialShotsAnimationManager) -> UICollectionView?
+    func collectionViewForAnimationManager(animationManager: InitialShotsAnimationManager) -> UICollectionView?
 
-    func itemsForAnimationManager(_ animationManager: InitialShotsAnimationManager) -> [AnyObject]
+    func itemsForAnimationManager(animationManager: InitialShotsAnimationManager) -> [AnyObject]
 }
 
 class InitialShotsAnimationManager {
@@ -26,7 +26,7 @@ class InitialShotsAnimationManager {
         let interval = 0.1
         addItems(items, collectionView: collectionView, interval: interval) {
             self.closureExecutor.executeClosureOnMainThread(delay: 1.0) {
-                self.removeItemsWithoutFirstItem(items, collectionView: collectionView, interval: interval, completion: completion)
+                self.deleteItemsWithoutFirstItem(items, collectionView: collectionView, interval: interval, completion: completion)
             }
         }
     }
@@ -44,7 +44,7 @@ class InitialShotsAnimationManager {
         updateItems(items, collectionView: collectionView, interval: interval, animation: addItemAnimation, completion: completion)
     }
 
-    private func removeItemsWithoutFirstItem(items: [AnyObject], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
+    private func deleteItemsWithoutFirstItem(items: [AnyObject], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
         var reversedItemsWithoutFirstItem = items
         reversedItemsWithoutFirstItem.removeFirst()
         reversedItemsWithoutFirstItem.reverse()

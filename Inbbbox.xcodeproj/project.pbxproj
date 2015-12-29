@@ -21,6 +21,8 @@
 		BEEE9062EC2A1026D4F58CF4 /* ClosureExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE92F532F05B02FCF9A199 /* ClosureExecutor.swift */; };
 		BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */; };
 		BEEE9447B994CF34F3D5D039 /* InitialShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */; };
+		BEEE9517436BBAF8AD9E06EB /* InitialShotsAnimationManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */; };
+		BEEE95BCBAB8072AE0F35D42 /* InitialShotsAnimationManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */; };
 		BEEE9867B125820EB9871298 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE97AF5FE60F6C45F64E7A /* UIColorExtension.swift */; };
 		BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */; };
 		BEEE9E016BFDA8F471FC1678 /* ClosureExecutorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F9EC9A50294169CF219 /* ClosureExecutorMock.swift */; };
@@ -120,7 +122,9 @@
 		BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialShotsCollectionViewControllerSpec.swift; path = "Unit Tests/InitialShotsCollectionViewControllerSpec.swift"; sourceTree = "<group>"; };
 		BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayoutSpec.swift; sourceTree = "<group>"; };
 		BEEE97AF5FE60F6C45F64E7A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsAnimationManagerSpec.swift; sourceTree = "<group>"; };
 		BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsAnimationManagerDelegateMock.swift; sourceTree = "<group>"; };
 		BEEE9F9EC9A50294169CF219 /* ClosureExecutorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureExecutorMock.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 				FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */,
 				FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */,
 				BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */,
+				BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -493,6 +498,7 @@
 				FF13AB67B01560FFA515D3E1 /* InitialShotsCollectionViewLayoutDelegateMock.swift */,
 				FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */,
 				BEEE9F9EC9A50294169CF219 /* ClosureExecutorMock.swift */,
+				BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -786,6 +792,8 @@
 				BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */,
 				BEEE9E016BFDA8F471FC1678 /* ClosureExecutorMock.swift in Sources */,
 				BEEE9447B994CF34F3D5D039 /* InitialShotsCollectionViewControllerSpec.swift in Sources */,
+				BEEE9517436BBAF8AD9E06EB /* InitialShotsAnimationManagerSpec.swift in Sources */,
+				BEEE95BCBAB8072AE0F35D42 /* InitialShotsAnimationManagerDelegateMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
