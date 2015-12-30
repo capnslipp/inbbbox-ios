@@ -23,13 +23,30 @@ class SettingsTableHeaderView: UIView, Reusable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        clipsToBounds = true
+        backgroundColor = UIColor.clearColor()
+        
         avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize))
-        commonInit()
+        
+        if let data = NSData(contentsOfURL: NSURL(string: "https://www.gravatar.com/avatar/348f80fa39b3d1d66bd68440ea229192?s=200")!) { // NGRTemp: will be removed
+            avatarView.imageView.image = UIImage(data: data) //NGRFix: provide the image
+        }
+        avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
+        addSubview(avatarView)
+        
+        userName.textAlignment = .Center
+        userName.text = "joke1410" //NGRFix: provide the name
+        userName.textColor = UIColor.textDarkColor()
+        userName.font = UIFont.helveticaFont(.Neue, size: 23)
+        addSubview(userName)
+        
+        setNeedsUpdateConstraints()
     }
     
+    @available(*, unavailable, message="Use init(_: CGRect) method instead")
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        fatalError("init(coder:) has not been implemented")
     }
     
     convenience init(size: CGSize) {
@@ -37,6 +54,7 @@ class SettingsTableHeaderView: UIView, Reusable {
     }
     
     override func updateConstraints() {
+        
         if !didSetConstraints {
             didSetConstraints = true
             
@@ -51,29 +69,5 @@ class SettingsTableHeaderView: UIView, Reusable {
         }
         
         super.updateConstraints()
-    }
-}
-
-private extension SettingsTableHeaderView {
-    
-    func commonInit() {
-        
-        clipsToBounds = true
-        backgroundColor = UIColor.clearColor()
-        
-        if let data = NSData(contentsOfURL: NSURL(string: "https://www.gravatar.com/avatar/348f80fa39b3d1d66bd68440ea229192?s=200")!) { // NGRTemp: will be removed
-            avatarView.imageView.image = UIImage(data: data) //NGRFix: provide the image
-        }
-        avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
-        
-        userName.textAlignment = .Center
-        userName.text = "joke1410" //NGRFix: provide the name
-        userName.textColor = UIColor.textDarkColor()
-        userName.font = UIFont(name: "HelveticaNeue", size: 23)
-        
-        addSubview(avatarView)
-        addSubview(userName)
-        
-        setNeedsUpdateConstraints()
     }
 }
