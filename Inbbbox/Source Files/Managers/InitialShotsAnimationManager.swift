@@ -55,21 +55,21 @@ class InitialShotsAnimationManager {
             collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: lastItemIndex, inSection: 0)])
         }
 
-        self.updateItems(reversedItemsWithoutFirstItem, collectionView: collectionView, interval: interval, animation: removeItemAnimation, completion: completion)
+        updateItems(reversedItemsWithoutFirstItem, collectionView: collectionView, interval: interval, animation: removeItemAnimation, completion: completion)
     }
 
     private func updateItems(items: [AnyObject], collectionView: UICollectionView, interval: Double, animation: Void -> Void, completion: (Void -> Void)?) {
         for itemIndex in 1 ... items.count {
             var updateAnimation = animation
             if itemIndex == items.count {
-                let batchUpdatesCompletion: (Bool -> Void) = { Bool in
+                let batchUpdatesCompletion: (Bool -> Void) = { _ in
                     completion?()
                 }
                 updateAnimation = {
                     collectionView.performBatchUpdates(animation, completion: batchUpdatesCompletion)
                 }
             }
-            self.closureExecutor.executeClosureOnMainThread(delay: Double(itemIndex) * interval, closure: updateAnimation)
+            closureExecutor.executeClosureOnMainThread(delay: Double(itemIndex) * interval, closure: updateAnimation)
         }
     }
 }
