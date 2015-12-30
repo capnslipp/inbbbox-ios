@@ -18,7 +18,7 @@ struct DribbbleNetworkService: SecureNetworkService, HeaderAuthorizable, OAuthAu
     let requestTokenURLString = Dribbble.RequestTokenURLString
     let accessTokenURLString = Dribbble.AccessTokenURLString
     let redirectURI = Dribbble.CallbackURLString
-    let clienID = Dribbble.ClientID
+    let clientID = Dribbble.ClientID
     let clientSecret = Dribbble.ClientSecret
     let scope = Dribbble.Scope
     

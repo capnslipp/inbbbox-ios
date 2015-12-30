@@ -13,7 +13,7 @@ protocol OAuthAuthorizable {
     var requestTokenURLString: String { get }
     var accessTokenURLString: String { get }
     
-    var clienID: String { get }
+    var clientID: String { get }
     var clientSecret: String { get }
     var redirectURI: String { get }
     var scope: String { get }
@@ -29,7 +29,7 @@ extension OAuthAuthorizable {
     func requestTokenURLRequest() -> NSURLRequest {
       
         var parameters = Parameters(encoding: .URL)
-        parameters["client_id"] = clienID
+        parameters["client_id"] = clientID
         parameters["redirect_uri"] = redirectURI
         parameters["scope"] = scope
         
@@ -39,7 +39,7 @@ extension OAuthAuthorizable {
     func accessTokenURLRequestWithRequestToken(token: String) -> NSURLRequest {
         
         var parameters = Parameters(encoding: .URL)
-        parameters["client_id"] = clienID
+        parameters["client_id"] = clientID
         parameters["client_secret"] = clientSecret
         parameters["redirect_uri"] = redirectURI
         parameters["code"] = token
