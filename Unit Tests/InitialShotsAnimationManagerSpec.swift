@@ -24,20 +24,24 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
 
         describe("start animation with completion") {
 
-            var capturedAddedItemsIndexPaths = [NSIndexPath]()
-            var capturedDeletedItemsIndexPaths = [NSIndexPath]()
-            var capturedDelays = [Double]()
+            var capturedAddedItemsIndexPaths: [NSIndexPath]?
+            var capturedDeletedItemsIndexPaths: [NSIndexPath]?
+            var capturedDelays: [Double]?
             var didInvokeCompletion: Bool?
 
             beforeEach() {
+                capturedAddedItemsIndexPaths = [NSIndexPath]()
+                capturedDeletedItemsIndexPaths = [NSIndexPath]()
+                capturedDelays = [Double]()
+
                 let collectionViewMock = CollectionViewMock(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
                 collectionViewMock.insertItemsAtIndexPathsStub.on(any()) {
                     indexPaths in
-                    capturedAddedItemsIndexPaths.append(indexPaths.first!)
+                    capturedAddedItemsIndexPaths!.append(indexPaths.first!)
                 }
                 collectionViewMock.deleteItemsAtIndexPathsStub.on(any()) {
                     indexPaths in
-                    capturedDeletedItemsIndexPaths.append(indexPaths.first!)
+                    capturedDeletedItemsIndexPaths!.append(indexPaths.first!)
                 }
                 collectionViewMock.performBatchUpdatesStub.on(any()) {
                     updates, completion in
@@ -54,7 +58,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                 let closureExecutorMock = ClosureExecutorMock()
                 closureExecutorMock.executeClosureOnMainThreadStub.on(any()) {
                     delay, closure in
-                    capturedDelays.append(delay)
+                    capturedDelays!.append(delay)
                     closure()
                 }
                 sut!.closureExecutor = closureExecutorMock
@@ -64,16 +68,10 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                 }
             }
 
-            afterEach() {
-                capturedAddedItemsIndexPaths.removeAll()
-                capturedDeletedItemsIndexPaths.removeAll()
-                capturedDelays.removeAll()
-            }
-
             describe("adding items") {
 
                 it("should add 3 items") {
-                    expect(capturedAddedItemsIndexPaths.count).to(equal(3))
+                    expect(capturedAddedItemsIndexPaths!.count).to(equal(3))
                 }
 
                 describe("first added item") {
@@ -82,8 +80,8 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var addedItemDelay: Double?
 
                     beforeEach() {
-                        addedItemIndexPath = capturedAddedItemsIndexPaths[0]
-                        addedItemDelay = capturedDelays[0]
+                        addedItemIndexPath = capturedAddedItemsIndexPaths![0]
+                        addedItemDelay = capturedDelays![0]
                     }
 
                     it("should add item for proper index path") {
@@ -101,8 +99,8 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var addedItemDelay: Double?
 
                     beforeEach() {
-                        addedItemIndexPath = capturedAddedItemsIndexPaths[1]
-                        addedItemDelay = capturedDelays[1]
+                        addedItemIndexPath = capturedAddedItemsIndexPaths![1]
+                        addedItemDelay = capturedDelays![1]
                     }
 
                     it("should add item for proper index path") {
@@ -120,8 +118,8 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var addedItemDelay: Double?
 
                     beforeEach() {
-                        addedItemIndexPath = capturedAddedItemsIndexPaths[2]
-                        addedItemDelay = capturedDelays[2]
+                        addedItemIndexPath = capturedAddedItemsIndexPaths![2]
+                        addedItemDelay = capturedDelays![2]
                     }
 
                     it("should add item for proper index path") {
@@ -137,11 +135,11 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
             describe("deleting items") {
 
                 it("should delete 2 items") {
-                    expect(capturedDeletedItemsIndexPaths.count).to(equal(2))
+                    expect(capturedDeletedItemsIndexPaths!.count).to(equal(2))
                 }
 
                 it("should make 1 second pause before deleting items"){
-                    expect(capturedDelays[3]).to(beCloseTo(1.0))
+                    expect(capturedDelays![3]).to(beCloseTo(1.0))
                 }
 
                 describe("first deleted item") {
@@ -150,8 +148,8 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var deletedItemDelay: Double?
 
                     beforeEach() {
-                        deletedItemIndexPath = capturedDeletedItemsIndexPaths[0]
-                        deletedItemDelay = capturedDelays[4]
+                        deletedItemIndexPath = capturedDeletedItemsIndexPaths![0]
+                        deletedItemDelay = capturedDelays![4]
                     }
 
                     it("should delete item for proper index path") {
@@ -169,8 +167,8 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var deletedItemDelay: Double?
 
                     beforeEach() {
-                        deletedItemIndexPath = capturedDeletedItemsIndexPaths[1]
-                        deletedItemDelay = capturedDelays[5]
+                        deletedItemIndexPath = capturedDeletedItemsIndexPaths![1]
+                        deletedItemDelay = capturedDelays![5]
                     }
 
                     it("should delete item for proper index path") {
