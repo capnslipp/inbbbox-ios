@@ -9,8 +9,6 @@
 import Quick
 import Nimble
 
-import Inbbbox
-
 @testable import Inbbbox
 
 class UnlikeQuerySpec: QuickSpec {
@@ -24,7 +22,7 @@ class UnlikeQuerySpec: QuickSpec {
                 sut = UnlikeQuery(shotID: "fixture.identifier")
             }
             
-            it("should have post method") {
+            it("should have DELETE method") {
                 expect(sut.method.rawValue).to(equal(Method.DELETE.rawValue))
             }
             
