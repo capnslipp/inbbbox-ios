@@ -11,8 +11,8 @@ import UIKit
 class DatePickerView: UIView {
     
     let datePicker = UIDatePicker()
-    var contentView = UIView()
-    var separatorLine = UIView()
+    private let contentView = UIView()
+    private let separatorLine = UIView()
     
     private var didSetConstraints = false
     
