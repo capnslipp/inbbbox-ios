@@ -18,12 +18,25 @@ class DatePickerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        
+        backgroundColor = UIColor.backgroundGrayColor()
+        
+        contentView.backgroundColor = UIColor.whiteColor()
+        addSubview(contentView)
+        
+        datePicker.backgroundColor = UIColor.whiteColor()
+        datePicker.datePickerMode = .Time
+        contentView.addSubview(datePicker)
+        
+        separatorLine.backgroundColor = UIColor.RGBA(224, 224, 224, 1)
+        contentView.addSubview(separatorLine)
+        
+        setNeedsUpdateConstraints()
     }
     
+    @available(*, unavailable, message="Use init(_: CGRect) method instead")
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func updateConstraints() {
@@ -47,22 +60,5 @@ class DatePickerView: UIView {
         }
         
         super.updateConstraints()
-    }
-    
-    private func commonInit() {
-        
-        backgroundColor = UIColor.backgroundGrayColor()
-        
-        contentView.backgroundColor = UIColor.whiteColor()
-        addSubview(contentView)
-        
-        datePicker.backgroundColor = UIColor.whiteColor()
-        datePicker.datePickerMode = .Time
-        contentView.addSubview(datePicker)
-        
-        separatorLine.backgroundColor = UIColor.RGBA(224, 224, 224, 1)
-        contentView.addSubview(separatorLine)
-        
-        setNeedsUpdateConstraints()
     }
 }

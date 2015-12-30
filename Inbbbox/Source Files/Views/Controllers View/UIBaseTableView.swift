@@ -18,18 +18,16 @@ class UIBaseTableView: UIView {
     
     init(frame: CGRect = CGRectZero, tableViewStyle: UITableViewStyle) {
         tableView = UITableView(frame: frame, style: tableViewStyle)
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-    func commonInit() {
         tableView.hideSeparatorForEmptyCells()
+        
+        super.init(frame: frame)
+        
         addSubview(tableView)
+    }
+    
+    @available(*, unavailable, message="Use init(_: CGRect, tableViewStyle: UITableViewStyle) method instead")
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

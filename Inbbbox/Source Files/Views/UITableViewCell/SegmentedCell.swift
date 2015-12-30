@@ -20,12 +20,21 @@ class SegmentedCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
+        
+        segmentedControl.insertSegmentWithTitle(NSLocalizedString("-", comment: ""), atIndex: 0, animated: false)
+        segmentedControl.insertSegmentWithTitle(NSLocalizedString("+", comment: ""), atIndex: 1, animated: false)
+        
+        segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment
+        
+        segmentedControl.tintColor = UIColor.pinkColor()
+        contentView.insertSubview(segmentedControl, aboveSubview: textLabel!)
+        
+        setNeedsUpdateConstraints()
     }
     
+    @available(*, unavailable, message="Use init(_: UITableViewCellStyle, reuseIdentifier String?) method instead")
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func updateConstraints() {
@@ -38,19 +47,6 @@ class SegmentedCell: UITableViewCell, Reusable {
         }
         
         super.updateConstraints()
-    }
-    
-    func commonInit() {
-        
-        segmentedControl.insertSegmentWithTitle(NSLocalizedString("-", comment: ""), atIndex: 0, animated: false)
-        segmentedControl.insertSegmentWithTitle(NSLocalizedString("+", comment: ""), atIndex: 1, animated: false)
-        
-        segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment
-        
-        segmentedControl.tintColor = UIColor.pinkColor()
-        contentView.insertSubview(segmentedControl, aboveSubview: textLabel!)
-        
-        setNeedsUpdateConstraints()
     }
 }
 

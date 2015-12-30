@@ -21,12 +21,20 @@ class DateCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
+        
+        accessoryType = .DisclosureIndicator
+        
+        dateLabel.textColor = UIColor.RGBA(164, 180, 188, 1)
+        dateLabel.text = ""
+        dateLabel.textAlignment = .Right
+        contentView.addSubview(dateLabel)
+        
+        setNeedsUpdateConstraints()
     }
     
+    @available(*, unavailable, message="Use init(_: UITableViewCellStyle, reuseIdentifier: String?) method instead")
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func updateConstraints() {
@@ -43,17 +51,5 @@ class DateCell: UITableViewCell, Reusable {
     
     func setDateText(text: String) {
         dateLabel.text = text
-    }
-    
-    func commonInit() {
-        
-        accessoryType = .DisclosureIndicator
-        
-        dateLabel.textColor = UIColor.RGBA(164, 180, 188, 1)
-        dateLabel.text = ""
-        dateLabel.textAlignment = .Right
-        contentView.addSubview(dateLabel)
-        
-        setNeedsUpdateConstraints()
     }
 }

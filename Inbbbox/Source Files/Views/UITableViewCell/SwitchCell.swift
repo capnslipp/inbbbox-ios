@@ -20,12 +20,20 @@ class SwitchCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
+        
+        switchControl.tintColor = UIColor.RGBA(143, 142, 148, 1)
+        switchControl.backgroundColor = switchControl.tintColor
+        switchControl.layer.cornerRadius = 18.0;
+        switchControl.thumbTintColor = UIColor.whiteColor()
+        switchControl.onTintColor = UIColor.pinkColor()
+        contentView.addSubview(switchControl)
+        
+        setNeedsUpdateConstraints()
     }
     
+    @available(*, unavailable, message="Use init(_: UITableViewCellStyle, reuseIdentifier: String?) method instead")
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func updateConstraints() {
@@ -37,18 +45,5 @@ class SwitchCell: UITableViewCell, Reusable {
         }
         
         super.updateConstraints()
-    }
-    
-    func commonInit() {
-
-        switchControl.tintColor = UIColor.RGBA(143, 142, 148, 1)
-        switchControl.backgroundColor = switchControl.tintColor
-        switchControl.layer.cornerRadius = 18.0;
-        switchControl.thumbTintColor = UIColor.whiteColor()
-        switchControl.onTintColor = UIColor.pinkColor()
-        
-        contentView.addSubview(switchControl)
-        
-        setNeedsUpdateConstraints()
     }
 }
