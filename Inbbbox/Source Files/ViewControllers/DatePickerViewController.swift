@@ -30,14 +30,16 @@ class DatePickerViewController: UIViewController {
         navigationController?.navigationBar.translucent = false
         
         aView = loadViewWithClass(DatePickerView.self)
-        aView?.datePicker.date = initialDate
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = NSLocalizedString("Set Reminder", comment: "")
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "didTapSaveButton:")
+        
+        aView?.datePicker.date = initialDate
     }
     
     func didTapSaveButton(sender: UIBarButtonItem) {

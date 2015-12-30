@@ -396,6 +396,7 @@
 				5E4857EA1C2957C90027B38A /* GroupedBaseTableView.swift */,
 				5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */,
 				5E50820D1C3132AF00093191 /* LoginView.swift */,
+				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
 			);
 			path = "Controllers View";
 			sourceTree = "<group>";
@@ -405,7 +406,6 @@
 			children = (
 				5E4857ED1C2957C90027B38A /* AvatarView.swift */,
 				5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */,
-				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
 				5E5082091C31305C00093191 /* AutoScrollableShotsView.swift */,
 				5E0899CD1C32A71E009FB52B /* ORLoginLabel.swift */,
 			);
