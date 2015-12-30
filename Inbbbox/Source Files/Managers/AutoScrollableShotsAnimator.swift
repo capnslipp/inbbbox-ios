@@ -64,7 +64,7 @@ class AutoScrollableShotsAnimator {
         isAnimating = false
     }
     
-    func displayLinkDidTick(_: CADisplayLink) {
+    dynamic func displayLinkDidTick(_: CADisplayLink) {
         performScrollAnimation()
     }
 }

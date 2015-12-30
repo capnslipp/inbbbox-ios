@@ -38,7 +38,6 @@ final class OAuthView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func updateConstraints() {
         
         if !didSetConstraints {

@@ -22,6 +22,6 @@ extension UINavigationController {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([bottomConstraint, leftConstraint, rightConstraint])
         
-        return progressView;
+        return progressView
     }
 }
