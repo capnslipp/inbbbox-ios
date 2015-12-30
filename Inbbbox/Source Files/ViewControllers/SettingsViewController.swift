@@ -6,11 +6,9 @@
 //  Copyright © 2015 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Async
 
-// NGRTemp: temporary implementation
 class SettingsViewController: UIViewController {
     
     private weak var aView: GroupedBaseTableView?
@@ -52,7 +50,7 @@ class SettingsViewController: UIViewController {
     }
 }
 
-// MARK ModelUpdatable
+// MARK: ModelUpdatable
 
 extension SettingsViewController: ModelUpdatable {
     
@@ -74,7 +72,7 @@ extension SettingsViewController: ModelUpdatable {
     }
 }
 
-// MARK UITableViewDataSource
+// MARK: UITableViewDataSource
 
 extension SettingsViewController: UITableViewDataSource {
     
@@ -96,7 +94,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
 }
 
-// MARK UITableViewDelegate
+// MARK: UITableViewDelegate
 
 extension SettingsViewController: UITableViewDelegate {
     
@@ -149,7 +147,7 @@ extension SettingsViewController: UITableViewDelegate {
     }
 }
 
-// MARK Configure cells
+// MARK: Configure cells
 
 private extension SettingsViewController {
     
@@ -184,11 +182,9 @@ private extension SettingsViewController {
     }
 }
 
-// MARK: Private
+// MARK: Configuration
 
 private extension SettingsViewController {
-    
-    // MARK: Configuration
     
     func setupTableView() {
         let tableView = aView!.tableView
@@ -208,6 +204,8 @@ private extension SettingsViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Log Out", comment: ""), style: .Plain, target: self, action: "didTapLogOutButton:")
     }
 }
+
+// MARK: Actions
 
 extension SettingsViewController {
     
