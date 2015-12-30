@@ -25,7 +25,7 @@ class UIBaseTableView: UIView {
         addSubview(tableView)
     }
     
-    @available(*, unavailable, message="Use init(_: CGRect, tableViewStyle: UITableViewStyle) method instead")
+    @available(*, unavailable, message="Use init(style:reuseIdentifier:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

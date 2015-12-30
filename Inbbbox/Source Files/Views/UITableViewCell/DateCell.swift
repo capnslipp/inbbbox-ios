@@ -32,7 +32,7 @@ class DateCell: UITableViewCell, Reusable {
         setNeedsUpdateConstraints()
     }
     
-    @available(*, unavailable, message="Use init(_: UITableViewCellStyle, reuseIdentifier: String?) method instead")
+    @available(*, unavailable, message="Use init(style:reuseIdentifier:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

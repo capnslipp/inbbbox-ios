@@ -19,6 +19,7 @@ class ORLoginLabel: UILabel {
         text = NSLocalizedString("OR", comment: "")
     }
 
+    @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

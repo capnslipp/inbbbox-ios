@@ -22,6 +22,12 @@ class SettingsViewController: UIViewController {
         title = viewModel.title
     }
     
+    @available(*, unavailable, message="Use init() instead")
+    override init(nibName: String?, bundle: NSBundle?) {
+        fatalError("init(nibName:bundle:) has not been implemented")
+    }
+    
+    @available(*, unavailable, message="Use init() instead")
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

@@ -22,8 +22,14 @@ class DatePickerViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(*, unavailable, message="Use init(date:completion:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @available(*, unavailable, message="Use init(date:completion:) instead")
+    override init(nibName: String?, bundle: NSBundle?) {
+        fatalError("init(nibName:bundle:) has not been implemented")
     }
     
     override func loadView() {
