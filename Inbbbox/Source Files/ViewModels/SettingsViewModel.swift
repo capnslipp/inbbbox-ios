@@ -6,7 +6,7 @@
 //  Copyright © 2015 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
+import SwiftyUserDefaults
 
 protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
@@ -15,9 +15,7 @@ protocol ModelUpdatable: class {
 }
 
 class SettingsViewModel: GroupedListViewModel {
-    
-    let defaults = NSUserDefaults.standardUserDefaults()
-    
+
     var title = NSLocalizedString("Account", comment: "")
     
     private weak var delegate: ModelUpdatable?
@@ -35,7 +33,7 @@ class SettingsViewModel: GroupedListViewModel {
     }
     
     // NGRTemp: should be moved to other class/enum
-    private let FollowingStreamSourceKey = "FollowingStreamSourceKey"
+    private let FollowingStreamSourceOnKey = "FollowingStreamSourceKey"
     private let NewTodayStreamSourceOnKey = "NewTodayStreamSourceOnKey"
     private let PopularTodayStreamSourceOnKey = "PopularTodayStreamSourceOnKey"
     private let DebutsStreamSourceOnKey = "DebutsStreamSourceOnKey"
@@ -56,13 +54,13 @@ class SettingsViewModel: GroupedListViewModel {
         
         // MARK: Create items
         
-        reminderItem = SwitchItem(title: reminderTitle, on: defaults.boolForKey(Key.ReminderOn.rawValue))
-        reminderDateItem = DateItem(title: reminderDateTitle, date: defaults.objectForKey(Key.ReminderDate.rawValue) as? NSDate)
+        reminderItem = SwitchItem(title: reminderTitle, on: Defaults[Key.ReminderOn.rawValue].bool)
+        reminderDateItem = DateItem(title: reminderDateTitle, date: Defaults[Key.ReminderDate.rawValue].date)
         
-        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: defaults.boolForKey(FollowingStreamSourceKey))
-        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: defaults.boolForKey(NewTodayStreamSourceOnKey))
-        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: defaults.boolForKey(PopularTodayStreamSourceOnKey))
-        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: defaults.boolForKey(DebutsStreamSourceOnKey))
+        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: Defaults[FollowingStreamSourceOnKey].bool)
+        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Defaults[NewTodayStreamSourceOnKey].bool)
+        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Defaults[PopularTodayStreamSourceOnKey].bool)
+        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Defaults[DebutsStreamSourceOnKey].bool)
         
         // MARK: Super init
         
@@ -80,30 +78,30 @@ class SettingsViewModel: GroupedListViewModel {
             } else {
                 NotificationManager.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
             }
-            self.defaults.setBool(on, forKey: Key.ReminderOn.rawValue)
+            Defaults[Key.ReminderOn.rawValue] = on
         }
         
         reminderDateItem.onValueChanged = { date -> Void in
             if self.reminderItem.on {
                 NotificationManager.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
             }
-            self.defaults.setObject(date, forKey: Key.ReminderDate.rawValue)
+            Defaults[Key.ReminderDate.rawValue] = date
         }
         
         followingStreamSourceItem.onValueChanged = { on in
-            self.defaults.setBool(on, forKey: self.FollowingStreamSourceKey)
+            Defaults[self.FollowingStreamSourceOnKey] = on
         }
         
         newTodayStreamSourceItem.onValueChanged = { on in
-            self.defaults.setBool(on, forKey: self.NewTodayStreamSourceOnKey)
+            Defaults[self.NewTodayStreamSourceOnKey] = on
         }
         
         popularTodayStreamSourceItem.onValueChanged = { on in
-            self.defaults.setBool(on, forKey: self.PopularTodayStreamSourceOnKey)
+            Defaults[self.PopularTodayStreamSourceOnKey] = on
         }
         
         debutsStreamSourceItem.onValueChanged = { on in
-            self.defaults.setBool(on, forKey: self.DebutsStreamSourceOnKey)
+            Defaults[self.DebutsStreamSourceOnKey] = on
         }
     }
 }
