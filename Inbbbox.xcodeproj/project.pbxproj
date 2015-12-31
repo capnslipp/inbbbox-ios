@@ -13,6 +13,7 @@
 		5A499B691C35411F009AB421 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B681C35411F009AB421 /* UIColorExtension.swift */; };
 		5A499B6B1C354154009AB421 /* ShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */; };
 		5A499B6D1C35417B009AB421 /* InitialShotsAnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B6C1C35417B009AB421 /* InitialShotsAnimationManager.swift */; };
+		5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
 		5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0899CD1C32A71E009FB52B /* ORLoginLabel.swift */; };
 		5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0899CF1C32A784009FB52B /* UIFontExtension.swift */; };
 		5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */; };
@@ -872,6 +873,7 @@
 				5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */,
 				F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
+				5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */,
 				5E4857C21C284AF80027B38A /* AuthenticatorError.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
 				5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */,
