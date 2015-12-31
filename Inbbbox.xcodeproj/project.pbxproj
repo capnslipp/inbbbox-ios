@@ -46,6 +46,7 @@
 		5EC0A7AD1C353C8800846975 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7AC1C353C8800846975 /* UIImageExtension.swift */; };
 		5EC0A7AF1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7AE1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift */; };
 		5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B01C3557A400846975 /* TokenStorageSpec.swift */; };
+		5EC0A7B31C3559A200846975 /* ClosureExecutorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B21C3559A200846975 /* ClosureExecutorSpec.swift */; };
 		5EDC25F81C32AF680045B759 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC25F71C32AF680045B759 /* StringExtension.swift */; };
 		5EE041AC1C33E93300657751 /* UserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041AB1C33E93300657751 /* UserQuerySpec.swift */; };
 		5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */; };
@@ -171,6 +172,7 @@
 		5EC0A7AC1C353C8800846975 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		5EC0A7AE1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsAnimatorSpec.swift; sourceTree = "<group>"; };
 		5EC0A7B01C3557A400846975 /* TokenStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageSpec.swift; sourceTree = "<group>"; };
+		5EC0A7B21C3559A200846975 /* ClosureExecutorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureExecutorSpec.swift; sourceTree = "<group>"; };
 		5EDC25F71C32AF680045B759 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		5EE041AB1C33E93300657751 /* UserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuerySpec.swift; sourceTree = "<group>"; };
 		5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsStorageSpec.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */,
 				5EC0A7AE1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift */,
 				5EC0A7B01C3557A400846975 /* TokenStorageSpec.swift */,
+				5EC0A7B21C3559A200846975 /* ClosureExecutorSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -952,6 +955,7 @@
 				FF13AF11CAA2BAB3EFD369E2 /* ShotsCollectionViewControllerSpec.swift in Sources */,
 				FF13AE1673A2D15C58A49606 /* InitialShotsCollectionViewLayoutSpec.swift in Sources */,
 				FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */,
+				5EC0A7B31C3559A200846975 /* ClosureExecutorSpec.swift in Sources */,
 				BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */,
 				BEEE9E016BFDA8F471FC1678 /* ClosureExecutorMock.swift in Sources */,
 				BEEE9447B994CF34F3D5D039 /* InitialShotsCollectionViewControllerSpec.swift in Sources */,
