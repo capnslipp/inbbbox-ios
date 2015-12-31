@@ -37,6 +37,9 @@ target 'Tests' do link_with 'Unit Tests', 'Functional Tests'
 
     pod 'Nimble', '~> 3.0',
         :configurations => ['Test']
+
+    pod 'Dobby', '~> 0.4.2',
+        :configurations => ['Test']
 end
 
 post_install do |installer|
