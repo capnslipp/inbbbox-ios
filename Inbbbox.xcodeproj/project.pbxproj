@@ -45,6 +45,7 @@
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		5EC0A7AD1C353C8800846975 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7AC1C353C8800846975 /* UIImageExtension.swift */; };
 		5EC0A7AF1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7AE1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift */; };
+		5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B01C3557A400846975 /* TokenStorageSpec.swift */; };
 		5EDC25F81C32AF680045B759 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC25F71C32AF680045B759 /* StringExtension.swift */; };
 		5EE041AC1C33E93300657751 /* UserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041AB1C33E93300657751 /* UserQuerySpec.swift */; };
 		5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */; };
@@ -169,6 +170,7 @@
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5EC0A7AC1C353C8800846975 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		5EC0A7AE1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsAnimatorSpec.swift; sourceTree = "<group>"; };
+		5EC0A7B01C3557A400846975 /* TokenStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenStorageSpec.swift; sourceTree = "<group>"; };
 		5EDC25F71C32AF680045B759 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		5EE041AB1C33E93300657751 /* UserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuerySpec.swift; sourceTree = "<group>"; };
 		5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsStorageSpec.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC0A7AB1C353C8800846975 /* Helper */,
+				FF13AAD2F902BC574DD6F670 /* Mock Objects */,
 				BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */,
 				BF95086A1C20790200E39242 /* ParametersSpec.swift */,
 				BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */,
@@ -374,13 +377,13 @@
 				5EE041B11C34009300657751 /* FormatterSpec.swift */,
 				5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */,
 				FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */,
-				FF13AAD2F902BC574DD6F670 /* Mock Objects */,
 				FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */,
 				FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */,
 				BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */,
 				BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */,
 				F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */,
 				5EC0A7AE1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift */,
+				5EC0A7B01C3557A400846975 /* TokenStorageSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -940,6 +943,7 @@
 				BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
+				5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */,
 				5EE041B01C33EF9E00657751 /* OAuthAuthorizableSpec.swift in Sources */,
 				BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
