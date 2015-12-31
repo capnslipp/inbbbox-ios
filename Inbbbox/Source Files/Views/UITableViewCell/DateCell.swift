@@ -25,7 +25,6 @@ class DateCell: UITableViewCell, Reusable {
         accessoryType = .DisclosureIndicator
         
         dateLabel.textColor = UIColor.RGBA(164, 180, 188, 1)
-        dateLabel.text = ""
         dateLabel.textAlignment = .Right
         contentView.addSubview(dateLabel)
         
