@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        shotsAnimator.startScrollAnimationIndefinitely()
+        shotsAnimator.startScrollAnimationInfinitely()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

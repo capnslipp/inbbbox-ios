@@ -23,6 +23,12 @@ class AutoScrollableShotsAnimator {
     
     init(bindForAnimation array: [(collectionView: UICollectionView, shots: [UIImage])]) {
         
+        for tuple in array {
+            guard let _ = tuple.collectionView.superview else {
+                fatalError("Given collection views have to be in view hierarchy! Add them to superview.")
+            }
+        }
+
         dataSources = array.map {
             AutoScrollableShotsDataSource(collectionView: $0.collectionView, content: $0.shots)
         }
@@ -47,7 +53,7 @@ class AutoScrollableShotsAnimator {
         }
     }
     
-    func startScrollAnimationIndefinitely() {
+    func startScrollAnimationInfinitely() {
         
         if isAnimating {
             return
@@ -101,7 +107,7 @@ private extension AutoScrollableShotsAnimator {
                 y = verticalRescrollValueBottom
             }
             
-           dataSource.collectionView.contentOffset = CGPoint(x: dataSource.collectionView.contentOffset.x, y: y)
+            dataSource.collectionView.contentOffset = CGPoint(x: dataSource.collectionView.contentOffset.x, y: y)
         }
         
         lastRunLoopTimestamp = displayLink.timestamp
