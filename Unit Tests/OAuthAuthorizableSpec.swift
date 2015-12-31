@@ -129,8 +129,8 @@ class OAuthAuthorizableSpec: QuickSpec {
                     isSilentAuthenticationURL = sut?.isSilentAuthenticationURL(url)
                 }
                 
-                it("shouldn't be marked as silent") {
-                    expect(isSilentAuthenticationURL).to(beFalsy())
+                it("should be marked as silent") {
+                    expect(isSilentAuthenticationURL).to(beTruthy())
                 }
             }
             
@@ -141,8 +141,8 @@ class OAuthAuthorizableSpec: QuickSpec {
                     isSilentAuthenticationURL = sut?.isSilentAuthenticationURL(url)
                 }
                 
-                it("should be marked as silent") {
-                    expect(isSilentAuthenticationURL).to(beTruthy())
+                it("shouldn't be marked as silent") {
+                    expect(isSilentAuthenticationURL).to(beFalsy())
                 }
             }
         }

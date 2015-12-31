@@ -56,7 +56,7 @@ extension OAuthAuthorizable {
     }
     
     func isSilentAuthenticationURL(url: NSURL?) -> Bool {
-        return url != nil && url!.absoluteString.containsString("login?")
+        return !(url != nil && url!.absoluteString.containsString("login?"))
     }
 }
 

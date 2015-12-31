@@ -63,8 +63,9 @@ final class OAuthViewController: UIViewController {
             
             firstly {
                 viewModel.startAuthentication()
-            }.then { accessToken -> Void in
+            }.always {
                 self.dismissViewControllerAnimated(true, completion: nil)
+            }.then { accessToken -> Void in
                 fulfill(accessToken)
             }.error { error in
                 reject(error)
