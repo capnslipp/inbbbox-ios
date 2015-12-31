@@ -132,7 +132,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
                 var itemsForAnimationManager: [String]?
 
                 beforeEach() {
-                    itemsForAnimationManager = sut!.itemsForAnimationManager(sut!.animationManager) as! [String]
+                    itemsForAnimationManager = sut!.itemsForAnimationManager(sut!.animationManager) as? [String]
                 }
 
                 it("should return shots") {
