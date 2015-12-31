@@ -68,7 +68,6 @@ class SettingsViewModel: GroupedListViewModel {
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: defaults.boolForKey(DebutsStreamSourceOnKey))
         minimumLikesItem = SegmentedItem(title: minimumLikesTitle, currentValue: defaults.integerForKey(MinimumLikesValueKey))
         
-        
         // MARK: Super init
         
         super.init(items: [
