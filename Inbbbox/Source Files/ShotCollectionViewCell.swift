@@ -8,8 +8,9 @@ class ShotCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
 
 //    MARK: - Life cycle
 
+    @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
 
     override init(frame: CGRect) {

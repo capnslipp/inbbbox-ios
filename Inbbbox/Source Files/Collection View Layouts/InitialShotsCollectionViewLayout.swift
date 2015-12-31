@@ -15,11 +15,9 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
     }
 
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        var layoutAttributesForVisibleElements = [UICollectionViewLayoutAttributes]()
-        for indexPath in indexPathsOfItemsInRect(rect) {
-            layoutAttributesForVisibleElements.append(layoutAttributesForItemAtIndexPath(indexPath)!)
+        return indexPathsOfItemsInRect(rect).map {
+            self.layoutAttributesForItemAtIndexPath($0)!
         }
-        return layoutAttributesForVisibleElements
     }
 
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {

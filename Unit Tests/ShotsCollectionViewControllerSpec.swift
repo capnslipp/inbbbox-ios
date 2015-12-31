@@ -25,7 +25,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
             expect(sut!.collectionViewLayout).to(beAKindOf(ShotsCollectionViewFlowLayout))
         }
 
-        describe("view did load") {
+        describe("when view did load") {
 
             beforeEach() {
                 sut!.view
@@ -39,7 +39,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                     collectionView = sut!.collectionView
                 }
 
-                it("have paging enabled") {
+                it("should have paging enabled") {
                     expect(collectionView!.pagingEnabled).to(beTruthy())
                 }
             }

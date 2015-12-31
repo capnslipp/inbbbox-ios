@@ -59,9 +59,9 @@ class InitialShotsAnimationManager {
     }
 
     private func updateItems(items: [AnyObject], collectionView: UICollectionView, interval: Double, animation: Void -> Void, completion: (Void -> Void)?) {
-        for itemIndex in 1 ... items.count {
+        for (index, _) in items.enumerate() {
             var updateAnimation = animation
-            if itemIndex == items.count {
+            if index == items.endIndex - 1 {
                 let batchUpdatesCompletion: (Bool -> Void) = { _ in
                     completion?()
                 }
@@ -69,7 +69,7 @@ class InitialShotsAnimationManager {
                     collectionView.performBatchUpdates(animation, completion: batchUpdatesCompletion)
                 }
             }
-            closureExecutor.executeClosureOnMainThread(delay: Double(itemIndex) * interval, closure: updateAnimation)
+            closureExecutor.executeClosureOnMainThread(delay: Double(index + 1) * interval, closure: updateAnimation)
         }
     }
 }

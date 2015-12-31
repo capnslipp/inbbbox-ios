@@ -30,7 +30,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
             expect(sut!.animationManager).toNot(beNil())
         }
 
-        describe("view did load") {
+        describe("when view did load") {
 
             beforeEach() {
                 sut!.view

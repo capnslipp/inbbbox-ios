@@ -35,16 +35,13 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                 capturedDelays = [Double]()
 
                 let collectionViewMock = CollectionViewMock(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
-                collectionViewMock.insertItemsAtIndexPathsStub.on(any()) {
-                    indexPaths in
+                collectionViewMock.insertItemsAtIndexPathsStub.on(any()) { indexPaths in
                     capturedAddedItemsIndexPaths!.append(indexPaths.first!)
                 }
-                collectionViewMock.deleteItemsAtIndexPathsStub.on(any()) {
-                    indexPaths in
+                collectionViewMock.deleteItemsAtIndexPathsStub.on(any()) { indexPaths in
                     capturedDeletedItemsIndexPaths!.append(indexPaths.first!)
                 }
-                collectionViewMock.performBatchUpdatesStub.on(any()) {
-                    updates, completion in
+                collectionViewMock.performBatchUpdatesStub.on(any()) { updates, completion in
                     updates?()
                     completion?(true)
                 }
@@ -56,8 +53,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
 
 
                 let closureExecutorMock = ClosureExecutorMock()
-                closureExecutorMock.executeClosureOnMainThreadStub.on(any()) {
-                    delay, closure in
+                closureExecutorMock.executeClosureOnMainThreadStub.on(any()) { delay, closure in
                     capturedDelays!.append(delay)
                     closure()
                 }

@@ -8,8 +8,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
 //    MARK: - Life cycle
 
+    @available(*, unavailable, message="Use init() or init(collectionViewLayout:) instead")
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
 
     convenience init() {
