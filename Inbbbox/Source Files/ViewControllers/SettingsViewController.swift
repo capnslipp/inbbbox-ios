@@ -103,8 +103,6 @@ extension SettingsViewController: UITableViewDelegate {
         
         if let item = item as? SwitchItem, cell = cell as? SwitchCell {
             item.bindSwitchControl(cell.switchControl)
-        } else if let item = item as? SegmentedItem, cell = cell as? SegmentedCell {
-            item.bindSegmentedControl(cell.segmentedControl)
         }
     }
     
@@ -118,8 +116,6 @@ extension SettingsViewController: UITableViewDelegate {
             
             if let item = item as? SwitchItem where cell is SwitchCell {
                 item.unbindSwitchControl()
-            } else if let item = item as? SegmentedItem where cell is SegmentedCell {
-                item.unbindSegmentedControl()
             }
         }
     }
@@ -156,8 +152,6 @@ private extension SettingsViewController {
             configureSwitchCell(cell as! SwitchCell, forItem: item)
         } else if let item = item as? DateItem {
             configureDateCell(cell as! DateCell, forItem: item)
-        } else if let item = item as? SegmentedItem {
-            configureSegmentedCell(cell as! SegmentedCell, forItem: item)
         }
     }
     
@@ -170,15 +164,6 @@ private extension SettingsViewController {
     func configureDateCell(cell: DateCell, forItem item: DateItem) {
         cell.textLabel?.text = item.title
         cell.setDateText(item.dateString)
-    }
-    
-    func configureSegmentedCell(cell: SegmentedCell, forItem item: SegmentedItem) {
-        cell.textLabel?.text = item.title
-        cell.selectionStyle = .None
-        
-        Async.main(after: 0.2) {
-            cell.clearSelection()
-        }
     }
 }
 
@@ -197,7 +182,6 @@ private extension SettingsViewController {
         
         tableView.registerClass(SwitchCell.self)
         tableView.registerClass(DateCell.self)
-        tableView.registerClass(SegmentedCell.self)
     }
     
     func setupBarButtons() {
@@ -219,9 +203,8 @@ private extension UITableView {
     func cellForItemCategory(category: GroupItem.Category) -> UITableViewCell {
         
         switch category {
-        case .Date: return dequeueReusableCell(DateCell.self)
-        case .Boolean: return dequeueReusableCell(SwitchCell.self)
-        case .Segmented: return dequeueReusableCell(SegmentedCell.self)
+            case .Date: return dequeueReusableCell(DateCell.self)
+            case .Boolean: return dequeueReusableCell(SwitchCell.self)
         }
     }
 }

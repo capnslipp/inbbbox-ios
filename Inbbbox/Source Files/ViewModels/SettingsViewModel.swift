@@ -28,7 +28,6 @@ class SettingsViewModel: GroupedListViewModel {
     private let newTodayStreamSourceItem: SwitchItem
     private let popularTodayStreamSourceItem: SwitchItem
     private let debutsStreamSourceItem: SwitchItem
-    private let minimumLikesItem: SegmentedItem
     
     private enum Key: String {
         case ReminderOn = "ReminderOn"
@@ -40,7 +39,6 @@ class SettingsViewModel: GroupedListViewModel {
     private let NewTodayStreamSourceOnKey = "NewTodayStreamSourceOnKey"
     private let PopularTodayStreamSourceOnKey = "PopularTodayStreamSourceOnKey"
     private let DebutsStreamSourceOnKey = "DebutsStreamSourceOnKey"
-    private let MinimumLikesValueKey = "MinimumLikesValueKey"
     
     init(delegate: ModelUpdatable) {
         
@@ -55,7 +53,6 @@ class SettingsViewModel: GroupedListViewModel {
         let newTodayStreamSourceTitle = NSLocalizedString("New Today", comment: "")
         let popularTodayStreamSourceTitle = NSLocalizedString("Popular Today", comment: "")
         let debutsStreamSourceTitle = NSLocalizedString("Debuts", comment: "")
-        let minimumLikesTitle = NSLocalizedString("Minimum Likes", comment: "")
         
         // MARK: Create items
         
@@ -66,13 +63,12 @@ class SettingsViewModel: GroupedListViewModel {
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: defaults.boolForKey(NewTodayStreamSourceOnKey))
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: defaults.boolForKey(PopularTodayStreamSourceOnKey))
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: defaults.boolForKey(DebutsStreamSourceOnKey))
-        minimumLikesItem = SegmentedItem(title: minimumLikesTitle, currentValue: defaults.integerForKey(MinimumLikesValueKey))
         
         // MARK: Super init
         
         super.init(items: [
             [reminderItem, reminderDateItem],
-            [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem, minimumLikesItem]
+            [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]
         ] as [[GroupItem]])
         
         // MARK: onValueChanged blocks
@@ -108,23 +104,6 @@ class SettingsViewModel: GroupedListViewModel {
         
         debutsStreamSourceItem.onValueChanged = { on in
             self.defaults.setBool(on, forKey: self.DebutsStreamSourceOnKey)
-        }
-        
-        minimumLikesItem.onValueChange = { selectedSegmentIndex -> Void in
-            // NGRTodo: add likes number & update label
-            switch selectedSegmentIndex {
-                case 0: self.minimumLikesItem.decreaseValue()
-                case 1: self.minimumLikesItem.increaseValue()
-                default: break
-            }
-            
-            self.minimumLikesItem.update()
-            
-            if let indexPaths = self.indexPathsForItems([self.minimumLikesItem]) {
-                self.delegate?.didChangeItemsAtIndexPaths(indexPaths)
-            }
-            
-            self.defaults.setInteger(self.minimumLikesItem.currentValue, forKey: self.MinimumLikesValueKey)
         }
     }
 }

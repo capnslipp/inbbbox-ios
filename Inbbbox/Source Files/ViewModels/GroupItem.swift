@@ -15,7 +15,7 @@ protocol Updatable {
 class GroupItem: Equatable {
     
     enum Category {
-        case Date, Boolean, Segmented
+        case Date, Boolean
     }
     
     var title: String
