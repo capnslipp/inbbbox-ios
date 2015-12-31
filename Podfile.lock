@@ -27,6 +27,7 @@ PODS:
   - PureLayout (3.0.1)
   - Quick (0.8.0)
   - SwiftyJSON (2.3.2)
+  - SwiftyUserDefaults (2.0.0)
 
 DEPENDENCIES:
   - Async (from `https://github.com/duemunk/Async.git`, tag `1.4`)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - PureLayout (~> 3.0)
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
+  - SwiftyUserDefaults (~> 2.0)
 
 EXTERNAL SOURCES:
   Async:
@@ -58,5 +60,6 @@ SPEC CHECKSUMS:
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyUserDefaults: 1266e9734c68bcfbac8294ee84173dc8ba6db312
 
 COCOAPODS: 0.39.0

@@ -28,6 +28,8 @@ pod 'HockeySDK', '~> 3.8'
 
 pod 'PureLayout', '~> 3.0'
 
+pod 'SwiftyUserDefaults', '~> 2.0'
+
 target 'Tests' do link_with 'Unit Tests', 'Functional Tests'
 
     pod 'Quick', '~> 0.8',
