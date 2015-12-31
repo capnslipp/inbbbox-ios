@@ -12,11 +12,11 @@ import Async
 class SettingsViewController: UIViewController {
     
     private weak var aView: GroupedBaseTableView?
-    private let viewModel = SettingsViewModel()
+    private var viewModel: SettingsViewModel!
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        viewModel.delegate = self
+        viewModel = SettingsViewModel(delegate: self)
         title = viewModel.title
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ModelUpdatable {
+protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
     func addedItemsAtIndexPaths(indexPaths: [NSIndexPath])
     func removedItemsAtIndexPaths(indexPaths: [NSIndexPath])
@@ -18,32 +18,35 @@ class SettingsViewModel: GroupedListViewModel {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    var delegate: ModelUpdatable?
-    var title: String
+    var title = NSLocalizedString("Account", comment: "")
     
-    let reminderItem: SwitchItem
-    let reminderDateItem: DateItem
-    let followingStreamSourceItem: SwitchItem
-    let newTodayStreamSourceItem: SwitchItem
-    let popularTodayStreamSourceItem: SwitchItem
-    let debutsStreamSourceItem: SwitchItem
-    let minimumLikesItem: SegmentedItem
+    private weak var delegate: ModelUpdatable?
     
-    private let ReminderOnKey = "ReminderOnKey"
-    private let ReminderDateKey = "ReminderDateKey"
+    private let reminderItem: SwitchItem
+    private let reminderDateItem: DateItem
+    private let followingStreamSourceItem: SwitchItem
+    private let newTodayStreamSourceItem: SwitchItem
+    private let popularTodayStreamSourceItem: SwitchItem
+    private let debutsStreamSourceItem: SwitchItem
+    private let minimumLikesItem: SegmentedItem
     
-    // NGRTemp: should be moved to other class/NSStringExtension
+    private enum Key: String {
+        case ReminderOn = "ReminderOn"
+        case ReminderDate = "ReminderDate"
+    }
+    
+    // NGRTemp: should be moved to other class/enum
     private let FollowingStreamSourceKey = "FollowingStreamSourceKey"
     private let NewTodayStreamSourceOnKey = "NewTodayStreamSourceOnKey"
     private let PopularTodayStreamSourceOnKey = "PopularTodayStreamSourceOnKey"
     private let DebutsStreamSourceOnKey = "DebutsStreamSourceOnKey"
     private let MinimumLikesValueKey = "MinimumLikesValueKey"
     
-    init() {
+    init(delegate: ModelUpdatable) {
         
         // MARK: Parameters
         
-        title = NSLocalizedString("Account", comment: "")
+        self.delegate = delegate
         
         let reminderTitle = NSLocalizedString("Enable daily reminder", comment: "")
         let reminderDateTitle = NSLocalizedString("Send daily reminder at", comment: "")
@@ -56,8 +59,8 @@ class SettingsViewModel: GroupedListViewModel {
         
         // MARK: Create items
         
-        reminderItem = SwitchItem(title: reminderTitle, on: defaults.boolForKey(ReminderOnKey))
-        reminderDateItem = DateItem(title: reminderDateTitle, date: defaults.objectForKey(ReminderDateKey) as? NSDate)
+        reminderItem = SwitchItem(title: reminderTitle, on: defaults.boolForKey(Key.ReminderOn.rawValue))
+        reminderDateItem = DateItem(title: reminderDateTitle, date: defaults.objectForKey(Key.ReminderDate.rawValue) as? NSDate)
         
         followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: defaults.boolForKey(FollowingStreamSourceKey))
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: defaults.boolForKey(NewTodayStreamSourceOnKey))
@@ -73,7 +76,7 @@ class SettingsViewModel: GroupedListViewModel {
             [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem, minimumLikesItem]
         ] as [[GroupItem]])
         
-        // MARK: onValueChanged and onButtonTapped blocks
+        // MARK: onValueChanged blocks
         
         reminderItem.onValueChanged = { on in
             // NGRTodo: make reminderDateCell active
@@ -82,14 +85,14 @@ class SettingsViewModel: GroupedListViewModel {
             } else {
                 NotificationManager.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
             }
-            self.defaults.setBool(on, forKey: self.ReminderOnKey)
+            self.defaults.setBool(on, forKey: Key.ReminderOn.rawValue)
         }
         
         reminderDateItem.onValueChanged = { date -> Void in
             if self.reminderItem.on {
                 NotificationManager.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
             }
-            self.defaults.setObject(date, forKey: self.ReminderDateKey)
+            self.defaults.setObject(date, forKey: Key.ReminderDate.rawValue)
         }
         
         followingStreamSourceItem.onValueChanged = { on in
