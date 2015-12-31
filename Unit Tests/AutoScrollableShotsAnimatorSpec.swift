@@ -61,18 +61,6 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
             }
         }
         
-        describe("when scrolling to middle") {
-            
-            beforeEach {
-                sut.scrollToMiddleInstantly()
-            }
-            
-            it("collection views should be in the middle") {
-                let middlePoint = CGPoint(x: 0, y: -100)
-                expect(collectionViews.map{ $0.contentOffset }).to(equal([middlePoint, middlePoint]))
-            }
-        }
-        
         describe("when performing scroll animation") {
             
             beforeEach {
