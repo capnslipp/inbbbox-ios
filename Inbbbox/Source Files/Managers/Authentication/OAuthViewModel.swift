@@ -111,7 +111,7 @@ private extension String {
         var name: NSString?
         var value: NSString?
         
-        while !scanner.atEnd {
+        repeat {
             
             name = nil
             value = nil
@@ -126,7 +126,7 @@ private extension String {
                 value = value?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
                     parameters[name] = value
             }
-        }
+        } while !scanner.atEnd
         
         return parameters
     }

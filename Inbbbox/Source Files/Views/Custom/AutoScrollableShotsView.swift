@@ -22,14 +22,15 @@ class AutoScrollableShotsView: UIView {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         
-        while collectionViews.count < numberOfColumns {
-            
+        repeat {
+
             let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
             collectionView.userInteractionEnabled = false
             addSubview(collectionView)
             
             collectionViews.append(collectionView)
-        }
+            
+        } while collectionViews.count < numberOfColumns
         
         setNeedsUpdateConstraints()
     }

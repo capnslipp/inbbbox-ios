@@ -11,20 +11,20 @@ import UIKit.UICollectionView
 class AutoScrollableShotsAnimator {
     
     private let animationPointsPerSecond = CGFloat(50)
-    private let collectionViewsToAnimate: [UICollectionView]
-    private let dataSource = AutoScrollableShotsDataSource()
+    private let dataSources: [AutoScrollableShotsDataSource]
+    private var collectionViewsToAnimate: [UICollectionView] {
+        return dataSources.map { $0.collectionView }
+    }
     
     private var displayLink: CADisplayLink?
     private var lastRunLoopTimestamp = CFTimeInterval(0)
     private var isAnimating = false
+    private var extendedScrollableItemsCount = 0
     
-    init(collectionViewsToAnimate: [UICollectionView]) {
-        self.collectionViewsToAnimate = collectionViewsToAnimate
+    init(bindForAnimation array: [(collectionView: UICollectionView, shots: [UIImage])]) {
         
-        for collectionView in collectionViewsToAnimate {
-            collectionView.dataSource = dataSource
-            collectionView.delegate = dataSource
-            dataSource.registerClassForCollectionView(collectionView)
+        dataSources = array.map {
+            AutoScrollableShotsDataSource(collectionView: $0.collectionView, content: $0.shots)
         }
         
         displayLink = CADisplayLink(target: self, selector: "displayLinkDidTick:")
@@ -53,7 +53,10 @@ class AutoScrollableShotsAnimator {
             return
         }
         
-        dataSource.fitExtendedScrollableContentCountForCollectionViews(collectionViewsToAnimate)
+        for dataSource in dataSources {
+            dataSource.prepareForAnimation()
+        }
+        
         displayLink?.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
         lastRunLoopTimestamp = displayLink?.timestamp ?? 0
         isAnimating = true
@@ -79,15 +82,16 @@ private extension AutoScrollableShotsAnimator {
         
         let deltaY = CGFloat(animationPointsPerSecond) * CGFloat(displayLink.timestamp - lastRunLoopTimestamp)
         
-        for (index, collectionView) in collectionViewsToAnimate.enumerate() {
+        
+        for (index, dataSource) in dataSources.enumerate() {
             
             let isEvenColumn = (index % 2 == 0)
             let direction = isEvenColumn ? 1 : -1 as CGFloat
             
-            let verticalRescrollValueTop = CGFloat(dataSource.extendedScrollableContentCount) * dataSource.sizeForItemInCollectionView(collectionView).height
-            let verticalRescrollValueBottom = collectionView.contentSize.height - verticalRescrollValueTop
+            let verticalRescrollValueTop = CGFloat(dataSource.extendedScrollableItemsCount) * dataSource.itemSize.height
+            let verticalRescrollValueBottom = dataSource.collectionView.contentSize.height - verticalRescrollValueTop
             
-            var y = collectionView.contentOffset.y + deltaY * direction
+            var y = dataSource.collectionView.contentOffset.y + deltaY * direction
             
             if y >  verticalRescrollValueBottom && isEvenColumn {
                 y = verticalRescrollValueTop
@@ -96,9 +100,8 @@ private extension AutoScrollableShotsAnimator {
             if y <  verticalRescrollValueTop && !isEvenColumn {
                 y = verticalRescrollValueBottom
             }
-
-            collectionView.contentOffset = CGPoint(x: collectionView.contentOffset.x, y: y)
             
+           dataSource.collectionView.contentOffset = CGPoint(x: dataSource.collectionView.contentOffset.x, y: y)
         }
         
         lastRunLoopTimestamp = displayLink.timestamp

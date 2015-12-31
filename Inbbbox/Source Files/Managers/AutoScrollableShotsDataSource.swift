@@ -10,50 +10,48 @@ import UIKit
 
 class AutoScrollableShotsDataSource: NSObject {
 
-    /// Count of items extended to simulate infinity scrolling for both, top and bottom respectively
-    private(set) var extendedScrollableContentCount = 4
-    private var content: [UIImage]!
+    private typealias AutoScrollableImageContent = (image: UIImage, isDuplicateForExtendedContent: Bool)
+    private var content: [AutoScrollableImageContent]!
     
-    override init() {
+    private(set) var extendedScrollableItemsCount = 0
+    var itemSize: CGSize {
+        return CGSize(width: CGRectGetWidth(collectionView.bounds), height: CGRectGetWidth(collectionView.bounds))
+    }
+    let collectionView: UICollectionView
+    
+    init(collectionView: UICollectionView, content: [UIImage]) {
+        self.collectionView = collectionView
+        self.content = content.map { ($0, false) }
+        
         super.init()
-        prepareContentToDisplay()
-    }
-    
-    func registerClassForCollectionView(collectionView: UICollectionView) {
+        
         //NGRTemp: temporary use suhc upproach (till merge proper branch)
+        collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.registerClass(AutoScrollableCollectionViewCell.self, forCellWithReuseIdentifier: AutoScrollableShotsDataSource.reuseIdentifier)
+        prepareExtendedContentToDisplayWithOffset(0)
     }
     
-    func sizeForItemInCollectionView(collectionView: UICollectionView) -> CGSize {
-        return CGSize(
-            width: CGRectGetWidth(collectionView.bounds),
-            height: CGRectGetWidth(collectionView.bounds)
-        )
+    @available(*, unavailable, message="Use init(collectionView:content:) instead")
+    override init() {
+        fatalError("init() has not been implemented")
     }
     
-    func fitExtendedScrollableContentCountForCollectionViews(collectionViews: [UICollectionView]) {
-        
-        var didPrepareContent = false
-        
-        for collectionView in collectionViews {
-            extendedScrollableContentCount = Int(ceil(CGRectGetHeight(collectionView.bounds) / sizeForItemInCollectionView(collectionView).height))
-            
-            if !didPrepareContent {
-                prepareContentToDisplay()
-                didPrepareContent = true
-            }
-            
-            collectionView.reloadData()
-        }
+    func prepareForAnimation() {
+        extendedScrollableItemsCount = Int(ceil(CGRectGetHeight(collectionView.bounds) / itemSize.height))
+        prepareExtendedContentToDisplayWithOffset(extendedScrollableItemsCount)
+        collectionView.reloadData()
     }
 }
+
+// MARK: UICollectionViewDataSource
 
 extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AutoScrollableShotsDataSource.reuseIdentifier, forIndexPath: indexPath) as! AutoScrollableCollectionViewCell
         
-        cell.imageView.image = content[indexPath.row]
+        cell.imageView.image = content[indexPath.row].image
         
         return cell
     }
@@ -67,12 +65,13 @@ extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
     }
 }
 
+// MARK: UICollectionViewDelegateFlowLayout
+
 extension AutoScrollableShotsDataSource: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return sizeForItemInCollectionView(collectionView)
+        return itemSize
     }
-    
 }
 
 
@@ -84,30 +83,35 @@ extension AutoScrollableShotsDataSource: Reusable {
     }
 }
 
+// MARK: Private
+
 private extension AutoScrollableShotsDataSource {
     
-    func prepareContentToDisplay() {
+    func prepareExtendedContentToDisplayWithOffset(offset: Int) {
         
-        let images = ShotsStorage().shotsFromAssetCatalog
-        var content = [UIImage]()
+        let images = content.filter { !$0.isDuplicateForExtendedContent }
         
-        for index in 0..<(images.count + 2 * extendedScrollableContentCount) {
+        var extendedContent = [AutoScrollableImageContent]()
+        
+        for index in 0..<(images.count + 2 * offset) {
             
             let indexSubscript: Int
+            var isDuplicateForExtendedContent = true
             
-            if index < extendedScrollableContentCount {
-                indexSubscript = images.count - extendedScrollableContentCount + index
+            if index < offset {
+                indexSubscript = images.count - offset + index
                 
-            } else if index > images.count + extendedScrollableContentCount - 1 {
-                indexSubscript = index - images.count - extendedScrollableContentCount
+            } else if index > images.count + offset - 1 {
+                indexSubscript = index - images.count - offset
                 
             } else {
-                indexSubscript = index - extendedScrollableContentCount
+                isDuplicateForExtendedContent = false
+                indexSubscript = index - offset
             }
             
-            content.append(images[indexSubscript])
+            extendedContent.append((images[indexSubscript].image, isDuplicateForExtendedContent))
         }
         
-        self.content = content
+        content = extendedContent
     }
 }
