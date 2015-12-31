@@ -75,9 +75,7 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                 
                 let initialValueY = collectionViews[0].contentOffset.y
                 
-                waitUntil { done in
-                    self.spec_done_after(0.1, done)
-                }
+                waitThenContinue()
                 expect(collectionViews[0].contentOffset.y).to(beGreaterThan(initialValueY))
             }
             
@@ -85,9 +83,7 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                 
                 let initialValueY = collectionViews[1].contentOffset.y
                 
-                waitUntil { done in
-                    self.spec_done_after(0.1, done)
-                }
+                waitThenContinue()
                 expect(collectionViews[1].contentOffset.y).to(beLessThan(initialValueY))
             }
             
@@ -101,9 +97,7 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                     
                     let initialValueY = collectionViews[0].contentOffset.y
                     
-                    waitUntil { done in
-                        self.spec_done_after(0.1, done)
-                    }
+                    waitThenContinue()
                     expect(collectionViews[0].contentOffset.y).to(equal(initialValueY))
                 }
                 
@@ -111,19 +105,10 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                     
                     let initialValueY = collectionViews[1].contentOffset.y
                     
-                    waitUntil { done in
-                        self.spec_done_after(0.1, done)
-                    }
+                    waitThenContinue()
                     expect(collectionViews[1].contentOffset.y).to(equal(initialValueY))
                 }
             }
         }
-    }
-}
-
-private extension AutoScrollableShotsAnimatorSpec {
-    
-    func spec_done_after(delay:Double, _ done: ()-> Void) {
-        dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), done)
     }
 }

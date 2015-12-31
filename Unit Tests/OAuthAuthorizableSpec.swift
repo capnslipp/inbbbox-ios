@@ -22,7 +22,7 @@ class OAuthAuthorizableSpec: QuickSpec {
         let clientSecret = "fixture.clientSecret"
         let scope = "fixture.scope"
     }
-    
+
     override func spec() {
         
         var sut: MockOAuthAuthorizableService?
