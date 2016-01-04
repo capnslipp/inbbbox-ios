@@ -12,13 +12,13 @@ final class LocalNotificationRegistrator {
     
     private static let LocalNotificationUserIDKey = "notificationID"
     
-    class func registerNotification(forUserID userID: String, time: NSDate) {
+    class func registerNotification(forUserID userID: String, time: NSDate) -> UILocalNotification? {
         
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil))
         
         unregisterNotification(forUserID: userID)
         
-        createNotification(forUserID: userID, atTime: time)
+        return createNotification(forUserID: userID, time: time)
     }
     
     class func unregisterNotification(forUserID userID: String) {
@@ -33,16 +33,18 @@ final class LocalNotificationRegistrator {
 
 private extension LocalNotificationRegistrator {
     
-    class func createNotification(forUserID userID: String, atTime: NSDate) {
+    class func createNotification(forUserID userID: String, time: NSDate) -> UILocalNotification {
         
         let localNotification = UILocalNotification()
         localNotification.userInfo = [LocalNotificationUserIDKey: userID]
-        localNotification.fireDate = atTime
+        localNotification.fireDate = time
         localNotification.alertBody = NSLocalizedString("Check Inbbbox!", comment: "") // NGRTemp: temp text
         localNotification.alertAction = NSLocalizedString("Show", comment: "") // NGRTemp: temp text
         localNotification.repeatInterval = .Day
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        
+        return localNotification
     }
     
     class func destroyNotification(notificationID notificationToDelete: UILocalNotification) {

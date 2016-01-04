@@ -14,6 +14,46 @@ import Nimble
 class LocalNotificationRegistratorSpec: QuickSpec {
     
     override func spec() {
-        // NGRTodo: implement me!
+        
+        let fixtureUserID = "fixture.user.id"
+        
+        describe("when managing local notifications") {
+            
+            var localNotification: UILocalNotification?
+            
+            describe("when local notification registered") {
+                
+                beforeEach {
+                    localNotification = LocalNotificationRegistrator.registerNotification(forUserID: fixtureUserID, time: NSDate())
+                }
+                
+                it("notification shouldn't be nil") {
+                    expect(localNotification).toNot(beNil())
+                }
+                
+                it("notification should have notificationID same as userID") {
+                    let userInfo = localNotification!.userInfo!
+                    expect(userInfo["notificationID"] as! String).to(equal(fixtureUserID))
+                }
+            }
+            
+            describe("when local notification unregistered") {
+                
+                var containsNotification = false
+                
+                beforeEach {
+                    LocalNotificationRegistrator.unregisterNotification(forUserID: fixtureUserID)
+                }
+                
+                it("notification should not exist") {
+                    
+                    if let scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications {
+                        containsNotification = scheduledLocalNotifications.contains(localNotification!)
+                    }
+                    
+                    expect(containsNotification).to(beFalse())
+                }
+            }
+        }
     }
 }
