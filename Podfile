@@ -40,6 +40,9 @@ target 'Tests' do link_with 'Unit Tests', 'Functional Tests'
 
     pod 'Dobby', '~> 0.4.2',
         :configurations => ['Test']
+        
+    pod 'Mockingjay', '~> 1.1',
+        :configurations => ['Test']
 end
 
 post_install do |installer|
