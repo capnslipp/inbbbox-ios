@@ -37,7 +37,7 @@ class AutoScrollableShotsView: UIView {
     
     @available(*, unavailable, message="Use init(numberOfColumns:) instead")
     override init(frame: CGRect) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init(frame:) has not been implemented")
     }
     
     @available(*, unavailable, message="Use init(numberOfColumns:) instead")
