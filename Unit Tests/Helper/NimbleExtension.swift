@@ -8,8 +8,8 @@
 
 import Nimble
 
-func waitThenContinue(delay: Double = 0.2) {
+func waitThenContinue(after after: Double = 0.2) {
     waitUntil { done in
-        dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), done)
+        dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64(after * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), done)
     }
 }

@@ -14,4 +14,5 @@ enum AuthenticatorError: ErrorType {
     case DataDecodingFailure
     case AccessTokenMissing
     case AuthTokenMissing
+    case UnknownError
 }

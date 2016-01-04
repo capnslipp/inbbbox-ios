@@ -86,7 +86,7 @@ final class OAuthViewController: UIViewController {
     //MARK: Actions
     
     func cancelBarButtonDidTap(_: UIBarButtonItem) {
-        viewModel.currentResolvers?.reject(AuthenticatorError.AuthenticationDidCancel)
+        viewModel.stopAuthentication(withError: AuthenticatorError.AuthenticationDidCancel)
         dismissViewControllerAnimated(true, completion: nil)
     }
 }

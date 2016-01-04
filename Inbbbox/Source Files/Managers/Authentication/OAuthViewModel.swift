@@ -13,7 +13,7 @@ import WebKit.WKNavigationDelegate
 final class OAuthViewModel: NSObject {
     
     let service: OAuthAuthorizable
-    private(set) var currentResolvers: (fulfill: String -> Void, reject: ErrorType -> Void)?
+    private var currentResolvers: (fulfill: String -> Void, reject: ErrorType -> Void)?
     
     var loadRequestReverseClosure: (NSURLRequest -> Void)?
     
@@ -47,6 +47,12 @@ final class OAuthViewModel: NSObject {
                 reject(error)
             }
         }
+    }
+    
+    func stopAuthentication(withError error: ErrorType? = nil) {
+        
+        let errorToThrow = error ?? AuthenticatorError.UnknownError
+        currentResolvers?.reject(errorToThrow)
     }
 }
 
