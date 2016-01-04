@@ -74,16 +74,16 @@ class SettingsViewModel: GroupedListViewModel {
         reminderItem.onValueChanged = { on in
             // NGRTodo: make reminderDateCell active
             if on {
-                NotificationManager.registerNotification(forUserID: "userID", time: self.reminderDateItem.date) //NGRTemp: provide userID
+                LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: self.reminderDateItem.date) //NGRTemp: provide userID
             } else {
-                NotificationManager.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
+                LocalNotificationRegistrator.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
             }
             Defaults[Key.ReminderOn.rawValue] = on
         }
         
         reminderDateItem.onValueChanged = { date -> Void in
             if self.reminderItem.on {
-                NotificationManager.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
+                LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
             }
             Defaults[Key.ReminderDate.rawValue] = date
         }

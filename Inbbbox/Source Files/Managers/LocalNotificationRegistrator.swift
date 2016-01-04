@@ -1,5 +1,5 @@
 //
-//  NotificationManager.swift
+//  LocalNotificationRegistrator.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 21/12/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class NotificationManager {
+final class LocalNotificationRegistrator {
     
     private static let LocalNotificationUserIDKey = "notificationID"
     
@@ -31,7 +31,7 @@ final class NotificationManager {
 
 // MARK: Private
 
-private extension NotificationManager {
+private extension LocalNotificationRegistrator {
     
     class func createNotification(forUserID userID: String, atTime: NSDate) {
         
