@@ -11,3 +11,13 @@ import Foundation
 enum NotificationKey: String {
     case UserNotificationSettingsRegistered = "UserNotificationSettingsRegistered"
 }
+
+enum DefaultsKey: String {
+    case ReminderOn = "ReminderOn"
+    case ReminderDate = "ReminderDate"
+    case FollowingStreamSourceOn = "FollowingStreamSourceOn"
+    case NewTodayStreamSourceOn = "NewTodayStreamSourceOn"
+    case PopularTodayStreamSourceOn = "PopularTodayStreamSourceOn"
+    case DebutsStreamSourceOn = "DebutsStreamSourceOn"
+    case LocalNotificationSettingsProvided = "LocalNotificationSettingsProvided"
+}

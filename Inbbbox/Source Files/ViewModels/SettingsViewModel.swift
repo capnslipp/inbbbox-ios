@@ -6,7 +6,8 @@
 //  Copyright © 2015 Netguru Sp. z o.o. All rights reserved.
 //
 
-import SwiftyUserDefaults
+import Foundation
+import UIKit
 
 protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
@@ -25,18 +26,6 @@ class SettingsViewModel: GroupedListViewModel {
     private let popularTodayStreamSourceItem: SwitchItem
     private let debutsStreamSourceItem: SwitchItem
     
-    private enum Key: String {
-        case ReminderOn = "ReminderOn"
-        case ReminderDate = "ReminderDate"
-        case LocalNotificationSettingsProvided = "LocalNotificationSettingsProvided"
-    }
-    
-    // NGRTemp: should be moved to other class/enum
-    private let FollowingStreamSourceOnKey = "FollowingStreamSourceKey"
-    private let NewTodayStreamSourceOnKey = "NewTodayStreamSourceOnKey"
-    private let PopularTodayStreamSourceOnKey = "PopularTodayStreamSourceOnKey"
-    private let DebutsStreamSourceOnKey = "DebutsStreamSourceOnKey"
-    
     init(delegate: ModelUpdatable) {
         
         // MARK: Parameters
@@ -53,13 +42,13 @@ class SettingsViewModel: GroupedListViewModel {
         
         // MARK: Create items
         
-        reminderItem = SwitchItem(title: reminderTitle, on: Defaults[Key.ReminderOn.rawValue].bool)
-        reminderDateItem = DateItem(title: reminderDateTitle, date: Defaults[Key.ReminderDate.rawValue].date)
+        reminderItem = SwitchItem(title: reminderTitle, on: ReminderEnabled)
+        reminderDateItem = DateItem(title: reminderDateTitle, date: ReminderDate)
         
-        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: Defaults[FollowingStreamSourceOnKey].bool)
-        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Defaults[NewTodayStreamSourceOnKey].bool)
-        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Defaults[PopularTodayStreamSourceOnKey].bool)
-        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Defaults[DebutsStreamSourceOnKey].bool)
+        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: ShouldIncludeFollowingStreamSource)
+        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: ShouldIncludeNewTodayStreamSource)
+        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: ShouldIncludePopularTodayStreamSource)
+        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: ShouldIncludeDebutsStreamSource)
         
         // MARK: Super init
         
@@ -71,11 +60,11 @@ class SettingsViewModel: GroupedListViewModel {
         // MARK: onValueChanged blocks
         
         reminderItem.onValueChanged = { on in
-            Defaults[Key.ReminderOn.rawValue] = on
+            ReminderEnabled = on
             if on {
                 self.registerUserNotificationSettings()
                 
-                if(Defaults[Key.LocalNotificationSettingsProvided.rawValue].bool == true) {
+                if LocalNotificationSettingsProvided == true {
                     self.registerLocalNotification()
                 }
             } else {
@@ -87,23 +76,23 @@ class SettingsViewModel: GroupedListViewModel {
             if self.reminderItem.on {
                 self.registerLocalNotification()
             }
-            Defaults[Key.ReminderDate.rawValue] = date
+            ReminderDate = date
         }
         
         followingStreamSourceItem.onValueChanged = { on in
-            Defaults[self.FollowingStreamSourceOnKey] = on
+            ShouldIncludeFollowingStreamSource = on
         }
         
         newTodayStreamSourceItem.onValueChanged = { on in
-            Defaults[self.NewTodayStreamSourceOnKey] = on
+            ShouldIncludeNewTodayStreamSource = on
         }
         
         popularTodayStreamSourceItem.onValueChanged = { on in
-            Defaults[self.PopularTodayStreamSourceOnKey] = on
+            ShouldIncludePopularTodayStreamSource = on
         }
         
         debutsStreamSourceItem.onValueChanged = { on in
-            Defaults[self.DebutsStreamSourceOnKey] = on
+            ShouldIncludeDebutsStreamSource = on
         }
         
         // MARK: add observer
@@ -115,7 +104,7 @@ class SettingsViewModel: GroupedListViewModel {
     }
     
     dynamic func didProvideNotificationSettings() {
-        Defaults[Key.LocalNotificationSettingsProvided.rawValue] = true
+        LocalNotificationSettingsProvided = true
         registerLocalNotification()
     }
 }
@@ -135,7 +124,7 @@ private extension SettingsViewModel {
         if localNotification == nil {
             // NGRTodo: display alert and redirect to settings
             reminderItem.on = false
-            Defaults[Key.ReminderOn.rawValue] = false
+            ReminderEnabled = false
             delegate?.didChangeItemsAtIndexPaths(indexPathsForItems([reminderItem])!)
         }
     }
