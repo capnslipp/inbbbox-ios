@@ -35,24 +35,28 @@ class SettingsViewModelSpec: QuickSpec {
                 expect(sut.sectionsCount()).to(equal(2))
             }
             
-            context("first section") {
+            describe("first section") {
                 
                 it("should have 2 items") {
                     expect(sut.sections[0].count).to(equal(2))
                 }
                 
-                it("should have SwitchItem as first item") {
-                    let item = sut.sections[0][0]
-                    expect(item is SwitchItem).to(beTruthy())
+                describe("first item") {
+                    it("should be switch item") {
+                        let item = sut.sections[0][0]
+                        expect(item is SwitchItem).to(beTrue())
+                    }
                 }
                 
-                it("should have DateItem as second item") {
-                    let item = sut.sections[0][1]
-                    expect(item is DateItem).to(beTruthy())
+                describe("second item") {
+                    it("should be date item") {
+                        let item = sut.sections[0][1]
+                        expect(item is DateItem).to(beTrue())
+                    }
                 }
             }
             
-            context("second section") {
+            describe("second section") {
                 
                 it("should have 4 items") {
                     expect(sut.sections[1].count).to(equal(4))
