@@ -25,7 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
-        // NGRTodo: start loading images from Dribble
+        // NGRTodo: start loading images from Dribbble, but first, check if notificationID == currentUserID
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
     }
 }
 

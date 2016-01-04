@@ -10,8 +10,6 @@ import SwiftyUserDefaults
 
 protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
-    func addedItemsAtIndexPaths(indexPaths: [NSIndexPath])
-    func removedItemsAtIndexPaths(indexPaths: [NSIndexPath])
 }
 
 class SettingsViewModel: GroupedListViewModel {
@@ -30,6 +28,7 @@ class SettingsViewModel: GroupedListViewModel {
     private enum Key: String {
         case ReminderOn = "ReminderOn"
         case ReminderDate = "ReminderDate"
+        case LocalNotificationSettingsProvided = "LocalNotificationSettingsProvided"
     }
     
     // NGRTemp: should be moved to other class/enum
@@ -72,18 +71,21 @@ class SettingsViewModel: GroupedListViewModel {
         // MARK: onValueChanged blocks
         
         reminderItem.onValueChanged = { on in
-            // NGRTodo: make reminderDateCell active
-            if on {
-                LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: self.reminderDateItem.date) //NGRTemp: provide userID
-            } else {
-                LocalNotificationRegistrator.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
-            }
             Defaults[Key.ReminderOn.rawValue] = on
+            if on {
+                self.registerUserNotificationSettings()
+                
+                if(Defaults[Key.LocalNotificationSettingsProvided.rawValue].bool == true) {
+                    self.registerLocalNotification()
+                }
+            } else {
+                self.unregisterLocalNotification()
+            }
         }
         
         reminderDateItem.onValueChanged = { date -> Void in
             if self.reminderItem.on {
-                LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: date) //NGRTemp: provide userID
+                self.registerLocalNotification()
             }
             Defaults[Key.ReminderDate.rawValue] = date
         }
@@ -103,5 +105,42 @@ class SettingsViewModel: GroupedListViewModel {
         debutsStreamSourceItem.onValueChanged = { on in
             Defaults[self.DebutsStreamSourceOnKey] = on
         }
+        
+        // MARK: add observer
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didProvideNotificationSettings", name: NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    dynamic func didProvideNotificationSettings() {
+        Defaults[Key.LocalNotificationSettingsProvided.rawValue] = true
+        registerLocalNotification()
+    }
+}
+
+// MARK: Private extension
+
+private extension SettingsViewModel {
+    
+    func registerUserNotificationSettings() {
+        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil))
+    }
+    
+    func registerLocalNotification() {
+        
+        let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: reminderDateItem.date) //NGRTemp: provide userID
+        
+        if localNotification == nil {
+            // NGRTodo: display alert and redirect to settings
+            reminderItem.on = false
+            Defaults[Key.ReminderOn.rawValue] = false
+            delegate?.didChangeItemsAtIndexPaths(indexPathsForItems([reminderItem])!)
+        }
+    }
+    
+    func unregisterLocalNotification() {
+        LocalNotificationRegistrator.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
     }
 }

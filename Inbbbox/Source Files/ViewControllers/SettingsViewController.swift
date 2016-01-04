@@ -62,14 +62,6 @@ extension SettingsViewController: ModelUpdatable {
             }
         }
     }
-    
-    func addedItemsAtIndexPaths(indexPaths: [NSIndexPath]) {
-        aView?.tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Fade)
-    }
-    
-    func removedItemsAtIndexPaths(indexPaths: [NSIndexPath]) {
-        aView?.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Fade)
-    }
 }
 
 // MARK: UITableViewDataSource

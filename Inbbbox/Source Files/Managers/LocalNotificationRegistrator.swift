@@ -14,11 +14,19 @@ final class LocalNotificationRegistrator {
     
     class func registerNotification(forUserID userID: String, time: NSDate) -> UILocalNotification? {
         
-        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil))
-        
-        unregisterNotification(forUserID: userID)
-        
-        return createNotification(forUserID: userID, time: time)
+        if let localNotificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings() {
+            
+            guard localNotificationSettings.types == [.Alert, .Sound] else {
+                return nil
+            }
+            
+            unregisterNotification(forUserID: userID)
+            
+            return createNotification(forUserID: userID, time: time)
+            
+        } else {
+            return nil
+        }
     }
     
     class func unregisterNotification(forUserID userID: String) {
