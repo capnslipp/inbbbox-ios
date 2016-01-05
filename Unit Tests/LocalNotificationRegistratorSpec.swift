@@ -26,14 +26,17 @@ class LocalNotificationRegistratorSpec: QuickSpec {
                 }
                 return false
             }
+            
             var localNotification: UILocalNotification?
             
-
-            
-            describe("when local notification is being registered") {
+            describe("when local notification registered") {
                 
                 beforeEach {
                     localNotification = LocalNotificationRegistrator.registerNotification(forUserID: fixtureUserID, time: NSDate())
+                }
+                
+                afterEach {
+                    localNotification = nil
                 }
                 
                 if localNotificationSettingsTypeFits {
@@ -55,18 +58,23 @@ class LocalNotificationRegistratorSpec: QuickSpec {
                 }
             }
             
-            describe("when local notification is being unregistered") {
+            describe("when local notification unregistered") {
                 
                 var containsNotification = false
                 
                 beforeEach {
+                    localNotification = LocalNotificationRegistrator.registerNotification(forUserID: fixtureUserID, time: NSDate())
                     LocalNotificationRegistrator.unregisterNotification(forUserID: fixtureUserID)
+                }
+                
+                afterEach {
+                    localNotification = nil
                 }
                 
                 it("notification should not exist") {
                     
-                    if let scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications {
-                        containsNotification = scheduledLocalNotifications.contains(localNotification!)
+                    if let localNotification = localNotification, scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications {
+                        containsNotification = scheduledLocalNotifications.contains(localNotification)
                     }
                     
                     expect(containsNotification).to(beFalse())
