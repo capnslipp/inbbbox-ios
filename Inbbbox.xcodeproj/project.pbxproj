@@ -106,7 +106,7 @@
 		F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2191C3AA3A600593D18 /* Settings.swift */; };
 		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
-		FF13A05570F8013CFD61C3B7 /* AnimationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A771B3B0C75085522777 /* AnimationStep.swift */; };
+		FF13A05570F8013CFD61C3B7 /* AnimationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A771B3B0C75085522777 /* AnimationStepViewController.swift */; };
 		FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A569D9CAB25C77AF66BB /* ShotsContainerViewController.swift */; };
 		FF13A3C0B9A1786150870E33 /* InitialShotsAnimationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A0AF874643193442C4BE /* InitialShotsAnimationManagerMock.swift */; };
 		FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */; };
@@ -253,7 +253,7 @@
 		FF13A648B5043F21AC510C25 /* AnimationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationContainerViewController.swift; sourceTree = "<group>"; };
 		FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewMock.swift; sourceTree = "<group>"; };
 		FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapperMock.swift; sourceTree = "<group>"; };
-		FF13A771B3B0C75085522777 /* AnimationStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationStep.swift; sourceTree = "<group>"; };
+		FF13A771B3B0C75085522777 /* AnimationStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationStepViewController.swift; sourceTree = "<group>"; };
 		FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		FF13AB67B01560FFA515D3E1 /* InitialShotsCollectionViewLayoutDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutDelegateMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -581,7 +581,7 @@
 				5A4005DF1C2418760010A500 /* HeightAware.swift */,
 				F0863DC11C23F3C10062EA21 /* StringConvertible.swift */,
 				F0863DC31C23F3DB0062EA21 /* Reusable.swift */,
-				FF13A771B3B0C75085522777 /* AnimationStep.swift */,
+				FF13A771B3B0C75085522777 /* AnimationStepViewController.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -955,7 +955,7 @@
 				FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */,
 				FF13AD5BDAA038D06F3CDFD2 /* AsyncWrapper.swift in Sources */,
 				5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */,
-				FF13A05570F8013CFD61C3B7 /* AnimationStep.swift in Sources */,
+				FF13A05570F8013CFD61C3B7 /* AnimationStepViewController.swift in Sources */,
 				FF13A7591AD6F59D12F6744D /* AnimationContainerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -6,15 +6,5 @@ import UIKit
 
 class AnimationContainerViewController: UIViewController {
 
-    private(set) var animationSteps: [AnimationStep]
-    
-    @available(*, unavailable, message = "Use init(animationSteps:) instead")
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    init(animationSteps animationSteps: [AnimationStep]) {
-        self.animationSteps = animationSteps
-        super.init(nibName: nil, bundle: nil)
-    }
+    var animationStepClasses: Array<AnimationStepViewController.Type> = []
 }
