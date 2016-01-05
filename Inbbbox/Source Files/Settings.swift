@@ -1,5 +1,5 @@
 //
-//  DefaultsWrapper.swift
+//  Settings.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 04/01/16.
@@ -9,65 +9,65 @@
 import Foundation
 import SwiftyUserDefaults
 
-class DefaultsWrapper {
+class Settings {
     
-    class var ReminderEnabled: Bool? {
+    class var reminderEnabled: Bool? {
         get {
-            return Defaults[DefaultsKey.ReminderOn.rawValue].bool
+        return Defaults[DefaultsKey.ReminderOn.rawValue].bool
         }
         set {
             Defaults[DefaultsKey.ReminderOn.rawValue] = newValue
         }
     }
     
-    class var ReminderDate: NSDate? {
+    class var reminderDate: NSDate? {
         get {
-            return Defaults[DefaultsKey.ReminderDate.rawValue].date
+        return Defaults[DefaultsKey.ReminderDate.rawValue].date
         }
         set {
             Defaults[DefaultsKey.ReminderDate.rawValue] = newValue
         }
     }
     
-    class var ShouldIncludeFollowingStreamSource: Bool? {
+    class var shouldIncludeFollowingStreamSource: Bool? {
         get {
-            return Defaults[DefaultsKey.FollowingStreamSourceOn.rawValue].bool
+        return Defaults[DefaultsKey.FollowingStreamSourceOn.rawValue].bool
         }
         set {
             Defaults[DefaultsKey.FollowingStreamSourceOn.rawValue] = newValue
         }
     }
     
-    class var ShouldIncludeNewTodayStreamSource: Bool? {
+    class var shouldIncludeNewTodayStreamSource: Bool? {
         get {
-            return Defaults[DefaultsKey.NewTodayStreamSourceOn.rawValue].bool
+        return Defaults[DefaultsKey.NewTodayStreamSourceOn.rawValue].bool
         }
         set {
             Defaults[DefaultsKey.NewTodayStreamSourceOn.rawValue] = newValue
         }
     }
     
-    class var ShouldIncludePopularTodayStreamSource: Bool? {
+    class var shouldIncludePopularTodayStreamSource: Bool? {
         get {
-            return Defaults[DefaultsKey.PopularTodayStreamSourceOn.rawValue].bool
+        return Defaults[DefaultsKey.PopularTodayStreamSourceOn.rawValue].bool
         }
         set {
             Defaults[DefaultsKey.PopularTodayStreamSourceOn.rawValue] = newValue
         }
     }
     
-    class var ShouldIncludeDebutsStreamSource: Bool? {
+    class var shouldIncludeDebutsStreamSource: Bool? {
         get {
-            return Defaults[DefaultsKey.DebutsStreamSourceOn.rawValue].bool
+        return Defaults[DefaultsKey.DebutsStreamSourceOn.rawValue].bool
         }
         set {
             Defaults[DefaultsKey.DebutsStreamSourceOn.rawValue] = newValue
         }
     }
     
-    class var LocalNotificationSettingsProvided: Bool? {
+    class var localNotificationSettingsProvided: Bool? {
         get {
-            return Defaults[DefaultsKey.LocalNotificationSettingsProvided.rawValue].bool
+        return Defaults[DefaultsKey.LocalNotificationSettingsProvided.rawValue].bool
         }
         set {
             Defaults[DefaultsKey.LocalNotificationSettingsProvided.rawValue] = newValue

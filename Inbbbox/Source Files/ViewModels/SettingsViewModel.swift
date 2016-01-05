@@ -18,7 +18,7 @@ protocol AlertDisplayable: class {
 }
 
 class SettingsViewModel: GroupedListViewModel {
-
+    
     var title = NSLocalizedString("Account", comment: "")
     
     private weak var delegate: ModelUpdatable?
@@ -47,29 +47,29 @@ class SettingsViewModel: GroupedListViewModel {
         
         // MARK: Create items
         
-        reminderItem = SwitchItem(title: reminderTitle, on: DefaultsWrapper.ReminderEnabled)
-        reminderDateItem = DateItem(title: reminderDateTitle, date: DefaultsWrapper.ReminderDate)
+        reminderItem = SwitchItem(title: reminderTitle, on: Settings.reminderEnabled)
+        reminderDateItem = DateItem(title: reminderDateTitle, date: Settings.reminderDate)
         
-        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: DefaultsWrapper.ShouldIncludeFollowingStreamSource)
-        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: DefaultsWrapper.ShouldIncludeNewTodayStreamSource)
-        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: DefaultsWrapper.ShouldIncludePopularTodayStreamSource)
-        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: DefaultsWrapper.ShouldIncludeDebutsStreamSource)
+        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: Settings.shouldIncludeFollowingStreamSource)
+        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Settings.shouldIncludeNewTodayStreamSource)
+        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.shouldIncludePopularTodayStreamSource)
+        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.shouldIncludeDebutsStreamSource)
         
         // MARK: Super init
         
         super.init(items: [
             [reminderItem, reminderDateItem],
             [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]
-        ] as [[GroupItem]])
+            ] as [[GroupItem]])
         
         // MARK: onValueChanged blocks
         
         reminderItem.onValueChanged = { on in
-            DefaultsWrapper.ReminderEnabled = on
+            Settings.reminderEnabled = on
             if on {
                 self.registerUserNotificationSettings()
                 
-                if DefaultsWrapper.LocalNotificationSettingsProvided == true {
+                if Settings.localNotificationSettingsProvided == true {
                     self.registerLocalNotification()
                 }
             } else {
@@ -81,23 +81,23 @@ class SettingsViewModel: GroupedListViewModel {
             if self.reminderItem.on {
                 self.registerLocalNotification()
             }
-            DefaultsWrapper.ReminderDate = date
+            Settings.reminderDate = date
         }
         
         followingStreamSourceItem.onValueChanged = { on in
-            DefaultsWrapper.ShouldIncludeFollowingStreamSource = on
+            Settings.shouldIncludeFollowingStreamSource = on
         }
         
         newTodayStreamSourceItem.onValueChanged = { on in
-            DefaultsWrapper.ShouldIncludeNewTodayStreamSource = on
+            Settings.shouldIncludeNewTodayStreamSource = on
         }
         
         popularTodayStreamSourceItem.onValueChanged = { on in
-            DefaultsWrapper.ShouldIncludePopularTodayStreamSource = on
+            Settings.shouldIncludePopularTodayStreamSource = on
         }
         
         debutsStreamSourceItem.onValueChanged = { on in
-            DefaultsWrapper.ShouldIncludeDebutsStreamSource = on
+            Settings.shouldIncludeDebutsStreamSource = on
         }
         
         // MARK: add observer
@@ -109,7 +109,7 @@ class SettingsViewModel: GroupedListViewModel {
     }
     
     dynamic func didProvideNotificationSettings() {
-        DefaultsWrapper.LocalNotificationSettingsProvided = true
+        Settings.localNotificationSettingsProvided = true
         registerLocalNotification()
     }
 }
@@ -127,11 +127,11 @@ private extension SettingsViewModel {
         let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: reminderDateItem.date) //NGRTemp: provide userID
         
         if localNotification == nil {
-
+            
             alertDelegate?.displayAlert(preparePermissionsAlert())
             
             reminderItem.on = false
-            DefaultsWrapper.ReminderEnabled = false
+            Settings.reminderEnabled = false
             delegate?.didChangeItemsAtIndexPaths(indexPathsForItems([reminderItem])!)
         }
     }
