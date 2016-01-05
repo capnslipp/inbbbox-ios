@@ -1,5 +1,5 @@
 //
-//  ClosureExecutorSpec.swift
+//  AsyncWrapperSpec.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 31/12/15.
@@ -11,39 +11,39 @@ import Nimble
 
 @testable import Inbbbox
 
-class ClosureExecutorSpec: QuickSpec {
+class AsyncWrapperSpec: QuickSpec {
     override func spec() {
-        
-        var sut: ClosureExecutor!
-        
+
+        var sut: AsyncWrapper!
+
         beforeEach {
-            sut = ClosureExecutor()
+            sut = AsyncWrapper()
         }
-        
+
         afterEach {
             sut = nil
         }
-        
+
         describe("when executing closure after delay") {
-            
+
             var didExecuteClosure = false
             var isMainThread = false
-            
+
             beforeEach {
-                
+
                 waitUntil { done in
-                    sut.executeClosureOnMainThread(delay: 0.1) {
+                    sut.main(after: 0.1) {
                         didExecuteClosure = true
                         isMainThread = NSThread.isMainThread()
                         done()
                     }
                 }
             }
-            
+
             it("closure should be executed") {
                 expect(didExecuteClosure).to(beTruthy())
             }
-            
+
             it("closure should be executed on main thread") {
                 expect(isMainThread).to(beTruthy())
             }

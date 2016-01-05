@@ -14,7 +14,7 @@ class InitialShotsAnimationManager {
 
     weak var delegate: InitialShotsAnimationManagerDelegate?
     var visibleItems = [AnyObject]()
-    var closureExecutor = ClosureExecutor()
+    var asyncWrapper = AsyncWrapper()
 
 //    Interface
 
@@ -25,7 +25,7 @@ class InitialShotsAnimationManager {
 
         let interval = 0.1
         addItems(items, collectionView: collectionView, interval: interval) {
-            self.closureExecutor.executeClosureOnMainThread(delay: 1.0) {
+            self.asyncWrapper.main(after: 1.0) {
                 self.deleteItemsWithoutFirstItem(items, collectionView: collectionView, interval: interval, completion: completion)
             }
         }
@@ -59,7 +59,7 @@ class InitialShotsAnimationManager {
     }
 
     private func updateItems(items: [AnyObject], collectionView: UICollectionView, interval: Double, animation: Void -> Void, completion: (Void -> Void)?) {
-        for (index, _) in items.enumerate() {
+        for (index, _ ) in items.enumerate() {
             var updateAnimation = animation
             if index == items.endIndex - 1 {
                 let batchUpdatesCompletion: (Bool -> Void) = { _ in
@@ -69,7 +69,7 @@ class InitialShotsAnimationManager {
                     collectionView.performBatchUpdates(animation, completion: batchUpdatesCompletion)
                 }
             }
-            closureExecutor.executeClosureOnMainThread(delay: Double(index + 1) * interval, closure: updateAnimation)
+            asyncWrapper.main(after: Double(index + 1) * interval, block: updateAnimation)
         }
     }
 }

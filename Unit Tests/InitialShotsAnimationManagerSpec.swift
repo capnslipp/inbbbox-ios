@@ -14,11 +14,11 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
 
         var sut: InitialShotsAnimationManager?
 
-        beforeEach() {
+        beforeEach {
             sut = InitialShotsAnimationManager()
         }
 
-        afterEach() {
+        afterEach {
             sut = nil
         }
 
@@ -29,7 +29,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
             var capturedDelays: [Double]?
             var didInvokeCompletion: Bool?
 
-            beforeEach() {
+            beforeEach {
                 capturedAddedItemsIndexPaths = [NSIndexPath]()
                 capturedDeletedItemsIndexPaths = [NSIndexPath]()
                 capturedDelays = [Double]()
@@ -51,13 +51,14 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                 delegateMock.itemsForAnimationManagerStub.on(any(), returnValue: ["fixtureShot1", "fixtureShot2", "fixtureShot3"])
                 sut!.delegate = delegateMock
 
-
-                let closureExecutorMock = ClosureExecutorMock()
-                closureExecutorMock.executeClosureOnMainThreadStub.on(any()) { delay, closure in
-                    capturedDelays!.append(delay)
-                    closure()
+                let asyncWrapperMock = AsyncWrapperMock()
+                asyncWrapperMock.mainStub.on(any()) { after, block in
+                    capturedDelays!.append(after!)
+                    block()
+                    return asyncWrapperMock
                 }
-                sut!.closureExecutor = closureExecutorMock
+
+                sut!.asyncWrapper = asyncWrapperMock
 
                 sut!.startAnimationWithCompletion() {
                     didInvokeCompletion = true
@@ -75,7 +76,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var addedItemIndexPath: NSIndexPath?
                     var addedItemDelay: Double?
 
-                    beforeEach() {
+                    beforeEach {
                         addedItemIndexPath = capturedAddedItemsIndexPaths![0]
                         addedItemDelay = capturedDelays![0]
                     }
@@ -94,7 +95,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var addedItemIndexPath: NSIndexPath?
                     var addedItemDelay: Double?
 
-                    beforeEach() {
+                    beforeEach {
                         addedItemIndexPath = capturedAddedItemsIndexPaths![1]
                         addedItemDelay = capturedDelays![1]
                     }
@@ -113,7 +114,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var addedItemIndexPath: NSIndexPath?
                     var addedItemDelay: Double?
 
-                    beforeEach() {
+                    beforeEach {
                         addedItemIndexPath = capturedAddedItemsIndexPaths![2]
                         addedItemDelay = capturedDelays![2]
                     }
@@ -143,7 +144,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var deletedItemIndexPath: NSIndexPath?
                     var deletedItemDelay: Double?
 
-                    beforeEach() {
+                    beforeEach {
                         deletedItemIndexPath = capturedDeletedItemsIndexPaths![0]
                         deletedItemDelay = capturedDelays![4]
                     }
@@ -162,7 +163,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     var deletedItemIndexPath: NSIndexPath?
                     var deletedItemDelay: Double?
 
-                    beforeEach() {
+                    beforeEach {
                         deletedItemIndexPath = capturedDeletedItemsIndexPaths![1]
                         deletedItemDelay = capturedDelays![5]
                     }
