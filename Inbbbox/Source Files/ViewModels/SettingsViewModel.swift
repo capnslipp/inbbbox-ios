@@ -13,12 +13,16 @@ protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
 }
 
+protocol AlertDisplayable: class {
+    func displayAlert(alert: UIAlertController)
+}
+
 class SettingsViewModel: GroupedListViewModel {
 
     var title = NSLocalizedString("Account", comment: "")
     
     private weak var delegate: ModelUpdatable?
-    
+    private weak var alertDelegate: AlertDisplayable?
     private let reminderItem: SwitchItem
     private let reminderDateItem: DateItem
     private let followingStreamSourceItem: SwitchItem
@@ -31,6 +35,7 @@ class SettingsViewModel: GroupedListViewModel {
         // MARK: Parameters
         
         self.delegate = delegate
+        self.alertDelegate = delegate as? AlertDisplayable
         
         let reminderTitle = NSLocalizedString("Enable daily reminder", comment: "")
         let reminderDateTitle = NSLocalizedString("Send daily reminder at", comment: "")
@@ -122,7 +127,9 @@ private extension SettingsViewModel {
         let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: reminderDateItem.date) //NGRTemp: provide userID
         
         if localNotification == nil {
-            // NGRTodo: display alert and redirect to settings
+
+            alertDelegate?.displayAlert(preparePermissionsAlert())
+            
             reminderItem.on = false
             ReminderEnabled = false
             delegate?.didChangeItemsAtIndexPaths(indexPathsForItems([reminderItem])!)
@@ -131,5 +138,23 @@ private extension SettingsViewModel {
     
     func unregisterLocalNotification() {
         LocalNotificationRegistrator.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
+    }
+    
+    // MARK: Prepare alert
+    
+    func preparePermissionsAlert() -> UIAlertController {
+        
+        let alert = UIAlertController(title: NSLocalizedString("Permissions", comment: ""), message: NSLocalizedString("You have to give access to notifications.", comment: ""), preferredStyle: .Alert) // NGRTemp: temporary texts
+        
+        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .Default) {
+            _ in
+            UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+        }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .Default, handler: nil)
+        
+        alert.addAction(settingsAction)
+        alert.addAction(cancelAction)
+        
+        return alert
     }
 }

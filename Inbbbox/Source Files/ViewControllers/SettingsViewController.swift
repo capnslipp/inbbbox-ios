@@ -64,6 +64,14 @@ extension SettingsViewController: ModelUpdatable {
     }
 }
 
+extension SettingsViewController: AlertDisplayable {
+    
+    func displayAlert(alert: UIAlertController) {
+        presentViewController(alert, animated: true, completion: nil)
+        alert.view.tintColor = UIColor.blackColor()
+    }
+}
+
 // MARK: UITableViewDataSource
 
 extension SettingsViewController: UITableViewDataSource {
