@@ -65,9 +65,9 @@ class LoginViewController: UIViewController {
         
         firstly {
             authenticator.loginWithService(.Dribbble)
-        }.then { user in
+        }.then { _ -> Void in
             //NGRTodo: Handle success
-            print(user)
+            print("success")
         }.error { error in
             //NGRTodo: Handle error
             print(error)

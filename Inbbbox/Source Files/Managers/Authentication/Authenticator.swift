@@ -27,7 +27,7 @@ class Authenticator {
         self.interactionHandler = interactionHandler
     }
     
-    func loginWithService(service: Service, trySilent: Bool = true) -> Promise<User?> {
+    func loginWithService(service: Service, trySilent: Bool = true) -> Promise<Void> {
         
         let serviceInstance = service.instance
         var controller: OAuthViewController!
@@ -49,15 +49,17 @@ class Authenticator {
             interactionHandler(UINavigationController(rootViewController: controller))
         }
         
-        return Promise<User?> { fulfill, reject in
+        return Promise<Void> { fulfill, reject in
             firstly {
                 controller.startAuthentication()
             }.then { accessToken in
                 self.persistToken(accessToken)
             }.then {
                 self.fetchUser()
-            }.then { user -> Void in
-                fulfill(user)
+            }.then { user in
+                self.persistUser(user)
+            }.then {
+                fulfill()
             }.error { error in
                 reject(error)
             }
@@ -96,6 +98,11 @@ private extension Authenticator {
     
     func persistToken(token: String) -> Promise<Void> {
         TokenStorage.storeToken(token)
+        return Promise()
+    }
+    
+    func persistUser(user: User) -> Promise<Void> {
+        UserStorage.storeUser(user)
         return Promise()
     }
 }
