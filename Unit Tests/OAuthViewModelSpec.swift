@@ -186,7 +186,7 @@ class OAuthViewModelSpec: QuickSpec {
                             }
                         }
                         
-                        expect(accessToken).to(equal("fixture.access.token"))
+                        expect(accessToken).toEventually(equal("fixture.access.token"))
                     }
                 }
                 
