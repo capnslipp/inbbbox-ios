@@ -8,7 +8,7 @@ protocol InitialShotsCollectionViewLayoutDelegate: class {
     func initialShotsCollectionViewDidFinishAnimations()
 }
 
-final class InitialShotsCollectionViewController: UICollectionViewController, InitialShotsAnimationManagerDelegate, AnimationStepViewController {
+final class InitialShotsCollectionViewController: UICollectionViewController, InitialShotsAnimationManagerDelegate {
 
     weak var delegate: InitialShotsCollectionViewLayoutDelegate?
     var shots = ["shot1", "shot2", "shot3"]

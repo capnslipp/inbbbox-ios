@@ -4,7 +4,7 @@
 
 import UIKit
 
-final class ShotsCollectionViewController: UICollectionViewController, AnimationStepViewController {
+final class ShotsCollectionViewController: UICollectionViewController {
 
 //    MARK: - Life cycle
 

@@ -6,5 +6,5 @@ import UIKit
 
 class AnimationContainerViewController: UIViewController {
 
-    var animationStepClasses: Array<AnimationStepViewController.Type> = []
+    var animationStepClasses = [AnimationStep]()
 }
