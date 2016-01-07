@@ -71,21 +71,33 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                 sut.stopAnimation()
             }
             
-            it("first collection view should be scrolled up") {
+            context("first collection view") {
                 
-                let initialValueY = collectionViews[0].contentOffset.y
+                var initialValueY: CGFloat!
                 
-                waitThenContinue()
-                expect(collectionViews[0].contentOffset.y).to(beGreaterThan(initialValueY))
+                beforeEach {
+                    initialValueY = collectionViews[0].contentOffset.y
+                }
+                
+                it("should be scrolled up") {
+                    expect(collectionViews[0].contentOffset.y).toEventually(beGreaterThan(initialValueY))
+                }
             }
             
-            it("second collection view should be scrolled down") {
+            
+            context("collection view") {
                 
-                let initialValueY = collectionViews[1].contentOffset.y
+                var initialValueY: CGFloat!
                 
-                waitThenContinue()
-                expect(collectionViews[1].contentOffset.y).to(beLessThan(initialValueY))
+                beforeEach {
+                    initialValueY = collectionViews[1].contentOffset.y
+                }
+                
+                it("should be scrolled down") {
+                    expect(collectionViews[1].contentOffset.y).toEventually(beLessThan(initialValueY))
+                }
             }
+
             
             context("and stopping it") {
                 
@@ -93,20 +105,31 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                     sut.stopAnimation()
                 }
                 
-                it("first collection view should be in same place") {
+                context("first collection view") {
                     
-                    let initialValueY = collectionViews[0].contentOffset.y
+                    var initialValueY: CGFloat!
                     
-                    waitThenContinue()
-                    expect(collectionViews[0].contentOffset.y).to(equal(initialValueY))
+                    beforeEach {
+                        initialValueY = collectionViews[0].contentOffset.y
+                    }
+                    
+                    it("first collection view should be in same place") {
+                        expect(collectionViews[0].contentOffset.y).toEventually(equal(initialValueY))
+                    }
                 }
                 
-                it("second collection view should be in same place") {
+                
+                context("second collection view") {
                     
-                    let initialValueY = collectionViews[1].contentOffset.y
+                    var initialValueY: CGFloat!
                     
-                    waitThenContinue()
-                    expect(collectionViews[1].contentOffset.y).to(equal(initialValueY))
+                    beforeEach {
+                        initialValueY = collectionViews[1].contentOffset.y
+                    }
+                    
+                    it("first collection view should be in same place") {
+                        expect(collectionViews[1].contentOffset.y).toEventually(equal(initialValueY))
+                    }
                 }
             }
         }

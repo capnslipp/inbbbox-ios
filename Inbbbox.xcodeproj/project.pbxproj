@@ -19,7 +19,6 @@
 		5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D77381C3BD6A9002191A7 /* UserStorage.swift */; };
 		5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D773A1C3BDEFD002191A7 /* UserStorageSpec.swift */; };
 		5E0D773D1C3BE475002191A7 /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D773C1C3BE475002191A7 /* UserSpec.swift */; };
-		5E21AA3C1C35950F0086FF67 /* NimbleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E21AA3B1C35950F0086FF67 /* NimbleExtension.swift */; };
 		5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */; };
 		5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */; };
 		5E2E730E1C2BFBC300D5BC80 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */; };
@@ -147,7 +146,6 @@
 		5E147CB51AA8B2D300EDD97C /* Inbbbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Inbbbox-Info.plist"; path = "Supporting Files/Inbbbox-Info.plist"; sourceTree = "<group>"; };
 		5E147CB71AA8B2DC00EDD97C /* Unit-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit-Tests-Bridging-Header.h"; path = "Supporting Files/Unit-Tests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		5E147CB81AA8B2DC00EDD97C /* Unit-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit-Tests-Info.plist"; path = "Supporting Files/Unit-Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
-		5E21AA3B1C35950F0086FF67 /* NimbleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NimbleExtension.swift; sourceTree = "<group>"; };
 		5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbbbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -554,7 +552,6 @@
 			isa = PBXGroup;
 			children = (
 				5EC0A7AC1C353C8800846975 /* UIImageExtension.swift */,
-				5E21AA3B1C35950F0086FF67 /* NimbleExtension.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -977,7 +974,6 @@
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
 				5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */,
 				5EE041B01C33EF9E00657751 /* OAuthAuthorizableSpec.swift in Sources */,
-				5E21AA3C1C35950F0086FF67 /* NimbleExtension.swift in Sources */,
 				BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */,
 				5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
