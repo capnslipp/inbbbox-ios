@@ -8,9 +8,10 @@ protocol InitialShotsCollectionViewLayoutDelegate: class {
     func initialShotsCollectionViewDidFinishAnimations()
 }
 
-final class InitialShotsCollectionViewController: UICollectionViewController, InitialShotsAnimationManagerDelegate {
+final class InitialShotsCollectionViewController: UICollectionViewController, InitialShotsAnimationManagerDelegate, PresentationStepViewController {
 
     weak var delegate: InitialShotsCollectionViewLayoutDelegate?
+    weak var presentationStepViewControllerDelegate: PresentationStepViewControllerDelegate?
     var shots = ["shot1", "shot2", "shot3"]
     var animationManager = InitialShotsAnimationManager()
 
@@ -50,6 +51,7 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
 
         animationManager.startAnimationWithCompletion() {
             self.delegate?.initialShotsCollectionViewDidFinishAnimations()
+            self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
         }
     }
 
@@ -71,5 +73,11 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
 
     func itemsForAnimationManager(animationManager: InitialShotsAnimationManager) -> [AnyObject] {
         return shots
+    }
+
+//    MARK: - PresentationStepViewController
+
+    var viewController: UIViewController {
+        return self
     }
 }
