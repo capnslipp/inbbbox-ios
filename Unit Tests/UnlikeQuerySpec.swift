@@ -27,15 +27,15 @@ class UnlikeQuerySpec: QuickSpec {
             }
             
             it("should have path with identifier") {
-                expect(sut.path).to(equal("/shots/fixture.identifier/unlike"))
+                expect(sut.path).to(equal("/shots/fixture.identifier/like"))
             }
             
             it("should have dribbble service") {
                 expect(sut.service is DribbbleNetworkService).to(beTrue())
             }
             
-            it("should have parameters with URL encoding") {
-                expect(sut.parameters.encoding).to(equal(Parameters.Encoding.URL))
+            it("should have parameters with JSON encoding") {
+                expect(sut.parameters.encoding).to(equal(Parameters.Encoding.JSON))
             }
             
             it("should have empty parameters") {

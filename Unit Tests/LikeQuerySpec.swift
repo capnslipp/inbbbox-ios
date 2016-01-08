@@ -34,8 +34,8 @@ class LikeQuerySpec: QuickSpec {
                 expect(sut.service is DribbbleNetworkService).to(beTrue())
             }
             
-            it("should have parameters with URL encoding") {
-                expect(sut.parameters.encoding).to(equal(Parameters.Encoding.URL))
+            it("should have parameters with JSON encoding") {
+                expect(sut.parameters.encoding).to(equal(Parameters.Encoding.JSON))
             }
             
             it("should have empty parameters") {
