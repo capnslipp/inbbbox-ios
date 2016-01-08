@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ShotsPresentationStep: PresentationStep, PresentationStepViewControllerDelegate {
+class ShotsPresentationStep: PresentationStep {
 
 //    MARK: - PresentationStep
 
@@ -12,11 +12,5 @@ class ShotsPresentationStep: PresentationStep, PresentationStepViewControllerDel
 
     var presentationStepViewController: PresentationStepViewController {
         return ShotsCollectionViewController()
-    }
-
-//    MARK: - PresentationStepViewControllerDelegate
-
-    func presentationStepViewControllerDidFinishPresenting(presentationStepViewController: PresentationStepViewController) {
-        presentationStepDelegate?.presentationStepDidFinish(self)
     }
 }
