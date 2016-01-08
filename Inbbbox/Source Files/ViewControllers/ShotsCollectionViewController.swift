@@ -54,7 +54,7 @@ final class ShotsCollectionViewController: UICollectionViewController, Presentat
         return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
     }
 
-//    MARK:- PresentationStepViewController
+//    MARK: - PresentationStepViewController
 
     var viewController: UIViewController {
         return self

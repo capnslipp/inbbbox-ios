@@ -14,7 +14,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
         var sut: InitialShotsCollectionViewController!
 
-        beforeEach() {
+        beforeEach {
             sut = InitialShotsCollectionViewController()
         }
 
@@ -32,7 +32,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
         describe("when view did load") {
 
-            beforeEach() {
+            beforeEach {
                 sut.view
             }
 
@@ -40,7 +40,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
                 var collectionView: UICollectionView!
 
-                beforeEach() {
+                beforeEach {
                     collectionView = sut.collectionView
                 }
 
@@ -55,7 +55,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
             var animationManagerMock: InitialShotsAnimationManagerMock!
             var capturedCompletion: (Void -> Void)!
 
-            beforeEach() {
+            beforeEach {
                 animationManagerMock = InitialShotsAnimationManagerMock()
                 animationManagerMock.startAnimationWithCompletionStub.on(any()) { completion in
                     capturedCompletion = completion
@@ -68,7 +68,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
                 var capturedPresentationStepViewController: PresentationStepViewController!
 
-                beforeEach() {
+                beforeEach {
                     let presentationStepViewControllerDelegateMock = PresentationStepViewControllerDelegateMock()
                     presentationStepViewControllerDelegateMock.presentationStepViewControllerDidFinishPresentingStub.on(any()) { presentationStepViewController in
                         capturedPresentationStepViewController = presentationStepViewController
@@ -77,7 +77,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
                     capturedCompletion!()
                 }
 
-                it("should inform delegate that that presentation step view controller did finish") {
+                it("should inform presentation step view controller delegate that that presentation step view controller did finish") {
                     expect(capturedPresentationStepViewController === sut).to(beTruthy())
                 }
             }
@@ -89,7 +89,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
                 var numberOfItems: Int!
 
-                beforeEach() {
+                beforeEach {
                     sut.animationManager.visibleItems = ["fixture item 1", "fixture item 2"]
                     numberOfItems = sut.collectionView(sut.collectionView!, numberOfItemsInSection: 0)
                 }
@@ -103,7 +103,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
                 var item: UICollectionViewCell!
 
-                beforeEach(){
+                beforeEach{
                     sut.animationManager.visibleItems = ["fixture item 1"]
                     item = sut.collectionView(sut.collectionView!, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
                 }
@@ -120,7 +120,7 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
                 var collectionView: UICollectionView!
 
-                beforeEach() {
+                beforeEach {
                     collectionView = sut.collectionViewForAnimationManager(sut.animationManager)
                 }
 
@@ -133,12 +133,28 @@ class InitialShotsCollectionViewControllerSpec: QuickSpec {
 
                 var itemsForAnimationManager: [String]!
 
-                beforeEach() {
+                beforeEach {
                     itemsForAnimationManager = sut.itemsForAnimationManager(sut.animationManager) as! [String]
                 }
 
                 it("should return shots") {
                     expect(itemsForAnimationManager).to(equal(sut.shots))
+                }
+            }
+        }
+
+        describe("presentation step view controller") {
+
+            describe("view controller") {
+
+                var viewController: UIViewController!
+
+                beforeEach {
+                    viewController = sut.viewController
+                }
+
+                it("should return initial shots collection view controller") {
+                    expect(viewController).to(equal(sut))
                 }
             }
         }
