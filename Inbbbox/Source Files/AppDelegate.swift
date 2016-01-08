@@ -15,14 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-
-//        NGRTemp: temporary implementation
-//        window!.rootViewController = LoginViewController()
-        let containerViewController = PresentationContainerViewController()
-        containerViewController.presentationSteps = [InitialShotsPresentationStep(), ShotsPresentationStep()]
-
-
-        window!.rootViewController = containerViewController
+        window!.rootViewController = LoginViewController()
         window!.makeKeyAndVisible()
         window!.tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barTintColor = UIColor.pinkColor()

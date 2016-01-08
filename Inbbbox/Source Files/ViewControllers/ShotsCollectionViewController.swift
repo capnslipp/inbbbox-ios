@@ -28,11 +28,13 @@ final class ShotsCollectionViewController: UICollectionViewController, Presentat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let collectionView = collectionView {
-            collectionView.backgroundColor = UIColor.whiteColor()
-            collectionView.pagingEnabled = true
-            collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
+        guard let collectionView = collectionView else {
+            return
         }
+
+        collectionView.backgroundColor = UIColor.backgroundGrayColor()
+        collectionView.pagingEnabled = true
+        collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
     }
 
     override func viewWillLayoutSubviews() {

@@ -7,11 +7,11 @@ import Dobby
 
 @testable import Inbbbox
 
-class InitialShotsCollectionViewLayoutDelegateMock: InitialShotsCollectionViewLayoutDelegate {
+class PresentationStepViewControllerDelegateMock: PresentationStepViewControllerDelegate {
 
-    let initialShotsCollectionViewDidFinishAnimationsMock = Mock<Void>()
+    let presentationStepViewControllerDidFinishPresentingStub = Stub<PresentationStepViewController, Void>()
 
-    func initialShotsCollectionViewDidFinishAnimations() {
-        initialShotsCollectionViewDidFinishAnimationsMock.record(())
+    func presentationStepViewControllerDidFinishPresenting(presentationStepViewController: PresentationStepViewController) {
+        try! presentationStepViewControllerDidFinishPresentingStub.invoke(presentationStepViewController)
     }
 }

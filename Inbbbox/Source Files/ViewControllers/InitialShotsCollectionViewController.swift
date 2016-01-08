@@ -4,13 +4,8 @@
 
 import UIKit
 
-protocol InitialShotsCollectionViewLayoutDelegate: class {
-    func initialShotsCollectionViewDidFinishAnimations()
-}
-
 final class InitialShotsCollectionViewController: UICollectionViewController, InitialShotsAnimationManagerDelegate, PresentationStepViewController {
 
-    weak var delegate: InitialShotsCollectionViewLayoutDelegate?
     weak var presentationStepViewControllerDelegate: PresentationStepViewControllerDelegate?
     var shots = ["shot1", "shot2", "shot3"]
     var animationManager = InitialShotsAnimationManager()
@@ -18,7 +13,7 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
 //    MARK: - Life cycle
 
 
-    @available(*, unavailable, message="Use init() or init(collectionViewLayout:) instead")
+    @available(*, unavailable, message = "Use init() or init(collectionViewLayout:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -38,11 +33,13 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
 
         animationManager.delegate = self
 
-        if let collectionView = collectionView {
-            collectionView.backgroundColor = UIColor.backgroundGrayColor()
-            collectionView.pagingEnabled = true
-            collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
+        guard let collectionView = collectionView else {
+            return
         }
+
+        collectionView.backgroundColor = UIColor.backgroundGrayColor()
+        collectionView.pagingEnabled = true
+        collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -50,7 +47,6 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
 
 
         animationManager.startAnimationWithCompletion() {
-            self.delegate?.initialShotsCollectionViewDidFinishAnimations()
             self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
         }
     }
