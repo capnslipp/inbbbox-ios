@@ -103,6 +103,14 @@
 		F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */; };
 		F092E2181C3A9E9900593D18 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2171C3A9E9900593D18 /* Defines.swift */; };
 		F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2191C3AA3A600593D18 /* Settings.swift */; };
+		F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */; };
+		F092E25F1C3FD47200593D18 /* ShotManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E25E1C3FD47200593D18 /* ShotManagedObject.swift */; };
+		F092E2611C3FD48600593D18 /* BucketManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2601C3FD48600593D18 /* BucketManagedObject.swift */; };
+		F092E2631C3FD4F600593D18 /* NSManagedObjectExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2621C3FD4F600593D18 /* NSManagedObjectExtension.swift */; };
+		F092E2651C3FD55A00593D18 /* ShotChangeHistoryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2641C3FD55A00593D18 /* ShotChangeHistoryStorage.swift */; };
+		F092E2671C3FD63D00593D18 /* ShotsLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2661C3FD63D00593D18 /* ShotsLocalStorage.swift */; };
+		F092E2691C3FD66700593D18 /* BucketsLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2681C3FD66700593D18 /* BucketsLocalStorage.swift */; };
+		F092E26B1C3FD6F900593D18 /* ShotChangeSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E26A1C3FD6F900593D18 /* ShotChangeSynchronizer.swift */; };
 		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
 		FF13A05570F8013CFD61C3B7 /* AnimationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A771B3B0C75085522777 /* AnimationStep.swift */; };
@@ -239,6 +247,14 @@
 		F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		F092E2171C3A9E9900593D18 /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		F092E2191C3AA3A600593D18 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		F092E25B1C3FD3DA00593D18 /* StoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StoreData.xcdatamodel; sourceTree = "<group>"; };
+		F092E25E1C3FD47200593D18 /* ShotManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotManagedObject.swift; sourceTree = "<group>"; };
+		F092E2601C3FD48600593D18 /* BucketManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketManagedObject.swift; sourceTree = "<group>"; };
+		F092E2621C3FD4F600593D18 /* NSManagedObjectExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtension.swift; sourceTree = "<group>"; };
+		F092E2641C3FD55A00593D18 /* ShotChangeHistoryStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotChangeHistoryStorage.swift; sourceTree = "<group>"; };
+		F092E2661C3FD63D00593D18 /* ShotsLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsLocalStorage.swift; sourceTree = "<group>"; };
+		F092E2681C3FD66700593D18 /* BucketsLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsLocalStorage.swift; sourceTree = "<group>"; };
+		F092E26A1C3FD6F900593D18 /* ShotChangeSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotChangeSynchronizer.swift; sourceTree = "<group>"; };
 		F09307C71C240609005F5111 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F09307C91C240656005F5111 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -301,6 +317,7 @@
 				5E50820B1C3131EF00093191 /* AutoScrollableShotsAnimator.swift */,
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				5E4857B41C2805E10027B38A /* Authentication */,
+				F092E26A1C3FD6F900593D18 /* ShotChangeSynchronizer.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -444,6 +461,7 @@
 				5E4857E71C2957C90027B38A /* Views */,
 				BF6A6E051C1ED147001EDAB8 /* ViewModels */,
 				FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */,
+				F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */,
 			);
 			path = "Source Files";
 			sourceTree = "<group>";
@@ -526,6 +544,7 @@
 		5E51B7981AA9C3280018EDA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F092E25D1C3FD44E00593D18 /* ManagedObjects */,
 				BF9508571C1F1D8700E39242 /* Mappable.swift */,
 				BF9508551C1F1BD000E39242 /* Shot.swift */,
 				BF95085B1C1F208F00E39242 /* User.swift */,
@@ -568,6 +587,7 @@
 				5EDC25F71C32AF680045B759 /* StringExtension.swift */,
 				5EE041B51C34227600657751 /* CollectionExtension.swift */,
 				BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */,
+				F092E2621C3FD4F600593D18 /* NSManagedObjectExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -628,6 +648,9 @@
 				BF6A6E1B1C1F02FA001EDAB8 /* TokenStorage.swift */,
 				5E5082071C312E2800093191 /* ShotsStorage.swift */,
 				5E0D77381C3BD6A9002191A7 /* UserStorage.swift */,
+				F092E2641C3FD55A00593D18 /* ShotChangeHistoryStorage.swift */,
+				F092E2661C3FD63D00593D18 /* ShotsLocalStorage.swift */,
+				F092E2681C3FD66700593D18 /* BucketsLocalStorage.swift */,
 			);
 			path = Storages;
 			sourceTree = "<group>";
@@ -639,6 +662,15 @@
 				FF13A1A2161AE07748341642 /* AsyncWrapper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F092E25D1C3FD44E00593D18 /* ManagedObjects */ = {
+			isa = PBXGroup;
+			children = (
+				F092E25E1C3FD47200593D18 /* ShotManagedObject.swift */,
+				F092E2601C3FD48600593D18 /* BucketManagedObject.swift */,
+			);
+			path = ManagedObjects;
 			sourceTree = "<group>";
 		};
 		FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */ = {
@@ -904,11 +936,13 @@
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */,
 				5E4857C21C284AF80027B38A /* AuthenticatorError.swift in Sources */,
+				F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
 				5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */,
 				5EDC25F81C32AF680045B759 /* StringExtension.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
 				F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */,
+				F092E25F1C3FD47200593D18 /* ShotManagedObject.swift in Sources */,
 				5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */,
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
@@ -916,6 +950,8 @@
 				F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */,
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F092E2181C3A9E9900593D18 /* Defines.swift in Sources */,
+				F092E2611C3FD48600593D18 /* BucketManagedObject.swift in Sources */,
+				F092E2651C3FD55A00593D18 /* ShotChangeHistoryStorage.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
 				5E50820A1C31305C00093191 /* AutoScrollableShotsView.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
@@ -930,10 +966,13 @@
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				5E4857BC1C28061F0027B38A /* OAuthView.swift in Sources */,
 				5E4857BA1C2805E10027B38A /* OAuthViewModel.swift in Sources */,
+				F092E2691C3FD66700593D18 /* BucketsLocalStorage.swift in Sources */,
 				5E5082101C313DFF00093191 /* AutoScrollableCollectionViewCell.swift in Sources */,
 				5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */,
 				5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
+				F092E26B1C3FD6F900593D18 /* ShotChangeSynchronizer.swift in Sources */,
+				F092E2631C3FD4F600593D18 /* NSManagedObjectExtension.swift in Sources */,
 				5E4857F81C2957C90027B38A /* UIBaseTableView.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
 				F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */,
@@ -944,6 +983,7 @@
 				5E50820C1C3131EF00093191 /* AutoScrollableShotsAnimator.swift in Sources */,
 				5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */,
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
+				F092E2671C3FD63D00593D18 /* ShotsLocalStorage.swift in Sources */,
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
 				FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewLayout.swift in Sources */,
@@ -1367,6 +1407,19 @@
 			defaultConfigurationName = Staging;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F092E25B1C3FD3DA00593D18 /* StoreData.xcdatamodel */,
+			);
+			currentVersion = F092E25B1C3FD3DA00593D18 /* StoreData.xcdatamodel */;
+			path = StoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5E3A97E01AA72F0A00CE2F20 /* Project object */;
 }
