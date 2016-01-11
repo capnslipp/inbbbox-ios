@@ -1,5 +1,5 @@
 //
-//  ShotChangeSynchronizer.Swift
+//  ShotOperationSynchronizer.Swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 07/01/16.
@@ -9,32 +9,32 @@
 import Foundation
 import PromiseKit
 
-final class ShotChangeSynchronizer {
+final class ShotOperationSynchronizer {
     
     class func synchronize() throws {
         
         do {
-            if let shotChanges = try ShotChangeHistoryStorage.allRecords() {
+            if let shotOperations = try ShotOperationHistoryStorage.allRecords() {
                 
                 var promise = Promise<Void>()
                 
-                for change in shotChanges {
+                for operation in shotOperations {
                     promise = promise.then {
-                        switch change.operationType {
+                        switch operation.type {
                             case .Like:
-                                return ShotOperationRequester.likeShot(change.shotID)
+                                return ShotOperationRequester.likeShot(operation.shotID)
                             case .Unlike:
-                                return ShotOperationRequester.unlikeShot(change.shotID)
+                                return ShotOperationRequester.unlikeShot(operation.shotID)
                             case .AddToBucket:
-                                return ShotOperationRequester.addToBucket(change.shotID, bucketID: change.bucketID!)
+                                return ShotOperationRequester.addToBucket(operation.shotID, bucketID: operation.bucketID!)
                             case .RemoveFromBucket:
-                                return ShotOperationRequester.removeFromBucket(change.shotID, bucketID: change.bucketID!)
+                                return ShotOperationRequester.removeFromBucket(operation.shotID, bucketID: operation.bucketID!)
                         }
                     }
                     
                 }
                 
-                try ShotChangeHistoryStorage.clearHistory()
+                try ShotOperationHistoryStorage.clearHistory()
                 try ShotsLocalStorage.clear()
             }
         } catch {

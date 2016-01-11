@@ -1,5 +1,5 @@
 //
-//  ShotChangeHistoryStorage.swift
+//  ShotOperationHistoryStorage.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 07/01/16.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-final class ShotChangeHistoryStorage {
+final class ShotOperationHistoryStorage {
     
     private static let EntityName = "ShotChange"
     
@@ -24,7 +24,7 @@ final class ShotChangeHistoryStorage {
     private static let entity = NSEntityDescription.entityForName(EntityName, inManagedObjectContext: managedContext)
     private static let fetchRequest = NSFetchRequest(entityName: EntityName)
     
-    class func insertRecord(shotID: Int, operation: ShotOperation, bucketID: Int? = nil) throws {
+    class func insertRecord(shotID: Int, operation: ShotOperationType, bucketID: Int? = nil) throws {
         
         let changeRecord = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
@@ -38,15 +38,15 @@ final class ShotChangeHistoryStorage {
         }
     }
     
-    class func allRecords() throws -> Array<ShotChange>? {
+    class func allRecords() throws -> Array<ShotOperation>? {
         
         do {
             guard let results = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] else { return nil }
             
-            var changeHistory = Array<ShotChange>()
+            var changeHistory = Array<ShotOperation>()
             
             _ = results.map {
-                changeHistory.append(ShotChange(shotID: $0.valueForKey(Attribute.ShotID.rawValue) as! Int, operation: ShotOperation(rawValue: $0.valueForKey(Attribute.OperationType.rawValue) as! Int)!, bucketID: $0.valueForKey(Attribute.BucketID.rawValue) as? Int))
+                changeHistory.append(ShotOperation(shotID: $0.valueForKey(Attribute.ShotID.rawValue) as! Int, operation: ShotOperationType(rawValue: $0.valueForKey(Attribute.OperationType.rawValue) as! Int)!, bucketID: $0.valueForKey(Attribute.BucketID.rawValue) as? Int))
             }
             
             return changeHistory
@@ -70,19 +70,19 @@ final class ShotChangeHistoryStorage {
     }
 }
 
-struct ShotChange {
+struct ShotOperation {
     
     var shotID: Int
-    var operationType: ShotOperation
+    var type: ShotOperationType
     var bucketID: Int?
     
-    init(shotID: Int, operation: ShotOperation, bucketID: Int? = nil) {
+    init(shotID: Int, operation: ShotOperationType, bucketID: Int? = nil) {
         self.shotID = shotID
-        operationType = operation
+        type = operation
     }
 }
 
-enum ShotOperation: Int {
+enum ShotOperationType: Int {
     case Like = 0
     case Unlike = 1
     case AddToBucket = 2
