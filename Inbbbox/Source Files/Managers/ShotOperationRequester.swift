@@ -37,7 +37,7 @@ final class ShotOperationRequester {
             
             firstly {
                 request.resume()
-            }.then { json in
+            }.then { _ in
                 fulfill()
             }.error { error in
                 reject(error)
@@ -54,7 +54,7 @@ final class ShotOperationRequester {
             
             firstly {
                 request.resume()
-            }.then { json in
+            }.then { _ in
                 fulfill()
             }.error { error in
                 reject(error)
@@ -71,7 +71,7 @@ final class ShotOperationRequester {
             
             firstly {
                 request.resume()
-            }.then { json in
+            }.then { _ in
                 fulfill()
             }.error { error in
                 reject(error)

@@ -31,11 +31,11 @@ final class ShotOperationSynchronizer {
                                 return ShotOperationRequester.removeFromBucket(operation.shotID, bucketID: operation.bucketID!)
                         }
                     }
-                    
                 }
                 
                 try ShotOperationHistoryStorage.clearHistory()
-                try ShotsLocalStorage.clear()
+                
+                try ShotsLocalStorage().clear()
             }
         } catch {
             throw error

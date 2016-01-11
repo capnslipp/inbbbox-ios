@@ -106,6 +106,8 @@
 		F08830F51C3FF42600F530A2 /* AddToBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */; };
 		F08830F71C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */; };
 		F08830F91C43944300F530A2 /* ShotOperationRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F81C43944300F530A2 /* ShotOperationRequester.swift */; };
+		F08830FB1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830FA1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift */; };
+		F08830FD1C43ABD700F530A2 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */; };
 		F092E2181C3A9E9900593D18 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2171C3A9E9900593D18 /* Defines.swift */; };
 		F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2191C3AA3A600593D18 /* Settings.swift */; };
 		F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */; };
@@ -255,6 +257,8 @@
 		F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuerySpec.swift; sourceTree = "<group>"; };
 		F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuerySpec.swift; sourceTree = "<group>"; };
 		F08830F81C43944300F530A2 /* ShotOperationRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotOperationRequester.swift; sourceTree = "<group>"; };
+		F08830FA1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsLocalStorageSpec.swift; sourceTree = "<group>"; };
+		F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		F092E2171C3A9E9900593D18 /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		F092E2191C3AA3A600593D18 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		F092E25B1C3FD3DA00593D18 /* StoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -436,6 +440,7 @@
 				5E0D773C1C3BE475002191A7 /* UserSpec.swift */,
 				F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */,
 				F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */,
+				F08830FA1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -586,6 +591,7 @@
 			isa = PBXGroup;
 			children = (
 				5EC0A7AC1C353C8800846975 /* UIImageExtension.swift */,
+				F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1023,6 +1029,7 @@
 				5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
 				BF95085E1C1F263200E39242 /* ShotsQuerySpec.swift in Sources */,
 				F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */,
+				F08830FD1C43ABD700F530A2 /* CoreDataHelper.swift in Sources */,
 				5EE041AC1C33E93300657751 /* UserQuerySpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageExtension.swift in Sources */,
 				BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */,
@@ -1030,6 +1037,7 @@
 				BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
+				F08830FB1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift in Sources */,
 				5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */,
 				5EE041B01C33EF9E00657751 /* OAuthAuthorizableSpec.swift in Sources */,
 				BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */,

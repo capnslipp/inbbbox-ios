@@ -11,18 +11,18 @@ import CoreData
 
 final class BucketsLocalStorage {
     
-    private static let BucketEntityName = "Bucket"
+    private let BucketEntityName = "Bucket"
     
-    private static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    private static let managedContext = appDelegate.managedObjectContext
-    private static let bucketEntity = NSEntityDescription.entityForName(BucketEntityName, inManagedObjectContext: managedContext)
-    private static let bucketFetchRequest = NSFetchRequest(entityName: BucketEntityName)
+    private let bucketEntity: NSEntityDescription!
+    private let bucketFetchRequest: NSFetchRequest!
     
-    class var buckets: [BucketManagedObject] {
+    var managedContext: NSManagedObjectContext!
+    
+    var buckets: [BucketManagedObject] {
         return try! managedContext.executeFetchRequest(bucketFetchRequest) as! [BucketManagedObject]
     }
     
-    private class var bucketIDs: [Int] {
+    private var bucketIDs: [Int] {
         
         if let results = try! managedContext.executeFetchRequest(bucketFetchRequest) as? [BucketManagedObject] {
             return results.map { return $0.id }
@@ -31,7 +31,13 @@ final class BucketsLocalStorage {
         }
     }
     
-    class func create(bucketID bucketID: Int, name: String) throws {
+    init(managedContext: NSManagedObjectContext? = nil) {
+        self.managedContext = managedContext ?? (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        bucketEntity = NSEntityDescription.entityForName(BucketEntityName, inManagedObjectContext: self.managedContext)
+        bucketFetchRequest = NSFetchRequest(entityName: BucketEntityName)
+    }
+    
+    func create(bucketID bucketID: Int, name: String) throws {
         
         guard !bucketIDs.contains(bucketID) else { return }
         
@@ -47,7 +53,7 @@ final class BucketsLocalStorage {
         }
     }
     
-    class func destroy(bucketID bucketID: Int) throws {
+    func destroy(bucketID bucketID: Int) throws {
         
         do {
             if let objectToDelete = findObject(bucketID) {
@@ -64,7 +70,7 @@ final class BucketsLocalStorage {
 
 private extension BucketsLocalStorage {
     
-    class func findObject(bucketID: Int) -> BucketManagedObject? {
+    func findObject(bucketID: Int) -> BucketManagedObject? {
         if let objects = try! managedContext.executeFetchRequest(bucketFetchRequest) as? [BucketManagedObject] {
             let fittingObjects = objects.filter {
                 return $0.id == bucketID

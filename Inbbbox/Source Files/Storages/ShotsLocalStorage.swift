@@ -11,15 +11,22 @@ import CoreData
 
 final class ShotsLocalStorage {
     
-    private static let ShotEntityName = "Shot"
-    private static let BucketEntityName = "Bucket"
+    private let ShotEntityName = "Shot"
+    private let BucketEntityName = "Bucket"
     
-    private static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    private static let managedContext = appDelegate.managedObjectContext
-    private static let shotEntity = NSEntityDescription.entityForName(ShotEntityName, inManagedObjectContext: managedContext)
-    private static let bucketEntity = NSEntityDescription.entityForName(BucketEntityName, inManagedObjectContext: managedContext)
+    private let shotEntity: NSEntityDescription!
+    private let bucketEntity: NSEntityDescription!
     
-    class var likedShots: [ShotManagedObject] {
+    var managedContext: NSManagedObjectContext!
+    
+    var shots: [ShotManagedObject] {
+        
+        let fetchRequest = NSFetchRequest(entityName: ShotEntityName)
+        
+        return try! managedContext.executeFetchRequest(fetchRequest) as! [ShotManagedObject]
+    }
+    
+    var likedShots: [ShotManagedObject] {
         
         let fetchRequest = NSFetchRequest(entityName: ShotEntityName)
         let predicate = NSPredicate(format: "liked == true")
@@ -28,7 +35,14 @@ final class ShotsLocalStorage {
         return try! managedContext.executeFetchRequest(fetchRequest) as! [ShotManagedObject]
     }
     
-    class func like(shotID shotID: Int) throws {
+    init(managedContext: NSManagedObjectContext? = nil) {
+        
+        self.managedContext = managedContext ?? (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        shotEntity = NSEntityDescription.entityForName(ShotEntityName, inManagedObjectContext: self.managedContext)
+        bucketEntity = NSEntityDescription.entityForName(BucketEntityName, inManagedObjectContext: self.managedContext)
+    }
+    
+    func like(shotID shotID: Int) throws {
         
         let shotFetchRequest = NSFetchRequest(entityName: ShotEntityName)
         let shotPredicate = NSPredicate(format: "id == %d", shotID)
@@ -51,7 +65,7 @@ final class ShotsLocalStorage {
         }
     }
     
-    class func unlike(shotID shotID: Int) throws {
+    func unlike(shotID shotID: Int) throws {
         
         let shotFetchRequest = NSFetchRequest(entityName: ShotEntityName)
         let shotPredicate = NSPredicate(format: "id == %d", shotID)
@@ -74,7 +88,7 @@ final class ShotsLocalStorage {
         }
     }
     
-    class func addToBucket(shotID shotID: Int, bucketID: Int) throws {
+    func addToBucket(shotID shotID: Int, bucketID: Int) throws {
         
         let bucketFetchRequest = NSFetchRequest(entityName: BucketEntityName)
         let bucketPredicate = NSPredicate(format: "id == %d", bucketID)
@@ -109,7 +123,7 @@ final class ShotsLocalStorage {
         }
     }
     
-    class func removeFromBucket(shotID shotID: Int, bucketID: Int) throws {
+    func removeFromBucket(shotID shotID: Int, bucketID: Int) throws {
         
         let bucketFetchRequest = NSFetchRequest(entityName: BucketEntityName)
         let bucketPredicate = NSPredicate(format: "id == %d", bucketID)
@@ -129,15 +143,22 @@ final class ShotsLocalStorage {
             
             if let buckets = try managedContext.executeFetchRequest(bucketFetchRequest) as? [BucketManagedObject] where buckets.count > 0 {
                 bucket = buckets[0]
-                let bucketShots = bucket.shots as? NSMutableSet
-                bucketShots?.removeObject(shot!)
+
+                bucket.removeShot(shot!)
+
+                if(shot!.buckets?.count == 0 && !shot!.liked) {
+                    managedContext.deleteObject(shot!)
+                }
             }
+            
+            try managedContext.save()
+            
         } catch {
             throw error
         }
     }
     
-    class func clear() throws {
+    func clear() throws {
         
         let fetchRequest = NSFetchRequest(entityName: ShotEntityName)
         
