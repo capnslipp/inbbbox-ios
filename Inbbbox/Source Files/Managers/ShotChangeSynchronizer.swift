@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class ShotChangeSynchronizer {
     
@@ -15,21 +16,22 @@ final class ShotChangeSynchronizer {
         do {
             if let shotChanges = try ShotChangeHistoryStorage.allRecords() {
                 
+                var promise = Promise<Void>()
+                
                 for change in shotChanges {
-                    switch change.operationType {
-                    case .Like:
-                        // NGRTodo: like shot query
-                        break
-                    case .Unlike:
-                        // NGRTodo: unlike shot query
-                        break
-                    case .AddToBucket:
-                        // NGRTodo: add to bucket query
-                        break
-                    case .RemoveFromBucket:
-                        // NGRTodo: remove from bucket query
-                        break
+                    promise = promise.then {
+                        switch change.operationType {
+                            case .Like:
+                                return ShotOperationRequester.likeShot(change.shotID)
+                            case .Unlike:
+                                return ShotOperationRequester.unlikeShot(change.shotID)
+                            case .AddToBucket:
+                                return ShotOperationRequester.addToBucket(change.shotID, bucketID: change.bucketID!)
+                            case .RemoveFromBucket:
+                                return ShotOperationRequester.removeFromBucket(change.shotID, bucketID: change.bucketID!)
+                        }
                     }
+                    
                 }
                 
                 try ShotChangeHistoryStorage.clearHistory()

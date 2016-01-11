@@ -105,6 +105,7 @@
 		F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */; };
 		F08830F51C3FF42600F530A2 /* AddToBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */; };
 		F08830F71C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */; };
+		F08830F91C43944300F530A2 /* ShotOperationRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F81C43944300F530A2 /* ShotOperationRequester.swift */; };
 		F092E2181C3A9E9900593D18 /* Defines.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2171C3A9E9900593D18 /* Defines.swift */; };
 		F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2191C3AA3A600593D18 /* Settings.swift */; };
 		F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */; };
@@ -253,6 +254,7 @@
 		F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuerySpec.swift; sourceTree = "<group>"; };
 		F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuerySpec.swift; sourceTree = "<group>"; };
+		F08830F81C43944300F530A2 /* ShotOperationRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotOperationRequester.swift; sourceTree = "<group>"; };
 		F092E2171C3A9E9900593D18 /* Defines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defines.swift; sourceTree = "<group>"; };
 		F092E2191C3AA3A600593D18 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		F092E25B1C3FD3DA00593D18 /* StoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				5E4857B41C2805E10027B38A /* Authentication */,
 				F092E26A1C3FD6F900593D18 /* ShotChangeSynchronizer.swift */,
+				F08830F81C43944300F530A2 /* ShotOperationRequester.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -981,6 +984,7 @@
 				5E4857BA1C2805E10027B38A /* OAuthViewModel.swift in Sources */,
 				F092E2691C3FD66700593D18 /* BucketsLocalStorage.swift in Sources */,
 				5E5082101C313DFF00093191 /* AutoScrollableCollectionViewCell.swift in Sources */,
+				F08830F91C43944300F530A2 /* ShotOperationRequester.swift in Sources */,
 				5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */,
 				5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
