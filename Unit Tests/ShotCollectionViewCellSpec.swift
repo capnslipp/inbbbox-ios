@@ -16,7 +16,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
 
                 var preferredHeight: CGFloat?
 
-                beforeEach() {
+                beforeEach {
                     preferredHeight = ShotCollectionViewCell.prefferedHeight
                 }
 
@@ -32,7 +32,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
 
                 var reuseIdentifier: String?
 
-                beforeEach() {
+                beforeEach {
                     reuseIdentifier = ShotCollectionViewCell.reuseIdentifier
                 }
 

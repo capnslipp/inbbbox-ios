@@ -61,12 +61,26 @@
 		5EE041B61C34227600657751 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B51C34227600657751 /* CollectionExtension.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
+		BEEE91128CC07599B6159C9B /* PresentationContainerViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9609511F92D73D90336E /* PresentationContainerViewControllerSpec.swift */; };
+		BEEE92C8E32A03FA1F4CCA78 /* PresentationStepMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95ECC4C99903BAECACFE /* PresentationStepMock.swift */; };
 		BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */; };
-		BEEE9447B994CF34F3D5D039 /* InitialShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */; };
+		BEEE930D57B77B35E162CA87 /* InitialShotsPresentationStepSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95A1F30390E6F75A22B0 /* InitialShotsPresentationStepSpec.swift */; };
+		BEEE9329A86A9C9EEDD3E134 /* PresentationStepDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE98C6473799F601D44F32 /* PresentationStepDelegateMock.swift */; };
+		BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9534945990DF5595E62C /* ViewControllerMock.swift */; };
 		BEEE9517436BBAF8AD9E06EB /* InitialShotsAnimationManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */; };
 		BEEE95BCBAB8072AE0F35D42 /* InitialShotsAnimationManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */; };
+		BEEE965DF95B8348E1966D2A /* PresentationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DD3BA8636A4E2FA0DB8 /* PresentationStepViewController.swift */; };
+		BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */; };
+		BEEE99141CA1C0CB35029A26 /* ShotsPresentationStepSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EE133C314D2A8D20075 /* ShotsPresentationStepSpec.swift */; };
+		BEEE9A456A2D2AB48979BD0B /* ShotsPresentationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE94B750A69A310BE31D88 /* ShotsPresentationStep.swift */; };
+		BEEE9B201A2BE95AE1DA5A44 /* InitialShotsPresentationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE96269B1BD7F30D51CF74 /* InitialShotsPresentationStep.swift */; };
+		BEEE9BB6AB9C016670501D87 /* InitialShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE99063076F835B499CBE5 /* InitialShotsCollectionViewControllerSpec.swift */; };
+		BEEE9D19FF31B2C42B9015D5 /* PresentationStepViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9B080291227916092727 /* PresentationStepViewControllerMock.swift */; };
+		BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */; };
 		BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */; };
+		BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */; };
 		BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */; };
+		BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
 		BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961191C1B443E000FC5D8 /* NetworkService.swift */; };
 		BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF69611B1C1B4551000FC5D8 /* Parameters.swift */; };
@@ -122,12 +136,11 @@
 		F092E26B1C3FD6F900593D18 /* ShotOperationSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E26A1C3FD6F900593D18 /* ShotOperationSynchronizer.swift */; };
 		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
-		FF13A05570F8013CFD61C3B7 /* AnimationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A771B3B0C75085522777 /* AnimationStep.swift */; };
-		FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A569D9CAB25C77AF66BB /* ShotsContainerViewController.swift */; };
+		FF13A05570F8013CFD61C3B7 /* PresentationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A771B3B0C75085522777 /* PresentationStep.swift */; };
 		FF13A3C0B9A1786150870E33 /* InitialShotsAnimationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A0AF874643193442C4BE /* InitialShotsAnimationManagerMock.swift */; };
 		FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */; };
-		FF13A6CBD12C4FF17CAFCFDB /* InitialShotsCollectionViewLayoutDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13AB67B01560FFA515D3E1 /* InitialShotsCollectionViewLayoutDelegateMock.swift */; };
-		FF13A7591AD6F59D12F6744D /* AnimationContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A648B5043F21AC510C25 /* AnimationContainerViewController.swift */; };
+		FF13A6CBD12C4FF17CAFCFDB /* PresentationStepViewControllerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13AB67B01560FFA515D3E1 /* PresentationStepViewControllerDelegateMock.swift */; };
+		FF13A7591AD6F59D12F6744D /* PresentationContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A648B5043F21AC510C25 /* PresentationContainerViewController.swift */; };
 		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */; };
 		FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */; };
 		FF13AB2E8D72A9EDF7DB081C /* AsyncWrapperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */; };
@@ -212,12 +225,26 @@
 		5EE041B11C34009300657751 /* FormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterSpec.swift; sourceTree = "<group>"; };
 		5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSourceSpec.swift; sourceTree = "<group>"; };
 		5EE041B51C34227600657751 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		BEEE94B750A69A310BE31D88 /* ShotsPresentationStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsPresentationStep.swift; sourceTree = "<group>"; };
+		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewController.swift; sourceTree = "<group>"; };
-		BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InitialShotsCollectionViewControllerSpec.swift; path = "Unit Tests/InitialShotsCollectionViewControllerSpec.swift"; sourceTree = "<group>"; };
+		BEEE95A1F30390E6F75A22B0 /* InitialShotsPresentationStepSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsPresentationStepSpec.swift; sourceTree = "<group>"; };
+		BEEE95ECC4C99903BAECACFE /* PresentationStepMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStepMock.swift; sourceTree = "<group>"; };
+		BEEE9609511F92D73D90336E /* PresentationContainerViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationContainerViewControllerSpec.swift; sourceTree = "<group>"; };
+		BEEE96269B1BD7F30D51CF74 /* InitialShotsPresentationStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsPresentationStep.swift; sourceTree = "<group>"; };
 		BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayoutSpec.swift; sourceTree = "<group>"; };
+		BEEE98C6473799F601D44F32 /* PresentationStepDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStepDelegateMock.swift; sourceTree = "<group>"; };
+		BEEE99063076F835B499CBE5 /* InitialShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
+		BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
+		BEEE9B080291227916092727 /* PresentationStepViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStepViewControllerMock.swift; sourceTree = "<group>"; };
+		BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsAnimationManagerSpec.swift; sourceTree = "<group>"; };
+		BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterMock.swift; sourceTree = "<group>"; };
+		BEEE9DD3BA8636A4E2FA0DB8 /* PresentationStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStepViewController.swift; sourceTree = "<group>"; };
 		BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
+		BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenterSpec.swift; sourceTree = "<group>"; };
 		BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsAnimationManagerDelegateMock.swift; sourceTree = "<group>"; };
+		BEEE9EE133C314D2A8D20075 /* ShotsPresentationStepSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsPresentationStepSpec.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BF69611B1C1B4551000FC5D8 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
@@ -280,14 +307,13 @@
 		FF13A1A2161AE07748341642 /* AsyncWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapper.swift; sourceTree = "<group>"; };
 		FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutSpec.swift; sourceTree = "<group>"; };
-		FF13A569D9CAB25C77AF66BB /* ShotsContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsContainerViewController.swift; sourceTree = "<group>"; };
 		FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellSpec.swift; sourceTree = "<group>"; };
-		FF13A648B5043F21AC510C25 /* AnimationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationContainerViewController.swift; sourceTree = "<group>"; };
+		FF13A648B5043F21AC510C25 /* PresentationContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationContainerViewController.swift; sourceTree = "<group>"; };
 		FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewMock.swift; sourceTree = "<group>"; };
 		FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapperMock.swift; sourceTree = "<group>"; };
-		FF13A771B3B0C75085522777 /* AnimationStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationStep.swift; sourceTree = "<group>"; };
+		FF13A771B3B0C75085522777 /* PresentationStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStep.swift; sourceTree = "<group>"; };
 		FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
-		FF13AB67B01560FFA515D3E1 /* InitialShotsCollectionViewLayoutDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutDelegateMock.swift; sourceTree = "<group>"; };
+		FF13AB67B01560FFA515D3E1 /* PresentationStepViewControllerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStepViewControllerDelegateMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +339,6 @@
 		005A401FFFA8DAC0C198A001 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BEEE9616FFED5D700F021C1C /* InitialShotsCollectionViewControllerSpec.swift */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -447,6 +472,11 @@
 				F08830FA1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift */,
 				F08830FE1C43C7A100F530A2 /* BucketsLocalStorageSpec.swift */,
 				F08831001C43CE0D00F530A2 /* ShotOperationHistoryStorageSpec.swift */,
+				BEEE99063076F835B499CBE5 /* InitialShotsCollectionViewControllerSpec.swift */,
+				BEEE95A1F30390E6F75A22B0 /* InitialShotsPresentationStepSpec.swift */,
+				BEEE9EE133C314D2A8D20075 /* ShotsPresentationStepSpec.swift */,
+				BEEE9609511F92D73D90336E /* PresentationContainerViewControllerSpec.swift */,
+				BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -486,6 +516,7 @@
 				BF6A6E051C1ED147001EDAB8 /* ViewModels */,
 				FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */,
 				F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */,
+				BEEE9D28210EBE9978F3CCF1 /* Presentation Steps */,
 			);
 			path = "Source Files";
 			sourceTree = "<group>";
@@ -587,8 +618,7 @@
 				F09307C71C240609005F5111 /* SettingsViewController.swift */,
 				F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */,
 				BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */,
-				FF13A569D9CAB25C77AF66BB /* ShotsContainerViewController.swift */,
-				FF13A648B5043F21AC510C25 /* AnimationContainerViewController.swift */,
+				FF13A648B5043F21AC510C25 /* PresentationContainerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -600,6 +630,15 @@
 				F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		BEEE9D28210EBE9978F3CCF1 /* Presentation Steps */ = {
+			isa = PBXGroup;
+			children = (
+				BEEE96269B1BD7F30D51CF74 /* InitialShotsPresentationStep.swift */,
+				BEEE94B750A69A310BE31D88 /* ShotsPresentationStep.swift */,
+			);
+			path = "Presentation Steps";
 			sourceTree = "<group>";
 		};
 		BF47EE2B1B4BBAF8002822D7 /* Extensions */ = {
@@ -625,7 +664,9 @@
 				5A4005DF1C2418760010A500 /* HeightAware.swift */,
 				F0863DC11C23F3C10062EA21 /* StringConvertible.swift */,
 				F0863DC31C23F3DB0062EA21 /* Reusable.swift */,
-				FF13A771B3B0C75085522777 /* AnimationStep.swift */,
+				FF13A771B3B0C75085522777 /* PresentationStep.swift */,
+				BEEE9DD3BA8636A4E2FA0DB8 /* PresentationStepViewController.swift */,
+				BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -687,6 +728,7 @@
 			children = (
 				BF95084F1C1F0F7E00E39242 /* Formatter.swift */,
 				FF13A1A2161AE07748341642 /* AsyncWrapper.swift */,
+				BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -713,11 +755,16 @@
 			isa = PBXGroup;
 			children = (
 				FF13A0AF874643193442C4BE /* InitialShotsAnimationManagerMock.swift */,
-				FF13AB67B01560FFA515D3E1 /* InitialShotsCollectionViewLayoutDelegateMock.swift */,
+				FF13AB67B01560FFA515D3E1 /* PresentationStepViewControllerDelegateMock.swift */,
 				FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */,
 				BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */,
 				5EC0A7B61C35668100846975 /* MockLoginService.swift */,
 				FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */,
+				BEEE98C6473799F601D44F32 /* PresentationStepDelegateMock.swift */,
+				BEEE95ECC4C99903BAECACFE /* PresentationStepMock.swift */,
+				BEEE9B080291227916092727 /* PresentationStepViewControllerMock.swift */,
+				BEEE9534945990DF5595E62C /* ViewControllerMock.swift */,
+				BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -1019,11 +1066,15 @@
 				FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewLayout.swift in Sources */,
 				BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */,
 				BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */,
-				FF13A30FACD0CA1D8290E6F6 /* ShotsContainerViewController.swift in Sources */,
 				FF13AD5BDAA038D06F3CDFD2 /* AsyncWrapper.swift in Sources */,
 				5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */,
-				FF13A05570F8013CFD61C3B7 /* AnimationStep.swift in Sources */,
-				FF13A7591AD6F59D12F6744D /* AnimationContainerViewController.swift in Sources */,
+				FF13A05570F8013CFD61C3B7 /* PresentationStep.swift in Sources */,
+				FF13A7591AD6F59D12F6744D /* PresentationContainerViewController.swift in Sources */,
+				BEEE9B201A2BE95AE1DA5A44 /* InitialShotsPresentationStep.swift in Sources */,
+				BEEE965DF95B8348E1966D2A /* PresentationStepViewController.swift in Sources */,
+				BEEE9A456A2D2AB48979BD0B /* ShotsPresentationStep.swift in Sources */,
+				BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */,
+				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,7 +1103,7 @@
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
 				F08830F51C3FF42600F530A2 /* AddToBucketQuerySpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* InitialShotsAnimationManagerMock.swift in Sources */,
-				FF13A6CBD12C4FF17CAFCFDB /* InitialShotsCollectionViewLayoutDelegateMock.swift in Sources */,
+				FF13A6CBD12C4FF17CAFCFDB /* PresentationStepViewControllerDelegateMock.swift in Sources */,
 				FF13AF11CAA2BAB3EFD369E2 /* ShotsCollectionViewControllerSpec.swift in Sources */,
 				5EC0A7B51C35634800846975 /* OAuthViewModelSpec.swift in Sources */,
 				5E0D773D1C3BE475002191A7 /* UserSpec.swift in Sources */,
@@ -1067,6 +1118,16 @@
 				BEEE95BCBAB8072AE0F35D42 /* InitialShotsAnimationManagerDelegateMock.swift in Sources */,
 				F08831011C43CE0D00F530A2 /* ShotOperationHistoryStorageSpec.swift in Sources */,
 				FF13AB2E8D72A9EDF7DB081C /* AsyncWrapperMock.swift in Sources */,
+				BEEE9BB6AB9C016670501D87 /* InitialShotsCollectionViewControllerSpec.swift in Sources */,
+				BEEE930D57B77B35E162CA87 /* InitialShotsPresentationStepSpec.swift in Sources */,
+				BEEE9329A86A9C9EEDD3E134 /* PresentationStepDelegateMock.swift in Sources */,
+				BEEE99141CA1C0CB35029A26 /* ShotsPresentationStepSpec.swift in Sources */,
+				BEEE91128CC07599B6159C9B /* PresentationContainerViewControllerSpec.swift in Sources */,
+				BEEE92C8E32A03FA1F4CCA78 /* PresentationStepMock.swift in Sources */,
+				BEEE9D19FF31B2C42B9015D5 /* PresentationStepViewControllerMock.swift in Sources */,
+				BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */,
+				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,
+				BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

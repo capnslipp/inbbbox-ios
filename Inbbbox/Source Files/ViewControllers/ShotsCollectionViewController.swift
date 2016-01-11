@@ -4,11 +4,13 @@
 
 import UIKit
 
-final class ShotsCollectionViewController: UICollectionViewController {
+final class ShotsCollectionViewController: UICollectionViewController, PresentationStepViewController {
+
+    weak var presentationStepViewControllerDelegate: PresentationStepViewControllerDelegate?
 
 //    MARK: - Life cycle
 
-    @available(*, unavailable, message="Use init() or init(collectionViewLayout:) instead")
+    @available(*, unavailable, message = "Use init() or init(collectionViewLayout:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -26,11 +28,13 @@ final class ShotsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let collectionView = collectionView {
-            collectionView.backgroundColor = UIColor.whiteColor()
-            collectionView.pagingEnabled = true
-            collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
+        guard let collectionView = collectionView else {
+            return
         }
+
+        collectionView.backgroundColor = UIColor.backgroundGrayColor()
+        collectionView.pagingEnabled = true
+        collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
     }
 
     override func viewWillLayoutSubviews() {
@@ -48,5 +52,11 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    }
+
+//    MARK: - PresentationStepViewController
+
+    var viewController: UIViewController {
+        return self
     }
 }

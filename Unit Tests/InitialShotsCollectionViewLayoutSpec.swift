@@ -15,7 +15,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
         var sut: InitialShotsCollectionViewLayout?
         var collectionViewMock: CollectionViewMock?
 
-        beforeEach() {
+        beforeEach {
             sut = InitialShotsCollectionViewLayout()
             collectionViewMock = CollectionViewMock(frame: CGRectZero, collectionViewLayout: sut!)
         }
@@ -30,7 +30,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
                 var contentSize: CGSize?
 
-                beforeEach() {
+                beforeEach {
                     collectionViewMock!.bounds = CGRect(x: 0, y: 0, width: 42, height: 666)
                     contentSize = sut!.collectionViewContentSize()
                 }
@@ -44,14 +44,14 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
                 var layoutAttributes: [UICollectionViewLayoutAttributes]?
 
-                beforeEach() {
+                beforeEach {
                     collectionViewMock!.bounds = CGRect(x: 0, y: 0, width: 200, height: 200)
                     collectionViewMock!.center = CGPoint(x: 100, y: 100)
                 }
 
                 context("when collection view has 2 items in first section") {
 
-                    beforeEach() {
+                    beforeEach {
                         collectionViewMock!.numberOfItemsInSectionStub.on(equals(0), returnValue: 2)
                         layoutAttributes = sut!.layoutAttributesForElementsInRect(CGRectZero)
                     }
@@ -64,7 +64,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
                         var firstItemLayoutAttributes: UICollectionViewLayoutAttributes?
 
-                        beforeEach() {
+                        beforeEach {
                             firstItemLayoutAttributes = layoutAttributes![0]
                         }
 
@@ -85,7 +85,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
                         var firstItemLayoutAttributes: UICollectionViewLayoutAttributes?
 
-                        beforeEach() {
+                        beforeEach {
                             firstItemLayoutAttributes = layoutAttributes![1]
                         }
 
@@ -108,7 +108,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
                 var boundsChanged: Bool?
 
-                beforeEach() {
+                beforeEach {
                     collectionViewMock!.bounds = CGRect(x: 0, y: 0, width: 100, height: 200)
                     boundsChanged = sut!.shouldInvalidateLayoutForBoundsChange(CGRect(x: 0, y: 0, width: 200, height: 100))
                 }
@@ -122,7 +122,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
                 var initialLayoutAttributes: UICollectionViewLayoutAttributes?
 
-                beforeEach() {
+                beforeEach {
                     collectionViewMock!.bounds = CGRect(x: 0, y: 0, width: 200, height: 200)
                     collectionViewMock!.center = CGPoint(x: 100, y: 100)
                     collectionViewMock!.numberOfItemsInSectionStub.on(0, returnValue: 1)
@@ -146,7 +146,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
                 var finalLayoutAttributes: UICollectionViewLayoutAttributes?
 
-                beforeEach() {
+                beforeEach {
                     collectionViewMock!.bounds = CGRect(x: 0, y: 0, width: 200, height: 200)
                     collectionViewMock!.center = CGPoint(x: 100, y: 100)
                     collectionViewMock!.numberOfItemsInSectionStub.on(0, returnValue: 1)

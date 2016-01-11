@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = LoginViewController()
         window!.makeKeyAndVisible()
@@ -24,11 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-    
+
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
         // NGRTodo: start loading images from Dribbble, but first, check if notificationID == currentUserID
     }
-    
+
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
         NSNotificationCenter.defaultCenter().postNotificationName(NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
     }

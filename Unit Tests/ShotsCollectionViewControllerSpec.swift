@@ -11,9 +11,9 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
     override func spec() {
 
-        var sut: ShotsCollectionViewController?
+        var sut: ShotsCollectionViewController!
 
-        beforeEach() {
+        beforeEach {
             sut = ShotsCollectionViewController()
         }
 
@@ -22,25 +22,25 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
         }
 
         it("should have shots collection view flow layout") {
-            expect(sut!.collectionViewLayout).to(beAKindOf(ShotsCollectionViewFlowLayout))
+            expect(sut.collectionViewLayout).to(beAKindOf(ShotsCollectionViewFlowLayout))
         }
 
         describe("when view did load") {
 
-            beforeEach() {
-                sut!.view
+            beforeEach {
+                sut.view
             }
 
             describe("collection view") {
 
-                var collectionView: UICollectionView?
+                var collectionView: UICollectionView!
 
-                beforeEach() {
-                    collectionView = sut!.collectionView
+                beforeEach {
+                    collectionView = sut.collectionView
                 }
 
                 it("should have paging enabled") {
-                    expect(collectionView!.pagingEnabled).to(beTruthy())
+                    expect(collectionView.pagingEnabled).to(beTruthy())
                 }
             }
         }
@@ -49,14 +49,30 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
             describe("cell for item at index path") {
 
-                var item: UICollectionViewCell?
+                var item: UICollectionViewCell!
 
-                beforeEach(){
-                    item = sut!.collectionView(sut!.collectionView!, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+                beforeEach{
+                    item = sut.collectionView(sut.collectionView!, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
                 }
 
                 it("should dequeue shot collection view cell"){
-                    expect(item!).to(beAKindOf(ShotCollectionViewCell))
+                    expect(item).to(beAKindOf(ShotCollectionViewCell))
+                }
+            }
+        }
+
+        describe("presentation step view controller") {
+
+            describe("view controller") {
+
+                var viewController: UIViewController!
+
+                beforeEach {
+                    viewController = sut.viewController
+                }
+
+                it("should return initial shots collection view controller") {
+                    expect(viewController).to(equal(sut))
                 }
             }
         }

@@ -13,7 +13,7 @@ class ShotsCollectionViewFlowLayoutSpec: QuickSpec {
         var sut: ShotsCollectionViewFlowLayout?
         var collectionView: UICollectionView?
 
-        beforeEach() {
+        beforeEach {
             sut = ShotsCollectionViewFlowLayout()
             collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: sut!)
         }
@@ -24,7 +24,7 @@ class ShotsCollectionViewFlowLayoutSpec: QuickSpec {
 
         describe("prepare layout") {
 
-            beforeEach() {
+            beforeEach {
                 collectionView!.bounds = CGRect(x: 0, y: 0, width: 500, height: 500)
                 sut!.prepareLayout()
             }
