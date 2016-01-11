@@ -8,13 +8,13 @@ class DefaultViewControllerPresenter: ViewControllerPresenter {
 
     private(set) weak var presentingViewController: UIViewController?
 
-    init(presentingViewController presentingViewController: UIViewController) {
+    init(presentingViewController: UIViewController) {
         self.presentingViewController = presentingViewController
     }
 
 //    MARK: - ViewControllerPresenter
 
-    func presentViewController(viewController: UIViewController, animated animated: Bool, completion: (() -> Void)?) {
+    func presentViewController(viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
         presentingViewController?.presentViewController(viewController, animated: animated, completion: completion)
     }
 

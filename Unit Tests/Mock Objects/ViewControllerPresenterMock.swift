@@ -14,7 +14,7 @@ class ViewControllerPresenterMock: ViewControllerPresenter {
 
 //    MARK: - ViewControllerPresenter
 
-    func presentViewController(viewControllerToPresent: UIViewController, animated animated: Bool, completion: (() -> Void)?) {
+    func presentViewController(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?) {
         try! presentViewControllerStub.invoke(viewControllerToPresent, animated, completion)
     }
 

@@ -6,7 +6,7 @@ import UIKit
 
 protocol ViewControllerPresenter {
 
-    func presentViewController(viewControllerToPresent: UIViewController, animated animated: Bool, completion: (() -> Void)?)
+    func presentViewController(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?)
 
     func dismissViewControllerAnimated(animated: Bool, completion: (() -> Void)?)
 }

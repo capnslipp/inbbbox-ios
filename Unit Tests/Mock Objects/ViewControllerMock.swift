@@ -14,7 +14,7 @@ class ViewControllerMock: UIViewController {
 
 //    MARK: - UIViewControlelr
 
-    override func presentViewController(viewControllerToPresent: UIViewController, animated animated: Bool, completion: (() -> Void)?) {
+    override func presentViewController(viewControllerToPresent: UIViewController, animated: Bool, completion: (() -> Void)?) {
         try! presentViewControllerStub.invoke(viewControllerToPresent, animated, completion)
     }
 

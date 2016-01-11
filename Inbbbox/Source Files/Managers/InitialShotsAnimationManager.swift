@@ -47,7 +47,6 @@ class InitialShotsAnimationManager {
     private func deleteItemsWithoutFirstItem(items: [AnyObject], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
         var reversedItemsWithoutFirstItem = items
         reversedItemsWithoutFirstItem.removeFirst()
-        reversedItemsWithoutFirstItem.reverse()
 
         let removeItemAnimation = {
             let lastItemIndex = self.visibleItems.count - 1

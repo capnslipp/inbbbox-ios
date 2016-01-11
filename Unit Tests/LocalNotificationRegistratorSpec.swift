@@ -47,7 +47,7 @@ class LocalNotificationRegistratorSpec: QuickSpec {
                     
                     it("notification should have notificationID same as userID") {
                         let userInfo = localNotification!.userInfo!
-                        expect(userInfo["notificationID"] as! String).to(equal(fixtureUserID))
+                        expect(userInfo["notificationID"] as? String).to(equal(fixtureUserID))
                     }
                     
                 } else {
