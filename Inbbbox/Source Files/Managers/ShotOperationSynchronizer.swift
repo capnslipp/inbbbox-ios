@@ -14,7 +14,9 @@ final class ShotOperationSynchronizer {
     class func synchronize() throws {
         
         do {
-            if let shotOperations = try ShotOperationHistoryStorage.allRecords() {
+            let shotOperationHistoryStorage = ShotOperationHistoryStorage()
+            
+            if let shotOperations = try shotOperationHistoryStorage.allRecords() {
                 
                 var promise = Promise<Void>()
                 
@@ -33,7 +35,7 @@ final class ShotOperationSynchronizer {
                     }
                 }
                 
-                try ShotOperationHistoryStorage.clearHistory()
+                try shotOperationHistoryStorage.clearHistory()
                 
                 try ShotsLocalStorage().clear()
             }

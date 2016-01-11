@@ -11,7 +11,7 @@ import CoreData
 
 final class ShotOperationHistoryStorage {
     
-    private static let EntityName = "ShotChange"
+    private let EntityName = "ShotOperation"
     
     private enum Attribute: String {
         case ShotID = "shot_id"
@@ -19,12 +19,18 @@ final class ShotOperationHistoryStorage {
         case BucketID = "bucket_id"
     }
     
-    private static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    private static let managedContext = appDelegate.managedObjectContext
-    private static let entity = NSEntityDescription.entityForName(EntityName, inManagedObjectContext: managedContext)
-    private static let fetchRequest = NSFetchRequest(entityName: EntityName)
+    private let entity: NSEntityDescription!
+    private let fetchRequest: NSFetchRequest!
     
-    class func insertRecord(shotID: Int, operation: ShotOperationType, bucketID: Int? = nil) throws {
+    var managedContext: NSManagedObjectContext!
+    
+    init(managedContext: NSManagedObjectContext? = nil) {
+        self.managedContext = managedContext ?? (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        entity = NSEntityDescription.entityForName(EntityName, inManagedObjectContext: self.managedContext)
+        fetchRequest = NSFetchRequest(entityName: EntityName)
+    }
+    
+    func insertRecord(shotID: Int, operation: ShotOperationType, bucketID: Int? = nil) throws {
         
         let changeRecord = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         
@@ -38,12 +44,12 @@ final class ShotOperationHistoryStorage {
         }
     }
     
-    class func allRecords() throws -> Array<ShotOperation>? {
+    func allRecords() throws -> [ShotOperation]? {
         
         do {
             guard let results = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] else { return nil }
             
-            var changeHistory = Array<ShotOperation>()
+            var changeHistory = [ShotOperation]()
             
             _ = results.map {
                 changeHistory.append(ShotOperation(shotID: $0.valueForKey(Attribute.ShotID.rawValue) as! Int, operation: ShotOperationType(rawValue: $0.valueForKey(Attribute.OperationType.rawValue) as! Int)!, bucketID: $0.valueForKey(Attribute.BucketID.rawValue) as? Int))
@@ -56,7 +62,7 @@ final class ShotOperationHistoryStorage {
         }
     }
     
-    class func clearHistory() throws {
+    func clearHistory() throws {
         
         do {
             if let objects = try! managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
