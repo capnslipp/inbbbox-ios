@@ -10,3 +10,5 @@
 
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) ENV_STAGING
 OTHER_SWIFT_FLAGS = $(inherited) -D ENV_STAGING
+PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.staging
+PRODUCT_NAME = Inbbbox Staging

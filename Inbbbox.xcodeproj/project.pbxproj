@@ -178,7 +178,7 @@
 		5E147CB81AA8B2DC00EDD97C /* Unit-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit-Tests-Info.plist"; path = "Supporting Files/Unit-Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
 		5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
-		5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbbbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E3A97E81AA72F0A00CE2F20 /* Inbbbox Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Inbbbox Development.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		5E3A98481AA73FD500CE2F20 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -382,7 +382,7 @@
 		5E3A97E91AA72F0A00CE2F20 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */,
+				5E3A97E81AA72F0A00CE2F20 /* Inbbbox Development.app */,
 				5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */,
 			);
 			name = Products;
@@ -790,7 +790,7 @@
 			);
 			name = Inbbbox;
 			productName = Project;
-			productReference = 5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */;
+			productReference = 5E3A97E81AA72F0A00CE2F20 /* Inbbbox Development.app */;
 			productType = "com.apple.product-type.application";
 		};
 		5E3A98351AA73A6500CE2F20 /* Unit Tests */ = {
@@ -1236,8 +1236,8 @@
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox;
-				PRODUCT_NAME = Inbbbox;
+				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_NAME = $PRODUCT_NAME;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1257,8 +1257,8 @@
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox;
-				PRODUCT_NAME = Inbbbox;
+				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_NAME = $PRODUCT_NAME;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1362,8 +1362,8 @@
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox;
-				PRODUCT_NAME = Inbbbox;
+				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_NAME = $PRODUCT_NAME;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1442,8 +1442,8 @@
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox;
-				PRODUCT_NAME = Inbbbox;
+				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_NAME = $PRODUCT_NAME;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

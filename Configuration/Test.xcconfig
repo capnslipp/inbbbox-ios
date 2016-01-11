@@ -10,3 +10,5 @@
 
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) ENV_TEST
 OTHER_SWIFT_FLAGS = $(inherited) -D ENV_TEST
+PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.test
+PRODUCT_NAME = Inbbbox Test
