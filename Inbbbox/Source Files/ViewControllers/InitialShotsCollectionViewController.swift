@@ -7,8 +7,10 @@ import UIKit
 final class InitialShotsCollectionViewController: UICollectionViewController, InitialShotsAnimationManagerDelegate, PresentationStepViewController {
 
     weak var presentationStepViewControllerDelegate: PresentationStepViewControllerDelegate?
-    var shots = ["shot1", "shot2", "shot3"]
     var animationManager = InitialShotsAnimationManager()
+
+//    NGRTemp: temporary implementation - remove after adding real shots
+    var shots = ["shot1", "shot2", "shot3"]
 
 //    MARK: - Life cycle
 

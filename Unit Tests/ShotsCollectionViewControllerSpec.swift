@@ -13,7 +13,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
         var sut: ShotsCollectionViewController!
 
-        beforeEach() {
+        beforeEach {
             sut = ShotsCollectionViewController()
         }
 
@@ -27,7 +27,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
         describe("when view did load") {
 
-            beforeEach() {
+            beforeEach {
                 sut.view
             }
 
@@ -35,7 +35,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
                 var collectionView: UICollectionView!
 
-                beforeEach() {
+                beforeEach {
                     collectionView = sut.collectionView
                 }
 
@@ -51,7 +51,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
                 var item: UICollectionViewCell!
 
-                beforeEach(){
+                beforeEach{
                     item = sut.collectionView(sut.collectionView!, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
                 }
 

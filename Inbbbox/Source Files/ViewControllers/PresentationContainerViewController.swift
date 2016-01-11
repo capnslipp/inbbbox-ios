@@ -7,6 +7,12 @@ import UIKit
 class PresentationContainerViewController: UIViewController, PresentationStepDelegate {
 
     var presentationSteps = [PresentationStep]()
+    var viewControllerPresenter: ViewControllerPresenter?
+
+    convenience init() {
+        self.init(nibName: nil, bundle: nil)
+        self.viewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
+    }
 
 //    MARK: - UIViewController
 
@@ -17,8 +23,7 @@ class PresentationContainerViewController: UIViewController, PresentationStepDel
             return
         }
 
-        firstPresentationStep.presentationStepDelegate = self
-        addChildPresentationStepViewController(firstPresentationStep.presentationStepViewController)
+        presentStep(firstPresentationStep)
     }
 
 //    MARK: - PresentationStepDelegate
@@ -30,22 +35,21 @@ class PresentationContainerViewController: UIViewController, PresentationStepDel
             return
         }
         let nextPresentationStepIndex = presentationStepIndex + 1
-        if presentationSteps.count == nextPresentationStepIndex {
-            return
-        }
 
         let nextPresentationStep = presentationSteps[nextPresentationStepIndex]
-        nextPresentationStep.presentationStepDelegate = self
-        addChildPresentationStepViewController(nextPresentationStep.presentationStepViewController)
+        presentStep(nextPresentationStep)
     }
 
 //    MARK: - Helpers
 
-    private func removeChildPresentationStepViewController(presentationStepViewController: PresentationStepViewController) {
-        let viewController = presentationStepViewController.viewController
-        viewController.willMoveToParentViewController(nil)
-        viewController.view.removeFromSuperview()
-        viewController.removeFromParentViewController()
+    private func presentStep(presentationStep: PresentationStep) {
+        let presentationStepViewController = presentationStep.presentationStepViewController
+        if presentationSteps.last === presentationStep {
+            self.viewControllerPresenter?.presentViewController(presentationStepViewController.viewController, animated: false, completion: nil)
+        } else {
+            presentationStep.presentationStepDelegate = self
+            addChildPresentationStepViewController(presentationStepViewController)
+        }
     }
 
     private func addChildPresentationStepViewController(presentationStepViewController: PresentationStepViewController) {
@@ -55,5 +59,12 @@ class PresentationContainerViewController: UIViewController, PresentationStepDel
         addChildViewController(viewController)
         view.addSubview(viewController.view)
         viewController.didMoveToParentViewController(self)
+    }
+
+    private func removeChildPresentationStepViewController(presentationStepViewController: PresentationStepViewController) {
+        let viewController = presentationStepViewController.viewController
+        viewController.willMoveToParentViewController(nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParentViewController()
     }
 }

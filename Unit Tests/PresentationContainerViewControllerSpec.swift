@@ -44,6 +44,10 @@ class PresentationContainerViewControllerSpec: QuickSpec {
             sut = nil
         }
 
+        it("should have default view controller presenter") {
+            expect(sut.viewControllerPresenter is DefaultViewControllerPresenter).to(beTruthy())
+        }
+
         describe("view did load") {
 
             beforeEach {
@@ -67,7 +71,20 @@ class PresentationContainerViewControllerSpec: QuickSpec {
 
             describe("presentation step did finish") {
 
+                var viewControllerPresenterMock: ViewControllerPresenterMock!
+
+                var capturedPresentedViewController: UIViewController!
+                var capturedAnimated: Bool!
+                var capturedCompletion: (() -> Void)!
+
                 beforeEach {
+                    viewControllerPresenterMock = ViewControllerPresenterMock()
+                    viewControllerPresenterMock.presentViewControllerStub.on(any()) { presentedViewController, animated, completion in
+                        capturedPresentedViewController = presentedViewController
+                        capturedAnimated = animated
+                        capturedCompletion = completion
+                    }
+                    sut.viewControllerPresenter = viewControllerPresenterMock
                     let _ = sut.view
                     sut.presentationStepDidFinish(firstPresentationStepMock)
                 }
@@ -80,16 +97,19 @@ class PresentationContainerViewControllerSpec: QuickSpec {
                     expect(sut.view.subviews).toNot(contain(firstFixtureViewController.view))
                 }
 
-                it("should set second presentation step delegate to presentation container view controller") {
-                    expect(secondPresentationStepMock.presentationStepDelegate === sut).to(beTruthy())
-                }
+                context("when second step is the last step") {
 
-                it("should add second presentation step view controller to child view controllers") {
-                    expect(sut.childViewControllers).to(contain(secondFixtureViewController))
-                }
+                    it("should present proper view controller") {
+                        expect(capturedPresentedViewController).to(equal(secondFixtureViewController))
+                    }
 
-                it("should add second presentation step view controller view to view subviews") {
-                    expect(sut.view.subviews).to(contain(secondFixtureViewController.view))
+                    it("should present view controller without animation") {
+                        expect(capturedAnimated).to(beFalsy())
+                    }
+
+                    it("should present view controller without completion") {
+                        expect(capturedCompletion).to(beNil())
+                    }
                 }
             }
         }
