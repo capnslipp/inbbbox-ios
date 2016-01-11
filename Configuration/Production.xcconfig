@@ -11,4 +11,3 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) ENV_PRODUCTION
 OTHER_SWIFT_FLAGS = $(inherited) -D ENV_PRODUCTION
 PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.production
-PRODUCT_NAME = Inbbbox Production
