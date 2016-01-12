@@ -8,11 +8,11 @@ class TabBarAnimationView: UIView {
 
 //    MARK: - Life cycle
 
-    let tabBar = UITabBar.newAutoLayoutView()
+    let tabBar = CenterButtonTabBarView()
     private(set) var tabBarVerticalConstraint: NSLayoutConstraint?
     private var didSetConstraints = false
 
-    @available(*, unavailable, message = "Use init() or init(collectionViewLayout:) instead")
+    @available(*, unavailable, message = "Use init() or init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -21,9 +21,11 @@ class TabBarAnimationView: UIView {
         super.init(frame: frame)
 
         backgroundColor = UIColor.backgroundGrayColor()
-
+        tabBar.translatesAutoresizingMaskIntoConstraints = false
         addSubview(tabBar)
     }
+
+//    MARK: - UIView
 
     override class func requiresConstraintBasedLayout() -> Bool {
         return true

@@ -19,7 +19,6 @@ class TabBarAnimationViewController: UIViewController, PresentationStepViewContr
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
 //        NGRTemp: temporary implementation
 
         let tabBarHeight = tabBarAnimationView.tabBar.intrinsicContentSize().height
@@ -28,7 +27,7 @@ class TabBarAnimationViewController: UIViewController, PresentationStepViewContr
         UIView.animateWithDuration(1, animations: {
             self.tabBarAnimationView.layoutIfNeeded()
         }, completion: { finished in
-            self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
+//            self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
         })
     }
 
