@@ -24,13 +24,19 @@ class CenterButtonTabBarView: UITabBar {
         let centerButtonPlaceholderTabBarItem = UITabBarItem(title: nil, image: nil, selectedImage: nil)
         let followingTabBarItem = UITabBarItem(title: "Following", image: UIImage(named: "ic-following"), selectedImage: UIImage(named: "ic-following-active"))
         let accountTabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "ic-account"), selectedImage: UIImage(named: "ic-account-active"))
-        self.items = [likesTabBarItem, bucketsTabBarItem, centerButtonPlaceholderTabBarItem, followingTabBarItem, accountTabBarItem]
+        items = [likesTabBarItem, bucketsTabBarItem, centerButtonPlaceholderTabBarItem, followingTabBarItem, accountTabBarItem]
 
         centerButton.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(centerButton)
+        addSubview(centerButton)
     }
 
 //    MARK: - UIView
+
+    override func addSubview(view: UIView) {
+        super.addSubview(view)
+
+        bringSubviewToFront(centerButton)
+    }
 
     override class func requiresConstraintBasedLayout() -> Bool {
         return true

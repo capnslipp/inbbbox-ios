@@ -18,6 +18,7 @@ class RoundedButton: UIButton {
         super.init(frame: frame)
 //        NGRTemp: temporary implementation
         setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
+        backgroundColor = UIColor.yellowColor()
     }
 
 //    MARK: - UIView
