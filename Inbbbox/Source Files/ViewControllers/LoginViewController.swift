@@ -77,7 +77,7 @@ class LoginViewController: UIViewController {
     func loginAsGuestButtonDidTap(_: UIButton) {
 //        NGRTemp: temporary implementation
         let containerViewController = PresentationContainerViewController()
-        containerViewController.presentationSteps = [InitialShotsPresentationStep(), ShotsPresentationStep()]
+        containerViewController.presentationSteps = [TabBarAnimationPresentationStep(), InitialShotsPresentationStep(), ShotsPresentationStep()]
         presentViewController(containerViewController, animated: false, completion: nil)
     }
 }

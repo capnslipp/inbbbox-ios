@@ -54,10 +54,10 @@ class PresentationContainerViewController: UIViewController, PresentationStepDel
 
     private func addChildPresentationStepViewController(presentationStepViewController: PresentationStepViewController) {
         let viewController = presentationStepViewController.viewController
-        viewController.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        viewController.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         addChildViewController(viewController)
         view.addSubview(viewController.view)
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        viewController.view.autoPinEdgesToSuperviewEdges()
         viewController.didMoveToParentViewController(self)
     }
 

@@ -62,8 +62,12 @@ class PresentationContainerViewControllerSpec: QuickSpec {
                 expect(sut.childViewControllers).to(contain(firstFixtureViewController))
             }
 
-            it("should add first presentation step view controller view to view subviews") {
+            it("should add first presentation step view controller's view to view subviews") {
                 expect(sut.view.subviews).to(contain(firstFixtureViewController.view))
+            }
+
+            it("should not translate autoresizing mask into constraints for first presentation step view controller's view") {
+                expect(firstFixtureViewController.view.translatesAutoresizingMaskIntoConstraints).to(beFalsy())
             }
         }
 
@@ -93,7 +97,7 @@ class PresentationContainerViewControllerSpec: QuickSpec {
                     expect(sut.childViewControllers).toNot(contain(firstFixtureViewController))
                 }
 
-                it("should remove first presentation step view controller view from view subviews") {
+                it("should remove first presentation step view controller's view from view subviews") {
                     expect(sut.view.subviews).toNot(contain(firstFixtureViewController.view))
                 }
 

@@ -61,6 +61,7 @@
 		5EE041B61C34227600657751 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B51C34227600657751 /* CollectionExtension.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
+		BEEE90CAA4B9E3F0DC786D41 /* TabBarAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE94E8395DC117565E4D67 /* TabBarAnimationViewController.swift */; };
 		BEEE91128CC07599B6159C9B /* PresentationContainerViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9609511F92D73D90336E /* PresentationContainerViewControllerSpec.swift */; };
 		BEEE92C8E32A03FA1F4CCA78 /* PresentationStepMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95ECC4C99903BAECACFE /* PresentationStepMock.swift */; };
 		BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */; };
@@ -70,11 +71,13 @@
 		BEEE9517436BBAF8AD9E06EB /* InitialShotsAnimationManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */; };
 		BEEE95BCBAB8072AE0F35D42 /* InitialShotsAnimationManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */; };
 		BEEE965DF95B8348E1966D2A /* PresentationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DD3BA8636A4E2FA0DB8 /* PresentationStepViewController.swift */; };
+		BEEE9785C69A23D3FC3F3A4B /* TabBarAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9A749C1CA7728C8FE953 /* TabBarAnimationView.swift */; };
 		BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */; };
 		BEEE99141CA1C0CB35029A26 /* ShotsPresentationStepSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EE133C314D2A8D20075 /* ShotsPresentationStepSpec.swift */; };
 		BEEE9A456A2D2AB48979BD0B /* ShotsPresentationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE94B750A69A310BE31D88 /* ShotsPresentationStep.swift */; };
 		BEEE9B201A2BE95AE1DA5A44 /* InitialShotsPresentationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE96269B1BD7F30D51CF74 /* InitialShotsPresentationStep.swift */; };
 		BEEE9BB6AB9C016670501D87 /* InitialShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE99063076F835B499CBE5 /* InitialShotsCollectionViewControllerSpec.swift */; };
+		BEEE9CB46639DD4B9EF06FCD /* TabBarAnimationPresentationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9C1F4187B75C661BFBF2 /* TabBarAnimationPresentationStep.swift */; };
 		BEEE9D19FF31B2C42B9015D5 /* PresentationStepViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9B080291227916092727 /* PresentationStepViewControllerMock.swift */; };
 		BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */; };
 		BEEE9DC8F953235587D79BE0 /* InitialShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */; };
@@ -226,6 +229,7 @@
 		5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSourceSpec.swift; sourceTree = "<group>"; };
 		5EE041B51C34227600657751 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		BEEE94B750A69A310BE31D88 /* ShotsPresentationStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsPresentationStep.swift; sourceTree = "<group>"; };
+		BEEE94E8395DC117565E4D67 /* TabBarAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarAnimationViewController.swift; sourceTree = "<group>"; };
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		BEEE956F0FB69CBAD08E04F8 /* InitialShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		BEEE95A1F30390E6F75A22B0 /* InitialShotsPresentationStepSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsPresentationStepSpec.swift; sourceTree = "<group>"; };
@@ -236,7 +240,9 @@
 		BEEE98C6473799F601D44F32 /* PresentationStepDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStepDelegateMock.swift; sourceTree = "<group>"; };
 		BEEE99063076F835B499CBE5 /* InitialShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
+		BEEE9A749C1CA7728C8FE953 /* TabBarAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarAnimationView.swift; sourceTree = "<group>"; };
 		BEEE9B080291227916092727 /* PresentationStepViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationStepViewControllerMock.swift; sourceTree = "<group>"; };
+		BEEE9C1F4187B75C661BFBF2 /* TabBarAnimationPresentationStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarAnimationPresentationStep.swift; sourceTree = "<group>"; };
 		BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9D82400E6103A1878E7E /* InitialShotsAnimationManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsAnimationManagerSpec.swift; sourceTree = "<group>"; };
 		BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterMock.swift; sourceTree = "<group>"; };
@@ -565,6 +571,7 @@
 				5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */,
 				5E50820D1C3132AF00093191 /* LoginView.swift */,
 				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
+				BEEE9A749C1CA7728C8FE953 /* TabBarAnimationView.swift */,
 			);
 			path = "Controllers View";
 			sourceTree = "<group>";
@@ -637,6 +644,7 @@
 			children = (
 				BEEE96269B1BD7F30D51CF74 /* InitialShotsPresentationStep.swift */,
 				BEEE94B750A69A310BE31D88 /* ShotsPresentationStep.swift */,
+				BEEE9C1F4187B75C661BFBF2 /* TabBarAnimationPresentationStep.swift */,
 			);
 			path = "Presentation Steps";
 			sourceTree = "<group>";
@@ -696,6 +704,7 @@
 				BF6A6E081C1ED166001EDAB8 /* ListViewModel.swift */,
 				BF6A6E0A1C1ED16E001EDAB8 /* GroupedListViewModel.swift */,
 				F09307C91C240656005F5111 /* SettingsViewModel.swift */,
+				BEEE94E8395DC117565E4D67 /* TabBarAnimationViewController.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1075,6 +1084,9 @@
 				BEEE9A456A2D2AB48979BD0B /* ShotsPresentationStep.swift in Sources */,
 				BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */,
 				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
+				BEEE90CAA4B9E3F0DC786D41 /* TabBarAnimationViewController.swift in Sources */,
+				BEEE9785C69A23D3FC3F3A4B /* TabBarAnimationView.swift in Sources */,
+				BEEE9CB46639DD4B9EF06FCD /* TabBarAnimationPresentationStep.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
