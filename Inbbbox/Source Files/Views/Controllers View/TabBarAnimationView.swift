@@ -37,6 +37,7 @@ class TabBarAnimationView: UIView {
             tabBarVerticalConstraint = tabBar.autoPinEdge(.Top, toEdge: .Bottom, ofView: self)
             tabBar.autoPinEdgeToSuperviewEdge(.Left)
             tabBar.autoPinEdgeToSuperviewEdge(.Right)
+            didSetConstraints = true
         }
 
         super.updateConstraints()

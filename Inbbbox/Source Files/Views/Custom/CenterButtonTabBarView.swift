@@ -47,6 +47,7 @@ class CenterButtonTabBarView: UITabBar {
         if !didSetConstraints {
             centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
             centerButton.autoPinEdgeToSuperviewEdge(.Bottom)
+            didSetConstraints = true
         }
 
         super.updateConstraints()
