@@ -19,6 +19,12 @@ class RoundedButton: UIButton {
 //        NGRTemp: temporary implementation
         setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
         backgroundColor = UIColor.yellowColor()
+
+        let maskLayer = CAShapeLayer()
+        let maskRect = CGRect(x: 0, y: 0, width: intrinsicContentSize().width, height: intrinsicContentSize().height)
+        let ovalPath = UIBezierPath(ovalInRect: maskRect)
+        maskLayer.path = ovalPath.CGPath
+        layer.mask = maskLayer
     }
 
 //    MARK: - UIView
