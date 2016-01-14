@@ -18,7 +18,7 @@ class RoundedButton: UIButton {
         super.init(frame: frame)
 //        NGRTemp: temporary implementation
         setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
-        backgroundColor = UIColor.yellowColor()
+        backgroundColor = UIColor.whiteColor()
 
         let maskLayer = CAShapeLayer()
         let maskRect = CGRect(x: 0, y: 0, width: intrinsicContentSize().width, height: intrinsicContentSize().height)
@@ -35,6 +35,6 @@ class RoundedButton: UIButton {
 
     override func intrinsicContentSize() -> CGSize {
 //        NGRTemp: temporary implementation
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: 70, height: 70)
     }
 }
