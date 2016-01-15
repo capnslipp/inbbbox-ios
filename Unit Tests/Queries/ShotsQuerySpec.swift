@@ -14,6 +14,12 @@ import Nimble
 class ShotsQuerySpec: QuickSpec {
     override func spec() {
         
+        SharedQuerySpec.performSpecForQuery( { Void -> Query in
+            return ShotsQuery()
+        }) { Void -> QueryExpectation in
+            return (method: .GET, encoding: .URL, path: "/shots")
+        }
+        
         var sut: ShotsQuery!
         
         beforeEach {
@@ -26,21 +32,6 @@ class ShotsQuerySpec: QuickSpec {
         
         describe("when newly initiliazed") {
             
-            it("should have correct method") {
-                expect(sut.method.rawValue).to(equal("GET"))
-            }
-            
-            it("should have correct path") {
-                expect(sut.path).to(equal("/shots"))
-            }
-            
-            it("should have correct service instance") {
-                expect(sut.service is DribbbleNetworkService).to(beTrue())
-            }
-            
-            it("should have correct parameters encoding") {
-                expect(sut.parameters.encoding).to(equal(Parameters.Encoding.URL))
-            }
             
             it("should have nil list parameter") {
                 expect(sut.list).to(beNil())

@@ -14,6 +14,12 @@ import Nimble
 class LikeQuerySpec: QuickSpec {
     override func spec() {
         
+        SharedQuerySpec.performSpecForQuery( { Void -> Query in
+            return LikeQuery(shotID: "fixture.identifier")
+        }) { Void -> QueryExpectation in
+            return (method: .POST, encoding: .JSON, path: "/shots/fixture.identifier/like")
+        }
+        
         describe("when newly initialized with shot identifier") {
             
             var sut: LikeQuery!
@@ -21,28 +27,14 @@ class LikeQuerySpec: QuickSpec {
             beforeEach {
                 sut = LikeQuery(shotID: "fixture.identifier")
             }
-            
-            it("should have post method") {
-                expect(sut.method.rawValue).to(equal(Method.POST.rawValue))
-            }
-            
-            it("should have path with identifier") {
-                expect(sut.path).to(equal("/shots/fixture.identifier/like"))
-            }
-            
-            it("should have dribbble service") {
-                expect(sut.service is DribbbleNetworkService).to(beTrue())
-            }
-            
-            it("should have parameters with JSON encoding") {
-                expect(sut.parameters.encoding).to(equal(Parameters.Encoding.JSON))
+
+            afterEach {
+                sut = nil
             }
             
             it("should have empty parameters") {
                 expect(sut.parameters.queryItems).to(beEmpty())
             }
-            
         }
-        
     }
 }

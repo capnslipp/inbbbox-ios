@@ -52,8 +52,14 @@
 		5EC0A7B31C3559A200846975 /* AsyncWrapperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B21C3559A200846975 /* AsyncWrapperSpec.swift */; };
 		5EC0A7B51C35634800846975 /* OAuthViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B41C35634800846975 /* OAuthViewModelSpec.swift */; };
 		5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B61C35668100846975 /* MockLoginService.swift */; };
+		5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83201C48DECE00FBCA05 /* AddToBucketQuerySpec.swift */; };
+		5EDB83271C48DECE00FBCA05 /* LikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83211C48DECE00FBCA05 /* LikeQuerySpec.swift */; };
+		5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83221C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift */; };
+		5EDB83291C48DECE00FBCA05 /* ShotsQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83231C48DECE00FBCA05 /* ShotsQuerySpec.swift */; };
+		5EDB832A1C48DECE00FBCA05 /* UnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83241C48DECE00FBCA05 /* UnlikeQuerySpec.swift */; };
+		5EDB832B1C48DECE00FBCA05 /* UserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83251C48DECE00FBCA05 /* UserQuerySpec.swift */; };
+		5EDB832E1C48DF0000FBCA05 /* SharedQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB832D1C48DF0000FBCA05 /* SharedQuerySpec.swift */; };
 		5EDC25F81C32AF680045B759 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDC25F71C32AF680045B759 /* StringExtension.swift */; };
-		5EE041AC1C33E93300657751 /* UserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041AB1C33E93300657751 /* UserQuerySpec.swift */; };
 		5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */; };
 		5EE041B01C33EF9E00657751 /* OAuthAuthorizableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041AF1C33EF9E00657751 /* OAuthAuthorizableSpec.swift */; };
 		5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B11C34009300657751 /* FormatterSpec.swift */; };
@@ -107,11 +113,8 @@
 		BF9508561C1F1BD000E39242 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508551C1F1BD000E39242 /* Shot.swift */; };
 		BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9508571C1F1D8700E39242 /* Mappable.swift */; };
 		BF95085C1C1F208F00E39242 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95085B1C1F208F00E39242 /* User.swift */; };
-		BF95085E1C1F263200E39242 /* ShotsQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */; };
 		BF9508691C1F27F800E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
 		BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95086A1C20790200E39242 /* ParametersSpec.swift */; };
-		BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */; };
-		BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */; };
 		E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
@@ -122,8 +125,6 @@
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
 		F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC31C23F3DB0062EA21 /* Reusable.swift */; };
 		F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */; };
-		F08830F51C3FF42600F530A2 /* AddToBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */; };
-		F08830F71C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */; };
 		F08830F91C43944300F530A2 /* ShotOperationRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830F81C43944300F530A2 /* ShotOperationRequester.swift */; };
 		F08830FB1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830FA1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift */; };
 		F08830FD1C43ABD700F530A2 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */; };
@@ -223,8 +224,14 @@
 		5EC0A7B21C3559A200846975 /* AsyncWrapperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapperSpec.swift; sourceTree = "<group>"; };
 		5EC0A7B41C35634800846975 /* OAuthViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewModelSpec.swift; sourceTree = "<group>"; };
 		5EC0A7B61C35668100846975 /* MockLoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginService.swift; sourceTree = "<group>"; };
+		5EDB83201C48DECE00FBCA05 /* AddToBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuerySpec.swift; sourceTree = "<group>"; };
+		5EDB83211C48DECE00FBCA05 /* LikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuerySpec.swift; sourceTree = "<group>"; };
+		5EDB83221C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuerySpec.swift; sourceTree = "<group>"; };
+		5EDB83231C48DECE00FBCA05 /* ShotsQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsQuerySpec.swift; sourceTree = "<group>"; };
+		5EDB83241C48DECE00FBCA05 /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
+		5EDB83251C48DECE00FBCA05 /* UserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuerySpec.swift; sourceTree = "<group>"; };
+		5EDB832D1C48DF0000FBCA05 /* SharedQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedQuerySpec.swift; sourceTree = "<group>"; };
 		5EDC25F71C32AF680045B759 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		5EE041AB1C33E93300657751 /* UserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuerySpec.swift; sourceTree = "<group>"; };
 		5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsStorageSpec.swift; sourceTree = "<group>"; };
 		5EE041AF1C33EF9E00657751 /* OAuthAuthorizableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthorizableSpec.swift; sourceTree = "<group>"; };
 		5EE041B11C34009300657751 /* FormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterSpec.swift; sourceTree = "<group>"; };
@@ -277,10 +284,7 @@
 		BF9508551C1F1BD000E39242 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		BF9508571C1F1D8700E39242 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		BF95085B1C1F208F00E39242 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsQuerySpec.swift; sourceTree = "<group>"; };
 		BF95086A1C20790200E39242 /* ParametersSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersSpec.swift; sourceTree = "<group>"; };
-		BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuerySpec.swift; sourceTree = "<group>"; };
-		BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotImage.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -293,8 +297,6 @@
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
 		F0863DC31C23F3DB0062EA21 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		F0863DC51C23F4740062EA21 /* UITableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
-		F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuerySpec.swift; sourceTree = "<group>"; };
-		F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuerySpec.swift; sourceTree = "<group>"; };
 		F08830F81C43944300F530A2 /* ShotOperationRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotOperationRequester.swift; sourceTree = "<group>"; };
 		F08830FA1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsLocalStorageSpec.swift; sourceTree = "<group>"; };
 		F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
@@ -453,13 +455,11 @@
 		5E3A98371AA73A6500CE2F20 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				5EDB832C1C48DEE200FBCA05 /* SharedExamples */,
 				5EC0A7AB1C353C8800846975 /* Helper */,
 				FF13AAD2F902BC574DD6F670 /* Mock Objects */,
-				BFB30C0B1C23055500DD22BD /* LikeQuerySpec.swift */,
+				5EDB831F1C48DECE00FBCA05 /* Queries */,
 				BF95086A1C20790200E39242 /* ParametersSpec.swift */,
-				BF95085D1C1F263200E39242 /* ShotsQuerySpec.swift */,
-				BFB30C0F1C2311DB00DD22BD /* UnlikeQuerySpec.swift */,
-				5EE041AB1C33E93300657751 /* UserQuerySpec.swift */,
 				5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */,
 				5EE041AF1C33EF9E00657751 /* OAuthAuthorizableSpec.swift */,
 				5EE041B11C34009300657751 /* FormatterSpec.swift */,
@@ -477,8 +477,6 @@
 				F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */,
 				5E0D773A1C3BDEFD002191A7 /* UserStorageSpec.swift */,
 				5E0D773C1C3BE475002191A7 /* UserSpec.swift */,
-				F08830F41C3FF42600F530A2 /* AddToBucketQuerySpec.swift */,
-				F08830F61C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift */,
 				F08830FA1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift */,
 				F08830FE1C43C7A100F530A2 /* BucketsLocalStorageSpec.swift */,
 				F08831001C43CE0D00F530A2 /* ShotOperationHistoryStorageSpec.swift */,
@@ -643,6 +641,27 @@
 				F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		5EDB831F1C48DECE00FBCA05 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				5EDB83201C48DECE00FBCA05 /* AddToBucketQuerySpec.swift */,
+				5EDB83211C48DECE00FBCA05 /* LikeQuerySpec.swift */,
+				5EDB83221C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift */,
+				5EDB83231C48DECE00FBCA05 /* ShotsQuerySpec.swift */,
+				5EDB83241C48DECE00FBCA05 /* UnlikeQuerySpec.swift */,
+				5EDB83251C48DECE00FBCA05 /* UserQuerySpec.swift */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		5EDB832C1C48DEE200FBCA05 /* SharedExamples */ = {
+			isa = PBXGroup;
+			children = (
+				5EDB832D1C48DF0000FBCA05 /* SharedQuerySpec.swift */,
+			);
+			path = SharedExamples;
 			sourceTree = "<group>";
 		};
 		BEEE9D28210EBE9978F3CCF1 /* Presentation Steps */ = {
@@ -1104,14 +1123,10 @@
 			files = (
 				5EC0A7AF1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift in Sources */,
 				5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
-				BF95085E1C1F263200E39242 /* ShotsQuerySpec.swift in Sources */,
 				F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */,
 				F08830FD1C43ABD700F530A2 /* CoreDataHelper.swift in Sources */,
-				5EE041AC1C33E93300657751 /* UserQuerySpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageExtension.swift in Sources */,
-				BFB30C101C2311DB00DD22BD /* UnlikeQuerySpec.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
-				BFB30C0C1C23055500DD22BD /* LikeQuerySpec.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
 				F08830FB1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift in Sources */,
@@ -1121,8 +1136,8 @@
 				5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
-				F08830F51C3FF42600F530A2 /* AddToBucketQuerySpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* InitialShotsAnimationManagerMock.swift in Sources */,
+				5EDB832E1C48DF0000FBCA05 /* SharedQuerySpec.swift in Sources */,
 				FF13A6CBD12C4FF17CAFCFDB /* PresentationStepViewControllerDelegateMock.swift in Sources */,
 				FF13AF11CAA2BAB3EFD369E2 /* ShotsCollectionViewControllerSpec.swift in Sources */,
 				5EC0A7B51C35634800846975 /* OAuthViewModelSpec.swift in Sources */,
@@ -1131,7 +1146,9 @@
 				FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */,
 				5EC0A7B31C3559A200846975 /* AsyncWrapperSpec.swift in Sources */,
 				BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */,
-				F08830F71C3FF44200F530A2 /* RemoveFromBucketQuerySpec.swift in Sources */,
+				5EDB83271C48DECE00FBCA05 /* LikeQuerySpec.swift in Sources */,
+				5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */,
+				5EDB83291C48DECE00FBCA05 /* ShotsQuerySpec.swift in Sources */,
 				BEEE9517436BBAF8AD9E06EB /* InitialShotsAnimationManagerSpec.swift in Sources */,
 				F08830FF1C43C7A100F530A2 /* BucketsLocalStorageSpec.swift in Sources */,
 				BEEE95BCBAB8072AE0F35D42 /* InitialShotsAnimationManagerDelegateMock.swift in Sources */,
@@ -1141,10 +1158,13 @@
 				BEEE930D57B77B35E162CA87 /* InitialShotsPresentationStepSpec.swift in Sources */,
 				BEEE9329A86A9C9EEDD3E134 /* PresentationStepDelegateMock.swift in Sources */,
 				BEEE99141CA1C0CB35029A26 /* ShotsPresentationStepSpec.swift in Sources */,
+				5EDB832B1C48DECE00FBCA05 /* UserQuerySpec.swift in Sources */,
 				BEEE91128CC07599B6159C9B /* PresentationContainerViewControllerSpec.swift in Sources */,
+				5EDB832A1C48DECE00FBCA05 /* UnlikeQuerySpec.swift in Sources */,
 				BEEE92C8E32A03FA1F4CCA78 /* PresentationStepMock.swift in Sources */,
 				BEEE9D19FF31B2C42B9015D5 /* PresentationStepViewControllerMock.swift in Sources */,
 				BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */,
+				5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */,
 				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,
 				BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */,
 			);
