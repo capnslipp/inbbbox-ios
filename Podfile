@@ -14,9 +14,7 @@ use_frameworks!
 
 xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
 
-pod 'Async',
-    :git => "https://github.com/duemunk/Async.git",
-    :tag => "1.4"
+pod 'AsyncSwift', '~> 1.6'
 
 pod 'KeychainAccess', '~> 2.3'
 
@@ -30,7 +28,7 @@ pod 'PureLayout', '~> 3.0'
 
 pod 'SwiftyUserDefaults', '~> 2.0'
 
-target 'Tests' do link_with 'Unit Tests', 'Functional Tests'
+target 'Tests' do link_with 'Unit Tests'
 
     pod 'Quick', '~> 0.8',
         :configurations => ['Test']
