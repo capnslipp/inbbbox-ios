@@ -81,6 +81,7 @@
 		BEEE965DF95B8348E1966D2A /* PresentationStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DD3BA8636A4E2FA0DB8 /* PresentationStepViewController.swift */; };
 		BEEE9785C69A23D3FC3F3A4B /* TabBarAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9A749C1CA7728C8FE953 /* TabBarAnimationView.swift */; };
 		BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */; };
+		BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F60853FDC4BABA4CBB9 /* CustomTabBarItemView.swift */; };
 		BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */; };
 		BEEE99141CA1C0CB35029A26 /* ShotsPresentationStepSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EE133C314D2A8D20075 /* ShotsPresentationStepSpec.swift */; };
 		BEEE9A456A2D2AB48979BD0B /* ShotsPresentationStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE94B750A69A310BE31D88 /* ShotsPresentationStep.swift */; };
@@ -264,6 +265,7 @@
 		BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenterSpec.swift; sourceTree = "<group>"; };
 		BEEE9EAE816915C3640FD627 /* InitialShotsAnimationManagerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsAnimationManagerDelegateMock.swift; sourceTree = "<group>"; };
 		BEEE9EE133C314D2A8D20075 /* ShotsPresentationStepSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsPresentationStepSpec.swift; sourceTree = "<group>"; };
+		BEEE9F60853FDC4BABA4CBB9 /* CustomTabBarItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItemView.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BF69611B1C1B4551000FC5D8 /* Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 				5E0899CD1C32A71E009FB52B /* ORLoginLabel.swift */,
 				BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */,
 				BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */,
+				BEEE9F60853FDC4BABA4CBB9 /* CustomTabBarItemView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				BEEE9CB46639DD4B9EF06FCD /* TabBarAnimationPresentationStep.swift in Sources */,
 				BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */,
 				BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */,
+				BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

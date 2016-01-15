@@ -6,10 +6,14 @@ import UIKit
 
 class CenterButtonTabBarView: UITabBar {
 
-//    MARK: - Life cycle
-
     private var didSetConstraints = false
+    let likesItemView = CustomTabBarItemView(name: "Likes", icon: UIImage(named: "ic-likes"))
+    let bucketsItemView = CustomTabBarItemView(name: "Buckets", icon: UIImage(named: "ic-buckets"))
     let centerButton = RoundedButton()
+    let followingItemView = CustomTabBarItemView(name: "Following", icon: UIImage(named: "ic-following"))
+    let accountItemView = CustomTabBarItemView(name: "Account", icon: UIImage(named: "ic-account"))
+
+//    MARK: - Life cycle
 
     @available(*, unavailable, message = "Use init() or init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
@@ -19,15 +23,20 @@ class CenterButtonTabBarView: UITabBar {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let likesTabBarItem = UITabBarItem(title: "Likes", image: UIImage(named: "ic-likes"), selectedImage: UIImage(named: "ic-likes-active"))
-        let bucketsTabBarItem = UITabBarItem(title: "Buckets", image: UIImage(named: "ic-buckets"), selectedImage: UIImage(named: "ic-buckets-active"))
-        let centerButtonPlaceholderTabBarItem = UITabBarItem(title: nil, image: nil, selectedImage: nil)
-        let followingTabBarItem = UITabBarItem(title: "Following", image: UIImage(named: "ic-following"), selectedImage: UIImage(named: "ic-following-active"))
-        let accountTabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "ic-account"), selectedImage: UIImage(named: "ic-account-active"))
-        items = [likesTabBarItem, bucketsTabBarItem, centerButtonPlaceholderTabBarItem, followingTabBarItem, accountTabBarItem]
+        likesItemView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(likesItemView)
+
+        bucketsItemView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(bucketsItemView)
 
         centerButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(centerButton)
+
+        followingItemView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(followingItemView)
+
+        accountItemView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(accountItemView)
     }
 
 //    MARK: - UIView
@@ -43,6 +52,7 @@ class CenterButtonTabBarView: UITabBar {
     }
 
     override func updateConstraints() {
+        //NGRTodo: Implementation needed
 
         if !didSetConstraints {
             centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
