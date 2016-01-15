@@ -12,7 +12,6 @@ struct UserQuery: Query {
     
     let method = Method.GET
     let path: String
-    let service: SecureNetworkService = DribbbleNetworkService()
     var parameters = Parameters(encoding: .URL)
     
     init() {

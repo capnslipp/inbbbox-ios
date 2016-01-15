@@ -21,3 +21,10 @@ protocol Query {
     var service: SecureNetworkService { get }
     var parameters: Parameters { get set }
 }
+
+extension Query {
+    
+    var service: SecureNetworkService {
+        return DribbbleNetworkService()
+    }
+}

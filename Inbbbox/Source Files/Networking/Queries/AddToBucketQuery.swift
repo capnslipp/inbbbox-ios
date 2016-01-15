@@ -12,7 +12,6 @@ struct AddToBucketQuery: Query {
     
     let method = Method.PUT
     let path: String
-    let service: SecureNetworkService = DribbbleNetworkService()
     var parameters = Parameters(encoding: .JSON)
     
     init(shotID: Int, bucketID: Int) {

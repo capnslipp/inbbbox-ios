@@ -12,7 +12,6 @@ struct LikeQuery: Query {
     
     let method = Method.POST
     let path: String
-    let service: SecureNetworkService = DribbbleNetworkService()
     var parameters = Parameters(encoding: .JSON)
     
     init(shotID: String) {

@@ -14,7 +14,6 @@ struct ShotsQuery: Query {
     
     let method = Method.GET
     let path  = "/shots"
-    let service: SecureNetworkService = DribbbleNetworkService()
     var parameters = Parameters(encoding: .URL)
     
     /// Types

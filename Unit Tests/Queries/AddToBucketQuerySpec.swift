@@ -14,7 +14,7 @@ import Nimble
 class AddToBucketQuerySpec: QuickSpec {
     override func spec() {
         
-       SharedQuerySpec.performSpecForQuery( { Void -> Query in
+        SharedQuerySpec.performSpecForQuery( { Void -> Query in
             return AddToBucketQuery(shotID: 123, bucketID: 234)
         }) { Void -> QueryExpectation in
             return (method: .PUT, encoding: .JSON, path: "/buckets/234/shots")
