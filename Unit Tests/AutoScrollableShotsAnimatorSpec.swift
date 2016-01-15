@@ -63,10 +63,6 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
         
         describe("when performing scroll animation") {
             
-            beforeEach {
-                sut.startScrollAnimationInfinitely()
-            }
-            
             afterEach {
                 sut.stopAnimation()
             }
@@ -77,6 +73,8 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                 
                 beforeEach {
                     initialValueY = collectionViews[0].contentOffset.y
+                    sut.startScrollAnimationInfinitely()
+                    NSRunLoop.currentRunLoop().runUntilDate(NSDate())
                 }
                 
                 it("should be scrolled up") {
@@ -84,20 +82,20 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
                 }
             }
             
-            
             context("collection view") {
                 
                 var initialValueY: CGFloat!
                 
                 beforeEach {
                     initialValueY = collectionViews[1].contentOffset.y
+                    sut.startScrollAnimationInfinitely()
+                    NSRunLoop.currentRunLoop().runUntilDate(NSDate())
                 }
                 
                 it("should be scrolled down") {
                     expect(collectionViews[1].contentOffset.y).toEventually(beLessThan(initialValueY))
                 }
             }
-
             
             context("and stopping it") {
                 
