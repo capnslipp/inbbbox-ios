@@ -11,10 +11,10 @@ import CoreData
 
 extension NSManagedObject {
     func addObject(value: NSManagedObject, forKey: String) {
-        self.mutableSetValueForKey(forKey).addObject(value)
+        mutableSetValueForKey(forKey).addObject(value)
     }
     
     func removeObject(value: NSManagedObject, forKey: String) {
-        self.mutableSetValueForKey(forKey).removeObject(value)
+        mutableSetValueForKey(forKey).removeObject(value)
     }
 }

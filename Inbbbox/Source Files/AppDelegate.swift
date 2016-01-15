@@ -35,9 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Core Data stack
     
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: NSURL? = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1]
+        return urls.last
     }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -48,19 +48,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("StoreData.sqlite")
-        var failureReason = "There was an error creating or loading the application's saved data."
+        let url = self.applicationDocumentsDirectory?.URLByAppendingPathComponent("StoreData.sqlite")
+
         do {
             try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
         } catch {
-            var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            let userInfo = [
+                NSLocalizedDescriptionKey: "Failed to initialize the application's saved data",
+                NSLocalizedFailureReasonErrorKey: "There was an error creating or loading the application's saved data.",
+                NSUnderlyingErrorKey: error as NSError
+            ]
+
+            let wrappedError = NSError(domain: "co.netguru.inbbbox.coredata", code: 1001, userInfo: userInfo)
             
-            dict[NSUnderlyingErrorKey] = error as NSError
-            let wrappedError = NSError(domain: "co.netguru.inbbbox", code: 1001, userInfo: dict)
-            
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+            print("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
             
             abort()
         }
@@ -69,9 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     lazy var managedObjectContext: NSManagedObjectContext = {
-        let coordinator = self.persistentStoreCoordinator
+
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = coordinator
+        managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
 }

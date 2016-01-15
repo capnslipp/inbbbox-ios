@@ -22,7 +22,7 @@ final class ShotOperationHistoryStorage {
     private let entity: NSEntityDescription!
     private let fetchRequest: NSFetchRequest!
     
-    var managedContext: NSManagedObjectContext!
+    private(set) var managedContext: NSManagedObjectContext!
     
     init(managedContext: NSManagedObjectContext? = nil) {
         self.managedContext = managedContext ?? (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -49,6 +49,8 @@ final class ShotOperationHistoryStorage {
         do {
             guard let results = try managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] else { return nil }
             
+            
+            //NGRToDo: refactor this:
             var changeHistory = [ShotOperation]()
             
             _ = results.map {
@@ -66,7 +68,7 @@ final class ShotOperationHistoryStorage {
         
         do {
             if let objects = try! managedContext.executeFetchRequest(fetchRequest) as? [NSManagedObject] {
-                _ = objects.map { managedContext.deleteObject($0) }
+                objects.forEach { managedContext.deleteObject($0) }
                 
                 try managedContext.save()
             }

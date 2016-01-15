@@ -25,7 +25,7 @@ final class BucketsLocalStorage {
     private var bucketIDs: [Int] {
         
         if let results = try! managedContext.executeFetchRequest(bucketFetchRequest) as? [BucketManagedObject] {
-            return results.map { return $0.id }
+            return results.map { $0.id }
         } else {
             return []
         }
