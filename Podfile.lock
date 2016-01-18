@@ -1,6 +1,7 @@
 PODS:
   - AsyncSwift (1.6.4)
   - Dobby (0.4.2)
+  - EasyAnimation (1.0.2)
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
@@ -41,6 +42,7 @@ PODS:
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
   - Dobby (~> 0.4.2)
+  - EasyAnimation (~> 1.0)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - Mockingjay (~> 1.1)
@@ -54,6 +56,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AsyncSwift: 3c90beed237324f1b57e1f1c414dc5501985d208
   Dobby: 66c6fa06aac194f1b8328b2b4c988d59a01fb5f1
+  EasyAnimation: 9615e40f58aa7d8d6a67de66e0edda1903ffa990
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430

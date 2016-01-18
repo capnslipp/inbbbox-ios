@@ -17,12 +17,16 @@ class LoginView: UIView {
     let loginAsGuestButton = UIButton(type: .System)
     let shotsView = AutoScrollableShotsView(numberOfColumns: 4)
     let dribbbleLogoImageView = UIImageView(image: UIImage(named: "ic-ball"))
+    let orLabel = ORLoginLabel()
+    let loadingLabel = UILabel.newAutoLayoutView()
     
     private let logoImageView = UIImageView(image: UIImage(named: "logo-inbbbox"))
     private let pinkOverlayView = UIImageView(image: UIImage(named: "bg-intro-gradient"))
     private let sloganLabel = UILabel()
-    private let orLabel = ORLoginLabel()
+    
     private var didSetConstraints = false
+    
+    var isAnimating = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,11 +58,69 @@ class LoginView: UIView {
         sloganLabel.textColor = UIColor.RGBA(249, 212, 226, 1)
         sloganLabel.font = UIFont.helveticaFont(.NeueLight, size: 22)
         addSubview(sloganLabel)
+        
+        loadingLabel.text = NSLocalizedString("LOADING...", comment: "")
+        loadingLabel.textAlignment = .Center
+        loadingLabel.textColor = UIColor.RGBA(249, 212, 226, 1)
+        loadingLabel.font = UIFont.helveticaFont(.Neue, size: 12)
+        addSubview(loadingLabel)
     }
     
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        /**
+            Sorry for using rects here, but autolayout is going crazy with
+            animations provided by our designer...
+        
+            If you want to be devoured by UIKit mutable state, please refactor this to autolayout.
+        */
+        if !isAnimating {
+            
+            let inset = CGFloat(30)
+            let height = 2 * cornerRadius
+            loginButton.frame = CGRect(
+                x: inset,
+                y: CGRectGetMinY(orLabel.frame) - height,
+                width: CGRectGetWidth(frame) - 2 * inset,
+                height: height
+            )
+            
+            let size = dribbbleLogoImageView.image?.size ?? CGSizeZero
+            dribbbleLogoImageView.frame = CGRect(
+                x: CGRectGetMinX(loginButton.frame) + 30,
+                y: CGRectGetMidY(loginButton.frame) - size.height * 0.5,
+                width: size.width,
+                height: size.height
+            )
+            
+            loginAsGuestButton.frame = CGRect(
+                x: inset,
+                y: CGRectGetMaxY(frame) - 40 - height,
+                width: CGRectGetWidth(frame) - 2 * inset,
+                height: height
+            )
+            
+            let width = CGFloat(150)
+            orLabel.frame = CGRect(
+                x: CGRectGetMidX(frame) - width * 0.5,
+                y: CGRectGetMinY(loginAsGuestButton.frame) - height,
+                width: width,
+                height: 60
+            )
+            
+            loadingLabel.frame = CGRect(
+                x: 0,
+                y: CGRectGetMaxY(frame) - 50,
+                width: CGRectGetWidth(frame),
+                height: 20
+            )
+        }
     }
     
     override func updateConstraints() {
@@ -77,24 +139,6 @@ class LoginView: UIView {
             logoImageView.autoSetDimensionsToSize(logoImageView.image?.size ?? CGSizeZero)
             logoImageView.autoAlignAxisToSuperviewAxis(.Vertical)
             logoImageView.autoPinEdge(.Bottom, toEdge: .Top, ofView: sloganLabel, withOffset: -30)
-            
-            loginAsGuestButton.autoSetDimension(.Height, toSize: 2 * cornerRadius)
-            loginAsGuestButton.autoPinEdgeToSuperviewEdge(.Left, withInset: 30)
-            loginAsGuestButton.autoPinEdgeToSuperviewEdge(.Right, withInset: 30)
-            loginAsGuestButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 40)
-            
-            orLabel.autoAlignAxisToSuperviewAxis(.Vertical)
-            orLabel.autoSetDimensionsToSize(CGSize(width: 150, height: 60))
-            orLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: loginAsGuestButton)
-            
-            loginButton.autoSetDimension(.Height, toSize: 2 * cornerRadius)
-            loginButton.autoPinEdgeToSuperviewEdge(.Left, withInset: 30)
-            loginButton.autoPinEdgeToSuperviewEdge(.Right, withInset: 30)
-            loginButton.autoPinEdge(.Bottom, toEdge: .Top, ofView: orLabel)
-            
-            dribbbleLogoImageView.autoSetDimensionsToSize(dribbbleLogoImageView.image?.size ?? CGSizeZero)
-            dribbbleLogoImageView.autoAlignAxis(.Horizontal, toSameAxisOfView: loginButton)
-            dribbbleLogoImageView.autoPinEdge(.Left, toEdge: .Left, ofView: loginButton, withOffset: 20)
         }
         
         super.updateConstraints()

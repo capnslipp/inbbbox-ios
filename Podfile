@@ -28,6 +28,8 @@ pod 'PureLayout', '~> 3.0'
 
 pod 'SwiftyUserDefaults', '~> 2.0'
 
+pod 'EasyAnimation', '~> 1.0'
+
 target 'Tests' do link_with 'Unit Tests'
 
     pod 'Quick', '~> 0.8',
