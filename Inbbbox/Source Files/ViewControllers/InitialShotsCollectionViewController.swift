@@ -76,6 +76,9 @@ final class InitialShotsCollectionViewController: UICollectionViewController, In
 //    MARK: - PresentationStepViewController
 
     var viewController: UIViewController {
-        return self
+        guard let containingTabBarController = tabBarController else {
+            return self
+        }
+        return containingTabBarController
     }
 }

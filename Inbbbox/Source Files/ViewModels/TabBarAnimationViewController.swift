@@ -36,12 +36,12 @@ class TabBarAnimationViewController: UIViewController, PresentationStepViewContr
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 //        NGRTemp: temporary implementation
-    
-        UIView.animateWithDuration(0.3, animations: {
+
+        UIView.animateWithDuration(3, animations: {
             self.tabBarAnimationView.tabBarVerticalConstraint?.constant = 0
             self.tabBarAnimationView.layoutIfNeeded()
         }, completion: { finished in
-            UIView.animateKeyframesWithDuration(0.3, delay: 0, options: .LayoutSubviews, animations: {
+            UIView.animateKeyframesWithDuration(3, delay: 0, options: .LayoutSubviews, animations: {
                 UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.25, animations: {
                     self.tabBarAnimationView.tabBar.likesItemViewVerticalConstraint?.constant = 0
                     self.tabBarAnimationView.layoutIfNeeded()
@@ -59,7 +59,7 @@ class TabBarAnimationViewController: UIViewController, PresentationStepViewContr
                     self.tabBarAnimationView.layoutIfNeeded()
                 })
             }, completion: { finished in
-//            self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
+                self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
             })
         })
     }
