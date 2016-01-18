@@ -34,7 +34,7 @@ class TabBarAnimationView: UIView {
     override func updateConstraints() {
 
         if !didSetConstraints {
-            tabBarVerticalConstraint = tabBar.autoPinEdge(.Top, toEdge: .Bottom, ofView: self)
+            tabBarVerticalConstraint = tabBar.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self)
             tabBar.autoPinEdgeToSuperviewEdge(.Left)
             tabBar.autoPinEdgeToSuperviewEdge(.Right)
             didSetConstraints = true

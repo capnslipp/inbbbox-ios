@@ -7,6 +7,12 @@ import UIKit
 class CenterButtonTabBarView: UITabBar {
 
     private var didSetConstraints = false
+
+    private(set) var likesItemViewVerticalConstraint: NSLayoutConstraint?
+    private(set) var bucketsItemViewVerticalConstraint: NSLayoutConstraint?
+    private(set) var followingItemViewVerticalConstraint: NSLayoutConstraint?
+    private(set) var accountItemViewVerticalConstraint: NSLayoutConstraint?
+
     let likesItemView = CustomTabBarItemView(name: "Likes", icon: UIImage(named: "ic-likes"))
     let bucketsItemView = CustomTabBarItemView(name: "Buckets", icon: UIImage(named: "ic-buckets"))
     let centerButton = RoundedButton()
@@ -58,23 +64,23 @@ class CenterButtonTabBarView: UITabBar {
 //        NGRTemp: temporary implementation
 
         if !didSetConstraints {
-            likesItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            likesItemViewVerticalConstraint = likesItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
             likesItemView.autoPinEdgeToSuperviewEdge(.Left)
             likesItemView.autoPinEdge(.Right, toEdge: .Left, ofView: bucketsItemView)
 
-            bucketsItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            bucketsItemViewVerticalConstraint = bucketsItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
             bucketsItemView.autoPinEdge(.Left, toEdge: .Right, ofView: likesItemView)
             bucketsItemView.autoPinEdge(.Right, toEdge: .Left, ofView: centerButton)
             bucketsItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: likesItemView)
             
             centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
             centerButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset:8.0)
-            
-            followingItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            followingItemViewVerticalConstraint = followingItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
             followingItemView.autoPinEdge(.Left, toEdge: .Right, ofView: centerButton)
             followingItemView.autoPinEdge(.Right, toEdge: .Left, ofView: accountItemView)
-            
-            accountItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            accountItemViewVerticalConstraint = accountItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
             accountItemView.autoPinEdge(.Left, toEdge: .Right, ofView: followingItemView)
             accountItemView.autoPinEdgeToSuperviewEdge(.Right)
             accountItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: followingItemView)
