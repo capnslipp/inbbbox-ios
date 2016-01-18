@@ -56,7 +56,7 @@ class PresentationContainerViewController: UIViewController, PresentationStepDel
         let viewController = presentationStepViewController.viewController
         addChildViewController(viewController)
         view.addSubview(viewController.view)
-        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        viewController.view.configureForAutoLayout()
         viewController.view.autoPinEdgesToSuperviewEdges()
         viewController.didMoveToParentViewController(self)
     }

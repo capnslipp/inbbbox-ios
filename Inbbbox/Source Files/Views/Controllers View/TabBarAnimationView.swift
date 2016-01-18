@@ -21,7 +21,7 @@ class TabBarAnimationView: UIView {
         super.init(frame: frame)
 
         backgroundColor = UIColor.backgroundGrayColor()
-        tabBar.translatesAutoresizingMaskIntoConstraints = false
+        tabBar.configureForAutoLayout()
         addSubview(tabBar)
     }
 
