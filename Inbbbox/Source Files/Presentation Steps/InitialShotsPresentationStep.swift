@@ -12,7 +12,8 @@ class InitialShotsPresentationStep: PresentationStep, PresentationStepViewContro
 
     var presentationStepViewController: PresentationStepViewController {
         let shotsViewController = InitialShotsCollectionViewController()
-        CenterButtonTabBarController(shotsViewController: shotsViewController)
+        let tabBarController = CenterButtonTabBarController(shotsViewController: shotsViewController)
+        tabBarController.tabBar.userInteractionEnabled = false
         let presentationStepViewController = shotsViewController
         presentationStepViewController.presentationStepViewControllerDelegate = self
         return presentationStepViewController
