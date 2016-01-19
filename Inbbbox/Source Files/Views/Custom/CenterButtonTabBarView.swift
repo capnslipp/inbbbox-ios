@@ -38,6 +38,7 @@ class CenterButtonTabBarView: UITabBar {
         centerButton.configureForAutoLayout()
         centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
         centerButton.backgroundColor = UIColor.whiteColor()
+        centerButton.layer.zPosition = 1;
         addSubview(centerButton)
 
         followingItemView.configureForAutoLayout()
@@ -48,12 +49,6 @@ class CenterButtonTabBarView: UITabBar {
     }
 
 //    MARK: - UIView
-
-    override func addSubview(view: UIView) {
-        super.addSubview(view)
-
-        bringSubviewToFront(centerButton)
-    }
 
     override class func requiresConstraintBasedLayout() -> Bool {
         return true

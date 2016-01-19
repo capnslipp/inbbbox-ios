@@ -9,6 +9,21 @@ class CenterButtonTabBarController: UITabBarController {
     private var didSetConstraints = false
     let centerButton = RoundedButton()
 
+    convenience init(shotsViewController: UIViewController) {
+        self.init(nibName: nil, bundle: nil)
+
+        let likesViewController = UIViewController()
+        likesViewController.tabBarItem = UITabBarItem(title: "Likes", image: UIImage(named: "ic-likes"), selectedImage: UIImage(named: "ic-likes-active"))
+        let bucketsViewController = UIViewController()
+        bucketsViewController.tabBarItem = UITabBarItem(title: "Buckets", image: UIImage(named: "ic-buckets"), selectedImage: UIImage(named: "ic-buckets-active"))
+        let followingViewController = UIViewController()
+        followingViewController.tabBarItem = UITabBarItem(title: "Following", image: UIImage(named: "ic-following"), selectedImage: UIImage(named: "ic-following-active"))
+        let accountViewController = UIViewController()
+        accountViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "ic-account"), selectedImage: UIImage(named: "ic-account-active"))
+        viewControllers = [likesViewController, bucketsViewController, shotsViewController, followingViewController, accountViewController]
+        selectedViewController = shotsViewController
+    }
+
 //    MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -17,19 +32,9 @@ class CenterButtonTabBarController: UITabBarController {
         centerButton.configureForAutoLayout()
         centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
         centerButton.backgroundColor = UIColor.whiteColor()
+        centerButton.layer.zPosition = 1;
         tabBar.addSubview(centerButton)
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        //        NGRTemp: temporary implementation
-
-        if !didSetConstraints {
-            centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
-            centerButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset:8.0)
-
-            didSetConstraints = true
-        }
+        centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
+        centerButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 8.0)
     }
 }
