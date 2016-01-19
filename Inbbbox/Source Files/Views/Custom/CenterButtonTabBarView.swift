@@ -66,11 +66,11 @@ class CenterButtonTabBarView: UITabBar {
 //        NGRTemp: temporary implementation
 
         if !didSetConstraints {
-            likesItemViewVerticalConstraint = likesItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            likesItemViewVerticalConstraint = likesItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 6)
             likesItemView.autoPinEdgeToSuperviewEdge(.Left)
             likesItemView.autoPinEdge(.Right, toEdge: .Left, ofView: bucketsItemView)
 
-            bucketsItemViewVerticalConstraint = bucketsItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            bucketsItemViewVerticalConstraint = bucketsItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 6)
             bucketsItemView.autoPinEdge(.Left, toEdge: .Right, ofView: likesItemView)
             bucketsItemView.autoPinEdge(.Right, toEdge: .Left, ofView: centerButton)
             bucketsItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: likesItemView)
@@ -78,11 +78,11 @@ class CenterButtonTabBarView: UITabBar {
             centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
             centerButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset:8.0)
 
-            followingItemViewVerticalConstraint = followingItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            followingItemViewVerticalConstraint = followingItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 6)
             followingItemView.autoPinEdge(.Left, toEdge: .Right, ofView: centerButton)
             followingItemView.autoPinEdge(.Right, toEdge: .Left, ofView: accountItemView)
 
-            accountItemViewVerticalConstraint = accountItemView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            accountItemViewVerticalConstraint = accountItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 6)
             accountItemView.autoPinEdge(.Left, toEdge: .Right, ofView: followingItemView)
             accountItemView.autoPinEdgeToSuperviewEdge(.Right)
             accountItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: followingItemView)

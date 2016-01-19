@@ -23,11 +23,11 @@ class TabBarAnimationViewController: UIViewController, PresentationStepViewContr
 
         if !didSetInitialTabbarPosition {
             let tabBarHeight = tabBarAnimationView.tabBar.intrinsicContentSize().height
-            tabBarAnimationView.tabBarVerticalConstraint?.constant = tabBarHeight
-            tabBarAnimationView.tabBar.likesItemViewVerticalConstraint?.constant = tabBarHeight
-            tabBarAnimationView.tabBar.bucketsItemViewVerticalConstraint?.constant = tabBarHeight
-            tabBarAnimationView.tabBar.followingItemViewVerticalConstraint?.constant = tabBarHeight
-            tabBarAnimationView.tabBar.accountItemViewVerticalConstraint?.constant = tabBarHeight
+            tabBarAnimationView.tabBarVerticalConstraint?.constant += tabBarHeight
+            tabBarAnimationView.tabBar.likesItemViewVerticalConstraint?.constant += tabBarHeight
+            tabBarAnimationView.tabBar.bucketsItemViewVerticalConstraint?.constant += tabBarHeight
+            tabBarAnimationView.tabBar.followingItemViewVerticalConstraint?.constant += tabBarHeight
+            tabBarAnimationView.tabBar.accountItemViewVerticalConstraint?.constant += tabBarHeight
 
             didSetInitialTabbarPosition = true
         }
@@ -37,25 +37,27 @@ class TabBarAnimationViewController: UIViewController, PresentationStepViewContr
         super.viewDidAppear(animated)
 //        NGRTemp: temporary implementation
 
-        UIView.animateWithDuration(3, animations: {
-            self.tabBarAnimationView.tabBarVerticalConstraint?.constant = 0
+        let tabBarHeight = tabBarAnimationView.tabBar.intrinsicContentSize().height
+
+        UIView.animateWithDuration(1, animations: {
+            self.tabBarAnimationView.tabBarVerticalConstraint?.constant -= tabBarHeight
             self.tabBarAnimationView.layoutIfNeeded()
         }, completion: { finished in
-            UIView.animateKeyframesWithDuration(3, delay: 0, options: .LayoutSubviews, animations: {
+            UIView.animateKeyframesWithDuration(1, delay: 0, options: .LayoutSubviews, animations: {
                 UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.25, animations: {
-                    self.tabBarAnimationView.tabBar.likesItemViewVerticalConstraint?.constant = 0
+                    self.tabBarAnimationView.tabBar.likesItemViewVerticalConstraint?.constant -= tabBarHeight
                     self.tabBarAnimationView.layoutIfNeeded()
                 })
                 UIView.addKeyframeWithRelativeStartTime(0.25, relativeDuration: 0.25, animations: {
-                    self.tabBarAnimationView.tabBar.bucketsItemViewVerticalConstraint?.constant = 0
+                    self.tabBarAnimationView.tabBar.bucketsItemViewVerticalConstraint?.constant -= tabBarHeight
                     self.tabBarAnimationView.layoutIfNeeded()
                 })
                 UIView.addKeyframeWithRelativeStartTime(0.5, relativeDuration: 0.25, animations: {
-                    self.tabBarAnimationView.tabBar.followingItemViewVerticalConstraint?.constant = 0
+                    self.tabBarAnimationView.tabBar.followingItemViewVerticalConstraint?.constant -= tabBarHeight
                     self.tabBarAnimationView.layoutIfNeeded()
                 })
                 UIView.addKeyframeWithRelativeStartTime(0.75, relativeDuration: 0.25, animations: {
-                    self.tabBarAnimationView.tabBar.accountItemViewVerticalConstraint?.constant = 0
+                    self.tabBarAnimationView.tabBar.accountItemViewVerticalConstraint?.constant -= tabBarHeight
                     self.tabBarAnimationView.layoutIfNeeded()
                 })
             }, completion: { finished in

@@ -9,37 +9,41 @@
 import UIKit
 
 extension UIColor {
-    
+
     class func RGBA(red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) -> UIColor {
-        return UIColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: alpha)
+        return UIColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
     }
-    
+
     class func pinkColor() -> UIColor {
         return pinkColor(alpha: 1)
     }
-    
+
     class func pinkColor(alpha alpha: CGFloat) -> UIColor {
         return RGBA(240, 55, 126, alpha)
     }
-    
+
     class func backgroundGrayColor() -> UIColor {
         return RGBA(246, 248, 248, 1)
     }
-    
+
     class func textDarkColor() -> UIColor {
         return RGBA(51, 51, 51, 1)
     }
-    
+
     class func textLightColor() -> UIColor {
         return RGBA(109, 109, 114, 1)
     }
-    
+
+    class func tabBarGrayColor() -> UIColor {
+        return RGBA(146, 146, 146, 1)
+    }
+
     class func randomColor() -> UIColor {
-        
+
         let red = Int(arc4random() % 256)
         let green = Int(arc4random() % 256)
         let blue = Int(arc4random() % 256)
-        
+
         return RGBA(red, green, blue, 1)
     }
 }
