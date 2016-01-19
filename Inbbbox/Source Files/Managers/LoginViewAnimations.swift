@@ -10,12 +10,24 @@ import UIKit
 
 class LoginViewAnimations {
     
+    private var buttonPositionDelta: (x: CGFloat, width: CGFloat)!
+    private var logoPositionDeltaX: CGFloat!
+    private var shouldAnimate = false
+    
     enum FadeStyle: CGFloat {
         case FadeIn = 1
         case FadeOut = 0
     }
     
-    class func animateCornerRadiusForthAndBack(view: UIView) {
+    func prepare() {
+        shouldAnimate = true
+    }
+    
+    func stop() {
+        shouldAnimate = false
+    }
+    
+    func animateCornerRadiusForthAndBack(view: UIView) {
         
         let endValue = CGRectGetHeight(view.frame ?? CGRectZero) * 0.5
         
@@ -26,25 +38,39 @@ class LoginViewAnimations {
         })
     }
     
-    class func animateSpringShrinkingToBall(button: UIView, logo: UIView, completion: Void -> Void) {
+    func animateSpringShrinkingToBall(button: UIView, logo: UIView, completion: Void -> Void) {
         
         let dimension = CGRectGetHeight(button.frame ?? CGRectZero)
         let deltaX = CGRectGetMidX(button.superview!.bounds) - dimension * 0.5 - CGRectGetMinX(button.frame)
         
+        buttonPositionDelta = (x: deltaX, width: CGRectGetWidth(button.frame))
+        logoPositionDeltaX = CGRectGetMidX(logo.superview!.bounds) - CGRectGetMidX(logo.frame)
+        
         UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [.FillModeForwards], animations: {
-            
-            print(CGRectGetMinX(button.frame) + deltaX)
             
             button.layer.position.x += deltaX
             button.layer.frame.size.width = dimension
+            logo.layer.position.x += self.logoPositionDeltaX
             
-            logo.layer.position.x += CGRectGetMidX(logo.superview!.bounds) - CGRectGetMidX(logo.frame)
         }, completion: { _ in
             completion()
         })
     }
     
-    class func rotationAnimation(views: [UIView], duration: NSTimeInterval, cycles: Double) {
+    func animateSpringExtendingToButton(button: UIView, logo: UIView, completion: Void -> Void) {
+        
+        UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [.FillModeForwards], animations: {
+            
+            button.layer.position.x -= self.buttonPositionDelta.x
+            button.layer.frame.size.width = self.buttonPositionDelta.width
+            logo.layer.position.x -= self.logoPositionDeltaX
+            
+        }, completion: { _ in
+            completion()
+        })
+    }
+    
+    func rotationAnimation(views: [UIView], duration: NSTimeInterval, cycles: Double) {
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.toValue = CGFloat(M_PI * 2.0 * cycles * duration)
@@ -58,7 +84,7 @@ class LoginViewAnimations {
         }
     }
     
-    class func moveAnimation(views: [UIView], duration: NSTimeInterval, fade: FadeStyle, transition: CGPoint, completion: (Void -> Void)? = nil) {
+    func moveAnimation(views: [UIView], duration: NSTimeInterval, fade: FadeStyle, transition: CGPoint, completion: (Void -> Void)? = nil) {
         
         UIView.animateWithDuration(duration, delay: 0, options: [.CurveEaseIn], animations: {
             views.forEach {
@@ -77,13 +103,15 @@ class LoginViewAnimations {
         })
     }
     
-    class func blinkAnimation(views: [UIView], duration: NSTimeInterval, inout stop: Bool) {
+    func blinkAnimation(views: [UIView], duration: NSTimeInterval) {
+        
+        if !shouldAnimate {
+            return
+        }
         
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
-            if !stop {
-                self.blinkAnimation(views, duration: duration, stop: &stop)
-            }
+            self.blinkAnimation(views, duration: duration)
         }
         
         UIView.animateWithDuration(duration * 0.5, animations: {
@@ -93,13 +121,15 @@ class LoginViewAnimations {
         })
     }
     
-    class func bounceAnimation(views: [UIView], duration: NSTimeInterval, inout stop: Bool) {
+    func bounceAnimation(views: [UIView], duration: NSTimeInterval) {
+        
+        if !shouldAnimate {
+            return
+        }
         
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
-            if !stop {
-                self.bounceAnimation(views, duration: duration, stop: &stop)
-            }
+            self.bounceAnimation(views, duration: duration)
         }
         
         let translationY = CAKeyframeAnimation(keyPath: "transform.translation.y")

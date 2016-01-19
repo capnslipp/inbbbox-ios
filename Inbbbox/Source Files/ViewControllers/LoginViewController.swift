@@ -8,7 +8,6 @@
 
 import UIKit
 import PromiseKit
-import EasyAnimation
 
 class LoginViewController: UIViewController {
 
@@ -56,35 +55,42 @@ class LoginViewController: UIViewController {
     deinit {
         shotsAnimator.stopAnimation()
     }
+}
 
-    //MARK: Actions
-
+//MARK: Actions
+extension LoginViewController {
+    
     func loginButtonDidTap(_: UIButton) {
         
         viewAnimator?.startLoginAnimation()
         
-
-//        let interactionHandler: (UIViewController -> Void) = { controller in
-//            self.presentViewController(controller, animated: true, completion: nil)
-//        }
-//
-//        let authenticator = Authenticator(interactionHandler: interactionHandler)
-//
-//        firstly {
-//            authenticator.loginWithService(.Dribbble)
-//        }.then { _ -> Void in
-//            //NGRTodo: Handle success
-//            print("success")
-//        }.error { error in
-//            //NGRTodo: Handle error
-//            print(error)
-//        }
+        let interactionHandler: (UIViewController -> Void) = { controller in
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        let authenticator = Authenticator(interactionHandler: interactionHandler)
+        
+        firstly {
+            authenticator.loginWithService(.Dribbble)
+        }.then { _ -> Void in
+            self.viewAnimator?.stopAnimationWithType(.Continue) {
+                self.presentNextViewController()
+            }
+        }.error { error in
+            self.viewAnimator?.stopAnimationWithType(.Undo)
+        }
     }
-
+    
     func loginAsGuestButtonDidTap(_: UIButton) {
-//        NGRTemp: temporary implementation
+        presentNextViewController()
+    }
+}
+
+private extension LoginViewController {
+    
+    //NGRTemp: temporary implementation
+    func presentNextViewController() {
         let containerViewController = PresentationContainerViewController()
         containerViewController.presentationSteps = [TabBarAnimationPresentationStep(), InitialShotsPresentationStep(), ShotsPresentationStep()]
-        presentViewController(containerViewController, animated: false, completion: nil)
+        self.presentViewController(containerViewController, animated: false, completion: nil)
     }
 }

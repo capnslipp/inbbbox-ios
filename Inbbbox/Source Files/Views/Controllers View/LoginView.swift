@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PureLayout
 
 class LoginView: UIView {
     
@@ -18,14 +17,12 @@ class LoginView: UIView {
     let shotsView = AutoScrollableShotsView(numberOfColumns: 4)
     let dribbbleLogoImageView = UIImageView(image: UIImage(named: "ic-ball"))
     let orLabel = ORLoginLabel()
-    let loadingLabel = UILabel.newAutoLayoutView()
+    let loadingLabel = UILabel()
     
-    private let logoImageView = UIImageView(image: UIImage(named: "logo-inbbbox"))
-    private let pinkOverlayView = UIImageView(image: UIImage(named: "bg-intro-gradient"))
-    private let sloganLabel = UILabel()
-    
-    private var didSetConstraints = false
-    
+    let logoImageView = UIImageView(image: UIImage(named: "logo-inbbbox"))
+    let pinkOverlayView = UIImageView(image: UIImage(named: "bg-intro-gradient"))
+    let sloganLabel = UILabel()
+
     var isAnimating = false
     
     override init(frame: CGRect) {
@@ -120,27 +117,25 @@ class LoginView: UIView {
                 width: CGRectGetWidth(frame),
                 height: 20
             )
+            
+            let sloganHeight = CGFloat(40)
+            sloganLabel.frame = CGRect(
+                x: 0,
+                y: CGRectGetMidY(frame) - sloganHeight * 0.5,
+                width: CGRectGetWidth(frame),
+                height: sloganHeight
+            )
+            
+            let imageSize = logoImageView.image!.size ?? CGSizeZero
+            logoImageView.frame = CGRect(
+                x: CGRectGetMidX(frame) - imageSize.width * 0.5,
+                y: CGRectGetMinY(sloganLabel.frame) - 30 - imageSize.height,
+                width: imageSize.width,
+                height: imageSize.height
+            )
+            
+            shotsView.frame = frame
+            pinkOverlayView.frame = frame
         }
-    }
-    
-    override func updateConstraints() {
-        
-        if !didSetConstraints {
-            didSetConstraints = true
-            
-            shotsView.autoPinEdgesToSuperviewEdges()
-            pinkOverlayView.autoPinEdgesToSuperviewEdges()
-            
-            sloganLabel.autoPinEdgeToSuperviewEdge(.Left)
-            sloganLabel.autoPinEdgeToSuperviewEdge(.Right)
-            sloganLabel.autoCenterInSuperview()
-            sloganLabel.autoSetDimension(.Height, toSize: 40)
-            
-            logoImageView.autoSetDimensionsToSize(logoImageView.image?.size ?? CGSizeZero)
-            logoImageView.autoAlignAxisToSuperviewAxis(.Vertical)
-            logoImageView.autoPinEdge(.Bottom, toEdge: .Top, ofView: sloganLabel, withOffset: -30)
-        }
-        
-        super.updateConstraints()
     }
 }
