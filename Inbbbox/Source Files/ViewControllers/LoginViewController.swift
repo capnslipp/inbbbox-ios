@@ -89,8 +89,6 @@ private extension LoginViewController {
     
     //NGRTemp: temporary implementation
     func presentNextViewController() {
-        let containerViewController = PresentationContainerViewController()
-        containerViewController.presentationSteps = [TabBarAnimationPresentationStep(), InitialShotsPresentationStep(), ShotsPresentationStep()]
-        self.presentViewController(containerViewController, animated: false, completion: nil)
+        self.presentViewController(CenterButtonTabBarController(), animated: false, completion: nil)
     }
 }

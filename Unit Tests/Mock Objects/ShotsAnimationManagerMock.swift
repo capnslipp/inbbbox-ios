@@ -7,7 +7,7 @@ import Dobby
 
 @testable import Inbbbox
 
-class InitialShotsAnimationManagerMock: InitialShotsAnimationManager {
+class ShotsAnimationManagerMock: ShotsAnimationManager {
 
     let startAnimationWithCompletionStub = Stub<(Void -> Void)?, Void>()
 

@@ -8,14 +8,14 @@ import Dobby
 
 @testable import Inbbbox
 
-class InitialShotsAnimationManagerSpec: QuickSpec {
+class ShotsAnimationManagerSpec: QuickSpec {
 
     override func spec() {
 
-        var sut: InitialShotsAnimationManager?
+        var sut: ShotsAnimationManager?
 
         beforeEach {
-            sut = InitialShotsAnimationManager()
+            sut = ShotsAnimationManager()
         }
 
         afterEach {
@@ -46,7 +46,7 @@ class InitialShotsAnimationManagerSpec: QuickSpec {
                     completion?(true)
                 }
 
-                let delegateMock = InitialShotsAnimationManagerDelegateMock()
+                let delegateMock = ShotsAnimationManagerDelegateMock()
                 delegateMock.collectionViewForAnimationManagerStub.on(any(), returnValue: collectionViewMock)
                 delegateMock.itemsForAnimationManagerStub.on(any(), returnValue: ["fixtureShot1", "fixtureShot2", "fixtureShot3"])
                 sut!.delegate = delegateMock

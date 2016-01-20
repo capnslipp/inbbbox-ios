@@ -60,21 +60,5 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 }
             }
         }
-
-        describe("presentation step view controller") {
-
-            describe("view controller") {
-
-                var viewController: UIViewController!
-
-                beforeEach {
-                    viewController = sut.viewController
-                }
-
-                it("should return initial shots collection view controller") {
-                    expect(viewController).to(equal(sut))
-                }
-            }
-        }
     }
 }

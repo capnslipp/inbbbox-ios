@@ -4,10 +4,9 @@
 
 import UIKit
 
-class TabBarAnimationViewController: UIViewController, PresentationStepViewController {
+class TabBarAnimationViewController: UIViewController {
 
     private var didSetInitialTabbarPosition = false
-    weak var presentationStepViewControllerDelegate: PresentationStepViewControllerDelegate?
     var tabBarAnimationView: TabBarAnimationView {
         return view as! TabBarAnimationView
     }
@@ -61,14 +60,8 @@ class TabBarAnimationViewController: UIViewController, PresentationStepViewContr
                     self.tabBarAnimationView.layoutIfNeeded()
                 })
             }, completion: { finished in
-                self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
+//                self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
             })
         })
-    }
-
-//    MARK: - PresentationStepViewController
-
-    var viewController: UIViewController {
-        return self
     }
 }

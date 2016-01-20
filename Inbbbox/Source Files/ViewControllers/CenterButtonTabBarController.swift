@@ -8,12 +8,10 @@ class CenterButtonTabBarController: UITabBarController {
 
     private var didSetConstraints = false
     let centerButton = RoundedButton()
-    private(set) var shotsViewController: UIViewController?
+    let shotsCollectionViewController = ShotsCollectionViewController()
 
-    convenience init(shotsViewController: UIViewController) {
+    convenience init() {
         self.init(nibName: nil, bundle: nil)
-
-        self.shotsViewController = shotsViewController
 
         let likesViewController = UIViewController()
         likesViewController.tabBarItem = UITabBarItem(title: "Likes", image: UIImage(named: "ic-likes"), selectedImage: UIImage(named: "ic-likes-active"))
@@ -23,8 +21,8 @@ class CenterButtonTabBarController: UITabBarController {
         followingViewController.tabBarItem = UITabBarItem(title: "Following", image: UIImage(named: "ic-following"), selectedImage: UIImage(named: "ic-following-active"))
         let accountViewController = UIViewController()
         accountViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "ic-account"), selectedImage: UIImage(named: "ic-account-active"))
-        viewControllers = [likesViewController, bucketsViewController, shotsViewController, followingViewController, accountViewController]
-        selectedViewController = shotsViewController
+        viewControllers = [likesViewController, bucketsViewController, shotsCollectionViewController, followingViewController, accountViewController]
+        selectedViewController = shotsCollectionViewController
     }
 
 //    MARK: - UIViewController
@@ -51,6 +49,6 @@ class CenterButtonTabBarController: UITabBarController {
 //    MARK: - Actions
 
     func didTapCenterButton(button: UIButton) {
-        selectedViewController = shotsViewController
+        selectedViewController = shotsCollectionViewController
     }
 }

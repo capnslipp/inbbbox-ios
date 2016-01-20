@@ -4,15 +4,15 @@
 
 import UIKit
 
-protocol InitialShotsAnimationManagerDelegate: class {
-    func collectionViewForAnimationManager(animationManager: InitialShotsAnimationManager) -> UICollectionView?
+protocol ShotsAnimationManagerDelegate: class {
+    func collectionViewForAnimationManager(animationManager: ShotsAnimationManager) -> UICollectionView?
 
-    func itemsForAnimationManager(animationManager: InitialShotsAnimationManager) -> [AnyObject]
+    func itemsForAnimationManager(animationManager: ShotsAnimationManager) -> [AnyObject]
 }
 
-class InitialShotsAnimationManager {
+class ShotsAnimationManager {
 
-    weak var delegate: InitialShotsAnimationManagerDelegate?
+    weak var delegate: ShotsAnimationManagerDelegate?
     var visibleItems = [AnyObject]()
     var asyncWrapper = AsyncWrapper()
 
