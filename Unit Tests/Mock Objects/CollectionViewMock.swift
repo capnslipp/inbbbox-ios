@@ -13,6 +13,11 @@ class CollectionViewMock: UICollectionView {
     let insertItemsAtIndexPathsStub = Stub<[NSIndexPath], Void>()
     let deleteItemsAtIndexPathsStub = Stub<[NSIndexPath], Void>()
     let performBatchUpdatesStub = Stub<((() -> Void)?, (Bool -> Void)?), Void>()
+    let reloadDataStub = Stub<Void, Void>()
+
+    convenience init() {
+        self.init(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+    }
 
     override func numberOfItemsInSection(section: Int) -> Int {
         return try! numberOfItemsInSectionStub.invoke(section)
@@ -30,4 +35,7 @@ class CollectionViewMock: UICollectionView {
         try! performBatchUpdatesStub.invoke(updates, completion)
     }
 
+    override func reloadData() {
+        try! reloadDataStub.invoke()
+    }
 }

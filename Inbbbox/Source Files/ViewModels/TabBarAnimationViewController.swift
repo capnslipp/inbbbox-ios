@@ -59,7 +59,7 @@ class TabBarAnimationViewController: UIViewController {
                     self.tabBarAnimationView.tabBar.accountItemViewVerticalConstraint?.constant -= tabBarHeight
                     self.tabBarAnimationView.layoutIfNeeded()
                 })
-            }, completion: { finished in
+            }, completion: { _ in
 //                self.presentationStepViewControllerDelegate?.presentationStepViewControllerDidFinishPresenting(self)
             })
         })
