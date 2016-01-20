@@ -9,6 +9,8 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
 //    MARK: - Life cycle
 
     var animationManager = ShotsAnimationManager()
+    private var didFinishInitialAnimations = false
+    private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
 
 //    NGRTemp: temporary implementation - remove after adding real shots
     var shots = ["shot1", "shot2", "shot3", "shot4", "shot5", "shot6", "shot7", "shot8", "shot9", "shot10"]
@@ -29,11 +31,23 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
             return
         }
 
-        tabBarController?.tabBar.hidden = true
-
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.pagingEnabled = true
         collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
+        tabBarController?.tabBar.userInteractionEnabled = false
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        dispatch_once(&onceTokenForInitialShotsAnimation) {
+            self.animationManager.startAnimationWithCompletion() {
+                self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
+                self.didFinishInitialAnimations = true
+                self.collectionView?.reloadData()
+                self.tabBarController?.tabBar.userInteractionEnabled = true
+            }
+        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -45,20 +59,20 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
 //    MARK: - UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shots.count
+        return didFinishInitialAnimations ? shots.count : animationManager.visibleItems.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
     }
 
-    //    MARK: - InitialShotsAnimationManagerDelegate
+//    MARK: - InitialShotsAnimationManagerDelegate
 
     func collectionViewForAnimationManager(animationManager: ShotsAnimationManager) -> UICollectionView? {
         return collectionView
     }
 
     func itemsForAnimationManager(animationManager: ShotsAnimationManager) -> [AnyObject] {
-        return shots.prefix(3) as! [AnyObject]
+        return Array(shots.prefix(3))
     }
 }
