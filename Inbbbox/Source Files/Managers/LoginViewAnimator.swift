@@ -229,7 +229,7 @@ private extension LoginViewAnimator {
     
     func slideOutBallWithFadingOut() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            animations.moveAnimation([view!.dribbbleLogoImageView, view!.loginButton], duration: 0.5, fade: .FadeOut, transition: CGPoint(x: 0, y: 200)) {
+            animations.moveAnimation([view!.dribbbleLogoImageView, view!.loginButton], duration: 0.3, fade: .FadeOut, transition: CGPoint(x: 0, y: 200)) {
                 fulfill()
             }
         }

@@ -19,7 +19,7 @@ class CenterButtonTabBarController: UITabBarController {
         bucketsViewController.tabBarItem = UITabBarItem(title: "Buckets", image: UIImage(named: "ic-buckets"), selectedImage: UIImage(named: "ic-buckets-active"))
         let followingViewController = UIViewController()
         followingViewController.tabBarItem = UITabBarItem(title: "Following", image: UIImage(named: "ic-following"), selectedImage: UIImage(named: "ic-following-active"))
-        let accountViewController = UIViewController()
+        let accountViewController = UINavigationController(rootViewController: SettingsViewController())
         accountViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "ic-account"), selectedImage: UIImage(named: "ic-account-active"))
         viewControllers = [likesViewController, bucketsViewController, shotsCollectionViewController, followingViewController, accountViewController]
         selectedViewController = shotsCollectionViewController

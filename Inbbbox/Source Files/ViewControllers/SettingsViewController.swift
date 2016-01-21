@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Async
 
 class SettingsViewController: UIViewController {
     
@@ -32,8 +31,8 @@ class SettingsViewController: UIViewController {
     
     override func loadView() {
         aView = loadViewWithClass(GroupedBaseTableView.self)
+        aView?.backgroundColor = UIColor.backgroundGrayColor()
         aView?.tableView.tableHeaderView = SettingsTableHeaderView(size: CGSize (width: CGRectGetWidth(aView!.bounds), height: 250))
-        aView?.tableView.backgroundColor = UIColor.backgroundGrayColor()
     }
     
     override func viewDidLoad() {
@@ -41,6 +40,7 @@ class SettingsViewController: UIViewController {
     
         setupBarButtons()
         setupTableView()
+        provideDataForHeader()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -55,9 +55,9 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: ModelUpdatable {
     
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath]) {
-        for indexPath in indexPaths {
-            if let cell = aView?.tableView.cellForRowAtIndexPath(indexPath) {
-                let item = viewModel[indexPath.section][indexPath.row]
+        indexPaths.forEach {
+            if let cell = aView?.tableView.cellForRowAtIndexPath($0) {
+                let item = viewModel[$0.section][$0.row]
                 configureSettingCell(cell, forItem: item)
             }
         }
@@ -122,9 +122,9 @@ extension SettingsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0: return NSLocalizedString("NOTIFICATIONS", comment: "")
-        case 1: return NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
-        default: return ""
+            case 0: return NSLocalizedString("NOTIFICATIONS", comment: "")
+            case 1: return NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
+            default: return ""
         }
     }
     
@@ -133,11 +133,14 @@ extension SettingsViewController: UITableViewDelegate {
         let item = viewModel[indexPath.section][indexPath.row]
         
         if let item = item as? DateItem {
-            navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: { date -> Void in
+            
+            let completion: (NSDate -> Void) = { date in
                 item.date = date
                 item.update()
                 self.didChangeItemsAtIndexPaths([indexPath])
-            }), animated: true)
+            }
+            
+            navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: completion), animated: true)
         }
         tableView.deselectRowIfSelectedAnimated(true)
     }
@@ -187,6 +190,19 @@ private extension SettingsViewController {
     func setupBarButtons() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Log Out", comment: ""), style: .Plain, target: self, action: "didTapLogOutButton:")
     }
+    
+    func provideDataForHeader() {
+        
+        guard let header = aView?.tableView.tableHeaderView as? SettingsTableHeaderView else {
+            return
+        }
+        
+        header.usernameLabel.text = viewModel.username()
+        
+        viewModel.fetchAvatar { image in
+            header.avatarView.imageView.image = image
+        }
+    }
 }
 
 // MARK: Actions
@@ -194,7 +210,9 @@ private extension SettingsViewController {
 extension SettingsViewController {
     
     func didTapLogOutButton(_: UIBarButtonItem) {
-        // NGRTodo: implement me!
+        Authenticator.logout()
+        provideDataForHeader()
+        //NGRToDo: Remember to hide settings when user is logged out
     }
 }
 

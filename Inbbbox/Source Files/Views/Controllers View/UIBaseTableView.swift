@@ -17,8 +17,10 @@ class UIBaseTableView: UIView {
     }
     
     init(frame: CGRect = CGRectZero, tableViewStyle: UITableViewStyle) {
+        
         tableView = UITableView(frame: frame, style: tableViewStyle)
         tableView.hideSeparatorForEmptyCells()
+        tableView.backgroundColor = UIColor.backgroundGrayColor()
         
         super.init(frame: frame)
         

@@ -104,7 +104,7 @@ private extension TabBarAnimator {
     
     func fadeCenterButtonIn() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            UIView.animateWithDuration(0.5, delay: 0.2, options: [],  animations: {
+            UIView.animateWithDuration(0.5, delay: 0.1, options: [],  animations: {
                 self.centerButton.alpha = 1
             }, completion: { _ in
                 fulfill()

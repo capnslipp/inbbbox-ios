@@ -6,8 +6,8 @@
 //  Copyright © 2015 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import Async
 
 protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
@@ -19,7 +19,7 @@ protocol AlertDisplayable: class {
 
 class SettingsViewModel: GroupedListViewModel {
     
-    var title = NSLocalizedString("Account", comment: "")
+    let title = NSLocalizedString("Account", comment: "")
     
     private weak var delegate: ModelUpdatable?
     private weak var alertDelegate: AlertDisplayable?
@@ -60,7 +60,7 @@ class SettingsViewModel: GroupedListViewModel {
         super.init(items: [
             [reminderItem, reminderDateItem],
             [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]
-            ] as [[GroupItem]])
+        ] as [[GroupItem]])
         
         // MARK: onValueChanged blocks
         
@@ -111,6 +111,29 @@ class SettingsViewModel: GroupedListViewModel {
     dynamic func didProvideNotificationSettings() {
         Settings.localNotificationSettingsProvided = true
         registerLocalNotification()
+    }
+    
+    func username() -> String? {
+        return UserStorage.currentUser?.username
+    }
+    
+    func fetchAvatar(completion: UIImage? -> Void) {
+        
+        guard let avatarURL = UserStorage.currentUser?.avatarString, url = NSURL(string: avatarURL) else {
+            completion(nil)
+            return
+        }
+        
+        var image: UIImage?
+        
+        Async.background {
+            if let data = NSData(contentsOfURL: url) {
+                image = UIImage(data: data)
+            }
+            
+        }.main {
+            completion(image)
+        }
     }
 }
 

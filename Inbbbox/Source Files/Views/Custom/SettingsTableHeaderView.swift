@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Async
 
 class SettingsTableHeaderView: UIView, Reusable {
     
@@ -14,8 +15,8 @@ class SettingsTableHeaderView: UIView, Reusable {
         return "SettingsTableHeaderViewReuseIdentifier"
     }
     
-    private var avatarView: AvatarView!
-    private let userName = UILabel()
+    private(set) var avatarView: AvatarView!
+    private(set) var usernameLabel = UILabel.newAutoLayoutView()
     
     private let avatarSize = CGSize(width: 176, height: 176)
     
@@ -28,18 +29,13 @@ class SettingsTableHeaderView: UIView, Reusable {
         backgroundColor = UIColor.clearColor()
         
         avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize))
-        
-        if let data = NSData(contentsOfURL: NSURL(string: "https://www.gravatar.com/avatar/348f80fa39b3d1d66bd68440ea229192?s=200")!) { // NGRTemp: will be removed
-            avatarView.imageView.image = UIImage(data: data) //NGRFix: provide the image
-        }
-        avatarView.imageView.backgroundColor = UIColor.lightGrayColor() // NGRTemp: temp color
+        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
         addSubview(avatarView)
         
-        userName.textAlignment = .Center
-        userName.text = "joke1410" //NGRFix: provide the name
-        userName.textColor = UIColor.textDarkColor()
-        userName.font = UIFont.helveticaFont(.Neue, size: 23)
-        addSubview(userName)
+        usernameLabel.textAlignment = .Center
+        usernameLabel.textColor = UIColor.textDarkColor()
+        usernameLabel.font = UIFont.helveticaFont(.Neue, size: 23)
+        addSubview(usernameLabel)
         
         setNeedsUpdateConstraints()
     }
@@ -62,10 +58,10 @@ class SettingsTableHeaderView: UIView, Reusable {
             avatarView.autoSetDimensionsToSize(avatarSize)
             avatarView.autoAlignAxisToSuperviewAxis(.Vertical)
             
-            userName.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 14)
-            userName.autoSetDimension(.Height, toSize: 28)
-            userName.autoMatchDimension(.Width, toDimension: .Width, ofView: self)
-            userName.autoAlignAxis(.Vertical, toSameAxisOfView: avatarView)
+            usernameLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 14)
+            usernameLabel.autoSetDimension(.Height, toSize: 28)
+            usernameLabel.autoMatchDimension(.Width, toDimension: .Width, ofView: self)
+            usernameLabel.autoAlignAxis(.Vertical, toSameAxisOfView: avatarView)
         }
         
         super.updateConstraints()
