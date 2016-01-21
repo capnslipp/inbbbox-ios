@@ -18,8 +18,8 @@ class ShotDetailsViewController: UIViewController {
     weak var delegate: ShotDetailsViewControllerDelegate?
     var closeButton = UIButton()
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated);
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         setupUI()
         setupButtonsInteractions()
