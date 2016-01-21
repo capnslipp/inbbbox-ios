@@ -8,6 +8,7 @@
 
 import UIKit
 import EasyAnimation
+import Async
 
 class LoginViewAnimations {
     
@@ -110,15 +111,14 @@ class LoginViewAnimations {
             return
         }
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        Async.main(after: duration) {
             self.blinkAnimation(views, duration: duration)
         }
         
         UIView.animateWithDuration(duration * 0.5, animations: {
             views.forEach { $0.alpha = 0.5 }
-            }, completion: { _ in
-                UIView.animateWithDuration(duration * 0.5) { views.forEach { $0.alpha = 1.0 } }
+        }, completion: { _ in
+            UIView.animateWithDuration(duration * 0.5) { views.forEach { $0.alpha = 1.0 } }
         })
     }
     
@@ -128,8 +128,7 @@ class LoginViewAnimations {
             return
         }
         
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(duration * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) {
+        Async.main(after: duration) {
             self.bounceAnimation(views, duration: duration)
         }
         
