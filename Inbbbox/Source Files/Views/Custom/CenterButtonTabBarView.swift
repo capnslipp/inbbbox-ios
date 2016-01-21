@@ -13,11 +13,11 @@ class CenterButtonTabBarView: UITabBar {
     private(set) var followingItemViewVerticalConstraint: NSLayoutConstraint?
     private(set) var accountItemViewVerticalConstraint: NSLayoutConstraint?
 
-    let likesItemView = CustomTabBarItemView(name: "Likes", icon: UIImage(named: "ic-likes"))
-    let bucketsItemView = CustomTabBarItemView(name: "Buckets", icon: UIImage(named: "ic-buckets"))
-    let centerButton = RoundedButton()
-    let followingItemView = CustomTabBarItemView(name: "Following", icon: UIImage(named: "ic-following"))
-    let accountItemView = CustomTabBarItemView(name: "Account", icon: UIImage(named: "ic-account"))
+    private let likesItemView = CustomTabBarItemView(name: "Likes", icon: UIImage(named: "ic-likes"))
+    private let bucketsItemView = CustomTabBarItemView(name: "Buckets", icon: UIImage(named: "ic-buckets"))
+    private let followingItemView = CustomTabBarItemView(name: "Following", icon: UIImage(named: "ic-following"))
+    private let accountItemView = CustomTabBarItemView(name: "Account", icon: UIImage(named: "ic-account"))
+    private let dummyItemView = CustomTabBarItemView(name: "", icon: nil)
 
 //    MARK: - Life cycle
 
@@ -36,11 +36,9 @@ class CenterButtonTabBarView: UITabBar {
 
         bucketsItemView.configureForAutoLayout()
         addSubview(bucketsItemView)
-
-        centerButton.configureForAutoLayout()
-        centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
-        centerButton.backgroundColor = UIColor.whiteColor()
-        addSubview(centerButton)
+        
+        dummyItemView.configureForAutoLayout()
+        addSubview(dummyItemView)
 
         followingItemView.configureForAutoLayout()
         addSubview(followingItemView)
@@ -49,43 +47,31 @@ class CenterButtonTabBarView: UITabBar {
         addSubview(accountItemView)
     }
 
-//    MARK: - UIView
-
-    override func addSubview(view: UIView) {
-        super.addSubview(view)
-
-        bringSubviewToFront(centerButton)
-    }
-
-    override class func requiresConstraintBasedLayout() -> Bool {
-        return true
-    }
-
     override func updateConstraints() {
 
-//        NGRTemp: temporary implementation
-
         if !didSetConstraints {
+            didSetConstraints = true
+            
             likesItemViewVerticalConstraint = likesItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
             likesItemView.autoPinEdgeToSuperviewEdge(.Left)
             likesItemView.autoPinEdge(.Right, toEdge: .Left, ofView: bucketsItemView)
 
             bucketsItemViewVerticalConstraint = bucketsItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
-            bucketsItemView.autoPinEdge(.Right, toEdge: .Left, ofView: centerButton, withOffset: -3)
+            bucketsItemView.autoPinEdge(.Right, toEdge: .Left, ofView: dummyItemView, withOffset: -3)
             bucketsItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: likesItemView)
 
-            centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
-            centerButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 8)
+            dummyItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
+            dummyItemView.autoPinEdgeToSuperviewEdge(.Bottom)
+            dummyItemView.autoAlignAxisToSuperviewAxis(.Vertical)
+            dummyItemView.autoSetDimension(.Width, toSize: 70)
 
             followingItemViewVerticalConstraint = followingItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
-            followingItemView.autoPinEdge(.Left, toEdge: .Right, ofView: centerButton, withOffset: 2.5)
+            followingItemView.autoPinEdge(.Left, toEdge: .Right, ofView: dummyItemView, withOffset: 2.5)
             followingItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: accountItemView)
 
             accountItemViewVerticalConstraint = accountItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
             accountItemView.autoPinEdge(.Left, toEdge: .Right, ofView: followingItemView)
             accountItemView.autoPinEdgeToSuperviewEdge(.Right)
-
-            didSetConstraints = true
         }
 
         super.updateConstraints()

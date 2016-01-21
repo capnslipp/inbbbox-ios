@@ -9,7 +9,12 @@
 import UIKit
 import PromiseKit
 
+protocol LoginViewAnimatorDelegate {
+    func styleForStatusBar(style: UIStatusBarStyle)
+}
+
 class LoginViewAnimator {
+    
     
     enum StopAnimationType {
         case Continue, Undo
@@ -17,12 +22,14 @@ class LoginViewAnimator {
     
     private weak var view: LoginView?
     private var animations = LoginViewAnimations()
+    private var delegate: LoginViewAnimatorDelegate?
     
     private var loginButtonTitle: String?
     private let loopDuration = NSTimeInterval(1)
     
-    init(view: LoginView?) {
+    init(view: LoginView?, delegate: LoginViewAnimatorDelegate?) {
         self.view = view
+        self.delegate = delegate
     }
     
     func startLoginAnimation() {
@@ -59,6 +66,10 @@ class LoginViewAnimator {
             
             firstly {
                 when(self.loadingFade(.FadeOut), self.slideInterfaceUp(), self.sloganFadeOut(), self.saturateBackground())
+            }.then {
+                self.changeStatusBarStyle()
+            }.then {
+                when(self.animateTabBar(), self.slideOutBallWithFadingOut(), self.addInbbboxLogo(fromTop: 50))
             }.then { _ -> Void in
                 completion?()
             }
@@ -186,5 +197,44 @@ private extension LoginViewAnimator {
                 fulfill()
             }
         }
+    }
+    
+    func addInbbboxLogo(fromTop y: CGFloat) -> Promise<Void> {
+        
+        let logoImageView = UIImageView(image: UIImage(named: "logo-type-shots"))
+        logoImageView.alpha = 0.0
+        
+        let size = logoImageView.image?.size ?? CGSizeZero
+        let origin = CGPoint(x: CGRectGetMidX(view!.frame) - size.width * 0.5, y: y)
+        logoImageView.frame = CGRect(origin: origin, size: size)
+        
+        view!.insertSubview(logoImageView, belowSubview: view!.pinkOverlayView)
+        
+        return Promise<Void> { fulfill, _ in
+            UIView.animateWithDuration(0.5, animations: {
+                logoImageView.alpha = 1
+            }, completion: { _ in
+                fulfill()
+            })
+        }
+    }
+    
+    func slideOutBallWithFadingOut() -> Promise<Void> {
+        return Promise<Void> { fulfill, _ in
+            animations.moveAnimation([view!.dribbbleLogoImageView, view!.loginButton], duration: 0.5, fade: .FadeOut, transition: CGPoint(x: 0, y: 200)) {
+                fulfill()
+            }
+        }
+    }
+    
+    func animateTabBar() -> Promise<Void> {
+        
+        let tabBarAnimator = TabBarAnimator(view: view!)
+        return tabBarAnimator.animateTabBar()
+    }
+    
+    func changeStatusBarStyle() -> Promise<Void> {
+        delegate?.styleForStatusBar(.Default)
+        return Promise()
     }
 }

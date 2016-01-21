@@ -70,16 +70,15 @@
 		5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B11C34009300657751 /* FormatterSpec.swift */; };
 		5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */; };
 		5EE041B61C34227600657751 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B51C34227600657751 /* CollectionExtension.swift */; };
+		5EF3097D1C50FD7E00728E0A /* TabBarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF3097C1C50FD7E00728E0A /* TabBarAnimator.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
-		BEEE90CAA4B9E3F0DC786D41 /* TabBarAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE94E8395DC117565E4D67 /* TabBarAnimationViewController.swift */; };
 		BEEE92DB2FA773AEA5E9EBB5 /* CenterButtonTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */; };
 		BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */; };
 		BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9534945990DF5595E62C /* ViewControllerMock.swift */; };
 		BEEE9517436BBAF8AD9E06EB /* ShotsAnimationManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* ShotsAnimationManagerSpec.swift */; };
 		BEEE95BCBAB8072AE0F35D42 /* ShotsAnimationManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EAE816915C3640FD627 /* ShotsAnimationManagerDelegateMock.swift */; };
 		BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */; };
-		BEEE9785C69A23D3FC3F3A4B /* TabBarAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9A749C1CA7728C8FE953 /* TabBarAnimationView.swift */; };
 		BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */; };
 		BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F60853FDC4BABA4CBB9 /* CustomTabBarItemView.swift */; };
 		BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */; };
@@ -234,14 +233,13 @@
 		5EE041B11C34009300657751 /* FormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterSpec.swift; sourceTree = "<group>"; };
 		5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSourceSpec.swift; sourceTree = "<group>"; };
 		5EE041B51C34227600657751 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		5EF3097C1C50FD7E00728E0A /* TabBarAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarAnimator.swift; sourceTree = "<group>"; };
 		BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		BEEE94E8395DC117565E4D67 /* TabBarAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarAnimationViewController.swift; sourceTree = "<group>"; };
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarController.swift; sourceTree = "<group>"; };
 		BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayoutSpec.swift; sourceTree = "<group>"; };
 		BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarView.swift; sourceTree = "<group>"; };
 		BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
-		BEEE9A749C1CA7728C8FE953 /* TabBarAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarAnimationView.swift; sourceTree = "<group>"; };
 		BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9D82400E6103A1878E7E /* ShotsAnimationManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimationManagerSpec.swift; sourceTree = "<group>"; };
 		BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterMock.swift; sourceTree = "<group>"; };
@@ -652,6 +650,7 @@
 				5E50820B1C3131EF00093191 /* AutoScrollableShotsAnimator.swift */,
 				5EBC0F4D1C4D1DF000BD2DD5 /* LoginViewAnimator.swift */,
 				5ED3642F1C4E3F81009E5B2F /* LoginViewAnimations.swift */,
+				5EF3097C1C50FD7E00728E0A /* TabBarAnimator.swift */,
 			);
 			name = Animators;
 			sourceTree = "<group>";
@@ -709,7 +708,6 @@
 				BF6A6E081C1ED166001EDAB8 /* ListViewModel.swift */,
 				BF6A6E0A1C1ED16E001EDAB8 /* GroupedListViewModel.swift */,
 				F09307C91C240656005F5111 /* SettingsViewModel.swift */,
-				BEEE94E8395DC117565E4D67 /* TabBarAnimationViewController.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1027,6 +1025,7 @@
 				5EDC25F81C32AF680045B759 /* StringExtension.swift in Sources */,
 				5EBC0F4E1C4D1DF000BD2DD5 /* LoginViewAnimator.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
+				5EF3097D1C50FD7E00728E0A /* TabBarAnimator.swift in Sources */,
 				F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */,
 				F092E25F1C3FD47200593D18 /* ShotManagedObject.swift in Sources */,
 				5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */,
@@ -1083,8 +1082,6 @@
 				5ED364301C4E3F81009E5B2F /* LoginViewAnimations.swift in Sources */,
 				BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */,
 				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
-				BEEE90CAA4B9E3F0DC786D41 /* TabBarAnimationViewController.swift in Sources */,
-				BEEE9785C69A23D3FC3F3A4B /* TabBarAnimationView.swift in Sources */,
 				BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */,
 				BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */,
 				BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */,

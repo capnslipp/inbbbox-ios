@@ -15,10 +15,15 @@ class LoginViewController: UIViewController {
     private weak var aView: LoginView?
     private var viewAnimator: LoginViewAnimator?
     private var onceTokenForScrollToMiddleInstantly = dispatch_once_t(0)
+    private var statusBarStyle: UIStatusBarStyle = .LightContent {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
 
     override func loadView() {
         aView = loadViewWithClass(LoginView.self)
-        viewAnimator = LoginViewAnimator(view: aView)
+        viewAnimator = LoginViewAnimator(view: aView, delegate: self)
     }
 
     override func viewDidLoad() {
@@ -49,7 +54,7 @@ class LoginViewController: UIViewController {
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+        return statusBarStyle
     }
 
     deinit {
@@ -65,13 +70,16 @@ extension LoginViewController {
         viewAnimator?.startLoginAnimation()
         
         let interactionHandler: (UIViewController -> Void) = { controller in
-            self.presentViewController(controller, animated: true, completion: nil)
+            after(0.6).then {
+                self.presentViewController(controller, animated: true, completion: nil)
+            }
         }
+        
         let authenticator = Authenticator(interactionHandler: interactionHandler)
         
         firstly {
             authenticator.loginWithService(.Dribbble)
-        }.then { _ -> Void in
+        }.then {
             self.viewAnimator?.stopAnimationWithType(.Continue) {
                 self.presentNextViewController()
             }
@@ -82,6 +90,13 @@ extension LoginViewController {
     
     func loginAsGuestButtonDidTap(_: UIButton) {
         presentNextViewController()
+    }
+}
+
+extension LoginViewController: LoginViewAnimatorDelegate {
+    
+    func styleForStatusBar(style: UIStatusBarStyle) {
+        statusBarStyle = style
     }
 }
 
