@@ -32,7 +32,7 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
             return
         }
 
-        collectionView.backgroundColor = UIColor.backgroundGrayColor()
+        collectionView.backgroundView = ShotsCollectionBackgroundView()
         collectionView.pagingEnabled = true
         collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
         tabBarController?.tabBar.userInteractionEnabled = false

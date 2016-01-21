@@ -53,6 +53,10 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 it("should have paging enabled") {
                     expect(collectionView.pagingEnabled).to(beTruthy())
                 }
+
+                it("should have proper background view") {
+                    expect(collectionView.backgroundView).to(beAKindOf(ShotsCollectionBackgroundView))
+                }
             }
         }
 

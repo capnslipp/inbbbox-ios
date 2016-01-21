@@ -23,7 +23,7 @@ extension UIColor {
     }
 
     class func backgroundGrayColor() -> UIColor {
-        return RGBA(246, 248, 248, 1)
+        return UIColor(white: 0.93, alpha: 1.0)
     }
 
     class func textDarkColor() -> UIColor {

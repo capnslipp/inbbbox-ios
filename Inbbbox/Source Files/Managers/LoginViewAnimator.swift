@@ -197,7 +197,7 @@ private extension LoginViewAnimator {
             let transition = CGPoint(x: 0, y: -CGRectGetHeight(frame))
             
             let whiteView = UIView(frame: frame)
-            whiteView.backgroundColor = UIColor(white: 0.93, alpha: 1.0)
+            whiteView.backgroundColor = UIColor.backgroundGrayColor()
             whiteView.alpha = 0.0
             view!.insertSubview(whiteView, belowSubview: view!.pinkOverlayView)
             
