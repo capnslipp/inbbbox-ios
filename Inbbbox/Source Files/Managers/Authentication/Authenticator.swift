@@ -36,7 +36,9 @@ class Authenticator {
             
             controller = OAuthViewController(oAuthAuthorizableService: oAuthAuthorizableService) { controller in
                 if trySilent {
-                    self.interactionHandler(UINavigationController(rootViewController: controller))
+                    
+                    let controller = self.navigationControllerByEmbeddingController(controller)
+                    self.interactionHandler(controller)
                 }
             }
         } else {
@@ -46,7 +48,8 @@ class Authenticator {
         }
         
         if !trySilent {
-            interactionHandler(UINavigationController(rootViewController: controller))
+            let controller = self.navigationControllerByEmbeddingController(controller)
+            interactionHandler(controller)
         }
         
         return Promise<Void> { fulfill, reject in
@@ -104,6 +107,13 @@ private extension Authenticator {
     func persistUser(user: User) -> Promise<Void> {
         UserStorage.storeUser(user)
         return Promise()
+    }
+    
+    func navigationControllerByEmbeddingController(controller: UIViewController) -> UINavigationController{
+        let navigationController = UINavigationController(rootViewController: controller)
+        navigationController.navigationBar.barStyle = .Black
+        
+        return navigationController
     }
 }
 
