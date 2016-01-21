@@ -89,6 +89,6 @@ private extension LoginViewController {
     
     //NGRTemp: temporary implementation
     func presentNextViewController() {
-        self.presentViewController(ShotsCollectionViewController(), animated: false, completion: nil)
+        self.presentViewController(CenterButtonTabBarController(), animated: false, completion: nil)
     }
 }
