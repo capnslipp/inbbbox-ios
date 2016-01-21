@@ -69,11 +69,9 @@ class Authenticator {
         }
     }
     
-    //NGRTodo: Implementation needed. DO NOT USE
-    func logoutFromService(service: Service) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
-            fatalError("Missing implementation")
-        }
+    class func logout() {
+        UserStorage.clear()
+        TokenStorage.clear()
     }
 }
 
@@ -116,4 +114,3 @@ private extension Authenticator {
         return navigationController
     }
 }
-

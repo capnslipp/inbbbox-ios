@@ -350,14 +350,12 @@
 			isa = PBXGroup;
 			children = (
 				5E4857B41C2805E10027B38A /* Authentication */,
+				5EF3097B1C50F46700728E0A /* Animators */,
 				5A499B6C1C35417B009AB421 /* ShotsAnimationManager.swift */,
 				F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */,
-				5E50820B1C3131EF00093191 /* AutoScrollableShotsAnimator.swift */,
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				F092E26A1C3FD6F900593D18 /* ShotOperationSynchronizer.swift */,
 				F08830F81C43944300F530A2 /* ShotOperationRequester.swift */,
-				5EBC0F4D1C4D1DF000BD2DD5 /* LoginViewAnimator.swift */,
-				5ED3642F1C4E3F81009E5B2F /* LoginViewAnimations.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -643,6 +641,16 @@
 				5EDB832D1C48DF0000FBCA05 /* SharedQuerySpec.swift */,
 			);
 			path = SharedExamples;
+			sourceTree = "<group>";
+		};
+		5EF3097B1C50F46700728E0A /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				5E50820B1C3131EF00093191 /* AutoScrollableShotsAnimator.swift */,
+				5EBC0F4D1C4D1DF000BD2DD5 /* LoginViewAnimator.swift */,
+				5ED3642F1C4E3F81009E5B2F /* LoginViewAnimations.swift */,
+			);
+			name = Animators;
 			sourceTree = "<group>";
 		};
 		BF47EE2B1B4BBAF8002822D7 /* Extensions */ = {
