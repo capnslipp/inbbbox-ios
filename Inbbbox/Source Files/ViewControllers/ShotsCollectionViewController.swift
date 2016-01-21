@@ -11,7 +11,7 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
     var animationManager = ShotsAnimationManager()
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
-    var viewControllerPresenter: DefaultViewControllerPresenter?
+    lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
 
 //    NGRTemp: temporary implementation - remove after adding real shots
     var shots = ["shot1", "shot2", "shot3", "shot4", "shot5", "shot6", "shot7", "shot8", "shot9", "shot10"]
@@ -69,14 +69,13 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         
-        self.definesPresentationContext = true;
+        definesPresentationContext = true
         
         let shotDetailsVC = ShotDetailsViewController()
         shotDetailsVC.modalPresentationStyle = .OverCurrentContext
         shotDetailsVC.delegate = self
         
-        viewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
-        viewControllerPresenter?.presentViewController(shotDetailsVC, animated: true, completion: nil)
+        viewControllerPresenter.presentViewController(shotDetailsVC, animated: true, completion: nil)
     }
 
 //    MARK: - InitialShotsAnimationManagerDelegate
@@ -93,6 +92,6 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
 extension ShotsCollectionViewController: ShotDetailsViewControllerDelegate {
     
     func didFinishPresentingDetails(sender: ShotDetailsViewController) {
-        viewControllerPresenter?.dismissViewControllerAnimated(true, completion: nil)
+        viewControllerPresenter.dismissViewControllerAnimated(true, completion: nil)
     }
 }

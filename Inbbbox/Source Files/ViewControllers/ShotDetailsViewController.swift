@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol ShotDetailsViewControllerDelegate: class {
-    func didFinishPresentingDetails(sender: ShotDetailsViewController) -> Void
+    func didFinishPresentingDetails(sender: ShotDetailsViewController)
 }
 
 class ShotDetailsViewController: UIViewController {
@@ -52,21 +52,8 @@ class ShotDetailsViewController: UIViewController {
         closeButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
         view.addSubview(closeButton)
         
-        NSLayoutConstraint(item: closeButton,
-            attribute: .CenterY,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Top,
-            multiplier: 1.0,
-            constant: 64.0).active = true
-        
-        NSLayoutConstraint(item: closeButton,
-            attribute: .Right,
-            relatedBy: .Equal,
-            toItem: view,
-            attribute: .Right,
-            multiplier: 1.0,
-            constant: -20.0).active = true
+        closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: view, withOffset: 44)
+        closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: view, withOffset: -20.0)
         
         closeButton.addTarget(self, action: "closeButtonTapped", forControlEvents: .TouchUpInside)
     }
