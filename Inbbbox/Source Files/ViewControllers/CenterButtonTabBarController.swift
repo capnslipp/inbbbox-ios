@@ -12,15 +12,16 @@ class CenterButtonTabBarController: UITabBarController {
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
-
+        
         let likesViewController = UIViewController()
-        likesViewController.tabBarItem = UITabBarItem(title: "Likes", image: UIImage(named: "ic-likes"), selectedImage: UIImage(named: "ic-likes-active"))
+        likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Like", comment: ""), imageName: "ic-likes")
         let bucketsViewController = UIViewController()
-        bucketsViewController.tabBarItem = UITabBarItem(title: "Buckets", image: UIImage(named: "ic-buckets"), selectedImage: UIImage(named: "ic-buckets-active"))
+        bucketsViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Buckets", comment: ""), imageName: "ic-buckets")
         let followingViewController = UIViewController()
-        followingViewController.tabBarItem = UITabBarItem(title: "Following", image: UIImage(named: "ic-following"), selectedImage: UIImage(named: "ic-following-active"))
+        followingViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Following", comment: ""), imageName: "ic-following")
         let accountViewController = UINavigationController(rootViewController: SettingsViewController())
-        accountViewController.tabBarItem = UITabBarItem(title: "Account", image: UIImage(named: "ic-account"), selectedImage: UIImage(named: "ic-account-active"))
+        accountViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Account", comment: ""), imageName: "ic-account")
+        
         viewControllers = [likesViewController, bucketsViewController, shotsCollectionViewController, followingViewController, accountViewController]
         selectedViewController = shotsCollectionViewController
     }
@@ -48,7 +49,23 @@ class CenterButtonTabBarController: UITabBarController {
 
 //    MARK: - Actions
 
-    func didTapCenterButton(button: UIButton) {
+    func didTapCenterButton(_: UIButton) {
         selectedViewController = shotsCollectionViewController
     }
+}
+
+private extension CenterButtonTabBarController {
+    
+    func tabBarItemWithTitle(title: String, imageName: String) -> UITabBarItem {
+        
+        let image = UIImage(named: imageName)?.imageWithRenderingMode(.AlwaysOriginal)
+        let selectedImage = UIImage(named: imageName + "-active")?.imageWithRenderingMode(.AlwaysOriginal)
+        
+        let tabBarItem = UITabBarItem(title: title, image: image, selectedImage: selectedImage)
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.pinkColor()], forState: .Selected)
+        tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.tabBarGrayColor()], forState: .Normal)
+        
+        return tabBarItem
+    }
+    
 }

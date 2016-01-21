@@ -14,15 +14,14 @@ class CustomTabBarItemView: UIView {
 
     convenience init(name: String?, icon: UIImage?) {
         self.init(frame: CGRectZero)
+        
         nameLabel.font = UIFont.systemFontOfSize(10)
         nameLabel.textColor = UIColor.tabBarGrayColor()
         nameLabel.text = name
         addSubview(nameLabel)
         nameLabel.configureForAutoLayout()
 
-        let templateRederedImage = icon?.imageWithRenderingMode(.AlwaysTemplate)
-        iconImageView.tintColor = UIColor.tabBarGrayColor()
-        iconImageView.image = templateRederedImage
+        iconImageView.image = icon?.imageWithRenderingMode(.AlwaysOriginal)
         addSubview(iconImageView)
         iconImageView.configureForAutoLayout()
     }

@@ -35,7 +35,7 @@ extension UIColor {
     }
 
     class func tabBarGrayColor() -> UIColor {
-        return RGBA(146, 146, 146, 1)
+        return RGBA(41, 41, 41, 1)
     }
 
     class func randomColor() -> UIColor {
