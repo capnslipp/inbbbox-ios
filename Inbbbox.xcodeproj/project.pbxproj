@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300814381C50FB920047E85C /* ShotDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300814371C50FB920047E85C /* ShotDetailsView.swift */; };
 		300BBF161C4F947900721D13 /* ShotDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300BBF151C4F947900721D13 /* ShotDetailsViewController.swift */; };
 		5A4005E01C2418760010A500 /* HeightAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005DF1C2418760010A500 /* HeightAware.swift */; };
 		5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */; };
@@ -157,6 +158,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		300814371C50FB920047E85C /* ShotDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsView.swift; sourceTree = "<group>"; };
 		300BBF151C4F947900721D13 /* ShotDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewController.swift; sourceTree = "<group>"; };
 		5A4005DF1C2418760010A500 /* HeightAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeightAware.swift; sourceTree = "<group>"; };
 		5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				5E50820D1C3132AF00093191 /* LoginView.swift */,
 				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
 				BEEE9A749C1CA7728C8FE953 /* TabBarAnimationView.swift */,
+				300814371C50FB920047E85C /* ShotDetailsView.swift */,
 			);
 			path = "Controllers View";
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 				5E50820A1C31305C00093191 /* AutoScrollableShotsView.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,
 				5E4857C91C2854F80027B38A /* ShotsQuery.swift in Sources */,
+				300814381C50FB920047E85C /* ShotDetailsView.swift in Sources */,
 				5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
