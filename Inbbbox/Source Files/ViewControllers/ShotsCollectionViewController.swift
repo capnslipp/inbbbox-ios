@@ -78,7 +78,7 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
         viewControllerPresenter.presentViewController(shotDetailsVC, animated: true, completion: nil)
     }
 
-//    MARK: - InitialShotsAnimationManagerDelegate
+//    MARK: - ShotsAnimationManagerDelegate
 
     func collectionViewForAnimationManager(animationManager: ShotsAnimationManager) -> UICollectionView? {
         return collectionView

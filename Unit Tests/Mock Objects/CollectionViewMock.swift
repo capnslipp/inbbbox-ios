@@ -14,6 +14,7 @@ class CollectionViewMock: UICollectionView {
     let deleteItemsAtIndexPathsStub = Stub<[NSIndexPath], Void>()
     let performBatchUpdatesStub = Stub<((() -> Void)?, (Bool -> Void)?), Void>()
     let reloadDataStub = Stub<Void, Void>()
+    let dequeueReusableCellWithReuseIdentifierStub = Stub<(String, NSIndexPath), UICollectionViewCell>()
 
     convenience init() {
         self.init(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -37,5 +38,9 @@ class CollectionViewMock: UICollectionView {
 
     override func reloadData() {
         try! reloadDataStub.invoke()
+    }
+
+    override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        return try! dequeueReusableCellWithReuseIdentifierStub.invoke(identifier, indexPath)
     }
 }
