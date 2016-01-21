@@ -11,6 +11,7 @@ import PromiseKit
 
 protocol LoginViewAnimatorDelegate {
     func styleForStatusBar(style: UIStatusBarStyle)
+    func shrinkAnimationDidFinish()
 }
 
 class LoginViewAnimator {
@@ -32,7 +33,7 @@ class LoginViewAnimator {
         self.delegate = delegate
     }
     
-    func startLoginAnimation() {
+    func startLoginAnimation(stopAfterShrink stop: Bool = false) {
 
         guard let view = view where !view.isAnimating else { return }
         
@@ -41,10 +42,17 @@ class LoginViewAnimator {
         }.then {
             self.shrinkToBallWithRotation()
         }.then {
-            when(self.ballBounce(), self.loadingFade(.FadeIn))
+            if stop {
+                self.delegate?.shrinkAnimationDidFinish()
+                // break chain:
+                throw NSError(domain: "", code: 0, message: "")
+            }
+            
+            return when(self.ballBounce(), self.loadingFade(.FadeIn))
         }.then {
             self.loadingBlink()
-        }
+        }.error { _ in /* do nothing */}
+        
     }
     
     func stopAnimationWithType(type: StopAnimationType, completion: (Void -> Void)? = nil) {

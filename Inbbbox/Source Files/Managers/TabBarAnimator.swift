@@ -37,7 +37,7 @@ class TabBarAnimator {
         let buttonSize = centerButton.intrinsicContentSize()
         centerButton.frame = CGRect(
             x: CGRectGetMidX(view.frame) - buttonSize.width * 0.5,
-            y: CGRectGetMaxY(view.frame) - tabBarHeight - buttonSize.height * 0.5 + 5,
+            y: CGRectGetMaxY(view.frame) - tabBarHeight - buttonSize.height * 0.5 + 6,
             width: buttonSize.width,
             height: buttonSize.height
         )

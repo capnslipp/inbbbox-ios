@@ -7,6 +7,15 @@ import UIKit
 class CenterButtonTabBarView: UITabBar {
 
     private var didSetConstraints = false
+    private var dummyItemScreenSizeDependentWidth: CGFloat {
+        get {
+            switch CGRectGetWidth(frame) {
+                case 0..<375: return 60
+                case 376..<100000: return 76
+                default: return 70
+            }
+        }
+    }
 
     private(set) var likesItemViewVerticalConstraint: NSLayoutConstraint?
     private(set) var bucketsItemViewVerticalConstraint: NSLayoutConstraint?
@@ -63,7 +72,7 @@ class CenterButtonTabBarView: UITabBar {
             dummyItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
             dummyItemView.autoPinEdgeToSuperviewEdge(.Bottom)
             dummyItemView.autoAlignAxisToSuperviewAxis(.Vertical)
-            dummyItemView.autoSetDimension(.Width, toSize: 70)
+            dummyItemView.autoSetDimension(.Width, toSize: dummyItemScreenSizeDependentWidth)
 
             followingItemViewVerticalConstraint = followingItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
             followingItemView.autoPinEdge(.Left, toEdge: .Right, ofView: dummyItemView, withOffset: 2.5)

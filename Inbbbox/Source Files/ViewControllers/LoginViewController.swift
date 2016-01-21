@@ -89,7 +89,7 @@ extension LoginViewController {
     }
     
     func loginAsGuestButtonDidTap(_: UIButton) {
-        presentNextViewController()
+        viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
 }
 
@@ -98,11 +98,16 @@ extension LoginViewController: LoginViewAnimatorDelegate {
     func styleForStatusBar(style: UIStatusBarStyle) {
         statusBarStyle = style
     }
+    
+    func shrinkAnimationDidFinish() {
+        self.viewAnimator?.stopAnimationWithType(.Continue) {
+            self.presentNextViewController()
+        }
+    }
 }
 
 private extension LoginViewController {
     
-    //NGRTemp: temporary implementation
     func presentNextViewController() {
         self.presentViewController(CenterButtonTabBarController(), animated: false, completion: nil)
     }

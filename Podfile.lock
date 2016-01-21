@@ -42,7 +42,8 @@ PODS:
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
   - Dobby (~> 0.4.2)
-  - EasyAnimation (~> 1.0)
+  - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
+    `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - Mockingjay (~> 1.1)
@@ -52,6 +53,16 @@ DEPENDENCIES:
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
   - SwiftyUserDefaults (~> 2.0)
+
+EXTERNAL SOURCES:
+  EasyAnimation:
+    :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
+    :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
+
+CHECKOUT OPTIONS:
+  EasyAnimation:
+    :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
+    :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
 
 SPEC CHECKSUMS:
   AsyncSwift: 3c90beed237324f1b57e1f1c414dc5501985d208
