@@ -10,6 +10,41 @@ import Nimble
 class ShotCollectionViewCellSpec: QuickSpec {
     override func spec() {
 
+        var sut: ShotCollectionViewCell!
+
+        beforeEach {
+            sut = ShotCollectionViewCell(frame: CGRectZero)
+        }
+
+        afterEach {
+            sut = nil
+        }
+
+        describe("shot image view") {
+
+            var shotImageView: UIImageView!
+
+            beforeEach {
+                shotImageView = sut.shotImageView
+            }
+
+            it("should clip to bounds") {
+                expect(shotImageView.clipsToBounds).to(beTruthy())
+            }
+
+            it("should have layer corner radius 5") {
+                expect(shotImageView.layer.cornerRadius).to(equal(5))
+            }
+
+            it("should not translate autoresizing mask into constraints") {
+                expect(shotImageView.translatesAutoresizingMaskIntoConstraints).to(beFalsy())
+            }
+
+            it("should be added to cell content view subviews") {
+                expect(sut.contentView.subviews).to(contain(shotImageView))
+            }
+        }
+
         describe("height aware") {
 
             describe("preferred height") {

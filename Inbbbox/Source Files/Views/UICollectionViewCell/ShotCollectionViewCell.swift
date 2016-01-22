@@ -18,7 +18,12 @@ class ShotCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        // NGRTemp: temporary implementation -
+        // added temporary image to see changes in UI without shots downloaded
         shotImageView.image = UIImage(named: "shot-menu")
+
+        shotImageView.clipsToBounds = true
+        shotImageView.layer.cornerRadius = 5
         contentView.addSubview(shotImageView)
     }
 
