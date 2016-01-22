@@ -10,12 +10,11 @@ import UIKit
 import PromiseKit
 
 protocol LoginViewAnimatorDelegate {
-    func styleForStatusBar(style: UIStatusBarStyle)
+    func tabBarWillAppear()
     func shrinkAnimationDidFinish()
 }
 
 class LoginViewAnimator {
-    
     
     enum StopAnimationType {
         case Continue, Undo
@@ -75,10 +74,9 @@ class LoginViewAnimator {
             firstly {
                 when(self.loadingFade(.FadeOut), self.slideInterfaceUp(), self.sloganFadeOut(), self.saturateBackground())
             }.then {
-                self.changeStatusBarStyle()
+                self.delegate?.tabBarWillAppear()
+                return when(self.animateTabBar(), self.slideOutBallWithFadingOut(), self.addInbbboxLogo(fromTop: 50))
             }.then {
-                when(self.animateTabBar(), self.slideOutBallWithFadingOut(), self.addInbbboxLogo(fromTop: 50))
-            }.then { _ -> Void in
                 completion?()
             }
         }
@@ -239,10 +237,5 @@ private extension LoginViewAnimator {
         
         let tabBarAnimator = TabBarAnimator(view: view!)
         return tabBarAnimator.animateTabBar()
-    }
-    
-    func changeStatusBarStyle() -> Promise<Void> {
-        delegate?.styleForStatusBar(.Default)
-        return Promise()
     }
 }

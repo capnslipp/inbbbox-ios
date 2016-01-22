@@ -95,8 +95,8 @@ extension LoginViewController {
 
 extension LoginViewController: LoginViewAnimatorDelegate {
     
-    func styleForStatusBar(style: UIStatusBarStyle) {
-        statusBarStyle = style
+    func tabBarWillAppear() {
+        statusBarStyle = .Default
     }
     
     func shrinkAnimationDidFinish() {
