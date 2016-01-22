@@ -32,8 +32,10 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
         describe("when view did load") {
 
+            var tabBarController: UITabBarController!
+            
             beforeEach {
-                let tabBarController = UITabBarController()
+                tabBarController = UITabBarController()
                 tabBarController.viewControllers = [sut]
                 let _ = sut.view
             }
@@ -84,9 +86,10 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
             describe("animation completion") {
 
                 var didReloadCollectionViewData: Bool!
-
+                var tabBarController: UITabBarController!
+                
                 beforeEach {
-                    let tabBarController = UITabBarController()
+                    tabBarController = UITabBarController()
                     tabBarController.viewControllers = [sut]
 
                     let collectionViewMock = CollectionViewMock()
