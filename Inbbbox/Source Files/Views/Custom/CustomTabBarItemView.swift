@@ -7,8 +7,8 @@ import UIKit
 class CustomTabBarItemView: UIView {
 
     private var didSetConstraints = false
-    let nameLabel = UILabel()
-    let iconImageView = UIImageView()
+    let nameLabel = UILabel.newAutoLayoutView()
+    let iconImageView = UIImageView.newAutoLayoutView()
 
 //    MARK: - Life cycle
 
@@ -19,11 +19,9 @@ class CustomTabBarItemView: UIView {
         nameLabel.textColor = UIColor.tabBarGrayColor()
         nameLabel.text = name
         addSubview(nameLabel)
-        nameLabel.configureForAutoLayout()
 
         iconImageView.image = icon?.imageWithRenderingMode(.AlwaysOriginal)
         addSubview(iconImageView)
-        iconImageView.configureForAutoLayout()
     }
     
     @available(*, unavailable, message="Use init(name:icon:) instead")

@@ -15,7 +15,7 @@ class DateCell: UITableViewCell, Reusable {
         return "TableViewDateCellReuseIdentifier"
     }
     
-    let dateLabel = UILabel()
+    let dateLabel = UILabel.newAutoLayoutView()
     
     private var didSetConstraints = false
     

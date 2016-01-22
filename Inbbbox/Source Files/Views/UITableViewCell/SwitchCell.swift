@@ -14,7 +14,7 @@ class SwitchCell: UITableViewCell, Reusable {
         return "TableViewSwitchCellReuseIdentifier"
     }
     
-    let switchControl = UISwitch()
+    let switchControl = UISwitch.newAutoLayoutView()
     
     private var didSetConstraints = false
     

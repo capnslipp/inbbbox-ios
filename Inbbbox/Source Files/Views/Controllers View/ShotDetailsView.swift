@@ -23,11 +23,13 @@ class ShotDetailsView: UIView {
         
         closeButton.setTitle("Close", forState: .Normal)
         closeButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-
-        addSubview(blurView)
         addSubview(closeButton)
+        
+        blurView.configureForAutoLayout()
+        addSubview(blurView)
     }
 
+    @available(*, unavailable, message="Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import PureLayout
 
 class DatePickerView: UIView {
     
-    let datePicker = UIDatePicker()
-    private let contentView = UIView()
-    private let separatorLine = UIView()
+    let datePicker = UIDatePicker.newAutoLayoutView()
+    private let contentView = UIView.newAutoLayoutView()
+    private let separatorLine = UIView.newAutoLayoutView()
     
     private var didSetConstraints = false
     

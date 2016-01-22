@@ -30,6 +30,7 @@ class SettingsTableHeaderView: UIView, Reusable {
         
         avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize))
         avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
+        avatarView.configureForAutoLayout()
         addSubview(avatarView)
         
         usernameLabel.textAlignment = .Center

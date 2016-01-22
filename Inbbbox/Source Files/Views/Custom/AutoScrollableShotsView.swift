@@ -26,6 +26,7 @@ class AutoScrollableShotsView: UIView {
 
             let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
             collectionView.userInteractionEnabled = false
+            collectionView.configureForAutoLayout()
             addSubview(collectionView)
             
             collectionViews.append(collectionView)

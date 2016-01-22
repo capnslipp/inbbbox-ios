@@ -11,13 +11,12 @@ import PureLayout
 
 class AutoScrollableCollectionViewCell: UICollectionViewCell {
     
-    let imageView = UIImageView()
+    let imageView = UIImageView.newAutoLayoutView()
     private var didSetConstraints = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
       
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
 
         setNeedsUpdateConstraints()
