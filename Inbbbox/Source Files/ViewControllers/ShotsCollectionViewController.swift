@@ -36,6 +36,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         collectionView.pagingEnabled = true
         collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
         tabBarController?.tabBar.userInteractionEnabled = false
+        collectionView.userInteractionEnabled = false
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -47,6 +48,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
                 self.didFinishInitialAnimations = true
                 self.collectionView?.reloadData()
                 self.tabBarController?.tabBar.userInteractionEnabled = true
+                self.collectionView?.userInteractionEnabled = true
             }
         }
     }
@@ -64,36 +66,58 @@ final class ShotsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        cell.delegate = self
+        // NGRTemp: temporary implementation
+        let shot = self.shots[indexPath.item]
+        cell.swipeCompletion = {
+            print(shot)
+        }
+        return cell
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+
         definesPresentationContext = true
-        
+
         let shotDetailsVC = ShotDetailsViewController()
         shotDetailsVC.modalPresentationStyle = .OverCurrentContext
         shotDetailsVC.delegate = self
-        
+
         viewControllerPresenter.presentViewController(shotDetailsVC, animated: true, completion: nil)
     }
 }
 
 
 extension ShotsCollectionViewController: ShotsAnimatorDelegate {
-    
+
     func collectionViewForShotsAnimator(animator: ShotsAnimator) -> UICollectionView? {
         return collectionView
     }
-    
+
     func itemsForShotsAnimator(animationManager: ShotsAnimator) -> [AnyObject] {
         return Array(shots.prefix(3))
     }
 }
 
 extension ShotsCollectionViewController: ShotDetailsViewControllerDelegate {
-    
+
     func didFinishPresentingDetails(sender: ShotDetailsViewController) {
         viewControllerPresenter.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
+        // NGRTodo: Implement it to allow swiping collection view while holding cell
+        return true
+    }
+}
+
+extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
+
+    func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
+        collectionView?.scrollEnabled = false
+    }
+    func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
+        collectionView?.scrollEnabled = true
     }
 }
