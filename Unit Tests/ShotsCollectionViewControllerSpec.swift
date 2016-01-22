@@ -178,6 +178,10 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                     }
                     cell = sut.collectionView(collectionViewMock, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
                 }
+                
+                it("should not be nil") {
+                    expect(cell).toNot(beNil())
+                }
 
                 it("should dequeue cell with proper identifier") {
                     expect(capturedIdentifier).to(equal("ShotCollectionViewCellIdentifier"))
