@@ -67,7 +67,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
             beforeEach {
                 let _ = sut.view
-                let animationManagerMock = ShotsAnimationManagerMock()
+                let animationManagerMock = ShotsAnimatorMock()
                 didStartAnimationWithCompletion = false
                 animationManagerMock.startAnimationWithCompletionStub.on(any()) { completion in
                     didStartAnimationWithCompletion = true
@@ -150,7 +150,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 context("when animations did finish") {
 
                     beforeEach {
-                        let animationManagerMock = ShotsAnimationManagerMock()
+                        let animationManagerMock = ShotsAnimatorMock()
                         animationManagerMock.startAnimationWithCompletionStub.on(any()) { completion in
                             completion?()
                         }
@@ -192,7 +192,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 var collectionView: UICollectionView!
 
                 beforeEach {
-                    collectionView = sut.collectionViewForAnimationManager(ShotsAnimationManager())
+                    collectionView = sut.collectionViewForShotsAnimator(ShotsAnimator())
                 }
 
                 it("should return proper collection view") {
@@ -205,7 +205,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 var items: [AnyObject]!
 
                 beforeEach {
-                    items = sut.itemsForAnimationManager(ShotsAnimationManager())
+                    items = sut.itemsForShotsAnimator(ShotsAnimator())
                 }
 
                 it("should have first 3 items") {

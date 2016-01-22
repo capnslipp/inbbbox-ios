@@ -4,11 +4,11 @@
 
 import UIKit
 
-final class ShotsCollectionViewController: UICollectionViewController, ShotsAnimationManagerDelegate {
+final class ShotsCollectionViewController: UICollectionViewController {
 
 //    MARK: - Life cycle
 
-    var animationManager = ShotsAnimationManager()
+    var animationManager = ShotsAnimator()
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
@@ -77,14 +77,16 @@ final class ShotsCollectionViewController: UICollectionViewController, ShotsAnim
         
         viewControllerPresenter.presentViewController(shotDetailsVC, animated: true, completion: nil)
     }
+}
 
-//    MARK: - ShotsAnimationManagerDelegate
 
-    func collectionViewForAnimationManager(animationManager: ShotsAnimationManager) -> UICollectionView? {
+extension ShotsCollectionViewController: ShotsAnimatorDelegate {
+    
+    func collectionViewForShotsAnimator(animator: ShotsAnimator) -> UICollectionView? {
         return collectionView
     }
-
-    func itemsForAnimationManager(animationManager: ShotsAnimationManager) -> [AnyObject] {
+    
+    func itemsForShotsAnimator(animationManager: ShotsAnimator) -> [AnyObject] {
         return Array(shots.prefix(3))
     }
 }

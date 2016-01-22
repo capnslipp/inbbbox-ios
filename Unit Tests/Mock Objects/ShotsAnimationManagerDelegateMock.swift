@@ -6,16 +6,16 @@ import Dobby
 
 @testable import Inbbbox
 
-class ShotsAnimationManagerDelegateMock: ShotsAnimationManagerDelegate {
+class ShotsAnimatorDelegateMock: ShotsAnimatorDelegate {
 
-    let collectionViewForAnimationManagerStub = Stub<(ShotsAnimationManager), UICollectionView?>()
-    let itemsForAnimationManagerStub = Stub<ShotsAnimationManager, [AnyObject]>()
+    let collectionViewForShotsAnimatorStub = Stub<(ShotsAnimator), UICollectionView?>()
+    let itemsForShotsAnimatorStub = Stub<ShotsAnimator, [AnyObject]>()
 
-    func collectionViewForAnimationManager(animationManager: ShotsAnimationManager) -> UICollectionView? {
-        return try! collectionViewForAnimationManagerStub.invoke(animationManager)
+    func collectionViewForShotsAnimator(animator: ShotsAnimator) -> UICollectionView? {
+        return try! collectionViewForShotsAnimatorStub.invoke(animator)
     }
 
-    func itemsForAnimationManager(animationManager: ShotsAnimationManager) -> [AnyObject] {
-        return try! itemsForAnimationManagerStub.invoke(animationManager)
+    func itemsForShotsAnimator(animator: ShotsAnimator) -> [AnyObject] {
+        return try! itemsForShotsAnimatorStub.invoke(animator)
     }
 }
