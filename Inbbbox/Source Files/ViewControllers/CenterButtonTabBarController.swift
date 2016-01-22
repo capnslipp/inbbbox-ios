@@ -14,7 +14,7 @@ class CenterButtonTabBarController: UITabBarController {
         self.init(nibName: nil, bundle: nil)
         
         let likesViewController = UIViewController()
-        likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Like", comment: ""), imageName: "ic-likes")
+        likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Likes", comment: ""), imageName: "ic-likes")
         let bucketsViewController = UIViewController()
         bucketsViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Buckets", comment: ""), imageName: "ic-buckets")
         let followingViewController = UIViewController()
