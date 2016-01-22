@@ -10,6 +10,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private var didSetConstraints = false
 
     // MARK: - Life cycle
+    
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
