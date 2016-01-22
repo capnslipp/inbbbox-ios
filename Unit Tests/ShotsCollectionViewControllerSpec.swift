@@ -39,7 +39,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
             }
 
             it("should have user interaction initially disabled on tab bar") {
-                expect(sut.tabBarController?.tabBar.userInteractionEnabled).to(beFalsy())
+                expect(sut.tabBarController!.tabBar.userInteractionEnabled).to(beFalsy())
             }
 
             describe("collection view") {
@@ -107,7 +107,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 }
 
                 it("should have user interaction enabled on tab bar") {
-                    expect(sut.tabBarController?.tabBar.userInteractionEnabled).to(beTruthy())
+                    expect(sut.tabBarController!.tabBar.userInteractionEnabled).to(beTruthy())
                 }
             }
         }

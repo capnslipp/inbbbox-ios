@@ -51,7 +51,7 @@ class LoginViewAnimator {
             return when(self.ballBounce(), self.loadingFade(.FadeIn))
         }.then {
             self.loadingBlink()
-        }.error { _ in /* do nothing */}
+        }.error { _ in /* silence error */}
         
     }
     

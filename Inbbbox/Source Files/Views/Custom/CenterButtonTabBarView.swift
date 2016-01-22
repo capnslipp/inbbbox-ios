@@ -8,12 +8,10 @@ class CenterButtonTabBarView: UITabBar {
 
     private var didSetConstraints = false
     private var dummyItemScreenSizeDependentWidth: CGFloat {
-        get {
-            switch CGRectGetWidth(frame) {
-                case 0..<375: return 60
-                case 376..<100000: return 76
-                default: return 70
-            }
+        switch CGRectGetWidth(frame) {
+            case 0..<375: return 60
+            case 376..<100000: return 76
+            default: return 70
         }
     }
 
