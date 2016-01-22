@@ -12,8 +12,8 @@ class CustomTabBarItemView: UIView {
 
 //    MARK: - Life cycle
 
-    convenience init(name: String?, icon: UIImage?) {
-        self.init(frame: CGRectZero)
+    init(name: String?, icon: UIImage?) {
+        super.init(frame: CGRectZero)
         
         nameLabel.font = UIFont.systemFontOfSize(10)
         nameLabel.textColor = UIColor.tabBarGrayColor()
@@ -25,6 +25,16 @@ class CustomTabBarItemView: UIView {
         addSubview(iconImageView)
         iconImageView.configureForAutoLayout()
     }
+    
+    @available(*, unavailable, message="Use init(name:icon:) instead")
+    override init(frame: CGRect) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @available(*, unavailable, message="Use init(name:icon:) instead")
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
 //    MARK: - UIView
     
@@ -33,8 +43,6 @@ class CustomTabBarItemView: UIView {
     }
     
     override func updateConstraints() {
-
-//        NGRTemp: temporary implementation
 
         if !didSetConstraints {
             iconImageView.autoPinEdgeToSuperviewEdge(.Top)

@@ -45,3 +45,10 @@ class AutoScrollableCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
     }
 }
+
+extension AutoScrollableCollectionViewCell: Reusable {
+    
+    class var reuseIdentifier: String {
+        return "AutoScrollableCollectionViewCellReuseIdentifier"
+    }
+}

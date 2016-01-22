@@ -25,10 +25,9 @@ class AutoScrollableShotsDataSource: NSObject {
         
         super.init()
         
-        //NGRTemp: temporary use suhc upproach (till merge proper branch)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerClass(AutoScrollableCollectionViewCell.self, forCellWithReuseIdentifier: AutoScrollableShotsDataSource.reuseIdentifier)
+        collectionView.registerClass(AutoScrollableCollectionViewCell.self, type: .Cell)
         prepareExtendedContentToDisplayWithOffset(0)
     }
     
@@ -49,8 +48,8 @@ class AutoScrollableShotsDataSource: NSObject {
 extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AutoScrollableShotsDataSource.reuseIdentifier, forIndexPath: indexPath) as! AutoScrollableCollectionViewCell
-        
+        let cell = collectionView.dequeueReusableClass(AutoScrollableCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+
         cell.imageView.image = content[indexPath.row].image
         
         return cell
@@ -71,15 +70,6 @@ extension AutoScrollableShotsDataSource: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return itemSize
-    }
-}
-
-
-//NGRTemp: temporary here.
-extension AutoScrollableShotsDataSource: Reusable {
-    
-    class var reuseIdentifier: String {
-        return "AutoScrollableCollectionViewCellReuseIdentifier"
     }
 }
 
