@@ -36,7 +36,7 @@ class ShotsProvider {
      Convenience initializer with default parameters.
      */
     convenience init() {
-        self.init(page: 1, pagination:30, configuration: ShotsProviderConfiguration())
+        self.init(page: 1, pagination: 30, configuration: ShotsProviderConfiguration())
     }
     
     /**
@@ -59,9 +59,9 @@ class ShotsProvider {
 
             firstly {
                 when(requests.map { $0.resume() })
-            }.then { responses -> Void in
+            }.then { response -> Void in
                 
-                let shots = responses
+                let shots = response
                     .map { $0?.arrayValue.map { Shot.map($0) } }
                     .flatMap { $0 }
                     .flatMap { $0 }
@@ -79,7 +79,7 @@ class ShotsProvider {
     
     /**
      Restores initial state of ShotsProvider.
-     It means in next api call ShotsProvider will provide shots from beggining.
+     It means in next api call ShotsProvider will provide shots from the beginning.
      @discussion: Use whether inbbbox stream source will change. Otherwise strange behaviour may appear.
      */
     func restoreInitialState() {
@@ -99,11 +99,7 @@ private extension ShotsProvider {
             query.parameters["page"] = page
             query.parameters["per_page"] = pagination
             
-            if $0 == .Following {
-                query.followingUsersShotsQuery = true
-            }
-            
-            configuration.configureQuery(&query, forSource: $0)
+            query = configuration.queryByConfigurationForQuery(query, source: $0)
             
             return query
         }

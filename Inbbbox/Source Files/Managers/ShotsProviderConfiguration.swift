@@ -27,8 +27,8 @@ class ShotsProviderConfiguration {
         return [.NewToday, .PopularToday, .Debuts, .Following].filter { $0.isActive }
     }
     
-    func configureQuery(inout query: ShotsQuery, forSource source: ShotsSource) {
-        
+    func queryByConfigurationForQuery(var query: ShotsQuery, source: ShotsSource) -> ShotsQuery {
+    
         switch source {
             case .NewToday:
                 query.parameters["sort"] = "recent"
@@ -37,7 +37,10 @@ class ShotsProviderConfiguration {
             case .Debuts:
                 query.parameters["list"] = "debuts"
                 query.parameters["sort"] = "recent"
-            case .Following: break
+            case .Following:
+                query.followingUsersShotsQuery = true
         }
+    
+        return query
     }
 }
