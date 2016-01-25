@@ -56,7 +56,7 @@ extension ShotDetailsViewController: UITableViewDelegate {
             return nil
         }
         
-        let headerView = ShotDetailsTableViewHeaderView(withImage: UIImage(named: "shot-14")!) //NGRTemp: Here, proper image to be set
+        let headerView = ShotDetailsTableViewHeaderView(withImage: UIImage(named: "shot-menu")!) //NGRTemp: Here, proper image to be set
         headerView.delegate = self
         return headerView
     }
