@@ -60,9 +60,7 @@ class Authenticator {
                 self.persistUser(user)
             }.then {
                 fulfill()
-            }.error { error in
-                reject(error)
-            }
+            }.error(reject)
         }
     }
     
@@ -94,13 +92,11 @@ private extension Authenticator {
         }
     }
     
-    func persistToken(token: String) -> Promise<Void> {
+    func persistToken(token: String) {
         TokenStorage.storeToken(token)
-        return Promise()
     }
     
-    func persistUser(user: User) -> Promise<Void> {
+    func persistUser(user: User) {
         UserStorage.storeUser(user)
-        return Promise()
     }
 }
