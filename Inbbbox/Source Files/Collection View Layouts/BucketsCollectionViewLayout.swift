@@ -15,8 +15,8 @@ class BucketsCollectionViewLayout: UICollectionViewFlowLayout {
             itemSize = CGSize(width: BucketCollectionViewCell.preferredWidth,
                 height: BucketCollectionViewCell.preferredHeight)
             let widthDependendSpacing = CGFloat((CGRectGetWidth(collectionView.bounds) - 2 * BucketCollectionViewCell.preferredWidth) / 3)
-            sectionInset = UIEdgeInsets(top:widthDependendSpacing, left:widthDependendSpacing , bottom:widthDependendSpacing, right:widthDependendSpacing)
-            minimumLineSpacing = widthDependendSpacing;
+            sectionInset = UIEdgeInsets(top: widthDependendSpacing, left: widthDependendSpacing, bottom: widthDependendSpacing, right: widthDependendSpacing)
+            minimumLineSpacing = widthDependendSpacing
         }
     }
 }
