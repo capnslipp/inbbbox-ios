@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BucketCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
+class BucketCollectionViewCell: UICollectionViewCell, HeightAware, WidthAware, Reusable {
     
     // MARK - Life cycle
     
@@ -29,7 +29,12 @@ class BucketCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
     
     // MARK: - HeightAware
     static var prefferedHeight: CGFloat {
-        return CGFloat(240)
+        return CGFloat(170)
+    }
+
+    // MARK: - WidthAware
+    static var prefferedWidth: CGFloat {
+        return CGFloat(140)
     }
     
     // MARK: - Reusable

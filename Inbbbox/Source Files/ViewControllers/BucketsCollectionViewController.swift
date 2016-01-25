@@ -16,8 +16,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     var buckets = ["bucket1", "bucket2", "bucket3", "bucket4", "bucket5", "bucket6", "bucket7"];
     
     convenience init() {
-        // NGRTemp: temporary implementation - set proper flow layout
-        self.init(collectionViewLayout: UICollectionViewFlowLayout())
+        self.init(collectionViewLayout: BucketsCollectionViewLayout())
         title = NSLocalizedString("Buckets", comment:"")
     }
     

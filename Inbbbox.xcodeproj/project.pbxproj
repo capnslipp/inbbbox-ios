@@ -73,6 +73,8 @@
 		5EE041B61C34227600657751 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B51C34227600657751 /* CollectionExtension.swift */; };
 		745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146931C5217F400710C61 /* BucketsCollectionViewController.swift */; };
 		745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146951C5235D600710C61 /* BucketCollectionViewCell.swift */; };
+		74C161821C561ECE004E1F9B /* BucketsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */; };
+		74C161841C562AB8004E1F9B /* WidthAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161831C562AB8004E1F9B /* WidthAware.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
 		BEEE92DB2FA773AEA5E9EBB5 /* CenterButtonTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */; };
@@ -238,8 +240,10 @@
 		5EE041B11C34009300657751 /* FormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterSpec.swift; sourceTree = "<group>"; };
 		5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSourceSpec.swift; sourceTree = "<group>"; };
 		5EE041B51C34227600657751 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
-        745146931C5217F400710C61 /* BucketsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewController.swift; sourceTree = "<group>"; };
+		745146931C5217F400710C61 /* BucketsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewController.swift; sourceTree = "<group>"; };
 		745146951C5235D600710C61 /* BucketCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCell.swift; sourceTree = "<group>"; };
+		74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewLayout.swift; sourceTree = "<group>"; };
+		74C161831C562AB8004E1F9B /* WidthAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidthAware.swift; sourceTree = "<group>"; };
 		BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundView.swift; sourceTree = "<group>"; };
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
@@ -691,6 +695,7 @@
 				F0863DC11C23F3C10062EA21 /* StringConvertible.swift */,
 				F0863DC31C23F3DB0062EA21 /* Reusable.swift */,
 				BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */,
+				74C161831C562AB8004E1F9B /* WidthAware.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -771,6 +776,7 @@
 			children = (
 				5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */,
 				FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */,
+				74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */,
 			);
 			path = "Collection View Layouts";
 			sourceTree = "<group>";
@@ -1046,6 +1052,7 @@
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
 				5EE041B61C34227600657751 /* CollectionExtension.swift in Sources */,
+				74C161821C561ECE004E1F9B /* BucketsCollectionViewLayout.swift in Sources */,
 				F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */,
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F092E2181C3A9E9900593D18 /* Defines.swift in Sources */,
@@ -1079,6 +1086,7 @@
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
 				F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */,
 				300BBF161C4F947900721D13 /* ShotDetailsViewController.swift in Sources */,
+				74C161841C562AB8004E1F9B /* WidthAware.swift in Sources */,
 				5E5082081C312E2800093191 /* ShotsStorage.swift in Sources */,
 				5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
