@@ -28,7 +28,6 @@ class BucketsCollectionViewController: UICollectionViewController {
             return
         }
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
-        collectionView.pagingEnabled = true
         collectionView.registerClass(BucketCollectionViewCell.self, type: .Cell)
     }
     
