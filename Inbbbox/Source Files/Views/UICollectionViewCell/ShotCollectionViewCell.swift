@@ -31,8 +31,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        // NGRTemp: temporary implementation -
-        // added temporary image to see changes in UI without shots downloaded
         contentView.backgroundColor = UIColor.pinkColor()
         contentView.layer.cornerRadius = 5
         contentView.clipsToBounds = true
@@ -49,7 +47,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
         commentImageView.configureForAutoLayout()
         contentView.addSubview(commentImageView)
 
-        shotImageView.image = UIImage(named: "shot-menu")
         contentView.addSubview(shotImageView)
 
         panGestureRecognizer.addTarget(self, action: "didSwipeCell:")

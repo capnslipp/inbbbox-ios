@@ -7,13 +7,13 @@ import UIKit
 protocol ShotsAnimatorDelegate: class {
     func collectionViewForShotsAnimator(animator: ShotsAnimator) -> UICollectionView?
 
-    func itemsForShotsAnimator(animator: ShotsAnimator) -> [AnyObject]
+    func itemsForShotsAnimator(animator: ShotsAnimator) -> [Shot]
 }
 
 class ShotsAnimator {
 
     weak var delegate: ShotsAnimatorDelegate?
-    var visibleItems = [AnyObject]()
+    var visibleItems = [Shot]()
     var asyncWrapper = AsyncWrapper()
 
 //    Interface
@@ -33,7 +33,7 @@ class ShotsAnimator {
 
 //    MARK: - Helpers
 
-    private func addItems(items: [AnyObject], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
+    private func addItems(items: [Shot], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
         let addItemAnimation = {
             let newItemIndex = self.visibleItems.count
             let newItem = items[newItemIndex]
@@ -44,7 +44,7 @@ class ShotsAnimator {
         updateItems(items, collectionView: collectionView, interval: interval, animation: addItemAnimation, completion: completion)
     }
 
-    private func deleteItemsWithoutFirstItem(items: [AnyObject], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
+    private func deleteItemsWithoutFirstItem(items: [Shot], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
         var reversedItemsWithoutFirstItem = items
         reversedItemsWithoutFirstItem.removeFirst()
 
@@ -57,7 +57,7 @@ class ShotsAnimator {
         updateItems(reversedItemsWithoutFirstItem, collectionView: collectionView, interval: interval, animation: removeItemAnimation, completion: completion)
     }
 
-    private func updateItems(items: [AnyObject], collectionView: UICollectionView, interval: Double, animation: Void -> Void, completion: (Void -> Void)?) {
+    private func updateItems(items: [Shot], collectionView: UICollectionView, interval: Double, animation: Void -> Void, completion: (Void -> Void)?) {
         for (index, _ ) in items.enumerate() {
             var updateAnimation = animation
             if index == items.endIndex - 1 {

@@ -8,7 +8,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Initial configuration
-platform :ios, '8.0'
+platform :ios, '8.2'
 inhibit_all_warnings!
 use_frameworks!
 
@@ -28,6 +28,8 @@ pod 'PureLayout', '~> 3.0'
 
 pod 'SwiftyUserDefaults', '~> 2.0'
 
+pod 'KFSwiftImageLoader', '~> 2.0.1'
+
 pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
     :git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git',
     :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
@@ -42,7 +44,7 @@ target 'Tests' do link_with 'Unit Tests'
 
     pod 'Dobby', '~> 0.4.2',
         :configurations => ['Test']
-        
+
     pod 'Mockingjay', '~> 1.1',
         :configurations => ['Test']
 end

@@ -3,6 +3,8 @@
 //
 
 import UIKit
+import PromiseKit
+import KFSwiftImageLoader
 
 final class ShotsCollectionViewController: UICollectionViewController {
 
@@ -13,9 +15,10 @@ final class ShotsCollectionViewController: UICollectionViewController {
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
 
-//    NGRTemp: temporary implementation - remove after adding real shots
-    var shots = ["shot1", "shot2", "shot3", "shot4", "shot5", "shot6", "shot7", "shot8", "shot9", "shot10"]
+//    NGRTemp: temporary implementation - Maybe we should download shots when the ball is jumping? Or just activity indicator will be enough?
+    var shots = [Shot]()
 
+    let shotsProvider = ShotsProvider()
 
     convenience init() {
         self.init(collectionViewLayout: InitialShotsCollectionViewLayout())
@@ -32,6 +35,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
             return
         }
 
+        // NGRTemp: temporary implementation - I wonder what should be enabled by default.
+        Settings.StreamSource.NewToday = true
+
         collectionView.backgroundView = ShotsCollectionBackgroundView()
         collectionView.pagingEnabled = true
         collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
@@ -43,12 +49,17 @@ final class ShotsCollectionViewController: UICollectionViewController {
         super.viewDidAppear(animated)
 
         dispatch_once(&onceTokenForInitialShotsAnimation) {
-            self.animationManager.startAnimationWithCompletion() {
-                self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
-                self.didFinishInitialAnimations = true
-                self.collectionView?.reloadData()
-                self.tabBarController?.tabBar.userInteractionEnabled = true
-                self.collectionView?.userInteractionEnabled = true
+            firstly {
+                self.shotsProvider.provideShots()
+                }.then { shots -> Void in
+                    self.shots = shots
+                    self.animationManager.startAnimationWithCompletion() {
+                        self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
+                        self.didFinishInitialAnimations = true
+                        self.collectionView?.reloadData()
+                        self.tabBarController?.tabBar.userInteractionEnabled = true
+                        self.collectionView?.userInteractionEnabled = true
+                    }
             }
         }
     }
@@ -67,9 +78,10 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        cell.delegate = self
-        // NGRTemp: temporary implementation
         let shot = self.shots[indexPath.item]
+        cell.delegate = self
+        // NGRTemp: temporary implementation - image should probably be downloaded earlier
+        cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
         cell.swipeCompletion = {
             print(shot)
         }
@@ -95,7 +107,7 @@ extension ShotsCollectionViewController: ShotsAnimatorDelegate {
         return collectionView
     }
 
-    func itemsForShotsAnimator(animationManager: ShotsAnimator) -> [AnyObject] {
+    func itemsForShotsAnimator(animationManager: ShotsAnimator) -> [Shot] {
         return Array(shots.prefix(3))
     }
 }
