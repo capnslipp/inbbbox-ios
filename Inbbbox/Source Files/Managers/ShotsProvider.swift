@@ -9,10 +9,8 @@
 import Foundation
 import PromiseKit
 import SwiftyJSON
-import Async
 
 class ShotsProvider {
-    
     
     let configuration: ShotsProviderConfiguration
     private(set) var page: UInt
@@ -63,13 +61,6 @@ class ShotsProvider {
                 when(requests.map { $0.resume() })
             }.then { responses -> Void in
                 
-//                let lol = responses
-//                    .map { $0?.arrayValue.map { Shot.map($0) } }
-//                    .flatMap { $0 }
-//                    .flatMap { $0 }
-//                
-//                 print("lol" + String(lol.count))
-                
                 let shots = responses
                     .map { $0?.arrayValue.map { Shot.map($0) } }
                     .flatMap { $0 }
@@ -107,6 +98,10 @@ private extension ShotsProvider {
             query.date = queryStartDate
             query.parameters["page"] = page
             query.parameters["per_page"] = pagination
+            
+            if $0 == .Following {
+                query.followingUsersShotsQuery = true
+            }
             
             configuration.configureQuery(&query, forSource: $0)
             

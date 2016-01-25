@@ -13,8 +13,14 @@ struct ShotsQuery: Query {
     /// Query definition
     
     let method = Method.GET
-    let path  = "/shots"
+    private(set) var path  = "/shots"
     var parameters = Parameters(encoding: .URL)
+    var followingUsersShotsQuery = false {
+        willSet (newValue) {
+            path = newValue ? "/user/following/shots" : "/shots"
+        }
+    }
+    
     
     /// Types
     
