@@ -57,12 +57,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        var gestureRecognizerShouldBegin = super.gestureRecognizerShouldBegin(gestureRecognizer)
-        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-            let velocity = panGestureRecognizer.velocityInView(self.contentView)
-            gestureRecognizerShouldBegin = fabs(velocity.x) > fabs(velocity.y)
+        guard let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
+            return true
         }
-        return gestureRecognizerShouldBegin
+        let velocity = panGestureRecognizer.velocityInView(self.contentView)
+        return fabs(velocity.x) > fabs(velocity.y)
     }
 
     // MARK: - Actions
