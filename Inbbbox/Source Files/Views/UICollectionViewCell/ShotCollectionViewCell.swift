@@ -56,6 +56,15 @@ class ShotCollectionViewCell: UICollectionViewCell {
         super.updateConstraints()
     }
 
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        var gestureRecognizerShouldBegin = super.gestureRecognizerShouldBegin(gestureRecognizer)
+        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let velocity = panGestureRecognizer.velocityInView(self.contentView)
+            gestureRecognizerShouldBegin = fabs(velocity.x) > fabs(velocity.y)
+        }
+        return gestureRecognizerShouldBegin
+    }
+
     // MARK: - Actions
 
     func didSwipeCell(panGestureRecognizer: UIPanGestureRecognizer) {

@@ -105,11 +105,6 @@ extension ShotsCollectionViewController: ShotDetailsViewControllerDelegate {
     func didFinishPresentingDetails(sender: ShotDetailsViewController) {
         viewControllerPresenter.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    func gestureRecognizerShouldBegin(_: UIGestureRecognizer) -> Bool {
-        // NGRTodo: Implement it to allow swiping collection view while holding cell
-        return true
-    }
 }
 
 extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
