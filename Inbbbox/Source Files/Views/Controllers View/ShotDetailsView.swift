@@ -11,8 +11,8 @@ import UIKit
 
 class ShotDetailsView: UIView {
     
-    let closeButton = UIButton(forAutoLayout: ())
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    let tableView = UITableView(frame: CGRectZero, style: .Grouped)
     
     private var didSetConstraints = false
     
@@ -20,13 +20,11 @@ class ShotDetailsView: UIView {
         super.init(frame: frame)
         
         backgroundColor = UIColor.clearColor()
-        
-        closeButton.setTitle("Close", forState: .Normal)
-        closeButton.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        addSubview(closeButton)
+        translatesAutoresizingMaskIntoConstraints = false
         
         blurView.configureForAutoLayout()
         addSubview(blurView)
+        addSubview(tableView)
     }
 
     @available(*, unavailable, message="Use init(frame:) method instead")
@@ -36,10 +34,15 @@ class ShotDetailsView: UIView {
     
     override func updateConstraints() {
         if !didSetConstraints {
-            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 44)
-            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -20.0)
             
+            self.autoPinEdgesToSuperviewEdges()
             blurView.autoPinEdgesToSuperviewEdges()
+            
+            tableView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset:30)
+            tableView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset:0)
+            tableView.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset:0)
+            tableView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self, withOffset:0)
+            
             didSetConstraints = true
         }
         super.updateConstraints()
