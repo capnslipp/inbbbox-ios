@@ -34,6 +34,6 @@ class BucketCollectionViewCell: UICollectionViewCell, HeightAware, Reusable {
     
     // MARK: - Reusable
     static var reuseIdentifier: String {
-        return "ShotCollectionViewCellIdentifier"
+        return "BucketCollectionViewCellIdentifier"
     }
 }
