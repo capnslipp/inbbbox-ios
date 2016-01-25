@@ -12,6 +12,10 @@ protocol ShotCollectionViewCellDelegate: class {
 class ShotCollectionViewCell: UICollectionViewCell {
 
     let shotImageView = UIImageView.newAutoLayoutView()
+    let likeImageView = UIImageView(image: UIImage(named: "ic-like-swipe"))
+    let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
+    let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
+    let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
     let panGestureRecognizer = UIPanGestureRecognizer()
     private var didSetConstraints = false
     var swipeCompletion: (Void -> Void)?
@@ -29,10 +33,23 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
         // NGRTemp: temporary implementation -
         // added temporary image to see changes in UI without shots downloaded
-        shotImageView.image = UIImage(named: "shot-menu")
+        contentView.backgroundColor = UIColor.pinkColor()
+        contentView.layer.cornerRadius = 5
+        contentView.clipsToBounds = true
 
-        shotImageView.clipsToBounds = true
-        shotImageView.layer.cornerRadius = 5
+        likeImageView.configureForAutoLayout()
+        contentView.addSubview(likeImageView)
+
+        plusImageView.configureForAutoLayout()
+        contentView.addSubview(plusImageView)
+
+        bucketImageView.configureForAutoLayout()
+        contentView.addSubview(bucketImageView)
+
+        commentImageView.configureForAutoLayout()
+        contentView.addSubview(commentImageView)
+
+        shotImageView.image = UIImage(named: "shot-menu")
         contentView.addSubview(shotImageView)
 
         panGestureRecognizer.addTarget(self, action: "didSwipeCell:")
@@ -49,6 +66,18 @@ class ShotCollectionViewCell: UICollectionViewCell {
     override func updateConstraints() {
 
         if !didSetConstraints {
+            likeImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            likeImageView.autoPinEdgeToSuperviewEdge(.Left, withInset: 48)
+
+            plusImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            plusImageView.autoPinEdge(.Left, toEdge: .Right, ofView: likeImageView, withOffset: 15)
+
+            bucketImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            bucketImageView.autoPinEdge(.Left, toEdge: .Right, ofView: plusImageView, withOffset: 15)
+
+            commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            commentImageView.autoPinEdgeToSuperviewEdge(.Right, withInset: 48)
+
             shotImageView.autoPinEdgesToSuperviewEdges()
             didSetConstraints = true
         }
