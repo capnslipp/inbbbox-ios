@@ -56,7 +56,7 @@ extension ShotDetailsViewController: UITableViewDelegate {
             return nil
         }
         
-        let headerView = ShotDetailsTableViewHeaderView(withImage: UIImage(named: "shot-menu")!) //NGRTemp: Here, proper image to be set
+        let headerView = ShotDetailsHeaderView(withImage: UIImage(named: "shot-menu")!)
         headerView.delegate = self
         return headerView
     }
@@ -92,7 +92,7 @@ extension ShotDetailsViewController: UITableViewDataSource {
 }
 
 extension ShotDetailsViewController: ShotDetailsTableViewHeaderViewDelegate {
-    func shotDetailsHeaderView(view: ShotDetailsTableViewHeaderView, didTapCloseButton: UIButton) {
+    func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapCloseButton: UIButton) {
         closeButtonTapped()
     }
 }

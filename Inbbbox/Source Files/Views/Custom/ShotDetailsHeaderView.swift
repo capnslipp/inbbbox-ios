@@ -1,5 +1,5 @@
 //
-//  ShotDetailsTableViewHeader.swift
+//  ShotDetailsHeaderView.swift
 //  Inbbbox
 //
 //  Created by Lukasz Pikor on 22.01.2016.
@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 protocol ShotDetailsTableViewHeaderViewDelegate: class {
-    func shotDetailsHeaderView(view: ShotDetailsTableViewHeaderView, didTapCloseButton: UIButton)
+    func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapCloseButton: UIButton)
 }
 
-class ShotDetailsTableViewHeaderView: UIView {
+class ShotDetailsHeaderView: UIView {
     
     weak var delegate: ShotDetailsTableViewHeaderViewDelegate?
     private var didUpdateConstraints = false
@@ -23,6 +23,8 @@ class ShotDetailsTableViewHeaderView: UIView {
     
     // MARK: Life Cycle
     
+    /* NGRTemp: Replace with custom-object initialization 
+        image, avatar, title, description, other data */
     init(withImage: UIImage) {
         shotImageView = RoundedImageView(
             withImage: withImage,
@@ -90,7 +92,7 @@ class ShotDetailsTableViewHeaderView: UIView {
 
 // MARK: UI Interactions
 
-extension ShotDetailsTableViewHeaderView {
+extension ShotDetailsHeaderView {
     @objc private func closeButtonDidTap(sender: UIButton) {
         delegate?.shotDetailsHeaderView(self, didTapCloseButton: sender)
     }
