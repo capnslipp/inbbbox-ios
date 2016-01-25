@@ -47,13 +47,13 @@ class SettingsViewModel: GroupedListViewModel {
         
         // MARK: Create items
         
-        reminderItem = SwitchItem(title: reminderTitle, on: Settings.reminderEnabled)
-        reminderDateItem = DateItem(title: reminderDateTitle, date: Settings.reminderDate)
+        reminderItem = SwitchItem(title: reminderTitle, on: Settings.Reminder.Enabled)
+        reminderDateItem = DateItem(title: reminderDateTitle, date: Settings.Reminder.Date)
         
-        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: Settings.shouldIncludeFollowingStreamSource)
-        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Settings.shouldIncludeNewTodayStreamSource)
-        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.shouldIncludePopularTodayStreamSource)
-        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.shouldIncludeDebutsStreamSource)
+        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: Settings.StreamSource.Following)
+        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Settings.StreamSource.NewToday)
+        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
+        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
         
         // MARK: Super init
         
@@ -65,11 +65,11 @@ class SettingsViewModel: GroupedListViewModel {
         // MARK: onValueChanged blocks
         
         reminderItem.onValueChanged = { on in
-            Settings.reminderEnabled = on
+            Settings.Reminder.Enabled = on
             if on {
                 self.registerUserNotificationSettings()
                 
-                if Settings.localNotificationSettingsProvided == true {
+                if Settings.Reminder.LocalNotificationSettingsProvided == true {
                     self.registerLocalNotification()
                 }
             } else {
@@ -81,23 +81,23 @@ class SettingsViewModel: GroupedListViewModel {
             if self.reminderItem.on {
                 self.registerLocalNotification()
             }
-            Settings.reminderDate = date
+            Settings.Reminder.Date = date
         }
         
         followingStreamSourceItem.onValueChanged = { on in
-            Settings.shouldIncludeFollowingStreamSource = on
+            Settings.StreamSource.Following = on
         }
         
         newTodayStreamSourceItem.onValueChanged = { on in
-            Settings.shouldIncludeNewTodayStreamSource = on
+            Settings.StreamSource.NewToday = on
         }
         
         popularTodayStreamSourceItem.onValueChanged = { on in
-            Settings.shouldIncludePopularTodayStreamSource = on
+            Settings.StreamSource.PopularToday = on
         }
         
         debutsStreamSourceItem.onValueChanged = { on in
-            Settings.shouldIncludeDebutsStreamSource = on
+            Settings.StreamSource.Debuts = on
         }
         
         // MARK: add observer
@@ -109,7 +109,7 @@ class SettingsViewModel: GroupedListViewModel {
     }
     
     dynamic func didProvideNotificationSettings() {
-        Settings.localNotificationSettingsProvided = true
+        Settings.Reminder.LocalNotificationSettingsProvided = true
         registerLocalNotification()
     }
     
@@ -154,7 +154,7 @@ private extension SettingsViewModel {
             alertDelegate?.displayAlert(preparePermissionsAlert())
             
             reminderItem.on = false
-            Settings.reminderEnabled = false
+            Settings.Reminder.Enabled = false
             delegate?.didChangeItemsAtIndexPaths(indexPathsForItems([reminderItem])!)
         }
     }

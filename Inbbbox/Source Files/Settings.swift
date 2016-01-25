@@ -11,66 +11,59 @@ import SwiftyUserDefaults
 
 class Settings {
     
-    class var reminderEnabled: Bool? {
-        get {
-        return Defaults[DefaultsKey.ReminderOn.rawValue].bool
+    struct StreamSource {
+        
+        static var Following: Bool {
+            get { return Settings.boolForKey(.FollowingStreamSourceOn) }
+            set { Settings.setValue(newValue, forKey: .FollowingStreamSourceOn) }
         }
-        set {
-            Defaults[DefaultsKey.ReminderOn.rawValue] = newValue
+        
+        static var NewToday: Bool {
+            get { return Settings.boolForKey(.NewTodayStreamSourceOn) }
+            set { Settings.setValue(newValue, forKey: .NewTodayStreamSourceOn) }
         }
-    }
-    
-    class var reminderDate: NSDate? {
-        get {
-        return Defaults[DefaultsKey.ReminderDate.rawValue].date
+        
+        static var PopularToday: Bool {
+            get { return Settings.boolForKey(.PopularTodayStreamSourceOn) }
+            set { Settings.setValue(newValue, forKey: .PopularTodayStreamSourceOn) }
         }
-        set {
-            Defaults[DefaultsKey.ReminderDate.rawValue] = newValue
-        }
-    }
-    
-    class var shouldIncludeFollowingStreamSource: Bool? {
-        get {
-        return Defaults[DefaultsKey.FollowingStreamSourceOn.rawValue].bool
-        }
-        set {
-            Defaults[DefaultsKey.FollowingStreamSourceOn.rawValue] = newValue
+        
+        static var Debuts: Bool {
+            get { return Settings.boolForKey(.DebutsStreamSourceOn) }
+            set { Settings.setValue(newValue, forKey: .DebutsStreamSourceOn) }
         }
     }
     
-    class var shouldIncludeNewTodayStreamSource: Bool? {
-        get {
-        return Defaults[DefaultsKey.NewTodayStreamSourceOn.rawValue].bool
+    struct Reminder {
+        
+        static var Enabled: Bool {
+            get { return Settings.boolForKey(.ReminderOn) }
+            set { Settings.setValue(newValue, forKey: .ReminderOn) }
         }
-        set {
-            Defaults[DefaultsKey.NewTodayStreamSourceOn.rawValue] = newValue
+        
+        static var Date: NSDate? {
+            get { return Settings.dateForKey(.ReminderDate) }
+            set { Settings.setValue(newValue, forKey: .ReminderDate) }
         }
-    }
-    
-    class var shouldIncludePopularTodayStreamSource: Bool? {
-        get {
-        return Defaults[DefaultsKey.PopularTodayStreamSourceOn.rawValue].bool
-        }
-        set {
-            Defaults[DefaultsKey.PopularTodayStreamSourceOn.rawValue] = newValue
-        }
-    }
-    
-    class var shouldIncludeDebutsStreamSource: Bool? {
-        get {
-        return Defaults[DefaultsKey.DebutsStreamSourceOn.rawValue].bool
-        }
-        set {
-            Defaults[DefaultsKey.DebutsStreamSourceOn.rawValue] = newValue
+        
+        static var LocalNotificationSettingsProvided: Bool {
+            get { return Settings.boolForKey(.LocalNotificationSettingsProvided) }
+            set { Settings.setValue(newValue, forKey: .LocalNotificationSettingsProvided) }
         }
     }
+}
+
+private extension Settings {
     
-    class var localNotificationSettingsProvided: Bool? {
-        get {
-        return Defaults[DefaultsKey.LocalNotificationSettingsProvided.rawValue].bool
-        }
-        set {
-            Defaults[DefaultsKey.LocalNotificationSettingsProvided.rawValue] = newValue
-        }
+    static func boolForKey(key: DefaultsKey) -> Bool {
+        return Defaults[key.rawValue].bool ?? false
+    }
+    
+    static func dateForKey(key: DefaultsKey) -> NSDate? {
+        return Defaults[key.rawValue].date
+    }
+    
+    static func setValue(value: AnyObject?, forKey key: DefaultsKey) {
+        Defaults[key.rawValue] = value
     }
 }

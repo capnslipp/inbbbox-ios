@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import PromiseKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.pinkColor()
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-
+        
         return true
     }
 

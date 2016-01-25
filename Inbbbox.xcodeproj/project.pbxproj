@@ -49,6 +49,8 @@
 		5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */; };
 		5E55DF601C491C7100E894E0 /* QuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55DF5F1C491C7100E894E0 /* QuerySpec.swift */; };
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
+		5E8532311C525E4F00FC5A50 /* ShotsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */; };
+		5EB5DDF71C528397000B3EAC /* ShotsProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */; };
 		5EB896C41C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB896BF1C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift */; };
 		5EB896C51C5257E800AC2F3D /* LoginViewAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB896C01C5257E800AC2F3D /* LoginViewAnimations.swift */; };
 		5EB896C61C5257E800AC2F3D /* LoginViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB896C11C5257E800AC2F3D /* LoginViewAnimator.swift */; };
@@ -222,6 +224,8 @@
 		5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSource.swift; sourceTree = "<group>"; };
 		5E55DF5F1C491C7100E894E0 /* QuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuerySpec.swift; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProvider.swift; sourceTree = "<group>"; };
+		5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfiguration.swift; sourceTree = "<group>"; };
 		5EB896BF1C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsAnimator.swift; sourceTree = "<group>"; };
 		5EB896C01C5257E800AC2F3D /* LoginViewAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewAnimations.swift; sourceTree = "<group>"; };
 		5EB896C11C5257E800AC2F3D /* LoginViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewAnimator.swift; sourceTree = "<group>"; };
@@ -375,6 +379,8 @@
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				F092E26A1C3FD6F900593D18 /* ShotOperationSynchronizer.swift */,
 				F08830F81C43944300F530A2 /* ShotOperationRequester.swift */,
+				5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */,
+				5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1032,7 +1038,9 @@
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
+				5E8532311C525E4F00FC5A50 /* ShotsProvider.swift in Sources */,
 				5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */,
+				5EB5DDF71C528397000B3EAC /* ShotsProviderConfiguration.swift in Sources */,
 				E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
 				BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */,
