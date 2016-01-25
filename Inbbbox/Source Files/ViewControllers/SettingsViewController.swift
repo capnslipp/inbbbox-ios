@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KFSwiftImageLoader
 
 class SettingsViewController: UIViewController {
     
@@ -197,10 +198,14 @@ private extension SettingsViewController {
             return
         }
         
-        header.usernameLabel.text = viewModel.username()
+        let user = viewModel.loggedInUser
+        header.usernameLabel.text = user?.username
         
-        viewModel.fetchAvatar { image in
-            header.avatarView.imageView.image = image
+        if let urlString = user?.avatarString {
+            header.avatarView.imageView.loadImageFromURLString(urlString)
+        } else {
+            //NGRToDo: provide placeholder
+            header.avatarView.imageView.image = nil
         }
     }
 }

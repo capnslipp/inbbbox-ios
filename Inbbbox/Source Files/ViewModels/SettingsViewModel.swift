@@ -30,6 +30,10 @@ class SettingsViewModel: GroupedListViewModel {
     private let popularTodayStreamSourceItem: SwitchItem
     private let debutsStreamSourceItem: SwitchItem
     
+    var loggedInUser: User? {
+        return UserStorage.currentUser
+    }
+    
     init(delegate: ModelUpdatable) {
         
         // MARK: Parameters
@@ -111,29 +115,6 @@ class SettingsViewModel: GroupedListViewModel {
     dynamic func didProvideNotificationSettings() {
         Settings.Reminder.LocalNotificationSettingsProvided = true
         registerLocalNotification()
-    }
-    
-    func username() -> String? {
-        return UserStorage.currentUser?.username
-    }
-    
-    func fetchAvatar(completion: UIImage? -> Void) {
-        
-        guard let avatarURL = UserStorage.currentUser?.avatarString, url = NSURL(string: avatarURL) else {
-            completion(nil)
-            return
-        }
-        
-        var image: UIImage?
-        
-        Async.background {
-            if let data = NSData(contentsOfURL: url) {
-                image = UIImage(data: data)
-            }
-            
-        }.main {
-            completion(image)
-        }
     }
 }
 
