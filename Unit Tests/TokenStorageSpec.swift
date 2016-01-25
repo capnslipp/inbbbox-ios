@@ -21,7 +21,10 @@ class TokenStorageSpec: QuickSpec {
         }
         
         afterSuite {
-            TokenStorage.storeToken(savedTokenBeforeTestLaunch)
+            if let token = savedTokenBeforeTestLaunch {
+                TokenStorage.storeToken(token)
+            }
+            
         }
         
         beforeEach {
@@ -45,7 +48,7 @@ class TokenStorageSpec: QuickSpec {
                 }
                 
                 it("token should be nil") {
-                    expect(TokenStorage.currentToken).to(equal(""))
+                    expect(TokenStorage.currentToken).to(beNil())
                 }
             }
         }

@@ -14,8 +14,8 @@ final class TokenStorage {
     private static let KeychainService = "co.netguru.inbbbox.keychain.token"
     private static let keychain = Keychain(service: KeychainService)
     
-    class var currentToken: String {
-        return keychain[Key.Token.rawValue] ?? ""
+    class var currentToken: String? {
+        return keychain[Key.Token.rawValue]
     }
     
     class func storeToken(token: String) {

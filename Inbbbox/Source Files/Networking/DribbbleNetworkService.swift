@@ -23,7 +23,9 @@ struct DribbbleNetworkService: SecureNetworkService, HeaderAuthorizable, OAuthAu
     let scope = Dribbble.Scope
     
     func authorizeRequest(request: NSMutableURLRequest) {
-        let header = authorizationHeader(TokenStorage.currentToken)
+        
+        let token = TokenStorage.currentToken ?? Dribbble.ClientAccessToken
+        let header = authorizationHeader(token)
         request.setHeader(header)
     }
 }
