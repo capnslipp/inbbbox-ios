@@ -78,6 +78,7 @@
 		74C161821C561ECE004E1F9B /* BucketsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */; };
 		74C161841C562AB8004E1F9B /* WidthAware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161831C562AB8004E1F9B /* WidthAware.swift */; };
 		74C161861C563A49004E1F9B /* BucketsCollectionViewLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161851C563A49004E1F9B /* BucketsCollectionViewLayoutSpec.swift */; };
+		74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
 		BEEE92DB2FA773AEA5E9EBB5 /* CenterButtonTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */; };
@@ -250,6 +251,7 @@
 		74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		74C161831C562AB8004E1F9B /* WidthAware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidthAware.swift; sourceTree = "<group>"; };
 		74C161851C563A49004E1F9B /* BucketsCollectionViewLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewLayoutSpec.swift; sourceTree = "<group>"; };
+		74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundView.swift; sourceTree = "<group>"; };
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				5E55DF5F1C491C7100E894E0 /* QuerySpec.swift */,
 				BEEE9B96B2E0EEEC762DF2E6 /* ShotsCollectionBackgroundViewSpec.swift */,
 				74C161851C563A49004E1F9B /* BucketsCollectionViewLayoutSpec.swift */,
+				74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1144,6 +1147,7 @@
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */,
 				5EDB832E1C48DF0000FBCA05 /* SharedQuerySpec.swift in Sources */,
+				74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */,
 				FF13AF11CAA2BAB3EFD369E2 /* ShotsCollectionViewControllerSpec.swift in Sources */,
 				5EC0A7B51C35634800846975 /* OAuthViewModelSpec.swift in Sources */,
 				5E0D773D1C3BE475002191A7 /* UserSpec.swift in Sources */,
