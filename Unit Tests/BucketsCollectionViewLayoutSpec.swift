@@ -32,12 +32,12 @@ class BucketsCollectionViewLayoutSpec: QuickSpec {
             
             beforeEach {
                 collectionView!.bounds = CGRect(x:0, y:0, width:500, height:500)
-                widthDependendSpacing = CGFloat((CGRectGetWidth(collectionView!.bounds) - 2 * BucketCollectionViewCell.prefferedWidth) / 3)
+                widthDependendSpacing = CGFloat((CGRectGetWidth(collectionView!.bounds) - 2 * BucketCollectionViewCell.preferredWidth) / 3)
                 sut!.prepareLayout()
             }
             
             it("should have proper item size") {
-                expect(sut!.itemSize).to(equal(CGSize(width: BucketCollectionViewCell.prefferedWidth, height: BucketCollectionViewCell.prefferedHeight)))
+                expect(sut!.itemSize).to(equal(CGSize(width: BucketCollectionViewCell.preferredWidth, height: BucketCollectionViewCell.preferredHeight)))
             }
             
             it("should have proper minimum line spacing") {

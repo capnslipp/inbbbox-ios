@@ -25,7 +25,7 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
         if let collectionView = collectionView {
             let cellMargins = UIEdgeInsets(top: 0, left: CGFloat(28), bottom: 0, right: CGFloat(28))
             let indexMultiplier = CGFloat(indexPath.item)
-            layoutAttributes.size = CGSize(width: CGRectGetWidth(collectionView.bounds) - (cellMargins.left + cellMargins.right) * (indexMultiplier + 1), height: ShotCollectionViewCell.prefferedHeight)
+            layoutAttributes.size = CGSize(width: CGRectGetWidth(collectionView.bounds) - (cellMargins.left + cellMargins.right) * (indexMultiplier + 1), height: ShotCollectionViewCell.preferredHeight)
             layoutAttributes.center = CGPoint(x: collectionView.center.x, y: collectionView.center.y + bottomCellOffset * indexMultiplier)
             layoutAttributes.zIndex = -indexPath.row
         }

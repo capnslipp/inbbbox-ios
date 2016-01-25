@@ -92,7 +92,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
 extension ShotCollectionViewCell: HeightAware {
 
-    static var prefferedHeight: CGFloat {
+    static var preferredHeight: CGFloat {
         return CGFloat(240)
     }
 }

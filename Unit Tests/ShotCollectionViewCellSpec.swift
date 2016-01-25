@@ -52,7 +52,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                 var preferredHeight: CGFloat?
 
                 beforeEach {
-                    preferredHeight = ShotCollectionViewCell.prefferedHeight
+                    preferredHeight = ShotCollectionViewCell.preferredHeight
                 }
 
                 it("should have preferred height 240") {

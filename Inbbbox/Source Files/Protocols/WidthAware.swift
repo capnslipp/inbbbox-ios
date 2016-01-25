@@ -9,5 +9,5 @@
 import UIKit
 
 protocol WidthAware {
-    static var prefferedWidth: CGFloat { get }
+    static var preferredWidth: CGFloat { get }
 }

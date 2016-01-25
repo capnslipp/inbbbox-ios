@@ -30,7 +30,7 @@ class ShotsCollectionViewFlowLayoutSpec: QuickSpec {
             }
 
             it("should have proper item size") {
-                expect(sut!.itemSize).to(equal(CGSize(width: 444, height: ShotCollectionViewCell.prefferedHeight)))
+                expect(sut!.itemSize).to(equal(CGSize(width: 444, height: ShotCollectionViewCell.preferredHeight)))
             }
 
             it("should have proper minimum line spacing") {

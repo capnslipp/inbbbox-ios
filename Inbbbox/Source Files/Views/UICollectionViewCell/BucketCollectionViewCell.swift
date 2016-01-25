@@ -28,12 +28,12 @@ class BucketCollectionViewCell: UICollectionViewCell, HeightAware, WidthAware, R
     }
     
     // MARK: - HeightAware
-    static var prefferedHeight: CGFloat {
+    static var preferredHeight: CGFloat {
         return CGFloat(170)
     }
 
     // MARK: - WidthAware
-    static var prefferedWidth: CGFloat {
+    static var preferredWidth: CGFloat {
         return CGFloat(140)
     }
     

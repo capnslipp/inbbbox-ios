@@ -69,7 +69,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                         }
 
                         it("should have proper size") {
-                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.prefferedHeight)))
+                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.preferredHeight)))
                         }
 
                         it("should have proper center") {
@@ -90,7 +90,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                         }
 
                         it("should have proper size") {
-                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 88, height: ShotCollectionViewCell.prefferedHeight)))
+                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 88, height: ShotCollectionViewCell.preferredHeight)))
                         }
 
                         it("should have proper center") {
@@ -130,7 +130,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 }
 
                 it("should have proper size") {
-                    expect(initialLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.prefferedHeight)))
+                    expect(initialLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.preferredHeight)))
                 }
 
                 it("should have proper center") {
@@ -158,7 +158,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 }
 
                 it("should have proper size") {
-                    expect(finalLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.prefferedHeight)))
+                    expect(finalLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.preferredHeight)))
                 }
 
                 it("should have proper center") {
