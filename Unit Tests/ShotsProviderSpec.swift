@@ -33,19 +33,18 @@ class ShotsProviderSpec: QuickSpec {
             
             context("when providing shots with success") {
                 
-                var shots: [Shot]!
-                
                 beforeEach {
                     sut = ShotsProvider()
                     self.stub(everything, builder: json(self.fixtureJSON))
                 }
                 
                 afterEach {
-                    shots = nil
                     self.removeAllStubs()
                 }
                 
-                it("should return 1 shot") {
+                it("should return 2 shots") {
+                    var shots: [Shot]!
+                    
                     sut.provideShots().then { _shots in
                         shots = _shots
                     }.error { _ in
@@ -56,9 +55,17 @@ class ShotsProviderSpec: QuickSpec {
                 }
                 
                 it("page should be increased") {
-                    sut.provideShots()
                     
-                    expect(sut.page).toEventually(equal(2))
+                    waitUntil { done in
+                        
+                        sut.provideShots().then {_ in
+                            done()
+                        }.error { _ in
+                            fail()
+                        }
+                    }
+                    
+                    expect(sut.page).to(equal(2))
                 }
 
                 it("after restoring, page should be 1") {
