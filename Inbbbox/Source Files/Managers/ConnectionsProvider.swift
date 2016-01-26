@@ -60,7 +60,7 @@ class ConnectionsProvider {
     func provideFollowersForUser(user: User) -> Promise<[Follower]> {
     
         let query = FollowersQuery(followersOfUser: user)
-        return usersWithQuery(query, shouldBeAuthenticated: true)
+        return usersWithQuery(query, shouldBeAuthenticated: false)
     }
     
     /**
@@ -73,9 +73,8 @@ class ConnectionsProvider {
     func provideFolloweesForUser(user: User) -> Promise<[Followee]> {
     
         let query = FolloweesQuery(followeesOfUser: user)
-        return usersWithQuery(query, shouldBeAuthenticated: true)
+        return usersWithQuery(query, shouldBeAuthenticated: false)
     }
-    
 }
 
 private extension ConnectionsProvider {
