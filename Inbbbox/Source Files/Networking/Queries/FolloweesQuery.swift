@@ -1,5 +1,5 @@
 //
-//  FollowingQuery.swift
+//  FolloweesQuery.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 26/01/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FollowingQuery: Query {
+struct FolloweesQuery: Query {
     
     let method = Method.GET
     let path: String
@@ -16,7 +16,7 @@ struct FollowingQuery: Query {
     
     /**
     Initialize query for list who the authenticated user is following.
-     */
+    */
     init() {
         path = "/user/following"
     }
@@ -24,7 +24,7 @@ struct FollowingQuery: Query {
     /**
      Initialize query for list who given user is following.
      */
-    init(usersFollowedByUser user: User) {
+    init(followeesOfUser user: User) {
         path = "/users/\(user.username)/following"
     }
 }

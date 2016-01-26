@@ -1,5 +1,5 @@
 //
-//  FollowingQuerySpec.swift
+//  FolloweesQuerySpec.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 26/01/16.
@@ -12,25 +12,25 @@ import SwiftyJSON
 
 @testable import Inbbbox
 
-class FollowingQuerySpec: QuickSpec {
+class FolloweesQuerySpec: QuickSpec {
     override func spec() {
         
-        var sut: FollowingQuery!
+        var sut: FolloweesQuery!
         
         afterEach {
             sut = nil
         }
         
-        describe("when newly initialized with identifier") {
+        describe("when newly initialize") {
             
             SharedQuerySpec.performSpecForQuery( { Void -> Query in
-                return FollowingQuery()
+                return FolloweesQuery()
             }) { Void -> QueryExpectation in
                 return (method: .GET, encoding: .URL, path: "/user/following")
             }
             
             beforeEach {
-                sut = FollowingQuery()
+                sut = FolloweesQuery()
             }
             
             it("should have empty parameters") {
@@ -38,16 +38,16 @@ class FollowingQuerySpec: QuickSpec {
             }
         }
         
-        describe("when newly initialized") {
+        describe("when newly initialize with user") {
             
             SharedQuerySpec.performSpecForQuery( { Void -> Query in
-                return FollowingQuery(usersFollowedByUser: self.fixtureUser)
+                return FolloweesQuery(followeesOfUser: self.fixtureUser)
             }) { Void -> QueryExpectation in
                 return (method: .GET, encoding: .URL, path: "/users/fixture.username/following")
             }
             
             beforeEach {
-                sut = FollowingQuery(usersFollowedByUser: self.fixtureUser)
+                sut = FolloweesQuery(followeesOfUser: self.fixtureUser)
             }
             
             it("should have empty parameters") {
@@ -57,7 +57,7 @@ class FollowingQuerySpec: QuickSpec {
     }
 }
 
-private extension FollowingQuerySpec {
+private extension FolloweesQuerySpec {
     
     var fixtureUser: User {
         
