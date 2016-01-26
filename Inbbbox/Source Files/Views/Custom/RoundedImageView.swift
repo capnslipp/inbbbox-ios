@@ -17,14 +17,13 @@ class RoundedImageView: UIView {
     
     // MARK: Life Cycle
     
-    init(withImage: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat, frame: CGRect) {
-        imageView = UIImageView(frame: frame)
-        imageView.image = withImage
+    init(image: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat, frame: CGRect) {
+        imageView = UIImageView.newAutoLayoutView()
+        imageView.image = image
         cornersToRound = byRoundingCorners
         radiusToSet = radius
         
         super.init(frame: frame)
-        
         addSubview(imageView)
     }
     
@@ -39,21 +38,18 @@ class RoundedImageView: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        [super.drawRect(rect)]
+        super.drawRect(rect)
 
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: cornersToRound, cornerRadii: CGSize(width: radiusToSet, height: radiusToSet))
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: cornersToRound, cornerRadii: CGSize(width: radiusToSet, height: radiusToSet))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
-        self.layer.mask = mask
+        layer.mask = mask
     }
     
     // MARK: Auto Layout
     override func updateConstraints() {
         if !didUpdateConstraints {
-            imageView.autoPinEdge(.Left, toEdge: .Left, ofView: self)
-            imageView.autoPinEdge(.Right, toEdge: .Right, ofView: self)
-            imageView.autoPinEdge(.Top, toEdge: .Top, ofView: self)
-            imageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self)
+            imageView.autoPinEdgesToSuperviewEdges()
             
             didUpdateConstraints = true
         }

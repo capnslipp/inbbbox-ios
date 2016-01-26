@@ -27,19 +27,21 @@ class ShotDetailsHeaderView: UIView {
     
     /* NGRTemp: Replace with custom-object initialization 
         image, avatar, title, description, other data */
-    init(withImage: UIImage) {
+    init(image: UIImage) {
         shotImageView = RoundedImageView(
-            withImage: withImage,
+            image: image,
             byRoundingCorners: [.TopLeft, .TopRight],
             radius: CGFloat(imageViewCornerRadius),
-            frame: CGRectZero)
+            frame: CGRectZero
+        )
         closeButton = UIButton(type: .System)
         
         avatarView = RoundedImageView(
-            withImage: withImage,
+            image: image,
             byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight],
             radius: CGFloat(avatarSize / 2),
-            frame: CGRectZero)
+            frame: CGRectZero
+        )
         
         super.init(frame: CGRectZero)
         
@@ -93,17 +95,20 @@ class ShotDetailsHeaderView: UIView {
     }
     
     private func setupShotImageView() {
+        shotImageView.configureForAutoLayout()
         shotImageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(shotImageView)
     }
     
     private func setupCloseButton() {
+        closeButton.configureForAutoLayout()
         closeButton.setImage(UIImage(named: "ic-closemodal"), forState: .Normal)
         closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         addSubview(closeButton)
     }
     
     private func setupAvatarView() {
+        avatarView.configureForAutoLayout()
         avatarView.backgroundColor = UIColor.yellowColor()
         addSubview(avatarView)
     }

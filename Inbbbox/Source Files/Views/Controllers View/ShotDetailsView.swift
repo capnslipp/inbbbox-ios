@@ -23,6 +23,7 @@ class ShotDetailsView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         blurView.configureForAutoLayout()
+        tableView.configureForAutoLayout()
         addSubview(blurView)
         addSubview(tableView)
     }
