@@ -11,12 +11,16 @@ import UIKit
 class BucketsCollectionViewLayout: UICollectionViewFlowLayout {
     
     override func prepareLayout() {
+       
         if let collectionView = collectionView {
-            itemSize = CGSize(width: BucketCollectionViewCell.preferredWidth,
-                height: BucketCollectionViewCell.preferredHeight)
-            let widthDependendSpacing = CGFloat((CGRectGetWidth(collectionView.bounds) - 2 * BucketCollectionViewCell.preferredWidth) / 3)
-            sectionInset = UIEdgeInsets(top: widthDependendSpacing, left: widthDependendSpacing, bottom: widthDependendSpacing, right: widthDependendSpacing)
-            minimumLineSpacing = widthDependendSpacing
+            let spacing = CGFloat(28)
+            let calculatedItemWidth = (round(CGRectGetWidth(collectionView.bounds)) - 3 * spacing) / 2
+            
+            // NGRTemp: width to height ratio will change because it contains also labels with info about bucket
+            let calculatedItemHeight = calculatedItemWidth
+            itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
+            minimumLineSpacing = spacing
+            sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         }
     }
 }
