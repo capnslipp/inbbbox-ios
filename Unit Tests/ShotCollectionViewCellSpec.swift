@@ -54,7 +54,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
             }
         }
 
-        describe("height aware") {
+        describe("height declaring") {
 
             describe("preferred height") {
 

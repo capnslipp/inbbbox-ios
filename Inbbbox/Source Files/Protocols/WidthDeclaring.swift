@@ -1,5 +1,5 @@
 //
-//  WidthAware.swift
+//  WidthDeclaring
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 25.01.2016.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-protocol WidthAware {
+protocol WidthDeclaring {
     static var preferredWidth: CGFloat { get }
 }

@@ -4,6 +4,6 @@
 
 import UIKit
 
-protocol HeightAware {
+protocol HeightDeclaring {
     static var preferredHeight: CGFloat { get }
 }

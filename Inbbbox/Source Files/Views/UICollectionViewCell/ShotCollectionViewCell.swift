@@ -116,7 +116,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension ShotCollectionViewCell: HeightAware {
+extension ShotCollectionViewCell: HeightDeclaring {
 
     static var preferredHeight: CGFloat {
         return CGFloat(240)

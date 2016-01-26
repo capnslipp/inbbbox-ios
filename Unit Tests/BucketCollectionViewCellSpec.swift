@@ -15,7 +15,7 @@ class BucketCollectionViewCellSpec: QuickSpec {
 
     override func spec() {
         
-        describe("height aware") {
+        describe("height declaring") {
             
             describe("preferred height") {
                 
@@ -31,7 +31,7 @@ class BucketCollectionViewCellSpec: QuickSpec {
             }
         }
         
-        describe("width aware") {
+        describe("width declaring") {
             
             describe("preferred width") {
                 
