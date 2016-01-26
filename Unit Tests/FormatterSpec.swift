@@ -14,9 +14,13 @@ import Nimble
 class FormatterSpec: QuickSpec {
     override func spec() {
         
+        var dateComponents: NSDateComponents!
+        
+        afterEach {
+            dateComponents = nil
+        }
+        
         describe("when formatting date with basic date formatter") {
-            
-            var dateComponents: NSDateComponents!
             
             beforeEach {
                 let date = Formatter.Date.Basic.dateFromString("1970-01-01")!
@@ -33,6 +37,38 @@ class FormatterSpec: QuickSpec {
             
             it("day should be properly decoded") {
                 expect(dateComponents.day).to(equal(1))
+            }
+        }
+        
+        describe("when formatting date with timestamp date formatter") {
+            
+            beforeEach {
+                let date = Formatter.Date.Timestamp.dateFromString("1970-01-01T08:19:14+01:00")!
+                dateComponents = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.components([.Year, .Month, .Day, .Hour, .Minute, .Second], fromDate: date)
+            }
+            
+            it("year should be properly decoded") {
+                expect(dateComponents.year).to(equal(1970))
+            }
+            
+            it("month should be properly decoded") {
+                expect(dateComponents.month).to(equal(1))
+            }
+            
+            it("day should be properly decoded") {
+                expect(dateComponents.day).to(equal(1))
+            }
+            
+            it("hour should be properly decoded") {
+                expect(dateComponents.hour).to(equal(8))
+            }
+            
+            it("minute should be properly decoded") {
+                expect(dateComponents.minute).to(equal(19))
+            }
+            
+            it("second should be properly decoded") {
+                expect(dateComponents.second).to(equal(14))
             }
         }
     }
