@@ -26,7 +26,7 @@ struct Shot {
 extension Shot: Mappable {
     static var map: JSON -> Shot {
         return { json in
-            
+            print(json)
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
             
             return Shot(
