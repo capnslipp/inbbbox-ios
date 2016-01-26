@@ -12,7 +12,6 @@
 		306C08301C578520002D88CB /* ShotDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C082F1C578520002D88CB /* ShotDetailsCell.swift */; };
 		306ED6E41C56138500C1D7A6 /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306ED6E31C56138500C1D7A6 /* RoundedImageView.swift */; };
 		30E099401C521D44009D2717 /* ShotDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E0993F1C521D44009D2717 /* ShotDetailsHeaderView.swift */; };
-		5A4005E01C2418760010A500 /* HeightDeclaring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005DF1C2418760010A500 /* HeightDeclaring.swift */; };
 		5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */; };
 		5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */; };
 		5A499B691C35411F009AB421 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B681C35411F009AB421 /* UIColorExtension.swift */; };
@@ -88,7 +87,6 @@
 		745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146931C5217F400710C61 /* BucketsCollectionViewController.swift */; };
 		745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146951C5235D600710C61 /* BucketCollectionViewCell.swift */; };
 		74C161821C561ECE004E1F9B /* BucketsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */; };
-		74C161841C562AB8004E1F9B /* WidthDeclaring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161831C562AB8004E1F9B /* WidthDeclaring.swift */; };
 		74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */; };
 		74C1618A1C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161891C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
@@ -183,7 +181,6 @@
 		306C082F1C578520002D88CB /* ShotDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsCell.swift; sourceTree = "<group>"; };
 		306ED6E31C56138500C1D7A6 /* RoundedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		30E0993F1C521D44009D2717 /* ShotDetailsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsHeaderView.swift; sourceTree = "<group>"; };
-		5A4005DF1C2418760010A500 /* HeightDeclaring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeightDeclaring.swift; sourceTree = "<group>"; };
 		5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5A499B681C35411F009AB421 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -270,7 +267,6 @@
 		745146931C5217F400710C61 /* BucketsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewController.swift; sourceTree = "<group>"; };
 		745146951C5235D600710C61 /* BucketCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCell.swift; sourceTree = "<group>"; };
 		74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewLayout.swift; sourceTree = "<group>"; };
-		74C161831C562AB8004E1F9B /* WidthDeclaring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidthDeclaring.swift; sourceTree = "<group>"; };
 		74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		74C161891C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -744,11 +740,9 @@
 		BF47EE2C1B4BBAFF002822D7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				5A4005DF1C2418760010A500 /* HeightDeclaring.swift */,
 				F0863DC11C23F3C10062EA21 /* StringConvertible.swift */,
 				F0863DC31C23F3DB0062EA21 /* Reusable.swift */,
 				BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */,
-				74C161831C562AB8004E1F9B /* WidthDeclaring.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1089,7 +1083,6 @@
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
 				5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */,
-				5A4005E01C2418760010A500 /* HeightDeclaring.swift in Sources */,
 				5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */,
 				30E099401C521D44009D2717 /* ShotDetailsHeaderView.swift in Sources */,
 				F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */,
@@ -1145,7 +1138,6 @@
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
 				F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */,
 				300BBF161C4F947900721D13 /* ShotDetailsViewController.swift in Sources */,
-				74C161841C562AB8004E1F9B /* WidthDeclaring.swift in Sources */,
 				5E5082081C312E2800093191 /* ShotsStorage.swift in Sources */,
 				5ED6C5BB1C57BA2900A591EA /* NSAttributedStringExtension.swift in Sources */,
 				5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */,

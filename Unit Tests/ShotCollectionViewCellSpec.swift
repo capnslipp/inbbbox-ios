@@ -54,22 +54,6 @@ class ShotCollectionViewCellSpec: QuickSpec {
             }
         }
 
-        describe("height declaring") {
-
-            describe("preferred height") {
-
-                var preferredHeight: CGFloat?
-
-                beforeEach {
-                    preferredHeight = ShotCollectionViewCell.preferredHeight
-                }
-
-                it("should have preferred height 240") {
-                    expect(preferredHeight).to(equal(240))
-                }
-            }
-        }
-
         describe("reusable") {
 
             describe("reuse identifier") {

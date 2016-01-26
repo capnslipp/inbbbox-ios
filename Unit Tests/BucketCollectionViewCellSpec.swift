@@ -15,38 +15,6 @@ class BucketCollectionViewCellSpec: QuickSpec {
 
     override func spec() {
         
-        describe("height declaring") {
-            
-            describe("preferred height") {
-                
-                var preferredHeight: CGFloat?
-                
-                beforeEach {
-                    preferredHeight = BucketCollectionViewCell.preferredHeight
-                }
-                
-                it("should have proper preferred height") {
-                    expect(preferredHeight).to(equal(170))
-                }
-            }
-        }
-        
-        describe("width declaring") {
-            
-            describe("preferred width") {
-                
-                var preferredWidth: CGFloat?
-                
-                beforeEach {
-                    preferredWidth = BucketCollectionViewCell.preferredWidth
-                }
-                
-                it("should have proper preferred width") {
-                    expect(preferredWidth).to(equal(140))
-                }
-            }
-        }
-        
         describe("reusable") {
             
             describe("reuse identifier") {

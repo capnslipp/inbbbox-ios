@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BucketCollectionViewCell: UICollectionViewCell, HeightDeclaring, WidthDeclaring, Reusable {
+class BucketCollectionViewCell: UICollectionViewCell, Reusable {
     
     // MARK - Life cycle
     
@@ -25,16 +25,6 @@ class BucketCollectionViewCell: UICollectionViewCell, HeightDeclaring, WidthDecl
             green: CGFloat(arc4random()) / CGFloat(UInt32.max),
             blue: CGFloat(arc4random()) / CGFloat(UInt32.max),
             alpha: 1)
-    }
-    
-    // MARK: - HeightDeclaring
-    static var preferredHeight: CGFloat {
-        return CGFloat(170)
-    }
-
-    // MARK: - WidthDeclaring
-    static var preferredWidth: CGFloat {
-        return CGFloat(140)
     }
     
     // MARK: - Reusable

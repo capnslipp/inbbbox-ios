@@ -116,13 +116,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension ShotCollectionViewCell: HeightDeclaring {
-
-    static var preferredHeight: CGFloat {
-        return CGFloat(240)
-    }
-}
-
 extension ShotCollectionViewCell: Reusable {
 
     static var reuseIdentifier: String {
