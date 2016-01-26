@@ -157,7 +157,7 @@
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
 		FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A0AF874643193442C4BE /* ShotsAnimationManagerMock.swift */; };
 		FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */; };
-		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */; };
+		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */; };
 		FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */; };
 		FF13AB2E8D72A9EDF7DB081C /* AsyncWrapperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */; };
 		FF13AD5BDAA038D06F3CDFD2 /* AsyncWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A1A2161AE07748341642 /* AsyncWrapper.swift */; };
@@ -338,7 +338,7 @@
 		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		FF13A0AF874643193442C4BE /* ShotsAnimationManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimationManagerMock.swift; sourceTree = "<group>"; };
 		FF13A1A2161AE07748341642 /* AsyncWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapper.swift; sourceTree = "<group>"; };
-		FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
+		FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutSpec.swift; sourceTree = "<group>"; };
 		FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewMock.swift; sourceTree = "<group>"; };
@@ -819,7 +819,7 @@
 			isa = PBXGroup;
 			children = (
 				5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */,
-				FF13A255632A76F4B0190369 /* ShotsCollectionViewLayout.swift */,
+				FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */,
 				74C161811C561ECE004E1F9B /* BucketsCollectionViewLayout.swift */,
 			);
 			path = "Collection View Layouts";
@@ -1147,7 +1147,7 @@
 				F092E2671C3FD63D00593D18 /* ShotsLocalStorage.swift in Sources */,
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
-				FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewLayout.swift in Sources */,
+				FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */,
 				BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */,
 				FF13AD5BDAA038D06F3CDFD2 /* AsyncWrapper.swift in Sources */,
 				5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */,
