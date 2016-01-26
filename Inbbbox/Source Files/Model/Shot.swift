@@ -16,7 +16,7 @@ import SwiftyJSON
 struct Shot {
     let identifier: String
     let title: String?
-    let description: String?
+    let description: NSAttributedString?
     let user: User
     let image: ShotImage
     let createdAt: NSDate
@@ -26,13 +26,14 @@ struct Shot {
 extension Shot: Mappable {
     static var map: JSON -> Shot {
         return { json in
-            print(json)
+            
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
+            let htmlDescription = json[Key.Description.rawValue].string
             
             return Shot(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 title: json[Key.Title.rawValue].string,
-                description: json[Key.Description.rawValue].string,
+                description: NSAttributedString(htmlString: htmlDescription),
                 user: User.map(json[Key.User.rawValue]),
                 image: ShotImage.map(json[Key.Images.rawValue]),
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
