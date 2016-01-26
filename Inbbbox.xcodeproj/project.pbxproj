@@ -62,6 +62,8 @@
 		5EC0A7B31C3559A200846975 /* AsyncWrapperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B21C3559A200846975 /* AsyncWrapperSpec.swift */; };
 		5EC0A7B51C35634800846975 /* OAuthViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B41C35634800846975 /* OAuthViewModelSpec.swift */; };
 		5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0A7B61C35668100846975 /* MockLoginService.swift */; };
+		5ED6C5B31C5768B200A591EA /* ShotsProviderConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5B21C5768B200A591EA /* ShotsProviderConfigurationSpec.swift */; };
+		5ED6C5B51C5768BA00A591EA /* ShotsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5B41C5768BA00A591EA /* ShotsProviderSpec.swift */; };
 		5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83201C48DECE00FBCA05 /* AddToBucketQuerySpec.swift */; };
 		5EDB83271C48DECE00FBCA05 /* LikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83211C48DECE00FBCA05 /* LikeQuerySpec.swift */; };
 		5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83221C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift */; };
@@ -236,6 +238,8 @@
 		5EC0A7B21C3559A200846975 /* AsyncWrapperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapperSpec.swift; sourceTree = "<group>"; };
 		5EC0A7B41C35634800846975 /* OAuthViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewModelSpec.swift; sourceTree = "<group>"; };
 		5EC0A7B61C35668100846975 /* MockLoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginService.swift; sourceTree = "<group>"; };
+		5ED6C5B21C5768B200A591EA /* ShotsProviderConfigurationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfigurationSpec.swift; sourceTree = "<group>"; };
+		5ED6C5B41C5768BA00A591EA /* ShotsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderSpec.swift; sourceTree = "<group>"; };
 		5EDB83201C48DECE00FBCA05 /* AddToBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuerySpec.swift; sourceTree = "<group>"; };
 		5EDB83211C48DECE00FBCA05 /* LikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeQuerySpec.swift; sourceTree = "<group>"; };
 		5EDB83221C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuerySpec.swift; sourceTree = "<group>"; };
@@ -493,6 +497,8 @@
 				74C161851C563A49004E1F9B /* BucketsCollectionViewLayoutSpec.swift */,
 				74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */,
 				74C161891C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift */,
+				5ED6C5B21C5768B200A591EA /* ShotsProviderConfigurationSpec.swift */,
+				5ED6C5B41C5768BA00A591EA /* ShotsProviderSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1139,10 +1145,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED6C5B51C5768BA00A591EA /* ShotsProviderSpec.swift in Sources */,
 				5EC0A7AF1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift in Sources */,
 				5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
 				F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */,
 				F08830FD1C43ABD700F530A2 /* CoreDataHelper.swift in Sources */,
+				5ED6C5B31C5768B200A591EA /* ShotsProviderConfigurationSpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageExtension.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,

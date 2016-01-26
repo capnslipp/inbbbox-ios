@@ -49,6 +49,25 @@ class ShotsQuerySpec: QuickSpec {
                 expect(sut.sort).to(beNil())
             }
             
+            it("should not be following user query") {
+                expect(sut.followingUsersShotsQuery).to(beFalsy())
+            }
+            
+            describe("when changing to following user query") {
+                
+                beforeEach {
+                    sut.followingUsersShotsQuery = true
+                }
+                
+                it("should be following user query") {
+                    expect(sut.followingUsersShotsQuery).to(beTruthy())
+                }
+                
+                it("should have proper path") {
+                    expect(sut.path).to(equal("/user/following/shots"))
+                }
+            }
+            
             describe("changing list parameter to") {
                 
                 afterEach {
