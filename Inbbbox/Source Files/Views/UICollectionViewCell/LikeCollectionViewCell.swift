@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LikeCollectionViewCell: UICollectionViewCell, Reusable {
+class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedHeight {
 
     // MARK - Life cycle
     
@@ -30,5 +30,10 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable {
     // MARK: - Reusable
     static var reuseIdentifier: String {
         return "LikeCollectionViewCellIdentifier"
+    }
+    
+    //MARK: - Width dependend height
+    static var heightToWidthRatio: CGFloat {
+        return CGFloat(0.75)
     }
 }

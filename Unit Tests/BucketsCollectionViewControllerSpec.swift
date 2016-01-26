@@ -26,7 +26,7 @@ class BucketsCollectionViewControllerSpec: QuickSpec {
         }
         
         it("should have initial shots collection view layout") {
-            expect(sut.collectionViewLayout).to(beAKindOf(BucketsCollectionViewLayout))
+            expect(sut.collectionViewLayout).to(beAKindOf(TwoColumnsCollectionViewFlowLayout))
         }
         
         describe("when view did load") {

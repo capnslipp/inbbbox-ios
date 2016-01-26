@@ -16,7 +16,9 @@ class BucketsCollectionViewController: UICollectionViewController {
     var buckets = ["bucket1", "bucket2", "bucket3", "bucket4", "bucket5", "bucket6", "bucket7"];
     
     convenience init() {
-        self.init(collectionViewLayout: BucketsCollectionViewLayout())
+        let flowLayout = TwoColumnsCollectionViewFlowLayout()
+        flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio;
+        self.init(collectionViewLayout: flowLayout)
         title = NSLocalizedString("Buckets", comment:"")
     }
     

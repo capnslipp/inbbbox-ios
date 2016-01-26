@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BucketCollectionViewCell: UICollectionViewCell, Reusable {
+class BucketCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedHeight {
     
     // MARK - Life cycle
     
@@ -30,5 +30,10 @@ class BucketCollectionViewCell: UICollectionViewCell, Reusable {
     // MARK: - Reusable
     static var reuseIdentifier: String {
         return "BucketCollectionViewCellIdentifier"
+    }
+    
+    //MARK: - Width dependend height
+    static var heightToWidthRatio: CGFloat {
+        return CGFloat(1)
     }
 }

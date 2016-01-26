@@ -16,7 +16,9 @@ class LikesCollectionViewController: UICollectionViewController {
     var likes = ["like1", "like2", "like3", "like4", "like5", "like6", "like7"];
     
     convenience init() {
-        self.init(collectionViewLayout: BucketsCollectionViewLayout())
+        let flowLayout = TwoColumnsCollectionViewFlowLayout()
+        flowLayout.itemHeightToWidthRatio = LikeCollectionViewCell.heightToWidthRatio;
+        self.init(collectionViewLayout: flowLayout)
         title = NSLocalizedString("Likes", comment:"")
     }
     
