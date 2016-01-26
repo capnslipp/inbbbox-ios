@@ -17,7 +17,7 @@ class ShotDetailsViewController: UIViewController {
     
     weak var delegate: ShotDetailsViewControllerDelegate?
     private weak var aView: ShotDetailsView?
-    let cellID = "ShotDetailsViewCell"
+    let cellID = String(UITableViewCell)
     
     // MARK: Life Cycle
     
@@ -66,7 +66,7 @@ extension ShotDetailsViewController: UITableViewDelegate {
             return 0
         }
         
-        return 267
+        return 400
     }
 } 
 

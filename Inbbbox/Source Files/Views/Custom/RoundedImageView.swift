@@ -13,11 +13,11 @@ class RoundedImageView: UIView {
     private var didUpdateConstraints = false
     private let imageView: UIImageView
     private let cornersToRound: UIRectCorner
-    private let radiusToSet: CGSize
-
+    private var radiusToSet: CGFloat
+    
     // MARK: Life Cycle
     
-    init(withImage: UIImage, byRoundingCorners: UIRectCorner, radius: CGSize, frame: CGRect) {
+    init(withImage: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat, frame: CGRect) {
         imageView = UIImageView(frame: frame)
         imageView.image = withImage
         cornersToRound = byRoundingCorners
@@ -41,7 +41,7 @@ class RoundedImageView: UIView {
     override func drawRect(rect: CGRect) {
         [super.drawRect(rect)]
 
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: cornersToRound, cornerRadii: radiusToSet)
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: cornersToRound, cornerRadii: CGSize(width: radiusToSet, height: radiusToSet))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         self.layer.mask = mask

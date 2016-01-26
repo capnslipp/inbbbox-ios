@@ -18,8 +18,10 @@ class ShotDetailsHeaderView: UIView {
     weak var delegate: ShotDetailsTableViewHeaderViewDelegate?
     private var didUpdateConstraints = false
     private var shotImageView: RoundedImageView
-    private var closeButton: UIButton
     private let imageViewCornerRadius = 15
+    private var closeButton: UIButton
+    private var avatarView: RoundedImageView
+    private let avatarSize = 48
     
     // MARK: Life Cycle
     
@@ -29,12 +31,19 @@ class ShotDetailsHeaderView: UIView {
         shotImageView = RoundedImageView(
             withImage: withImage,
             byRoundingCorners: [.TopLeft, .TopRight],
-            radius: CGSize(width: imageViewCornerRadius,
-                height: imageViewCornerRadius),
+            radius: CGFloat(imageViewCornerRadius),
             frame: CGRectZero)
         closeButton = UIButton(type: .System)
         
+        avatarView = RoundedImageView(
+            withImage: withImage,
+            byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight],
+            radius: CGFloat(avatarSize / 2),
+            frame: CGRectZero)
+        
         super.init(frame: CGRectZero)
+        
+        backgroundColor = UIColor(red:0.964, green:0.972, blue:0.972, alpha:1)
         setupSubviews()
     }
 
@@ -60,11 +69,15 @@ class ShotDetailsHeaderView: UIView {
             shotImageView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset: 10)
             shotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -10)
             shotImageView.autoPinEdge(.Top, toEdge: .Top, ofView: self)
-            shotImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self)
+            shotImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self, withOffset: -100)
             
             closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -14.6)
             closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 5)
-        
+            
+            avatarView.autoSetDimensionsToSize(CGSize(width: avatarSize, height: avatarSize))
+            avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset: 20)
+            avatarView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self, withOffset: -40)
+            
             didUpdateConstraints = true
         }
         
@@ -76,6 +89,7 @@ class ShotDetailsHeaderView: UIView {
     private func setupSubviews() {
         setupShotImageView()
         setupCloseButton()
+        setupAvatarView()
     }
     
     private func setupShotImageView() {
@@ -87,6 +101,11 @@ class ShotDetailsHeaderView: UIView {
         closeButton.setImage(UIImage(named: "ic-closemodal"), forState: .Normal)
         closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         addSubview(closeButton)
+    }
+    
+    private func setupAvatarView() {
+        avatarView.backgroundColor = UIColor.yellowColor()
+        addSubview(avatarView)
     }
 }
 
