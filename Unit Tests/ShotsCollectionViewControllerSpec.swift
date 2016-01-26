@@ -18,7 +18,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
             sut = ShotsCollectionViewController()
         }
 
-        afterEach() {
+        afterEach {
             sut = nil
         }
 

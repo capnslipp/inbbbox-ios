@@ -31,18 +31,17 @@ final class ShotsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        guard let collectionView = collectionView else {
+        configureInitialSettings()
+
+        guard let collectionView = collectionView, tabBarController = tabBarController else {
             return
         }
-
-        // NGRTemp: temporary implementation - I wonder what should be enabled by default.
-        Settings.StreamSource.NewToday = true
 
         collectionView.backgroundView = ShotsCollectionBackgroundView()
         collectionView.pagingEnabled = true
         collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
-        tabBarController?.tabBar.userInteractionEnabled = false
         collectionView.userInteractionEnabled = false
+        tabBarController.tabBar.userInteractionEnabled = false
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -51,15 +50,18 @@ final class ShotsCollectionViewController: UICollectionViewController {
         dispatch_once(&onceTokenForInitialShotsAnimation) {
             firstly {
                 self.shotsProvider.provideShots()
-                }.then { shots -> Void in
-                    self.shots = shots
-                    self.animationManager.startAnimationWithCompletion() {
-                        self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
-                        self.didFinishInitialAnimations = true
-                        self.collectionView?.reloadData()
-                        self.tabBarController?.tabBar.userInteractionEnabled = true
-                        self.collectionView?.userInteractionEnabled = true
-                    }
+            }.then { shots -> Void in
+                self.shots = shots
+                self.animationManager.startAnimationWithCompletion() {
+                    self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
+                    self.didFinishInitialAnimations = true
+                    self.collectionView?.reloadData()
+                    self.tabBarController?.tabBar.userInteractionEnabled = true
+                    self.collectionView?.userInteractionEnabled = true
+                }
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+                print(error)
             }
         }
     }
@@ -78,7 +80,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        let shot = self.shots[indexPath.item]
+        let shot = shots[indexPath.item]
         cell.delegate = self
         // NGRTemp: temporary implementation - image should probably be downloaded earlier
         cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
@@ -97,6 +99,15 @@ final class ShotsCollectionViewController: UICollectionViewController {
         shotDetailsVC.delegate = self
 
         viewControllerPresenter.presentViewController(shotDetailsVC, animated: true, completion: nil)
+    }
+
+    // MARK: - Helpers
+
+    func configureInitialSettings() {
+        // NGRTemp: - I wonder if there is a better place to configure initial settings other than this view controller
+        Settings.StreamSource.NewToday = true
+        Settings.StreamSource.PopularToday = true
+        Settings.StreamSource.Debuts = true
     }
 }
 
