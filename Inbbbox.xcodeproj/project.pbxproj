@@ -19,6 +19,8 @@
 		5A499B6B1C354154009AB421 /* ShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */; };
 		5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
 		5C4A4A3C1C5772340019EADE /* ShotExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A4A3B1C5772340019EADE /* ShotExtension.swift */; };
+		5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */; };
+		5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */; };
 		5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0899CD1C32A71E009FB52B /* ORLoginLabel.swift */; };
 		5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0899CF1C32A784009FB52B /* UIFontExtension.swift */; };
 		5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D77381C3BD6A9002191A7 /* UserStorage.swift */; };
@@ -1169,6 +1171,7 @@
 				5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
 				F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */,
 				F08830FD1C43ABD700F530A2 /* CoreDataHelper.swift in Sources */,
+				5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */,
 				5ED6C5B31C5768B200A591EA /* ShotsProviderConfigurationSpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageExtension.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
@@ -1183,6 +1186,7 @@
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */,
+				5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */,
 				5EDB832E1C48DF0000FBCA05 /* SharedQuerySpec.swift in Sources */,
 				74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */,
 				5EC0A7B51C35634800846975 /* OAuthViewModelSpec.swift in Sources */,

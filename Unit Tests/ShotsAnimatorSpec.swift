@@ -48,7 +48,8 @@ class ShotsAnimatorSpec: QuickSpec {
 
                 let delegateMock = ShotsAnimatorDelegateMock()
                 delegateMock.collectionViewForShotsAnimatorStub.on(any(), returnValue: collectionViewMock)
-                delegateMock.itemsForShotsAnimatorStub.on(any(), returnValue: ["fixtureShot1", "fixtureShot2", "fixtureShot3"])
+                let shot = Shot.emptyShotForBundle(NSBundle(forClass: self.dynamicType))
+                delegateMock.itemsForShotsAnimatorStub.on(any(), returnValue: [shot, shot, shot])
                 sut!.delegate = delegateMock
 
                 let asyncWrapperMock = AsyncWrapperMock()
