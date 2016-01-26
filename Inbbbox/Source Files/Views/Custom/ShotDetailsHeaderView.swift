@@ -22,7 +22,8 @@ class ShotDetailsHeaderView: UIView {
     private var closeButton: UIButton
     private var avatarView: RoundedImageView
     private let avatarSize = 48
-    
+    private var titleLabel: UILabel
+
     // MARK: Life Cycle
     
     /* NGRTemp: Replace with custom-object initialization 
@@ -42,6 +43,8 @@ class ShotDetailsHeaderView: UIView {
             radius: CGFloat(avatarSize / 2),
             frame: CGRectZero
         )
+
+        titleLabel = UILabel(forAutoLayout: ())
         
         super.init(frame: CGRectZero)
         
@@ -77,8 +80,12 @@ class ShotDetailsHeaderView: UIView {
             closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 5)
             
             avatarView.autoSetDimensionsToSize(CGSize(width: avatarSize, height: avatarSize))
+            avatarView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotImageView, withOffset: 22)
             avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset: 20)
-            avatarView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self, withOffset: -40)
+            
+            titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 15)
+            titleLabel.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -10)
+            titleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotImageView, withOffset: 20)
             
             didUpdateConstraints = true
         }
@@ -92,6 +99,7 @@ class ShotDetailsHeaderView: UIView {
         setupShotImageView()
         setupCloseButton()
         setupAvatarView()
+        setupTitleLabelWithTitle("Weather Calendar Application")
     }
     
     private func setupShotImageView() {
@@ -109,9 +117,16 @@ class ShotDetailsHeaderView: UIView {
     
     private func setupAvatarView() {
         avatarView.configureForAutoLayout()
-        avatarView.backgroundColor = UIColor.yellowColor()
         addSubview(avatarView)
     }
+    
+    private func setupTitleLabelWithTitle(title: String) {
+        titleLabel.text = title;
+        titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 17)
+        titleLabel.textColor = UIColor(red:0.2, green:0.2, blue:0.2, alpha:1)
+        addSubview(titleLabel)
+    }
+
 }
 
 // MARK: UI Interactions
