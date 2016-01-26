@@ -31,12 +31,12 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var contentSize: CGSize!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 42, height: 666)
+                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
                     contentSize = sut.collectionViewContentSize()
                 }
 
                 it("should have proper content size") {
-                    expect(contentSize).to(equal(CGSize(width: 42, height: 666)))
+                    expect(contentSize).to(equal(CGSize(width: 375, height: 667)))
                 }
             }
 
@@ -45,7 +45,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var layoutAttributes: [UICollectionViewLayoutAttributes]!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 200, height: 200)
+                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
                     collectionViewMock.center = CGPoint(x: 100, y: 100)
                 }
 
@@ -69,7 +69,12 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                         }
 
                         it("should have proper size") {
-                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.preferredHeight)))
+                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 320, height: 240)))
+                        }
+                        
+                        it("should have proper item height to width ratio") {
+                            let heightToWidhtRatio = firstItemLayoutAttributes.size.height / firstItemLayoutAttributes.size.width
+                            expect(heightToWidhtRatio).to(equal(3 / 4))
                         }
 
                         it("should have proper center") {
@@ -90,11 +95,16 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                         }
 
                         it("should have proper size") {
-                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 88, height: ShotCollectionViewCell.preferredHeight)))
+                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 265, height: 198.75)))
+                        }
+                        
+                        it("should have proper item height to width ratio") {
+                            let heightToWidhtRatio = firstItemLayoutAttributes.size.height / firstItemLayoutAttributes.size.width
+                            expect(heightToWidhtRatio).to(equal(3 / 4))
                         }
 
                         it("should have proper center") {
-                            expect(firstItemLayoutAttributes.center).to(equal(CGPoint(x: 100, y: 120)))
+                            expect(firstItemLayoutAttributes.center).to(equal(CGPoint(x: 100, y: 140)))
                         }
 
                         it("should have proper z index") {
@@ -109,7 +119,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var boundsChanged: Bool!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 100, height: 200)
+                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
                     boundsChanged = sut.shouldInvalidateLayoutForBoundsChange(CGRect(x: 0, y: 0, width: 200, height: 100))
                 }
 
@@ -123,14 +133,14 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var initialLayoutAttributes: UICollectionViewLayoutAttributes!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 200, height: 200)
+                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
                     collectionViewMock.center = CGPoint(x: 100, y: 100)
                     collectionViewMock.numberOfItemsInSectionStub.on(0, returnValue: 1)
                     initialLayoutAttributes = sut.initialLayoutAttributesForAppearingItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
                 }
 
                 it("should have proper size") {
-                    expect(initialLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.preferredHeight)))
+                    expect(initialLayoutAttributes.size).to(equal(CGSize(width: 320, height: 240)))
                 }
 
                 it("should have proper center") {
@@ -151,18 +161,18 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var finalLayoutAttributes: UICollectionViewLayoutAttributes!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 200, height: 200)
+                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
                     collectionViewMock.center = CGPoint(x: 100, y: 100)
                     collectionViewMock.numberOfItemsInSectionStub.on(0, returnValue: 1)
                     finalLayoutAttributes = sut.finalLayoutAttributesForDisappearingItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
                 }
 
                 it("should have proper size") {
-                    expect(finalLayoutAttributes.size).to(equal(CGSize(width: 144, height: ShotCollectionViewCell.preferredHeight)))
+                    expect(finalLayoutAttributes.size).to(equal(CGSize(width: 320, height: 240)))
                 }
 
                 it("should have proper center") {
-                    expect(finalLayoutAttributes.center).to(equal(CGPoint(x: 100, y: 440)))
+                    expect(finalLayoutAttributes.center).to(equal(CGPoint(x: 187.5, y: 907)))
                 }
 
                 it("should have proper z index") {

@@ -10,15 +10,14 @@ class ShotsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     override func prepareLayout() {
         if let collectionView = collectionView {
-            let cellMargins = UIEdgeInsets(top: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.preferredHeight / 2),
-                    left: CGFloat(28),
-                    bottom: round(CGRectGetHeight(collectionView.bounds) / 2 - ShotCollectionViewCell.preferredHeight / 2),
-                    right: CGFloat(28))
-
-            itemSize = CGSize(width: CGRectGetWidth(collectionView.bounds) - cellMargins.left - cellMargins.right,
-                    height: ShotCollectionViewCell.preferredHeight)
-            minimumLineSpacing = CGFloat(CGRectGetHeight(collectionView.bounds) - ShotCollectionViewCell.preferredHeight)
-            sectionInset = UIEdgeInsets(top: cellMargins.top, left: 0, bottom: cellMargins.bottom, right: 0)
+            let fixedLeftMargin = CGFloat(28)
+            let fixedRightMargin = CGFloat(27)
+            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - fixedLeftMargin - fixedRightMargin
+            let calculatedItemHeight = calculatedItemWidth * 3 / 4
+            let calculatedVerticalSpacing = round(CGRectGetHeight(collectionView.bounds) / 2 - calculatedItemHeight / 2)
+            itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
+            minimumLineSpacing = CGFloat(CGRectGetHeight(collectionView.bounds) - calculatedItemHeight)
+            sectionInset = UIEdgeInsets(top: calculatedVerticalSpacing, left: 0, bottom: calculatedVerticalSpacing, right: 0)
         }
     }
 }

@@ -25,20 +25,25 @@ class ShotsCollectionViewFlowLayoutSpec: QuickSpec {
         describe("prepare layout") {
 
             beforeEach {
-                collectionView!.bounds = CGRect(x: 0, y: 0, width: 500, height: 500)
+                collectionView!.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
                 sut!.prepareLayout()
             }
 
             it("should have proper item size") {
-                expect(sut!.itemSize).to(equal(CGSize(width: 444, height: ShotCollectionViewCell.preferredHeight)))
+                expect(sut!.itemSize).to(equal(CGSize(width: 320, height: 240)))
+            }
+            
+            it("should have proper item height to width ratio") {
+                let heightToWidhtRatio = sut!.itemSize.height / sut!.itemSize.width
+                expect(heightToWidhtRatio).to(equal(3 / 4))
             }
 
             it("should have proper minimum line spacing") {
-                expect(sut!.minimumLineSpacing).to(equal(CGFloat(260)))
+                expect(sut!.minimumLineSpacing).to(equal(CGFloat(427)))
             }
 
             it("should have proper section inset") {
-                expect(sut!.sectionInset).to(equal(UIEdgeInsets(top: 130, left: 0, bottom: 130, right: 0)))
+                expect(sut!.sectionInset).to(equal(UIEdgeInsets(top: 214, left: 0, bottom: 214, right: 0)))
             }
         }
     }

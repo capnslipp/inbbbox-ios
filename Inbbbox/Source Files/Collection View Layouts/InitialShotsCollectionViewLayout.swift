@@ -6,7 +6,7 @@ import UIKit
 
 class InitialShotsCollectionViewLayout: UICollectionViewLayout {
 
-    private var bottomCellOffset = CGFloat(20)
+    private var bottomCellOffset = CGFloat(40)
 
 //    MARK: - UICollectionViewLayout
 
@@ -23,9 +23,12 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
     override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
         let layoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         if let collectionView = collectionView {
-            let cellMargins = UIEdgeInsets(top: 0, left: CGFloat(28), bottom: 0, right: CGFloat(28))
+            let fixedLeftMargin = CGFloat(28)
+            let fixedRightMargin = CGFloat(27)
             let indexMultiplier = CGFloat(indexPath.item)
-            layoutAttributes.size = CGSize(width: CGRectGetWidth(collectionView.bounds) - (cellMargins.left + cellMargins.right) * (indexMultiplier + 1), height: ShotCollectionViewCell.preferredHeight)
+            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - (fixedLeftMargin + fixedRightMargin) * (indexMultiplier + 1)
+            let calculatedItemHeight = calculatedItemWidth * 3 / 4
+            layoutAttributes.size = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
             layoutAttributes.center = CGPoint(x: collectionView.center.x, y: collectionView.center.y + bottomCellOffset * indexMultiplier)
             layoutAttributes.zIndex = -indexPath.row
         }
