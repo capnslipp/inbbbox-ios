@@ -45,6 +45,7 @@ class FormatterSpec: QuickSpec {
             beforeEach {
                 let date = Formatter.Date.Timestamp.dateFromString("1970-01-01T08:19:14+01:00")!
                 dateComponents = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.components([.Year, .Month, .Day, .Hour, .Minute, .Second], fromDate: date)
+                dateComponents.timeZone = NSTimeZone(abbreviation: "GMT")
             }
             
             it("year should be properly decoded") {
