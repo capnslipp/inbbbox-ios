@@ -17,7 +17,6 @@ class ShotDetailsViewController: UIViewController {
     
     weak var delegate: ShotDetailsViewControllerDelegate?
     private weak var aView: ShotDetailsView?
-    let cellID = String(UITableViewCell)
     
     // MARK: Life Cycle
     
@@ -41,7 +40,7 @@ class ShotDetailsViewController: UIViewController {
     private func setupTableView() {
         aView?.tableView.delegate = self
         aView?.tableView.dataSource = self
-        aView?.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        aView?.tableView.registerClass(ShotDetailsCell)
     }
     
     private func closeButtonTapped() {
@@ -83,7 +82,7 @@ extension ShotDetailsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID, forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(ShotDetailsCell.self)
         
         cell.backgroundColor = UIColor.clearColor()
         
