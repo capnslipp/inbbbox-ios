@@ -45,10 +45,10 @@ class ShotsAnimatorSpec: QuickSpec {
                     updates?()
                     completion?(true)
                 }
-
+                
                 let delegateMock = ShotsAnimatorDelegateMock()
                 delegateMock.collectionViewForShotsAnimatorStub.on(any(), returnValue: collectionViewMock)
-                let shot = Shot.emptyShotForBundle(NSBundle(forClass: self.dynamicType))
+                let shot = Shot.fixtureShot()
                 delegateMock.itemsForShotsAnimatorStub.on(any(), returnValue: [shot, shot, shot])
                 sut!.delegate = delegateMock
 

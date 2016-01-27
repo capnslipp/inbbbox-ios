@@ -28,7 +28,7 @@ class UserSpec: QuickSpec {
         describe("when mapping user") {
             
             beforeEach {
-                sut = User.map(self.fixtureJSON)
+                sut = User.fixtureUser()
             }
             
             it("user should exist") {
@@ -57,7 +57,7 @@ class UserSpec: QuickSpec {
             var data: NSData!
             
             beforeEach {
-                sut = User.map(self.fixtureJSON)
+                sut = User.fixtureUser()
                 data = NSKeyedArchiver.archivedDataWithRootObject(sut)
             }
             
@@ -94,20 +94,5 @@ class UserSpec: QuickSpec {
                 }
             }
         }
-    }
-}
-
-private extension UserSpec {
-    
-    var fixtureJSON: JSON {
-        
-        let dictionary = [
-            "id" : "fixture.id",
-            "name" : "fixture.name",
-            "username" : "fixture.username",
-            "avatar_url" : "fixture.avatar.url",
-            "param_to_omit" : "fixture.param"
-        ]
-        return JSON(dictionary)
     }
 }

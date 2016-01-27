@@ -127,7 +127,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 context("when animations did not finish") {
 
                     beforeEach {
-                        let shot = Shot.emptyShotForBundle(NSBundle(forClass: self.dynamicType))
+                        let shot = Shot.fixtureShot()
                         sut.animationManager.visibleItems = [shot, shot]
                         numberOfItems = sut.collectionView(CollectionViewMock(), numberOfItemsInSection: 0)
                     }
@@ -164,7 +164,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 var capturedIdentifier: String!
 
                 beforeEach {
-                    sut.shots = [Shot.emptyShotForBundle(NSBundle(forClass: self.dynamicType))]
+                    sut.shots = [Shot.fixtureShot()]
                     let collectionViewMock = CollectionViewMock()
                     collectionViewMock.dequeueReusableCellWithReuseIdentifierStub.on(any()) { identifier, _ in
                         capturedIdentifier = identifier
@@ -203,7 +203,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 var items: [Shot]!
 
                 beforeEach {
-                    let shot = Shot.emptyShotForBundle(NSBundle(forClass: self.dynamicType))
+                    let shot = Shot.fixtureShot()
                     sut.shots = [shot, shot, shot, shot, shot]
                     items = sut.itemsForShotsAnimator(ShotsAnimator())
                 }

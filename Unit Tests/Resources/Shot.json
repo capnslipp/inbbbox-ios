@@ -1,70 +1,18 @@
 {
-  "title" : "Mega Man",
-  "attachments_count" : 0,
-  "description" : "<p>Legend.</p>",
-  "team" : null,
-  "buckets_count" : 0,
-  "views_count" : 1,
-  "likes_count" : 0,
-  "buckets_url" : "https://api.dribbble.com/v1/shots/2482141/buckets",
-  "rebounds_count" : 0,
-  "animated" : false,
-  "id" : 2482141,
-  "updated_at" : "2016-01-26T09:20:10Z",
-  "height" : 300,
-  "user" : {
-    "html_url" : "https://dribbble.com/elvis_camarena",
-    "location" : "Fresno, CA",
-    "pro" : true,
-    "projects_url" : "https://api.dribbble.com/v1/users/171201/projects",
-    "following_url" : "https://api.dribbble.com/v1/users/171201/following",
-    "projects_count" : 0,
-    "buckets_url" : "https://api.dribbble.com/v1/users/171201/buckets",
-    "updated_at" : "2016-01-26T09:20:10Z",
-    "shots_count" : 58,
-    "rebounds_received_count" : 4,
-    "bio" : "",
-    "links" : {
-      "web" : "http://www.hundred10.com"
+    "id": 2479405,
+    "title": "fixture.title.1",
+    "description": "fixture.description.1",
+    "animated": true,
+    "created_at" : "2016-01-25T08:19:14Z",
+    "user":  {
+        "id" : "fixture.id",
+        "name" : "fixture.name",
+        "username" : "fixture.username",
+        "avatar_url" : "fixture.avatar.url"
     },
-    "name" : "Elvis Camarena",
-    "avatar_url" : "https://d13yacurqjgara.cloudfront.net/users/171201/avatars/normal/dribbb_icon.jpg?1396655749",
-    "can_upload_shot" : true,
-    "type" : "Player",
-    "shots_url" : "https://api.dribbble.com/v1/users/171201/shots",
-    "id" : 171201,
-    "buckets_count" : 0,
-    "teams_count" : 1,
-    "teams_url" : "https://api.dribbble.com/v1/users/171201/teams",
-    "followers_count" : 167,
-    "likes_received_count" : 880,
-    "likes_count" : 2021,
-    "followings_count" : 368,
-    "created_at" : "2012-07-03T16:34:46Z",
-    "followers_url" : "https://api.dribbble.com/v1/users/171201/followers",
-    "comments_received_count" : 54,
-    "likes_url" : "https://api.dribbble.com/v1/users/171201/likes",
-    "username" : "elvis_camarena"
-  },
-  "likes_url" : "https://api.dribbble.com/v1/shots/2482141/likes",
-  "created_at" : "2016-01-26T09:19:40Z",
-  "comments_url" : "https://api.dribbble.com/v1/shots/2482141/comments",
-  "comments_count" : 0,
-  "width" : 400,
-  "attachments_url" : "https://api.dribbble.com/v1/shots/2482141/attachments",
-  "rebounds_url" : "https://api.dribbble.com/v1/shots/2482141/rebounds",
-  "tags" : [
-    "illustration",
-    "illustrator",
-    "link",
-    "man",
-    "mega"
-  ],
-  "projects_url" : "https://api.dribbble.com/v1/shots/2482141/projects",
-  "images" : {
-    "hidpi" : "https://d13yacurqjgara.cloudfront.net/users/171201/screenshots/2482141/megaman.jpg",
-    "teaser" : "https://d13yacurqjgara.cloudfront.net/users/171201/screenshots/2482141/megaman_teaser.jpg",
-    "normal" : "https://d13yacurqjgara.cloudfront.net/users/171201/screenshots/2482141/megaman_1x.jpg"
-  },
-  "html_url" : "https://dribbble.com/shots/2482141-Mega-Man"
+    "images": {
+        "hidpi": "https://fixture.domain/fixture.image.hidpi.png",
+        "normal": "https://fixture.domain/fixture.image.normal.png",
+        "teaser": "https://fixture.domain/fixture.image.teaser.png"
+    }
 }

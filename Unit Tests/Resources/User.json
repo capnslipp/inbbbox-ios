@@ -1,0 +1,7 @@
+{
+    "id" : "fixture.id",
+    "name" : "fixture.name",
+    "username" : "fixture.username",
+    "avatar_url" : "fixture.avatar.url",
+    "param_to_omit" : "fixture.param"
+}

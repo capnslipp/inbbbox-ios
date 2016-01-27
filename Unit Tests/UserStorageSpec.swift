@@ -34,7 +34,7 @@ class UserStorageSpec: QuickSpec {
         describe("when storing user") {
             
             beforeEach {
-                UserStorage.storeUser(self.fixtureUser)
+                UserStorage.storeUser(User.fixtureUser())
             }
             
             it("user should be properly stored") {
@@ -68,19 +68,5 @@ class UserStorageSpec: QuickSpec {
                 }
             }
         }
-    }
-}
-
-private extension UserStorageSpec {
-    
-    var fixtureUser: User {
-        
-        let dictionary = [
-                "id" : "fixture.id",
-                "name" : "fixture.name",
-                "username" : "fixture.username",
-                "avatar_url" : "fixture.avatar.url"
-            ]
-        return User(json: JSON(dictionary))
     }
 }

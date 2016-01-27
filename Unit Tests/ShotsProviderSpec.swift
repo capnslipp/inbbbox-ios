@@ -138,57 +138,14 @@ class MockShotsProviderConfiguration: ShotsProviderConfiguration {}
 private extension ShotsProviderSpec {
     
     var fixtureJSON: [[String: AnyObject]] {
-        return [
-            [
-                "id": 2479405,
-                "title": "fixture.title.1",
-                "description": "fixture.description.1",
-                "animated": true,
-                "created_at" : "2016-01-25T08:19:14Z",
-                "user": fixtureUserJSON,
-                "images": fixtureImagesJSON
-            ],[
-                "id": 2479406,
-                "title": "fixture.title.2",
-                "description": "fixture.description.2",
-                "animated": false,
-                "created_at" : "2016-01-25T08:19:14Z",
-                "user": fixtureUserJSON,
-                "images": fixtureImagesJSON
-            ],[
-                "id": 2479407,
-                "title": "fixture.title.3",
-                "description": "fixture.description.3",
-                "animated": false,
-                "created_at" : "2016-01-25T08:19:14Z",
-                "user": fixtureUserJSON,
-                "images": fixtureImagesJSON
-            ],[
-                "id": 2479407,
-                "title": "fixture.title.4",
-                "description": "fixture.description.4",
-                "animated": false,
-                "created_at" : "2016-01-25T08:19:14Z",
-                "user": fixtureUserJSON,
-                "images": fixtureImagesJSON
-            ]
+        
+        let configuration = [
+            (identifier: 1, animated: true),
+            (identifier: 2, animated: false),
+            (identifier: 3, animated: false),
+            (identifier: 3, animated: false)
         ]
-    }
-    
-    var fixtureUserJSON: [String: AnyObject] {
-        return  [
-            "id" : "fixture.id",
-            "name" : "fixture.name",
-            "username" : "fixture.username",
-            "avatar_url" : "fixture.avatar.url"
-        ]
-    }
-    
-    var fixtureImagesJSON: [String: AnyObject] {
-        return [
-            "hidpi": "https://fixture.domain/fixture.image.hidpi.png",
-            "normal": "https://fixture.domain/fixture.image.normal.png",
-            "teaser": "https://fixture.domain/fixture.image.teaser.png"
-        ]
+        
+        return JSONSpecLoader.sharedInstance.fixtureShotJSON(configuration)
     }
 }

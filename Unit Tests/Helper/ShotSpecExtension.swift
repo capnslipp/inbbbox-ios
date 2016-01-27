@@ -1,5 +1,5 @@
 //
-//  ShotExtension.swift
+//  ShotSpecExtension.swift
 //  Inbbbox
 //
 //  Created by Lukasz Wolanczyk on 1/26/16.
@@ -12,10 +12,9 @@ import SwiftyJSON
 @testable import Inbbbox
 
 extension Shot {
-    static func emptyShotForBundle(bundle: NSBundle) -> Shot {
-        let file = bundle.pathForResource("Shot", ofType:"json")
-        let data = NSData(contentsOfFile: file!)
-        let json = JSON(data: data!)
+    
+    static func fixtureShot() -> Shot {
+        let json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Shot")
         return Shot.map(json)
     }
 }
