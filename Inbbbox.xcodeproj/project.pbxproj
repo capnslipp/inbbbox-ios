@@ -55,6 +55,9 @@
 		5E781B411C58B694009A2E14 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E781B401C58B694009A2E14 /* User.json */; };
 		5E781B431C58B99A009A2E14 /* JSONSpecLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */; };
 		5E781B451C58C00E009A2E14 /* UserSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */; };
+		5E781B471C58D848009A2E14 /* BucketsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B461C58D848009A2E14 /* BucketsProvider.swift */; };
+		5E781B491C58D8B5009A2E14 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B481C58D8B5009A2E14 /* Bucket.swift */; };
+		5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */; };
 		5E8532311C525E4F00FC5A50 /* ShotsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */; };
 		5EB5DDF71C528397000B3EAC /* ShotsProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */; };
 		5EB896C41C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB896BF1C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift */; };
@@ -245,6 +248,9 @@
 		5E781B401C58B694009A2E14 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSpecLoader.swift; sourceTree = "<group>"; };
 		5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpecExtension.swift; sourceTree = "<group>"; };
+		5E781B461C58D848009A2E14 /* BucketsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsProvider.swift; sourceTree = "<group>"; };
+		5E781B481C58D8B5009A2E14 /* Bucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
+		5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketQuery.swift; sourceTree = "<group>"; };
 		5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProvider.swift; sourceTree = "<group>"; };
 		5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfiguration.swift; sourceTree = "<group>"; };
 		5EB896BF1C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsAnimator.swift; sourceTree = "<group>"; };
@@ -416,6 +422,7 @@
 				5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */,
 				5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */,
 				5ED6C5BE1C57C92D00A591EA /* ConnectionsProvider.swift */,
+				5E781B461C58D848009A2E14 /* BucketsProvider.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -593,6 +600,7 @@
 				5E4857C51C2854F80027B38A /* ShotsQuery.swift */,
 				5E4857C61C2854F80027B38A /* UnlikeQuery.swift */,
 				5E4857C71C2854F80027B38A /* UserQuery.swift */,
+				5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */,
 				5ED6C5B61C5787ED00A591EA /* FolloweesQuery.swift */,
 				5ED6C5C01C57CD2800A591EA /* FollowersQuery.swift */,
 				F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */,
@@ -671,6 +679,7 @@
 				BF9508551C1F1BD000E39242 /* Shot.swift */,
 				BF95085B1C1F208F00E39242 /* User.swift */,
 				E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */,
+				5E781B481C58D8B5009A2E14 /* Bucket.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1094,6 +1103,7 @@
 				BF6A6E101C1ED1E9001EDAB8 /* DateItem.swift in Sources */,
 				5EB896C51C5257E800AC2F3D /* LoginViewAnimations.swift in Sources */,
 				BF95085C1C1F208F00E39242 /* User.swift in Sources */,
+				5E781B491C58D8B5009A2E14 /* Bucket.swift in Sources */,
 				5EB896C61C5257E800AC2F3D /* LoginViewAnimator.swift in Sources */,
 				5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */,
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
@@ -1104,6 +1114,7 @@
 				5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */,
 				5EB5DDF71C528397000B3EAC /* ShotsProviderConfiguration.swift in Sources */,
 				E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */,
+				5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
 				BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */,
 				5A499B691C35411F009AB421 /* UIColorExtension.swift in Sources */,
@@ -1142,6 +1153,7 @@
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F092E2181C3A9E9900593D18 /* Defines.swift in Sources */,
 				F092E2611C3FD48600593D18 /* BucketManagedObject.swift in Sources */,
+				5E781B471C58D848009A2E14 /* BucketsProvider.swift in Sources */,
 				5ED6C5C11C57CD2800A591EA /* FollowersQuery.swift in Sources */,
 				F092E2651C3FD55A00593D18 /* ShotOperationHistoryStorage.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,

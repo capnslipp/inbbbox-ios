@@ -21,12 +21,24 @@ struct ShotsQuery: Query {
         }
     }
     
+    /**
+     Initialize query for list of the shots.
+     */
     init() {}
     
+    /**
+     Initialize query for list of the given user's shots.
+     */
     init(user: User) {
         path = "/users/\(user.username)/shots"
     }
     
+    /**
+     Initialize query for list of the given bucket's shors.
+     */
+    init(bucket: Bucket) {
+        path = "/buckets/\(bucket.identifier)/shots"
+    }
     
     /// Types
     

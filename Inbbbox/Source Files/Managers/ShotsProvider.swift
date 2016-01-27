@@ -10,14 +10,19 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
-class ShotsProvider {
+final class ShotsProvider {
+    
+    private enum ShotsProviderType {
+        case General, User, Bucket
+    }
     
     let configuration: ShotsProviderConfiguration
     private(set) var page: UInt
     private(set) var pagination: UInt
     
+    private var type: ShotsProviderType?
     private var queryStartDate = NSDate()
-    private var shouldRestartDate = true
+    private var shouldRestoreInitialState = true
 
      /**
      Initializer with customizable parameters.
@@ -26,7 +31,7 @@ class ShotsProvider {
      - parameter pagination:    Pagination of request.
      - parameter configuration: Configuration for ShotsProvider.
      */
-    init(page: UInt, pagination: UInt, configuration: ShotsProviderConfiguration) {
+    init(page: UInt, pagination: UInt, configuration: ShotsProviderConfiguration = ShotsProviderConfiguration()) {
         self.page = page
         self.pagination = pagination
         self.configuration = configuration
@@ -36,7 +41,7 @@ class ShotsProvider {
      Convenience initializer with default parameters.
      */
     convenience init() {
-        self.init(page: 1, pagination: 30, configuration: ShotsProviderConfiguration())
+        self.init(page: 1, pagination: 30)
     }
     
     /**
@@ -48,10 +53,7 @@ class ShotsProvider {
      */
     func provideShots() -> Promise<[Shot]> {
         
-        if shouldRestartDate {
-            shouldRestartDate = false
-            queryStartDate = NSDate()
-        }
+        secureCheckForType(.General)
         
         return Promise<[Shot]> { fulfill, reject in
             
@@ -84,33 +86,38 @@ class ShotsProvider {
      */
     func restoreInitialState() {
         page = 1
-        shouldRestartDate = true
+        shouldRestoreInitialState = true
     }
     
     /**
-     Provides shots of given user.
+     Provides shots for given user.
      
      - parameter user: User whose shots should be provided.
      
      - returns: Promise which resolves with shots. Optional.
      */
     func provideShotsForUser(user: User) -> Promise<[Shot]?> {
-        return Promise<[Shot]?> { fulfill, reject in
-            
-            let query = ShotsQuery(user: user)
-            let request = Request(query: query)
-            
-            firstly {
-                request.resume()
-            }.then { response -> Void in
-                
-                let shots = response
-                    .map { $0.arrayValue.map { Shot.map($0) } }
-                
-                fulfill(shots)
-                
-            }.error(reject)
-        }
+        
+        secureCheckForType(.User)
+        let query = ShotsQuery(user: user)
+        
+        return provideShotsWithQuery(query)
+    }
+    
+    
+    /**
+     Provides shots for given bucket.
+     
+     - parameter bucket: Bucket which shots should be provided.
+     
+     - returns: Promise which resolves with shots. Optional.
+     */
+    func provideShotsForBucket(bucket: Bucket) -> Promise<[Shot]?> {
+        
+        secureCheckForType(.Bucket)
+        let query = ShotsQuery(bucket: bucket)
+        
+        return provideShotsWithQuery(query)
     }
 }
 
@@ -121,14 +128,55 @@ private extension ShotsProvider {
         return configuration.sources.map {
             
             var query = ShotsQuery()
-            query.date = queryStartDate
-            query.parameters["page"] = page
-            query.parameters["per_page"] = pagination
             
+            query = queryByPagingConfiguration(query)
             query = configuration.queryByConfigurationForQuery(query, source: $0)
             
             return query
         }
+    }
+    
+    func provideShotsWithQuery(var query: ShotsQuery) -> Promise<[Shot]?> {
+        return Promise<[Shot]?> { fulfill, reject in
+            
+            query = queryByPagingConfiguration(query)
+            let request = Request(query: query)
+            
+            firstly {
+                request.resume()
+            }.then { response -> Void in
+                
+                let shots = response
+                    .map { $0.arrayValue.map { Shot.map($0) } }
+                
+                self.page++
+                
+                fulfill(shots)
+                
+            }.error(reject)
+        }
+    }
+    
+    func secureCheckForType(providerType: ShotsProviderType) {
+        
+        if let type = type where type != providerType && !shouldRestoreInitialState {
+            fatalError("Initialize new instance of ShotsProvider or restore initial state of current one for providing shots with different type.")
+        }
+        type = providerType
+        
+        if shouldRestoreInitialState {
+            shouldRestoreInitialState = false
+            queryStartDate = NSDate()
+        }
+    }
+    
+    func queryByPagingConfiguration(var query: ShotsQuery) -> ShotsQuery {
+        
+        query.date = queryStartDate
+        query.parameters["page"] = page
+        query.parameters["per_page"] = pagination
+        
+        return query
     }
 }
 
