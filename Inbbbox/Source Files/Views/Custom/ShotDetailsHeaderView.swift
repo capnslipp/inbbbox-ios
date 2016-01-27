@@ -73,7 +73,7 @@ class ShotDetailsHeaderView: UIView {
         if !didUpdateConstraints {
             shotImageView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 0, left: 10, bottom: 100, right: 10))
             
-            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -14.6)
+            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -15.0)
             closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 5)
             
             avatarView.autoSetDimensionsToSize(CGSize(width: avatarSize, height: avatarSize))
