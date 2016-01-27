@@ -82,6 +82,26 @@ class ShotsProviderSpec: QuickSpec {
                     sut.restoreInitialState()
                     expect(sut.page).to(equal(1))
                 }
+                
+                context("for user") {
+                    
+                    var shots: [Shot]!
+                    
+                    beforeEach {
+                        shots = nil
+                    }
+                    
+                    it("should return 4 shots") {
+                        
+                        sut.provideShotsForUser(User.fixtureUser()).then { _shots in
+                            shots = _shots
+                        }.error { _ in
+                            fail()
+                        }
+                        
+                        expect(shots).toEventually(haveCount(4))
+                    }
+                }
             }
             
             context("when providing shots with error") {
@@ -102,6 +122,17 @@ class ShotsProviderSpec: QuickSpec {
                 it("error should be returned") {
                     
                     sut.provideShots().then { _ in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error).toNotEventually(beNil())
+                }
+                    
+                it("for user, error should be returned") {
+                    
+                    sut.provideShotsForUser(User.fixtureUser()).then { _ in
                         fail()
                     }.error { _error in
                         error = _error

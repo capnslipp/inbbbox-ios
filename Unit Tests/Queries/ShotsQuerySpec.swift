@@ -14,12 +14,7 @@ import Nimble
 class ShotsQuerySpec: QuickSpec {
     override func spec() {
         
-        SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return ShotsQuery()
-        }) { Void -> QueryExpectation in
-            return (method: .GET, encoding: .URL, path: "/shots")
-        }
-        
+
         var sut: ShotsQuery!
         
         beforeEach {
@@ -32,6 +27,11 @@ class ShotsQuerySpec: QuickSpec {
         
         describe("when newly initiliazed") {
             
+            SharedQuerySpec.performSpecForQuery( { Void -> Query in
+                return ShotsQuery()
+            }) { Void -> QueryExpectation in
+                return (method: .GET, encoding: .URL, path: "/shots")
+            }
             
             it("should have nil list parameter") {
                 expect(sut.list).to(beNil())
@@ -237,6 +237,15 @@ class ShotsQuerySpec: QuickSpec {
                         expect(sut.sort).to(equal(ShotsQuery.Sort.Views))
                     }
                 }
+            }
+        }
+        
+        describe("when newly initiliazed with user") {
+            
+            SharedQuerySpec.performSpecForQuery( { Void -> Query in
+                return ShotsQuery(user: User.fixtureUser())
+            }) { Void -> QueryExpectation in
+                return (method: .GET, encoding: .URL, path: "/users/fixture.username/shots")
             }
         }
     }

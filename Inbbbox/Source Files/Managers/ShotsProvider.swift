@@ -86,6 +86,32 @@ class ShotsProvider {
         page = 1
         shouldRestartDate = true
     }
+    
+    /**
+     Provides shots of given user.
+     
+     - parameter user: User whose shots should be provided.
+     
+     - returns: Promise which resolves with shots. Optional.
+     */
+    func provideShotsForUser(user: User) -> Promise<[Shot]?> {
+        return Promise<[Shot]?> { fulfill, reject in
+            
+            let query = ShotsQuery(user: user)
+            let request = Request(query: query)
+            
+            firstly {
+                request.resume()
+            }.then { response -> Void in
+                
+                let shots = response
+                    .map { $0.arrayValue.map { Shot.map($0) } }
+                
+                fulfill(shots)
+                
+            }.error(reject)
+        }
+    }
 }
 
 private extension ShotsProvider {
