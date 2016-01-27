@@ -17,12 +17,12 @@ class ShotDetailsHeaderView: UIView {
     
     weak var delegate: ShotDetailsTableViewHeaderViewDelegate?
     private var didUpdateConstraints = false
-    private var shotImageView: RoundedImageView
+    private let shotImageView: RoundedImageView
     private let imageViewCornerRadius = 15
-    private var closeButton: UIButton
-    private var avatarView: RoundedImageView
+    private let closeButton = UIButton(type: .System)
+    private let avatarView: RoundedImageView
     private let avatarSize = 48
-    private var titleLabel: UILabel
+    private let titleLabel = UILabel(forAutoLayout: ())
 
     // MARK: Life Cycle
     
@@ -35,7 +35,6 @@ class ShotDetailsHeaderView: UIView {
             radius: CGFloat(imageViewCornerRadius),
             frame: CGRectZero
         )
-        closeButton = UIButton(type: .System)
         
         avatarView = RoundedImageView(
             image: image,
@@ -43,8 +42,6 @@ class ShotDetailsHeaderView: UIView {
             radius: CGFloat(avatarSize / 2),
             frame: CGRectZero
         )
-
-        titleLabel = UILabel(forAutoLayout: ())
         
         super.init(frame: CGRectZero)
         
@@ -81,7 +78,7 @@ class ShotDetailsHeaderView: UIView {
             avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset: 20)
             
             titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 15)
-            titleLabel.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -10)
+            titleLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: 10)
             titleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotImageView, withOffset: 20)
             
             didUpdateConstraints = true
@@ -96,6 +93,7 @@ class ShotDetailsHeaderView: UIView {
         setupShotImageView()
         setupCloseButton()
         setupAvatarView()
+        // NGRTemp: pass proper data here
         setupTitleLabelWithTitle("Weather Calendar Application")
     }
     
@@ -118,8 +116,8 @@ class ShotDetailsHeaderView: UIView {
     }
     
     private func setupTitleLabelWithTitle(title: String) {
-        titleLabel.text = title;
-        titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 17)
+        titleLabel.text = title
+        titleLabel.font = UIFont.helveticaFont(.NeueMedium, size: 17)
         titleLabel.textColor = UIColor(red:0.2, green:0.2, blue:0.2, alpha:1)
         addSubview(titleLabel)
     }
