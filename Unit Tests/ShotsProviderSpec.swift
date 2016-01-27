@@ -51,12 +51,12 @@ class ShotsProviderSpec: QuickSpec {
                         fail()
                     }
                     
-                    expect(shots).toEventually(haveCount(2))
+                    expect(shots).toEventually(haveCount(2), timeout: 10)
                 }
                 
                 it("page should be increased") {
                     
-                    waitUntil { done in
+                    waitUntil(timeout: 10) { done in
                         
                         sut.provideShots().then {_ in
                             done()
@@ -70,7 +70,7 @@ class ShotsProviderSpec: QuickSpec {
 
                 it("after restoring, page should be 1") {
                     
-                    waitUntil { done in
+                    waitUntil(timeout: 10) { done in
                         
                         sut.provideShots().then {_ in
                             done()
