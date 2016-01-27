@@ -13,28 +13,20 @@ import PromiseKit
 /// Provides connections between users, followers and followees
 class ConnectionsProvider {
     
-    enum ConnectionsProviderError: ErrorType {
-        case NotAuthorized
-    }
-    
     typealias Followee = User
     typealias Follower = User
-    
-    var authenticatedUser: User? {
-        return UserStorage.currentUser
-    }
     
     /**
      Provides a list the authenticated user’s followers.
      
      **Important:** Authenticated user is required.
      
-     - returns: Promise which resolves with followers.
+     - returns: Promise which resolves with followers or nil.
      */
-    func provideMyFollowers() -> Promise<[Follower]> {
+    func provideMyFollowers() -> Promise<[Follower]?> {
         
         let query = FollowersQuery()
-        return usersWithQuery(query, shouldBeAuthenticated: true)
+        return usersWithQuery(query, authenticationRequired: true)
     }
     
     /**
@@ -42,12 +34,12 @@ class ConnectionsProvider {
      
     **Important:** Authenticated user is required.
     
-    - returns: Promise which resolves with followees.
+    - returns: Promise which resolves with followees or nil.
     */
-    func provideMyFollowees() -> Promise<[Followee]> {
+    func provideMyFollowees() -> Promise<[Followee]?> {
     
         let query = FolloweesQuery()
-        return usersWithQuery(query, shouldBeAuthenticated: true)
+        return usersWithQuery(query, authenticationRequired: true)
     }
     
     /**
@@ -55,12 +47,12 @@ class ConnectionsProvider {
      
      - parameter user: User for who followers list should be provided.
      
-     - returns: Promise which resolves with followers.
+     - returns: Promise which resolves with followers or nil.
      */
-    func provideFollowersForUser(user: User) -> Promise<[Follower]> {
+    func provideFollowersForUser(user: User) -> Promise<[Follower]?> {
     
         let query = FollowersQuery(followersOfUser: user)
-        return usersWithQuery(query, shouldBeAuthenticated: false)
+        return usersWithQuery(query, authenticationRequired: false)
     }
     
     /**
@@ -68,36 +60,31 @@ class ConnectionsProvider {
      
      - parameter user: User for who followees list should be provided.
      
-     - returns: Promise which resolves with followees.
+     - returns: Promise which resolves with followees or nil.
      */
-    func provideFolloweesForUser(user: User) -> Promise<[Followee]> {
+    func provideFolloweesForUser(user: User) -> Promise<[Followee]?> {
     
         let query = FolloweesQuery(followeesOfUser: user)
-        return usersWithQuery(query, shouldBeAuthenticated: false)
+        return usersWithQuery(query, authenticationRequired: false)
     }
 }
 
 private extension ConnectionsProvider {
     
-    func usersWithQuery(query: Query, shouldBeAuthenticated authenticated: Bool) -> Promise<[User]> {
+    func usersWithQuery(query: Query, authenticationRequired: Bool) -> Promise<[User]?> {
     
-        return Promise<[User]> { fulfill, reject in
-            
-            guard let _ = authenticatedUser where authenticated else {
-                throw ConnectionsProviderError.NotAuthorized
-            }
-
-            let request = Request(query: query)
+        return Promise<[User]?> { fulfill, reject in
+        
             let serializationKey = query is FollowersQuery ? "follower" : "followee"
             
             firstly {
-                request.resume()
+                Provider.sendQuery(query, authenticationRequired: authenticationRequired)
             }.then { response -> Void in
         
                 let users = response
                     .map { $0.arrayValue.map { User.map($0[serializationKey]) } }
 
-                fulfill(users ?? [])
+                fulfill(users)
                 
             }.error(reject)
         }

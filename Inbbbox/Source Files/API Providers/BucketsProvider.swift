@@ -13,14 +13,16 @@ class BucketsProvider {
     
     /**
      Provides authenticated user’s buckets.
+     
+     **Important:** Authenticated user is required.
 
-     - returns: Promise which resolves with buckets. Optional.
+     - returns: Promise which resolves with buckets or nil.
      */
     func provideMyBuckets() -> Promise<[Bucket]?> {
         
         let query = BucketQuery()
         
-        return provideBucketsWithQuery(query)
+        return provideBucketsWithQuery(query, authenticationRequired: true)
     }
     
     /**
@@ -28,25 +30,23 @@ class BucketsProvider {
      
      - parameter user: User for who buckets should be provided.
      
-     - returns: Promise which resolves with buckets. Optional.
+     - returns: Promise which resolves with buckets or nil.
      */
     func provideBucketsForUser(user: User) -> Promise<[Bucket]?> {
         
         let query = BucketQuery(user: user)
         
-        return provideBucketsWithQuery(query)
+        return provideBucketsWithQuery(query, authenticationRequired: false)
     }
 }
 
 private extension BucketsProvider {
     
-    func provideBucketsWithQuery(query: BucketQuery) -> Promise<[Bucket]?> {
+    func provideBucketsWithQuery(query: BucketQuery, authenticationRequired: Bool) -> Promise<[Bucket]?> {
         return Promise<[Bucket]?> { fulfill, reject in
-            
-            let request = Request(query: query)
-            
+        
             firstly {
-                request.resume()
+                Provider.sendQuery(query, authenticationRequired: authenticationRequired)
             }.then { response -> Void in
                 
                 let buckets = response

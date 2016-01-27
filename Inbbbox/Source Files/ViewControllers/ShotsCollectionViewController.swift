@@ -51,7 +51,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
             firstly {
                 self.shotsProvider.provideShots()
             }.then { shots -> Void in
-                self.shots = shots
+                self.shots = shots ?? []
                 self.animationManager.startAnimationWithCompletion() {
                     self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
                     self.didFinishInitialAnimations = true

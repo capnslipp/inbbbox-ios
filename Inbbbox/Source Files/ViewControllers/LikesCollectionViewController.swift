@@ -52,8 +52,10 @@ class LikesCollectionViewController: UICollectionViewController {
         firstly {
             self.shotsProvider.provideShots()
         }.then { shots -> Void in
-            self.likedShots = shots
-            self.collectionView?.reloadData()
+            if let shots = shots {
+                self.likedShots = shots
+                self.collectionView?.reloadData()
+            }
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)

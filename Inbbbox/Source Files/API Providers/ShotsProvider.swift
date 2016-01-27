@@ -10,6 +10,13 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
+/**
+Class for providing shots of various source type:
+
+ - General - for common shots browsing.
+ - User - shots which belong to specified user.
+ - Bucket - shots which come from given bucket.
+*/
 final class ShotsProvider {
     
     private enum ShotsProviderType {
@@ -49,18 +56,16 @@ final class ShotsProvider {
      @discussion: queries uses underneath date to omit paging-page mismatch.
      If you want to reset page use restoreInitialState() method
      
-     - returns: Promise which resolves with shots.
+     - returns: Promise which resolves with shots or nil.
      */
-    func provideShots() -> Promise<[Shot]> {
+    func provideShots() -> Promise<[Shot]?> {
         
         secureCheckForType(.General)
         
-        return Promise<[Shot]> { fulfill, reject in
-            
-            let requests = activeQueries.map { Request(query: $0) }
+        return Promise<[Shot]?> { fulfill, reject in
 
             firstly {
-                when(requests.map { $0.resume() })
+                Provider.sendQueries(activeQueries)
             }.then { response -> Void in
                 
                 let shots = response
@@ -80,21 +85,11 @@ final class ShotsProvider {
     }
     
     /**
-     Restores initial state of ShotsProvider.
-     It means in next api call ShotsProvider will provide shots from the beginning.
-     @discussion: Use whether inbbbox stream source will change. Otherwise strange behaviour may appear.
-     */
-    func restoreInitialState() {
-        page = 1
-        shouldRestoreInitialState = true
-    }
-    
-    /**
      Provides shots for given user.
      
      - parameter user: User whose shots should be provided.
      
-     - returns: Promise which resolves with shots. Optional.
+     - returns: Promise which resolves with shots or nil.
      */
     func provideShotsForUser(user: User) -> Promise<[Shot]?> {
         
@@ -110,7 +105,7 @@ final class ShotsProvider {
      
      - parameter bucket: Bucket which shots should be provided.
      
-     - returns: Promise which resolves with shots. Optional.
+     - returns: Promise which resolves with shots or nil.
      */
     func provideShotsForBucket(bucket: Bucket) -> Promise<[Shot]?> {
         
@@ -119,11 +114,23 @@ final class ShotsProvider {
         
         return provideShotsWithQuery(query)
     }
+    
+    /**
+     Restores initial state of ShotsProvider.
+     It means in next api call ShotsProvider will provide shots from the beginning.
+     
+     **Important** Use whether inbbbox stream source will change or you want to provide other shots type with the same instance of ShotsProvider. 
+     Otherwise strange behaviour may appear.
+     */
+    func restoreInitialState() {
+        page = 1
+        shouldRestoreInitialState = true
+    }
 }
 
 private extension ShotsProvider {
     
-    var activeQueries: [ShotsQuery] {
+    var activeQueries: [Query] {
         
         return configuration.sources.map {
             
@@ -140,10 +147,9 @@ private extension ShotsProvider {
         return Promise<[Shot]?> { fulfill, reject in
             
             query = queryByPagingConfiguration(query)
-            let request = Request(query: query)
             
             firstly {
-                request.resume()
+                Provider.sendQuery(query)
             }.then { response -> Void in
                 
                 let shots = response
@@ -177,21 +183,5 @@ private extension ShotsProvider {
         query.parameters["per_page"] = pagination
         
         return query
-    }
-}
-
-private extension Array {
-    
-    var unique: [Shot] {
-     
-        var array = [Shot]()
-        
-        forEach {
-            if let shot = $0 as? Shot where !array.contains(shot) {
-                array.append(shot)
-            }
-        }
-        
-        return array
     }
 }

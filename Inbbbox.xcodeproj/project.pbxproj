@@ -93,6 +93,8 @@
 		5EE3AB1F1C5905B30003B639 /* ConnectionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1B1C5905B30003B639 /* ConnectionsProvider.swift */; };
 		5EE3AB201C5905B30003B639 /* ShotsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1C1C5905B30003B639 /* ShotsProvider.swift */; };
 		5EE3AB211C5905B30003B639 /* ShotsProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */; };
+		5EE3AB231C5905FE0003B639 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB221C5905FE0003B639 /* Provider.swift */; };
+		5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB241C5912E70003B639 /* ArrayExtension.swift */; };
 		745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146931C5217F400710C61 /* BucketsCollectionViewController.swift */; };
 		745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146951C5235D600710C61 /* BucketCollectionViewCell.swift */; };
 		74A6C67C1C57C84F009BDD75 /* LikesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */; };
@@ -286,6 +288,8 @@
 		5EE3AB1B1C5905B30003B639 /* ConnectionsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsProvider.swift; sourceTree = "<group>"; };
 		5EE3AB1C1C5905B30003B639 /* ShotsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProvider.swift; sourceTree = "<group>"; };
 		5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfiguration.swift; sourceTree = "<group>"; };
+		5EE3AB221C5905FE0003B639 /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		5EE3AB241C5912E70003B639 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		745146931C5217F400710C61 /* BucketsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewController.swift; sourceTree = "<group>"; };
 		745146951C5235D600710C61 /* BucketCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCell.swift; sourceTree = "<group>"; };
 		74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -747,6 +751,7 @@
 		5EE3AB191C5905B30003B639 /* API Providers */ = {
 			isa = PBXGroup;
 			children = (
+				5EE3AB221C5905FE0003B639 /* Provider.swift */,
 				5EE3AB1A1C5905B30003B639 /* BucketsProvider.swift */,
 				5EE3AB1B1C5905B30003B639 /* ConnectionsProvider.swift */,
 				5EE3AB1C1C5905B30003B639 /* ShotsProvider.swift */,
@@ -778,6 +783,7 @@
 				BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */,
 				F092E2621C3FD4F600593D18 /* NSManagedObjectExtension.swift */,
 				5ED6C5BA1C57BA2900A591EA /* NSAttributedStringExtension.swift */,
+				5EE3AB241C5912E70003B639 /* ArrayExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1116,6 +1122,7 @@
 				5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */,
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
+				5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
 				74A6C67C1C57C84F009BDD75 /* LikesCollectionViewController.swift in Sources */,
 				5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */,
@@ -1169,6 +1176,7 @@
 				5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
+				5EE3AB231C5905FE0003B639 /* Provider.swift in Sources */,
 				5EE3AB211C5905B30003B639 /* ShotsProviderConfiguration.swift in Sources */,
 				5E50820E1C3132AF00093191 /* LoginView.swift in Sources */,
 				74A6C6821C57D2F8009BDD75 /* OneColumnCollectionViewFlowLayout.swift in Sources */,
