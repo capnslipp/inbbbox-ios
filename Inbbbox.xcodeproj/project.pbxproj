@@ -55,11 +55,8 @@
 		5E781B411C58B694009A2E14 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E781B401C58B694009A2E14 /* User.json */; };
 		5E781B431C58B99A009A2E14 /* JSONSpecLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */; };
 		5E781B451C58C00E009A2E14 /* UserSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */; };
-		5E781B471C58D848009A2E14 /* BucketsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B461C58D848009A2E14 /* BucketsProvider.swift */; };
 		5E781B491C58D8B5009A2E14 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B481C58D8B5009A2E14 /* Bucket.swift */; };
 		5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */; };
-		5E8532311C525E4F00FC5A50 /* ShotsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */; };
-		5EB5DDF71C528397000B3EAC /* ShotsProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */; };
 		5EB896C41C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB896BF1C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift */; };
 		5EB896C51C5257E800AC2F3D /* LoginViewAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB896C01C5257E800AC2F3D /* LoginViewAnimations.swift */; };
 		5EB896C61C5257E800AC2F3D /* LoginViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB896C11C5257E800AC2F3D /* LoginViewAnimator.swift */; };
@@ -77,7 +74,6 @@
 		5ED6C5B91C57A98400A591EA /* FolloweesQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5B81C57A98400A591EA /* FolloweesQuerySpec.swift */; };
 		5ED6C5BB1C57BA2900A591EA /* NSAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5BA1C57BA2900A591EA /* NSAttributedStringExtension.swift */; };
 		5ED6C5BD1C57BD3C00A591EA /* NSAttributedStringExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5BC1C57BD3C00A591EA /* NSAttributedStringExtensionSpec.swift */; };
-		5ED6C5BF1C57C92D00A591EA /* ConnectionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5BE1C57C92D00A591EA /* ConnectionsProvider.swift */; };
 		5ED6C5C11C57CD2800A591EA /* FollowersQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5C01C57CD2800A591EA /* FollowersQuery.swift */; };
 		5ED6C5C31C57DA5500A591EA /* FollowersQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6C5C21C57DA5500A591EA /* FollowersQuerySpec.swift */; };
 		5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB83201C48DECE00FBCA05 /* AddToBucketQuerySpec.swift */; };
@@ -93,6 +89,10 @@
 		5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B11C34009300657751 /* FormatterSpec.swift */; };
 		5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */; };
 		5EE041B61C34227600657751 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE041B51C34227600657751 /* CollectionExtension.swift */; };
+		5EE3AB1E1C5905B30003B639 /* BucketsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1A1C5905B30003B639 /* BucketsProvider.swift */; };
+		5EE3AB1F1C5905B30003B639 /* ConnectionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1B1C5905B30003B639 /* ConnectionsProvider.swift */; };
+		5EE3AB201C5905B30003B639 /* ShotsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1C1C5905B30003B639 /* ShotsProvider.swift */; };
+		5EE3AB211C5905B30003B639 /* ShotsProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */; };
 		745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146931C5217F400710C61 /* BucketsCollectionViewController.swift */; };
 		745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146951C5235D600710C61 /* BucketCollectionViewCell.swift */; };
 		74A6C67C1C57C84F009BDD75 /* LikesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */; };
@@ -248,11 +248,8 @@
 		5E781B401C58B694009A2E14 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSpecLoader.swift; sourceTree = "<group>"; };
 		5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpecExtension.swift; sourceTree = "<group>"; };
-		5E781B461C58D848009A2E14 /* BucketsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsProvider.swift; sourceTree = "<group>"; };
 		5E781B481C58D8B5009A2E14 /* Bucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
 		5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketQuery.swift; sourceTree = "<group>"; };
-		5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProvider.swift; sourceTree = "<group>"; };
-		5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfiguration.swift; sourceTree = "<group>"; };
 		5EB896BF1C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsAnimator.swift; sourceTree = "<group>"; };
 		5EB896C01C5257E800AC2F3D /* LoginViewAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewAnimations.swift; sourceTree = "<group>"; };
 		5EB896C11C5257E800AC2F3D /* LoginViewAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewAnimator.swift; sourceTree = "<group>"; };
@@ -270,7 +267,6 @@
 		5ED6C5B81C57A98400A591EA /* FolloweesQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweesQuerySpec.swift; sourceTree = "<group>"; };
 		5ED6C5BA1C57BA2900A591EA /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		5ED6C5BC1C57BD3C00A591EA /* NSAttributedStringExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensionSpec.swift; sourceTree = "<group>"; };
-		5ED6C5BE1C57C92D00A591EA /* ConnectionsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsProvider.swift; sourceTree = "<group>"; };
 		5ED6C5C01C57CD2800A591EA /* FollowersQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersQuery.swift; sourceTree = "<group>"; };
 		5ED6C5C21C57DA5500A591EA /* FollowersQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersQuerySpec.swift; sourceTree = "<group>"; };
 		5EDB83201C48DECE00FBCA05 /* AddToBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuerySpec.swift; sourceTree = "<group>"; };
@@ -286,6 +282,10 @@
 		5EE041B11C34009300657751 /* FormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatterSpec.swift; sourceTree = "<group>"; };
 		5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSourceSpec.swift; sourceTree = "<group>"; };
 		5EE041B51C34227600657751 /* CollectionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		5EE3AB1A1C5905B30003B639 /* BucketsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsProvider.swift; sourceTree = "<group>"; };
+		5EE3AB1B1C5905B30003B639 /* ConnectionsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsProvider.swift; sourceTree = "<group>"; };
+		5EE3AB1C1C5905B30003B639 /* ShotsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProvider.swift; sourceTree = "<group>"; };
+		5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfiguration.swift; sourceTree = "<group>"; };
 		745146931C5217F400710C61 /* BucketsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewController.swift; sourceTree = "<group>"; };
 		745146951C5235D600710C61 /* BucketCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCell.swift; sourceTree = "<group>"; };
 		74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -419,10 +419,6 @@
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				F092E26A1C3FD6F900593D18 /* ShotOperationSynchronizer.swift */,
 				F08830F81C43944300F530A2 /* ShotOperationRequester.swift */,
-				5E8532301C525E4F00FC5A50 /* ShotsProvider.swift */,
-				5EB5DDF61C528397000B3EAC /* ShotsProviderConfiguration.swift */,
-				5ED6C5BE1C57C92D00A591EA /* ConnectionsProvider.swift */,
-				5E781B461C58D848009A2E14 /* BucketsProvider.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -565,6 +561,7 @@
 				BF9508511C1F12A300E39242 /* Constants.swift */,
 				F092E2171C3A9E9900593D18 /* Defines.swift */,
 				F092E2191C3AA3A600593D18 /* Settings.swift */,
+				5EE3AB191C5905B30003B639 /* API Providers */,
 				BF47EE2B1B4BBAF8002822D7 /* Extensions */,
 				5E2070111C27FABB00A4B57F /* Managers */,
 				5E51B7981AA9C3280018EDA9 /* Model */,
@@ -745,6 +742,17 @@
 				5EDB832D1C48DF0000FBCA05 /* SharedQuerySpec.swift */,
 			);
 			path = SharedExamples;
+			sourceTree = "<group>";
+		};
+		5EE3AB191C5905B30003B639 /* API Providers */ = {
+			isa = PBXGroup;
+			children = (
+				5EE3AB1A1C5905B30003B639 /* BucketsProvider.swift */,
+				5EE3AB1B1C5905B30003B639 /* ConnectionsProvider.swift */,
+				5EE3AB1C1C5905B30003B639 /* ShotsProvider.swift */,
+				5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */,
+			);
+			path = "API Providers";
 			sourceTree = "<group>";
 		};
 		BEEE9B7FDF125A64C50A158E /* Resources */ = {
@@ -1109,10 +1117,8 @@
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
-				5E8532311C525E4F00FC5A50 /* ShotsProvider.swift in Sources */,
 				74A6C67C1C57C84F009BDD75 /* LikesCollectionViewController.swift in Sources */,
 				5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */,
-				5EB5DDF71C528397000B3EAC /* ShotsProviderConfiguration.swift in Sources */,
 				E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */,
 				5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
@@ -1153,7 +1159,6 @@
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F092E2181C3A9E9900593D18 /* Defines.swift in Sources */,
 				F092E2611C3FD48600593D18 /* BucketManagedObject.swift in Sources */,
-				5E781B471C58D848009A2E14 /* BucketsProvider.swift in Sources */,
 				5ED6C5C11C57CD2800A591EA /* FollowersQuery.swift in Sources */,
 				F092E2651C3FD55A00593D18 /* ShotOperationHistoryStorage.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
@@ -1164,6 +1169,7 @@
 				5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
+				5EE3AB211C5905B30003B639 /* ShotsProviderConfiguration.swift in Sources */,
 				5E50820E1C3132AF00093191 /* LoginView.swift in Sources */,
 				74A6C6821C57D2F8009BDD75 /* OneColumnCollectionViewFlowLayout.swift in Sources */,
 				5E4857F71C2957C90027B38A /* GroupedBaseTableView.swift in Sources */,
@@ -1188,7 +1194,6 @@
 				300BBF161C4F947900721D13 /* ShotDetailsViewController.swift in Sources */,
 				5E5082081C312E2800093191 /* ShotsStorage.swift in Sources */,
 				5ED6C5BB1C57BA2900A591EA /* NSAttributedStringExtension.swift in Sources */,
-				5ED6C5BF1C57C92D00A591EA /* ConnectionsProvider.swift in Sources */,
 				5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */,
@@ -1200,6 +1205,7 @@
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
 				FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */,
+				5EE3AB1E1C5905B30003B639 /* BucketsProvider.swift in Sources */,
 				BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */,
 				FF13AD5BDAA038D06F3CDFD2 /* AsyncWrapper.swift in Sources */,
 				5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */,
@@ -1207,8 +1213,10 @@
 				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
 				BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */,
 				BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */,
+				5EE3AB201C5905B30003B639 /* ShotsProvider.swift in Sources */,
 				BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */,
 				BEEE92DB2FA773AEA5E9EBB5 /* CenterButtonTabBarController.swift in Sources */,
+				5EE3AB1F1C5905B30003B639 /* ConnectionsProvider.swift in Sources */,
 				745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */,
 				BEEE94B758777658FD47E908 /* ShotsCollectionBackgroundView.swift in Sources */,
 			);
