@@ -20,23 +20,6 @@ class ShotCollectionViewCellSpec: QuickSpec {
             sut = nil
         }
         
-        describe("conent view") {
-            
-            var contentView: UIView!
-            
-            beforeEach {
-                contentView = sut.contentView
-            }
-            
-            it("should clip to bounds") {
-                expect(contentView.clipsToBounds).to(beTruthy())
-            }
-            
-            it("should have layer corner radius 5") {
-                expect(contentView.layer.cornerRadius).to(equal(5))
-            }
-        }
-
         describe("shot image view") {
 
             var shotImageView: UIImageView!
