@@ -13,10 +13,15 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     let shotImageView = UIImageView.newAutoLayoutView()
     let likeImageView = UIImageView(image: UIImage(named: "ic-like-swipe"))
-    let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
-    let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
-    let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
-    let panGestureRecognizer = UIPanGestureRecognizer()
+    // NGRTemp: restore commented out code
+    // let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
+    // let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
+    // let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
+    private let panGestureRecognizer = UIPanGestureRecognizer()
+
+    private var likeImageViewLeftConstraint: NSLayoutConstraint?
+    private var likeImageViewWidthConstraint: NSLayoutConstraint?
+
     private var didSetConstraints = false
     var swipeCompletion: (Void -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
@@ -38,14 +43,14 @@ class ShotCollectionViewCell: UICollectionViewCell {
         likeImageView.configureForAutoLayout()
         contentView.addSubview(likeImageView)
 
-        plusImageView.configureForAutoLayout()
-        contentView.addSubview(plusImageView)
-
-        bucketImageView.configureForAutoLayout()
-        contentView.addSubview(bucketImageView)
-
-        commentImageView.configureForAutoLayout()
-        contentView.addSubview(commentImageView)
+        // plusImageView.configureForAutoLayout()
+        // contentView.addSubview(plusImageView)
+        //
+        // bucketImageView.configureForAutoLayout()
+        // contentView.addSubview(bucketImageView)
+        //
+        // commentImageView.configureForAutoLayout()
+        // contentView.addSubview(commentImageView)
 
         contentView.addSubview(shotImageView)
 
@@ -63,19 +68,23 @@ class ShotCollectionViewCell: UICollectionViewCell {
     override func updateConstraints() {
 
         if !didSetConstraints {
-            likeImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
-            likeImageView.autoPinEdgeToSuperviewEdge(.Left, withInset: 48)
-
-            plusImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
-            plusImageView.autoPinEdge(.Left, toEdge: .Right, ofView: likeImageView, withOffset: 15)
-
-            bucketImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
-            bucketImageView.autoPinEdge(.Left, toEdge: .Right, ofView: plusImageView, withOffset: 15)
-
-            commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
-            commentImageView.autoPinEdgeToSuperviewEdge(.Right, withInset: 48)
-
             shotImageView.autoPinEdgesToSuperviewEdges()
+
+            likeImageViewLeftConstraint = likeImageView.autoPinEdgeToSuperviewEdge(.Left)
+            likeImageViewWidthConstraint = likeImageView.autoSetDimension(.Width, toSize: 0)
+            likeImageView.autoMatchDimension(.Width, toDimension: .Height, ofView: likeImageView)
+            likeImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+
+            // plusImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            // plusImageView.autoPinEdge(.Left, toEdge: .Right, ofView: likeImageView, withOffset: 15)
+            //
+            // bucketImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            // bucketImageView.autoPinEdge(.Left, toEdge: .Right, ofView: plusImageView, withOffset: 15)
+            //
+            // commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            // commentImageView.autoPinEdgeToSuperviewEdge(.Right, withInset: 48)
+
             didSetConstraints = true
         }
 
@@ -112,6 +121,10 @@ class ShotCollectionViewCell: UICollectionViewCell {
             default:
                 let translation = panGestureRecognizer.translationInView(self.contentView)
                 shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, translation.x, 0)
+
+                likeImageViewLeftConstraint?.constant = abs(translation.x) * 0.2
+                likeImageViewWidthConstraint?.constant = min(abs(translation.x * 0.6), likeImageView.intrinsicContentSize().width)
+                likeImageView.alpha = min(abs(translation.x) / 70, 1)
         }
     }
 }
