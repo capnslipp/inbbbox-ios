@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import PromiseKit
 
 class LikesCollectionViewController: UICollectionViewController {
     
     // MARK: - Lifecycle
     
-    // NGRTemp: temporary implementation - remove after adding real likes
-    var likes = ["like1", "like2", "like3", "like4", "like5", "like6", "like7"]
+    // NGRTemp: temporary implementation - Downloading shots instead of liked shots.
+    // Query and func in provider needs to be implemented
+    // Maybe we should download liked shots earlier?
+    
+    var likedShots = [Shot]()
+    let shotsProvider = ShotsProvider()
     
     var oneColumnLayoutButton: UIBarButtonItem?
     var twoColumnsLayoutButton: UIBarButtonItem?
@@ -39,16 +44,34 @@ class LikesCollectionViewController: UICollectionViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.translucent = true
-    }
+        
+            }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        firstly {
+            self.shotsProvider.provideShots()
+        }.then { shots -> Void in
+            self.likedShots = shots
+            self.collectionView?.reloadData()
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
+    }
+    
     // MARK: UICollectionViewDataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return likes.count
+        return likedShots.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+         // NGRTemp: temporary implementation - image should probably be downloaded earlier
+        let shot = likedShots[indexPath.item]
+        cell.shotImageView.loadImageFromURL(shot.image.normalURL)
+        return cell
     }
     
     // MARK: UICollectionViewDelegate

@@ -9,6 +9,9 @@
 import UIKit
 
 class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedHeight {
+    
+    let shotImageView = UIImageView.newAutoLayoutView()
+    private var didSetConstraints = false
 
     // MARK - Life cycle
     
@@ -19,12 +22,22 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedHeigh
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        // NGRTemp: temporary implementation
-        contentView.backgroundColor = UIColor(red: CGFloat(arc4random()) / CGFloat(UInt32.max),
-            green: CGFloat(arc4random()) / CGFloat(UInt32.max),
-            blue: CGFloat(arc4random()) / CGFloat(UInt32.max),
-            alpha: 1)
+        contentView.backgroundColor = UIColor.backgroundGrayColor()
+        contentView.addSubview(shotImageView)
+    }
+    
+    // MARK - UIView
+    
+    override class func requiresConstraintBasedLayout() -> Bool{
+        return true
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        if !didSetConstraints {
+            shotImageView.autoPinEdgesToSuperviewEdges()
+            didSetConstraints = true
+        }
     }
     
     // MARK: - Reusable
