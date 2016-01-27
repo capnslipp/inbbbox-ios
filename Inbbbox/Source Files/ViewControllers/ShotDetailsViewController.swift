@@ -51,21 +51,21 @@ class ShotDetailsViewController: UIViewController {
 extension ShotDetailsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section == 0 else {
-            return nil
+        if section == 0 {
+            let headerView = ShotDetailsHeaderView(image: UIImage(named: "shot-menu")!)
+            headerView.delegate = self
+            return headerView
         }
         
-        let headerView = ShotDetailsHeaderView(image: UIImage(named: "shot-menu")!)
-        headerView.delegate = self
-        return headerView
+        return nil
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard section == 0 else {
-            return 0
+        if section == 0 {
+            return 400
         }
         
-        return 400
+        return 0
     }
 } 
 
