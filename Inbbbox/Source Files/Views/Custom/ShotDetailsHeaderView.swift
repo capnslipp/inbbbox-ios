@@ -71,10 +71,7 @@ class ShotDetailsHeaderView: UIView {
     
     override func updateConstraints() {
         if !didUpdateConstraints {
-            shotImageView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset: 10)
-            shotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -10)
-            shotImageView.autoPinEdge(.Top, toEdge: .Top, ofView: self)
-            shotImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self, withOffset: -100)
+            shotImageView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 0, left: 10, bottom: 100, right: 10))
             
             closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -14.6)
             closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 5)
