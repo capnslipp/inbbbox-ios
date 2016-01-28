@@ -137,7 +137,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
                 animations: {
                     self.shotImageView.transform = CGAffineTransformIdentity
                 }, completion: { _ in
-                    print(xTranslation)
                     self.swipeCompletion?(selectedAction)
                     self.delegate?.shotCollectionViewCellDidEndSwiping(self)
             })
