@@ -106,6 +106,7 @@
 		74C161821C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161811C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift */; };
 		74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */; };
 		74C1618A1C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161891C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift */; };
+		74F00B6A1C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
 		BEEE92DB2FA773AEA5E9EBB5 /* CenterButtonTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */; };
@@ -303,6 +304,7 @@
 		74C161811C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		74C161891C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
+		74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLayoutsCollectionViewController.swift; sourceTree = "<group>"; };
 		BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundView.swift; sourceTree = "<group>"; };
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 				300BBF151C4F947900721D13 /* ShotDetailsViewController.swift */,
 				745146931C5217F400710C61 /* BucketsCollectionViewController.swift */,
 				74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */,
+				74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1207,6 +1210,7 @@
 				5E4857F81C2957C90027B38A /* UIBaseTableView.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
 				F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */,
+				74F00B6A1C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift in Sources */,
 				300BBF161C4F947900721D13 /* ShotDetailsViewController.swift in Sources */,
 				5E5082081C312E2800093191 /* ShotsStorage.swift in Sources */,
 				5ED6C5BB1C57BA2900A591EA /* NSAttributedStringExtension.swift in Sources */,
