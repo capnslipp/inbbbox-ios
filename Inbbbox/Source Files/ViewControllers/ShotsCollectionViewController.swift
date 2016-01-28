@@ -84,8 +84,8 @@ final class ShotsCollectionViewController: UICollectionViewController {
         cell.delegate = self
         // NGRTemp: temporary implementation - image should probably be downloaded earlier
         cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
-        cell.swipeCompletion = {
-            print(shot)
+        cell.swipeCompletion = { action in
+            print(action)
         }
         return cell
     }

@@ -9,6 +9,12 @@ protocol ShotCollectionViewCellDelegate: class {
     func shotCollectionViewCellDidEndSwiping(shotCollectionViewCell: ShotCollectionViewCell)
 }
 
+enum ShotCollectionViewCellAction {
+    case Like
+    case Bucket
+    case Comment
+}
+
 class ShotCollectionViewCell: UICollectionViewCell {
     
     let shotImageView = UIImageView.newAutoLayoutView()
@@ -26,7 +32,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private var commentImageViewWidthConstraint: NSLayoutConstraint?
     
     private var didSetConstraints = false
-    var swipeCompletion: (Void -> Void)?
+    var swipeCompletion: (ShotCollectionViewCellAction -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
     
     // MARK: - Life cycle
@@ -110,11 +116,27 @@ class ShotCollectionViewCell: UICollectionViewCell {
     // MARK: - Actions
     
     func didSwipeCell(panGestureRecognizer: UIPanGestureRecognizer) {
-        // NGRTemp: temporary implementation
+        // NGRTemp: method too long - needs refactoring
+        let likeActionTreshold = CGFloat(100)
+        let bucketActionTreshold = CGFloat(200)
+        let commentActionTreshold = CGFloat(-100)
+        
+        let translation = panGestureRecognizer.translationInView(self.contentView)
+        
         switch panGestureRecognizer.state {
         case .Began:
             self.delegate?.shotCollectionViewCellDidStartSwiping(self)
         case .Ended, .Cancelled, .Failed:
+            
+            var selectedAction: ShotCollectionViewCellAction
+            if 0...likeActionTreshold ~= translation.x {
+                selectedAction = .Like
+            } else if translation.x > 100 {
+                selectedAction = .Bucket
+            } else {
+                selectedAction = .Comment
+            }
+            
             UIView.animateWithDuration(0.3,
                 delay: 0,
                 usingSpringWithDamping: 0.6,
@@ -123,11 +145,14 @@ class ShotCollectionViewCell: UICollectionViewCell {
                 animations: {
                     self.shotImageView.transform = CGAffineTransformIdentity
                 }, completion: { _ in
-                    self.swipeCompletion?()
+                    print(translation.x)
+                    self.swipeCompletion?(selectedAction)
                     self.delegate?.shotCollectionViewCellDidEndSwiping(self)
             })
         default:
-            let translation = panGestureRecognizer.translationInView(self.contentView)
+            if translation.x > bucketActionTreshold || translation.x < commentActionTreshold {
+                return
+            }
             shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, translation.x, 0)
             
             likeImageViewLeftConstraint?.constant = abs(translation.x) * 0.2
