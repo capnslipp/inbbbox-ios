@@ -15,13 +15,15 @@ class ShotCollectionViewCell: UICollectionViewCell {
     let likeImageView = UIImageView(image: UIImage(named: "ic-like-swipe"))
     let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
     let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
-    // let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
+    let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
     private let panGestureRecognizer = UIPanGestureRecognizer()
     
     private var likeImageViewLeftConstraint: NSLayoutConstraint?
     private var likeImageViewWidthConstraint: NSLayoutConstraint?
     private var plusImageViewWidthConstraint: NSLayoutConstraint?
     private var bucketImageViewWidthConstraint: NSLayoutConstraint?
+    private var commentImageViewRightConstraint: NSLayoutConstraint?
+    private var commentImageViewWidthConstraint: NSLayoutConstraint?
     
     private var didSetConstraints = false
     var swipeCompletion: (Void -> Void)?
@@ -50,8 +52,8 @@ class ShotCollectionViewCell: UICollectionViewCell {
         bucketImageView.configureForAutoLayout()
         contentView.addSubview(bucketImageView)
         
-        // commentImageView.configureForAutoLayout()
-        // contentView.addSubview(commentImageView)
+        commentImageView.configureForAutoLayout()
+        contentView.addSubview(commentImageView)
         
         contentView.addSubview(shotImageView)
         
@@ -73,7 +75,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
             
             likeImageViewWidthConstraint = likeImageView.autoSetDimension(.Width, toSize: 0)
             likeImageView.autoConstrainAttribute(.Height, toAttribute: .Width, ofView: likeImageView, withMultiplier: likeImageView.intrinsicContentSize().height / likeImageView.intrinsicContentSize().width)
-            likeImageView.autoMatchDimension(.Width, toDimension: .Height, ofView: likeImageView)
             likeImageViewLeftConstraint = likeImageView.autoPinEdgeToSuperviewEdge(.Left)
             likeImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
             
@@ -87,8 +88,10 @@ class ShotCollectionViewCell: UICollectionViewCell {
             bucketImageView.autoPinEdge(.Left, toEdge: .Right, ofView: plusImageView, withOffset: 15)
             bucketImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
             
-            // commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
-            // commentImageView.autoPinEdgeToSuperviewEdge(.Right, withInset: 48)
+            commentImageViewWidthConstraint = commentImageView.autoSetDimension(.Width, toSize: 0)
+            commentImageView.autoConstrainAttribute(.Height, toAttribute: .Width, ofView: commentImageView, withMultiplier: commentImageView.intrinsicContentSize().height / commentImageView.intrinsicContentSize().width)
+            commentImageViewRightConstraint = commentImageView.autoPinEdgeToSuperviewEdge(.Right)
+            commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
             
             didSetConstraints = true
         }
@@ -138,7 +141,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
             bucketImageViewWidthConstraint?.constant = min((abs(translation.x * 0.6) - displaySecondActionTreshold), bucketImageView.intrinsicContentSize().width)
             plusImageView.alpha = min((abs(translation.x) - displaySecondActionTreshold) / 70, 1)
             
-            
+            commentImageViewRightConstraint?.constant = -abs(translation.x) * 0.2
+            commentImageViewWidthConstraint?.constant = min(abs(translation.x * 0.6), commentImageView.intrinsicContentSize().width)
+            commentImageView.alpha = min(abs(translation.x) / 70, 1)
         }
     }
 }
