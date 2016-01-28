@@ -15,14 +15,12 @@ class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepareLayout() {
         
         if let collectionView = collectionView {
-            let fixedLeftMargin = CGFloat(28)
-            let fixedRightMargin = CGFloat(27)
-            let fixedVerticalSpacing = CGFloat(28)
-            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - fixedLeftMargin - fixedRightMargin
+            let spacings = CollectionViewLayoutSpacings()
+            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - 2 * spacings.itemMargin
             let calculatedItemHeight = calculatedItemWidth * itemHeightToWidthRatio
             itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
-            minimumLineSpacing = fixedVerticalSpacing
-            sectionInset = UIEdgeInsets(top: fixedVerticalSpacing, left: 0, bottom: fixedVerticalSpacing, right: 0)
+            minimumLineSpacing = spacings.itemMargin
+            sectionInset = UIEdgeInsets(top: spacings.sectionMargin, left: spacings.sectionMargin, bottom: spacings.sectionMargin, right: spacings.sectionMargin)
         }
     }
 }
