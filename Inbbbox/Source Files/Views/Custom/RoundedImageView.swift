@@ -12,16 +12,14 @@ class RoundedImageView: UIView {
     
     private var didUpdateConstraints = false
     private let imageView: UIImageView
-    private let cornersToRound: UIRectCorner
+    private var cornersToRound = UIRectCorner()
     private var radiusToSet: CGFloat
     
     // MARK: Life Cycle
     
-    init(image: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat, frame: CGRect) {
+    override init(frame: CGRect) {
         imageView = UIImageView.newAutoLayoutView()
-        imageView.image = image
-        cornersToRound = byRoundingCorners
-        radiusToSet = radius
+        radiusToSet = 0
         
         super.init(frame: frame)
         addSubview(imageView)
@@ -32,10 +30,14 @@ class RoundedImageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @available(*, unavailable, message = "Use init(withImage:, byRoundingCorners:, radius:, frame:")
-    override init(frame: CGRect) {
-        fatalError("init(frame:) has not been implemented")
+    // MARK: Public
+    func updateWith(image: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat, frame: CGRect) {
+        imageView.image = image
+        cornersToRound = byRoundingCorners
+        radiusToSet = radius
     }
+    
+    // MARK: Internal
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
