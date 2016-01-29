@@ -115,6 +115,7 @@
 		BEEE935B22E458DAA56334DB /* UIGestureRecognizer+Specs.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DB7B075CCEC2383EE01 /* UIGestureRecognizer+Specs.m */; };
 		BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9534945990DF5595E62C /* ViewControllerMock.swift */; };
 		BEEE94B758777658FD47E908 /* ShotsCollectionBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */; };
+		BEEE953B3FD7B5D2FBE7DD4C /* ViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE96DE52EFED046C0DD6AD /* ViewMock.swift */; };
 		BEEE95BCBAB8072AE0F35D42 /* ShotsAnimationManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EAE816915C3640FD627 /* ShotsAnimationManagerDelegateMock.swift */; };
 		BEEE96288C099EC6A58CAC82 /* PanGestureRecognizerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE92A5546E6D5C79EA1634 /* PanGestureRecognizerMock.swift */; };
 		BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */; };
@@ -126,6 +127,7 @@
 		BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */; };
 		BEEE9ED4DA368627F8C5310A /* Shot.json in Resources */ = {isa = PBXBuildFile; fileRef = BEEE957B2085B7978B14F8F0 /* Shot.json */; };
 		BEEE9F024FB2F4CB9602C71A /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */; };
+		BEEE9F05CB427B52631AAE7C /* ShotCollectionViewCellDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D4BB3B567940D98A215 /* ShotCollectionViewCellDelegateMock.swift */; };
 		BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */; };
 		BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF29C2561B4AA5500053378F /* AppDelegate.swift */; };
 		BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6961191C1B443E000FC5D8 /* NetworkService.swift */; };
@@ -316,11 +318,13 @@
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		BEEE957B2085B7978B14F8F0 /* Shot.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Shot.json; sourceTree = "<group>"; };
 		BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarController.swift; sourceTree = "<group>"; };
+		BEEE96DE52EFED046C0DD6AD /* ViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewMock.swift; sourceTree = "<group>"; };
 		BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayoutSpec.swift; sourceTree = "<group>"; };
 		BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarView.swift; sourceTree = "<group>"; };
 		BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9B96B2E0EEEC762DF2E6 /* ShotsCollectionBackgroundViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundViewSpec.swift; sourceTree = "<group>"; };
 		BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
+		BEEE9D4BB3B567940D98A215 /* ShotCollectionViewCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellDelegateMock.swift; sourceTree = "<group>"; };
 		BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimatorSpec.swift; sourceTree = "<group>"; };
 		BEEE9DB7B075CCEC2383EE01 /* UIGestureRecognizer+Specs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+Specs.m"; sourceTree = "<group>"; };
 		BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterMock.swift; sourceTree = "<group>"; };
@@ -911,6 +915,8 @@
 				BEEE9534945990DF5595E62C /* ViewControllerMock.swift */,
 				BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */,
 				BEEE92A5546E6D5C79EA1634 /* PanGestureRecognizerMock.swift */,
+				BEEE9D4BB3B567940D98A215 /* ShotCollectionViewCellDelegateMock.swift */,
+				BEEE96DE52EFED046C0DD6AD /* ViewMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -1310,6 +1316,8 @@
 				5E781B451C58C00E009A2E14 /* UserSpecExtension.swift in Sources */,
 				BEEE96288C099EC6A58CAC82 /* PanGestureRecognizerMock.swift in Sources */,
 				BEEE935B22E458DAA56334DB /* UIGestureRecognizer+Specs.m in Sources */,
+				BEEE9F05CB427B52631AAE7C /* ShotCollectionViewCellDelegateMock.swift in Sources */,
+				BEEE953B3FD7B5D2FBE7DD4C /* ViewMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

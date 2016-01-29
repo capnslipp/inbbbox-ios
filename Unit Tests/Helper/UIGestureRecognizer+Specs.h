@@ -6,6 +6,6 @@
 
 @interface UIGestureRecognizer (Specs)
 
-- (void)specRecognizeWithState:(UIGestureRecognizerState)state;
+- (void)specRecognizeWithGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer;
 
 @end

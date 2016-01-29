@@ -21,6 +21,8 @@ class ShotCollectionViewCell: UICollectionViewCell {
     let likeImageView = UIImageView(image: UIImage(named: "ic-like-swipe"))
     let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
     let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
+
+    var viewClass = UIView.self
     var swipeCompletion: (ShotCollectionViewCellAction -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
 
@@ -122,25 +124,25 @@ class ShotCollectionViewCell: UICollectionViewCell {
     // MARK: - Actions
 
     func didSwipeCell(panGestureRecognizer: UIPanGestureRecognizer) {
-        let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
-
         switch panGestureRecognizer.state {
         case .Began:
             self.delegate?.shotCollectionViewCellDidStartSwiping(self)
         case .Ended, .Cancelled, .Failed:
-            let selectedAction = selectedActionForSwipeXTranslation(xTranslation)
-            UIView.animateWithDuration(0.3,
-                delay: 0,
-                usingSpringWithDamping: 0.6,
-                initialSpringVelocity: 0.9,
-                options: .CurveEaseInOut,
-                animations: {
-                    self.shotImageView.transform = CGAffineTransformIdentity
-                }, completion: { _ in
-                    self.swipeCompletion?(selectedAction)
-                    self.delegate?.shotCollectionViewCellDidEndSwiping(self)
+            viewClass.animateWithDuration(0.3,
+                    delay: 0,
+                    usingSpringWithDamping: 0.6,
+                    initialSpringVelocity: 0.9,
+                    options: .CurveEaseInOut,
+                    animations: {
+                        self.shotImageView.transform = CGAffineTransformIdentity
+                    }, completion: { _ in
+                let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
+                let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
+                self.swipeCompletion?(selectedAction)
+                self.delegate?.shotCollectionViewCellDidEndSwiping(self)
             })
         default:
+            let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
             adjustConstraintsForSwipeXTranslation(xTranslation)
         }
     }
