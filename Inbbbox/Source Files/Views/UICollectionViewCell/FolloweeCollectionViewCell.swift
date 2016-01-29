@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedHeight {
+class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
     
     private let firstShotImageView = UIImageView.newAutoLayoutView()
     private let secondShotImageView = UIImageView.newAutoLayoutView()
@@ -97,7 +97,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedH
         return "FolloweeCollectionViewCellIdentifier"
     }
     
-    //MARK: - Width dependend height
+    //MARK: - Width dependent height
     
     static var heightToWidthRatio: CGFloat {
         return CGFloat(1)

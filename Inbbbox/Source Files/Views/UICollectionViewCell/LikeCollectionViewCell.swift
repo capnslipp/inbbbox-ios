@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedHeight {
+class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
     
     let shotImageView = UIImageView.newAutoLayoutView()
     private var didSetConstraints = false
@@ -45,7 +45,7 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependedHeigh
         return "LikeCollectionViewCellIdentifier"
     }
     
-    //MARK: - Width dependend height
+    //MARK: - Width dependent height
     static var heightToWidthRatio: CGFloat {
         return CGFloat(0.75)
     }

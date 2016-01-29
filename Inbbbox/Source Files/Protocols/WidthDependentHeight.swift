@@ -1,5 +1,5 @@
 //
-//  HeightToWidthRatioDeclaring.swift
+//  WidthDependentHeight.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 26.01.2016.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-protocol WidthDependedHeight {
+protocol WidthDependentHeight {
     static var heightToWidthRatio: CGFloat { get }
 }
