@@ -10,10 +10,16 @@ import UIKit
 
 class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
     
+    private let shotsView = UIView.newAutoLayoutView()
+    private let infoView = UIView.newAutoLayoutView()
+    
     private let firstShotImageView = UIImageView.newAutoLayoutView()
     private let secondShotImageView = UIImageView.newAutoLayoutView()
     private let thirdShotImageView = UIImageView.newAutoLayoutView()
     private let fourthShotImageView = UIImageView.newAutoLayoutView()
+    
+    private let avatarImageView = UIView.newAutoLayoutView()
+    private let infoLabel = UILabel.newAutoLayoutView()
     
     private var didSetConstraints = false
     
@@ -37,58 +43,81 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        shotsView.addSubview(firstShotImageView)
+        shotsView.addSubview(secondShotImageView)
+        shotsView.addSubview(thirdShotImageView)
+        shotsView.addSubview(fourthShotImageView)
+        
+        infoView.addSubview(avatarImageView)
+        infoView.addSubview(infoLabel)
+        
+        contentView.addSubview(shotsView)
+        contentView.addSubview(infoView)
         contentView.backgroundColor = UIColor.cellGrayColor()
-        contentView.addSubview(firstShotImageView)
-        contentView.addSubview(secondShotImageView)
-        contentView.addSubview(thirdShotImageView)
-        contentView.addSubview(fourthShotImageView)
+        
+        firstShotImageView.backgroundColor = UIColor.redColor()
+        secondShotImageView.backgroundColor = UIColor.yellowColor()
+        thirdShotImageView.backgroundColor = UIColor.blackColor()
+        fourthShotImageView.backgroundColor = UIColor.blueColor()
+        infoView.backgroundColor = UIColor.whiteColor()
     }
     
     // MARK - UIView
     
-    override class func requiresConstraintBasedLayout() -> Bool{
+    override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
     
     override func updateConstraints() {
         super.updateConstraints()
         if !didSetConstraints {
-            
             // NGRTodo: Fix situation when collectionViewLayout is changed and cell size changes
-            let shotImageViewHeight = contentView.bounds.height / 2
-            let shotImageViewWidth = contentView.bounds.width / 2
-            
-            firstShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
-            firstShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
-            
-            secondShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
-            secondShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
-            
-            thirdShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
-            thirdShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
-            
-            fourthShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
-            firstShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
-            
-            firstShotImageView.autoPinEdge(.Top, toEdge: .Top, ofView: contentView)
-            firstShotImageView.autoPinEdge(.Left, toEdge: .Left, ofView: contentView)
-            firstShotImageView.autoPinEdge(.Bottom, toEdge: .Top, ofView: thirdShotImageView)
-            firstShotImageView.autoPinEdge(.Right, toEdge: .Left, ofView: secondShotImageView)
-
-            secondShotImageView.autoPinEdge(.Top, toEdge: .Top, ofView: contentView)
-            secondShotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: contentView)
-            secondShotImageView.autoPinEdge(.Bottom, toEdge: .Top, ofView: fourthShotImageView)
-            
-            thirdShotImageView.autoPinEdge(.Left, toEdge: .Left, ofView: contentView)
-            thirdShotImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: contentView)
-            thirdShotImageView.autoPinEdge(.Right, toEdge: .Left, ofView: fourthShotImageView)
-            
-            fourthShotImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: contentView)
-            fourthShotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: contentView)
-            
+            shotsView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            infoView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
+            infoView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotsView)
+            setShotsViewConstraints()
+            setInfoViewConstraints()
             didSetConstraints = true
         }
     }
+    
+    func setShotsViewConstraints() {
+        let shotImageViewWidth = contentView.bounds.width / 2
+        let shotImageViewHeight = shotImageViewWidth * 0.75
+        
+        firstShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
+        firstShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
+        
+        secondShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
+        secondShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
+        
+        thirdShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
+        thirdShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
+        
+        fourthShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
+        fourthShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
+        
+        firstShotImageView.autoPinEdge(.Top, toEdge: .Top, ofView: shotsView)
+        firstShotImageView.autoPinEdge(.Left, toEdge: .Left, ofView: shotsView)
+        firstShotImageView.autoPinEdge(.Bottom, toEdge: .Top, ofView: thirdShotImageView)
+        firstShotImageView.autoPinEdge(.Right, toEdge: .Left, ofView: secondShotImageView)
+        
+        secondShotImageView.autoPinEdge(.Top, toEdge: .Top, ofView: shotsView)
+        secondShotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: shotsView)
+        secondShotImageView.autoPinEdge(.Bottom, toEdge: .Top, ofView: fourthShotImageView)
+        
+        thirdShotImageView.autoPinEdge(.Left, toEdge: .Left, ofView: shotsView)
+        thirdShotImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: shotsView)
+        thirdShotImageView.autoPinEdge(.Right, toEdge: .Left, ofView: fourthShotImageView)
+        
+        fourthShotImageView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: shotsView)
+        fourthShotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: shotsView)
+    }
+    
+    func setInfoViewConstraints() {
+        
+    }
+    
     
     // MARK: - Reusable
     
