@@ -37,8 +37,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        // NGRTodo: change background color to #DFE0E2
-        contentView.backgroundColor = UIColor.backgroundGrayColor()
+        contentView.backgroundColor = UIColor.cellGrayColor()
         contentView.addSubview(firstShotImageView)
         contentView.addSubview(secondShotImageView)
         contentView.addSubview(thirdShotImageView)
