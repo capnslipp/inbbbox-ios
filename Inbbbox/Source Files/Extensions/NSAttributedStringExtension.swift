@@ -10,13 +10,12 @@ import UIKit
 
 extension NSAttributedString {
     
-    convenience init?(htmlString: String?) {
+    convenience init?(htmlString: String) {
         
-        guard let htmlString = htmlString else {
+        guard let encodedData = htmlString.dataUsingEncoding(NSUTF8StringEncoding) else {
             return nil
         }
         
-        let encodedData = htmlString.dataUsingEncoding(NSUTF8StringEncoding)!
         let attributedOptions : [String: AnyObject] = [
             NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
             NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding
@@ -31,6 +30,5 @@ extension NSAttributedString {
         }
         
         self.init(attributedString: attributedString!)
-    }
-    
+    }    
 }

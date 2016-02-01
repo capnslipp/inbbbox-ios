@@ -24,12 +24,17 @@ extension Bucket: Mappable {
         return { json in
             
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
-            let htmlDescription = json[Key.Description.rawValue].string
+            let htmlDescription: NSAttributedString? = {
+                guard let htmlString = json[Key.Description.rawValue].string else {
+                    return nil
+                }
+                return NSAttributedString(htmlString: htmlString)
+            }()
             
             return Bucket(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].stringValue,
-                description: NSAttributedString(htmlString: htmlDescription),
+                description: htmlDescription,
                 shotsCount: json[Key.ShotsCount.rawValue].intValue,
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!
             )

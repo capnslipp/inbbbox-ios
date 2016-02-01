@@ -28,12 +28,17 @@ extension Shot: Mappable {
         return { json in
             
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
-            let htmlDescription = json[Key.Description.rawValue].string
+            let htmlDescription: NSAttributedString? = {
+                guard let htmlString = json[Key.Description.rawValue].string else {
+                    return nil
+                }
+                return NSAttributedString(htmlString: htmlString)
+            }()
             
             return Shot(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 title: json[Key.Title.rawValue].string,
-                description: NSAttributedString(htmlString: htmlDescription),
+                description: htmlDescription,
                 user: User.map(json[Key.User.rawValue]),
                 image: ShotImage.map(json[Key.Images.rawValue]),
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,

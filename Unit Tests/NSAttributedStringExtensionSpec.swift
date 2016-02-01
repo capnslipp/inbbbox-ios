@@ -20,17 +20,6 @@ class NSAttributedStringExtensionSpec: QuickSpec {
             sut = nil
         }
         
-        describe("when init with nil") {
-            
-            beforeEach {
-                sut = NSAttributedString(htmlString: nil)
-            }
-            
-            it("should be nil") {
-                expect(sut).to(beNil())
-            }
-        }
-        
         describe("when init with common string") {
             
             beforeEach {
@@ -41,7 +30,6 @@ class NSAttributedStringExtensionSpec: QuickSpec {
                 expect(sut.string).to(equal("fixture.string"))
             }
         }
-        
         
         describe("when init with common string") {
             
