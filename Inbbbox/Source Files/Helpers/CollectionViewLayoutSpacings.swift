@@ -11,4 +11,6 @@ import UIKit
 struct CollectionViewLayoutSpacings {
     let itemMargin = CGFloat(28)
     let sectionMargin = CGFloat(28)
+    let shotHeightToWidthRatio = CGFloat(0.75)
+    let initialShotsLayoutBottomCellOffset = CGFloat(40)
 }

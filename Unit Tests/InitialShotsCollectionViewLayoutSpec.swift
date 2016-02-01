@@ -14,6 +14,9 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
         var sut: InitialShotsCollectionViewLayout!
         var collectionViewMock: CollectionViewMock!
+        let fixtureCollectionViewBounds = FixtureCollectionViewBounds()
+        let fixtureFirstItemAttributes = FixtureFirstItemAttributes()
+        let fixtureSecondItemAttributes = FixtureSecondItemAttributes()
 
         beforeEach {
             sut = InitialShotsCollectionViewLayout()
@@ -31,12 +34,12 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var contentSize: CGSize!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
+                    collectionViewMock.bounds = CGRect(x: fixtureCollectionViewBounds.x, y: fixtureCollectionViewBounds.y, width: fixtureCollectionViewBounds.width, height: fixtureCollectionViewBounds.height)
                     contentSize = sut.collectionViewContentSize()
                 }
 
                 it("should have proper content size") {
-                    expect(contentSize).to(equal(CGSize(width: 375, height: 667)))
+                    expect(contentSize).to(equal(CGSize(width: fixtureCollectionViewBounds.width, height: fixtureCollectionViewBounds.height)))
                 }
             }
 
@@ -45,8 +48,8 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var layoutAttributes: [UICollectionViewLayoutAttributes]!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
-                    collectionViewMock.center = CGPoint(x: 100, y: 100)
+                        collectionViewMock.bounds = CGRect(x: fixtureCollectionViewBounds.x, y: fixtureCollectionViewBounds.y, width: fixtureCollectionViewBounds.width, height: fixtureCollectionViewBounds.height)
+                        collectionViewMock.center = CGPoint(x: fixtureCollectionViewBounds.width / 2, y: fixtureCollectionViewBounds.height / 2)
                 }
 
                 context("when collection view has 2 items in first section") {
@@ -69,46 +72,46 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                         }
 
                         it("should have proper size") {
-                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 320, height: 240)))
+                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: fixtureFirstItemAttributes.width, height: fixtureFirstItemAttributes.height)))
                         }
                         
                         it("should have proper item height to width ratio") {
                             let heightToWidhtRatio = firstItemLayoutAttributes.size.height / firstItemLayoutAttributes.size.width
-                            expect(heightToWidhtRatio).to(equal(3 / 4))
+                            expect(heightToWidhtRatio).to(equal(fixtureFirstItemAttributes.height / fixtureFirstItemAttributes.width))
                         }
 
                         it("should have proper center") {
-                            expect(firstItemLayoutAttributes.center).to(equal(CGPoint(x: 100, y: 100)))
+                            expect(firstItemLayoutAttributes.center).to(equal(fixtureFirstItemAttributes.center))
                         }
 
                         it("should have proper z index") {
-                            expect(firstItemLayoutAttributes.zIndex).to(equal(0))
+                            expect(firstItemLayoutAttributes.zIndex).to(equal(fixtureFirstItemAttributes.zIndex))
                         }
                     }
 
                     describe("second item layout attributes") {
 
-                        var firstItemLayoutAttributes: UICollectionViewLayoutAttributes!
+                        var secondItemLayoutAttributes: UICollectionViewLayoutAttributes!
 
                         beforeEach {
-                            firstItemLayoutAttributes = layoutAttributes![1]
+                            secondItemLayoutAttributes = layoutAttributes![1]
                         }
 
                         it("should have proper size") {
-                            expect(firstItemLayoutAttributes.size).to(equal(CGSize(width: 265, height: 198.75)))
+                            expect(secondItemLayoutAttributes.size).to(equal(CGSize(width: fixtureSecondItemAttributes.width, height: fixtureSecondItemAttributes.height)))
                         }
                         
                         it("should have proper item height to width ratio") {
-                            let heightToWidhtRatio = firstItemLayoutAttributes.size.height / firstItemLayoutAttributes.size.width
-                            expect(heightToWidhtRatio).to(equal(3 / 4))
+                            let heightToWidhtRatio = secondItemLayoutAttributes.size.height / secondItemLayoutAttributes.size.width
+                            expect(heightToWidhtRatio).to(equal(fixtureSecondItemAttributes.height / fixtureSecondItemAttributes.width))
                         }
 
                         it("should have proper center") {
-                            expect(firstItemLayoutAttributes.center).to(equal(CGPoint(x: 100, y: 140)))
+                            expect(secondItemLayoutAttributes.center).to(equal(fixtureSecondItemAttributes.center))
                         }
 
                         it("should have proper z index") {
-                            expect(firstItemLayoutAttributes.zIndex).to(equal(-1))
+                            expect(secondItemLayoutAttributes.zIndex).to(equal(fixtureSecondItemAttributes.zIndex))
                         }
                     }
                 }
@@ -133,26 +136,26 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var initialLayoutAttributes: UICollectionViewLayoutAttributes!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
-                    collectionViewMock.center = CGPoint(x: 100, y: 100)
+                    collectionViewMock.bounds = CGRect(x: fixtureCollectionViewBounds.x, y: fixtureCollectionViewBounds.y, width: fixtureCollectionViewBounds.width, height: fixtureCollectionViewBounds.height)
+                    collectionViewMock.center = CGPoint(x: fixtureCollectionViewBounds.width / 2, y: fixtureCollectionViewBounds.height / 2)
                     collectionViewMock.numberOfItemsInSectionStub.on(0, returnValue: 1)
                     initialLayoutAttributes = sut.initialLayoutAttributesForAppearingItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
                 }
 
                 it("should have proper size") {
-                    expect(initialLayoutAttributes.size).to(equal(CGSize(width: 320, height: 240)))
+                    expect(initialLayoutAttributes.size).to(equal(CGSize(width: fixtureFirstItemAttributes.width, height: fixtureFirstItemAttributes.height)))
                 }
 
                 it("should have proper center") {
-                    expect(initialLayoutAttributes.center).to(equal(CGPoint(x: 100, y: 100)))
+                    expect(initialLayoutAttributes.center).to(equal(fixtureFirstItemAttributes.center))
                 }
 
                 it("should have proper z index") {
-                    expect(initialLayoutAttributes.zIndex).to(equal(0))
+                    expect(initialLayoutAttributes.zIndex).to(equal(fixtureFirstItemAttributes.zIndex))
                 }
 
                 it("should have alpha 0") {
-                    expect(initialLayoutAttributes.alpha).to(equal(0))
+                    expect(initialLayoutAttributes.alpha).to(equal(fixtureFirstItemAttributes.alpha))
                 }
             }
 
@@ -161,28 +164,51 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 var finalLayoutAttributes: UICollectionViewLayoutAttributes!
 
                 beforeEach {
-                    collectionViewMock.bounds = CGRect(x: 0, y: 0, width: 375, height: 667)
-                    collectionViewMock.center = CGPoint(x: 100, y: 100)
+                    collectionViewMock.bounds = CGRect(x: fixtureCollectionViewBounds.x, y: fixtureCollectionViewBounds.y, width: fixtureCollectionViewBounds.width, height: fixtureCollectionViewBounds.height)
+                    collectionViewMock.center = CGPoint(x: fixtureCollectionViewBounds.width / 2, y: fixtureCollectionViewBounds.height / 2)
                     collectionViewMock.numberOfItemsInSectionStub.on(0, returnValue: 1)
                     finalLayoutAttributes = sut.finalLayoutAttributesForDisappearingItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
                 }
 
                 it("should have proper size") {
-                    expect(finalLayoutAttributes.size).to(equal(CGSize(width: 320, height: 240)))
+                    expect(finalLayoutAttributes.size).to(equal(CGSize(width: fixtureFirstItemAttributes.width, height: fixtureFirstItemAttributes.height)))
                 }
 
                 it("should have proper center") {
-                    expect(finalLayoutAttributes.center).to(equal(CGPoint(x: 187.5, y: 907)))
+                    expect(finalLayoutAttributes.center).to(equal(CGPoint(x: fixtureCollectionViewBounds.width / 2, y: fixtureCollectionViewBounds.height + fixtureFirstItemAttributes.height)))
                 }
 
                 it("should have proper z index") {
-                    expect(finalLayoutAttributes.zIndex).to(equal(0))
+                    expect(finalLayoutAttributes.zIndex).to(equal(fixtureFirstItemAttributes.zIndex))
                 }
 
                 it("should have alpha 0") {
-                    expect(finalLayoutAttributes.alpha).to(equal(0))
+                    expect(finalLayoutAttributes.alpha).to(equal(fixtureFirstItemAttributes.alpha))
                 }
             }
         }
     }
+}
+
+private struct FixtureCollectionViewBounds {
+    let width = CGFloat(320)
+    let height = CGFloat(568)
+    let x = CGFloat(0)
+    let y = CGFloat(0)
+}
+
+private struct FixtureFirstItemAttributes {
+    let width = CGFloat(264)
+    let height = CGFloat(198)
+    let center = CGPoint(x: 160, y: 284)
+    let zIndex = NSInteger(0)
+    let alpha = CGFloat(0)
+}
+
+private struct FixtureSecondItemAttributes  {
+    let width = CGFloat(208)
+    let height = CGFloat(156)
+    let center = CGPoint(x: 160, y: 324)
+    let zIndex = NSInteger(-1)
+    let alpha = CGFloat(0)
 }
