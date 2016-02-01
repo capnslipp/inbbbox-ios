@@ -128,19 +128,12 @@ class ShotCollectionViewCell: UICollectionViewCell {
         case .Began:
             self.delegate?.shotCollectionViewCellDidStartSwiping(self)
         case .Ended, .Cancelled, .Failed:
-            viewClass.animateWithDuration(0.3,
-                    delay: 0,
-                    usingSpringWithDamping: 0.6,
-                    initialSpringVelocity: 0.9,
-                    options: .CurveEaseInOut,
-                    animations: {
-                        self.shotImageView.transform = CGAffineTransformIdentity
-                    }, completion: { _ in
+            animateCellAction() {
                 let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
                 let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
                 self.swipeCompletion?(selectedAction)
                 self.delegate?.shotCollectionViewCellDidEndSwiping(self)
-            })
+            }
         default:
             let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
             adjustConstraintsForSwipeXTranslation(xTranslation)
@@ -179,6 +172,41 @@ class ShotCollectionViewCell: UICollectionViewCell {
             return .Bucket
         } else {
             return .Comment
+        }
+    }
+    
+    private func animateCellAction(completion: (() -> ())?) {
+        
+        let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
+        let selectedAction = selectedActionForSwipeXTranslation(xTranslation)
+        switch selectedAction {
+        case .Like:
+            bucketImageView.hidden = true
+            plusImageView.hidden = true
+            commentImageView.hidden = true
+            let contentViewWidht = CGRectGetWidth(self.contentView.bounds)
+            likeImageViewLeftConstraint?.constant = round(contentViewWidht / 2 - likeImageView.intrinsicContentSize().width / 2 )
+            likeImageViewWidthConstraint?.constant = likeImageView.intrinsicContentSize().width
+            viewClass.animateWithDuration(0.3,
+                animations: {
+                    self.contentView.layoutIfNeeded()
+                    self.likeImageView.alpha = 1.0
+                    self.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
+                },
+                completion: { _ in
+                    completion?()
+            })
+        default:
+            viewClass.animateWithDuration(0.3,
+                delay: 0,
+                usingSpringWithDamping: 0.6,
+                initialSpringVelocity: 0.9,
+                options: .CurveEaseInOut,
+                animations: {
+                    self.shotImageView.transform = CGAffineTransformIdentity
+                }, completion: { _ in
+                    completion?()
+            })
         }
     }
 }
