@@ -39,8 +39,6 @@
 		5E4857C91C2854F80027B38A /* ShotsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857C51C2854F80027B38A /* ShotsQuery.swift */; };
 		5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857C61C2854F80027B38A /* UnlikeQuery.swift */; };
 		5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857C71C2854F80027B38A /* UserQuery.swift */; };
-		5E4857F71C2957C90027B38A /* GroupedBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857EA1C2957C90027B38A /* GroupedBaseTableView.swift */; };
-		5E4857F81C2957C90027B38A /* UIBaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */; };
 		5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857ED1C2957C90027B38A /* AvatarView.swift */; };
 		5E4857FB1C2957C90027B38A /* SettingsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */; };
 		5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */; };
@@ -98,9 +96,9 @@
 		5EE3AB211C5905B30003B639 /* ShotsProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */; };
 		5EE3AB231C5905FE0003B639 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB221C5905FE0003B639 /* Provider.swift */; };
 		5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB241C5912E70003B639 /* ArrayExtension.swift */; };
+		5EE65FA61C5A7EC30055F1AB /* PageableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */; };
 		7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */; };
 		7416CD7A1C591F680051F65B /* FolloweeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7416CD791C591F680051F65B /* FolloweeCollectionViewCell.swift */; };
-		5EE65FA61C5A7EC30055F1AB /* PageableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */; };
 		745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146931C5217F400710C61 /* BucketsCollectionViewController.swift */; };
 		745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146951C5235D600710C61 /* BucketCollectionViewCell.swift */; };
 		74A0184C1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A0184B1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift */; };
@@ -246,8 +244,6 @@
 		5E4857C51C2854F80027B38A /* ShotsQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsQuery.swift; sourceTree = "<group>"; };
 		5E4857C61C2854F80027B38A /* UnlikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlikeQuery.swift; sourceTree = "<group>"; };
 		5E4857C71C2854F80027B38A /* UserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserQuery.swift; sourceTree = "<group>"; };
-		5E4857EA1C2957C90027B38A /* GroupedBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupedBaseTableView.swift; sourceTree = "<group>"; };
-		5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseTableView.swift; sourceTree = "<group>"; };
 		5E4857ED1C2957C90027B38A /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableHeaderView.swift; sourceTree = "<group>"; };
 		5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAuthorizable.swift; sourceTree = "<group>"; };
@@ -305,9 +301,9 @@
 		5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfiguration.swift; sourceTree = "<group>"; };
 		5EE3AB221C5905FE0003B639 /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 		5EE3AB241C5912E70003B639 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponent.swift; sourceTree = "<group>"; };
 		7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweesCollectionViewController.swift; sourceTree = "<group>"; };
 		7416CD791C591F680051F65B /* FolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
-		5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponent.swift; sourceTree = "<group>"; };
 		745146931C5217F400710C61 /* BucketsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewController.swift; sourceTree = "<group>"; };
 		745146951C5235D600710C61 /* BucketCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCell.swift; sourceTree = "<group>"; };
 		74A0184B1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutSpacings.swift; sourceTree = "<group>"; };
@@ -650,8 +646,6 @@
 		5E4857E91C2957C90027B38A /* Controllers View */ = {
 			isa = PBXGroup;
 			children = (
-				5E4857EA1C2957C90027B38A /* GroupedBaseTableView.swift */,
-				5E4857EB1C2957C90027B38A /* UIBaseTableView.swift */,
 				5E50820D1C3132AF00093191 /* LoginView.swift */,
 				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
 				300814371C50FB920047E85C /* ShotDetailsView.swift */,
@@ -1224,7 +1218,6 @@
 				5EE3AB211C5905B30003B639 /* ShotsProviderConfiguration.swift in Sources */,
 				5E50820E1C3132AF00093191 /* LoginView.swift in Sources */,
 				74A6C6821C57D2F8009BDD75 /* OneColumnCollectionViewFlowLayout.swift in Sources */,
-				5E4857F71C2957C90027B38A /* GroupedBaseTableView.swift in Sources */,
 				5E4857BE1C280AB40027B38A /* OAuthViewController.swift in Sources */,
 				5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */,
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
@@ -1240,7 +1233,6 @@
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
 				F092E26B1C3FD6F900593D18 /* ShotOperationSynchronizer.swift in Sources */,
 				F092E2631C3FD4F600593D18 /* NSManagedObjectExtension.swift in Sources */,
-				5E4857F81C2957C90027B38A /* UIBaseTableView.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
 				F092E21A1C3AA3A600593D18 /* Settings.swift in Sources */,
 				74F00B6A1C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift in Sources */,
