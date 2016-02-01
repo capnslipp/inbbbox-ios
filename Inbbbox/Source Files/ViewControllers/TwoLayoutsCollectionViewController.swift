@@ -18,7 +18,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     
     convenience init(cellHeightToWidthRatio: CGFloat) {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
-        flowLayout.itemHeightToWidthRatio = LikeCollectionViewCell.heightToWidthRatio
+        flowLayout.itemHeightToWidthRatio = cellHeightToWidthRatio
         self.init(collectionViewLayout: flowLayout)
         self.cellHeightToWidthRatio = cellHeightToWidthRatio
     }
