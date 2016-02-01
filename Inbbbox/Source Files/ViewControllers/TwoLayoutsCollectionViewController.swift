@@ -12,9 +12,9 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
 
     // MARK: - Lifecycle
     
-    var oneColumnLayoutButton: UIBarButtonItem?
-    var twoColumnsLayoutButton: UIBarButtonItem?
     var cellHeightToWidthRatio = CGFloat(1)
+    private var oneColumnLayoutButton: UIBarButtonItem?
+    private var twoColumnsLayoutButton: UIBarButtonItem?
     
     convenience init(cellHeightToWidthRatio: CGFloat) {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
@@ -44,19 +44,13 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         // NGRTodo: set images instead of title
         oneColumnLayoutButton = UIBarButtonItem(title: "1", style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
         twoColumnsLayoutButton = UIBarButtonItem(title: "2", style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
-        if let firstBarButton = oneColumnLayoutButton, secondBarButton = twoColumnsLayoutButton {
-            navigationItem.rightBarButtonItems = [firstBarButton, secondBarButton]
-        }
+        navigationItem.rightBarButtonItems = [oneColumnLayoutButton!, twoColumnsLayoutButton!]
     }
     
     func updateBarButtons(layout: UICollectionViewLayout) {
-        if layout.isKindOfClass(OneColumnCollectionViewFlowLayout) {
-            oneColumnLayoutButton?.enabled = false
-            twoColumnsLayoutButton?.enabled = true
-        } else {
-            oneColumnLayoutButton?.enabled = true
-            twoColumnsLayoutButton?.enabled = false
-        }
+        let isCurrentLayoutOneColumn = layout.isKindOfClass(OneColumnCollectionViewFlowLayout)
+        oneColumnLayoutButton?.enabled = !isCurrentLayoutOneColumn
+        twoColumnsLayoutButton?.enabled = isCurrentLayoutOneColumn
     }
     
     // MARK: Actions:
