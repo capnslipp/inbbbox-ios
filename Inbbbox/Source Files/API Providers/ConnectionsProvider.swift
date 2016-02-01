@@ -9,12 +9,11 @@
 import Foundation
 import PromiseKit
 
+typealias Followee = User
+typealias Follower = User
 
 /// Provides connections between users, followers and followees
 class ConnectionsProvider {
-    
-    typealias Followee = User
-    typealias Follower = User
     
     /**
      Provides a list the authenticated user’s followers.

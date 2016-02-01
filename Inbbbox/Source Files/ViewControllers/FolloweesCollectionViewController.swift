@@ -13,7 +13,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     
     // MARK: - Lifecycle
     
-    var followees = [User]()
+    var followees = [Followee]()
     let connectionsProvider = ConnectionsProvider()
     
     override func viewDidLoad() {
