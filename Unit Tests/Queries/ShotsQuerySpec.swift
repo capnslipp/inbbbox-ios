@@ -185,7 +185,7 @@ class ShotsQuerySpec: QuickSpec {
             
             describe("changing date parameter") {
                 
-                var  date: NSDate!
+                var date: NSDate!
                 
                 beforeEach {
                     let components = NSDateComponents()

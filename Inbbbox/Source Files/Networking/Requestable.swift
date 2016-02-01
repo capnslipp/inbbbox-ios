@@ -8,10 +8,6 @@
 
 import Foundation
 import PromiseKit
-import SwiftyJSON
-import Async
-
-let NetworkErrorDomain = "co.netguru.inbbbox.error.network"
 
 /**
  *  Requestable
@@ -47,64 +43,5 @@ extension Requestable {
         query.service.authorizeRequest(mutableRequest)
         
         return mutableRequest.copy() as! NSURLRequest
-    }
-    
-    func resume() -> Promise<JSON?> {
-
-        let promise = Promise<JSON?> { fulfill, reject in
-            let dataTask = self.session.dataTaskWithRequest(self.foundationRequest) { data, response, error in
-                
-                if let error = self.checkResponseForError(response, withError: error) {
-                    reject(error)
-                    return
-                }
-                
-                if let responseData = data where data?.length>0 {
-                    var swiftyJSON: JSON? = nil
-                    var serializationError: NSError?
-                    
-                    Async.background {
-                        swiftyJSON = JSON(data: responseData, options: .AllowFragments, error: &serializationError)
-                    }.main {
-                        if let serializationError = serializationError {
-                            reject(serializationError)
-                        } else {
-                            fulfill(swiftyJSON)
-                        }
-                    }
-                } else if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 204 {
-                    fulfill(nil)
-                } else {
-                    let message = NSLocalizedString("Failed retrieving data", comment: "")
-                    let otherError = NSError(domain: NetworkErrorDomain, code: 0, message: message)
-                    reject(otherError)
-                }
-            }
-            
-            dataTask.resume()
-        }
-        
-        return promise
-    }
-}
-
-// MARK: - Private extension of Requestable
-extension Requestable {
-    
-    var session: NSURLSession {
-        return NSURLSession.sharedSession()
-    }
-    
-    func checkResponseForError(response: NSURLResponse?, withError error: NSError?) -> NSError? {
-        if let response = response as? NSHTTPURLResponse where response.statusCode >= 400 {
-            let message: String = {
-                if response.statusCode == 401 {
-                    return NSLocalizedString("Authorization expired. Please log in again.", comment: "")
-                }
-                return NSLocalizedString("Failed retrieving data", comment: "")
-            }()
-            return NSError(domain: NetworkErrorDomain, code: response.statusCode, message: message)
-        }
-        return error
     }
 }

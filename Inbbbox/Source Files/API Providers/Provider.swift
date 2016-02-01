@@ -19,10 +19,12 @@ class Provider {
     class func sendQuery(query: Query, authenticationRequired: Bool = false) -> Promise<JSON?> {
         return Promise<JSON?> { fulfill, reject in
             
-            guard let _ = TokenStorage.currentToken where !authenticationRequired else {
-                throw ProviderError.AuthenticationRequired
+            if authenticationRequired {
+                guard let _ = TokenStorage.currentToken else {
+                    throw ProviderError.AuthenticationRequired
+                }
             }
-            
+
             let request = Request(query: query)
             request.resume().then(fulfill).error(reject)
         }
@@ -31,8 +33,10 @@ class Provider {
     class func sendQueries(queries: [Query], authenticationRequired: Bool = false) -> Promise<[JSON?]> {
         return Promise<[JSON?]> { fulfill, reject in
             
-            guard let _ = TokenStorage.currentToken where !authenticationRequired else {
-                throw ProviderError.AuthenticationRequired
+            if authenticationRequired {
+                guard let _ = TokenStorage.currentToken else {
+                    throw ProviderError.AuthenticationRequired
+                }
             }
             
             let requests = queries.map { Request(query: $0) }

@@ -1,5 +1,6 @@
 //
 //  ShotsProvider.swift
+//  ShotsProvider.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 22/01/16.
@@ -11,37 +12,34 @@ import PromiseKit
 import SwiftyJSON
 
 /**
-Class for providing shots of various source type:
-
- - General - for common shots browsing.
- - User - shots which belong to specified user.
- - Bucket - shots which come from given bucket.
+Class for providing shots of various source type.
 */
-final class ShotsProvider {
+
+class ShotsProvider: Pageable {
+
+    /// Used only when using provideShots() method.
+    var configuration = ShotsProviderConfiguration()
+    let page: UInt
+    let pagination: UInt
     
-    private enum ShotsProviderType {
-        case General, User, Bucket
+    // Pageable protocol conformance.
+    var nextPageableComponents = [PageableComponent]()
+    var previousPageableComponents = [PageableComponent]()
+
+    private var currentSourceType: SourceType?
+    private enum SourceType {
+        case General, Bucket, User
     }
     
-    let configuration: ShotsProviderConfiguration
-    private(set) var page: UInt
-    private(set) var pagination: UInt
-    
-    private var type: ShotsProviderType?
-    private var queryStartDate = NSDate()
-    private var shouldRestoreInitialState = true
-
      /**
      Initializer with customizable parameters.
      
      - parameter page:          Number of page from which ShotsProvider should start to provide shots.
      - parameter pagination:    Pagination of request.
-     - parameter configuration: Configuration for ShotsProvider.
      */
-    init(page: UInt, pagination: UInt, configuration: ShotsProviderConfiguration = ShotsProviderConfiguration()) {
+    init(page: UInt, pagination: UInt) {
         self.page = page
         self.pagination = pagination
-        self.configuration = configuration
     }
     
     /**
@@ -52,36 +50,13 @@ final class ShotsProvider {
     }
     
     /**
-     Provides shots with current configuration, paging and page.
-     @discussion: queries uses underneath date to omit paging-page mismatch.
-     If you want to reset page use restoreInitialState() method
+     Provides shots with current configuration, pagination and page.
      
      - returns: Promise which resolves with shots or nil.
      */
     func provideShots() -> Promise<[Shot]?> {
-        
-        secureCheckForType(.General)
-        
-        return Promise<[Shot]?> { fulfill, reject in
-
-            firstly {
-                Provider.sendQueries(activeQueries)
-            }.then { response -> Void in
-                
-                let shots = response
-                    .map { $0?.arrayValue.map { Shot.map($0) } }
-                    .flatMap { $0 }
-                    .flatMap { $0 }
-                    .filter { !$0.animated } // animated after MVP
-                    .unique
-                    .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
-            
-                self.page++
-                
-                fulfill(shots)
-                
-            }.error(reject)
-        }
+        resetAnUseSourceType(.General)
+        return provideShotsWithQueries(activeQueries)
     }
     
     /**
@@ -92,13 +67,11 @@ final class ShotsProvider {
      - returns: Promise which resolves with shots or nil.
      */
     func provideShotsForUser(user: User) -> Promise<[Shot]?> {
+        resetAnUseSourceType(.User)
         
-        secureCheckForType(.User)
         let query = ShotsQuery(user: user)
-        
-        return provideShotsWithQuery(query)
+        return provideShotsWithQueries([query])
     }
-    
     
     /**
      Provides shots for given bucket.
@@ -108,80 +81,121 @@ final class ShotsProvider {
      - returns: Promise which resolves with shots or nil.
      */
     func provideShotsForBucket(bucket: Bucket) -> Promise<[Shot]?> {
+        resetAnUseSourceType(.Bucket)
         
-        secureCheckForType(.Bucket)
         let query = ShotsQuery(bucket: bucket)
-        
-        return provideShotsWithQuery(query)
+        return provideShotsWithQueries([query])
     }
     
     /**
-     Restores initial state of ShotsProvider.
-     It means in next api call ShotsProvider will provide shots from the beginning.
+     Provides next page of shots.
      
-     **Important** Use whether inbbbox stream source will change or you want to provide other shots type with the same instance of ShotsProvider. 
-     Otherwise strange behaviour may appear.
+     **Important** You have to use any of provideShots... method first to be able to use this method.
+     Otherwise an exception will appear.
+     
+     - returns: Promise which resolves with shots or nil.
      */
-    func restoreInitialState() {
-        page = 1
-        shouldRestoreInitialState = true
-    }
-}
-
-private extension ShotsProvider {
-    
-    var activeQueries: [Query] {
+    func nextPage() -> Promise<[Shot]?> {
         
-        return configuration.sources.map {
-            
-            var query = ShotsQuery()
-            
-            query = queryByPagingConfiguration(query)
-            query = configuration.queryByConfigurationForQuery(query, source: $0)
-            
-            return query
-        }
-    }
-    
-    func provideShotsWithQuery(var query: ShotsQuery) -> Promise<[Shot]?> {
+        checkCorrectnessOfUsage()
+        
         return Promise<[Shot]?> { fulfill, reject in
             
-            query = queryByPagingConfiguration(query)
-            
             firstly {
-                Provider.sendQuery(query)
+                nextPageFor(Shot)
             }.then { response -> Void in
-                
-                let shots = response
-                    .map { $0.arrayValue.map { Shot.map($0) } }
-                
-                self.page++
-                
-                fulfill(shots)
+
+                let result = self.currentSourceType?.serialize(response)
+                fulfill(result)
                 
             }.error(reject)
         }
     }
     
-    func secureCheckForType(providerType: ShotsProviderType) {
+    /**
+     Provides previous page of shots.
+     
+     **Important** You have to use any of provideShots... method first to be able to use this method.
+     Otherwise an exception will appear.
+     
+     - returns: Promise which resolves with shots or nil.
+     */
+    func previousPage() -> Promise<[Shot]?> {
         
-        if let type = type where type != providerType && !shouldRestoreInitialState {
-            fatalError("Initialize new instance of ShotsProvider or restore initial state of current one for providing shots with different type.")
+        checkCorrectnessOfUsage()
+        
+        return Promise<[Shot]?> { fulfill, reject in
+            
+            firstly {
+                previousPageFor(Shot)
+            }.then { response -> Void in
+                
+                let result = self.currentSourceType?.serialize(response)
+                fulfill(result)
+                
+            }.error(reject)
         }
-        type = providerType
-        
-        if shouldRestoreInitialState {
-            shouldRestoreInitialState = false
-            queryStartDate = NSDate()
+    }
+}
+
+private extension ShotsProvider {
+    
+    var activeQueries: [ShotsQuery] {
+        return configuration.sources.map {
+            configuration.queryByConfigurationForQuery(ShotsQuery(), source: $0)
+        }
+    }
+    
+    func provideShotsWithQueries(let shotQueries: [ShotsQuery]) -> Promise<[Shot]?> {
+        return Promise<[Shot]?> { fulfill, reject in
+            
+            let queries = shotQueries.map { queryByPagingConfiguration($0) } as [Query]
+            
+            firstly {
+                firstPageFor(Shot.self, withQueries: queries)
+            
+            }.then { response -> Void in
+                
+                let result = self.currentSourceType?.serialize(response)
+                fulfill(result)
+                
+            }.error(reject)
         }
     }
     
     func queryByPagingConfiguration(var query: ShotsQuery) -> ShotsQuery {
         
-        query.date = queryStartDate
+        query.date = NSDate()
         query.parameters["page"] = page
         query.parameters["per_page"] = pagination
         
         return query
+    }
+    
+    func checkCorrectnessOfUsage() {
+        if currentSourceType == nil {
+            fatalError("You cannot ask for next or previous page without using any of provideShots.. method first.")
+        }
+    }
+    
+    func resetAnUseSourceType(type: SourceType) {
+        currentSourceType = type
+        nextPageableComponents = []
+        previousPageableComponents = []
+    }
+}
+
+private extension ShotsProvider.SourceType {
+    
+    func serialize(shots: [Shot]?) -> [Shot]? {
+        
+        guard self == General else {
+            return shots
+        }
+        
+        return shots?
+            .filter { !$0.animated } // animated after MVP
+            .unique
+            .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
     }
 }
