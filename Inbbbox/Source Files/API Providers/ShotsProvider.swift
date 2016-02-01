@@ -1,6 +1,5 @@
 //
 //  ShotsProvider.swift
-//  ShotsProvider.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 22/01/16.
@@ -96,20 +95,7 @@ class ShotsProvider: Pageable {
      - returns: Promise which resolves with shots or nil.
      */
     func nextPage() -> Promise<[Shot]?> {
-        
-        checkCorrectnessOfUsage()
-        
-        return Promise<[Shot]?> { fulfill, reject in
-            
-            firstly {
-                nextPageFor(Shot)
-            }.then { response -> Void in
-
-                let result = self.currentSourceType?.serialize(response)
-                fulfill(result)
-                
-            }.error(reject)
-        }
+        return fetchPage(nextPageFor(Shot))
     }
     
     /**
@@ -121,20 +107,7 @@ class ShotsProvider: Pageable {
      - returns: Promise which resolves with shots or nil.
      */
     func previousPage() -> Promise<[Shot]?> {
-        
-        checkCorrectnessOfUsage()
-        
-        return Promise<[Shot]?> { fulfill, reject in
-            
-            firstly {
-                previousPageFor(Shot)
-            }.then { response -> Void in
-                
-                let result = self.currentSourceType?.serialize(response)
-                fulfill(result)
-                
-            }.error(reject)
-        }
+        return fetchPage(previousPageFor(Shot))
     }
 }
 
@@ -153,12 +126,8 @@ private extension ShotsProvider {
             
             firstly {
                 firstPageFor(Shot.self, withQueries: queries)
-            
-            }.then { response -> Void in
-                
-                let result = self.currentSourceType?.serialize(response)
-                fulfill(result)
-                
+            }.then {
+                self.serialize($0, fulfill)
             }.error(reject)
         }
     }
@@ -171,17 +140,29 @@ private extension ShotsProvider {
         
         return query
     }
+
+    func resetAnUseSourceType(type: SourceType) {
+        currentSourceType = type
+        resetPages()
+    }
     
-    func checkCorrectnessOfUsage() {
-        if currentSourceType == nil {
-            fatalError("You cannot ask for next or previous page without using any of provideShots.. method first.")
+    func fetchPage(promise: Promise<[Shot]?>) -> Promise<[Shot]?> {
+        return Promise<[Shot]?> { fulfill, reject in
+            
+            if currentSourceType == nil {
+                throw PageableError.PageableBehaviourUndefined
+            }
+            
+            firstly {
+                promise
+            }.then {
+                self.serialize($0, fulfill)
+            }.error(reject)
         }
     }
     
-    func resetAnUseSourceType(type: SourceType) {
-        currentSourceType = type
-        nextPageableComponents = []
-        previousPageableComponents = []
+    func serialize(shots: [Shot]?, _ fulfill: ([Shot]?) -> Void) {
+        fulfill( currentSourceType?.serialize(shots) )
     }
 }
 

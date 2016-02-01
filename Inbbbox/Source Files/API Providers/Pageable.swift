@@ -9,11 +9,16 @@
 import Foundation
 import PromiseKit
 
+enum PageableError: ErrorType {
+    case PageableBehaviourUndefined
+}
+
 protocol Pageable: class {
     
     var nextPageableComponents: [PageableComponent] { get set }
     var previousPageableComponents: [PageableComponent] { get set }
     
+    func resetPages()
     func firstPageFor<T: Mappable>(type: T.Type, withQueries queries: [Query]) -> Promise<[T]?>
     func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?>
     func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?>
@@ -45,6 +50,11 @@ extension Pageable {
             
             self.pageWithQueries(queries).then(fulfill).error(reject)
         }
+    }
+    
+    func resetPages() {
+        nextPageableComponents = []
+        previousPageableComponents = []
     }
 }
 

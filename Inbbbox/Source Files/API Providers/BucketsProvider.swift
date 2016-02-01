@@ -9,7 +9,13 @@
 import Foundation
 import PromiseKit
 
-class BucketsProvider {
+class BucketsProvider: Pageable, Authorizable {
+    
+    // Pageable protocol conformance.
+    var nextPageableComponents = [PageableComponent]()
+    var previousPageableComponents = [PageableComponent]()
+    
+    private var didDefineProviderMethodBefore = false
     
     /**
      Provides authenticated user’s buckets.
@@ -21,8 +27,7 @@ class BucketsProvider {
     func provideMyBuckets() -> Promise<[Bucket]?> {
         
         let query = BucketQuery()
-        
-        return provideBucketsWithQuery(query, authenticationRequired: true)
+        return provideBucketsWithQueries([query], authentizationRequired: true)
     }
     
     /**
@@ -33,28 +38,37 @@ class BucketsProvider {
      - returns: Promise which resolves with buckets or nil.
      */
     func provideBucketsForUser(user: User) -> Promise<[Bucket]?> {
+        return provideBucketsForUsers([user])
+    }
+    
+    /**
+     Provides a given users' buckets.
+     
+     - parameter users: Array of users for whose buckets should be provided.
+     
+     - returns: Promise which resolves with buckets or nil.
+     */
+    func provideBucketsForUsers(users: [User]) -> Promise<[Bucket]?> {
         
-        let query = BucketQuery(user: user)
-        
-        return provideBucketsWithQuery(query, authenticationRequired: false)
+        let queries = users.map { BucketQuery(user: $0) } as [Query]
+        return provideBucketsWithQueries(queries, authentizationRequired: false)
     }
 }
 
 private extension BucketsProvider {
     
-    func provideBucketsWithQuery(query: BucketQuery, authenticationRequired: Bool) -> Promise<[Bucket]?> {
+    func provideBucketsWithQueries(queries: [Query], authentizationRequired: Bool) -> Promise<[Bucket]?> {
+        
+        resetPages()
+        didDefineProviderMethodBefore = true
+        
         return Promise<[Bucket]?> { fulfill, reject in
         
             firstly {
-                Provider.sendQuery(query, authenticationRequired: authenticationRequired)
-            }.then { response -> Void in
-                
-                let buckets = response
-                    .map { $0.arrayValue.map { Bucket.map($0) } }
-                
-                fulfill(buckets)
-                
-            }.error(reject)
+                authorizeIfNeeded(authentizationRequired)
+            }.then {
+                self.firstPageFor(Bucket.self, withQueries: queries)
+            }.then(fulfill).error(reject)
         }
     }
 }
