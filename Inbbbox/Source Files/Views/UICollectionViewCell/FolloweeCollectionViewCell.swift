@@ -18,21 +18,10 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     private let thirdShotImageView = UIImageView.newAutoLayoutView()
     private let fourthShotImageView = UIImageView.newAutoLayoutView()
     
-    private let avatarImageView = UIView.newAutoLayoutView()
+    private let avatarImageView = UIImageView.newAutoLayoutView()
     private let infoLabel = UILabel.newAutoLayoutView()
     
     private var didSetConstraints = false
-    
-    private var _shotImages: [UIImage]? = nil
-    var shotImages: [UIImage]? {
-        get {
-            return self._shotImages
-        }
-        set {
-            self._shotImages = newValue
-            showShotImages()
-        }
-    }
     
     // MARK - Life cycle
     
@@ -43,6 +32,10 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        commonInit()
+    }
+    
+    func commonInit() {
         shotsView.addSubview(firstShotImageView)
         shotsView.addSubview(secondShotImageView)
         shotsView.addSubview(thirdShotImageView)
@@ -55,11 +48,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
         contentView.addSubview(infoView)
         contentView.backgroundColor = UIColor.cellGrayColor()
         
-        firstShotImageView.backgroundColor = UIColor.redColor()
-        secondShotImageView.backgroundColor = UIColor.yellowColor()
-        thirdShotImageView.backgroundColor = UIColor.blackColor()
-        fourthShotImageView.backgroundColor = UIColor.blueColor()
-        infoView.backgroundColor = UIColor.whiteColor()
+        infoLabel.numberOfLines = 2
     }
     
     // MARK - UIView
@@ -71,7 +60,6 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     override func updateConstraints() {
         super.updateConstraints()
         if !didSetConstraints {
-            // NGRTodo: Fix situation when collectionViewLayout is changed and cell size changes
             shotsView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             infoView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
             infoView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotsView)
@@ -81,9 +69,12 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
         }
     }
     
+    //MARK - Setting constraints
+    
     func setShotsViewConstraints() {
+        let spacings = CollectionViewLayoutSpacings()
         let shotImageViewWidth = contentView.bounds.width / 2
-        let shotImageViewHeight = shotImageViewWidth * 0.75
+        let shotImageViewHeight = shotImageViewWidth * spacings.shotHeightToWidthRatio
         
         firstShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
         firstShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
@@ -115,9 +106,14 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     }
     
     func setInfoViewConstraints() {
-        
+        infoLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: infoView)
+        infoLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarImageView, withOffset: 5)
+        avatarImageView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView, withOffset: 5)
+        avatarImageView.autoSetDimension(.Width, toSize: 20)
+        avatarImageView.autoSetDimension(.Height, toSize: 20)
+        avatarImageView.autoPinEdge(.Top, toEdge: .Top, ofView: infoLabel)
+     
     }
-    
     
     // MARK: - Reusable
     
@@ -131,12 +127,28 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
         return CGFloat(1)
     }
     
-    // MARK: - Configuration
+    func setName(name: String, numberOfShots: Int) {
+        let firstLine = NSMutableAttributedString.init(string: name, attributes:[
+            // NGRTodo:set proper font and color
+            NSForegroundColorAttributeName : UIColor.pinkColor(),
+            NSFontAttributeName: UIFont.systemFontOfSize(14)
+            ]
+        )
+        let secondLine = NSAttributedString.init(string: "\n\(numberOfShots) shots", attributes:[
+            // NGRTodo:set proper font and color
+            NSForegroundColorAttributeName : UIColor.textDarkColor(),
+            NSFontAttributeName: UIFont.systemFontOfSize(10)
+            ]
+        )
+        firstLine.appendAttributedString(secondLine)
+        infoLabel.attributedText = firstLine
+    }
     
-    func showShotImages() {
-        guard let shotImages = shotImages else {
-            return
-        }
+    func setAvatar(avatar: UIImage?) {
+        avatarImageView.image = avatar
+    }
+    
+    func setShotImages(shotImages: [UIImage]){
         switch shotImages.count {
         case 0:
             return
