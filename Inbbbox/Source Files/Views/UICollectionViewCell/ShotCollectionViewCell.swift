@@ -190,8 +190,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func restoreInitialStateAnimationDescriptorWithCompletion(completion: (() -> ())?) -> AnimationDescriptor {
-        let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
-
         var restoreInitialStateAnimationDescriptor = AnimationDescriptor()
         restoreInitialStateAnimationDescriptor.options = .CurveEaseInOut
         restoreInitialStateAnimationDescriptor.animationType = .Spring
