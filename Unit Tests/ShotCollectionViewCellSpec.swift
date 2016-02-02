@@ -137,31 +137,161 @@ class ShotCollectionViewCellSpec: QuickSpec {
             context("when swipe ended") {
 
                 var panGestureRecognizerMock: PanGestureRecognizerMock!
+                var viewClassMock: ViewMock.Type!
 
-                var capturedDuration: NSTimeInterval!
-                var capturedDelay: NSTimeInterval!
-                var capturedDamping: CGFloat!
-                var capturedVelocity: CGFloat!
-                var capturedOptions: UIViewAnimationOptions!
-                var capturedAnimations: (() -> Void)!
-                var capturedCompletion: ((Bool) -> Void)!
+                var capturedRestoreInitialStateDuration: NSTimeInterval!
+                var capturedRestoreInitialStateDelay: NSTimeInterval!
+                var capturedRestoreInitialStateDamping: CGFloat!
+                var capturedRestoreInitialStateVelocity: CGFloat!
+                var capturedRestoreInitialStateOptions: UIViewAnimationOptions!
+                var capturedRestoreInitialStateAnimations: (() -> Void)!
+                var capturedRestoreInitialStateCompletion: ((Bool) -> Void)!
 
                 beforeEach {
-                    let viewClassMock = ViewMock.self
-
+                    viewClassMock = ViewMock.self
                     viewClassMock.springAnimationStub.on(any()) { duration, delay, damping, velocity, options, animations, completion in
-                        capturedDuration = duration
-                        capturedDelay = delay
-                        capturedDamping = damping
-                        capturedVelocity = velocity
-                        capturedOptions = options
-                        capturedAnimations = animations
-                        capturedCompletion = completion
+                        capturedRestoreInitialStateDuration = duration
+                        capturedRestoreInitialStateDelay = delay
+                        capturedRestoreInitialStateDamping = damping
+                        capturedRestoreInitialStateVelocity = velocity
+                        capturedRestoreInitialStateOptions = options
+                        capturedRestoreInitialStateAnimations = animations
+                        capturedRestoreInitialStateCompletion = completion
                     }
                     sut.viewClass = viewClassMock
                     panGestureRecognizerMock = PanGestureRecognizerMock()
                     panGestureRecognizerMock.stateStub.on(any()) {
                         return .Ended
+                    }
+                }
+
+                context("when user swiped slightly right") {
+
+                    var capturedLikeActionDuration: NSTimeInterval!
+                    var capturedLikeActionDelay: NSTimeInterval!
+                    var capturedLikeActionOptions: UIViewAnimationOptions!
+                    var capturedLikeActionAnimations: (() -> Void)!
+                    var capturedLikeActionCompletion: ((Bool) -> Void)!
+
+                    beforeEach {
+                        viewClassMock.animationStub.on(any()) { duration, delay, options, animations, completion in
+                            capturedLikeActionDuration = duration
+                            capturedLikeActionDelay = delay
+                            capturedLikeActionOptions = options
+                            capturedLikeActionAnimations = animations
+                            capturedLikeActionCompletion = completion
+                        }
+                        panGestureRecognizerMock.translationInViewStub.on(any()) { _ in
+                            return CGPoint(x: 50, y:0)
+                        }
+                        panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
+                    }
+
+                    it("should animate like action with duration 0.3") {
+                        expect(capturedLikeActionDuration).to(equal(0.3))
+                    }
+
+                    it("should animate like action without delay") {
+                        expect(capturedLikeActionDelay).to(equal(0))
+                    }
+
+                    it("should animate like action without options") {
+                        expect(capturedLikeActionOptions).to(equal([]))
+                    }
+
+                    describe("like action animations block") {
+
+                        beforeEach {
+                            sut.contentView.bounds = CGRect(x: 0, y: 0, width: 100, height: 0)
+                            sut.likeImageView.alpha = 0
+                            capturedLikeActionAnimations()
+                        }
+
+                        it("should set shot image view tranform") {
+                            expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0))).to(beTruthy())
+                        }
+
+                        it("should set like image view alpha to 1") {
+                            expect(sut.likeImageView.alpha).to(equal(1.0))
+                        }
+                    }
+
+                    describe("like action completion block") {
+
+
+                        beforeEach {
+                            capturedLikeActionCompletion(true)
+                        }
+
+                        it("should animate returning to initial cell state with duration 0.3") {
+                            expect(capturedRestoreInitialStateDuration).to(equal(0.3))
+                        }
+
+                        it("should animate returning to initial cell state with delay 0.2") {
+                            expect(capturedRestoreInitialStateDelay).to(equal(0.2))
+                        }
+
+                        it("should animate returning to initial cell state with damping 0.6") {
+                            expect(capturedRestoreInitialStateDamping).to(equal(0.6))
+                        }
+
+                        it("should animate returning to initial cell state with velocity 0.9") {
+                            expect(capturedRestoreInitialStateVelocity).to(equal(0.9))
+                        }
+
+                        it("should animate returning to initial cell state with ease in out option") {
+                            expect(capturedRestoreInitialStateOptions == UIViewAnimationOptions.CurveEaseInOut).to(beTruthy())
+                        }
+
+                        describe("restore initial state animations block") {
+
+                            beforeEach {
+                                sut.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0)
+                                capturedRestoreInitialStateAnimations()
+                            }
+
+                            it("should restore shot image view identity tranform") {
+                                expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity)).to(beTruthy())
+                            }
+                        }
+
+                        describe("restore initial state completion block") {
+
+                            var delegateMock: ShotCollectionViewCellDelegateMock!
+                            var didInformDelegateCellDidEndSwiping: Bool!
+                            var capturedAction: ShotCollectionViewCell.Action!
+
+                            beforeEach {
+                                sut.swipeCompletion = { action in
+                                    capturedAction = action
+                                }
+                                delegateMock = ShotCollectionViewCellDelegateMock()
+                                didInformDelegateCellDidEndSwiping = false
+                                delegateMock.shotCollectionViewCellDidEndSwipingStub.on(any()) { _ in
+                                    didInformDelegateCellDidEndSwiping = true
+                                }
+                                sut.delegate = delegateMock
+                                sut.bucketImageView.hidden = true
+                                sut.commentImageView.hidden = true
+                                capturedRestoreInitialStateCompletion(true)
+                            }
+
+                            it("should invoke swipe completion with Bucket action") {
+                                expect(capturedAction).to(equal(ShotCollectionViewCell.Action.Like))
+                            }
+
+                            it("should inform delegate that cell did end swiping") {
+                                expect(didInformDelegateCellDidEndSwiping).to(beTruthy())
+                            }
+
+                            it("show bucket image view") {
+                                expect(sut.bucketImageView.hidden).to(beFalsy())
+                            }
+
+                            it("show comment image view") {
+                                expect(sut.commentImageView.hidden).to(beFalsy())
+                            }
+                        }
                     }
                 }
 
@@ -175,30 +305,30 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     }
 
                     it("should animate returning to initial cell state with duration 0.3") {
-                        expect(capturedDuration).to(equal(0.3))
+                        expect(capturedRestoreInitialStateDuration).to(equal(0.3))
                     }
 
                     it("should animate returning to initial cell state without delay") {
-                        expect(capturedDelay).to(equal(0))
+                        expect(capturedRestoreInitialStateDelay).to(equal(0))
                     }
 
                     it("should animate returning to initial cell state with damping 0.6") {
-                        expect(capturedDamping).to(equal(0.6))
+                        expect(capturedRestoreInitialStateDamping).to(equal(0.6))
                     }
 
                     it("should animate returning to initial cell state with velocity 0.9") {
-                        expect(capturedVelocity).to(equal(0.9))
+                        expect(capturedRestoreInitialStateVelocity).to(equal(0.9))
                     }
 
                     it("should animate returning to initial cell state with ease in out option") {
-                        expect(capturedOptions == UIViewAnimationOptions.CurveEaseInOut).to(beTruthy())
+                        expect(capturedRestoreInitialStateOptions == UIViewAnimationOptions.CurveEaseInOut).to(beTruthy())
                     }
 
-                    describe("animations block") {
+                    describe("restore initial state animations block") {
 
                         beforeEach {
                             sut.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0)
-                            capturedAnimations()
+                            capturedRestoreInitialStateAnimations()
                         }
 
                         it("should restore shot image view identity tranform") {
@@ -206,7 +336,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                         }
                     }
 
-                    describe("completion block") {
+                    describe("restore initial state completion block") {
 
                         var delegateMock: ShotCollectionViewCellDelegateMock!
                         var didInformDelegateCellDidEndSwiping: Bool!
@@ -222,15 +352,105 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 didInformDelegateCellDidEndSwiping = true
                             }
                             sut.delegate = delegateMock
-                            capturedCompletion(true)
+                            sut.bucketImageView.hidden = true
+                            sut.commentImageView.hidden = true
+                            capturedRestoreInitialStateCompletion(true)
                         }
 
-                        it("should invoke swipe completion with Like action") {
+                        it("should invoke swipe completion with Bucket action") {
                             expect(capturedAction).to(equal(ShotCollectionViewCell.Action.Bucket))
                         }
 
                         it("should inform delegate that cell did end swiping") {
                             expect(didInformDelegateCellDidEndSwiping).to(beTruthy())
+                        }
+
+                        it("show bucket image view") {
+                            expect(sut.bucketImageView.hidden).to(beFalsy())
+                        }
+
+                        it("show comment image view") {
+                            expect(sut.commentImageView.hidden).to(beFalsy())
+                        }
+                    }
+                }
+
+                context("when user swiped slightly left") {
+
+                    beforeEach {
+                        panGestureRecognizerMock.translationInViewStub.on(any()) { _ in
+                            return CGPoint(x: -50, y:0)
+                        }
+                        panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
+                    }
+
+                    it("should animate returning to initial cell state with duration 0.3") {
+                        expect(capturedRestoreInitialStateDuration).to(equal(0.3))
+                    }
+
+                    it("should animate returning to initial cell state without delay") {
+                        expect(capturedRestoreInitialStateDelay).to(equal(0))
+                    }
+
+                    it("should animate returning to initial cell state with damping 0.6") {
+                        expect(capturedRestoreInitialStateDamping).to(equal(0.6))
+                    }
+
+                    it("should animate returning to initial cell state with velocity 0.9") {
+                        expect(capturedRestoreInitialStateVelocity).to(equal(0.9))
+                    }
+
+                    it("should animate returning to initial cell state with ease in out option") {
+                        expect(capturedRestoreInitialStateOptions == UIViewAnimationOptions.CurveEaseInOut).to(beTruthy())
+                    }
+
+                    describe("restore initial state animations block") {
+
+                        beforeEach {
+                            sut.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0)
+                            capturedRestoreInitialStateAnimations()
+                        }
+
+                        it("should restore shot image view identity tranform") {
+                            expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity)).to(beTruthy())
+                        }
+                    }
+
+                    describe("restore initial state completion block") {
+
+                        var delegateMock: ShotCollectionViewCellDelegateMock!
+                        var didInformDelegateCellDidEndSwiping: Bool!
+                        var capturedAction: ShotCollectionViewCell.Action!
+
+                        beforeEach {
+                            sut.swipeCompletion = { action in
+                                capturedAction = action
+                            }
+                            delegateMock = ShotCollectionViewCellDelegateMock()
+                            didInformDelegateCellDidEndSwiping = false
+                            delegateMock.shotCollectionViewCellDidEndSwipingStub.on(any()) { _ in
+                                didInformDelegateCellDidEndSwiping = true
+                            }
+                            sut.delegate = delegateMock
+                            sut.bucketImageView.hidden = true
+                            sut.commentImageView.hidden = true
+                            capturedRestoreInitialStateCompletion(true)
+                        }
+
+                        it("should invoke swipe completion with Comment action") {
+                            expect(capturedAction).to(equal(ShotCollectionViewCell.Action.Comment))
+                        }
+
+                        it("should inform delegate that cell did end swiping") {
+                            expect(didInformDelegateCellDidEndSwiping).to(beTruthy())
+                        }
+
+                        it("show bucket image view") {
+                            expect(sut.bucketImageView.hidden).to(beFalsy())
+                        }
+
+                        it("show comment image view") {
+                            expect(sut.commentImageView.hidden).to(beFalsy())
                         }
                     }
                 }
