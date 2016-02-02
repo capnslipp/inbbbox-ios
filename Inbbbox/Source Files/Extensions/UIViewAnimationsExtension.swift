@@ -16,7 +16,7 @@ extension UIView {
 
         switch animationType {
         case AnimationDescriptor.AnimationType.Plain:
-            UIView.animateWithDuration(duration,
+            self.animateWithDuration(duration,
                     delay: delay,
                     options: options,
                     animations: animations,
@@ -24,7 +24,7 @@ extension UIView {
         case AnimationDescriptor.AnimationType.Spring:
             let springDamping = animationDescriptor.springDamping
             let springVelocity = animationDescriptor.springVelocity
-            UIView.animateWithDuration(duration,
+            self.animateWithDuration(duration,
                     delay: delay,
                     usingSpringWithDamping: springDamping,
                     initialSpringVelocity: springVelocity,

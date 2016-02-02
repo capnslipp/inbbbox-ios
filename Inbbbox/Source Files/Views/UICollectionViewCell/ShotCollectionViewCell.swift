@@ -9,13 +9,13 @@ protocol ShotCollectionViewCellDelegate: class {
     func shotCollectionViewCellDidEndSwiping(shotCollectionViewCell: ShotCollectionViewCell)
 }
 
-enum ShotCollectionViewCellAction {
-    case Like
-    case Bucket
-    case Comment
-}
-
 class ShotCollectionViewCell: UICollectionViewCell {
+
+    enum Action {
+        case Like
+        case Bucket
+        case Comment
+    }
 
     let shotImageView = UIImageView.newAutoLayoutView()
     let likeImageView = UIImageView(image: UIImage(named: "ic-like-swipe"))
@@ -23,7 +23,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
 
     var viewClass = UIView.self
-    var swipeCompletion: (ShotCollectionViewCellAction -> Void)?
+    var swipeCompletion: (Action -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
 
     private let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
@@ -128,9 +128,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
         case .Began:
             self.delegate?.shotCollectionViewCellDidStartSwiping(self)
         case .Ended, .Cancelled, .Failed:
-            animateCellAction() {
-                let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
-                let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
+            let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
+            let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
+            animateCellAction(selectedAction) {
                 self.swipeCompletion?(selectedAction)
                 self.delegate?.shotCollectionViewCellDidEndSwiping(self)
             }
@@ -165,7 +165,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         commentImageView.alpha = min(abs(xTranslation) / 70, 1)
     }
 
-    private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> ShotCollectionViewCellAction {
+    private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
         if 0...likeActionTreshold ~= xTranslation {
             return .Like
         } else if xTranslation > 100 {
@@ -175,12 +175,8 @@ class ShotCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func animateCellAction(completion: (() -> ())?) {
-
-        let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
-        let selectedAction = selectedActionForSwipeXTranslation(xTranslation)
-
-        switch selectedAction {
+    private func animateCellAction(action: Action, completion: (() -> ())?) {
+        switch action {
         case .Like:
             bucketImageView.hidden = true
             plusImageView.hidden = true
@@ -197,6 +193,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
 
         var restoreInitialStateAnimationDescriptor = AnimationDescriptor()
+        restoreInitialStateAnimationDescriptor.options = .CurveEaseInOut
         restoreInitialStateAnimationDescriptor.animationType = .Spring
         restoreInitialStateAnimationDescriptor.animations = {
             self.shotImageView.transform = CGAffineTransformIdentity
