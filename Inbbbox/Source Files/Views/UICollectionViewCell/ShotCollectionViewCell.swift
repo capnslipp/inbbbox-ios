@@ -202,6 +202,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
             self.shotImageView.transform = CGAffineTransformIdentity
         }
         restoreInitialStateAnimationDescriptor.completion = { _ in
+            self.bucketImageView.hidden = false
+            self.plusImageView.hidden = false
+            self.commentImageView.hidden = false
             completion?()
         }
         return restoreInitialStateAnimationDescriptor
@@ -218,23 +221,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
             self.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
         }
         likeActionAnimationDescriptor.completion = { _ in
-            var delayedRestoreInitialStateAnimationDescriptor = delayedRestoreInitialStateAnimationDescriptorWithCompletion(completion)
+            var delayedRestoreInitialStateAnimationDescriptor = self.restoreInitialStateAnimationDescriptorWithCompletion(completion)
+            delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
             self.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
         }
         return likeActionAnimationDescriptor
-    }
-
-    private func delayedRestoreInitialStateAnimationDescriptorWithCompletion(completion: (() -> Bool)) {
-        var restoreInitialStateAnimationDescriptor = self.restoreInitialStateAnimationDescriptorWithCompletion(completion)
-        var delayedRestoreInitialStateAnimationDescriptor = restoreInitialStateAnimationDescriptor
-        delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
-        delayedRestoreInitialStateAnimationDescriptor.completion = { finished in
-            self.bucketImageView.hidden = false
-            self.plusImageView.hidden = false
-            self.commentImageView.hidden = false
-            restoreInitialStateAnimationDescriptor.completion?(finished)
-        }
-        return delayedRestoreInitialStateAnimationDescriptor
     }
 }
 
