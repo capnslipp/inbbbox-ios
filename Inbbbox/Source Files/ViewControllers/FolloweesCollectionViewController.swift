@@ -48,7 +48,15 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableClass(FolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(FolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let followee = followees[indexPath.row]
+        cell.setName(followee.name!, numberOfShots: 11)
+        
+        if let avatarString = followee.avatarString {
+            
+            cell.setAvatarString(avatarString)
+        }
+        return cell
     }
     
     // MARK: UICollectionViewDelegate

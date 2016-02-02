@@ -47,6 +47,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
         contentView.addSubview(shotsView)
         contentView.addSubview(infoView)
         contentView.backgroundColor = UIColor.cellGrayColor()
+        infoView.backgroundColor = UIColor.whiteColor()
         
         infoLabel.numberOfLines = 2
     }
@@ -108,6 +109,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     func setInfoViewConstraints() {
         infoLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: infoView)
         infoLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarImageView, withOffset: 5)
+        infoLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
         avatarImageView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView, withOffset: 5)
         avatarImageView.autoSetDimension(.Width, toSize: 20)
         avatarImageView.autoSetDimension(.Height, toSize: 20)
@@ -131,21 +133,21 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
         let firstLine = NSMutableAttributedString.init(string: name, attributes:[
             // NGRTodo:set proper font and color
             NSForegroundColorAttributeName : UIColor.pinkColor(),
-            NSFontAttributeName: UIFont.systemFontOfSize(14)
+            NSFontAttributeName: UIFont.systemFontOfSize(10)
             ]
         )
         let secondLine = NSAttributedString.init(string: "\n\(numberOfShots) shots", attributes:[
             // NGRTodo:set proper font and color
             NSForegroundColorAttributeName : UIColor.textDarkColor(),
-            NSFontAttributeName: UIFont.systemFontOfSize(10)
+            NSFontAttributeName: UIFont.systemFontOfSize(8)
             ]
         )
         firstLine.appendAttributedString(secondLine)
         infoLabel.attributedText = firstLine
     }
     
-    func setAvatar(avatar: UIImage?) {
-        avatarImageView.image = avatar
+    func setAvatarString(avatarString: String) {
+        avatarImageView.loadImageFromURLString(avatarString)
     }
     
     func setShotImages(shotImages: [UIImage]){
