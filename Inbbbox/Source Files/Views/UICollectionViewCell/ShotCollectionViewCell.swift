@@ -176,38 +176,60 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
     
     private func animateCellAction(completion: (() -> ())?) {
-        
+
         let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
         let selectedAction = selectedActionForSwipeXTranslation(xTranslation)
+
         switch selectedAction {
         case .Like:
             bucketImageView.hidden = true
             plusImageView.hidden = true
             commentImageView.hidden = true
-            let contentViewWidht = CGRectGetWidth(self.contentView.bounds)
-            likeImageViewLeftConstraint?.constant = round(contentViewWidht / 2 - likeImageView.intrinsicContentSize().width / 2 )
-            likeImageViewWidthConstraint?.constant = likeImageView.intrinsicContentSize().width
-            viewClass.animateWithDuration(0.3,
-                animations: {
-                    self.contentView.layoutIfNeeded()
-                    self.likeImageView.alpha = 1.0
-                    self.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
-                },
-                completion: { _ in
-                    completion?()
-            })
+            let likeActionAnimationDescriptor = likeActionAnimationDescriptorWithCompletion(completion)
+            viewClass.animateWithDescriptor(likeActionAnimationDescriptor)
         default:
-            viewClass.animateWithDuration(0.3,
-                delay: 0,
-                usingSpringWithDamping: 0.6,
-                initialSpringVelocity: 0.9,
-                options: .CurveEaseInOut,
-                animations: {
-                    self.shotImageView.transform = CGAffineTransformIdentity
-                }, completion: { _ in
-                    completion?()
-            })
+            let restoreInitialStateAnimationDescriptor = restoreInitialStateAnimationDescriptorWithCompletion(completion)
+            viewClass.animateWithDescriptor(restoreInitialStateAnimationDescriptor)
         }
+    }
+
+    private func restoreInitialStateAnimationDescriptorWithCompletion(completion: (() -> ())?) -> AnimationDescriptor {
+        let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
+
+        var restoreInitialStateAnimationDescriptor = AnimationDescriptor()
+        restoreInitialStateAnimationDescriptor.animationType = .Spring
+        restoreInitialStateAnimationDescriptor.animations = {
+            self.shotImageView.transform = CGAffineTransformIdentity
+        }
+        restoreInitialStateAnimationDescriptor.completion = { _ in
+            completion?()
+        }
+        return restoreInitialStateAnimationDescriptor
+    }
+
+    private func likeActionAnimationDescriptorWithCompletion(completion: (() -> ())?) -> AnimationDescriptor {
+        var likeActionAnimationDescriptor = AnimationDescriptor()
+        likeActionAnimationDescriptor.animations = {
+            let contentViewWidht = CGRectGetWidth(self.contentView.bounds)
+            self.likeImageViewLeftConstraint?.constant = round(contentViewWidht / 2 - self.likeImageView.intrinsicContentSize().width / 2)
+            self.likeImageViewWidthConstraint?.constant = self.likeImageView.intrinsicContentSize().width
+            self.contentView.layoutIfNeeded()
+            self.likeImageView.alpha = 1.0
+            self.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
+        }
+        likeActionAnimationDescriptor.completion = { _ in
+            var restoreInitialStateAnimationDescriptor = self.restoreInitialStateAnimationDescriptorWithCompletion(completion)
+            var delayedRestoreInitialStateAnimationDescriptor = restoreInitialStateAnimationDescriptor
+            delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
+            delayedRestoreInitialStateAnimationDescriptor.completion = { finished in
+                self.bucketImageView.hidden = false
+                self.plusImageView.hidden = false
+                self.commentImageView.hidden = false
+                restoreInitialStateAnimationDescriptor.completion?(finished)
+            }
+            self.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
+        }
+        return likeActionAnimationDescriptor
     }
 }
 
