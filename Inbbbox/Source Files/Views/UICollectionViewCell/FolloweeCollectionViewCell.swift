@@ -18,7 +18,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     private let thirdShotImageView = UIImageView.newAutoLayoutView()
     private let fourthShotImageView = UIImageView.newAutoLayoutView()
     
-    private let avatarImageView = UIImageView.newAutoLayoutView()
+    private var avatarView: AvatarView!
     private let infoLabel = UILabel.newAutoLayoutView()
     
     private var didSetConstraints = false
@@ -58,19 +58,22 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     }
     
     func commonInit() {
+        shotsView.layer.cornerRadius = 5
+        shotsView.clipsToBounds = true
         shotsView.addSubview(firstShotImageView)
         shotsView.addSubview(secondShotImageView)
         shotsView.addSubview(thirdShotImageView)
         shotsView.addSubview(fourthShotImageView)
         
-        infoView.addSubview(avatarImageView)
+        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: CGSizeMake(15, 15)))
+        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
+        avatarView.configureForAutoLayout()
+        infoView.addSubview(avatarView)
+        
         infoView.addSubview(infoLabel)
         
         contentView.addSubview(shotsView)
         contentView.addSubview(infoView)
-        contentView.backgroundColor = UIColor.cellGrayColor()
-        infoView.backgroundColor = UIColor.whiteColor()
-        
         infoLabel.numberOfLines = 2
     }
     
@@ -130,12 +133,11 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     
     func setInfoViewConstraints() {
         infoLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: infoView)
-        infoLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarImageView, withOffset: 5)
+        infoLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
         infoLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
-        avatarImageView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView, withOffset: 5)
-        avatarImageView.autoSetDimension(.Width, toSize: 20)
-        avatarImageView.autoSetDimension(.Height, toSize: 20)
-        avatarImageView.autoPinEdge(.Top, toEdge: .Top, ofView: infoLabel)
+        avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
+        avatarView.autoSetDimension(.Width, toSize: 15)
+        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoLabel)
     }
     
     // MARK: - Reusable
@@ -182,7 +184,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     
     func showFolloweeInfo() {
         if let avatarString = followee?.avatarString {
-            avatarImageView.loadImageFromURLString(avatarString)
+            avatarView.imageView.loadImageFromURLString(avatarString)
         }
         configureInfoLabel(followee?.name, numberOfShots: followee?.shotsCount)
     }

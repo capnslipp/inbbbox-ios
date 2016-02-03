@@ -28,7 +28,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         guard let collectionView = collectionView else {
             return
         }
-        collectionView.backgroundColor = UIColor.backgroundGrayColor()
+        collectionView.backgroundColor = UIColor.whiteColor()
         setupBarButtons()
         updateBarButtons(collectionView.collectionViewLayout)
     }
