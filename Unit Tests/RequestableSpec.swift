@@ -10,6 +10,7 @@ import Quick
 import Nimble
 
 @testable import Inbbbox
+
 class RequestableSpec: QuickSpec {
     override func spec() {
         

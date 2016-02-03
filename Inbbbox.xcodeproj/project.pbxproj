@@ -32,6 +32,7 @@
 		5E30F5CB1C5F9F3C00D5236F /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E30F5CA1C5F9F3C00D5236F /* Connection.swift */; };
 		5E3509231C6255D8009386AE /* AuthorizableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509221C6255D8009386AE /* AuthorizableSpec.swift */; };
 		5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509241C625C2A009386AE /* RequestableSpec.swift */; };
+		5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509261C625EBD009386AE /* ResponsableSpec.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
 		5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857B51C2805E10027B38A /* Authenticator.swift */; };
@@ -230,6 +231,7 @@
 		5E30F5CA1C5F9F3C00D5236F /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		5E3509221C6255D8009386AE /* AuthorizableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizableSpec.swift; sourceTree = "<group>"; };
 		5E3509241C625C2A009386AE /* RequestableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestableSpec.swift; sourceTree = "<group>"; };
+		5E3509261C625EBD009386AE /* ResponsableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsableSpec.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbbbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				5ED6C5BC1C57BD3C00A591EA /* NSAttributedStringExtensionSpec.swift */,
 				5E3509221C6255D8009386AE /* AuthorizableSpec.swift */,
 				5E3509241C625C2A009386AE /* RequestableSpec.swift */,
+				5E3509261C625EBD009386AE /* ResponsableSpec.swift */,
 				BEEE9B7FDF125A64C50A158E /* Resources */,
 			);
 			path = "Unit Tests";
@@ -1284,6 +1287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ED6C5C31C57DA5500A591EA /* FollowersQuerySpec.swift in Sources */,
+				5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */,
 				5EC0A7AF1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift in Sources */,
 				5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
 				F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */,
