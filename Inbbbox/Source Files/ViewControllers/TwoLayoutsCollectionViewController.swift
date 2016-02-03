@@ -78,6 +78,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
             flowLayout.itemHeightToWidthRatio = cellHeightToWidthRatio
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         }
+        collectionView.reloadData()
         scrollToTop(collectionView)
         updateBarButtons(collectionView.collectionViewLayout)
     }

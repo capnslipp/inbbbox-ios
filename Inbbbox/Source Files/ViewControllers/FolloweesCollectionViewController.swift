@@ -22,6 +22,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             return
         }
         collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
         title = NSLocalizedString("Following", comment:"")
     }
     
@@ -48,11 +49,20 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        cell.followee = followees[indexPath.row]
-        //NGRTemp: download shots for users
-        cell.shotImagesUrlStrings = ["https://d13yacurqjgara.cloudfront.net/users/1065997/screenshots/2500813/3_1x.png","https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png","https://d13yacurqjgara.cloudfront.net/users/721601/screenshots/2500809/mouse_1x.png","https://d13yacurqjgara.cloudfront.net/users/159102/screenshots/2500807/floating_dribbble_1x.jpg"]
-        return cell
+        
+        if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
+            let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            cell.followee = followees[indexPath.row]
+            //NGRTemp: download shots for users
+            cell.shotImagesUrlStrings = ["https://d13yacurqjgara.cloudfront.net/users/1065997/screenshots/2500813/3_1x.png","https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png","https://d13yacurqjgara.cloudfront.net/users/721601/screenshots/2500809/mouse_1x.png","https://d13yacurqjgara.cloudfront.net/users/159102/screenshots/2500807/floating_dribbble_1x.jpg"]
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            cell.followee = followees[indexPath.row]
+            //NGRTemp: download shots for users
+            cell.shotImageUrlString = "https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png"
+            return cell
+        }
     }
     
     // MARK: UICollectionViewDelegate
