@@ -34,6 +34,7 @@
 		5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509241C625C2A009386AE /* RequestableSpec.swift */; };
 		5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509261C625EBD009386AE /* ResponsableSpec.swift */; };
 		5E3509291C6266E9009386AE /* PageableComponentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509281C6266E9009386AE /* PageableComponentSpec.swift */; };
+		5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35092A1C62692F009386AE /* RequestSpec.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
 		5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857B51C2805E10027B38A /* Authenticator.swift */; };
@@ -234,6 +235,7 @@
 		5E3509241C625C2A009386AE /* RequestableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestableSpec.swift; sourceTree = "<group>"; };
 		5E3509261C625EBD009386AE /* ResponsableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsableSpec.swift; sourceTree = "<group>"; };
 		5E3509281C6266E9009386AE /* PageableComponentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponentSpec.swift; sourceTree = "<group>"; };
+		5E35092A1C62692F009386AE /* RequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSpec.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbbbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -571,6 +573,7 @@
 				5E3509241C625C2A009386AE /* RequestableSpec.swift */,
 				5E3509261C625EBD009386AE /* ResponsableSpec.swift */,
 				5E3509281C6266E9009386AE /* PageableComponentSpec.swift */,
+				5E35092A1C62692F009386AE /* RequestSpec.swift */,
 				BEEE9B7FDF125A64C50A158E /* Resources */,
 			);
 			path = "Unit Tests";
@@ -1303,6 +1306,7 @@
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
+				5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */,
 				F08830FB1C43AB7100F530A2 /* ShotsLocalStorageSpec.swift in Sources */,
 				5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */,
 				5EE041B01C33EF9E00657751 /* OAuthAuthorizableSpec.swift in Sources */,
