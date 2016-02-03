@@ -23,6 +23,28 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     
     private var didSetConstraints = false
     
+    private var _followee: Followee? = nil
+    var followee: Followee? {
+        get {
+            return self._followee
+        }
+        set {
+            self._followee = newValue
+            showFolloweeInfo()
+        }
+    }
+    
+    private var _shotImagesUrlStrings: [String]? = nil
+    var shotImagesUrlStrings: [String]? {
+        get {
+            return self._shotImagesUrlStrings
+        }
+        set {
+            self._shotImagesUrlStrings = newValue
+            showShotImageViews()
+        }
+    }
+    
     // MARK - Life cycle
     
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -114,7 +136,6 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
         avatarImageView.autoSetDimension(.Width, toSize: 20)
         avatarImageView.autoSetDimension(.Height, toSize: 20)
         avatarImageView.autoPinEdge(.Top, toEdge: .Top, ofView: infoLabel)
-     
     }
     
     // MARK: - Reusable
@@ -129,51 +150,57 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
         return CGFloat(1)
     }
     
-    func setName(name: String, numberOfShots: Int) {
+    func showShotImageViews() {
+        guard let shotImagesUrlStrings = shotImagesUrlStrings else {
+            return
+        }
+        switch shotImagesUrlStrings.count {
+        case 0:
+            return
+        case 1:
+            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+        case 2:
+            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+        case 3:
+            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
+            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+        default:
+            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
+            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[3])
+        }
+    }
+    
+    func showFolloweeInfo() {
+        if let avatarString = followee?.avatarString {
+            avatarImageView.loadImageFromURLString(avatarString)
+        }
+        configureInfoLabel(followee?.name, numberOfShots: followee?.shotsCount)
+    }
+    
+    func configureInfoLabel(followeeName: String?, numberOfShots: Int?) {
+        let name = (followeeName != nil) ? followeeName! : " ";
         let firstLine = NSMutableAttributedString.init(string: name, attributes:[
             // NGRTodo:set proper font and color
             NSForegroundColorAttributeName : UIColor.pinkColor(),
             NSFontAttributeName: UIFont.systemFontOfSize(10)
-            ]
-        )
-        let secondLine = NSAttributedString.init(string: "\n\(numberOfShots) shots", attributes:[
+        ])
+        let numberOfShotsText = (numberOfShots != nil) ? "\n\(numberOfShots!) shots" : " "
+        let secondLine = NSAttributedString.init(string: numberOfShotsText, attributes:[
             // NGRTodo:set proper font and color
             NSForegroundColorAttributeName : UIColor.textDarkColor(),
             NSFontAttributeName: UIFont.systemFontOfSize(8)
-            ]
-        )
+        ])
         firstLine.appendAttributedString(secondLine)
         infoLabel.attributedText = firstLine
-    }
-    
-    func setAvatarString(avatarString: String) {
-        avatarImageView.loadImageFromURLString(avatarString)
-    }
-    
-    func setShotImages(shotImages: [UIImage]){
-        switch shotImages.count {
-        case 0:
-            return
-        case 1:
-            firstShotImageView.image = shotImages[0]
-            secondShotImageView.image = shotImages[0]
-            thirdShotImageView.image = shotImages[0]
-            fourthShotImageView.image = shotImages[0]
-        case 2:
-            firstShotImageView.image = shotImages[0]
-            secondShotImageView.image = shotImages[1]
-            thirdShotImageView.image = shotImages[1]
-            fourthShotImageView.image = shotImages[0]
-        case 3:
-            firstShotImageView.image = shotImages[0]
-            secondShotImageView.image = shotImages[1]
-            thirdShotImageView.image = shotImages[2]
-            fourthShotImageView.image = shotImages[0]
-        default:
-            firstShotImageView.image = shotImages[0]
-            secondShotImageView.image = shotImages[1]
-            thirdShotImageView.image = shotImages[2]
-            fourthShotImageView.image = shotImages[3]
-        }
     }
 }
