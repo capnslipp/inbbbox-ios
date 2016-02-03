@@ -17,7 +17,7 @@ class CenterButtonTabBarController: UITabBarController {
         likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Likes", comment: ""), imageName: "ic-likes")
         let bucketsViewController = UINavigationController(rootViewController: BucketsCollectionViewController())
         bucketsViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Buckets", comment: ""), imageName: "ic-buckets")
-        let followeesViewController = UINavigationController(rootViewController: FolloweesCollectionViewController(cellHeightToWidthRatio: FolloweeCollectionViewCell.heightToWidthRatio))
+        let followeesViewController = UINavigationController(rootViewController: FolloweesCollectionViewController(cellHeightToWidthRatio: SmallFolloweeCollectionViewCell.heightToWidthRatio))
         followeesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Following", comment: ""), imageName: "ic-following")
         let accountViewController = UINavigationController(rootViewController: SettingsViewController())
         accountViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Account", comment: ""), imageName: "ic-account")

@@ -1,5 +1,5 @@
 //
-//  FolloweeCollectionViewCell.swift
+//  SmallFolloweeCollectionViewCell.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 27.01.2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
+class SmallFolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
     
     private let shotsView = UIView.newAutoLayoutView()
     private let infoView = UIView.newAutoLayoutView()
@@ -143,7 +143,7 @@ class FolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependent
     // MARK: - Reusable
     
     static var reuseIdentifier: String {
-        return "FolloweeCollectionViewCellIdentifier"
+        return "SmallFolloweeCollectionViewCellIdentifier"
     }
     
     //MARK: - Width dependent height
