@@ -21,7 +21,7 @@ protocol Authorizable {
 extension Authorizable {
     
     func authorizeIfNeeded(authorizationRequired: Bool) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> { fulfill, _ in
             
             if authorizationRequired {
                 guard let _ = TokenStorage.currentToken else {

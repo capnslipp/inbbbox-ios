@@ -30,6 +30,7 @@
 		5E2E730E1C2BFBC300D5BC80 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */; };
 		5E30F5C91C5F76ED00D5236F /* Authorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E30F5C81C5F76ED00D5236F /* Authorizable.swift */; };
 		5E30F5CB1C5F9F3C00D5236F /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E30F5CA1C5F9F3C00D5236F /* Connection.swift */; };
+		5E3509231C6255D8009386AE /* AuthorizableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509221C6255D8009386AE /* AuthorizableSpec.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
 		5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857B51C2805E10027B38A /* Authenticator.swift */; };
@@ -226,6 +227,7 @@
 		5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		5E30F5C81C5F76ED00D5236F /* Authorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizable.swift; sourceTree = "<group>"; };
 		5E30F5CA1C5F9F3C00D5236F /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		5E3509221C6255D8009386AE /* AuthorizableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizableSpec.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbbbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				74C161891C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift */,
 				5ED6C5B21C5768B200A591EA /* ShotsProviderConfigurationSpec.swift */,
 				5ED6C5BC1C57BD3C00A591EA /* NSAttributedStringExtensionSpec.swift */,
+				5E3509221C6255D8009386AE /* AuthorizableSpec.swift */,
 				BEEE9B7FDF125A64C50A158E /* Resources */,
 			);
 			path = "Unit Tests";
@@ -1311,6 +1314,7 @@
 				BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */,
 				5EDB83271C48DECE00FBCA05 /* LikeQuerySpec.swift in Sources */,
 				5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */,
+				5E3509231C6255D8009386AE /* AuthorizableSpec.swift in Sources */,
 				5EDB83291C48DECE00FBCA05 /* ShotsQuerySpec.swift in Sources */,
 				F08830FF1C43C7A100F530A2 /* BucketsLocalStorageSpec.swift in Sources */,
 				BEEE95BCBAB8072AE0F35D42 /* ShotsAnimationManagerDelegateMock.swift in Sources */,
