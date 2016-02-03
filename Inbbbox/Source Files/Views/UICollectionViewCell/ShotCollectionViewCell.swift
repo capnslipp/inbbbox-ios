@@ -18,7 +18,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     let shotImageView = UIImageView.newAutoLayoutView()
-    let likeImageView = UIImageView(image: UIImage(named: "ic-like-swipe"))
+    let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"), secondImage: UIImage(named: "ic-like-swipe-filled"))
     let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
     let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
 
@@ -200,6 +200,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             self.bucketImageView.hidden = false
             self.plusImageView.hidden = false
             self.commentImageView.hidden = false
+            self.likeImageView.displayFirstImageView()
             completion?()
         }
         return restoreInitialStateAnimationDescriptor
@@ -214,6 +215,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             self.contentView.layoutIfNeeded()
             self.likeImageView.alpha = 1.0
             self.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
+            self.likeImageView.displaySecondImageView()
         }
         likeActionAnimationDescriptor.completion = { _ in
             var delayedRestoreInitialStateAnimationDescriptor = self.restoreInitialStateAnimationDescriptorWithCompletion(completion)

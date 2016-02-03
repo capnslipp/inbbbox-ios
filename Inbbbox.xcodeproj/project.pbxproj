@@ -125,8 +125,10 @@
 		BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */; };
 		BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F60853FDC4BABA4CBB9 /* CustomTabBarItemView.swift */; };
 		BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */; };
+		BEEE9C4E8AED6BBB21C37552 /* SwitchableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE976D93B9067675F4D1A1 /* SwitchableImageView.swift */; };
 		BEEE9C4FC72546AB195ED04C /* UIViewAnimationsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */; };
 		BEEE9CFCA116CF0737E33E41 /* AnimationDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9BD827DA13B5253F0FF8 /* AnimationDescriptor.swift */; };
+		BEEE9D88EA03F8AD09F081B3 /* ShotCollectionViewCellActionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE945B0A9BC354C07E8CA8 /* ShotCollectionViewCellActionWrapper.swift */; };
 		BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */; };
 		BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */; };
 		BEEE9ED4DA368627F8C5310A /* Shot.json in Resources */ = {isa = PBXBuildFile; fileRef = BEEE957B2085B7978B14F8F0 /* Shot.json */; };
@@ -321,11 +323,13 @@
 		BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewAnimationsExtension.swift; sourceTree = "<group>"; };
 		BEEE922FED9289D441B6890D /* UIGestureRecognizer+Specs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+Specs.h"; sourceTree = "<group>"; };
 		BEEE92A5546E6D5C79EA1634 /* PanGestureRecognizerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanGestureRecognizerMock.swift; sourceTree = "<group>"; };
+		BEEE945B0A9BC354C07E8CA8 /* ShotCollectionViewCellActionWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellActionWrapper.swift; sourceTree = "<group>"; };
 		BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundView.swift; sourceTree = "<group>"; };
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		BEEE957B2085B7978B14F8F0 /* Shot.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Shot.json; sourceTree = "<group>"; };
 		BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarController.swift; sourceTree = "<group>"; };
 		BEEE96DE52EFED046C0DD6AD /* ViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewMock.swift; sourceTree = "<group>"; };
+		BEEE976D93B9067675F4D1A1 /* SwitchableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchableImageView.swift; sourceTree = "<group>"; };
 		BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayoutSpec.swift; sourceTree = "<group>"; };
 		BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarView.swift; sourceTree = "<group>"; };
 		BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
@@ -670,6 +674,7 @@
 				BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */,
 				30E0993F1C521D44009D2717 /* ShotDetailsHeaderView.swift */,
 				306ED6E31C56138500C1D7A6 /* RoundedImageView.swift */,
+				BEEE976D93B9067675F4D1A1 /* SwitchableImageView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -749,6 +754,7 @@
 				5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */,
 				BEEE9DB7B075CCEC2383EE01 /* UIGestureRecognizer+Specs.m */,
 				BEEE922FED9289D441B6890D /* UIGestureRecognizer+Specs.h */,
+				BEEE945B0A9BC354C07E8CA8 /* ShotCollectionViewCellActionWrapper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1274,6 +1280,8 @@
 				BEEE94B758777658FD47E908 /* ShotsCollectionBackgroundView.swift in Sources */,
 				BEEE9C4FC72546AB195ED04C /* UIViewAnimationsExtension.swift in Sources */,
 				BEEE9CFCA116CF0737E33E41 /* AnimationDescriptor.swift in Sources */,
+				BEEE9C4E8AED6BBB21C37552 /* SwitchableImageView.swift in Sources */,
+				BEEE9D88EA03F8AD09F081B3 /* ShotCollectionViewCellActionWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
