@@ -6,8 +6,6 @@
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
-
 import Quick
 import Nimble
 
