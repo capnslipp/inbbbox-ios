@@ -65,7 +65,7 @@ class SmallFolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDepe
         shotsView.addSubview(thirdShotImageView)
         shotsView.addSubview(fourthShotImageView)
         
-        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: CGSizeMake(15, 15)))
+        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: CGSizeMake(15, 15)), border: false)
         avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
         avatarView.configureForAutoLayout()
         infoView.addSubview(avatarView)
@@ -136,7 +136,7 @@ class SmallFolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDepe
         infoLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
         infoLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
-        avatarView.autoSetDimension(.Width, toSize: 15)
+        avatarView.autoSetDimensionsToSize(CGSizeMake(15, 15))
         avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoLabel)
     }
     
