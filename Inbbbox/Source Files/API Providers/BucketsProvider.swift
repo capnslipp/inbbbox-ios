@@ -20,7 +20,7 @@ class BucketsProvider: Pageable, Authorizable {
     /**
      Provides authenticated user’s buckets.
      
-     **Important:** Authenticated user is required.
+     - Requires: Authenticated user.
 
      - returns: Promise which resolves with buckets or nil.
      */
@@ -53,6 +53,30 @@ class BucketsProvider: Pageable, Authorizable {
         let queries = users.map { BucketQuery(user: $0) } as [Query]
         return provideBucketsWithQueries(queries, authentizationRequired: false)
     }
+    
+    /**
+     Provides next page of buckets.
+     
+     - Warning: You have to use any of provide... method first to be able to use this method.
+     Otherwise an exception will appear.
+     
+     - returns: Promise which resolves with buckets or nil.
+     */
+    func nextPage() -> Promise<[Bucket]?> {
+        return fetchPage(nextPageFor(Bucket))
+    }
+    
+    /**
+     Provides previous page of buckets.
+     
+     - Warning: You have to use any of provide... method first to be able to use this method.
+     Otherwise an exception will appear.
+     
+     - returns: Promise which resolves with buckets or nil.
+     */
+    func previousPage() -> Promise<[Bucket]?> {
+        return fetchPage(previousPageFor(Bucket))
+    }
 }
 
 private extension BucketsProvider {
@@ -69,6 +93,17 @@ private extension BucketsProvider {
             }.then {
                 self.firstPageForQueries(queries)
             }.then(fulfill).error(reject)
+        }
+    }
+    
+    func fetchPage(promise: Promise<[Bucket]?>) -> Promise<[Bucket]?> {
+        return Promise<[Bucket]?> { fulfill, reject in
+            
+            if !didDefineProviderMethodBefore {
+                throw PageableError.PageableBehaviourUndefined
+            }
+            
+            promise.then(fulfill).error(reject)
         }
     }
 }

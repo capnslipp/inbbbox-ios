@@ -24,7 +24,7 @@ class ConnectionsProvider: Pageable, Authorizable {
     /**
      Provides a list the authenticated user’s followers.
      
-     **Important:** Authenticated user is required.
+     - Requires: Authenticated user.
      
      - returns: Promise which resolves with followers or nil.
      */
@@ -37,7 +37,7 @@ class ConnectionsProvider: Pageable, Authorizable {
     /**
     Provides a list who the authenticated user is following.
      
-    **Important:** Authenticated user is required.
+    - Requires: Authenticated.
     
     - returns: Promise which resolves with followees or nil.
     */
@@ -98,7 +98,7 @@ class ConnectionsProvider: Pageable, Authorizable {
     /**
      Provides next page of followees / followers.
      
-     **Important** You have to use any of provide... method first to be able to use this method.
+     - Warning: You have to use any of provide... method first to be able to use this method.
      Otherwise an exception will appear.
      
      - returns: Promise which resolves with shots or nil.
@@ -110,7 +110,7 @@ class ConnectionsProvider: Pageable, Authorizable {
     /**
      Provides previous page of followees / followers.
      
-     **Important** You have to use any of provide... method first to be able to use this method.
+     - Warning: You have to use any of provide... method first to be able to use this method.
      Otherwise an exception will appear.
      
      - returns: Promise which resolves with shots or nil.

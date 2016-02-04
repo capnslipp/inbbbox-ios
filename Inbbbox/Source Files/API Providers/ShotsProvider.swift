@@ -89,7 +89,7 @@ class ShotsProvider: Pageable {
     /**
      Provides next page of shots.
      
-     **Important** You have to use any of provideShots... method first to be able to use this method.
+     - Warning: You have to use any of provideShots... method first to be able to use this method.
      Otherwise an exception will appear.
      
      - returns: Promise which resolves with shots or nil.
@@ -101,7 +101,7 @@ class ShotsProvider: Pageable {
     /**
      Provides previous page of shots.
      
-     **Important** You have to use any of provideShots... method first to be able to use this method.
+     - Warning: You have to use any of provideShots... method first to be able to use this method.
      Otherwise an exception will appear.
      
      - returns: Promise which resolves with shots or nil.
