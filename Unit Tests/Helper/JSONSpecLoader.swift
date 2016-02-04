@@ -16,7 +16,7 @@ class JSONSpecLoader {
     
     static let sharedInstance = JSONSpecLoader()
 
-     func jsonWithResourceName(name: String) -> JSON {
+    func jsonWithResourceName(name: String) -> JSON {
         
         let file = NSBundle(forClass: self.dynamicType).pathForResource(name, ofType:"json")
         let data = NSData(contentsOfFile: file!)
@@ -35,6 +35,20 @@ class JSONSpecLoader {
             if let dictionary = json.dictionaryObject {
                 array.appendContentsOf([dictionary])
             }
+        }
+        
+        return array
+    }
+    
+    func fixtureBucketsJSON(withCount count: Int) -> [JSON] {
+        
+        var array = [JSON]()
+        
+        for i in 0..<count {
+            var json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Bucket")
+            json["id"].intValue = i+1
+            
+            array.append(json)
         }
         
         return array

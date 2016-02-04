@@ -6,4 +6,15 @@
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
+import Quick
+import SwiftyJSON
+
+@testable import Inbbbox
+
+extension Bucket {
+    
+    static func fixtureBucket() -> Bucket {
+        let json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Bucket")
+        return Bucket.map(json)
+    }
+}
