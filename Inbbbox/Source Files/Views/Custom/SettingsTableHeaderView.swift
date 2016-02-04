@@ -28,7 +28,7 @@ class SettingsTableHeaderView: UIView, Reusable {
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
         
-        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize))
+        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize), border: true)
         avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
         avatarView.configureForAutoLayout()
         addSubview(avatarView)
