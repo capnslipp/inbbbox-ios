@@ -43,7 +43,7 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     //MARK: - Width dependent height
     
     static var heightToWidthRatio: CGFloat {
-        return CGFloat(1)
+        return CGFloat(0.85)
     }
     
     //MARK: - Data filling
