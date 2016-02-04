@@ -41,11 +41,26 @@ class JSONSpecLoader {
     }
     
     func fixtureBucketsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("Bucket", count: count)
+    }
+    
+    func fixtureFolloweeConnectionsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("FolloweeConnection", count: count)
+    }
+    
+    func fixtureFollowerConnectionsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("FollowerConnection", count: count)
+    }
+}
+
+private extension JSONSpecLoader {
+    
+    func fixtureJSONArrayWithResourceName(name: String, count: Int) -> [JSON] {
         
         var array = [JSON]()
         
         for i in 0..<count {
-            var json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Bucket")
+            var json = JSONSpecLoader.sharedInstance.jsonWithResourceName(name)
             json["id"].intValue = i+1
             
             array.append(json)

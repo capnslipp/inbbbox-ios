@@ -1,0 +1,10 @@
+{
+    "id" : "fixture.connection.id",
+    "created_at" : "2014-02-21T15:41:14Z",
+    "follower" : {
+        "id" : "fixture.id",
+        "name" : "fixture.name",
+        "username" : "fixture.username",
+        "avatar_url" : "fixture.avatar.url"
+    }
+}

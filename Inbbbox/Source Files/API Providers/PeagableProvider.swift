@@ -87,9 +87,7 @@ private extension PageableProvider {
                 
                 fulfill(result)
                 
-            }.error { _error in
-                reject(_error)
-            }
+            }.error(reject)
         }
     }
 }

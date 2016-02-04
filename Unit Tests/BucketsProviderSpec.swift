@@ -109,7 +109,6 @@ class BucketsProviderSpec: QuickSpec {
             }
         }
         
-        
         describe("when providing buckets from previous page") {
             
             it("buckets should be properly returned") {
@@ -125,7 +124,7 @@ class BucketsProviderSpec: QuickSpec {
     }
 }
 
-//Explanation: Create MockBucketsProvider to ovveride methods from PageableProvider.
+//Explanation: Create MockBucketsProvider to override methods from PageableProvider.
 private class MockBucketsProvider: BucketsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
