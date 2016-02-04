@@ -10,7 +10,7 @@ import CoreData
 
 class ShotManagedObject: NSManagedObject {
     
-    @NSManaged var id: Int
+    @NSManaged var id: String
     @NSManaged var liked: Bool
     @NSManaged var buckets: NSSet?
     

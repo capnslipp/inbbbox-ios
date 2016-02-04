@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
     <entity name="Bucket" representedClassName=".BucketManagedObject" syncable="YES">
-        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="shots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Shot" inverseName="buckets" inverseEntity="Shot" syncable="YES"/>
     </entity>
     <entity name="Shot" representedClassName=".ShotManagedObject" syncable="YES">
-        <attribute name="id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="liked" attributeType="Boolean" syncable="YES"/>
         <relationship name="buckets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bucket" inverseName="shots" inverseEntity="Bucket" syncable="YES"/>
     </entity>

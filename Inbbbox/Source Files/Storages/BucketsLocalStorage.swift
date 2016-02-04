@@ -22,7 +22,7 @@ final class BucketsLocalStorage {
         return try! managedContext.executeFetchRequest(bucketFetchRequest) as! [BucketManagedObject]
     }
     
-    private var bucketIDs: [Int] {
+    private var bucketIDs: [String] {
         
         if let results = try! managedContext.executeFetchRequest(bucketFetchRequest) as? [BucketManagedObject] {
             return results.map { $0.id }
@@ -37,7 +37,7 @@ final class BucketsLocalStorage {
         bucketFetchRequest = NSFetchRequest(entityName: BucketEntityName)
     }
     
-    func create(bucketID bucketID: Int, name: String) throws {
+    func create(bucketID bucketID: String, name: String) throws {
         
         guard !bucketIDs.contains(bucketID) else { return }
         
@@ -53,7 +53,7 @@ final class BucketsLocalStorage {
         }
     }
     
-    func destroy(bucketID bucketID: Int) throws {
+    func destroy(bucketID bucketID: String) throws {
         
         do {
             if let objectToDelete = findObject(bucketID) {
@@ -70,7 +70,7 @@ final class BucketsLocalStorage {
 
 private extension BucketsLocalStorage {
     
-    func findObject(bucketID: Int) -> BucketManagedObject? {
+    func findObject(bucketID: String) -> BucketManagedObject? {
         if let objects = try! managedContext.executeFetchRequest(bucketFetchRequest) as? [BucketManagedObject] {
             let fittingObjects = objects.filter {
                 return $0.id == bucketID
