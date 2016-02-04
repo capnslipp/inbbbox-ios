@@ -59,13 +59,16 @@
 		5E5082101C313DFF00093191 /* AutoScrollableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E50820F1C313DFF00093191 /* AutoScrollableCollectionViewCell.swift */; };
 		5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */; };
 		5E55DF601C491C7100E894E0 /* QuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55DF5F1C491C7100E894E0 /* QuerySpec.swift */; };
+		5E5D563A1C637FC800C7957E /* BucketsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D56391C637FC800C7957E /* BucketsProviderSpec.swift */; };
+		5E5D563C1C63882500C7957E /* PeagableProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D563B1C63882500C7957E /* PeagableProvider.swift */; };
+		5E5D563E1C638E2C00C7957E /* Bucket.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E5D563D1C638E2C00C7957E /* Bucket.json */; };
+		5E5D56401C638E8B00C7957E /* BucketSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D563F1C638E8B00C7957E /* BucketSpecExtension.swift */; };
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		5E781B411C58B694009A2E14 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E781B401C58B694009A2E14 /* User.json */; };
 		5E781B431C58B99A009A2E14 /* JSONSpecLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */; };
 		5E781B451C58C00E009A2E14 /* UserSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */; };
 		5E781B491C58D8B5009A2E14 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B481C58D8B5009A2E14 /* Bucket.swift */; };
 		5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */; };
-		5EB87A701C59FD2E00CB2A7B /* Pageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB87A6F1C59FD2E00CB2A7B /* Pageable.swift */; };
 		5EB87A721C5A02E100CB2A7B /* PageableQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB87A711C5A02E100CB2A7B /* PageableQuery.swift */; };
 		5EB87A761C5A123700CB2A7B /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB87A751C5A123700CB2A7B /* Responsable.swift */; };
 		5EB87A781C5A124100CB2A7B /* PageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB87A771C5A124100CB2A7B /* PageRequest.swift */; };
@@ -273,13 +276,16 @@
 		5E50820F1C313DFF00093191 /* AutoScrollableCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoScrollableShotsDataSource.swift; sourceTree = "<group>"; };
 		5E55DF5F1C491C7100E894E0 /* QuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuerySpec.swift; sourceTree = "<group>"; };
+		5E5D56391C637FC800C7957E /* BucketsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsProviderSpec.swift; sourceTree = "<group>"; };
+		5E5D563B1C63882500C7957E /* PeagableProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeagableProvider.swift; sourceTree = "<group>"; };
+		5E5D563D1C638E2C00C7957E /* Bucket.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Bucket.json; sourceTree = "<group>"; };
+		5E5D563F1C638E8B00C7957E /* BucketSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketSpecExtension.swift; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E781B401C58B694009A2E14 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSpecLoader.swift; sourceTree = "<group>"; };
 		5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpecExtension.swift; sourceTree = "<group>"; };
 		5E781B481C58D8B5009A2E14 /* Bucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
 		5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketQuery.swift; sourceTree = "<group>"; };
-		5EB87A6F1C59FD2E00CB2A7B /* Pageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pageable.swift; sourceTree = "<group>"; };
 		5EB87A711C5A02E100CB2A7B /* PageableQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableQuery.swift; sourceTree = "<group>"; };
 		5EB87A751C5A123700CB2A7B /* Responsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		5EB87A771C5A124100CB2A7B /* PageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRequest.swift; sourceTree = "<group>"; };
@@ -582,6 +588,7 @@
 				5E35092A1C62692F009386AE /* RequestSpec.swift */,
 				5E35092C1C626C9C009386AE /* PageRequestSpec.swift */,
 				5E22ADCE1C635DE5008D900C /* PageableComponentSerializerSpec.swift */,
+				5E5D56391C637FC800C7957E /* BucketsProviderSpec.swift */,
 				BEEE9B7FDF125A64C50A158E /* Resources */,
 			);
 			path = "Unit Tests";
@@ -769,6 +776,7 @@
 				F08830FC1C43ABD700F530A2 /* CoreDataHelper.swift */,
 				5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */,
 				5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */,
+				5E5D563F1C638E8B00C7957E /* BucketSpecExtension.swift */,
 				BEEE9DB7B075CCEC2383EE01 /* UIGestureRecognizer+Specs.m */,
 				BEEE922FED9289D441B6890D /* UIGestureRecognizer+Specs.h */,
 			);
@@ -801,8 +809,8 @@
 		5EE3AB191C5905B30003B639 /* API Providers */ = {
 			isa = PBXGroup;
 			children = (
-				5EB87A6F1C59FD2E00CB2A7B /* Pageable.swift */,
 				5E30F5C81C5F76ED00D5236F /* Authorizable.swift */,
+				5E5D563B1C63882500C7957E /* PeagableProvider.swift */,
 				5EE3AB1A1C5905B30003B639 /* BucketsProvider.swift */,
 				5EE3AB1B1C5905B30003B639 /* ConnectionsProvider.swift */,
 				5EE3AB1C1C5905B30003B639 /* ShotsProvider.swift */,
@@ -816,6 +824,7 @@
 			children = (
 				BEEE957B2085B7978B14F8F0 /* Shot.json */,
 				5E781B401C58B694009A2E14 /* User.json */,
+				5E5D563D1C638E2C00C7957E /* Bucket.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1053,6 +1062,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E781B411C58B694009A2E14 /* User.json in Resources */,
+				5E5D563E1C638E2C00C7957E /* Bucket.json in Resources */,
 				BEEE9ED4DA368627F8C5310A /* Shot.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1194,6 +1204,7 @@
 				BF6961221C1B4805000FC5D8 /* HeaderAuthorizable.swift in Sources */,
 				5E4857FB1C2957C90027B38A /* SettingsTableHeaderView.swift in Sources */,
 				5EB87A781C5A124100CB2A7B /* PageRequest.swift in Sources */,
+				5E5D563C1C63882500C7957E /* PeagableProvider.swift in Sources */,
 				5E4857C81C2854F80027B38A /* LikeQuery.swift in Sources */,
 				5EB896C71C5257E800AC2F3D /* ShotsAnimator.swift in Sources */,
 				306ED6E41C56138500C1D7A6 /* RoundedImageView.swift in Sources */,
@@ -1269,7 +1280,6 @@
 				5EB87A721C5A02E100CB2A7B /* PageableQuery.swift in Sources */,
 				5E5082081C312E2800093191 /* ShotsStorage.swift in Sources */,
 				5ED6C5BB1C57BA2900A591EA /* NSAttributedStringExtension.swift in Sources */,
-				5EB87A701C59FD2E00CB2A7B /* Pageable.swift in Sources */,
 				5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */,
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */,
@@ -1304,6 +1314,7 @@
 			files = (
 				5E22ADCF1C635DE5008D900C /* PageableComponentSerializerSpec.swift in Sources */,
 				5ED6C5C31C57DA5500A591EA /* FollowersQuerySpec.swift in Sources */,
+				5E5D56401C638E8B00C7957E /* BucketSpecExtension.swift in Sources */,
 				5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */,
 				5EC0A7AF1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift in Sources */,
 				5EE041B41C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
@@ -1327,6 +1338,7 @@
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */,
+				5E5D563A1C637FC800C7957E /* BucketsProviderSpec.swift in Sources */,
 				5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */,
 				5EDB832E1C48DF0000FBCA05 /* SharedQuerySpec.swift in Sources */,
 				74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */,
