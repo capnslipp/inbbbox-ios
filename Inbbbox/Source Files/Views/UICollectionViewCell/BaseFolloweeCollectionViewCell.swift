@@ -52,6 +52,8 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
         commonInit()
     }
     
+    // Mark - Setup UI
+    
      func commonInit() {
         setupShotViews()
         avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize), border: false)
@@ -67,6 +69,9 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
         numberOfShotsLabel.textColor = UIColor.darkTextColor()
         numberOfShotsLabel.font = UIFont.systemFontOfSize(8)
         infoView.addSubview(numberOfShotsLabel)
+        
+        shotsView.layer.cornerRadius = 5
+        shotsView.clipsToBounds = true
         
         contentView.addSubview(shotsView)
         contentView.addSubview(infoView)

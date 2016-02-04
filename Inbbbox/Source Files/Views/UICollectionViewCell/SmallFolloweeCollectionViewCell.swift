@@ -8,96 +8,27 @@
 
 import UIKit
 
-class SmallFolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
+class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight {
     
-    private let shotsView = UIView.newAutoLayoutView()
-    private let infoView = UIView.newAutoLayoutView()
     
     private let firstShotImageView = UIImageView.newAutoLayoutView()
     private let secondShotImageView = UIImageView.newAutoLayoutView()
     private let thirdShotImageView = UIImageView.newAutoLayoutView()
     private let fourthShotImageView = UIImageView.newAutoLayoutView()
     
-    private var avatarView: AvatarView!
-    private let infoLabel = UILabel.newAutoLayoutView()
     
-    private var didSetConstraints = false
+    // MARK - Setup UI
     
-    private var _followee: Followee? = nil
-    var followee: Followee? {
-        get {
-            return self._followee
-        }
-        set {
-            self._followee = newValue
-            showFolloweeInfo()
-        }
-    }
-    
-    private var _shotImagesUrlStrings: [String]? = nil
-    var shotImagesUrlStrings: [String]? {
-        get {
-            return self._shotImagesUrlStrings
-        }
-        set {
-            self._shotImagesUrlStrings = newValue
-            showShotImageViews()
-        }
-    }
-    
-    // MARK - Life cycle
-    
-    @available(*, unavailable, message="Use init(frame:) instead")
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    func commonInit() {
-        shotsView.layer.cornerRadius = 5
-        shotsView.clipsToBounds = true
+    override func setupShotViews() {
         shotsView.addSubview(firstShotImageView)
         shotsView.addSubview(secondShotImageView)
         shotsView.addSubview(thirdShotImageView)
         shotsView.addSubview(fourthShotImageView)
-        
-        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: CGSizeMake(15, 15)), border: false)
-        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
-        avatarView.configureForAutoLayout()
-        infoView.addSubview(avatarView)
-        
-        infoView.addSubview(infoLabel)
-        
-        contentView.addSubview(shotsView)
-        contentView.addSubview(infoView)
-        infoLabel.numberOfLines = 2
     }
+
+    // MARK - Setting constraints
     
-    // MARK - UIView
-    
-    override class func requiresConstraintBasedLayout() -> Bool {
-        return true
-    }
-    
-    override func updateConstraints() {
-        super.updateConstraints()
-        if !didSetConstraints {
-            shotsView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
-            infoView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
-            infoView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotsView)
-            setShotsViewConstraints()
-            setInfoViewConstraints()
-            didSetConstraints = true
-        }
-    }
-    
-    //MARK - Setting constraints
-    
-    func setShotsViewConstraints() {
+    override func setShotsViewConstraints() {
         let spacings = CollectionViewLayoutSpacings()
         let shotImageViewWidth = contentView.bounds.width / 2
         let shotImageViewHeight = shotImageViewWidth * spacings.shotHeightToWidthRatio
@@ -131,13 +62,17 @@ class SmallFolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDepe
         fourthShotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: shotsView)
     }
     
-    func setInfoViewConstraints() {
-        infoLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: infoView)
-        infoLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
-        infoLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
+    override func setInfoViewConstraints() {
+        avatarView.autoSetDimensionsToSize(avatarSize)
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
-        avatarView.autoSetDimensionsToSize(CGSizeMake(15, 15))
-        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoLabel)
+        avatarView.autoAlignAxis(.Horizontal, toSameAxisOfView: userNameLabel)
+        
+        userNameLabel.autoPinEdge(.Top, toEdge: .Top, ofView: infoView)
+        userNameLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: numberOfShotsLabel)
+        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
+
+        numberOfShotsLabel.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: infoView)
+        numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: userNameLabel)
     }
     
     // MARK: - Reusable
@@ -152,7 +87,9 @@ class SmallFolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDepe
         return CGFloat(1)
     }
     
-    func showShotImageViews() {
+    //MARK: - Data filling
+    
+    override func showShotImages() {
         guard let shotImagesUrlStrings = shotImagesUrlStrings else {
             return
         }
@@ -180,29 +117,5 @@ class SmallFolloweeCollectionViewCell: UICollectionViewCell, Reusable, WidthDepe
             thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
             fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[3])
         }
-    }
-    
-    func showFolloweeInfo() {
-        if let avatarString = followee?.avatarString {
-            avatarView.imageView.loadImageFromURLString(avatarString)
-        }
-        configureInfoLabel(followee?.name, numberOfShots: followee?.shotsCount)
-    }
-    
-    func configureInfoLabel(followeeName: String?, numberOfShots: Int?) {
-        let name = (followeeName != nil) ? followeeName! : " ";
-        let firstLine = NSMutableAttributedString.init(string: name, attributes:[
-            // NGRTodo:set proper font and color
-            NSForegroundColorAttributeName : UIColor.pinkColor(),
-            NSFontAttributeName: UIFont.systemFontOfSize(10)
-        ])
-        let numberOfShotsText = (numberOfShots != nil) ? "\n\(numberOfShots!) shots" : " "
-        let secondLine = NSAttributedString.init(string: numberOfShotsText, attributes:[
-            // NGRTodo:set proper font and color
-            NSForegroundColorAttributeName : UIColor.textDarkColor(),
-            NSFontAttributeName: UIFont.systemFontOfSize(8)
-        ])
-        firstLine.appendAttributedString(secondLine)
-        infoLabel.attributedText = firstLine
     }
 }

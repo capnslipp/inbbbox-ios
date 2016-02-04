@@ -11,23 +11,19 @@ import UIKit
 class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight {
     
     private let shotImageView = UIImageView.newAutoLayoutView()
-    // MARK - UIView
     
-    override class func requiresConstraintBasedLayout() -> Bool {
-        return true
-    }
+    // MARK - Setup UI
     
     override func setupShotViews() {
-        shotsView.layer.cornerRadius = 5
-        shotsView.clipsToBounds = true
         shotsView.addSubview(shotImageView)
     }
+    
+    // MARK - Setting constraints
     
     override func setShotsViewConstraints() {
         shotImageView.autoPinEdgesToSuperviewEdges()
     }
     
-
     override func setInfoViewConstraints() {
         userNameLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
         userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
