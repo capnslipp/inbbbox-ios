@@ -60,7 +60,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.followee = followees[indexPath.row]
             //NGRTemp: download shots for users
-            cell.shotImageUrlString = "https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png"
+            cell.shotImagesUrlStrings = ["https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png"]
             return cell
         }
     }
