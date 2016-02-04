@@ -10,9 +10,7 @@ import Foundation
 import PromiseKit
 
 class BucketsProvider: PageableProvider, Authorizable {
-    
-    private var didDefineProviderMethodBefore = false
-    
+        
     /**
      Provides authenticated user’s buckets.
      
@@ -59,7 +57,7 @@ class BucketsProvider: PageableProvider, Authorizable {
      - returns: Promise which resolves with buckets or nil.
      */
     func nextPage() -> Promise<[Bucket]?> {
-        return fetchPage(nextPageFor(Bucket))
+        return nextPageFor(Bucket)
     }
     
     /**
@@ -71,17 +69,13 @@ class BucketsProvider: PageableProvider, Authorizable {
      - returns: Promise which resolves with buckets or nil.
      */
     func previousPage() -> Promise<[Bucket]?> {
-        return fetchPage(previousPageFor(Bucket))
+        return previousPageFor(Bucket)
     }
 }
 
 private extension BucketsProvider {
     
     func provideBucketsWithQueries(queries: [Query], authentizationRequired: Bool) -> Promise<[Bucket]?> {
-        
-        resetPages()
-        didDefineProviderMethodBefore = true
-        
         return Promise<[Bucket]?> { fulfill, reject in
         
             firstly {
@@ -89,17 +83,6 @@ private extension BucketsProvider {
             }.then {
                 self.firstPageForQueries(queries)
             }.then(fulfill).error(reject)
-        }
-    }
-    
-    func fetchPage(promise: Promise<[Bucket]?>) -> Promise<[Bucket]?> {
-        return Promise<[Bucket]?> { fulfill, reject in
-            
-            if !didDefineProviderMethodBefore {
-                throw PageableProviderError.PageableBehaviourUndefined
-            }
-            
-            promise.then(fulfill).error(reject)
         }
     }
 }

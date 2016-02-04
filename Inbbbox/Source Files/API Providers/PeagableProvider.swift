@@ -18,12 +18,24 @@ class PageableProvider {
     private var nextPageableComponents = [PageableComponent]()
     private var previousPageableComponents = [PageableComponent]()
     
+    private var didDefineProviderMethodBefore = false
+    
     func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
-        return pageWithQueries(queries)
+        return Promise<[T]?> { fulfill, reject in
+            
+            resetPages()
+            didDefineProviderMethodBefore = true
+            
+            pageWithQueries(queries).then(fulfill).error(reject)
+        }
     }
     
     func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
+            
+            if !didDefineProviderMethodBefore {
+                throw PageableProviderError.PageableBehaviourUndefined
+            }
             
             let queries = nextPageableComponents.map {
                 PageableQuery(path: $0.path, queryItems: $0.queryItems)
@@ -35,6 +47,10 @@ class PageableProvider {
     
     func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
+            
+            if !didDefineProviderMethodBefore {
+                throw PageableProviderError.PageableBehaviourUndefined
+            }
             
             let queries = previousPageableComponents.map {
                 PageableQuery(path: $0.path, queryItems: $0.queryItems)

@@ -15,8 +15,6 @@ typealias Follower = User
 /// Provides connections between users, followers and followees
 class ConnectionsProvider: PageableProvider, Authorizable {
     
-    private var didDefineProviderMethodBefore = false
-    
     /**
      Provides a list the authenticated user’s followers.
      
@@ -119,10 +117,6 @@ class ConnectionsProvider: PageableProvider, Authorizable {
 private extension ConnectionsProvider {
     
     func provideUsersWithQueries(queries: [Query], authentizationRequired: Bool) -> Promise<[User]?> {
-        
-        resetPages()
-        didDefineProviderMethodBefore = true
-        
         return Promise<[User]?> { fulfill, reject in
             
             firstly {
@@ -137,10 +131,6 @@ private extension ConnectionsProvider {
     
     func fetchPage(promise: Promise<[Connection]?>) -> Promise<[User]?> {
         return Promise<[User]?> { fulfill, reject in
-            
-            if !didDefineProviderMethodBefore {
-                throw PageableProviderError.PageableBehaviourUndefined
-            }
             
             firstly {
                 promise

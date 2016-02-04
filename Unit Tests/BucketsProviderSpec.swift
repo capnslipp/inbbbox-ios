@@ -15,6 +15,7 @@ import PromiseKit
 class BucketsProviderSpec: QuickSpec {
     override func spec() {
         
+        var buckets: [Bucket]?
         var sut: MockBucketsProvider!
         
         beforeEach {
@@ -23,37 +24,9 @@ class BucketsProviderSpec: QuickSpec {
         
         afterEach {
             sut = nil
+            buckets = nil
         }
-        
-        describe("when using next/previous page without specyfing provide method") {
-            
-            var error: ErrorType?
-            
-            afterEach {
-                error = nil
-            }
-            
-            it("error should appear") {
-                sut.nextPage().then { _ -> Void in
-                    fail()
-                }.error { _error in
-                    error = _error
-                }
-                
-                expect(error is PageableProviderError).toEventually(beTruthy())
-            }
-            
-            it("error should appear") {
-                sut.previousPage().then { _ -> Void in
-                    fail()
-                }.error { _error in
-                    error = _error
-                }
-                
-                expect(error is PageableProviderError).toEventually(beTruthy())
-            }
-        }
-        
+
         describe("when providing my buckets") {
             
             context("and token doesn't exist") {
@@ -81,14 +54,8 @@ class BucketsProviderSpec: QuickSpec {
             
             context("and token does exist") {
                 
-                var buckets: [Bucket]?
-                
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                }
-                
-                afterEach {
-                    buckets = nil
                 }
                 
                 it("buckets should be properly returned") {
@@ -104,12 +71,6 @@ class BucketsProviderSpec: QuickSpec {
         }
         
         describe("when providing buckets for user") {
-                
-            var buckets: [Bucket]?
-            
-            afterEach {
-                buckets = nil
-            }
             
             it("buckets should be properly returned") {
                 sut.provideBucketsForUser(User.fixtureUser()).then { _buckets -> Void in
@@ -124,14 +85,35 @@ class BucketsProviderSpec: QuickSpec {
         
         describe("when providing buckets for users") {
             
-            var buckets: [Bucket]?
-            
-            afterEach {
-                buckets = nil
-            }
-            
             it("buckets should be properly returned") {
                 sut.provideBucketsForUsers([User.fixtureUser(), User.fixtureUser()]).then { _buckets -> Void in
+                    buckets = _buckets
+                }.error { _ in fail() }
+                
+                expect(buckets).toNotEventually(beNil())
+                expect(buckets).toEventually(haveCount(3))
+                expect(buckets?.first?.identifier).toEventually(equal("1"))
+            }
+        }
+        
+        describe("when providing buckets from next page") {
+
+            it("buckets should be properly returned") {
+                sut.nextPage().then { _buckets -> Void in
+                    buckets = _buckets
+                }.error { _ in fail() }
+                
+                expect(buckets).toNotEventually(beNil())
+                expect(buckets).toEventually(haveCount(3))
+                expect(buckets?.first?.identifier).toEventually(equal("1"))
+            }
+        }
+        
+        
+        describe("when providing buckets from previous page") {
+            
+            it("buckets should be properly returned") {
+                sut.previousPage().then { _buckets -> Void in
                     buckets = _buckets
                 }.error { _ in fail() }
                 
