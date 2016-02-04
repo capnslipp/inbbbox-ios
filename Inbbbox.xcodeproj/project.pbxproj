@@ -119,13 +119,17 @@
 		BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9534945990DF5595E62C /* ViewControllerMock.swift */; };
 		BEEE94B758777658FD47E908 /* ShotsCollectionBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */; };
 		BEEE953B3FD7B5D2FBE7DD4C /* ViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE96DE52EFED046C0DD6AD /* ViewMock.swift */; };
-		BEEE95BCBAB8072AE0F35D42 /* ShotsAnimationManagerDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EAE816915C3640FD627 /* ShotsAnimationManagerDelegateMock.swift */; };
+		BEEE95BCBAB8072AE0F35D42 /* ShotsAnimatorDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9EAE816915C3640FD627 /* ShotsAnimatorDelegateMock.swift */; };
 		BEEE96288C099EC6A58CAC82 /* PanGestureRecognizerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE92A5546E6D5C79EA1634 /* PanGestureRecognizerMock.swift */; };
 		BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */; };
 		BEEE97370AC7B81A23CD03A0 /* ShotsCollectionBackgroundViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9B96B2E0EEEC762DF2E6 /* ShotsCollectionBackgroundViewSpec.swift */; };
 		BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */; };
 		BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9F60853FDC4BABA4CBB9 /* CustomTabBarItemView.swift */; };
 		BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */; };
+		BEEE9C4E8AED6BBB21C37552 /* SwitchableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE976D93B9067675F4D1A1 /* SwitchableImageView.swift */; };
+		BEEE9C4FC72546AB195ED04C /* UIViewAnimationsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */; };
+		BEEE9CFCA116CF0737E33E41 /* AnimationDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9BD827DA13B5253F0FF8 /* AnimationDescriptor.swift */; };
+		BEEE9D88EA03F8AD09F081B3 /* ShotCollectionViewCellActionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE945B0A9BC354C07E8CA8 /* ShotCollectionViewCellActionWrapper.swift */; };
 		BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */; };
 		BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */; };
 		BEEE9ED4DA368627F8C5310A /* Shot.json in Resources */ = {isa = PBXBuildFile; fileRef = BEEE957B2085B7978B14F8F0 /* Shot.json */; };
@@ -182,7 +186,7 @@
 		F092E26B1C3FD6F900593D18 /* ShotOperationSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E26A1C3FD6F900593D18 /* ShotOperationSynchronizer.swift */; };
 		F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C91C240656005F5111 /* SettingsViewModel.swift */; };
 		F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */; };
-		FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A0AF874643193442C4BE /* ShotsAnimationManagerMock.swift */; };
+		FF13A3C0B9A1786150870E33 /* ShotsAnimatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A0AF874643193442C4BE /* ShotsAnimatorMock.swift */; };
 		FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */; };
 		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */; };
 		FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */; };
@@ -318,17 +322,21 @@
 		74C161891C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 		74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLayoutsCollectionViewController.swift; sourceTree = "<group>"; };
 		BEEE913355DEC6EF2E04C83D /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewAnimationsExtension.swift; sourceTree = "<group>"; };
 		BEEE922FED9289D441B6890D /* UIGestureRecognizer+Specs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+Specs.h"; sourceTree = "<group>"; };
 		BEEE92A5546E6D5C79EA1634 /* PanGestureRecognizerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanGestureRecognizerMock.swift; sourceTree = "<group>"; };
+		BEEE945B0A9BC354C07E8CA8 /* ShotCollectionViewCellActionWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellActionWrapper.swift; sourceTree = "<group>"; };
 		BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundView.swift; sourceTree = "<group>"; };
 		BEEE9534945990DF5595E62C /* ViewControllerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		BEEE957B2085B7978B14F8F0 /* Shot.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Shot.json; sourceTree = "<group>"; };
 		BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarController.swift; sourceTree = "<group>"; };
 		BEEE96DE52EFED046C0DD6AD /* ViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewMock.swift; sourceTree = "<group>"; };
+		BEEE976D93B9067675F4D1A1 /* SwitchableImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchableImageView.swift; sourceTree = "<group>"; };
 		BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayoutSpec.swift; sourceTree = "<group>"; };
 		BEEE98BCD9AC3456D15069E8 /* CenterButtonTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterButtonTabBarView.swift; sourceTree = "<group>"; };
 		BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9B96B2E0EEEC762DF2E6 /* ShotsCollectionBackgroundViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundViewSpec.swift; sourceTree = "<group>"; };
+		BEEE9BD827DA13B5253F0FF8 /* AnimationDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationDescriptor.swift; sourceTree = "<group>"; };
 		BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9D4BB3B567940D98A215 /* ShotCollectionViewCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellDelegateMock.swift; sourceTree = "<group>"; };
 		BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimatorSpec.swift; sourceTree = "<group>"; };
@@ -336,7 +344,7 @@
 		BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterMock.swift; sourceTree = "<group>"; };
 		BEEE9E22FEA8F52BC344676C /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		BEEE9E5033A84C343B7F22B0 /* DefaultViewControllerPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenterSpec.swift; sourceTree = "<group>"; };
-		BEEE9EAE816915C3640FD627 /* ShotsAnimationManagerDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimationManagerDelegateMock.swift; sourceTree = "<group>"; };
+		BEEE9EAE816915C3640FD627 /* ShotsAnimatorDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimatorDelegateMock.swift; sourceTree = "<group>"; };
 		BEEE9F60853FDC4BABA4CBB9 /* CustomTabBarItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItemView.swift; sourceTree = "<group>"; };
 		BF29C2561B4AA5500053378F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6961191C1B443E000FC5D8 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -391,7 +399,7 @@
 		F09307C71C240609005F5111 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		F09307C91C240656005F5111 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		F09307CB1C2407D4005F5111 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
-		FF13A0AF874643193442C4BE /* ShotsAnimationManagerMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimationManagerMock.swift; sourceTree = "<group>"; };
+		FF13A0AF874643193442C4BE /* ShotsAnimatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimatorMock.swift; sourceTree = "<group>"; };
 		FF13A1A2161AE07748341642 /* AsyncWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapper.swift; sourceTree = "<group>"; };
 		FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutSpec.swift; sourceTree = "<group>"; };
@@ -668,6 +676,7 @@
 				BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */,
 				30E0993F1C521D44009D2717 /* ShotDetailsHeaderView.swift */,
 				306ED6E31C56138500C1D7A6 /* RoundedImageView.swift */,
+				BEEE976D93B9067675F4D1A1 /* SwitchableImageView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -748,6 +757,7 @@
 				5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */,
 				BEEE9DB7B075CCEC2383EE01 /* UIGestureRecognizer+Specs.m */,
 				BEEE922FED9289D441B6890D /* UIGestureRecognizer+Specs.h */,
+				BEEE945B0A9BC354C07E8CA8 /* ShotCollectionViewCellActionWrapper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -812,6 +822,7 @@
 				F092E2621C3FD4F600593D18 /* NSManagedObjectExtension.swift */,
 				5ED6C5BA1C57BA2900A591EA /* NSAttributedStringExtension.swift */,
 				5EE3AB241C5912E70003B639 /* ArrayExtension.swift */,
+				BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -889,6 +900,7 @@
 				FF13A1A2161AE07748341642 /* AsyncWrapper.swift */,
 				BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */,
 				74A0184B1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift */,
+				BEEE9BD827DA13B5253F0FF8 /* AnimationDescriptor.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -916,9 +928,9 @@
 		FF13AAD2F902BC574DD6F670 /* Mock Objects */ = {
 			isa = PBXGroup;
 			children = (
-				FF13A0AF874643193442C4BE /* ShotsAnimationManagerMock.swift */,
+				FF13A0AF874643193442C4BE /* ShotsAnimatorMock.swift */,
 				FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */,
-				BEEE9EAE816915C3640FD627 /* ShotsAnimationManagerDelegateMock.swift */,
+				BEEE9EAE816915C3640FD627 /* ShotsAnimatorDelegateMock.swift */,
 				5EC0A7B61C35668100846975 /* MockLoginService.swift */,
 				FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */,
 				BEEE9534945990DF5595E62C /* ViewControllerMock.swift */,
@@ -1270,6 +1282,10 @@
 				5EE3AB1F1C5905B30003B639 /* ConnectionsProvider.swift in Sources */,
 				745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */,
 				BEEE94B758777658FD47E908 /* ShotsCollectionBackgroundView.swift in Sources */,
+				BEEE9C4FC72546AB195ED04C /* UIViewAnimationsExtension.swift in Sources */,
+				BEEE9CFCA116CF0737E33E41 /* AnimationDescriptor.swift in Sources */,
+				BEEE9C4E8AED6BBB21C37552 /* SwitchableImageView.swift in Sources */,
+				BEEE9D88EA03F8AD09F081B3 /* ShotCollectionViewCellActionWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1297,7 +1313,7 @@
 				5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
-				FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */,
+				FF13A3C0B9A1786150870E33 /* ShotsAnimatorMock.swift in Sources */,
 				5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */,
 				5EDB832E1C48DF0000FBCA05 /* SharedQuerySpec.swift in Sources */,
 				74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */,
@@ -1313,7 +1329,7 @@
 				5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */,
 				5EDB83291C48DECE00FBCA05 /* ShotsQuerySpec.swift in Sources */,
 				F08830FF1C43C7A100F530A2 /* BucketsLocalStorageSpec.swift in Sources */,
-				BEEE95BCBAB8072AE0F35D42 /* ShotsAnimationManagerDelegateMock.swift in Sources */,
+				BEEE95BCBAB8072AE0F35D42 /* ShotsAnimatorDelegateMock.swift in Sources */,
 				5E55DF601C491C7100E894E0 /* QuerySpec.swift in Sources */,
 				F08831011C43CE0D00F530A2 /* ShotOperationHistoryStorageSpec.swift in Sources */,
 				FF13AB2E8D72A9EDF7DB081C /* AsyncWrapperMock.swift in Sources */,
