@@ -13,11 +13,7 @@ typealias Followee = User
 typealias Follower = User
 
 /// Provides connections between users, followers and followees
-class ConnectionsProvider: Pageable, Authorizable {
-    
-    // Pageable protocol conformance.
-    var nextPageableComponents = [PageableComponent]()
-    var previousPageableComponents = [PageableComponent]()
+class ConnectionsProvider: PageableProvider, Authorizable {
     
     private var didDefineProviderMethodBefore = false
     
@@ -143,7 +139,7 @@ private extension ConnectionsProvider {
         return Promise<[User]?> { fulfill, reject in
             
             if !didDefineProviderMethodBefore {
-                throw PageableError.PageableBehaviourUndefined
+                throw PageableProviderError.PageableBehaviourUndefined
             }
             
             firstly {

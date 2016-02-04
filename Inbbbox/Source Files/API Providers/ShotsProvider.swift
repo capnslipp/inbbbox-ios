@@ -14,16 +14,12 @@ import SwiftyJSON
 Class for providing shots of various source type.
 */
 
-class ShotsProvider: Pageable {
+class ShotsProvider: PageableProvider {
 
     /// Used only when using provideShots() method.
     var configuration = ShotsProviderConfiguration()
     let page: UInt
     let pagination: UInt
-    
-    // Pageable protocol conformance.
-    var nextPageableComponents = [PageableComponent]()
-    var previousPageableComponents = [PageableComponent]()
 
     private var currentSourceType: SourceType?
     private enum SourceType {
@@ -44,7 +40,7 @@ class ShotsProvider: Pageable {
     /**
      Convenience initializer with default parameters.
      */
-    convenience init() {
+    convenience override init() {
         self.init(page: 1, pagination: 30)
     }
     
@@ -150,7 +146,7 @@ private extension ShotsProvider {
         return Promise<[Shot]?> { fulfill, reject in
             
             if currentSourceType == nil {
-                throw PageableError.PageableBehaviourUndefined
+                throw PageableProviderError.PageableBehaviourUndefined
             }
             
             firstly {

@@ -9,11 +9,7 @@
 import Foundation
 import PromiseKit
 
-class BucketsProvider: Pageable, Authorizable {
-    
-    // Pageable protocol conformance.
-    var nextPageableComponents = [PageableComponent]()
-    var previousPageableComponents = [PageableComponent]()
+class BucketsProvider: PageableProvider, Authorizable {
     
     private var didDefineProviderMethodBefore = false
     
@@ -100,7 +96,7 @@ private extension BucketsProvider {
         return Promise<[Bucket]?> { fulfill, reject in
             
             if !didDefineProviderMethodBefore {
-                throw PageableError.PageableBehaviourUndefined
+                throw PageableProviderError.PageableBehaviourUndefined
             }
             
             promise.then(fulfill).error(reject)
