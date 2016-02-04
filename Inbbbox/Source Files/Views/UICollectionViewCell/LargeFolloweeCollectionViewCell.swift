@@ -15,6 +15,7 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     // MARK - Setup UI
     
     override func setupShotViews() {
+        shotImageView.backgroundColor = UIColor.followeeShotGrayColor()
         shotsView.addSubview(shotImageView)
     }
     
@@ -25,13 +26,17 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     }
     
     override func setInfoViewConstraints() {
-        userNameLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
-        numberOfShotsLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
-        numberOfShotsLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
-        avatarView.autoAlignAxisToSuperviewAxis(.Horizontal)
-        avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
+        
         avatarView.autoSetDimensionsToSize(avatarSize)
+        avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
+        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 5)
+        
+        userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
+        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
+        userNameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: userNameLabel)
+        
+        numberOfShotsLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
+        numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: userNameLabel)
     }
     
     // MARK: - Reusable

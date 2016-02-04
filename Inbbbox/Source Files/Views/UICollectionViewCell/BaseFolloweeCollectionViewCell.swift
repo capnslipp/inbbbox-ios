@@ -61,13 +61,12 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
         avatarView.configureForAutoLayout()
         infoView.addSubview(avatarView)
         
-        // NGRTodo:set proper font and color
         userNameLabel.textColor = UIColor.pinkColor()
-        userNameLabel.font = UIFont.systemFontOfSize(10)
+        userNameLabel.font = UIFont.systemFontOfSize(13, weight:UIFontWeightMedium)
         infoView.addSubview(userNameLabel)
         
-        numberOfShotsLabel.textColor = UIColor.darkTextColor()
-        numberOfShotsLabel.font = UIFont.systemFontOfSize(8)
+        numberOfShotsLabel.textColor = UIColor.followeeTextGrayColor()
+        numberOfShotsLabel.font = UIFont.systemFontOfSize(10)
         infoView.addSubview(numberOfShotsLabel)
         
         shotsView.layer.cornerRadius = 5
@@ -103,17 +102,17 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     }
     
     func setInfoViewConstraints() {
-        //Empty implementation - needs to be overrided in subclass
+        //Empty implementation - needs to be overriden in subclass
     }
     
     func setShotsViewConstraints() {
-        //Empty implementation - needs to be overrided in subclass
+        //Empty implementation - needs to be overriden in subclass
     }
     
     //MARK: - Data filling
     
     func showShotImages() {
-        //Empty implementation - needs to be overrided in subclass
+        //Empty implementation - needs to be overriden in subclass
     }
     
     func showFolloweeInfo() {

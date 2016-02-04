@@ -10,7 +10,6 @@ import UIKit
 
 class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight {
     
-    
     private let firstShotImageView = UIImageView.newAutoLayoutView()
     private let secondShotImageView = UIImageView.newAutoLayoutView()
     private let thirdShotImageView = UIImageView.newAutoLayoutView()
@@ -20,10 +19,10 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     // MARK - Setup UI
     
     override func setupShotViews() {
-        shotsView.addSubview(firstShotImageView)
-        shotsView.addSubview(secondShotImageView)
-        shotsView.addSubview(thirdShotImageView)
-        shotsView.addSubview(fourthShotImageView)
+        for view in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
+            view.backgroundColor = UIColor.followeeShotGrayColor()
+            shotsView.addSubview(view)
+        }
     }
 
     // MARK - Setting constraints
@@ -65,13 +64,13 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     override func setInfoViewConstraints() {
         avatarView.autoSetDimensionsToSize(avatarSize)
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
-        avatarView.autoAlignAxis(.Horizontal, toSameAxisOfView: userNameLabel)
+        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 5)
         
-        userNameLabel.autoPinEdge(.Top, toEdge: .Top, ofView: infoView)
         userNameLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: numberOfShotsLabel)
+        userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
         userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
+        userNameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
 
-        numberOfShotsLabel.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: infoView)
         numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: userNameLabel)
     }
     
