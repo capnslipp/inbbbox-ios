@@ -25,17 +25,16 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
         shotImageView.autoPinEdgesToSuperviewEdges()
     }
     
-    override func setInfoViewConstraints() {
-        
+    override func setInfoViewConstraints() {        
         avatarView.autoSetDimensionsToSize(avatarSize)
-        avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
-        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 5)
+        avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView, withOffset: 2)
+        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 10)
         
         userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
-        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
+        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
         userNameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: userNameLabel)
         
-        numberOfShotsLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
+        numberOfShotsLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView, withOffset: -2)
         numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: userNameLabel)
     }
     
@@ -48,7 +47,7 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     //MARK: - Width dependent height
     
     static var heightToWidthRatio: CGFloat {
-        return CGFloat(0.85)
+        return CGFloat(0.83)
     }
     
     //MARK: - Data filling

@@ -64,11 +64,11 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     override func setInfoViewConstraints() {
         avatarView.autoSetDimensionsToSize(avatarSize)
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
-        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 5)
+        avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 6.5)
         
         userNameLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: numberOfShotsLabel)
         userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
-        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 5)
+        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
         userNameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
 
         numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: userNameLabel)

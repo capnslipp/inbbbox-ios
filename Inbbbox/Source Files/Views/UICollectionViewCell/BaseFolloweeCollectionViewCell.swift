@@ -15,7 +15,7 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     var avatarView: AvatarView!
     let userNameLabel = UILabel.newAutoLayoutView()
     let numberOfShotsLabel = UILabel.newAutoLayoutView()
-    let avatarSize = CGSizeMake(15, 15)
+    let avatarSize = CGSizeMake(16, 16)
     private var didSetConstraints = false
     
     private var _followee: Followee? = nil

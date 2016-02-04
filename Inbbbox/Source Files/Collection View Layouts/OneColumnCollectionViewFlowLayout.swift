@@ -19,8 +19,8 @@ class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
             let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - 2 * spacings.itemMargin
             let calculatedItemHeight = calculatedItemWidth * itemHeightToWidthRatio
             itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
-            minimumLineSpacing = spacings.itemMargin
-            sectionInset = UIEdgeInsets(top: spacings.sectionMargin, left: spacings.sectionMargin, bottom: spacings.sectionMargin, right: spacings.sectionMargin)
+            minimumLineSpacing = spacings.minimumLineSpacing
+            sectionInset = UIEdgeInsets(top: spacings.sectionMarginVertical, left: spacings.sectionMarginHorizontal, bottom: spacings.sectionMarginVertical, right: spacings.sectionMarginHorizontal)
         }
     }
 }
