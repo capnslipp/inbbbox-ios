@@ -132,7 +132,7 @@ private extension ConnectionsProvider {
             firstly {
                 authorizeIfNeeded(authentizationRequired)
             }.then {
-                self.firstPageFor(Connection.self, withQueries: queries)
+                self.firstPageForQueries(queries)
             }.then {
                 self.serialize($0, fulfill)
             }.error(reject)

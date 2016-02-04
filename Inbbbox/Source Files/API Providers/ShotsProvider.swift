@@ -125,7 +125,7 @@ private extension ShotsProvider {
             let queries = shotQueries.map { queryByPagingConfiguration($0) } as [Query]
             
             firstly {
-                firstPageFor(Shot.self, withQueries: queries)
+                firstPageForQueries(queries)
             }.then {
                 self.serialize($0, fulfill)
             }.error(reject)

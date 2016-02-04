@@ -67,7 +67,7 @@ private extension BucketsProvider {
             firstly {
                 authorizeIfNeeded(authentizationRequired)
             }.then {
-                self.firstPageFor(Bucket.self, withQueries: queries)
+                self.firstPageForQueries(queries)
             }.then(fulfill).error(reject)
         }
     }

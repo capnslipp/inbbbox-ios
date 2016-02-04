@@ -19,14 +19,14 @@ protocol Pageable: class {
     var previousPageableComponents: [PageableComponent] { get set }
     
     func resetPages()
-    func firstPageFor<T: Mappable>(type: T.Type, withQueries queries: [Query]) -> Promise<[T]?>
+    func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?>
     func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?>
     func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?>
 }
 
 extension Pageable {
     
-    func firstPageFor<T: Mappable>(type: T.Type, withQueries queries: [Query]) -> Promise<[T]?> {
+    func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
         return pageWithQueries(queries)
     }
     
