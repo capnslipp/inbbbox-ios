@@ -25,6 +25,8 @@
 		5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D77381C3BD6A9002191A7 /* UserStorage.swift */; };
 		5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D773A1C3BDEFD002191A7 /* UserStorageSpec.swift */; };
 		5E0D773D1C3BE475002191A7 /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0D773C1C3BE475002191A7 /* UserSpec.swift */; };
+		5E22ADCD1C635813008D900C /* PageableComponentSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E22ADCC1C635813008D900C /* PageableComponentSerializer.swift */; };
+		5E22ADCF1C635DE5008D900C /* PageableComponentSerializerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E22ADCE1C635DE5008D900C /* PageableComponentSerializerSpec.swift */; };
 		5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */; };
 		5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */; };
 		5E2E730E1C2BFBC300D5BC80 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */; };
@@ -35,6 +37,7 @@
 		5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509261C625EBD009386AE /* ResponsableSpec.swift */; };
 		5E3509291C6266E9009386AE /* PageableComponentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509281C6266E9009386AE /* PageableComponentSpec.swift */; };
 		5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35092A1C62692F009386AE /* RequestSpec.swift */; };
+		5E35092D1C626C9C009386AE /* PageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35092C1C626C9C009386AE /* PageRequestSpec.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
 		5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857B51C2805E10027B38A /* Authenticator.swift */; };
@@ -227,6 +230,8 @@
 		5E147CB51AA8B2D300EDD97C /* Inbbbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Inbbbox-Info.plist"; path = "Supporting Files/Inbbbox-Info.plist"; sourceTree = "<group>"; };
 		5E147CB71AA8B2DC00EDD97C /* Unit-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit-Tests-Bridging-Header.h"; path = "Supporting Files/Unit-Tests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		5E147CB81AA8B2DC00EDD97C /* Unit-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Unit-Tests-Info.plist"; path = "Supporting Files/Unit-Tests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		5E22ADCC1C635813008D900C /* PageableComponentSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponentSerializer.swift; sourceTree = "<group>"; };
+		5E22ADCE1C635DE5008D900C /* PageableComponentSerializerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponentSerializerSpec.swift; sourceTree = "<group>"; };
 		5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		5E30F5C81C5F76ED00D5236F /* Authorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizable.swift; sourceTree = "<group>"; };
@@ -236,6 +241,7 @@
 		5E3509261C625EBD009386AE /* ResponsableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsableSpec.swift; sourceTree = "<group>"; };
 		5E3509281C6266E9009386AE /* PageableComponentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponentSpec.swift; sourceTree = "<group>"; };
 		5E35092A1C62692F009386AE /* RequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSpec.swift; sourceTree = "<group>"; };
+		5E35092C1C626C9C009386AE /* PageRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRequestSpec.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbbbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -574,6 +580,8 @@
 				5E3509261C625EBD009386AE /* ResponsableSpec.swift */,
 				5E3509281C6266E9009386AE /* PageableComponentSpec.swift */,
 				5E35092A1C62692F009386AE /* RequestSpec.swift */,
+				5E35092C1C626C9C009386AE /* PageRequestSpec.swift */,
+				5E22ADCE1C635DE5008D900C /* PageableComponentSerializerSpec.swift */,
 				BEEE9B7FDF125A64C50A158E /* Resources */,
 			);
 			path = "Unit Tests";
@@ -858,6 +866,7 @@
 				BF69611D1C1B46BB000FC5D8 /* SecureNetworkService.swift */,
 				5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */,
 				5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */,
+				5E22ADCC1C635813008D900C /* PageableComponentSerializer.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1216,6 +1225,7 @@
 				74A0184C1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
 				5EE041B61C34227600657751 /* CollectionExtension.swift in Sources */,
+				5E22ADCD1C635813008D900C /* PageableComponentSerializer.swift in Sources */,
 				74C161821C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift in Sources */,
 				74A6C6801C57CDAB009BDD75 /* WidthDependentHeight.swift in Sources */,
 				F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */,
@@ -1292,6 +1302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E22ADCF1C635DE5008D900C /* PageableComponentSerializerSpec.swift in Sources */,
 				5ED6C5C31C57DA5500A591EA /* FollowersQuerySpec.swift in Sources */,
 				5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */,
 				5EC0A7AF1C353D4200846975 /* AutoScrollableShotsAnimatorSpec.swift in Sources */,
@@ -1330,6 +1341,7 @@
 				5EDB83271C48DECE00FBCA05 /* LikeQuerySpec.swift in Sources */,
 				5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */,
 				5E3509231C6255D8009386AE /* AuthorizableSpec.swift in Sources */,
+				5E35092D1C626C9C009386AE /* PageRequestSpec.swift in Sources */,
 				5EDB83291C48DECE00FBCA05 /* ShotsQuerySpec.swift in Sources */,
 				F08830FF1C43C7A100F530A2 /* BucketsLocalStorageSpec.swift in Sources */,
 				BEEE95BCBAB8072AE0F35D42 /* ShotsAnimationManagerDelegateMock.swift in Sources */,
