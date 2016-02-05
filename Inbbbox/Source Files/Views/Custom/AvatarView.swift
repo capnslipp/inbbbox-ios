@@ -12,11 +12,11 @@ class AvatarView: UIView {
     
     let imageView = UIImageView()
     
-    convenience init(frame: CGRect, border: Bool) {
-        self.init(frame: frame)
-        if (border) {
+    convenience init(avatarFrame: CGRect, bordered: Bool = true) {
+        self.init(frame: avatarFrame)
+        if bordered {
             layer.cornerRadius = CGRectGetHeight(frame) * 0.5
-            layer.shadowColor = UIColor.RGBA(0, 0, 0, 0.1).CGColor
+            layer.shadowColor = UIColor(white: 1, alpha: 0.1).CGColor
             layer.shadowOffset = CGSizeZero
             layer.shadowRadius = 5
             layer.shadowOpacity = 1
@@ -25,7 +25,7 @@ class AvatarView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
+    private override init(frame: CGRect) {
         super.init(frame: frame)
         imageView.frame.size = frame.size
         imageView.layer.masksToBounds = true

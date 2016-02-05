@@ -8,26 +8,44 @@
 
 import UIKit
 
-class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight {
+class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight, FolloweeCellConfigurable {
     
-    private let firstShotImageView = UIImageView.newAutoLayoutView()
-    private let secondShotImageView = UIImageView.newAutoLayoutView()
-    private let thirdShotImageView = UIImageView.newAutoLayoutView()
-    private let fourthShotImageView = UIImageView.newAutoLayoutView()
+    let firstShotImageView = UIImageView.newAutoLayoutView()
+    let secondShotImageView = UIImageView.newAutoLayoutView()
+    let thirdShotImageView = UIImageView.newAutoLayoutView()
+    let fourthShotImageView = UIImageView.newAutoLayoutView()
+
+    private var didSetConstraints = false
     
     
-    // MARK - Setup UI
+    // MARK: - Lifecycle
     
-    override func setupShotViews() {
+    override func commonInit() {
+        super.commonInit()
+        setupShotsView()
+    }
+    
+    // MARK: - UIView
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        if !didSetConstraints {
+            setShotsViewConstraints()
+            setInfoViewConstraints()
+            didSetConstraints = true
+        }
+    }
+    
+    // MARK: - Followee Cell Configurable
+    
+    func setupShotsView() {
         for view in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
             view.backgroundColor = UIColor.followeeShotGrayColor()
             shotsView.addSubview(view)
         }
     }
-
-    // MARK - Setting constraints
     
-    override func setShotsViewConstraints() {
+    func setShotsViewConstraints() {
         let spacings = CollectionViewLayoutSpacings()
         let shotImageViewWidth = contentView.bounds.width / 2
         let shotImageViewHeight = shotImageViewWidth * spacings.shotHeightToWidthRatio
@@ -61,7 +79,7 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
         fourthShotImageView.autoPinEdge(.Right, toEdge: .Right, ofView: shotsView)
     }
     
-    override func setInfoViewConstraints() {
+    func setInfoViewConstraints() {
         avatarView.autoSetDimensionsToSize(avatarSize)
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
         avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 6.5)
@@ -84,37 +102,5 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     
     static var heightToWidthRatio: CGFloat {
         return CGFloat(1)
-    }
-    
-    //MARK: - Data filling
-    
-    override func showShotImages() {
-        guard let shotImagesUrlStrings = shotImagesUrlStrings else {
-            return
-        }
-        switch shotImagesUrlStrings.count {
-        case 0:
-            return
-        case 1:
-            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-        case 2:
-            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-        case 3:
-            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
-            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-        default:
-            firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
-            fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[3])
-        }
     }
 }

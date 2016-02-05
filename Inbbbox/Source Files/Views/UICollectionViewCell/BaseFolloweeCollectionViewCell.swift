@@ -15,30 +15,8 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     var avatarView: AvatarView!
     let userNameLabel = UILabel.newAutoLayoutView()
     let numberOfShotsLabel = UILabel.newAutoLayoutView()
-    let avatarSize = CGSizeMake(16, 16)
+    let avatarSize = CGSize(width:16, height:16)
     private var didSetConstraints = false
-    
-    private var _followee: Followee? = nil
-    var followee: Followee? {
-        get {
-            return self._followee
-        }
-        set {
-            self._followee = newValue
-            showFolloweeInfo()
-        }
-    }
-    
-    private var _shotImagesUrlStrings: [String]? = nil
-    var shotImagesUrlStrings: [String]? {
-        get {
-            return self._shotImagesUrlStrings
-        }
-        set {
-            self._shotImagesUrlStrings = newValue
-            showShotImages()
-        }
-    }
     
     // MARK - Life cycle
     
@@ -55,8 +33,7 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     // Mark - Setup UI
     
      func commonInit() {
-        setupShotViews()
-        avatarView = AvatarView(frame: CGRect(origin: CGPointZero, size: avatarSize), border: false)
+        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
         avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
         avatarView.configureForAutoLayout()
         infoView.addSubview(avatarView)
@@ -76,10 +53,6 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(infoView)
     }
     
-    func setupShotViews() {
-        //Empty implementation - needs to be overrided in subclass
-    }
-    
     // MARK - UIView
     
     override class func requiresConstraintBasedLayout() -> Bool {
@@ -95,31 +68,7 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
             shotsView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             infoView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
             infoView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotsView)
-            setInfoViewConstraints()
-            setShotsViewConstraints()
             didSetConstraints = true
         }
-    }
-    
-    func setInfoViewConstraints() {
-        //Empty implementation - needs to be overriden in subclass
-    }
-    
-    func setShotsViewConstraints() {
-        //Empty implementation - needs to be overriden in subclass
-    }
-    
-    //MARK: - Data filling
-    
-    func showShotImages() {
-        //Empty implementation - needs to be overriden in subclass
-    }
-    
-    func showFolloweeInfo() {
-        if let avatarString = followee?.avatarString {
-            avatarView.imageView.loadImageFromURLString(avatarString)
-        }
-        userNameLabel.text = followee?.name
-        numberOfShotsLabel.text = "\(followee!.shotsCount) shots"
     }
 }

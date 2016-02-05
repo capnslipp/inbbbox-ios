@@ -52,15 +52,19 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            cell.followee = followees[indexPath.row]
+            let followee = followees[indexPath.row]
             //NGRTemp: download shots for users
-            cell.shotImagesUrlStrings = ["https://d13yacurqjgara.cloudfront.net/users/1065997/screenshots/2500813/3_1x.png","https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png","https://d13yacurqjgara.cloudfront.net/users/721601/screenshots/2500809/mouse_1x.png","https://d13yacurqjgara.cloudfront.net/users/159102/screenshots/2500807/floating_dribbble_1x.jpg"]
+            let shotImagesUrlStrings = ["https://d13yacurqjgara.cloudfront.net/users/1065997/screenshots/2500813/3_1x.png","https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png","https://d13yacurqjgara.cloudfront.net/users/721601/screenshots/2500809/mouse_1x.png","https://d13yacurqjgara.cloudfront.net/users/159102/screenshots/2500807/floating_dribbble_1x.jpg"]
+            presentFoloweeForCell(followee, cell: cell)
+            presentSmallShotsImagesForCell(shotImagesUrlStrings, cell: cell)
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            cell.followee = followees[indexPath.row]
+            let followee = followees[indexPath.row]
             //NGRTemp: download shots for users
-            cell.shotImagesUrlStrings = ["https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png"]
+            let shotImageUrlString = "https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png"
+            presentFoloweeForCell(followee, cell: cell)
+            presentLargeShotImageForCell(shotImageUrlString, cell: cell)
             return cell
         }
     }
@@ -69,5 +73,49 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present followee details view controller
+    }
+}
+
+// MARK - Cells data filling
+
+private extension FolloweesCollectionViewController {
+    
+    func presentFoloweeForCell(followee: Followee, cell: BaseFolloweeCollectionViewCell) {
+        if let avatarString = followee.avatarString {
+            cell.avatarView.imageView.loadImageFromURLString(avatarString)
+        }
+        cell.userNameLabel.text = followee.name
+        cell.numberOfShotsLabel.text = "\(followee.shotsCount) shots"
+    }
+    
+    func presentLargeShotImageForCell(shotImageUrlString: String, cell: LargeFolloweeCollectionViewCell) {
+        cell.shotImageView.loadImageFromURLString(shotImageUrlString)
+    }
+    
+    func presentSmallShotsImagesForCell(shotImagesUrlStrings: [String], cell: SmallFolloweeCollectionViewCell) {
+        switch shotImagesUrlStrings.count {
+        case 0:
+            return
+        case 1:
+            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+        case 2:
+            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+        case 3:
+            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
+            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+        default:
+            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
+            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
+            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[3])
+        }
     }
 }

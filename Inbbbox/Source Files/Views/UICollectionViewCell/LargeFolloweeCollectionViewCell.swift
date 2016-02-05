@@ -8,31 +8,48 @@
 
 import UIKit
 
-class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight {
+class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight, FolloweeCellConfigurable {
     
-    private let shotImageView = UIImageView.newAutoLayoutView()
+    let shotImageView = UIImageView.newAutoLayoutView()
+    private var didSetConstraints = false
     
-    // MARK - Setup UI
+    // MARK: - Lifecycle
     
-    override func setupShotViews() {
+    override func commonInit() {
+        super.commonInit()
+        setupShotsView()
+    }
+    
+    // MARK: - UIView
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        if !didSetConstraints {
+            setShotsViewConstraints()
+            setInfoViewConstraints()
+            didSetConstraints = true
+        }
+    }
+    
+    // MARK: - Followee Cell Configurable
+    
+    func setupShotsView() {
         shotImageView.backgroundColor = UIColor.followeeShotGrayColor()
         shotsView.addSubview(shotImageView)
     }
     
-    // MARK - Setting constraints
-    
-    override func setShotsViewConstraints() {
+    func setShotsViewConstraints() {
         shotImageView.autoPinEdgesToSuperviewEdges()
     }
     
-    override func setInfoViewConstraints() {        
+    func setInfoViewConstraints() {
         avatarView.autoSetDimensionsToSize(avatarSize)
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView, withOffset: 2)
         avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 10)
         
         userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
         userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
-        userNameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: userNameLabel)
+        userNameLabel.autoPinEdge(.Right, toEdge: .Left, ofView: numberOfShotsLabel)
         
         numberOfShotsLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView, withOffset: -2)
         numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: userNameLabel)
@@ -48,13 +65,5 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     
     static var heightToWidthRatio: CGFloat {
         return CGFloat(0.83)
-    }
-    
-    //MARK: - Data filling
-    
-    override func showShotImages() {
-        if let shotImageUrlString = shotImagesUrlStrings?.first {
-            shotImageView.loadImageFromURLString(shotImageUrlString)
-        }
     }
 }
