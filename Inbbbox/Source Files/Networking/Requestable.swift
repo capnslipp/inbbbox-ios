@@ -29,7 +29,10 @@ extension Requestable {
         components.scheme = query.service.scheme
         components.host = query.service.host
         components.path = query.service.version + query.path
-        components.queryItems = queryItems
+        
+        if queryItems.count > 0 {
+            components.queryItems = queryItems
+        }
         
         // Intentionally force unwrapping optional to get crash when problem occur
         let mutableRequest = NSMutableURLRequest(URL: components.URL!)

@@ -14,16 +14,12 @@ import SwiftyJSON
 Class for providing shots of various source type.
 */
 
-class ShotsProvider: Pageable {
+class ShotsProvider: PageableProvider {
 
     /// Used only when using provideShots() method.
     var configuration = ShotsProviderConfiguration()
     let page: UInt
     let pagination: UInt
-    
-    // Pageable protocol conformance.
-    var nextPageableComponents = [PageableComponent]()
-    var previousPageableComponents = [PageableComponent]()
 
     private var currentSourceType: SourceType?
     private enum SourceType {
@@ -44,7 +40,7 @@ class ShotsProvider: Pageable {
     /**
      Convenience initializer with default parameters.
      */
-    convenience init() {
+    convenience override init() {
         self.init(page: 1, pagination: 30)
     }
     
@@ -89,7 +85,7 @@ class ShotsProvider: Pageable {
     /**
      Provides next page of shots.
      
-     **Important** You have to use any of provideShots... method first to be able to use this method.
+     - Warning: You have to use any of provideShots... method first to be able to use this method.
      Otherwise an exception will appear.
      
      - returns: Promise which resolves with shots or nil.
@@ -101,7 +97,7 @@ class ShotsProvider: Pageable {
     /**
      Provides previous page of shots.
      
-     **Important** You have to use any of provideShots... method first to be able to use this method.
+     - Warning: You have to use any of provideShots... method first to be able to use this method.
      Otherwise an exception will appear.
      
      - returns: Promise which resolves with shots or nil.
@@ -125,7 +121,7 @@ private extension ShotsProvider {
             let queries = shotQueries.map { queryByPagingConfiguration($0) } as [Query]
             
             firstly {
-                firstPageFor(Shot.self, withQueries: queries)
+                firstPageForQueries(queries)
             }.then {
                 self.serialize($0, fulfill)
             }.error(reject)
@@ -150,7 +146,7 @@ private extension ShotsProvider {
         return Promise<[Shot]?> { fulfill, reject in
             
             if currentSourceType == nil {
-                throw PageableError.PageableBehaviourUndefined
+                throw PageableProviderError.PageableBehaviourUndefined
             }
             
             firstly {
@@ -162,21 +158,11 @@ private extension ShotsProvider {
     }
     
     func serialize(shots: [Shot]?, _ fulfill: ([Shot]?) -> Void) {
-        fulfill( currentSourceType?.serialize(shots) )
-    }
-}
-
-private extension ShotsProvider.SourceType {
-    
-    func serialize(shots: [Shot]?) -> [Shot]? {
-        
-        guard self == General else {
-            return shots
-        }
-        
-        return shots?
+        let result = shots?
             .filter { !$0.animated } // animated after MVP
             .unique
             .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
+        
+        fulfill(result)
     }
 }

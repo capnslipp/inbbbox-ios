@@ -33,12 +33,19 @@ struct PageRequest: Requestable, Responsable {
                     
                 }.then { response -> Void in
                     
-                    let pageableComponents = self.pageableComponentsFromHeader(response.header)
+                    var next: PageableComponent?
+                    var previous: PageableComponent?
+                    
+                    if let header = response.header {
+                        next = PageableComponentSerializer.nextPageableComponentWithSentQuery(self.query, receivedHeader: header)
+                        previous = PageableComponentSerializer.previousPageableComponentWithSentQuery(self.query, receivedHeader: header)
+                    }
+
                     fulfill((
                         json: response.json,
                         pages: (
-                            next: pageableComponents.next,
-                            previous: pageableComponents.previous)
+                            next: next,
+                            previous: previous)
                     ))
                     
                 }.error(reject)
@@ -46,62 +53,5 @@ struct PageRequest: Requestable, Responsable {
             
             dataTask.resume()
         }
-    }
-}
-
-private extension PageRequest {
-    
-    func pageableComponentsFromHeader(header: [String: AnyObject]?) -> (next: PageableComponent?, previous: PageableComponent?) {
-        
-        let link = header?["Link"] as? String
-        let linkHeaderComponents = link?.componentsSeparatedByString(",")
-        
-        var next: PageableComponent?
-        var previous: PageableComponent?
-        
-        linkHeaderComponents?.forEach {
-            if $0.rangeOfString("next") != nil {
-                next = $0.url?.pageableComponentFromQuery(query)
-                
-            } else if $0.rangeOfString("prev") != nil {
-                previous = $0.url?.pageableComponentFromQuery(query)
-            }
-        }
-        
-        return (next: next, previous: previous)
-    }
-}
-
-private extension String {
-    
-    var url: NSURL? {
-        
-        guard let leftBracket = rangeOfString("<"), rightBracket = rangeOfString(">") else {
-            return nil
-        }
-        
-        let range = Range<String.Index>(
-            start: leftBracket.startIndex.advancedBy(1),
-            end: rightBracket.endIndex.advancedBy(-1)
-        )
-        let urlString = substringWithRange(range)
-        
-        return  NSURL(string: urlString)
-    }
-}
-
-private extension NSURL {
-    
-    func pageableComponentFromQuery(requestQuery: Query) -> PageableComponent? {
-        
-        guard var path = path else {
-            return nil
-        }
-        
-        if let substringEndIndex = path.rangeOfString(requestQuery.service.version)?.endIndex {
-            path = path.substringFromIndex(substringEndIndex)
-        }
-        
-        return PageableComponent(path: path, query: query)
     }
 }

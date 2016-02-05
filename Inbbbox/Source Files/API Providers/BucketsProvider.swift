@@ -9,18 +9,12 @@
 import Foundation
 import PromiseKit
 
-class BucketsProvider: Pageable, Authorizable {
-    
-    // Pageable protocol conformance.
-    var nextPageableComponents = [PageableComponent]()
-    var previousPageableComponents = [PageableComponent]()
-    
-    private var didDefineProviderMethodBefore = false
-    
+class BucketsProvider: PageableProvider, Authorizable {
+        
     /**
      Provides authenticated user’s buckets.
      
-     **Important:** Authenticated user is required.
+     - Requires: Authenticated user.
 
      - returns: Promise which resolves with buckets or nil.
      */
@@ -53,21 +47,41 @@ class BucketsProvider: Pageable, Authorizable {
         let queries = users.map { BucketQuery(user: $0) } as [Query]
         return provideBucketsWithQueries(queries, authentizationRequired: false)
     }
+    
+    /**
+     Provides next page of buckets.
+     
+     - Warning: You have to use any of provide... method first to be able to use this method.
+     Otherwise an exception will appear.
+     
+     - returns: Promise which resolves with buckets or nil.
+     */
+    func nextPage() -> Promise<[Bucket]?> {
+        return nextPageFor(Bucket)
+    }
+    
+    /**
+     Provides previous page of buckets.
+     
+     - Warning: You have to use any of provide... method first to be able to use this method.
+     Otherwise an exception will appear.
+     
+     - returns: Promise which resolves with buckets or nil.
+     */
+    func previousPage() -> Promise<[Bucket]?> {
+        return previousPageFor(Bucket)
+    }
 }
 
 private extension BucketsProvider {
     
     func provideBucketsWithQueries(queries: [Query], authentizationRequired: Bool) -> Promise<[Bucket]?> {
-        
-        resetPages()
-        didDefineProviderMethodBefore = true
-        
         return Promise<[Bucket]?> { fulfill, reject in
         
             firstly {
                 authorizeIfNeeded(authentizationRequired)
             }.then {
-                self.firstPageFor(Bucket.self, withQueries: queries)
+                self.firstPageForQueries(queries)
             }.then(fulfill).error(reject)
         }
     }

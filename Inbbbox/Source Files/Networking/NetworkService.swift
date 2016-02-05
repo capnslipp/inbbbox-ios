@@ -12,14 +12,6 @@ protocol NetworkService {
     var scheme: String { get }
     var host: String { get }
     var version: String { get }
-    var serviceType: NSURLRequestNetworkServiceType { get }
     
     func authorizeRequest(request: NSMutableURLRequest)
-}
-
-extension NetworkService {
-    /// Network service has network service type as default
-    var serviceType: NSURLRequestNetworkServiceType {
-        return .NetworkServiceTypeDefault
-    }
 }

@@ -16,25 +16,52 @@ class JSONSpecLoader {
     
     static let sharedInstance = JSONSpecLoader()
 
-     func jsonWithResourceName(name: String) -> JSON {
+    func jsonWithResourceName(name: String) -> JSON {
         
         let file = NSBundle(forClass: self.dynamicType).pathForResource(name, ofType:"json")
         let data = NSData(contentsOfFile: file!)
         return JSON(data: data!)
     }
     
-    func fixtureShotJSON(configuration: [(identifier: Int, animated: Bool)]) -> [[String: AnyObject]] {
+    func fixtureShotJSON(configuration: [(identifier: Int, animated: Bool)]) -> [JSON] {
         
-        var array = [[String: AnyObject]]()
+        let json = fixtureJSONArrayWithResourceName("Shot", count: configuration.count)
+        var array = [JSON]()
         
-        configuration.forEach {
-            var json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Shot")
-            json["animated"].boolValue = $0.animated
-            json["id"].intValue = $0.identifier
+        for (index, var element) in json.enumerate() {
+            element["animated"].boolValue = configuration[index].animated
+            element["id"].intValue = configuration[index].identifier
             
-            if let dictionary = json.dictionaryObject {
-                array.appendContentsOf([dictionary])
-            }
+            array.append(element)
+        }
+
+        return array
+    }
+    
+    func fixtureBucketsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("Bucket", count: count)
+    }
+    
+    func fixtureFolloweeConnectionsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("FolloweeConnection", count: count)
+    }
+    
+    func fixtureFollowerConnectionsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("FollowerConnection", count: count)
+    }
+}
+
+private extension JSONSpecLoader {
+    
+    func fixtureJSONArrayWithResourceName(name: String, count: Int) -> [JSON] {
+        
+        var array = [JSON]()
+        
+        for i in 0..<count {
+            var json = JSONSpecLoader.sharedInstance.jsonWithResourceName(name)
+            json["id"].intValue = i+1
+            
+            array.append(json)
         }
         
         return array

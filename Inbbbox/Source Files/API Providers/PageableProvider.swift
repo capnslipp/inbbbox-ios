@@ -1,54 +1,62 @@
 //
-//  Pageable.swift
+//  PageableProvider.swift
 //  Inbbbox
 //
-//  Created by Patryk Kaczmarek on 28/01/16.
+//  Created by Patryk Kaczmarek on 04/02/16.
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
 import Foundation
 import PromiseKit
 
-enum PageableError: ErrorType {
+enum PageableProviderError: ErrorType {
     case PageableBehaviourUndefined
 }
 
-protocol Pageable: class {
+class PageableProvider {
+  
+    private var nextPageableComponents = [PageableComponent]()
+    private var previousPageableComponents = [PageableComponent]()
     
-    var nextPageableComponents: [PageableComponent] { get set }
-    var previousPageableComponents: [PageableComponent] { get set }
+    private var didDefineProviderMethodBefore = false
     
-    func resetPages()
-    func firstPageFor<T: Mappable>(type: T.Type, withQueries queries: [Query]) -> Promise<[T]?>
-    func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?>
-    func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?>
-}
-
-extension Pageable {
-    
-    func firstPageFor<T: Mappable>(type: T.Type, withQueries queries: [Query]) -> Promise<[T]?> {
-        return pageWithQueries(queries)
+    func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
+        return Promise<[T]?> { fulfill, reject in
+            
+            resetPages()
+            didDefineProviderMethodBefore = true
+            
+            pageWithQueries(queries).then(fulfill).error(reject)
+        }
     }
     
     func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
             
+            if !didDefineProviderMethodBefore {
+                throw PageableProviderError.PageableBehaviourUndefined
+            }
+            
             let queries = nextPageableComponents.map {
                 PageableQuery(path: $0.path, queryItems: $0.queryItems)
             } as [Query]
             
-            self.pageWithQueries(queries).then(fulfill).error(reject)
+            pageWithQueries(queries).then(fulfill).error(reject)
         }
     }
     
     func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
             
+            if !didDefineProviderMethodBefore {
+                throw PageableProviderError.PageableBehaviourUndefined
+            }
+            
             let queries = previousPageableComponents.map {
                 PageableQuery(path: $0.path, queryItems: $0.queryItems)
             } as [Query]
             
-            self.pageWithQueries(queries).then(fulfill).error(reject)
+            pageWithQueries(queries).then(fulfill).error(reject)
         }
     }
     
@@ -58,7 +66,7 @@ extension Pageable {
     }
 }
 
-private extension Pageable {
+private extension PageableProvider {
     
     func pageWithQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
@@ -71,7 +79,7 @@ private extension Pageable {
                 
                 self.nextPageableComponents = responses.filter { $0.pages.next != nil }.map { $0.pages.next! }
                 self.previousPageableComponents = responses.filter { $0.pages.previous != nil }.map { $0.pages.previous! }
-
+                
                 let result = responses
                     .map { $0.json?.arrayValue.map { T.map($0) } }
                     .flatMap { $0 }
