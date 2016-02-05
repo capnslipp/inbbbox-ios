@@ -19,7 +19,7 @@ class BucketsLocalStorageSpec: QuickSpec {
         
         describe("when creating bucket") {
             
-            let fixtureBucketId = 1
+            let fixtureBucketId = "1"
             let fixtureBucketName = "fixture.bucket.name"
             
             beforeEach {

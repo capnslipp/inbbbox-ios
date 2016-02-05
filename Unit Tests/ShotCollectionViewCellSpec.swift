@@ -188,7 +188,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     }
 
                     it("should animate returning to initial cell state without delay") {
-                        expect(capturedRestoreInitialStateDelay).to(equal(sharedExampleContext()["expectedDelay"] as! NSTimeInterval))
+                        expect(capturedRestoreInitialStateDelay).to(equal(sharedExampleContext()["expectedDelay"] as? NSTimeInterval))
                     }
 
                     it("should animate returning to initial cell state with damping 0.6") {
@@ -257,18 +257,18 @@ class ShotCollectionViewCellSpec: QuickSpec {
 
                         describe("like image view") {
 
-                            var likeImageView: UIView!
+                            var likeImageView: DoubleImageView!
 
                             beforeEach {
                                 likeImageView = sut.likeImageView
                             }
 
                             it("should display first image view") {
-                                expect(sut.likeImageView.firstImageView.alpha).to(equal(1))
+                                expect(likeImageView.firstImageView.alpha).to(equal(1))
                             }
 
                             it("should hide second image view") {
-                                expect(sut.likeImageView.secondImageView.alpha).to(equal(0))
+                                expect(likeImageView.secondImageView.alpha).to(equal(0))
                             }
                         }
                     }

@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-final class ShotOperationRequester {
+class ShotOperationRequester {
     
     class func likeShot(shotID: String) -> Promise<Void> {
         

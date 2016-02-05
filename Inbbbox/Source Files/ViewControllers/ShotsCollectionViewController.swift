@@ -11,10 +11,12 @@ final class ShotsCollectionViewController: UICollectionViewController {
 //    MARK: - Life cycle
 
     var animationManager = ShotsAnimator()
+    var localStorage = ShotsLocalStorage()
+    var userStorageClass = UserStorage.self
+    var shotOperationRequesterClass =  ShotOperationRequester.self
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
-    let localStorage = ShotsLocalStorage()
 
 //    NGRTemp: temporary implementation - Maybe we should download shots when the ball is jumping? Or just activity indicator will be enough?
     var shots = [Shot]()
@@ -85,9 +87,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
         cell.swipeCompletion = { action in
             switch action {
             case .Like:
-                if UserStorage.currentUser != nil{
-                    ShotOperationRequester.likeShot(shot.identifier)
-                } else{
+                if self.userStorageClass.currentUser != nil {
+                    self.shotOperationRequesterClass.likeShot(shot.identifier)
+                } else {
                     do {
                         try self.localStorage.like(shotID: shot.identifier)
                     } catch {

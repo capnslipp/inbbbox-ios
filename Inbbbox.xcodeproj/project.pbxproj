@@ -18,6 +18,8 @@
 		5A499B6B1C354154009AB421 /* ShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */; };
 		5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
 		5C4A4A3C1C5772340019EADE /* ShotSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */; };
+		5C502AEC1C64F9580043B0D8 /* ShotsLocalStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D687FE2264B4CC53DA8 /* ShotsLocalStorageMock.swift */; };
+		5C502AEE1C64FEDC0043B0D8 /* ShotOperationRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C502AED1C64FEDC0043B0D8 /* ShotOperationRequesterMock.swift */; };
 		5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */; };
 		5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */; };
 		5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0899CD1C32A71E009FB52B /* ORLoginLabel.swift */; };
@@ -132,6 +134,7 @@
 		74F00B6A1C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */; };
 		76E969DD61F6B2F95773D3E0 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E863DC0075B8561A39153AA0 /* Pods_Tests.framework */; };
 		96B0A12C6682F9B408E5CF68 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0759062D32339F0F1B138E /* Pods.framework */; };
+		BEEE9297DBB09F37BF8D17D5 /* UserStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9CA477EB506CA0E007FE /* UserStorageMock.swift */; };
 		BEEE92DB2FA773AEA5E9EBB5 /* CenterButtonTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE95CB455C74161AEBAE96 /* CenterButtonTabBarController.swift */; };
 		BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */; };
 		BEEE935B22E458DAA56334DB /* UIGestureRecognizer+Specs.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9DB7B075CCEC2383EE01 /* UIGestureRecognizer+Specs.m */; };
@@ -235,6 +238,7 @@
 		5A499B681C35411F009AB421 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotSpecExtension.swift; sourceTree = "<group>"; };
+		5C502AED1C64FEDC0043B0D8 /* ShotOperationRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotOperationRequesterMock.swift; sourceTree = "<group>"; };
 		5E0759062D32339F0F1B138E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E0899CD1C32A71E009FB52B /* ORLoginLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ORLoginLabel.swift; sourceTree = "<group>"; };
 		5E0899CF1C32A784009FB52B /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
@@ -375,8 +379,10 @@
 		BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9B96B2E0EEEC762DF2E6 /* ShotsCollectionBackgroundViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionBackgroundViewSpec.swift; sourceTree = "<group>"; };
 		BEEE9BD827DA13B5253F0FF8 /* AnimationDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationDescriptor.swift; sourceTree = "<group>"; };
+		BEEE9CA477EB506CA0E007FE /* UserStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserStorageMock.swift; sourceTree = "<group>"; };
 		BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
 		BEEE9D4BB3B567940D98A215 /* ShotCollectionViewCellDelegateMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellDelegateMock.swift; sourceTree = "<group>"; };
+		BEEE9D687FE2264B4CC53DA8 /* ShotsLocalStorageMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsLocalStorageMock.swift; sourceTree = "<group>"; };
 		BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimatorSpec.swift; sourceTree = "<group>"; };
 		BEEE9DB7B075CCEC2383EE01 /* UIGestureRecognizer+Specs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+Specs.m"; sourceTree = "<group>"; };
 		BEEE9DBA1D3132A02E89AD2E /* ViewControllerPresenterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenterMock.swift; sourceTree = "<group>"; };
@@ -995,6 +1001,9 @@
 				BEEE92A5546E6D5C79EA1634 /* PanGestureRecognizerMock.swift */,
 				BEEE9D4BB3B567940D98A215 /* ShotCollectionViewCellDelegateMock.swift */,
 				BEEE96DE52EFED046C0DD6AD /* ViewMock.swift */,
+				BEEE9D687FE2264B4CC53DA8 /* ShotsLocalStorageMock.swift */,
+				BEEE9CA477EB506CA0E007FE /* UserStorageMock.swift */,
+				5C502AED1C64FEDC0043B0D8 /* ShotOperationRequesterMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -1358,6 +1367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E22ADCF1C635DE5008D900C /* PageableComponentSerializerSpec.swift in Sources */,
+				5C502AEC1C64F9580043B0D8 /* ShotsLocalStorageMock.swift in Sources */,
 				5ED6C5C31C57DA5500A591EA /* FollowersQuerySpec.swift in Sources */,
 				5E5D56401C638E8B00C7957E /* BucketSpecExtension.swift in Sources */,
 				5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */,
@@ -1415,6 +1425,7 @@
 				5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */,
 				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,
 				BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */,
+				5C502AEE1C64FEDC0043B0D8 /* ShotOperationRequesterMock.swift in Sources */,
 				BEEE97370AC7B81A23CD03A0 /* ShotsCollectionBackgroundViewSpec.swift in Sources */,
 				5E781B451C58C00E009A2E14 /* UserSpecExtension.swift in Sources */,
 				BEEE96288C099EC6A58CAC82 /* PanGestureRecognizerMock.swift in Sources */,
@@ -1422,6 +1433,7 @@
 				BEEE9F05CB427B52631AAE7C /* ShotCollectionViewCellDelegateMock.swift in Sources */,
 				5E5D56421C63F29A00C7957E /* ConnectionsProviderSpec.swift in Sources */,
 				BEEE953B3FD7B5D2FBE7DD4C /* ViewMock.swift in Sources */,
+				BEEE9297DBB09F37BF8D17D5 /* UserStorageMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

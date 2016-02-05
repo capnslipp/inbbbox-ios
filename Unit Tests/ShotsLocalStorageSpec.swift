@@ -17,13 +17,13 @@ class ShotsLocalStorageSpec: QuickSpec {
         
         let sut = ShotsLocalStorage(managedContext: setUpInMemoryManagedObjectContext())
         
-        let fixtureShotId1 = 11
-        let fixtureShotId2 = 22
+        let fixtureShotId1 = "11"
+        let fixtureShotId2 = "22"
         
         let bucketsStorage = BucketsLocalStorage(managedContext: sut.managedContext)
-        let fixtureBucketId1 = 1
+        let fixtureBucketId1 = "1"
         let fixtureBucketName1 = "fixture.bucket.name1"
-        let fixtureBucketId2 = 2
+        let fixtureBucketId2 = "2"
         let fixtureBucketName2 = "fixture.bucket.name2"
         
         describe("when liking shots") {

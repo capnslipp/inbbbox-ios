@@ -30,7 +30,7 @@ final class ShotOperationHistoryStorage {
         fetchRequest = NSFetchRequest(entityName: EntityName)
     }
     
-    func insertRecord(shotID: Int, operation: ShotOperationType, bucketID: Int? = nil) throws {
+    func insertRecord(shotID: String, operation: ShotOperationType, bucketID: String? = nil) throws {
         
         let changeRecord = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
         

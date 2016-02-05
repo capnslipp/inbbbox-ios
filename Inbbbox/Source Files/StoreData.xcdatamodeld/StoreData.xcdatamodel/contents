@@ -11,9 +11,9 @@
         <relationship name="buckets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bucket" inverseName="shots" inverseEntity="Bucket" syncable="YES"/>
     </entity>
     <entity name="ShotOperation" syncable="YES">
-        <attribute name="bucket_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="bucket_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="operation_type" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="shot_id" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="shot_id" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Bucket" positionX="-288" positionY="-216" width="128" height="88"/>

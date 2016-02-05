@@ -15,7 +15,7 @@ class AddToBucketQuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return AddToBucketQuery(shotID: 123, bucketID: 234)
+            return AddToBucketQuery(shotID: "123", bucketID: "234")
         }) { Void -> QueryExpectation in
             return (method: .PUT, encoding: .JSON, path: "/buckets/234/shots")
         }
@@ -25,7 +25,7 @@ class AddToBucketQuerySpec: QuickSpec {
             var sut: AddToBucketQuery!
             
             beforeEach {
-                sut = AddToBucketQuery(shotID: 123, bucketID: 234)
+                sut = AddToBucketQuery(shotID: "123", bucketID: "234")
             }
 
             afterEach {
@@ -33,7 +33,7 @@ class AddToBucketQuerySpec: QuickSpec {
             }
             
             it("should have one parameter - shot_id") {
-                expect(sut.parameters.body).to(equal(try! NSJSONSerialization.dataWithJSONObject(["shot_id": 123], options: .PrettyPrinted)))
+                expect(sut.parameters.body).to(equal(try! NSJSONSerialization.dataWithJSONObject(["shot_id": "123"], options: .PrettyPrinted)))
             }
         }
     }
