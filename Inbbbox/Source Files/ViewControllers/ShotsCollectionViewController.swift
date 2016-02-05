@@ -85,10 +85,14 @@ final class ShotsCollectionViewController: UICollectionViewController {
         cell.swipeCompletion = { action in
             switch action {
             case .Like:
-                do {
-                    try self.localStorage.like(shotID: shot.identifier)
-                } catch {
-                    print("failed like shot")
+                if UserStorage.currentUser != nil{
+                    ShotOperationRequester.likeShot(shot.identifier)
+                } else{
+                    do {
+                        try self.localStorage.like(shotID: shot.identifier)
+                    } catch {
+                        print("failed to like shot locally")
+                    }
                 }
             case .Bucket: break
             case .Comment: break

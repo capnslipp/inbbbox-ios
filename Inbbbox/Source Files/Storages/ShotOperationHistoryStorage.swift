@@ -54,7 +54,7 @@ final class ShotOperationHistoryStorage {
             var changeHistory = [ShotOperation]()
             
             _ = results.map {
-                changeHistory.append(ShotOperation(shotID: $0.valueForKey(Attribute.ShotID.rawValue) as! Int, operation: ShotOperationType(rawValue: $0.valueForKey(Attribute.OperationType.rawValue) as! Int)!, bucketID: $0.valueForKey(Attribute.BucketID.rawValue) as? Int))
+                changeHistory.append(ShotOperation(shotID: $0.valueForKey(Attribute.ShotID.rawValue) as! String, operation: ShotOperationType(rawValue: $0.valueForKey(Attribute.OperationType.rawValue) as! Int)!, bucketID: $0.valueForKey(Attribute.BucketID.rawValue) as? String))
             }
             
             return changeHistory
@@ -80,11 +80,11 @@ final class ShotOperationHistoryStorage {
 
 struct ShotOperation {
     
-    var shotID: Int
+    var shotID: String
     var type: ShotOperationType
-    var bucketID: Int?
+    var bucketID: String?
     
-    init(shotID: Int, operation: ShotOperationType, bucketID: Int? = nil) {
+    init(shotID: String, operation: ShotOperationType, bucketID: String? = nil) {
         self.shotID = shotID
         type = operation
     }
