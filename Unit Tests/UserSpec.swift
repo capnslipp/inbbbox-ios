@@ -50,6 +50,10 @@ class UserSpec: QuickSpec {
             it("user's id should be properly mapped") {
                 expect(sut.identifier).to(equal("fixture.id"))
             }
+            
+            it("user's shots count should be properly mapped") {
+                expect(sut.shotsCount).to(equal(1))
+            }
         }
         
         describe("when encoding user") {
@@ -91,6 +95,10 @@ class UserSpec: QuickSpec {
                 
                 it("user's id should be properly decoded") {
                     expect(sut.identifier).to(equal(decodedUser!.identifier))
+                }
+                
+                it("user's shots count should be properly mapped") {
+                    expect(sut.shotsCount).to(equal(1))
                 }
             }
         }

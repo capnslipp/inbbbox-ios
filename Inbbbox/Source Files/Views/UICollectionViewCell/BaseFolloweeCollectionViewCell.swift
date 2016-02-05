@@ -120,7 +120,6 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
             avatarView.imageView.loadImageFromURLString(avatarString)
         }
         userNameLabel.text = followee?.name
-        let numberOfShotsText = (followee?.shotsCount != nil) ? "\(followee!.shotsCount!) shots" : " "
-        numberOfShotsLabel.text = numberOfShotsText
+        numberOfShotsLabel.text = "\(followee!.shotsCount) shots"
     }
 }
