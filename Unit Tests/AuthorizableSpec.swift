@@ -27,7 +27,6 @@ class AuthorizableSpec: QuickSpec {
             if let token = savedTokenBeforeTestLaunch {
                 TokenStorage.storeToken(token)
             }
-            
         }
         
         beforeEach {

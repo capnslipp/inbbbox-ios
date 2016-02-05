@@ -15,10 +15,10 @@ import Mockingjay
 class PageableComponentSerializerSpec: QuickSpec {
     override func spec() {
         
-        var sut: PageableComponent!
+        var component: PageableComponent!
         
         afterEach {
-            sut = nil
+            component = nil
         }
         
         describe("when serializing next component") {
@@ -27,39 +27,39 @@ class PageableComponentSerializerSpec: QuickSpec {
                 
                 beforeEach {
                     let header = self.linkHeaderForTypes([.RelNext])
-                    sut = PageableComponentSerializer.nextPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
+                    component = PageableComponentSerializer.nextPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
                 }
                 
                 it("serialized component should not be nil") {
-                    expect(sut).toNot(beNil())
+                    expect(component).toNot(beNil())
                 }
                 
                 it("serialized component should have correct path") {
-                    expect(sut.path).to(equal("/fixture.path.next"))
+                    expect(component.path).to(equal("/fixture.path.next"))
                 }
                 
                 it("serialized component should have query items") {
-                    expect(sut.queryItems).toNot(beNil())
+                    expect(component.queryItems).toNot(beNil())
                 }
                 
                 it("serialized component should have 2 query items") {
-                    expect(sut.queryItems).to(haveCount(2))
+                    expect(component.queryItems).to(haveCount(2))
                 }
                 
                 it("first query item of serialized component should have proper value") {
-                    expect(sut.queryItems!.first!.value).to(equal("3"))
+                    expect(component.queryItems!.first!.value).to(equal("3"))
                 }
                 
                 it("first query item of serialized component should have proper name") {
-                    expect(sut.queryItems!.first!.name).to(equal("page"))
+                    expect(component.queryItems!.first!.name).to(equal("page"))
                 }
                 
                 it("second query item of serialized component should have proper value") {
-                    expect(sut.queryItems![1].value).to(equal("100"))
+                    expect(component.queryItems![1].value).to(equal("100"))
                 }
                 
                 it("second query item of serialized component should have proper name") {
-                    expect(sut.queryItems![1].name).to(equal("per_page"))
+                    expect(component.queryItems![1].name).to(equal("per_page"))
                 }
             }
             
@@ -67,11 +67,11 @@ class PageableComponentSerializerSpec: QuickSpec {
                 
                 beforeEach {
                     let header = ["fixture.header.key": "fixture.header.value"]
-                    sut = PageableComponentSerializer.nextPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
+                    component = PageableComponentSerializer.nextPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
                 }
                 
                 it("serialized component should not be nil") {
-                    expect(sut).to(beNil())
+                    expect(component).to(beNil())
                 }
             }
         }
@@ -82,39 +82,39 @@ class PageableComponentSerializerSpec: QuickSpec {
                 
                 beforeEach {
                     let header = self.linkHeaderForTypes([.RelPrev])
-                    sut = PageableComponentSerializer.previousPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
+                    component = PageableComponentSerializer.previousPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
                 }
                 
                 it("serialized component should not be nil") {
-                    expect(sut).toNot(beNil())
+                    expect(component).toNot(beNil())
                 }
                 
                 it("serialized component should have correct path") {
-                    expect(sut.path).to(equal("/fixture.path.prev"))
+                    expect(component.path).to(equal("/fixture.path.prev"))
                 }
                 
                 it("serialized component should have query items") {
-                    expect(sut.queryItems).toNot(beNil())
+                    expect(component.queryItems).toNot(beNil())
                 }
                 
                 it("serialized component should have 2 query items") {
-                    expect(sut.queryItems).to(haveCount(2))
+                    expect(component.queryItems).to(haveCount(2))
                 }
                 
                 it("first query item of serialized component should have proper value") {
-                    expect(sut.queryItems!.first!.value).to(equal("1"))
+                    expect(component.queryItems!.first!.value).to(equal("1"))
                 }
                 
                 it("first query item of serialized component should have proper name") {
-                    expect(sut.queryItems!.first!.name).to(equal("page"))
+                    expect(component.queryItems!.first!.name).to(equal("page"))
                 }
                 
                 it("second query item of serialized component should have proper value") {
-                    expect(sut.queryItems![1].value).to(equal("200"))
+                    expect(component.queryItems![1].value).to(equal("200"))
                 }
                 
                 it("second query item of serialized component should have proper name") {
-                    expect(sut.queryItems![1].name).to(equal("per_page"))
+                    expect(component.queryItems![1].name).to(equal("per_page"))
                 }
                 
             }
@@ -123,11 +123,11 @@ class PageableComponentSerializerSpec: QuickSpec {
                 
                 beforeEach {
                     let header = ["fixture.header.key": "fixture.header.value"]
-                    sut = PageableComponentSerializer.previousPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
+                    component = PageableComponentSerializer.previousPageableComponentWithSentQuery(MockQuery(), receivedHeader: header)
                 }
                 
                 it("serialized component should not be nil") {
-                    expect(sut).to(beNil())
+                    expect(component).to(beNil())
                 }
             }
         }

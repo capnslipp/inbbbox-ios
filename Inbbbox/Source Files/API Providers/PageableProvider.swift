@@ -1,5 +1,5 @@
 //
-//  PeagableProvider.swift
+//  PageableProvider.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 04/02/16.
