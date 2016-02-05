@@ -66,6 +66,7 @@
 		5E5D56421C63F29A00C7957E /* ConnectionsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D56411C63F29A00C7957E /* ConnectionsProviderSpec.swift */; };
 		5E5D56441C63F36100C7957E /* FollowerConnection.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E5D56431C63F36100C7957E /* FollowerConnection.json */; };
 		5E5D56461C63F3C800C7957E /* FolloweeConnection.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E5D56451C63F3C800C7957E /* FolloweeConnection.json */; };
+		5E5D56481C64A24400C7957E /* ShotsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5D56471C64A24400C7957E /* ShotsProviderSpec.swift */; };
 		5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E650B401C21884C00F8A192 /* LoginViewController.swift */; };
 		5E781B411C58B694009A2E14 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E781B401C58B694009A2E14 /* User.json */; };
 		5E781B431C58B99A009A2E14 /* JSONSpecLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */; };
@@ -286,6 +287,7 @@
 		5E5D56411C63F29A00C7957E /* ConnectionsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsProviderSpec.swift; sourceTree = "<group>"; };
 		5E5D56431C63F36100C7957E /* FollowerConnection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FollowerConnection.json; sourceTree = "<group>"; };
 		5E5D56451C63F3C800C7957E /* FolloweeConnection.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FolloweeConnection.json; sourceTree = "<group>"; };
+		5E5D56471C64A24400C7957E /* ShotsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderSpec.swift; sourceTree = "<group>"; };
 		5E650B401C21884C00F8A192 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E781B401C58B694009A2E14 /* User.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = User.json; sourceTree = "<group>"; };
 		5E781B421C58B99A009A2E14 /* JSONSpecLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONSpecLoader.swift; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 				5E22ADCE1C635DE5008D900C /* PageableComponentSerializerSpec.swift */,
 				5E5D56391C637FC800C7957E /* BucketsProviderSpec.swift */,
 				5E5D56411C63F29A00C7957E /* ConnectionsProviderSpec.swift */,
+				5E5D56471C64A24400C7957E /* ShotsProviderSpec.swift */,
 				BEEE9B7FDF125A64C50A158E /* Resources */,
 			);
 			path = "Unit Tests";
@@ -1348,6 +1351,7 @@
 				5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
+				5E5D56481C64A24400C7957E /* ShotsProviderSpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */,
 				5E5D563A1C637FC800C7957E /* BucketsProviderSpec.swift in Sources */,
 				5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */,

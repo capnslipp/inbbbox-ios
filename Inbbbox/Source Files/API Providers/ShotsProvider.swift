@@ -158,21 +158,11 @@ private extension ShotsProvider {
     }
     
     func serialize(shots: [Shot]?, _ fulfill: ([Shot]?) -> Void) {
-        fulfill( currentSourceType?.serialize(shots) )
-    }
-}
-
-private extension ShotsProvider.SourceType {
-    
-    func serialize(shots: [Shot]?) -> [Shot]? {
-        
-        guard self == General else {
-            return shots
-        }
-        
-        return shots?
+        let result = shots?
             .filter { !$0.animated } // animated after MVP
             .unique
             .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
+        
+        fulfill(result)
     }
 }

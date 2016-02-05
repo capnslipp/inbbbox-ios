@@ -23,20 +23,18 @@ class JSONSpecLoader {
         return JSON(data: data!)
     }
     
-    func fixtureShotJSON(configuration: [(identifier: Int, animated: Bool)]) -> [[String: AnyObject]] {
+    func fixtureShotJSON(configuration: [(identifier: Int, animated: Bool)]) -> [JSON] {
         
-        var array = [[String: AnyObject]]()
+        let json = fixtureJSONArrayWithResourceName("Shot", count: configuration.count)
+        var array = [JSON]()
         
-        configuration.forEach {
-            var json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Shot")
-            json["animated"].boolValue = $0.animated
-            json["id"].intValue = $0.identifier
+        for (index, var element) in json.enumerate() {
+            element["animated"].boolValue = configuration[index].animated
+            element["id"].intValue = configuration[index].identifier
             
-            if let dictionary = json.dictionaryObject {
-                array.appendContentsOf([dictionary])
-            }
+            array.append(element)
         }
-        
+
         return array
     }
     
