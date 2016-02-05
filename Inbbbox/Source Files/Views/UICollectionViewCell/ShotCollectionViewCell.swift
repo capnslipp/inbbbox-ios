@@ -9,21 +9,21 @@ protocol ShotCollectionViewCellDelegate: class {
     func shotCollectionViewCellDidEndSwiping(shotCollectionViewCell: ShotCollectionViewCell)
 }
 
-enum ShotCollectionViewCellAction {
-    case Like
-    case Bucket
-    case Comment
-}
-
 class ShotCollectionViewCell: UICollectionViewCell {
 
+    enum Action {
+        case Like
+        case Bucket
+        case Comment
+    }
+
     let shotImageView = UIImageView.newAutoLayoutView()
-    let likeImageView = UIImageView(image: UIImage(named: "ic-like-swipe"))
+    let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"), secondImage: UIImage(named: "ic-like-swipe-filled"))
     let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
     let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
 
     var viewClass = UIView.self
-    var swipeCompletion: (ShotCollectionViewCellAction -> Void)?
+    var swipeCompletion: (Action -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
 
     private let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
@@ -128,19 +128,12 @@ class ShotCollectionViewCell: UICollectionViewCell {
         case .Began:
             self.delegate?.shotCollectionViewCellDidStartSwiping(self)
         case .Ended, .Cancelled, .Failed:
-            viewClass.animateWithDuration(0.3,
-                    delay: 0,
-                    usingSpringWithDamping: 0.6,
-                    initialSpringVelocity: 0.9,
-                    options: .CurveEaseInOut,
-                    animations: {
-                        self.shotImageView.transform = CGAffineTransformIdentity
-                    }, completion: { _ in
-                let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
-                let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
+            let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
+            let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
+            animateCellAction(selectedAction) {
                 self.swipeCompletion?(selectedAction)
                 self.delegate?.shotCollectionViewCellDidEndSwiping(self)
-            })
+            }
         default:
             let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
             adjustConstraintsForSwipeXTranslation(xTranslation)
@@ -172,7 +165,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         commentImageView.alpha = min(abs(xTranslation) / 70, 1)
     }
 
-    private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> ShotCollectionViewCellAction {
+    private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
         if 0...likeActionTreshold ~= xTranslation {
             return .Like
         } else if xTranslation > 100 {
@@ -180,6 +173,56 @@ class ShotCollectionViewCell: UICollectionViewCell {
         } else {
             return .Comment
         }
+    }
+    
+    private func animateCellAction(action: Action, completion: (() -> ())?) {
+        switch action {
+        case .Like:
+            bucketImageView.hidden = true
+            plusImageView.hidden = true
+            commentImageView.hidden = true
+            let likeActionAnimationDescriptor = likeActionAnimationDescriptorWithCompletion(completion)
+            viewClass.animateWithDescriptor(likeActionAnimationDescriptor)
+        default:
+            let restoreInitialStateAnimationDescriptor = restoreInitialStateAnimationDescriptorWithCompletion(completion)
+            viewClass.animateWithDescriptor(restoreInitialStateAnimationDescriptor)
+        }
+    }
+
+    private func restoreInitialStateAnimationDescriptorWithCompletion(completion: (() -> ())?) -> AnimationDescriptor {
+        var restoreInitialStateAnimationDescriptor = AnimationDescriptor()
+        restoreInitialStateAnimationDescriptor.options = .CurveEaseInOut
+        restoreInitialStateAnimationDescriptor.animationType = .Spring
+        restoreInitialStateAnimationDescriptor.animations = {
+            self.shotImageView.transform = CGAffineTransformIdentity
+        }
+        restoreInitialStateAnimationDescriptor.completion = { _ in
+            self.bucketImageView.hidden = false
+            self.plusImageView.hidden = false
+            self.commentImageView.hidden = false
+            self.likeImageView.displayFirstImageView()
+            completion?()
+        }
+        return restoreInitialStateAnimationDescriptor
+    }
+
+    private func likeActionAnimationDescriptorWithCompletion(completion: (() -> ())?) -> AnimationDescriptor {
+        var likeActionAnimationDescriptor = AnimationDescriptor()
+        likeActionAnimationDescriptor.animations = {
+            let contentViewWidht = CGRectGetWidth(self.contentView.bounds)
+            self.likeImageViewLeftConstraint?.constant = round(contentViewWidht / 2 - self.likeImageView.intrinsicContentSize().width / 2)
+            self.likeImageViewWidthConstraint?.constant = self.likeImageView.intrinsicContentSize().width
+            self.contentView.layoutIfNeeded()
+            self.likeImageView.alpha = 1.0
+            self.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
+            self.likeImageView.displaySecondImageView()
+        }
+        likeActionAnimationDescriptor.completion = { _ in
+            var delayedRestoreInitialStateAnimationDescriptor = self.restoreInitialStateAnimationDescriptorWithCompletion(completion)
+            delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
+            self.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
+        }
+        return likeActionAnimationDescriptor
     }
 }
 

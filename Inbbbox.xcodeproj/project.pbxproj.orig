@@ -1371,9 +1371,13 @@
 				5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
+<<<<<<< HEAD
 				5E5D56481C64A24400C7957E /* ShotsProviderSpec.swift in Sources */,
-				FF13A3C0B9A1786150870E33 /* ShotsAnimatorMock.swift in Sources */,
+				FF13A3C0B9A1786150870E33 /* ShotsAnimationManagerMock.swift in Sources */,
 				5E5D563A1C637FC800C7957E /* BucketsProviderSpec.swift in Sources */,
+=======
+				FF13A3C0B9A1786150870E33 /* ShotsAnimatorMock.swift in Sources */,
+>>>>>>> master
 				5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */,
 				5EDB832E1C48DF0000FBCA05 /* SharedQuerySpec.swift in Sources */,
 				74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */,
