@@ -31,11 +31,6 @@ class BucketsCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(BucketCollectionViewCell.self, type: .Cell)
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.translucent = true
-    }
 
     // MARK: UICollectionViewDataSource
 

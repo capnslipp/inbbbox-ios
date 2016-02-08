@@ -32,9 +32,7 @@ class DatePickerViewController: UIViewController {
         fatalError("init(nibName:bundle:) has not been implemented")
     }
     
-    override func loadView() {
-        navigationController?.navigationBar.translucent = false
-        
+    override func loadView() {        
         aView = loadViewWithClass(DatePickerView.self)
     }
     
