@@ -3,5 +3,6 @@
     "name" : "fixture.name",
     "username" : "fixture.username",
     "avatar_url" : "fixture.avatar.url",
+    "shots_count" : 1,
     "param_to_omit" : "fixture.param"
 }

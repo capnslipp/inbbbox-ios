@@ -13,11 +13,11 @@ class CenterButtonTabBarController: UITabBarController {
     convenience init() {
         self.init(nibName: nil, bundle: nil)
         
-        let likesViewController = UINavigationController(rootViewController: LikesCollectionViewController(cellHeightToWidthRatio:LikeCollectionViewCell.heightToWidthRatio))
+        let likesViewController = UINavigationController(rootViewController: LikesCollectionViewController(oneColumnLayoutCellHeightToWidthRatio: LikeCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: LikeCollectionViewCell.heightToWidthRatio))
         likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Likes", comment: ""), imageName: "ic-likes")
         let bucketsViewController = UINavigationController(rootViewController: BucketsCollectionViewController())
         bucketsViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Buckets", comment: ""), imageName: "ic-buckets")
-        let followeesViewController = UINavigationController(rootViewController: FolloweesCollectionViewController(cellHeightToWidthRatio: FolloweeCollectionViewCell.heightToWidthRatio))
+        let followeesViewController = UINavigationController(rootViewController: FolloweesCollectionViewController(oneColumnLayoutCellHeightToWidthRatio: LargeFolloweeCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SmallFolloweeCollectionViewCell.heightToWidthRatio))
         followeesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Following", comment: ""), imageName: "ic-following")
         let accountViewController = UINavigationController(rootViewController: SettingsViewController())
         accountViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Account", comment: ""), imageName: "ic-account")

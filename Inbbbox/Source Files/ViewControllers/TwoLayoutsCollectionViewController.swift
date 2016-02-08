@@ -12,15 +12,17 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
 
     // MARK: - Lifecycle
     
-    var cellHeightToWidthRatio = CGFloat(1)
+    var oneColumnLayoutCellHeightToWidthRatio = CGFloat(1)
+    var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(1)
     private var oneColumnLayoutButton: UIBarButtonItem?
     private var twoColumnsLayoutButton: UIBarButtonItem?
     
-    convenience init(cellHeightToWidthRatio: CGFloat) {
+    convenience init(oneColumnLayoutCellHeightToWidthRatio: CGFloat, twoColumnsLayoutCellHeightToWidthRatio: CGFloat) {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
-        flowLayout.itemHeightToWidthRatio = cellHeightToWidthRatio
+        flowLayout.itemHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
         self.init(collectionViewLayout: flowLayout)
-        self.cellHeightToWidthRatio = cellHeightToWidthRatio
+        self.oneColumnLayoutCellHeightToWidthRatio = oneColumnLayoutCellHeightToWidthRatio
+        self.twoColumnsLayoutCellHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
     }
     
     override func viewDidLoad() {
@@ -28,7 +30,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         guard let collectionView = collectionView else {
             return
         }
-        collectionView.backgroundColor = UIColor.backgroundGrayColor()
+        collectionView.backgroundColor = UIColor.whiteColor()
         setupBarButtons()
         updateBarButtons(collectionView.collectionViewLayout)
     }
@@ -71,13 +73,14 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         }
         if collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout) {
             let flowLayout = TwoColumnsCollectionViewFlowLayout()
-            flowLayout.itemHeightToWidthRatio = cellHeightToWidthRatio
+            flowLayout.itemHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         } else {
             let flowLayout = OneColumnCollectionViewFlowLayout()
-            flowLayout.itemHeightToWidthRatio = cellHeightToWidthRatio
+            flowLayout.itemHeightToWidthRatio = oneColumnLayoutCellHeightToWidthRatio
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         }
+        collectionView.reloadData()
         scrollToTop(collectionView)
         updateBarButtons(collectionView.collectionViewLayout)
     }

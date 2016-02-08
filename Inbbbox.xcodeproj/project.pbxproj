@@ -115,9 +115,12 @@
 		5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB241C5912E70003B639 /* ArrayExtension.swift */; };
 		5EE65FA61C5A7EC30055F1AB /* PageableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */; };
 		7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */; };
-		7416CD7A1C591F680051F65B /* FolloweeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7416CD791C591F680051F65B /* FolloweeCollectionViewCell.swift */; };
+		7416CD7A1C591F680051F65B /* SmallFolloweeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7416CD791C591F680051F65B /* SmallFolloweeCollectionViewCell.swift */; };
+		7439A36D1C688798001DBEAE /* FolloweeCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7439A36C1C688798001DBEAE /* FolloweeCellConfigurable.swift */; };
 		745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146931C5217F400710C61 /* BucketsCollectionViewController.swift */; };
 		745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745146951C5235D600710C61 /* BucketCollectionViewCell.swift */; };
+		7454E6CD1C636865009313FC /* BaseFolloweeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7454E6CC1C636865009313FC /* BaseFolloweeCollectionViewCell.swift */; };
+		749B578F1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749B578E1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift */; };
 		74A0184C1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A0184B1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift */; };
 		74A6C67C1C57C84F009BDD75 /* LikesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */; };
 		74A6C67E1C57C8F6009BDD75 /* LikeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A6C67D1C57C8F6009BDD75 /* LikeCollectionViewCell.swift */; };
@@ -341,9 +344,12 @@
 		5EE3AB241C5912E70003B639 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponent.swift; sourceTree = "<group>"; };
 		7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweesCollectionViewController.swift; sourceTree = "<group>"; };
-		7416CD791C591F680051F65B /* FolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
+		7416CD791C591F680051F65B /* SmallFolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallFolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
+		7439A36C1C688798001DBEAE /* FolloweeCellConfigurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweeCellConfigurable.swift; sourceTree = "<group>"; };
 		745146931C5217F400710C61 /* BucketsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsCollectionViewController.swift; sourceTree = "<group>"; };
 		745146951C5235D600710C61 /* BucketCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCell.swift; sourceTree = "<group>"; };
+		7454E6CC1C636865009313FC /* BaseFolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
+		749B578E1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeFolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
 		74A0184B1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayoutSpacings.swift; sourceTree = "<group>"; };
 		74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesCollectionViewController.swift; sourceTree = "<group>"; };
 		74A6C67D1C57C8F6009BDD75 /* LikeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -737,11 +743,13 @@
 		5E4858031C2959E50027B38A /* UICollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				7416CD791C591F680051F65B /* FolloweeCollectionViewCell.swift */,
+				7416CD791C591F680051F65B /* SmallFolloweeCollectionViewCell.swift */,
 				5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */,
 				5E50820F1C313DFF00093191 /* AutoScrollableCollectionViewCell.swift */,
 				745146951C5235D600710C61 /* BucketCollectionViewCell.swift */,
 				74A6C67D1C57C8F6009BDD75 /* LikeCollectionViewCell.swift */,
+				749B578E1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift */,
+				7454E6CC1C636865009313FC /* BaseFolloweeCollectionViewCell.swift */,
 			);
 			path = UICollectionViewCell;
 			sourceTree = "<group>";
@@ -881,6 +889,7 @@
 				F0863DC31C23F3DB0062EA21 /* Reusable.swift */,
 				BEEE9CD76324DA83CFBC6EE0 /* ViewControllerPresenter.swift */,
 				74A6C67F1C57CDAB009BDD75 /* WidthDependentHeight.swift */,
+				7439A36C1C688798001DBEAE /* FolloweeCellConfigurable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1244,12 +1253,13 @@
 				5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */,
 				30E099401C521D44009D2717 /* ShotDetailsHeaderView.swift in Sources */,
 				F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */,
+				7454E6CD1C636865009313FC /* BaseFolloweeCollectionViewCell.swift in Sources */,
 				F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */,
 				5E4857C21C284AF80027B38A /* AuthenticatorError.swift in Sources */,
 				F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */,
-				7416CD7A1C591F680051F65B /* FolloweeCollectionViewCell.swift in Sources */,
+				7416CD7A1C591F680051F65B /* SmallFolloweeCollectionViewCell.swift in Sources */,
 				745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */,
 				74A6C67E1C57C8F6009BDD75 /* LikeCollectionViewCell.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
@@ -1300,6 +1310,7 @@
 				5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */,
 				5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
+				7439A36D1C688798001DBEAE /* FolloweeCellConfigurable.swift in Sources */,
 				F092E26B1C3FD6F900593D18 /* ShotOperationSynchronizer.swift in Sources */,
 				F092E2631C3FD4F600593D18 /* NSManagedObjectExtension.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,
@@ -1326,6 +1337,7 @@
 				5E0D77391C3BD6A9002191A7 /* UserStorage.swift in Sources */,
 				BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */,
 				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
+				749B578F1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift in Sources */,
 				BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */,
 				BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */,
 				5EE3AB201C5905B30003B639 /* ShotsProvider.swift in Sources */,

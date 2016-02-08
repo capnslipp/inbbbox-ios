@@ -57,6 +57,10 @@ class UserStorageSpec: QuickSpec {
                 expect(UserStorage.currentUser!.identifier).to(equal("fixture.id"))
             }
             
+            it("user's shots count should be same as previously stored") {
+                expect(UserStorage.currentUser!.shotsCount).to(equal(1))
+            }
+            
             context("and clearing storage") {
                 
                 beforeEach {

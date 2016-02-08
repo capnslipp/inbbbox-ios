@@ -16,11 +16,12 @@ class TwoColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
        
         if let collectionView = collectionView {
             let spacings = CollectionViewLayoutSpacings()
-            let calculatedItemWidth = (round(CGRectGetWidth(collectionView.bounds)) - 3 * spacings.itemMargin) / 2
+            let calculatedItemWidth = (round(CGRectGetWidth(collectionView.bounds)) - 3 * spacings.twoColumnsItemMargin) / 2
             let calculatedItemHeight = calculatedItemWidth * itemHeightToWidthRatio
             itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
-            minimumLineSpacing = spacings.itemMargin
-            sectionInset = UIEdgeInsets(top: spacings.sectionMargin, left: spacings.sectionMargin, bottom: spacings.sectionMargin, right: spacings.sectionMargin)
+            minimumLineSpacing = spacings.twoColumnsMinimumLineSpacing
+            minimumInteritemSpacing = spacings.twoColumnsMinimymInterimSpacing
+            sectionInset = UIEdgeInsets(top: spacings.twoColumnsSectionMarginVertical, left: spacings.twoColumnsSectionMarginVertical, bottom: spacings.twoColumnsSectionMarginHorizontal, right: spacings.twoColumnsSectionMarginVertical)
         }
     }
 }

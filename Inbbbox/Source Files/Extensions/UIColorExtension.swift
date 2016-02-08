@@ -33,9 +33,17 @@ extension UIColor {
     class func textLightColor() -> UIColor {
         return RGBA(109, 109, 114, 1)
     }
+    
+    class func followeeTextGrayColor() -> UIColor {
+        return RGBA(164, 180, 188, 1)
+    }
 
     class func tabBarGrayColor() -> UIColor {
         return RGBA(41, 41, 41, 1)
+    }
+    
+    class func followeeShotGrayColor() -> UIColor {
+        return RGBA(223, 224, 226, 1)
     }
 
     class func randomColor() -> UIColor {

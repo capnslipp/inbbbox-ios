@@ -15,12 +15,14 @@ final class User: NSObject  {
     let name: String?
     let username: String
     let avatarString: String?
+    let shotsCount: Int
     
     init(json: JSON) {
         identifier = json[Key.Identifier.rawValue].stringValue
         name = json[Key.Name.rawValue].string
         username = json[Key.Username.rawValue].stringValue
         avatarString = json[Key.Avatar.rawValue].string
+        shotsCount = json[Key.ShotsCount.rawValue].intValue
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -28,6 +30,7 @@ final class User: NSObject  {
         name = aDecoder.decodeObjectForKey(Key.Name.rawValue) as? String
         username = aDecoder.decodeObjectForKey(Key.Username.rawValue) as! String
         avatarString = aDecoder.decodeObjectForKey(Key.Avatar.rawValue) as? String
+        shotsCount = aDecoder.decodeObjectForKey(Key.ShotsCount.rawValue) as? Int ?? 0
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -35,6 +38,7 @@ final class User: NSObject  {
         aCoder.encodeObject(name, forKey: Key.Name.rawValue)
         aCoder.encodeObject(username, forKey: Key.Username.rawValue)
         aCoder.encodeObject(avatarString, forKey: Key.Avatar.rawValue)
+        aCoder.encodeObject(shotsCount, forKey: Key.ShotsCount.rawValue)
     }
 }
 
@@ -45,6 +49,7 @@ private extension User {
         case Name = "name"
         case Username = "username"
         case Avatar = "avatar_url"
+        case ShotsCount = "shots_count"
     }
 }
 
