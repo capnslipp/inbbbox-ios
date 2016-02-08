@@ -4,19 +4,19 @@
 
 import UIKit
 
-struct AnimationDescriptor {
+enum AnimationType {
+    case Plain
+    case Spring
+}
 
-    enum AnimationType {
-        case Plain
-        case Spring
-    }
+protocol AnimationDescriptor {
 
-    var animationType = AnimationType.Plain
-    var duration = 0.3
-    var delay = 0.0
-    var springDamping = CGFloat(0.6)
-    var springVelocity = CGFloat(0.9)
-    var options: UIViewAnimationOptions = []
-    var animations = {}
-    var completion: ((Bool) -> Void)?
+    var animationType: AnimationType {get set}
+    var duration: NSTimeInterval {get set}
+    var delay: NSTimeInterval {get set}
+    var springDamping: CGFloat {get set}
+    var springVelocity: CGFloat {get set}
+    var options: UIViewAnimationOptions {get set}
+    var animations: () -> Void {get set}
+    var completion: ((Bool) -> Void)? {get set}
 }

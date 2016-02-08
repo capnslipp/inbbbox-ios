@@ -19,24 +19,25 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     let shotImageView = UIImageView.newAutoLayoutView()
     let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"), secondImage: UIImage(named: "ic-like-swipe-filled"))
+    let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
     let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
     let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
+    private(set) var likeImageViewLeftConstraint: NSLayoutConstraint?
+    private(set) var likeImageViewWidthConstraint: NSLayoutConstraint?
+    private(set) var plusImageViewWidthConstraint: NSLayoutConstraint?
+    private(set) var bucketImageViewWidthConstraint: NSLayoutConstraint?
+    private(set) var commentImageViewRightConstraint: NSLayoutConstraint?
+    private(set) var commentImageViewWidthConstraint: NSLayoutConstraint?
 
+    
     var viewClass = UIView.self
     var swipeCompletion: (Action -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
 
-    private let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
     private let panGestureRecognizer = UIPanGestureRecognizer()
     private let likeActionTreshold = CGFloat(100)
     private let bucketActionTreshold = CGFloat(200)
     private let commentActionTreshold = CGFloat(-100)
-    private var likeImageViewLeftConstraint: NSLayoutConstraint?
-    private var likeImageViewWidthConstraint: NSLayoutConstraint?
-    private var plusImageViewWidthConstraint: NSLayoutConstraint?
-    private var bucketImageViewWidthConstraint: NSLayoutConstraint?
-    private var commentImageViewRightConstraint: NSLayoutConstraint?
-    private var commentImageViewWidthConstraint: NSLayoutConstraint?
     private var didSetConstraints = false
 
     // MARK: - Life cycle
@@ -181,48 +182,10 @@ class ShotCollectionViewCell: UICollectionViewCell {
             bucketImageView.hidden = true
             plusImageView.hidden = true
             commentImageView.hidden = true
-            let likeActionAnimationDescriptor = likeActionAnimationDescriptorWithCompletion(completion)
-            viewClass.animateWithDescriptor(likeActionAnimationDescriptor)
+            viewClass.animateWithDescriptor(ShotCellLikeActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
         default:
-            let restoreInitialStateAnimationDescriptor = restoreInitialStateAnimationDescriptorWithCompletion(completion)
-            viewClass.animateWithDescriptor(restoreInitialStateAnimationDescriptor)
+            viewClass.animateWithDescriptor(ShotCellRestoreInitialStateAnimationDescriptor(shotCell: self, swipeCompletion: completion))
         }
-    }
-
-    private func restoreInitialStateAnimationDescriptorWithCompletion(completion: (() -> ())?) -> AnimationDescriptor {
-        var restoreInitialStateAnimationDescriptor = AnimationDescriptor()
-        restoreInitialStateAnimationDescriptor.options = .CurveEaseInOut
-        restoreInitialStateAnimationDescriptor.animationType = .Spring
-        restoreInitialStateAnimationDescriptor.animations = {
-            self.shotImageView.transform = CGAffineTransformIdentity
-        }
-        restoreInitialStateAnimationDescriptor.completion = { _ in
-            self.bucketImageView.hidden = false
-            self.plusImageView.hidden = false
-            self.commentImageView.hidden = false
-            self.likeImageView.displayFirstImageView()
-            completion?()
-        }
-        return restoreInitialStateAnimationDescriptor
-    }
-
-    private func likeActionAnimationDescriptorWithCompletion(completion: (() -> ())?) -> AnimationDescriptor {
-        var likeActionAnimationDescriptor = AnimationDescriptor()
-        likeActionAnimationDescriptor.animations = {
-            let contentViewWidht = CGRectGetWidth(self.contentView.bounds)
-            self.likeImageViewLeftConstraint?.constant = round(contentViewWidht / 2 - self.likeImageView.intrinsicContentSize().width / 2)
-            self.likeImageViewWidthConstraint?.constant = self.likeImageView.intrinsicContentSize().width
-            self.contentView.layoutIfNeeded()
-            self.likeImageView.alpha = 1.0
-            self.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
-            self.likeImageView.displaySecondImageView()
-        }
-        likeActionAnimationDescriptor.completion = { _ in
-            var delayedRestoreInitialStateAnimationDescriptor = self.restoreInitialStateAnimationDescriptorWithCompletion(completion)
-            delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
-            self.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
-        }
-        return likeActionAnimationDescriptor
     }
 }
 

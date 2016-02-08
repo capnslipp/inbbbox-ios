@@ -15,13 +15,13 @@ extension UIView {
         let completion = animationDescriptor.completion
 
         switch animationType {
-        case AnimationDescriptor.AnimationType.Plain:
+        case AnimationType.Plain:
             self.animateWithDuration(duration,
                     delay: delay,
                     options: options,
                     animations: animations,
                     completion: completion)
-        case AnimationDescriptor.AnimationType.Spring:
+        case AnimationType.Spring:
             let springDamping = animationDescriptor.springDamping
             let springVelocity = animationDescriptor.springVelocity
             self.animateWithDuration(duration,
