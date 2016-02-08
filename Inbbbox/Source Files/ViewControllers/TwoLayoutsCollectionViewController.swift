@@ -35,11 +35,6 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         updateBarButtons(collectionView.collectionViewLayout)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.translucent = true
-    }
-    
     // MARK: Configuration
     
     func setupBarButtons() {

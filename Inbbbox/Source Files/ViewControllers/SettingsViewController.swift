@@ -38,12 +38,6 @@ class SettingsViewController: UITableViewController {
 
         provideDataForHeader()
     }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.navigationBar.translucent = true
-    }
 }
 
 // MARK: ModelUpdatable
