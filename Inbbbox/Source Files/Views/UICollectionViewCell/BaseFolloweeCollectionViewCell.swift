@@ -60,7 +60,6 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     }
     
     override func updateConstraints() {
-        super.updateConstraints()
         if !didSetConstraints {
             let spacings = CollectionViewLayoutSpacings()
             let shotsViewHeight = spacings.shotHeightToWidthRatio * frame.width
@@ -70,5 +69,6 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
             infoView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotsView)
             didSetConstraints = true
         }
+        super.updateConstraints()
     }
 }

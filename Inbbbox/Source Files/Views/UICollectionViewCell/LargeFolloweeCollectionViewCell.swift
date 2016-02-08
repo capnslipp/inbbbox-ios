@@ -23,12 +23,12 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     // MARK: - UIView
     
     override func updateConstraints() {
-        super.updateConstraints()
         if !didSetConstraints {
             setShotsViewConstraints()
             setInfoViewConstraints()
             didSetConstraints = true
         }
+        super.updateConstraints()
     }
     
     // MARK: - Followee Cell Configurable
