@@ -13,9 +13,9 @@ import PromiseKit
 @testable import Inbbbox
 
 class ShotOperationRequesterMock: ShotOperationRequester {
-    
+
     static let likeShotStub = Stub<String, Promise<Void>>()
-    
+
     override class func likeShot(shotID: String) -> Promise<Void> {
         return try! likeShotStub.invoke(shotID)
     }

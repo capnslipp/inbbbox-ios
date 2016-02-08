@@ -93,7 +93,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
                     do {
                         try self.localStorage.like(shotID: shot.identifier)
                     } catch {
-                        print("failed to like shot locally")
                     }
                 }
             case .Bucket: break
