@@ -185,28 +185,28 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 describe("swipe completion") {
 
                     context("when action is like") {
-                        
+
                         context("when user is not signed in") {
-                            
+
                             var capturedShotID: String!
-                            
+
                             beforeEach {
                                 let localStorageMock = ShotsLocalStorageMock()
                                 localStorageMock.likeStub.on(any()) { shotID in
                                     capturedShotID = shotID
                                 }
                                 sut.localStorage = localStorageMock
-                                
+
                                 cell.swipeCompletion?(.Like)
                             }
-                            
+
                             it("should like shot locally with proper ID") {
                                 expect(capturedShotID).to(equal("2479405"))
                             }
                         }
 
                         context("when user is signed in") {
-                            
+
                             var capturedShotID: String!
 
                             beforeEach {
@@ -215,14 +215,14 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                                     return User.fixtureUser()
                                 }
                                 sut.userStorageClass = userStorageMockClass
-                                
+
                                 let shotOperationRequesterMockClass = ShotOperationRequesterMock.self
                                 shotOperationRequesterMockClass.likeShotStub.on(any()) { shotID in
                                     capturedShotID = shotID
-                                    return Promise<Void> { _, _ in }
+                                    return Promise()
                                 }
                                 sut.shotOperationRequesterClass = shotOperationRequesterMockClass
-                                
+
                                 cell.swipeCompletion?(.Like)
                             }
 
