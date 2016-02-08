@@ -9,9 +9,9 @@
 import Foundation
 import PromiseKit
 
-final class ShotOperationRequester {
+class ShotOperationRequester {
     
-    class func likeShot(shotID: Int) -> Promise<Void> {
+    class func likeShot(shotID: String) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             
@@ -28,7 +28,7 @@ final class ShotOperationRequester {
         }
     }
     
-    class func unlikeShot(shotID: Int) -> Promise<Void> {
+    class func unlikeShot(shotID: String) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             
@@ -45,7 +45,7 @@ final class ShotOperationRequester {
         }
     }
     
-    class func addToBucket(shotID: Int, bucketID: Int) -> Promise<Void> {
+    class func addToBucket(shotID: String, bucketID: String) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             
@@ -62,7 +62,7 @@ final class ShotOperationRequester {
         }
     }
     
-    class func removeFromBucket(shotID: Int, bucketID: Int) -> Promise<Void> {
+    class func removeFromBucket(shotID: String, bucketID: String) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             

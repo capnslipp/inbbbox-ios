@@ -9,7 +9,7 @@
 import Foundation
 import KeychainAccess
 
-final class UserStorage {
+class UserStorage {
     
     private static let KeychainService = "co.netguru.inbbbox.keychain.user"
     private static let keychain = Keychain(service: KeychainService)

@@ -11,6 +11,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
 //    MARK: - Life cycle
 
     var animationManager = ShotsAnimator()
+    var localStorage = ShotsLocalStorage()
+    var userStorageClass = UserStorage.self
+    var shotOperationRequesterClass =  ShotOperationRequester.self
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
@@ -81,6 +84,21 @@ final class ShotsCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         let shot = shots[indexPath.item]
+        cell.swipeCompletion = { action in
+            switch action {
+            case .Like:
+                if self.userStorageClass.currentUser != nil {
+                    self.shotOperationRequesterClass.likeShot(shot.identifier)
+                } else {
+                    do {
+                        try self.localStorage.like(shotID: shot.identifier)
+                    } catch {
+                    }
+                }
+            case .Bucket: break
+            case .Comment: break
+            }
+        }
         cell.delegate = self
         // NGRTemp: temporary implementation - image should probably be downloaded earlier
         cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))

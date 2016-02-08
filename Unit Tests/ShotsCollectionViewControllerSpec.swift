@@ -5,6 +5,7 @@
 import Quick
 import Nimble
 import Dobby
+import PromiseKit
 
 @testable import Inbbbox
 
@@ -140,7 +141,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 // NGRTodo: Update this spec
                 pending("implementation changed") {
                     context("when animations did finish") {
-                        
+
                         beforeEach {
                             let animationManagerMock = ShotsAnimatorMock()
                             animationManagerMock.startAnimationWithCompletionStub.on(any()) { completion in
@@ -150,7 +151,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                             sut.viewDidAppear(true)
                             numberOfItems = sut.collectionView(CollectionViewMock(), numberOfItemsInSection: 0)
                         }
-                        
+
                         it("should return number of shots") {
                             expect(numberOfItems).to(equal(10))
                         }
@@ -160,7 +161,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
             describe("cell for item at index path") {
 
-                var cell: UICollectionViewCell!
+                var cell: ShotCollectionViewCell!
                 var capturedIdentifier: String!
 
                 beforeEach {
@@ -170,7 +171,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                         capturedIdentifier = identifier
                         return ShotCollectionViewCell()
                     }
-                    cell = sut.collectionView(collectionViewMock, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+                    cell = sut.collectionView(collectionViewMock, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)) as! ShotCollectionViewCell
                 }
 
                 it("should not be nil") {
@@ -179,6 +180,57 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
                 it("should dequeue cell with proper identifier") {
                     expect(capturedIdentifier).to(equal("ShotCollectionViewCellIdentifier"))
+                }
+
+                describe("swipe completion") {
+
+                    context("when action is like") {
+
+                        context("when user is not signed in") {
+
+                            var capturedShotID: String!
+
+                            beforeEach {
+                                let localStorageMock = ShotsLocalStorageMock()
+                                localStorageMock.likeStub.on(any()) { shotID in
+                                    capturedShotID = shotID
+                                }
+                                sut.localStorage = localStorageMock
+
+                                cell.swipeCompletion?(.Like)
+                            }
+
+                            it("should like shot locally with proper ID") {
+                                expect(capturedShotID).to(equal("2479405"))
+                            }
+                        }
+
+                        context("when user is signed in") {
+
+                            var capturedShotID: String!
+
+                            beforeEach {
+                                let userStorageMockClass = UserStorageMock.self
+                                userStorageMockClass.currentUserStub.on(any()) { _ in
+                                    return User.fixtureUser()
+                                }
+                                sut.userStorageClass = userStorageMockClass
+
+                                let shotOperationRequesterMockClass = ShotOperationRequesterMock.self
+                                shotOperationRequesterMockClass.likeShotStub.on(any()) { shotID in
+                                    capturedShotID = shotID
+                                    return Promise()
+                                }
+                                sut.shotOperationRequesterClass = shotOperationRequesterMockClass
+
+                                cell.swipeCompletion?(.Like)
+                            }
+
+                            it("should like shot with proper ID") {
+                                expect(capturedShotID).to(equal("2479405"))
+                            }
+                        }
+                    }
                 }
             }
         }

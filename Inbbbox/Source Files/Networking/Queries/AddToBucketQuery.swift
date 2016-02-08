@@ -14,7 +14,7 @@ struct AddToBucketQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .JSON)
     
-    init(shotID: Int, bucketID: Int) {
+    init(shotID: String, bucketID: String) {
         path = "/buckets/" + bucketID.stringValue + "/shots"
         parameters["shot_id"] = shotID
     }

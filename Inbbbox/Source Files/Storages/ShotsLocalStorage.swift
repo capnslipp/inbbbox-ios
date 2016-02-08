@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-final class ShotsLocalStorage {
+class ShotsLocalStorage {
     
     private let ShotEntityName = "Shot"
     private let BucketEntityName = "Bucket"
@@ -42,10 +42,10 @@ final class ShotsLocalStorage {
         bucketEntity = NSEntityDescription.entityForName(BucketEntityName, inManagedObjectContext: self.managedContext)
     }
     
-    func like(shotID shotID: Int) throws {
+    func like(shotID shotID: String) throws {
         
         let shotFetchRequest = NSFetchRequest(entityName: ShotEntityName)
-        let shotPredicate = NSPredicate(format: "id == %d", shotID)
+        let shotPredicate = NSPredicate(format: "id == %@", shotID)
         shotFetchRequest.predicate = shotPredicate
         
         do {
@@ -65,10 +65,10 @@ final class ShotsLocalStorage {
         }
     }
     
-    func unlike(shotID shotID: Int) throws {
+    func unlike(shotID shotID: String) throws {
         
         let shotFetchRequest = NSFetchRequest(entityName: ShotEntityName)
-        let shotPredicate = NSPredicate(format: "id == %d", shotID)
+        let shotPredicate = NSPredicate(format: "id == %@", shotID)
         shotFetchRequest.predicate = shotPredicate
         
         do {
@@ -88,14 +88,14 @@ final class ShotsLocalStorage {
         }
     }
     
-    func addToBucket(shotID shotID: Int, bucketID: Int) throws {
+    func addToBucket(shotID shotID: String, bucketID: String) throws {
         
         let bucketFetchRequest = NSFetchRequest(entityName: BucketEntityName)
-        let bucketPredicate = NSPredicate(format: "id == %d", bucketID)
+        let bucketPredicate = NSPredicate(format: "id == %@", bucketID)
         bucketFetchRequest.predicate = bucketPredicate
         
         let shotFetchRequest = NSFetchRequest(entityName: ShotEntityName)
-        let shotPredicate = NSPredicate(format: "id == %d", shotID)
+        let shotPredicate = NSPredicate(format: "id == %@", shotID)
         shotFetchRequest.predicate = shotPredicate
         
         do {
@@ -123,14 +123,14 @@ final class ShotsLocalStorage {
         }
     }
     
-    func removeFromBucket(shotID shotID: Int, bucketID: Int) throws {
+    func removeFromBucket(shotID shotID: String, bucketID: String) throws {
         
         let bucketFetchRequest = NSFetchRequest(entityName: BucketEntityName)
-        let bucketPredicate = NSPredicate(format: "id == %d", bucketID)
+        let bucketPredicate = NSPredicate(format: "id == %@", bucketID)
         bucketFetchRequest.predicate = bucketPredicate
         
         let shotFetchRequest = NSFetchRequest(entityName: ShotEntityName)
-        let shotPredicate = NSPredicate(format: "id == %d", shotID)
+        let shotPredicate = NSPredicate(format: "id == %@", shotID)
         shotFetchRequest.predicate = shotPredicate
         
         do {

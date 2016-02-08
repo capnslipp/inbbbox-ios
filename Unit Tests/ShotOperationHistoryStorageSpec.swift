@@ -17,8 +17,8 @@ class ShotOperationHistoryStorageSpec: QuickSpec {
         
         let sut = ShotOperationHistoryStorage(managedContext: setUpInMemoryManagedObjectContext())
         
-        let fixtureShotId = 1
-        let fixtureBucketId = 1
+        let fixtureShotId = "1"
+        let fixtureBucketId = "1"
         
         describe("when operate on shots and buckets") {
             

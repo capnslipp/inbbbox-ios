@@ -10,7 +10,7 @@ import CoreData
 
 class BucketManagedObject: NSManagedObject {
     
-    @NSManaged var id: Int
+    @NSManaged var id: String
     @NSManaged var name: String
     @NSManaged var shots: NSSet?
     
