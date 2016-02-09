@@ -9,7 +9,7 @@
 import UIKit
 
 struct DefaultAnimationDescriptor: AnimationDescriptor {
-    
+
     var animationType = AnimationType.Plain
     var duration = 0.3
     var delay = 0.0

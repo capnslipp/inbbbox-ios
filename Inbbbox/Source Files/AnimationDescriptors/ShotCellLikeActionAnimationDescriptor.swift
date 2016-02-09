@@ -9,7 +9,7 @@
 import UIKit
 
 struct ShotCellLikeActionAnimationDescriptor: AnimationDescriptor {
-    
+
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Plain
     var duration = 0.3
@@ -19,7 +19,7 @@ struct ShotCellLikeActionAnimationDescriptor: AnimationDescriptor {
     var options: UIViewAnimationOptions = []
     var animations: () -> Void
     var completion: ((Bool) -> Void)?
-    
+
     init(shotCell: ShotCollectionViewCell, swipeCompletion: (() -> ())?) {
         self.shotCell = shotCell
         animations = {

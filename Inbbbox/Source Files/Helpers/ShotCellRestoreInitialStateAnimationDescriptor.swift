@@ -9,7 +9,7 @@
 import UIKit
 
 struct ShotCellRestoreInitialStateAnimationDescriptor: AnimationDescriptor {
-    
+
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Spring
     var duration = 0.3
@@ -19,7 +19,7 @@ struct ShotCellRestoreInitialStateAnimationDescriptor: AnimationDescriptor {
     var options: UIViewAnimationOptions = .CurveEaseInOut
     var animations: () -> Void
     var completion: ((Bool) -> Void)?
-    
+
     init(shotCell: ShotCollectionViewCell, swipeCompletion: (() -> ())?) {
         self.shotCell = shotCell
         animations = {
