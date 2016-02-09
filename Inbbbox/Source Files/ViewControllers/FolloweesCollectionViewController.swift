@@ -14,7 +14,9 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     // MARK: - Lifecycle
     
     var followees = [Followee]()
+    var followeesShots = [Followee : [Shot]]()
     let connectionsProvider = ConnectionsProvider()
+    let shotsProvider = ShotsProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,21 +26,44 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
         title = NSLocalizedString("Following", comment:"")
+        downloadFollowees()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        //NGRTodo: use paging
+    // MARK: Downloading
+    
+    func downloadFollowees() {
+    //NGRTodo: use paging
         firstly {
             self.connectionsProvider.provideMyFollowees()
-        }.then { followees -> Void in
-            if let followees = followees {
-                self.followees = followees
+            }.then { followees -> Void in
+                if let followees = followees {
+                    self.followees = followees
+                    self.downloadShotsForFollowees()
+                }
                 self.collectionView?.reloadData()
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+                print(error)
+        }
+    }
+    
+    func downloadShotsForFollowees() {
+        for index in 0...followees.count - 1 {
+            let followee = followees[index]
+            firstly {
+                self.shotsProvider.provideShotsForUser(followee)
+                }.then { shots -> Void in
+                if let shots = shots {
+                        self.followeesShots[followee] = shots
+                    } else {
+                        self.followeesShots[followee] = [Shot]()
+                    }
+                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                }.error { error in
+                    // NGRTemp: Need mockups for error message view
+                    print(error)
             }
-        }.error { error in
-            // NGRTemp: Need mockups for error message view
-            print(error)
         }
     }
     
@@ -53,18 +78,20 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             let followee = followees[indexPath.row]
-            //NGRTemp: download shots for users
-            let shotImagesUrlStrings = ["https://d13yacurqjgara.cloudfront.net/users/1065997/screenshots/2500813/3_1x.png","https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png","https://d13yacurqjgara.cloudfront.net/users/721601/screenshots/2500809/mouse_1x.png","https://d13yacurqjgara.cloudfront.net/users/159102/screenshots/2500807/floating_dribbble_1x.jpg"]
             presentFoloweeForCell(followee, cell: cell)
-            presentSmallShotsImagesForCell(shotImagesUrlStrings, cell: cell)
+            if let followeeShots = followeesShots[followee] {
+                let shotImagesUrls = followeeShots.map({ $0.image.normalURL })
+                presentSmallShotsImagesForCell(shotImagesUrls, cell: cell)
+            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            
             let followee = followees[indexPath.row]
-            //NGRTemp: download shots for users
-            let shotImageUrlString = "https://d13yacurqjgara.cloudfront.net/users/691242/screenshots/2500811/cy_logo_challenge_004_dbl_1x.png"
             presentFoloweeForCell(followee, cell: cell)
-            presentLargeShotImageForCell(shotImageUrlString, cell: cell)
+            if let shotImageUrl = followeesShots[followee]?.first?.image.normalURL {
+                presentLargeShotImageForCell(shotImageUrl, cell: cell)
+            }
             return cell
         }
     }
@@ -88,34 +115,34 @@ private extension FolloweesCollectionViewController {
         cell.numberOfShotsLabel.text = "\(followee.shotsCount) shots"
     }
     
-    func presentLargeShotImageForCell(shotImageUrlString: String, cell: LargeFolloweeCollectionViewCell) {
-        cell.shotImageView.loadImageFromURLString(shotImageUrlString)
+    func presentLargeShotImageForCell(shotImageUrl: NSURL, cell: LargeFolloweeCollectionViewCell) {
+        cell.shotImageView.loadImageFromURL(shotImageUrl)
     }
     
-    func presentSmallShotsImagesForCell(shotImagesUrlStrings: [String], cell: SmallFolloweeCollectionViewCell) {
-        switch shotImagesUrlStrings.count {
+    func presentSmallShotsImagesForCell(shotImagesUrls: [NSURL], cell: SmallFolloweeCollectionViewCell) {
+        switch shotImagesUrls.count {
         case 0:
             return
         case 1:
-            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
+            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[0])
+            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[0])
+            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[0])
         case 2:
-            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
+            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[1])
+            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[1])
+            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[0])
         case 3:
-            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
-            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
+            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
+            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[1])
+            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[2])
+            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[0])
         default:
-            cell.firstShotImageView.loadImageFromURLString(shotImagesUrlStrings[0])
-            cell.secondShotImageView.loadImageFromURLString(shotImagesUrlStrings[1])
-            cell.thirdShotImageView.loadImageFromURLString(shotImagesUrlStrings[2])
-            cell.fourthShotImageView.loadImageFromURLString(shotImagesUrlStrings[3])
+            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
+            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[1])
+            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[2])
+            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[3])
         }
     }
 }
