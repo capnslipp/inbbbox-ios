@@ -31,7 +31,7 @@ class RoundedImageView: UIView {
     }
     
     // MARK: Public
-    func updateWith(image: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat, frame: CGRect) {
+    func updateWith(image: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat) {
         imageView.image = image
         cornersToRound = byRoundingCorners
         radiusToSet = radius
