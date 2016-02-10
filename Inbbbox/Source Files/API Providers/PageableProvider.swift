@@ -11,23 +11,47 @@ import PromiseKit
 import SwiftyJSON
 
 enum PageableProviderError: ErrorType {
-    case PageableBehaviourUndefined
+    case BehaviourUndefined
+    case DidReachLastPage
+    case DidReachFirstPage
 }
 
 class PageableProvider {
+    
+    private(set) var page = UInt(1)
+    private(set) var pagination = UInt(30)
   
-    private var nextPageableComponents = [PageableComponent]()
-    private var previousPageableComponents = [PageableComponent]()
+    private var nextPageableComponents: [PageableComponent]?
+    private var previousPageableComponents: [PageableComponent]?
     
     private var serializationKey: String?
     private var didDefineProviderMethodBefore = false
     
-    func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
+     /**
+     Initializer with customizable parameters.
+     
+     - parameter page:          Number of page from which ShotsProvider should start to provide shots.
+     - parameter pagination:    Pagination of request.
+     */
+    init(page: UInt, pagination: UInt) {
+        self.page = page
+        self.pagination = pagination
+    }
+    
+    /**
+     Default initializer provided for simplify initalization with default parameters.
+     Required by subclasses.
+     */
+    init() {}
+    
+    func firstPageForQueries<T: Mappable>(var queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
             
             resetPages()
             serializationKey = key
             didDefineProviderMethodBefore = true
+            
+            queries = queries.map { queryByPagingConfiguration($0) }
             
             pageWithQueries(queries).then(fulfill).error(reject)
         }
@@ -37,7 +61,11 @@ class PageableProvider {
         return Promise<[T]?> { fulfill, reject in
             
             if !didDefineProviderMethodBefore {
-                throw PageableProviderError.PageableBehaviourUndefined
+                throw PageableProviderError.BehaviourUndefined
+            }
+            
+            guard let nextPageableComponents = nextPageableComponents else {
+                throw PageableProviderError.DidReachLastPage
             }
             
             let queries = nextPageableComponents.map {
@@ -52,7 +80,11 @@ class PageableProvider {
         return Promise<[T]?> { fulfill, reject in
             
             if !didDefineProviderMethodBefore {
-                throw PageableProviderError.PageableBehaviourUndefined
+                throw PageableProviderError.BehaviourUndefined
+            }
+            
+            guard let previousPageableComponents = previousPageableComponents else {
+                throw PageableProviderError.DidReachFirstPage
             }
             
             let queries = previousPageableComponents.map {
@@ -65,8 +97,8 @@ class PageableProvider {
     
     func resetPages() {
         serializationKey = nil
-        nextPageableComponents = []
-        previousPageableComponents = []
+        nextPageableComponents = nil
+        previousPageableComponents = nil
     }
 }
 
@@ -81,8 +113,16 @@ private extension PageableProvider {
                 when(requests.map { $0.resume() })
             }.then { responses -> Void in
                 
-                self.nextPageableComponents = responses.filter { $0.pages.next != nil }.map { $0.pages.next! }
-                self.previousPageableComponents = responses.filter { $0.pages.previous != nil }.map { $0.pages.previous! }
+                self.nextPageableComponents = {
+                    let next = responses.filter { $0.pages.next != nil }.map { $0.pages.next! }
+                    
+                    return next.count > 0 ? next : nil
+                }()
+                self.previousPageableComponents = {
+                    let previous = responses.filter { $0.pages.previous != nil }.map { $0.pages.previous! }
+                    
+                    return previous.count > 0 ? previous : nil
+                }()
                 
                 let result = responses
                     .map { $0.json?.arrayValue.map { T.map( self.serializationKey != nil ? $0[self.serializationKey!] : $0 ) } }
@@ -93,5 +133,13 @@ private extension PageableProvider {
                 
             }.error(reject)
         }
+    }
+    
+    func queryByPagingConfiguration(var query: Query) -> Query {
+        
+        query.parameters["page"] = page
+        query.parameters["per_page"] = pagination
+        
+        return query
     }
 }

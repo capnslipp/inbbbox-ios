@@ -12,7 +12,6 @@ import PromiseKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let c = CommentsProvider()
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -25,47 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
-        
-        
-        Settings.StreamSource.PopularToday = true
-        
-        ShotsProvider().provideShots().then { _shots in
-            
-//            print(_shots!.first!.title)
-//            print(_shots!.first!.identifier)
-            
-            return self.c.provideCommentsForShot(_shots!.first!)
-        }.then { (_comments: [Comment]?)  in
-            
-            print("1")
-            print(_comments?.count)
-            
-            _comments?.forEach {
-                print($0.body?.string)
-            }
-            
-            return self.c.nextPage()
-        }.then { (_comments: [Comment]?)  in
-            
-            print("2")
-            print(_comments?.count)
-            
-            _comments?.forEach {
-                print($0.body?.string)
-                }
-            
-            return self.c.nextPage()
-        }.then { (_comments: [Comment]?) -> Void  in
-            
-            print("3")
-            print(_comments)
-            
-            _comments?.forEach {
-                print($0.body?.string)
-            }
-        }.error { _error in
-            print(_error)
-        }
         
         return true
     }
