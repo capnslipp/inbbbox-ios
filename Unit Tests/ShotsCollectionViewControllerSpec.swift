@@ -201,7 +201,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                             }
 
                             it("should like shot locally with proper ID") {
-                                expect(capturedShotID).to(equal("2479405"))
+                                expect(capturedShotID).to(equal("fixture.identifier"))
                             }
                         }
 
@@ -227,7 +227,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                             }
 
                             it("should like shot with proper ID") {
-                                expect(capturedShotID).to(equal("2479405"))
+                                expect(capturedShotID).to(equal("fixture.identifier"))
                             }
                         }
                     }
