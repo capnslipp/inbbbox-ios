@@ -62,7 +62,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                                 NSIndexPath(forRow: self.followees.indexOfObject($0), inSection: 0)
                             })
                             self.collectionView?.insertItemsAtIndexPaths(indexPaths)
-                            self.downloadShots(followees)}
+                            self.downloadShots(followees)
+                        }
                     }
                 }.error { error in
                     // NGRTemp: Need mockups for error message view
