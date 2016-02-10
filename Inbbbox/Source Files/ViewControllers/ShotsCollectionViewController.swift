@@ -104,6 +104,8 @@ final class ShotsCollectionViewController: UICollectionViewController {
         cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
         return cell
     }
+    
+    // MARK: UICollectionViewDelegate
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
@@ -114,6 +116,23 @@ final class ShotsCollectionViewController: UICollectionViewController {
         shotDetailsVC.delegate = self
 
         viewControllerPresenter.presentViewController(shotDetailsVC, animated: true, completion: nil)
+    }
+    
+    // MARK: UIScrollViewDelegate
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard let collectionView = collectionView else {
+            return
+        }
+        let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
+        
+        for (_, cell) in collectionView.visibleCells().enumerate() {
+            if let shotCell = cell as? ShotCollectionViewCell, indexPath = collectionView.indexPathForCell(shotCell) {
+                let shot = shots[indexPath.item]
+                let image = UIImage.cachedImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
+                shotCell.shotImageView.image = image?.blurredImage(blur)
+            }
+        }
     }
 
     // MARK: - Helpers
