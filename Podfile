@@ -30,6 +30,8 @@ pod 'SwiftyUserDefaults', '~> 2.0'
 
 pod 'KFSwiftImageLoader', '~> 2.0.1'
 
+pod 'GPUImage', '~> 0.1'
+
 pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
     :git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git',
     :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
