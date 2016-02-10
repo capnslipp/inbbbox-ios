@@ -13,10 +13,11 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     
     // MARK: - Lifecycle
     
-    var followees = [Followee]()
-    var followeesShots = [Followee : [Shot]]()
-    let connectionsProvider = ConnectionsProvider()
-    let shotsProvider = ShotsProvider()
+    private var followees = [Followee]()
+    private var followeesShots = [Followee : [Shot]]()
+    private let connectionsProvider = ConnectionsProvider()
+    private let shotsProvider = ShotsProvider()
+    private var isNextPageAvailable = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +33,12 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     // MARK: Downloading
     
     func downloadFollowees() {
-    //NGRTodo: use paging
         firstly {
             self.connectionsProvider.provideMyFollowees()
             }.then { followees -> Void in
                 if let followees = followees {
                     self.followees = followees
-                    self.downloadShotsForFollowees()
+                    self.downloadShots(followees)
                 }
                 self.collectionView?.reloadData()
             }.error { error in
@@ -47,7 +47,33 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         }
     }
     
-    func downloadShotsForFollowees() {
+    func downloadFolloweesForNextPage() {
+        if isNextPageAvailable {
+            firstly {
+                self.connectionsProvider.nextPage()
+                }.then { followees -> Void in
+                    if let followees = followees {
+                        if followees.count > 0 {
+                           for followee in followees {
+                                self.followees.append(followee)
+                            }
+                            self.collectionView?.reloadData()
+                            self.downloadShots(self.followees)
+                        } else {
+                            self.isNextPageAvailable = false
+                        }
+                    } else {
+                        self.isNextPageAvailable = false
+                    }
+                }.error { error in
+                    // NGRTemp: Need mockups for error message view
+                    print(error)
+                    self.isNextPageAvailable = false
+            }
+        }
+    }
+    
+    func downloadShots(followees: [Followee]) {
         for index in 0...followees.count - 1 {
             let followee = followees[index]
             firstly {
@@ -74,6 +100,10 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        if indexPath.row == followees.count - 1 {
+            downloadFolloweesForNextPage()
+        }
         
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
