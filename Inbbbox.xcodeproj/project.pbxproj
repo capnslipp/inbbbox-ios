@@ -36,12 +36,14 @@
 		5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */; };
 		5E2E730E1C2BFBC300D5BC80 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */; };
 		5E30F5C91C5F76ED00D5236F /* Authorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E30F5C81C5F76ED00D5236F /* Authorizable.swift */; };
+		5E31AB8B1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E31AB8A1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift */; };
 		5E3509231C6255D8009386AE /* AuthorizableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509221C6255D8009386AE /* AuthorizableSpec.swift */; };
 		5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509241C625C2A009386AE /* RequestableSpec.swift */; };
 		5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509261C625EBD009386AE /* ResponsableSpec.swift */; };
 		5E3509291C6266E9009386AE /* PageableComponentSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509281C6266E9009386AE /* PageableComponentSpec.swift */; };
 		5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35092A1C62692F009386AE /* RequestSpec.swift */; };
 		5E35092D1C626C9C009386AE /* PageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E35092C1C626C9C009386AE /* PageRequestSpec.swift */; };
+		5E381C961C6BBA96002DF2DC /* CreateCommentQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E381C951C6BBA96002DF2DC /* CreateCommentQuery.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
 		5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857B51C2805E10027B38A /* Authenticator.swift */; };
@@ -266,12 +268,14 @@
 		5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		5E30F5C81C5F76ED00D5236F /* Authorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizable.swift; sourceTree = "<group>"; };
+		5E31AB8A1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCommentQuerySpec.swift; sourceTree = "<group>"; };
 		5E3509221C6255D8009386AE /* AuthorizableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizableSpec.swift; sourceTree = "<group>"; };
 		5E3509241C625C2A009386AE /* RequestableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestableSpec.swift; sourceTree = "<group>"; };
 		5E3509261C625EBD009386AE /* ResponsableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsableSpec.swift; sourceTree = "<group>"; };
 		5E3509281C6266E9009386AE /* PageableComponentSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponentSpec.swift; sourceTree = "<group>"; };
 		5E35092A1C62692F009386AE /* RequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestSpec.swift; sourceTree = "<group>"; };
 		5E35092C1C626C9C009386AE /* PageRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageRequestSpec.swift; sourceTree = "<group>"; };
+		5E381C951C6BBA96002DF2DC /* CreateCommentQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCommentQuery.swift; sourceTree = "<group>"; };
 		5E3A97E81AA72F0A00CE2F20 /* Inbbbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inbbbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98361AA73A6500CE2F20 /* Unit Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Unit Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -724,6 +728,7 @@
 				F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */,
 				F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */,
 				5EADE3B01C6B7CE700B03DAD /* CommentQuery.swift */,
+				5E381C951C6BBA96002DF2DC /* CreateCommentQuery.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -865,6 +870,7 @@
 				5ED6C5B81C57A98400A591EA /* FolloweesQuerySpec.swift */,
 				5ED6C5C21C57DA5500A591EA /* FollowersQuerySpec.swift */,
 				5EADE3BA1C6B960000B03DAD /* CommentQuerySpec.swift */,
+				5E31AB8A1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1377,6 +1383,7 @@
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
 				F092E2671C3FD63D00593D18 /* ShotsLocalStorage.swift in Sources */,
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
+				5E381C961C6BBA96002DF2DC /* CreateCommentQuery.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
 				FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */,
 				5EE3AB1E1C5905B30003B639 /* BucketsProvider.swift in Sources */,
@@ -1470,6 +1477,7 @@
 				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,
 				BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */,
 				5C502AEE1C64FEDC0043B0D8 /* ShotOperationRequesterMock.swift in Sources */,
+				5E31AB8B1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift in Sources */,
 				BEEE97370AC7B81A23CD03A0 /* ShotsCollectionBackgroundViewSpec.swift in Sources */,
 				5E781B451C58C00E009A2E14 /* UserSpecExtension.swift in Sources */,
 				BEEE96288C099EC6A58CAC82 /* PanGestureRecognizerMock.swift in Sources */,

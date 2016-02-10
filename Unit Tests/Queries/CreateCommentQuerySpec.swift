@@ -1,5 +1,5 @@
 //
-//  CommentQuerySpec.swift
+//  CreateCommentQuerySpec.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 10/02/16.
@@ -12,21 +12,21 @@ import Nimble
 
 @testable import Inbbbox
 
-class CommentQuerySpec: QuickSpec {
+class CreateCommentQuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return CommentQuery(shot: Shot.fixtureShot())
+            return CreateCommentQuery(shot: Shot.fixtureShot(), body: "fixture.body")
         }) { Void -> QueryExpectation in
-            return (method: .GET, encoding: .URL, path: "/shots/fixture.identifier/comments")
+            return (method: .POST, encoding: .JSON, path: "/shots/fixture.identifier/comments")
         }
         
         describe("when newly initialized with shot") {
             
-            var sut: CommentQuery!
+            var sut: CreateCommentQuery!
             
             beforeEach {
-                sut = CommentQuery(shot: Shot.fixtureShot())
+                sut = CreateCommentQuery(shot: Shot.fixtureShot(), body: "fixture.body")
             }
             
             afterEach {
@@ -35,6 +35,10 @@ class CommentQuerySpec: QuickSpec {
             
             it("should have empty parameters") {
                 expect(sut.parameters.queryItems).to(beEmpty())
+            }
+            
+            it("should have body parameter properly set") {
+                expect(sut.parameters["body"] as? String).to(equal("fixture.body"))
             }
         }
     }
