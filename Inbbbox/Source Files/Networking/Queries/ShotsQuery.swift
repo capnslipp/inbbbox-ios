@@ -10,6 +10,32 @@ import Foundation
 
 struct ShotsQuery: Query {
     
+    /**
+     ShotsType specify source of shots.
+     
+     - List:           General list of the shots.
+     - UserShots:      List of the given user's shots.
+     - BucketShots:    List of the given bucket's shots.
+     - UserLikedShots: List of the given user's liked shots.
+     */
+    enum ShotsType {
+        case List, UserShots(User), BucketShots(Bucket), UserLikedShots(User)
+        
+        var path: String {
+
+            switch self {
+            case .List:
+                return "/shots"
+            case .UserShots(let user):
+                return "/users/\(user.username)/shots"
+            case .BucketShots(let bucket):
+                return "/buckets/\(bucket.identifier)/shots"
+            case .UserLikedShots(let user):
+                return "/users/\(user.username)/likes"
+            }
+        }
+    }
+    
     /// Query definition
     
     let method = Method.GET
@@ -22,22 +48,10 @@ struct ShotsQuery: Query {
     }
     
     /**
-     Initialize query for list of the shots.
+     Initialize query for list of the shots of given type.
      */
-    init() {}
-    
-    /**
-     Initialize query for list of the given user's shots.
-     */
-    init(user: User) {
-        path = "/users/\(user.username)/shots"
-    }
-    
-    /**
-     Initialize query for list of the given bucket's shors.
-     */
-    init(bucket: Bucket) {
-        path = "/buckets/\(bucket.identifier)/shots"
+    init(type: ShotsType) {
+        path = type.path
     }
     
     /// Types

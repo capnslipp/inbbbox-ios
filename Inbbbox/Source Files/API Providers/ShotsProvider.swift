@@ -64,7 +64,7 @@ class ShotsProvider: PageableProvider {
     func provideShotsForUser(user: User) -> Promise<[Shot]?> {
         resetAnUseSourceType(.User)
         
-        let query = ShotsQuery(user: user)
+        let query = ShotsQuery(type: .UserShots(user))
         return provideShotsWithQueries([query])
     }
     
@@ -78,7 +78,7 @@ class ShotsProvider: PageableProvider {
     func provideShotsForBucket(bucket: Bucket) -> Promise<[Shot]?> {
         resetAnUseSourceType(.Bucket)
         
-        let query = ShotsQuery(bucket: bucket)
+        let query = ShotsQuery(type: .BucketShots(bucket))
         return provideShotsWithQueries([query])
     }
     
@@ -111,7 +111,7 @@ private extension ShotsProvider {
     
     var activeQueries: [ShotsQuery] {
         return configuration.sources.map {
-            configuration.queryByConfigurationForQuery(ShotsQuery(), source: $0)
+            configuration.queryByConfigurationForQuery(ShotsQuery(type: .List), source: $0)
         }
     }
     
