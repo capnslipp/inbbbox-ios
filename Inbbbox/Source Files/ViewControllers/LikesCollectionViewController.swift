@@ -31,8 +31,13 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        guard let user = UserStorage.currentUser else {
+            return
+        }
+        
         firstly {
-            self.shotsProvider.provideShots()
+            self.shotsProvider.provideLikedShotsForUser(user)
         }.then { shots -> Void in
             if let shots = shots {
                 self.likedShots = shots

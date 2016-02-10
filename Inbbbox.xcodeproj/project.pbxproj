@@ -36,7 +36,6 @@
 		5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */; };
 		5E2E730E1C2BFBC300D5BC80 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */; };
 		5E30F5C91C5F76ED00D5236F /* Authorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E30F5C81C5F76ED00D5236F /* Authorizable.swift */; };
-		5E30F5CB1C5F9F3C00D5236F /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E30F5CA1C5F9F3C00D5236F /* Connection.swift */; };
 		5E3509231C6255D8009386AE /* AuthorizableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509221C6255D8009386AE /* AuthorizableSpec.swift */; };
 		5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509241C625C2A009386AE /* RequestableSpec.swift */; };
 		5E3509271C625EBD009386AE /* ResponsableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3509261C625EBD009386AE /* ResponsableSpec.swift */; };
@@ -260,7 +259,6 @@
 		5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		5E30F5C81C5F76ED00D5236F /* Authorizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authorizable.swift; sourceTree = "<group>"; };
-		5E30F5CA1C5F9F3C00D5236F /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		5E3509221C6255D8009386AE /* AuthorizableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizableSpec.swift; sourceTree = "<group>"; };
 		5E3509241C625C2A009386AE /* RequestableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestableSpec.swift; sourceTree = "<group>"; };
 		5E3509261C625EBD009386AE /* ResponsableSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponsableSpec.swift; sourceTree = "<group>"; };
@@ -600,6 +598,7 @@
 				5EC0A7AB1C353C8800846975 /* Helper */,
 				FF13AAD2F902BC574DD6F670 /* Mock Objects */,
 				5EDB831F1C48DECE00FBCA05 /* Queries */,
+				BEEE9B7FDF125A64C50A158E /* Resources */,
 				BF95086A1C20790200E39242 /* ParametersSpec.swift */,
 				5EE041AD1C33ED7400657751 /* ShotsStorageSpec.swift */,
 				5EE041AF1C33EF9E00657751 /* OAuthAuthorizableSpec.swift */,
@@ -639,7 +638,6 @@
 				5E5D56411C63F29A00C7957E /* ConnectionsProviderSpec.swift */,
 				5E5D56471C64A24400C7957E /* ShotsProviderSpec.swift */,
 				5E5D56491C64D13300C7957E /* PageableProviderSpec.swift */,
-				BEEE9B7FDF125A64C50A158E /* Resources */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -787,7 +785,6 @@
 				BF95085B1C1F208F00E39242 /* User.swift */,
 				E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */,
 				5E781B481C58D8B5009A2E14 /* Bucket.swift */,
-				5E30F5CA1C5F9F3C00D5236F /* Connection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1312,7 +1309,6 @@
 				F092E2611C3FD48600593D18 /* BucketManagedObject.swift in Sources */,
 				5ED6C5C11C57CD2800A591EA /* FollowersQuery.swift in Sources */,
 				F092E2651C3FD55A00593D18 /* ShotOperationHistoryStorage.swift in Sources */,
-				5E30F5CB1C5F9F3C00D5236F /* Connection.swift in Sources */,
 				F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */,
 				5E50820A1C31305C00093191 /* AutoScrollableShotsView.swift in Sources */,
 				BF6A6E161C1F0211001EDAB8 /* DribbbleNetworkService.swift in Sources */,

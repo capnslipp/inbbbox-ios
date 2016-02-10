@@ -66,7 +66,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
             context("with NewToday source") {
                 
                 beforeEach {
-                    query = sut.queryByConfigurationForQuery(ShotsQuery(), source: .NewToday)
+                    query = sut.queryByConfigurationForQuery(ShotsQuery(type: .List), source: .NewToday)
                 }
                 
                 it("should query have proper parameters") {
@@ -78,7 +78,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
             context("with PopularToday source") {
                 
                 beforeEach {
-                    query = sut.queryByConfigurationForQuery(ShotsQuery(), source: .PopularToday)
+                    query = sut.queryByConfigurationForQuery(ShotsQuery(type: .List), source: .PopularToday)
                 }
                 
                 it("should query have proper parameters") {
@@ -90,7 +90,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
             context("with Debuts source") {
                 
                 beforeEach {
-                    query = sut.queryByConfigurationForQuery(ShotsQuery(), source: .Debuts)
+                    query = sut.queryByConfigurationForQuery(ShotsQuery(type: .List), source: .Debuts)
                 }
                 
                 it("should query have proper parameters") {
@@ -103,7 +103,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
             context("with Following source") {
                 
                 beforeEach {
-                    query = sut.queryByConfigurationForQuery(ShotsQuery(), source: .Following)
+                    query = sut.queryByConfigurationForQuery(ShotsQuery(type: .List), source: .Following)
                 }
                 
                 it("should query have proper parameters") {

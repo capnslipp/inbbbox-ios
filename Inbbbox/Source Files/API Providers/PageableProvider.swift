@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import SwiftyJSON
 
 enum PageableProviderError: ErrorType {
     case PageableBehaviourUndefined
@@ -18,12 +19,14 @@ class PageableProvider {
     private var nextPageableComponents = [PageableComponent]()
     private var previousPageableComponents = [PageableComponent]()
     
+    private var serializationKey: String?
     private var didDefineProviderMethodBefore = false
     
-    func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
+    func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
             
             resetPages()
+            serializationKey = key
             didDefineProviderMethodBefore = true
             
             pageWithQueries(queries).then(fulfill).error(reject)
@@ -61,6 +64,7 @@ class PageableProvider {
     }
     
     func resetPages() {
+        serializationKey = nil
         nextPageableComponents = []
         previousPageableComponents = []
     }
@@ -81,7 +85,7 @@ private extension PageableProvider {
                 self.previousPageableComponents = responses.filter { $0.pages.previous != nil }.map { $0.pages.previous! }
                 
                 let result = responses
-                    .map { $0.json?.arrayValue.map { T.map($0) } }
+                    .map { $0.json?.arrayValue.map { T.map( self.serializationKey != nil ? $0[self.serializationKey!] : $0 ) } }
                     .flatMap { $0 }
                     .flatMap { $0 }
                 

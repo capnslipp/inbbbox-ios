@@ -207,7 +207,7 @@ private class MockConnectionsProvider: ConnectionsProvider {
         case MockFollowee, MockFollower
     }
     
-    override func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
+    override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)
     }
     

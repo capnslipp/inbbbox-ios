@@ -23,7 +23,7 @@ class ShotsProvider: PageableProvider {
 
     private var currentSourceType: SourceType?
     private enum SourceType {
-        case General, Bucket, User
+        case General, Bucket, User, Liked
     }
     
      /**
@@ -64,8 +64,22 @@ class ShotsProvider: PageableProvider {
     func provideShotsForUser(user: User) -> Promise<[Shot]?> {
         resetAnUseSourceType(.User)
         
-        let query = ShotsQuery(user: user)
+        let query = ShotsQuery(type: .UserShots(user))
         return provideShotsWithQueries([query])
+    }
+    
+    /**
+     Provides liked shots for given user.
+     
+     - parameter user: User whose liked shots should be provided.
+     
+     - returns: Promise which resolves with shots or nil.
+     */
+    func provideLikedShotsForUser(user: User) -> Promise<[Shot]?> {
+        resetAnUseSourceType(.Liked)
+        
+        let query = ShotsQuery(type: .UserLikedShots(user))
+        return provideShotsWithQueries([query], serializationKey: "shot")
     }
     
     /**
@@ -78,7 +92,7 @@ class ShotsProvider: PageableProvider {
     func provideShotsForBucket(bucket: Bucket) -> Promise<[Shot]?> {
         resetAnUseSourceType(.Bucket)
         
-        let query = ShotsQuery(bucket: bucket)
+        let query = ShotsQuery(type: .BucketShots(bucket))
         return provideShotsWithQueries([query])
     }
     
@@ -111,17 +125,17 @@ private extension ShotsProvider {
     
     var activeQueries: [ShotsQuery] {
         return configuration.sources.map {
-            configuration.queryByConfigurationForQuery(ShotsQuery(), source: $0)
+            configuration.queryByConfigurationForQuery(ShotsQuery(type: .List), source: $0)
         }
     }
     
-    func provideShotsWithQueries(let shotQueries: [ShotsQuery]) -> Promise<[Shot]?> {
+    func provideShotsWithQueries(let shotQueries: [ShotsQuery], serializationKey key: String? = nil) -> Promise<[Shot]?> {
         return Promise<[Shot]?> { fulfill, reject in
             
             let queries = shotQueries.map { queryByPagingConfiguration($0) } as [Query]
             
             firstly {
-                firstPageForQueries(queries)
+                firstPageForQueries(queries, withSerializationKey: key)
             }.then {
                 self.serialize($0, fulfill)
             }.error(reject)

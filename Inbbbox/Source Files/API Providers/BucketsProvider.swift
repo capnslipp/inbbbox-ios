@@ -81,7 +81,7 @@ private extension BucketsProvider {
             firstly {
                 authorizeIfNeeded(authentizationRequired)
             }.then {
-                self.firstPageForQueries(queries)
+                self.firstPageForQueries(queries, withSerializationKey: nil)
             }.then(fulfill).error(reject)
         }
     }
