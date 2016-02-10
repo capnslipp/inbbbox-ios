@@ -47,6 +47,7 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotDetailsCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        cell.viewData = ShotDetailsCollectionViewCell.ViewData(avatar: UIImage(named: "shot-menu")!, author: "author", comment: "comment", time: "time")
         
         return cell
     }
@@ -75,9 +76,9 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         view.backgroundColor = UIColor.clearColor()
         
         let blur = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-        collectionView?.backgroundColor = UIColor.clearColor()
-        collectionView?.backgroundView = blur
+        view.insertSubview(blur, belowSubview: collectionView!)
         blur.autoPinEdgesToSuperviewEdges()
+        collectionView?.backgroundColor = UIColor.clearColor()
         
         collectionView?.registerClass(ShotDetailsCollectionViewCell.self, type: .Cell)
         collectionView?.registerClass(ShotDetailsHeaderView.self, type: .Header)
@@ -86,11 +87,17 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
 }
 
 extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width - ((collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.left + (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.right), height: 100)
+    }
+    
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int) -> CGSize {
             // NGRFixme: this is not computing size properly (although constraints in header seems to be correct)
-            return header.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize)
+//            return CGSize(width: collectionView.bounds.width - ((collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.left + (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.right), height: 100)
+            return header.requiredSize()
     }
     
     func collectionView(collectionView: UICollectionView,

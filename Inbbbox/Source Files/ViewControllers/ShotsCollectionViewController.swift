@@ -139,7 +139,7 @@ extension ShotsCollectionViewController: ShotsAnimatorDelegate {
 
 extension ShotsCollectionViewController: ShotDetailsCollectionViewControllerDelegate {
     func didFinishPresentingDetails(sender: ShotDetailsCollectionViewController) {
-        tabBarController?.dismissViewControllerAnimated(true, completion: nil)
+        sender.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

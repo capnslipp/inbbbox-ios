@@ -116,7 +116,7 @@ class ShotDetailsFooterView: UICollectionReusableView {
     private func setupTextField() {
         textField.backgroundColor = UIColor(red: 0.9555, green: 0.9658, blue: 0.9654, alpha: 1.0)
         textField.placeholder = "Type your comment"
-        textField.tintColor = UIColor ( red: 0.3522, green: 0.3513, blue: 0.3722, alpha: 1.0 )
+        textField.tintColor = UIColor(red: 0.3522, green: 0.3513, blue: 0.3722, alpha: 1.0)
         textField.setLeft(padding: 21)
         
         let addCommentButton = UIButton(type: .Custom)

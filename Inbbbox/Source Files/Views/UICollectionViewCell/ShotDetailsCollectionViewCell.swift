@@ -29,7 +29,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     
     // Private Properties
     private var didUpdateConstraints = false
-    private let avatarSize: CGFloat = 32
+    private let avatarSize = CGFloat(32)
     
     // Private UI Components
     private let avatar = RoundedImageView.newAutoLayoutView()
@@ -54,11 +54,11 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     override func updateConstraints() {
         if !didUpdateConstraints {
             
-            let topInset: CGFloat = 10
-            let leftInset: CGFloat = 20
-            let rightInset: CGFloat = 31
-            let avatarToTextInset: CGFloat = 15
-            let authorHeight: CGFloat = 20
+            let topInset = CGFloat(10)
+            let leftInset = CGFloat(20)
+            let rightInset = CGFloat(31)
+            let avatarToTextInset = CGFloat(15)
+            let authorHeight = CGFloat(20)
             
             avatar.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset)
             avatar.autoPinEdgeToSuperviewEdge(.Left, withInset: leftInset)
@@ -98,7 +98,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     
     private func setupAuthor() {
         author.font = UIFont.helveticaFont(.NeueMedium, size: 16)
-        author.textColor = UIColor.RGBA(51, 51, 51, 1)
+        author.textColor = UIColor.textDarkColor()
         contentView.addSubview(author)
     }
     

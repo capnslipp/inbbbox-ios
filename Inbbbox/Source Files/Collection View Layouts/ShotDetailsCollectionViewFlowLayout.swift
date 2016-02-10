@@ -12,10 +12,6 @@ class ShotDetailsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func prepareLayout() {
         sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
         scrollDirection = .Vertical
-        if var width = collectionView?.bounds.width {
-            width = width - (sectionInset.left + sectionInset.right)
-            estimatedItemSize = CGSizeMake(width, 100)
-        }
         minimumLineSpacing = 0
     }
 }

@@ -41,6 +41,7 @@ class AuthorDetailsView: UIView {
     
     // Colors & Fonts
     private let detailsFont = UIFont.helveticaFont(.Neue, size: 13)
+    private let compactDetailsFont = UIFont.helveticaFont(.Neue, size: 12)
     private let linkColor = UIColor.pinkColor()
     private let defaultTextColor = UIColor.textDarkColor()
     
@@ -81,6 +82,20 @@ class AuthorDetailsView: UIView {
     
     func setDefaultBackgrounColor() {
         backgroundColor = defaultBackgroundColor
+    }
+    
+    func displayAuthorDetailsInNormalSize() {
+        titleLabel.font = UIFont.helveticaFont(.NeueMedium, size: 17)
+        authorPrefixLabel.font = detailsFont
+        avatarView.autoSetDimensionsToSize(CGSize(width: avatarNormalSize, height: avatarNormalSize))
+        self.layoutIfNeeded()
+    }
+    
+    func displayAuthorDetailsInCompactSize() {
+        titleLabel.font = UIFont.helveticaFont(.NeueMedium, size: 15)
+        authorPrefixLabel.font = compactDetailsFont
+        avatarView.autoSetDimensionsToSize(CGSize(width: avatarCompactSize, height: avatarCompactSize))
+        self.layoutIfNeeded()
     }
     
     // MARK: UI

@@ -50,9 +50,9 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let animationDuration: NSTimeInterval = 0.4
     
     // Contraints values
-    private let topInset: CGFloat = 30
-    private let shotImageNormalHeight: CGFloat = 267
-    private let shotImageCompactHeight: CGFloat = 100
+    private let topInset = CGFloat(30)
+    private let shotImageNormalHeight = CGFloat(267)
+    private let shotImageCompactHeight = CGFloat(70)
     
     // Colors
     private let headerBackgroundColor = UIColor(red:0.964, green:0.972, blue:0.972, alpha:1)
@@ -92,6 +92,15 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         displayCompactVariant()
     }
     
+    func requiredSize() -> CGSize {
+        // NGRHack: value of `systemLayoutSizeFittingSize(UILayoutFittingExpandedSize)` is improperly calculated in compact mode although all constraints seem to be ok.
+        if shouldDisplayCompactVariant {
+            return CGSize(width: UIScreen.mainScreen().bounds.width, height: topInset + shotImageCompactHeight)
+        } else {
+            return systemLayoutSizeFittingSize(UILayoutFittingExpandedSize)
+        }
+    }
+    
     // MARK: UI
     
     class override func requiresConstraintBasedLayout() -> Bool {
@@ -99,10 +108,10 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     override func updateConstraints() {
-        let leftAndRightMargin: CGFloat = 10
-        let closeButtonRightMargin: CGFloat = -5
-        let closeButtonTopMargin: CGFloat = 5
-        let authorDetailsViewHeight: CGFloat = 100
+        let leftAndRightMargin = CGFloat(10)
+        let closeButtonRightMargin = CGFloat(-5)
+        let closeButtonTopMargin = CGFloat(5)
+        let authorDetailsViewHeight = CGFloat(100)
         
         if !didUpdateConstraints {
             shotImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset).autoIdentify("[shotImageView] .Top = \(topInset)")
@@ -122,9 +131,9 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Bottom)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
-            NSLayoutConstraint.autoSetPriority(UILayoutPriorityRequired, forConstraints: { () -> Void in
+            NSLayoutConstraint.autoSetPriority(UILayoutPriorityRequired) {
                 self.shotDescriptionView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
-            })
+            }
             
             didUpdateConstraints = true
         }
@@ -144,7 +153,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             animations: { () -> Void in
                 
                 // Animations
-                if self.shouldDisplayCompactVariant == true {
+                if self.shouldDisplayCompactVariant {
                     
                     // ShotImage
                     self.shotImageHeightConstraint?.constant = self.shotImageCompactHeight
@@ -154,14 +163,16 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     self.authorDetailsTopToSuperviewEdge = self.authorDetailsView.autoPinEdgeToSuperviewEdge(.Top, withInset: self.topInset)
                     self.shotDescriptionTopToAuthorDetailsBottom?.autoRemove()
                     self.shotDescriptionToSuperviewEdge = self.shotDescriptionView.autoPinEdgeToSuperviewEdge(.Top)
-                    UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
+                    
+                    self.authorDetailsView.displayAuthorDetailsInCompactSize()
+                    
+                    UIView.animateWithDuration(self.animationDuration) {
                         self.authorDetailsView.backgroundColor = UIColor.clearColor()
                         self.authorDetailsView.hideShotInfoLabel()
                         self.authorDetailsView.setTextColor(UIColor.whiteColor())
                         self.shotDescriptionView.hidden = true
-                    })
-                }
-                else {
+                    }
+                } else {
                     
                     // ShotImage
                     self.shotImageHeightConstraint?.constant = self.shotImageNormalHeight
@@ -171,12 +182,15 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     self.authorDetailsTopToShotImageBottom?.autoInstall()
                     self.shotDescriptionToSuperviewEdge?.autoRemove()
                     self.shotDescriptionTopToAuthorDetailsBottom?.autoInstall()
-                    UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
+                    
+                    self.authorDetailsView.displayAuthorDetailsInNormalSize()
+                    
+                    UIView.animateWithDuration(self.animationDuration) {
                         self.authorDetailsView.setDefaultTextColor()
                         self.authorDetailsView.setDefaultBackgrounColor()
                         self.authorDetailsView.showShotInfoLabel()
                         self.shotDescriptionView.hidden = false
-                    })
+                    }
                 }
                 self.layoutIfNeeded()
             },
