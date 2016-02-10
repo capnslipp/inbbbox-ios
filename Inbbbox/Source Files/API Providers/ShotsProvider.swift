@@ -10,10 +10,7 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
-/**
-Class for providing shots of various source type.
-*/
-
+/// Provides interface for dribbble shots API
 class ShotsProvider: PageableProvider {
 
     /// Used only when using provideShots() method.

@@ -9,14 +9,23 @@
 import Foundation
 import PromiseKit
 
-/// Provides interface for dribbble comments api
+/// Provides interface for dribbble comments API
 class CommentsProvider: PageableProvider {
 
+    /**
+     Provides comments for given shot.
+     
+     - parameter shot: Shot which comments should be fetched
+     
+     - returns: Promise which resolves with comments or nil.
+     */
     func provideCommentsForShot(shot: Shot) -> Promise<[Comment]?> {
         
         let query = CommentQuery(shot: shot)
         return self.firstPageForQueries([query], withSerializationKey: nil)
     }
+    
+    
     
     /**
      Provides next page of comments.
