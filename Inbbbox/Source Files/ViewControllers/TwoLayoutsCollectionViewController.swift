@@ -83,7 +83,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     func scrollToTop(collectionView: UICollectionView) {
         if (collectionView.numberOfItemsInSection(0) > 0) {
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Top, animated: false)
+            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
         }
     }
 }
