@@ -49,6 +49,11 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private var shouldDisplayCompactVariant = false
     private let animationDuration: NSTimeInterval = 0.4
     
+    // Contraints values
+    private let topInset: CGFloat = 30
+    private let shotImageNormalHeight: CGFloat = 267
+    private let shotImageCompactHeight: CGFloat = 100
+    
     // Colors
     private let headerBackgroundColor = UIColor(red:0.964, green:0.972, blue:0.972, alpha:1)
     
@@ -94,13 +99,10 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     override func updateConstraints() {
-        let shotImageCompactHeight: CGFloat = 100
-        let shotImageNormalHeight: CGFloat = 267
         let leftAndRightMargin: CGFloat = 10
         let closeButtonRightMargin: CGFloat = -5
         let closeButtonTopMargin: CGFloat = 5
         let authorDetailsViewHeight: CGFloat = 100
-        let topInset: CGFloat = 30
         
         if !didUpdateConstraints {
             shotImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset).autoIdentify("[shotImageView] .Top = \(topInset)")
@@ -127,42 +129,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             didUpdateConstraints = true
         }
         
-        // Animations
-        if shouldDisplayCompactVariant == true {
-            
-            // ShotImage
-            shotImageHeightConstraint?.constant = shotImageCompactHeight
-            
-            // AuthorDetails
-            authorDetailsTopToShotImageBottom?.autoRemove()
-            authorDetailsTopToSuperviewEdge = authorDetailsView.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset)
-            shotDescriptionTopToAuthorDetailsBottom?.autoRemove()
-            shotDescriptionToSuperviewEdge = shotDescriptionView.autoPinEdgeToSuperviewEdge(.Top)
-            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-                self.authorDetailsView.backgroundColor = UIColor.clearColor()
-                self.authorDetailsView.hideShotInfoLabel()
-                self.authorDetailsView.setText(color: UIColor.whiteColor())
-                self.shotDescriptionView.hidden = true
-            })
-        }
-        else {
-            
-            // ShotImage
-            shotImageHeightConstraint?.constant = shotImageNormalHeight
-            
-            // AuthorDetails
-            authorDetailsTopToSuperviewEdge?.autoRemove()
-            authorDetailsTopToShotImageBottom?.autoInstall()
-            shotDescriptionToSuperviewEdge?.autoRemove()
-            shotDescriptionTopToAuthorDetailsBottom?.autoInstall()
-            UIView.animateWithDuration(animationDuration, animations: { () -> Void in
-                self.authorDetailsView.setDefaultTextColor()
-                self.authorDetailsView.setDefaultBackgrounColor()
-                self.authorDetailsView.showShotInfoLabel()
-                self.shotDescriptionView.hidden = false
-            })
-        }
-        
         super.updateConstraints()
     }
 
@@ -176,7 +142,43 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
         UIView.animateWithDuration(animationDuration, delay: 0, options: UIViewAnimationOptions(),
             animations: { () -> Void in
-            self.layoutIfNeeded()
+                
+                // Animations
+                if self.shouldDisplayCompactVariant == true {
+                    
+                    // ShotImage
+                    self.shotImageHeightConstraint?.constant = self.shotImageCompactHeight
+                    
+                    // AuthorDetails
+                    self.authorDetailsTopToShotImageBottom?.autoRemove()
+                    self.authorDetailsTopToSuperviewEdge = self.authorDetailsView.autoPinEdgeToSuperviewEdge(.Top, withInset: self.topInset)
+                    self.shotDescriptionTopToAuthorDetailsBottom?.autoRemove()
+                    self.shotDescriptionToSuperviewEdge = self.shotDescriptionView.autoPinEdgeToSuperviewEdge(.Top)
+                    UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
+                        self.authorDetailsView.backgroundColor = UIColor.clearColor()
+                        self.authorDetailsView.hideShotInfoLabel()
+                        self.authorDetailsView.setTextColor(UIColor.whiteColor())
+                        self.shotDescriptionView.hidden = true
+                    })
+                }
+                else {
+                    
+                    // ShotImage
+                    self.shotImageHeightConstraint?.constant = self.shotImageNormalHeight
+                    
+                    // AuthorDetails
+                    self.authorDetailsTopToSuperviewEdge?.autoRemove()
+                    self.authorDetailsTopToShotImageBottom?.autoInstall()
+                    self.shotDescriptionToSuperviewEdge?.autoRemove()
+                    self.shotDescriptionTopToAuthorDetailsBottom?.autoInstall()
+                    UIView.animateWithDuration(self.animationDuration, animations: { () -> Void in
+                        self.authorDetailsView.setDefaultTextColor()
+                        self.authorDetailsView.setDefaultBackgrounColor()
+                        self.authorDetailsView.showShotInfoLabel()
+                        self.shotDescriptionView.hidden = false
+                    })
+                }
+                self.layoutIfNeeded()
             },
             completion: nil
         )

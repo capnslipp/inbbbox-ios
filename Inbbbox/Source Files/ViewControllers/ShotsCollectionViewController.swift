@@ -109,10 +109,10 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
         definesPresentationContext = true
 
-        let shotDetailsVC = ShotDetailsCollectionViewController()
-        shotDetailsVC.modalPresentationStyle = .OverCurrentContext
-        shotDetailsVC.delegate = self
-        tabBarController?.presentViewController(shotDetailsVC, animated: true, completion: nil)
+        let shotDetailsCollectionViewController = ShotDetailsCollectionViewController()
+        shotDetailsCollectionViewController.modalPresentationStyle = .OverCurrentContext
+        shotDetailsCollectionViewController.delegate = self
+        tabBarController?.presentViewController(shotDetailsCollectionViewController, animated: true, completion: nil)
     }
 
     // MARK: - Helpers

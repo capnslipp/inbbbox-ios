@@ -15,9 +15,8 @@ protocol ShotDetailsCollectionViewControllerDelegate: class {
 class ShotDetailsCollectionViewController: UICollectionViewController {
     
     weak var delegate: ShotDetailsCollectionViewControllerDelegate?
-    var layout = ShotDetailsCollectionViewFlowLayout()
-    var header = ShotDetailsHeaderView()
-    var footer = ShotDetailsFooterView()
+    private var header = ShotDetailsHeaderView()
+    private var footer = ShotDetailsFooterView()
     
     convenience init() {
         self.init(collectionViewLayout: ShotDetailsCollectionViewFlowLayout())
@@ -37,7 +36,6 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
             shot: image,
             avatar: image
         )
-        layout = collectionViewLayout as! ShotDetailsCollectionViewFlowLayout
         setupSubviews()
     }
     
@@ -57,8 +55,6 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         
         if kind == UICollectionElementKindSectionHeader {
             let header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
-            header.setNeedsUpdateConstraints()
-            header.updateConstraintsIfNeeded()
             header.viewData = self.header.viewData
             header.delegate = self
             self.header = header
@@ -77,17 +73,15 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     private func setupSubviews() {
         // Backgrounds
         view.backgroundColor = UIColor.clearColor()
+        
         let blur = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-        view.insertSubview(blur, belowSubview: collectionView!)
-        blur.autoPinEdgesToSuperviewEdges()
         collectionView?.backgroundColor = UIColor.clearColor()
+        collectionView?.backgroundView = blur
+        blur.autoPinEdgesToSuperviewEdges()
+        
         collectionView?.registerClass(ShotDetailsCollectionViewCell.self, type: .Cell)
         collectionView?.registerClass(ShotDetailsHeaderView.self, type: .Header)
         collectionView?.registerClass(ShotDetailsFooterView.self, type: .Footer)
-    }
-    
-    private func finishPresentation() {
-        delegate?.didFinishPresentingDetails(self)
     }
 }
 
@@ -110,12 +104,12 @@ extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         header.displayCompactVariant()
         footer.displayEditingVariant()
-        layout.invalidateLayout()
+        collectionViewLayout.invalidateLayout()
         return true
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        finishPresentation()
+        delegate?.didFinishPresentingDetails(self)
         return true
     }
     
@@ -128,7 +122,7 @@ extension ShotDetailsCollectionViewController: UITextFieldDelegate {
 extension ShotDetailsCollectionViewController: ShotDetailsHeaderViewDelegate {
     func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapCloseButton: UIButton) {
         footer.textField.resignFirstResponder()
-        finishPresentation()
+        delegate?.didFinishPresentingDetails(self)
     }
 }
 
@@ -137,7 +131,7 @@ extension ShotDetailsCollectionViewController: ShotDetailsFooterViewDelegate {
         if message?.isEmpty == true {
             footer.textField.becomeFirstResponder()
         } else {
-            finishPresentation()
+            delegate?.didFinishPresentingDetails(self)
         }
     }
 }

@@ -1,6 +1,9 @@
 //
-// Created by Lukasz Pikor on 29.01.2016.
-// Copyright (c) 2016 Netguru Sp. z o.o. All rights reserved.
+//  RoundedView.swift
+//  Inbbbox
+//
+//  Created by Lukasz Pikor on 29.01.2016.
+//  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
 import Foundation

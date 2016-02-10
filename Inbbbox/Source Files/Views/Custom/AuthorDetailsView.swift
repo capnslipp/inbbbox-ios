@@ -41,8 +41,8 @@ class AuthorDetailsView: UIView {
     
     // Colors & Fonts
     private let detailsFont = UIFont.helveticaFont(.Neue, size: 13)
-    private let linkColor = UIColor(red:0.941, green:0.215, blue:0.494, alpha:1)
-    private let defaultTextColor = UIColor(red:0.2, green:0.2, blue:0.2, alpha:1)
+    private let linkColor = UIColor.pinkColor()
+    private let defaultTextColor = UIColor.textDarkColor()
     
     // MARK: Life Cycle
     
@@ -61,7 +61,7 @@ class AuthorDetailsView: UIView {
     
     // MARK: Public
     
-    func setText(color color: UIColor) {
+    func setTextColor(color: UIColor) {
         setColorToLabels(color)
         setColorToButtons(color)
     }
@@ -87,12 +87,12 @@ class AuthorDetailsView: UIView {
     
     override func updateConstraints() {
         
-        let avatarViewNormalHeight: CGFloat = 22
-        let avatarViewLeftInset: CGFloat = 20
+        let avatarViewNormalHeight = CGFloat(22)
+        let avatarViewLeftInset = CGFloat(20)
         let titleLabelNormalHeight = avatarViewLeftInset
-        let avatarToTextDetailsDistance: CGFloat = 15
-        let spacingBetweenLabelsAndButtons: CGFloat = 2
-        let tightenLettersInVerticalAxis: CGFloat = -5
+        let avatarToTextDetailsDistance = CGFloat(15)
+        let spacingBetweenLabelsAndButtons = CGFloat(2)
+        let tightenLettersInVerticalAxis = CGFloat(-5)
         
         if !didUpdateConstraints {
             
@@ -170,7 +170,7 @@ class AuthorDetailsView: UIView {
     
     private func setupShotInfoLabel() {
         shotInfoLabel.font = detailsFont
-        shotInfoLabel.textColor = UIColor(red:0.427, green:0.427, blue:0.447, alpha:1)
+        shotInfoLabel.textColor = UIColor.textLightColor()
         addSubview(shotInfoLabel)
     }
     
