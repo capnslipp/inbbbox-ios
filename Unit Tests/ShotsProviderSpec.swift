@@ -76,6 +76,18 @@ class ShotsProviderSpec: QuickSpec {
                 }
             }
             
+            context("when providing liked shots for user") {
+                
+                it("shots should be properly returned") {
+                    sut.provideLikedShotsForUser(User.fixtureUser()).then { _shots -> Void in
+                        shots = _shots
+                    }.error { _ in fail() }
+                    
+                    expect(shots).toNotEventually(beNil())
+                    expect(shots).toEventually(haveCount(2))
+                }
+            }
+            
             context("when providing shots for bucket") {
                 
                 it("shots should be properly returned") {
@@ -153,7 +165,7 @@ class ShotsProviderSpec: QuickSpec {
 //Explanation: Create MockShotsProvider to override methods from PageableProvider.
 private class MockShotsProvider: ShotsProvider {
     
-    override func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
+    override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)
     }
     

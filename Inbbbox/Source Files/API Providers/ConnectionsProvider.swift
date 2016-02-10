@@ -25,20 +25,20 @@ class ConnectionsProvider: PageableProvider, Authorizable {
     func provideMyFollowers() -> Promise<[Follower]?> {
         
         let query = FollowersQuery()
-        return provideUsersWithQueries([query], authentizationRequired: true)
+        return provideUsersWithQueries([query], serializationKey: "follower", authentizationRequired: true)
     }
     
     /**
     Provides a list who the authenticated user is following.
      
-    - Requires: Authenticated.
+    - Requires: Authenticated user.
     
     - returns: Promise which resolves with followees or nil.
     */
     func provideMyFollowees() -> Promise<[Followee]?> {
     
         let query = FolloweesQuery()
-        return provideUsersWithQueries([query], authentizationRequired: true)
+        return provideUsersWithQueries([query], serializationKey: "followee", authentizationRequired: true)
     }
     
     /**
@@ -62,7 +62,7 @@ class ConnectionsProvider: PageableProvider, Authorizable {
     func provideFollowersForUsers(users: [User]) -> Promise<[Follower]?> {
         
         let queries = users.map { FollowersQuery(followersOfUser: $0) } as [Query]
-        return provideUsersWithQueries(queries, authentizationRequired: false)
+        return provideUsersWithQueries(queries, serializationKey: "follower", authentizationRequired: false)
     }
     
     /**
@@ -86,7 +86,7 @@ class ConnectionsProvider: PageableProvider, Authorizable {
     func provideFolloweesForUsers(users: [User]) -> Promise<[Followee]?> {
         
         let queries = users.map { FolloweesQuery(followeesOfUser: $0) } as [Query]
-        return provideUsersWithQueries(queries, authentizationRequired: false)
+        return provideUsersWithQueries(queries, serializationKey: "followee", authentizationRequired: false)
     }
     
     /**
@@ -98,7 +98,7 @@ class ConnectionsProvider: PageableProvider, Authorizable {
      - returns: Promise which resolves with shots or nil.
      */
     func nextPage() -> Promise<[User]?> {
-        return fetchPage(nextPageFor(Connection))
+        return fetchPage(nextPageFor(User))
     }
     
     /**
@@ -110,37 +110,29 @@ class ConnectionsProvider: PageableProvider, Authorizable {
      - returns: Promise which resolves with shots or nil.
      */
     func previousPage() -> Promise<[User]?> {
-        return fetchPage(previousPageFor(Connection))
+        return fetchPage(previousPageFor(User))
     }
 }
 
 private extension ConnectionsProvider {
     
-    func provideUsersWithQueries(queries: [Query], authentizationRequired: Bool) -> Promise<[User]?> {
+    func provideUsersWithQueries(queries: [Query], serializationKey key: String? = nil, authentizationRequired: Bool) -> Promise<[User]?> {
         return Promise<[User]?> { fulfill, reject in
             
             firstly {
                 authorizeIfNeeded(authentizationRequired)
             }.then {
-                self.firstPageForQueries(queries)
-            }.then {
-                self.serialize($0, fulfill)
-            }.error(reject)
+                self.firstPageForQueries(queries, withSerializationKey: key)
+            }.then(fulfill).error(reject)
         }
     }
     
-    func fetchPage(promise: Promise<[Connection]?>) -> Promise<[User]?> {
+    func fetchPage(promise: Promise<[User]?>) -> Promise<[User]?> {
         return Promise<[User]?> { fulfill, reject in
             
             firstly {
                 promise
-            }.then {
-                self.serialize($0, fulfill)
-            }.error(reject)
+            }.then(fulfill).error(reject)
         }
-    }
-    
-    func serialize(connections: [Connection]?, _ fulfill: ([User]?) -> Void) {
-        fulfill( connections?.map { $0.user }.flatMap { $0 } )
     }
 }

@@ -127,7 +127,7 @@ class BucketsProviderSpec: QuickSpec {
 //Explanation: Create MockBucketsProvider to override methods from PageableProvider.
 private class MockBucketsProvider: BucketsProvider {
     
-    override func firstPageForQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
+    override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)
     }
     

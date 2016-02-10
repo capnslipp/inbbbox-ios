@@ -41,7 +41,7 @@ class PageableProviderSpec: QuickSpec {
             }
             
             it("result should be properly returned") {
-                let promise: Promise<[MockModel]?> = sut.firstPageForQueries([MockQuery()])
+                let promise: Promise<[MockModel]?> = sut.firstPageForQueries([MockQuery()], withSerializationKey: nil)
                 promise.then { _result in
                     result = _result
                 }.error { _ in fail() }
@@ -55,7 +55,7 @@ class PageableProviderSpec: QuickSpec {
                 var didInvokePromise: Bool!
                 
                 beforeEach {
-                    let _: Promise<[MockModel]?> = sut.firstPageForQueries([MockQuery()])
+                    let _: Promise<[MockModel]?> = sut.firstPageForQueries([MockQuery()], withSerializationKey: nil)
                 }
                 
                 afterEach {
@@ -97,7 +97,7 @@ class PageableProviderSpec: QuickSpec {
             }
             
             it("error should appear") {
-                let promise: Promise<[MockModel]?> = sut.firstPageForQueries([MockQuery()])
+                let promise: Promise<[MockModel]?> = sut.firstPageForQueries([MockQuery()], withSerializationKey: nil)
                 promise.then { _ in
                     fail()
                 }.error { _error in
