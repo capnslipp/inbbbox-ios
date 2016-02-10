@@ -12,6 +12,9 @@ import PromiseKit
 typealias Followee = User
 typealias Follower = User
 
+private let FollowerSerializationKey = "follower"
+private let FolloweeSerializationKey = "followee"
+
 /// Provides connections between users, followers and followees
 class ConnectionsProvider: PageableProvider, Authorizable {
     
@@ -25,7 +28,7 @@ class ConnectionsProvider: PageableProvider, Authorizable {
     func provideMyFollowers() -> Promise<[Follower]?> {
         
         let query = FollowersQuery()
-        return provideUsersWithQueries([query], serializationKey: "follower", authentizationRequired: true)
+        return provideUsersWithQueries([query], serializationKey: FollowerSerializationKey, authentizationRequired: true)
     }
     
     /**
@@ -38,7 +41,7 @@ class ConnectionsProvider: PageableProvider, Authorizable {
     func provideMyFollowees() -> Promise<[Followee]?> {
     
         let query = FolloweesQuery()
-        return provideUsersWithQueries([query], serializationKey: "followee", authentizationRequired: true)
+        return provideUsersWithQueries([query], serializationKey: FolloweeSerializationKey, authentizationRequired: true)
     }
     
     /**
@@ -62,7 +65,7 @@ class ConnectionsProvider: PageableProvider, Authorizable {
     func provideFollowersForUsers(users: [User]) -> Promise<[Follower]?> {
         
         let queries = users.map { FollowersQuery(followersOfUser: $0) } as [Query]
-        return provideUsersWithQueries(queries, serializationKey: "follower", authentizationRequired: false)
+        return provideUsersWithQueries(queries, serializationKey: FollowerSerializationKey, authentizationRequired: false)
     }
     
     /**
@@ -86,7 +89,7 @@ class ConnectionsProvider: PageableProvider, Authorizable {
     func provideFolloweesForUsers(users: [User]) -> Promise<[Followee]?> {
         
         let queries = users.map { FolloweesQuery(followeesOfUser: $0) } as [Query]
-        return provideUsersWithQueries(queries, serializationKey: "followee", authentizationRequired: false)
+        return provideUsersWithQueries(queries, serializationKey: FolloweeSerializationKey, authentizationRequired: false)
     }
     
     /**
