@@ -61,8 +61,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                             let indexPaths = followees.map({
                                 NSIndexPath(forRow: self.followees.indexOfObject($0), inSection: 0)
                             })
-                            self.collectionView?.insertItemsAtIndexPaths(indexPaths)
-                            self.downloadShots(followees)
+                        self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                        self.downloadShots(followees)
                         }
                     }
                 }.error { error in
