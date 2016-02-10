@@ -13,7 +13,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     
     // MARK: - Lifecycle
     
-    private var followees = [Followee]()
+    private var followees = NSMutableOrderedSet()
     private var followeesShots = [Followee : [Shot]]()
     private let connectionsProvider = ConnectionsProvider()
     private let shotsProvider = ShotsProvider()
@@ -37,7 +37,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             self.connectionsProvider.provideMyFollowees()
             }.then { followees -> Void in
                 if let followees = followees {
-                    self.followees = followees
+                    self.followees.addObjectsFromArray(followees)
                     self.downloadShots(followees)
                 }
                 self.collectionView?.reloadData()
@@ -54,11 +54,10 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                 }.then { followees -> Void in
                     if let followees = followees {
                         if followees.count > 0 {
-                           for followee in followees {
-                                self.followees.append(followee)
-                            }
-                            self.collectionView?.reloadData()
-                            self.downloadShots(self.followees)
+                            self.followees.addObjectsFromArray(followees)
+                            let indexPaths = followees.map({NSIndexPath(forRow: self.followees.indexOfObject($0), inSection: 0)})
+                            self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                            self.downloadShots(followees)
                         } else {
                             self.isNextPageAvailable = false
                         }
@@ -74,8 +73,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     }
     
     func downloadShots(followees: [Followee]) {
-        for index in 0...followees.count - 1 {
-            let followee = followees[index]
+        for followee in followees {
             firstly {
                 self.shotsProvider.provideShotsForUser(followee)
                 }.then { shots -> Void in
@@ -84,7 +82,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                     } else {
                         self.followeesShots[followee] = [Shot]()
                     }
-                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    let indexPath = NSIndexPath(forRow: self.followees.indexOfObject(followee), inSection: 0)
                     self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                 }.error { error in
                     // NGRTemp: Need mockups for error message view
@@ -107,7 +105,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            let followee = followees[indexPath.row]
+            let followee = followees[indexPath.row] as! Followee
             presentFoloweeForCell(followee, cell: cell)
             if let followeeShots = followeesShots[followee] {
                 let shotImagesUrls = followeeShots.map({ $0.image.normalURL })
@@ -117,7 +115,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
-            let followee = followees[indexPath.row]
+            let followee = followees[indexPath.row] as! Followee
             presentFoloweeForCell(followee, cell: cell)
             if let shotImageUrl = followeesShots[followee]?.first?.image.normalURL {
                 presentLargeShotImageForCell(shotImageUrl, cell: cell)
