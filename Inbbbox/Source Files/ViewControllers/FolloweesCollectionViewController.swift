@@ -34,15 +34,15 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     func downloadInitialFollowees() {
         firstly {
             self.connectionsProvider.provideMyFollowees()
-            }.then { followees -> Void in
-                if let followees = followees {
-                    self.followees.appendContentsOf(followees)
-                    self.downloadShots(followees)
-                }
-                self.collectionView?.reloadData()
-            }.error { error in
-                // NGRTemp: Need mockups for error message view
-                print(error)
+        }.then { followees -> Void in
+            if let followees = followees {
+                self.followees.appendContentsOf(followees)
+                self.downloadShots(followees)
+            }
+            self.collectionView?.reloadData()
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
         }
     }
     
@@ -54,21 +54,21 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         if isNextPageAvailable {
             firstly {
                 self.connectionsProvider.nextPage()
-                }.then { followees -> Void in
-                    if let followees = followees where followees.count > 0 {
-                        let indexes = followees.enumerate().map { index, element in
-                            return index + self.followees.count
-                        }
-                        self.followees.appendContentsOf(followees)
-                        let indexPaths = indexes.map {
-                            NSIndexPath(forRow:($0), inSection: 0)
-                        }
-                        self.collectionView?.insertItemsAtIndexPaths(indexPaths)
-                        self.downloadShots(followees)
+            }.then { followees -> Void in
+                if let followees = followees where followees.count > 0 {
+                    let indexes = followees.enumerate().map { index, element in
+                        return index + self.followees.count
                     }
-                }.error { error in
-                    // NGRTemp: Need mockups for error message view
-                    print(error)
+                    self.followees.appendContentsOf(followees)
+                    let indexPaths = indexes.map {
+                        NSIndexPath(forRow:($0), inSection: 0)
+                    }
+                    self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                    self.downloadShots(followees)
+                }
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+                print(error)
             }
         }
     }
@@ -77,20 +77,20 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         for followee in followees {
             firstly {
                 self.shotsProvider.provideShotsForUser(followee)
-                }.then { shots -> Void in
-                    if let shots = shots {
-                        self.followeesShots[followee] = shots
-                    } else {
-                        self.followeesShots[followee] = [Shot]()
-                    }
-                    guard let index = self.followees.indexOf(followee) else {
-                        return
-                    }
-                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                    self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-                }.error { error in
-                    // NGRTemp: Need mockups for error message view
-                    print(error)
+            }.then { shots -> Void in
+                if let shots = shots {
+                    self.followeesShots[followee] = shots
+                } else {
+                    self.followeesShots[followee] = [Shot]()
+                }
+                guard let index = self.followees.indexOf(followee) else {
+                    return
+                }
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+                print(error)
             }
         }
     }
