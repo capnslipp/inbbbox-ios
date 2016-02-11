@@ -25,8 +25,8 @@ class AuthorDetailsView: UIView {
     let clientButton = UIButton.newAutoLayoutView()
     
     // Private Properties
-    private let avatarNormalSize = 48
-    private let avatarCompactSize = 24
+    private let avatarNormalSize = CGFloat(48)
+    private let avatarCompactSize = CGFloat(24)
     private var didUpdateConstraints = false
     private let defaultBackgroundColor = UIColor.RGBA(246, 248, 248, 1)
     private let labels: [UILabel]
@@ -44,6 +44,9 @@ class AuthorDetailsView: UIView {
     private let compactDetailsFont = UIFont.helveticaFont(.Neue, size: 12)
     private let linkColor = UIColor.pinkColor()
     private let defaultTextColor = UIColor.textDarkColor()
+    
+    // Contraints
+    private var avatarSizeConstraints: [NSLayoutConstraint]?
     
     // MARK: Life Cycle
     
@@ -87,15 +90,21 @@ class AuthorDetailsView: UIView {
     func displayAuthorDetailsInNormalSize() {
         titleLabel.font = UIFont.helveticaFont(.NeueMedium, size: 17)
         authorPrefixLabel.font = detailsFont
-        avatarView.autoSetDimensionsToSize(CGSize(width: avatarNormalSize, height: avatarNormalSize))
-        self.layoutIfNeeded()
+        avatarSizeConstraints?.forEach {
+            $0.constant = self.avatarNormalSize
+        }
+        avatarView.updateRadius(CGFloat(avatarNormalSize / 2))
+        layoutIfNeeded()
     }
     
     func displayAuthorDetailsInCompactSize() {
         titleLabel.font = UIFont.helveticaFont(.NeueMedium, size: 15)
         authorPrefixLabel.font = compactDetailsFont
-        avatarView.autoSetDimensionsToSize(CGSize(width: avatarCompactSize, height: avatarCompactSize))
-        self.layoutIfNeeded()
+        avatarSizeConstraints?.forEach {
+            $0.constant = self.avatarCompactSize
+        }
+        avatarView.updateRadius(CGFloat(avatarCompactSize / 2))
+        layoutIfNeeded()
     }
     
     // MARK: UI
@@ -111,7 +120,7 @@ class AuthorDetailsView: UIView {
         
         if !didUpdateConstraints {
             
-            avatarView.autoSetDimensionsToSize(CGSize(width: avatarNormalSize, height: avatarNormalSize))
+            avatarSizeConstraints = avatarView.autoSetDimensionsToSize(CGSize(width: avatarNormalSize, height: avatarNormalSize))
             avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: avatarViewLeftInset)
             avatarView.autoPinEdgeToSuperviewEdge(.Top, withInset: avatarViewNormalHeight)
             
@@ -204,7 +213,7 @@ class AuthorDetailsView: UIView {
 
 extension AuthorDetailsView {
     struct ViewData {
-        let avatar: UIImage
+        let avatar: String
         let title: String
         let author: String
         let client: String

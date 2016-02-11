@@ -18,23 +18,30 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     private var header = ShotDetailsHeaderView()
     private var footer = ShotDetailsFooterView()
     
-    convenience init() {
+    private var shot: Shot?
+    
+    convenience init(shot: Shot) {
         self.init(collectionViewLayout: ShotDetailsCollectionViewFlowLayout())
         // NGRTemp: Until model hooked up
-        let image = UIImage(named: "shot-menu")!
-        let shotDescription = "Hey Dribbblers! We are Netguru, a team of 150+ web and mobile software experts. We are just starting with design and want to build something for this awesome community. What’s the plan? Creating and launching Inbbbox - an inbox app for your Dribbble shots. Our developers team will release two native apps (iOS and Android) at the beginning of next year!Hey Dribbblers! We are Netguru, a team of 150+ web and mobile software experts. We are just starting with design and want to build something for this awesome community. What’s the plan? Creating and launching Inbbbox - an inbox app for your Dribbble shots. Our developers team will release two native apps (iOS and Android) at the beginning of next year!Hey Dribbblers! We are Netguru, a team of 150+ web and mobile software experts. We are just starting with design and want to build something for this awesome community. What’s the plan? Creating and launching Inbbbox - an inbox app for your Dribbble shots. Our developers team will release two native apps (iOS and Android) at the beginning of next year!Hey Dribbblers! We are Netguru, a team of 150+ web and mobile software experts. We are just starting with design and want to build something for this awesome community. What’s the plan? Creating and launching Inbbbox - an inbox app for your Dribbble shots. Our developers team will release two native apps (iOS and Android) at the beginning of next year!\n###############################"
-        let title = "Weather Calendar Application"
-        let author = "Author link"
+        
+        self.shot = shot
+        
+        // NGRTodo: get image async
+        let imageUrl = shot.image.normalURL.absoluteString
+        let shotDescription = shot.description
+        let title = shot.title
+        let author = shot.user.name ?? shot.user.username
         let client = "Client link"
         let info = "app name + date"
+        let avatar = shot.user.avatarString!
         
         header.viewData = ShotDetailsHeaderView.ViewData(description: shotDescription,
-            title: title,
+            title: title!,
             author: author,
             client: client,
             shotInfo: info,
-            shot: image,
-            avatar: image
+            shot: imageUrl,
+            avatar: avatar
         )
         setupSubviews()
     }
@@ -42,12 +49,12 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewController DataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return 4
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotDetailsCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        cell.viewData = ShotDetailsCollectionViewCell.ViewData(avatar: UIImage(named: "shot-menu")!, author: "author", comment: "comment", time: "time")
+        cell.viewData = ShotDetailsCollectionViewCell.ViewData(avatar: "", author: "author", comment: "comment", time: "time")
         
         return cell
     }
@@ -95,8 +102,6 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int) -> CGSize {
-            // NGRFixme: this is not computing size properly (although constraints in header seems to be correct)
-//            return CGSize(width: collectionView.bounds.width - ((collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.left + (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.right), height: 100)
             return header.requiredSize()
     }
     

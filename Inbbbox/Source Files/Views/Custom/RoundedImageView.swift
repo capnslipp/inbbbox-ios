@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KFSwiftImageLoader
 
 class RoundedImageView: UIView {
     
@@ -14,15 +15,22 @@ class RoundedImageView: UIView {
     private let imageView: UIImageView
     private var cornersToRound = UIRectCorner()
     private var radiusToSet: CGFloat
+    private var dimnessView: UIView
+    
+    // Constraints
+    private var dimnessViewConstraints: [NSLayoutConstraint]?
     
     // MARK: Life Cycle
     
     override init(frame: CGRect) {
         imageView = UIImageView.newAutoLayoutView()
+        dimnessView = UIView.newAutoLayoutView()
         radiusToSet = 0
         
         super.init(frame: frame)
+        
         addSubview(imageView)
+        addSubview(dimnessView)
     }
     
     @available(*, unavailable, message = "Use init(withImage:, byRoundingCorners:, radius:, frame:")
@@ -31,10 +39,25 @@ class RoundedImageView: UIView {
     }
     
     // MARK: Public
-    func updateWith(image: UIImage, byRoundingCorners: UIRectCorner, radius: CGFloat) {
-        imageView.image = image
+    func updateWith(imageUrl: String, byRoundingCorners: UIRectCorner, radius: CGFloat) {
+        imageView.loadImageFromURLString(imageUrl)
         cornersToRound = byRoundingCorners
         radiusToSet = radius
+    }
+    
+    func updateRadius(radius: CGFloat) {
+        radiusToSet = radius
+        setNeedsDisplay()
+    }
+    
+    func updateFitting(mode: UIViewContentMode) {
+        imageView.contentMode = mode
+        dimnessView.backgroundColor = UIColor.RGBA(0, 0, 0, 0.1)
+        setNeedsDisplay()
+    }
+    
+    func useDimness(value: Bool, alpha: CGFloat = 0.1) {
+        dimnessView.backgroundColor = value ? UIColor.RGBA(0, 0, 0, alpha) : UIColor.clearColor()
     }
     
     // MARK: Internal
@@ -52,7 +75,7 @@ class RoundedImageView: UIView {
     override func updateConstraints() {
         if !didUpdateConstraints {
             imageView.autoPinEdgesToSuperviewEdges()
-            
+            dimnessView.autoPinEdgesToSuperviewEdges()
             didUpdateConstraints = true
         }
         

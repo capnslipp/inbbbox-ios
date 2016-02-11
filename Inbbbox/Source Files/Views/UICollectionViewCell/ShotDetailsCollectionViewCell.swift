@@ -12,7 +12,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     
     // Public
     struct ViewData {
-        let avatar: UIImage
+        let avatar: String
         let author: String
         let comment: String
         let time: String

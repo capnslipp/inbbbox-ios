@@ -18,18 +18,24 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
     // Public
     struct ViewData {
-        let description: String
+        let description: NSAttributedString?
         let title: String
         let author: String
         let client: String
         let shotInfo: String
-        let shot: UIImage
-        let avatar: UIImage
+        let shot: String
+        let avatar: String
     }
     
     var viewData: ViewData? {
         didSet {
-            shotDescriptionView.text = viewData?.description
+            if let description = viewData?.description {
+                shotDescriptionView.attributedText = description
+            } else {
+                // NGRTodo: needs to be consulted what should be in here
+                shotDescriptionView.attributedText = NSAttributedString(string: "There is no decription")
+            }
+            
             shotImageView.updateWith((viewData?.shot)!, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius))
             authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: (viewData?.avatar)!,
                 title: (viewData?.title)!,
@@ -53,6 +59,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let topInset = CGFloat(30)
     private let shotImageNormalHeight = CGFloat(267)
     private let shotImageCompactHeight = CGFloat(70)
+    private let authorDetailsViewNormalHeight = CGFloat(100)
+    private let authorDetailsViewCompactHeight = CGFloat(70)
     
     // Colors
     private let headerBackgroundColor = UIColor(red:0.964, green:0.972, blue:0.972, alpha:1)
@@ -65,6 +73,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
     // Constraints
     private var shotImageHeightConstraint: NSLayoutConstraint?
+    private var authorDetailsViewHeightConstaint: NSLayoutConstraint?
     private var authorDetailsTopToShotImageBottom: NSLayoutConstraint?
     private var authorDetailsTopToSuperviewEdge: NSLayoutConstraint?
     private var shotDescriptionTopToAuthorDetailsBottom: NSLayoutConstraint?
@@ -111,7 +120,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         let leftAndRightMargin = CGFloat(10)
         let closeButtonRightMargin = CGFloat(-5)
         let closeButtonTopMargin = CGFloat(5)
-        let authorDetailsViewHeight = CGFloat(100)
         
         if !didUpdateConstraints {
             shotImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset).autoIdentify("[shotImageView] .Top = \(topInset)")
@@ -125,7 +133,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             authorDetailsTopToShotImageBottom = authorDetailsView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotImageView)
             authorDetailsView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
             authorDetailsView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
-            authorDetailsView.autoSetDimension(.Height, toSize: authorDetailsViewHeight)
+            authorDetailsViewHeightConstaint = authorDetailsView.autoSetDimension(.Height, toSize: authorDetailsViewNormalHeight)
             
             shotDescriptionTopToAuthorDetailsBottom = shotDescriptionView.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorDetailsView)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Bottom)
@@ -157,6 +165,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     
                     // ShotImage
                     self.shotImageHeightConstraint?.constant = self.shotImageCompactHeight
+                    self.shotImageView.updateFitting(.ScaleAspectFill)
+                    self.shotImageView.useDimness(true)
                     
                     // AuthorDetails
                     self.authorDetailsTopToShotImageBottom?.autoRemove()
@@ -164,6 +174,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     self.shotDescriptionTopToAuthorDetailsBottom?.autoRemove()
                     self.shotDescriptionToSuperviewEdge = self.shotDescriptionView.autoPinEdgeToSuperviewEdge(.Top)
                     
+                    self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewCompactHeight
                     self.authorDetailsView.displayAuthorDetailsInCompactSize()
                     
                     UIView.animateWithDuration(self.animationDuration) {
@@ -176,13 +187,16 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     
                     // ShotImage
                     self.shotImageHeightConstraint?.constant = self.shotImageNormalHeight
+                    self.shotImageView.updateFitting(.ScaleAspectFit)
+                    self.shotImageView.useDimness(true)
                     
                     // AuthorDetails
                     self.authorDetailsTopToSuperviewEdge?.autoRemove()
                     self.authorDetailsTopToShotImageBottom?.autoInstall()
                     self.shotDescriptionToSuperviewEdge?.autoRemove()
                     self.shotDescriptionTopToAuthorDetailsBottom?.autoInstall()
-                    
+
+                    self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewNormalHeight
                     self.authorDetailsView.displayAuthorDetailsInNormalSize()
                     
                     UIView.animateWithDuration(self.animationDuration) {
