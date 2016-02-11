@@ -13,7 +13,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     
     // MARK: - Lifecycle
     
-    private var followees = NSMutableOrderedSet()
+    private var followees = [Followee]()
     private var followeesShots = [Followee : [Shot]]()
     private let connectionsProvider = ConnectionsProvider()
     private let shotsProvider = ShotsProvider()
@@ -36,7 +36,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             self.connectionsProvider.provideMyFollowees()
             }.then { followees -> Void in
                 if let followees = followees {
-                    self.followees.addObjectsFromArray(followees)
+                    self.followees.appendContentsOf(followees)
                     self.downloadShots(followees)
                 }
                 self.collectionView?.reloadData()
@@ -50,20 +50,21 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         // NGRTemp: Display only 30 followers on screen to avoid
         // exceeded number of requests (Dribbble allows 60 request per minute).
         // Needs to be changed.
-        let isNextPageAvailable = self.followees.count < 30 ? true : false
+        let isNextPageAvailable = self.followees.count < 30
         if isNextPageAvailable {
             firstly {
                 self.connectionsProvider.nextPage()
                 }.then { followees -> Void in
-                    if let followees = followees {
-                        if followees.count > 0 {
-                            self.followees.addObjectsFromArray(followees)
-                            let indexPaths = followees.map({
-                                NSIndexPath(forRow: self.followees.indexOfObject($0), inSection: 0)
-                            })
+                    if let followees = followees where followees.count > 0 {
+                        let indexes = followees.enumerate().map { index, element in
+                            return index + self.followees.count
+                        }
+                        self.followees.appendContentsOf(followees)
+                        let indexPaths = indexes.map {
+                            NSIndexPath(forRow:($0), inSection: 0)
+                        }
                         self.collectionView?.insertItemsAtIndexPaths(indexPaths)
                         self.downloadShots(followees)
-                        }
                     }
                 }.error { error in
                     // NGRTemp: Need mockups for error message view
@@ -77,12 +78,15 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             firstly {
                 self.shotsProvider.provideShotsForUser(followee)
                 }.then { shots -> Void in
-                if let shots = shots {
+                    if let shots = shots {
                         self.followeesShots[followee] = shots
                     } else {
                         self.followeesShots[followee] = [Shot]()
                     }
-                    let indexPath = NSIndexPath(forRow: self.followees.indexOfObject(followee), inSection: 0)
+                    guard let index = self.followees.indexOf(followee) else {
+                        return
+                    }
+                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
                     self.collectionView?.reloadItemsAtIndexPaths([indexPath])
                 }.error { error in
                     // NGRTemp: Need mockups for error message view
@@ -103,16 +107,16 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         }
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            let followee = followees[indexPath.row] as! Followee
+            let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
             if let followeeShots = followeesShots[followee] {
-                let shotImagesUrls = followeeShots.map({ $0.image.normalURL })
+                let shotImagesUrls = followeeShots.map { $0.image.normalURL }
                 presentSmallShotsImagesForCell(shotImagesUrls, cell: cell)
             }
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            let followee = followees[indexPath.row] as! Followee
+            let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
             let shotImageUrl = followeesShots[followee]?.first?.image.normalURL
             presentLargeShotImageForCell(shotImageUrl, cell: cell)
