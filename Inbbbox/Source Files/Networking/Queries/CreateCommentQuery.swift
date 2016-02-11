@@ -19,4 +19,3 @@ struct CreateCommentQuery: Query {
         parameters["body"] = body
     }
 }
-
