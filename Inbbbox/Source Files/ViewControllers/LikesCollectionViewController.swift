@@ -27,21 +27,41 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
             return
         }
         collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
+        downloadInitialShots()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    // MARK: Downloading
+    
+    func downloadInitialShots() {
         guard let user = UserStorage.currentUser else {
             return
         }
-        
         firstly {
             self.shotsProvider.provideLikedShotsForUser(user)
         }.then { shots -> Void in
             if let shots = shots {
                 self.likedShots = shots
                 self.collectionView?.reloadData()
+            }
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
+    }
+    
+    func downloadShotsForNextPage() {
+         firstly {
+            self.shotsProvider.nextPage()
+        }.then { shots -> Void in
+            if let shots = shots where shots.count > 0 {
+                let indexes = shots.enumerate().map { index, _ in
+                    return index + self.likedShots.count
+                }
+                self.likedShots.appendContentsOf(shots)
+                let indexPaths = indexes.map {
+                    NSIndexPath(forRow:($0), inSection: 0)
+                }
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
@@ -56,6 +76,9 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        if indexPath.row == likedShots.count - 1 {
+            downloadShotsForNextPage()
+        }
         let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
          // NGRTemp: temporary implementation - image should probably be downloaded earlier
         let shot = likedShots[indexPath.item]
