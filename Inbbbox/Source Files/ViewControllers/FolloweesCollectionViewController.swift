@@ -56,7 +56,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                 self.connectionsProvider.nextPage()
             }.then { followees -> Void in
                 if let followees = followees where followees.count > 0 {
-                    let indexes = followees.enumerate().map { index, element in
+                    let indexes = followees.enumerate().map { index, _ in
                         return index + self.followees.count
                     }
                     self.followees.appendContentsOf(followees)
