@@ -83,6 +83,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        
         let shot = shots[indexPath.item]
         cell.swipeCompletion = { action in
             switch action {
@@ -101,7 +102,14 @@ final class ShotsCollectionViewController: UICollectionViewController {
         }
         cell.delegate = self
         // NGRTemp: temporary implementation - image should probably be downloaded earlier
-        cell.shotImageView.loadShotImageFromURL(shot.image.normalURL)
+        
+        if !didFinishInitialAnimations && indexPath.row != 0 {
+            let image = UIImage.cachedImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
+            let blurredImage = image?.blurredImage(CGFloat(1))
+            cell.shotImageView.image = blurredImage
+        } else {
+            cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
+        }
         
         return cell
     }
