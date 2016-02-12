@@ -4,7 +4,6 @@
 
 import UIKit
 import PromiseKit
-import KFSwiftImageLoader
 
 final class ShotsCollectionViewController: UICollectionViewController {
 
@@ -101,7 +100,8 @@ final class ShotsCollectionViewController: UICollectionViewController {
         }
         cell.delegate = self
         // NGRTemp: temporary implementation - image should probably be downloaded earlier
-        cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
+        cell.shotImageView.loadShotImageFromURL(shot.image.normalURL)
+        
         return cell
     }
 
