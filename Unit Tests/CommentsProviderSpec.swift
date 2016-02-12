@@ -184,7 +184,7 @@ class CommentsProviderSpec: QuickSpec {
                         error = _error
                     }
                     
-                    expect(error is VerifiableError).toNotEventually(beTruthy())
+                    expect(error is VerifiableError).toEventually(beTruthy())
                 }
             }
             

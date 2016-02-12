@@ -67,7 +67,7 @@ class BucketsProviderSpec: QuickSpec {
                         buckets = _buckets
                     }.error { _ in fail() }
                     
-                    expect(buckets).toNotEventually(beNil())
+                    expect(buckets).toNotEventually(beNil(), timeout: 3)
                     expect(buckets).toEventually(haveCount(3))
                     expect(buckets?.first?.identifier).toEventually(equal("1"))
                 }
