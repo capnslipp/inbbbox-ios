@@ -15,6 +15,8 @@ class CollectionViewMock: UICollectionView {
     let performBatchUpdatesStub = Stub<((() -> Void)?, (Bool -> Void)?), Void>()
     let reloadDataStub = Stub<Void, Void>()
     let dequeueReusableCellWithReuseIdentifierStub = Stub<(String, NSIndexPath), UICollectionViewCell>()
+    let visibleCellsStub = Stub<Void, [UICollectionViewCell]>()
+    let indexPathForCellStub = Stub<UICollectionViewCell, NSIndexPath>()
 
     convenience init() {
         self.init(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -42,5 +44,13 @@ class CollectionViewMock: UICollectionView {
 
     override func dequeueReusableCellWithReuseIdentifier(identifier: String, forIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return try! dequeueReusableCellWithReuseIdentifierStub.invoke(identifier, indexPath)
+    }
+
+    override func visibleCells() -> [UICollectionViewCell] {
+        return try! visibleCellsStub.invoke()
+    }
+
+    override func indexPathForCell(cell: UICollectionViewCell) -> NSIndexPath? {
+        return try! indexPathForCellStub.invoke(cell)
     }
 }

@@ -15,7 +15,7 @@ class QuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return MockQuery()
+            return QueryMock()
         }) { Void -> QueryExpectation in
             return (method: .POST, encoding: .JSON, path: "/fixture/path")
         }
@@ -29,7 +29,7 @@ class QuerySpec: QuickSpec {
     }
 }
 
-private struct MockQuery: Query {
+private struct QueryMock: Query {
     let method = Method.POST
     let path = "/fixture/path"
     var parameters = Parameters(encoding: .JSON)

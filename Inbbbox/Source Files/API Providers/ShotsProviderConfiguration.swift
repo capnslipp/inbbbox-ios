@@ -40,6 +40,8 @@ class ShotsProviderConfiguration {
             case .Following:
                 query.followingUsersShotsQuery = true
         }
+        
+        query.date = NSDate()
     
         return query
     }

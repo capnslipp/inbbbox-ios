@@ -4,7 +4,6 @@
 
 import UIKit
 import PromiseKit
-import KFSwiftImageLoader
 
 final class ShotsCollectionViewController: UICollectionViewController {
 
@@ -13,6 +12,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     var animationManager = ShotsAnimator()
     var localStorage = ShotsLocalStorage()
     var userStorageClass = UserStorage.self
+    var imageClass = UIImage.self
     var shotOperationRequesterClass =  ShotOperationRequester.self
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
@@ -101,9 +101,12 @@ final class ShotsCollectionViewController: UICollectionViewController {
         }
         cell.delegate = self
         // NGRTemp: temporary implementation - image should probably be downloaded earlier
-        cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
+        cell.shotImageView.loadShotImageFromURL(shot.image.normalURL)
+        
         return cell
     }
+
+    // MARK: UICollectionViewDelegate
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
@@ -115,6 +118,23 @@ final class ShotsCollectionViewController: UICollectionViewController {
         tabBarController?.presentViewController(shotDetailsCollectionViewController, animated: true, completion: nil)
     }
 
+    // MARK: UIScrollViewDelegate
+
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard let collectionView = collectionView else {
+            return
+        }
+        let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
+
+        for cell in collectionView.visibleCells() {
+            if let shotCell = cell as? ShotCollectionViewCell, indexPath = collectionView.indexPathForCell(shotCell) {
+                let shot = shots[indexPath.item]
+                let image = imageClass.cachedImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
+                shotCell.shotImageView.image = image?.blurredImage(blur)
+            }
+        }
+    }
+
     // MARK: - Helpers
 
     func configureInitialSettings() {
@@ -124,7 +144,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
         Settings.StreamSource.Debuts = true
     }
 }
-
 
 extension ShotsCollectionViewController: ShotsAnimatorDelegate {
 

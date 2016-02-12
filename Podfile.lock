@@ -2,6 +2,7 @@ PODS:
   - AsyncSwift (1.6.4)
   - Dobby (0.4.2)
   - EasyAnimation (1.0.2)
+  - GPUImage (0.1.7)
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - Dobby (~> 0.4.2)
   - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
+  - GPUImage (~> 0.1)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - KFSwiftImageLoader (~> 2.0.1)
@@ -70,6 +72,7 @@ SPEC CHECKSUMS:
   AsyncSwift: 3c90beed237324f1b57e1f1c414dc5501985d208
   Dobby: 66c6fa06aac194f1b8328b2b4c988d59a01fb5f1
   EasyAnimation: 9615e40f58aa7d8d6a67de66e0edda1903ffa990
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
   KFSwiftImageLoader: a2b8a33a89116c767e7af8d2c109e8c483037b19

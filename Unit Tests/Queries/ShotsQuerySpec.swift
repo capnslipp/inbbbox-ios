@@ -18,7 +18,7 @@ class ShotsQuerySpec: QuickSpec {
         var sut: ShotsQuery!
         
         beforeEach {
-            sut = ShotsQuery()
+            sut = ShotsQuery(type: .List)
         }
         
         afterEach {
@@ -28,7 +28,7 @@ class ShotsQuerySpec: QuickSpec {
         describe("when newly initiliazed") {
             
             SharedQuerySpec.performSpecForQuery( { Void -> Query in
-                return ShotsQuery()
+                return ShotsQuery(type: .List)
             }) { Void -> QueryExpectation in
                 return (method: .GET, encoding: .URL, path: "/shots")
             }
@@ -240,12 +240,34 @@ class ShotsQuerySpec: QuickSpec {
             }
         }
         
-        describe("when newly initiliazed with user") {
+        describe("when newly initilized for user shots") {
             
             SharedQuerySpec.performSpecForQuery( { Void -> Query in
-                return ShotsQuery(user: User.fixtureUser())
+                let user = User.fixtureUser()
+                return ShotsQuery(type: .UserShots(user))
             }) { Void -> QueryExpectation in
                 return (method: .GET, encoding: .URL, path: "/users/fixture.username/shots")
+            }
+        }
+        
+        
+        describe("when newly initilized for bucket shots") {
+            
+            SharedQuerySpec.performSpecForQuery( { Void -> Query in
+                let bucket = Bucket.fixtureBucket()
+                return ShotsQuery(type: .BucketShots(bucket))
+            }) { Void -> QueryExpectation in
+                return (method: .GET, encoding: .URL, path: "/buckets/fixture.id/shots")
+            }
+        }
+        
+        describe("when newly initilized for user liked shots") {
+            
+            SharedQuerySpec.performSpecForQuery( { Void -> Query in
+                let user = User.fixtureUser()
+                return ShotsQuery(type: .UserLikedShots(user))
+            }) { Void -> QueryExpectation in
+                return (method: .GET, encoding: .URL, path: "/users/fixture.username/likes")
             }
         }
     }

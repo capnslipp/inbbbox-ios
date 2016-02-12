@@ -17,7 +17,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         case Comment
     }
 
-    let shotImageView = UIImageView.newAutoLayoutView()
+    let shotImageView = ShotImageView.newAutoLayoutView()
     let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"), secondImage: UIImage(named: "ic-like-swipe-filled"))
     let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
     let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))

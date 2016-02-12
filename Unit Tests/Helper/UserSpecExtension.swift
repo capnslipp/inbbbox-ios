@@ -17,4 +17,11 @@ extension User {
         let json = JSONSpecLoader.sharedInstance.jsonWithResourceName("User")
         return User.map(json)
     }
+    
+    static func fixtureUserForAccountType(type: AccountType) -> User {
+        var json = JSONSpecLoader.sharedInstance.jsonWithResourceName("User")
+        json["type"].stringValue = type.rawValue
+        
+        return User.map(json)
+    }
 }

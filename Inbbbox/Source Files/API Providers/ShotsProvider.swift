@@ -10,40 +10,17 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
-/**
-Class for providing shots of various source type.
-*/
-
+/// Provides interface for dribbble shots API
 class ShotsProvider: PageableProvider {
 
     /// Used only when using provideShots() method.
     var configuration = ShotsProviderConfiguration()
-    let page: UInt
-    let pagination: UInt
 
     private var currentSourceType: SourceType?
     private enum SourceType {
-        case General, Bucket, User
+        case General, Bucket, User, Liked
     }
-    
-     /**
-     Initializer with customizable parameters.
-     
-     - parameter page:          Number of page from which ShotsProvider should start to provide shots.
-     - parameter pagination:    Pagination of request.
-     */
-    init(page: UInt, pagination: UInt) {
-        self.page = page
-        self.pagination = pagination
-    }
-    
-    /**
-     Convenience initializer with default parameters.
-     */
-    convenience override init() {
-        self.init(page: 1, pagination: 30)
-    }
-    
+        
     /**
      Provides shots with current configuration, pagination and page.
      
@@ -64,8 +41,22 @@ class ShotsProvider: PageableProvider {
     func provideShotsForUser(user: User) -> Promise<[Shot]?> {
         resetAnUseSourceType(.User)
         
-        let query = ShotsQuery(user: user)
+        let query = ShotsQuery(type: .UserShots(user))
         return provideShotsWithQueries([query])
+    }
+    
+    /**
+     Provides liked shots for given user.
+     
+     - parameter user: User whose liked shots should be provided.
+     
+     - returns: Promise which resolves with shots or nil.
+     */
+    func provideLikedShotsForUser(user: User) -> Promise<[Shot]?> {
+        resetAnUseSourceType(.Liked)
+        
+        let query = ShotsQuery(type: .UserLikedShots(user))
+        return provideShotsWithQueries([query], serializationKey: "shot")
     }
     
     /**
@@ -78,7 +69,7 @@ class ShotsProvider: PageableProvider {
     func provideShotsForBucket(bucket: Bucket) -> Promise<[Shot]?> {
         resetAnUseSourceType(.Bucket)
         
-        let query = ShotsQuery(bucket: bucket)
+        let query = ShotsQuery(type: .BucketShots(bucket))
         return provideShotsWithQueries([query])
     }
     
@@ -109,32 +100,21 @@ class ShotsProvider: PageableProvider {
 
 private extension ShotsProvider {
     
-    var activeQueries: [ShotsQuery] {
+    var activeQueries: [Query] {
         return configuration.sources.map {
-            configuration.queryByConfigurationForQuery(ShotsQuery(), source: $0)
+            configuration.queryByConfigurationForQuery(ShotsQuery(type: .List), source: $0)
         }
     }
     
-    func provideShotsWithQueries(let shotQueries: [ShotsQuery]) -> Promise<[Shot]?> {
+    func provideShotsWithQueries(queries: [Query], serializationKey key: String? = nil) -> Promise<[Shot]?> {
         return Promise<[Shot]?> { fulfill, reject in
             
-            let queries = shotQueries.map { queryByPagingConfiguration($0) } as [Query]
-            
             firstly {
-                firstPageForQueries(queries)
+                firstPageForQueries(queries, withSerializationKey: key)
             }.then {
                 self.serialize($0, fulfill)
             }.error(reject)
         }
-    }
-    
-    func queryByPagingConfiguration(var query: ShotsQuery) -> ShotsQuery {
-        
-        query.date = NSDate()
-        query.parameters["page"] = page
-        query.parameters["per_page"] = pagination
-        
-        return query
     }
 
     func resetAnUseSourceType(type: SourceType) {
@@ -146,7 +126,7 @@ private extension ShotsProvider {
         return Promise<[Shot]?> { fulfill, reject in
             
             if currentSourceType == nil {
-                throw PageableProviderError.PageableBehaviourUndefined
+                throw PageableProviderError.BehaviourUndefined
             }
             
             firstly {
