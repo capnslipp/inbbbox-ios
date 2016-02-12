@@ -46,7 +46,7 @@ class BucketsProviderSpec: QuickSpec {
                         error = _error
                     }
                     
-                    expect(error is AuthorizableError).toEventually(beTruthy())
+                    expect(error is VerifiableError).toEventually(beTruthy())
                 }
             }
             

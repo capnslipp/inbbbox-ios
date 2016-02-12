@@ -16,9 +16,9 @@ class UpdateCommentQuerySpec: QuickSpec {
     override func spec() {
 
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return UpdateCommentQuery(shot: Shot.fixtureShot(), comment:  Comment.fixtureComment())
+            return UpdateCommentQuery(shot: Shot.fixtureShot(), comment:  Comment.fixtureComment(), withBody: "fixture.body")
         }) { Void -> QueryExpectation in
-            return (method: .PUT, encoding: .URL, path: "/shots/fixture.identifier/comments/fixture.identifier")
+            return (method: .PUT, encoding: .JSON, path: "/shots/fixture.identifier/comments/fixture.identifier")
         }
         
         describe("when newly initialized with shot") {
@@ -26,7 +26,7 @@ class UpdateCommentQuerySpec: QuickSpec {
             var sut: UpdateCommentQuery!
             
             beforeEach {
-                sut = UpdateCommentQuery(shot: Shot.fixtureShot(), comment:  Comment.fixtureComment())
+                sut = UpdateCommentQuery(shot: Shot.fixtureShot(), comment:  Comment.fixtureComment(), withBody: "fixture.body")
             }
             
             afterEach {
@@ -35,6 +35,10 @@ class UpdateCommentQuerySpec: QuickSpec {
             
             it("should have empty parameters") {
                 expect(sut.parameters.queryItems).to(beEmpty())
+            }
+            
+            it("should have body parameter properly set") {
+                expect(sut.parameters["body"] as? String).to(equal("fixture.body"))
             }
         }
     }

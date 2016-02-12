@@ -120,7 +120,7 @@ class VerifiableSpec: QuickSpec {
             }
         }
         
-        describe("when checking account type") {
+        describe("when verifying account type") {
             
             beforeEach {
                 UserStorage.clear()
@@ -174,7 +174,70 @@ class VerifiableSpec: QuickSpec {
                     expect(didInvokePromise).toEventually(beTruthy())
                 }
             }
+        }
+        
+        describe("when verifying text length") {
             
+            context("and text is longer than allowed") {
+                
+                it("should not pass validation") {
+                    sut.verifyTextLength("foo", min: 0, max: 2).then { _ in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+            
+            context("and text is shorter than allowed") {
+                
+                it("should not pass validation") {
+                    sut.verifyTextLength("foobar", min: 0, max: 2).then { _ in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+            
+            context("when min and max value are swapped") {
+                
+                it("should not pass validation") {
+                    sut.verifyTextLength("foobar", min: 2, max: 0).then { _ in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+            
+            context("when text contains whitespaces") {
+                
+                it("should pass validation") {
+                    sut.verifyTextLength("   foo    ", min: 1, max: 3).error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error).toEventually(beNil())
+                }
+            }
+            
+            context("when text is correct") {
+                
+                it("should pass validation") {
+                    sut.verifyTextLength("foo", min: 0, max: 10).error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error).toEventually(beNil())
+                }
+            }
         }
     }
 }
