@@ -52,4 +52,3 @@ extension Comment: Equatable {}
 func ==(lhs: Comment, rhs: Comment) -> Bool {
     return lhs.identifier == rhs.identifier
 }
-
