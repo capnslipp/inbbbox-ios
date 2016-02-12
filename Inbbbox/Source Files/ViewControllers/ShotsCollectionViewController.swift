@@ -127,7 +127,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         }
         let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
 
-        for (_, cell) in collectionView.visibleCells().enumerate() {
+        for cell in collectionView.visibleCells() {
             if let shotCell = cell as? ShotCollectionViewCell, indexPath = collectionView.indexPathForCell(shotCell) {
                 let shot = shots[indexPath.item]
                 let image = imageClass.cachedImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
