@@ -12,9 +12,10 @@ struct UpdateCommentQuery: Query {
     
     let method = Method.PUT
     let path: String
-    var parameters = Parameters(encoding: .URL)
+    var parameters = Parameters(encoding: .JSON)
     
-    init(shot: Shot, comment: Comment) {
+    init(shot: Shot, comment: Comment, withBody body: String) {
         path = "/shots/" + shot.identifier + "/comments/" + comment.identifier
+        parameters["body"] = body
     }
 }
