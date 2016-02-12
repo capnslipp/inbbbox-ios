@@ -16,7 +16,7 @@ enum PageableProviderError: ErrorType {
     case DidReachFirstPage
 }
 
-class PageableProvider {
+class PageableProvider: Verifiable {
     
     private(set) var page = UInt(1)
     private(set) var pagination = UInt(30)

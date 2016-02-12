@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 /// Provides interface for dribbble buckets API
-class BucketsProvider: PageableProvider, Authorizable {
+class BucketsProvider: PageableProvider {
         
     /**
      Provides authenticated user’s buckets.
@@ -80,7 +80,7 @@ private extension BucketsProvider {
         return Promise<[Bucket]?> { fulfill, reject in
         
             firstly {
-                authorizeIfNeeded(authentizationRequired)
+                verifyAuthenticationStatus(authentizationRequired)
             }.then {
                 self.firstPageForQueries(queries, withSerializationKey: nil)
             }.then(fulfill).error(reject)

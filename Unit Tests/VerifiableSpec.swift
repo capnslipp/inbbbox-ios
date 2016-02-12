@@ -1,5 +1,5 @@
 //
-//  AuthorizableSpec.swift
+//  VerifiableSpec.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 03/02/16.
@@ -11,10 +11,10 @@ import Nimble
 
 @testable import Inbbbox
 
-class AuthorizableSpec: QuickSpec {
+class VerifiableSpec: QuickSpec {
     override func spec() {
         
-        var sut: MockAuthorizable!
+        var sut: MockVerifiable!
         var savedTokenBeforeTestLaunch: String!
         var didInvokePromise: Bool!
         var error: ErrorType?
@@ -30,7 +30,7 @@ class AuthorizableSpec: QuickSpec {
         }
         
         beforeEach {
-            sut = MockAuthorizable()
+            sut = MockVerifiable()
         }
         
         afterEach {
@@ -50,7 +50,7 @@ class AuthorizableSpec: QuickSpec {
                 it("authorization check should pass") {
                     
                     waitUntil { done in
-                        sut.authorizeIfNeeded(false).then { _ -> Void in
+                        sut.verifyAuthenticationStatus(false).then { _ -> Void in
                             didInvokePromise = true
                             done()
                         }.error { _ in fail() }
@@ -66,7 +66,7 @@ class AuthorizableSpec: QuickSpec {
                 it("authorization check should throw error") {
                     
                     waitUntil { done in
-                        sut.authorizeIfNeeded(true).then { _ -> Void in
+                        sut.verifyAuthenticationStatus(true).then { _ -> Void in
                             fail()
                         }.error { _error in
                             didInvokePromise = true
@@ -76,7 +76,7 @@ class AuthorizableSpec: QuickSpec {
                     }
                     
                     expect(didInvokePromise).to(beTruthy())
-                    expect(error is AuthorizableError).to(beTruthy())
+                    expect(error is VerifiableError).to(beTruthy())
                 }
             }
         }
@@ -92,7 +92,7 @@ class AuthorizableSpec: QuickSpec {
                 it("authorization check should pass") {
                     
                     waitUntil { done in
-                        sut.authorizeIfNeeded(false).then { _ -> Void in
+                        sut.verifyAuthenticationStatus(false).then { _ -> Void in
                             didInvokePromise = true
                             done()
                         }.error { _ in fail() }
@@ -108,7 +108,7 @@ class AuthorizableSpec: QuickSpec {
                 it("authorization check should throw error") {
                     
                     waitUntil { done in
-                        sut.authorizeIfNeeded(true).then { _ -> Void in
+                        sut.verifyAuthenticationStatus(true).then { _ -> Void in
                             didInvokePromise = true
                             done()
                         }.error { _ in fail() }
@@ -119,7 +119,64 @@ class AuthorizableSpec: QuickSpec {
                 }
             }
         }
+        
+        describe("when checking account type") {
+            
+            beforeEach {
+                UserStorage.clear()
+            }
+            
+            context("and user does not exist") {
+                
+                it("error should occur") {
+                    sut.verifyAccountType().then { _ in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+            
+            context("and user has wrong account type") {
+                
+                beforeEach {
+                    let user = User.fixtureUserForAccountType(.User)
+                    UserStorage.storeUser(user)
+                }
+                
+                it("error should occur") {
+                    
+                    sut.verifyAccountType().then { _ in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+            
+            context("and user has correct account type") {
+                
+                beforeEach {
+                    let user = User.fixtureUserForAccountType(.Player)
+                    UserStorage.storeUser(user)
+                }
+                
+                it("validation should pass") {
+                    
+                    sut.verifyAccountType().then { _ in
+                        didInvokePromise = true
+                    }.error { _ in fail() }
+                    
+                    expect(didInvokePromise).toEventually(beTruthy())
+                }
+            }
+            
+        }
     }
 }
 
-private struct MockAuthorizable: Authorizable {}
+private struct MockVerifiable: Verifiable {}
