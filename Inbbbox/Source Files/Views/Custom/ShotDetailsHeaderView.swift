@@ -12,6 +12,7 @@ import UIKit
     func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapCloseButton: UIButton)
     optional func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapAuthor: String)
     optional func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapClient: String)
+    optional func shotDetailsHeaderViewDidTapLikeButton(like: Bool, completion: (operationSucceed: Bool) -> Void)
 }
 
 class ShotDetailsHeaderView: UICollectionReusableView {
@@ -25,6 +26,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         let shotInfo: String
         let shot: String
         let avatar: String
+        let shotLiked: Bool
     }
     
     var viewData: ViewData? {
@@ -43,6 +45,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                 client: (viewData?.client)!,
                 shotInfo: (viewData?.shotInfo)!
             )
+            
+            shotDetailsOperationView.shotLiked = viewData?.shotLiked
             setupButtonsInteractions()
         }
     }
@@ -70,13 +74,15 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let authorDetailsView = AuthorDetailsView.newAutoLayoutView()
     private let closeButton = UIButton(type: .System)
     private let shotDescriptionView = UITextView(forAutoLayout: ())
+    private let shotDetailsOperationView = ShotDetailsOperationView.newAutoLayoutView()
     
     // Constraints
     private var shotImageHeightConstraint: NSLayoutConstraint?
     private var authorDetailsViewHeightConstaint: NSLayoutConstraint?
     private var authorDetailsTopToShotImageBottom: NSLayoutConstraint?
     private var authorDetailsTopToSuperviewEdge: NSLayoutConstraint?
-    private var shotDescriptionTopToAuthorDetailsBottom: NSLayoutConstraint?
+    private var shotOperationToAuthorDetailsBottom: NSLayoutConstraint?
+    private var shotDescriptionTopToShotOperationDetailsBottom: NSLayoutConstraint?
     private var shotDescriptionToSuperviewEdge: NSLayoutConstraint?
     
     // MARK: Life Cycle
@@ -93,6 +99,11 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     // MARK: Public
+    
+    func updateLikeButton(shotLiked shotLiked: Bool) {
+        shotDetailsOperationView.updateLikeButton(liked: shotLiked)
+    }
+    
     func displayCompactVariant() {
         animateLayoutWithRegularAnimation()
     }
@@ -120,6 +131,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         let leftAndRightMargin = CGFloat(10)
         let closeButtonRightMargin = CGFloat(-5)
         let closeButtonTopMargin = CGFloat(5)
+        let shotDetailsOperationViewHeight = CGFloat(40)
         
         if !didUpdateConstraints {
             shotImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset).autoIdentify("[shotImageView] .Top = \(topInset)")
@@ -135,7 +147,12 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             authorDetailsView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
             authorDetailsViewHeightConstaint = authorDetailsView.autoSetDimension(.Height, toSize: authorDetailsViewNormalHeight)
             
-            shotDescriptionTopToAuthorDetailsBottom = shotDescriptionView.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorDetailsView)
+            shotOperationToAuthorDetailsBottom = shotDetailsOperationView.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorDetailsView)
+            shotDetailsOperationView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
+            shotDetailsOperationView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
+            shotDetailsOperationView.autoSetDimension(.Height, toSize: shotDetailsOperationViewHeight)
+            
+            shotDescriptionTopToShotOperationDetailsBottom = shotDescriptionView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotDetailsOperationView)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Bottom)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
@@ -171,17 +188,20 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     // AuthorDetails
                     self.authorDetailsTopToShotImageBottom?.autoRemove()
                     self.authorDetailsTopToSuperviewEdge = self.authorDetailsView.autoPinEdgeToSuperviewEdge(.Top, withInset: self.topInset)
-                    self.shotDescriptionTopToAuthorDetailsBottom?.autoRemove()
+                    self.shotDescriptionTopToShotOperationDetailsBottom?.autoRemove()
                     self.shotDescriptionToSuperviewEdge = self.shotDescriptionView.autoPinEdgeToSuperviewEdge(.Top)
                     
                     self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewCompactHeight
                     self.authorDetailsView.displayAuthorDetailsInCompactSize()
+                    
+                    self.shotOperationToAuthorDetailsBottom?.autoRemove()
                     
                     UIView.animateWithDuration(self.animationDuration) {
                         self.authorDetailsView.backgroundColor = UIColor.clearColor()
                         self.authorDetailsView.hideShotInfoLabel()
                         self.authorDetailsView.setTextColor(UIColor.whiteColor())
                         self.shotDescriptionView.hidden = true
+                        self.shotDetailsOperationView.hidden = true
                     }
                 } else {
                     
@@ -194,16 +214,19 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     self.authorDetailsTopToSuperviewEdge?.autoRemove()
                     self.authorDetailsTopToShotImageBottom?.autoInstall()
                     self.shotDescriptionToSuperviewEdge?.autoRemove()
-                    self.shotDescriptionTopToAuthorDetailsBottom?.autoInstall()
+                    self.shotDescriptionTopToShotOperationDetailsBottom?.autoInstall()
 
                     self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewNormalHeight
                     self.authorDetailsView.displayAuthorDetailsInNormalSize()
+                    
+                    self.shotOperationToAuthorDetailsBottom?.autoInstall()
                     
                     UIView.animateWithDuration(self.animationDuration) {
                         self.authorDetailsView.setDefaultTextColor()
                         self.authorDetailsView.setDefaultBackgrounColor()
                         self.authorDetailsView.showShotInfoLabel()
                         self.shotDescriptionView.hidden = false
+                        self.shotDetailsOperationView.hidden = false
                     }
                 }
                 self.layoutIfNeeded()
@@ -217,6 +240,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         setupAuthorDetailsView()
         setupCloseButton()
         setupShotDescriptionView()
+        setupShotDetailsOperationView()
     }
     
     private func setupAuthorDetailsView() {
@@ -246,29 +270,43 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         addSubview(shotDescriptionView)
     }
     
+    private func setupShotDetailsOperationView() {
+        addSubview(shotDetailsOperationView)
+    }
+    
     private func setupButtonsInteractions() {
         authorDetailsView.authorButton.addTarget(self, action: "authorButtonDidTap:", forControlEvents: .TouchUpInside)
         authorDetailsView.clientButton.addTarget(self, action: "clientButtonDidTap:", forControlEvents: .TouchUpInside)
+        shotDetailsOperationView.likeButton.addTarget(self, action: "likeButtonDidTap:", forControlEvents: .TouchUpInside)
     }
 }
 
 // MARK: UI Interactions
 
 extension ShotDetailsHeaderView {
-    @objc private func closeButtonDidTap(sender: UIButton) {
+    dynamic private func closeButtonDidTap(sender: UIButton) {
         delegate?.shotDetailsHeaderView(self, didTapCloseButton: sender)
     }
     
-    @objc private func authorButtonDidTap(sender: UIButton) {
+    dynamic private func authorButtonDidTap(_: UIButton) {
         // NGRTodo: consider replacing it with authorID
         let authorLink = viewData?.author ?? ""
         delegate?.shotDetailsHeaderView?(self, didTapAuthor: authorLink)
     }
     
-    @objc private func clientButtonDidTap(sender: UIButton) {
+    dynamic private func clientButtonDidTap(_: UIButton) {
         // NGRTodo: consider replacing it with clientID
         let clientLink = viewData?.client ?? ""
-        delegate?.shotDetailsHeaderView?(self, didTapAuthor: clientLink)
+        delegate?.shotDetailsHeaderView?(self, didTapClient: clientLink)
+    }
+    
+    // NGRTemp:
+    dynamic private func likeButtonDidTap(_: UIButton) {
+        delegate?.shotDetailsHeaderViewDidTapLikeButton?(!shotDetailsOperationView.shotLiked!){ operationSucceed -> Void in
+            if operationSucceed {
+                self.shotDetailsOperationView.updateLikeButton(liked: !self.shotDetailsOperationView.shotLiked!)
+            }
+        }
     }
 }
 

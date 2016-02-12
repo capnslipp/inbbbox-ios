@@ -27,6 +27,7 @@ class AuthorDetailsView: UIView {
     // Private Properties
     private let avatarNormalSize = CGFloat(48)
     private let avatarCompactSize = CGFloat(24)
+    private let bottomButtonsSize = CGFloat(24)
     private var didUpdateConstraints = false
     private let defaultBackgroundColor = UIColor.RGBA(246, 248, 248, 1)
     private let labels: [UILabel]

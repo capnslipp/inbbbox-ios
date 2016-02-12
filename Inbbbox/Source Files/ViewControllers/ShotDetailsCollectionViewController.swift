@@ -16,6 +16,11 @@ protocol ShotDetailsCollectionViewControllerDelegate: class {
 class ShotDetailsCollectionViewController: UICollectionViewController {
     
     weak var delegate: ShotDetailsCollectionViewControllerDelegate?
+    
+    var localStorage = ShotsLocalStorage()
+    var userStorageClass = UserStorage.self
+    var shotOperationRequesterClass =  ShotOperationRequester.self
+    
     private var header = ShotDetailsHeaderView()
     private var footer = ShotDetailsFooterView()
     
@@ -38,14 +43,27 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         let info = "app name + date"
         let avatar = shot.user.avatarString!
         
-        header.viewData = ShotDetailsHeaderView.ViewData(description: shotDescription,
-            title: title!,
-            author: author,
-            client: client,
-            shotInfo: info,
-            shot: imageUrl,
-            avatar: avatar
-        )
+        
+        
+        
+        
+        if self.userStorageClass.currentUser != nil {
+            // NGRFixme: call API for `Check if you like a shot`
+        } else {
+            let shotIsLiked = localStorage.likedShots.contains{
+                $0.id == self.shot?.identifier
+            }
+            header.viewData = ShotDetailsHeaderView.ViewData(description: shotDescription,
+                title: title!,
+                author: author,
+                client: client,
+                shotInfo: info,
+                shot: imageUrl,
+                avatar: avatar,
+                shotLiked:  shotIsLiked
+            )
+        }
+
         setupSubviews()
     }
     
@@ -120,7 +138,7 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
 extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        if cellCount < changingHeaderStyleCommentsThreshold {
+        if cellCount >= changingHeaderStyleCommentsThreshold {
             header.displayCompactVariant()
         }
         footer.displayEditingVariant()
@@ -144,6 +162,23 @@ extension ShotDetailsCollectionViewController: ShotDetailsHeaderViewDelegate {
     func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapCloseButton: UIButton) {
         footer.textField.resignFirstResponder()
         delegate?.didFinishPresentingDetails(self)
+    }
+    
+    func shotDetailsHeaderViewDidTapLikeButton(like: Bool, completion: (operationSucceed: Bool) -> Void) {
+        if self.userStorageClass.currentUser != nil {
+            let promise = like ? shotOperationRequesterClass.likeShot(shot!.identifier) : shotOperationRequesterClass.unlikeShot(shot!.identifier)
+            if let _ = promise.error {
+                completion(operationSucceed: false)
+            }
+        } else {
+            do {
+                like ? try localStorage.like(shotID: shot!.identifier) : try localStorage.unlike(shotID: shot!.identifier)
+            } catch {
+                completion(operationSucceed: false)
+                return
+            }
+        }
+        completion(operationSucceed: true)
     }
 }
 
