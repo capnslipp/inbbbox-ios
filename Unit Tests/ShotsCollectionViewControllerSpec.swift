@@ -235,6 +235,64 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
             }
         }
 
+        describe("scroll view delegate") {
+
+            describe("scroll view did scroll") {
+
+                var shotCell: ShotCollectionViewCell!
+                var capturedImageURL: NSURL!
+                var capturedPlaceholderImage: UIImage!
+                var capturedBlur: CGFloat!
+                var blurredImage: UIImage!
+
+                beforeEach {
+                    shotCell = ShotCollectionViewCell(frame: CGRectZero)
+                    let scrollView = UIScrollView()
+                    scrollView.bounds = CGRect(x: 0, y: 0, width: 0, height: 100)
+                    scrollView.contentOffset = CGPoint(x: 0, y: 110)
+                    let collectionViewMock = CollectionViewMock()
+                    collectionViewMock.visibleCellsStub.on(any()) {
+                        return [shotCell]
+                    }
+                    collectionViewMock.indexPathForCellStub.on(any()) { _ in
+                        return NSIndexPath(forItem: 0, inSection: 0)
+                    }
+                    sut.collectionView = collectionViewMock
+                    let imageClassMock = ImageMock.self
+                    let imageMock = ImageMock()
+                    blurredImage = UIImage()
+                    imageMock.blurredImageStub.on(any()) { blur in
+                        capturedBlur = blur
+                        return blurredImage
+                    }
+                    imageClassMock.cachedImageFromURLStub.on(any()) { url, placeholderImage in
+                        capturedImageURL = url
+                        capturedPlaceholderImage = placeholderImage
+                        return imageMock
+                    }
+                    sut.imageClass = imageClassMock
+                    sut.shots = [Shot.fixtureShot()]
+                    sut.scrollViewDidScroll(scrollView)
+                }
+
+                it("should get cached image with proper url") {
+                    expect(capturedImageURL).to(equal(NSURL(string:"https://fixture.domain/fixture.image.normal.png")))
+                }
+
+                it("should get chached image with proper placeholder image") {
+                    expect(UIImagePNGRepresentation(capturedPlaceholderImage)).to(equal(UIImagePNGRepresentation(UIImage(named: "shot-menu")!)))
+                }
+
+                it("should blur image with proper value") {
+                    expect(capturedBlur).to(equal(0.2))
+                }
+
+                it("should set proper blurred image on visible cell") {
+                    expect(shotCell.shotImageView.image).to(equal(blurredImage))
+                }
+            }
+        }
+
         describe("shots animation manager delegate") {
 
             describe("colleciton view for animation manager") {
