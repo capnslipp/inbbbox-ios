@@ -21,7 +21,7 @@ class RequestSpec: QuickSpec {
         describe("when initializing with query") {
             
             beforeEach {
-                sut = Request(query: MockQuery())
+                sut = Request(query: QueryMock())
             }
             
             afterEach {
@@ -99,7 +99,7 @@ class RequestSpec: QuickSpec {
     }
 }
 
-private struct MockQuery: Query {
+private struct QueryMock: Query {
     let path = "/fixture/path"
     var parameters = Parameters(encoding: .JSON)
     let method = Method.POST

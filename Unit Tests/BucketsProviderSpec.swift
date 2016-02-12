@@ -15,16 +15,14 @@ import PromiseKit
 class BucketsProviderSpec: QuickSpec {
     override func spec() {
         
-        var buckets: [Bucket]?
-        var sut: MockBucketsProvider!
+        var sut: BucketsProviderMock!
         
         beforeEach {
-            sut = MockBucketsProvider()
+            sut = BucketsProviderMock()
         }
         
         afterEach {
             sut = nil
-            buckets = nil
         }
 
         describe("when providing my buckets") {
@@ -48,18 +46,90 @@ class BucketsProviderSpec: QuickSpec {
                         error = _error
                     }
                     
-                    expect(error is AuthorizableError).toEventually(beTruthy())
+                    expect(error is VerifiableError).toEventually(beTruthy())
                 }
             }
             
             context("and token does exist") {
                 
+                var buckets: [Bucket]?
+                
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
                 }
                 
+                afterEach {
+                    buckets = nil
+                }
+                
                 it("buckets should be properly returned") {
                     sut.provideMyBuckets().then { _buckets -> Void in
+                        buckets = _buckets
+                    }.error { _ in fail() }
+                    
+                    expect(buckets).toNotEventually(beNil(), timeout: 3)
+                    expect(buckets).toEventually(haveCount(3))
+                    expect(buckets?.first?.identifier).toEventually(equal("1"))
+                }
+            }
+        }
+        
+        describe("when providing buckets for user") {
+            
+            
+            var buckets: [Bucket]?
+                
+            beforeEach {
+                TokenStorage.storeToken("fixture.token")
+            }
+            
+            afterEach {
+                buckets = nil
+            }
+            
+            context("for user") {
+                
+                it("buckets should be properly returned") {
+                    sut.provideBucketsForUser(User.fixtureUser()).then { _buckets -> Void in
+                        buckets = _buckets
+                    }.error { _ in fail() }
+                    
+                    expect(buckets).toNotEventually(beNil())
+                    expect(buckets).toEventually(haveCount(3))
+                    expect(buckets?.first?.identifier).toEventually(equal("1"))
+                }
+            }
+            
+            context("for users") {
+                
+                it("buckets should be properly returned") {
+                    sut.provideBucketsForUsers([User.fixtureUser(), User.fixtureUser()]).then { _buckets -> Void in
+                        buckets = _buckets
+                    }.error { _ in fail() }
+                    
+                    expect(buckets).toNotEventually(beNil())
+                    expect(buckets).toEventually(haveCount(3))
+                    expect(buckets?.first?.identifier).toEventually(equal("1"))
+                }
+            }
+            
+            context("for the next page") {
+                
+                it("buckets should be properly returned") {
+                    sut.nextPage().then { _buckets -> Void in
+                        buckets = _buckets
+                    }.error { _ in fail() }
+                    
+                    expect(buckets).toNotEventually(beNil())
+                    expect(buckets).toEventually(haveCount(3))
+                    expect(buckets?.first?.identifier).toEventually(equal("1"))
+                }
+            }
+            
+            context("for the previous page") {
+                
+                it("buckets should be properly returned") {
+                    sut.previousPage().then { _buckets -> Void in
                         buckets = _buckets
                     }.error { _ in fail() }
                     
@@ -69,63 +139,11 @@ class BucketsProviderSpec: QuickSpec {
                 }
             }
         }
-        
-        describe("when providing buckets for user") {
-            
-            it("buckets should be properly returned") {
-                sut.provideBucketsForUser(User.fixtureUser()).then { _buckets -> Void in
-                    buckets = _buckets
-                }.error { _ in fail() }
-                
-                expect(buckets).toNotEventually(beNil())
-                expect(buckets).toEventually(haveCount(3))
-                expect(buckets?.first?.identifier).toEventually(equal("1"))
-            }
-        }
-        
-        describe("when providing buckets for users") {
-            
-            it("buckets should be properly returned") {
-                sut.provideBucketsForUsers([User.fixtureUser(), User.fixtureUser()]).then { _buckets -> Void in
-                    buckets = _buckets
-                }.error { _ in fail() }
-                
-                expect(buckets).toNotEventually(beNil())
-                expect(buckets).toEventually(haveCount(3))
-                expect(buckets?.first?.identifier).toEventually(equal("1"))
-            }
-        }
-        
-        describe("when providing buckets from next page") {
-
-            it("buckets should be properly returned") {
-                sut.nextPage().then { _buckets -> Void in
-                    buckets = _buckets
-                }.error { _ in fail() }
-                
-                expect(buckets).toNotEventually(beNil())
-                expect(buckets).toEventually(haveCount(3))
-                expect(buckets?.first?.identifier).toEventually(equal("1"))
-            }
-        }
-        
-        describe("when providing buckets from previous page") {
-            
-            it("buckets should be properly returned") {
-                sut.previousPage().then { _buckets -> Void in
-                    buckets = _buckets
-                }.error { _ in fail() }
-                
-                expect(buckets).toNotEventually(beNil())
-                expect(buckets).toEventually(haveCount(3))
-                expect(buckets?.first?.identifier).toEventually(equal("1"))
-            }
-        }
     }
 }
 
-//Explanation: Create MockBucketsProvider to override methods from PageableProvider.
-private class MockBucketsProvider: BucketsProvider {
+//Explanation: Create BucketsProviderMock to override methods from PageableProvider.
+private class BucketsProviderMock: BucketsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)

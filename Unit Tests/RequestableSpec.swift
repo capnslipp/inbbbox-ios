@@ -14,12 +14,12 @@ import Nimble
 class RequestableSpec: QuickSpec {
     override func spec() {
         
-        var sut: MockRequestable!
+        var sut: RequestableMock!
         
         describe("when initializaing request to be used as POST") {
             
             beforeEach {
-                sut = MockRequestable(encoding: .JSON)
+                sut = RequestableMock(encoding: .JSON)
             }
             
             afterEach {
@@ -52,7 +52,7 @@ class RequestableSpec: QuickSpec {
         describe("when initializaing request to be used as GET") {
             
             beforeEach {
-                sut = MockRequestable(encoding: .URL)
+                sut = RequestableMock(encoding: .URL)
             }
             
             afterEach {
@@ -82,9 +82,9 @@ class RequestableSpec: QuickSpec {
     }
 }
 
-private struct MockRequestable: Requestable {
+private struct RequestableMock: Requestable {
     
-    let query: Query = MockQuery()
+    let query: Query = QueryMock()
     
     init(encoding: Parameters.Encoding) {
         query.parameters = Parameters(encoding: encoding)
@@ -92,18 +92,18 @@ private struct MockRequestable: Requestable {
     }
 }
 
-private struct MockQuery: Query {
+private struct QueryMock: Query {
     
     let path = "/query.fixture/path"
     var parameters = Parameters(encoding: .JSON)
     let method = Method.POST
     
     var service: SecureNetworkService {
-        return MockService()
+        return ServiceMock()
     }
 }
 
-private struct MockService: SecureNetworkService {
+private struct ServiceMock: SecureNetworkService {
     
     let scheme = "https"
     let host = "fixture.host"

@@ -15,8 +15,8 @@ typealias Follower = User
 private let FollowerSerializationKey = "follower"
 private let FolloweeSerializationKey = "followee"
 
-/// Provides connections between users, followers and followees
-class ConnectionsProvider: PageableProvider, Authorizable {
+/// Provides interface for dribbble followers and followees API
+class ConnectionsProvider: PageableProvider {
     
     /**
      Provides a list the authenticated user’s followers.
@@ -123,7 +123,7 @@ private extension ConnectionsProvider {
         return Promise<[User]?> { fulfill, reject in
             
             firstly {
-                authorizeIfNeeded(authentizationRequired)
+                verifyAuthenticationStatus(authentizationRequired)
             }.then {
                 self.firstPageForQueries(queries, withSerializationKey: key)
             }.then(fulfill).error(reject)

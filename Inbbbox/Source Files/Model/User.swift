@@ -10,12 +10,20 @@ import Foundation
 import SwiftyJSON
 
 final class User: NSObject  {
+    
+    enum AccountType: String {
+        case User = "User"
+        case Player = "Player"
+        case Team = "Team"
+    }
 
     let identifier: String
     let name: String?
     let username: String
     let avatarString: String?
     let shotsCount: Int
+    let accountType: AccountType?
+    
     
     init(json: JSON) {
         identifier = json[Key.Identifier.rawValue].stringValue
@@ -23,6 +31,7 @@ final class User: NSObject  {
         username = json[Key.Username.rawValue].stringValue
         avatarString = json[Key.Avatar.rawValue].string
         shotsCount = json[Key.ShotsCount.rawValue].intValue
+        accountType = AccountType(rawValue: json[Key.AccountType.rawValue].stringValue)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -31,6 +40,12 @@ final class User: NSObject  {
         username = aDecoder.decodeObjectForKey(Key.Username.rawValue) as! String
         avatarString = aDecoder.decodeObjectForKey(Key.Avatar.rawValue) as? String
         shotsCount = aDecoder.decodeObjectForKey(Key.ShotsCount.rawValue) as? Int ?? 0
+        accountType = {
+            if let key = aDecoder.decodeObjectForKey(Key.AccountType.rawValue) as? String {
+                return AccountType(rawValue: key)
+            }
+            return nil
+        }()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
@@ -39,6 +54,7 @@ final class User: NSObject  {
         aCoder.encodeObject(username, forKey: Key.Username.rawValue)
         aCoder.encodeObject(avatarString, forKey: Key.Avatar.rawValue)
         aCoder.encodeObject(shotsCount, forKey: Key.ShotsCount.rawValue)
+        aCoder.encodeObject(accountType?.rawValue, forKey: Key.AccountType.rawValue)
     }
 }
 
@@ -50,6 +66,7 @@ private extension User {
         case Username = "username"
         case Avatar = "avatar_url"
         case ShotsCount = "shots_count"
+        case AccountType = "type"
     }
 }
 

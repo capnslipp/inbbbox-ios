@@ -70,8 +70,10 @@ class ShotsProviderConfigurationSpec: QuickSpec {
                 }
                 
                 it("should query have proper parameters") {
+                    
                     expect(query.parameters["sort"] as? String).to(equal("recent"))
                     expect(query.followingUsersShotsQuery).to(beFalsy())
+                    expect(query.date).to(equal(self.todayDate))
                 }
             }
             
@@ -84,6 +86,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
                 it("should query have proper parameters") {
                     expect(query.parameters.body).to(beNil())
                     expect(query.followingUsersShotsQuery).to(beFalsy())
+                    expect(query.date).to(equal(self.todayDate))
                 }
             }
             
@@ -97,6 +100,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
                     expect(query.parameters["sort"] as? String).to(equal("recent"))
                     expect(query.parameters["list"] as? String).to(equal("debuts"))
                     expect(query.followingUsersShotsQuery).to(beFalsy())
+                    expect(query.date).to(equal(self.todayDate))
                 }
             }
             
@@ -109,6 +113,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
                 it("should query have proper parameters") {
                      expect(query.parameters.body).to(beNil())
                     expect(query.followingUsersShotsQuery).to(beTruthy())
+                    expect(query.date).to(equal(self.todayDate))
                 }
             }
         }
@@ -136,5 +141,12 @@ private extension ShotsProviderConfigurationSpec {
             Settings.StreamSource.Debuts = savedSettings.debuts
             Settings.StreamSource.Following = savedSettings.following
         }
+    }
+    
+    var todayDate: NSDate {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return formatter.dateFromString(formatter.stringFromDate(NSDate()))!
     }
 }
