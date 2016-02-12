@@ -17,10 +17,10 @@ class ConnectionsProviderSpec: QuickSpec {
         
         var followees: [Followee]?
         var followers: [Follower]?
-        var sut: MockConnectionsProvider!
+        var sut: ConnectionsProviderMock!
         
         beforeEach {
-            sut = MockConnectionsProvider()
+            sut = ConnectionsProviderMock()
         }
         
         afterEach {
@@ -199,8 +199,8 @@ class ConnectionsProviderSpec: QuickSpec {
     }
 }
 
-//Explanation: Create MockConnectionsProvider to override methods from PageableProvider.
-private class MockConnectionsProvider: ConnectionsProvider {
+//Explanation: Create ConnectionsProviderMock to override methods from PageableProvider.
+private class ConnectionsProviderMock: ConnectionsProvider {
     
     var mockType: MockType!
     

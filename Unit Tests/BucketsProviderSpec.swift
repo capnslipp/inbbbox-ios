@@ -15,10 +15,10 @@ import PromiseKit
 class BucketsProviderSpec: QuickSpec {
     override func spec() {
         
-        var sut: MockBucketsProvider!
+        var sut: BucketsProviderMock!
         
         beforeEach {
-            sut = MockBucketsProvider()
+            sut = BucketsProviderMock()
         }
         
         afterEach {
@@ -142,8 +142,8 @@ class BucketsProviderSpec: QuickSpec {
     }
 }
 
-//Explanation: Create MockBucketsProvider to override methods from PageableProvider.
-private class MockBucketsProvider: BucketsProvider {
+//Explanation: Create BucketsProviderMock to override methods from PageableProvider.
+private class BucketsProviderMock: BucketsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)

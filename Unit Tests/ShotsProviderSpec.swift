@@ -15,11 +15,11 @@ import PromiseKit
 class ShotsProviderSpec: QuickSpec {
     override func spec() {
         
-        var sut: MockShotsProvider!
+        var sut: ShotsProviderMock!
         var shots: [Shot]?
         
         beforeEach {
-            sut = MockShotsProvider()
+            sut = ShotsProviderMock()
         }
         
         afterEach {
@@ -136,8 +136,8 @@ class ShotsProviderSpec: QuickSpec {
     }
 }
 
-//Explanation: Create MockShotsProvider to override methods from PageableProvider.
-private class MockShotsProvider: ShotsProvider {
+//Explanation: Create ShotsProviderMock to override methods from PageableProvider.
+private class ShotsProviderMock: ShotsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)

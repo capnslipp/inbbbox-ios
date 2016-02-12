@@ -14,7 +14,7 @@ import Nimble
 class VerifiableSpec: QuickSpec {
     override func spec() {
         
-        var sut: MockVerifiable!
+        var sut: VerifiableMock!
         var savedTokenBeforeTestLaunch: String!
         var didInvokePromise: Bool!
         var error: ErrorType?
@@ -30,7 +30,7 @@ class VerifiableSpec: QuickSpec {
         }
         
         beforeEach {
-            sut = MockVerifiable()
+            sut = VerifiableMock()
         }
         
         afterEach {
@@ -242,4 +242,4 @@ class VerifiableSpec: QuickSpec {
     }
 }
 
-private struct MockVerifiable: Verifiable {}
+private struct VerifiableMock: Verifiable {}

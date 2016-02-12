@@ -17,10 +17,10 @@ class CommentsProviderSpec: QuickSpec {
     override func spec() {
         
         var comments: [Comment]?
-        var sut: MockCommentsProvider!
+        var sut: CommentsProviderMock!
         
         beforeEach {
-            sut = MockCommentsProvider()
+            sut = CommentsProviderMock()
         }
         
         afterEach {
@@ -285,8 +285,8 @@ class CommentsProviderSpec: QuickSpec {
     }
 }
 
-//Explanation: Create MockBucketsProvider to override methods from PageableProvider.
-private class MockCommentsProvider: CommentsProvider {
+//Explanation: Create CommentsProviderMock to override methods from PageableProvider.
+private class CommentsProviderMock: CommentsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)

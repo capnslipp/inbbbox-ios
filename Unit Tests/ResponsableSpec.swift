@@ -15,10 +15,10 @@ import SwiftyJSON
 class ResponsableSpec: QuickSpec {
     override func spec() {
     
-        var sut: MockResponsable!
+        var sut: ResponsableMock!
         
         beforeEach {
-            sut = MockResponsable()
+            sut = ResponsableMock()
         }
         
         afterEach {
@@ -104,7 +104,7 @@ class ResponsableSpec: QuickSpec {
     }
 }
 
-private struct MockResponsable: Responsable {}
+private struct ResponsableMock: Responsable {}
 
 private extension ResponsableSpec {
     

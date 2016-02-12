@@ -18,7 +18,7 @@ class PageRequestSpec: QuickSpec {
         var sut: PageRequest!
         
         beforeEach {
-            sut = PageRequest(query: MockQuery())
+            sut = PageRequest(query: QueryMock())
         }
 
         afterEach {
@@ -77,7 +77,7 @@ class PageRequestSpec: QuickSpec {
     }
 }
 
-private struct MockQuery: Query {
+private struct QueryMock: Query {
     let path = "/fixture/path"
     var parameters = Parameters(encoding: .JSON)
     let method = Method.POST
