@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Async
 
 protocol ShotDetailsCollectionViewControllerDelegate: class {
     func didFinishPresentingDetails(sender: ShotDetailsCollectionViewController)
@@ -19,14 +20,16 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     private var footer = ShotDetailsFooterView()
     
     private var shot: Shot?
+    private let changingHeaderStyleCommentsThreshold = 3
+    
+    // NGRTemp: will be removed after connecting comments API
+    private let cellCount = 3
     
     convenience init(shot: Shot) {
         self.init(collectionViewLayout: ShotDetailsCollectionViewFlowLayout())
-        // NGRTemp: Until model hooked up
-        
+
         self.shot = shot
         
-        // NGRTodo: get image async
         let imageUrl = shot.image.normalURL.absoluteString
         let shotDescription = shot.description
         let title = shot.title
@@ -49,12 +52,14 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewController DataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return cellCount
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotDetailsCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        cell.viewData = ShotDetailsCollectionViewCell.ViewData(avatar: "", author: "author", comment: "comment", time: "time")
+        
+        // NGRTemp: will be changed
+        cell.viewData = ShotDetailsCollectionViewCell.ViewData(avatar: shot!.user.avatarString!, author: "author", comment: "comment", time: "time")
         
         return cell
     }
@@ -114,9 +119,13 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
 
 extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        header.displayCompactVariant()
+        
+        if cellCount < changingHeaderStyleCommentsThreshold {
+            header.displayCompactVariant()
+        }
         footer.displayEditingVariant()
         collectionViewLayout.invalidateLayout()
+        collectionView?.layoutIfNeeded()
         return true
     }
     

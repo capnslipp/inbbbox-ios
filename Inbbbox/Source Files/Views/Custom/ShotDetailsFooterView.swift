@@ -22,11 +22,11 @@ class ShotDetailsFooterView: UICollectionReusableView {
     // Private Properties
     private var didUpdateConstraints = false
     private let corners: UIRectCorner = [.BottomLeft, .BottomRight]
-    private let normalRadius: CGFloat = 15
-    private let editingRadius: CGFloat = 0
+    private let normalRadius = CGFloat(15)
+    private let editingRadius = CGFloat(0)
     private var shouldDisplayEditingVariant = false
-    private let sideNormalMargin: CGFloat = 10
-    private let sideEditingMargin: CGFloat = 0
+    private let sideNormalMargin = CGFloat(10)
+    private let sideEditingMargin = CGFloat(0)
 
     // Private UI Components
     private let roundedTextFieldView = RoundedTextField(forAutoLayout: ())
