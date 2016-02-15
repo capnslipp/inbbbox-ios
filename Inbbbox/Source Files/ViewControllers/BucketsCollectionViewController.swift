@@ -43,7 +43,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         isUserLogged ? downloadInitialBuckets() : loadLocallyStoredBuckets()
     }
     
-    // MARK: Loading shots
+    // MARK: Loading buckets
     
     func loadLocallyStoredBuckets() {
         // NGRTodo: Implement this

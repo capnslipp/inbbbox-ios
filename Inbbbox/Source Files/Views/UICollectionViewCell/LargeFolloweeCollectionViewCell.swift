@@ -8,15 +8,18 @@
 
 import UIKit
 
-class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight, FolloweeCellConfigurable {
+class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight, InfoShotsCellConfigurable, AvatarSettable {
     
     let shotImageView = UIImageView.newAutoLayoutView()
+    var avatarView: AvatarView!
+    let avatarSize = CGSize(width:16, height:16)
     private var didSetConstraints = false
     
     // MARK: - Lifecycle
     
     override func commonInit() {
         super.commonInit()
+        setupAvatar()
         setupShotsView()
     }
     
@@ -29,6 +32,15 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
             didSetConstraints = true
         }
         super.updateConstraints()
+    }
+    
+    // MARK - Avatar settable
+    
+    func setupAvatar() {
+        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
+        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
+        avatarView.configureForAutoLayout()
+        infoView.addSubview(avatarView)
     }
     
     // MARK: - Followee Cell Configurable

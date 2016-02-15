@@ -1,5 +1,5 @@
 //
-//  BaseFolloweeCollectionViewCell.swift
+//  BaseInfoShotsCollectionViewCell
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 04.02.2016.
@@ -8,14 +8,12 @@
 
 import UIKit
 
-class BaseFolloweeCollectionViewCell: UICollectionViewCell {
+class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     
     let shotsView = UIImageView.newAutoLayoutView()
     let infoView = UIView.newAutoLayoutView()
-    var avatarView: AvatarView!
     let userNameLabel = UILabel.newAutoLayoutView()
     let numberOfShotsLabel = UILabel.newAutoLayoutView()
-    let avatarSize = CGSize(width:16, height:16)
     private var didSetConstraints = false
     
     // MARK - Life cycle
@@ -33,10 +31,6 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     // Mark - Setup UI
     
      func commonInit() {
-        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
-        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
-        avatarView.configureForAutoLayout()
-        infoView.addSubview(avatarView)
         
         userNameLabel.textColor = UIColor.pinkColor()
         userNameLabel.font = UIFont.systemFontOfSize(13, weight:UIFontWeightMedium)

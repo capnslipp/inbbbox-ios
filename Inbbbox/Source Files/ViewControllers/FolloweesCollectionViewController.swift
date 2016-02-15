@@ -135,7 +135,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
 
 private extension FolloweesCollectionViewController {
     
-    func presentFoloweeForCell(followee: Followee, cell: BaseFolloweeCollectionViewCell) {
+    func presentFoloweeForCell<T: BaseInfoShotsCollectionViewCell where T: AvatarSettable>(followee: Followee, cell: T) {
         if let avatarString = followee.avatarString {
             cell.avatarView.imageView.loadImageFromURLString(avatarString)
         } else {

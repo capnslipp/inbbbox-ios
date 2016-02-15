@@ -8,12 +8,15 @@
 
 import UIKit
 
-class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight, FolloweeCellConfigurable {
+class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight, InfoShotsCellConfigurable, AvatarSettable {
     
     let firstShotImageView = UIImageView.newAutoLayoutView()
     let secondShotImageView = UIImageView.newAutoLayoutView()
     let thirdShotImageView = UIImageView.newAutoLayoutView()
     let fourthShotImageView = UIImageView.newAutoLayoutView()
+    
+    var avatarView: AvatarView!
+    let avatarSize = CGSize(width:16, height:16)
 
     private var didSetConstraints = false
     
@@ -22,6 +25,7 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     
     override func commonInit() {
         super.commonInit()
+        setupAvatar()
         setupShotsView()
     }
     
@@ -34,6 +38,15 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
             didSetConstraints = true
         }
         super.updateConstraints()
+    }
+    
+    // MARK - Avatar settable
+    
+    func setupAvatar() {
+        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
+        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
+        avatarView.configureForAutoLayout()
+        infoView.addSubview(avatarView)
     }
     
     // MARK: - Followee Cell Configurable
