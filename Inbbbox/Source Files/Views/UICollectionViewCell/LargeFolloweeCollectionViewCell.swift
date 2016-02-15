@@ -43,7 +43,7 @@ class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         infoView.addSubview(avatarView)
     }
     
-    // MARK: - Followee Cell Configurable
+    // MARK: - Info Shots Cell Configurable
     
     func setupShotsView() {
         shotImageView.backgroundColor = UIColor.followeeShotGrayColor()

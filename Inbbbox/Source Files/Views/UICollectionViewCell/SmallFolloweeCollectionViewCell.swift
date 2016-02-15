@@ -49,7 +49,7 @@ class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         infoView.addSubview(avatarView)
     }
     
-    // MARK: - Followee Cell Configurable
+    // MARK: - Info Shots Cell Configurable
     
     func setupShotsView() {
         for view in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
