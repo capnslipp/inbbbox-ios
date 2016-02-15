@@ -134,6 +134,7 @@
 		5EE3AB211C5905B30003B639 /* ShotsProviderConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */; };
 		5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE3AB241C5912E70003B639 /* ArrayExtension.swift */; };
 		5EE65FA61C5A7EC30055F1AB /* PageableComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */; };
+		5EEEC9A31C71C86B00BB7237 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEEC9A21C71C86B00BB7237 /* Team.swift */; };
 		7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */; };
 		7416CD7A1C591F680051F65B /* SmallFolloweeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7416CD791C591F680051F65B /* SmallFolloweeCollectionViewCell.swift */; };
 		7439A36D1C688798001DBEAE /* FolloweeCellConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7439A36C1C688798001DBEAE /* FolloweeCellConfigurable.swift */; };
@@ -383,6 +384,7 @@
 		5EE3AB1D1C5905B30003B639 /* ShotsProviderConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderConfiguration.swift; sourceTree = "<group>"; };
 		5EE3AB241C5912E70003B639 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableComponent.swift; sourceTree = "<group>"; };
+		5EEEC9A21C71C86B00BB7237 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweesCollectionViewController.swift; sourceTree = "<group>"; };
 		7416CD791C591F680051F65B /* SmallFolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallFolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
 		7439A36C1C688798001DBEAE /* FolloweeCellConfigurable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweeCellConfigurable.swift; sourceTree = "<group>"; };
@@ -824,6 +826,7 @@
 				E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */,
 				5E781B481C58D8B5009A2E14 /* Bucket.swift */,
 				5EADE3AA1C6B61D100B03DAD /* Comment.swift */,
+				5EEEC9A21C71C86B00BB7237 /* Team.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1389,6 +1392,7 @@
 				5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
 				7439A36D1C688798001DBEAE /* FolloweeCellConfigurable.swift in Sources */,
+				5EEEC9A31C71C86B00BB7237 /* Team.swift in Sources */,
 				F092E26B1C3FD6F900593D18 /* ShotOperationSynchronizer.swift in Sources */,
 				F092E2631C3FD4F600593D18 /* NSManagedObjectExtension.swift in Sources */,
 				F0863DC61C23F4740062EA21 /* UITableViewExtension.swift in Sources */,

@@ -21,6 +21,11 @@ struct Shot {
     let image: ShotImage
     let createdAt: NSDate
     let animated: Bool
+    let likesCount: UInt
+    let viewsCount: UInt
+    let commentsCount: UInt
+    let bucketsCount: UInt
+    let team: Team?
 }
 
 extension Shot: Mappable {
@@ -35,6 +40,13 @@ extension Shot: Mappable {
                 return NSAttributedString(htmlString: htmlString)
             }()
             
+            let team: Team? = {
+                guard json[Key.Team.rawValue] != nil else {
+                    return nil
+                }
+                return Team.map(json[Key.Team.rawValue])
+            }()
+            
             return Shot(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 title: json[Key.Title.rawValue].string,
@@ -42,7 +54,12 @@ extension Shot: Mappable {
                 user: User.map(json[Key.User.rawValue]),
                 image: ShotImage.map(json[Key.Images.rawValue]),
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
-                animated: json[Key.Animated.rawValue].boolValue
+                animated: json[Key.Animated.rawValue].boolValue,
+                likesCount: json[Key.LikesCount.rawValue].uIntValue,
+                viewsCount: json[Key.ViewsCount.rawValue].uIntValue,
+                commentsCount: json[Key.CommentsCount.rawValue].uIntValue,
+                bucketsCount: json[Key.BucketsCount.rawValue].uIntValue,
+                team: team
             )
         }
     }
@@ -55,6 +72,11 @@ extension Shot: Mappable {
         case Images = "images"
         case CreatedAt = "created_at"
         case Animated = "animated"
+        case LikesCount = "likes_count"
+        case ViewsCount = "views_count"
+        case CommentsCount = "comments_count"
+        case BucketsCount = "buckets_count"
+        case Team = "team"
     }
 }
 
