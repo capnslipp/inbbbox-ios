@@ -93,7 +93,9 @@ class BucketsCollectionViewController: UICollectionViewController {
         if indexPath.row == buckets.count - 1 && isUserLogged {
             downloadBucketsForNextPage()
         }
-        return collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        presentBucketForCell(buckets[indexPath.row], cell: cell)
+        return cell
     }
 
     // MARK: UICollectionViewDelegate
@@ -113,4 +115,14 @@ class BucketsCollectionViewController: UICollectionViewController {
     func didTapAddNewBucketButton(_: UIBarButtonItem) {
         // NGRTodo: Implement this
     }
+    
+    // MARK - Cells data filling
+    
+}
+    private extension BucketsCollectionViewController {
+        
+        func presentBucketForCell(bucket: Bucket, cell: BucketCollectionViewCell) {
+            cell.nameLabel.text = bucket.name
+            cell.numberOfShotsLabel.text = "\(bucket.shotsCount) shots"
+        }
 }
