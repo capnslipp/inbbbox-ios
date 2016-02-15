@@ -141,7 +141,7 @@ private extension FolloweesCollectionViewController {
         } else {
             cell.avatarView.imageView.image = nil
         }
-        cell.userNameLabel.text = followee.name
+        cell.nameLabel.text = followee.name
         cell.numberOfShotsLabel.text = "\(followee.shotsCount) shots"
     }
     

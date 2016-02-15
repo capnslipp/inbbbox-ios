@@ -83,11 +83,11 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
     }
     
     func setInfoViewConstraints() {
-        userNameLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: numberOfShotsLabel)
-        userNameLabel.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 6.5)
-        userNameLabel.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
-        userNameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
-        numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: userNameLabel)
+        nameLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: numberOfShotsLabel)
+        nameLabel.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 6.5)
+        nameLabel.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
+        nameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
+        numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: nameLabel)
     }
     
     // MARK: - Reusable

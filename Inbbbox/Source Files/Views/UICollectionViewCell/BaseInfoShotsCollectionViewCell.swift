@@ -12,7 +12,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     
     let shotsView = UIImageView.newAutoLayoutView()
     let infoView = UIView.newAutoLayoutView()
-    let userNameLabel = UILabel.newAutoLayoutView()
+    let nameLabel = UILabel.newAutoLayoutView()
     let numberOfShotsLabel = UILabel.newAutoLayoutView()
     var shotsViewHeightToWidthRatio: CGFloat {
         get {
@@ -37,9 +37,9 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     
      func commonInit() {
         
-        userNameLabel.textColor = UIColor.pinkColor()
-        userNameLabel.font = UIFont.systemFontOfSize(13, weight:UIFontWeightMedium)
-        infoView.addSubview(userNameLabel)
+        nameLabel.textColor = UIColor.pinkColor()
+        nameLabel.font = UIFont.systemFontOfSize(13, weight:UIFontWeightMedium)
+        infoView.addSubview(nameLabel)
         
         numberOfShotsLabel.textColor = UIColor.followeeTextGrayColor()
         numberOfShotsLabel.font = UIFont.systemFontOfSize(10)

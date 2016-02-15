@@ -59,12 +59,12 @@ class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView, withOffset: 2)
         avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 10)
         
-        userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
-        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
-        userNameLabel.autoPinEdge(.Right, toEdge: .Left, ofView: numberOfShotsLabel)
+        nameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
+        nameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
+        nameLabel.autoPinEdge(.Right, toEdge: .Left, ofView: numberOfShotsLabel)
         
         numberOfShotsLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView, withOffset: -2)
-        numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: userNameLabel)
+        numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: nameLabel)
     }
     
     // MARK: - Reusable
