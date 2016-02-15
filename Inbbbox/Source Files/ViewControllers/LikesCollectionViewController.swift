@@ -11,9 +11,9 @@ import PromiseKit
 
 class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
-    var likedShots = [Shot]()
-    let shotsProvider = ShotsProvider()
-    var isUserLogged: Bool {
+    private var likedShots = [Shot]()
+    private let shotsProvider = ShotsProvider()
+    private var isUserLogged: Bool {
         get {
             return UserStorage.currentUser != nil
         }
@@ -43,34 +43,34 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     func downloadInitialShots() {
         firstly {
             self.shotsProvider.provideLikedShotsForUser(UserStorage.currentUser!)
-            }.then { shots -> Void in
-                if let shots = shots {
-                    self.likedShots = shots
-                    self.collectionView?.reloadData()
-                }
-            }.error { error in
-                // NGRTemp: Need mockups for error message view
-                print(error)
+        }.then { shots -> Void in
+            if let shots = shots {
+                self.likedShots = shots
+                self.collectionView?.reloadData()
+            }
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
         }
     }
     
     func downloadShotsForNextPage() {
         firstly {
             self.shotsProvider.nextPage()
-            }.then { shots -> Void in
-                if let shots = shots where shots.count > 0 {
-                    let indexes = shots.enumerate().map { index, _ in
-                        return index + self.likedShots.count
-                    }
-                    self.likedShots.appendContentsOf(shots)
-                    let indexPaths = indexes.map {
-                        NSIndexPath(forRow:($0), inSection: 0)
-                    }
-                    self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+        }.then { shots -> Void in
+            if let shots = shots where shots.count > 0 {
+                let indexes = shots.enumerate().map { index, _ in
+                    return index + self.likedShots.count
                 }
-            }.error { error in
-                // NGRTemp: Need mockups for error message view
-                print(error)
+                self.likedShots.appendContentsOf(shots)
+                let indexPaths = indexes.map {
+                    NSIndexPath(forRow:($0), inSection: 0)
+                }
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+            }
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
         }
     }
     
