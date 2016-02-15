@@ -53,6 +53,10 @@ class JSONSpecLoader {
     func fixtureCommentsJSON(withCount count: Int) -> [JSON] {
         return fixtureJSONArrayWithResourceName("Comment", count: count)
     }
+    
+    func fixtureProjectsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("Project", count: count)
+    }
 }
 
 private extension JSONSpecLoader {
