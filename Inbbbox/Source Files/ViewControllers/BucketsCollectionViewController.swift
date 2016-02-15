@@ -123,6 +123,6 @@ class BucketsCollectionViewController: UICollectionViewController {
         
         func presentBucketForCell(bucket: Bucket, cell: BucketCollectionViewCell) {
             cell.nameLabel.text = bucket.name
-            cell.numberOfShotsLabel.text = "\(bucket.shotsCount) shots"
+            cell.numberOfShotsLabel.text = bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
         }
 }

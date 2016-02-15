@@ -142,7 +142,7 @@ private extension FolloweesCollectionViewController {
             cell.avatarView.imageView.image = nil
         }
         cell.nameLabel.text = followee.name
-        cell.numberOfShotsLabel.text = "\(followee.shotsCount) shots"
+        cell.numberOfShotsLabel.text = followee.shotsCount == 1 ? "\(followee.shotsCount) shot" : "\(followee.shotsCount) shots"
     }
     
     func presentLargeShotImageForCell(shotImageUrl: NSURL?, cell: LargeFolloweeCollectionViewCell) {
