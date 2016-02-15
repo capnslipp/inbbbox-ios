@@ -14,6 +14,11 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     let infoView = UIView.newAutoLayoutView()
     let userNameLabel = UILabel.newAutoLayoutView()
     let numberOfShotsLabel = UILabel.newAutoLayoutView()
+    var shotsViewHeightToWidthRatio: CGFloat {
+        get {
+            return 0.75
+        }
+    }
     private var didSetConstraints = false
     
     // MARK - Life cycle
@@ -55,8 +60,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     
     override func updateConstraints() {
         if !didSetConstraints {
-            let spacings = CollectionViewLayoutSpacings()
-            let shotsViewHeight = spacings.shotHeightToWidthRatio * frame.width
+            let shotsViewHeight = shotsViewHeightToWidthRatio * frame.width
             shotsView.autoSetDimension(.Height, toSize: shotsViewHeight)
             shotsView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             infoView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)

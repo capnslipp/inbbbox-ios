@@ -34,7 +34,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         guard let collectionView = collectionView else {
             return
         }
-        collectionView.backgroundColor = UIColor.backgroundGrayColor()
+        collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.registerClass(BucketCollectionViewCell.self, type: .Cell)
     }
     
