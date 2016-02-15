@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import PromiseKit
 
 class BucketsCollectionViewController: UICollectionViewController {
 
+    private var buckets = [Bucket]()
+    private let bucketsProvider = BucketsProvider()
+    private var isUserLogged: Bool {
+        get {
+            return UserStorage.currentUser != nil
+        }
+    }
+    
     // MARK: - Lifecycle
-    
-    // NGRTemp: temporary implementation - remove after adding real buckets
-    var buckets = ["bucket1", "bucket2", "bucket3", "bucket4", "bucket5", "bucket6", "bucket7"];
-    
+
     convenience init() {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
         flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio;
@@ -31,6 +37,51 @@ class BucketsCollectionViewController: UICollectionViewController {
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(BucketCollectionViewCell.self, type: .Cell)
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        isUserLogged ? downloadInitialBuckets() : loadLocallyStoredBuckets()
+    }
+    
+    // MARK: Loading shots
+    
+    func loadLocallyStoredBuckets() {
+        // NGRTodo: Implement this
+    }
+    
+    func downloadInitialBuckets() {
+        firstly {
+            self.bucketsProvider.provideMyBuckets()
+        }.then { buckets -> Void in
+            if let buckets = buckets {
+                self.buckets = buckets
+                self.collectionView?.reloadData()
+            }
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
+    }
+    
+    func downloadBucketsForNextPage() {
+        firstly {
+            self.bucketsProvider.nextPage()
+        }.then { buckets -> Void in
+            if let buckets = buckets where buckets.count > 0 {
+                let indexes = buckets.enumerate().map { index, _ in
+                    return index + self.buckets.count
+                }
+                self.buckets.appendContentsOf(buckets)
+                let indexPaths = indexes.map {
+                    NSIndexPath(forRow:($0), inSection: 0)
+                }
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+            }
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
+    }
 
     // MARK: UICollectionViewDataSource
 
@@ -39,7 +90,10 @@ class BucketsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-            return collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        if indexPath.row == buckets.count - 1 && isUserLogged {
+            downloadBucketsForNextPage()
+        }
+        return collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
     }
 
     // MARK: UICollectionViewDelegate
