@@ -11,46 +11,47 @@ import PureLayout
 import KFSwiftImageLoader
 
 class ShotImageView: UIImageView {
-    
+
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     private var didSetupConstraints = false
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         backgroundColor = .followeeShotGrayColor()
         contentMode = .ScaleAspectFit
-        
+
         activityIndicatorView.color = .whiteColor()
         addSubview(activityIndicatorView)
     }
-    
+
     @available(*, unavailable, message="Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
-    
+
     override func updateConstraints() {
-        
+
         if !didSetupConstraints {
             didSetupConstraints = true
-            
+
             activityIndicatorView.autoCenterInSuperview()
         }
-        
+
         super.updateConstraints()
     }
-    
-    func loadShotImageFromURL(url: NSURL) {
-        
+
+    func loadShotImageFromURL(url: NSURL, blur: CGFloat = 0) {
+
         image = nil
         activityIndicatorView.startAnimating()
-        
+
         loadImageFromURL(url) { [weak self] finished, error in
+            self?.image = self?.image?.blurredImage(blur)
             self?.activityIndicatorView.stopAnimating()
         }
     }

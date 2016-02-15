@@ -83,16 +83,23 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        
+
         let shot = shots[indexPath.item]
-        cell.swipeCompletion = { action in
+        
+        let shouldBlurShotImage = !didFinishInitialAnimations && indexPath.row != 0
+        let blur = shouldBlurShotImage ? CGFloat(1) : CGFloat(0)
+        cell.shotImageView.loadShotImageFromURL(shot.image.normalURL, blur: blur)
+        
+        cell.delegate = self
+        
+        cell.swipeCompletion = { [weak self] action in
             switch action {
             case .Like:
-                if self.userStorageClass.currentUser != nil {
-                    self.shotOperationRequesterClass.likeShot(shot.identifier)
+                if self?.userStorageClass.currentUser != nil {
+                    self?.shotOperationRequesterClass.likeShot(shot.identifier)
                 } else {
                     do {
-                        try self.localStorage.like(shotID: shot.identifier)
+                        try self?.localStorage.like(shotID: shot.identifier)
                     } catch {
                     }
                 }
@@ -100,17 +107,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
             case .Comment: break
             }
         }
-        cell.delegate = self
-        // NGRTemp: temporary implementation - image should probably be downloaded earlier
-        
-        if !didFinishInitialAnimations && indexPath.row != 0 {
-            let image = UIImage.cachedImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
-            let blurredImage = image?.blurredImage(CGFloat(1))
-            cell.shotImageView.image = blurredImage
-        } else {
-            cell.shotImageView.loadImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
-        }
-        
         return cell
     }
 
@@ -138,8 +134,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         for cell in collectionView.visibleCells() {
             if let shotCell = cell as? ShotCollectionViewCell, indexPath = collectionView.indexPathForCell(shotCell) {
                 let shot = shots[indexPath.item]
-                let image = imageClass.cachedImageFromURL(shot.image.normalURL, placeholderImage: UIImage(named: "shot-menu"))
-                shotCell.shotImageView.image = image?.blurredImage(blur)
+                shotCell.shotImageView.loadShotImageFromURL(shot.image.normalURL, blur: blur)
             }
         }
     }
