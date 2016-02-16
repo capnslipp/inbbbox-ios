@@ -9,7 +9,7 @@
 import Foundation
 
 /// Provides interface for dribbble followers and followees update, delete, create API
-class ConnectionsRequester: Verifiable {
+final class ConnectionsRequester: Verifiable {
     
     // temp empty
 }

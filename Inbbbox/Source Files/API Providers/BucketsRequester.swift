@@ -11,7 +11,7 @@ import PromiseKit
 import SwiftyJSON
 
 /// Provides interface for dribbble buckets update, delete and create API
-class BucketsRequester: Verifiable {
+final class BucketsRequester: Verifiable {
     
     /**
      Adds shot to given bucket.
