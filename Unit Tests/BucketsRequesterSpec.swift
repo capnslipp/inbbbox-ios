@@ -17,8 +17,6 @@ class BucketsRequesterSpec: QuickSpec {
     override func spec() {
         
         var sut: BucketsRequester!
-        var error: ErrorType?
-        var didInvokePromise: Bool?
         
         beforeEach {
             sut = BucketsRequester()
@@ -26,12 +24,18 @@ class BucketsRequesterSpec: QuickSpec {
         
         afterEach {
             sut = nil
-            error = nil
-            didInvokePromise = nil
             self.removeAllStubs()
         }
         
         describe("when adding shot to bucket") {
+            
+            var error: ErrorType?
+            var didInvokePromise: Bool?
+            
+            beforeEach {
+                error = nil
+                didInvokePromise = nil
+            }
             
             context("and token does not exist") {
                 
@@ -68,6 +72,14 @@ class BucketsRequesterSpec: QuickSpec {
         }
         
         describe("when removing shot from bucket") {
+            
+            var error: ErrorType?
+            var didInvokePromise: Bool?
+            
+            beforeEach {
+                error = nil
+                didInvokePromise = nil
+            }
             
             context("and token does not exist") {
                 
