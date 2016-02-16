@@ -12,7 +12,7 @@ import SwiftyJSON
 
 /// Provides interface for dribbble shots update, delete and create API
 class ShotsRequester: Verifiable {
-    
+
     /**
      Likes given shot.
      

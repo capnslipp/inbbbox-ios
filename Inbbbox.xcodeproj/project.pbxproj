@@ -39,6 +39,7 @@
 		5E12C3651C734B46003C6B48 /* ConnectionsRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12C3641C734B46003C6B48 /* ConnectionsRequester.swift */; };
 		5E12C3671C734B97003C6B48 /* ShotsRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12C3661C734B97003C6B48 /* ShotsRequester.swift */; };
 		5E12C3691C734FF4003C6B48 /* ShotsRequesterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12C3681C734FF4003C6B48 /* ShotsRequesterSpec.swift */; };
+		5E12C36B1C7359BD003C6B48 /* BucketsRequesterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E12C36A1C7359BD003C6B48 /* BucketsRequesterSpec.swift */; };
 		5E22ADCD1C635813008D900C /* PageableComponentSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E22ADCC1C635813008D900C /* PageableComponentSerializer.swift */; };
 		5E22ADCF1C635DE5008D900C /* PageableComponentSerializerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E22ADCE1C635DE5008D900C /* PageableComponentSerializerSpec.swift */; };
 		5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */; };
@@ -289,6 +290,7 @@
 		5E12C3641C734B46003C6B48 /* ConnectionsRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsRequester.swift; sourceTree = "<group>"; };
 		5E12C3661C734B97003C6B48 /* ShotsRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsRequester.swift; sourceTree = "<group>"; };
 		5E12C3681C734FF4003C6B48 /* ShotsRequesterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsRequesterSpec.swift; sourceTree = "<group>"; };
+		5E12C36A1C7359BD003C6B48 /* BucketsRequesterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsRequesterSpec.swift; sourceTree = "<group>"; };
 		5E147CB41AA8B2D300EDD97C /* Inbbbox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Inbbbox-Bridging-Header.h"; path = "Supporting Files/Inbbbox-Bridging-Header.h"; sourceTree = "<group>"; };
 		5E147CB51AA8B2D300EDD97C /* Inbbbox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Inbbbox-Info.plist"; path = "Supporting Files/Inbbbox-Info.plist"; sourceTree = "<group>"; };
 		5E147CB71AA8B2DC00EDD97C /* Unit-Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit-Tests-Bridging-Header.h"; path = "Supporting Files/Unit-Tests-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -739,6 +741,7 @@
 				5E35092C1C626C9C009386AE /* PageRequestSpec.swift */,
 				5E22ADCE1C635DE5008D900C /* PageableComponentSerializerSpec.swift */,
 				5E5D56391C637FC800C7957E /* BucketsProviderSpec.swift */,
+				5E12C36A1C7359BD003C6B48 /* BucketsRequesterSpec.swift */,
 				5E5D56411C63F29A00C7957E /* ConnectionsProviderSpec.swift */,
 				5E5D56471C64A24400C7957E /* ShotsProviderSpec.swift */,
 				5E12C3681C734FF4003C6B48 /* ShotsRequesterSpec.swift */,
@@ -1595,6 +1598,7 @@
 				74C1618A1C5650B7004E1F9B /* BucketsCollectionViewControllerSpec.swift in Sources */,
 				5E12C3691C734FF4003C6B48 /* ShotsRequesterSpec.swift in Sources */,
 				BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */,
+				5E12C36B1C7359BD003C6B48 /* BucketsRequesterSpec.swift in Sources */,
 				5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */,
 				5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */,
 				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,

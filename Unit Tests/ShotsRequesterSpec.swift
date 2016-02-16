@@ -123,7 +123,7 @@ class ShotsRequesterSpec: QuickSpec {
                 }
             }
             
-            context("and server respond with 204") {
+            context("and server respond with 200") {
                 
                 var isLikedByMe: Bool?
                 
@@ -136,12 +136,12 @@ class ShotsRequesterSpec: QuickSpec {
                     isLikedByMe = nil
                 }
                 
-                
                 it("shot should be liked by authenticated user") {
                     sut.isShotLikedByMe(Shot.fixtureShot()).then { _isLikedByMe in
                         isLikedByMe = _isLikedByMe
                     }.error { _ in fail() }
                     
+                    expect(isLikedByMe).toNotEventually(beNil())
                     expect(isLikedByMe).toEventually(beTruthy())
                 }
             }
@@ -152,7 +152,8 @@ class ShotsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 404))
+                    let error = NSError(domain: "fixture.domain", code: 404, userInfo: nil)
+                    self.stub(everything, builder: failure(error))
                 }
                 
                 afterEach {
@@ -164,6 +165,7 @@ class ShotsRequesterSpec: QuickSpec {
                         isLikedByMe = _isLikedByMe
                     }.error { _ in fail() }
                     
+                    expect(isLikedByMe).toNotEventually(beNil())
                     expect(isLikedByMe).toEventually(beFalsy())
                 }
             }
