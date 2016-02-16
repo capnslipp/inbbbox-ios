@@ -9,7 +9,7 @@
 import UIKit
 import Async
 
-class SettingsTableHeaderView: UIView, Reusable {
+class SettingsTableHeaderView: UIView, Reusable, AvatarSettable {
     
     class var reuseIdentifier: String {
         return "SettingsTableHeaderViewReuseIdentifier"
@@ -18,26 +18,18 @@ class SettingsTableHeaderView: UIView, Reusable {
     private(set) var avatarView: AvatarView!
     private(set) var usernameLabel = UILabel.newAutoLayoutView()
     
-    private let avatarSize = CGSize(width: 176, height: 176)
+    let avatarSize = CGSize(width: 176, height: 176)
     
     private var didSetConstraints = false
     
+    // MARK: Lifecycyle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         clipsToBounds = true
         backgroundColor = UIColor.clearColor()
-        
-        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize))
-        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
-        avatarView.configureForAutoLayout()
-        addSubview(avatarView)
-        
-        usernameLabel.textAlignment = .Center
-        usernameLabel.textColor = UIColor.textDarkColor()
-        usernameLabel.font = UIFont.helveticaFont(.Neue, size: 23)
-        addSubview(usernameLabel)
-        
+        setupAvatar()
+        setupUsernameLabel()
         setNeedsUpdateConstraints()
     }
     
@@ -49,6 +41,8 @@ class SettingsTableHeaderView: UIView, Reusable {
     convenience init(size: CGSize) {
         self.init(frame: CGRect(origin: CGPointZero, size: size))
     }
+    
+    // MARK: UIView
     
     override func updateConstraints() {
         
@@ -66,5 +60,23 @@ class SettingsTableHeaderView: UIView, Reusable {
         }
         
         super.updateConstraints()
+    }
+    
+    // MARK: Avatar settable
+    
+    func setupAvatar() {
+        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize))
+        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
+        avatarView.configureForAutoLayout()
+        addSubview(avatarView)
+    }
+    
+    // MARK: Setup label
+    
+    func setupUsernameLabel() {
+        usernameLabel.textAlignment = .Center
+        usernameLabel.textColor = UIColor.textDarkColor()
+        usernameLabel.font = UIFont.helveticaFont(.Neue, size: 23)
+        addSubview(usernameLabel)
     }
 }

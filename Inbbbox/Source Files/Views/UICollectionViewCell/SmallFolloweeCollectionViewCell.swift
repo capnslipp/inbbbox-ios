@@ -8,12 +8,15 @@
 
 import UIKit
 
-class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight, FolloweeCellConfigurable {
+class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight, InfoShotsCellConfigurable, AvatarSettable {
     
     let firstShotImageView = UIImageView.newAutoLayoutView()
     let secondShotImageView = UIImageView.newAutoLayoutView()
     let thirdShotImageView = UIImageView.newAutoLayoutView()
     let fourthShotImageView = UIImageView.newAutoLayoutView()
+    
+    var avatarView: AvatarView!
+    let avatarSize = CGSize(width:16, height:16)
 
     private var didSetConstraints = false
     
@@ -22,6 +25,7 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
     
     override func commonInit() {
         super.commonInit()
+        setupAvatar()
         setupShotsView()
     }
     
@@ -36,7 +40,16 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
         super.updateConstraints()
     }
     
-    // MARK: - Followee Cell Configurable
+    // MARK - Avatar settable
+    
+    func setupAvatar() {
+        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
+        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
+        avatarView.configureForAutoLayout()
+        infoView.addSubview(avatarView)
+    }
+    
+    // MARK: - Info Shots Cell Configurable
     
     func setupShotsView() {
         for view in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
@@ -84,12 +97,18 @@ class SmallFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView)
         avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 6.5)
         
-        userNameLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: numberOfShotsLabel)
-        userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
-        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
-        userNameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
+        nameLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: numberOfShotsLabel)
+        nameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
+        nameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
+        nameLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView)
 
-        numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: userNameLabel)
+        numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: nameLabel)
+    }
+    
+    func clearImages() {
+        for imageView in [avatarView.imageView, firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
+            imageView.image = nil
+        }
     }
     
     // MARK: - Reusable
