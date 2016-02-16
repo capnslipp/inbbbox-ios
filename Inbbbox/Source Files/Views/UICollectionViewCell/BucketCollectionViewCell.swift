@@ -16,9 +16,7 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
     let fourthShotImageView = UIImageView.newAutoLayoutView()
     
     override var shotsViewHeightToWidthRatio: CGFloat {
-        get {
-            return 1
-        }
+        return 1
     }
     private var didSetConstraints = false
     

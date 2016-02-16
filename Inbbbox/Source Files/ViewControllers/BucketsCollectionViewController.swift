@@ -16,9 +16,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     private let bucketsProvider = BucketsProvider()
     private let shotsProvider = ShotsProvider()
     private var isUserLogged: Bool {
-        get {
-            return UserStorage.currentUser != nil
-        }
+        return UserStorage.currentUser != nil
     }
     
     // MARK: - Lifecycle
@@ -53,7 +51,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     
     func downloadInitialBuckets() {
         firstly {
-            self.bucketsProvider.provideMyBuckets()
+            bucketsProvider.provideMyBuckets()
         }.then { buckets -> Void in
             if let buckets = buckets {
                 self.buckets = buckets
@@ -68,7 +66,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     
     func downloadBucketsForNextPage() {
         firstly {
-            self.bucketsProvider.nextPage()
+            bucketsProvider.nextPage()
         }.then { buckets -> Void in
             if let buckets = buckets where buckets.count > 0 {
                 let indexes = buckets.enumerate().map { index, _ in

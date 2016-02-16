@@ -15,9 +15,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     let nameLabel = UILabel.newAutoLayoutView()
     let numberOfShotsLabel = UILabel.newAutoLayoutView()
     var shotsViewHeightToWidthRatio: CGFloat {
-        get {
-            return 0.75
-        }
+        return 0.75
     }
     private var didSetConstraints = false
     

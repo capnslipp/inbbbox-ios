@@ -52,9 +52,7 @@ extension Bucket: Mappable {
 
 extension Bucket: Hashable {
     var hashValue: Int {
-        get {
-            return identifier.hashValue
-        }
+        return identifier.hashValue
     }
 }
 
