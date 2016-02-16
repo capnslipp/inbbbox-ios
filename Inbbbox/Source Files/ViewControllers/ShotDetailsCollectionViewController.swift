@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Async
+import PromiseKit
 
 protocol ShotDetailsCollectionViewControllerDelegate: class {
     func didFinishPresentingDetails(sender: ShotDetailsCollectionViewController)
@@ -21,65 +21,69 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     var userStorageClass = UserStorage.self
     var shotOperationRequesterClass =  ShotOperationRequester.self
     
+    private let commentsProvider = CommentsProvider(page: 1, pagination: 2) // NGRTemp: just for test, then set up 10-20
+    
     private var header = ShotDetailsHeaderView()
     private var footer = ShotDetailsFooterView()
     
     private var shot: Shot?
+    private var comments: [Comment]?
     private let changingHeaderStyleCommentsThreshold = 3
-    
-    // NGRTemp: will be removed after connecting comments API
-    private let cellCount = 3
     
     convenience init(shot: Shot) {
         self.init(collectionViewLayout: ShotDetailsCollectionViewFlowLayout())
-
         self.shot = shot
         
-        let imageUrl = shot.image.normalURL.absoluteString
-        let shotDescription = shot.description
-        let title = shot.title
-        let author = shot.user.name ?? shot.user.username
-        let client = "Client link"
-        let info = "app name + date"
-        let avatar = shot.user.avatarString!
-        
-        
-        
-        
-        
-        if self.userStorageClass.currentUser != nil {
-            // NGRFixme: call API for `Check if you like a shot`
-        } else {
-            let shotIsLiked = localStorage.likedShots.contains{
-                $0.id == self.shot?.identifier
-            }
-            header.viewData = ShotDetailsHeaderView.ViewData(description: shotDescription,
-                title: title!,
-                author: author,
-                client: client,
-                shotInfo: info,
-                shot: imageUrl,
-                avatar: avatar,
-                shotLiked:  shotIsLiked
-            )
-        }
-
         setupSubviews()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        firstly {
+            self.commentsProvider.provideCommentsForShot(shot!)
+        }.then { comments -> Void in
+            self.comments = comments ?? []
+            self.collectionView?.reloadData()
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
     }
     
     // MARK: UICollectionViewController DataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellCount
+        return (comments != nil) ? comments!.count + 1 : 0 // NGRTemp: +1 to show `load more comments` cell - waiting for updating shot model
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(ShotDetailsCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        
-        // NGRTemp: will be changed
-        cell.viewData = ShotDetailsCollectionViewCell.ViewData(avatar: shot!.user.avatarString!, author: "author", comment: "comment", time: "time")
-        
-        return cell
+        if indexPath.item < comments!.count {
+            
+            let cell = collectionView.dequeueReusableClass(ShotDetailsCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            
+            let comment = comments![indexPath.item]
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = .MediumStyle
+            dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
+            dateFormatter.timeStyle = .ShortStyle
+            
+            cell.viewData = ShotDetailsCollectionViewCell.ViewData(
+                avatar: comment.user.avatarString!,
+                author: comment.user.name ?? comment.user.username,
+                comment: comment.body?.mutableCopy() as? NSMutableAttributedString ?? NSMutableAttributedString(),
+                time: dateFormatter.stringFromDate(comment.createdAt)
+            )
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableClass(ShotDetailsLoadMoreCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            
+            cell.viewData = ShotDetailsLoadMoreCollectionViewCell.ViewData(commentsCount: "10")
+            cell.delegate = self
+            return cell
+        }
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -109,23 +113,94 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         view.insertSubview(blur, belowSubview: collectionView!)
         blur.autoPinEdgesToSuperviewEdges()
         collectionView?.backgroundColor = UIColor.clearColor()
+        collectionView?.layer.shadowColor = UIColor.grayColor().CGColor
+        collectionView?.layer.shadowOffset = CGSize(width: 0, height: 0.1)
+        collectionView?.layer.shadowOpacity = 0.3
         
         collectionView?.registerClass(ShotDetailsCollectionViewCell.self, type: .Cell)
+        collectionView?.registerClass(ShotDetailsLoadMoreCollectionViewCell.self, type: .Cell)
         collectionView?.registerClass(ShotDetailsHeaderView.self, type: .Header)
         collectionView?.registerClass(ShotDetailsFooterView.self, type: .Footer)
+        
+        // NGRTodo: move somewhere
+        if self.userStorageClass.currentUser != nil {
+            // NGRFixme: call API for `Check if you like a shot`
+        } else {
+            let shotIsLiked = localStorage.likedShots.contains{
+                $0.id == self.shot?.identifier
+            }
+            let viewData = ShotDetailsHeaderView.ViewData(
+                description: shot!.description?.mutableCopy() as? NSMutableAttributedString,
+                title: shot!.title!,
+                author: shot!.user.name ?? shot!.user.username,
+                client: "Client link",
+                shotInfo: "app name + date",
+                shot: shot!.image.normalURL.absoluteString,
+                avatar: shot!.user.avatarString!,
+                shotLiked:  shotIsLiked
+            )
+            
+            header = ShotDetailsHeaderView(viewData: viewData)
+
+        }
+        
+        
     }
 }
 
 extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayout {
     
+    // NGRHack: hacky code
+    /*
+        The problem is that after using `estimatedItemSize` and `preferredLayoutAttributesFittingAttributes` in cell
+        it is properly calculated, but not when it first appears.
+        After appearing it has `estimatedItemSize` as a size and turns into proper size just after scrolling the collectionView.
+        I tried to force showing proper size just from the beginning of appearing and I ended up with this solution.
+        I think it's dirty, but the only one working (surprisingly) properly...
+    */
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - ((collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.left + (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.right), height: 100)
+        
+        let collectionViewUsableWidth = collectionView.bounds.width - ((collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.left + (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset.right)
+        var cellHeight: CGFloat
+        
+        let aLotButEnoughNotToBreakConstraints = CGFloat(5000)
+        
+        if indexPath.item < comments!.count {
+            
+            // NGRHack: It's not possible to use `dequeueReusableClass` cause it crashes.
+            // This value should be high enough to contain long comment and not to break constraints in cell
+            let cell = ShotDetailsCollectionViewCell(frame: CGRect(x: 0, y: 0, width: collectionViewUsableWidth, height: aLotButEnoughNotToBreakConstraints))
+            
+            let comment = comments![indexPath.item]
+            
+            cell.viewData = ShotDetailsCollectionViewCell.ViewData(
+                avatar: comment.user.avatarString!,
+                author: comment.user.name ?? comment.user.username,
+                comment: comment.body?.mutableCopy() as? NSMutableAttributedString ?? NSMutableAttributedString(),
+                time: "time"
+            )
+            
+            cell.layoutIfNeeded()
+            
+            cellHeight = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height
+        } else {
+            // NGRHack: It's not possible to use `dequeueReusableClass` cause it crashes.
+            // This value should be high enough to contain long comment and not to break constraints in cell
+            let cell = ShotDetailsLoadMoreCollectionViewCell(frame: CGRect(x: 0, y: 0, width: collectionViewUsableWidth, height: aLotButEnoughNotToBreakConstraints))
+            
+            cell.layoutIfNeeded()
+            cellHeight = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height
+        }
+
+        
+        let size = CGSize(width: collectionViewUsableWidth, height: cellHeight)
+        return size
     }
     
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForHeaderInSection section: Int) -> CGSize {
-            return header.requiredSize()
+            return header.intrinsicContentSize()
     }
     
     func collectionView(collectionView: UICollectionView,
@@ -138,6 +213,7 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
 extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
+        let cellCount = (comments != nil) ? comments!.count : 0
         if cellCount >= changingHeaderStyleCommentsThreshold {
             header.displayCompactVariant()
         }
@@ -179,6 +255,42 @@ extension ShotDetailsCollectionViewController: ShotDetailsHeaderViewDelegate {
             }
         }
         completion(operationSucceed: true)
+    }
+}
+
+extension ShotDetailsCollectionViewController: ShotDetailsLoadMoreCollectionViewCellDelegate {
+    
+    func shotDetailsLoadMoreCollectionViewCell(view: ShotDetailsLoadMoreCollectionViewCell, didTapLoadMoreButton: UIButton) {
+        // NGRTodo: implement me!
+        firstly {
+            self.commentsProvider.nextPage()//provideCommentsForShot(shot!)
+        }.then { comments -> Void in
+            self.appendCommentsToCollectionView(comments! as [Comment])
+        }.then {
+            print("") // NGRTodo: check if `load more...` should be visible and update comments count if needed
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
+    }
+    
+    private func appendCommentsToCollectionView(comments: [Comment]) -> Promise<Void> {
+        let currentCommentCount = self.comments!.count
+        var indexPaths = [NSIndexPath]()
+        
+        self.comments?.appendContentsOf(comments)
+        
+        for i in currentCommentCount..<self.comments!.count {
+            indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
+        }
+        
+        self.collectionView?.performBatchUpdates({
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+            },
+            completion: nil
+        )
+        
+        return Promise()
     }
 }
 

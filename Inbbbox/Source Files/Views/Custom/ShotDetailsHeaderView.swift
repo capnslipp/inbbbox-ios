@@ -19,7 +19,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
     // Public
     struct ViewData {
-        let description: NSAttributedString?
+        let description: NSMutableAttributedString?
         let title: String
         let author: String
         let client: String
@@ -31,13 +31,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
     var viewData: ViewData? {
         didSet {
-            if let description = viewData?.description {
-                shotDescriptionView.attributedText = description
-            } else {
-                // NGRTodo: needs to be consulted what should be in here
-                shotDescriptionView.attributedText = NSAttributedString(string: "There is no decription")
-            }
             
+            shotDescriptionView.descriptionText = viewData?.description ?? NSMutableAttributedString(string: "There is no decription")
             shotImageView.updateWith((viewData?.shot)!, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius))
             authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: (viewData?.avatar)!,
                 title: (viewData?.title)!,
@@ -45,7 +40,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                 client: (viewData?.client)!,
                 shotInfo: (viewData?.shotInfo)!
             )
-            
             shotDetailsOperationView.shotLiked = viewData?.shotLiked
             setupButtonsInteractions()
         }
@@ -65,6 +59,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let shotImageCompactHeight = CGFloat(70)
     private let authorDetailsViewNormalHeight = CGFloat(100)
     private let authorDetailsViewCompactHeight = CGFloat(70)
+    private let shotDetailsOperationViewHeight = CGFloat(40)
+    
     
     // Colors
     private let headerBackgroundColor = UIColor(red:0.964, green:0.972, blue:0.972, alpha:1)
@@ -73,7 +69,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let shotImageView = RoundedImageView(forAutoLayout: ())
     private let authorDetailsView = AuthorDetailsView.newAutoLayoutView()
     private let closeButton = UIButton(type: .System)
-    private let shotDescriptionView = UITextView(forAutoLayout: ())
+    private var shotDescriptionView = ShotDescriptionView.newAutoLayoutView()//UILabel(forAutoLayout: ())
     private let shotDetailsOperationView = ShotDetailsOperationView.newAutoLayoutView()
     
     // Constraints
@@ -91,6 +87,18 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         super.init(frame: frame)
         backgroundColor = UIColor.clearColor()
         setupSubviews()
+    }
+    
+    convenience init(viewData: ViewData) {
+        self.init()
+        
+        backgroundColor = UIColor.clearColor()
+        
+        self.viewData = viewData
+        
+        setupSubviews()
+        setupButtonsInteractions()
+        
     }
 
     @available(*, unavailable, message="Use init(withImage: UIImage) method instead")
@@ -112,16 +120,16 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         displayCompactVariant()
     }
     
-    func requiredSize() -> CGSize {
-        // NGRHack: value of `systemLayoutSizeFittingSize(UILayoutFittingExpandedSize)` is improperly calculated in compact mode although all constraints seem to be ok.
+    // MARK: UI
+    
+    override func intrinsicContentSize() -> CGSize {
         if shouldDisplayCompactVariant {
             return CGSize(width: UIScreen.mainScreen().bounds.width, height: topInset + shotImageCompactHeight)
         } else {
-            return systemLayoutSizeFittingSize(UILayoutFittingExpandedSize)
+            // NGRFix: `shotDescriptionView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height` is improperly calculated
+            return CGSize(width: UIScreen.mainScreen().bounds.width, height: topInset + shotDetailsOperationViewHeight + shotImageNormalHeight + authorDetailsViewNormalHeight + shotDescriptionView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height)
         }
     }
-    
-    // MARK: UI
     
     class override func requiresConstraintBasedLayout() -> Bool {
         return true
@@ -131,7 +139,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         let leftAndRightMargin = CGFloat(10)
         let closeButtonRightMargin = CGFloat(-5)
         let closeButtonTopMargin = CGFloat(5)
-        let shotDetailsOperationViewHeight = CGFloat(40)
+        
         
         if !didUpdateConstraints {
             shotImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset).autoIdentify("[shotImageView] .Top = \(topInset)")
@@ -156,9 +164,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Bottom)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
             shotDescriptionView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
-            NSLayoutConstraint.autoSetPriority(UILayoutPriorityRequired) {
-                self.shotDescriptionView.autoSetContentCompressionResistancePriorityForAxis(.Vertical)
-            }
             
             didUpdateConstraints = true
         }
@@ -260,13 +265,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     private func setupShotDescriptionView() {
-        shotDescriptionView.font = UIFont.helveticaFont(.Neue, size: 15)
-        shotDescriptionView.textColor = UIColor(red: 0.3522, green: 0.3513, blue: 0.3722, alpha: 1.0 )
-        shotDescriptionView.backgroundColor = UIColor(red: 0.9999, green: 1.0, blue: 0.9998, alpha: 1.0 )
-        shotDescriptionView.scrollEnabled = false
-        shotDescriptionView.editable = false
-        shotDescriptionView.selectable = false
-        shotDescriptionView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         addSubview(shotDescriptionView)
     }
     

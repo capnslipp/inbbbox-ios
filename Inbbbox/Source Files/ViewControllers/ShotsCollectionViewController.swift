@@ -139,9 +139,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     func configureInitialSettings() {
         // NGRTemp: - I wonder if there is a better place to configure initial settings other than this view controller
-        Settings.StreamSource.NewToday = true
+        Settings.StreamSource.NewToday = false
         Settings.StreamSource.PopularToday = true
-        Settings.StreamSource.Debuts = true
+        Settings.StreamSource.Debuts = false
     }
 }
 

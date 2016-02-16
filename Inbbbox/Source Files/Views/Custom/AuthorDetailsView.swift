@@ -127,6 +127,7 @@ class AuthorDetailsView: UIView {
             
             titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: titleLabelNormalHeight)
             titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: avatarToTextDetailsDistance)
+            titleLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: 10)
             
             authorPrefixLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: titleLabel, withOffset: tightenLettersInVerticalAxis)
             authorPrefixLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: avatarToTextDetailsDistance)
@@ -167,6 +168,9 @@ class AuthorDetailsView: UIView {
     
     private func setupTitle() {
         titleLabel.font = UIFont.helveticaFont(.NeueMedium, size: 17)
+        titleLabel.minimumScaleFactor = 8/titleLabel.font.pointSize;
+        titleLabel.numberOfLines = 1
+        titleLabel.adjustsFontSizeToFitWidth = true;
         titleLabel.textColor = defaultTextColor
         addSubview(titleLabel)
     }

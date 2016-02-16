@@ -19,7 +19,7 @@ class ShotDetailsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
         return true
     }
-
+    
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
 
         let superAttributes = super.layoutAttributesForElementsInRect(rect)

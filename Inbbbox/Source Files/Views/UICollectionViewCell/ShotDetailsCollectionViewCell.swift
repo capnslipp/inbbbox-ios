@@ -14,7 +14,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     struct ViewData {
         let avatar: String
         let author: String
-        let comment: String
+        let comment: NSMutableAttributedString
         let time: String
     }
     
@@ -22,8 +22,10 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
         didSet {
             avatar.updateWith((viewData?.avatar)!, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight], radius: CGFloat(avatarSize))
             author.text = viewData?.author
-            comment.text = viewData?.comment
+            comment.text = viewData?.comment.string
             time.text = viewData?.time
+            
+            setNeedsLayout()
         }
     }
     
@@ -36,6 +38,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     private let author = UILabel.newAutoLayoutView()
     private let comment = UILabel.newAutoLayoutView()
     private let time = UILabel.newAutoLayoutView()
+    private let separatorLine = UIView.newAutoLayoutView()
     
     // MARK: Life Cycle
     
@@ -43,6 +46,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.backgroundColor = UIColor.RGBA(255, 255, 255, 1)
         setupSubviews()
+        setNeedsUpdateConstraints()
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -50,7 +54,12 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // UI
+    // MARK: UI
+    
+    override class func requiresConstraintBasedLayout() -> Bool {
+        return true
+    }
+    
     override func updateConstraints() {
         if !didUpdateConstraints {
             
@@ -59,6 +68,13 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
             let rightInset = CGFloat(31)
             let avatarToTextInset = CGFloat(15)
             let authorHeight = CGFloat(20)
+            let authorToTextDistance = CGFloat(3)
+            let textToDateDistance = CGFloat(2)
+            let commentMinimumHeight = CGFloat(40)
+            let timeToSeparatorDistance = CGFloat(10)
+            let separatorLineHeight = CGFloat(1)
+            let separatorLineRightInset = CGFloat(20)
+            let separatorLineLeftInset = CGFloat(67)
             
             avatar.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset)
             avatar.autoPinEdgeToSuperviewEdge(.Left, withInset: leftInset)
@@ -69,17 +85,22 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
             author.autoPinEdgeToSuperviewEdge(.Right)
             author.autoSetDimension(.Height, toSize: authorHeight)
             
-            comment.autoPinEdge(.Top, toEdge: .Bottom, ofView: author)
+            comment.autoPinEdge(.Top, toEdge: .Bottom, ofView: author, withOffset: authorToTextDistance)
             comment.autoPinEdge(.Left, toEdge: .Right, ofView: avatar, withOffset: avatarToTextInset)
             comment.autoPinEdgeToSuperviewEdge(.Right, withInset: rightInset)
+            comment.autoSetDimension(.Height, toSize: commentMinimumHeight, relation: .GreaterThanOrEqual)
             
-            time.autoPinEdge(.Top, toEdge: .Bottom, ofView: comment)
+            time.autoPinEdge(.Top, toEdge: .Bottom, ofView: comment, withOffset: textToDateDistance)
             time.autoPinEdge(.Left, toEdge: .Right, ofView: avatar, withOffset: avatarToTextInset)
-            time.autoPinEdgeToSuperviewEdge(.Bottom)
+            
+            separatorLine.autoPinEdge(.Top, toEdge: .Bottom, ofView: time, withOffset: timeToSeparatorDistance)
+            separatorLine.autoSetDimension(.Height, toSize: separatorLineHeight)
+            separatorLine.autoPinEdgeToSuperviewEdge(.Left, withInset: separatorLineLeftInset)
+            separatorLine.autoPinEdgeToSuperviewEdge(.Right, withInset: separatorLineRightInset)
+            separatorLine.autoPinEdgeToSuperviewEdge(.Bottom)
             
             didUpdateConstraints = true
         }
-        
         super.updateConstraints()
     }
     
@@ -90,6 +111,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
         setupAuthor()
         setupComment()
         setupTime()
+        setupSeparatorLine()
     }
     
     private func setupAvatar() {
@@ -104,8 +126,9 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     
     private func setupComment() {
         comment.font = UIFont.helveticaFont(.Neue, size: 15)
-        comment.textColor = UIColor.RGBA(113, 113, 117, 1)
+        comment.textColor = UIColor.textLightColor()
         comment.numberOfLines = 0
+        comment.lineBreakMode = .ByWordWrapping
         contentView.addSubview(comment)
     }
     
@@ -113,6 +136,11 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
         time.font = UIFont.helveticaFont(.Neue, size: 10)
         time.textColor = UIColor.RGBA(164, 180, 188, 1)
         contentView.addSubview(time)
+    }
+    
+    private func setupSeparatorLine() {
+        separatorLine.backgroundColor = UIColor.RGBA(246, 248, 248, 1)
+        contentView.addSubview(separatorLine)
     }
 }
 
