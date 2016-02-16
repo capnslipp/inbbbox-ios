@@ -96,6 +96,11 @@
 		5E781B451C58C00E009A2E14 /* UserSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */; };
 		5E781B491C58D8B5009A2E14 /* Bucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B481C58D8B5009A2E14 /* Bucket.swift */; };
 		5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */; };
+		5E91A6371C73802300C9D609 /* FollowUserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A6361C73802300C9D609 /* FollowUserQuery.swift */; };
+		5E91A6391C73802E00C9D609 /* UnfollowUserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A6381C73802E00C9D609 /* UnfollowUserQuery.swift */; };
+		5E91A63B1C73822300C9D609 /* FollowUserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A63A1C73822300C9D609 /* FollowUserQuerySpec.swift */; };
+		5E91A63D1C73822C00C9D609 /* UnfollowUserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */; };
+		5E91A63F1C7390F200C9D609 /* ConnectionsRequesterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A63E1C7390F200C9D609 /* ConnectionsRequesterSpec.swift */; };
 		5EADE3AB1C6B61D100B03DAD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADE3AA1C6B61D100B03DAD /* Comment.swift */; };
 		5EADE3B11C6B7CE700B03DAD /* CommentQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADE3B01C6B7CE700B03DAD /* CommentQuery.swift */; };
 		5EADE3B31C6B7E5F00B03DAD /* CommentsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADE3B21C6B7E5F00B03DAD /* CommentsProvider.swift */; };
@@ -360,6 +365,11 @@
 		5E781B441C58C00E009A2E14 /* UserSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSpecExtension.swift; sourceTree = "<group>"; };
 		5E781B481C58D8B5009A2E14 /* Bucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bucket.swift; sourceTree = "<group>"; };
 		5E781B4A1C58D8CC009A2E14 /* BucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketQuery.swift; sourceTree = "<group>"; };
+		5E91A6361C73802300C9D609 /* FollowUserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUserQuery.swift; sourceTree = "<group>"; };
+		5E91A6381C73802E00C9D609 /* UnfollowUserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfollowUserQuery.swift; sourceTree = "<group>"; };
+		5E91A63A1C73822300C9D609 /* FollowUserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUserQuerySpec.swift; sourceTree = "<group>"; };
+		5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfollowUserQuerySpec.swift; sourceTree = "<group>"; };
+		5E91A63E1C7390F200C9D609 /* ConnectionsRequesterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsRequesterSpec.swift; sourceTree = "<group>"; };
 		5EADE3AA1C6B61D100B03DAD /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		5EADE3B01C6B7CE700B03DAD /* CommentQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentQuery.swift; sourceTree = "<group>"; };
 		5EADE3B21C6B7E5F00B03DAD /* CommentsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsProvider.swift; sourceTree = "<group>"; };
@@ -742,6 +752,7 @@
 				5E5D56391C637FC800C7957E /* BucketsProviderSpec.swift */,
 				5E12C36A1C7359BD003C6B48 /* BucketsRequesterSpec.swift */,
 				5E5D56411C63F29A00C7957E /* ConnectionsProviderSpec.swift */,
+				5E91A63E1C7390F200C9D609 /* ConnectionsRequesterSpec.swift */,
 				5E5D56471C64A24400C7957E /* ShotsProviderSpec.swift */,
 				5E12C3681C734FF4003C6B48 /* ShotsRequesterSpec.swift */,
 				5E5D56491C64D13300C7957E /* PageableProviderSpec.swift */,
@@ -824,6 +835,8 @@
 				5E31AB8E1C6CAAFC001BC1DF /* UpdateCommentQuery.swift */,
 				5EEEC9A61C71E10900BB7237 /* ProjectsQuery.swift */,
 				5E31DBAD1C71E88800D5C5DB /* ShotLikedByMeQuery.swift */,
+				5E91A6361C73802300C9D609 /* FollowUserQuery.swift */,
+				5E91A6381C73802E00C9D609 /* UnfollowUserQuery.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -973,6 +986,8 @@
 				5E31AB921C6CAD19001BC1DF /* DeleteCommentQuerySpec.swift */,
 				5EEEC9A81C71E14000BB7237 /* ProjectsQuerySpec.swift */,
 				5E31DBAF1C71E8B600D5C5DB /* ShotLikedByMeQuerySpec.swift */,
+				5E91A63A1C73822300C9D609 /* FollowUserQuerySpec.swift */,
+				5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1387,6 +1402,7 @@
 				5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */,
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
+				5E91A6391C73802E00C9D609 /* UnfollowUserQuery.swift in Sources */,
 				5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
 				74A6C67C1C57C84F009BDD75 /* LikesCollectionViewController.swift in Sources */,
@@ -1429,6 +1445,7 @@
 				5EEEC9AD1C71E2A600BB7237 /* ProjectsProvider.swift in Sources */,
 				7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
+				5E91A6371C73802300C9D609 /* FollowUserQuery.swift in Sources */,
 				F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */,
 				F092E25F1C3FD47200593D18 /* ShotManagedObject.swift in Sources */,
 				5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */,
@@ -1536,6 +1553,7 @@
 			files = (
 				5EEEC9B11C71E58500BB7237 /* ProjectsProviderSpec.swift in Sources */,
 				5E22ADCF1C635DE5008D900C /* PageableComponentSerializerSpec.swift in Sources */,
+				5E91A63D1C73822C00C9D609 /* UnfollowUserQuerySpec.swift in Sources */,
 				5C502AEC1C64F9580043B0D8 /* ShotsLocalStorageMock.swift in Sources */,
 				5E31AB911C6CAD0E001BC1DF /* UpdateCommentQuerySpec.swift in Sources */,
 				5ED6C5C31C57DA5500A591EA /* FollowersQuerySpec.swift in Sources */,
@@ -1567,6 +1585,7 @@
 				5EC0A7B71C35668100846975 /* MockLoginService.swift in Sources */,
 				FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */,
 				F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */,
+				5E91A63F1C7390F200C9D609 /* ConnectionsRequesterSpec.swift in Sources */,
 				5E5D56481C64A24400C7957E /* ShotsProviderSpec.swift in Sources */,
 				FF13A3C0B9A1786150870E33 /* ShotsAnimatorMock.swift in Sources */,
 				5E5D563A1C637FC800C7957E /* BucketsProviderSpec.swift in Sources */,
@@ -1577,6 +1596,7 @@
 				5ED6C5B91C57A98400A591EA /* FolloweesQuerySpec.swift in Sources */,
 				5EC0A7B51C35634800846975 /* OAuthViewModelSpec.swift in Sources */,
 				5E0D773D1C3BE475002191A7 /* UserSpec.swift in Sources */,
+				5E91A63B1C73822300C9D609 /* FollowUserQuerySpec.swift in Sources */,
 				FF13AE1673A2D15C58A49606 /* InitialShotsCollectionViewLayoutSpec.swift in Sources */,
 				5ED6C5BD1C57BD3C00A591EA /* NSAttributedStringExtensionSpec.swift in Sources */,
 				FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */,
