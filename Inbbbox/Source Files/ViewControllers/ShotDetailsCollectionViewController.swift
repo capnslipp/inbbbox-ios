@@ -56,7 +56,8 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let comments = comments else { return 0 }
         
-        return comments.count == Int(shot!.commentsCount) ? comments.count : comments.count + 1
+        // NGRFix: interesting '>='? added because of problem when somebody adds comment between shot loading and comments loading
+        return comments.count >= Int(shot!.commentsCount) ? comments.count : comments.count + 1
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -127,7 +128,12 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         collectionView?.registerClass(ShotDetailsHeaderView.self, type: .Header)
         collectionView?.registerClass(ShotDetailsFooterView.self, type: .Footer)
         
+        
         // NGRTodo: move somewhere
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
+        
         if self.userStorageClass.currentUser != nil {
             // NGRFixme: call API for `Check if you like a shot`
         } else {
@@ -138,8 +144,8 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
                 description: shot!.description?.mutableCopy() as? NSMutableAttributedString,
                 title: shot!.title!,
                 author: shot!.user.name ?? shot!.user.username,
-                client: "Client link",
-                shotInfo: "app name + date",
+                client: shot!.team?.name,
+                shotInfo: dateFormatter.stringFromDate(shot!.createdAt),
                 shot: shot!.image.normalURL.absoluteString,
                 avatar: shot!.user.avatarString!,
                 shotLiked:  shotIsLiked,

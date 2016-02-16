@@ -22,7 +22,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         let description: NSMutableAttributedString?
         let title: String
         let author: String
-        let client: String
+        let client: String?
         let shotInfo: String
         let shot: String
         let avatar: String
@@ -38,7 +38,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: (viewData?.avatar)!,
                 title: (viewData?.title)!,
                 author: (viewData?.author)!,
-                client: (viewData?.client)!,
+                client: viewData?.client,
                 shotInfo: (viewData?.shotInfo)!
             )
             shotDetailsOperationView.viewData = ShotDetailsOperationView.ViewData(

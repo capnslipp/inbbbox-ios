@@ -17,6 +17,7 @@ class AuthorDetailsView: UIView {
             titleLabel.text = viewData?.title
             authorButton.setTitle(viewData?.author, forState: .Normal)
             clientButton.setTitle(viewData?.client, forState: .Normal)
+            clientPrefixLabel.hidden = viewData?.client == nil
             shotInfoLabel.text = viewData?.shotInfo
         }
     }
@@ -221,7 +222,7 @@ extension AuthorDetailsView {
         let avatar: String
         let title: String
         let author: String
-        let client: String
+        let client: String?
         let shotInfo: String
     }
 }
