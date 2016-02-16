@@ -44,7 +44,7 @@ class BucketsRequesterSpec: QuickSpec {
                 }
                 
                 it("error should appear") {
-                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then { _ in
+                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
                         fail()
                     }.error { _error in
                         error = _error
@@ -62,7 +62,7 @@ class BucketsRequesterSpec: QuickSpec {
                 }
                 
                 it("should add shot to bucket") {
-                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then { _ in
+                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     
@@ -88,7 +88,7 @@ class BucketsRequesterSpec: QuickSpec {
                 }
                 
                 it("error should appear") {
-                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then { _ in
+                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
                         fail()
                     }.error { _error in
                         error = _error
@@ -106,7 +106,7 @@ class BucketsRequesterSpec: QuickSpec {
                 }
                 
                 it("should remove shot from bucket") {
-                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then { _ in
+                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     

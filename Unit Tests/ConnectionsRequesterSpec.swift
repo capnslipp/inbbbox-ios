@@ -44,7 +44,7 @@ class ConnectionsRequesterSpec: QuickSpec {
                 }
                 
                 it("error should appear") {
-                    sut.followUser(User.fixtureUser()).then { _ in
+                    sut.followUser(User.fixtureUser()).then {
                         fail()
                     }.error { _error in
                         error = _error
@@ -62,7 +62,7 @@ class ConnectionsRequesterSpec: QuickSpec {
                 }
                 
                 it("should follow user") {
-                    sut.followUser(User.fixtureUser()).then { _ in
+                    sut.followUser(User.fixtureUser()).then {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     
@@ -88,7 +88,7 @@ class ConnectionsRequesterSpec: QuickSpec {
                 }
                 
                 it("error should appear") {
-                    sut.unfollowUser(User.fixtureUser()).then { _ in
+                    sut.unfollowUser(User.fixtureUser()).then {
                         fail()
                     }.error { _error in
                         error = _error
@@ -106,7 +106,7 @@ class ConnectionsRequesterSpec: QuickSpec {
                 }
                 
                 it("should unfollow user") {
-                    sut.followUser(User.fixtureUser()).then { _ in
+                    sut.followUser(User.fixtureUser()).then {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     

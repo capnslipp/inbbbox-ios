@@ -38,10 +38,8 @@ extension Responsable {
             
             if let error = self.checkDataForError(data, response: response) {
                 throw error
-                
             } else if let error = self.checkResponseForError(response) {
                 throw error
-                
             } else if let responseData = data where data?.length > 0 {
                 
                 var swiftyJSON: JSON? = nil
@@ -59,7 +57,6 @@ extension Responsable {
                 
             } else if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 204 {
                 fulfill((json: nil, header: header))
-                
             } else {
                 let message = NSLocalizedString("Failed retrieving data", comment: "")
                 throw NSError(domain: NetworkErrorDomain, code: 0, message: message)
