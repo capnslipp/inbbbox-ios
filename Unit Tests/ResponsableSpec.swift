@@ -89,6 +89,39 @@ class ResponsableSpec: QuickSpec {
                 expect(response).toEventually(beNil())
             }
             
+            it("error should not be nil") {
+                expect(error).toNotEventually(beNil())
+            }
+            
+            it("error should have corect localized message") {
+                expect((error as! NSError).domain).toEventually(equal(NetworkErrorDomain))
+            }
+        }
+        
+        describe("when respond with dictionary of errors") {
+            
+            var response: Response?
+            var error: ErrorType?
+            
+            beforeEach {
+                let json = ["errors" : [["message" : "fixture.message"]]]
+                let data = try! NSJSONSerialization.dataWithJSONObject(json, options: .PrettyPrinted)
+                sut.responseWithData(data, response: self.mockResponse(422)).then { _ -> Void in
+                    fail()
+                }.error { _error in
+                    error = _error
+                }
+            }
+            
+            afterEach {
+                response = nil
+                error = nil
+            }
+            
+            it("response should be nil") {
+                expect(response).toEventually(beNil())
+            }
+            
             it("response should not have json") {
                 expect(response?.json).toEventually(beNil())
             }
@@ -98,7 +131,7 @@ class ResponsableSpec: QuickSpec {
             }
             
             it("error should have corect localized message") {
-                expect((error as! NSError).domain).toEventually(equal(NetworkErrorDomain))
+                expect((error as! NSError).localizedDescription).toEventually(equal("fixture.message"))
             }
         }
     }
