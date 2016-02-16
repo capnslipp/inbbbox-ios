@@ -128,7 +128,6 @@ class BucketsCollectionViewController: UICollectionViewController {
             let shotImagesUrls = bucketShots.map { $0.image.normalURL }
             presentShotsImagesForCell(shotImagesUrls, cell: cell)
         }
-
         return cell
     }
 
@@ -149,10 +148,9 @@ class BucketsCollectionViewController: UICollectionViewController {
     func didTapAddNewBucketButton(_: UIBarButtonItem) {
         // NGRTodo: Implement this
     }
-    
-    // MARK - Cells data filling
-    
 }
+
+// MARK - Cells data filling
 
 private extension BucketsCollectionViewController {
         
@@ -162,13 +160,10 @@ private extension BucketsCollectionViewController {
     }
         
     func presentShotsImagesForCell(shotImagesURLs: [NSURL], cell: BucketCollectionViewCell) {
-
         guard shotImagesURLs.count > 0 else {
             return
         }
         let repeatedShotURLs = Array(Array(Array(count: 4, repeatedValue: shotImagesURLs).flatten())[0...3])
-       
-        
         cell.firstShotImageView.loadImageFromURL(repeatedShotURLs[0])
         cell.secondShotImageView.loadImageFromURL(repeatedShotURLs[1])
         cell.thirdShotImageView.loadImageFromURL(repeatedShotURLs[2])
