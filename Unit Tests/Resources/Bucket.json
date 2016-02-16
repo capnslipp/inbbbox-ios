@@ -1,5 +1,5 @@
 {
-    "id" : "fixture.id",
+    "id" : "fixture.identifier",
     "name" : "fixture.name",
     "description" : "fixture.description",
     "shots_count" : 250,

@@ -12,11 +12,11 @@ import PromiseKit
 
 @testable import Inbbbox
 
-class ShotOperationRequesterMock: ShotOperationRequester {
+class ShotsRequesterMock: ShotsRequester {
 
-    static let likeShotStub = Stub<String, Promise<Void>>()
+    let likeShotStub = Stub<Shot, Promise<Void>>()
 
-    override class func likeShot(shotID: String) -> Promise<Void> {
-        return try! likeShotStub.invoke(shotID)
+    override func likeShot(shot: Shot) -> Promise<Void> {
+        return try! likeShotStub.invoke(shot)
     }
 }

@@ -257,7 +257,7 @@ class ShotsQuerySpec: QuickSpec {
                 let bucket = Bucket.fixtureBucket()
                 return ShotsQuery(type: .BucketShots(bucket))
             }) { Void -> QueryExpectation in
-                return (method: .GET, encoding: .URL, path: "/buckets/fixture.id/shots")
+                return (method: .GET, encoding: .URL, path: "/buckets/fixture.identifier/shots")
             }
         }
         

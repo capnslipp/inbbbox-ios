@@ -15,7 +15,7 @@ class RemoveFromBucketQuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return RemoveFromBucketQuery(shot: Shot.fixtureShot(), bucketID: Bucket.fixtureBucket())
+            return RemoveFromBucketQuery(shot: Shot.fixtureShot(), bucket: Bucket.fixtureBucket())
         }) { Void -> QueryExpectation in
             return (method: .DELETE, encoding: .JSON, path: "/buckets/fixture.identifier/shots")
         }
@@ -25,7 +25,7 @@ class RemoveFromBucketQuerySpec: QuickSpec {
             var sut: RemoveFromBucketQuery!
             
             beforeEach {
-                sut = RemoveFromBucketQuery(shot: Shot.fixtureShot(), bucketID: Bucket.fixtureBucket())
+                sut = RemoveFromBucketQuery(shot: Shot.fixtureShot(), bucket: Bucket.fixtureBucket())
             }
             
             afterEach {
