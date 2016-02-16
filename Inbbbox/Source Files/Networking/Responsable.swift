@@ -36,7 +36,10 @@ extension Responsable {
             
             let header = (response as? NSHTTPURLResponse)?.allHeaderFields as? [String: AnyObject]
             
-            if let error = self.checkResponseForError(response) {
+            if let error = self.checkDataForError(data, response: response) {
+                throw error
+                
+            } else if let error = self.checkResponseForError(response) {
                 throw error
                 
             } else if let responseData = data where data?.length > 0 {
@@ -68,6 +71,24 @@ extension Responsable {
 
 // MARK: - Private extension of Responsable
 private extension Responsable {
+    
+    func checkDataForError(data: NSData?, response: NSURLResponse?) -> NSError? {
+        
+        guard let response = response as? NSHTTPURLResponse where response.statusCode >= 400 else {
+            return nil
+        }
+        
+        guard let data = data else {
+            return nil
+        }
+        
+        let swiftyJSON = JSON(data: data, options: .AllowFragments, error: nil)
+        guard let message = swiftyJSON["errors"].array?.first?["message"].string else {
+            return nil
+        }
+        
+        return NSError(domain: NetworkErrorDomain, code: response.statusCode, message: message)
+    }
     
     func checkResponseForError(response: NSURLResponse?) -> NSError? {
         
