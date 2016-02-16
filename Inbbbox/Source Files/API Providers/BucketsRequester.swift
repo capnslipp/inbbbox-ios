@@ -56,8 +56,6 @@ private extension BucketsRequester {
             firstly {
                 verifyAuthenticationStatus(true)
             }.then {
-                self.verifyAccountType()
-            }.then {
                 Request(query: query).resume()
             }.then { _ -> Void in
                 fulfill()
