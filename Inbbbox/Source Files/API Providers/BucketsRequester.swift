@@ -8,7 +8,6 @@
 
 import Foundation
 import PromiseKit
-import SwiftyJSON
 
 /// Provides interface for dribbble buckets update, delete and create API
 final class BucketsRequester: Verifiable {
@@ -17,7 +16,7 @@ final class BucketsRequester: Verifiable {
      Adds shot to given bucket.
      
      - Requires: Authenticated user.
-     - Warning: Authenticated user has to be owner of bucket.
+     - Warning:  Authenticated user has to be owner of bucket.
      
      - parameter shot:   Shot which should be added to bucket.
      - parameter bucket: Bucket which should contain bucket.
@@ -34,7 +33,7 @@ final class BucketsRequester: Verifiable {
      Removes shot from given bucket.
      
      - Requires: Authenticated user.
-     - Warning: Authenticated user has to be owner of bucket.
+     - Warning:  Authenticated user has to be owner of bucket.
      
      - parameter shot:   Shot which should be added to bucket.
      - parameter bucket: Bucket which should contain bucket.
