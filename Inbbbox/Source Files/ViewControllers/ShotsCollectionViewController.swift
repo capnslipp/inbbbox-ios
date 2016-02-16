@@ -13,7 +13,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     var localStorage = ShotsLocalStorage()
     var userStorageClass = UserStorage.self
     var imageClass = UIImage.self
-    var shotOperationRequesterClass =  ShotOperationRequester.self
+    var shotsRequester =  ShotsRequester()
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
@@ -96,7 +96,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
             switch action {
             case .Like:
                 if self?.userStorageClass.currentUser != nil {
-                    self?.shotOperationRequesterClass.likeShot(shot.identifier)
+                    self?.shotsRequester.likeShot(shot)
                 } else {
                     do {
                         try self?.localStorage.like(shotID: shot.identifier)

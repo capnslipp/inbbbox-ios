@@ -13,6 +13,10 @@ import Async
 
 let NetworkErrorDomain = "co.netguru.inbbbox.error.network"
 
+enum ResponseError: ErrorType {
+    case UnexpectedResponse
+}
+
 /**
  *  Responsable
  *  Defines how Responsable type should behave.
