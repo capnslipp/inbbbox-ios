@@ -90,7 +90,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     func downloadShots(buckets: [Bucket]) {
         for bucket in buckets {
             firstly {
-                self.shotsProvider.provideShotsForBucket(bucket)
+                shotsProvider.provideShotsForBucket(bucket)
             }.then { shots -> Void in
                 if let shots = shots {
                     self.bucketsShots[bucket] = shots
