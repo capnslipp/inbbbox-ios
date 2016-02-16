@@ -122,6 +122,7 @@ class BucketsCollectionViewController: UICollectionViewController {
             downloadBucketsForNextPage()
         }
         let cell = collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        cell.clearImages()
         let bucket = buckets[indexPath.row]
         presentBucketForCell(bucket, cell: cell)
         if let bucketShots = bucketsShots[bucket] {

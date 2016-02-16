@@ -90,6 +90,12 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
         numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: nameLabel)
     }
     
+    func clearImages() {
+        for imageView in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
+            imageView.image = nil
+        }
+    }
+    
     // MARK: - Reusable
     static var reuseIdentifier: String {
         return "BucketCollectionViewCellIdentifier"

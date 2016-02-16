@@ -107,6 +107,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         }
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            cell.clearImages()
             let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
             if let followeeShots = followeesShots[followee] {
@@ -116,6 +117,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            cell.clearImages()
             let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
             let shotImageUrl = followeesShots[followee]?.first?.image.normalURL

@@ -86,7 +86,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
             downloadShotsForNextPage()
         }
         let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-         // NGRTemp: temporary implementation - image should probably be downloaded earlier
+        cell.shotImageView.image = nil
         let shot = likedShots[indexPath.item]
         cell.shotImageView.loadImageFromURL(shot.image.normalURL)
         return cell

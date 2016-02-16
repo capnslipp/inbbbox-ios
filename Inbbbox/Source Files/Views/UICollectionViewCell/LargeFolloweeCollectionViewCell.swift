@@ -67,6 +67,11 @@ class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: nameLabel)
     }
     
+    func clearImages() {
+        avatarView.imageView.image = nil
+        shotImageView.image = nil
+    }
+    
     // MARK: - Reusable
     
     static var reuseIdentifier: String {

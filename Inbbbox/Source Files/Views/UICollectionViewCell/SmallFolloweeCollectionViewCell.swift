@@ -105,6 +105,12 @@ class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         numberOfShotsLabel.autoPinEdge(.Left, toEdge: .Left, ofView: nameLabel)
     }
     
+    func clearImages() {
+        for imageView in [avatarView.imageView, firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
+            imageView.image = nil
+        }
+    }
+    
     // MARK: - Reusable
     
     static var reuseIdentifier: String {

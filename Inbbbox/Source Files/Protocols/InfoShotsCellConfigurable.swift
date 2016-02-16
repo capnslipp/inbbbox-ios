@@ -14,4 +14,6 @@ protocol InfoShotsCellConfigurable {
     
     func setInfoViewConstraints()
     
+    func clearImages()
+    
 }
