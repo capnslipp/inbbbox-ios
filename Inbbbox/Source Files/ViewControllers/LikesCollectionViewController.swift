@@ -27,6 +27,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         guard let collectionView = collectionView else {
             return
         }
+        collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
     }
     
