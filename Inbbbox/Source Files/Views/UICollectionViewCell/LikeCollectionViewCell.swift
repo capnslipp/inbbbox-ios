@@ -22,8 +22,13 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeig
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = UIColor.backgroundGrayColor()
+        commonInit()
+    }
+    
+    func commonInit() {
         contentView.addSubview(shotImageView)
+        contentView.layer.cornerRadius = 5
+        contentView.clipsToBounds = true
     }
     
     // MARK - UIView

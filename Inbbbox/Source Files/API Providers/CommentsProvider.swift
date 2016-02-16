@@ -23,7 +23,7 @@ class CommentsProvider: PageableProvider {
     func provideCommentsForShot(shot: Shot) -> Promise<[Comment]?> {
         
         let query = CommentQuery(shot: shot)
-        return self.firstPageForQueries([query], withSerializationKey: nil)
+        return firstPageForQueries([query], withSerializationKey: nil)
     }
     
     

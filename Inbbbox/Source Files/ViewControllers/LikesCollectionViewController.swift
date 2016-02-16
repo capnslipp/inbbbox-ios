@@ -11,15 +11,16 @@ import PromiseKit
 
 class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
+    private var likedShots = [Shot]()
+    private let shotsProvider = ShotsProvider()
+    private var isUserLogged: Bool {
+        get {
+            return UserStorage.currentUser != nil
+        }
+    }
+    
     // MARK: - Lifecycle
     
-    // NGRTemp: temporary implementation - Downloading shots instead of liked shots.
-    // Query and func in provider needs to be implemented
-    // Maybe we should download liked shots earlier?
-    
-    var likedShots = [Shot]()
-    let shotsProvider = ShotsProvider()
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString("Likes", comment: "")
@@ -31,17 +32,41 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        guard let user = UserStorage.currentUser else {
-            return
-        }
-        
+        isUserLogged ? downloadInitialShots() : loadLocallyStoredShots()
+    }
+    // MARK: Loading shots
+    
+    func loadLocallyStoredShots() {
+        // NGRTodo: Implement this
+    }
+    
+    func downloadInitialShots() {
         firstly {
-            self.shotsProvider.provideLikedShotsForUser(user)
+            self.shotsProvider.provideLikedShotsForUser(UserStorage.currentUser!)
         }.then { shots -> Void in
             if let shots = shots {
                 self.likedShots = shots
                 self.collectionView?.reloadData()
+            }
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
+    }
+    
+    func downloadShotsForNextPage() {
+        firstly {
+            self.shotsProvider.nextPage()
+        }.then { shots -> Void in
+            if let shots = shots where shots.count > 0 {
+                let indexes = shots.enumerate().map { index, _ in
+                    return index + self.likedShots.count
+                }
+                self.likedShots.appendContentsOf(shots)
+                let indexPaths = indexes.map {
+                    NSIndexPath(forRow:($0), inSection: 0)
+                }
+                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
@@ -56,6 +81,9 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        if indexPath.row == likedShots.count - 1 && isUserLogged {
+            downloadShotsForNextPage()
+        }
         let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
          // NGRTemp: temporary implementation - image should probably be downloaded earlier
         let shot = likedShots[indexPath.item]
