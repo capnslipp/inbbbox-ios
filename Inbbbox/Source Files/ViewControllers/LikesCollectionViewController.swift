@@ -14,9 +14,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     private var likedShots = [Shot]()
     private let shotsProvider = ShotsProvider()
     private var isUserLogged: Bool {
-        get {
-            return UserStorage.currentUser != nil
-        }
+        return UserStorage.currentUser != nil
     }
     
     // MARK: - Lifecycle
@@ -27,6 +25,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         guard let collectionView = collectionView else {
             return
         }
+        collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
     }
     
@@ -42,7 +41,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
     func downloadInitialShots() {
         firstly {
-            self.shotsProvider.provideLikedShotsForUser(UserStorage.currentUser!)
+            shotsProvider.provideLikedShotsForUser(UserStorage.currentUser!)
         }.then { shots -> Void in
             if let shots = shots {
                 self.likedShots = shots
@@ -56,7 +55,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
     func downloadShotsForNextPage() {
         firstly {
-            self.shotsProvider.nextPage()
+            shotsProvider.nextPage()
         }.then { shots -> Void in
             if let shots = shots where shots.count > 0 {
                 let indexes = shots.enumerate().map { index, _ in
@@ -85,7 +84,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
             downloadShotsForNextPage()
         }
         let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-         // NGRTemp: temporary implementation - image should probably be downloaded earlier
+        cell.shotImageView.image = nil
         let shot = likedShots[indexPath.item]
         cell.shotImageView.loadImageFromURL(shot.image.normalURL)
         return cell

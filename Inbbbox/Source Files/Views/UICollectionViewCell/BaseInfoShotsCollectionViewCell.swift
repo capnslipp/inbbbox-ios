@@ -1,5 +1,5 @@
 //
-//  BaseFolloweeCollectionViewCell.swift
+//  BaseInfoShotsCollectionViewCell
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 04.02.2016.
@@ -8,14 +8,15 @@
 
 import UIKit
 
-class BaseFolloweeCollectionViewCell: UICollectionViewCell {
+class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     
     let shotsView = UIImageView.newAutoLayoutView()
     let infoView = UIView.newAutoLayoutView()
-    var avatarView: AvatarView!
-    let userNameLabel = UILabel.newAutoLayoutView()
+    let nameLabel = UILabel.newAutoLayoutView()
     let numberOfShotsLabel = UILabel.newAutoLayoutView()
-    let avatarSize = CGSize(width:16, height:16)
+    var shotsViewHeightToWidthRatio: CGFloat {
+        return 0.75
+    }
     private var didSetConstraints = false
     
     // MARK - Life cycle
@@ -33,14 +34,10 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     // Mark - Setup UI
     
      func commonInit() {
-        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
-        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
-        avatarView.configureForAutoLayout()
-        infoView.addSubview(avatarView)
         
-        userNameLabel.textColor = UIColor.pinkColor()
-        userNameLabel.font = UIFont.systemFontOfSize(13, weight:UIFontWeightMedium)
-        infoView.addSubview(userNameLabel)
+        nameLabel.textColor = UIColor.pinkColor()
+        nameLabel.font = UIFont.systemFontOfSize(13, weight:UIFontWeightMedium)
+        infoView.addSubview(nameLabel)
         
         numberOfShotsLabel.textColor = UIColor.followeeTextGrayColor()
         numberOfShotsLabel.font = UIFont.systemFontOfSize(10)
@@ -61,8 +58,7 @@ class BaseFolloweeCollectionViewCell: UICollectionViewCell {
     
     override func updateConstraints() {
         if !didSetConstraints {
-            let spacings = CollectionViewLayoutSpacings()
-            let shotsViewHeight = spacings.shotHeightToWidthRatio * frame.width
+            let shotsViewHeight = shotsViewHeightToWidthRatio * frame.width
             shotsView.autoSetDimension(.Height, toSize: shotsViewHeight)
             shotsView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             infoView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)

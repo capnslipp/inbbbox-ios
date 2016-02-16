@@ -50,6 +50,12 @@ extension Bucket: Mappable {
     }
 }
 
+extension Bucket: Hashable {
+    var hashValue: Int {
+        return identifier.hashValue
+    }
+}
+
 extension Bucket: Equatable {}
 
 func ==(lhs: Bucket, rhs: Bucket) -> Bool {
