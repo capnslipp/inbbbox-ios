@@ -8,7 +8,6 @@
 
 import Foundation
 import PromiseKit
-import SwiftyJSON
 
 /// Provides interface for dribbble shots update, delete and create API
 class ShotsRequester: Verifiable {
@@ -32,7 +31,7 @@ class ShotsRequester: Verifiable {
      Unlikes given shot.
      
      - Requires: Authenticated user.
-     - Warning: Authenticated user has to previously like the shot.
+     - Warning:  Authenticated user has to previously like the shot.
      
      - parameter shot: Shot to unlike.
      

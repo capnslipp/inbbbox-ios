@@ -20,7 +20,7 @@ class UnlikeQuerySpec: QuickSpec {
             return (method: .DELETE, encoding: .JSON, path: "/shots/fixture.identifier/like")
         }
         
-        describe("when newly initialized with shot identifier") {
+        describe("when newly initialized with shot") {
             
             var sut: UnlikeQuery!
             

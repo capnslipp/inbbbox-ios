@@ -21,7 +21,7 @@ class CreateCommentQuerySpec: QuickSpec {
             return (method: .POST, encoding: .JSON, path: "/shots/fixture.identifier/comments")
         }
         
-        describe("when newly initialized with shot") {
+        describe("when newly initialized with comment") {
             
             var sut: CreateCommentQuery!
             

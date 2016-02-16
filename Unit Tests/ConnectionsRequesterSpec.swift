@@ -1,5 +1,5 @@
 //
-//  BucketsRequesterSpec.swift
+//  ConnectionsRequesterSpec.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 16/02/16.
@@ -13,13 +13,13 @@ import Mockingjay
 
 @testable import Inbbbox
 
-class BucketsRequesterSpec: QuickSpec {
+class ConnectionsRequesterSpec: QuickSpec {
     override func spec() {
         
-        var sut: BucketsRequester!
+        var sut: ConnectionsRequester!
         
         beforeEach {
-            sut = BucketsRequester()
+            sut = ConnectionsRequester()
         }
         
         afterEach {
@@ -27,7 +27,7 @@ class BucketsRequesterSpec: QuickSpec {
             self.removeAllStubs()
         }
         
-        describe("when adding shot to bucket") {
+        describe("when following user") {
             
             var error: ErrorType?
             var didInvokePromise: Bool?
@@ -44,7 +44,7 @@ class BucketsRequesterSpec: QuickSpec {
                 }
                 
                 it("error should appear") {
-                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
+                    sut.followUser(User.fixtureUser()).then {
                         fail()
                     }.error { _error in
                         error = _error
@@ -61,8 +61,8 @@ class BucketsRequesterSpec: QuickSpec {
                     self.stub(everything, builder: json([], status: 204))
                 }
                 
-                it("should add shot to bucket") {
-                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
+                it("should follow user") {
+                    sut.followUser(User.fixtureUser()).then {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     
@@ -71,7 +71,7 @@ class BucketsRequesterSpec: QuickSpec {
             }
         }
         
-        describe("when removing shot from bucket") {
+        describe("when unfollowing user") {
             
             var error: ErrorType?
             var didInvokePromise: Bool?
@@ -88,7 +88,7 @@ class BucketsRequesterSpec: QuickSpec {
                 }
                 
                 it("error should appear") {
-                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
+                    sut.unfollowUser(User.fixtureUser()).then {
                         fail()
                     }.error { _error in
                         error = _error
@@ -105,8 +105,8 @@ class BucketsRequesterSpec: QuickSpec {
                     self.stub(everything, builder: json([], status: 204))
                 }
                 
-                it("should remove shot from bucket") {
-                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
+                it("should unfollow user") {
+                    sut.followUser(User.fixtureUser()).then {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     

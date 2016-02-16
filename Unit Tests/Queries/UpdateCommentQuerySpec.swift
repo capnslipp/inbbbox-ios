@@ -21,7 +21,7 @@ class UpdateCommentQuerySpec: QuickSpec {
             return (method: .PUT, encoding: .JSON, path: "/shots/fixture.identifier/comments/fixture.identifier")
         }
         
-        describe("when newly initialized with shot") {
+        describe("when newly initialized with comment") {
             
             var sut: UpdateCommentQuery!
             
