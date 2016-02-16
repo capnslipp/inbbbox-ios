@@ -96,7 +96,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
             switch action {
             case .Like:
                 if self?.userStorageClass.currentUser != nil {
-                    self?.shotOperationRequesterClass.likeShot(shot.identifier)
+                    self?.shotOperationRequesterClass.likeShot(shot)
                 } else {
                     do {
                         try self?.localStorage.like(shotID: shot.identifier)

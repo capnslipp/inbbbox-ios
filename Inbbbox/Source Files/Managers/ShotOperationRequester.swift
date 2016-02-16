@@ -11,11 +11,11 @@ import PromiseKit
 
 class ShotOperationRequester {
     
-    class func likeShot(shotID: String) -> Promise<Void> {
+    class func likeShot(shot: Shot) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             
-            let query = LikeQuery(shotID: shotID.stringValue)
+            let query = LikeQuery(shot: shot)
             let request = Request(query: query)
             
             firstly {
@@ -26,11 +26,11 @@ class ShotOperationRequester {
         }
     }
     
-    class func unlikeShot(shotID: String) -> Promise<Void> {
+    class func unlikeShot(shot: Shot) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             
-            let query = UnlikeQuery(shotID: shotID.stringValue)
+            let query = UnlikeQuery(shot: shot)
             let request = Request(query: query)
             
             firstly {
@@ -67,11 +67,11 @@ class ShotOperationRequester {
         }
     }
     
-    class func addToBucket(shotID: String, bucketID: String) -> Promise<Void> {
+    class func addToBucket(shot: Shot, bucket: Bucket) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             
-            let query = AddToBucketQuery(shotID: shotID, bucketID: bucketID)
+            let query = AddToBucketQuery(shot: shot, bucket: bucket)
             let request = Request(query: query)
             
             firstly {
@@ -82,11 +82,11 @@ class ShotOperationRequester {
         }
     }
     
-    class func removeFromBucket(shotID: String, bucketID: String) -> Promise<Void> {
+    class func removeFromBucket(shot: Shot, bucket: Bucket) -> Promise<Void> {
         
         return Promise<Void> { fulfill, reject in
             
-            let query = RemoveFromBucketQuery(shotID: shotID, bucketID: bucketID)
+            let query = RemoveFromBucketQuery(shot: shot, bucket: bucket)
             let request = Request(query: query)
             
             firstly {

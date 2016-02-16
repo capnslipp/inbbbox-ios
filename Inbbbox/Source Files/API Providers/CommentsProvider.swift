@@ -26,7 +26,6 @@ class CommentsProvider: PageableProvider {
         return firstPageForQueries([query], withSerializationKey: nil)
     }
     
-    
     /**
      Provides next page of comments.
      

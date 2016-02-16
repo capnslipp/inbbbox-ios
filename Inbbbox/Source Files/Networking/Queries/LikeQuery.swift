@@ -14,7 +14,7 @@ struct LikeQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .JSON)
     
-    init(shotID: String) {
-        path = "/shots/" + shotID + "/like"
+    init(shot: Shot) {
+        path = "/shots/" + shot.identifier + "/like"
     }
 }

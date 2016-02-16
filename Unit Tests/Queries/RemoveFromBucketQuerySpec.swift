@@ -15,9 +15,9 @@ class RemoveFromBucketQuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return RemoveFromBucketQuery(shotID: "123", bucketID: "234")
+            return RemoveFromBucketQuery(shot: Shot.fixtureShot(), bucketID: Bucket.fixtureBucket())
         }) { Void -> QueryExpectation in
-            return (method: .DELETE, encoding: .JSON, path: "/buckets/234/shots")
+            return (method: .DELETE, encoding: .JSON, path: "/buckets/fixture.identifier/shots")
         }
         
         describe("when newly initialized with shot and bucket identifiers") {
@@ -25,7 +25,7 @@ class RemoveFromBucketQuerySpec: QuickSpec {
             var sut: RemoveFromBucketQuery!
             
             beforeEach {
-                sut = RemoveFromBucketQuery(shotID: "123", bucketID: "234")
+                sut = RemoveFromBucketQuery(shot: Shot.fixtureShot(), bucketID: Bucket.fixtureBucket())
             }
             
             afterEach {
@@ -33,7 +33,7 @@ class RemoveFromBucketQuerySpec: QuickSpec {
             }
             
             it("should have one parameter - shot_id") {
-                expect(sut.parameters.body).to(equal(try! NSJSONSerialization.dataWithJSONObject(["shot_id": "123"], options: .PrettyPrinted)))
+                expect(sut.parameters.body).to(equal(try! NSJSONSerialization.dataWithJSONObject(["shot_id": "fixture.identifier"], options: .PrettyPrinted)))
             }
         }
     }
