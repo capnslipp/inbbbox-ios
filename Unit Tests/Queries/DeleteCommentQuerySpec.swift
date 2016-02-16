@@ -21,7 +21,7 @@ class DeleteCommentQuerySpec: QuickSpec {
             return (method: .DELETE, encoding: .URL, path: "/shots/fixture.identifier/comments/fixture.identifier")
         }
         
-        describe("when newly initialized with shot") {
+        describe("when newly initialized with comment") {
             
             var sut: DeleteCommentQuery!
             

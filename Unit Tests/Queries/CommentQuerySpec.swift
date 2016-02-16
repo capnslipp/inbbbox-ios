@@ -21,7 +21,7 @@ class CommentQuerySpec: QuickSpec {
             return (method: .GET, encoding: .URL, path: "/shots/fixture.identifier/comments")
         }
         
-        describe("when newly initialized with shot") {
+        describe("when newly initialized with comment") {
             
             var sut: CommentQuery!
             

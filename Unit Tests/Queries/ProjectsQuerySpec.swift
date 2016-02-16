@@ -21,7 +21,7 @@ class ProjectsQuerySpec: QuickSpec {
             return (method: .GET, encoding: .URL, path: "/shots/fixture.identifier/projects")
         }
         
-        describe("when newly initialized with shot") {
+        describe("when newly initialized with project") {
             
             var sut: ProjectsQuery!
             
