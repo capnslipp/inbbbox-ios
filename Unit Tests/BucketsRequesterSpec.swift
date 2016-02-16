@@ -62,7 +62,7 @@ class BucketsRequesterSpec: QuickSpec {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     
-                    expect(didInvokePromise).toEventually(beTruthy())
+                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
             }
         }
@@ -98,7 +98,7 @@ class BucketsRequesterSpec: QuickSpec {
                         didInvokePromise = true
                     }.error { _ in fail() }
                     
-                    expect(didInvokePromise).toEventually(beTruthy())
+                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
             }
         }
