@@ -27,6 +27,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         let shot: String
         let avatar: String
         let shotLiked: Bool
+        let shotInBuckets: Bool
     }
     
     var viewData: ViewData? {
@@ -40,7 +41,9 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                 client: (viewData?.client)!,
                 shotInfo: (viewData?.shotInfo)!
             )
-            shotDetailsOperationView.shotLiked = viewData?.shotLiked
+            shotDetailsOperationView.viewData = ShotDetailsOperationView.ViewData(
+                shotLiked: viewData!.shotLiked,
+                shotInBuckets: viewData!.shotInBuckets)
             setupButtonsInteractions()
         }
     }
@@ -300,9 +303,9 @@ extension ShotDetailsHeaderView {
     
     // NGRTemp:
     dynamic private func likeButtonDidTap(_: UIButton) {
-        delegate?.shotDetailsHeaderViewDidTapLikeButton?(!shotDetailsOperationView.shotLiked!){ operationSucceed -> Void in
+        delegate?.shotDetailsHeaderViewDidTapLikeButton?(!shotDetailsOperationView.isShotLiked()){ operationSucceed -> Void in
             if operationSucceed {
-                self.shotDetailsOperationView.updateLikeButton(liked: !self.shotDetailsOperationView.shotLiked!)
+                self.shotDetailsOperationView.updateLikeButton(liked: !self.shotDetailsOperationView.isShotLiked())
             }
         }
     }

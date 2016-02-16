@@ -12,7 +12,26 @@ class ShotDetailsOperationView: UIView {
 
     let likeButton = UIButton.newAutoLayoutView()
     let bucketButton = UIButton.newAutoLayoutView()
-    var shotLiked: Bool? {
+    
+    struct ViewData {
+        let shotLiked: Bool
+        let shotInBuckets: Bool
+    }
+    
+    var viewData: ViewData? {
+        didSet {
+            shotLiked = viewData!.shotLiked
+            shotInBuckets = viewData!.shotInBuckets
+        }
+    }
+    
+    
+    // Private Properties
+    private let buttonsSize = CGFloat(24)
+    private var didUpdateConstraints = false
+    private let defaultBackgroundColor = UIColor.RGBA(246, 248, 248, 1)
+    
+    private var shotLiked: Bool? {
         didSet {
             // NGRTemp: temp images
             if shotLiked! {
@@ -23,11 +42,16 @@ class ShotDetailsOperationView: UIView {
         }
     }
     
-    // Private Properties
-    private let buttonsSize = CGFloat(24)
-    private var didUpdateConstraints = false
-    private let defaultBackgroundColor = UIColor.RGBA(246, 248, 248, 1)
-    
+    private var shotInBuckets: Bool? {
+        didSet {
+            // NGRTemp: temp images
+            if shotInBuckets! {
+                bucketButton.setBackgroundImage(UIImage(named: "ic-likes-active"), forState: .Normal)
+            } else {
+                bucketButton.setBackgroundImage(UIImage(named: "ic-buckets"), forState: .Normal)
+            }
+        }
+    }
     // MARK: Life Cycle
     
     override init(frame: CGRect) {
@@ -45,6 +69,14 @@ class ShotDetailsOperationView: UIView {
     
     func updateLikeButton(liked liked: Bool) {
         shotLiked = liked
+    }
+    
+    func isShotLiked() -> Bool {
+        return shotLiked!
+    }
+    
+    func isShotInBuckets() -> Bool {
+        return shotInBuckets!
     }
     
     // MARK: UI

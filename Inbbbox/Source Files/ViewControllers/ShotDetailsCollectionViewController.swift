@@ -21,7 +21,7 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     var userStorageClass = UserStorage.self
     var shotOperationRequesterClass =  ShotOperationRequester.self
     
-    private let commentsProvider = CommentsProvider(page: 1, pagination: 2) // NGRTemp: just for test, then set up 10-20
+    private let commentsProvider = CommentsProvider(page: 1, pagination: 10)
     
     private var header = ShotDetailsHeaderView()
     private var footer = ShotDetailsFooterView()
@@ -54,7 +54,9 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewController DataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (comments != nil) ? comments!.count + 1 : 0 // NGRTemp: +1 to show `load more comments` cell - waiting for updating shot model
+        guard let comments = comments else { return 0 }
+        
+        return comments.count == Int(shot!.commentsCount) ? comments.count : comments.count + 1
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -80,7 +82,10 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         } else {
             let cell = collectionView.dequeueReusableClass(ShotDetailsLoadMoreCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
-            cell.viewData = ShotDetailsLoadMoreCollectionViewCell.ViewData(commentsCount: "10")
+            let difference = Int(shot!.commentsCount) - self.comments!.count
+            cell.viewData = ShotDetailsLoadMoreCollectionViewCell.ViewData(
+                commentsCount: difference > Int(commentsProvider.pagination) ? Int(commentsProvider.pagination).stringValue : difference.stringValue
+            )
             cell.delegate = self
             return cell
         }
@@ -137,7 +142,8 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
                 shotInfo: "app name + date",
                 shot: shot!.image.normalURL.absoluteString,
                 avatar: shot!.user.avatarString!,
-                shotLiked:  shotIsLiked
+                shotLiked:  shotIsLiked,
+                shotInBuckets: true // NGRTodo: provide this info
             )
             
             header = ShotDetailsHeaderView(viewData: viewData)
@@ -265,7 +271,7 @@ extension ShotDetailsCollectionViewController: ShotDetailsLoadMoreCollectionView
         firstly {
             self.commentsProvider.nextPage()//provideCommentsForShot(shot!)
         }.then { comments -> Void in
-            self.appendCommentsToCollectionView(comments! as [Comment])
+            self.appendCommentsAndUpdateCollectionView(comments! as [Comment], loadMoreCell: view)
         }.then {
             print("") // NGRTodo: check if `load more...` should be visible and update comments count if needed
         }.error { error in
@@ -274,20 +280,31 @@ extension ShotDetailsCollectionViewController: ShotDetailsLoadMoreCollectionView
         }
     }
     
-    private func appendCommentsToCollectionView(comments: [Comment]) -> Promise<Void> {
-        let currentCommentCount = self.comments!.count
-        var indexPaths = [NSIndexPath]()
+    private func appendCommentsAndUpdateCollectionView(comments: [Comment], loadMoreCell: ShotDetailsLoadMoreCollectionViewCell) -> Promise<Void> {
         
-        self.comments?.appendContentsOf(comments)
+        let currentCommentCount = self.comments!.count
+        var indexPathsToInsert = [NSIndexPath]()
+        var indexPathsToReload = [NSIndexPath]()
+        var indexPathsToDelete = [NSIndexPath]()
+        
+        self.comments!.appendContentsOf(comments)
         
         for i in currentCommentCount..<self.comments!.count {
-            indexPaths.append(NSIndexPath(forItem: i, inSection: 0))
+            indexPathsToInsert.append(NSIndexPath(forItem: i, inSection: 0))
+        }
+        
+        if self.comments!.count < Int(shot!.commentsCount) {
+            indexPathsToReload.append(collectionView!.indexPathForCell(loadMoreCell)!)
+        } else {
+            indexPathsToDelete.append(collectionView!.indexPathForCell(loadMoreCell)!)
         }
         
         self.collectionView?.performBatchUpdates({
-                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                self.collectionView?.insertItemsAtIndexPaths(indexPathsToInsert)
+                self.collectionView?.reloadItemsAtIndexPaths(indexPathsToReload)
+                self.collectionView?.deleteItemsAtIndexPaths(indexPathsToDelete)
             },
-            completion: nil
+            completion:nil
         )
         
         return Promise()
