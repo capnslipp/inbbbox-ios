@@ -42,7 +42,7 @@ final class APIRateLimitKeeper {
     }
     
     /// Number of api hits remaining during current minute.
-    /// The number is unknown when api request wasn't sent previously.
+    /// The number is unknown until api request wasn't sent previously.
     private(set) var rateLimitRemainingPerMinute: UInt?
     
     /// Number of api hits remaining during current day.
@@ -59,10 +59,11 @@ final class APIRateLimitKeeper {
         }
     }
     
-    /// Time left to reset remaining minute rate limit.
+    /// Time interval left to reset minute rate limit.
+    /// The number is unknown until api request wasn't sent previously.
     private(set) var timeIntervalRemainingToResetMinuteLimit: NSTimeInterval?
     
-    /// Time left to reset remaining daily rate limit.
+    /// Time interval left to reset daily rate limit.
     var timeIntervalRemainingToResetDailyLimit: NSTimeInterval {
         
         let oneDayTimeInterval = NSTimeInterval(60*60*24)
