@@ -253,20 +253,52 @@ extension ShotDetailsCollectionViewController: ShotDetailsHeaderViewDelegate {
     }
     
     func shotDetailsHeaderViewDidTapLikeButton(like: Bool, completion: (operationSucceed: Bool) -> Void) {
-        if self.userStorageClass.currentUser != nil {
-            let promise = like ? shotOperationRequesterClass.likeShot(shot!.identifier) : shotOperationRequesterClass.unlikeShot(shot!.identifier)
-            if let _ = promise.error {
-                completion(operationSucceed: false)
+        
+        // NGRTemp: will be refactored
+        if like {
+            if self.userStorageClass.currentUser != nil {
+                let promise = self.shotOperationRequesterClass.likeShot(self.shot!.identifier)
+                if let _ = promise.error {
+                    completion(operationSucceed: false)
+                }
+            } else {
+                do {
+                    try self.localStorage.like(shotID: self.shot!.identifier)
+                    
+                } catch {
+                    completion(operationSucceed: false)
+                    return
+                }
             }
+            completion(operationSucceed: true)
         } else {
-            do {
-                like ? try localStorage.like(shotID: shot!.identifier) : try localStorage.unlike(shotID: shot!.identifier)
-            } catch {
-                completion(operationSucceed: false)
-                return
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { action -> Void in
+                actionSheet.dismissViewControllerAnimated(true, completion: nil)
             }
+            
+            let unlikeAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Unlike", comment: ""), style: .Destructive) { action -> Void in
+                if self.userStorageClass.currentUser != nil {
+                    let promise = self.shotOperationRequesterClass.unlikeShot(self.shot!.identifier)
+                    if let _ = promise.error {
+                        completion(operationSucceed: false)
+                    }
+                } else {
+                    do {
+                        try self.localStorage.unlike(shotID: self.shot!.identifier)
+                    } catch {
+                        completion(operationSucceed: false)
+                        return
+                    }
+                }
+                completion(operationSucceed: true)
+            }
+            actionSheet.addAction(cancelAction)
+            actionSheet.addAction(unlikeAction)
+            
+            presentViewController(actionSheet, animated: true, completion: nil)
+            actionSheet.view.tintColor = UIColor.RGBA(0, 118, 255, 1)
         }
-        completion(operationSucceed: true)
     }
 }
 
