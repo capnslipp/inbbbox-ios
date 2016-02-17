@@ -107,6 +107,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         }
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            cell.clearImages()
             let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
             if let followeeShots = followeesShots[followee] {
@@ -116,6 +117,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            cell.clearImages()
             let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
             let shotImageUrl = followeesShots[followee]?.first?.image.normalURL
@@ -135,14 +137,14 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
 
 private extension FolloweesCollectionViewController {
     
-    func presentFoloweeForCell(followee: Followee, cell: BaseFolloweeCollectionViewCell) {
+    func presentFoloweeForCell<T: BaseInfoShotsCollectionViewCell where T: AvatarSettable>(followee: Followee, cell: T) {
         if let avatarString = followee.avatarString {
             cell.avatarView.imageView.loadImageFromURLString(avatarString)
         } else {
             cell.avatarView.imageView.image = nil
         }
-        cell.userNameLabel.text = followee.name
-        cell.numberOfShotsLabel.text = "\(followee.shotsCount) shots"
+        cell.nameLabel.text = followee.name
+        cell.numberOfShotsLabel.text = followee.shotsCount == 1 ? "\(followee.shotsCount) shot" : "\(followee.shotsCount) shots"
     }
     
     func presentLargeShotImageForCell(shotImageUrl: NSURL?, cell: LargeFolloweeCollectionViewCell) {

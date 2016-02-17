@@ -15,7 +15,7 @@ class LikeQuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return LikeQuery(shotID: "fixture.identifier")
+            return LikeQuery(shot: Shot.fixtureShot())
         }) { Void -> QueryExpectation in
             return (method: .POST, encoding: .JSON, path: "/shots/fixture.identifier/like")
         }
@@ -25,7 +25,7 @@ class LikeQuerySpec: QuickSpec {
             var sut: LikeQuery!
             
             beforeEach {
-                sut = LikeQuery(shotID: "fixture.identifier")
+                sut = LikeQuery(shot: Shot.fixtureShot())
             }
 
             afterEach {

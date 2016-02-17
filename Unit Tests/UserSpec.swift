@@ -48,7 +48,7 @@ class UserSpec: QuickSpec {
             }
             
             it("user's id should be properly mapped") {
-                expect(sut.identifier).to(equal("fixture.id"))
+                expect(sut.identifier).to(equal("fixture.identifier"))
             }
             
             it("user's shots count should be properly mapped") {

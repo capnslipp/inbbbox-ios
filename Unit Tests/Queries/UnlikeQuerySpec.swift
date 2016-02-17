@@ -15,17 +15,17 @@ class UnlikeQuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return UnlikeQuery(shotID: "fixture.identifier")
+            return UnlikeQuery(shot: Shot.fixtureShot())
         }) { Void -> QueryExpectation in
             return (method: .DELETE, encoding: .JSON, path: "/shots/fixture.identifier/like")
         }
         
-        describe("when newly initialized with shot identifier") {
+        describe("when newly initialized with shot") {
             
             var sut: UnlikeQuery!
             
             beforeEach {
-                sut = UnlikeQuery(shotID: "fixture.identifier")
+                sut = UnlikeQuery(shot: Shot.fixtureShot())
             }
             
             afterEach {

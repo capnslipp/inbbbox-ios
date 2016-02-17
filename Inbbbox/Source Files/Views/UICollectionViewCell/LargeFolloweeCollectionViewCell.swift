@@ -8,15 +8,18 @@
 
 import UIKit
 
-class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable, WidthDependentHeight, FolloweeCellConfigurable {
+class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight, InfoShotsCellConfigurable, AvatarSettable {
     
     let shotImageView = UIImageView.newAutoLayoutView()
+    var avatarView: AvatarView!
+    let avatarSize = CGSize(width:16, height:16)
     private var didSetConstraints = false
     
     // MARK: - Lifecycle
     
     override func commonInit() {
         super.commonInit()
+        setupAvatar()
         setupShotsView()
     }
     
@@ -31,7 +34,16 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
         super.updateConstraints()
     }
     
-    // MARK: - Followee Cell Configurable
+    // MARK - Avatar settable
+    
+    func setupAvatar() {
+        avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
+        avatarView.imageView.backgroundColor = UIColor.backgroundGrayColor()
+        avatarView.configureForAutoLayout()
+        infoView.addSubview(avatarView)
+    }
+    
+    // MARK: - Info Shots Cell Configurable
     
     func setupShotsView() {
         shotImageView.backgroundColor = UIColor.followeeShotGrayColor()
@@ -47,12 +59,17 @@ class LargeFolloweeCollectionViewCell: BaseFolloweeCollectionViewCell, Reusable,
         avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: infoView, withOffset: 2)
         avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: infoView, withOffset: 10)
         
-        userNameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
-        userNameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
-        userNameLabel.autoPinEdge(.Right, toEdge: .Left, ofView: numberOfShotsLabel)
+        nameLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView)
+        nameLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 3)
+        nameLabel.autoPinEdge(.Right, toEdge: .Left, ofView: numberOfShotsLabel)
         
         numberOfShotsLabel.autoPinEdge(.Right, toEdge: .Right, ofView: infoView, withOffset: -2)
-        numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: userNameLabel)
+        numberOfShotsLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: nameLabel)
+    }
+    
+    func clearImages() {
+        avatarView.imageView.image = nil
+        shotImageView.image = nil
     }
     
     // MARK: - Reusable

@@ -15,7 +15,7 @@ typealias Follower = User
 private let FollowerSerializationKey = "follower"
 private let FolloweeSerializationKey = "followee"
 
-/// Provides interface for dribbble followers and followees API
+/// Provides interface for dribbble followers and followees read API
 class ConnectionsProvider: PageableProvider {
     
     /**

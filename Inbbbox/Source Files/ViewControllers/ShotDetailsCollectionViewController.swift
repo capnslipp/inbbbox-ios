@@ -19,7 +19,7 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     
     var localStorage = ShotsLocalStorage()
     var userStorageClass = UserStorage.self
-    var shotOperationRequesterClass =  ShotOperationRequester.self
+    var shotsRequesterClass =  ShotsRequester()
     
     private let commentsProvider = CommentsProvider(page: 1, pagination: 10)
     
@@ -292,7 +292,7 @@ extension ShotDetailsCollectionViewController: ShotDetailsHeaderViewDelegate {
         // NGRTemp: will be refactored
         if like {
             if self.userStorageClass.currentUser != nil {
-                let promise = self.shotOperationRequesterClass.likeShot(self.shot!.identifier)
+                let promise = self.shotsRequesterClass.likeShot(self.shot!)
                 if let _ = promise.error {
                     completion(operationSucceed: false)
                 }
@@ -314,7 +314,7 @@ extension ShotDetailsCollectionViewController: ShotDetailsHeaderViewDelegate {
             
             let unlikeAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Unlike", comment: ""), style: .Destructive) { action -> Void in
                 if self.userStorageClass.currentUser != nil {
-                    let promise = self.shotOperationRequesterClass.unlikeShot(self.shot!.identifier)
+                    let promise = self.shotsRequesterClass.unlikeShot(self.shot!)
                     if let _ = promise.error {
                         completion(operationSucceed: false)
                     }

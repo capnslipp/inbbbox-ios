@@ -131,7 +131,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
                         context("when user is signed in") {
 
-                            var capturedShotID: String!
+                            var capturedShot: Shot!
 
                             beforeEach {
                                 let userStorageMockClass = UserStorageMock.self
@@ -140,18 +140,18 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                                 }
                                 sut.userStorageClass = userStorageMockClass
 
-                                let shotOperationRequesterMockClass = ShotOperationRequesterMock.self
-                                shotOperationRequesterMockClass.likeShotStub.on(any()) { shotID in
-                                    capturedShotID = shotID
+                                let shotsRequesterMock = ShotsRequesterMock()
+                                shotsRequesterMock.likeShotStub.on(any()) { shot in
+                                    capturedShot = shot
                                     return Promise()
                                 }
-                                sut.shotOperationRequesterClass = shotOperationRequesterMockClass
+                                sut.shotsRequester = shotsRequesterMock
 
                                 cell.swipeCompletion?(.Like)
                             }
 
                             it("should like shot with proper ID") {
-                                expect(capturedShotID).to(equal("fixture.identifier"))
+                                expect(capturedShot.identifier).to(equal("fixture.identifier"))
                             }
                         }
                     }

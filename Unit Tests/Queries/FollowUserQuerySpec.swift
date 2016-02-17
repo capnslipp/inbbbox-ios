@@ -1,8 +1,8 @@
 //
-//  CommentQuerySpec.swift
+//  FollowUserQuerySpec.swift
 //  Inbbbox
 //
-//  Created by Patryk Kaczmarek on 10/02/16.
+//  Created by Patryk Kaczmarek on 16/02/16.
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
@@ -12,21 +12,21 @@ import Nimble
 
 @testable import Inbbbox
 
-class CommentQuerySpec: QuickSpec {
+class FollowUserQuerySpec: QuickSpec {
     override func spec() {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
-            return CommentQuery(shot: Shot.fixtureShot())
+            return FollowUserQuery(user: User.fixtureUser())
         }) { Void -> QueryExpectation in
-            return (method: .GET, encoding: .URL, path: "/shots/fixture.identifier/comments")
+            return (method: .PUT, encoding: .URL, path: "/users/fixture.identifier/follow")
         }
         
-        describe("when newly initialized with comment") {
+        describe("when newly initialized with user") {
             
-            var sut: CommentQuery!
+            var sut: FollowUserQuery!
             
             beforeEach {
-                sut = CommentQuery(shot: Shot.fixtureShot())
+                sut = FollowUserQuery(user: User.fixtureUser())
             }
             
             afterEach {

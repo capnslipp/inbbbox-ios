@@ -1,5 +1,5 @@
 {
-    "id" : "fixture.id",
+    "id" : "fixture.identifier",
     "name" : "fixture.name",
     "username" : "fixture.username",
     "avatar_url" : "fixture.avatar.url",
