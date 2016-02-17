@@ -27,7 +27,7 @@ class ShotDetailsOperationView: UIView {
     
     
     // Private Properties
-    private let buttonsSize = CGFloat(24)
+    private let buttonsSize = CGFloat(28)
     private var didUpdateConstraints = false
     private let defaultBackgroundColor = UIColor.RGBA(246, 248, 248, 1)
     
@@ -35,9 +35,9 @@ class ShotDetailsOperationView: UIView {
         didSet {
             // NGRTemp: temp images
             if shotLiked! {
-                likeButton.setBackgroundImage(UIImage(named: "ic-likes-active"), forState: .Normal)
+                likeButton.setImage(UIImage(named: "ic-like-details-active"), forState: .Normal)
             } else {
-                likeButton.setBackgroundImage(UIImage(named: "ic-likes"), forState: .Normal)
+                likeButton.setImage(UIImage(named: "ic-likes"), forState: .Normal)
             }
         }
     }
@@ -46,9 +46,9 @@ class ShotDetailsOperationView: UIView {
         didSet {
             // NGRTemp: temp images
             if shotInBuckets! {
-                bucketButton.setBackgroundImage(UIImage(named: "ic-likes-active"), forState: .Normal)
+                bucketButton.setImage(UIImage(named: "ic-bucket-details-active"), forState: .Normal)
             } else {
-                bucketButton.setBackgroundImage(UIImage(named: "ic-buckets"), forState: .Normal)
+                bucketButton.setImage(UIImage(named: "ic-bucket-details"), forState: .Normal)
             }
         }
     }
@@ -84,15 +84,15 @@ class ShotDetailsOperationView: UIView {
     override func updateConstraints() {
         
         let leftInset = CGFloat(83)
-        let distanceBetweenButtons = CGFloat(50)
+        let distanceBetweenButtons = CGFloat(30)
         
         if !didUpdateConstraints {
             
             likeButton.autoPinEdgeToSuperviewEdge(.Top)
-            likeButton.autoPinEdgeToSuperviewEdge(.Left, withInset: leftInset)
+            likeButton.autoAlignAxis(.Vertical, toSameAxisOfView: likeButton.superview!, withOffset: -(distanceBetweenButtons/2 + buttonsSize/2))
             likeButton.autoSetDimensionsToSize(CGSize(width: buttonsSize, height: buttonsSize))
             
-            bucketButton.autoPinEdge(.Left, toEdge: .Right, ofView: likeButton, withOffset: distanceBetweenButtons)
+            bucketButton.autoAlignAxis(.Vertical, toSameAxisOfView: likeButton.superview!, withOffset: distanceBetweenButtons/2 + buttonsSize/2)
             bucketButton.autoPinEdgeToSuperviewEdge(.Top)
             bucketButton.autoSetDimensionsToSize(CGSize(width: buttonsSize, height: buttonsSize))
             
@@ -111,13 +111,15 @@ class ShotDetailsOperationView: UIView {
     
     private func setupLikeButton() {
         // NGRTemp: temp image
-        likeButton.setBackgroundImage(UIImage(named: "ic-likes"), forState: .Normal)
+        likeButton.setImage(UIImage(named: "ic-likes"), forState: .Normal)
+        likeButton.contentMode = .ScaleAspectFit
         addSubview(likeButton)
     }
     
     private func setupBucketButton() {
         // NGRTemp: temp image
-        bucketButton.setBackgroundImage(UIImage(named: "ic-buckets"), forState: .Normal)
+        bucketButton.setImage(UIImage(named: "ic-bucket-details"), forState: .Normal)
+        likeButton.contentMode = .ScaleAspectFit
         addSubview(bucketButton)
     }
 }
