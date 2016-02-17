@@ -44,7 +44,6 @@ class ShotDetailsOperationView: UIView {
     
     private var shotInBuckets: Bool? {
         didSet {
-            // NGRTemp: temp images
             if shotInBuckets! {
                 bucketButton.setImage(UIImage(named: "ic-bucket-details-active"), forState: .Normal)
             } else {
@@ -83,7 +82,6 @@ class ShotDetailsOperationView: UIView {
     
     override func updateConstraints() {
         
-        let leftInset = CGFloat(83)
         let distanceBetweenButtons = CGFloat(30)
         
         if !didUpdateConstraints {
@@ -117,7 +115,6 @@ class ShotDetailsOperationView: UIView {
     }
     
     private func setupBucketButton() {
-        // NGRTemp: temp image
         bucketButton.setImage(UIImage(named: "ic-bucket-details"), forState: .Normal)
         likeButton.contentMode = .ScaleAspectFit
         addSubview(bucketButton)

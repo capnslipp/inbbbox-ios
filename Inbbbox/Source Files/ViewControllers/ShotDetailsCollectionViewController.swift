@@ -63,6 +63,7 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if indexPath.item < comments!.count {
             
+            // NGRTodo: refactor needed
             let cell = collectionView.dequeueReusableClass(ShotDetailsCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             let comment = comments![indexPath.item]
@@ -78,6 +79,7 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
                 comment: comment.body?.mutableCopy() as? NSMutableAttributedString ?? NSMutableAttributedString(),
                 time: dateFormatter.stringFromDate(comment.createdAt)
             )
+            cell.delegate = self
             
             return cell
         } else {
@@ -106,6 +108,16 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
             footer.delegate = self
             self.footer = footer
             return footer
+        }
+    }
+    
+    // MARK: UICollectionViewController Delegate
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotDetailsCollectionViewCell {
+            // NGRTodo: check if user can edit this comment (if it is user's comment)
+            // what is more, first you should hide editView on all cells
+            cell.showEditView()
         }
     }
     
@@ -153,10 +165,7 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
             )
             
             header = ShotDetailsHeaderView(viewData: viewData)
-
         }
-        
-        
     }
 }
 
@@ -236,7 +245,19 @@ extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
-        delegate?.didFinishPresentingDetails(self)
+       
+        if textField.text!.isEmpty == true {
+            
+            textField.resignFirstResponder()
+            
+            let cellCount = (comments != nil) ? comments!.count : 0
+            if cellCount >= changingHeaderStyleCommentsThreshold {
+                header.displayNormalVariant()
+            }
+            footer.displayNormalVariant()
+        } else {
+            delegate?.didFinishPresentingDetails(self)
+        }
         return true
     }
     
@@ -302,16 +323,24 @@ extension ShotDetailsCollectionViewController: ShotDetailsHeaderViewDelegate {
     }
 }
 
+extension ShotDetailsCollectionViewController: ShotDetailsCollectionViewCellDelegate {
+    
+    func shotDetailsCollectionViewCell(view: ShotDetailsCollectionViewCell, didTapCancelButton: UIButton) {
+        view.hideEditView()
+    }
+    
+    func shotDetailsCollectionViewCell(view: ShotDetailsCollectionViewCell, didTapDeleteButton: UIButton) {
+        // NGRTodo: Implement me!
+    }
+}
+
 extension ShotDetailsCollectionViewController: ShotDetailsLoadMoreCollectionViewCellDelegate {
     
     func shotDetailsLoadMoreCollectionViewCell(view: ShotDetailsLoadMoreCollectionViewCell, didTapLoadMoreButton: UIButton) {
-        // NGRTodo: implement me!
         firstly {
-            self.commentsProvider.nextPage()//provideCommentsForShot(shot!)
+            self.commentsProvider.nextPage()
         }.then { comments -> Void in
             self.appendCommentsAndUpdateCollectionView(comments! as [Comment], loadMoreCell: view)
-        }.then {
-            print("") // NGRTodo: check if `load more...` should be visible and update comments count if needed
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)
@@ -351,9 +380,9 @@ extension ShotDetailsCollectionViewController: ShotDetailsLoadMoreCollectionView
 
 extension ShotDetailsCollectionViewController: ShotDetailsFooterViewDelegate {
     func shotDetailsFooterView(view: ShotDetailsFooterView, didTapAddCommentButton: UIButton, forMessage message: String?) {
-        if message?.isEmpty == true {
-            footer.textField.becomeFirstResponder()
-        } else {
+        footer.textField.resignFirstResponder()
+        if message?.isEmpty == false {
+            // NGRTodo: begin process of sending comment and reloading collection view
             delegate?.didFinishPresentingDetails(self)
         }
     }

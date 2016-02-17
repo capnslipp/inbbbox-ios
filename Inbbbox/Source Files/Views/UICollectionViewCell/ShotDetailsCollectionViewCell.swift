@@ -8,9 +8,16 @@
 
 import UIKit
 
+@objc protocol ShotDetailsCollectionViewCellDelegate: class {
+    func shotDetailsCollectionViewCell(view: ShotDetailsCollectionViewCell, didTapCancelButton: UIButton)
+    func shotDetailsCollectionViewCell(view: ShotDetailsCollectionViewCell, didTapDeleteButton: UIButton)
+}
+
 class ShotDetailsCollectionViewCell: UICollectionViewCell {
     
     // Public
+    weak var delegate: ShotDetailsCollectionViewCellDelegate?
+    
     struct ViewData {
         let avatar: String
         let author: String
@@ -39,6 +46,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     private let comment = UILabel.newAutoLayoutView()
     private let time = UILabel.newAutoLayoutView()
     private let separatorLine = UIView.newAutoLayoutView()
+    private let editView = CommentEditView.newAutoLayoutView()
     
     // MARK: Life Cycle
     
@@ -46,12 +54,29 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.backgroundColor = UIColor.RGBA(255, 255, 255, 1)
         setupSubviews()
+        setupButtonsInteractions()
         setNeedsUpdateConstraints()
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Public methods
+    
+    func showEditView() {
+        // NGRTodo: add any animation?
+        addSubview(editView)
+        editView.autoPinEdge(.Left, toEdge: .Left, ofView: comment)
+        editView.autoPinEdge(.Right, toEdge: .Right, ofView: comment)
+        editView.autoPinEdge(.Top, toEdge: .Top, ofView: comment)
+        editView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: comment)
+    }
+    
+    func hideEditView() {
+        // NGRTodo: implement me!
+        editView.removeFromSuperview()
     }
     
     // MARK: UI
@@ -70,7 +95,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
             let authorHeight = CGFloat(20)
             let authorToTextDistance = CGFloat(3)
             let textToDateDistance = CGFloat(2)
-            let commentMinimumHeight = CGFloat(40)
+            let commentMinimumHeight = CGFloat(45)
             let timeToSeparatorDistance = CGFloat(10)
             let separatorLineHeight = CGFloat(1)
             let separatorLineRightInset = CGFloat(20)
@@ -141,6 +166,23 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     private func setupSeparatorLine() {
         separatorLine.backgroundColor = UIColor.RGBA(246, 248, 248, 1)
         contentView.addSubview(separatorLine)
+    }
+    
+    private func setupButtonsInteractions() {
+        editView.deleteButton.addTarget(self, action: "deleteButtonDidTap:", forControlEvents: .TouchUpInside)
+        editView.cancelButton.addTarget(self, action: "cancelButtonDidTap:", forControlEvents: .TouchUpInside)
+    }
+}
+
+// MARK: UI Interactions
+
+extension ShotDetailsCollectionViewCell {
+    dynamic private func deleteButtonDidTap(sender: UIButton) {
+        delegate?.shotDetailsCollectionViewCell(self, didTapDeleteButton: sender)
+    }
+    
+    dynamic private func cancelButtonDidTap(sender : UIButton) {
+        delegate?.shotDetailsCollectionViewCell(self, didTapCancelButton: sender)
     }
 }
 
