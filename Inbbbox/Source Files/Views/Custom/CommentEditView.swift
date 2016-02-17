@@ -92,15 +92,13 @@ class CommentEditView: UIView {
     }
     
     private func setupCancelButton() {
-        // NGRTemp: temp image
-        cancelButton.setImage(UIImage(named: "ic-likes-active"), forState: .Normal)
+        cancelButton.setImage(UIImage(named: "bt-cancel-comment"), forState: .Normal)
         cancelButton.contentMode = .ScaleAspectFit
         blurView.addSubview(cancelButton)
     }
     
     private func setupDeleteButton() {
-        // NGRTemp: temp image
-        deleteButton.setImage(UIImage(named: "ic-likes"), forState: .Normal)
+        deleteButton.setImage(UIImage(named: "bt-delete-comment"), forState: .Normal)
         deleteButton.contentMode = .ScaleAspectFit
         blurView.addSubview(deleteButton)
     }

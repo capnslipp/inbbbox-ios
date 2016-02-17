@@ -33,11 +33,10 @@ class ShotDetailsOperationView: UIView {
     
     private var shotLiked: Bool? {
         didSet {
-            // NGRTemp: temp images
             if shotLiked! {
                 likeButton.setImage(UIImage(named: "ic-like-details-active"), forState: .Normal)
             } else {
-                likeButton.setImage(UIImage(named: "ic-likes"), forState: .Normal)
+                likeButton.setImage(UIImage(named: "ic-like-details"), forState: .Normal)
             }
         }
     }
@@ -108,8 +107,7 @@ class ShotDetailsOperationView: UIView {
     }
     
     private func setupLikeButton() {
-        // NGRTemp: temp image
-        likeButton.setImage(UIImage(named: "ic-likes"), forState: .Normal)
+        likeButton.setImage(UIImage(named: "ic-like-details"), forState: .Normal)
         likeButton.contentMode = .ScaleAspectFit
         addSubview(likeButton)
     }
