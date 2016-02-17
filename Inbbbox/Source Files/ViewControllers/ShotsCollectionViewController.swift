@@ -116,11 +116,10 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
         definesPresentationContext = true
 
-        let shotDetailsVC = ShotDetailsViewController()
-        shotDetailsVC.modalPresentationStyle = .OverCurrentContext
-        shotDetailsVC.delegate = self
-
-        viewControllerPresenter.presentViewController(shotDetailsVC, animated: true, completion: nil)
+        let shotDetailsCollectionViewController = ShotDetailsCollectionViewController(shot: shots[indexPath.item])
+        shotDetailsCollectionViewController.modalPresentationStyle = .OverCurrentContext
+        shotDetailsCollectionViewController.delegate = self
+        tabBarController?.presentViewController(shotDetailsCollectionViewController, animated: true, completion: nil)
     }
 
     // MARK: UIScrollViewDelegate
@@ -143,9 +142,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     func configureInitialSettings() {
         // NGRTemp: - I wonder if there is a better place to configure initial settings other than this view controller
-        Settings.StreamSource.NewToday = true
+        Settings.StreamSource.NewToday = false
         Settings.StreamSource.PopularToday = true
-        Settings.StreamSource.Debuts = true
+        Settings.StreamSource.Debuts = false
     }
 }
 
@@ -160,10 +159,9 @@ extension ShotsCollectionViewController: ShotsAnimatorDelegate {
     }
 }
 
-extension ShotsCollectionViewController: ShotDetailsViewControllerDelegate {
-
-    func didFinishPresentingDetails(sender: ShotDetailsViewController) {
-        viewControllerPresenter.dismissViewControllerAnimated(true, completion: nil)
+extension ShotsCollectionViewController: ShotDetailsCollectionViewControllerDelegate {
+    func didFinishPresentingDetails(sender: ShotDetailsCollectionViewController) {
+        sender.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

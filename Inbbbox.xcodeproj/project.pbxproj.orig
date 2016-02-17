@@ -108,8 +108,6 @@
 		5E91A63B1C73822300C9D609 /* FollowUserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A63A1C73822300C9D609 /* FollowUserQuerySpec.swift */; };
 		5E91A63D1C73822C00C9D609 /* UnfollowUserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */; };
 		5E91A63F1C7390F200C9D609 /* ConnectionsRequesterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A63E1C7390F200C9D609 /* ConnectionsRequesterSpec.swift */; };
-		5E91A6411C73D44200C9D609 /* APIRateLimitKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A6401C73D44200C9D609 /* APIRateLimitKeeper.swift */; };
-		5E91A6431C7494D100C9D609 /* APIRateLimitKeeperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E91A6421C7494D100C9D609 /* APIRateLimitKeeperSpec.swift */; };
 		5EADE3AB1C6B61D100B03DAD /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADE3AA1C6B61D100B03DAD /* Comment.swift */; };
 		5EADE3B11C6B7CE700B03DAD /* CommentQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADE3B01C6B7CE700B03DAD /* CommentQuery.swift */; };
 		5EADE3B31C6B7E5F00B03DAD /* CommentsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EADE3B21C6B7E5F00B03DAD /* CommentsProvider.swift */; };
@@ -390,8 +388,6 @@
 		5E91A63A1C73822300C9D609 /* FollowUserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowUserQuerySpec.swift; sourceTree = "<group>"; };
 		5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnfollowUserQuerySpec.swift; sourceTree = "<group>"; };
 		5E91A63E1C7390F200C9D609 /* ConnectionsRequesterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionsRequesterSpec.swift; sourceTree = "<group>"; };
-		5E91A6401C73D44200C9D609 /* APIRateLimitKeeper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRateLimitKeeper.swift; sourceTree = "<group>"; };
-		5E91A6421C7494D100C9D609 /* APIRateLimitKeeperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRateLimitKeeperSpec.swift; sourceTree = "<group>"; };
 		5EADE3AA1C6B61D100B03DAD /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		5EADE3B01C6B7CE700B03DAD /* CommentQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentQuery.swift; sourceTree = "<group>"; };
 		5EADE3B21C6B7E5F00B03DAD /* CommentsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsProvider.swift; sourceTree = "<group>"; };
@@ -785,7 +781,6 @@
 				5EADE3B81C6B843200B03DAD /* CommentsProviderSpec.swift */,
 				5E12C3621C73480E003C6B48 /* CommentsRequesterSpec.swift */,
 				5EEEC9B01C71E58500BB7237 /* ProjectsProviderSpec.swift */,
-				5E91A6421C7494D100C9D609 /* APIRateLimitKeeperSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -935,10 +930,13 @@
 				745146951C5235D600710C61 /* BucketCollectionViewCell.swift */,
 				74A6C67D1C57C8F6009BDD75 /* LikeCollectionViewCell.swift */,
 				749B578E1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift */,
-				7454E6CC1C636865009313FC /* BaseInfoShotsCollectionViewCell.swift */,
+<<<<<<< HEAD
 				7454E6CC1C636865009313FC /* BaseFolloweeCollectionViewCell.swift */,
 				30CA57511C64B6DE008D6BEB /* ShotDetailsCollectionViewCell.swift */,
 				F0F501061C731F8D00E8959E /* ShotDetailsLoadMoreCollectionViewCell.swift */,
+=======
+				7454E6CC1C636865009313FC /* BaseInfoShotsCollectionViewCell.swift */,
+>>>>>>> master
 			);
 			path = UICollectionViewCell;
 			sourceTree = "<group>";
@@ -1105,7 +1103,6 @@
 			children = (
 				5E4857C31C2854F80027B38A /* Queries */,
 				BF6A6E151C1F0211001EDAB8 /* DribbbleNetworkService.swift */,
-				5E91A6401C73D44200C9D609 /* APIRateLimitKeeper.swift */,
 				BF6961211C1B4805000FC5D8 /* HeaderAuthorizable.swift */,
 				BF6961191C1B443E000FC5D8 /* NetworkService.swift */,
 				BF69611B1C1B4551000FC5D8 /* Parameters.swift */,
@@ -1489,8 +1486,11 @@
 				7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */,
 				F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
-				5E91A6371C73802300C9D609 /* FollowUserQuery.swift in Sources */,
+<<<<<<< HEAD
 				F0F501031C70E40A00E8959E /* ShotDescriptionView.swift in Sources */,
+=======
+				5E91A6371C73802300C9D609 /* FollowUserQuery.swift in Sources */,
+>>>>>>> master
 				F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */,
 				F092E25F1C3FD47200593D18 /* ShotManagedObject.swift in Sources */,
 				5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */,
@@ -1559,9 +1559,11 @@
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */,
 				F07B598E1C3FF02000F5CB86 /* AddToBucketQuery.swift in Sources */,
-				5E91A6411C73D44200C9D609 /* APIRateLimitKeeper.swift in Sources */,
-				5E12C3651C734B46003C6B48 /* ConnectionsRequester.swift in Sources */,
+<<<<<<< HEAD
 				305441A81C65F093005B9149 /* AuthorDetailsView.swift in Sources */,
+=======
+				5E12C3651C734B46003C6B48 /* ConnectionsRequester.swift in Sources */,
+>>>>>>> master
 				5ED6C5B71C5787ED00A591EA /* FolloweesQuery.swift in Sources */,
 				7488EBB31C71D96A00C34907 /* AvatarSettable.swift in Sources */,
 				5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */,
@@ -1666,7 +1668,6 @@
 				F08831011C43CE0D00F530A2 /* ShotOperationHistoryStorageSpec.swift in Sources */,
 				FF13AB2E8D72A9EDF7DB081C /* AsyncWrapperMock.swift in Sources */,
 				5EDB832B1C48DECE00FBCA05 /* UserQuerySpec.swift in Sources */,
-				5E91A6431C7494D100C9D609 /* APIRateLimitKeeperSpec.swift in Sources */,
 				5EADE3BB1C6B960000B03DAD /* CommentQuerySpec.swift in Sources */,
 				5EDB832A1C48DECE00FBCA05 /* UnlikeQuerySpec.swift in Sources */,
 				5E12C3691C734FF4003C6B48 /* ShotsRequesterSpec.swift in Sources */,

@@ -6,82 +6,89 @@
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-@objc protocol ShotDetailsTableViewHeaderViewDelegate: class {
+@objc protocol ShotDetailsHeaderViewDelegate: class {
     func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapCloseButton: UIButton)
     optional func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapAuthor: String)
     optional func shotDetailsHeaderView(view: ShotDetailsHeaderView, didTapClient: String)
+    optional func shotDetailsHeaderViewDidTapLikeButton(like: Bool, completion: (operationSucceed: Bool) -> Void)
 }
 
-class ShotDetailsHeaderView: UIView {
-    
-    struct ViewData {
-        let description: String
-        let title: String
-        let author: String
-        let client: String
-        let shotInfo: String
-        let shot: UIImage
-        let avatar: UIImage
-    }
+class ShotDetailsHeaderView: UICollectionReusableView {
     
     // Public
+    struct ViewData {
+        let description: NSMutableAttributedString?
+        let title: String
+        let author: String
+        let client: String?
+        let shotInfo: String
+        let shot: String
+        let avatar: String
+        let shotLiked: Bool
+        let shotInBuckets: Bool
+    }
+    
     var viewData: ViewData? {
         didSet {
-            shotDescriptionView.text = viewData?.description
-            titleLabel.text = viewData?.title
-            authorButton.setTitle(viewData?.author, forState: .Normal)
-            clientButton.setTitle(viewData?.client, forState: .Normal)
-            shotInfoLabel.text = viewData?.shotInfo
-            shotImageView.updateWith((viewData?.shot)!, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius), frame: CGRectZero)
-            avatarView.updateWith((viewData?.avatar)!, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight], radius: CGFloat(avatarSize / 2), frame: CGRectZero)
+            shotDescriptionView.descriptionText = viewData?.description ?? NSMutableAttributedString(string: "There is no decription")
+            shotImageView.updateWith((viewData?.shot)!, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius))
+            authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: (viewData?.avatar)!,
+                title: (viewData?.title)!,
+                author: (viewData?.author)!,
+                client: viewData?.client,
+                shotInfo: (viewData?.shotInfo)!
+            )
+            shotDetailsOperationView.viewData = ShotDetailsOperationView.ViewData(
+                shotLiked: viewData!.shotLiked,
+                shotInBuckets: viewData!.shotInBuckets)
+            
+            setupButtonsInteractions()
         }
     }
     
-    weak var delegate: ShotDetailsTableViewHeaderViewDelegate?
+    weak var delegate: ShotDetailsHeaderViewDelegate?
     
     // Private Properties
     private var didUpdateConstraints = false
     private let imageViewCornerRadius = 15
     private var shouldDisplayCompactVariant = false
     private let animationDuration: NSTimeInterval = 0.4
-    private let avatarSize = 48
     
-    // Colors & Fonts
+    // Contraints values
+    private let topInset = CGFloat(30)
+    private let shotImageNormalHeight = CGFloat(267)
+    private let shotImageCompactHeight = CGFloat(70)
+    private let authorDetailsViewNormalHeight = CGFloat(100)
+    private let authorDetailsViewCompactHeight = CGFloat(70)
+    private let shotDetailsOperationViewHeight = CGFloat(40)
+    
+    
+    // Colors
     private let headerBackgroundColor = UIColor(red:0.964, green:0.972, blue:0.972, alpha:1)
-    private let linkColor = UIColor(red:0.941, green:0.215, blue:0.494, alpha:1)
-    private let detailsFont = UIFont.helveticaFont(.Neue, size: 13)
     
     // Private UI Components
     private let shotImageView = RoundedImageView(forAutoLayout: ())
-    private let avatarView = RoundedImageView(forAutoLayout: ())
+    private let authorDetailsView = AuthorDetailsView.newAutoLayoutView()
     private let closeButton = UIButton(type: .System)
-    private let titleLabel = UILabel(forAutoLayout: ())
-    private let authorPrefixLabel = UILabel(forAutoLayout: ())
-    private let authorButton = UIButton(forAutoLayout: ())
-    private let clientPrefixLabel = UILabel(forAutoLayout: ())
-    private let clientButton = UIButton(forAutoLayout: ())
-    private var shotInfoLabel = UILabel(forAutoLayout: ())
-    private let shotDescriptionView = UITextView(forAutoLayout: ())
+    private var shotDescriptionView = ShotDescriptionView.newAutoLayoutView()
+    private let shotDetailsOperationView = ShotDetailsOperationView.newAutoLayoutView()
     
     // Constraints
-    private var groupInfoTopConstraint: NSLayoutConstraint?
-    private var shotImageTopConstraint: NSLayoutConstraint?
-    private var avatarViewTopConstraint: NSLayoutConstraint?
-    private var titleLabelTopConstraint: NSLayoutConstraint?
-    private var authorPrefixLabelTopConstraint: NSLayoutConstraint?
-    private var authorButtonTopConstraint: NSLayoutConstraint?
-    private var clientPrefixTopConstraint: NSLayoutConstraint?
-    private var clientButtonTopConstraint: NSLayoutConstraint?
-    private var shotInfoLabelTopConstraint: NSLayoutConstraint?
+    private var shotImageHeightConstraint: NSLayoutConstraint?
+    private var authorDetailsViewHeightConstaint: NSLayoutConstraint?
+    private var authorDetailsTopToShotImageBottom: NSLayoutConstraint?
+    private var authorDetailsTopToSuperviewEdge: NSLayoutConstraint?
+    private var shotOperationToAuthorDetailsBottom: NSLayoutConstraint?
+    private var shotDescriptionTopToShotOperationDetailsBottom: NSLayoutConstraint?
+    private var shotDescriptionToSuperviewEdge: NSLayoutConstraint?
     
     // MARK: Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = headerBackgroundColor
+        backgroundColor = UIColor.clearColor()
         setupSubviews()
     }
 
@@ -91,6 +98,11 @@ class ShotDetailsHeaderView: UIView {
     }
     
     // MARK: Public
+    
+    func updateLikeButton(shotLiked shotLiked: Bool) {
+        shotDetailsOperationView.updateLikeButton(liked: shotLiked)
+    }
+    
     func displayCompactVariant() {
         animateLayoutWithRegularAnimation()
     }
@@ -101,103 +113,50 @@ class ShotDetailsHeaderView: UIView {
     
     // MARK: UI
     
+    override func intrinsicContentSize() -> CGSize {
+        if shouldDisplayCompactVariant {
+            return CGSize(width: UIScreen.mainScreen().bounds.width, height: topInset + shotImageCompactHeight)
+        } else {
+            // NGRFix: `shotDescriptionView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height` is improperly calculated
+            return CGSize(width: UIScreen.mainScreen().bounds.width, height: topInset + shotDetailsOperationViewHeight + shotImageNormalHeight + authorDetailsViewNormalHeight + shotDescriptionView.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height)
+        }
+    }
+    
     class override func requiresConstraintBasedLayout() -> Bool {
         return true
     }
     
     override func updateConstraints() {
+        let leftAndRightMargin = CGFloat(10)
+        let closeButtonRightMargin = CGFloat(-5)
+        let closeButtonTopMargin = CGFloat(5)
         
-        let shotImageCompactHeight: CGFloat = 100
-        let shotImageNormalHeight: CGFloat = 267
-        
-        let avatarViewAndTitleLabelCompactHeight: CGFloat = 25
-        let avatarViewNormalHeight: CGFloat = 299
-        let titleLabelNormalHeight: CGFloat = 297
-        
-        let authorAndClientCompactHeight: CGFloat = avatarViewAndTitleLabelCompactHeight + 20
-        let authorAndClientNormalHeight: CGFloat = 319
-        let spacingBetweenLabelsAndButtons: CGFloat = 2
-        
-        let shotInfoLabelNormalHeight: CGFloat = 348
-        let shotInfoLabelCompactHeight: CGFloat = authorAndClientCompactHeight + 30
         
         if !didUpdateConstraints {
-            
-            shotImageView.autoPinEdgeToSuperviewEdge(.Top)
-            shotImageTopConstraint = shotImageView.autoSetDimension(.Height, toSize: 267)
-            
-            closeButton.autoPinEdgeToSuperviewEdge(.Right, withInset: 15)
-            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset: 5)
-            
-            avatarView.autoSetDimensionsToSize(CGSize(width: avatarSize, height: avatarSize))
-            avatarView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset: 20)
-            avatarViewTopConstraint = avatarView.autoPinEdgeToSuperviewEdge(.Top, withInset: avatarViewNormalHeight)
-            let avatarToTextDetailsDistance: CGFloat = 15
-            
-            titleLabelTopConstraint = titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: titleLabelNormalHeight)
-            authorPrefixLabelTopConstraint = authorPrefixLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: authorAndClientNormalHeight)
-            shotInfoLabelTopConstraint = shotInfoLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: shotInfoLabelNormalHeight)
-            
-            // Pin views in array to avatarView
-            let views = [titleLabel, authorPrefixLabel, shotInfoLabel]
-            for view in views {
-                view.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: avatarToTextDetailsDistance)
-            }
-
-            authorButton.autoPinEdge(.Left, toEdge: .Right, ofView: authorPrefixLabel, withOffset: spacingBetweenLabelsAndButtons)
-            authorButtonTopConstraint = authorButton.autoPinEdgeToSuperviewEdge(.Top, withInset: authorAndClientNormalHeight)
-            authorButton.autoMatchDimension(.Height, toDimension: .Height, ofView: authorPrefixLabel)
-            
-            clientPrefixLabel.autoPinEdge(.Left, toEdge: .Right, ofView: authorButton, withOffset: spacingBetweenLabelsAndButtons)
-            clientPrefixTopConstraint = clientPrefixLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: authorAndClientNormalHeight)
-            
-            clientButton.autoPinEdge(.Left, toEdge: .Right, ofView: clientPrefixLabel, withOffset: spacingBetweenLabelsAndButtons)
-            clientButtonTopConstraint = clientButton.autoPinEdgeToSuperviewEdge(.Top, withInset: authorAndClientNormalHeight)
-            clientButton.autoMatchDimension(.Height, toDimension: .Height, ofView: clientPrefixLabel)
-
-            shotDescriptionView.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 28)
-            shotDescriptionView.autoPinEdgeToSuperviewEdge(.Left)
-            shotDescriptionView.autoPinEdgeToSuperviewEdge(.Right)
-            shotDescriptionView.sizeToFit()
-            
-            let leftAndRightMargin: CGFloat = 10
+            shotImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: topInset).autoIdentify("[shotImageView] .Top = \(topInset)")
             shotImageView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
             shotImageView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
+            shotImageHeightConstraint =  shotImageView.autoSetDimension(.Height, toSize: shotImageNormalHeight).autoIdentify("[shotImageView] .Height = \(shotImageNormalHeight)")
+            
+            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: shotImageView, withOffset:closeButtonRightMargin)
+            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: shotImageView, withOffset: closeButtonTopMargin)
+            
+            authorDetailsTopToShotImageBottom = authorDetailsView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotImageView)
+            authorDetailsView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
+            authorDetailsView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
+            authorDetailsViewHeightConstaint = authorDetailsView.autoSetDimension(.Height, toSize: authorDetailsViewNormalHeight)
+            
+            shotOperationToAuthorDetailsBottom = shotDetailsOperationView.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorDetailsView)
+            shotDetailsOperationView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
+            shotDetailsOperationView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
+            shotDetailsOperationView.autoSetDimension(.Height, toSize: shotDetailsOperationViewHeight)
+            
+            shotDescriptionTopToShotOperationDetailsBottom = shotDescriptionView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotDetailsOperationView)
+            shotDescriptionView.autoPinEdgeToSuperviewEdge(.Bottom)
+            shotDescriptionView.autoPinEdgeToSuperviewEdge(.Left, withInset: leftAndRightMargin)
+            shotDescriptionView.autoPinEdgeToSuperviewEdge(.Right, withInset: leftAndRightMargin)
             
             didUpdateConstraints = true
-        }
-        
-        // Animations
-        let groupConstraintsOfAuthorAndClient = [authorPrefixLabelTopConstraint,
-            authorButtonTopConstraint,
-            clientPrefixTopConstraint,
-            clientButtonTopConstraint,
-            shotInfoLabelTopConstraint
-        ]
-        
-        if shouldDisplayCompactVariant == true {
-            shotImageTopConstraint?.constant = shotImageCompactHeight
-            avatarViewTopConstraint?.constant = avatarViewAndTitleLabelCompactHeight
-            titleLabelTopConstraint?.constant = avatarViewAndTitleLabelCompactHeight
-            
-            for constraint in groupConstraintsOfAuthorAndClient {
-                constraint?.constant = authorAndClientCompactHeight
-            }
-            
-            shotInfoLabelTopConstraint?.constant = shotInfoLabelCompactHeight
-            shotDescriptionView.alpha = 0
-        }
-        else {
-            shotImageTopConstraint?.constant = shotImageNormalHeight
-            avatarViewTopConstraint?.constant = avatarViewNormalHeight
-            titleLabelTopConstraint?.constant = titleLabelNormalHeight
-            
-            for constraint in groupConstraintsOfAuthorAndClient {
-                constraint?.constant = authorAndClientNormalHeight
-            }
-            
-            shotInfoLabelTopConstraint?.constant = shotInfoLabelNormalHeight
-            shotDescriptionView.alpha = 1.0
         }
         
         super.updateConstraints()
@@ -213,7 +172,57 @@ class ShotDetailsHeaderView: UIView {
     
         UIView.animateWithDuration(animationDuration, delay: 0, options: UIViewAnimationOptions(),
             animations: { () -> Void in
-            self.layoutIfNeeded()
+                
+                // Animations
+                if self.shouldDisplayCompactVariant {
+                    
+                    // ShotImage
+                    self.shotImageHeightConstraint?.constant = self.shotImageCompactHeight
+                    self.shotImageView.updateFitting(.ScaleAspectFill)
+                    self.shotImageView.useDimness(true)
+                    
+                    // AuthorDetails
+                    self.authorDetailsTopToShotImageBottom?.autoRemove()
+                    self.authorDetailsTopToSuperviewEdge = self.authorDetailsView.autoPinEdgeToSuperviewEdge(.Top, withInset: self.topInset)
+                    self.shotDescriptionTopToShotOperationDetailsBottom?.autoRemove()
+                    self.shotDescriptionToSuperviewEdge = self.shotDescriptionView.autoPinEdgeToSuperviewEdge(.Top)
+                    
+                    self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewCompactHeight
+                    self.authorDetailsView.displayAuthorDetailsInCompactSize()
+                    
+                    self.shotOperationToAuthorDetailsBottom?.autoRemove()
+                    
+                    self.authorDetailsView.backgroundColor = UIColor.clearColor()
+                    self.authorDetailsView.hideShotInfoLabel()
+                    self.authorDetailsView.setTextColor(UIColor.whiteColor())
+                    self.shotDescriptionView.hidden = true
+                    self.shotDetailsOperationView.hidden = true
+                } else {
+                    
+                    // NGRFix: this doesn't work properly - needs to be fixed
+                    // ShotImage
+                    self.shotImageHeightConstraint?.constant = self.shotImageNormalHeight
+                    self.shotImageView.updateFitting(.ScaleAspectFit)
+                    self.shotImageView.useDimness(true)
+                    
+                    // AuthorDetails
+                    self.authorDetailsTopToSuperviewEdge?.autoRemove()
+                    self.authorDetailsTopToShotImageBottom?.autoInstall()
+                    self.shotDescriptionToSuperviewEdge?.autoRemove()
+                    self.shotDescriptionTopToShotOperationDetailsBottom?.autoInstall()
+                    
+                    self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewNormalHeight
+                    self.authorDetailsView.displayAuthorDetailsInNormalSize()
+                    
+                    self.shotOperationToAuthorDetailsBottom?.autoInstall()
+                    
+                    self.authorDetailsView.setDefaultTextColor()
+                    self.authorDetailsView.setDefaultBackgrounColor()
+                    self.authorDetailsView.showShotInfoLabel()
+                    self.shotDescriptionView.hidden = false
+                    self.shotDetailsOperationView.hidden = false
+                }
+                self.layoutIfNeeded()
             },
             completion: nil
         )
@@ -221,28 +230,18 @@ class ShotDetailsHeaderView: UIView {
     
     private func setupSubviews() {
         setupShotImageView()
+        setupAuthorDetailsView()
         setupCloseButton()
-        setupAvatarView()
-        setupTitleLabel()
-        setupPrefixAndAuthor()
-        setupPrefixAndClient()
-        setupShotInfoLabel()
         setupShotDescriptionView()
+        setupShotDetailsOperationView()
     }
     
-    private func setupAvatarView() {
-        avatarView.configureForAutoLayout()
-        addSubview(avatarView)
-    }
-    
-    private func setupTitleLabel() {
-        titleLabel.font = UIFont.helveticaFont(.NeueMedium, size: 17)
-        titleLabel.textColor = UIColor(red:0.2, green:0.2, blue:0.2, alpha:1)
-        addSubview(titleLabel)
+    private func setupAuthorDetailsView() {
+        addSubview(authorDetailsView)
     }
     
     private func setupShotImageView() {
-        shotImageView.configureForAutoLayout()
+        shotImageView.contentMode = .ScaleAspectFit
         addSubview(shotImageView)
     }
     
@@ -253,64 +252,54 @@ class ShotDetailsHeaderView: UIView {
         addSubview(closeButton)
     }
     
-    private func setupPrefixAndAuthor() {
-        let prefix = "by"
-        authorPrefixLabel.text = prefix
-        authorPrefixLabel.font = detailsFont
-        addSubview(authorPrefixLabel)
-        
-        authorButton.titleLabel?.font = detailsFont
-        authorButton.setTitleColor(linkColor, forState: .Normal)
-        authorButton.addTarget(self, action: "authorButtonDidTap:", forControlEvents: .TouchUpInside)
-        addSubview(authorButton)
-    }
-    
-    private func setupPrefixAndClient() {
-        let prefix = "for"
-        clientPrefixLabel.text = prefix
-        clientPrefixLabel.font = detailsFont
-        addSubview(clientPrefixLabel)
-        
-        clientButton.titleLabel?.font = detailsFont
-        clientButton.setTitleColor(linkColor, forState: .Normal)
-        clientButton.addTarget(self, action: "clientButtonDidTap:", forControlEvents: .TouchUpInside)
-        addSubview(clientButton)
-    }
-    
-    private func setupShotInfoLabel() {
-        shotInfoLabel.font = detailsFont
-        shotInfoLabel.textColor = UIColor(red:0.427, green:0.427, blue:0.447, alpha:1)
-        addSubview(shotInfoLabel)
-    }
-    
     private func setupShotDescriptionView() {
-        shotDescriptionView.font = UIFont.helveticaFont(.Neue, size: 15)
-        shotDescriptionView.textColor = UIColor(red: 0.3522, green: 0.3513, blue: 0.3722, alpha: 1.0 )
-        shotDescriptionView.backgroundColor = UIColor(red: 0.9999, green: 1.0, blue: 0.9998, alpha: 1.0 )
-        shotDescriptionView.scrollEnabled = false
-        shotDescriptionView.editable = false
-        shotDescriptionView.selectable = false
-        shotDescriptionView.textContainerInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         addSubview(shotDescriptionView)
+    }
+    
+    private func setupShotDetailsOperationView() {
+        addSubview(shotDetailsOperationView)
+    }
+    
+    private func setupButtonsInteractions() {
+        authorDetailsView.authorButton.addTarget(self, action: "authorButtonDidTap:", forControlEvents: .TouchUpInside)
+        authorDetailsView.clientButton.addTarget(self, action: "clientButtonDidTap:", forControlEvents: .TouchUpInside)
+        shotDetailsOperationView.likeButton.addTarget(self, action: "likeButtonDidTap:", forControlEvents: .TouchUpInside)
     }
 }
 
 // MARK: UI Interactions
 
 extension ShotDetailsHeaderView {
-    @objc private func closeButtonDidTap(sender: UIButton) {
-         delegate?.shotDetailsHeaderView(self, didTapCloseButton: sender)
+    dynamic private func closeButtonDidTap(sender: UIButton) {
+        delegate?.shotDetailsHeaderView(self, didTapCloseButton: sender)
     }
     
-    @objc private func authorButtonDidTap(sender: UIButton) {
+    dynamic private func authorButtonDidTap(_: UIButton) {
         // NGRTodo: consider replacing it with authorID
         let authorLink = viewData?.author ?? ""
         delegate?.shotDetailsHeaderView?(self, didTapAuthor: authorLink)
     }
     
-    @objc private func clientButtonDidTap(sender: UIButton) {
+    dynamic private func clientButtonDidTap(_: UIButton) {
         // NGRTodo: consider replacing it with clientID
         let clientLink = viewData?.client ?? ""
-        delegate?.shotDetailsHeaderView?(self, didTapAuthor: clientLink)
+        delegate?.shotDetailsHeaderView?(self, didTapClient: clientLink)
+    }
+    
+    // NGRTemp:
+    dynamic private func likeButtonDidTap(_: UIButton) {
+        delegate?.shotDetailsHeaderViewDidTapLikeButton?(!shotDetailsOperationView.isShotLiked()){ operationSucceed -> Void in
+            if operationSucceed {
+                self.shotDetailsOperationView.updateLikeButton(liked: !self.shotDetailsOperationView.isShotLiked())
+            }
+        }
+    }
+}
+
+// MARK: Reusable
+
+extension ShotDetailsHeaderView: Reusable {
+    class var reuseIdentifier: String {
+        return String(ShotDetailsHeaderView)
     }
 }
