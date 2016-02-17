@@ -124,6 +124,9 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     // MARK: Private
     
     private func setupSubviews() {
+        
+        setupHeaderView()
+        
         // Backgrounds
         view.backgroundColor = UIColor.clearColor()
         
@@ -141,18 +144,31 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         collectionView?.registerClass(ShotDetailsFooterView.self, type: .Footer)
         
         
-        // NGRTodo: move somewhere
+    }
+    
+    private func setupHeaderView() {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
         
         if self.userStorageClass.currentUser != nil {
             // NGRFixme: call API for `Check if you like a shot`
+            header.viewData = ShotDetailsHeaderView.ViewData(
+                description: self.shot!.description?.mutableCopy() as? NSMutableAttributedString,
+                title: self.shot!.title!,
+                author: self.shot!.user.name ?? self.shot!.user.username,
+                client: self.shot!.team?.name,
+                shotInfo: dateFormatter.stringFromDate(self.shot!.createdAt),
+                shot: self.shot!.image.normalURL.absoluteString,
+                avatar: self.shot!.user.avatarString!,
+                shotLiked: true, // NGRTodo: provide this info
+                shotInBuckets: true // NGRTodo: provide this info
+            )
         } else {
             let shotIsLiked = localStorage.likedShots.contains{
                 $0.id == self.shot?.identifier
             }
-            let viewData = ShotDetailsHeaderView.ViewData(
+            header.viewData = ShotDetailsHeaderView.ViewData(
                 description: shot!.description?.mutableCopy() as? NSMutableAttributedString,
                 title: shot!.title!,
                 author: shot!.user.name ?? shot!.user.username,
@@ -163,8 +179,6 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
                 shotLiked:  shotIsLiked,
                 shotInBuckets: true // NGRTodo: provide this info
             )
-            
-            header = ShotDetailsHeaderView(viewData: viewData)
         }
     }
 }

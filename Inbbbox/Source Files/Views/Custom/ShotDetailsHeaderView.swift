@@ -32,7 +32,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
     var viewData: ViewData? {
         didSet {
-            
             shotDescriptionView.descriptionText = viewData?.description ?? NSMutableAttributedString(string: "There is no decription")
             shotImageView.updateWith((viewData?.shot)!, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius))
             authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: (viewData?.avatar)!,
@@ -44,6 +43,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             shotDetailsOperationView.viewData = ShotDetailsOperationView.ViewData(
                 shotLiked: viewData!.shotLiked,
                 shotInBuckets: viewData!.shotInBuckets)
+            
             setupButtonsInteractions()
         }
     }
@@ -90,18 +90,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         super.init(frame: frame)
         backgroundColor = UIColor.clearColor()
         setupSubviews()
-    }
-    
-    convenience init(viewData: ViewData) {
-        self.init()
-        
-        backgroundColor = UIColor.clearColor()
-        
-        self.viewData = viewData
-        
-        setupSubviews()
-        setupButtonsInteractions()
-        
     }
 
     @available(*, unavailable, message="Use init(withImage: UIImage) method instead")
