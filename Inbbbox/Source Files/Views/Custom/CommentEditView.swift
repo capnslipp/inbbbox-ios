@@ -10,7 +10,6 @@ import UIKit
 
 class CommentEditView: UIView {
     
-    
     // Private Properties
     private var didUpdateConstraints = false
     private let topInset = CGFloat(10)
@@ -116,5 +115,4 @@ class CommentEditView: UIView {
         deleteLabel.text = NSLocalizedString("Delete", comment: "")
         blurView.addSubview(deleteLabel)
     }
-    
 }
