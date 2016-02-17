@@ -72,7 +72,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let shotImageView = RoundedImageView(forAutoLayout: ())
     private let authorDetailsView = AuthorDetailsView.newAutoLayoutView()
     private let closeButton = UIButton(type: .System)
-    private var shotDescriptionView = ShotDescriptionView.newAutoLayoutView()//UILabel(forAutoLayout: ())
+    private var shotDescriptionView = ShotDescriptionView.newAutoLayoutView()
     private let shotDetailsOperationView = ShotDetailsOperationView.newAutoLayoutView()
     
     // Constraints
@@ -192,15 +192,14 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     
                     self.shotOperationToAuthorDetailsBottom?.autoRemove()
                     
-                    UIView.animateWithDuration(self.animationDuration) {
-                        self.authorDetailsView.backgroundColor = UIColor.clearColor()
-                        self.authorDetailsView.hideShotInfoLabel()
-                        self.authorDetailsView.setTextColor(UIColor.whiteColor())
-                        self.shotDescriptionView.hidden = true
-                        self.shotDetailsOperationView.hidden = true
-                    }
+                    self.authorDetailsView.backgroundColor = UIColor.clearColor()
+                    self.authorDetailsView.hideShotInfoLabel()
+                    self.authorDetailsView.setTextColor(UIColor.whiteColor())
+                    self.shotDescriptionView.hidden = true
+                    self.shotDetailsOperationView.hidden = true
                 } else {
                     
+                    // NGRFix: this doesn't work properly - needs to be fixed
                     // ShotImage
                     self.shotImageHeightConstraint?.constant = self.shotImageNormalHeight
                     self.shotImageView.updateFitting(.ScaleAspectFit)
@@ -211,19 +210,17 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     self.authorDetailsTopToShotImageBottom?.autoInstall()
                     self.shotDescriptionToSuperviewEdge?.autoRemove()
                     self.shotDescriptionTopToShotOperationDetailsBottom?.autoInstall()
-
+                    
                     self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewNormalHeight
                     self.authorDetailsView.displayAuthorDetailsInNormalSize()
                     
                     self.shotOperationToAuthorDetailsBottom?.autoInstall()
                     
-                    UIView.animateWithDuration(self.animationDuration) {
-                        self.authorDetailsView.setDefaultTextColor()
-                        self.authorDetailsView.setDefaultBackgrounColor()
-                        self.authorDetailsView.showShotInfoLabel()
-                        self.shotDescriptionView.hidden = false
-                        self.shotDetailsOperationView.hidden = false
-                    }
+                    self.authorDetailsView.setDefaultTextColor()
+                    self.authorDetailsView.setDefaultBackgrounColor()
+                    self.authorDetailsView.showShotInfoLabel()
+                    self.shotDescriptionView.hidden = false
+                    self.shotDetailsOperationView.hidden = false
                 }
                 self.layoutIfNeeded()
             },

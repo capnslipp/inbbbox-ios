@@ -25,7 +25,7 @@ class ShotDescriptionView: UIView{
     private let bottomInset = CGFloat(10)
     
     // Colors
-    private let viewBackgroundColor = UIColor(red: 0.9999, green: 1.0, blue: 0.9998, alpha: 1.0)
+    private let viewBackgroundColor = UIColor.whiteColor()
     
     // Private UI Components
     private let topSeparatorLine = UIView.newAutoLayoutView()
@@ -91,7 +91,7 @@ class ShotDescriptionView: UIView{
         descriptionLabel.font = UIFont.helveticaFont(.Neue, size: 15)
         descriptionLabel.textColor = UIColor.textLightColor()
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.backgroundColor = UIColor(red: 0.9999, green: 1.0, blue: 0.9998, alpha: 1.0 )
+        descriptionLabel.backgroundColor = backgroundColor
         descriptionLabel.lineBreakMode = .ByWordWrapping
         descriptionLabel.tintColor = UIColor.textLightColor()
         addSubview(descriptionLabel)

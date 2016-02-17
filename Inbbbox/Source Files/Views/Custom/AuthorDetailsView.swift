@@ -13,12 +13,14 @@ class AuthorDetailsView: UIView {
     // Public
     var viewData: ViewData? {
         didSet {
-            avatarView.updateWith((viewData?.avatar)!, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight], radius: CGFloat(avatarNormalSize / 2))
-            titleLabel.text = viewData?.title
-            authorButton.setTitle(viewData?.author, forState: .Normal)
-            clientButton.setTitle(viewData?.client, forState: .Normal)
-            clientPrefixLabel.hidden = viewData?.client == nil
-            shotInfoLabel.text = viewData?.shotInfo
+            if let data = viewData {
+                avatarView.updateWith(data.avatar, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight], radius: CGFloat(avatarNormalSize / 2))
+                titleLabel.text = data.title
+                authorButton.setTitle(data.author, forState: .Normal)
+                clientButton.setTitle(data.client, forState: .Normal)
+                clientPrefixLabel.hidden = data.client == nil
+                shotInfoLabel.text = data.shotInfo
+            }
         }
     }
     

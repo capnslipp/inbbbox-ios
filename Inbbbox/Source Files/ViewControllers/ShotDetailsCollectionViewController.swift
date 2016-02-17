@@ -130,9 +130,9 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
         // Backgrounds
         view.backgroundColor = UIColor.clearColor()
         
-        let blur = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-        view.insertSubview(blur, belowSubview: collectionView!)
-        blur.autoPinEdgesToSuperviewEdges()
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+        view.insertSubview(blurView, belowSubview: collectionView!)
+        blurView.autoPinEdgesToSuperviewEdges()
         collectionView?.backgroundColor = UIColor.clearColor()
         collectionView?.layer.shadowColor = UIColor.grayColor().CGColor
         collectionView?.layer.shadowOffset = CGSize(width: 0, height: 0.1)
@@ -241,7 +241,7 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         referenceSizeForFooterInSection section: Int) -> CGSize {
-            return footer.requiredSize()
+            return footer.intrinsicContentSize()
     }
 }
 

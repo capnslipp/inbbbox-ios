@@ -62,12 +62,12 @@ class ShotDetailsFooterView: UICollectionReusableView {
         roundedTextFieldView.update(corners, radius: normalRadius)
         updateTextFieldLayout()
     }
-    
-    func requiredSize() -> CGSize {
-        return CGSize(width: UIScreen.mainScreen().bounds.width, height: 61)
-    }
 
     // MARK: Auto Layout
+    
+    override func intrinsicContentSize() -> CGSize {
+        return CGSize(width: UIScreen.mainScreen().bounds.width, height: 61)
+    }
     
     class override func requiresConstraintBasedLayout() -> Bool {
         return true
