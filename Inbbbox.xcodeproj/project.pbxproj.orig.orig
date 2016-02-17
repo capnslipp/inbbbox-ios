@@ -930,10 +930,13 @@
 				745146951C5235D600710C61 /* BucketCollectionViewCell.swift */,
 				74A6C67D1C57C8F6009BDD75 /* LikeCollectionViewCell.swift */,
 				749B578E1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift */,
-				7454E6CC1C636865009313FC /* BaseInfoShotsCollectionViewCell.swift */,
+<<<<<<< HEAD
 				7454E6CC1C636865009313FC /* BaseFolloweeCollectionViewCell.swift */,
 				30CA57511C64B6DE008D6BEB /* ShotDetailsCollectionViewCell.swift */,
 				F0F501061C731F8D00E8959E /* ShotDetailsLoadMoreCollectionViewCell.swift */,
+=======
+				7454E6CC1C636865009313FC /* BaseInfoShotsCollectionViewCell.swift */,
+>>>>>>> master
 			);
 			path = UICollectionViewCell;
 			sourceTree = "<group>";
@@ -1483,8 +1486,11 @@
 				7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */,
 				F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
-				5E91A6371C73802300C9D609 /* FollowUserQuery.swift in Sources */,
+<<<<<<< HEAD
 				F0F501031C70E40A00E8959E /* ShotDescriptionView.swift in Sources */,
+=======
+				5E91A6371C73802300C9D609 /* FollowUserQuery.swift in Sources */,
+>>>>>>> master
 				F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */,
 				F092E25F1C3FD47200593D18 /* ShotManagedObject.swift in Sources */,
 				5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */,
@@ -1553,8 +1559,11 @@
 				BF69611C1C1B4551000FC5D8 /* Parameters.swift in Sources */,
 				F0863DC41C23F3DB0062EA21 /* Reusable.swift in Sources */,
 				F07B598E1C3FF02000F5CB86 /* AddToBucketQuery.swift in Sources */,
-				5E12C3651C734B46003C6B48 /* ConnectionsRequester.swift in Sources */,
+<<<<<<< HEAD
 				305441A81C65F093005B9149 /* AuthorDetailsView.swift in Sources */,
+=======
+				5E12C3651C734B46003C6B48 /* ConnectionsRequester.swift in Sources */,
+>>>>>>> master
 				5ED6C5B71C5787ED00A591EA /* FolloweesQuery.swift in Sources */,
 				7488EBB31C71D96A00C34907 /* AvatarSettable.swift in Sources */,
 				5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */,
