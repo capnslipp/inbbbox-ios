@@ -34,7 +34,15 @@ extension Responsable {
         
         return Promise<Response> { fulfill, reject in
             
+            do {
+                try APIRateLimitKeeper.sharedKeeper.verifyResponseForRateLimitation(response)
+            } catch {
+                throw error
+            }
+            
             let header = (response as? NSHTTPURLResponse)?.allHeaderFields as? [String: AnyObject]
+            
+            APIRateLimitKeeper.sharedKeeper.setCurrentLimitFromHeader(header ?? [:])
             
             if let error = self.checkDataForError(data, response: response) {
                 throw error

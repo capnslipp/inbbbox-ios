@@ -24,6 +24,12 @@ struct Request: Requestable, Responsable {
     func resume() -> Promise<JSON?> {
         return Promise<JSON?> { fulfill, reject in
             
+            do {
+                try APIRateLimitKeeper.sharedKeeper.verifyRateLimit()
+            } catch {
+                throw error
+            }
+            
             let dataTask = session.dataTaskWithRequest(foundationRequest) { data, response, error in
                 
                 if let error = error {

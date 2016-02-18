@@ -19,4 +19,5 @@ struct Dribbble {
     static let RequestTokenURLString = "https://dribbble.com/oauth/authorize"
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"
     static let Scope = "public+write+comment"
+    static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
 }

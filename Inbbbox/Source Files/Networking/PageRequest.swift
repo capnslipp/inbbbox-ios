@@ -22,6 +22,12 @@ struct PageRequest: Requestable, Responsable {
     func resume() -> Promise<PageResponse> {
         return Promise<PageResponse> { fulfill, reject in
             
+            do {
+                try APIRateLimitKeeper.sharedKeeper.verifyRateLimit()
+            } catch {
+                throw error
+            }
+            
             let dataTask = session.dataTaskWithRequest(foundationRequest) { data, response, error in
                 
                 if let error = error {
