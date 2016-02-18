@@ -199,10 +199,9 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     self.shotDetailsOperationView.hidden = true
                 } else {
                     
-                    // NGRFix: this doesn't work properly - needs to be fixed
                     // ShotImage
                     self.shotImageHeightConstraint?.constant = self.shotImageNormalHeight
-                    self.shotImageView.updateFitting(.ScaleAspectFit)
+                    self.shotImageView.updateFitting(.ScaleToFill)
                     self.shotImageView.useDimness(true)
                     
                     // AuthorDetails
@@ -213,8 +212,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     
                     self.authorDetailsViewHeightConstaint?.constant = self.authorDetailsViewNormalHeight
                     self.authorDetailsView.displayAuthorDetailsInNormalSize()
-                    
-                    self.shotOperationToAuthorDetailsBottom?.autoInstall()
                     
                     self.authorDetailsView.setDefaultTextColor()
                     self.authorDetailsView.setDefaultBackgrounColor()
