@@ -199,7 +199,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
                     self.shotDetailsOperationView.hidden = true
                 } else {
                     
-                    // NGRFix: this doesn't work properly - needs to be fixed
                     // ShotImage
                     self.shotImageHeightConstraint?.constant = self.shotImageNormalHeight
                     self.shotImageView.updateFitting(.ScaleToFill)
