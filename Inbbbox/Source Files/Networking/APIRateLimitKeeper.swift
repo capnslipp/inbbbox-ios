@@ -66,7 +66,7 @@ final class APIRateLimitKeeper {
     /// Time interval left to reset daily rate limit.
     var timeIntervalRemainingToResetDailyLimit: NSTimeInterval {
         
-        let oneDayTimeInterval = NSTimeInterval(60*60*24)
+        let oneDayTimeInterval = NSTimeInterval(60 * 60 * 24)
         let startOfNextDay = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.startOfDayForDate(NSDate(timeIntervalSinceNow: oneDayTimeInterval))
         
         return startOfNextDay.timeIntervalSinceDate(NSDate())
@@ -94,7 +94,7 @@ final class APIRateLimitKeeper {
             }()
             
             // Checks whether API respond with greater value of time needed to reset than stored one.
-            // If yes then sets remaining rate limit to  default one.
+            // If yes then sets remaining rate limit to default one.
             let isNewMinuteSlotForSendingRequest = previousTimeIntervalRemainingToResetMinuteLimit < timeIntervalRemainingToResetMinuteLimit
             if isNewMinuteSlotForSendingRequest {
                 rateLimitRemainingPerMinute = rateLimitPerMinute
@@ -133,11 +133,11 @@ final class APIRateLimitKeeper {
         }
         
         if let limit = rateLimitRemainingPerDay where limit <= 0 {
-            throw APIRateLimitKeeperError.DidExceedRateLimitPerDay(self.timeIntervalRemainingToResetDailyLimit ?? 0)
+            throw APIRateLimitKeeperError.DidExceedRateLimitPerDay(timeIntervalRemainingToResetDailyLimit ?? 0)
         }
         
         if let limit = rateLimitRemainingPerMinute where limit <= 1 {
-            throw APIRateLimitKeeperError.DidExceedRateLimitPerMinute(self.timeIntervalRemainingToResetMinuteLimit ?? 0)
+            throw APIRateLimitKeeperError.DidExceedRateLimitPerMinute(timeIntervalRemainingToResetMinuteLimit ?? 0)
         }
     }
 }
