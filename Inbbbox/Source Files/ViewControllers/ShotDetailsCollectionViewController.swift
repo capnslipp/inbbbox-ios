@@ -272,6 +272,8 @@ extension ShotDetailsCollectionViewController: UITextFieldDelegate {
         } else {
             delegate?.didFinishPresentingDetails(self)
         }
+        collectionViewLayout.invalidateLayout()
+        collectionView?.layoutIfNeeded()
         return true
     }
     
