@@ -22,6 +22,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     var shots = [Shot]()
 
     let shotsProvider = ShotsProvider()
+    private var shouldAskForMoreShots = true
 
     convenience init() {
         self.init(collectionViewLayout: InitialShotsCollectionViewLayout())
@@ -123,7 +124,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == shots.count - 4 {
+        if indexPath.row == shots.count - 6 && shouldAskForMoreShots {
             firstly {
                 shotsProvider.nextPage()
             }.then { shots -> Void in
@@ -131,6 +132,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
                     self.shots.appendContentsOf(shots)
                     self.collectionView?.reloadData()
                 }
+                self.shouldAskForMoreShots = !(shots == nil || shots?.count == 0)
             }.error { error in
                 // NGRTemp: Need mockups for error message view
                 print(error)
