@@ -25,7 +25,7 @@ class SettingsViewModel: GroupedListViewModel {
     
     let title = NSLocalizedString("Account", comment: "")
     
-    var setupType:SetupType
+    private(set) var setupType: SetupType
     private weak var delegate: ModelUpdatable?
     private weak var alertDelegate: AlertDisplayable?
     private let createAccountItem: LabelItem
@@ -46,7 +46,7 @@ class SettingsViewModel: GroupedListViewModel {
         
         self.delegate = delegate
         self.alertDelegate = delegate as? AlertDisplayable
-        self.setupType = UserStorage.logedIn ? .LogedUser : .DemoUser
+        self.setupType = UserStorage.loggedIn ? .LogedUser : .DemoUser
 
         let createAccountTitle = NSLocalizedString("Create Dribble Account", comment: "")
         
@@ -70,7 +70,7 @@ class SettingsViewModel: GroupedListViewModel {
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
         var items:[[GroupItem]]
-        if self.setupType == .LogedUser {
+        if setupType == .LogedUser {
             items = [[reminderItem, reminderDateItem],
                 [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]]
         } else {

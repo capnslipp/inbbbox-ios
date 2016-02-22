@@ -37,11 +37,7 @@ class LabelCell: UITableViewCell, Reusable {
     override func updateConstraints() {
         if !didSetConstraints {
             didSetConstraints = true
-            
-            titleLabel.autoPinEdgeToSuperviewEdge(.Trailing)
-            titleLabel.autoPinEdgeToSuperviewEdge(.Leading)
-            titleLabel.autoPinEdgeToSuperviewEdge(.Top)
-            titleLabel.autoPinEdgeToSuperviewEdge(.Bottom)
+            titleLabel.autoPinEdgesToSuperviewEdges()
         }
         
         super.updateConstraints()

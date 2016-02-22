@@ -109,7 +109,6 @@ class SettingsViewModelSpec: QuickSpec {
             afterEach {
                 sut = nil
                 UserStorage.clear()
-
             }
             
             it("should have account title") {

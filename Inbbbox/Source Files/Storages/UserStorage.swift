@@ -21,7 +21,7 @@ class UserStorage {
         return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
     }
     
-    class var logedIn: Bool {
+    class var loggedIn: Bool {
         return currentUser != nil
     }
     

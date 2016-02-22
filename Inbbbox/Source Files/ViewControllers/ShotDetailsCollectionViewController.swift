@@ -264,12 +264,12 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
 
 extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        if !UserStorage.logedIn {
+        if !UserStorage.loggedIn {
             showLoginView()
             return false
         }
         
-        let cellCount = (comments != nil) ? comments!.count : 0
+        let cellCount = comments?.count ?? 0
         if cellCount >= changingHeaderStyleCommentsThreshold {
             header.displayCompactVariant()
         }

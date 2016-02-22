@@ -196,7 +196,6 @@ private extension SettingsViewController {
         if let urlString = viewModel.loggedInUser?.avatarString {
             header.avatarView.imageView.loadImageFromURLString(urlString)
         } else {
-            //NGRToDo: provide placeholder
             header.avatarView.imageView.image = UIImage(named: "avatar_placeholder")
         }
     }
@@ -220,11 +219,11 @@ private extension SettingsViewController {
     }
     
     func refreshViewAccordingToAuthenticationStatus() {
-        let setupType = UserStorage.logedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
-        if setupType != self.viewModel.setupType {
-            self.viewModel = SettingsViewModel(delegate: self)
-            self.provideDataForHeader()
-            self.tableView.reloadData()
+        let setupType = UserStorage.loggedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
+        if setupType != viewModel.setupType {
+            viewModel = SettingsViewModel(delegate: self)
+            provideDataForHeader()
+            tableView.reloadData()
         }
     }
 }
@@ -245,9 +244,9 @@ private extension UITableView {
     func cellForItemCategory(category: GroupItem.Category) -> UITableViewCell {
 
         switch category {
-            case .Date: return dequeueReusableCell(DateCell.self)
-            case .Boolean: return dequeueReusableCell(SwitchCell.self)
-            case .String: return dequeueReusableCell(LabelCell.self)
+            case .Date: return dequeueReusableCell(DateCell)
+            case .Boolean: return dequeueReusableCell(SwitchCell)
+            case .String: return dequeueReusableCell(LabelCell)
         }
     }
 }
