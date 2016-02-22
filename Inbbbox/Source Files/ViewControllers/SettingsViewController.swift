@@ -8,6 +8,7 @@
 
 import UIKit
 import KFSwiftImageLoader
+import PromiseKit
 
 class SettingsViewController: UITableViewController {
 
@@ -31,12 +32,18 @@ class SettingsViewController: UITableViewController {
         
         tableView.registerClass(SwitchCell.self)
         tableView.registerClass(DateCell.self)
+        tableView.registerClass(LabelCell.self)
 
         tableView?.hideSeparatorForEmptyCells()
         tableView?.backgroundColor = UIColor.backgroundGrayColor()
         tableView?.tableHeaderView = SettingsTableHeaderView(size: CGSize (width: 0, height: 250))
 
         provideDataForHeader()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.refreshViewAccordingToAuthenticationStatus()
     }
 }
 
@@ -100,20 +107,22 @@ extension SettingsViewController {
         let cellIndexPath = tableView.indexPathForCell(cell) ?? indexPath
         let section = cellIndexPath.section
         let row = cellIndexPath.row
-
-        if row < viewModel[section].count {
-            let item = viewModel[section][row]
-
-            if let item = item as? SwitchItem where cell is SwitchCell {
-                item.unbindSwitchControl()
+        if section < viewModel.sectionsCount() {
+            if row < viewModel[section].count {
+                let item = viewModel[section][row]
+                
+                if let item = item as? SwitchItem where cell is SwitchCell {
+                    item.unbindSwitchControl()
+                }
             }
         }
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-            case 0: return NSLocalizedString("NOTIFICATIONS", comment: "")
-            case 1: return NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
+            case 0: return nil
+            case 1: return NSLocalizedString("NOTIFICATIONS", comment: "")
+            case 2: return NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
             default: return ""
         }
     }
@@ -132,6 +141,9 @@ extension SettingsViewController {
 
             navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: completion), animated: true)
         }
+        if item is LabelItem {
+            self.authenticateUser()
+        }
         tableView.deselectRowIfSelectedAnimated(true)
     }
 }
@@ -145,6 +157,8 @@ private extension SettingsViewController {
             configureSwitchCell(cell as! SwitchCell, forItem: item)
         } else if let item = item as? DateItem {
             configureDateCell(cell as! DateCell, forItem: item)
+        } else if let item = item as? LabelItem {
+            configureLabelCell(cell as! LabelCell, forItem: item)
         }
     }
 
@@ -158,6 +172,11 @@ private extension SettingsViewController {
         cell.textLabel?.text = item.title
         cell.setDateText(item.dateString)
     }
+    
+    func configureLabelCell(cell: LabelCell, forItem item: LabelItem) {
+        cell.titleLabel.text = item.title
+    }
+    
 }
 
 // MARK: Configuration
@@ -169,15 +188,44 @@ private extension SettingsViewController {
         guard let header = tableView?.tableHeaderView as? SettingsTableHeaderView else {
             return
         }
+        if let user = viewModel.loggedInUser {
+            header.usernameLabel.text = user.username
+        } else {
+            header.usernameLabel.text = NSLocalizedString("Guest?", comment: "")
+        }
 
-        let user = viewModel.loggedInUser
-        header.usernameLabel.text = user?.username
-
-        if let urlString = user?.avatarString {
+        if let urlString = viewModel.loggedInUser?.avatarString {
             header.avatarView.imageView.loadImageFromURLString(urlString)
         } else {
             //NGRToDo: provide placeholder
-            header.avatarView.imageView.image = nil
+            header.avatarView.imageView.image = UIImage(named: "avatar_placeholder")
+        }
+    }
+}
+
+// MARK: Authentication
+
+private extension SettingsViewController {
+    
+    func authenticateUser() {
+        let interactionHandler: (UIViewController -> Void) = { controller in
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        let authenticator = Authenticator(interactionHandler: interactionHandler)
+        
+        firstly {
+            authenticator.loginWithService(.Dribbble)
+        }.then { result -> Void in
+            self.refreshViewAccordingToAuthenticationStatus()
+        }
+    }
+    
+    func refreshViewAccordingToAuthenticationStatus() {
+        let setupType = UserStorage.logedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
+        if setupType != self.viewModel.setupType {
+            self.viewModel = SettingsViewModel(delegate: self)
+            self.provideDataForHeader()
+            self.tableView.reloadData()
         }
     }
 }
@@ -188,7 +236,7 @@ extension SettingsViewController {
 
     func didTapLogOutButton(_: UIBarButtonItem) {
         Authenticator.logout()
-        provideDataForHeader()
+        self.refreshViewAccordingToAuthenticationStatus()
         //NGRToDo: Remember to hide settings when user is logged out
     }
 }
@@ -200,6 +248,7 @@ private extension UITableView {
         switch category {
             case .Date: return dequeueReusableCell(DateCell.self)
             case .Boolean: return dequeueReusableCell(SwitchCell.self)
+            case .String: return dequeueReusableCell(LabelCell.self)
         }
     }
 }
