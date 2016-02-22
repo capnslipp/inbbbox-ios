@@ -229,6 +229,8 @@
 		BF95085C1C1F208F00E39242 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95085B1C1F208F00E39242 /* User.swift */; };
 		BF9508691C1F27F800E39242 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95084F1C1F0F7E00E39242 /* Formatter.swift */; };
 		BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95086A1C20790200E39242 /* ParametersSpec.swift */; };
+		C616C67E1C773EB700896E70 /* LabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67D1C773EB700896E70 /* LabelItem.swift */; };
+		C616C6801C77410300896E70 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67F1C77410300896E70 /* LabelCell.swift */; };
 		E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
@@ -512,6 +514,8 @@
 		BF9508571C1F1D8700E39242 /* Mappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mappable.swift; sourceTree = "<group>"; };
 		BF95085B1C1F208F00E39242 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BF95086A1C20790200E39242 /* ParametersSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersSpec.swift; sourceTree = "<group>"; };
+		C616C67D1C773EB700896E70 /* LabelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelItem.swift; sourceTree = "<group>"; };
+		C616C67F1C77410300896E70 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotImage.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -922,6 +926,7 @@
 				5E2E73051C2BF9EF00D5BC80 /* DateCell.swift */,
 				5E2E73081C2BF9EF00D5BC80 /* SwitchCell.swift */,
 				306C082F1C578520002D88CB /* ShotDetailsCell.swift */,
+				C616C67F1C77410300896E70 /* LabelCell.swift */,
 			);
 			path = UITableViewCell;
 			sourceTree = "<group>";
@@ -936,7 +941,6 @@
 				74A6C67D1C57C8F6009BDD75 /* LikeCollectionViewCell.swift */,
 				749B578E1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift */,
 				7454E6CC1C636865009313FC /* BaseInfoShotsCollectionViewCell.swift */,
-				7454E6CC1C636865009313FC /* BaseFolloweeCollectionViewCell.swift */,
 				30CA57511C64B6DE008D6BEB /* ShotDetailsCollectionViewCell.swift */,
 				F0F501061C731F8D00E8959E /* ShotDetailsLoadMoreCollectionViewCell.swift */,
 			);
@@ -1140,6 +1144,7 @@
 				BF6A6E0D1C1ED1DC001EDAB8 /* GroupItem.swift */,
 				BF6A6E0F1C1ED1E9001EDAB8 /* DateItem.swift */,
 				BF6A6E111C1ED1F6001EDAB8 /* SwitchItem.swift */,
+				C616C67D1C773EB700896E70 /* LabelItem.swift */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -1474,6 +1479,7 @@
 				F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
 				5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */,
+				C616C6801C77410300896E70 /* LabelCell.swift in Sources */,
 				5E12C3671C734B97003C6B48 /* ShotsRequester.swift in Sources */,
 				5CE595CA1C68ACE00076DDA1 /* ShotCellRestoreInitialStateAnimationDescriptor.swift in Sources */,
 				5E4857C21C284AF80027B38A /* AuthenticatorError.swift in Sources */,
@@ -1562,6 +1568,7 @@
 				5E91A6411C73D44200C9D609 /* APIRateLimitKeeper.swift in Sources */,
 				5E12C3651C734B46003C6B48 /* ConnectionsRequester.swift in Sources */,
 				305441A81C65F093005B9149 /* AuthorDetailsView.swift in Sources */,
+				C616C67E1C773EB700896E70 /* LabelItem.swift in Sources */,
 				5ED6C5B71C5787ED00A591EA /* FolloweesQuery.swift in Sources */,
 				7488EBB31C71D96A00C34907 /* AvatarSettable.swift in Sources */,
 				5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */,
