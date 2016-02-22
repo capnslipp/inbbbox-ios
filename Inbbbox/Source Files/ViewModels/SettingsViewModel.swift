@@ -19,10 +19,16 @@ protocol AlertDisplayable: class {
 
 class SettingsViewModel: GroupedListViewModel {
     
+    enum SetupType {
+        case LogedUser, DemoUser
+    }
+    
     let title = NSLocalizedString("Account", comment: "")
     
+    var setupType:SetupType
     private weak var delegate: ModelUpdatable?
     private weak var alertDelegate: AlertDisplayable?
+    private let createAccountItem: LabelItem
     private let reminderItem: SwitchItem
     private let reminderDateItem: DateItem
     private let followingStreamSourceItem: SwitchItem
@@ -40,6 +46,9 @@ class SettingsViewModel: GroupedListViewModel {
         
         self.delegate = delegate
         self.alertDelegate = delegate as? AlertDisplayable
+        self.setupType = UserStorage.logedIn ? .LogedUser : .DemoUser
+
+        let createAccountTitle = NSLocalizedString("Create Dribble Account", comment: "")
         
         let reminderTitle = NSLocalizedString("Enable daily reminder", comment: "")
         let reminderDateTitle = NSLocalizedString("Send daily reminder at", comment: "")
@@ -51,6 +60,8 @@ class SettingsViewModel: GroupedListViewModel {
         
         // MARK: Create items
         
+        createAccountItem = LabelItem(title: createAccountTitle)
+        
         reminderItem = SwitchItem(title: reminderTitle, on: Settings.Reminder.Enabled)
         reminderDateItem = DateItem(title: reminderDateTitle, date: Settings.Reminder.Date)
         
@@ -58,13 +69,19 @@ class SettingsViewModel: GroupedListViewModel {
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Settings.StreamSource.NewToday)
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
+        var items:[[GroupItem]]
+        if self.setupType == .LogedUser {
+            items = [[reminderItem, reminderDateItem],
+                [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]]
+        } else {
+            items = [[createAccountItem],
+                [reminderItem, reminderDateItem],
+                [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]]
+        }
         
         // MARK: Super init
         
-        super.init(items: [
-            [reminderItem, reminderDateItem],
-            [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]
-        ] as [[GroupItem]])
+        super.init(items: items as [[GroupItem]])
         
         // MARK: onValueChanged blocks
         
