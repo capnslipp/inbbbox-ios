@@ -41,6 +41,10 @@ class UserStorageSpec: QuickSpec {
                 expect(UserStorage.currentUser).toNot(beNil())
             }
             
+            it("logedIn flag should be true") {
+                expect(UserStorage.logedIn).to(beTruthy())
+            }
+            
             it("user's username should be same as previously stored") {
                 expect(UserStorage.currentUser!.username).to(equal("fixture.username"))
             }
@@ -69,6 +73,10 @@ class UserStorageSpec: QuickSpec {
                 
                 it("user should be nil") {
                     expect(UserStorage.currentUser).to(beNil())
+                }
+                
+                it("logedIn flag should be false") {
+                    expect(UserStorage.logedIn).to(beFalsy())
                 }
             }
         }
