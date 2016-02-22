@@ -16,7 +16,7 @@ class SettingsViewController: UITableViewController {
 
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
-        viewModel = SettingsViewModel(delegate: self)
+        viewModel = SettingsViewModel(delegate: self, logedIn: UserStorage.logedIn)
         title = viewModel.title
     }
 
@@ -223,7 +223,7 @@ private extension SettingsViewController {
     func refreshViewAccordingToAuthenticationStatus() {
         let setupType = UserStorage.logedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
         if setupType != self.viewModel.setupType {
-            self.viewModel = SettingsViewModel(delegate: self)
+            self.viewModel = SettingsViewModel(delegate: self, logedIn: UserStorage.logedIn)
             self.provideDataForHeader()
             self.tableView.reloadData()
         }

@@ -40,13 +40,13 @@ class SettingsViewModel: GroupedListViewModel {
         return UserStorage.currentUser
     }
     
-    init(delegate: ModelUpdatable) {
+    init(delegate: ModelUpdatable, logedIn:Bool) {
         
         // MARK: Parameters
         
         self.delegate = delegate
         self.alertDelegate = delegate as? AlertDisplayable
-        self.setupType = UserStorage.logedIn ? .LogedUser : .DemoUser
+        self.setupType = logedIn ? .LogedUser : .DemoUser
 
         let createAccountTitle = NSLocalizedString("Create Dribble Account", comment: "")
         
