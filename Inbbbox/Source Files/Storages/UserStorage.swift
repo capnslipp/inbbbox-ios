@@ -21,6 +21,10 @@ class UserStorage {
         return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
     }
     
+    class var loggedIn: Bool {
+        return currentUser != nil
+    }
+    
     class func storeUser(user: User) {
         keychain[data: Key.Token.rawValue] = NSKeyedArchiver.archivedDataWithRootObject(user)
     }
