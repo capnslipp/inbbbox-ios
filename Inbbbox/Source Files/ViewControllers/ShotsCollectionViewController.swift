@@ -121,6 +121,22 @@ final class ShotsCollectionViewController: UICollectionViewController {
         shotDetailsCollectionViewController.delegate = self
         tabBarController?.presentViewController(shotDetailsCollectionViewController, animated: true, completion: nil)
     }
+    
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == shots.count - 1 {
+            firstly {
+                self.shotsProvider.nextPage()
+                }.then { shots -> Void in
+                    if let shots = shots {
+                        self.shots.appendContentsOf(shots)
+                        self.collectionView?.reloadData()
+                    }
+                }.error { error in
+                    // NGRTemp: Need mockups for error message view
+                    print(error)
+            }
+        }
+    }
 
     // MARK: UIScrollViewDelegate
 
