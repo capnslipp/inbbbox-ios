@@ -123,7 +123,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == shots.count - 1 {
+        if indexPath.row == shots.count - 4 {
             firstly {
                 shotsProvider.nextPage()
             }.then { shots -> Void in
