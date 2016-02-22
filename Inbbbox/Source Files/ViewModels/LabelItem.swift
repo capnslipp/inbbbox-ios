@@ -16,5 +16,3 @@ class LabelItem: GroupItem {
         super.init(title: title, category: .String)
     }
 }
-
- 

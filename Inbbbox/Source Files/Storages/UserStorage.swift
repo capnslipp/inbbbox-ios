@@ -22,7 +22,7 @@ class UserStorage {
     }
     
     class var logedIn: Bool {
-        return self.currentUser != nil
+        return currentUser != nil
     }
     
     class func storeUser(user: User) {

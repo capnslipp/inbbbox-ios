@@ -194,8 +194,8 @@ extension ShotDetailsCollectionViewController {
         
         firstly {
             authenticator.loginWithService(.Dribbble)
-            }.then { Void in
-                self.footer.textField.becomeFirstResponder()
+        }.then { Void in
+            self.footer.textField.becomeFirstResponder()
         }
     }
 }
@@ -265,7 +265,7 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
 extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if !UserStorage.logedIn {
-            self.showLoginView()
+            showLoginView()
             return false
         }
         

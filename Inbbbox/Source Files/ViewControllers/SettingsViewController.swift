@@ -43,7 +43,7 @@ class SettingsViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.refreshViewAccordingToAuthenticationStatus()
+        refreshViewAccordingToAuthenticationStatus()
     }
 }
 
@@ -107,15 +107,14 @@ extension SettingsViewController {
         let cellIndexPath = tableView.indexPathForCell(cell) ?? indexPath
         let section = cellIndexPath.section
         let row = cellIndexPath.row
-        if section < viewModel.sectionsCount() {
-            if row < viewModel[section].count {
-                let item = viewModel[section][row]
-                
-                if let item = item as? SwitchItem where cell is SwitchCell {
-                    item.unbindSwitchControl()
-                }
+        if section < viewModel.sectionsCount() && row < viewModel[section].count {
+            let item = viewModel[section][row]
+            
+            if let item = item as? SwitchItem where cell is SwitchCell {
+                item.unbindSwitchControl()
             }
         }
+        
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -142,7 +141,7 @@ extension SettingsViewController {
             navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: completion), animated: true)
         }
         if item is LabelItem {
-            self.authenticateUser()
+            authenticateUser()
         }
         tableView.deselectRowIfSelectedAnimated(true)
     }
@@ -236,7 +235,7 @@ extension SettingsViewController {
 
     func didTapLogOutButton(_: UIBarButtonItem) {
         Authenticator.logout()
-        self.refreshViewAccordingToAuthenticationStatus()
+        refreshViewAccordingToAuthenticationStatus()
         //NGRToDo: Remember to hide settings when user is logged out
     }
 }

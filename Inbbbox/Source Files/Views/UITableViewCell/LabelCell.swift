@@ -40,7 +40,8 @@ class LabelCell: UITableViewCell, Reusable {
             
             titleLabel.autoPinEdgeToSuperviewEdge(.Trailing)
             titleLabel.autoPinEdgeToSuperviewEdge(.Leading)
-            titleLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 12)
+            titleLabel.autoPinEdgeToSuperviewEdge(.Top)
+            titleLabel.autoPinEdgeToSuperviewEdge(.Bottom)
         }
         
         super.updateConstraints()
