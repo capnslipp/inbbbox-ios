@@ -20,7 +20,7 @@ class SettingsViewModelSpec: QuickSpec {
         describe("when newly created as guest user") {
             
             beforeEach {
-                sut = SettingsViewModel(delegate: SettingsViewController(), logedIn:false)
+                sut = SettingsViewModel(delegate: SettingsViewController())
             }
             
             afterEach {
@@ -101,13 +101,15 @@ class SettingsViewModelSpec: QuickSpec {
         
         describe("when newly created as loged user") {
             
-            
             beforeEach {
-                sut = SettingsViewModel(delegate: SettingsViewController(), logedIn:true)
+                UserStorage.storeUser(User.fixtureUser())
+                sut = SettingsViewModel(delegate: SettingsViewController())
             }
             
             afterEach {
                 sut = nil
+                UserStorage.clear()
+
             }
             
             it("should have account title") {
