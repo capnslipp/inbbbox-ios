@@ -108,7 +108,11 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 }
                 
                 it("should have correct shotInfo") {
-                    expect(viewDataForHeader!.shotInfo).to(equal("Jan 25, 2016"))
+                    let formatter = NSDateFormatter()
+                    formatter.dateStyle = .MediumStyle
+                    formatter.locale = NSLocale(localeIdentifier: "en_US")
+                    
+                    expect(viewDataForHeader!.shotInfo).to(equal(formatter.stringFromDate(shot.createdAt)))
                 }
                 
                 it("should have correct shot url") {
@@ -173,7 +177,12 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 }
                 
                 it("should have correct time") {
-                    expect(viewDataForCommentCell!.time).to(equal("Jan 25, 2016, 9:19 AM"))
+                    let formatter = NSDateFormatter()
+                    formatter.dateStyle = .MediumStyle
+                    formatter.locale = NSLocale(localeIdentifier: "en_US")
+                    formatter.timeStyle = .ShortStyle
+                    
+                    expect(viewDataForCommentCell!.time).to(equal(formatter.stringFromDate(Comment.fixtureComment().createdAt)))
                 }
             }
         }
