@@ -40,7 +40,7 @@ class ShotDetailsViewController: UIViewController {
         
         firstly {
             viewModel.loadComments()
-        }.then { _ in
+        }.then {
             self.aView?.collectionView.reloadData()
         }.error { error in
             print(error)

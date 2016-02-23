@@ -8,7 +8,6 @@
 
 import UIKit
 import PureLayout
-import EasyAnimation
 
 class ShotDetailsView: UIView {
     
@@ -51,7 +50,7 @@ class ShotDetailsView: UIView {
         closeButton.setImage(UIImage(named: "ic-closemodal"), forState: .Normal)
         addSubview(closeButton)
     }
-    
+
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

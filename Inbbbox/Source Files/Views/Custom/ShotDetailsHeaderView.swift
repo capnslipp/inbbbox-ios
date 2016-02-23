@@ -9,8 +9,12 @@
 import UIKit
 import PureLayout
 
-private let avatarSize = CGSize(width: 40, height: 40)
-private let margin = CGFloat(10)
+private var avatarSize: CGSize {
+    return CGSize(width: 40, height: 40)
+}
+private var margin: CGFloat {
+    return 10
+}
 
 class ShotDetailsHeaderView: UICollectionReusableView {
     
@@ -61,7 +65,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         
         addSubview(avatarView)
     }
-    
+
     @available(*, unavailable, message="Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

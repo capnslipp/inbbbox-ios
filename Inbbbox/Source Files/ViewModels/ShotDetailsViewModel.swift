@@ -8,7 +8,6 @@
 
 import Foundation
 import PromiseKit
-import UIKit.NSAttributedString
 
 final class ShotDetailsViewModel {
     
@@ -133,18 +132,7 @@ final class ShotDetailsViewModel {
         if like {
             operationClosure()
         } else {
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { _ in
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-            }
-            
-            let unlikeAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Unlike", comment: ""), style: .Destructive) { _ in
-                operationClosure()
-            }
-            alertController.addAction(cancelAction)
-            alertController.addAction(unlikeAction)
-            //NGRTemp: backward compatibility
-//            delegate?.presentAlertController(alertController)
+            //NGRToDo: Inform controller about error
         }
     }
     
