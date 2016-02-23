@@ -43,6 +43,7 @@ class RoundedImageView: UIView {
         imageView.loadImageFromURLString(imageUrl)
         cornersToRound = byRoundingCorners
         radiusToSet = radius
+        setNeedsDisplay()
     }
     
     func updateRadius(radius: CGFloat) {

@@ -17,25 +17,7 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     
     // Public
     weak var delegate: ShotDetailsCollectionViewCellDelegate?
-    
-    struct ViewData {
-        let avatar: String
-        let author: String
-        let comment: NSMutableAttributedString
-        let time: String
-    }
-    
-    var viewData: ViewData? {
-        didSet {
-            avatar.updateWith((viewData?.avatar)!, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight], radius: CGFloat(avatarSize))
-            author.text = viewData?.author
-            comment.text = viewData?.comment.string
-            time.text = viewData?.time
-            
-            setNeedsLayout()
-        }
-    }
-    
+
     // Private Properties
     private var didUpdateConstraints = false
     private let avatarSize = CGFloat(32)
@@ -64,6 +46,13 @@ class ShotDetailsCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: Public methods
+    
+    func setupCell(data: ShotDetailsViewModel.DetailsCollectionViewCellViewData) {
+        avatar.updateWith(data.avatar, byRoundingCorners: [.TopLeft, .TopRight, .BottomLeft, .BottomRight], radius: CGFloat(avatarSize))
+        author.text = data.author
+        comment.text = data.comment.string
+        time.text = data.time
+    }
     
     func showEditView() {
         // NGRTodo: add any animation?

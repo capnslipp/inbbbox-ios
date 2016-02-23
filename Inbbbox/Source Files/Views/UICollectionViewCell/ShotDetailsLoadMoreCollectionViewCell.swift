@@ -18,18 +18,6 @@ class ShotDetailsLoadMoreCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: ShotDetailsLoadMoreCollectionViewCellDelegate?
     
-    struct ViewData {
-        let commentsCount: String
-    }
-    
-    var viewData: ViewData? {
-        didSet {
-            loadMoreButton.setTitle("Load more comments (\(viewData!.commentsCount))", forState: .Normal)
-            setNeedsDisplay()
-            setNeedsLayout()
-        }
-    }
-    
     // Private Properties
     private var didUpdateConstraints = false
     
@@ -49,6 +37,14 @@ class ShotDetailsLoadMoreCollectionViewCell: UICollectionViewCell {
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // Public
+    
+    func setupCell(data: ShotDetailsViewModel.LoadMoreCellViewData) {
+        loadMoreButton.setTitle("Load more comments (\(data.commentsCount))", forState: .Normal)
+        setNeedsDisplay()
+        setNeedsLayout()
     }
     
     // MARK: UI
