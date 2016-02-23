@@ -35,7 +35,7 @@ class ShotDetailsViewModel {
     }
     
     // Comment requester and provider
-    var commentsProvider = CommentsProvider(page: 1, pagination: 20)
+    var commentsProvider = CommentsProvider(page: 1, pagination: 2)
     var commentsRequester = CommentsRequester()
     
     // Private
@@ -119,10 +119,10 @@ class ShotDetailsViewModel {
             if self.userStorageClass.currentUser != nil {
                 firstly {
                     like ? self.shotsRequester.likeShot(self.shot) : self.shotsRequester.unlikeShot(self.shot)
-                    }.then {
-                        completion(Result.Success)
-                    }.error { error in
-                        completion(Result.Error(error))
+                }.then {
+                    completion(Result.Success)
+                }.error { error in
+                    completion(Result.Error(error))
                 }
             } else {
                 do {
@@ -156,26 +156,27 @@ class ShotDetailsViewModel {
     func viewDataForHeader(completion: (Result, HeaderViewData?) -> Void) {
         var shotLiked: Bool?
         var headerViewData: HeaderViewData?
+        
         firstly{
             self.isShotLikedByMe()
-            }.then { liked in
-                shotLiked = liked
-            }.then {
-                headerViewData = HeaderViewData(
-                    description: self.shot.description?.mutableCopy() as? NSMutableAttributedString,
-                    title: self.shot.title!,
-                    author: self.shot.user.name ?? self.shot.user.username,
-                    client: self.shot.team?.name,
-                    shotInfo: self.shotDateFormatter.stringFromDate(self.shot.createdAt),
-                    shot: self.shot.image.normalURL.absoluteString,
-                    avatar: self.shot.user.avatarString!,
-                    shotLiked: shotLiked!,
-                    shotInBuckets: true // NGRTodo: provide this information
-                )
-            }.then {
-                completion(Result.Success, headerViewData)
-            }.error {error in
-                completion(Result.Error(error), nil)
+        }.then { liked in
+            shotLiked = liked
+        }.then {
+            headerViewData = HeaderViewData(
+                description: self.shot.description?.mutableCopy() as? NSMutableAttributedString,
+                title: self.shot.title!,
+                author: self.shot.user.name ?? self.shot.user.username,
+                client: self.shot.team?.name,
+                shotInfo: self.shotDateFormatter.stringFromDate(self.shot.createdAt),
+                shot: self.shot.image.normalURL.absoluteString,
+                avatar: self.shot.user.avatarString!,
+                shotLiked: shotLiked!,
+                shotInBuckets: true // NGRTodo: provide this information
+            )
+        }.then {
+            completion(Result.Success, headerViewData)
+        }.error {error in
+            completion(Result.Error(error), nil)
         }
     }
     
@@ -239,13 +240,9 @@ private extension ShotDetailsViewModel {
             if self.userStorageClass.currentUser != nil {
                 firstly {
                     shotsRequester.isShotLikedByMe(shot)
-                }.then { liked in
-                    fulfill(liked)
-                }.error { error in
-                    reject(error)
-                }
+                }.then(fulfill).error(reject)
             } else {
-                let liked = localStorage.likedShots.contains{
+                let liked = localStorage.likedShots.contains {
                     $0.id == shot.identifier
                 }
                 fulfill(liked)

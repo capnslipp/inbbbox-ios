@@ -42,7 +42,7 @@ class ShotDetailsLoadMoreCollectionViewCell: UICollectionViewCell {
     // Public
     
     func setupCell(data: ShotDetailsViewModel.LoadMoreCellViewData) {
-        loadMoreButton.setTitle("Load more comments (\(data.commentsCount))", forState: .Normal)
+        loadMoreButton.setTitle(String.localizedStringWithFormat(NSLocalizedString("Load more comments (%@)", comment: ""), data.commentsCount), forState: .Normal)
         setNeedsDisplay()
         setNeedsLayout()
     }

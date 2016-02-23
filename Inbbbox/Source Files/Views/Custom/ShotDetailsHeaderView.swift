@@ -71,7 +71,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     // MARK: Public
     
     func setupHeader(data: ShotDetailsViewModel.HeaderViewData) {
-        shotDescriptionView.descriptionText = data.description ?? NSMutableAttributedString(string: "There is no decription")
+        shotDescriptionView.descriptionText = data.description ?? NSMutableAttributedString(string: NSLocalizedString("There is no decription", comment: ""))
         shotImageView.updateWith(data.shot, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius))
         authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: data.avatar,
             title: data.title,
