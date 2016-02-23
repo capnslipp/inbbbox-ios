@@ -35,7 +35,7 @@ class ShotDetailsViewModel {
     }
     
     // Comment requester and provider
-    var commentsProvider = CommentsProvider(page: 1, pagination: 2)
+    var commentsProvider = CommentsProvider(page: 1, pagination: 20)
     var commentsRequester = CommentsRequester()
     
     // Private
