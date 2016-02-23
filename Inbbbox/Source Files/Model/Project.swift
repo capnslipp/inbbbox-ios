@@ -9,11 +9,11 @@
 import Foundation
 import SwiftyJSON
 
-struct Project {
-    
+struct Project: ProjectType {
+
     let identifier: String
     let name: String?
-    let description: NSAttributedString?
+    let htmlDescription: NSAttributedString?
     let createdAt: NSDate
     let shotsCount: UInt
     
@@ -34,7 +34,7 @@ extension Project: Mappable {
             return Project(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].string,
-                description: htmlDescription,
+                htmlDescription: htmlDescription,
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
                 shotsCount: json[Key.ShotsCount.rawValue].uIntValue
             )

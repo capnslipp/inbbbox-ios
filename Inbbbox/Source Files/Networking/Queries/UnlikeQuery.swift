@@ -14,7 +14,7 @@ struct UnlikeQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .JSON)
     
-    init(shot: Shot) {
+    init(shot: ShotType) {
         path = "/shots/" + shot.identifier + "/like"
     }
 }

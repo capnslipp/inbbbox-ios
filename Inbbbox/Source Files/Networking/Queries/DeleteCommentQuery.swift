@@ -14,7 +14,7 @@ struct DeleteCommentQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
-    init(shot: Shot, comment: Comment) {
+    init(shot: ShotType, comment: CommentType) {
         path = "/shots/" + shot.identifier + "/comments/" + comment.identifier
     }
 }

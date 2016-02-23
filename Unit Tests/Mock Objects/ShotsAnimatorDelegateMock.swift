@@ -9,13 +9,13 @@ import Dobby
 class ShotsAnimatorDelegateMock: ShotsAnimatorDelegate {
 
     let collectionViewForShotsAnimatorStub = Stub<(ShotsAnimator), UICollectionView?>()
-    let itemsForShotsAnimatorStub = Stub<ShotsAnimator, [Shot]>()
+    let itemsForShotsAnimatorStub = Stub<ShotsAnimator, [ShotType]>()
 
     func collectionViewForShotsAnimator(animator: ShotsAnimator) -> UICollectionView? {
         return try! collectionViewForShotsAnimatorStub.invoke(animator)
     }
 
-    func itemsForShotsAnimator(animator: ShotsAnimator) -> [Shot] {
+    func itemsForShotsAnimator(animator: ShotsAnimator) -> [ShotType] {
         return try! itemsForShotsAnimatorStub.invoke(animator)
     }
 }

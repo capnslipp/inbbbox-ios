@@ -10,11 +10,8 @@ import Foundation
 import CoreData
 
 extension NSManagedObject {
-    func addObject(value: NSManagedObject, forKey: String) {
-        mutableSetValueForKey(forKey).addObject(value)
-    }
-    
-    func removeObject(value: NSManagedObject, forKey: String) {
-        mutableSetValueForKey(forKey).removeObject(value)
+
+    class var entityName: String {
+        return NSStringFromClass(self).componentsSeparatedByString(".").last!
     }
 }

@@ -14,8 +14,9 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     // MARK: - Lifecycle
     
     private var followees = [Followee]()
-    private var followeesShots = [Followee : [Shot]]()
-    private let connectionsProvider = ConnectionsProvider()
+    //NGRTemp: could be solved nicer with IOS-131
+    private var followeesIndexedShots = [Int : [ShotType]]()
+    private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
     
     override func viewDidLoad() {
@@ -78,13 +79,20 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             firstly {
                 self.shotsProvider.provideShotsForUser(followee)
             }.then { shots -> Void in
-                if let shots = shots {
-                    self.followeesShots[followee] = shots
-                } else {
-                    self.followeesShots[followee] = [Shot]()
+                var indexOfFollowee: Int?
+                for (index, item) in self.followees.enumerate(){
+                    if item.identifier == followee.identifier {
+                        indexOfFollowee = index
+                        break
+                    }
                 }
-                guard let index = self.followees.indexOf(followee) else {
+                guard let index = indexOfFollowee else {
                     return
+                }
+                if let shots = shots {
+                    self.followeesIndexedShots[index] = shots
+                } else {
+                    self.followeesIndexedShots[index] = [ShotType]()
                 }
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 self.collectionView?.reloadItemsAtIndexPaths([indexPath])
@@ -110,9 +118,19 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             cell.clearImages()
             let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
-            if let followeeShots = followeesShots[followee] {
-                let shotImagesUrls = followeeShots.map { $0.image.normalURL }
-                presentSmallShotsImagesForCell(shotImagesUrls, cell: cell)
+            
+            var indexOfFollowee: Int?
+            for (index, item) in self.followees.enumerate(){
+                if item.identifier == followee.identifier {
+                    indexOfFollowee = index
+                    break
+                }
+            }
+            if let index = indexOfFollowee {
+                if let followeeShots = followeesIndexedShots[index] {
+                    let shotImagesUrls = followeeShots.map { $0.shotImage.normalURL }
+                    presentSmallShotsImagesForCell(shotImagesUrls, cell: cell)
+                }
             }
             return cell
         } else {
@@ -120,8 +138,17 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             cell.clearImages()
             let followee = followees[indexPath.row]
             presentFoloweeForCell(followee, cell: cell)
-            let shotImageUrl = followeesShots[followee]?.first?.image.normalURL
-            presentLargeShotImageForCell(shotImageUrl, cell: cell)
+            var indexOfFollowee: Int?
+            for (index, item) in self.followees.enumerate(){
+                if item.identifier == followee.identifier {
+                    indexOfFollowee = index
+                    break
+                }
+            }
+            if let index = indexOfFollowee {
+                let shotImageUrl = followeesIndexedShots[index]?.first?.shotImage.normalURL
+                presentLargeShotImageForCell(shotImageUrl, cell: cell)
+            }
             return cell
         }
     }

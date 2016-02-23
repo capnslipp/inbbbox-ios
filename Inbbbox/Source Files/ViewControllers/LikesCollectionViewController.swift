@@ -11,7 +11,7 @@ import PromiseKit
 
 class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
-    private var likedShots = [Shot]()
+    private var likedShots = [ShotType]()
     private let shotsProvider = ShotsProvider()
     private var isUserLogged: Bool {
         return UserStorage.currentUser != nil
@@ -86,7 +86,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let shot = likedShots[indexPath.item]
-        cell.shotImageView.loadImageFromURL(shot.image.normalURL)
+        cell.shotImageView.loadImageFromURL(shot.shotImage.normalURL)
         return cell
     }
     

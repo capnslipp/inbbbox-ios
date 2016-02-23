@@ -1,0 +1,27 @@
+//
+//  ManagedBucketsProvider.swift
+//  Inbbbox
+//
+//  Created by Lukasz Wolanczyk on 2/23/16.
+//  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
+//
+
+import UIKit
+import PromiseKit
+import CoreData
+
+class ManagedBucketsProvider {
+
+    func provideMyBuckets() -> Promise<[BucketType]?> {
+        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: ManagedBucket.entityName)
+        
+        return Promise<[BucketType]?> { fulfill, reject in
+            do {
+                fulfill(try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedBucket])
+            } catch {
+                reject(error)
+            }
+        }
+    }
+}

@@ -18,15 +18,15 @@ class ShotDetailsViewModelSpec: QuickSpec {
     override func spec() {
         
         var sut: ShotDetailsViewModel!
-        var shot: Shot!
-        var commentsProviderMock: CommentsProviderMock!
-        var commentsRequesterMock: CommentsRequesterMock!
+        var shot: ShotType!
+        var commentsProviderMock: APICommentsProviderMock!
+        var commentsRequesterMock: APICommentsRequesterMock!
         
         beforeEach {
             shot = Shot.fixtureShot()
             sut = ShotDetailsViewModel(shot: shot)
-            commentsProviderMock = CommentsProviderMock()
-            commentsRequesterMock = CommentsRequesterMock()
+            commentsProviderMock = APICommentsProviderMock()
+            commentsRequesterMock = APICommentsRequesterMock()
             sut.commentsProvider = commentsProviderMock
             sut.commentsRequester = commentsRequesterMock
             
@@ -36,7 +36,12 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     let json = JSONSpecLoader.sharedInstance.fixtureCommentsJSON(withCount: 10)
                     let result = json.map { Comment.map($0) }
                     
-                    fulfill(result)
+                    var resultCommentTypes = [CommentType]()
+                    for comment in result {
+                        resultCommentTypes.append(comment)
+                    }
+                    
+                    fulfill(resultCommentTypes)
                 }
             }
             
@@ -46,7 +51,12 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     let json = JSONSpecLoader.sharedInstance.fixtureCommentsJSON(withCount: 5)
                     let result = json.map { Comment.map($0) }
                     
-                    fulfill(result)
+                    var resultCommentTypes = [CommentType]()
+                    for comment in result {
+                        resultCommentTypes.append(comment)
+                    }
+                    
+                    fulfill(resultCommentTypes)
                 }
             }
             
@@ -71,8 +81,57 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
             
             it("view model should have no items") {
-                //NGRTemp: added 2 cause of view model changes
-                expect(sut.itemsCount).to(equal(2))
+                expect(sut.itemsCount).to(equal(0))
+            }
+            
+            it("compact variant of header can't be displayed") {
+                expect(sut.compactVariantCanBeDisplayed).to(beFalsy())
+            }
+            
+            describe("view data for header") {
+                
+                var viewDataForHeader: ShotDetailsViewModel.HeaderViewData?
+                
+                beforeEach {
+                    waitUntil { done in
+                        sut.viewDataForHeader{ _, viewData in
+                            viewDataForHeader = viewData!
+                            done()
+                        }
+                    }
+                }
+                
+                it("should have correct description") {
+                    expect(viewDataForHeader!.description).to(equal(shot.htmlDescription))
+                }
+                
+                it("should have correct title") {
+                    expect(viewDataForHeader!.title).to(equal(shot.title))
+                }
+                
+                it("should have correct author") {
+                    expect(viewDataForHeader!.author).to(equal(shot.user.name ?? shot.user.username))
+                }
+                
+                it("should have correct client") {
+                    expect(viewDataForHeader!.client).to(equal(shot.team?.name))
+                }
+                
+                it("should have correct shotInfo") {
+                    let formatter = NSDateFormatter()
+                    formatter.dateStyle = .MediumStyle
+                    formatter.locale = NSLocale(localeIdentifier: "en_US")
+                    
+                    expect(viewDataForHeader!.shotInfo).to(equal(formatter.stringFromDate(shot.createdAt)))
+                }
+                
+                it("should have correct shot url") {
+                    expect(viewDataForHeader!.shot).to(equal(shot.shotImage.normalURL.absoluteString))
+                }
+                
+                it("should have correct avatar url") {
+                    expect(viewDataForHeader!.avatar).to(equal(shot.user.avatarString))
+                }
             }
         }
         
@@ -84,10 +143,15 @@ class ShotDetailsViewModelSpec: QuickSpec {
             beforeEach {
                 
                 waitUntil { done in
-                sut.loadComments().then { result -> Void in
-                        responseResult = successResponse
+                    sut.loadComments { result in
+                        switch result {
+                        case .Success:
+                            responseResult = successResponse
+                        case .Error(_):
+                            fail("This should not be invoked")
+                        }
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                    }
                 }
             }
             
@@ -100,8 +164,36 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
             
             it("view model should have correct number of items") {
-                //NGRTemp: added 2 cause of view model changes
-                expect(sut.itemsCount).to(equal(12))
+                expect(sut.itemsCount).to(equal(11))
+            }
+            
+            describe("any comment") {
+                var viewDataForCommentCell: ShotDetailsViewModel.DetailsCollectionViewCellViewData?
+                
+                beforeEach {
+                    viewDataForCommentCell = sut.viewDataForCellAtIndex(0)
+                }
+                
+                it("should have correct author") {
+                    expect(viewDataForCommentCell!.author).to(equal(Comment.fixtureComment().user.name))
+                }
+                
+                it("should have correct comment") {
+                    expect(viewDataForCommentCell!.comment).to(equal(Comment.fixtureComment().body))
+                }
+                
+                it("should have correct avatar") {
+                    expect(viewDataForCommentCell!.avatar).to(equal(Comment.fixtureComment().user.avatarString))
+                }
+                
+                it("should have correct time") {
+                    let formatter = NSDateFormatter()
+                    formatter.dateStyle = .MediumStyle
+                    formatter.locale = NSLocale(localeIdentifier: "en_US")
+                    formatter.timeStyle = .ShortStyle
+                    
+                    expect(viewDataForCommentCell!.time).to(equal(formatter.stringFromDate(Comment.fixtureComment().createdAt)))
+                }
             }
         }
         
@@ -109,15 +201,27 @@ class ShotDetailsViewModelSpec: QuickSpec {
             beforeEach {
                 
                 waitUntil { done in
-                    sut.loadComments().then { result in
+                    sut.loadComments { result in
+                        switch result {
+                        case .Success:
+                            break
+                        case .Error(_):
+                            fail("This should not be invoked")
+                        }
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                    }
                 }
                 
                 waitUntil { done in
-                    sut.loadComments().then { result in
+                    sut.loadComments { result in
+                        switch result {
+                        case .Success:
+                            break
+                        case .Error(_):
+                            fail("This should not be invoked")
+                        }
                         done()
-                        }.error { _ in fail("This should not be invoked") }
+                    }
                 }
             }
             
@@ -126,8 +230,7 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
             
             it("view model should have correct number of items") {
-                //NGRTemp: added 2 cause of view model changes
-                expect(sut.itemsCount).to(equal(17))
+                expect(sut.itemsCount).to(equal(15))
             }
         }
         
@@ -137,10 +240,15 @@ class ShotDetailsViewModelSpec: QuickSpec {
             
             beforeEach {
                 waitUntil { done in
-                    sut.postComment("fixture.message").then { result -> Void in
-                        responseResult = successResponse
+                    sut.postComment("fixture.message") { result -> Void in
+                        switch result {
+                        case .Success:
+                            responseResult = successResponse
+                        case .Error(_):
+                            fail("This should not be invoked")
+                        }
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                    }
                 }
             }
             
@@ -174,3 +282,5 @@ class ShotDetailsViewModelSpec: QuickSpec {
         }
     }
 }
+
+

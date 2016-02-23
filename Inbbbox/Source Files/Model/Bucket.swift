@@ -9,14 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-struct Bucket {
+struct Bucket: BucketType {
     
     let identifier: String
     let name: String
-    let description: NSAttributedString?
+    let htmlDescription: NSAttributedString?
     let shotsCount: Int
     let createdAt: NSDate
-    
 }
 
 extension Bucket: Mappable {
@@ -34,7 +33,7 @@ extension Bucket: Mappable {
             return Bucket(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].stringValue,
-                description: htmlDescription,
+                htmlDescription: htmlDescription,
                 shotsCount: json[Key.ShotsCount.rawValue].intValue,
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!
             )

@@ -17,4 +17,10 @@ extension Shot {
         let json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Shot")
         return Shot.map(json)
     }
+    
+    static func fixtureShotWithIdentifier(identifier: String) -> Shot {
+        var json = JSONSpecLoader.sharedInstance.jsonWithResourceName("Shot")
+        json["id"].string = identifier
+        return Shot.map(json)
+    }
 }

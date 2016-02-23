@@ -7,102 +7,106 @@
 //
 
 import Foundation
+import UIKit
 import PromiseKit
 
-final class ShotDetailsViewModel {
+protocol ShotDetailsViewModelDelegate: class {
+    func performBatchUpdate(insertIndexPaths: [NSIndexPath], reloadIndexPaths: [NSIndexPath], deleteIndexPaths: [NSIndexPath])
+    func presentAlertController(controller: UIAlertController)
+}
+
+class ShotDetailsViewModel {
+    
+    // Public properties
+    weak var delegate: ShotDetailsViewModelDelegate?
     
     var commentsCount: Int {
         return comments.count
     }
     
     var itemsCount: Int {
+        guard comments.count > 0 else { return 0 }
         
-        var counter = Int(1) //for ShotDetailsOperationCollectionViewCell
-        if let description = shot.description where description.string.characters.count > 0 {
-            counter++
-        }
-        if hasCommentsToFetch {
-            counter += comments.count
-        }
-        
-        return counter
+        return comments.count >= Int(shot.commentsCount) ? comments.count : comments.count + 1
     }
     
-    // requesters and provider
-    var commentsProvider = CommentsProvider(page: 1, pagination: 20)
-    var commentsRequester = CommentsRequester()
+    var compactVariantCanBeDisplayed: Bool {
+        return itemsCount >= changingHeaderStyleCommentsThreshold
+    }
     
-    private let localStorage = ShotsLocalStorage()
-    private let userStorageClass = UserStorage.self
-    private let shotsRequester =  ShotsRequester()
-    
-    let shot: Shot
-    private(set) var comments = [Comment]()
+    // Comment requester and provider
+    var commentsProvider = APICommentsProvider(page: 1, pagination: 20)
+    var commentsRequester = APICommentsRequester()
     
     // Private
-    private var hasCommentsToFetch: Bool {
-        return shot.commentsCount != 0
-    }
     
-    var attributedShotTitleForHeader: NSAttributedString {
-        return ShotDetailsFormatter.attributedStringForHeaderFromShot(shot)
-    }
+    private let shot: ShotType
+    private var comments = [CommentType]()
+    private let changingHeaderStyleCommentsThreshold = 3
     
-    var attributedShotDescription: NSAttributedString? {
-        return ShotDetailsFormatter.attributedShotDescriptionFromShot(shot)
-    }
+    //Storages
+    private let userStorageClass = UserStorage.self
     
-    init(shot: Shot) {
+    // Requesters
+    private let shotsRequester =  ShotsRequester()
+    
+    // Formatters
+    private let shotDateFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        return formatter
+    }()
+    
+    private let commentDateFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        formatter.timeStyle = .ShortStyle
+        return formatter
+    }()
+    
+    init(shot: ShotType) {
         self.shot = shot
-    }
-    
-    func isDescriptionIndex(index: Int) -> Bool {
-        if index > 1 {
-            return false
-        } else if let description = shot.description where description.string.characters.count > 0 {
-            return true
-        }
-        return false
-    }
-    
-    func isShotOperationIndex(index: Int) -> Bool {
-        return index == 0
     }
     
     // Comments methods
     
-    func loadComments() -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
-            
-            if comments.count == 0 {
-                firstly {
-                    commentsProvider.provideCommentsForShot(shot)
-                }.then { comments -> Void in
-                    self.comments = comments ?? []
-                }.then(fulfill).error(reject)
-                
-            } else {
-                
-                firstly {
-                    commentsProvider.nextPage()
-                }.then { comments -> Void in
-                    if let comments = comments {
-                        self.appendCommentsAndUpdateCollectionView(comments)
-                    }
-                }.then(fulfill).error(reject)
+    func loadComments(completion: (Result) -> Void) {
+        
+        if comments.count == 0 {
+            firstly {
+                self.commentsProvider.provideCommentsForShot(shot)
+            }.then { comments -> Void in
+                self.comments = comments ?? []
+            }.then {
+                completion(Result.Success)
+            }.error { error in
+                completion(Result.Error(error))
+            }
+        } else {
+            firstly {
+                self.commentsProvider.nextPage()
+            }.then { comments -> Void in
+                self.appendCommentsAndUpdateCollectionView(comments! as [CommentType])
+            }.then {
+                completion(Result.Success)
+            }.error { error in
+                completion(Result.Error(error))
             }
         }
     }
     
-    //NGRToDo: Handle reloading messages appropriately
-    func postComment(message: String) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
-            
-            firstly {
-                commentsRequester.postCommentForShot(shot, withText: message)
-            }.then { comment in
-                self.comments.append(comment)
-            }.then(fulfill).error(reject)
+    func postComment(message: String, completion: (Result) -> Void) {
+        
+        firstly {
+            commentsRequester.postCommentForShot(shot, withText: message)
+        }.then { comment in
+            self.comments.append(comment)
+        }.then {
+            completion(Result.Success)
+        }.error { error in
+            completion(Result.Error(error))
         }
     }
     
@@ -110,51 +114,61 @@ final class ShotDetailsViewModel {
     
     func userDidTapLikeButton(like: Bool, completion: (Result) -> Void) {
         
-        let operationClosure = {
-            if self.userStorageClass.currentUser != nil {
-                firstly {
-                    like ? self.shotsRequester.likeShot(self.shot) : self.shotsRequester.unlikeShot(self.shot)
-                }.then {
-                    completion(Result.Success)
-                }.error { error in
-                    completion(Result.Error(error))
-                }
-            } else {
-                do {
-                    like ? try self.localStorage.like(shotID: self.shot.identifier) : try self.localStorage.unlike(shotID: self.shot.identifier)
-                    completion(Result.Success)
-                } catch {
-                    completion(Result.Error(error))
-                }
-            }
-        }
-
         if like {
-            operationClosure()
+            shotsRequester.likeShot(shot)
         } else {
-            //NGRToDo: Inform controller about error
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { _ in
+                alertController.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            let unlikeAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Unlike", comment: ""), style: .Destructive) { _ in
+                self.shotsRequester.unlikeShot(self.shot)
+            }
+            alertController.addAction(cancelAction)
+            alertController.addAction(unlikeAction)
+            delegate?.presentAlertController(alertController)
         }
     }
     
-    func displayableDataForCommentAtIndex(index: Int) -> (author: String, comment: NSAttributedString?, date: String, avatarURLString: String) {
+    // Provide viewData methods
+    
+    func viewDataForHeader(completion: (Result, HeaderViewData?) -> Void) {
+        var shotLiked: Bool?
+        var headerViewData: HeaderViewData?
         
-        let indexWithOffset = comments.count - itemsCount + index
-        let comment = comments[indexWithOffset]
-
-        return (
-            author: comment.user.name ?? comment.user.username,
-            comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
-            date: ShotDetailsFormatter.commentDateForComment(comment),
-            avatarURLString: comment.user.avatarString ?? ""
-        )
+        
+        firstly{
+            shotsRequester.isShotLikedByMe(shot)
+        }.then { liked in
+            shotLiked = liked
+        }.then {
+            headerViewData = HeaderViewData(
+                description: self.shot.htmlDescription?.mutableCopy() as? NSMutableAttributedString,
+                title: self.shot.title,
+                author: self.shot.user.name ?? self.shot.user.username,
+                client: self.shot.team?.name,
+                shotInfo: self.shotDateFormatter.stringFromDate(self.shot.createdAt),
+                shot: self.shot.shotImage.normalURL.absoluteString,
+                avatar: self.shot.user.avatarString!,
+                shotLiked: shotLiked!,
+                shotInBuckets: true // NGRTodo: provide this information
+            )
+        }.then {
+            completion(Result.Success, headerViewData)
+        }.error {error in
+            completion(Result.Error(error), nil)
+        }
     }
     
-    func isCurrentUserOwnerOfCommentAtIndex(index: Int) -> Bool {
-        
-        let indexWithOffset = comments.count - itemsCount + index
-        let comment = comments[indexWithOffset]
-        
-        return UserStorage.currentUser?.identifier == comment.user.identifier
+    func viewDataForCellAtIndex(index: Int) -> ShotDetailsViewModel.DetailsCollectionViewCellViewData {
+        let comment = comments[index]
+        return DetailsCollectionViewCellViewData(
+            avatar: comment.user.avatarString!,
+            author: comment.user.name ?? comment.user.username,
+            comment: comment.body?.mutableCopy() as? NSMutableAttributedString ?? NSMutableAttributedString(),
+            time: commentDateFormatter.stringFromDate(comment.createdAt)
+        )
     }
     
     func viewDataForLoadMoreCell() -> ShotDetailsViewModel.LoadMoreCellViewData {
@@ -168,7 +182,7 @@ final class ShotDetailsViewModel {
 private extension ShotDetailsViewModel {
     
     // Comments methods
-    func appendCommentsAndUpdateCollectionView(comments: [Comment]) {
+    func appendCommentsAndUpdateCollectionView(comments: [CommentType]) {
         
         let currentCommentCount = self.comments.count
         let possibleLoadMoreCellIndexPath:NSIndexPath? =  {
@@ -196,31 +210,30 @@ private extension ShotDetailsViewModel {
             }
         }
         
-        //NGRTemp: backward compatibility
-//        delegate?.performBatchUpdate(indexPathsToInsert, reloadIndexPaths: indexPathsToReload, deleteIndexPaths: indexPathsToDelete)
-    }
-    
-    // Shot methods
-    func isShotLikedByMe() -> Promise<Bool> {
-    
-        return Promise<Bool> { fulfill, reject in
-            
-            if self.userStorageClass.currentUser != nil {
-                firstly {
-                    shotsRequester.isShotLikedByMe(shot)
-                }.then(fulfill).error(reject)
-            } else {
-                let liked = localStorage.likedShots.contains {
-                    $0.id == shot.identifier
-                }
-                fulfill(liked)
-            }
-        }
+        delegate?.performBatchUpdate(indexPathsToInsert, reloadIndexPaths: indexPathsToReload, deleteIndexPaths: indexPathsToDelete)
     }
 }
 
 extension ShotDetailsViewModel {
     
+    struct HeaderViewData {
+        let description: NSMutableAttributedString?
+        let title: String
+        let author: String
+        let client: String?
+        let shotInfo: String
+        let shot: String
+        let avatar: String
+        let shotLiked: Bool
+        let shotInBuckets: Bool
+    }
+    
+    struct DetailsCollectionViewCellViewData {
+        let avatar: String
+        let author: String
+        let comment: NSMutableAttributedString
+        let time: String
+    }
     
     struct LoadMoreCellViewData {
         let commentsCount: String

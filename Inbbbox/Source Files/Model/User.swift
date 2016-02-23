@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-final class User: NSObject  {
+final class User: NSObject, UserType {
     
     enum AccountType: String {
         case User = "User"
