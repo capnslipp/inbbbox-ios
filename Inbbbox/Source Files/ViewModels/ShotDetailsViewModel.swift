@@ -116,6 +116,7 @@ class ShotDetailsViewModel {
         
         if like {
             shotsRequester.likeShot(shot)
+            completion(Result.Success)
         } else {
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             let cancelAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel) { _ in
@@ -124,6 +125,7 @@ class ShotDetailsViewModel {
             
             let unlikeAction: UIAlertAction = UIAlertAction(title: NSLocalizedString("Unlike", comment: ""), style: .Destructive) { _ in
                 self.shotsRequester.unlikeShot(self.shot)
+                completion(Result.Success)
             }
             alertController.addAction(cancelAction)
             alertController.addAction(unlikeAction)
