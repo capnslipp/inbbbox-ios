@@ -11,10 +11,11 @@ import GPUImage
 
 extension UIImage {
 
-    func blurredImage(blur: CGFloat) -> UIImage {
-        let maxBlurRadius = CGFloat(5)
+    func imageByBlurringImageWithBlur(blur: CGFloat) -> UIImage {
+        let maxBlurRadius = CGFloat(1)
         let blurFilter = GPUImageGaussianBlurFilter()
         blurFilter.blurRadiusInPixels = blur * maxBlurRadius
+        
         return blurFilter.imageByFilteringImage(self)
     }
 }
