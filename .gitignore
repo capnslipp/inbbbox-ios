@@ -56,4 +56,4 @@ Carthage
 vendor
 
 # Merge files
-.orig
+*.orig
