@@ -18,39 +18,10 @@ import UIKit
 class ShotDetailsHeaderView: UICollectionReusableView {
     
     // Public
-    struct ViewData {
-        let description: NSMutableAttributedString?
-        let title: String
-        let author: String
-        let client: String?
-        let shotInfo: String
-        let shot: String
-        let avatar: String
-        let shotLiked: Bool
-        let shotInBuckets: Bool
-    }
-    
-    var viewData: ViewData? {
-        didSet {
-            shotDescriptionView.descriptionText = viewData?.description ?? NSMutableAttributedString(string: "There is no decription")
-            shotImageView.updateWith((viewData?.shot)!, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius))
-            authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: (viewData?.avatar)!,
-                title: (viewData?.title)!,
-                author: (viewData?.author)!,
-                client: viewData?.client,
-                shotInfo: (viewData?.shotInfo)!
-            )
-            shotDetailsOperationView.viewData = ShotDetailsOperationView.ViewData(
-                shotLiked: viewData!.shotLiked,
-                shotInBuckets: viewData!.shotInBuckets)
-            
-            setupButtonsInteractions()
-        }
-    }
-    
     weak var delegate: ShotDetailsHeaderViewDelegate?
     
     // Private Properties
+    
     private var didUpdateConstraints = false
     private let imageViewCornerRadius = 15
     private var shouldDisplayCompactVariant = false
@@ -98,6 +69,23 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     // MARK: Public
+    
+    func setupHeader(data: ShotDetailsViewModel.HeaderViewData) {
+        shotDescriptionView.descriptionText = data.description ?? NSMutableAttributedString(string: NSLocalizedString("There is no decription", comment: ""))
+        shotImageView.updateWith(data.shot, byRoundingCorners: [.TopLeft, .TopRight], radius: CGFloat(imageViewCornerRadius))
+        authorDetailsView.viewData = AuthorDetailsView.ViewData(avatar: data.avatar,
+            title: data.title,
+            author: data.author,
+            client: data.client,
+            shotInfo: data.shotInfo
+        )
+        shotDetailsOperationView.viewData = ShotDetailsOperationView.ViewData(
+            shotLiked: data.shotLiked,
+            shotInBuckets: data.shotInBuckets
+        )
+        
+        setupButtonsInteractions()
+    }
     
     func updateLikeButton(shotLiked shotLiked: Bool) {
         shotDetailsOperationView.updateLikeButton(liked: shotLiked)
@@ -271,19 +259,18 @@ extension ShotDetailsHeaderView {
         delegate?.shotDetailsHeaderView(self, didTapCloseButton: sender)
     }
     
-    dynamic private func authorButtonDidTap(_: UIButton) {
+    dynamic private func authorButtonDidTap(sender: UIButton) {
         // NGRTodo: consider replacing it with authorID
-        let authorLink = viewData?.author ?? ""
+        let authorLink = sender.titleLabel?.text ?? ""
         delegate?.shotDetailsHeaderView?(self, didTapAuthor: authorLink)
     }
     
-    dynamic private func clientButtonDidTap(_: UIButton) {
+    dynamic private func clientButtonDidTap(sender: UIButton) {
         // NGRTodo: consider replacing it with clientID
-        let clientLink = viewData?.client ?? ""
+        let clientLink = sender.titleLabel?.text ?? ""
         delegate?.shotDetailsHeaderView?(self, didTapClient: clientLink)
     }
-    
-    // NGRTemp:
+
     dynamic private func likeButtonDidTap(_: UIButton) {
         delegate?.shotDetailsHeaderViewDidTapLikeButton?(!shotDetailsOperationView.isShotLiked()){ operationSucceed -> Void in
             if operationSucceed {

@@ -11,7 +11,7 @@ import PromiseKit
 import SwiftyJSON
 
 /// Provides interface for dribbble comments update, delete and create API
-final class CommentsRequester: Verifiable {
+class CommentsRequester: Verifiable {
     
     /**
      Creates and posts comment for given shot with provided text.

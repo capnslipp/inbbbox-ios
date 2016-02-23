@@ -9,7 +9,7 @@
 import Quick
 import Nimble
 import PromiseKit
-import Mockingjay
+import Dobby
 
 @testable import Inbbbox
 
@@ -17,10 +17,10 @@ class CommentsProviderSpec: QuickSpec {
     override func spec() {
         
         var comments: [Comment]?
-        var sut: CommentsProviderMock!
+        var sut: CommentsProviderPrivateMock!
         
         beforeEach {
-            sut = CommentsProviderMock()
+            sut = CommentsProviderPrivateMock()
         }
         
         afterEach {
@@ -67,8 +67,8 @@ class CommentsProviderSpec: QuickSpec {
     }
 }
 
-//Explanation: Create CommentsProviderMock to override methods from PageableProvider.
-private class CommentsProviderMock: CommentsProvider {
+//Explanation: Create CommentsProviderPrivateMock to override methods from PageableProvider.
+private class CommentsProviderPrivateMock: CommentsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)
