@@ -12,6 +12,10 @@ class AvatarView: UIView {
     
     let imageView = UIImageView()
     
+    convenience init (size: CGSize, bordered: Bool = true) {
+        self.init(avatarFrame: CGRect(origin: CGPointZero, size: size), bordered: bordered)
+    }
+    
     convenience init(avatarFrame: CGRect, bordered: Bool = true) {
         self.init(frame: avatarFrame)
         if bordered {

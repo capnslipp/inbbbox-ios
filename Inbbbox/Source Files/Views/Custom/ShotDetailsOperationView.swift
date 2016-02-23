@@ -25,11 +25,10 @@ class ShotDetailsOperationView: UIView {
         }
     }
     
-    
-    // Private Properties
-    private let buttonsSize = CGFloat(28)
     private var didUpdateConstraints = false
-    private let defaultBackgroundColor = UIColor.RGBA(246, 248, 248, 1)
+    private var buttonSize: CGSize {
+        return CGSize(width: 44, height: 44)
+    }
     
     private var shotLiked: Bool? {
         didSet {
@@ -50,17 +49,45 @@ class ShotDetailsOperationView: UIView {
             }
         }
     }
-    // MARK: Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = defaultBackgroundColor
-        setupSubviews()
+        backgroundColor = UIColor.RGBA(246, 248, 248, 1)
+      
+        likeButton.setImage(UIImage(named: "ic-like-details"), forState: .Normal)
+        likeButton.contentMode = .ScaleAspectFit
+        addSubview(likeButton)
+
+        bucketButton.setImage(UIImage(named: "ic-bucket-details"), forState: .Normal)
+        bucketButton.contentMode = .ScaleAspectFit
+        addSubview(bucketButton)
     }
     
     @available(*, unavailable, message="Use init(withImage: UIImage) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func intrinsicContentSize() -> CGSize {
+        let margin = CGFloat(10)
+        return CGSize(width: 0, height: buttonSize.height + 2 * margin)
+    }
+    
+    override func updateConstraints() {
+        
+        if !didUpdateConstraints {
+            didUpdateConstraints = true
+
+            let views = [likeButton, bucketButton] as NSArray
+            views.autoDistributeViewsAlongAxis(.Horizontal, alignedTo: .Horizontal, withFixedSize: buttonSize.width, insetSpacing: true)
+            
+            views.forEach {
+                $0.autoAlignAxis(.Horizontal, toSameAxisOfView: self)
+                $0.autoSetDimension(.Height, toSize: buttonSize.height)
+            }
+        }
+        
+        super.updateConstraints()
     }
     
     // MARK: Public
@@ -75,46 +102,5 @@ class ShotDetailsOperationView: UIView {
     
     func isShotInBuckets() -> Bool {
         return shotInBuckets!
-    }
-    
-    // MARK: UI
-    
-    override func updateConstraints() {
-        
-        let distanceBetweenButtons = CGFloat(30)
-        
-        if !didUpdateConstraints {
-            
-            likeButton.autoPinEdgeToSuperviewEdge(.Top)
-            likeButton.autoAlignAxis(.Vertical, toSameAxisOfView: likeButton.superview!, withOffset: -(distanceBetweenButtons/2 + buttonsSize/2))
-            likeButton.autoSetDimensionsToSize(CGSize(width: buttonsSize, height: buttonsSize))
-            
-            bucketButton.autoAlignAxis(.Vertical, toSameAxisOfView: likeButton.superview!, withOffset: distanceBetweenButtons/2 + buttonsSize/2)
-            bucketButton.autoPinEdgeToSuperviewEdge(.Top)
-            bucketButton.autoSetDimensionsToSize(CGSize(width: buttonsSize, height: buttonsSize))
-            
-            didUpdateConstraints = true
-        }
-        
-        super.updateConstraints()
-    }
-    
-    // MARK: Private
-    
-    private func setupSubviews() {
-        setupLikeButton()
-        setupBucketButton()
-    }
-    
-    private func setupLikeButton() {
-        likeButton.setImage(UIImage(named: "ic-like-details"), forState: .Normal)
-        likeButton.contentMode = .ScaleAspectFit
-        addSubview(likeButton)
-    }
-    
-    private func setupBucketButton() {
-        bucketButton.setImage(UIImage(named: "ic-bucket-details"), forState: .Normal)
-        likeButton.contentMode = .ScaleAspectFit
-        addSubview(bucketButton)
     }
 }

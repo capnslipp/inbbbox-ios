@@ -2,50 +2,96 @@
 //  ShotDetailsView.swift
 //  Inbbbox
 //
-//  Created by Lukasz Pikor on 21.01.2016.
+//  Created by Patryk Kaczmarek on 18/02/16.
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import PureLayout
+import EasyAnimation
 
 class ShotDetailsView: UIView {
     
-    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-    let tableView = UITableView(frame: CGRectZero, style: .Grouped)
+    let collectionView: UICollectionView
+    let commentComposerView = CommentComposerView.newAutoLayoutView()
+    let closeButton = UIButton(type: .System)
     
+    var topLayoutGuideOffset = CGFloat(0)
+    
+    private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    private let keyboardResizableView = KeyboardResizableView.newAutoLayoutView()
     private var didSetConstraints = false
     
     override init(frame: CGRect) {
+
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
+        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.layer.shadowColor = UIColor.grayColor().CGColor
+        collectionView.layer.shadowOffset = CGSize(width: 0, height: 0.1)
+        collectionView.layer.shadowOpacity = 0.3
+        collectionView.clipsToBounds = true
+        
         super.init(frame: frame)
         
-        backgroundColor = UIColor.clearColor()
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        blurView.configureForAutoLayout()
-        tableView.configureForAutoLayout()
-        addSubview(blurView)
-        addSubview(tableView)
-    }
+        backgroundColor = .clearColor()
 
-    @available(*, unavailable, message="Use init(frame:) method instead")
+        blurView.configureForAutoLayout()
+        addSubview(blurView)
+        
+        collectionViewCornerWrapperView.backgroundColor = .clearColor()
+        collectionViewCornerWrapperView.clipsToBounds = true
+        collectionViewCornerWrapperView.addSubview(collectionView)
+        
+        keyboardResizableView.automaticallySnapToKeyboardTopEdge = true
+        keyboardResizableView.addSubview(collectionViewCornerWrapperView)
+        keyboardResizableView.addSubview(commentComposerView)
+        addSubview(keyboardResizableView)
+        
+        closeButton.setImage(UIImage(named: "ic-closemodal"), forState: .Normal)
+        addSubview(closeButton)
+    }
+    
+    @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func updateConstraints() {
+        
         if !didSetConstraints {
+            didSetConstraints = true
             
-            self.autoPinEdgesToSuperviewEdges()
             blurView.autoPinEdgesToSuperviewEdges()
             
-            tableView.autoPinEdge(.Top, toEdge: .Top, ofView: self, withOffset:30)
-            tableView.autoPinEdge(.Left, toEdge: .Left, ofView: self, withOffset:0)
-            tableView.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset:0)
-            tableView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self, withOffset:0)
+            keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            let constraint = keyboardResizableView.autoPinEdgeToSuperviewEdge(.Bottom)
+            keyboardResizableView.setReferenceBottomConstraint(constraint)
             
-            didSetConstraints = true
+            commentComposerView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
+            commentComposerView.autoSetDimension(.Height, toSize: 50)
+            
+            let insets = UIEdgeInsets(top: topLayoutGuideOffset, left: 10, bottom: 0, right: 10)
+            collectionViewCornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
+            collectionViewCornerWrapperView.autoPinEdge(.Bottom, toEdge: .Top, ofView: commentComposerView)
+            
+            collectionView.autoPinEdgesToSuperviewEdges()
+            
+            let margin = CGFloat(5)
+            closeButton.autoSetDimensionsToSize(closeButton.imageForState(.Normal)?.size ?? CGSizeZero)
+            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: collectionViewCornerWrapperView, withOffset: -margin)
+            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: collectionViewCornerWrapperView, withOffset: margin)
         }
+        
         super.updateConstraints()
+    }
+    
+    override func drawRect(rect: CGRect) {
+        super.drawRect(rect)
+        
+        let path = UIBezierPath(roundedRect: collectionViewCornerWrapperView.bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
+        let mask = CAShapeLayer()
+        mask.path = path.CGPath
+        collectionViewCornerWrapperView.layer.mask = mask
     }
 }
