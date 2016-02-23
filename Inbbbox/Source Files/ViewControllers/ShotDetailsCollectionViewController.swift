@@ -137,6 +137,23 @@ class ShotDetailsCollectionViewController: UICollectionViewController {
     }
 }
 
+// Mark: Authentication
+
+extension ShotDetailsCollectionViewController {
+    func showLoginView() {
+        let interactionHandler: (UIViewController -> Void) = { controller in
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+        let authenticator = Authenticator(interactionHandler: interactionHandler)
+        
+        firstly {
+            authenticator.loginWithService(.Dribbble)
+        }.then { Void in
+            self.footer.textField.becomeFirstResponder()
+        }
+    }
+}
+
 extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     // NGRHack: hacky code
@@ -185,6 +202,10 @@ extension ShotDetailsCollectionViewController: UICollectionViewDelegateFlowLayou
 
 extension ShotDetailsCollectionViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if !UserStorage.loggedIn {
+            showLoginView()
+            return false
+        }
         
         if shotDetailsViewModel.compactVariantCanBeDisplayed {
             header.displayCompactVariant()
