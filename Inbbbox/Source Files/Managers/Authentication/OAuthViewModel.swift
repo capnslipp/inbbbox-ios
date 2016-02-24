@@ -128,8 +128,8 @@ private extension String {
             scanner.scanUpToString("&", intoString:&value)
             scanner.scanString("&", intoString: nil)
             
-            if let name = name?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding),
-                value = value?.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding) {
+            if let name = name?.stringByRemovingPercentEncoding,
+                value = value?.stringByRemovingPercentEncoding {
                     parameters[name] = value
             }
         } while !scanner.atEnd

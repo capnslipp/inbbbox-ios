@@ -12,7 +12,7 @@ extension UIViewController {
     
     func loadViewWithClass<T: UIView>(viewType: T.Type) -> T {
         
-        view = T(frame: UIScreen.mainScreen().applicationFrame)
+        view = T(frame: UIScreen.mainScreen().bounds)
         view.autoresizingMask = [.FlexibleRightMargin, .FlexibleLeftMargin, .FlexibleBottomMargin, .FlexibleTopMargin]
         return view as! T
     }

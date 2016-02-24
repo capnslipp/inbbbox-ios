@@ -28,14 +28,14 @@ final class ShotDetailsFormatter {
         return formatter
     }()
     
-    class func attributedStringForHeaderFromShot(shot: Shot) -> NSAttributedString {
+    class func attributedStringForHeaderFromShot(shot: ShotType) -> NSAttributedString {
         
         let mutableAttributedString = NSMutableAttributedString()
         
-        if let title = shot.title where title.characters.count > 0 {
+        if shot.title.characters.count > 0 {
             
             let titleAttributedString = NSAttributedString(
-                string: title,
+                string: shot.title,
                 attributes: [
                     NSForegroundColorAttributeName : UIColor.blackColor(),
                     NSFontAttributeName : UIFont.boldSystemFontOfSize(15)
@@ -101,9 +101,9 @@ final class ShotDetailsFormatter {
         return mutableAttributedString.copy() as! NSAttributedString
     }
     
-    class func attributedShotDescriptionFromShot(shot: Shot) -> NSAttributedString? {
+    class func attributedShotDescriptionFromShot(shot: ShotType) -> NSAttributedString? {
         
-        guard let body = shot.description?.attributedStringByTrimingNewLineCharactersAtTheEnd() else {
+        guard let body = shot.htmlDescription?.attributedStringByTrimingNewLineCharactersAtTheEnd() else {
             return nil
         }
         
@@ -117,7 +117,7 @@ final class ShotDetailsFormatter {
         return mutableBody.copy() as? NSAttributedString
     }
     
-    class func attributedCommentBodyForComment(comment: Comment) -> NSAttributedString? {
+    class func attributedCommentBodyForComment(comment: CommentType) -> NSAttributedString? {
         
         guard let body = comment.body where body.length > 0 else {
             return nil
@@ -134,7 +134,7 @@ final class ShotDetailsFormatter {
         return mutableBody.copy() as? NSAttributedString
     }
     
-    class func commentDateForComment(comment: Comment) -> String {
+    class func commentDateForComment(comment: CommentType) -> String {
         return commentDateFormatter.stringFromDate(comment.createdAt)
     }
 }

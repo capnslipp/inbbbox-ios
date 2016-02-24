@@ -16,7 +16,7 @@ class ShotDetailsViewController: UIViewController {
     private var header: ShotDetailsHeaderView?
     private let viewModel: ShotDetailsViewModel
     
-    init(shot: Shot) {
+    init(shot: ShotType) {
         self.viewModel = ShotDetailsViewModel(shot: shot)
         super.init(nibName: nil, bundle: nil)
     }
@@ -118,7 +118,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
-            header?.imageView.loadShotImageFromURL(viewModel.shot.image.normalURL)
+            header?.imageView.loadShotImageFromURL(viewModel.shot.shotImage.normalURL)
             
             header?.maxHeight = sizeForExpandedCollectionViewHeader(collectionView).height
             header?.minHeight = heightForCollapsedCollectionViewHeader
