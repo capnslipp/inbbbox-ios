@@ -146,10 +146,6 @@ private extension APIShotsProvider {
             .filter { !$0.animated } // animated after MVP
             .unique
             .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
-        var resultShotTypes = [ShotType]()
-        for shot in resultShots {
-            resultShotTypes.append(shot)
-        }
-        fulfill(resultShotTypes)
+        fulfill(resultShots.map { $0 as ShotType })
     }
 }

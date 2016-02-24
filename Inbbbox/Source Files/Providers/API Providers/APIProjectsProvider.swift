@@ -29,14 +29,7 @@ class APIProjectsProvider: PageableProvider {
             firstly {
                 firstPageForQueries([query], withSerializationKey: nil)
             }.then { (projects: [Project]?) -> Void in
-                var projectTypes: [ProjectType]?
-                if let projects = projects {
-                    projectTypes = [ProjectType]()
-                    for project in projects {
-                        projectTypes?.append(project)
-                    }
-                }
-                fulfill(projectTypes)
+                fulfill(projects.flatMap { $0.map { $0 as ProjectType } })
             }.error(reject)
         }
     }

@@ -127,14 +127,7 @@ private extension APIConnectionsProvider {
             }.then {
                 self.firstPageForQueries(queries, withSerializationKey: key)
             }.then { (users: [User]?) -> Void in
-                var userTypes: [UserType]?
-                if let users = users {
-                    userTypes = [UserType]()
-                    for user in users {
-                        userTypes?.append(user)
-                    }
-                }
-                fulfill(userTypes)
+                fulfill(users.flatMap { $0.map { $0 as UserType } })
             }.error(reject)
         }
     }
@@ -145,14 +138,7 @@ private extension APIConnectionsProvider {
             firstly {
                 promise
             }.then { (users: [User]?) -> Void in
-                var userTypes: [UserType]?
-                if let users = users {
-                    userTypes = [UserType]()
-                    for user in users {
-                        userTypes?.append(user)
-                    }
-                }
-                fulfill(userTypes)
+                fulfill(users.flatMap { $0.map { $0 as UserType } })
             }.error(reject)
         }
     }

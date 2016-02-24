@@ -25,9 +25,6 @@ extension ManagedUser: UserType {
     var avatarString: String? { return mngd_avatarString }
     var shotsCount: Int { return mngd_shotsCount }
     var accountType: UserAccountType? {
-        guard let mngd_accountType = mngd_accountType else {
-            return nil
-        }
-        return UserAccountType(rawValue: mngd_accountType)
+        return mngd_accountType.flatMap { UserAccountType(rawValue: $0) }
     }
 }
