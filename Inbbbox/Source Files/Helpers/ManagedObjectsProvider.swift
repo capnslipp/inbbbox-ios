@@ -11,7 +11,13 @@ import CoreData
 
 struct ManagedObjectsProvider {
     
-    static func managedShot(shot: ShotType, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> ManagedShot {
+    let managedObjectContext: NSManagedObjectContext
+    
+    init(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
+    }
+    
+    func managedShot(shot: ShotType) -> ManagedShot {
         let fetchRequest = NSFetchRequest(entityName: ManagedShot.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", shot.identifier)
 
@@ -24,8 +30,8 @@ struct ManagedObjectsProvider {
         managedShot.mngd_identifier = shot.identifier
         managedShot.mngd_title = shot.title
         managedShot.mngd_htmlDescription = shot.htmlDescription
-        managedShot.mngd_user = managedUser(shot.user, inManagedObjectContext: managedObjectContext)
-        managedShot.mngd_shotImage = managedShotImage(shot.shotImage, inManagedObjectContext: managedObjectContext)
+        managedShot.mngd_user = managedUser(shot.user)
+        managedShot.mngd_shotImage = managedShotImage(shot.shotImage)
         managedShot.mngd_createdAt = shot.createdAt
         managedShot.mngd_animated = shot.animated
         managedShot.mngd_likesCount = NSNumber(unsignedInteger: shot.likesCount)
@@ -33,12 +39,12 @@ struct ManagedObjectsProvider {
         managedShot.mngd_commentsCount = NSNumber(unsignedInteger: shot.commentsCount)
         managedShot.mngd_bucketsCount = NSNumber(unsignedInteger: shot.bucketsCount)
         if let team = shot.team {
-            managedShot.mngd_team = managedTeam(team, inManagedObjectContext: managedObjectContext)
+            managedShot.mngd_team = managedTeam(team)
         }
         return managedShot
     }
     
-    static func managedUser(user: UserType, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> ManagedUser {
+    func managedUser(user: UserType) -> ManagedUser {
         let fetchRequest = NSFetchRequest(entityName: ManagedUser.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", user.identifier)
 
@@ -57,7 +63,7 @@ struct ManagedObjectsProvider {
         return managedUser
     }
     
-    static func managedTeam(team: TeamType, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> ManagedTeam {
+    func managedTeam(team: TeamType) -> ManagedTeam {
         let fetchRequest = NSFetchRequest(entityName: ManagedTeam.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", team.identifier)
         
@@ -75,7 +81,7 @@ struct ManagedObjectsProvider {
         return managedTeam
     }
     
-    static func managedShotImage(shotImage: ShotImageType, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> ManagedShotImage {
+    func managedShotImage(shotImage: ShotImageType) -> ManagedShotImage {
         let fetchRequest = NSFetchRequest(entityName: ManagedShotImage.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_normalURL == %@", shotImage.normalURL.absoluteString)
         do {
@@ -93,7 +99,7 @@ struct ManagedObjectsProvider {
         return managedShotImage
     }
     
-    static func managedBucket(bucket: BucketType, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> ManagedBucket {
+    func managedBucket(bucket: BucketType) -> ManagedBucket {
         let fetchRequest = NSFetchRequest(entityName: ManagedBucket.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", bucket.identifier)
         
@@ -110,7 +116,7 @@ struct ManagedObjectsProvider {
         return managedBucket
     }
     
-    static func managedProject(project: ProjectType, inManagedObjectContext managedObjectContext: NSManagedObjectContext) -> ManagedProject {
+    func managedProject(project: ProjectType) -> ManagedProject {
         let fetchRequest = NSFetchRequest(entityName: ManagedProject.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", project.identifier)
         

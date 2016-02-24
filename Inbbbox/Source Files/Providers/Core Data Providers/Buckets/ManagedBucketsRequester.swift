@@ -8,13 +8,22 @@
 
 import UIKit
 import PromiseKit
+import CoreData
 
 class ManagedBucketsRequester {
     
+    let managedObjectContext: NSManagedObjectContext
+    let managedObjectsProvider: ManagedObjectsProvider
+    
+    init() {
+        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
+    }
+    
+    
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let managedBucket = ManagedObjectsProvider.managedBucket(bucket, inManagedObjectContext: managedObjectContext)
-        let managedShot = ManagedObjectsProvider.managedShot(shot, inManagedObjectContext: managedObjectContext)
+        let managedBucket = managedObjectsProvider.managedBucket(bucket)
+        let managedShot = managedObjectsProvider.managedShot(shot)
         if let managedShots = managedBucket.shots {
             managedShots.setByAddingObject(managedShot)
         } else {
@@ -30,9 +39,9 @@ class ManagedBucketsRequester {
     }
 
     func removeShot(shot: ShotType, fromBucket bucket: BucketType) -> Promise<Void> {
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let managedBucket = ManagedObjectsProvider.managedBucket(bucket, inManagedObjectContext: managedObjectContext)
-        let managedShot = ManagedObjectsProvider.managedShot(shot, inManagedObjectContext: managedObjectContext)
+
+        let managedBucket = managedObjectsProvider.managedBucket(bucket)
+        let managedShot = managedObjectsProvider.managedShot(shot)
         if let managedShots = managedBucket.shots{
             let mutableShots = NSMutableSet(set: managedShots)
             mutableShots.removeObject(managedShot)

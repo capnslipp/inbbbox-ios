@@ -7,8 +7,10 @@ import PromiseKit
 import CoreData
 
 class ManagedShotsProvider {
+    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     func provideLikedShotsForUser(user: UserType) -> Promise<[ShotType]?> {
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: ManagedShot.entityName)
         let likedPredicate = NSPredicate(format: "liked == true")
         let userPredicate = NSPredicate(format: "mngd_user.mngd_identifier == %@", user.identifier)

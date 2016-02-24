@@ -4,12 +4,21 @@
 
 import UIKit
 import PromiseKit
+import CoreData
 
 class ManagedShotsRequester {
+    
+    let managedObjectContext: NSManagedObjectContext
+    let managedObjectsProvider: ManagedObjectsProvider
+    
+    init() {
+        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
+    }
+    
 
     func likeShot(shot: ShotType) -> Promise<Void> {
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let managedShot = ManagedObjectsProvider.managedShot(shot, inManagedObjectContext: managedObjectContext)
+        let managedShot = managedObjectsProvider.managedShot(shot)
         managedShot.liked = true
         return Promise<Void> { fulfill, reject in
             do {
@@ -21,8 +30,7 @@ class ManagedShotsRequester {
     }
 
     func unlikeShot(shot: ShotType) -> Promise<Void> {
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let managedShot = ManagedObjectsProvider.managedShot(shot, inManagedObjectContext: managedObjectContext)
+        let managedShot = managedObjectsProvider.managedShot(shot)
         managedShot.liked = false
         return Promise<Void> { fulfill, reject in
             do {
@@ -34,8 +42,7 @@ class ManagedShotsRequester {
     }
 
     func isShotLikedByMe(shot: ShotType) -> Promise<Bool> {
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let managedShot = ManagedObjectsProvider.managedShot(shot, inManagedObjectContext: managedObjectContext)
+        let managedShot = managedObjectsProvider.managedShot(shot)
         return Promise<Bool> { fulfill, _ in
             fulfill(managedShot.liked)
         }

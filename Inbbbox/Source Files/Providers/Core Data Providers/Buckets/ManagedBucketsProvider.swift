@@ -12,8 +12,9 @@ import CoreData
 
 class ManagedBucketsProvider {
 
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     func provideMyBuckets() -> Promise<[BucketType]?> {
-        let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: ManagedBucket.entityName)
         
         return Promise<[BucketType]?> { fulfill, reject in
