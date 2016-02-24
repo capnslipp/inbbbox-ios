@@ -51,7 +51,7 @@ class ShotImageView: UIImageView {
         activityIndicatorView.startAnimating()
 
         loadImageFromURL(url) { [weak self] finished, error in
-            self?.image = self?.image?.blurredImage(blur)
+            self?.image = self?.image?.imageByBlurringImageWithBlur(blur)
             self?.activityIndicatorView.stopAnimating()
         }
     }

@@ -16,7 +16,7 @@ class ImageMock: UIImage {
     static let cachedImageFromURLStub = Stub<(NSURL, UIImage?), UIImage?>()
     let blurredImageStub = Stub<CGFloat, UIImage>()
 
-    override func blurredImage(blur: CGFloat) -> UIImage {
+    override func imageByBlurringImageWithBlur(blur: CGFloat) -> UIImage {
         return try! blurredImageStub.invoke(blur)
     }
 }

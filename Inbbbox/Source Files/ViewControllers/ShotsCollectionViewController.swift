@@ -117,9 +117,8 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
         definesPresentationContext = true
 
-        let shotDetailsCollectionViewController = ShotDetailsCollectionViewController(shot: shots[indexPath.item])
+        let shotDetailsCollectionViewController = ShotDetailsViewController(shot: shots[indexPath.item])
         shotDetailsCollectionViewController.modalPresentationStyle = .OverCurrentContext
-        shotDetailsCollectionViewController.delegate = self
         tabBarController?.presentViewController(shotDetailsCollectionViewController, animated: true, completion: nil)
     }
     
@@ -174,12 +173,6 @@ extension ShotsCollectionViewController: ShotsAnimatorDelegate {
 
     func itemsForShotsAnimator(animationManager: ShotsAnimator) -> [Shot] {
         return Array(shots.prefix(3))
-    }
-}
-
-extension ShotsCollectionViewController: ShotDetailsCollectionViewControllerDelegate {
-    func didFinishPresentingDetails(sender: ShotDetailsCollectionViewController) {
-        sender.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

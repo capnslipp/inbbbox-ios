@@ -30,5 +30,29 @@ extension NSAttributedString {
         }
         
         self.init(attributedString: attributedString!)
-    }    
+    }
+    
+    func attributedStringByTrimingNewLineCharactersAtTheEnd() -> NSAttributedString {
+        
+        let possibleNewLineCharacter = string.substringFromIndex(string.endIndex.advancedBy(-1))
+        if possibleNewLineCharacter == "\n" {
+            let range = NSMakeRange(0, length - 1)
+            return attributedSubstringFromRange(range).attributedStringByTrimingNewLineCharactersAtTheEnd()
+        }
+
+        return self
+    }
+    
+    class func newLineAttributedString() -> NSAttributedString {
+        return NSAttributedString(string: "\n")
+    }
+    
+    func boundingHeightUsingAvailableWidth(width: CGFloat) -> CGFloat {
+        
+        let options = unsafeBitCast(
+            NSStringDrawingOptions.UsesLineFragmentOrigin.rawValue,
+            NSStringDrawingOptions.self
+        )
+        return ceil(boundingRectWithSize(CGSizeMake(width, CGFloat(MAXFLOAT)), options:options, context:nil).size.height)
+    }
 }
