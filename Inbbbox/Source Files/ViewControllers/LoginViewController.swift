@@ -96,10 +96,11 @@ extension LoginViewController {
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
     
-    func logoTapped(sender: UIImageView) {
+    func logoTapped(sender: UITapGestureRecognizer) {
         logoTappedCount++
         if logoTappedCount == 5 {
             viewAnimator?.showLoginAsGuest()
+            sender.enabled = false
         }
     }
 }
