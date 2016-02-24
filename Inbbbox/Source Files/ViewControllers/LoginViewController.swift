@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     private weak var aView: LoginView?
     private var viewAnimator: LoginViewAnimator?
     private var onceTokenForScrollToMiddleInstantly = dispatch_once_t(0)
+    private var logoTappedCount = 0
     private var statusBarStyle: UIStatusBarStyle = .LightContent {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
@@ -36,6 +37,9 @@ class LoginViewController: UIViewController {
         shotsAnimator = AutoScrollableShotsAnimator(bindForAnimation: bindForAnimation)
         aView?.loginButton.addTarget(self, action: "loginButtonDidTap:", forControlEvents: .TouchUpInside)
         aView?.loginAsGuestButton.addTarget(self, action: "loginAsGuestButtonDidTap:", forControlEvents: .TouchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: "logoTapped:")
+        aView?.logoImageView.addGestureRecognizer(tapGesture)
+        aView?.logoImageView.userInteractionEnabled = true
         aView?.loadingLabel.alpha = 0
     }
 
@@ -90,6 +94,14 @@ extension LoginViewController {
     
     func loginAsGuestButtonDidTap(_: UIButton) {
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
+    }
+    
+    func logoTapped(sender: UITapGestureRecognizer) {
+        logoTappedCount++
+        if logoTappedCount == 5 {
+            viewAnimator?.showLoginAsGuest()
+            sender.enabled = false
+        }
     }
 }
 

@@ -83,7 +83,7 @@ class LoginView: UIView {
             let height = 2 * cornerRadius
             loginButton.frame = CGRect(
                 x: inset,
-                y: CGRectGetMinY(orLabel.frame) - height,
+                y: CGRectGetMaxY(frame) - height - 120,
                 width: CGRectGetWidth(frame) - 2 * inset,
                 height: height
             )
@@ -98,7 +98,7 @@ class LoginView: UIView {
             
             loginAsGuestButton.frame = CGRect(
                 x: inset,
-                y: CGRectGetMaxY(frame) - 40 - height,
+                y: CGRectGetMaxY(frame) - 40 - height + 200,
                 width: CGRectGetWidth(frame) - 2 * inset,
                 height: height
             )
