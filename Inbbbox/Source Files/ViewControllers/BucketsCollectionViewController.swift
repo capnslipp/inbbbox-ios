@@ -31,7 +31,6 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBarButtons()
         guard let collectionView = collectionView else {
             return
         }
@@ -143,18 +142,6 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present bucket details view controller
-    }
-
-    // MARK: Configuration
-
-    func setupBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add New", comment: ""), style: .Plain, target: self, action: "didTapAddNewBucketButton:")
-    }
-
-    // MARK: Actions:
-
-    func didTapAddNewBucketButton(_: UIBarButtonItem) {
-        // NGRTodo: Implement this
     }
 }
 
