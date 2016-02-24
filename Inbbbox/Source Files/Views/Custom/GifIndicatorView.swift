@@ -11,7 +11,7 @@ import UIKit
 class GifIndicatorView:UIView {
     
     let gifLabel = UILabel()
-    let vibrancyGifLabel = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    let vibrancyGifView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
     
     private var didSetConstraints = false
  
@@ -31,11 +31,11 @@ class GifIndicatorView:UIView {
         gifLabel.textColor = UIColor.textDarkColor()
         gifLabel.textAlignment = .Center
         
-        vibrancyGifLabel.contentView.addSubview(gifLabel)
-        vibrancyGifLabel.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
-        vibrancyGifLabel.layer.cornerRadius = 4
-        vibrancyGifLabel.clipsToBounds = true
-        self.addSubview(vibrancyGifLabel)
+        vibrancyGifView.contentView.addSubview(gifLabel)
+        vibrancyGifView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
+        vibrancyGifView.layer.cornerRadius = 4
+        vibrancyGifView.clipsToBounds = true
+        self.addSubview(vibrancyGifView)
     }
     
     override func updateConstraints() {
@@ -43,7 +43,7 @@ class GifIndicatorView:UIView {
             didSetConstraints = true
             
             gifLabel.autoPinEdgesToSuperviewEdges()
-            vibrancyGifLabel.autoPinEdgesToSuperviewEdges()
+            vibrancyGifView.autoPinEdgesToSuperviewEdges()
             autoSetDimension(.Width, toSize: 30)
             autoSetDimension(.Height, toSize: 20)
         }

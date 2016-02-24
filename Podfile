@@ -36,7 +36,7 @@ pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/is
     :git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git',
     :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
 
-pod 'Gifu'
+pod 'Gifu', '~> 1.0.1'
 
 target 'Tests' do link_with 'Unit Tests'
 

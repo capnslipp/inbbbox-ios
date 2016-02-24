@@ -47,7 +47,7 @@ DEPENDENCIES:
   - Dobby (~> 0.4.2)
   - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
-  - Gifu
+  - Gifu (~> 1.0.1)
   - GPUImage (~> 0.1)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
