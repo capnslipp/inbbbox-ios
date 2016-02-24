@@ -10,7 +10,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
 //    MARK: - Life cycle
 
     var animationManager = ShotsAnimator()
-    var userStorageClass = UserStorage.self
     var imageClass = UIImage.self
     var shotsRequester =  ShotsRequester()
     let shotsProvider = ShotsProvider()
@@ -96,16 +95,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         cell.swipeCompletion = { [weak self] action in
             switch action {
             case .Like:
-                //NGRTodo: Refactor - move to separate object, it's not vc responsibility
-                if self?.userStorageClass.currentUser != nil {
-                    self?.shotsRequester.likeShot(shot)
-                } else {
-                    //NGRTodo: Refactor this AppDelegate Driven Development
-                    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-                    let managedShot = ManagedObjectsProvider.managedShot(shot, inManagedObjectContext: managedObjectContext)
-                    managedShot.liked = true
-                    try! managedObjectContext.save()
-                }
+                self?.shotsRequester.likeShot(shot)
             case .Bucket: break
             case .Comment: break
             }
