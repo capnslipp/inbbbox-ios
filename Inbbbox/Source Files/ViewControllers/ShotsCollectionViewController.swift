@@ -89,6 +89,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         let shouldBlurShotImage = !didFinishInitialAnimations && indexPath.row != 0
         let blur = shouldBlurShotImage ? CGFloat(1) : CGFloat(0)
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL, blur: blur)
+        cell.gifLabel.hidden = !shot.animated
 
         cell.delegate = self
 

@@ -87,6 +87,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         cell.shotImageView.image = nil
         let shot = likedShots[indexPath.item]
         cell.shotImageView.loadImageFromURL(shot.shotImage.normalURL)
+        cell.gifLabel.hidden = !shot.animated
         return cell
     }
     

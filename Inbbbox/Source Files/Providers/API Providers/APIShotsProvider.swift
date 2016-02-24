@@ -139,7 +139,6 @@ private extension APIShotsProvider {
 
     func serialize(shots: [Shot]?, _ fulfill: [ShotType]? -> Void) {
         let result = shots?
-            .filter { !$0.animated } // animated after MVP
             .unique
             .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
         fulfill(result.flatMap{ $0.map { $0 as ShotType } })
