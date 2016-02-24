@@ -18,7 +18,7 @@ final class ShotDetailsViewModel {
     var itemsCount: Int {
         
         var counter = Int(1) //for ShotDetailsOperationCollectionViewCell
-        if let description = shot.htmlDescription where description.string.characters.count > 0 {
+        if let description = shot.attributedDescription where description.string.characters.count > 0 {
             counter++
         }
         if hasCommentsToFetch {
@@ -58,7 +58,7 @@ final class ShotDetailsViewModel {
     func isDescriptionIndex(index: Int) -> Bool {
         if index > 1 {
             return false
-        } else if let description = shot.htmlDescription where description.string.characters.count > 0 {
+        } else if let description = shot.attributedDescription where description.string.characters.count > 0 {
             return true
         }
         return false

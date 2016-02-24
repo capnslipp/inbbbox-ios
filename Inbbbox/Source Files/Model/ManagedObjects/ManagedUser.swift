@@ -14,7 +14,7 @@ class ManagedUser: NSManagedObject {
     @NSManaged var mngd_name: String?
     @NSManaged var mngd_username: String
     @NSManaged var mngd_avatarString: String?
-    @NSManaged var mngd_shotsCount: NSNumber
+    @NSManaged var mngd_shotsCount: Int
     @NSManaged var mngd_accountType: String?
 }
 
@@ -23,11 +23,11 @@ extension ManagedUser: UserType {
     var name: String? { return mngd_name }
     var username: String { return mngd_username }
     var avatarString: String? { return mngd_avatarString }
-    var shotsCount: Int { return mngd_shotsCount.integerValue }
-    var accountType: User.AccountType? {
+    var shotsCount: Int { return mngd_shotsCount }
+    var accountType: UserAccountType? {
         guard let mngd_accountType = mngd_accountType else {
             return nil
         }
-        return User.AccountType(rawValue: mngd_accountType)
+        return UserAccountType(rawValue: mngd_accountType)
     }
 }

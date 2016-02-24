@@ -11,7 +11,7 @@ import Foundation
 protocol ProjectType {
     var identifier: String { get }
     var name: String? { get }
-    var htmlDescription: NSAttributedString? { get }
+    var attributedDescription: NSAttributedString? { get }
     var createdAt: NSDate { get }
     var shotsCount: UInt { get }
 }

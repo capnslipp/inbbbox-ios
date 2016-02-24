@@ -15,7 +15,7 @@ import Foundation
 protocol ShotType {
     var identifier: String { get }
     var title: String { get }
-    var htmlDescription: NSAttributedString? { get }
+    var attributedDescription: NSAttributedString? { get }
     var user: UserType { get }
     var shotImage: ShotImageType { get }
     var createdAt: NSDate { get }

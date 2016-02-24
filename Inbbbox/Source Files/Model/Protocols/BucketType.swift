@@ -11,7 +11,7 @@ import Foundation
 protocol BucketType {
     var identifier: String { get }
     var name: String { get }
-    var htmlDescription: NSAttributedString? { get }
+    var attributedDescription: NSAttributedString? { get }
     var shotsCount: Int { get }
     var createdAt: NSDate { get }
 }

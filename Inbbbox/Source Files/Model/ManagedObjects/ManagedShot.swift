@@ -17,10 +17,10 @@ class ManagedShot: NSManagedObject {
     @NSManaged var mngd_shotImage: ManagedShotImage
     @NSManaged var mngd_createdAt: NSDate
     @NSManaged var mngd_animated: Bool
-    @NSManaged var mngd_likesCount: NSNumber
-    @NSManaged var mngd_viewsCount: NSNumber
-    @NSManaged var mngd_commentsCount: NSNumber
-    @NSManaged var mngd_bucketsCount: NSNumber
+    @NSManaged var mngd_likesCount: UInt
+    @NSManaged var mngd_viewsCount: UInt
+    @NSManaged var mngd_commentsCount: UInt
+    @NSManaged var mngd_bucketsCount: UInt
     @NSManaged var mngd_team: ManagedTeam?
 
     @NSManaged var liked: Bool
@@ -31,14 +31,14 @@ extension ManagedShot: ShotType {
 
     var identifier: String { return mngd_identifier }
     var title: String { return mngd_title }
-    var htmlDescription: NSAttributedString? { return mngd_htmlDescription }
+    var attributedDescription: NSAttributedString? { return mngd_htmlDescription }
     var user: UserType { return mngd_user }
     var shotImage: ShotImageType { return mngd_shotImage }
     var createdAt: NSDate { return mngd_createdAt }
     var animated: Bool { return mngd_animated }
-    var likesCount: UInt { return mngd_likesCount.unsignedIntegerValue }
-    var viewsCount: UInt { return mngd_viewsCount.unsignedIntegerValue }
-    var commentsCount: UInt { return mngd_commentsCount.unsignedIntegerValue }
-    var bucketsCount: UInt { return mngd_bucketsCount.unsignedIntegerValue }
+    var likesCount: UInt { return mngd_likesCount }
+    var viewsCount: UInt { return mngd_viewsCount }
+    var commentsCount: UInt { return mngd_commentsCount }
+    var bucketsCount: UInt { return mngd_bucketsCount }
     var team: TeamType? { return mngd_team }
 }

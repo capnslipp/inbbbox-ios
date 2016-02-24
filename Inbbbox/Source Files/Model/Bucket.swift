@@ -13,7 +13,7 @@ struct Bucket: BucketType {
     
     let identifier: String
     let name: String
-    let htmlDescription: NSAttributedString?
+    let attributedDescription: NSAttributedString?
     let shotsCount: Int
     let createdAt: NSDate
 }
@@ -23,7 +23,7 @@ extension Bucket: Mappable {
         return { json in
             
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
-            let htmlDescription: NSAttributedString? = {
+            let attributedDescription: NSAttributedString? = {
                 guard let htmlString = json[Key.Description.rawValue].string else {
                     return nil
                 }
@@ -33,7 +33,7 @@ extension Bucket: Mappable {
             return Bucket(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].stringValue,
-                htmlDescription: htmlDescription,
+                attributedDescription: attributedDescription,
                 shotsCount: json[Key.ShotsCount.rawValue].intValue,
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!
             )

@@ -103,7 +103,7 @@ final class ShotDetailsFormatter {
     
     class func attributedShotDescriptionFromShot(shot: ShotType) -> NSAttributedString? {
         
-        guard let body = shot.htmlDescription?.attributedStringByTrimingNewLineCharactersAtTheEnd() else {
+        guard let body = shot.attributedDescription?.attributedStringByTrimingNewLineCharactersAtTheEnd() else {
             return nil
         }
         

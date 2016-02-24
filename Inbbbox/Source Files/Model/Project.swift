@@ -13,7 +13,7 @@ struct Project: ProjectType {
 
     let identifier: String
     let name: String?
-    let htmlDescription: NSAttributedString?
+    let attributedDescription: NSAttributedString?
     let createdAt: NSDate
     let shotsCount: UInt
     
@@ -24,7 +24,7 @@ extension Project: Mappable {
         return { json in
             
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
-            let htmlDescription: NSAttributedString? = {
+            let attributedDescription: NSAttributedString? = {
                 guard let htmlString = json[Key.Description.rawValue].string else {
                     return nil
                 }
@@ -34,7 +34,7 @@ extension Project: Mappable {
             return Project(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].string,
-                htmlDescription: htmlDescription,
+                attributedDescription: attributedDescription,
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
                 shotsCount: json[Key.ShotsCount.rawValue].uIntValue
             )
