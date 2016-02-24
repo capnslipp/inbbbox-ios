@@ -105,7 +105,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
             
-            imageView.autoMatchDimension(.Width, toDimension: .Height, ofView: imageView)
+            imageView.autoMatchDimension(.Width, toDimension: .Width, ofView: imageViewCenterWrapperView)
             imageView.autoCenterInSuperview()
             
             dimView.autoPinEdgesToSuperviewEdges()

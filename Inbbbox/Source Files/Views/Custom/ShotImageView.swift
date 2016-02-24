@@ -9,8 +9,9 @@
 import UIKit
 import PureLayout
 import KFSwiftImageLoader
+import Gifu
 
-class ShotImageView: UIImageView {
+class ShotImageView: AnimatableImageView {
 
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     private var didSetupConstraints = false
@@ -54,5 +55,19 @@ class ShotImageView: UIImageView {
             self?.image = self?.image?.imageByBlurringImageWithBlur(blur)
             self?.activityIndicatorView.stopAnimating()
         }
+    }
+    
+    func loadAnimatableShotFromUrl(url: NSURL) {
+        activityIndicatorView.startAnimating()
+        let request = NSURLRequest(URL: url)
+        NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            dispatch_async(dispatch_get_main_queue(), {
+                if let data = data {
+                    self.animateWithImageData(data)
+                }
+                self.activityIndicatorView.stopAnimating()
+            })
+        }.resume()
     }
 }
