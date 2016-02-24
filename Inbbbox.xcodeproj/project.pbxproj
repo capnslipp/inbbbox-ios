@@ -252,6 +252,7 @@
 		BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95086A1C20790200E39242 /* ParametersSpec.swift */; };
 		C616C67E1C773EB700896E70 /* LabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67D1C773EB700896E70 /* LabelItem.swift */; };
 		C616C6801C77410300896E70 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67F1C77410300896E70 /* LabelCell.swift */; };
+		C663D7CF1C7C75A700353761 /* GifIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */; };
 		E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
@@ -552,6 +553,7 @@
 		BF95086A1C20790200E39242 /* ParametersSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersSpec.swift; sourceTree = "<group>"; };
 		C616C67D1C773EB700896E70 /* LabelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelItem.swift; sourceTree = "<group>"; };
 		C616C67F1C77410300896E70 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
+		C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifIndicatorView.swift; sourceTree = "<group>"; };
 		E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotImage.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -945,6 +947,9 @@
 				5E0D038B1C760D8700DDB497 /* CommentComposerView.swift */,
 				5EA18A621C762BE4004F61C1 /* ShotDetailsHeaderView.swift */,
 				5E1572B11C7CA49C0083B6CA /* ShotDetailsOperationView.swift */,
+
+				C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */,
+
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1568,6 +1573,7 @@
 				5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */,
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
+				C663D7CF1C7C75A700353761 /* GifIndicatorView.swift in Sources */,
 				5E91A6391C73802E00C9D609 /* UnfollowUserQuery.swift in Sources */,
 				5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */,
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
