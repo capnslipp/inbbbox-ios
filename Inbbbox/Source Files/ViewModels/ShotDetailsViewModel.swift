@@ -76,19 +76,19 @@ final class ShotDetailsViewModel {
             if comments.count == 0 {
                 firstly {
                     commentsProvider.provideCommentsForShot(shot)
-                    }.then { comments -> Void in
-                        self.comments = comments ?? []
-                    }.then(fulfill).error(reject)
+                }.then { comments -> Void in
+                    self.comments = comments ?? []
+                }.then(fulfill).error(reject)
                 
             } else {
                 
                 firstly {
                     commentsProvider.nextPage()
-                    }.then { comments -> Void in
-                        if let comments = comments {
-                            self.appendCommentsAndUpdateCollectionView(comments)
-                        }
-                    }.then(fulfill).error(reject)
+                }.then { comments -> Void in
+                    if let comments = comments {
+                        self.appendCommentsAndUpdateCollectionView(comments)
+                    }
+                }.then(fulfill).error(reject)
             }
         }
     }
@@ -99,9 +99,9 @@ final class ShotDetailsViewModel {
             
             firstly {
                 commentsRequester.postCommentForShot(shot, withText: message)
-                }.then { comment in
-                    self.comments.append(comment)
-                }.then(fulfill).error(reject)
+            }.then { comment in
+                self.comments.append(comment)
+            }.then(fulfill).error(reject)
         }
     }
     

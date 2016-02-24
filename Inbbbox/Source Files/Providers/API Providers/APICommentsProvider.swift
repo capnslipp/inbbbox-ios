@@ -27,14 +27,7 @@ class APICommentsProvider: PageableProvider {
             firstly {
                 firstPageForQueries([query], withSerializationKey: nil)
             }.then { (comments: [Comment]?) -> Void in
-                var commentTypes: [CommentType]?
-                if let comments = comments {
-                    commentTypes = [CommentType]()
-                    for project in comments {
-                        commentTypes?.append(project)
-                    }
-                }
-                fulfill(commentTypes)
+                fulfill(comments.flatMap { $0.map { $0 as CommentType } })
             }.error(reject)
         }
     }
@@ -52,14 +45,7 @@ class APICommentsProvider: PageableProvider {
             firstly {
                 nextPageFor(Comment)
             }.then { comments -> Void in
-                var commentTypes: [CommentType]?
-                if let comments = comments {
-                    commentTypes = [CommentType]()
-                    for comment in comments {
-                        commentTypes?.append(comment)
-                    }
-                }
-                fulfill(commentTypes)
+                fulfill(comments.flatMap { $0.map { $0 as CommentType } })
             }.error(reject)
         }
     }
@@ -77,14 +63,7 @@ class APICommentsProvider: PageableProvider {
             firstly {
                 previousPageFor(Comment)
             }.then { comments -> Void in
-                var commentTypes: [CommentType]?
-                if let comments = comments {
-                    commentTypes = [CommentType]()
-                    for comment in comments {
-                        commentTypes?.append(comment)
-                    }
-                }
-                fulfill(commentTypes)
+                fulfill(comments.flatMap { $0.map { $0 as CommentType } })
             }.error(reject)
         }
     }
