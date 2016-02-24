@@ -14,7 +14,7 @@ struct ProjectsQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
-    init(shot: Shot) {
+    init(shot: ShotType) {
         path = "/shots/" + shot.identifier + "/projects"
     }
 }

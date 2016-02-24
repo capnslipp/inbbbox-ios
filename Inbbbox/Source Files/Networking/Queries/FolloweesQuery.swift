@@ -24,7 +24,7 @@ struct FolloweesQuery: Query {
     /**
      Initialize query for list who given user is following.
      */
-    init(followeesOfUser user: User) {
+    init(followeesOfUser user: UserType) {
         path = "/users/\(user.username)/following"
     }
 }

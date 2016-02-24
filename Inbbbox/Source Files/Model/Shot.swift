@@ -9,50 +9,46 @@
 import Foundation
 import SwiftyJSON
 
-/**
- Shot model. Can contain much more properties. See http://developer.dribbble.com/v1/shots/#get-a-shot.
- */
-
-struct Shot {
+struct Shot: ShotType {
     let identifier: String
-    let title: String?
-    let description: NSAttributedString?
-    let user: User
-    let image: ShotImage
+    let title: String
+    let attributedDescription: NSAttributedString?
+    let user: UserType
+    let shotImage: ShotImageType
     let createdAt: NSDate
     let animated: Bool
     let likesCount: UInt
     let viewsCount: UInt
     let commentsCount: UInt
     let bucketsCount: UInt
-    let team: Team?
+    let team: TeamType?
 }
 
 extension Shot: Mappable {
     static var map: JSON -> Shot {
         return { json in
-            
+
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
-            let htmlDescription: NSAttributedString? = {
+            let attributedDescription: NSAttributedString? = {
                 guard let htmlString = json[Key.Description.rawValue].string else {
                     return nil
                 }
                 return NSAttributedString(htmlString: htmlString)
             }()
-            
+
             let team: Team? = {
                 guard json[Key.Team.rawValue] != nil else {
                     return nil
                 }
                 return Team.map(json[Key.Team.rawValue])
             }()
-            
+
             return Shot(
                 identifier: json[Key.Identifier.rawValue].stringValue,
-                title: json[Key.Title.rawValue].string,
-                description: htmlDescription,
+                title: json[Key.Title.rawValue].stringValue,
+                attributedDescription: attributedDescription,
                 user: User.map(json[Key.User.rawValue]),
-                image: ShotImage.map(json[Key.Images.rawValue]),
+                shotImage: ShotImage.map(json[Key.Images.rawValue]),
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
                 animated: json[Key.Animated.rawValue].boolValue,
                 likesCount: json[Key.LikesCount.rawValue].uIntValue,

@@ -10,18 +10,17 @@ final class ShotsCollectionViewController: UICollectionViewController {
 //    MARK: - Life cycle
 
     var animationManager = ShotsAnimator()
-    var localStorage = ShotsLocalStorage()
-    var userStorageClass = UserStorage.self
     var imageClass = UIImage.self
     var shotsRequester =  ShotsRequester()
+    let shotsProvider = ShotsProvider()
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
 
 //    NGRTemp: temporary implementation - Maybe we should download shots when the ball is jumping? Or just activity indicator will be enough?
-    var shots = [Shot]()
 
-    let shotsProvider = ShotsProvider()
+    var shots = [ShotType]()
+
     private var shouldAskForMoreShots = true
 
     convenience init() {
@@ -86,24 +85,17 @@ final class ShotsCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
 
         let shot = shots[indexPath.item]
-        
+
         let shouldBlurShotImage = !didFinishInitialAnimations && indexPath.row != 0
         let blur = shouldBlurShotImage ? CGFloat(1) : CGFloat(0)
-        cell.shotImageView.loadShotImageFromURL(shot.image.normalURL, blur: blur)
-        
+        cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL, blur: blur)
+
         cell.delegate = self
-        
+
         cell.swipeCompletion = { [weak self] action in
             switch action {
             case .Like:
-                if self?.userStorageClass.currentUser != nil {
-                    self?.shotsRequester.likeShot(shot)
-                } else {
-                    do {
-                        try self?.localStorage.like(shotID: shot.identifier)
-                    } catch {
-                    }
-                }
+                self?.shotsRequester.likeShot(shot)
             case .Bucket: break
             case .Comment: break
             }
@@ -121,7 +113,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         shotDetailsCollectionViewController.modalPresentationStyle = .OverCurrentContext
         tabBarController?.presentViewController(shotDetailsCollectionViewController, animated: true, completion: nil)
     }
-    
+
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == shots.count - 6 && shouldAskForMoreShots {
             firstly {
@@ -150,7 +142,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         for cell in collectionView.visibleCells() {
             if let shotCell = cell as? ShotCollectionViewCell, indexPath = collectionView.indexPathForCell(shotCell) {
                 let shot = shots[indexPath.item]
-                shotCell.shotImageView.loadShotImageFromURL(shot.image.normalURL, blur: blur)
+                shotCell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL, blur: blur)
             }
         }
     }
@@ -171,7 +163,7 @@ extension ShotsCollectionViewController: ShotsAnimatorDelegate {
         return collectionView
     }
 
-    func itemsForShotsAnimator(animationManager: ShotsAnimator) -> [Shot] {
+    func itemsForShotsAnimator(animationManager: ShotsAnimator) -> [ShotType] {
         return Array(shots.prefix(3))
     }
 }

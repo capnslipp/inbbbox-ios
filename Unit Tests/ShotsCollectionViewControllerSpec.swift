@@ -105,57 +105,6 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
                 it("should dequeue cell with proper identifier") {
                     expect(capturedIdentifier).to(equal("ShotCollectionViewCellIdentifier"))
                 }
-
-                describe("swipe completion") {
-
-                    context("when action is like") {
-
-                        context("when user is not signed in") {
-
-                            var capturedShotID: String!
-
-                            beforeEach {
-                                let localStorageMock = ShotsLocalStorageMock()
-                                localStorageMock.likeStub.on(any()) { shotID in
-                                    capturedShotID = shotID
-                                }
-                                sut.localStorage = localStorageMock
-
-                                cell.swipeCompletion?(.Like)
-                            }
-
-                            it("should like shot locally with proper ID") {
-                                expect(capturedShotID).to(equal("fixture.identifier"))
-                            }
-                        }
-
-                        context("when user is signed in") {
-
-                            var capturedShot: Shot!
-
-                            beforeEach {
-                                let userStorageMockClass = UserStorageMock.self
-                                userStorageMockClass.currentUserStub.on(any()) { _ in
-                                    return User.fixtureUser()
-                                }
-                                sut.userStorageClass = userStorageMockClass
-
-                                let shotsRequesterMock = ShotsRequesterMock()
-                                shotsRequesterMock.likeShotStub.on(any()) { shot in
-                                    capturedShot = shot
-                                    return Promise()
-                                }
-                                sut.shotsRequester = shotsRequesterMock
-
-                                cell.swipeCompletion?(.Like)
-                            }
-
-                            it("should like shot with proper ID") {
-                                expect(capturedShot.identifier).to(equal("fixture.identifier"))
-                            }
-                        }
-                    }
-                }
             }
         }
 
@@ -176,7 +125,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
 
             describe("items for animation manager") {
 
-                var items: [Shot]!
+                var items: [ShotType]!
 
                 beforeEach {
                     let shot = Shot.fixtureShot()

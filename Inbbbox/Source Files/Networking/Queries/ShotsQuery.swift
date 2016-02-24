@@ -19,7 +19,7 @@ struct ShotsQuery: Query {
      - UserLikedShots: List of the given user's liked shots.
      */
     enum ShotsType {
-        case List, UserShots(User), BucketShots(Bucket), UserLikedShots(User)
+        case List, UserShots(UserType), BucketShots(BucketType), UserLikedShots(UserType)
         
         var path: String {
 

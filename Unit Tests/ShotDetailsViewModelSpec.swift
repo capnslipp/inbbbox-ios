@@ -18,15 +18,15 @@ class ShotDetailsViewModelSpec: QuickSpec {
     override func spec() {
         
         var sut: ShotDetailsViewModel!
-        var shot: Shot!
-        var commentsProviderMock: CommentsProviderMock!
-        var commentsRequesterMock: CommentsRequesterMock!
+        var shot: ShotType!
+        var commentsProviderMock: APICommentsProviderMock!
+        var commentsRequesterMock: APICommentsRequesterMock!
         
         beforeEach {
             shot = Shot.fixtureShot()
             sut = ShotDetailsViewModel(shot: shot)
-            commentsProviderMock = CommentsProviderMock()
-            commentsRequesterMock = CommentsRequesterMock()
+            commentsProviderMock = APICommentsProviderMock()
+            commentsRequesterMock = APICommentsRequesterMock()
             sut.commentsProvider = commentsProviderMock
             sut.commentsRequester = commentsRequesterMock
             
@@ -35,8 +35,12 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     
                     let json = JSONSpecLoader.sharedInstance.fixtureCommentsJSON(withCount: 10)
                     let result = json.map { Comment.map($0) }
+                    var resultCommentTypes = [CommentType]()
+                    for comment in result {
+                        resultCommentTypes.append(comment)
+                    }
                     
-                    fulfill(result)
+                    fulfill(resultCommentTypes)
                 }
             }
             
@@ -45,8 +49,12 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     
                     let json = JSONSpecLoader.sharedInstance.fixtureCommentsJSON(withCount: 5)
                     let result = json.map { Comment.map($0) }
+                    var resultCommentTypes = [CommentType]()
+                    for comment in result {
+                        resultCommentTypes.append(comment)
+                    }
                     
-                    fulfill(result)
+                    fulfill(resultCommentTypes)
                 }
             }
             
@@ -84,10 +92,10 @@ class ShotDetailsViewModelSpec: QuickSpec {
             beforeEach {
                 
                 waitUntil { done in
-                sut.loadComments().then { result -> Void in
+                    sut.loadComments().then { result -> Void in
                         responseResult = successResponse
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                 }
             }
             
@@ -111,7 +119,7 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 waitUntil { done in
                     sut.loadComments().then { result in
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                 }
                 
                 waitUntil { done in
@@ -140,7 +148,7 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     sut.postComment("fixture.message").then { result -> Void in
                         responseResult = successResponse
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                 }
             }
             

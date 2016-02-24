@@ -16,10 +16,10 @@ class ShotsProviderConfigurationSpec: QuickSpec {
         
         restoreEnvironmentAfterSuite()
         
-        var sut: ShotsProviderConfiguration!
+        var sut: APIShotsProviderConfiguration!
         
         beforeEach {
-            sut = ShotsProviderConfiguration()
+            sut = APIShotsProviderConfiguration()
         }
         
         afterEach {
@@ -50,7 +50,7 @@ class ShotsProviderConfigurationSpec: QuickSpec {
                 }
                 
                 it("shouldn't return disabled source") {
-                    expect(sut.sources).toNot(contain(ShotsProviderConfiguration.ShotsSource.NewToday))
+                    expect(sut.sources).toNot(contain(APIShotsProviderConfiguration.ShotsSource.NewToday))
                 }
             }
         }
