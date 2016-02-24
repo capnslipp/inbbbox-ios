@@ -86,9 +86,9 @@ class LoginViewAnimations {
         }
     }
     
-    func moveAnimation(views: [UIView], duration: NSTimeInterval, fade: FadeStyle, transition: CGPoint, completion: (Void -> Void)? = nil) {
+    func moveAnimation(views: [UIView], duration: NSTimeInterval, fade: FadeStyle, easeFunction:UIViewAnimationOptions = .CurveEaseIn, transition: CGPoint, completion: (Void -> Void)? = nil) {
         
-        UIView.animateWithDuration(duration, delay: 0, options: [.CurveEaseIn], animations: {
+        UIView.animateWithDuration(duration, delay: 0, options: [easeFunction], animations: {
             views.forEach {
                 let frame = CGRect(
                     x: CGRectGetMinX($0.frame) + transition.x,

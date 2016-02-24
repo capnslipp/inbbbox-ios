@@ -81,6 +81,11 @@ class LoginViewAnimator {
             }
         }
     }
+    
+    func showLoginAsGuest() {
+        animations.moveAnimation([view!.loginButton, view!.dribbbleLogoImageView], duration: 0.5, fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -32))
+        animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.5, fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -200))
+    }
 }
 
 private extension LoginViewAnimator {
