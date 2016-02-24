@@ -134,7 +134,10 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 extension ShotDetailsViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return collectionView.cellForItemAtIndexPath(indexPath) is ShotDetailsCommentCollectionViewCell
+        if collectionView.cellForItemAtIndexPath(indexPath) is ShotDetailsCommentCollectionViewCell {
+            return viewModel.isCurrentUserOwnerOfCommentAtIndex(indexPath.row)
+        }
+        return false
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

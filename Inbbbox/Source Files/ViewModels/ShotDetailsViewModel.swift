@@ -149,6 +149,14 @@ final class ShotDetailsViewModel {
         )
     }
     
+    func isCurrentUserOwnerOfCommentAtIndex(index: Int) -> Bool {
+        
+        let indexWithOffset = comments.count - itemsCount + index
+        let comment = comments[indexWithOffset]
+        
+        return UserStorage.currentUser?.identifier == comment.user.identifier
+    }
+    
     func viewDataForLoadMoreCell() -> ShotDetailsViewModel.LoadMoreCellViewData {
         let difference = Int(shot.commentsCount) - commentsCount
         return LoadMoreCellViewData(

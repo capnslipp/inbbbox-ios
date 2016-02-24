@@ -100,11 +100,11 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
             dateLabel.autoPinEdge(.Left, toEdge: .Left, ofView: authorLabel)
             dateLabel.autoPinEdge(.Right, toEdge: .Right, ofView: authorLabel)
             dateLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
-            
-            editView.autoPinEdge(.Left, toEdge: .Left, ofView: commentLabel)
-            editView.autoPinEdge(.Right, toEdge: .Right, ofView: commentLabel)
-            editView.autoPinEdge(.Top, toEdge: .Top, ofView: commentLabel)
-            editView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: commentLabel)
+                        
+            editView.autoPinEdge(.Right, toEdge: .Right, ofView: self)
+            editView.autoPinEdge(.Left, toEdge: .Left, ofView: self)
+            editView.autoPinEdge(.Top, toEdge: .Top, ofView: self)
+            editView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self)
         }
         
         super.updateConstraints()
