@@ -35,7 +35,7 @@ class APIShotsProviderSpec: QuickSpec {
                 }.error { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
-                expect(shots).toEventually(haveCount(2))
+                expect(shots).toEventually(haveCount(3))
             }
         }
         
@@ -47,7 +47,7 @@ class APIShotsProviderSpec: QuickSpec {
                 }.error { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
-                expect(shots).toEventually(haveCount(2))
+                expect(shots).toEventually(haveCount(3))
             }
         }
         
@@ -59,7 +59,7 @@ class APIShotsProviderSpec: QuickSpec {
                 }.error { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
-                expect(shots).toEventually(haveCount(2))
+                expect(shots).toEventually(haveCount(3))
             }
         }
         
@@ -71,7 +71,7 @@ class APIShotsProviderSpec: QuickSpec {
                 }.error { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
-                expect(shots).toEventually(haveCount(2))
+                expect(shots).toEventually(haveCount(3))
             }
         }
         
@@ -118,7 +118,7 @@ class APIShotsProviderSpec: QuickSpec {
                     }.error { _ in fail() }
                     
                     expect(shots).toNotEventually(beNil())
-                    expect(shots).toEventually(haveCount(2))
+                    expect(shots).toEventually(haveCount(3))
                 }
                 
                 
@@ -128,7 +128,7 @@ class APIShotsProviderSpec: QuickSpec {
                     }.error { _ in fail() }
                     
                     expect(shots).toNotEventually(beNil())
-                    expect(shots).toEventually(haveCount(2))
+                    expect(shots).toEventually(haveCount(3))
                 }
                 
             }
