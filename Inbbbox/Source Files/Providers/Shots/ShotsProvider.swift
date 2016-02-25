@@ -12,7 +12,6 @@ class ShotsProvider {
     let managedShotsProvider = ManagedShotsProvider()
 
     func provideShots() -> Promise<[ShotType]?> {
-        assert(UserStorage.userIsSignedIn, "Cannot provide shots when user is not signed in")
         return apiShotsProvider.provideShots()
     }
 
