@@ -9,16 +9,9 @@
 import UIKit
 import PromiseKit
 
-class BucketsCollectionViewController: UICollectionViewController {
+class BucketsCollectionViewController: UICollectionViewController, BucketsViewModelDelegate {
 
-    private var buckets = [BucketType]()
-    //NGRTemp: could be solved nicer with IOS-131
-    private var bucketsIndexedShots = [Int : [ShotType]]()
-    private let bucketsProvider = BucketsProvider()
-    private let shotsProvider = ShotsProvider()
-    private var isUserLogged: Bool {
-        return UserStorage.currentUser != nil
-    }
+    private let viewModel = BucketsViewModel()
 
     // MARK: - Lifecycle
 
@@ -26,7 +19,8 @@ class BucketsCollectionViewController: UICollectionViewController {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
         flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio;
         self.init(collectionViewLayout: flowLayout)
-        title = NSLocalizedString("Buckets", comment:"")
+        title = viewModel.title
+        viewModel.delegate = self
     }
 
     override func viewDidLoad() {
@@ -40,100 +34,29 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        isUserLogged ? downloadInitialBuckets() : loadLocallyStoredBuckets()
-    }
-
-    // MARK: Loading buckets
-
-    func loadLocallyStoredBuckets() {
-        // NGRTodo: Implement this
-    }
-
-    func downloadInitialBuckets() {
-        firstly {
-            bucketsProvider.provideMyBuckets()
-        }.then { buckets -> Void in
-            if let buckets = buckets {
-                self.buckets = buckets
-                self.downloadShots(buckets)
-            }
-            self.collectionView?.reloadData()
-        }.error { error in
-            // NGRTemp: Need mockups for error message view
-            print(error)
-        }
-    }
-
-    func downloadBucketsForNextPage() {
-        firstly {
-            bucketsProvider.nextPage()
-        }.then { buckets -> Void in
-            if let buckets = buckets where buckets.count > 0 {
-                let indexes = buckets.enumerate().map { index, _ in
-                    return index + self.buckets.count
-                }
-                self.buckets.appendContentsOf(buckets)
-                let indexPaths = indexes.map {
-                    NSIndexPath(forRow:($0), inSection: 0)
-                }
-                self.collectionView?.insertItemsAtIndexPaths(indexPaths)
-                self.downloadShots(buckets)
-            }
-        }.error { error in
-            // NGRTemp: Need mockups for error message view
-            print(error)
-        }
-    }
-
-    //MARK: Downloading shots
-
-    func downloadShots(buckets: [BucketType]) {
-        for bucket in buckets {
-            firstly {
-                shotsProvider.provideShotsForBucket(bucket)
-            }.then { shots -> Void in
-
-                var indexOfBucket: Int?
-                for (index, item) in self.buckets.enumerate(){
-                    if item.identifier == bucket.identifier {
-                        indexOfBucket = index
-                        break
-                    }
-                }
-                guard let index = indexOfBucket else {
-                    return
-                }
-                if let shots = shots {
-                    self.bucketsIndexedShots[index] = shots
-                } else {
-                    self.bucketsIndexedShots[index] = [ShotType]()
-                }
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-            }.error { error in
-                // NGRTemp: Need mockups for error message view
-                print(error)
-            }
-        }
+        viewModel.downloadInitialBuckets()
     }
 
     // MARK: UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return buckets.count
+        return viewModel.bucketsCount
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == buckets.count - 1 && isUserLogged {
-            downloadBucketsForNextPage()
+        if indexPath.row == viewModel.bucketsCount - 1 {
+            viewModel.downloadBucketsForNextPage()
         }
         let cell = collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.clearImages()
-        let bucket = buckets[indexPath.row]
-        presentBucketForCell(bucket, cell: cell)
-        if let bucketShots = bucketsIndexedShots[indexPath.row] {
-            let shotImagesUrls = bucketShots.map { $0.shotImage.normalURL }
-            presentShotsImagesForCell(shotImagesUrls, cell: cell)
+        let cellData = viewModel.bucketCollectionViewCellViewData(indexPath)
+        cell.nameLabel.text = cellData.name
+        cell.numberOfShotsLabel.text = cellData.numberOfShots
+        if let shotImagesURLs = cellData.shotsImagesURLs {
+            cell.firstShotImageView.loadImageFromURL(shotImagesURLs[0])
+            cell.secondShotImageView.loadImageFromURL(shotImagesURLs[1])
+            cell.thirdShotImageView.loadImageFromURL(shotImagesURLs[2])
+            cell.fourthShotImageView.loadImageFromURL(shotImagesURLs[3])
         }
         return cell
     }
@@ -143,25 +66,18 @@ class BucketsCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present bucket details view controller
     }
-}
-
-// MARK - Cells data filling
-
-private extension BucketsCollectionViewController {
-
-    func presentBucketForCell(bucket: BucketType, cell: BucketCollectionViewCell) {
-        cell.nameLabel.text = bucket.name
-        cell.numberOfShotsLabel.text = bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
+    
+    // MARK: Buckets View Model Delegate
+    
+    func bucketsViewModelDidLoadInitialBuckets(viewModel: BucketsViewModel) {
+        collectionView?.reloadData()
     }
-
-    func presentShotsImagesForCell(shotImagesURLs: [NSURL], cell: BucketCollectionViewCell) {
-        guard shotImagesURLs.count > 0 else {
-            return
-        }
-        let repeatedShotURLs = Array(Array(Array(count: 4, repeatedValue: shotImagesURLs).flatten())[0...3])
-        cell.firstShotImageView.loadImageFromURL(repeatedShotURLs[0])
-        cell.secondShotImageView.loadImageFromURL(repeatedShotURLs[1])
-        cell.thirdShotImageView.loadImageFromURL(repeatedShotURLs[2])
-        cell.fourthShotImageView.loadImageFromURL(repeatedShotURLs[3])
+    
+    func bucketsViewModel(viewModel: BucketsViewModel, didLoadBucketsAtIndexPaths indexPaths: [NSIndexPath]) {
+        collectionView?.insertItemsAtIndexPaths(indexPaths)
+    }
+    
+    func bucketsViewModel(viewModel: BucketsViewModel, didLoadShotsForBucketAtIndexPath indexPath: NSIndexPath) {
+        collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
 }

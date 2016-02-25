@@ -9,15 +9,26 @@
 import Foundation
 import PromiseKit
 
+protocol BucketsViewModelDelegate {
+    func bucketsViewModelDidLoadInitialBuckets(viewModel: BucketsViewModel)
+    func bucketsViewModel(viewModel: BucketsViewModel, didLoadBucketsAtIndexPaths indexPaths: [NSIndexPath])
+    func bucketsViewModel(viewModel: BucketsViewModel, didLoadShotsForBucketAtIndexPath indexPath: NSIndexPath)
+}
+
 class BucketsViewModel {
     
+    var delegate: BucketsViewModelDelegate?
+    let title = NSLocalizedString("Buckets", comment:"")
     private var buckets = [BucketType]()
-    //NGRTemp: could be solved nicer with IOS-131
     private var bucketsIndexedShots = [Int : [ShotType]]()
     private let bucketsProvider = BucketsProvider()
     private let shotsProvider = ShotsProvider()
     
-    private func downloadInitialBuckets(handler: () -> ()) {
+    var bucketsCount: Int {
+        return buckets.count
+    }
+    
+    func downloadInitialBuckets() {
         firstly {
             bucketsProvider.provideMyBuckets()
         }.then { buckets -> Void in
@@ -25,15 +36,17 @@ class BucketsViewModel {
                 self.buckets = buckets
                 self.downloadShots(buckets)
             }
-            handler()
+            self.delegate?.bucketsViewModelDidLoadInitialBuckets(self)
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)
         }
-        
     }
     
-    func downloadBucketsForNextPage(handler: ([NSIndexPath]) -> ()) {
+    func downloadBucketsForNextPage() {
+        guard UserStorage.currentUser != nil else {
+            return
+        }
         firstly {
             bucketsProvider.nextPage()
         }.then { buckets -> Void in
@@ -45,8 +58,7 @@ class BucketsViewModel {
                 let indexPaths = indexes.map {
                     NSIndexPath(forRow:($0), inSection: 0)
                 }
-                handler(indexPaths)
-                //self.collectionView?.insertItemsAtIndexPaths(indexPaths)
+                self.delegate?.bucketsViewModel(self, didLoadBucketsAtIndexPaths: indexPaths)
                 self.downloadShots(buckets)
             }
         }.error { error in
@@ -55,7 +67,7 @@ class BucketsViewModel {
         }
     }
     
-    func downloadShots(buckets: [BucketType]) {
+    private func downloadShots(buckets: [BucketType]) {
         for bucket in buckets {
             firstly {
                 shotsProvider.provideShotsForBucket(bucket)
@@ -76,7 +88,7 @@ class BucketsViewModel {
                     self.bucketsIndexedShots[index] = [ShotType]()
                 }
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
-           //     self.collectionView?.reloadItemsAtIndexPaths([indexPath])
+                self.delegate?.bucketsViewModel(self, didLoadShotsForBucketAtIndexPath: indexPath)
             }.error { error in
                 // NGRTemp: Need mockups for error message view
                 print(error)
@@ -87,7 +99,6 @@ class BucketsViewModel {
     func bucketCollectionViewCellViewData(indexPath: NSIndexPath) -> BucketCollectionViewCellViewData {
         return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row], shots: bucketsIndexedShots[indexPath.row])
     }
-    
 }
 
 extension BucketsViewModel {
@@ -95,16 +106,16 @@ extension BucketsViewModel {
     struct BucketCollectionViewCellViewData {
         let name: String
         let numberOfShots: String
-        let shotsImagesURLs: [NSURL]
+        let shotsImagesURLs: [NSURL]?
         
         init(bucket: BucketType, shots: [ShotType]?) {
             self.name = bucket.name
             self.numberOfShots = bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
-            if let shots = shots {
+            if let shots = shots where shots.count > 0 {
                 let allShotsImagesURLs = shots.map { $0.shotImage.normalURL }
                 self.shotsImagesURLs =  Array(Array(Array(count: 4, repeatedValue: allShotsImagesURLs).flatten())[0...3])
             } else {
-                self.shotsImagesURLs = [NSURL]()
+                self.shotsImagesURLs = nil
             }
         }
     }
