@@ -30,4 +30,11 @@ class ShotsRequester {
         }
         return managedShotsRequester.isShotLikedByMe(shot)
     }
+    
+    func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
+        if UserStorage.userIsSignedIn {
+            return apiShotsRequester.userBucketsForShot(shot)
+        }
+        return managedShotsRequester.userBucketsForShot(shot)
+    }
 }

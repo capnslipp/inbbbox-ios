@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import SwiftyJSON
 
 /// Provides interface for dribbble shots update, delete and create API
 class APIShotsRequester: Verifiable {
@@ -69,6 +70,34 @@ class APIShotsRequester: Verifiable {
             }
         }
     }
+    
+    /**
+     Checks whether shot is liked by authenticated user or not.
+     
+     - Requires: Authenticated user.
+     
+     - parameter shot: Shot to check.
+     
+     - returns: Promise which resolves with true (if user likes shot) or false (if don't)
+     */
+    func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
+        
+        return Promise<[BucketType]!> { fulfill, reject in
+            
+            let query = BucketsForShotQuery(shot: shot)
+            
+            firstly {
+                sendShotQueryForRespone(query)
+            }.then { json -> Void in
+                let values = (json?.arrayValue.map({ return Bucket.map($0) as BucketType}))!.filter({ bucket -> Bool in
+                    return bucket.owner!.identifier == (UserStorage.currentUser?.identifier)!
+                })
+                fulfill(values)
+            }.error { error in
+                reject(error)
+            }
+        }
+    }
 }
 
 private extension APIShotsRequester {
@@ -83,6 +112,24 @@ private extension APIShotsRequester {
             }.then { _ -> Void in
                 fulfill()
             }.error(reject)
+        }
+    }
+    
+    func sendShotQueryForRespone(query: Query) -> Promise<JSON?> {
+        return Promise<JSON?> { fulfill, reject in
+            
+            firstly {
+                verifyAuthenticationStatus(true)
+            }.then {
+                Request(query: query).resume()
+            }.then { json -> Void in
+                print("aaa")
+                fulfill(json)
+            }.error { error in
+                print("aaa")
+                reject(error)
+                    
+            }
         }
     }
 }
