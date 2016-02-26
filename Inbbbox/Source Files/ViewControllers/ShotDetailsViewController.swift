@@ -169,7 +169,10 @@ extension ShotDetailsViewController {
     
     func bucketButtonDidTap(_: UIButton) {
         //NGRToDo: attach action
-        presentTempAlertController()
+        let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: .RemoveFromBucket)
+        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
+        presentViewController(shotBucketsViewController, animated: true, completion: nil)
+//        presentTempAlertController()
     }
 }
 

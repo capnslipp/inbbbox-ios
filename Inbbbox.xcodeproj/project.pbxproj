@@ -232,6 +232,15 @@
 		C616C67E1C773EB700896E70 /* LabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67D1C773EB700896E70 /* LabelItem.swift */; };
 		C616C6801C77410300896E70 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67F1C77410300896E70 /* LabelCell.swift */; };
 		E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */; };
+		F00232831C7DC798003020BD /* ShotBucketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232821C7DC798003020BD /* ShotBucketsViewController.swift */; };
+		F00232851C7DC86B003020BD /* ShotBucketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232841C7DC86B003020BD /* ShotBucketsViewModel.swift */; };
+		F00232871C7DC902003020BD /* ShotBucketsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232861C7DC902003020BD /* ShotBucketsHeaderView.swift */; };
+		F00232891C7DCABE003020BD /* ShotBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232881C7DCABE003020BD /* ShotBucketsView.swift */; };
+		F002328B1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */; };
+		F002328D1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */; };
+		F002328F1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */; };
+		F00232911C7F2339003020BD /* ShotBucketsSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */; };
+		F00232951C7F5774003020BD /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
@@ -521,6 +530,15 @@
 		C616C67F1C77410300896E70 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotImage.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F00232821C7DC798003020BD /* ShotBucketsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewController.swift; sourceTree = "<group>"; };
+		F00232841C7DC86B003020BD /* ShotBucketsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModel.swift; sourceTree = "<group>"; };
+		F00232861C7DC902003020BD /* ShotBucketsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsHeaderView.swift; sourceTree = "<group>"; };
+		F00232881C7DCABE003020BD /* ShotBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsView.swift; sourceTree = "<group>"; };
+		F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsAddCollectionViewCell.swift; sourceTree = "<group>"; };
+		F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsSelectCollectionViewCell.swift; sourceTree = "<group>"; };
+		F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsRemoveCollectionViewCell.swift; sourceTree = "<group>"; };
+		F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsSeparatorCollectionViewCell.swift; sourceTree = "<group>"; };
+		F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsFooterView.swift; sourceTree = "<group>"; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistratorSpec.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
@@ -897,6 +915,7 @@
 				5E50820D1C3132AF00093191 /* LoginView.swift */,
 				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
 				5E0D03871C760AB100DDB497 /* ShotDetailsView.swift */,
+				F00232881C7DCABE003020BD /* ShotBucketsView.swift */,
 			);
 			path = "Controllers View";
 			sourceTree = "<group>";
@@ -920,6 +939,8 @@
 				5E0D038B1C760D8700DDB497 /* CommentComposerView.swift */,
 				5EA18A621C762BE4004F61C1 /* ShotDetailsHeaderView.swift */,
 				5E1572B11C7CA49C0083B6CA /* ShotDetailsOperationView.swift */,
+				F00232861C7DC902003020BD /* ShotBucketsHeaderView.swift */,
+				F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -948,6 +969,10 @@
 				5E0307981C77029B00CC06E8 /* ShotDetailsDescriptionCollectionViewCell.swift */,
 				5EBA677F1C7B15310089A1AB /* ShotDetailsCommentCollectionViewCell.swift */,
 				5ECBB7E91C7C7D3B001C5EEB /* ShotDetailsOperationCollectionViewCell.swift */,
+				F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */,
+				F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */,
+				F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */,
+				F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */,
 			);
 			path = UICollectionViewCell;
 			sourceTree = "<group>";
@@ -981,6 +1006,7 @@
 				74A6C67B1C57C84F009BDD75 /* LikesCollectionViewController.swift */,
 				74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */,
 				5E0D03851C760A7900DDB497 /* ShotDetailsViewController.swift */,
+				F00232821C7DC798003020BD /* ShotBucketsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1141,6 +1167,7 @@
 				F09307C91C240656005F5111 /* SettingsViewModel.swift */,
 				F0F5010A1C75E52D00E8959E /* ShotDetailsViewModel.swift */,
 				5E1572B31C7CF12D0083B6CA /* ShotDetailsFormatter.swift */,
+				F00232841C7DC86B003020BD /* ShotBucketsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1462,6 +1489,7 @@
 				BF6A6E071C1ED155001EDAB8 /* Listable.swift in Sources */,
 				74A6C67C1C57C84F009BDD75 /* LikesCollectionViewController.swift in Sources */,
 				5E4857CB1C2854F80027B38A /* UserQuery.swift in Sources */,
+				F00232851C7DC86B003020BD /* ShotBucketsViewModel.swift in Sources */,
 				5EE65FA61C5A7EC30055F1AB /* PageableComponent.swift in Sources */,
 				E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */,
 				5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */,
@@ -1473,6 +1501,7 @@
 				5EB87A781C5A124100CB2A7B /* PageRequest.swift in Sources */,
 				5E5D563C1C63882500C7957E /* PageableProvider.swift in Sources */,
 				5E4857C81C2854F80027B38A /* LikeQuery.swift in Sources */,
+				F00232911C7F2339003020BD /* ShotBucketsSeparatorCollectionViewCell.swift in Sources */,
 				5EB896C71C5257E800AC2F3D /* ShotsAnimator.swift in Sources */,
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
@@ -1480,6 +1509,8 @@
 				5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */,
 				5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */,
 				F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */,
+				F00232871C7DC902003020BD /* ShotBucketsHeaderView.swift in Sources */,
+				F00232891C7DCABE003020BD /* ShotBucketsView.swift in Sources */,
 				7454E6CD1C636865009313FC /* BaseInfoShotsCollectionViewCell.swift in Sources */,
 				F09307CA1C240656005F5111 /* SettingsViewModel.swift in Sources */,
 				BF6A6E1C1C1F02FA001EDAB8 /* TokenStorage.swift in Sources */,
@@ -1491,6 +1522,7 @@
 				5E4857C21C284AF80027B38A /* AuthenticatorError.swift in Sources */,
 				F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */,
 				7416CD7A1C591F680051F65B /* SmallFolloweeCollectionViewCell.swift in Sources */,
+				F002328F1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift in Sources */,
 				745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */,
 				74A6C67E1C57C8F6009BDD75 /* LikeCollectionViewCell.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
@@ -1507,6 +1539,7 @@
 				5E1572B41C7CF12D0083B6CA /* ShotDetailsFormatter.swift in Sources */,
 				F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */,
 				F092E25F1C3FD47200593D18 /* ShotManagedObject.swift in Sources */,
+				F00232951C7F5774003020BD /* ShotBucketsFooterView.swift in Sources */,
 				5E2E730D1C2BF9EF00D5BC80 /* SwitchCell.swift in Sources */,
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				5CE595CD1C68B18D0076DDA1 /* ShotCellLikeActionAnimationDescriptor.swift in Sources */,
@@ -1524,6 +1557,7 @@
 				F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */,
 				BF9508691C1F27F800E39242 /* Formatter.swift in Sources */,
 				F092E2181C3A9E9900593D18 /* Defines.swift in Sources */,
+				F00232831C7DC798003020BD /* ShotBucketsViewController.swift in Sources */,
 				F092E2611C3FD48600593D18 /* BucketManagedObject.swift in Sources */,
 				5E0307991C77029B00CC06E8 /* ShotDetailsDescriptionCollectionViewCell.swift in Sources */,
 				5ED6C5C11C57CD2800A591EA /* FollowersQuery.swift in Sources */,
@@ -1579,10 +1613,12 @@
 				5E12C3651C734B46003C6B48 /* ConnectionsRequester.swift in Sources */,
 				C616C67E1C773EB700896E70 /* LabelItem.swift in Sources */,
 				5ED6C5B71C5787ED00A591EA /* FolloweesQuery.swift in Sources */,
+				F002328B1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift in Sources */,
 				7488EBB31C71D96A00C34907 /* AvatarSettable.swift in Sources */,
 				5E4857F91C2957C90027B38A /* AvatarView.swift in Sources */,
 				BF6A6E091C1ED166001EDAB8 /* ListViewModel.swift in Sources */,
 				F092E2671C3FD63D00593D18 /* ShotsLocalStorage.swift in Sources */,
+				F002328D1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift in Sources */,
 				5E650B411C21884C00F8A192 /* LoginViewController.swift in Sources */,
 				5E381C961C6BBA96002DF2DC /* CreateCommentQuery.swift in Sources */,
 				BF6A6E0B1C1ED16E001EDAB8 /* GroupedListViewModel.swift in Sources */,
