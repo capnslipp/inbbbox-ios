@@ -99,7 +99,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     
 }
 
-//extension FolloweesViewModel {
+extension FolloweesViewModel {
     
     struct FolloweeCollectionViewCellViewData {
         let name: String?
@@ -127,4 +127,4 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             }
         }
     }
-//}
+}

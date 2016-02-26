@@ -41,12 +41,33 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
-            configureCell(cellData, cell: cell)
+            if let avatarString = cellData.avatarString {
+                cell.avatarView.imageView.loadImageFromURLString(avatarString)
+            } else {
+                cell.avatarView.imageView.image = nil
+            }
+            cell.nameLabel.text = cellData.name
+            cell.numberOfShotsLabel.text = cellData.numberOfShots
+            if cellData.shotsImagesURLs?.count > 0 {
+                cell.firstShotImageView.loadImageFromURL(cellData.shotsImagesURLs![0])
+                cell.secondShotImageView.loadImageFromURL(cellData.shotsImagesURLs![1])
+                cell.thirdShotImageView.loadImageFromURL(cellData.shotsImagesURLs![2])
+                cell.fourthShotImageView.loadImageFromURL(cellData.shotsImagesURLs![3])
+            }
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
-            configureCell(cellData, cell: cell)
+            if let avatarString = cellData.avatarString {
+                cell.avatarView.imageView.loadImageFromURLString(avatarString)
+            } else {
+                cell.avatarView.imageView.image = nil
+            }
+            cell.nameLabel.text = cellData.name
+            cell.numberOfShotsLabel.text = cellData.numberOfShots
+            if let imageURL = cellData.shotsImagesURLs?.first {
+                cell.shotImageView.loadImageFromURL(imageURL)
+            }
             return cell
         }
     }
@@ -69,32 +90,5 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
-    }
-}
-
-// MARK - Cells data filling
-
-private extension FolloweesCollectionViewController {
-    
-    func configureCell<T: BaseInfoShotsCollectionViewCell where T: AvatarSettable>(data: FolloweeCollectionViewCellViewData, cell: T) {
-        if let avatarString = data.avatarString {
-            cell.avatarView.imageView.loadImageFromURLString(avatarString)
-        } else {
-            cell.avatarView.imageView.image = nil
-        }
-        cell.nameLabel.text = data.name
-        cell.numberOfShotsLabel.text = data.numberOfShots
-        if cell.isKindOfClass(LargeFolloweeCollectionViewCell) && (data.shotsImagesURLs?.count > 0) {
-            let cell = cell as! LargeFolloweeCollectionViewCell
-            cell.shotImageView.loadImageFromURL(data.shotsImagesURLs!.first!)
-        } else if cell.isKindOfClass(SmallFolloweeCollectionViewCell) {
-            if cell.isKindOfClass(SmallFolloweeCollectionViewCell) && (data.shotsImagesURLs?.count > 0) {
-                let cell = cell as! SmallFolloweeCollectionViewCell
-                cell.firstShotImageView.loadImageFromURL(data.shotsImagesURLs![0])
-                cell.secondShotImageView.loadImageFromURL(data.shotsImagesURLs![1])
-                cell.thirdShotImageView.loadImageFromURL(data.shotsImagesURLs![2])
-                cell.fourthShotImageView.loadImageFromURL(data.shotsImagesURLs![3])
-            }
-        }
     }
 }
