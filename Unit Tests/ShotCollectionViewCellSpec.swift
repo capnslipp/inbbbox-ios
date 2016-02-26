@@ -32,10 +32,6 @@ class ShotCollectionViewCellSpec: QuickSpec {
             it("should be added to cell content view subviews") {
                 expect(sut.contentView.subviews).to(contain(likeImageView))
             }
-            
-            it("should not translate autoresizing mask into constraints") {
-                expect(likeImageView.translatesAutoresizingMaskIntoConstraints).to(beFalsy())
-            }
 
             it("should have proper first image") {
                 expect(UIImagePNGRepresentation(likeImageView.firstImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "ic-like-swipe")!)))
