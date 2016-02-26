@@ -174,11 +174,12 @@ class APIShotsRequesterSpec: QuickSpec {
         describe("when checking shot in user buckets") {
             
             context("should corectly return buckets") {
-                var buckets: [Bucket]?
+                var buckets: [BucketType]!
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
                     self.stub(everything, builder: json(self.fixtureJSON))
+                    UserStorage.storeUser(User.fixtureUser())
                 }
                 
                 it("should return 1 user bucket") {

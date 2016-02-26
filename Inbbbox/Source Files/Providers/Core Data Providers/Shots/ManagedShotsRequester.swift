@@ -52,7 +52,7 @@ class ManagedShotsRequester {
         let managedShot = managedObjectsProvider.managedShot(shot)
         return Promise<[BucketType]!> { fulfill, _ in
             var managedBuckets = managedShot.buckets?.allObjects as! [ManagedBucket]
-            managedBuckets = managedBuckets.filter({return $0.owner?.identifier == UserStorage.currentUser?.identifier})
+            managedBuckets = managedBuckets.filter({return $0.owner.identifier == UserStorage.currentUser?.identifier})
             fulfill(managedBuckets)
             
         }

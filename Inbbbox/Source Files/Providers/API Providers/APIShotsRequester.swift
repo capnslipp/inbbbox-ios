@@ -90,7 +90,7 @@ class APIShotsRequester: Verifiable {
                 sendShotQueryForRespone(query)
             }.then { json -> Void in
                 let values = (json?.arrayValue.map({ return Bucket.map($0) as BucketType}))!.filter({ bucket -> Bool in
-                    return bucket.owner!.identifier == (UserStorage.currentUser?.identifier)!
+                    return bucket.owner.identifier == (UserStorage.currentUser?.identifier)!
                 })
                 fulfill(values)
             }.error { error in
@@ -123,10 +123,8 @@ private extension APIShotsRequester {
             }.then {
                 Request(query: query).resume()
             }.then { json -> Void in
-                print("aaa")
                 fulfill(json)
             }.error { error in
-                print("aaa")
                 reject(error)
                     
             }

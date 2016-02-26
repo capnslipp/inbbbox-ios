@@ -16,7 +16,7 @@ struct Bucket: BucketType {
     let attributedDescription: NSAttributedString?
     let shotsCount: Int
     let createdAt: NSDate
-    let owner: User?
+    let owner: User
 }
 
 extension Bucket: Mappable {

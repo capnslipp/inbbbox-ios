@@ -17,7 +17,7 @@ class ManagedBucket: NSManagedObject {
     @NSManaged var mngd_createdAt: NSDate
     
     @NSManaged var shots: NSSet?
-    @NSManaged var owner: User?
+    @NSManaged var owner: User
 }
 
 extension ManagedBucket: BucketType {
