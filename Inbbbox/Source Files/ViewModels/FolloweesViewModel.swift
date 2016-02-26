@@ -9,26 +9,20 @@
 import Foundation
 import PromiseKit
 
-protocol FolloweesViewModelDelegate {
-    func followeesViewModelDidLoadInitialFollowees(viewModel: FolloweesViewModel)
-    func followeesViewModel(viewModel: FolloweesViewModel, didLoadFolloweesAtIndexPaths indexPaths: [NSIndexPath])
-    func followeesViewModel(viewModel: FolloweesViewModel, didLoadShotsForFolloweesAtIndexPath indexPath: NSIndexPath)
-}
-
-class FolloweesViewModel {
+class FolloweesViewModel: BaseCollectionViewViewModel {
     
-    var delegate: FolloweesViewModelDelegate?
+    var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Following", comment:"")
     private var followees = [Followee]()
     private var followeesIndexedShots = [Int : [ShotType]]()
     private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
     
-    var followeesCount: Int {
+    var itemsCount: Int {
         return followees.count
     }
     
-    func downloadInitialFollowees() {
+    func downloadInitialItems() {
         guard UserStorage.currentUser != nil else {
             return
         }
@@ -39,14 +33,14 @@ class FolloweesViewModel {
                 self.followees = followees
                 self.downloadShots(followees)
             }
-            self.delegate?.followeesViewModelDidLoadInitialFollowees(self)
+            self.delegate?.viewModelDidLoadInitialItems(self)
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)
         }
     }
     
-    func downloadFolloweesForNextPage() {
+    func downloadItemsForNextPage() {
         guard UserStorage.currentUser != nil else {
             return
         }
@@ -61,7 +55,7 @@ class FolloweesViewModel {
                 let indexPaths = indexes.map {
                     NSIndexPath(forRow:($0), inSection: 0)
                 }
-                self.delegate?.followeesViewModel(self, didLoadFolloweesAtIndexPaths: indexPaths)
+                self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
                 self.downloadShots(followees)
             }
         }.error { error in
@@ -91,7 +85,7 @@ class FolloweesViewModel {
                     self.followeesIndexedShots[index] = [ShotType]()
                 }
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.delegate?.followeesViewModel(self, didLoadShotsForFolloweesAtIndexPath: indexPath)
+                self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
             }.error { error in
                 // NGRTemp: Need mockups for error message view
                 print(error)

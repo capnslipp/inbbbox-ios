@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, FolloweesViewModelDelegate {
+class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate {
     
     // MARK: - Lifecycle
     
@@ -24,18 +24,18 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Fol
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
         viewModel.delegate = self
         self.title = viewModel.title
-        viewModel.downloadInitialFollowees()
+        viewModel.downloadInitialItems()
     }
  
     // MARK: UICollectionViewDataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.followeesCount
+        return viewModel.itemsCount
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == viewModel.followeesCount - 1 {
-            viewModel.downloadFolloweesForNextPage()
+        if indexPath.row == viewModel.itemsCount - 1 {
+            viewModel.downloadItemsForNextPage()
         }
         let cellData = viewModel.followeeCollectionViewCellViewData(indexPath)
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
@@ -57,17 +57,17 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Fol
         // NGRTodo: present followee details view controller
     }
     
-    // MARK: Followees View Model Delegate
+    // MARK: Base Collection View View Model Delegate
     
-    func followeesViewModelDidLoadInitialFollowees(viewModel: FolloweesViewModel) {
+    func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
         collectionView?.reloadData()
     }
     
-    func followeesViewModel(viewModel: FolloweesViewModel, didLoadFolloweesAtIndexPaths indexPaths: [NSIndexPath]) {
+    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
     
-    func followeesViewModel(viewModel: FolloweesViewModel, didLoadShotsForFolloweesAtIndexPath indexPath: NSIndexPath) {
+    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
 }
