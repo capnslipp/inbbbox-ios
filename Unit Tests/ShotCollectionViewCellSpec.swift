@@ -29,12 +29,12 @@ class ShotCollectionViewCellSpec: QuickSpec {
                 likeImageView = sut.likeImageView
             }
 
-            it("should not translate autoresizing mask into constraints") {
-                expect(likeImageView.translatesAutoresizingMaskIntoConstraints).to(beFalsy())
-            }
-
             it("should be added to cell content view subviews") {
                 expect(sut.contentView.subviews).to(contain(likeImageView))
+            }
+            
+            it("should not translate autoresizing mask into constraints") {
+                expect(likeImageView.translatesAutoresizingMaskIntoConstraints).to(beFalsy())
             }
 
             it("should have proper first image") {
