@@ -72,13 +72,13 @@ class APIShotsRequester: Verifiable {
     }
     
     /**
-     Checks whether shot is liked by authenticated user or not.
+     Get buckets where owner is current user and contain given shot.
      
      - Requires: Authenticated user.
      
      - parameter shot: Shot to check.
      
-     - returns: Promise which resolves with true (if user likes shot) or false (if don't)
+     - returns: Promise which resolves with collection of Buckets
      */
     func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
         
@@ -93,9 +93,7 @@ class APIShotsRequester: Verifiable {
                     return bucket.owner.identifier == (UserStorage.currentUser?.identifier)!
                 })
                 fulfill(values)
-            }.error { error in
-                reject(error)
-            }
+            }.error(reject)
         }
     }
 }
@@ -124,10 +122,7 @@ private extension APIShotsRequester {
                 Request(query: query).resume()
             }.then { json -> Void in
                 fulfill(json)
-            }.error { error in
-                reject(error)
-                    
-            }
+            }.error(reject)
         }
     }
 }
