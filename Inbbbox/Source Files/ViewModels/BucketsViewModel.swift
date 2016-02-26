@@ -9,26 +9,21 @@
 import Foundation
 import PromiseKit
 
-protocol BucketsViewModelDelegate {
-    func bucketsViewModelDidLoadInitialBuckets(viewModel: BucketsViewModel)
-    func bucketsViewModel(viewModel: BucketsViewModel, didLoadBucketsAtIndexPaths indexPaths: [NSIndexPath])
-    func bucketsViewModel(viewModel: BucketsViewModel, didLoadShotsForBucketAtIndexPath indexPath: NSIndexPath)
-}
 
-class BucketsViewModel {
+class BucketsViewModel: BaseCollectionViewViewModel {
     
-    var delegate: BucketsViewModelDelegate?
+    var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Buckets", comment:"")
     private var buckets = [BucketType]()
     private var bucketsIndexedShots = [Int : [ShotType]]()
     private let bucketsProvider = BucketsProvider()
     private let shotsProvider = ShotsProvider()
     
-    var bucketsCount: Int {
+    var itemsCount: Int {
         return buckets.count
     }
     
-    func downloadInitialBuckets() {
+    func downloadInitialItems() {
         firstly {
             bucketsProvider.provideMyBuckets()
         }.then { buckets -> Void in
@@ -36,14 +31,14 @@ class BucketsViewModel {
                 self.buckets = buckets
                 self.downloadShots(buckets)
             }
-            self.delegate?.bucketsViewModelDidLoadInitialBuckets(self)
+            self.delegate?.viewModelDidLoadInitialItems(self)
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)
         }
     }
     
-    func downloadBucketsForNextPage() {
+    func downloadItemsForNextPage() {
         guard UserStorage.currentUser != nil else {
             return
         }
@@ -58,7 +53,7 @@ class BucketsViewModel {
                 let indexPaths = indexes.map {
                     NSIndexPath(forRow:($0), inSection: 0)
                 }
-                self.delegate?.bucketsViewModel(self, didLoadBucketsAtIndexPaths: indexPaths)
+                self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
                 self.downloadShots(buckets)
             }
         }.error { error in
@@ -88,7 +83,7 @@ class BucketsViewModel {
                     self.bucketsIndexedShots[index] = [ShotType]()
                 }
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.delegate?.bucketsViewModel(self, didLoadShotsForBucketAtIndexPath: indexPath)
+                self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
             }.error { error in
                 // NGRTemp: Need mockups for error message view
                 print(error)

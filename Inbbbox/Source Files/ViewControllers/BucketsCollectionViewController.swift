@@ -9,7 +9,7 @@
 import UIKit
 import PromiseKit
 
-class BucketsCollectionViewController: UICollectionViewController, BucketsViewModelDelegate {
+class BucketsCollectionViewController: UICollectionViewController, BaseCollectionViewViewModelDelegate {
 
     private let viewModel = BucketsViewModel()
 
@@ -34,18 +34,18 @@ class BucketsCollectionViewController: UICollectionViewController, BucketsViewMo
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.downloadInitialBuckets()
+        viewModel.downloadInitialItems()
     }
 
     // MARK: UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.bucketsCount
+        return viewModel.itemsCount
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == viewModel.bucketsCount - 1 {
-            viewModel.downloadBucketsForNextPage()
+        if indexPath.row == viewModel.itemsCount - 1 {
+            viewModel.downloadItemsForNextPage()
         }
         let cell = collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.clearImages()
@@ -67,17 +67,17 @@ class BucketsCollectionViewController: UICollectionViewController, BucketsViewMo
         // NGRTodo: present bucket details view controller
     }
     
-    // MARK: Buckets View Model Delegate
+    // MARK: Base Collection View View Model Delegate
     
-    func bucketsViewModelDidLoadInitialBuckets(viewModel: BucketsViewModel) {
+    func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
         collectionView?.reloadData()
     }
     
-    func bucketsViewModel(viewModel: BucketsViewModel, didLoadBucketsAtIndexPaths indexPaths: [NSIndexPath]) {
+    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
     
-    func bucketsViewModel(viewModel: BucketsViewModel, didLoadShotsForBucketAtIndexPath indexPath: NSIndexPath) {
+    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
 }
