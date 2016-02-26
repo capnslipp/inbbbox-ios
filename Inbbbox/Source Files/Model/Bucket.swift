@@ -16,6 +16,7 @@ struct Bucket: BucketType {
     let attributedDescription: NSAttributedString?
     let shotsCount: Int
     let createdAt: NSDate
+    let owner: User?
 }
 
 extension Bucket: Mappable {
@@ -35,7 +36,8 @@ extension Bucket: Mappable {
                 name: json[Key.Name.rawValue].stringValue,
                 attributedDescription: attributedDescription,
                 shotsCount: json[Key.ShotsCount.rawValue].intValue,
-                createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!
+                createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
+                owner: User.map(json[Key.User.rawValue])
             )
         }
     }
@@ -46,6 +48,7 @@ extension Bucket: Mappable {
         case Description = "description"
         case CreatedAt = "created_at"
         case ShotsCount = "shots_count"
+        case User = "user"
     }
 }
 
