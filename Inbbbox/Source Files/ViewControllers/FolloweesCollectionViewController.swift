@@ -9,15 +9,11 @@
 import UIKit
 import PromiseKit
 
-class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
+class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, FolloweesViewModelDelegate {
     
     // MARK: - Lifecycle
     
-    private var followees = [Followee]()
-    //NGRTemp: could be solved nicer with IOS-131
-    private var followeesIndexedShots = [Int : [ShotType]]()
-    private let connectionsProvider = APIConnectionsProvider()
-    private let shotsProvider = ShotsProvider()
+    private let viewModel = FolloweesViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,129 +22,31 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         }
         collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
-        title = NSLocalizedString("Following", comment:"")
-        downloadInitialFollowees()
+        viewModel.delegate = self
+        self.title = viewModel.title
+        viewModel.downloadInitialFollowees()
     }
-    
-    // MARK: Downloading
-    
-    func downloadInitialFollowees() {
-        firstly {
-            self.connectionsProvider.provideMyFollowees()
-        }.then { followees -> Void in
-            if let followees = followees {
-                self.followees.appendContentsOf(followees)
-                self.downloadShots(followees)
-            }
-            self.collectionView?.reloadData()
-        }.error { error in
-            // NGRTemp: Need mockups for error message view
-            print(error)
-        }
-    }
-    
-    func downloadFolloweesForNextPage() {
-        // NGRTemp: Display only 30 followers on screen to avoid
-        // exceeded number of requests (Dribbble allows 60 request per minute).
-        // Needs to be changed.
-        let isNextPageAvailable = self.followees.count < 30
-        if isNextPageAvailable {
-            firstly {
-                self.connectionsProvider.nextPage()
-            }.then { followees -> Void in
-                if let followees = followees where followees.count > 0 {
-                    let indexes = followees.enumerate().map { index, _ in
-                        return index + self.followees.count
-                    }
-                    self.followees.appendContentsOf(followees)
-                    let indexPaths = indexes.map {
-                        NSIndexPath(forRow:($0), inSection: 0)
-                    }
-                    self.collectionView?.insertItemsAtIndexPaths(indexPaths)
-                    self.downloadShots(followees)
-                }
-            }.error { error in
-                // NGRTemp: Need mockups for error message view
-                print(error)
-            }
-        }
-    }
-    
-    func downloadShots(followees: [Followee]) {
-        for followee in followees {
-            firstly {
-                self.shotsProvider.provideShotsForUser(followee)
-            }.then { shots -> Void in
-                var indexOfFollowee: Int?
-                for (index, item) in self.followees.enumerate(){
-                    if item.identifier == followee.identifier {
-                        indexOfFollowee = index
-                        break
-                    }
-                }
-                guard let index = indexOfFollowee else {
-                    return
-                }
-                if let shots = shots {
-                    self.followeesIndexedShots[index] = shots
-                } else {
-                    self.followeesIndexedShots[index] = [ShotType]()
-                }
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.collectionView?.reloadItemsAtIndexPaths([indexPath])
-            }.error { error in
-                // NGRTemp: Need mockups for error message view
-                print(error)
-            }
-        }
-    }
-    
+ 
     // MARK: UICollectionViewDataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return followees.count
+        return viewModel.followeesCount
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == followees.count - 1 {
-            downloadFolloweesForNextPage()
+        if indexPath.row == viewModel.followeesCount - 1 {
+            viewModel.downloadFolloweesForNextPage()
         }
+        let cellData = viewModel.followeeCollectionViewCellViewData(indexPath)
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
-            let followee = followees[indexPath.row]
-            presentFoloweeForCell(followee, cell: cell)
-            
-            var indexOfFollowee: Int?
-            for (index, item) in self.followees.enumerate(){
-                if item.identifier == followee.identifier {
-                    indexOfFollowee = index
-                    break
-                }
-            }
-            if let index = indexOfFollowee {
-                if let followeeShots = followeesIndexedShots[index] {
-                    let shotImagesUrls = followeeShots.map { $0.shotImage.normalURL }
-                    presentSmallShotsImagesForCell(shotImagesUrls, cell: cell)
-                }
-            }
+            configureCell(cellData, cell: cell)
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
-            let followee = followees[indexPath.row]
-            presentFoloweeForCell(followee, cell: cell)
-            var indexOfFollowee: Int?
-            for (index, item) in self.followees.enumerate(){
-                if item.identifier == followee.identifier {
-                    indexOfFollowee = index
-                    break
-                }
-            }
-            if let index = indexOfFollowee {
-                let shotImageUrl = followeesIndexedShots[index]?.first?.shotImage.normalURL
-                presentLargeShotImageForCell(shotImageUrl, cell: cell)
-            }
+            configureCell(cellData, cell: cell)
             return cell
         }
     }
@@ -158,57 +56,45 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present followee details view controller
     }
+    
+    // MARK: Followees View Model Delegate
+    
+    func followeesViewModelDidLoadInitialFollowees(viewModel: FolloweesViewModel) {
+        collectionView?.reloadData()
+    }
+    
+    func followeesViewModel(viewModel: FolloweesViewModel, didLoadFolloweesAtIndexPaths indexPaths: [NSIndexPath]) {
+        collectionView?.insertItemsAtIndexPaths(indexPaths)
+    }
+    
+    func followeesViewModel(viewModel: FolloweesViewModel, didLoadShotsForFolloweesAtIndexPath indexPath: NSIndexPath) {
+        collectionView?.reloadItemsAtIndexPaths([indexPath])
+    }
 }
 
 // MARK - Cells data filling
 
 private extension FolloweesCollectionViewController {
     
-    func presentFoloweeForCell<T: BaseInfoShotsCollectionViewCell where T: AvatarSettable>(followee: Followee, cell: T) {
-        if let avatarString = followee.avatarString {
+    func configureCell<T: BaseInfoShotsCollectionViewCell where T: AvatarSettable>(data: FolloweeCollectionViewCellViewData, cell: T) {
+        if let avatarString = data.avatarString {
             cell.avatarView.imageView.loadImageFromURLString(avatarString)
         } else {
             cell.avatarView.imageView.image = nil
         }
-        cell.nameLabel.text = followee.name
-        cell.numberOfShotsLabel.text = followee.shotsCount == 1 ? "\(followee.shotsCount) shot" : "\(followee.shotsCount) shots"
-    }
-    
-    func presentLargeShotImageForCell(shotImageUrl: NSURL?, cell: LargeFolloweeCollectionViewCell) {
-        if let shotImageUrl = shotImageUrl {
-            cell.shotImageView.loadImageFromURL(shotImageUrl)
-        } else {
-            cell.shotImageView.image = nil
-        }
-    }
-    
-    func presentSmallShotsImagesForCell(shotImagesUrls: [NSURL], cell: SmallFolloweeCollectionViewCell) {
-        switch shotImagesUrls.count {
-        case 0:
-            cell.firstShotImageView.image = nil
-            cell.secondShotImageView.image = nil
-            cell.thirdShotImageView.image = nil
-            cell.fourthShotImageView.image = nil
-        case 1:
-            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
-            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[0])
-            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[0])
-            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[0])
-        case 2:
-            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
-            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[1])
-            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[1])
-            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[0])
-        case 3:
-            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
-            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[1])
-            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[2])
-            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[0])
-        default:
-            cell.firstShotImageView.loadImageFromURL(shotImagesUrls[0])
-            cell.secondShotImageView.loadImageFromURL(shotImagesUrls[1])
-            cell.thirdShotImageView.loadImageFromURL(shotImagesUrls[2])
-            cell.fourthShotImageView.loadImageFromURL(shotImagesUrls[3])
+        cell.nameLabel.text = data.name
+        cell.numberOfShotsLabel.text = data.numberOfShots
+        if cell.isKindOfClass(LargeFolloweeCollectionViewCell) && (data.shotsImagesURLs?.count > 0) {
+            let cell = cell as! LargeFolloweeCollectionViewCell
+            cell.shotImageView.loadImageFromURL(data.shotsImagesURLs!.first!)
+        } else if cell.isKindOfClass(SmallFolloweeCollectionViewCell) {
+            if cell.isKindOfClass(SmallFolloweeCollectionViewCell) && (data.shotsImagesURLs?.count > 0) {
+                let cell = cell as! SmallFolloweeCollectionViewCell
+                cell.firstShotImageView.loadImageFromURL(data.shotsImagesURLs![0])
+                cell.secondShotImageView.loadImageFromURL(data.shotsImagesURLs![1])
+                cell.thirdShotImageView.loadImageFromURL(data.shotsImagesURLs![2])
+                cell.fourthShotImageView.loadImageFromURL(data.shotsImagesURLs![3])
+            }
         }
     }
 }
