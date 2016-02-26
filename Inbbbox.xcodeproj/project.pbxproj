@@ -558,7 +558,6 @@
 		C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifIndicatorView.swift; sourceTree = "<group>"; };
 		C68389921C7EE1FF0021F8EA /* BucketsForShotQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsForShotQuery.swift; sourceTree = "<group>"; };
 		C68389941C7F310A0021F8EA /* Buckets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Buckets.json; sourceTree = "<group>"; };
-		C68389961C8047240021F8EA /* StoreData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "StoreData 2.xcdatamodel"; sourceTree = "<group>"; };
 		E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotImage.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -2220,10 +2219,9 @@
 		F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C68389961C8047240021F8EA /* StoreData 2.xcdatamodel */,
 				F092E25B1C3FD3DA00593D18 /* StoreData.xcdatamodel */,
 			);
-			currentVersion = C68389961C8047240021F8EA /* StoreData 2.xcdatamodel */;
+			currentVersion = F092E25B1C3FD3DA00593D18 /* StoreData.xcdatamodel */;
 			path = StoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
