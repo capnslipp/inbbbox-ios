@@ -38,6 +38,8 @@ pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/is
 
 pod 'Gifu', '~> 1.0.1'
 
+pod 'ZFDragableModalTransition', '~> 0.6'
+
 target 'Tests' do link_with 'Unit Tests'
 
     pod 'Quick', '~> 0.8',

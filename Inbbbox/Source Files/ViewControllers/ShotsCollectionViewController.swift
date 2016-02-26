@@ -4,6 +4,7 @@
 
 import UIKit
 import PromiseKit
+import ZFDragableModalTransition
 
 final class ShotsCollectionViewController: UICollectionViewController {
 
@@ -16,6 +17,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
+    var modalTransitionAnimator: ZFModalTransitionAnimator?
 
 //    NGRTemp: temporary implementation - Maybe we should download shots when the ball is jumping? Or just activity indicator will be enough?
 
@@ -110,9 +112,18 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
         definesPresentationContext = true
 
-        let shotDetailsCollectionViewController = ShotDetailsViewController(shot: shots[indexPath.item])
-        shotDetailsCollectionViewController.modalPresentationStyle = .OverCurrentContext
-        tabBarController?.presentViewController(shotDetailsCollectionViewController, animated: true, completion: nil)
+        let shotDetailsViewController = ShotDetailsViewController(shot: shots[indexPath.item])
+        shotDetailsViewController.modalPresentationStyle = .OverCurrentContext
+        
+        modalTransitionAnimator = ZFModalTransitionAnimator(modalViewController: shotDetailsViewController)
+        modalTransitionAnimator?.dragable = true
+        modalTransitionAnimator?.direction = ZFModalTransitonDirection.Bottom
+        modalTransitionAnimator?.setContentScrollView(shotDetailsViewController.shotDetailsView.collectionView)
+        modalTransitionAnimator?.behindViewAlpha = 0.5
+        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
+        shotDetailsViewController.modalPresentationStyle = .Custom
+        
+        tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
 
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {

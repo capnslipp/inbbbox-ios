@@ -12,7 +12,9 @@ import KFSwiftImageLoader
 
 class ShotDetailsViewController: UIViewController {
     
-    private weak var aView: ShotDetailsView?
+    var shotDetailsView: ShotDetailsView {
+        return view as! ShotDetailsView
+    }
     private var header: ShotDetailsHeaderView?
     private let viewModel: ShotDetailsViewModel
     
@@ -32,7 +34,7 @@ class ShotDetailsViewController: UIViewController {
     }
     
     override func loadView() {
-        aView = loadViewWithClass(ShotDetailsView)
+        view = ShotDetailsView(frame: CGRectZero)
     }
     
     override func viewDidLoad() {
@@ -41,31 +43,27 @@ class ShotDetailsViewController: UIViewController {
         firstly {
             viewModel.loadComments()
         }.then {
-            self.aView?.collectionView.reloadData()
+            self.shotDetailsView.collectionView.reloadData()
         }.error { error in
             print(error)
         }
-        
-        guard let view = aView else {
-            return
-        }
-        
-        view.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
-        view.collectionView.delegate = self
-        view.collectionView.dataSource = self
-        view.collectionView.registerClass(ShotDetailsCommentCollectionViewCell.self, type: .Cell)
-        view.collectionView.registerClass(ShotDetailsOperationCollectionViewCell.self, type: .Cell)
-        view.collectionView.registerClass(ShotDetailsDescriptionCollectionViewCell.self, type: .Cell)
-        view.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
-        view.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
-        view.commentComposerView.delegate = self
+   
+        shotDetailsView.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
+        shotDetailsView.collectionView.delegate = self
+        shotDetailsView.collectionView.dataSource = self
+        shotDetailsView.collectionView.registerClass(ShotDetailsCommentCollectionViewCell.self, type: .Cell)
+        shotDetailsView.collectionView.registerClass(ShotDetailsOperationCollectionViewCell.self, type: .Cell)
+        shotDetailsView.collectionView.registerClass(ShotDetailsDescriptionCollectionViewCell.self, type: .Cell)
+        shotDetailsView.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
+        shotDetailsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
+        shotDetailsView.commentComposerView.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         setEstimatedSizeIfNeeded()
-        (aView?.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
+        (shotDetailsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
     }
 }
 
@@ -199,7 +197,7 @@ private extension ShotDetailsViewController {
     var heightForCollapsedCollectionViewHeader: CGFloat {
         
         let margin = CGFloat(5)
-        let maxWidth = abs((aView?.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
+        let maxWidth = abs((shotDetailsView.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
         let height = viewModel.attributedShotTitleForHeader.boundingHeightUsingAvailableWidth(maxWidth) + 2 * margin
         
         return max(70, height)
@@ -215,8 +213,8 @@ private extension ShotDetailsViewController {
     
     func setEstimatedSizeIfNeeded() {
         
-        let width = aView?.collectionView.frame.size.width ?? 0
-        if let layout = aView?.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
+        let width = shotDetailsView.collectionView.frame.size.width ?? 0
+        if let layout = shotDetailsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
             layout.estimatedItemSize = CGSize(width: width, height: 100)
             layout.invalidateLayout()
         }
