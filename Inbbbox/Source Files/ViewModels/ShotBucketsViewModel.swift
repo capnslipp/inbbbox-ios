@@ -58,17 +58,19 @@ class ShotBucketsViewModel {
     func loadBuckets() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
         
-        switch shotBucketsViewControllerMode {
-        case .AddToBucket:
-            firstly {
-                bucketsProvider.provideMyBuckets()
-            }.then { buckets in
-                self.buckets = buckets ?? []
-            }.then(fulfill).error(reject)
-        case .RemoveFromBucket:
-            print(true)
-        }
-            
+            switch shotBucketsViewControllerMode {
+                
+            case .AddToBucket:
+                firstly {
+                    bucketsProvider.provideMyBuckets()
+                }.then { buckets in
+                    self.buckets = buckets ?? []
+                }.then(fulfill).error(reject)
+                
+            case .RemoveFromBucket:
+                // NGRTodo: implement me!
+                print(true)
+            }
         }
     }
     
@@ -81,9 +83,16 @@ class ShotBucketsViewModel {
         }
     }
     
-    // NGRTodo: implement method
     func removeShotFromSelectedBuckets() -> Promise<Void> {
-        return Promise()
+        return Promise<Void> { fulfill, reject in
+            
+            var bucketsToRemoveShot = [BucketType]()
+            selectedBucketsIndexes.forEach {
+                bucketsToRemoveShot.append(buckets[$0])
+            }
+            
+            when(bucketsToRemoveShot.map { bucketsRequester.removeShot(shot, fromBucket: $0) }).then(fulfill).error(reject)
+        }
     }
     
     func selectBucketAtIndex(index: Int) -> Bool {

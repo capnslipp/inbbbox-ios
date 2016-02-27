@@ -77,7 +77,7 @@ class ShotBucketsViewController: UIViewController {
 extension ShotBucketsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.itemsCount//5 //NGRTemp: should be viewModel.itemsCount
+        return viewModel.itemsCount
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -147,7 +147,13 @@ extension ShotBucketsViewController {
     }
     
     func removeButtonDidTap(_: UIButton) {
-        presentTempAlertController()
+        firstly {
+            viewModel.removeShotFromSelectedBuckets()
+        }.then {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }.error { error in
+            print(error)
+        }
     }
 }
 
@@ -219,7 +225,9 @@ private extension ShotBucketsViewController {
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(ShotBucketsSelectCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            cell.bucketNameLabel.text = "Awesome UI/UX" // NGRTemp: temp text
+            
+            let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
+            cell.bucketNameLabel.text = bucketData.bucketName
             cell.selectBucket(viewModel.bucketShouldBeSelectedAtIndex(indexPath.item))
             cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
             return cell
