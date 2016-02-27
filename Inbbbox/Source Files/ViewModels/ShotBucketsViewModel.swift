@@ -40,6 +40,7 @@ class ShotBucketsViewModel {
     }
     
     var bucketsProvider = APIBucketsProvider(page: 1, pagination: 100)
+    var bucketsRequester = APIBucketsRequester()
     
     private var selectedBucketsIndexes = [Int]()
     
@@ -71,9 +72,13 @@ class ShotBucketsViewModel {
         }
     }
     
-    // NGRTodo: implement method
     func addShotToBucketAtIndex(index: Int) -> Promise<Void> {
-        return Promise()
+        return Promise<Void> { fulfill, reject in
+        
+            firstly {
+                bucketsRequester.addShot(shot, toBucket: buckets[index])
+            }.then(fulfill).error(reject)
+        }
     }
     
     // NGRTodo: implement method

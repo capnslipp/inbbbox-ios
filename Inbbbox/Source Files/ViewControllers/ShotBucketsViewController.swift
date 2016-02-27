@@ -121,6 +121,8 @@ extension ShotBucketsViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotBucketsSelectCollectionViewCell {
             cell.selectBucket(viewModel.selectBucketAtIndex(indexPath.item))
+        } else if let _ = collectionView.cellForItemAtIndexPath(indexPath) as? ShotBucketsAddCollectionViewCell {
+            addShotToBucketAtIndexPath(indexPath)
         }
     }
 }
@@ -221,6 +223,16 @@ private extension ShotBucketsViewController {
             cell.selectBucket(viewModel.bucketShouldBeSelectedAtIndex(indexPath.item))
             cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
             return cell
+        }
+    }
+    
+    func addShotToBucketAtIndexPath(indexPath: NSIndexPath) {
+        firstly {
+            viewModel.addShotToBucketAtIndex(indexPath.item)
+        }.then {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }.error { error in
+            print(error)
         }
     }
 }
