@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-struct Team {
+struct Team: TeamType {
     
     let identifier: String
     let name: String

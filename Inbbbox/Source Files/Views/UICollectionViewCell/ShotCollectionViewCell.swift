@@ -22,6 +22,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
     let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
     let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
+    let gifLabel = GifIndicatorView()
     private(set) var likeImageViewLeftConstraint: NSLayoutConstraint?
     private(set) var likeImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var plusImageViewWidthConstraint: NSLayoutConstraint?
@@ -67,6 +68,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(commentImageView)
 
         contentView.addSubview(shotImageView)
+        
+        gifLabel.configureForAutoLayout()
+        contentView.addSubview(gifLabel)
 
         panGestureRecognizer.addTarget(self, action: "didSwipeCell:")
         panGestureRecognizer.delegate = self
@@ -107,6 +111,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
                 withMultiplier: commentImageView.intrinsicContentSize().height / commentImageView.intrinsicContentSize().width)
             commentImageViewRightConstraint = commentImageView.autoPinEdgeToSuperviewEdge(.Right)
             commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            
+            gifLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 10)
+            gifLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: 10)
 
             didSetConstraints = true
         }

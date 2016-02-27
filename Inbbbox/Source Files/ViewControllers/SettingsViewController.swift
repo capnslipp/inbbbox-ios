@@ -22,14 +22,14 @@ class SettingsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("Log Out", comment: ""),
             style: .Plain,
             target: self,
             action: "didTapLogOutButton:"
         )
-        
+
         tableView.registerClass(SwitchCell.self)
         tableView.registerClass(DateCell.self)
         tableView.registerClass(LabelCell.self)
@@ -40,7 +40,7 @@ class SettingsViewController: UITableViewController {
 
         provideDataForHeader()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         refreshViewAccordingToAuthenticationStatus()
@@ -109,12 +109,12 @@ extension SettingsViewController {
         let row = cellIndexPath.row
         if section < viewModel.sectionsCount() && row < viewModel[section].count {
             let item = viewModel[section][row]
-            
+
             if let item = item as? SwitchItem where cell is SwitchCell {
                 item.unbindSwitchControl()
             }
         }
-        
+
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -171,11 +171,11 @@ private extension SettingsViewController {
         cell.textLabel?.text = item.title
         cell.setDateText(item.dateString)
     }
-    
+
     func configureLabelCell(cell: LabelCell, forItem item: LabelItem) {
         cell.titleLabel.text = item.title
     }
-    
+
 }
 
 // MARK: Configuration
@@ -204,22 +204,22 @@ private extension SettingsViewController {
 // MARK: Authentication
 
 private extension SettingsViewController {
-    
+
     func authenticateUser() {
         let interactionHandler: (UIViewController -> Void) = { controller in
             self.presentViewController(controller, animated: true, completion: nil)
         }
         let authenticator = Authenticator(interactionHandler: interactionHandler)
-        
+
         firstly {
             authenticator.loginWithService(.Dribbble)
         }.then { result -> Void in
             self.refreshViewAccordingToAuthenticationStatus()
         }
     }
-    
+
     func refreshViewAccordingToAuthenticationStatus() {
-        let setupType = UserStorage.loggedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
+        let setupType = UserStorage.userIsSignedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
         if setupType != viewModel.setupType {
             viewModel = SettingsViewModel(delegate: self)
             provideDataForHeader()

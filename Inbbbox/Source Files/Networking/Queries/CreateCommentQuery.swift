@@ -14,7 +14,7 @@ struct CreateCommentQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .JSON)
     
-    init(shot: Shot, body: String) {
+    init(shot: ShotType, body: String) {
         path = "/shots/" + shot.identifier + "/comments"
         parameters["body"] = body
     }

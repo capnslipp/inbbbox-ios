@@ -9,7 +9,6 @@ import Dobby
 
 class PanGestureRecognizerMock: UIPanGestureRecognizer {
 
-
     let velocityInViewStub = Stub<UIView?, CGPoint>()
     let translationInViewStub = Stub<UIView?, CGPoint>()
     let stateStub = Stub<Void, UIGestureRecognizerState>()
@@ -24,6 +23,11 @@ class PanGestureRecognizerMock: UIPanGestureRecognizer {
     }
 
     override var state: UIGestureRecognizerState {
-        return try! stateStub.invoke()
+        get {
+            return try! stateStub.invoke()
+        }
+        set {
+            
+        }
     }
 }

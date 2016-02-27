@@ -21,7 +21,7 @@ class ShotBucketsViewController: UIViewController {
     private var footer: ShotBucketsFooterView?
     private let viewModel: ShotBucketsViewModel
     
-    init(shot: Shot, mode: ShotBucketsViewControllerMode) {
+    init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
         self.viewModel = ShotBucketsViewModel(shot: shot, mode: mode)
         super.init(nibName: nil, bundle: nil)
     }
@@ -91,7 +91,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
         if kind == UICollectionElementKindSectionHeader {
             if header == nil && kind == UICollectionElementKindSectionHeader {
                 header = collectionView.dequeueReusableClass(ShotBucketsHeaderView.self, forIndexPath: indexPath, type: .Header)
-                header?.imageView.loadShotImageFromURL(viewModel.shot.image.normalURL)
+                header?.imageView.loadShotImageFromURL(viewModel.shot.shotImage.normalURL)
                 
                 header?.maxHeight = sizeForExpandedCollectionViewHeader(collectionView).height
                 header?.minHeight = heightForCollapsedCollectionViewHeader

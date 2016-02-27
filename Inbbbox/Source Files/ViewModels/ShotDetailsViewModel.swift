@@ -18,7 +18,7 @@ final class ShotDetailsViewModel {
     var itemsCount: Int {
         
         var counter = Int(1) //for ShotDetailsOperationCollectionViewCell
-        if let description = shot.description where description.string.characters.count > 0 {
+        if let description = shot.attributedDescription where description.string.characters.count > 0 {
             counter++
         }
         if hasCommentsToFetch {
@@ -29,15 +29,14 @@ final class ShotDetailsViewModel {
     }
     
     // requesters and provider
-    var commentsProvider = CommentsProvider(page: 1, pagination: 20)
-    var commentsRequester = CommentsRequester()
+    var commentsProvider = APICommentsProvider(page: 1, pagination: 20)
+    var commentsRequester = APICommentsRequester()
     
-    private let localStorage = ShotsLocalStorage()
     private let userStorageClass = UserStorage.self
     private let shotsRequester =  ShotsRequester()
     
-    let shot: Shot
-    private(set) var comments = [Comment]()
+    let shot: ShotType
+    private(set) var comments = [CommentType]()
     
     // Private
     private var hasCommentsToFetch: Bool {
@@ -52,14 +51,14 @@ final class ShotDetailsViewModel {
         return ShotDetailsFormatter.attributedShotDescriptionFromShot(shot)
     }
     
-    init(shot: Shot) {
+    init(shot: ShotType) {
         self.shot = shot
     }
     
     func isDescriptionIndex(index: Int) -> Bool {
         if index > 1 {
             return false
-        } else if let description = shot.description where description.string.characters.count > 0 {
+        } else if let description = shot.attributedDescription where description.string.characters.count > 0 {
             return true
         }
         return false
@@ -110,27 +109,9 @@ final class ShotDetailsViewModel {
     
     func userDidTapLikeButton(like: Bool, completion: (Result) -> Void) {
         
-        let operationClosure = {
-            if self.userStorageClass.currentUser != nil {
-                firstly {
-                    like ? self.shotsRequester.likeShot(self.shot) : self.shotsRequester.unlikeShot(self.shot)
-                }.then {
-                    completion(Result.Success)
-                }.error { error in
-                    completion(Result.Error(error))
-                }
-            } else {
-                do {
-                    like ? try self.localStorage.like(shotID: self.shot.identifier) : try self.localStorage.unlike(shotID: self.shot.identifier)
-                    completion(Result.Success)
-                } catch {
-                    completion(Result.Error(error))
-                }
-            }
-        }
-
         if like {
-            operationClosure()
+            shotsRequester.likeShot(shot)
+            completion(Result.Success)
         } else {
             //NGRToDo: Inform controller about error
         }
@@ -140,7 +121,7 @@ final class ShotDetailsViewModel {
         
         let indexWithOffset = comments.count - itemsCount + index
         let comment = comments[indexWithOffset]
-
+        
         return (
             author: comment.user.name ?? comment.user.username,
             comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
@@ -168,7 +149,7 @@ final class ShotDetailsViewModel {
 private extension ShotDetailsViewModel {
     
     // Comments methods
-    func appendCommentsAndUpdateCollectionView(comments: [Comment]) {
+    func appendCommentsAndUpdateCollectionView(comments: [CommentType]) {
         
         let currentCommentCount = self.comments.count
         let possibleLoadMoreCellIndexPath:NSIndexPath? =  {
@@ -197,26 +178,9 @@ private extension ShotDetailsViewModel {
         }
         
         //NGRTemp: backward compatibility
-//        delegate?.performBatchUpdate(indexPathsToInsert, reloadIndexPaths: indexPathsToReload, deleteIndexPaths: indexPathsToDelete)
+        //        delegate?.performBatchUpdate(indexPathsToInsert, reloadIndexPaths: indexPathsToReload, deleteIndexPaths: indexPathsToDelete)
     }
     
-    // Shot methods
-    func isShotLikedByMe() -> Promise<Bool> {
-    
-        return Promise<Bool> { fulfill, reject in
-            
-            if self.userStorageClass.currentUser != nil {
-                firstly {
-                    shotsRequester.isShotLikedByMe(shot)
-                }.then(fulfill).error(reject)
-            } else {
-                let liked = localStorage.likedShots.contains {
-                    $0.id == shot.identifier
-                }
-                fulfill(liked)
-            }
-        }
-    }
 }
 
 extension ShotDetailsViewModel {

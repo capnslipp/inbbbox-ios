@@ -9,13 +9,12 @@
 import Foundation
 import SwiftyJSON
 
-struct Comment {
+struct Comment: CommentType {
     
     let identifier: String
     let body: NSAttributedString?
     let createdAt: NSDate
-    let user: User
-    
+    let user: UserType
 }
 
 extension Comment: Mappable {

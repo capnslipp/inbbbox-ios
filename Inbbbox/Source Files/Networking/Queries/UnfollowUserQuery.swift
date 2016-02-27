@@ -14,7 +14,7 @@ struct UnfollowUserQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
-    init(user: User) {
+    init(user: UserType) {
         path = "/users/" + user.identifier + "/follow"
     }
 }

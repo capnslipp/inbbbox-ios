@@ -18,7 +18,7 @@ import SwiftyJSON
  - teaserURL: url of image with typical resolution 200x150. May be smaller if created before October 4th, 2012.
  */
 
-struct ShotImage {
+struct ShotImage: ShotImageType {
     let hidpiURL: NSURL?
     let normalURL: NSURL
     let teaserURL: NSURL

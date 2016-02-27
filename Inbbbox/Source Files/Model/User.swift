@@ -9,20 +9,14 @@
 import Foundation
 import SwiftyJSON
 
-final class User: NSObject  {
-    
-    enum AccountType: String {
-        case User = "User"
-        case Player = "Player"
-        case Team = "Team"
-    }
+final class User: NSObject, UserType {
 
     let identifier: String
     let name: String?
     let username: String
     let avatarString: String?
     let shotsCount: Int
-    let accountType: AccountType?
+    let accountType: UserAccountType?
     
     
     init(json: JSON) {
@@ -31,7 +25,7 @@ final class User: NSObject  {
         username = json[Key.Username.rawValue].stringValue
         avatarString = json[Key.Avatar.rawValue].string
         shotsCount = json[Key.ShotsCount.rawValue].intValue
-        accountType = AccountType(rawValue: json[Key.AccountType.rawValue].stringValue)
+        accountType = UserAccountType(rawValue: json[Key.AccountType.rawValue].stringValue)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -42,7 +36,7 @@ final class User: NSObject  {
         shotsCount = aDecoder.decodeObjectForKey(Key.ShotsCount.rawValue) as? Int ?? 0
         accountType = {
             if let key = aDecoder.decodeObjectForKey(Key.AccountType.rawValue) as? String {
-                return AccountType(rawValue: key)
+                return UserAccountType(rawValue: key)
             }
             return nil
         }()

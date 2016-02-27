@@ -46,12 +46,12 @@ class ShotBucketsViewModel {
         return shot.bucketsCount != 0
     }
     
-    let shot: Shot
+    let shot: ShotType
     private(set) var buckets = [Bucket]()
     
     let shotBucketsViewControllerMode: ShotBucketsViewControllerMode
     
-    init(shot: Shot, mode: ShotBucketsViewControllerMode) {
+    init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
         self.shot = shot
         shotBucketsViewControllerMode = mode
     }

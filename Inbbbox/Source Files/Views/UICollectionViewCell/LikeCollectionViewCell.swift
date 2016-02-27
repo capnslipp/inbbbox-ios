@@ -11,6 +11,7 @@ import UIKit
 class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
     
     let shotImageView = UIImageView.newAutoLayoutView()
+    let gifLabel = GifIndicatorView.newAutoLayoutView()
     private var didSetConstraints = false
 
     // MARK - Life cycle
@@ -27,6 +28,7 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeig
     
     func commonInit() {
         contentView.addSubview(shotImageView)
+        contentView.addSubview(gifLabel)
         contentView.layer.cornerRadius = 5
         contentView.clipsToBounds = true
     }
@@ -40,8 +42,10 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeig
     override func updateConstraints() {
         super.updateConstraints()
         if !didSetConstraints {
-            shotImageView.autoPinEdgesToSuperviewEdges()
             didSetConstraints = true
+            shotImageView.autoPinEdgesToSuperviewEdges()
+            gifLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: 5)
+            gifLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 5)
         }
     }
     

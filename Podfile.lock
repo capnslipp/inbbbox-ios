@@ -1,7 +1,8 @@
 PODS:
-  - AsyncSwift (1.6.4)
+  - AsyncSwift (1.7.2)
   - Dobby (0.4.2)
   - EasyAnimation (1.0.2)
+  - Gifu (1.0.1)
   - GPUImage (0.1.7)
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
@@ -16,36 +17,38 @@ PODS:
   - Mockingjay/XCTest (1.1.1):
     - Mockingjay/Core
   - Nimble (3.1.0)
-  - OMGHTTPURLRQ (3.0.2):
-    - OMGHTTPURLRQ/RQ (= 3.0.2)
-  - OMGHTTPURLRQ/FormURLEncode (3.0.2)
-  - OMGHTTPURLRQ/RQ (3.0.2):
+  - OMGHTTPURLRQ (3.1.1):
+    - OMGHTTPURLRQ/RQ (= 3.1.1)
+  - OMGHTTPURLRQ/FormURLEncode (3.1.1)
+  - OMGHTTPURLRQ/RQ (3.1.1):
     - OMGHTTPURLRQ/FormURLEncode
     - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (3.0.2)
-  - PromiseKit (3.0.1):
-    - PromiseKit/Foundation (= 3.0.1)
-    - PromiseKit/QuartzCore (= 3.0.1)
-    - PromiseKit/UIKit (= 3.0.1)
-  - PromiseKit/CorePromise (3.0.1)
-  - PromiseKit/Foundation (3.0.1):
-    - OMGHTTPURLRQ (~> 3.0.0)
+  - OMGHTTPURLRQ/UserAgent (3.1.1)
+  - PromiseKit (3.0.2):
+    - PromiseKit/Foundation (= 3.0.2)
+    - PromiseKit/QuartzCore (= 3.0.2)
+    - PromiseKit/UIKit (= 3.0.2)
+  - PromiseKit/CorePromise (3.0.2)
+  - PromiseKit/Foundation (3.0.2):
+    - OMGHTTPURLRQ (~> 3.1.0)
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.0.1):
+  - PromiseKit/QuartzCore (3.0.2):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.0.1):
+  - PromiseKit/UIKit (3.0.2):
     - PromiseKit/CorePromise
   - PureLayout (3.0.1)
-  - Quick (0.8.0)
+  - Quick (0.9.1)
   - SwiftyJSON (2.3.2)
   - SwiftyUserDefaults (2.0.0)
-  - URITemplate (1.3.0)
+  - URITemplate (1.3.1)
+  - ZFDragableModalTransition (0.6)
 
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
   - Dobby (~> 0.4.2)
   - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
+  - Gifu (~> 1.0.1)
   - GPUImage (~> 0.1)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
@@ -57,6 +60,7 @@ DEPENDENCIES:
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
   - SwiftyUserDefaults (~> 2.0)
+  - ZFDragableModalTransition (~> 0.6)
 
 EXTERNAL SOURCES:
   EasyAnimation:
@@ -69,21 +73,23 @@ CHECKOUT OPTIONS:
     :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
 
 SPEC CHECKSUMS:
-  AsyncSwift: 3c90beed237324f1b57e1f1c414dc5501985d208
+  AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
   Dobby: 66c6fa06aac194f1b8328b2b4c988d59a01fb5f1
   EasyAnimation: 9615e40f58aa7d8d6a67de66e0edda1903ffa990
+  Gifu: bf7a99fe9f20a1dc18c3cb4289aebc922a2ad419
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
   KFSwiftImageLoader: a2b8a33a89116c767e7af8d2c109e8c483037b19
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430
   Nimble: 79d40f4d69d47314229bbabacaa02b8838c779b9
-  OMGHTTPURLRQ: 8376dc887d76a5a7e2a67881dc788f917a2f437c
-  PromiseKit: 19d12914484a15c25a46f72fde38579204a5dac6
+  OMGHTTPURLRQ: 633f98ee745aeda02345935a52eec1784cddb589
+  PromiseKit: ab1a380f7a30cf8cce663a2411e8b3580b10313d
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
-  Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
+  Quick: a5221fc21788b6aeda934805e68b061839bc3165
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   SwiftyUserDefaults: 1266e9734c68bcfbac8294ee84173dc8ba6db312
-  URITemplate: 0ebbec80d1eb59a89e29db9b14c99d5908d3e574
+  URITemplate: 398a48d6559e23b77bd41176b675b017ad1fc959
+  ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
 COCOAPODS: 0.39.0
