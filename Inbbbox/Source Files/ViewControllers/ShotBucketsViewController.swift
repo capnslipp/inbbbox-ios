@@ -16,7 +16,9 @@ enum ShotBucketsViewControllerMode {
 
 class ShotBucketsViewController: UIViewController {
     
-    private weak var aView: ShotBucketsView?
+    var shotBucketsView: ShotBucketsView {
+        return view as! ShotBucketsView
+    }
     private var header: ShotBucketsHeaderView?
     private var footer: ShotBucketsFooterView?
     private let viewModel: ShotBucketsViewModel
@@ -37,35 +39,37 @@ class ShotBucketsViewController: UIViewController {
     }
     
     override func loadView() {
-        aView = loadViewWithClass(ShotBucketsView)
+        view = loadViewWithClass(ShotBucketsView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // NGRTodo: collect data to display (buckets)
-        
-        guard let view = aView else {
-            return
+        firstly {
+            viewModel.loadBuckets()
+        }.then {
+            self.shotBucketsView.collectionView.reloadData()
+        }.error { error in
+            print(error)
         }
         
-        view.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
-        view.collectionView.delegate = self
-        view.collectionView.dataSource = self
-        view.collectionView.registerClass(ShotBucketsAddCollectionViewCell.self, type: .Cell)
-        view.collectionView.registerClass(ShotBucketsSelectCollectionViewCell.self, type: .Cell)
-        view.collectionView.registerClass(ShotBucketsRemoveCollectionViewCell.self, type: .Cell)
-        view.collectionView.registerClass(ShotBucketsSeparatorCollectionViewCell.self, type: .Cell)
-        view.collectionView.registerClass(ShotBucketsHeaderView.self, type: .Header)
-        view.collectionView.registerClass(ShotBucketsFooterView.self, type: .Footer)
-        view.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
+        shotBucketsView.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
+        shotBucketsView.collectionView.delegate = self
+        shotBucketsView.collectionView.dataSource = self
+        shotBucketsView.collectionView.registerClass(ShotBucketsAddCollectionViewCell.self, type: .Cell)
+        shotBucketsView.collectionView.registerClass(ShotBucketsSelectCollectionViewCell.self, type: .Cell)
+        shotBucketsView.collectionView.registerClass(ShotBucketsRemoveCollectionViewCell.self, type: .Cell)
+        shotBucketsView.collectionView.registerClass(ShotBucketsSeparatorCollectionViewCell.self, type: .Cell)
+        shotBucketsView.collectionView.registerClass(ShotBucketsHeaderView.self, type: .Header)
+        shotBucketsView.collectionView.registerClass(ShotBucketsFooterView.self, type: .Footer)
+        shotBucketsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         setEstimatedSizeIfNeeded()
-        (aView?.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
+        (shotBucketsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
     }
 }
 
@@ -73,7 +77,7 @@ class ShotBucketsViewController: UIViewController {
 extension ShotBucketsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5 //NGRTemp: should be viewModel.itemsCount
+        return viewModel.itemsCount//5 //NGRTemp: should be viewModel.itemsCount
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -161,7 +165,7 @@ private extension ShotBucketsViewController {
     var heightForCollapsedCollectionViewHeader: CGFloat {
         
         let margin = CGFloat(5)
-        let maxWidth = abs((aView?.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
+        let maxWidth = abs((shotBucketsView.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
         let height = viewModel.attributedShotTitleForHeader.boundingHeightUsingAvailableWidth(maxWidth) + 2 * margin
         
         return max(70, height)
@@ -177,8 +181,8 @@ private extension ShotBucketsViewController {
     
     func setEstimatedSizeIfNeeded() {
         
-        let width = aView?.collectionView.frame.size.width ?? 0
-        if let layout = aView?.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
+        let width = shotBucketsView.collectionView.frame.size.width ?? 0
+        if let layout = shotBucketsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
             layout.estimatedItemSize = CGSize(width: width, height: 40)
             layout.invalidateLayout()
         }
@@ -195,8 +199,10 @@ private extension ShotBucketsViewController {
     
     func configureCellForAddToBucketMode(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotBucketsAddCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        cell.bucketNameLabel.text = "Awesome UI/UX" // NGRTemp: temp text
-        cell.shotsCountLabel.text = "2 shots" // NGRTemp: temp text
+        
+        let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
+        cell.bucketNameLabel.text = bucketData.bucketName
+        cell.shotsCountLabel.text = bucketData.shotsCountText
         cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
         return cell
     }

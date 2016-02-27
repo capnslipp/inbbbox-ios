@@ -15,9 +15,8 @@ class ShotBucketsViewModel {
         
         var counter = Int(0)
 
-        if hasBucketsToFetch {
-            counter += buckets.count
-        }
+        counter += buckets.count
+        
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
             break
@@ -40,14 +39,12 @@ class ShotBucketsViewModel {
         }
     }
     
+    var bucketsProvider = APIBucketsProvider(page: 1, pagination: 100)
+    
     private var selectedBucketsIndexes = [Int]()
     
-    private var hasBucketsToFetch: Bool {
-        return shot.bucketsCount != 0
-    }
-    
     let shot: ShotType
-    private(set) var buckets = [Bucket]()
+    private(set) var buckets = [BucketType]()
     
     let shotBucketsViewControllerMode: ShotBucketsViewControllerMode
     
@@ -58,13 +55,19 @@ class ShotBucketsViewModel {
     
     // NGRTodo: implement method
     func loadBuckets() -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+        
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
-            print(true)
-            return Promise()
+            firstly {
+                bucketsProvider.provideMyBuckets()
+            }.then { buckets in
+                self.buckets = buckets ?? []
+            }.then(fulfill).error(reject)
         case .RemoveFromBucket:
             print(true)
-            return Promise()
+        }
+            
         }
     }
     
@@ -88,15 +91,33 @@ class ShotBucketsViewModel {
     }
     
     func showBottomSeparatorForBucketAtIndex(index: Int) -> Bool {
-        return index != 2 // NGRTemp:
+        return index != buckets.count - 1
     }
     
     func isSeparatorCellAtIndex(index: Int) -> Bool {
-        return index == 3 // NGRTemp:
+        switch shotBucketsViewControllerMode {
+        case .AddToBucket:
+            return false
+        case .RemoveFromBucket:
+            return index == itemsCount - 2
+        }
     }
     
     func isRemoveCellAtIndex(index: Int) -> Bool {
-        return index == 4 // NGRTemp:
+        switch shotBucketsViewControllerMode {
+        case .AddToBucket:
+            return false
+        case .RemoveFromBucket:
+            return index == itemsCount - 1
+        }
+    }
+    
+    func displayableDataForBucketAtIndex(index: Int) -> (bucketName: String, shotsCountText: String) {
+        let bucket = buckets[index]
+        return (
+            bucketName: bucket.name,
+            shotsCountText: bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
+        )
     }
 }
 
