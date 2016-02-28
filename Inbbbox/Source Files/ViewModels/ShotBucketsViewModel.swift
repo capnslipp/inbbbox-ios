@@ -39,22 +39,21 @@ class ShotBucketsViewModel {
         }
     }
     
+    let shot: ShotType
+    let shotBucketsViewControllerMode: ShotBucketsViewControllerMode
+    
     var bucketsProvider = APIBucketsProvider(page: 1, pagination: 100)
     var bucketsRequester = APIBucketsRequester()
     
-    private var selectedBucketsIndexes = [Int]()
-    
-    let shot: ShotType
     private(set) var buckets = [BucketType]()
-    
-    let shotBucketsViewControllerMode: ShotBucketsViewControllerMode
+    private var selectedBucketsIndexes = [Int]()
     
     init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
         self.shot = shot
         shotBucketsViewControllerMode = mode
     }
     
-    // NGRTodo: implement method
+    // NGRTodo: implement `RemoveFromBucket` case
     func loadBuckets() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
         

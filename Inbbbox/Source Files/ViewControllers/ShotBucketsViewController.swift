@@ -160,16 +160,6 @@ extension ShotBucketsViewController {
 
 private extension ShotBucketsViewController {
     
-    func presentTempAlertController() {
-        let controller = UIAlertController(title: "Oh no!", message: "This function is not supported yet", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Destructive) { _ in
-            controller.dismissViewControllerAnimated(true, completion: nil)
-        }
-        
-        controller.addAction(action)
-        presentViewController(controller, animated: true, completion: nil)
-    }
-    
     var heightForCollapsedCollectionViewHeader: CGFloat {
         
         let margin = CGFloat(5)
@@ -199,9 +189,9 @@ private extension ShotBucketsViewController {
     func backgroundColorForFooter() -> UIColor {
         switch viewModel.shotBucketsViewControllerMode {
         case .AddToBucket:
-            return .RGBA(255, 255, 255, 1)
+            return .RGBA(255, 255, 255, 1) // color same as cell's background
         case .RemoveFromBucket:
-            return .RGBA(246, 248, 248, 1)
+            return .RGBA(246, 248, 248, 1) // color same as header title background
         }
     }
     

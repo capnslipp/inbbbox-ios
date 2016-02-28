@@ -283,6 +283,9 @@
 		F0B1B6A71C7AF54800EF6EB3 /* ShotDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B6A61C7AF54800EF6EB3 /* ShotDetailsViewModelSpec.swift */; };
 		F0B1B6A91C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */; };
 		F0B1B6AB1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */; };
+		F0F1221C1C83084200F6949B /* ShotBucketsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221B1C83084200F6949B /* ShotBucketsViewModelSpec.swift */; };
+		F0F1221E1C83096100F6949B /* APIBucketsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */; };
+		F0F122201C83097800F6949B /* APIBucketsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */; };
 		F0F501031C70E40A00E8959E /* ShotDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */; };
 		F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501041C7211E200E8959E /* CommentEditView.swift */; };
 		F0F501071C731F8D00E8959E /* ShotDetailsLoadMoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501061C731F8D00E8959E /* ShotDetailsLoadMoreCollectionViewCell.swift */; };
@@ -597,6 +600,9 @@
 		F0B1B6A61C7AF54800EF6EB3 /* ShotDetailsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewModelSpec.swift; sourceTree = "<group>"; };
 		F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICommentsProviderMock.swift; sourceTree = "<group>"; };
 		F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICommentsRequesterMock.swift; sourceTree = "<group>"; };
+		F0F1221B1C83084200F6949B /* ShotBucketsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModelSpec.swift; sourceTree = "<group>"; };
+		F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIBucketsProviderMock.swift; sourceTree = "<group>"; };
+		F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIBucketsRequesterMock.swift; sourceTree = "<group>"; };
 		F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDescriptionView.swift; sourceTree = "<group>"; };
 		F0F501041C7211E200E8959E /* CommentEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentEditView.swift; sourceTree = "<group>"; };
 		F0F501061C731F8D00E8959E /* ShotDetailsLoadMoreCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsLoadMoreCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -842,6 +848,7 @@
 				5EEEC9B01C71E58500BB7237 /* APIProjectsProviderSpec.swift */,
 				5E91A6421C7494D100C9D609 /* APIRateLimitKeeperSpec.swift */,
 				F0B1B6A61C7AF54800EF6EB3 /* ShotDetailsViewModelSpec.swift */,
+				F0F1221B1C83084200F6949B /* ShotBucketsViewModelSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1361,6 +1368,8 @@
 				5C04279A1C6C9A0D006680DA /* ImageMock.swift */,
 				F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */,
 				F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */,
+				F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */,
+				F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -1809,6 +1818,7 @@
 				5ED6C5B31C5768B200A591EA /* ShotsProviderConfigurationSpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageSpecExtension.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
+				F0F122201C83097800F6949B /* APIBucketsRequesterMock.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
 				5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */,
@@ -1842,6 +1852,7 @@
 				5EC0A7B31C3559A200846975 /* AsyncWrapperSpec.swift in Sources */,
 				BEEE92F7926C73875C776470 /* ShotsCollectionViewFlowLayoutSpec.swift in Sources */,
 				5EDB83271C48DECE00FBCA05 /* LikeQuerySpec.swift in Sources */,
+				F0F1221C1C83084200F6949B /* ShotBucketsViewModelSpec.swift in Sources */,
 				5EDB83261C48DECE00FBCA05 /* AddToBucketQuerySpec.swift in Sources */,
 				5E3509231C6255D8009386AE /* VerifiableSpec.swift in Sources */,
 				5E35092D1C626C9C009386AE /* PageRequestSpec.swift in Sources */,
@@ -1858,6 +1869,7 @@
 				5E12C36B1C7359BD003C6B48 /* APIBucketsRequesterSpec.swift in Sources */,
 				5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */,
 				5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */,
+				F0F1221E1C83096100F6949B /* APIBucketsProviderMock.swift in Sources */,
 				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,
 				BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */,
 				5E31AB8B1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift in Sources */,

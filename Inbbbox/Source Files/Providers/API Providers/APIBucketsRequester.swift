@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 /// Provides interface for dribbble buckets update, delete and create API
-final class APIBucketsRequester: Verifiable {
+class APIBucketsRequester: Verifiable {
     
     /**
      Adds shot to given bucket.
