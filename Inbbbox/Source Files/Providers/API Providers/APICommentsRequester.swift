@@ -64,7 +64,7 @@ class APICommentsRequester: Verifiable {
             let query = DeleteCommentQuery(shot: shot, comment: comment)
 
             firstly {
-                sendCommentQuery(query)
+                sendCommentDeleteQuery(query)
             }.then { _ in fulfill() }.error(reject)
         }
     }
@@ -100,6 +100,19 @@ private extension APICommentsRequester {
                 fulfill(Comment.map(json))
 
             }.error(reject)
+        }
+    }
+    
+    func sendCommentDeleteQuery(query: Query) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            
+            firstly {
+                verifyAuthenticationStatus(true)
+                }.then {
+                    self.verifyAccountType()
+                }.then {
+                    Request(query: query).resume()
+                }.then { _ in fulfill() }.error(reject)
         }
     }
 }

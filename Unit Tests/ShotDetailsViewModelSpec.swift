@@ -64,6 +64,12 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     fulfill(result)
                 }
             }
+            
+            commentsRequesterMock.deleteCommentStub.on(any()) { _, _ in
+                return Promise{ fulfill, _ in
+                    fulfill()
+                }
+            }
         }
         
         afterEach {
@@ -148,11 +154,37 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     sut.postComment("fixture.message").then { result -> Void in
                         responseResult = successResponse
                         done()
-                        }.error { _ in fail("This should not be invoked") }
+                    }.error { _ in fail("This should not be invoked") }
                 }
             }
             
             it("should be correctly added") {
+                expect(responseResult).to(equal(successResponse))
+            }
+        }
+        
+        describe("when deleting comment") {
+            
+            var responseResult: String!
+            let successResponse = "success"
+            
+            beforeEach {
+                
+                waitUntil { done in
+                    sut.loadComments().then { result in
+                        done()
+                        }.error { _ in fail("This should not be invoked") }
+                }
+                
+                waitUntil { done in
+                    sut.deleteCommentAtIndex(4).then { result -> Void in
+                        responseResult = successResponse
+                        done()
+                    }.error { _ in fail("This should not be invoked") }
+                }
+            }
+            
+            it("should be correctly removed") {
                 expect(responseResult).to(equal(successResponse))
             }
         }
