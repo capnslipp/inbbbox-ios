@@ -24,7 +24,7 @@ class ShotBucketsViewController: UIViewController {
     private let viewModel: ShotBucketsViewModel
     
     init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
-        self.viewModel = ShotBucketsViewModel(shot: shot, mode: mode)
+        viewModel = ShotBucketsViewModel(shot: shot, mode: mode)
         super.init(nibName: nil, bundle: nil)
     }
     
