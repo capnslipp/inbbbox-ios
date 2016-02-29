@@ -103,8 +103,8 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.commentLabel.attributedText = data.comment
             cell.dateLabel.text = data.date
             cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"), completion: nil)
-            cell.deleteActionHandler = { _ in
-                    self.deleteCommentAtIndexPath(indexPath)
+            cell.deleteActionHandler = { [weak self] in
+                self?.deleteCommentAtIndexPath(indexPath)
             }
             
             return cell

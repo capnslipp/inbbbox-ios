@@ -108,13 +108,12 @@ final class ShotDetailsViewModel {
     func deleteCommentAtIndex(index: Int) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
             
-            let indexWithOffset = comments.count - itemsCount + index
-            let comment = comments[indexWithOffset]
+            let comment = comments[indexInCommentArrayBasedOnItemIndex(index)]
             
             firstly {
                 commentsRequester.deleteComment(comment, forShot: shot)
             }.then { comment in
-                self.comments.removeAtIndex(indexWithOffset)
+                self.comments.removeAtIndex(self.indexInCommentArrayBasedOnItemIndex(index))
             }.then { _ in
                 fulfill()
             }.error(reject)
@@ -149,8 +148,7 @@ final class ShotDetailsViewModel {
     
     func isCurrentUserOwnerOfCommentAtIndex(index: Int) -> Bool {
         
-        let indexWithOffset = comments.count - itemsCount + index
-        let comment = comments[indexWithOffset]
+        let comment = comments[indexInCommentArrayBasedOnItemIndex(index)]
         
         return UserStorage.currentUser?.identifier == comment.user.identifier
     }
@@ -198,10 +196,13 @@ private extension ShotDetailsViewModel {
         //        delegate?.performBatchUpdate(indexPathsToInsert, reloadIndexPaths: indexPathsToReload, deleteIndexPaths: indexPathsToDelete)
     }
     
+    func indexInCommentArrayBasedOnItemIndex(index: Int) -> Int {
+        return comments.count - itemsCount + index
+    }
+    
 }
 
 extension ShotDetailsViewModel {
-    
     
     struct LoadMoreCellViewData {
         let commentsCount: String

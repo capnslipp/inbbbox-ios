@@ -45,17 +45,11 @@ class ShotBucketsViewModelSpec: QuickSpec {
             }
             
             bucketsRequesterMock.addShotStub.on(any()) { _ in
-                return Promise{ fulfill, _ in
-                    
-                    fulfill()
-                }
+                return Promise()
             }
             
             bucketsRequesterMock.removeShotStub.on(any()) { _ in
-                return Promise{ fulfill, _ in
-                    
-                    fulfill()
-                }
+                return Promise()
             }
             
             shotsRequesterMock.userBucketsForShotStub.on(any()) { _ in

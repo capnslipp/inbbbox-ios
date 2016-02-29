@@ -65,7 +65,7 @@ class APICommentsRequester: Verifiable {
 
             firstly {
                 sendCommentDeleteQuery(query)
-            }.then { _ in fulfill() }.error(reject)
+            }.then(fulfill).error(reject)
         }
     }
 }
