@@ -19,7 +19,7 @@ struct ShotsQuery: Query {
      - UserLikedShots: List of the given user's liked shots.
      */
     enum ShotsType {
-        case List, UserShots(UserType), BucketShots(BucketType), UserLikedShots(UserType)
+        case List, UserShots(UserType), BucketShots(BucketType), UserLikedShots(UserType), LikedShots
         
         var path: String {
 
@@ -32,6 +32,8 @@ struct ShotsQuery: Query {
                 return "/buckets/\(bucket.identifier)/shots"
             case .UserLikedShots(let user):
                 return "/users/\(user.username)/likes"
+            case .LikedShots:
+                return "/user/likes"
             }
         }
     }
