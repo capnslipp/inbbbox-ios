@@ -108,11 +108,11 @@ private extension APICommentsRequester {
             
             firstly {
                 verifyAuthenticationStatus(true)
-                }.then {
-                    self.verifyAccountType()
-                }.then {
-                    Request(query: query).resume()
-                }.then { _ in fulfill() }.error(reject)
+            }.then {
+                self.verifyAccountType()
+            }.then {
+                Request(query: query).resume()
+            }.then { _ in fulfill() }.error(reject)
         }
     }
 }
