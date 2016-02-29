@@ -170,5 +170,33 @@ class APIShotsRequesterSpec: QuickSpec {
                 }
             }
         }
+        
+        describe("when checking shot in user buckets") {
+            
+            context("should corectly return buckets") {
+                var buckets: [BucketType]!
+                
+                beforeEach {
+                    TokenStorage.storeToken("fixture.token")
+                    self.stub(everything, builder: json(self.fixtureJSON))
+                    UserStorage.storeUser(User.fixtureUser())
+                }
+                
+                it("should return 1 user bucket") {
+                    sut.userBucketsForShot(Shot.fixtureShot()).then({ _buckets in
+                        buckets = _buckets
+                    }).error { _ in fail() }
+                    expect(buckets).toEventually(haveCount(1), timeout: 3)
+                }
+            }
+        }
     }
 }
+
+private extension APIShotsRequesterSpec {
+    
+    var fixtureJSON: [AnyObject] {
+        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Buckets").arrayObject!
+    }
+}
+

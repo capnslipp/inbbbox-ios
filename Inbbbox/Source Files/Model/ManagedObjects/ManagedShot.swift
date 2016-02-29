@@ -25,6 +25,7 @@ class ManagedShot: NSManagedObject {
 
     @NSManaged var liked: Bool
     @NSManaged var projects: NSSet?
+    @NSManaged var buckets: NSSet?
 }
 
 extension ManagedShot: ShotType {

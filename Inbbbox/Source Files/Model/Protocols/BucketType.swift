@@ -14,4 +14,5 @@ protocol BucketType {
     var attributedDescription: NSAttributedString? { get }
     var shotsCount: Int { get }
     var createdAt: NSDate { get }
+    var owner: User { get }
 }
