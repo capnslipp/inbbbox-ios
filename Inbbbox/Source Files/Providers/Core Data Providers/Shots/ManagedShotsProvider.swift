@@ -8,7 +8,7 @@ import CoreData
 
 class ManagedShotsProvider {
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     func provideMyLikedShots() -> Promise<[ShotType]?> {
         let fetchRequest = NSFetchRequest(entityName: ManagedShot.entityName)
