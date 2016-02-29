@@ -105,6 +105,23 @@ final class ShotDetailsViewModel {
         }
     }
     
+    func deleteCommentAtIndex(index: Int) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            
+            let indexWithOffset = comments.count - itemsCount + index
+            let comment = comments[indexWithOffset]
+            
+            firstly {
+                commentsRequester.deleteComment(comment, forShot: shot)
+            }.then { comment in
+                self.comments.removeAtIndex(indexWithOffset)
+            }.then { _ in
+                fulfill()
+            }.error(reject)
+            
+        }
+    }
+    
     // Shot methods
     
     func userDidTapLikeButton(like: Bool, completion: (Result) -> Void) {

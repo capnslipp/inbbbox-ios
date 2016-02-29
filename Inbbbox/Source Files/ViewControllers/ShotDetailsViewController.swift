@@ -102,10 +102,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.authorLabel.text = data.author
             cell.commentLabel.attributedText = data.comment
             cell.dateLabel.text = data.date
-            cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"), completion: nil)
-            cell.deleteActionHandler = { [weak self] in
-                //NGRToDo: attach action
-                self?.presentTempAlertController()
+            cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString)
+            cell.deleteActionHandler = { _ in
+                    self.deleteCommentAtIndexPath(indexPath)
             }
             
             return cell
@@ -219,6 +218,16 @@ private extension ShotDetailsViewController {
         if let layout = shotDetailsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
             layout.estimatedItemSize = CGSize(width: width, height: 100)
             layout.invalidateLayout()
+        }
+    }
+    
+    func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
+        firstly {
+            viewModel.deleteCommentAtIndex(indexPath.item)
+        }.then {
+            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
+        }.error { error in
+            print(error)
         }
     }
 }
