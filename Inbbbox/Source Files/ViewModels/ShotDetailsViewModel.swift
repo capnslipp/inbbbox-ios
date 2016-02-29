@@ -135,8 +135,7 @@ final class ShotDetailsViewModel {
     
     func displayableDataForCommentAtIndex(index: Int) -> (author: String, comment: NSAttributedString?, date: String, avatarURLString: String) {
         
-        let indexWithOffset = comments.count - itemsCount + index
-        let comment = comments[indexWithOffset]
+        let comment = comments[indexInCommentArrayBasedOnItemIndex(index)]
         
         return (
             author: comment.user.name ?? comment.user.username,
