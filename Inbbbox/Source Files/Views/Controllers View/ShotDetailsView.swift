@@ -47,7 +47,8 @@ class ShotDetailsView: UIView {
         keyboardResizableView.addSubview(commentComposerView)
         addSubview(keyboardResizableView)
         
-        closeButton.setImage(UIImage(named: "ic-closemodal"), forState: .Normal)
+        let image = UIImage(named: "ic-closemodal")?.imageWithRenderingMode(.AlwaysOriginal)
+        closeButton.setImage(image, forState: .Normal)
         addSubview(closeButton)
     }
 

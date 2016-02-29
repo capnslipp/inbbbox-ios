@@ -42,7 +42,8 @@ class ShotBucketsView: UIView {
         
         addSubview(collectionViewCornerWrapperView)
         
-        closeButton.setImage(UIImage(named: "ic-closemodal"), forState: .Normal)
+        let image = UIImage(named: "ic-closemodal")?.imageWithRenderingMode(.AlwaysOriginal)
+        closeButton.setImage(image, forState: .Normal)
         addSubview(closeButton)
     }
     

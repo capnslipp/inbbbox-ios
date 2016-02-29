@@ -35,7 +35,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         
         avatarView.configureForAutoLayout()
         avatarView.layer.borderWidth = 2
-        avatarView.imageView.image = UIImage(named: "ic-ball-active")
+        avatarView.imageView.image = UIImage(named: "avatar_placeholder")
         contentView.addSubview(avatarView)
         
         authorLabel.font = UIFont.helveticaFont(.NeueMedium, size: 16)

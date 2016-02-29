@@ -102,7 +102,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.authorLabel.text = data.author
             cell.commentLabel.attributedText = data.comment
             cell.dateLabel.text = data.date
-            cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString)
+            cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"), completion: nil)
             cell.deleteActionHandler = { [weak self] in
                 //NGRToDo: attach action
                 self?.presentTempAlertController()
