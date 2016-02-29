@@ -45,17 +45,11 @@ class ShotBucketsViewModelSpec: QuickSpec {
             }
             
             bucketsRequesterMock.addShotStub.on(any()) { _ in
-                return Promise{ fulfill, _ in
-                    
-                    fulfill()
-                }
+                return Promise()
             }
             
             bucketsRequesterMock.removeShotStub.on(any()) { _ in
-                return Promise{ fulfill, _ in
-                    
-                    fulfill()
-                }
+                return Promise()
             }
             
             shotsRequesterMock.userBucketsForShotStub.on(any()) { _ in
@@ -110,24 +104,25 @@ class ShotBucketsViewModelSpec: QuickSpec {
             
             describe("when buckets are loaded") {
                 
-                var responseResult: String!
-                let successResponse = "success"
+                var didReceiveResponse: Bool?
                 
                 beforeEach {
+                    didReceiveResponse = false
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
-                            responseResult = successResponse
+                            didReceiveResponse = true
                             done()
                         }.error { _ in fail("This should not be invoked") }
                     }
                 }
                 
                 afterEach {
-                    responseResult = nil
+                    didReceiveResponse = nil
                 }
                 
                 it("buckets should be properly downloaded") {
-                    expect(responseResult).to(equal(successResponse))
+                    expect(didReceiveResponse).to(beTruthy())
+                    expect(didReceiveResponse).toNot(beNil())
                 }
                 
                 it("view model should have correct number of buckets") {
@@ -141,10 +136,11 @@ class ShotBucketsViewModelSpec: QuickSpec {
             
             describe("when adding shot to bucket") {
                 
-                var responseResult: String!
-                let successResponse = "success"
+                var didReceiveResponse: Bool?
                 
                 beforeEach {
+                    didReceiveResponse = false
+                    
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
                             done()
@@ -153,18 +149,19 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     
                     waitUntil { done in
                         sut.addShotToBucketAtIndex(0).then { result -> Void in
-                            responseResult = successResponse
+                            didReceiveResponse = true
                             done()
                         }.error { _ in fail("This should not be invoked") }
                     }
                 }
                 
                 afterEach {
-                    responseResult = nil
+                    didReceiveResponse = nil
                 }
                 
                 it("should be correctly added") {
-                    expect(responseResult).to(equal(successResponse))
+                    expect(didReceiveResponse).to(beTruthy())
+                    expect(didReceiveResponse).toNot(beNil())
                 }
             }
         }
@@ -199,24 +196,25 @@ class ShotBucketsViewModelSpec: QuickSpec {
             
             describe("when buckets for shot are loaded") {
                 
-                var responseResult: String!
-                let successResponse = "success"
+                var didReceiveResponse: Bool?
                 
                 beforeEach {
+                    didReceiveResponse = false
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
-                            responseResult = successResponse
+                            didReceiveResponse = true
                             done()
                         }.error { _ in fail("This should not be invoked") }
                     }
                 }
                 
                 afterEach {
-                    responseResult = nil
+                    didReceiveResponse = nil
                 }
                 
                 it("buckets should be properly downloaded") {
-                    expect(responseResult).to(equal(successResponse))
+                    expect(didReceiveResponse).to(beTruthy())
+                    expect(didReceiveResponse).toNot(beNil())
                 }
                 
                 it("view model should have correct number of buckets") {
@@ -230,10 +228,11 @@ class ShotBucketsViewModelSpec: QuickSpec {
             
             describe("when removing shot from selected buckets") {
                 
-                var responseResult: String!
-                let successResponse = "success"
+                var didReceiveResponse: Bool?
                 
                 beforeEach {
+                    didReceiveResponse = false
+                    
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
                             done()
@@ -245,18 +244,19 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     
                     waitUntil { done in
                         sut.removeShotFromSelectedBuckets().then { result -> Void in
-                            responseResult = successResponse
+                            didReceiveResponse = true
                             done()
                         }.error { _ in fail("This should not be invoked") }
                     }
                 }
                 
                 afterEach {
-                    responseResult = nil
+                    didReceiveResponse = nil
                 }
                 
                 it("shot should be properly removed from selected buckets") {
-                    expect(responseResult).to(equal(successResponse))
+                    expect(didReceiveResponse).to(beTruthy())
+                    expect(didReceiveResponse).toNot(beNil())
                 }
             }
         }
