@@ -22,8 +22,10 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
         let layoutAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
         if let collectionView = collectionView {
             let spacings = CollectionViewLayoutSpacings()
+            let fixedLeftMargin = CGFloat(28)
+            let fixedRightMargin = CGFloat(27)
             let indexMultiplier = CGFloat(indexPath.item)
-            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - 2 * spacings.itemMargin * (indexMultiplier + 1)
+            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - (fixedLeftMargin + fixedRightMargin) * (indexMultiplier + 1)
             let calculatedItemHeight = calculatedItemWidth * spacings.shotHeightToWidthRatio
             layoutAttributes.size = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
             layoutAttributes.center = CGPoint(x: collectionView.center.x, y: collectionView.center.y + spacings.initialShotsLayoutBottomCellOffset * indexMultiplier)
