@@ -170,8 +170,10 @@ extension ShotDetailsViewController {
     }
     
     func bucketButtonDidTap(_: UIButton) {
-        //NGRToDo: attach action
-        presentTempAlertController()
+        //NGRTemp: needs logic to decide if modal should be shown and if yes - which mode
+        let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: .AddToBucket)
+        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
+        presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
 }
 
