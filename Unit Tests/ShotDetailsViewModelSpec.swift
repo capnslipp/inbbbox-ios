@@ -90,21 +90,25 @@ class ShotDetailsViewModelSpec: QuickSpec {
         
         describe("when comments are loaded for the first time") {
             
-            var responseResult: String!
-            let successResponse = "success"
+            var didReceiveResponse: Bool?
             
             beforeEach {
-                
+                didReceiveResponse = false
                 waitUntil { done in
                     sut.loadComments().then { result -> Void in
-                        responseResult = successResponse
+                        didReceiveResponse = true
                         done()
                     }.error { _ in fail("This should not be invoked") }
                 }
             }
             
+            afterEach {
+                didReceiveResponse = nil
+            }
+            
             it("commments should be properly downloaded") {
-                expect(responseResult).to(equal(successResponse))
+                expect(didReceiveResponse).to(beTruthy())
+                expect(didReceiveResponse).toNot(beNil())
             }
             
             it("view model should have correct number of commments") {
@@ -118,8 +122,8 @@ class ShotDetailsViewModelSpec: QuickSpec {
         }
         
         describe("when comments are loaded with pagination") {
+            
             beforeEach {
-                
                 waitUntil { done in
                     sut.loadComments().then { result in
                         done()
@@ -144,29 +148,35 @@ class ShotDetailsViewModelSpec: QuickSpec {
         }
         
         describe("when posting comment") {
-            var responseResult: String!
-            let successResponse = "success"
+            
+            var didReceiveResponse: Bool?
             
             beforeEach {
+                didReceiveResponse = false
                 waitUntil { done in
                     sut.postComment("fixture.message").then { result -> Void in
-                        responseResult = successResponse
+                        didReceiveResponse = true
                         done()
                     }.error { _ in fail("This should not be invoked") }
                 }
             }
             
+            afterEach {
+                didReceiveResponse = nil
+            }
+            
             it("should be correctly added") {
-                expect(responseResult).to(equal(successResponse))
+                expect(didReceiveResponse).to(beTruthy())
+                expect(didReceiveResponse).toNot(beNil())
             }
         }
         
         describe("when deleting comment") {
             
-            var responseResult: String!
-            let successResponse = "success"
+            var didReceiveResponse: Bool?
             
             beforeEach {
+                didReceiveResponse = false
                 
                 waitUntil { done in
                     sut.loadComments().then { result in
@@ -176,28 +186,34 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 
                 waitUntil { done in
                     sut.deleteCommentAtIndex(4).then { result -> Void in
-                        responseResult = successResponse
+                        didReceiveResponse = true
                         done()
                     }.error { _ in fail("This should not be invoked") }
                 }
             }
             
+            afterEach {
+                didReceiveResponse = nil
+            }
+            
             it("should be correctly removed") {
-                expect(responseResult).to(equal(successResponse))
+                expect(didReceiveResponse).to(beTruthy())
+                expect(didReceiveResponse).toNot(beNil())
             }
         }
         
         describe("when tapping `like shot`") {
             
-            var responseResult: String!
-            let successResponse = "success"
+            var didReceiveResponse: Bool?
             
             beforeEach {
+                didReceiveResponse = false
+                
                 waitUntil { done in
                     sut.userDidTapLikeButton(true) { result -> Void in
                         switch result {
                         case .Success:
-                            responseResult = successResponse
+                            didReceiveResponse = true
                         case .Error(_):
                             fail("This should not be invoked")
                         }
@@ -206,8 +222,13 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 }
             }
             
+            afterEach {
+                didReceiveResponse = nil
+            }
+            
             it("shot should be correctly liked") {
-                expect(responseResult).to(equal(successResponse))
+                expect(didReceiveResponse).to(beTruthy())
+                expect(didReceiveResponse).toNot(beNil())
             }
         }
     }
