@@ -10,9 +10,8 @@ class ShotsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     override func prepareLayout() {
         if let collectionView = collectionView {
-            let fixedLeftMargin = CGFloat(28)
-            let fixedRightMargin = CGFloat(28)
-            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - fixedLeftMargin - fixedRightMargin
+            let fixedHorizontalMargin = CGFloat(28)
+            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - 2 * fixedHorizontalMargin
             let calculatedItemHeight = calculatedItemWidth * 3 / 4
             let calculatedVerticalSpacing = round(CGRectGetHeight(collectionView.bounds) / 2 - calculatedItemHeight / 2)
             itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
