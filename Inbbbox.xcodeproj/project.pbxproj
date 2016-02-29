@@ -183,6 +183,7 @@
 		74AC197A1C7DFD280008DB12 /* BucketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AC19791C7DFD280008DB12 /* BucketsViewModel.swift */; };
 		74C161821C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161811C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift */; };
 		74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */; };
+		74C608C11C8451E30012B5DF /* LikesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C608C01C8451E30012B5DF /* LikesViewModel.swift */; };
 		74E2D96C1C808FFB0059A90C /* FolloweesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2D96B1C808FFB0059A90C /* FolloweesViewModel.swift */; };
 		74E2D96E1C80B03C0059A90C /* BaseCollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2D96D1C80B03C0059A90C /* BaseCollectionViewViewModel.swift */; };
 		74F00B6A1C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */; };
@@ -502,6 +503,7 @@
 		74AC19791C7DFD280008DB12 /* BucketsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsViewModel.swift; sourceTree = "<group>"; };
 		74C161811C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCellSpec.swift; sourceTree = "<group>"; };
+		74C608C01C8451E30012B5DF /* LikesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewModel.swift; sourceTree = "<group>"; };
 		74E2D96B1C808FFB0059A90C /* FolloweesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweesViewModel.swift; sourceTree = "<group>"; };
 		74E2D96D1C80B03C0059A90C /* BaseCollectionViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewViewModel.swift; sourceTree = "<group>"; };
 		74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLayoutsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -1306,6 +1308,7 @@
 				F00232841C7DC86B003020BD /* ShotBucketsViewModel.swift */,
 				74AC19791C7DFD280008DB12 /* BucketsViewModel.swift */,
 				74E2D96B1C808FFB0059A90C /* FolloweesViewModel.swift */,
+				74C608C01C8451E30012B5DF /* LikesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1804,6 +1807,7 @@
 				BEEE909720C154D685312CA5 /* APIBucketsRequester.swift in Sources */,
 				BEEE9877C29DB839BC9263D3 /* APIConnectionsProvider.swift in Sources */,
 				BEEE991D172CCF52DB70EE78 /* APIConnectionsRequester.swift in Sources */,
+				74C608C11C8451E30012B5DF /* LikesViewModel.swift in Sources */,
 				BEEE9FCE12A56D27ADE8B855 /* APICommentsProvider.swift in Sources */,
 				BEEE9BA062926D6F8C24043C /* APICommentsRequester.swift in Sources */,
 				BEEE9AA25E83D35C18F1DBF9 /* APIProjectsProvider.swift in Sources */,
