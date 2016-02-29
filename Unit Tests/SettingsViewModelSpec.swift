@@ -20,6 +20,7 @@ class SettingsViewModelSpec: QuickSpec {
         describe("when newly created as guest user") {
             
             beforeEach {
+                UserStorage.clear()
                 sut = SettingsViewModel(delegate: SettingsViewController())
             }
             

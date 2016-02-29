@@ -1,7 +1,16 @@
 {
-    "id" : "fixture.identifier",
-    "name" : "fixture.name",
-    "description" : "fixture.description",
-    "shots_count" : 250,
-    "created_at" : "2011-05-20T21:05:55Z",
+    "id": "fixture.identifier",
+    "name": "fixture.name",
+    "description": "fixture.description",
+    "shots_count": 250,
+    "created_at": "2011-05-20T21:05:55Z",
+    "user": {
+        "id": "fixture.identifier",
+        "name": "fixture.name",
+        "username": "fixture.username",
+        "avatar_url": "fixture.avatar.url",
+        "shots_count": 250,
+        "param_to_omit": "fixture.param",
+        "type": "User"
+    }
 }

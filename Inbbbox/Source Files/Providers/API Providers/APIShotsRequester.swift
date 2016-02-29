@@ -8,6 +8,7 @@
 
 import Foundation
 import PromiseKit
+import SwiftyJSON
 
 /// Provides interface for dribbble shots update, delete and create API
 class APIShotsRequester: Verifiable {
@@ -69,6 +70,32 @@ class APIShotsRequester: Verifiable {
             }
         }
     }
+    
+    /**
+     Get buckets where owner is current user and contain given shot.
+     
+     - Requires: Authenticated user.
+     
+     - parameter shot: Shot to check.
+     
+     - returns: Promise which resolves with collection of Buckets
+     */
+    func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
+        
+        return Promise<[BucketType]!> { fulfill, reject in
+            
+            let query = BucketsForShotQuery(shot: shot)
+            
+            firstly {
+                sendShotQueryForRespone(query)
+            }.then { json -> Void in
+                let values = (json?.arrayValue.map({ return Bucket.map($0) as BucketType}))!.filter({ bucket -> Bool in
+                    return bucket.owner.identifier == (UserStorage.currentUser?.identifier)!
+                })
+                fulfill(values)
+            }.error(reject)
+        }
+    }
 }
 
 private extension APIShotsRequester {
@@ -82,6 +109,19 @@ private extension APIShotsRequester {
                 Request(query: query).resume()
             }.then { _ -> Void in
                 fulfill()
+            }.error(reject)
+        }
+    }
+    
+    func sendShotQueryForRespone(query: Query) -> Promise<JSON?> {
+        return Promise<JSON?> { fulfill, reject in
+            
+            firstly {
+                verifyAuthenticationStatus(true)
+            }.then {
+                Request(query: query).resume()
+            }.then { json -> Void in
+                fulfill(json)
             }.error(reject)
         }
     }

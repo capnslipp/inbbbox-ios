@@ -44,6 +44,7 @@ class ShotBucketsViewModel {
     
     var bucketsProvider = APIBucketsProvider(page: 1, pagination: 100)
     var bucketsRequester = APIBucketsRequester()
+    var shotsRequester = APIShotsRequester()
     
     private(set) var buckets = [BucketType]()
     private var selectedBucketsIndexes = [Int]()
@@ -53,7 +54,6 @@ class ShotBucketsViewModel {
         shotBucketsViewControllerMode = mode
     }
     
-    // NGRTodo: implement `RemoveFromBucket` case
     func loadBuckets() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
         
@@ -67,8 +67,11 @@ class ShotBucketsViewModel {
                 }.then(fulfill).error(reject)
                 
             case .RemoveFromBucket:
-                // NGRTodo: implement me!
-                print(true)
+                firstly {
+                    shotsRequester.userBucketsForShot(shot)
+                }.then { buckets in
+                    self.buckets = buckets ?? []
+                }.then(fulfill).error(reject)
             }
         }
     }

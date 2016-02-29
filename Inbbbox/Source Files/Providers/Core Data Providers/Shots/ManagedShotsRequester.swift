@@ -47,4 +47,15 @@ class ManagedShotsRequester {
             fulfill(managedShot.liked)
         }
     }
+    
+    func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
+        let managedShot = managedObjectsProvider.managedShot(shot)
+        return Promise<[BucketType]!> { fulfill, _ in
+            var managedBuckets = managedShot.buckets?.allObjects as! [ManagedBucket]
+            managedBuckets = managedBuckets.filter({return $0.owner.identifier == UserStorage.currentUser?.identifier})
+            fulfill(managedBuckets)
+            
+        }
+        
+    }
 }

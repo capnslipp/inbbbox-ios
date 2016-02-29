@@ -21,12 +21,14 @@ class ShotBucketsViewModelSpec: QuickSpec {
         var shot: ShotType!
         var bucketsProviderMock: APIBucketsProviderMock!
         var bucketsRequesterMock: APIBucketsRequesterMock!
+        var shotsRequesterMock: APIShotsRequesterMock!
         
         beforeEach {
             
             shot = Shot.fixtureShot()
             bucketsProviderMock = APIBucketsProviderMock()
             bucketsRequesterMock = APIBucketsRequesterMock()
+            shotsRequesterMock = APIShotsRequesterMock()
             
             bucketsProviderMock.provideMyBucketsStub.on(any()) { _ in
                 return Promise{ fulfill, _ in
@@ -48,11 +50,33 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     fulfill()
                 }
             }
+            
+            bucketsRequesterMock.removeShotStub.on(any()) { _ in
+                return Promise{ fulfill, _ in
+                    
+                    fulfill()
+                }
+            }
+            
+            shotsRequesterMock.userBucketsForShotStub.on(any()) { _ in
+                return Promise{ fulfill, _ in
+                    
+                    let json = JSONSpecLoader.sharedInstance.fixtureBucketsJSON(withCount: 3)
+                    let result = json.map { Bucket.map($0) }
+                    var resultBucketTypes = [BucketType]()
+                    for bucket in result {
+                        resultBucketTypes.append(bucket)
+                    }
+                    
+                    fulfill(resultBucketTypes)
+                }
+            }
         }
         
         afterEach {
             bucketsProviderMock = nil
             bucketsRequesterMock = nil
+            shotsRequesterMock = nil
             shot = nil
         }
         
@@ -94,7 +118,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                         sut.loadBuckets().then { result -> Void in
                             responseResult = successResponse
                             done()
-                            }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                     }
                 }
                 
@@ -124,14 +148,14 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
                             done()
-                            }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                     }
                     
                     waitUntil { done in
                         sut.addShotToBucketAtIndex(0).then { result -> Void in
                             responseResult = successResponse
                             done()
-                            }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                     }
                 }
                 
@@ -149,14 +173,92 @@ class ShotBucketsViewModelSpec: QuickSpec {
             
             beforeEach {
                 sut = ShotBucketsViewModel(shot: shot, mode: .RemoveFromBucket)
+                
+                sut.shotsRequester = shotsRequesterMock
+                sut.bucketsRequester = bucketsRequesterMock
             }
             
             afterEach {
                 sut = nil
             }
             
-            // NGRTodo: write spec
+            describe("when newly initialized") {
+                
+                it("should have correct title") {
+                    expect(sut.titleForHeader).to(equal("Remove From Bucket"))
+                }
+                
+                it("should have no buckets") {
+                    expect(sut.buckets.count).to(equal(0))
+                }
+                
+                it("should have correct number of items") {
+                    expect(sut.itemsCount).to(equal(2))
+                }
+            }
+            
+            describe("when buckets for shot are loaded") {
+                
+                var responseResult: String!
+                let successResponse = "success"
+                
+                beforeEach {
+                    waitUntil { done in
+                        sut.loadBuckets().then { result -> Void in
+                            responseResult = successResponse
+                            done()
+                        }.error { _ in fail("This should not be invoked") }
+                    }
+                }
+                
+                afterEach {
+                    responseResult = nil
+                }
+                
+                it("buckets should be properly downloaded") {
+                    expect(responseResult).to(equal(successResponse))
+                }
+                
+                it("view model should have correct number of buckets") {
+                    expect(sut.buckets.count).to(equal(3))
+                }
+                
+                it("view model should have correct number of items") {
+                    expect(sut.itemsCount).to(equal(5))
+                }
+            }
+            
+            describe("when removing shot from selected buckets") {
+                
+                var responseResult: String!
+                let successResponse = "success"
+                
+                beforeEach {
+                    waitUntil { done in
+                        sut.loadBuckets().then { result -> Void in
+                            done()
+                        }.error { _ in fail("This should not be invoked") }
+                    }
+                    
+                    sut.selectBucketAtIndex(0)
+                    sut.selectBucketAtIndex(1)
+                    
+                    waitUntil { done in
+                        sut.removeShotFromSelectedBuckets().then { result -> Void in
+                            responseResult = successResponse
+                            done()
+                        }.error { _ in fail("This should not be invoked") }
+                    }
+                }
+                
+                afterEach {
+                    responseResult = nil
+                }
+                
+                it("shot should be properly removed from selected buckets") {
+                    expect(responseResult).to(equal(successResponse))
+                }
+            }
         }
-        
     }
 }
