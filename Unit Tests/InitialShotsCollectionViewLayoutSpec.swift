@@ -198,16 +198,16 @@ private struct FixtureCollectionViewBounds {
 }
 
 private struct FixtureFirstItemAttributes {
-    let width = CGFloat(264)
-    let height = CGFloat(198)
+    let width = CGFloat(265)
+    let height = CGFloat(198.75)
     let center = CGPoint(x: 160, y: 284)
     let zIndex = NSInteger(0)
     let alpha = CGFloat(0)
 }
 
 private struct FixtureSecondItemAttributes  {
-    let width = CGFloat(208)
-    let height = CGFloat(156)
+    let width = CGFloat(210)
+    let height = CGFloat(157.5)
     let center = CGPoint(x: 160, y: 324)
     let zIndex = NSInteger(-1)
     let alpha = CGFloat(0)
