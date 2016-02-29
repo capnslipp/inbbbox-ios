@@ -112,7 +112,7 @@ final class ShotDetailsFormatter {
         mutableBody.addAttributes([
             NSForegroundColorAttributeName : UIColor.grayColor(),
             NSFontAttributeName : UIFont.systemFontOfSize(14)
-        ], range: NSMakeRange(0, body.length - 1))
+        ], range: NSMakeRange(0, body.length))
         
         return mutableBody.copy() as? NSAttributedString
     }
