@@ -13,7 +13,6 @@ import PromiseKit
 class SettingsViewController: UITableViewController {
 
     private var viewModel: SettingsViewModel!
-    private var logoutButton: UIBarButtonItem?
 
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
