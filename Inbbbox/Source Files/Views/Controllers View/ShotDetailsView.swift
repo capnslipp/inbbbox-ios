@@ -15,13 +15,18 @@ class ShotDetailsView: UIView {
     let commentComposerView = CommentComposerView.newAutoLayoutView()
     let closeButton = UIButton(type: .System)
     
+    var shouldShowCommentComposerView = true {
+        willSet(newValue) {
+            commentComposerView.hidden = !newValue
+        }
+    }
     var topLayoutGuideOffset = CGFloat(0)
     
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
     private let keyboardResizableView = KeyboardResizableView.newAutoLayoutView()
     private var didSetConstraints = false
-    
+
     override init(frame: CGRect) {
 
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
@@ -64,16 +69,18 @@ class ShotDetailsView: UIView {
             
             blurView.autoPinEdgesToSuperviewEdges()
             
+            let commentComposerViewHeight = CGFloat(50)
             keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             let constraint = keyboardResizableView.autoPinEdgeToSuperviewEdge(.Bottom)
             keyboardResizableView.setReferenceBottomConstraint(constraint)
             
             commentComposerView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
-            commentComposerView.autoSetDimension(.Height, toSize: 50)
+            commentComposerView.autoSetDimension(.Height, toSize: commentComposerViewHeight)
             
             let insets = UIEdgeInsets(top: topLayoutGuideOffset, left: 10, bottom: 0, right: 10)
+            let commentComposerInset = shouldShowCommentComposerView ? commentComposerViewHeight : 0
             collectionViewCornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
-            collectionViewCornerWrapperView.autoPinEdge(.Bottom, toEdge: .Top, ofView: commentComposerView)
+            collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: commentComposerInset)
             
             collectionView.autoPinEdgesToSuperviewEdges()
             
