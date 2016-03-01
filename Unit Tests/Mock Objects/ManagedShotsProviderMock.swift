@@ -12,9 +12,9 @@ import PromiseKit
 @testable import Inbbbox
 
 class ManagedShotsProviderMock: ManagedShotsProvider {
-    
+
     let provideMyLikedShotsStub = Stub<Void, Promise<[ShotType]?>>()
-    
+
     override func provideMyLikedShots() -> Promise<[ShotType]?> {
         return try! provideMyLikedShotsStub.invoke()
     }
