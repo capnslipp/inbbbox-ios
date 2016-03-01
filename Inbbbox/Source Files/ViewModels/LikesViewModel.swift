@@ -14,7 +14,7 @@ class LikesViewModel: BaseCollectionViewViewModel {
     
     var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Likes", comment:"")
-    private var likedShots = [ShotType]()
+    var likedShots = [ShotType]()
     private let shotsProvider = ShotsProvider()
     
     var itemsCount: Int {
