@@ -39,7 +39,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     }
     
     func downloadItemsForNextPage() {
-        guard UserStorage.currentUser != nil else {
+        guard UserStorage.isUserSignedIn else {
             return
         }
         firstly {

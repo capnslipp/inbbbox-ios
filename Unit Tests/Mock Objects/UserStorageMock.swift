@@ -11,7 +11,7 @@ class UserStorageMock: UserStorage {
 
     static let userIsSignedInStub = Stub<Void, Bool>()
 
-    override class var userIsSignedIn: Bool {
+    override class var isUserSignedIn: Bool {
         return try! userIsSignedInStub.invoke()
     }
 }
