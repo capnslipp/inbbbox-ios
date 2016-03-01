@@ -133,7 +133,7 @@ class LoginViewAnimations {
         }
         
         let translationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        translationY.values = [0, 100, 0]
+        translationY.values = [0, 70, 0]
         translationY.keyTimes = [0, 0.45, 1]
         translationY.timingFunction = CAMediaTimingFunction(controlPoints: 0.7, 0.2, 0.3, 0.8)
         translationY.duration = duration
