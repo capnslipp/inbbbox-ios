@@ -77,7 +77,7 @@ class APIShotsProviderSpec: QuickSpec {
                 it("shots should be properly returned") {
                     sut.provideMyLikedShots().then { _shots -> Void in
                         shots = _shots
-                        }.error { _ in fail() }
+                    }.error { _ in fail() }
                     
                     expect(shots).toNotEventually(beNil())
                     expect(shots).toEventually(haveCount(3))
