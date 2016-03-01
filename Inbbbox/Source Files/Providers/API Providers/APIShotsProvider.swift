@@ -40,7 +40,7 @@ class APIShotsProvider: PageableProvider {
         resetAnUseSourceType(.Liked)
         
         let query = ShotsQuery(type: .LikedShots)
-        return provideShotsWithQueries([query])
+        return provideShotsWithQueries([query], serializationKey: "shot")
     }
 
     /**
