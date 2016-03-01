@@ -1,5 +1,5 @@
 //
-//  BucketsViewModelSpec.swift
+//  FolloweesViewModelSpec.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 01.03.2016.
@@ -11,18 +11,19 @@ import Nimble
 
 @testable import Inbbbox
 
-class BucketsViewModelSpec: QuickSpec {
+class FolloweesViewModelSpec: QuickSpec {
     
     override func spec() {
         
-        var sut: BucketsViewModelMock!
+        var sut: FolloweesViewModelMock!
         let fixtureImageURL = NSURL(string: "https://fixture.domain/fixture.image.normal.png")
         let fixtureImagesURLs: [NSURL]? = [fixtureImageURL!, fixtureImageURL!, fixtureImageURL!, fixtureImageURL!]
-        let fixtureBucketName = "fixture.name"
-        let fixtureNumberOfShots = "250 shots"
+        let fixtureFolloweeName = "fixture.name"
+        let fixtureNumberOfShots = "1 shot"
+        let fixtureAvatarString = "fixture.avatar.url"
         
         beforeEach {
-            sut = BucketsViewModelMock()
+            sut = FolloweesViewModelMock()
         }
         
         afterEach {
@@ -42,16 +43,17 @@ class BucketsViewModelSpec: QuickSpec {
                 sut.downloadInitialItems()
             }
             
-            it("should have proper number of buckets") {
+            it("should have proper number of followees") {
                 expect(sut.itemsCount).to(equal(2))
             }
             
             it("should return proper cell data for index path") {
                 let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-                let cellData = sut.bucketCollectionViewCellViewData(indexPath)
-                expect(cellData.name).to(equal(fixtureBucketName))
+                let cellData = sut.followeeCollectionViewCellViewData(indexPath)
+                expect(cellData.name).to(equal(fixtureFolloweeName))
                 expect(cellData.numberOfShots).to(equal(fixtureNumberOfShots))
                 expect(cellData.shotsImagesURLs).to(equal(fixtureImagesURLs))
+                expect(cellData.avatarString).to(equal(fixtureAvatarString))
             }
         }
         
@@ -67,10 +69,11 @@ class BucketsViewModelSpec: QuickSpec {
             
             it("should return proper shot data for index path") {
                 let indexPath = NSIndexPath(forRow: 1, inSection: 0)
-                let cellData = sut.bucketCollectionViewCellViewData(indexPath)
-                expect(cellData.name).to(equal(fixtureBucketName))
+                let cellData = sut.followeeCollectionViewCellViewData(indexPath)
+                expect(cellData.name).to(equal(fixtureFolloweeName))
                 expect(cellData.numberOfShots).to(equal(fixtureNumberOfShots))
                 expect(cellData.shotsImagesURLs).to(equal(fixtureImagesURLs))
+                expect(cellData.avatarString).to(equal(fixtureAvatarString))
             }
         }
     }
@@ -78,23 +81,23 @@ class BucketsViewModelSpec: QuickSpec {
 
 //Explanation: Create mock class to override methods from BaseCollectionViewViewModel.
 
-private class BucketsViewModelMock: BucketsViewModel {
+private class FolloweesViewModelMock: FolloweesViewModel {
     
     override func downloadInitialItems() {
-        let bucket = Bucket.fixtureBucket()
-        buckets = [bucket, bucket]
-        downloadShots(buckets)
+        let followee = User.fixtureUser()
+        followees = [followee, followee]
+        downloadShots(followees)
     }
     
     override func downloadItemsForNextPage() {
-        let bucket = Bucket.fixtureBucket()
-        buckets = [bucket, bucket, bucket]
-        downloadShots(buckets)
+        let followee = User.fixtureUser()
+        followees = [followee, followee, followee]
+        downloadShots(followees)
     }
     
-    override func downloadShots(buckets: [BucketType]) {
-        for index in 0...buckets.count - 1 {
-            bucketsIndexedShots[index] = [Shot.fixtureShot()]
+    override func downloadShots(followees: [Followee]) {
+        for index in 0...followees.count - 1 {
+            followeesIndexedShots[index] = [Shot.fixtureShot()]
         }
     }
 }

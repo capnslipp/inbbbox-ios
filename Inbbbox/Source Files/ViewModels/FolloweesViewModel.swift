@@ -13,8 +13,8 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     
     var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Following", comment:"")
-    private var followees = [Followee]()
-    private var followeesIndexedShots = [Int : [ShotType]]()
+    var followees = [Followee]()
+    var followeesIndexedShots = [Int : [ShotType]]()
     private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
     
@@ -64,7 +64,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
         }
     }
     
-    private func downloadShots(followees: [Followee]) {
+    func downloadShots(followees: [Followee]) {
         for followee in followees {
             firstly {
                 shotsProvider.provideShotsForUser(followee)
