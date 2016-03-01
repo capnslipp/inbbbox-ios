@@ -28,6 +28,13 @@ final class ShotDetailsViewModel {
         return counter
     }
     
+    var isCommentingAvailable: Bool {
+        if let accountType = UserStorage.currentUser?.accountType {
+            return accountType == .Player || accountType == .Team
+        }
+        return  false
+    }
+    
     // requesters and provider
     var commentsProvider = APICommentsProvider(page: 1, pagination: 20)
     var commentsRequester = APICommentsRequester()

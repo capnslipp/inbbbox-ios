@@ -11,28 +11,28 @@ class ShotsRequester {
     let managedShotsRequester = ManagedShotsRequester()
 
     func likeShot(shot: ShotType) -> Promise<Void> {
-        if UserStorage.userIsSignedIn {
+        if UserStorage.isUserSignedIn {
             return apiShotsRequester.likeShot(shot)
         }
         return managedShotsRequester.likeShot(shot)
     }
 
     func unlikeShot(shot: ShotType) -> Promise<Void> {
-        if UserStorage.userIsSignedIn {
+        if UserStorage.isUserSignedIn {
             return apiShotsRequester.unlikeShot(shot)
         }
         return managedShotsRequester.unlikeShot(shot)
     }
 
     func isShotLikedByMe(shot: ShotType) -> Promise<Bool> {
-        if UserStorage.userIsSignedIn {
+        if UserStorage.isUserSignedIn {
             return apiShotsRequester.isShotLikedByMe(shot)
         }
         return managedShotsRequester.isShotLikedByMe(shot)
     }
     
     func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
-        if UserStorage.userIsSignedIn {
+        if UserStorage.isUserSignedIn {
             return apiShotsRequester.userBucketsForShot(shot)
         }
         return managedShotsRequester.userBucketsForShot(shot)

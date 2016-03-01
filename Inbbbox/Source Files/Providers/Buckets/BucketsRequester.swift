@@ -14,14 +14,14 @@ class BucketsRequester {
     let managedBucketsRequester = ManagedBucketsRequester()
     
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
-        if UserStorage.userIsSignedIn {
+        if UserStorage.isUserSignedIn {
             return apiBucketsRequester.addShot(shot, toBucket: bucket)
         }
         return managedBucketsRequester.addShot(shot, toBucket: bucket)
     }
     
     func removeShot(shot: ShotType, fromBucket bucket: BucketType) -> Promise<Void> {
-        if UserStorage.userIsSignedIn {
+        if UserStorage.isUserSignedIn {
             return apiBucketsRequester.removeShot(shot, fromBucket: bucket)
         }
         return managedBucketsRequester.removeShot(shot, fromBucket: bucket)

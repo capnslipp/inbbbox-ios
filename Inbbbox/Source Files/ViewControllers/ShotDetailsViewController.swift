@@ -57,7 +57,7 @@ class ShotDetailsViewController: UIViewController {
         shotDetailsView.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
         shotDetailsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         shotDetailsView.commentComposerView.delegate = self
-        shotDetailsView.shouldShowCommentComposerView = UserStorage.userIsSignedIn
+        shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
     }
     
     override func viewDidLayoutSubviews() {
