@@ -9,9 +9,9 @@ import Dobby
 
 class UserStorageMock: UserStorage {
 
-    static let currentUserStub = Stub<Void, User?>()
+    static let userIsSignedInStub = Stub<Void, Bool>()
 
-    override class var currentUser: User? {
-        return try! currentUserStub.invoke()
+    override class var isUserSignedIn: Bool {
+        return try! userIsSignedInStub.invoke()
     }
 }

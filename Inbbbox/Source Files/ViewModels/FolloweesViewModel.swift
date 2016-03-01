@@ -23,7 +23,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     }
     
     func downloadInitialItems() {
-        guard UserStorage.currentUser != nil else {
+        guard UserStorage.isUserSignedIn else {
             return
         }
         firstly {
@@ -41,7 +41,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     }
     
     func downloadItemsForNextPage() {
-        guard UserStorage.currentUser != nil else {
+        guard UserStorage.isUserSignedIn else {
             return
         }
         firstly {

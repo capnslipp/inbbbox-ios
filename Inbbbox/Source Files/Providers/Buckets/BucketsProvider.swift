@@ -14,29 +14,29 @@ class BucketsProvider {
     let managedBucketsProvider = ManagedBucketsProvider()
     
     func provideMyBuckets() -> Promise<[BucketType]?> {
-        if UserStorage.userIsSignedIn {
+        if UserStorage.isUserSignedIn {
             return apiBucketsProvider.provideMyBuckets()
         }
         return managedBucketsProvider.provideMyBuckets()
     }
     
     func provideBucketsForUser(user: UserType) -> Promise<[BucketType]?> {
-        assert(UserStorage.userIsSignedIn, "Cannot provide buckets when user is not signed in")
+        assert(UserStorage.isUserSignedIn, "Cannot provide buckets when user is not signed in")
         return apiBucketsProvider.provideBucketsForUser(user)
     }
     
     func provideBucketsForUsers(users: [UserType]) -> Promise<[BucketType]?> {
-        assert(UserStorage.userIsSignedIn, "Cannot provide buckets when user is not signed in")
+        assert(UserStorage.isUserSignedIn, "Cannot provide buckets when user is not signed in")
         return apiBucketsProvider.provideBucketsForUsers(users)
     }
     
     func nextPage() -> Promise<[BucketType]?> {
-        assert(UserStorage.userIsSignedIn, "Cannot provide buckets for next page when user is not signed in")
+        assert(UserStorage.isUserSignedIn, "Cannot provide buckets for next page when user is not signed in")
         return apiBucketsProvider.nextPage()
     }
     
     func previousPage() -> Promise<[BucketType]?> {
-        assert(UserStorage.userIsSignedIn, "Cannot provide buckets for previous page when user is not signed in")
+        assert(UserStorage.isUserSignedIn, "Cannot provide buckets for previous page when user is not signed in")
         return apiBucketsProvider.previousPage()
     }
 }

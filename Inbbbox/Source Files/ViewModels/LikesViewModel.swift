@@ -23,7 +23,7 @@ class LikesViewModel: BaseCollectionViewViewModel {
     
     func downloadInitialItems() {
         firstly {
-            shotsProvider.provideLikedShotsForUser(UserStorage.currentUser!)
+            shotsProvider.provideMyLikedShots()
         }.then { shots -> Void in
             if let shots = shots {
                 self.likedShots = shots
@@ -36,7 +36,7 @@ class LikesViewModel: BaseCollectionViewViewModel {
     }
     
     func downloadItemsForNextPage() {
-        guard UserStorage.currentUser != nil else {
+        guard UserStorage.isUserSignedIn else {
             return
         }
         firstly {

@@ -219,7 +219,7 @@ private extension SettingsViewController {
     }
 
     func refreshViewAccordingToAuthenticationStatus() {
-        let setupType = UserStorage.userIsSignedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
+        let setupType = UserStorage.isUserSignedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
         if setupType != viewModel.setupType {
             viewModel = SettingsViewModel(delegate: self)
             provideDataForHeader()
