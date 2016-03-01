@@ -93,9 +93,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         let blur = shouldBlurShotImage ? CGFloat(1) : CGFloat(0)
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL, blur: blur)
         cell.gifLabel.hidden = !shot.animated
-        cell.liked = likedShots.contains({ (obj) -> Bool in
-            return obj.identifier == shot.identifier
-        })
+        cell.liked = self.isShotLiked(shot)
         cell.delegate = self
 
         cell.swipeCompletion = { [weak self] action in
@@ -174,11 +172,12 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
 private extension ShotsCollectionViewController {
     
+    func isShotLiked(shot: ShotType) -> Bool {
+        return likedShots.contains({$0.identifier == shot.identifier})
+    }
+    
     func likeShot(shot: ShotType) {
-        let alreadyliked = likedShots.contains({ (obj) -> Bool in
-        return obj.identifier == shot.identifier
-        })
-        if alreadyliked {
+        if self.isShotLiked(shot) {
             return
         }
         
