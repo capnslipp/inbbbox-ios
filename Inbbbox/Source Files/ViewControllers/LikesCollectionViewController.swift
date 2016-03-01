@@ -38,9 +38,6 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == viewModel.itemsCount {
-            viewModel.downloadItemsForNextPage()
-        }
         let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
@@ -50,6 +47,12 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     }
     
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == viewModel.itemsCount {
+            viewModel.downloadItemsForNextPage()
+        }
+    }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present like details view controller

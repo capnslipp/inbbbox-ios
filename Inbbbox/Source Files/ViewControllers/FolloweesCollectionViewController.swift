@@ -34,9 +34,6 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == viewModel.itemsCount - 1 {
-            viewModel.downloadItemsForNextPage()
-        }
         let cellData = viewModel.followeeCollectionViewCellViewData(indexPath)
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
@@ -73,6 +70,12 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     }
     
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == viewModel.itemsCount {
+            viewModel.downloadItemsForNextPage()
+        }
+    }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present followee details view controller

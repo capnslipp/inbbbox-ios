@@ -10,7 +10,7 @@ import Foundation
 
 protocol BaseCollectionViewViewModel {
     
-    var delegate: BaseCollectionViewViewModelDelegate? { get set }
+    var delegate: BaseCollectionViewViewModelDelegate? { get }
     var itemsCount: Int { get }
     
     func downloadInitialItems()

@@ -44,9 +44,6 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row == viewModel.itemsCount - 1 {
-            viewModel.downloadItemsForNextPage()
-        }
         let cell = collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.clearImages()
         let cellData = viewModel.bucketCollectionViewCellViewData(indexPath)
@@ -62,6 +59,12 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     }
 
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == viewModel.itemsCount {
+            viewModel.downloadItemsForNextPage()
+        }
+    }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present bucket details view controller
