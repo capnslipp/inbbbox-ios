@@ -39,15 +39,49 @@ class APIShotsProviderSpec: QuickSpec {
             }
         }
         
-        describe("when providing authenticated user liked shots") {
+        describe("when providing my liked shots") {
             
-            it("shots should be properly returned") {
-                sut.provideMyLikedShots().then { _shots -> Void in
-                    shots = _shots
-                    }.error { _ in fail() }
+            context("and token doesn't exist") {
                 
-                expect(shots).toNotEventually(beNil())
-                expect(shots).toEventually(haveCount(3))
+                var error: ErrorType?
+                
+                beforeEach {
+                    TokenStorage.clear()
+                }
+                
+                afterEach {
+                    error = nil
+                }
+                
+                it("error should appear") {
+                    sut.provideMyLikedShots().then { _ -> Void in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+
+            context("and token does exist") {
+                
+                beforeEach {
+                    TokenStorage.storeToken("fixture.token")
+                }
+                
+                afterEach {
+                    shots = nil
+                }
+                
+                it("shots should be properly returned") {
+                    sut.provideMyLikedShots().then { _shots -> Void in
+                        shots = _shots
+                        }.error { _ in fail() }
+                    
+                    expect(shots).toNotEventually(beNil())
+                    expect(shots).toEventually(haveCount(3))
+                }
             }
         }
         
