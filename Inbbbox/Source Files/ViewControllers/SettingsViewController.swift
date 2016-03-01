@@ -177,16 +177,12 @@ private extension SettingsViewController {
 private extension SettingsViewController {
     
     func configureLogoutButton() {
-        if viewModel.loggedInUser != nil {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
+        navigationItem.rightBarButtonItem = viewModel.loggedInUser != nil ? UIBarButtonItem(
                 title: NSLocalizedString("Log Out", comment: ""),
                 style: .Plain,
                 target: self,
                 action: "didTapLogOutButton:"
-            )
-        } else {
-            navigationItem.rightBarButtonItem = nil
-        }
+            ) : nil
     }
 
     func provideDataForHeader() {
