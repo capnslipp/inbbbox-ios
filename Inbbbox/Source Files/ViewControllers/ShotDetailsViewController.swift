@@ -84,6 +84,15 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 
             // NGRToDo:
             // use set selected for distinguish images
+            firstly {
+                viewModel.checkNumberOfUserBucketsForShot()
+            }.then { number -> Void in
+                if number > 0 {
+                    cell.operationView.selectBucketButton(true)
+                }
+            }.error { error in
+                print(error)
+            }
             
             return cell
             
@@ -169,10 +178,22 @@ extension ShotDetailsViewController {
     }
     
     func bucketButtonDidTap(_: UIButton) {
-        //NGRTemp: needs logic to decide if modal should be shown and if yes - which mode
-        let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: .AddToBucket)
-        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
-        presentViewController(shotBucketsViewController, animated: true, completion: nil)
+
+        firstly{
+            viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
+        }.then { result -> Void in
+            if !result.removed {
+                if result.bucketsNumber! == 0 {
+                    self.presentShotBucketsViewControllerWithMode(.AddToBucket)
+                } else {
+                    self.presentShotBucketsViewControllerWithMode(.RemoveFromBucket)
+                }
+            } else {
+                self.selectBucketButtonInOperationViewCell(false)
+            }
+        }.error { error in
+            print(error)
+        }
     }
 }
 
@@ -228,6 +249,32 @@ private extension ShotDetailsViewController {
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
         }.error { error in
             print(error)
+        }
+    }
+    
+    func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
+        
+        let shotBucketsViewController = ShotBucketsViewController(shot: self.viewModel.shot, mode: mode)
+        
+        shotBucketsViewController.dismissClosure =  { [weak self] in
+            self?.viewModel.clearBucketsData()
+            
+            firstly {
+                self!.viewModel.checkNumberOfUserBucketsForShot()
+            }.then { number -> Void in
+                self?.selectBucketButtonInOperationViewCell(number > 0)
+            }.error { error in
+                print(error)
+            }
+        }
+        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
+        self.presentViewController(shotBucketsViewController, animated: true, completion: nil)
+    }
+    
+    func selectBucketButtonInOperationViewCell(select: Bool) {
+        let operationViewCellIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+        if let cell = shotDetailsView.collectionView.cellForItemAtIndexPath(operationViewCellIndexPath) where cell is ShotDetailsOperationCollectionViewCell {
+            (cell as! ShotDetailsOperationCollectionViewCell).operationView.selectBucketButton(select)
         }
     }
 }

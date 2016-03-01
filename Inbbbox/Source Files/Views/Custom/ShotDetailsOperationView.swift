@@ -96,6 +96,10 @@ class ShotDetailsOperationView: UIView {
         shotLiked = liked
     }
     
+    func selectBucketButton(selected: Bool) {
+        shotInBuckets = selected
+    }
+    
     func isShotLiked() -> Bool {
         return shotLiked!
     }
