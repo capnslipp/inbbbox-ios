@@ -13,6 +13,7 @@ import PromiseKit
 class SettingsViewController: UITableViewController {
 
     private var viewModel: SettingsViewModel!
+    private var logoutButton: UIBarButtonItem?
 
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
@@ -22,14 +23,8 @@ class SettingsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("Log Out", comment: ""),
-            style: .Plain,
-            target: self,
-            action: "didTapLogOutButton:"
-        )
-
+        configureLogoutButton()
+        
         tableView.registerClass(SwitchCell.self)
         tableView.registerClass(DateCell.self)
         tableView.registerClass(LabelCell.self)
@@ -181,6 +176,19 @@ private extension SettingsViewController {
 // MARK: Configuration
 
 private extension SettingsViewController {
+    
+    func configureLogoutButton() {
+        if viewModel.loggedInUser != nil {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: NSLocalizedString("Log Out", comment: ""),
+                style: .Plain,
+                target: self,
+                action: "didTapLogOutButton:"
+            )
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
 
     func provideDataForHeader() {
 
@@ -224,6 +232,7 @@ private extension SettingsViewController {
             viewModel = SettingsViewModel(delegate: self)
             provideDataForHeader()
             tableView.reloadData()
+            configureLogoutButton()
         }
     }
 }
