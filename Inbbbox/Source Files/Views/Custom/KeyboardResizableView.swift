@@ -97,12 +97,16 @@ class KeyboardResizableView: UIView {
 extension KeyboardResizableView {
     
     func keyboardWillAppear(notification: NSNotification) {
-        relayoutViewWithNotification(notification, keyboardPresence: true)
+        if !isKeyboardPresent {
+            relayoutViewWithNotification(notification, keyboardPresence: true)
+        }
         isKeyboardPresent = true
     }
     
     func keyboardWillDisappear(notification: NSNotification) {
-        relayoutViewWithNotification(notification, keyboardPresence: false)
+        if isKeyboardPresent {
+            relayoutViewWithNotification(notification, keyboardPresence: false)
+        }
         isKeyboardPresent = false
     }
 }
@@ -120,6 +124,7 @@ private extension KeyboardResizableView {
     func relayoutViewWithNotification(notification: NSNotification, keyboardPresence: Bool) {
         
         let properlyRotatedCoords = calculateCorrectKeyboardRectFromNotification(notification)
+        
         let height = properlyRotatedCoords.size.height
         let animationDuration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
         
@@ -138,15 +143,14 @@ private extension KeyboardResizableView {
         }
         
         let constant = keyboardPresence ? initialBottomConstraintConstant - addition : bottomConstraint.constant + addition
-        
         bottomConstraint.constant = constant
         
         willRelayoutSubviews?(view: self, state: keyboardPresence ? .WillAppear : .WillDisappear)
         
         UIView.animateWithDuration(animationDuration.doubleValue, animations: {
             self.layoutIfNeeded()
-            }) { _ in
-                self.didRelayoutSubviews?(view: self, state: keyboardPresence ? .DidAppear : .DidDisappear)
+        }) { _ in
+            self.didRelayoutSubviews?(view: self, state: keyboardPresence ? .DidAppear : .DidDisappear)
         }
     }
 }
