@@ -14,8 +14,8 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     
     var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Buckets", comment:"")
-    private var buckets = [BucketType]()
-    private var bucketsIndexedShots = [Int : [ShotType]]()
+    var buckets = [BucketType]()
+    var bucketsIndexedShots = [Int : [ShotType]]()
     private let bucketsProvider = BucketsProvider()
     private let shotsProvider = ShotsProvider()
     
@@ -62,7 +62,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         }
     }
     
-    private func downloadShots(buckets: [BucketType]) {
+    func downloadShots(buckets: [BucketType]) {
         for bucket in buckets {
             firstly {
                 shotsProvider.provideShotsForBucket(bucket)

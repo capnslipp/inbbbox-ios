@@ -77,11 +77,11 @@ private class LikesViewModelMock: LikesViewModel {
  
     override func downloadInitialItems() {
         let shot = Shot.fixtureShot()
-        self.likedShots = [shot, shot]
+        likedShots = [shot, shot]
     }
     
     override func downloadItemsForNextPage() {
         let shot = Shot.fixtureShot()
-        self.likedShots = [shot, shot, shot]
+        likedShots = [shot, shot, shot]
     }
 }
