@@ -22,6 +22,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
 //    NGRTemp: temporary implementation - Maybe we should download shots when the ball is jumping? Or just activity indicator will be enough?
 
     var shots = [ShotType]()
+    var likedShots = [ShotType]()
 
     private var shouldAskForMoreShots = true
 
@@ -92,13 +93,13 @@ final class ShotsCollectionViewController: UICollectionViewController {
         let blur = shouldBlurShotImage ? CGFloat(1) : CGFloat(0)
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL, blur: blur)
         cell.gifLabel.hidden = !shot.animated
-
+        cell.liked = self.isShotLiked(shot)
         cell.delegate = self
 
         cell.swipeCompletion = { [weak self] action in
             switch action {
             case .Like:
-                self?.shotsRequester.likeShot(shot)
+                self?.likeShot(shot)
             case .Bucket: break
             case .Comment: break
             }
@@ -166,6 +167,28 @@ final class ShotsCollectionViewController: UICollectionViewController {
         Settings.StreamSource.NewToday = false
         Settings.StreamSource.PopularToday = true
         Settings.StreamSource.Debuts = false
+    }
+}
+
+private extension ShotsCollectionViewController {
+    
+    func isShotLiked(shot: ShotType) -> Bool {
+        return likedShots.contains({$0.identifier == shot.identifier})
+    }
+    
+    func likeShot(shot: ShotType) {
+        if self.isShotLiked(shot) {
+            return
+        }
+        
+        firstly {
+            self.shotsRequester.likeShot(shot)
+        }.then { Void -> Void in
+            self.collectionView?.reloadData()
+            self.likedShots.append(shot)
+        }.error { error in
+            // NGRToDo handle error and show alert
+        }
     }
 }
 

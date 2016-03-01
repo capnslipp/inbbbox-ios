@@ -41,6 +41,15 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private let commentActionTreshold = CGFloat(-100)
     private var didSetConstraints = false
 
+    var liked = false {
+        didSet {
+            if liked {
+                self.likeImageView.displaySecondImageView()
+            } else {
+                self.likeImageView.displayFirstImageView()
+            }
+        }
+    }
     // MARK: - Life cycle
 
     @available(*, unavailable, message="Use init(frame:) instead")

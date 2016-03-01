@@ -29,7 +29,6 @@ struct ShotCellRestoreInitialStateAnimationDescriptor: AnimationDescriptor {
             shotCell.bucketImageView.hidden = false
             shotCell.plusImageView.hidden = false
             shotCell.commentImageView.hidden = false
-            shotCell.likeImageView.displayFirstImageView()
             swipeCompletion?()
         }
     }
