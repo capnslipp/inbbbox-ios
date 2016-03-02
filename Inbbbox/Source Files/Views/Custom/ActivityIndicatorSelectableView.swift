@@ -19,7 +19,7 @@ class ActivityIndicatorSelectableView: UIView {
         set { button.selected = newValue }
     }
     
-    var tapHandler: (Void-> Void)?
+    var tapHandler: (() -> Void)?
     
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     private let button = UIButton(type: .Custom)

@@ -11,7 +11,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
 //    MARK: - Life cycle
 
     var animationManager = ShotsAnimator()
-    var imageClass = UIImage.self
     var shotsRequester =  ShotsRequester()
     let shotsProvider = ShotsProvider()
     private var didFinishInitialAnimations = false
@@ -173,7 +172,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
 private extension ShotsCollectionViewController {
     
     func isShotLiked(shot: ShotType) -> Bool {
-        return likedShots.contains({$0.identifier == shot.identifier})
+        return likedShots.contains {$0.identifier == shot.identifier}
     }
     
     func likeShot(shot: ShotType) {

@@ -10,57 +10,27 @@ import UIKit
 
 class ShotDetailsOperationView: UIView {
 
-    let likeButton = UIButton.newAutoLayoutView()
-    let bucketButton = UIButton.newAutoLayoutView()
-    
-    struct ViewData {
-        let shotLiked: Bool
-        let shotInBuckets: Bool
-    }
-    
-    var viewData: ViewData? {
-        didSet {
-            shotLiked = viewData!.shotLiked
-            shotInBuckets = viewData!.shotInBuckets
-        }
-    }
-    
+    let likeSelectableView = ActivityIndicatorSelectableView.newAutoLayoutView()
+    let bucketSelectableView = ActivityIndicatorSelectableView.newAutoLayoutView()
+ 
     private var didUpdateConstraints = false
-    private var buttonSize: CGSize {
+    private var selectableViewSize: CGSize {
         return CGSize(width: 44, height: 44)
-    }
-    
-    private var shotLiked: Bool? {
-        didSet {
-            if shotLiked! {
-                likeButton.setImage(UIImage(named: "ic-like-details-active"), forState: .Normal)
-            } else {
-                likeButton.setImage(UIImage(named: "ic-like-details"), forState: .Normal)
-            }
-        }
-    }
-    
-    private var shotInBuckets: Bool? {
-        didSet {
-            if shotInBuckets! {
-                bucketButton.setImage(UIImage(named: "ic-bucket-details-active"), forState: .Normal)
-            } else {
-                bucketButton.setImage(UIImage(named: "ic-bucket-details"), forState: .Normal)
-            }
-        }
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         backgroundColor = UIColor.RGBA(246, 248, 248, 1)
-      
-        likeButton.setImage(UIImage(named: "ic-like-details"), forState: .Normal)
-        likeButton.contentMode = .ScaleAspectFit
-        addSubview(likeButton)
 
-        bucketButton.setImage(UIImage(named: "ic-bucket-details"), forState: .Normal)
-        bucketButton.contentMode = .ScaleAspectFit
-        addSubview(bucketButton)
+        
+        likeSelectableView.setImage(UIImage(named: "ic-like-details-active"), forState: .Selected)
+        likeSelectableView.setImage(UIImage(named: "ic-like-details"), forState: .Deselected)
+        addSubview(likeSelectableView)
+        
+        bucketSelectableView.setImage(UIImage(named: "ic-bucket-details-active"), forState: .Selected)
+        bucketSelectableView.setImage(UIImage(named: "ic-bucket-details"), forState: .Deselected)
+        addSubview(bucketSelectableView)
     }
     
     @available(*, unavailable, message="Use init(withImage: UIImage) method instead")
@@ -70,7 +40,7 @@ class ShotDetailsOperationView: UIView {
     
     override func intrinsicContentSize() -> CGSize {
         let margin = CGFloat(10)
-        return CGSize(width: 0, height: buttonSize.height + 2 * margin)
+        return CGSize(width: 0, height: selectableViewSize.height + 2 * margin)
     }
     
     override func updateConstraints() {
@@ -78,29 +48,15 @@ class ShotDetailsOperationView: UIView {
         if !didUpdateConstraints {
             didUpdateConstraints = true
 
-            let views = [likeButton, bucketButton] as NSArray
-            views.autoDistributeViewsAlongAxis(.Horizontal, alignedTo: .Horizontal, withFixedSize: buttonSize.width, insetSpacing: true)
+            let views = [likeSelectableView, bucketSelectableView] as NSArray
+            views.autoDistributeViewsAlongAxis(.Horizontal, alignedTo: .Horizontal, withFixedSize: selectableViewSize.width, insetSpacing: true)
             
             views.forEach {
                 $0.autoAlignAxis(.Horizontal, toSameAxisOfView: self)
-                $0.autoSetDimension(.Height, toSize: buttonSize.height)
+                $0.autoSetDimension(.Height, toSize: selectableViewSize.height)
             }
         }
         
         super.updateConstraints()
-    }
-    
-    // MARK: Public
-    
-    func updateLikeButton(liked liked: Bool) {
-        shotLiked = liked
-    }
-    
-    func isShotLiked() -> Bool {
-        return shotLiked!
-    }
-    
-    func isShotInBuckets() -> Bool {
-        return shotInBuckets!
     }
 }

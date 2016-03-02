@@ -8,10 +8,6 @@
 
 import Foundation
 
-/**
- Shot model. Can contain much more properties. See http:developer.dribbble.com/v1/shots/#get-a-shot.
- */
-
 protocol ShotType {
     var identifier: String { get }
     var title: String { get }

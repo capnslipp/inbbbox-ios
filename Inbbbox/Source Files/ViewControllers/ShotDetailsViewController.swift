@@ -80,11 +80,20 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         if viewModel.isShotOperationIndex(indexPath.row) {
             let cell = collectionView.dequeueReusableClass(ShotDetailsOperationCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
-            cell.operationView.likeButton.addTarget(self, action: "likeButtonDidTap:", forControlEvents: .TouchUpInside)
-            cell.operationView.bucketButton.addTarget(self, action: "bucketButtonDidTap:", forControlEvents: .TouchUpInside)
-
-            // NGRToDo:
-            // use set selected for distinguish images
+            let likeSelectableView = cell.operationView.likeSelectableView
+            let bucketSelectableView = cell.operationView.bucketSelectableView
+            
+            
+            likeSelectableView.tapHandler = { [weak self] in
+                self?.likeSelectableViewDidTap(likeSelectableView)
+            }
+            
+            bucketSelectableView.tapHandler = { [weak self] in
+                
+            }
+            
+            setLikeStateInSelectableView(likeSelectableView)
+            setBucketStatusInSelectableView(bucketSelectableView)
             
             return cell
             
@@ -164,16 +173,24 @@ extension ShotDetailsViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func likeButtonDidTap(_: UIButton) {
-        //NGRToDo: attach action
-        presentTempAlertController()
-    }
-    
     func bucketButtonDidTap(_: UIButton) {
         //NGRTemp: needs logic to decide if modal should be shown and if yes - which mode
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: .AddToBucket)
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
+    }
+    
+    func likeSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
+        
+        view.startAnimating()
+        
+        firstly {
+            viewModel.performLikeOperation()
+        }.then { isShotLikedByUser in
+            view.selected = isShotLikedByUser
+        }.always {
+            view.stopAnimating()
+        }.error { e in print(e) }
     }
 }
 
@@ -194,6 +211,23 @@ private extension ShotDetailsViewController {
 
         controller.addAction(action)
         presentViewController(controller, animated: true, completion: nil)
+    }
+    
+    func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
+        
+        view.startAnimating()
+            
+        firstly {
+            viewModel.gainLikeStatusOfShot()
+        }.then { isShotLikedByUser in
+            view.selected = isShotLikedByUser
+        }.always {
+            view.stopAnimating()
+        }
+    }
+    
+    func setBucketStatusInSelectableView(view: ActivityIndicatorSelectableView) {
+        
     }
     
     var heightForCollapsedCollectionViewHeader: CGFloat {

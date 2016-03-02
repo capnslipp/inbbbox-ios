@@ -44,6 +44,7 @@ final class ShotDetailsViewModel {
     
     let shot: ShotType
     private(set) var comments = [CommentType]()
+    private var isShotLikedByMe: Bool?
     
     // Private
     private var hasCommentsToFetch: Bool {
@@ -130,13 +131,36 @@ final class ShotDetailsViewModel {
     
     // Shot methods
     
-    func userDidTapLikeButton(like: Bool, completion: (Result) -> Void) {
+    func performLikeOperation() -> Promise<Bool> {
+        return Promise<Bool> { fulfill, reject in
+            
+            let like = !isShotLikedByMe!
+            
+            firstly {
+                like ? shotsRequester.likeShot(shot) : shotsRequester.unlikeShot(shot)
+            }.then { _ -> Void in
+                self.isShotLikedByMe = like
+                fulfill(like)
+            }.error(reject)
+        }
+    }
+    
+    // obsluzyc errory + ładniejsza metoda
+    
+    func gainLikeStatusOfShot() -> Promise<Bool> {
         
-        if like {
-            shotsRequester.likeShot(shot)
-            completion(Result.Success)
-        } else {
-            //NGRToDo: Inform controller about error
+        if let isShotLikedByMe = isShotLikedByMe {
+            return Promise(isShotLikedByMe)
+        }
+        
+        return Promise<Bool> { fulfill, reject in
+            
+            firstly {
+                shotsRequester.isShotLikedByMe(shot)
+            }.then { isShotLikedByMe -> Void in
+                self.isShotLikedByMe = isShotLikedByMe
+                fulfill(isShotLikedByMe)
+            }.error(reject)
         }
     }
     
@@ -159,12 +183,12 @@ final class ShotDetailsViewModel {
         return UserStorage.currentUser?.identifier == comment.user.identifier
     }
     
-    func viewDataForLoadMoreCell() -> ShotDetailsViewModel.LoadMoreCellViewData {
-        let difference = Int(shot.commentsCount) - commentsCount
-        return LoadMoreCellViewData(
-            commentsCount: difference > Int(commentsProvider.pagination) ? Int(commentsProvider.pagination).stringValue : difference.stringValue
-        )
-    }
+//    func viewDataForLoadMoreCell() -> ShotDetailsViewModel.LoadMoreCellViewData {
+//        let difference = Int(shot.commentsCount) - commentsCount
+//        return LoadMoreCellViewData(
+//            commentsCount: difference > Int(commentsProvider.pagination) ? Int(commentsProvider.pagination).stringValue : difference.stringValue
+//        )
+//    }
 }
 
 private extension ShotDetailsViewModel {

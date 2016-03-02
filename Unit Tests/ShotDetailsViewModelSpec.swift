@@ -201,35 +201,5 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 expect(didReceiveResponse).toNot(beNil())
             }
         }
-        
-        describe("when tapping `like shot`") {
-            
-            var didReceiveResponse: Bool?
-            
-            beforeEach {
-                didReceiveResponse = false
-                
-                waitUntil { done in
-                    sut.userDidTapLikeButton(true) { result -> Void in
-                        switch result {
-                        case .Success:
-                            didReceiveResponse = true
-                        case .Error(_):
-                            fail("This should not be invoked")
-                        }
-                        done()
-                    }
-                }
-            }
-            
-            afterEach {
-                didReceiveResponse = nil
-            }
-            
-            it("shot should be correctly liked") {
-                expect(didReceiveResponse).to(beTruthy())
-                expect(didReceiveResponse).toNot(beNil())
-            }
-        }
     }
 }
