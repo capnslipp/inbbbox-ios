@@ -9,10 +9,18 @@
 import UIKit
 import PureLayout
 
+private var cornerRadius: CGFloat {
+    return 15
+}
+
+private var spaceBetweenBottomEdgeOfFooterAndCollectionView: CGFloat {
+    return 20
+}
+
 class ShotDetailsFooterView: UICollectionReusableView {
     
-    class var cornerRadius: CGFloat {
-        return 15
+    class var minimumRequiredHeight: CGFloat {
+        return cornerRadius + spaceBetweenBottomEdgeOfFooterAndCollectionView
     }
     
     var tapHandler: (() -> Void)?
@@ -25,11 +33,12 @@ class ShotDetailsFooterView: UICollectionReusableView {
     private var didUpdateConstraints = false
     private let loadMoreButton = UIButton.newAutoLayoutView()
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    private let cornerWrapperView = UIView.newAutoLayoutView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor.RGBA(255, 255, 255, 1)
+        backgroundColor = .clearColor()
         
         loadMoreButton.addTarget(self, action: "loadMoreButtonDidTap:", forControlEvents: .TouchUpInside)
         loadMoreButton.setTitleColor(UIColor.textDarkColor(), forState: .Normal)
@@ -37,12 +46,15 @@ class ShotDetailsFooterView: UICollectionReusableView {
         loadMoreButton.layer.borderColor = UIColor.RGBA(223, 224, 226, 1).CGColor
         loadMoreButton.layer.borderWidth = 1
         loadMoreButton.layer.cornerRadius = 5
-        addSubview(loadMoreButton)
         
         activityIndicatorView.configureForAutoLayout()
         activityIndicatorView.backgroundColor = .clearColor()
-        activityIndicatorView.color = UIColor.grayColor()
-        addSubview(activityIndicatorView)
+        activityIndicatorView.color = .grayColor()
+        
+        cornerWrapperView.backgroundColor = .RGBA(255, 255, 255, 1)
+        cornerWrapperView.addSubview(loadMoreButton)
+        cornerWrapperView.addSubview(activityIndicatorView)
+        addSubview(cornerWrapperView)
     }
     
     @available(*, unavailable, message="Use init(frame:) method instead")
@@ -53,8 +65,7 @@ class ShotDetailsFooterView: UICollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let radius = ShotDetailsFooterView.cornerRadius
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(roundedRect: cornerWrapperView.bounds, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         layer.mask = mask
@@ -63,6 +74,10 @@ class ShotDetailsFooterView: UICollectionReusableView {
     override func updateConstraints() {
         if !didUpdateConstraints {
             didUpdateConstraints = true
+            
+            let bottomInset = spaceBetweenBottomEdgeOfFooterAndCollectionView
+            cornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            cornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: bottomInset)
             
             let insets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
             loadMoreButton.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)

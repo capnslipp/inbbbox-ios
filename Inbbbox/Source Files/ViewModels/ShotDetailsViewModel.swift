@@ -12,6 +12,7 @@ import PromiseKit
 final class ShotDetailsViewModel {
     
     let shot: ShotType
+    private(set) var isFetchingComments = false
     
     var commentsProvider = APICommentsProvider(page: 1, pagination: 20)
     var commentsRequester = APICommentsRequester()
@@ -195,16 +196,19 @@ extension ShotDetailsViewModel {
     }
 
     var commentsLeftToFetch: UInt {
-        return shot.commentsCount - UInt(comments.count)
+        return max(0, shot.commentsCount - UInt(comments.count))
     }
     
     func loadComments() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
+            
+            isFetchingComments = true
 
             if comments.count == 0 {
                 firstly {
                     commentsProvider.provideCommentsForShot(shot)
                 }.then { comments -> Void in
+                    self.isFetchingComments = false
                     self.comments = comments ?? []
                 }.then(fulfill).error(reject)
                 
@@ -213,6 +217,7 @@ extension ShotDetailsViewModel {
                 firstly {
                     commentsProvider.nextPage()
                 }.then { comments -> Void in
+                    self.isFetchingComments = false
                     if let comments = comments {
                         self.comments.appendContentsOf(comments)
                     }

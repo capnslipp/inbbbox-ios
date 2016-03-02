@@ -40,14 +40,6 @@ class ShotDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        firstly {
-            viewModel.loadComments()
-        }.then {
-            self.shotDetailsView.collectionView.reloadData()
-        }.error { error in
-            print(error)
-        }
    
         shotDetailsView.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
         shotDetailsView.collectionView.delegate = self
@@ -60,6 +52,14 @@ class ShotDetailsViewController: UIViewController {
         shotDetailsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         shotDetailsView.commentComposerView.delegate = self
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
+        
+        firstly {
+            viewModel.loadComments()
+        }.then {
+            self.shotDetailsView.collectionView.reloadData()
+        }.error { error in
+            print(error)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -146,9 +146,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                 }
             }
             
-            footer?.shouldShowLoadMoreButton = viewModel.hasMoreCommentsToFetch
+            viewModel.isFetchingComments ? footer?.startAnimating() : footer?.stopAnimating()
+            footer?.shouldShowLoadMoreButton = viewModel.hasMoreCommentsToFetch && !viewModel.isFetchingComments
             footer?.setTitleForCount(viewModel.commentsLeftToFetch)
-            
             
             return footer!
         }
@@ -197,7 +197,7 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let height: CGFloat = viewModel.hasMoreCommentsToFetch ? 54 : ShotDetailsFooterView.cornerRadius
+        let height: CGFloat = viewModel.hasMoreCommentsToFetch ? 54 : ShotDetailsFooterView.minimumRequiredHeight
         return CGSize(width: CGRectGetWidth(collectionView.frame), height: height)
     }
 }
