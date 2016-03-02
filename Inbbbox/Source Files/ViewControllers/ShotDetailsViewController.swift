@@ -82,28 +82,13 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             let likeSelectableView = cell.operationView.likeSelectableView
             let bucketSelectableView = cell.operationView.bucketSelectableView
-            cell.operationView.likeButton.addTarget(self, action: "likeButtonDidTap:", forControlEvents: .TouchUpInside)
-            cell.operationView.bucketButton.addTarget(self, action: "bucketButtonDidTap:", forControlEvents: .TouchUpInside)
-
-            // NGRToDo:
-            // use set selected for distinguish images
-            firstly {
-                viewModel.checkNumberOfUserBucketsForShot()
-            }.then { number -> Void in
-                if number > 0 {
-                    cell.operationView.selectBucketButton(true)
-                }
-            }.error { error in
-                print(error)
-            }
-            
             
             likeSelectableView.tapHandler = { [weak self] in
                 self?.likeSelectableViewDidTap(likeSelectableView)
             }
             
             bucketSelectableView.tapHandler = { [weak self] in
-                
+                self?.bucketSelectableViewDidTap(bucketSelectableView)
             }
             
             setLikeStateInSelectableView(likeSelectableView)
@@ -186,35 +171,6 @@ extension ShotDetailsViewController {
     func closeButtonDidTap(_: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    func bucketButtonDidTap(_: UIButton) {
-
-        firstly{
-            viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
-        }.then { result -> Void in
-            if let bucketNumber = result.bucketsNumber where !result.removed {
-                let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
-                self.presentShotBucketsViewControllerWithMode(mode)
-            } else {
-                self.selectBucketButtonInOperationViewCell(false)
-            }
-        }.error { error in
-            print(error)
-        }
-    }
-    
-    func likeSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
-        
-        view.startAnimating()
-        
-        firstly {
-            viewModel.performLikeOperation()
-        }.then { isShotLikedByUser in
-            view.selected = isShotLikedByUser
-        }.always {
-            view.stopAnimating()
-        }.error { e in print(e) }
-    }
 }
 
 extension ShotDetailsViewController: CommentComposerViewDelegate {
@@ -235,22 +191,67 @@ private extension ShotDetailsViewController {
         controller.addAction(action)
         presentViewController(controller, animated: true, completion: nil)
     }
-    
+
     func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
-        
+        handleSelectableViewStatus(view) {
+            self.viewModel.gainLikeStatusOfShot()
+        }
+    }
+
+    func setBucketStatusInSelectableView(view: ActivityIndicatorSelectableView) {
+        handleSelectableViewStatus(view) {
+            self.viewModel.gainBucketStatus()
+        }
+    }
+
+    func handleSelectableViewStatus(view: ActivityIndicatorSelectableView, withAction action: (() -> Promise<Bool>)) {
+
         view.startAnimating()
             
         firstly {
-            viewModel.gainLikeStatusOfShot()
+            action()
+        }.then { selected in
+            view.selected = selected
+        }.always {
+            view.stopAnimating()
+        }.error { error in
+            print(error)
+        }
+    }
+    
+    func likeSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
+
+        view.startAnimating()
+        
+        firstly {
+            viewModel.performLikeOperation()
         }.then { isShotLikedByUser in
             view.selected = isShotLikedByUser
         }.always {
             view.stopAnimating()
+        }.error { error in
+            print(error)
         }
     }
     
-    func setBucketStatusInSelectableView(view: ActivityIndicatorSelectableView) {
+    func bucketSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
         
+        view.startAnimating()
+        
+        firstly{
+            viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
+        }.then { result -> Void in
+            if let bucketNumber = result.bucketsNumber where !result.removed {
+                let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
+                self.presentShotBucketsViewControllerWithMode(mode)
+            } else {
+                view.selected = false
+            }
+        }.always {
+            view.stopAnimating()
+        }.error { error in
+            print(error)
+        }
     }
     
     var heightForCollapsedCollectionViewHeader: CGFloat {
@@ -298,23 +299,9 @@ private extension ShotDetailsViewController {
             guard let certainSelf = self else { return }
             
             certainSelf.viewModel.clearBucketsData()
-            
-            firstly {
-                certainSelf.viewModel.checkNumberOfUserBucketsForShot()
-            }.then { number -> Void in
-                certainSelf.selectBucketButtonInOperationViewCell(number > 0)
-            }.error { error in
-                print(error)
-            }
+            certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
-    }
-    
-    func selectBucketButtonInOperationViewCell(select: Bool) {
-        let operationViewCellIndexPath = NSIndexPath(forItem: 0, inSection: 0)
-        if let cell = shotDetailsView.collectionView.cellForItemAtIndexPath(operationViewCellIndexPath) where cell is ShotDetailsOperationCollectionViewCell {
-            (cell as! ShotDetailsOperationCollectionViewCell).operationView.selectBucketButton(select)
-        }
     }
 }

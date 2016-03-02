@@ -136,6 +136,17 @@ final class ShotDetailsViewModel {
     
     // Buckets methods
     
+    func gainBucketStatus() -> Promise<Bool> {
+        return Promise<Bool> { fulfill, reject in
+
+            firstly {
+                checkNumberOfUserBucketsForShot()
+            }.then { number -> Void in
+                fulfill(Bool(number))
+            }.error(reject)
+        }
+    }
+    
     func checkNumberOfUserBucketsForShot() -> Promise<Int> {
         return Promise<Int> { fulfill, reject in
             
