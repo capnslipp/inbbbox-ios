@@ -268,7 +268,7 @@ private extension ShotDetailsViewController {
             }
         }
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
-        self.presentViewController(shotBucketsViewController, animated: true, completion: nil)
+        presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
     
     func selectBucketButtonInOperationViewCell(select: Bool) {
