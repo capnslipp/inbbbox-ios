@@ -34,7 +34,12 @@ class CenterButtonTabBarController: UITabBarController {
         tabBar.layer.shadowColor = UIColor.RGBA(0, 0, 0, 0.09).CGColor
         tabBar.layer.shadowRadius = 3
         tabBar.layer.shadowOpacity = 1
-        tabBar.setValue(true, forKey: "_hidesShadow") // hides top border line of tabBar
+        
+        _ =  { // these two lines hide top border line of tabBar - can't be separated, so I packed them into closure
+            tabBar.shadowImage = UIImage()
+            tabBar.backgroundImage = UIImage()
+        }()
+        
         tabBar.translucent = false
         centerButton.configureForAutoLayout()
         centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
