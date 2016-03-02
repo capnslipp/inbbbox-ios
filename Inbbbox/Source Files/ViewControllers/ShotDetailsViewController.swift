@@ -194,13 +194,13 @@ private extension ShotDetailsViewController {
 
     func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
         handleSelectableViewStatus(view) {
-            self.viewModel.gainLikeStatusOfShot()
+            self.viewModel.checkLikeStatusOfShot()
         }
     }
 
     func setBucketStatusInSelectableView(view: ActivityIndicatorSelectableView) {
         handleSelectableViewStatus(view) {
-            self.viewModel.gainBucketStatus()
+            self.viewModel.checkShotAffiliationToUserBuckets()
         }
     }
 
