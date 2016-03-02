@@ -122,18 +122,18 @@ class LoginViewAnimations {
         })
     }
     
-    func bounceAnimation(views: [UIView], duration: NSTimeInterval) {
+    func bounceAnimation(views: [UIView], duration: NSTimeInterval, additionalYOffset: Bool) {
         
         if !shouldAnimate {
             return
         }
         
         Async.main(after: duration) {
-            self.bounceAnimation(views, duration: duration)
+            self.bounceAnimation(views, duration: duration, additionalYOffset: additionalYOffset)
         }
-        
+        let maxY = additionalYOffset ? 100 : 70
         let translationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        translationY.values = [0, 70, 0]
+        translationY.values = [0, maxY, 0]
         translationY.keyTimes = [0, 0.45, 1]
         translationY.timingFunction = CAMediaTimingFunction(controlPoints: 0.7, 0.2, 0.3, 0.8)
         translationY.duration = duration

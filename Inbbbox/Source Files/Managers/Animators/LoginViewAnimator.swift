@@ -26,6 +26,7 @@ class LoginViewAnimator {
     
     private var loginButtonTitle: String?
     private let loopDuration = NSTimeInterval(1)
+    private var loginAsGuestShown = false
     
     init(view: LoginView?, delegate: LoginViewAnimatorDelegate?) {
         self.view = view
@@ -83,6 +84,7 @@ class LoginViewAnimator {
     }
     
     func showLoginAsGuest() {
+        loginAsGuestShown = true
         animations.moveAnimation([view!.loginButton, view!.dribbbleLogoImageView], duration: 0.5, fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -32))
         animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.5, fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -200))
     }
@@ -108,7 +110,7 @@ private extension LoginViewAnimator {
     }
     
     func ballBounce() -> Promise<Void> {
-        animations.bounceAnimation([view!.loginButton, view!.dribbbleLogoImageView], duration: loopDuration)
+        animations.bounceAnimation([view!.loginButton, view!.dribbbleLogoImageView], duration: loopDuration, additionalYOffset: loginAsGuestShown)
         return Promise()
     }
     
