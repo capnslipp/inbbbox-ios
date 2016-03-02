@@ -25,7 +25,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     var maxHeight = CGFloat(0)
     var minHeight = CGFloat(0)
     
-    let imageView = ShotImageView.newAutoLayoutView()
+    var imageView: UIImageView!
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     
     private let titleLabel = UILabel.newAutoLayoutView()
@@ -50,7 +50,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         titleLabel.numberOfLines = 0
         addSubview(titleLabel)
         
-        imageViewCenterWrapperView.addSubview(imageView)
         imageViewCenterWrapperView.clipsToBounds = true
         addSubview(imageViewCenterWrapperView)
         
@@ -105,9 +104,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
             
-            imageView.autoMatchDimension(.Width, toDimension: .Width, ofView: imageViewCenterWrapperView)
-            imageView.autoCenterInSuperview()
-            
             dimView.autoPinEdgesToSuperviewEdges()
         }
         
@@ -136,6 +132,33 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             
             return mutableTitle.copy() as? NSAttributedString
         }()
+    }
+}
+
+extension ShotDetailsHeaderView {
+    
+    func setImageWithUrl(url: NSURL) {
+        if imageView == nil {
+            imageView = ShotImageView.newAutoLayoutView()
+            setupImageView()
+        }
+        let iv = imageView as! ShotImageView
+        iv.loadImageFromURL(url)
+    }
+    
+    func setAnimatedImageWithUrl(url: NSURL) {
+        if imageView == nil {
+            imageView = AnimatableShotImageView.newAutoLayoutView()
+            setupImageView()
+        }
+        let iv = imageView as! AnimatableShotImageView
+        iv.loadAnimatableShotFromUrl(url)
+    }
+    
+    private func setupImageView() {
+        imageViewCenterWrapperView.addSubview(imageView)
+        imageView.autoMatchDimension(.Width, toDimension: .Width, ofView: imageViewCenterWrapperView)
+        imageView.autoCenterInSuperview()
     }
 }
 
