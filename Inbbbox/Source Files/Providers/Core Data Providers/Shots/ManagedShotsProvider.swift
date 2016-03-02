@@ -7,18 +7,17 @@ import PromiseKit
 import CoreData
 
 class ManagedShotsProvider {
-    
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    func provideLikedShotsForUser(user: UserType) -> Promise<[ShotType]?> {
+
+    var managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+
+    func provideMyLikedShots() -> Promise<[ShotType]?> {
         let fetchRequest = NSFetchRequest(entityName: ManagedShot.entityName)
-        let likedPredicate = NSPredicate(format: "liked == true")
-        let userPredicate = NSPredicate(format: "mngd_user.mngd_identifier == %@", user.identifier)
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [likedPredicate, userPredicate])
+        fetchRequest.predicate = NSPredicate(format: "liked == true")
 
         return Promise<[ShotType]?> { fulfill, reject in
             do {
-                fulfill(try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedShot])
+                let managedShots = try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedShot]
+                fulfill(managedShots.map { $0 as ShotType })
             } catch {
                 reject(error)
             }

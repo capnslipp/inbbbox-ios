@@ -30,6 +30,24 @@ class APIShotsProvider: PageableProvider {
         resetAnUseSourceType(.General)
         return provideShotsWithQueries(activeQueries)
     }
+    
+    /**
+     Provides shots for current user.
+     
+     - returns: Promise which resolves with shots or nil.
+     */
+    func provideMyLikedShots() -> Promise<[ShotType]?> {
+        return Promise<[ShotType]?> { fulfill, reject in
+            firstly {
+                verifyAuthenticationStatus(true)
+            }.then {
+                self.resetAnUseSourceType(.Liked)
+                
+                let query = ShotsQuery(type: .LikedShots)
+                return self.provideShotsWithQueries([query], serializationKey: "shot")
+            }.then(fulfill).error(reject)
+        }
+    }
 
     /**
      Provides shots for given user.

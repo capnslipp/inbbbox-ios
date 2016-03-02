@@ -15,11 +15,11 @@ import PromiseKit
 class APIShotsProviderSpec: QuickSpec {
     override func spec() {
         
-        var sut: APIShotsProviderMock!
+        var sut: APIShotsProviderPrivateMock!
         var shots: [ShotType]?
         
         beforeEach {
-            sut = APIShotsProviderMock()
+            sut = APIShotsProviderPrivateMock()
         }
         
         afterEach {
@@ -36,6 +36,52 @@ class APIShotsProviderSpec: QuickSpec {
                 
                 expect(shots).toNotEventually(beNil())
                 expect(shots).toEventually(haveCount(3))
+            }
+        }
+        
+        describe("when providing my liked shots") {
+            
+            context("and token doesn't exist") {
+                
+                var error: ErrorType?
+                
+                beforeEach {
+                    TokenStorage.clear()
+                }
+                
+                afterEach {
+                    error = nil
+                }
+                
+                it("error should appear") {
+                    sut.provideMyLikedShots().then { _ -> Void in
+                        fail()
+                    }.error { _error in
+                        error = _error
+                    }
+
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+
+            context("and token does exist") {
+                
+                beforeEach {
+                    TokenStorage.storeToken("fixture.token")
+                }
+                
+                afterEach {
+                    shots = nil
+                }
+                
+                it("shots should be properly returned") {
+                    sut.provideMyLikedShots().then { _shots -> Void in
+                        shots = _shots
+                    }.error { _ in fail() }
+                    
+                    expect(shots).toNotEventually(beNil())
+                    expect(shots).toEventually(haveCount(3))
+                }
             }
         }
         
@@ -137,7 +183,7 @@ class APIShotsProviderSpec: QuickSpec {
 }
 
 //Explanation: Create ShotsProviderMock to override methods from PageableProvider.
-private class APIShotsProviderMock: APIShotsProvider {
+private class APIShotsProviderPrivateMock: APIShotsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)

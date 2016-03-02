@@ -8,11 +8,19 @@ import PromiseKit
 
 class ShotsProvider {
 
-    let apiShotsProvider = APIShotsProvider()
-    let managedShotsProvider = ManagedShotsProvider()
+    var apiShotsProvider = APIShotsProvider()
+    var managedShotsProvider = ManagedShotsProvider()
+    var userStorageClass = UserStorage.self
 
     func provideShots() -> Promise<[ShotType]?> {
         return apiShotsProvider.provideShots()
+    }
+    
+    func provideMyLikedShots() -> Promise<[ShotType]?> {
+        if userStorageClass.isUserSignedIn {
+            return apiShotsProvider.provideMyLikedShots()
+        }
+        return managedShotsProvider.provideMyLikedShots()
     }
 
     func provideShotsForUser(user: UserType) -> Promise<[ShotType]?> {
