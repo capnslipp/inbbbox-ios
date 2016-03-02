@@ -82,6 +82,20 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             let likeSelectableView = cell.operationView.likeSelectableView
             let bucketSelectableView = cell.operationView.bucketSelectableView
+            cell.operationView.likeButton.addTarget(self, action: "likeButtonDidTap:", forControlEvents: .TouchUpInside)
+            cell.operationView.bucketButton.addTarget(self, action: "bucketButtonDidTap:", forControlEvents: .TouchUpInside)
+
+            // NGRToDo:
+            // use set selected for distinguish images
+            firstly {
+                viewModel.checkNumberOfUserBucketsForShot()
+            }.then { number -> Void in
+                if number > 0 {
+                    cell.operationView.selectBucketButton(true)
+                }
+            }.error { error in
+                print(error)
+            }
             
             
             likeSelectableView.tapHandler = { [weak self] in
@@ -174,10 +188,19 @@ extension ShotDetailsViewController {
     }
     
     func bucketButtonDidTap(_: UIButton) {
-        //NGRTemp: needs logic to decide if modal should be shown and if yes - which mode
-        let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: .AddToBucket)
-        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
-        presentViewController(shotBucketsViewController, animated: true, completion: nil)
+
+        firstly{
+            viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
+        }.then { result -> Void in
+            if let bucketNumber = result.bucketsNumber where !result.removed {
+                let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
+                self.presentShotBucketsViewControllerWithMode(mode)
+            } else {
+                self.selectBucketButtonInOperationViewCell(false)
+            }
+        }.error { error in
+            print(error)
+        }
     }
     
     func likeSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
@@ -263,6 +286,35 @@ private extension ShotDetailsViewController {
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
         }.error { error in
             print(error)
+        }
+    }
+    
+    func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
+        
+        let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
+        
+        shotBucketsViewController.dismissClosure =  { [weak self] in
+            
+            guard let certainSelf = self else { return }
+            
+            certainSelf.viewModel.clearBucketsData()
+            
+            firstly {
+                certainSelf.viewModel.checkNumberOfUserBucketsForShot()
+            }.then { number -> Void in
+                certainSelf.selectBucketButtonInOperationViewCell(number > 0)
+            }.error { error in
+                print(error)
+            }
+        }
+        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
+        presentViewController(shotBucketsViewController, animated: true, completion: nil)
+    }
+    
+    func selectBucketButtonInOperationViewCell(select: Bool) {
+        let operationViewCellIndexPath = NSIndexPath(forItem: 0, inSection: 0)
+        if let cell = shotDetailsView.collectionView.cellForItemAtIndexPath(operationViewCellIndexPath) where cell is ShotDetailsOperationCollectionViewCell {
+            (cell as! ShotDetailsOperationCollectionViewCell).operationView.selectBucketButton(select)
         }
     }
 }

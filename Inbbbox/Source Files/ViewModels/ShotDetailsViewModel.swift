@@ -39,17 +39,22 @@ final class ShotDetailsViewModel {
     var commentsProvider = APICommentsProvider(page: 1, pagination: 20)
     var commentsRequester = APICommentsRequester()
     
+    var bucketsRequester = APIBucketsRequester()
+    
     private let userStorageClass = UserStorage.self
     private let shotsRequester =  ShotsRequester()
     
     let shot: ShotType
     private(set) var comments = [CommentType]()
+    private(set) var userBucketsForShot = [BucketType]()
     private var isShotLikedByMe: Bool?
     
     // Private
     private var hasCommentsToFetch: Bool {
         return shot.commentsCount != 0
     }
+    
+    private var userBucketsForShotCount: Int?
     
     var attributedShotTitleForHeader: NSAttributedString {
         return ShotDetailsFormatter.attributedStringForHeaderFromShot(shot)
@@ -126,6 +131,54 @@ final class ShotDetailsViewModel {
                 fulfill()
             }.error(reject)
             
+        }
+    }
+    
+    // Buckets methods
+    
+    func checkNumberOfUserBucketsForShot() -> Promise<Int> {
+        return Promise<Int> { fulfill, reject in
+            
+            if let userBucketsForShotCount = userBucketsForShotCount {
+                fulfill(userBucketsForShotCount)
+            } else {
+                
+                firstly {
+                    shotsRequester.userBucketsForShot(shot)
+                }.then { buckets -> Void in
+                    self.userBucketsForShot = buckets
+                    self.userBucketsForShotCount = self.userBucketsForShot.count
+                    fulfill(self.userBucketsForShotCount!)
+                }.error(reject)
+            }
+        }
+    }
+    
+    func clearBucketsData() {
+        userBucketsForShotCount = nil
+        userBucketsForShot = []
+    }
+    
+    func removeShotFromBucketIfExistsInExactlyOneBucket() -> Promise<(removed: Bool, bucketsNumber: Int?)> {
+        return Promise<(removed: Bool, bucketsNumber: Int?)> { fulfill, reject in
+            
+            var numberOfBuckets: Int?
+            
+            firstly {
+                checkNumberOfUserBucketsForShot()
+            }.then { number -> Void in
+                numberOfBuckets = number
+                if numberOfBuckets == 1 {
+                    self.bucketsRequester.removeShot(self.shot, fromBucket: self.userBucketsForShot[0])
+                }
+            }.then { () -> Void in
+                if numberOfBuckets == 1 {
+                    self.clearBucketsData()
+                    fulfill((removed: true, bucketsNumber: nil))
+                } else {
+                    fulfill((removed: false, bucketsNumber: numberOfBuckets))
+                }
+            }.error(reject)
         }
     }
     
