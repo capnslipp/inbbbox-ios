@@ -268,6 +268,7 @@
 		C663D7CF1C7C75A700353761 /* GifIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */; };
 		C68389931C7EE1FF0021F8EA /* BucketsForShotQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68389921C7EE1FF0021F8EA /* BucketsForShotQuery.swift */; };
 		C68389951C7F310A0021F8EA /* Buckets.json in Resources */ = {isa = PBXBuildFile; fileRef = C68389941C7F310A0021F8EA /* Buckets.json */; };
+		C6C83DD61C86FF14003CA891 /* AnimatableShotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C83DD51C86FF14003CA891 /* AnimatableShotImageView.swift */; };
 		E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */; };
 		F00232831C7DC798003020BD /* ShotBucketsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232821C7DC798003020BD /* ShotBucketsViewController.swift */; };
 		F00232851C7DC86B003020BD /* ShotBucketsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232841C7DC86B003020BD /* ShotBucketsViewModel.swift */; };
@@ -596,6 +597,7 @@
 		C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifIndicatorView.swift; sourceTree = "<group>"; };
 		C68389921C7EE1FF0021F8EA /* BucketsForShotQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsForShotQuery.swift; sourceTree = "<group>"; };
 		C68389941C7F310A0021F8EA /* Buckets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Buckets.json; sourceTree = "<group>"; };
+		C6C83DD51C86FF14003CA891 /* AnimatableShotImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableShotImageView.swift; sourceTree = "<group>"; };
 		E1368BC71C3BEDCC00AA3AEB /* ShotImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotImage.swift; sourceTree = "<group>"; };
 		E863DC0075B8561A39153AA0 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F00232821C7DC798003020BD /* ShotBucketsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewController.swift; sourceTree = "<group>"; };
@@ -1003,6 +1005,7 @@
 				BEEE95226A14343E2C4A9C84 /* ShotsCollectionBackgroundView.swift */,
 				BEEE976D93B9067675F4D1A1 /* SwitchableImageView.swift */,
 				5E08CD7C1C6E0E5200EF19E9 /* ShotImageView.swift */,
+				C6C83DD51C86FF14003CA891 /* AnimatableShotImageView.swift */,
 				F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */,
 				F0F501041C7211E200E8959E /* CommentEditView.swift */,
 				5E0D03891C760B5900DDB497 /* KeyboardResizableView.swift */,
@@ -1837,6 +1840,7 @@
 				BEEE9BA062926D6F8C24043C /* APICommentsRequester.swift in Sources */,
 				BEEE9AA25E83D35C18F1DBF9 /* APIProjectsProvider.swift in Sources */,
 				BEEE9332E63D6FDB795B2160 /* APIShotsProviderConfiguration.swift in Sources */,
+				C6C83DD61C86FF14003CA891 /* AnimatableShotImageView.swift in Sources */,
 				BEEE9C8F11324595445A7FD4 /* APIShotsProvider.swift in Sources */,
 				BEEE979BC70DA6672441BE57 /* APIShotsRequester.swift in Sources */,
 				BEEE9AE6936A568F8C4CBA25 /* ManagedShotsRequester.swift in Sources */,

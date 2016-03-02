@@ -156,9 +156,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
             if let url = viewModel.shot.shotImage.hidpiURL where viewModel.shot.animated {
-                header?.imageView.loadAnimatableShotFromUrl(url)
+                header?.setAnimatedImageWithUrl(url)
             } else {
-                header?.imageView.loadShotImageFromURL(viewModel.shot.shotImage.normalURL)
+                header?.setImageWithUrl(viewModel.shot.shotImage.normalURL)
             }
             
             header?.maxHeight = sizeForExpandedCollectionViewHeader(collectionView).height
