@@ -196,7 +196,9 @@ extension ShotDetailsViewModel {
     }
 
     var commentsLeftToFetch: UInt {
-        return max(0, shot.commentsCount - UInt(comments.count))
+        // because someone can add comment after shot download.
+        // so we decide don't show it.
+        return UInt(max(0, Int(shot.commentsCount) - comments.count))
     }
     
     func loadComments() -> Promise<Void> {
