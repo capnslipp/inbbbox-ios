@@ -79,7 +79,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         
         imageViewCenterWrapperViewBottomEdgeConstraint?.constant = -minHeight + minHeight * absoluteProgress
         
-        dimView.alpha = progress
+        dimView.alpha = 0.3 + 0.7 * progress
 
     }
     
