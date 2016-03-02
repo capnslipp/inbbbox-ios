@@ -54,7 +54,6 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         
         imageViewCenterWrapperView.addSubview(imageView)
         imageViewCenterWrapperView.clipsToBounds = true
-        
         addSubview(imageViewCenterWrapperView)
         
         dimView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
