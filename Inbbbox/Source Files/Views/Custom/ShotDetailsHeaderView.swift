@@ -156,7 +156,7 @@ extension ShotDetailsHeaderView {
     }
     
     private func setupImageView() {
-        imageViewCenterWrapperView.addSubview(imageView)
+        imageViewCenterWrapperView.insertSubview(imageView, belowSubview: dimView)
         imageView.autoMatchDimension(.Width, toDimension: .Width, ofView: imageViewCenterWrapperView)
         imageView.autoCenterInSuperview()
     }
