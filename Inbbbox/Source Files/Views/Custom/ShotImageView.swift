@@ -13,7 +13,7 @@ import Gifu
 
 class ShotImageView: UIImageView {
 
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
     private var didSetupConstraints = false
 
     override init(frame: CGRect) {
@@ -22,7 +22,6 @@ class ShotImageView: UIImageView {
         backgroundColor = .followeeShotGrayColor()
         contentMode = .ScaleAspectFit
 
-        activityIndicatorView.color = .whiteColor()
         addSubview(activityIndicatorView)
     }
 

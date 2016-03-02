@@ -13,7 +13,7 @@ import Gifu
 
 class AnimatableShotImageView: AnimatableImageView {
     
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
     private var didSetupConstraints = false
     
     override init(frame: CGRect) {
@@ -22,7 +22,6 @@ class AnimatableShotImageView: AnimatableImageView {
         backgroundColor = .followeeShotGrayColor()
         contentMode = .ScaleAspectFit
         
-        activityIndicatorView.color = .whiteColor()
         addSubview(activityIndicatorView)
     }
     
@@ -56,6 +55,7 @@ class AnimatableShotImageView: AnimatableImageView {
                     self.animateWithImageData(data)
                 }
                 self.activityIndicatorView.stopAnimating()
+                // NGRToDo we should show some kind feedback to user if image failed to load
             })
             }.resume()
     }
