@@ -242,7 +242,6 @@ extension ShotDetailsViewModel {
             }.then { _ in
                 fulfill()
             }.error(reject)
-            
         }
     }
 }

@@ -16,7 +16,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
     var deleteActionHandler: (Void -> Void)?
     
-    let avatarView = AvatarView(size: CGSize(width: 40, height: 40))
+    let avatarView = AvatarView(size: CGSize(width: 40, height: 40), bordered: false)
     let authorLabel = UILabel.newAutoLayoutView()
     let commentLabel = UILabel.newAutoLayoutView()
     let dateLabel = UILabel.newAutoLayoutView()
@@ -34,7 +34,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = UIColor.RGBA(255, 255, 255, 1)
         
         avatarView.configureForAutoLayout()
-        avatarView.layer.borderWidth = 2
         avatarView.imageView.image = UIImage(named: "avatar_placeholder")
         contentView.addSubview(avatarView)
         
