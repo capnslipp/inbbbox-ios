@@ -38,6 +38,9 @@ class CenterButtonTabBarView: UITabBar {
 
         userInteractionEnabled = false
 
+        setValue(true, forKey: "_hidesShadow") // hides top border line of tabBar
+        translucent = false
+        
         likesItemView.configureForAutoLayout()
         addSubview(likesItemView)
 
