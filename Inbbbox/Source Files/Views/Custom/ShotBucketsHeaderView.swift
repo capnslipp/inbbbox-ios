@@ -54,6 +54,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         
         imageViewCenterWrapperView.addSubview(imageView)
         imageViewCenterWrapperView.clipsToBounds = true
+        
         addSubview(imageViewCenterWrapperView)
         
         dimView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
@@ -79,7 +80,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         
         imageViewCenterWrapperViewBottomEdgeConstraint?.constant = -minHeight + minHeight * absoluteProgress
         
-        dimView.alpha = progress
+        dimView.alpha = 0.3 + 0.7 * progress
 
     }
     
