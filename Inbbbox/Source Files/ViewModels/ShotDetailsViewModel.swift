@@ -24,6 +24,8 @@ final class ShotDetailsViewModel {
         if let description = shot.attributedDescription where description.string.characters.count > 0 {
             counter++
         }
+        
+        let hasCommentsToFetch = shot.commentsCount != 0
         if hasCommentsToFetch {
             counter += comments.count
         }
@@ -181,24 +183,24 @@ extension ShotDetailsViewModel {
 // MARK: Comments handling
 extension ShotDetailsViewModel {
     
-    private var commentsCount: Int {
-        return comments.count
-    }
-    
-    private var hasCommentsToFetch: Bool {
-        return shot.commentsCount != 0
-    }
-    
     var isCommentingAvailable: Bool {
         if let accountType = UserStorage.currentUser?.accountType {
             return accountType == .Player || accountType == .Team
         }
         return  false
     }
+    
+    var hasMoreCommentsToFetch: Bool {
+        return UInt(comments.count) < shot.commentsCount
+    }
 
+    var commentsLeftToFetch: UInt {
+        return shot.commentsCount - UInt(comments.count)
+    }
+    
     func loadComments() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
-            
+
             if comments.count == 0 {
                 firstly {
                     commentsProvider.provideCommentsForShot(shot)
@@ -212,7 +214,7 @@ extension ShotDetailsViewModel {
                     commentsProvider.nextPage()
                 }.then { comments -> Void in
                     if let comments = comments {
-                        self.appendCommentsAndUpdateCollectionView(comments)
+                        self.comments.appendContentsOf(comments)
                     }
                 }.then(fulfill).error(reject)
             }
@@ -247,36 +249,6 @@ extension ShotDetailsViewModel {
 }
 
 private extension ShotDetailsViewModel {
-    
-    // Comments methods
-    func appendCommentsAndUpdateCollectionView(comments: [CommentType]) {
-        
-        let currentCommentCount = self.comments.count
-        let possibleLoadMoreCellIndexPath:NSIndexPath? =  {
-            if commentsCount < itemsCount {
-                return NSIndexPath(forItem: currentCommentCount, inSection: 0)
-            } else {
-                return nil
-            }
-        }()
-        
-        var indexPathsToInsert = [NSIndexPath]()
-        var indexPathsToReload = [NSIndexPath]()
-        var indexPathsToDelete = [NSIndexPath]()
-        
-        self.comments.appendContentsOf(comments)
-        
-        for i in currentCommentCount..<self.comments.count {
-            indexPathsToInsert.append(NSIndexPath(forItem: i, inSection: 0))
-        }
-        if let loadMoreCellIndexPath = possibleLoadMoreCellIndexPath {
-            if self.comments.count < Int(shot.commentsCount) {
-                indexPathsToReload.append(loadMoreCellIndexPath)
-            } else {
-                indexPathsToDelete.append(loadMoreCellIndexPath)
-            }
-        }
-    }
     
     func indexInCommentArrayBasedOnItemIndex(index: Int) -> Int {
         return comments.count - itemsCount + index

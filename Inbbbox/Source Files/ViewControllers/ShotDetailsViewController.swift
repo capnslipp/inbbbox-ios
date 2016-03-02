@@ -16,6 +16,7 @@ class ShotDetailsViewController: UIViewController {
         return view as! ShotDetailsView
     }
     private var header: ShotDetailsHeaderView?
+    private var footer: ShotDetailsFooterView?
     private let viewModel: ShotDetailsViewModel
     
     init(shot: ShotType) {
@@ -54,6 +55,7 @@ class ShotDetailsViewController: UIViewController {
         shotDetailsView.collectionView.registerClass(ShotDetailsCommentCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsOperationCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsDescriptionCollectionViewCell.self, type: .Cell)
+        shotDetailsView.collectionView.registerClass(ShotDetailsFooterView.self, type: .Footer)
         shotDetailsView.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
         shotDetailsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         shotDetailsView.commentComposerView.delegate = self
@@ -122,6 +124,35 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
+        if kind == UICollectionElementKindSectionFooter {
+            
+            if footer == nil {
+                footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
+                footer?.tapHandler = { [weak self] in
+                    
+                    guard let this = self else { return }
+                    this.footer?.startAnimating()
+                    
+                    let collectionView = this.shotDetailsView.collectionView
+                    firstly {
+                        this.viewModel.loadComments()
+                    }.then { () -> Void in
+                        collectionView.reloadData()
+                    }.always {
+                        this.footer?.stopAnimating()
+                    }.error { error in
+                        print(error)
+                    }
+                }
+            }
+            
+            footer?.shouldShowLoadMoreButton = viewModel.hasMoreCommentsToFetch
+            footer?.setTitleForCount(viewModel.commentsLeftToFetch)
+            
+            
+            return footer!
+        }
+        
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
             if let url = viewModel.shot.shotImage.hidpiURL where viewModel.shot.animated {
@@ -136,6 +167,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
         }
+        
         return header!
     }
 }
@@ -162,6 +194,11 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return sizeForExpandedCollectionViewHeader(collectionView)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        let height: CGFloat = viewModel.hasMoreCommentsToFetch ? 54 : ShotDetailsFooterView.cornerRadius
+        return CGSize(width: CGRectGetWidth(collectionView.frame), height: height)
     }
 }
 
