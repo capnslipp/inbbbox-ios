@@ -182,12 +182,9 @@ extension ShotDetailsViewController {
         firstly{
             viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
         }.then { result -> Void in
-            if !result.removed {
-                if result.bucketsNumber! == 0 {
-                    self.presentShotBucketsViewControllerWithMode(.AddToBucket)
-                } else {
-                    self.presentShotBucketsViewControllerWithMode(.RemoveFromBucket)
-                }
+            if let bucketNumber = result.bucketsNumber where !result.removed {
+                let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
+                self.presentShotBucketsViewControllerWithMode(mode)
             } else {
                 self.selectBucketButtonInOperationViewCell(false)
             }
@@ -254,15 +251,18 @@ private extension ShotDetailsViewController {
     
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
         
-        let shotBucketsViewController = ShotBucketsViewController(shot: self.viewModel.shot, mode: mode)
+        let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         
         shotBucketsViewController.dismissClosure =  { [weak self] in
-            self?.viewModel.clearBucketsData()
+            
+            guard let certainSelf = self else { return }
+            
+            certainSelf.viewModel.clearBucketsData()
             
             firstly {
-                self!.viewModel.checkNumberOfUserBucketsForShot()
+                certainSelf.viewModel.checkNumberOfUserBucketsForShot()
             }.then { number -> Void in
-                self?.selectBucketButtonInOperationViewCell(number > 0)
+                certainSelf.selectBucketButtonInOperationViewCell(number > 0)
             }.error { error in
                 print(error)
             }
