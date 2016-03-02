@@ -19,6 +19,9 @@ class ShotBucketsViewController: UIViewController {
     var shotBucketsView: ShotBucketsView {
         return view as! ShotBucketsView
     }
+    
+    var dismissClosure: (() -> Void)?
+    
     private var header: ShotBucketsHeaderView?
     private var footer: ShotBucketsFooterView?
     private let viewModel: ShotBucketsViewModel
@@ -149,14 +152,14 @@ extension ShotBucketsViewController {
     func removeButtonDidTap(_: UIButton) {
         firstly {
             viewModel.removeShotFromSelectedBuckets()
-        }.then {
+        }.then { () -> Void in
+            self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
             print(error)
         }
     }
 }
-
 
 private extension ShotBucketsViewController {
     
@@ -227,7 +230,8 @@ private extension ShotBucketsViewController {
     func addShotToBucketAtIndexPath(indexPath: NSIndexPath) {
         firstly {
             viewModel.addShotToBucketAtIndex(indexPath.item)
-        }.then {
+        }.then { () -> Void in
+            self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
             print(error)
