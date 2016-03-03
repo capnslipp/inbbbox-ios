@@ -37,10 +37,12 @@ class ShotCollectionViewCell: UICollectionViewCell {
     weak var delegate: ShotCollectionViewCellDelegate?
 
     private let panGestureRecognizer = UIPanGestureRecognizer()
-    private let doNothingActionTreshold = CGFloat(50)
-    private let likeActionTreshold = CGFloat(100)
-    private let bucketActionTreshold = CGFloat(200)
-    private let commentActionTreshold = CGFloat(-100)
+    
+    private let doNothingActionRange = (min: CGFloat(-50), max: CGFloat(50))
+    private let likeActionRange = (min: CGFloat(50), max: CGFloat(150))
+    private let bucketActionRange = (min: CGFloat(150), max: CGFloat(200))
+    private let commentActionRange = (min: CGFloat(-100), max: CGFloat(-50))
+    
     private var didSetConstraints = false
 
     var liked = false {
@@ -162,7 +164,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
 //    MARK: - Helpers
 
     private func adjustConstraintsForSwipeXTranslation(xTranslation: CGFloat) {
-        if xTranslation > bucketActionTreshold || xTranslation < commentActionTreshold {
+        if xTranslation > bucketActionRange.max || xTranslation < commentActionRange.min {
             return
         }
         shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, xTranslation, 0)
@@ -185,11 +187,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
-        if -doNothingActionTreshold...doNothingActionTreshold ~= xTranslation {
+        if doNothingActionRange.min...doNothingActionRange.max ~= xTranslation {
             return .DoNothing
-        } else if doNothingActionTreshold...likeActionTreshold ~= xTranslation {
+        } else if likeActionRange.min...likeActionRange.max ~= xTranslation {
             return .Like
-        } else if xTranslation > likeActionTreshold {
+        } else if xTranslation > likeActionRange.max   {
             return .Bucket
         } else {
             return .Comment
