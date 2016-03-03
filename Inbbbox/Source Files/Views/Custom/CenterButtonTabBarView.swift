@@ -37,7 +37,14 @@ class CenterButtonTabBarView: UITabBar {
         super.init(frame: frame)
 
         userInteractionEnabled = false
+        
+        _ =  { // these two lines hide top border line of tabBar - can't be separated, so I packed them into closure
+            shadowImage = UIImage()
+            backgroundImage = UIImage()
+        }()
 
+        translucent = false
+        
         likesItemView.configureForAutoLayout()
         addSubview(likesItemView)
 
