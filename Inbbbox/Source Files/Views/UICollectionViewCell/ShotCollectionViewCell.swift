@@ -185,7 +185,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
-        if 0...doNothingActionTreshold ~= xTranslation {
+        if 0...doNothingActionTreshold ~= xTranslation || -doNothingActionTreshold...0 ~= xTranslation {
             return .DoNothing
         } else if doNothingActionTreshold...likeActionTreshold ~= xTranslation {
             return .Like
