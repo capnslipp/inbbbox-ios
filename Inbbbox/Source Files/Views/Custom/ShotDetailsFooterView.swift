@@ -102,6 +102,10 @@ class ShotDetailsFooterView: UICollectionReusableView {
         loadMoreButton.hidden = false
         activityIndicatorView.stopAnimating()
     }
+    
+    func grayOutBackground() {
+        cornerWrapperView.backgroundColor = .RGBA(246, 248, 248, 1)
+    }
 }
 
 private extension ShotDetailsFooterView {

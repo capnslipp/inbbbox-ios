@@ -55,7 +55,10 @@ class ShotDetailsViewController: UIViewController {
         
         firstly {
             viewModel.loadComments()
-        }.then {
+        }.then { () -> Void in
+            if self.viewModel.commentsCount == 0 && self.viewModel.attributedShotDescription == nil {
+                self.footer?.grayOutBackground()
+            }
             self.shotDetailsView.collectionView.reloadData()
         }.error { error in
             print(error)
@@ -197,7 +200,12 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let height: CGFloat = viewModel.hasMoreCommentsToFetch ? 54 : ShotDetailsFooterView.minimumRequiredHeight
+        let height: CGFloat = {
+            if viewModel.isFetchingComments {
+                return 44
+            }
+            return viewModel.hasMoreCommentsToFetch ? 54 : ShotDetailsFooterView.minimumRequiredHeight
+        }()
         return CGSize(width: CGRectGetWidth(collectionView.frame), height: height)
     }
 }

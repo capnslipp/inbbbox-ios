@@ -194,6 +194,10 @@ extension ShotDetailsViewModel {
     var hasMoreCommentsToFetch: Bool {
         return UInt(comments.count) < shot.commentsCount
     }
+    
+    var commentsCount: Int {
+        return comments.count
+    }
 
     var commentsLeftToFetch: UInt {
         // because someone can add comment after shot download.
