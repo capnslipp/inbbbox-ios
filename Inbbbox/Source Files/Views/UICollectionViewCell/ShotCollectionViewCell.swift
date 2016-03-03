@@ -37,7 +37,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     weak var delegate: ShotCollectionViewCellDelegate?
 
     private let panGestureRecognizer = UIPanGestureRecognizer()
-    private let doNothingActionTreshold = CGFloat (50)
+    private let doNothingActionTreshold = CGFloat(50)
     private let likeActionTreshold = CGFloat(100)
     private let bucketActionTreshold = CGFloat(200)
     private let commentActionTreshold = CGFloat(-100)
