@@ -32,9 +32,9 @@ class ShotsProvider {
         assert(userStorageClass.isUserSignedIn, "Cannot provide shots for user when user is not signed in")
         return Promise<[ShotType]?> { fulfill, reject in
             firstly {
-                self.apiShotsProvider.provideLikedShotsForUser(user)
-            }.then { (shots:[ShotType]?) -> Void in
-                let shotsSorted:[ShotType]? = shots?.sort({return $0.createdAt.compare($1.createdAt) == NSComparisonResult.OrderedAscending})
+                apiShotsProvider.provideLikedShotsForUser(user)
+            }.then { shots -> Void in
+                let shotsSorted = shots?.sort{return $0.createdAt.compare($1.createdAt) == NSComparisonResult.OrderedAscending}
                 fulfill(shotsSorted)
             }.error(reject)
         }
