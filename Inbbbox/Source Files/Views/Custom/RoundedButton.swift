@@ -8,6 +8,8 @@ class RoundedButton: UIButton {
 
 //    MARK: - Life cycle
 
+    let diameter = CGFloat(70)
+    
     @available(*, unavailable, message = "Use init() or init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -16,17 +18,18 @@ class RoundedButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        let maskLayer = CAShapeLayer()
-        let maskRect = CGRect(x: 0, y: 0, width: intrinsicContentSize().width, height: intrinsicContentSize().height)
-        let ovalPath = UIBezierPath(ovalInRect: maskRect)
-        maskLayer.path = ovalPath.CGPath
-        layer.mask = maskLayer
+        
+        layer.cornerRadius = diameter/2
+        layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
+        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 1
+        layer.masksToBounds = false
     }
 
 //    MARK: - UIView
 
     override func intrinsicContentSize() -> CGSize {
-        return CGSize(width: 70, height: 70)
+        return CGSize(width: diameter, height: diameter)
     }
 }

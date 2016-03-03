@@ -21,6 +21,10 @@ class TabBarAnimator {
         
         let tabBarHeight = tabBarView.intrinsicContentSize().height
         
+        tabBarView.layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
+        tabBarView.layer.shadowRadius = 3
+        tabBarView.layer.shadowOpacity = 1
+        
         view.addSubview(tabBarView)
         tabBarView.frame = CGRect(
             x: 0,
