@@ -214,8 +214,9 @@ extension ShotDetailsViewModel {
                 firstly {
                     commentsProvider.provideCommentsForShot(shot)
                 }.then { comments -> Void in
-                    self.isFetchingComments = false
                     self.comments = comments ?? []
+                }.always {
+                    self.isFetchingComments = false
                 }.then(fulfill).error(reject)
                 
             } else {
@@ -223,10 +224,11 @@ extension ShotDetailsViewModel {
                 firstly {
                     commentsProvider.nextPage()
                 }.then { comments -> Void in
-                    self.isFetchingComments = false
                     if let comments = comments {
                         self.comments.appendContentsOf(comments)
                     }
+                }.always {
+                    self.isFetchingComments = false
                 }.then(fulfill).error(reject)
             }
         }
