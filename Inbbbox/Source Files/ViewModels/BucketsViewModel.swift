@@ -27,11 +27,17 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         firstly {
             bucketsProvider.provideMyBuckets()
         }.then { buckets -> Void in
+            var bucketsShouldBeReloaded = true
             if let buckets = buckets {
+                if buckets == self.buckets {
+                    bucketsShouldBeReloaded = false
+                }
                 self.buckets = buckets
                 self.downloadShots(buckets)
             }
-            self.delegate?.viewModelDidLoadInitialItems(self)
+            if bucketsShouldBeReloaded {
+                self.delegate?.viewModelDidLoadInitialItems(self)
+            }
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)
@@ -67,6 +73,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             firstly {
                 shotsProvider.provideShotsForBucket(bucket)
             }.then { shots -> Void in
+                var bucketShotsShouldBeReloaded = true
                 var indexOfBucket: Int?
                 for (index, item) in self.buckets.enumerate(){
                     if item.identifier == bucket.identifier {
@@ -74,16 +81,22 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                         break
                     }
                 }
-                guard let index = indexOfBucket else {
-                    return
+                guard let index = indexOfBucket else { return }
+                
+                if let oldShots = self.bucketsIndexedShots[index], newShots = shots {
+                     bucketShotsShouldBeReloaded = oldShots != newShots
                 }
+                
                 if let shots = shots {
                     self.bucketsIndexedShots[index] = shots
                 } else {
                     self.bucketsIndexedShots[index] = [ShotType]()
                 }
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
+                
+                if bucketShotsShouldBeReloaded {
+                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
+                }
             }.error { error in
                 // NGRTemp: Need mockups for error message view
                 print(error)
