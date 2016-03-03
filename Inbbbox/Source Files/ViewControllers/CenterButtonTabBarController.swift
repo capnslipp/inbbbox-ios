@@ -31,7 +31,7 @@ class CenterButtonTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.layer.shadowColor = UIColor.RGBA(0, 0, 0, 0.09).CGColor
+        tabBar.layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
         tabBar.layer.shadowRadius = 3
         tabBar.layer.shadowOpacity = 1
         

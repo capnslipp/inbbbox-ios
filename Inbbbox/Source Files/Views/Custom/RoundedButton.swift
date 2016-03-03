@@ -20,7 +20,7 @@ class RoundedButton: UIButton {
         super.init(frame: frame)
         
         layer.cornerRadius = diameter/2
-        layer.shadowColor = UIColor.RGBA(0, 0, 0, 0.09).CGColor
+        layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shadowRadius = 3
         layer.shadowOpacity = 1
