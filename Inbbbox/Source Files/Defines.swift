@@ -15,6 +15,7 @@ enum NotificationKey: String {
 enum DefaultsKey: String {
     case ReminderOn = "ReminderOn"
     case ReminderDate = "ReminderDate"
+    case StreamSourceIsSet = "StreamSourceIsSet"
     case FollowingStreamSourceOn = "FollowingStreamSourceOn"
     case NewTodayStreamSourceOn = "NewTodayStreamSourceOn"
     case PopularTodayStreamSourceOn = "PopularTodayStreamSourceOn"

@@ -13,6 +13,11 @@ class Settings {
     
     struct StreamSource {
         
+        static var IsSet: Bool {
+            get { return Settings.boolForKey(.StreamSourceIsSet) }
+            set { Settings.setValue(newValue, forKey: .StreamSourceIsSet) }
+        }
+        
         static var Following: Bool {
             get { return Settings.boolForKey(.FollowingStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .FollowingStreamSourceOn) }

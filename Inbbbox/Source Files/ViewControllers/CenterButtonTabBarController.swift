@@ -13,6 +13,8 @@ class CenterButtonTabBarController: UITabBarController {
     convenience init() {
         self.init(nibName: nil, bundle: nil)
         
+        configureInitialStreamSources()
+        
         let likesViewController = UINavigationController(rootViewController: LikesCollectionViewController(oneColumnLayoutCellHeightToWidthRatio: LikeCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: LikeCollectionViewCell.heightToWidthRatio))
         likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Likes", comment: ""), imageName: "ic-likes")
         let bucketsViewController = UINavigationController(rootViewController: BucketsCollectionViewController())
@@ -78,4 +80,10 @@ private extension CenterButtonTabBarController {
         return tabBarItem
     }
     
+    func configureInitialStreamSources() {
+        if !Settings.StreamSource.IsSet {
+            Settings.StreamSource.PopularToday = true
+            Settings.StreamSource.IsSet = true
+        }
+    }
 }
