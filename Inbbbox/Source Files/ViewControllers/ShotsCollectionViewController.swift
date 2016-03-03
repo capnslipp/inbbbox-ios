@@ -102,6 +102,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
                 self?.likeShot(shot)
             case .Bucket: break
             case .Comment: break
+            case .DoNothing: break
             }
         }
         return cell

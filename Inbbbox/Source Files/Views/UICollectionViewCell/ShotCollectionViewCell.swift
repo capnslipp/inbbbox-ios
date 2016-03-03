@@ -12,6 +12,7 @@ protocol ShotCollectionViewCellDelegate: class {
 class ShotCollectionViewCell: UICollectionViewCell {
 
     enum Action {
+        case DoNothing
         case Like
         case Bucket
         case Comment
@@ -36,6 +37,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     weak var delegate: ShotCollectionViewCellDelegate?
 
     private let panGestureRecognizer = UIPanGestureRecognizer()
+    private let doNothingActionTreshold = CGFloat (50)
     private let likeActionTreshold = CGFloat(100)
     private let bucketActionTreshold = CGFloat(200)
     private let commentActionTreshold = CGFloat(-100)
@@ -183,9 +185,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
-        if 0...likeActionTreshold ~= xTranslation {
+        if 0...doNothingActionTreshold ~= xTranslation {
+            return .DoNothing
+        } else if doNothingActionTreshold...likeActionTreshold ~= xTranslation {
             return .Like
-        } else if xTranslation > 100 {
+        } else if xTranslation > likeActionTreshold {
             return .Bucket
         } else {
             return .Comment
