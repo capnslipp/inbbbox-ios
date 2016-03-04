@@ -13,7 +13,6 @@ class ShotDetailsView: UIView {
     
     let collectionView: UICollectionView
     let commentComposerView = CommentComposerView.newAutoLayoutView()
-    let closeButton = UIButton(type: .System)
     
     var shouldShowCommentComposerView = true {
         willSet(newValue) {
@@ -51,10 +50,6 @@ class ShotDetailsView: UIView {
         keyboardResizableView.addSubview(collectionViewCornerWrapperView)
         keyboardResizableView.addSubview(commentComposerView)
         addSubview(keyboardResizableView)
-        
-        let image = UIImage(named: "ic-closemodal")?.imageWithRenderingMode(.AlwaysOriginal)
-        closeButton.setImage(image, forState: .Normal)
-        addSubview(closeButton)
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -83,11 +78,6 @@ class ShotDetailsView: UIView {
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: commentComposerInset)
             
             collectionView.autoPinEdgesToSuperviewEdges()
-            
-            let margin = CGFloat(5)
-            closeButton.autoSetDimensionsToSize(closeButton.imageForState(.Normal)?.size ?? CGSizeZero)
-            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: collectionViewCornerWrapperView, withOffset: -margin)
-            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: collectionViewCornerWrapperView, withOffset: margin)
         }
         
         super.updateConstraints()

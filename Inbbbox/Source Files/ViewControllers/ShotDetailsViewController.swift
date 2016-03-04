@@ -50,7 +50,6 @@ class ShotDetailsViewController: UIViewController {
         shotDetailsView.collectionView.registerClass(ShotDetailsDescriptionCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsFooterView.self, type: .Footer)
         shotDetailsView.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
-        shotDetailsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         shotDetailsView.commentComposerView.delegate = self
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
         
@@ -160,6 +159,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+            header?.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         }
         
         return header!
