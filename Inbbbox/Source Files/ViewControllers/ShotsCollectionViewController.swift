@@ -37,8 +37,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureInitialSettings()
-
         guard let collectionView = collectionView, tabBarController = tabBarController else {
             return
         }
@@ -159,15 +157,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
                 shotCell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL, blur: blur)
             }
         }
-    }
-
-    // MARK: - Helpers
-
-    func configureInitialSettings() {
-        // NGRTemp: - I wonder if there is a better place to configure initial settings other than this view controller
-        Settings.StreamSource.NewToday = false
-        Settings.StreamSource.PopularToday = true
-        Settings.StreamSource.Debuts = false
     }
 }
 

@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
         
+        configureInitialSettings()
+        
         return true
     }
 
@@ -78,4 +80,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         managedObjectContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         return managedObjectContext
     }()
+}
+
+// MARK: Initial configuration
+
+private extension AppDelegate {
+    
+    func configureInitialSettings() {
+        if !Settings.StreamSource.IsSet {
+            Settings.StreamSource.PopularToday = true
+            Settings.StreamSource.IsSet = true
+        }
+    }
 }
