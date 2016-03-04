@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import WebKit
 
 class Authenticator {
     
@@ -67,6 +68,7 @@ class Authenticator {
     class func logout() {
         UserStorage.clear()
         TokenStorage.clear()
+        WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0) , completionHandler:{})
     }
 }
 
