@@ -33,7 +33,11 @@ class DoubleImageView: UIView {
         firstImageView.alpha = 0
         secondImageView.alpha = 1
     }
-
+    
+    func isFirstImageVisible() -> Bool {
+        return firstImageView.alpha == 1
+    }
+    
 //     MARK: - UIView
 
     override class func requiresConstraintBasedLayout() -> Bool {

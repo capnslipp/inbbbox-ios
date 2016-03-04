@@ -168,11 +168,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
             return
         }
         shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, xTranslation, 0)
-
         likeImageViewLeftConstraint?.constant = abs(xTranslation) * 0.2
         likeImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), likeImageView.intrinsicContentSize().width)
-        likeImageView.alpha = min(abs(xTranslation) / 70, 1)
-
+        if (likeImageView.isFirstImageVisible()) {
+            likeImageView.secondImageView.alpha = 0...40 ~= xTranslation ? 0 : min((xTranslation * xTranslation) / 4000 , 1)
+        }
         let displaySecondActionTreshold = CGFloat(50)
         let secondActionWidthConstant = max((abs(xTranslation * 0.6) - displaySecondActionTreshold), 0)
         plusImageViewWidthConstraint?.constant = min(secondActionWidthConstant, plusImageView.intrinsicContentSize().width)
