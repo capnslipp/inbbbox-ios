@@ -124,8 +124,12 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
-            if let url = viewModel.shot.shotImage.hidpiURL where viewModel.shot.animated {
-                header?.setAnimatedImageWithUrl(url)
+            if viewModel.shot.animated {
+                if let url = viewModel.shot.shotImage.hidpiURL {
+                    header?.setAnimatedImageWithUrl(url)
+                } else {
+                    header?.setAnimatedImageWithUrl(viewModel.shot.shotImage.normalURL)
+                }
             } else {
                 header?.setImageWithUrl(viewModel.shot.shotImage.normalURL)
             }
