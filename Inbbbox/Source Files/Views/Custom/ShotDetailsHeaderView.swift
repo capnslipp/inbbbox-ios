@@ -63,6 +63,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         addSubview(overlapingTitleLabel)
         
         addSubview(avatarView)
+        
+        setNeedsUpdateConstraints()
     }
 
     @available(*, unavailable, message="Use init(frame:) method instead")

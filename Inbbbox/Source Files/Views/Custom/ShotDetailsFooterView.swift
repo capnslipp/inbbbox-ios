@@ -39,6 +39,8 @@ class ShotDetailsFooterView: UICollectionReusableView {
         cornerWrapperView.backgroundColor = .RGBA(255, 255, 255, 1)
         cornerWrapperView.addSubview(activityIndicatorView)
         addSubview(cornerWrapperView)
+        
+        setNeedsUpdateConstraints()
     }
     
     @available(*, unavailable, message="Use init(frame:) method instead")
@@ -49,7 +51,7 @@ class ShotDetailsFooterView: UICollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let path = UIBezierPath(roundedRect: cornerWrapperView.bounds, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        let path = UIBezierPath(roundedRect: cornerWrapperView.frame, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         layer.mask = mask
@@ -59,9 +61,8 @@ class ShotDetailsFooterView: UICollectionReusableView {
         if !didUpdateConstraints {
             didUpdateConstraints = true
             
-            let bottomInset = spaceBetweenBottomEdgeOfFooterAndCollectionView
             cornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
-            cornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: bottomInset)
+            cornerWrapperView.autoSetDimension(.Height, toSize: spaceBetweenBottomEdgeOfFooterAndCollectionView)
             
             activityIndicatorView.autoPinEdgesToSuperviewEdges()
         }
