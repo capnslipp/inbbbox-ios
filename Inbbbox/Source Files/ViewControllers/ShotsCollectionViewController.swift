@@ -36,8 +36,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureInitialSettings()
-
         guard let collectionView = collectionView, tabBarController = tabBarController else {
             return
         }
@@ -101,6 +99,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
                 self?.likeShot(shot)
             case .Bucket: break
             case .Comment: break
+            case .DoNothing: break
             }
         }
         return cell
@@ -152,20 +151,10 @@ final class ShotsCollectionViewController: UICollectionViewController {
         let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
 
         for cell in collectionView.visibleCells() {
-            if let shotCell = cell as? ShotCollectionViewCell, indexPath = collectionView.indexPathForCell(shotCell) {
-                let shot = shots[indexPath.item]
-                shotCell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL, blur: blur)
+            if let shotCell = cell as? ShotCollectionViewCell {
+                shotCell.shotImageView.applyBlur(blur)
             }
         }
-    }
-
-    // MARK: - Helpers
-
-    func configureInitialSettings() {
-        // NGRTemp: - I wonder if there is a better place to configure initial settings other than this view controller
-        Settings.StreamSource.NewToday = false
-        Settings.StreamSource.PopularToday = true
-        Settings.StreamSource.Debuts = false
     }
 }
 

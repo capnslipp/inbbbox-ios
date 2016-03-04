@@ -15,6 +15,7 @@ class ShotImageView: UIImageView {
 
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
     private var didSetupConstraints = false
+    private let bluredImageView = UIImageView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,6 +24,9 @@ class ShotImageView: UIImageView {
         contentMode = .ScaleAspectFit
 
         addSubview(activityIndicatorView)
+        
+        bluredImageView.backgroundColor = UIColor.clearColor()
+        addSubview(bluredImageView)
     }
 
     @available(*, unavailable, message="Use init(frame:) method instead")
@@ -40,19 +44,29 @@ class ShotImageView: UIImageView {
             didSetupConstraints = true
 
             activityIndicatorView.autoCenterInSuperview()
+            bluredImageView.autoPinEdgesToSuperviewEdges()
         }
 
         super.updateConstraints()
     }
 
     func loadShotImageFromURL(url: NSURL, blur: CGFloat = 0) {
-
         image = nil
         activityIndicatorView.startAnimating()
         
         loadImageFromURL(url) { [weak self] finished, error in
-            self?.image = self?.image?.imageByBlurringImageWithBlur(blur)
+            self?.bluredImageView.hidden = (blur == 0)
+            self?.applyBlur()
             self?.activityIndicatorView.stopAnimating()
         }
+    }
+    
+    func applyBlur(blur: CGFloat = 0) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { [weak self] in
+            let bluredImage = self?.image?.imageByBlurringImageWithBlur(blur)
+            dispatch_async(dispatch_get_main_queue(), {
+                self?.bluredImageView.image = bluredImage
+            })
+        })
     }
 }
