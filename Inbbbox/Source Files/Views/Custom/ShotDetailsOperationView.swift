@@ -8,22 +8,27 @@
 
 import UIKit
 
+private var selectableViewSize: CGSize {
+    return CGSize(width: 44, height: 44)
+}
+
 class ShotDetailsOperationView: UIView {
 
+    class var minimumRequiredHeight: CGFloat {
+        let margin = CGFloat(10)
+        return  selectableViewSize.height + 2 * margin
+    }
+    
     let likeSelectableView = ActivityIndicatorSelectableView.newAutoLayoutView()
     let bucketSelectableView = ActivityIndicatorSelectableView.newAutoLayoutView()
  
     private var didUpdateConstraints = false
-    private var selectableViewSize: CGSize {
-        return CGSize(width: 44, height: 44)
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = UIColor.RGBA(246, 248, 248, 1)
 
-        
         likeSelectableView.setImage(UIImage(named: "ic-like-details-active"), forState: .Selected)
         likeSelectableView.setImage(UIImage(named: "ic-like-details"), forState: .Deselected)
         addSubview(likeSelectableView)
@@ -39,8 +44,7 @@ class ShotDetailsOperationView: UIView {
     }
     
     override func intrinsicContentSize() -> CGSize {
-        let margin = CGFloat(10)
-        return CGSize(width: 0, height: selectableViewSize.height + 2 * margin)
+        return CGSize(width: 0, height: self.dynamicType.minimumRequiredHeight)
     }
     
     override func updateConstraints() {

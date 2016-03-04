@@ -8,27 +8,23 @@
 
 import Foundation
 import PromiseKit
+import SwiftyJSON
 
 final class ShotDetailsViewModel {
     
     let shot: ShotType
     private(set) var isFetchingComments = false
     
-    var commentsProvider = APICommentsProvider(page: 1, pagination: 20)
+    var commentsProvider = APICommentsProvider(page: 1, pagination: 30)
     var commentsRequester = APICommentsRequester()
     var bucketsRequester = APIBucketsRequester()
     var shotsRequester =  ShotsRequester()
     
     var itemsCount: Int {
         
-        var counter = Int(1) //for ShotDetailsOperationCollectionViewCell
-        if let description = shot.attributedDescription where description.string.characters.count > 0 {
+        var counter = comments.count + 1 // 1 for ShotDetailsOperationCollectionViewCell
+        if hasDescription {
             counter++
-        }
-        
-        let hasCommentsToFetch = shot.commentsCount != 0
-        if hasCommentsToFetch {
-            counter += comments.count
         }
         
         return counter
@@ -44,10 +40,7 @@ final class ShotDetailsViewModel {
     }
     
     func isDescriptionIndex(index: Int) -> Bool {
-        if let description = shot.attributedDescription where description.length > 0 && index == 1 {
-            return true
-        }
-        return false
+        return hasDescription && index == 1
     }
     
     func isShotOperationIndex(index: Int) -> Bool {
@@ -72,12 +65,19 @@ extension ShotDetailsViewModel {
         return ShotDetailsFormatter.attributedShotDescriptionFromShot(shot)
     }
     
-    func displayableDataForCommentAtIndex(index: Int) -> (author: String, comment: NSAttributedString?, date: String, avatarURLString: String) {
+    var hasDescription: Bool {
+        if let description = shot.attributedDescription where description.length > 0 {
+            return true
+        }
+        return false
+    }
+    
+    func displayableDataForCommentAtIndex(index: Int) -> (author: NSAttributedString, comment: NSAttributedString?, date: NSAttributedString, avatarURLString: String) {
         
         let comment = comments[indexInCommentArrayBasedOnItemIndex(index)]
         
         return (
-            author: comment.user.name ?? comment.user.username,
+            author: ShotDetailsFormatter.commentAuthorForComment(comment),
             comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
             date: ShotDetailsFormatter.commentDateForComment(comment),
             avatarURLString: comment.user.avatarString ?? ""
@@ -198,12 +198,6 @@ extension ShotDetailsViewModel {
     var commentsCount: Int {
         return comments.count
     }
-
-    var commentsLeftToFetch: UInt {
-        // because someone can add comment after shot download.
-        // so we decide don't show it.
-        return UInt(max(0, Int(shot.commentsCount) - comments.count))
-    }
     
     func loadComments() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
@@ -231,6 +225,25 @@ extension ShotDetailsViewModel {
                     self.isFetchingComments = false
                 }.then(fulfill).error(reject)
             }
+        }
+    }
+    
+    func loadAllComments() -> Promise<Void> {
+        
+        if comments.count >= Int(shot.commentsCount) {
+            return Promise()
+        }
+        
+        return Promise<Void> { fulfill, reject in
+         
+            firstly {
+                loadComments()
+            }.then {
+                if !self.hasMoreCommentsToFetch {
+                    fulfill()
+                }
+                return self.loadAllComments()
+            }.then(fulfill).error(reject)
         }
     }
     

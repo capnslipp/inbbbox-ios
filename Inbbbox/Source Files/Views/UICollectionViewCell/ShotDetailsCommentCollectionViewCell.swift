@@ -8,15 +8,23 @@
 
 import UIKit
 
-private var margin: CGFloat {
-    return 5
+private var avatarSize: CGSize {
+    return CGSize(width: 40, height: 40)
 }
 
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
+    class var requiredSpaceForLayout: CGFloat {
+        return 2 * insets.left + insets.right + avatarSize.width
+    }
+    
+    class var insets: UIEdgeInsets {
+        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
+    
     var deleteActionHandler: (Void -> Void)?
     
-    let avatarView = AvatarView(size: CGSize(width: 40, height: 40), bordered: false)
+    let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = UILabel.newAutoLayoutView()
     let commentLabel = UILabel.newAutoLayoutView()
     let dateLabel = UILabel.newAutoLayoutView()
@@ -37,20 +45,14 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         avatarView.imageView.image = UIImage(named: "avatar_placeholder")
         contentView.addSubview(avatarView)
         
-        authorLabel.font = UIFont.helveticaFont(.NeueMedium, size: 16)
         authorLabel.numberOfLines = 0
-        authorLabel.textColor = UIColor.textDarkColor()
         contentView.addSubview(authorLabel)
 
-        commentLabel.font = UIFont.helveticaFont(.Neue, size: 15)
-        commentLabel.textColor = UIColor.textLightColor()
         commentLabel.numberOfLines = 0
         commentLabel.lineBreakMode = .ByWordWrapping
         contentView.addSubview(commentLabel)
         
-        dateLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         dateLabel.numberOfLines = 0
-        dateLabel.textColor = UIColor.RGBA(164, 180, 188, 1)
         contentView.addSubview(dateLabel)
         
         editView.deleteButton.addTarget(self, action: "deleteButtonDidTap:", forControlEvents: .TouchUpInside)
@@ -68,7 +70,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let preferredMaxLayoutWidth = frame.size.width - 3 * margin - avatarView.frame.size.width
+        let preferredMaxLayoutWidth = frame.size.width - self.dynamicType.requiredSpaceForLayout
         
         authorLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         dateLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
@@ -79,23 +81,25 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         
         if !didUpdateConstraints {
             didUpdateConstraints = true
-
-            avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: margin)
-            avatarView.autoPinEdgeToSuperviewEdge(.Top, withInset: margin)
-            avatarView.autoSetDimensionsToSize(avatarView.frame.size)
-            avatarView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: margin, relation: .GreaterThanOrEqual)
             
-            authorLabel.autoPinEdge(.Top, toEdge: .Top, ofView: avatarView, withOffset: margin)
-            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: margin)
-            authorLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: margin)
+            let insets = self.dynamicType.insets
+
+            avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: insets.left)
+            avatarView.autoPinEdgeToSuperviewEdge(.Top, withInset: insets.top)
+            avatarView.autoSetDimensionsToSize(avatarView.frame.size)
+            avatarView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom, relation: .GreaterThanOrEqual)
+            
+            authorLabel.autoPinEdge(.Top, toEdge: .Top, ofView: avatarView, withOffset: insets.top)
+            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: insets.top)
+            authorLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: insets.right)
             authorLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
             
-            commentLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorLabel, withOffset: margin)
+            commentLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorLabel, withOffset: insets.top)
             commentLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: dateLabel)
             commentLabel.autoPinEdge(.Left, toEdge: .Left, ofView: authorLabel)
-            commentLabel.autoPinEdge(.Right, toEdge: .Right, ofView: authorLabel, withOffset: margin)
+            commentLabel.autoPinEdge(.Right, toEdge: .Right, ofView: authorLabel, withOffset: insets.right)
             
-            dateLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: margin)
+            dateLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom)
             dateLabel.autoPinEdge(.Left, toEdge: .Left, ofView: authorLabel)
             dateLabel.autoPinEdge(.Right, toEdge: .Right, ofView: authorLabel)
             dateLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
@@ -108,26 +112,13 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         
         super.updateConstraints()
     }
-    
-    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        
-        layoutAttributes.frame = {
-            
-            var frame = layoutAttributes.frame
-            frame.size.height = contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-            
-            return CGRectIntegral(frame)
-        }()
-        
-        return layoutAttributes
-    }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        authorLabel.text = nil
+        authorLabel.attributedText = nil
         commentLabel.attributedText = nil
-        dateLabel.text = nil
+        dateLabel.attributedText = nil
         avatarView.imageView.image = nil
         showEditView(false)
     }

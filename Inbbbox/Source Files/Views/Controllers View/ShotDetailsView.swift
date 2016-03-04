@@ -30,7 +30,7 @@ class ShotDetailsView: UIView {
     override init(frame: CGRect) {
 
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = .clearColor()
         collectionView.layer.shadowColor = UIColor.grayColor().CGColor
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 0.1)
         collectionView.layer.shadowOpacity = 0.3

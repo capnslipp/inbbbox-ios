@@ -10,7 +10,7 @@ import UIKit
 import PureLayout
 
 private var cornerRadius: CGFloat {
-    return 15
+    return 30
 }
 
 private var spaceBetweenBottomEdgeOfFooterAndCollectionView: CGFloat {
@@ -23,15 +23,7 @@ class ShotDetailsFooterView: UICollectionReusableView {
         return cornerRadius + spaceBetweenBottomEdgeOfFooterAndCollectionView
     }
     
-    var tapHandler: (() -> Void)?
-    var shouldShowLoadMoreButton = true {
-        willSet(newValue) {
-            loadMoreButton.hidden = !newValue
-        }
-    }
-    
     private var didUpdateConstraints = false
-    private let loadMoreButton = UIButton.newAutoLayoutView()
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     private let cornerWrapperView = UIView.newAutoLayoutView()
     
@@ -40,19 +32,11 @@ class ShotDetailsFooterView: UICollectionReusableView {
         
         backgroundColor = .clearColor()
         
-        loadMoreButton.addTarget(self, action: "loadMoreButtonDidTap:", forControlEvents: .TouchUpInside)
-        loadMoreButton.setTitleColor(UIColor.textDarkColor(), forState: .Normal)
-        loadMoreButton.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 14)
-        loadMoreButton.layer.borderColor = UIColor.RGBA(223, 224, 226, 1).CGColor
-        loadMoreButton.layer.borderWidth = 1
-        loadMoreButton.layer.cornerRadius = 5
-        
         activityIndicatorView.configureForAutoLayout()
         activityIndicatorView.backgroundColor = .clearColor()
         activityIndicatorView.color = .grayColor()
         
         cornerWrapperView.backgroundColor = .RGBA(255, 255, 255, 1)
-        cornerWrapperView.addSubview(loadMoreButton)
         cornerWrapperView.addSubview(activityIndicatorView)
         addSubview(cornerWrapperView)
     }
@@ -79,38 +63,22 @@ class ShotDetailsFooterView: UICollectionReusableView {
             cornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             cornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: bottomInset)
             
-            let insets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-            loadMoreButton.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
-            loadMoreButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom, relation: .LessThanOrEqual)
-            
             activityIndicatorView.autoPinEdgesToSuperviewEdges()
         }
         
         super.updateConstraints()
     }
-    
-    func setTitleForCount(count: UInt) {
-        loadMoreButton.setTitle(String.localizedStringWithFormat(NSLocalizedString("Load more comments (%d)", comment: ""), count), forState: .Normal)
-    }
-    
+
     func startAnimating() {
         activityIndicatorView.startAnimating()
-        loadMoreButton.hidden = true
     }
     
     func stopAnimating() {
-        loadMoreButton.hidden = false
         activityIndicatorView.stopAnimating()
     }
     
     func grayOutBackground() {
         cornerWrapperView.backgroundColor = .RGBA(246, 248, 248, 1)
-    }
-}
-
-private extension ShotDetailsFooterView {
-    dynamic func loadMoreButtonDidTap(_: UIButton) {
-        tapHandler?()
     }
 }
 

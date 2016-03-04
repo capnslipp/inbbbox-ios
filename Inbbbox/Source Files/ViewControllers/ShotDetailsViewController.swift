@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import KFSwiftImageLoader
+import Async
 
 class ShotDetailsViewController: UIViewController {
     
@@ -54,11 +55,12 @@ class ShotDetailsViewController: UIViewController {
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
         
         firstly {
-            viewModel.loadComments()
+            viewModel.loadAllComments()
         }.then { () -> Void in
-            if self.viewModel.commentsCount == 0 && self.viewModel.attributedShotDescription == nil {
+            if self.viewModel.commentsCount == 0 && !self.viewModel.hasDescription {
                 self.footer?.grayOutBackground()
             }
+            
             self.shotDetailsView.collectionView.reloadData()
         }.error { error in
             print(error)
@@ -68,8 +70,10 @@ class ShotDetailsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setEstimatedSizeIfNeeded()
-        (shotDetailsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
+        if let layout = shotDetailsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader {
+            layout.collapsableHeight = heightForCollapsedCollectionViewHeader
+            layout.invalidateLayout()
+        }
     }
 }
 
@@ -102,6 +106,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             return cell
             
         } else if viewModel.isDescriptionIndex(indexPath.row) {
+
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             cell.descriptionLabel.attributedText = viewModel.attributedShotDescription
@@ -112,15 +117,15 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableClass(ShotDetailsCommentCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
-            
-            cell.authorLabel.text = data.author
+
+            cell.authorLabel.attributedText = data.author
             cell.commentLabel.attributedText = data.comment
-            cell.dateLabel.text = data.date
+            cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"), completion: nil)
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
-            
+
             return cell
         }
     }
@@ -131,27 +136,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             if footer == nil {
                 footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
-                footer?.tapHandler = { [weak self] in
-                    
-                    guard let this = self else { return }
-                    this.footer?.startAnimating()
-                    
-                    let collectionView = this.shotDetailsView.collectionView
-                    firstly {
-                        this.viewModel.loadComments()
-                    }.then { () -> Void in
-                        collectionView.reloadData()
-                    }.always {
-                        this.footer?.stopAnimating()
-                    }.error { error in
-                        print(error)
-                    }
-                }
             }
             
             viewModel.isFetchingComments ? footer?.startAnimating() : footer?.stopAnimating()
-            footer?.shouldShowLoadMoreButton = viewModel.hasMoreCommentsToFetch && !viewModel.isFetchingComments
-            footer?.setTitleForCount(viewModel.commentsLeftToFetch)
             
             return footer!
         }
@@ -190,6 +177,39 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
             cell.showEditView(true)
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        var width = collectionView.bounds.size.width
+        var height = CGFloat(0)
+        
+        if viewModel.isShotOperationIndex(indexPath.row) {
+            height += ShotDetailsOperationCollectionViewCell.minimumRequiredHeight
+        
+        } else if viewModel.isDescriptionIndex(indexPath.row) {
+            
+            let insets = ShotDetailsDescriptionCollectionViewCell.insets
+            width -= (insets.left + insets.right)
+            height += {
+                if let attributedDescription = viewModel.attributedShotDescription {
+                    return attributedDescription.boundingHeightUsingAvailableWidth(width) + insets.top + insets.bottom
+                }
+                return 0
+            }()
+            
+        } else {
+            let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
+            let insets = ShotDetailsDescriptionCollectionViewCell.insets
+            
+            width -= ShotDetailsCommentCollectionViewCell.requiredSpaceForLayout
+            height += data.author.boundingHeightUsingAvailableWidth(width)
+            height += data.comment?.boundingHeightUsingAvailableWidth(width) ?? 0
+            height += data.date.boundingHeightUsingAvailableWidth(width)
+            height += (insets.top + insets.bottom)
+        }
+        
+        return CGSize(width: collectionView.bounds.size.width, height: height)
+    }
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
@@ -200,12 +220,7 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let height: CGFloat = {
-            if viewModel.isFetchingComments {
-                return 44
-            }
-            return viewModel.hasMoreCommentsToFetch ? 54 : ShotDetailsFooterView.minimumRequiredHeight
-        }()
+        let height: CGFloat = viewModel.isFetchingComments ? 64 : ShotDetailsFooterView.minimumRequiredHeight
         return CGSize(width: CGRectGetWidth(collectionView.frame), height: height)
     }
 }
@@ -220,22 +235,29 @@ extension ShotDetailsViewController {
 
 extension ShotDetailsViewController: CommentComposerViewDelegate {
     
-    func didTapSendButtonInComposerView(view: CommentComposerView, withComment: String?) {
-        presentTempAlertController()
+    func didTapSendButtonInComposerView(view: CommentComposerView, comment: String) {
+        
+        view.startAnimation()
+        
+        firstly {
+            viewModel.postComment(comment)
+        }.then { () -> Void in
+            
+            let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0), inSection: 0)
+            self.shotDetailsView.collectionView.performBatchUpdates({ () -> Void in
+                self.shotDetailsView.collectionView.insertItemsAtIndexPaths([indexPath])
+            }, completion: { _ -> Void in
+                self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredVertically, animated: true)
+            })
+        }.always {
+            view.stopAnimation()
+        }.error { error in
+            print(error)
+        }
     }
 }
 
 private extension ShotDetailsViewController {
-
-    func presentTempAlertController() {
-        let controller = UIAlertController(title: "Oh no!", message: "This function is not supported yet", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Destructive) { _ in
-            controller.dismissViewControllerAnimated(true, completion: nil)
-        }
-
-        controller.addAction(action)
-        presentViewController(controller, animated: true, completion: nil)
-    }
 
     func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
         handleSelectableViewStatus(view) {
@@ -316,25 +338,16 @@ private extension ShotDetailsViewController {
         )
     }
     
-    func setEstimatedSizeIfNeeded() {
-        
-        let width = shotDetailsView.collectionView.frame.size.width ?? 0
-        if let layout = shotDetailsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
-            layout.estimatedItemSize = CGSize(width: width, height: 100)
-            layout.invalidateLayout()
-        }
-    }
-    
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
         firstly {
             viewModel.deleteCommentAtIndex(indexPath.item)
-        }.then {
+        }.then { () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
         }.error { error in
             print(error)
         }
     }
-    
+
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
         
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)

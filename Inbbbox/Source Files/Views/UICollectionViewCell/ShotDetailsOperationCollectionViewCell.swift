@@ -10,10 +10,14 @@ import UIKit
 
 class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
     
+    class var minimumRequiredHeight: CGFloat {
+        return  ShotDetailsOperationView.minimumRequiredHeight
+    }
+    
     let operationView = ShotDetailsOperationView.newAutoLayoutView()
     private let separatorView = UIView.newAutoLayoutView()
     private var didUpdateConstraints = false
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -45,19 +49,6 @@ class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
         }
         
         super.updateConstraints()
-    }
-    
-    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        
-        layoutAttributes.frame = {
-            
-            var frame = layoutAttributes.frame
-            frame.size.height = contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-            
-            return CGRectIntegral(frame)
-        }()
-        
-        return layoutAttributes
     }
 }
 
