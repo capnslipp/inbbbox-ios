@@ -66,7 +66,7 @@ class ShotImageView: UIImageView {
             let bluredImage = self?.image?.imageByBlurringImageWithBlur(blur)
             dispatch_async(dispatch_get_main_queue(), {
                 self?.bluredImageView.image = bluredImage
-            });
-        });
+            })
+        })
     }
 }
