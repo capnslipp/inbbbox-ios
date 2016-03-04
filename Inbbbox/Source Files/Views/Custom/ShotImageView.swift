@@ -56,13 +56,17 @@ class ShotImageView: UIImageView {
         
         loadImageFromURL(url) { [weak self] finished, error in
             self?.bluredImageView.hidden = (blur == 0)
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                let bluredImage = self?.image?.imageByBlurringImageWithBlur(blur)
-                dispatch_async(dispatch_get_main_queue(), {
-                    self?.bluredImageView.image = bluredImage
-                    });
-                });
+            self?.applyBlur()
             self?.activityIndicatorView.stopAnimating()
         }
+    }
+    
+    func applyBlur(blur: CGFloat = 0) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { [weak self] in
+            let bluredImage = self?.image?.imageByBlurringImageWithBlur(blur)
+            dispatch_async(dispatch_get_main_queue(), {
+                self?.bluredImageView.image = bluredImage
+            })
+        })
     }
 }
