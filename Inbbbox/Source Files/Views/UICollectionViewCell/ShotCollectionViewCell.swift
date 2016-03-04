@@ -179,7 +179,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         plusImageView.alpha = min((abs(xTranslation) - displaySecondActionTreshold) / 70, 1)
 
         bucketImageViewWidthConstraint?.constant = min(secondActionWidthConstant, bucketImageView.intrinsicContentSize().width)
-        plusImageView.alpha = min((abs(xTranslation) - displaySecondActionTreshold) / 70, 1)
+        bucketImageView.alpha = min((abs(xTranslation) - displaySecondActionTreshold) / 70, 1)
 
         commentImageViewRightConstraint?.constant = -abs(xTranslation) * 0.2
         commentImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), commentImageView.intrinsicContentSize().width)
