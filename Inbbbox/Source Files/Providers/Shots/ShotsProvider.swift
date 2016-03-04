@@ -24,7 +24,7 @@ class ShotsProvider {
     }
 
     func provideShotsForUser(user: UserType) -> Promise<[ShotType]?> {
-        assert(UserStorage.isUserSignedIn, "Cannot provide shots for user when user is not signed in")
+        assert(userStorageClass.isUserSignedIn, "Cannot provide shots for user when user is not signed in")
         return apiShotsProvider.provideShotsForUser(user)
     }
 
@@ -42,17 +42,17 @@ class ShotsProvider {
     }
 
     func provideShotsForBucket(bucket: BucketType) -> Promise<[ShotType]?> {
-        assert(UserStorage.isUserSignedIn, "Cannot provide shots for bucket bucket when user is not signed in")
+        assert(userStorageClass.isUserSignedIn, "Cannot provide shots for bucket bucket when user is not signed in")
         return apiShotsProvider.provideShotsForBucket(bucket)
     }
 
     func nextPage() -> Promise<[ShotType]?> {
-        assert(UserStorage.isUserSignedIn, "Cannot provide shots for next page when user is not signed in")
+        assert(userStorageClass.isUserSignedIn, "Cannot provide shots for next page when user is not signed in")
         return apiShotsProvider.nextPage()
     }
 
     func previousPage() -> Promise<[ShotType]?> {
-        assert(UserStorage.isUserSignedIn, "Cannot provide shots for previous page when user is not signed in")
+        assert(userStorageClass.isUserSignedIn, "Cannot provide shots for previous page when user is not signed in")
         return apiShotsProvider.previousPage()
     }
 }
