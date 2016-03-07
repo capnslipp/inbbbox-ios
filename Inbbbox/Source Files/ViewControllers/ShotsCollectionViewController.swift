@@ -113,13 +113,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
         definesPresentationContext = true
 
         let shotDetailsViewController = ShotDetailsViewController(shot: shots[indexPath.item])
-        shotDetailsViewController.modalPresentationStyle = .OverCurrentContext
         
-        modalTransitionAnimator = ZFModalTransitionAnimator(modalViewController: shotDetailsViewController)
-        modalTransitionAnimator?.dragable = true
-        modalTransitionAnimator?.direction = ZFModalTransitonDirection.Bottom
-        modalTransitionAnimator?.setContentScrollView(shotDetailsViewController.shotDetailsView.collectionView)
-        modalTransitionAnimator?.behindViewAlpha = 0.5
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController, contentScrollView: shotDetailsViewController.shotDetailsView.collectionView)
+        
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
         

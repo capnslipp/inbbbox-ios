@@ -57,14 +57,11 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
         let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.likedShots[indexPath.item])
-        shotDetailsViewController.modalPresentationStyle = .OverCurrentContext
         
-        modalTransitionAnimator = ZFModalTransitionAnimator(modalViewController: shotDetailsViewController)
-        modalTransitionAnimator?.dragable = true
-        modalTransitionAnimator?.direction = ZFModalTransitonDirection.Bottom
-        modalTransitionAnimator?.setContentScrollView(shotDetailsViewController.shotDetailsView.collectionView)
-        modalTransitionAnimator?.behindViewAlpha = 0.5
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController, contentScrollView: shotDetailsViewController.shotDetailsView.collectionView)
+        
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
         

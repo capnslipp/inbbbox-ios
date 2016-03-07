@@ -278,6 +278,7 @@
 		F00232911C7F2339003020BD /* ShotBucketsSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */; };
 		F00232951C7F5774003020BD /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */; };
 		F00232971C811EAC003020BD /* ManagedShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232961C811EAC003020BD /* ManagedShot.swift */; };
+		F033BBD01C8D71BF00E3DE64 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
@@ -608,6 +609,7 @@
 		F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsFooterView.swift; sourceTree = "<group>"; };
 		F00232961C811EAC003020BD /* ManagedShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShot.swift; sourceTree = "<group>"; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
 		F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistratorSpec.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1364,6 +1366,7 @@
 				BEEE99FBFDCE9B7FC2B21F4B /* DefaultViewControllerPresenter.swift */,
 				74A0184B1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift */,
 				5CB3D5B41C75D7BE009C722B /* ManagedObjectsProvider.swift */,
+				F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1840,6 +1843,7 @@
 				BEEE9C8F11324595445A7FD4 /* APIShotsProvider.swift in Sources */,
 				BEEE979BC70DA6672441BE57 /* APIShotsRequester.swift in Sources */,
 				BEEE9AE6936A568F8C4CBA25 /* ManagedShotsRequester.swift in Sources */,
+				F033BBD01C8D71BF00E3DE64 /* CustomTransitions.swift in Sources */,
 				BEEE94E5AD53C9FE14D1F699 /* ShotsProvider.swift in Sources */,
 				BEEE9457C0CBAE837D6D6071 /* ShotsRequester.swift in Sources */,
 			);
