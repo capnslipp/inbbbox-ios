@@ -59,7 +59,6 @@ class ShotDetailsViewController: UIViewController {
             if self.viewModel.commentsCount == 0 && !self.viewModel.hasDescription {
                 self.footer?.grayOutBackground()
             }
-            
             self.shotDetailsView.collectionView.reloadData()
         }.error { error in
             print(error)
@@ -109,7 +108,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             cell.descriptionLabel.attributedText = viewModel.attributedShotDescription
-            
+
             return cell
             
         } else {
@@ -133,10 +132,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         
         if kind == UICollectionElementKindSectionFooter {
             
-            if footer == nil {
-                footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
-            }
-            
+            footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
             viewModel.isFetchingComments ? footer?.startAnimating() : footer?.stopAnimating()
             
             return footer!
@@ -185,16 +181,13 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         if viewModel.isShotOperationIndex(indexPath.row) {
-            
             return collectionView.sizeForAutoSizingCell(ShotDetailsOperationCollectionViewCell.self, textToBound: nil)
         
         } else if viewModel.isDescriptionIndex(indexPath.row) {
-            
             let text = viewModel.attributedShotDescription
             return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text])
 
         } else {
-            
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
             let text = [data.author, data.comment, data.date]
             return collectionView.sizeForAutoSizingCell(ShotDetailsCommentCollectionViewCell.self, textToBound: text)
@@ -244,6 +237,12 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
         }.error { error in
             print(error)
         }
+    }
+}
+
+extension ShotDetailsViewController: ModalByDraggingClosable {
+    var scrollViewToObserve: UIScrollView {
+        return shotDetailsView.collectionView
     }
 }
 
@@ -351,11 +350,5 @@ private extension ShotDetailsViewController {
         }
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
-    }
-}
-
-extension ShotDetailsViewController: ModalByDraggingClosable {
-    var scrollViewToObserve: UIScrollView {
-        return shotDetailsView.collectionView
     }
 }

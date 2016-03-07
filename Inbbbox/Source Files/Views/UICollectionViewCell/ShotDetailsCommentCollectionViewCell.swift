@@ -82,8 +82,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
             avatarView.autoSetDimensionsToSize(avatarView.frame.size)
             avatarView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom, relation: .GreaterThanOrEqual)
             
-            authorLabel.autoPinEdge(.Top, toEdge: .Top, ofView: avatarView, withOffset: insets.top)
-            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: insets.top)
+            authorLabel.autoPinEdge(.Top, toEdge: .Top, ofView: authorLabel.superview!, withOffset: insets.top)
+            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: insets.left)
             authorLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: insets.right)
             authorLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
             
