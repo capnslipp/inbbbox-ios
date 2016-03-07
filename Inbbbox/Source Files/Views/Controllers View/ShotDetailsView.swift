@@ -46,6 +46,11 @@ class ShotDetailsView: UIView {
         collectionViewCornerWrapperView.clipsToBounds = true
         collectionViewCornerWrapperView.addSubview(collectionView)
         
+        keyboardResizableView.willRelayoutSubviews = { [weak self] (_, state) in
+            let round = state == .WillAppear
+            self?.commentComposerView.animateByRoundingCorners(round)
+        }
+        
         keyboardResizableView.automaticallySnapToKeyboardTopEdge = true
         keyboardResizableView.addSubview(collectionViewCornerWrapperView)
         keyboardResizableView.addSubview(commentComposerView)
