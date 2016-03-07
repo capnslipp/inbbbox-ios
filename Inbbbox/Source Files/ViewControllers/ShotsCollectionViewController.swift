@@ -55,12 +55,16 @@ final class ShotsCollectionViewController: UICollectionViewController {
                 self.shotsProvider.provideShots()
             }.then { shots -> Void in
                 self.shots = shots ?? []
-                self.animationManager.startAnimationWithCompletion() {
-                    self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
-                    self.didFinishInitialAnimations = true
-                    self.collectionView?.reloadData()
+                if self.shots.count > 0 {
+                    self.animationManager.startAnimationWithCompletion() {
+                        self.collectionView?.setCollectionViewLayout(ShotsCollectionViewFlowLayout(), animated: false)
+                        self.didFinishInitialAnimations = true
+                        self.collectionView?.reloadData()
+                        self.tabBarController?.tabBar.userInteractionEnabled = true
+                        self.collectionView?.userInteractionEnabled = true
+                    }
+                } else {
                     self.tabBarController?.tabBar.userInteractionEnabled = true
-                    self.collectionView?.userInteractionEnabled = true
                 }
             }.error { error in
                 // NGRTemp: Need mockups for error message view
@@ -112,13 +116,9 @@ final class ShotsCollectionViewController: UICollectionViewController {
         definesPresentationContext = true
 
         let shotDetailsViewController = ShotDetailsViewController(shot: shots[indexPath.item])
-        shotDetailsViewController.modalPresentationStyle = .OverCurrentContext
         
-        modalTransitionAnimator = ZFModalTransitionAnimator(modalViewController: shotDetailsViewController)
-        modalTransitionAnimator?.dragable = true
-        modalTransitionAnimator?.direction = ZFModalTransitonDirection.Bottom
-        modalTransitionAnimator?.setContentScrollView(shotDetailsViewController.shotDetailsView.collectionView)
-        modalTransitionAnimator?.behindViewAlpha = 0.5
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+        
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
         

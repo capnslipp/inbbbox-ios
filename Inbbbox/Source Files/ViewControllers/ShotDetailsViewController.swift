@@ -13,7 +13,7 @@ import Async
 
 class ShotDetailsViewController: UIViewController {
     
-    var shotDetailsView: ShotDetailsView {
+    private var shotDetailsView: ShotDetailsView {
         return view as! ShotDetailsView
     }
     private var header: ShotDetailsHeaderView?
@@ -351,5 +351,11 @@ private extension ShotDetailsViewController {
         }
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
+    }
+}
+
+extension ShotDetailsViewController: ModalByDraggingClosable {
+    var scrollViewToObserve: UIScrollView {
+        return shotDetailsView.collectionView
     }
 }

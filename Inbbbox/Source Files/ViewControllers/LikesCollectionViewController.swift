@@ -8,10 +8,12 @@
 
 import UIKit
 import PromiseKit
+import ZFDragableModalTransition
 
 class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate {
     
     let viewModel = LikesViewModel()
+    var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     // MARK: - Lifecycle
     
@@ -55,7 +57,15 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // NGRTodo: present like details view controller
+
+        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.likedShots[indexPath.item])
+        
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+        
+        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
+        shotDetailsViewController.modalPresentationStyle = .Custom
+        
+        tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
     
     // MARK: Base Collection View View Model Delegate
