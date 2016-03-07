@@ -9,6 +9,14 @@
 import Foundation
 import PromiseKit
 
+struct CommentDisplayableData {
+    
+    let author: NSAttributedString
+    let comment: NSAttributedString?
+    let date: NSAttributedString
+    let avatarURLString: String
+}
+
 final class ShotDetailsViewModel {
     
     let shot: ShotType
@@ -29,6 +37,7 @@ final class ShotDetailsViewModel {
         return counter
     }
     
+    private var cachedFormattedComments = [CommentDisplayableData]()
     private var comments = [CommentType]()
     private var userBucketsForShot = [BucketType]()
     private var isShotLikedByMe: Bool?
@@ -71,16 +80,25 @@ extension ShotDetailsViewModel {
         return false
     }
     
-    func displayableDataForCommentAtIndex(index: Int) -> (author: NSAttributedString, comment: NSAttributedString?, date: NSAttributedString, avatarURLString: String) {
+    func displayableDataForCommentAtIndex(index: Int) -> CommentDisplayableData {
         
-        let comment = comments[indexInCommentArrayBasedOnItemIndex(index)]
+        let indexWithOffset = indexInCommentArrayBasedOnItemIndex(index)
         
-        return (
-            author: ShotDetailsFormatter.commentAuthorForComment(comment),
-            comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
-            date: ShotDetailsFormatter.commentDateForComment(comment),
-            avatarURLString: comment.user.avatarString ?? ""
-        )
+        let existsCachedComment = cachedFormattedComments.count - 1 > indexWithOffset 
+        if !existsCachedComment {
+            
+            let comment = comments[indexWithOffset]
+            let displayableData = CommentDisplayableData(
+                author: ShotDetailsFormatter.commentAuthorForComment(comment),
+                comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
+                date: ShotDetailsFormatter.commentDateForComment(comment),
+                avatarURLString: comment.user.avatarString ?? ""
+            )
+            
+            cachedFormattedComments.append(displayableData)
+        }
+        
+        return cachedFormattedComments[indexWithOffset]
     }
 }
 
