@@ -15,8 +15,8 @@ class ShotImageView: UIImageView {
 
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
     private var didSetupConstraints = false
-    private var originalImage:UIImage?
-    private var imageUrl:NSURL?
+    private var originalImage: UIImage?
+    private var imageUrl: NSURL?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,7 +52,7 @@ class ShotImageView: UIImageView {
         image = nil
         originalImage = nil
         activityIndicatorView.startAnimating()
-        Shared.imageCache.fetch(URL: url, formatName: CacheManager.imageFormatName, failure: nil) {[weak self] image  in
+        Shared.imageCache.fetch(URL: url, formatName: CacheManager.imageFormatName, failure: nil) { [weak self] image in
             self?.activityIndicatorView.stopAnimating()
             self?.image = image
             self?.originalImage = image
