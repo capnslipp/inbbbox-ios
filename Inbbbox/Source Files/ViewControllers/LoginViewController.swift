@@ -93,6 +93,7 @@ extension LoginViewController {
     }
     
     func loginAsGuestButtonDidTap(_: UIButton) {
+        Authenticator.logout()
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
     
