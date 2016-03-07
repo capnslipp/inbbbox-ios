@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import KFSwiftImageLoader
+import Async
 
 class ShotDetailsViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class ShotDetailsViewController: UIViewController {
         return view as! ShotDetailsView
     }
     private var header: ShotDetailsHeaderView?
+    private var footer: ShotDetailsFooterView?
     private let viewModel: ShotDetailsViewModel
     
     init(shot: ShotType) {
@@ -39,14 +41,6 @@ class ShotDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        firstly {
-            viewModel.loadComments()
-        }.then {
-            self.shotDetailsView.collectionView.reloadData()
-        }.error { error in
-            print(error)
-        }
    
         shotDetailsView.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
         shotDetailsView.collectionView.delegate = self
@@ -54,16 +48,30 @@ class ShotDetailsViewController: UIViewController {
         shotDetailsView.collectionView.registerClass(ShotDetailsCommentCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsOperationCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsDescriptionCollectionViewCell.self, type: .Cell)
+        shotDetailsView.collectionView.registerClass(ShotDetailsFooterView.self, type: .Footer)
         shotDetailsView.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
-        shotDetailsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         shotDetailsView.commentComposerView.delegate = self
+        shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
+        
+        firstly {
+            viewModel.loadAllComments()
+        }.then { () -> Void in
+            if self.viewModel.commentsCount == 0 && !self.viewModel.hasDescription {
+                self.footer?.grayOutBackground()
+            }
+            self.shotDetailsView.collectionView.reloadData()
+        }.error { error in
+            print(error)
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        setEstimatedSizeIfNeeded()
-        (shotDetailsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
+        if let layout = shotDetailsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader {
+            layout.collapsableHeight = heightForCollapsedCollectionViewHeader
+            layout.invalidateLayout()
+        }
     }
 }
 
@@ -79,48 +87,56 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         if viewModel.isShotOperationIndex(indexPath.row) {
             let cell = collectionView.dequeueReusableClass(ShotDetailsOperationCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
-            cell.operationView.likeButton.addTarget(self, action: "likeButtonDidTap:", forControlEvents: .TouchUpInside)
-            cell.operationView.bucketButton.addTarget(self, action: "bucketButtonDidTap:", forControlEvents: .TouchUpInside)
-
-            // NGRToDo:
-            // use set selected for distinguish images
-            firstly {
-                viewModel.checkNumberOfUserBucketsForShot()
-            }.then { number -> Void in
-                if number > 0 {
-                    cell.operationView.selectBucketButton(true)
-                }
-            }.error { error in
-                print(error)
+            let likeSelectableView = cell.operationView.likeSelectableView
+            let bucketSelectableView = cell.operationView.bucketSelectableView
+            
+            likeSelectableView.tapHandler = { [weak self] in
+                self?.likeSelectableViewDidTap(likeSelectableView)
             }
+            
+            bucketSelectableView.tapHandler = { [weak self] in
+                self?.bucketSelectableViewDidTap(bucketSelectableView)
+            }
+            
+            setLikeStateInSelectableView(likeSelectableView)
+            setBucketStatusInSelectableView(bucketSelectableView)
             
             return cell
             
         } else if viewModel.isDescriptionIndex(indexPath.row) {
+
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             cell.descriptionLabel.attributedText = viewModel.attributedShotDescription
-            
+
             return cell
             
         } else {
             let cell = collectionView.dequeueReusableClass(ShotDetailsCommentCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
-            
-            cell.authorLabel.text = data.author
+
+            cell.authorLabel.attributedText = data.author
             cell.commentLabel.attributedText = data.comment
-            cell.dateLabel.text = data.date
+            cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"), completion: nil)
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
-            
+
             return cell
         }
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        if kind == UICollectionElementKindSectionFooter {
+            
+            footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
+            viewModel.isFetchingComments ? footer?.startAnimating() : footer?.stopAnimating()
+            
+            return footer!
+        }
         
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
@@ -139,7 +155,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+            header?.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         }
+        
         return header!
     }
 }
@@ -159,6 +177,22 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
             cell.showEditView(true)
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        if viewModel.isShotOperationIndex(indexPath.row) {
+            return collectionView.sizeForAutoSizingCell(ShotDetailsOperationCollectionViewCell.self, textToBound: nil)
+        
+        } else if viewModel.isDescriptionIndex(indexPath.row) {
+            let text = viewModel.attributedShotDescription
+            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text])
+
+        } else {
+            let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
+            let text = [data.author, data.comment, data.date]
+            return collectionView.sizeForAutoSizingCell(ShotDetailsCommentCollectionViewCell.self, textToBound: text)
+        }
+    }
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
@@ -166,6 +200,11 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return sizeForExpandedCollectionViewHeader(collectionView)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        let height: CGFloat = viewModel.isFetchingComments ? 64 : ShotDetailsFooterView.minimumRequiredHeight
+        return CGSize(width: CGRectGetWidth(collectionView.frame), height: height)
     }
 }
 
@@ -175,14 +214,86 @@ extension ShotDetailsViewController {
     func closeButtonDidTap(_: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+}
+
+extension ShotDetailsViewController: CommentComposerViewDelegate {
     
-    func likeButtonDidTap(_: UIButton) {
-        //NGRToDo: attach action
-        presentTempAlertController()
+    func didTapSendButtonInComposerView(view: CommentComposerView, comment: String) {
+        
+        view.startAnimation()
+        
+        firstly {
+            viewModel.postComment(comment)
+        }.then { () -> Void in
+            
+            let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0), inSection: 0)
+            self.shotDetailsView.collectionView.performBatchUpdates({ () -> Void in
+                self.shotDetailsView.collectionView.insertItemsAtIndexPaths([indexPath])
+            }, completion: { _ -> Void in
+                self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredVertically, animated: true)
+            })
+        }.always {
+            view.stopAnimation()
+        }.error { error in
+            print(error)
+        }
+    }
+}
+
+extension ShotDetailsViewController: ModalByDraggingClosable {
+    var scrollViewToObserve: UIScrollView {
+        return shotDetailsView.collectionView
+    }
+}
+
+private extension ShotDetailsViewController {
+
+    func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
+        handleSelectableViewStatus(view) {
+            self.viewModel.checkLikeStatusOfShot()
+        }
+    }
+
+    func setBucketStatusInSelectableView(view: ActivityIndicatorSelectableView) {
+        handleSelectableViewStatus(view) {
+            self.viewModel.checkShotAffiliationToUserBuckets()
+        }
+    }
+
+    func handleSelectableViewStatus(view: ActivityIndicatorSelectableView, withAction action: (() -> Promise<Bool>)) {
+
+        view.startAnimating()
+            
+        firstly {
+            action()
+        }.then { selected in
+            view.selected = selected
+        }.always {
+            view.stopAnimating()
+        }.error { error in
+            print(error)
+        }
     }
     
-    func bucketButtonDidTap(_: UIButton) {
+    func likeSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
 
+        view.startAnimating()
+        
+        firstly {
+            viewModel.performLikeOperation()
+        }.then { isShotLikedByUser in
+            view.selected = isShotLikedByUser
+        }.always {
+            view.stopAnimating()
+        }.error { error in
+            print(error)
+        }
+    }
+    
+    func bucketSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
+        
+        view.startAnimating()
+        
         firstly{
             viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
         }.then { result -> Void in
@@ -190,31 +301,13 @@ extension ShotDetailsViewController {
                 let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
                 self.presentShotBucketsViewControllerWithMode(mode)
             } else {
-                self.selectBucketButtonInOperationViewCell(false)
+                view.selected = false
             }
+        }.always {
+            view.stopAnimating()
         }.error { error in
             print(error)
         }
-    }
-}
-
-extension ShotDetailsViewController: CommentComposerViewDelegate {
-    
-    func didTapSendButtonInComposerView(view: CommentComposerView, withComment: String?) {
-        presentTempAlertController()
-    }
-}
-
-private extension ShotDetailsViewController {
-
-    func presentTempAlertController() {
-        let controller = UIAlertController(title: "Oh no!", message: "This function is not supported yet", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Destructive) { _ in
-            controller.dismissViewControllerAnimated(true, completion: nil)
-        }
-
-        controller.addAction(action)
-        presentViewController(controller, animated: true, completion: nil)
     }
     
     var heightForCollapsedCollectionViewHeader: CGFloat {
@@ -234,25 +327,16 @@ private extension ShotDetailsViewController {
         )
     }
     
-    func setEstimatedSizeIfNeeded() {
-        
-        let width = shotDetailsView.collectionView.frame.size.width ?? 0
-        if let layout = shotDetailsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
-            layout.estimatedItemSize = CGSize(width: width, height: 100)
-            layout.invalidateLayout()
-        }
-    }
-    
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
         firstly {
             viewModel.deleteCommentAtIndex(indexPath.item)
-        }.then {
+        }.then { () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
         }.error { error in
             print(error)
         }
     }
-    
+
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
         
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
@@ -262,29 +346,9 @@ private extension ShotDetailsViewController {
             guard let certainSelf = self else { return }
             
             certainSelf.viewModel.clearBucketsData()
-            
-            firstly {
-                certainSelf.viewModel.checkNumberOfUserBucketsForShot()
-            }.then { number -> Void in
-                certainSelf.selectBucketButtonInOperationViewCell(number > 0)
-            }.error { error in
-                print(error)
-            }
+            certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
-    }
-    
-    func selectBucketButtonInOperationViewCell(select: Bool) {
-        let operationViewCellIndexPath = NSIndexPath(forItem: 0, inSection: 0)
-        if let cell = shotDetailsView.collectionView.cellForItemAtIndexPath(operationViewCellIndexPath) where cell is ShotDetailsOperationCollectionViewCell {
-            (cell as! ShotDetailsOperationCollectionViewCell).operationView.selectBucketButton(select)
-        }
-    }
-}
-
-extension ShotDetailsViewController: ModalByDraggingClosable {
-    var scrollViewToObserve: UIScrollView {
-        return shotDetailsView.collectionView
     }
 }

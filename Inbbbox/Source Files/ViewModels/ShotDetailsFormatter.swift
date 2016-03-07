@@ -112,7 +112,7 @@ final class ShotDetailsFormatter {
         mutableBody.addAttributes([
             NSForegroundColorAttributeName : UIColor.grayColor(),
             NSFontAttributeName : UIFont.systemFontOfSize(14)
-        ], range: NSMakeRange(0, body.length))
+        ], range: NSMakeRange(0, mutableBody.length))
         
         return mutableBody.copy() as? NSAttributedString
     }
@@ -124,7 +124,7 @@ final class ShotDetailsFormatter {
         }
         
         let mutableBody = NSMutableAttributedString(attributedString: body.attributedStringByTrimingNewLineCharactersAtTheEnd())
-        let range = NSMakeRange(0, max(0, body.length - 1))
+        let range = NSMakeRange(0, mutableBody.length)
         
         mutableBody.addAttributes([
             NSForegroundColorAttributeName : UIColor.grayColor(),
@@ -134,7 +134,18 @@ final class ShotDetailsFormatter {
         return mutableBody.copy() as? NSAttributedString
     }
     
-    class func commentDateForComment(comment: CommentType) -> String {
-        return commentDateFormatter.stringFromDate(comment.createdAt)
+    class func commentDateForComment(comment: CommentType) -> NSAttributedString {
+        return NSAttributedString(string: commentDateFormatter.stringFromDate(comment.createdAt), attributes: [
+                NSForegroundColorAttributeName : UIColor.RGBA(164, 180, 188, 1),
+                NSFontAttributeName : UIFont.helveticaFont(.Neue, size: 10)
+            ])
+    }
+    
+    
+    class func commentAuthorForComment(comment: CommentType) -> NSAttributedString {
+        return NSAttributedString(string: comment.user.name ?? comment.user.username, attributes: [
+                NSForegroundColorAttributeName : UIColor.textDarkColor(),
+                NSFontAttributeName : UIFont.helveticaFont(.NeueMedium, size: 16)
+            ])
     }
 }

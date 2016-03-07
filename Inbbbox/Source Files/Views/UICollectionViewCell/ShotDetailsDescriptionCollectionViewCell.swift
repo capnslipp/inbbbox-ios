@@ -7,10 +7,6 @@
 //
 import UIKit
 
-private var inset: CGPoint {
-    return CGPoint(x: 10, y: 15)
-}
-
 class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     
     let descriptionLabel = UILabel.newAutoLayoutView()
@@ -37,7 +33,8 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        descriptionLabel.preferredMaxLayoutWidth = frame.size.width - 2 * inset.x
+        let insets = self.dynamicType.contentInsets
+        descriptionLabel.preferredMaxLayoutWidth = frame.size.width - insets.left - insets.right
     }
 
     override func updateConstraints() {
@@ -45,8 +42,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
             
-            let insets = UIEdgeInsets(top: inset.y, left: inset.x, bottom: inset.y, right: inset.x)
-            descriptionLabel.autoPinEdgesToSuperviewEdgesWithInsets(insets)
+            descriptionLabel.autoPinEdgesToSuperviewEdgesWithInsets(self.dynamicType.contentInsets)
             
             separatorView.autoSetDimension(.Height, toSize: 1)
             separatorView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
@@ -54,24 +50,18 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         
         super.updateConstraints()
     }
-    
-    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-
-        layoutAttributes.frame = {
-            
-            var frame = layoutAttributes.frame
-            frame.size.height = contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-            
-            return CGRectIntegral(frame)
-        }()
-
-        return layoutAttributes
-    }
-    
+        
     override func prepareForReuse() {
         super.prepareForReuse()
         
         descriptionLabel.attributedText = nil
+    }
+}
+
+extension ShotDetailsDescriptionCollectionViewCell: AutoSizable {
+        
+    static var contentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
     }
 }
 

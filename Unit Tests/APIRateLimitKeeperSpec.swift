@@ -17,7 +17,7 @@ class APIRateLimitKeeperSpec: QuickSpec {
         var sut: APIRateLimitKeeper!
         
         beforeEach {
-            sut = APIRateLimitKeeper.sharedKeeper
+            sut = APIRateLimitKeeper()
         }
         
         afterEach {
@@ -56,7 +56,7 @@ class APIRateLimitKeeperSpec: QuickSpec {
             }
             
             it("instances should be same") {
-                expect(sut).to(beIdenticalTo(anotherAPIRateLimitKeeper))
+                expect(APIRateLimitKeeper.sharedKeeper).to(beIdenticalTo(anotherAPIRateLimitKeeper))
             }
         }
         

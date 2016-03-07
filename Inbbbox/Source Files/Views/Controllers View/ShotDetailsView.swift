@@ -13,19 +13,23 @@ class ShotDetailsView: UIView {
     
     let collectionView: UICollectionView
     let commentComposerView = CommentComposerView.newAutoLayoutView()
-    let closeButton = UIButton(type: .System)
     
+    var shouldShowCommentComposerView = true {
+        willSet(newValue) {
+            commentComposerView.hidden = !newValue
+        }
+    }
     var topLayoutGuideOffset = CGFloat(0)
     
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
     private let keyboardResizableView = KeyboardResizableView.newAutoLayoutView()
     private var didSetConstraints = false
-    
+
     override init(frame: CGRect) {
 
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = .clearColor()
         collectionView.layer.shadowColor = UIColor.grayColor().CGColor
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 0.1)
         collectionView.layer.shadowOpacity = 0.3
@@ -46,10 +50,6 @@ class ShotDetailsView: UIView {
         keyboardResizableView.addSubview(collectionViewCornerWrapperView)
         keyboardResizableView.addSubview(commentComposerView)
         addSubview(keyboardResizableView)
-        
-        let image = UIImage(named: "ic-closemodal")?.imageWithRenderingMode(.AlwaysOriginal)
-        closeButton.setImage(image, forState: .Normal)
-        addSubview(closeButton)
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -64,23 +64,20 @@ class ShotDetailsView: UIView {
             
             blurView.autoPinEdgesToSuperviewEdges()
             
+            let commentComposerViewHeight = CGFloat(50)
             keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             let constraint = keyboardResizableView.autoPinEdgeToSuperviewEdge(.Bottom)
             keyboardResizableView.setReferenceBottomConstraint(constraint)
             
             commentComposerView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
-            commentComposerView.autoSetDimension(.Height, toSize: 50)
+            commentComposerView.autoSetDimension(.Height, toSize: commentComposerViewHeight)
             
             let insets = UIEdgeInsets(top: topLayoutGuideOffset, left: 10, bottom: 0, right: 10)
+            let commentComposerInset = shouldShowCommentComposerView ? commentComposerViewHeight : 0
             collectionViewCornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
-            collectionViewCornerWrapperView.autoPinEdge(.Bottom, toEdge: .Top, ofView: commentComposerView)
+            collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: commentComposerInset)
             
             collectionView.autoPinEdgesToSuperviewEdges()
-            
-            let margin = CGFloat(5)
-            closeButton.autoSetDimensionsToSize(closeButton.imageForState(.Normal)?.size ?? CGSizeZero)
-            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: collectionViewCornerWrapperView, withOffset: -margin)
-            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: collectionViewCornerWrapperView, withOffset: margin)
         }
         
         super.updateConstraints()
