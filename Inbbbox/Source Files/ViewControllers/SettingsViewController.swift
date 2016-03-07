@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import KFSwiftImageLoader
 import PromiseKit
 
 class SettingsViewController: UITableViewController {

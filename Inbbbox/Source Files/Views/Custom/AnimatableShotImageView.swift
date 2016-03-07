@@ -8,8 +8,8 @@
 
 import UIKit
 import PureLayout
-import KFSwiftImageLoader
 import Gifu
+import Haneke
 
 class AnimatableShotImageView: AnimatableImageView {
     
@@ -20,7 +20,7 @@ class AnimatableShotImageView: AnimatableImageView {
         super.init(frame: frame)
         
         backgroundColor = .followeeShotGrayColor()
-        contentMode = .ScaleAspectFit
+        contentMode = .ScaleAspectFill
         
         addSubview(activityIndicatorView)
     }
@@ -47,17 +47,10 @@ class AnimatableShotImageView: AnimatableImageView {
     
     func loadAnimatableShotFromUrl(url: NSURL) {
         activityIndicatorView.startAnimating()
-        let request = NSURLRequest(URL: url)
-        NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            dispatch_async(dispatch_get_main_queue(), {
-                if let data = data {
-                    self.animateWithImageData(data)
-                }
-                self.activityIndicatorView.stopAnimating()
-                // NGRToDo we should show some kind feedback to user if image failed to load
-            })
-            }.resume()
+        Shared.dataCache.fetch(URL: url, formatName: CacheManager.gifFormatName, failure: nil) { [weak self] data in
+            self?.animateWithImageData(data)
+            self?.activityIndicatorView.stopAnimating()
+        }
     }
 }
 

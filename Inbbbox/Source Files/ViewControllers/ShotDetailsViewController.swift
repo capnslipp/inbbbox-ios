@@ -8,8 +8,6 @@
 
 import UIKit
 import PromiseKit
-import KFSwiftImageLoader
-import Async
 
 class ShotDetailsViewController: UIViewController {
     
@@ -119,7 +117,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.authorLabel.attributedText = data.author
             cell.commentLabel.attributedText = data.comment
             cell.dateLabel.attributedText = data.date
-            cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"), completion: nil)
+            cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"))
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }

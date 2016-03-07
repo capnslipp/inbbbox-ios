@@ -8,25 +8,23 @@
 
 import UIKit
 import PureLayout
-import KFSwiftImageLoader
 import Gifu
+import Haneke
 
 class ShotImageView: UIImageView {
 
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
     private var didSetupConstraints = false
-    private let bluredImageView = UIImageView()
+    private var originalImage:UIImage?
+    private var imageUrl:NSURL?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         backgroundColor = .followeeShotGrayColor()
-        contentMode = .ScaleAspectFit
+        contentMode = .ScaleAspectFill
 
         addSubview(activityIndicatorView)
-        
-        bluredImageView.backgroundColor = UIColor.clearColor()
-        addSubview(bluredImageView)
     }
 
     @available(*, unavailable, message="Use init(frame:) method instead")
@@ -44,28 +42,36 @@ class ShotImageView: UIImageView {
             didSetupConstraints = true
 
             activityIndicatorView.autoCenterInSuperview()
-            bluredImageView.autoPinEdgesToSuperviewEdges()
         }
 
         super.updateConstraints()
     }
 
     func loadShotImageFromURL(url: NSURL, blur: CGFloat = 0) {
+        imageUrl = url
         image = nil
+        originalImage = nil
         activityIndicatorView.startAnimating()
-        
-        loadImageFromURL(url) { [weak self] finished, error in
-            self?.bluredImageView.hidden = (blur == 0)
-            self?.applyBlur()
+        Shared.imageCache.fetch(URL: url, formatName: CacheManager.imageFormatName, failure: nil) {[weak self] image  in
             self?.activityIndicatorView.stopAnimating()
+            self?.image = image
+            self?.originalImage = image
+            self?.applyBlur()
         }
     }
     
     func applyBlur(blur: CGFloat = 0) {
+        if blur == 0 {
+            self.image = originalImage
+            return
+        }
+        let bluredImageUrl = imageUrl?.copy()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { [weak self] in
-            let bluredImage = self?.image?.imageByBlurringImageWithBlur(blur)
+            let bluredImage = self?.originalImage?.imageByBlurringImageWithBlur(blur)
             dispatch_async(dispatch_get_main_queue(), {
-                self?.bluredImageView.image = bluredImage
+                if self?.imageUrl?.absoluteString == bluredImageUrl?.absoluteString {
+                    self?.image = bluredImage
+                }
             })
         })
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Haneke
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().translucent = false
         
         configureInitialSettings()
-        
+        CacheManager.setupCache()
         return true
     }
 
