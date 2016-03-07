@@ -84,9 +84,9 @@ extension ShotDetailsViewModel {
         
         let indexWithOffset = indexInCommentArrayBasedOnItemIndex(index)
         
-        let existsCachedComment = cachedFormattedComments.count - 1 > indexWithOffset 
+        let existsCachedComment = cachedFormattedComments.count > indexWithOffset
         if !existsCachedComment {
-            
+
             let comment = comments[indexWithOffset]
             let displayableData = CommentDisplayableData(
                 author: ShotDetailsFormatter.commentAuthorForComment(comment),
@@ -282,9 +282,11 @@ extension ShotDetailsViewModel {
             
             firstly {
                 commentsRequester.deleteComment(comment, forShot: shot)
-            }.then { comment in
-                self.comments.removeAtIndex(self.indexInCommentArrayBasedOnItemIndex(index))
-            }.then { _ in
+            }.then { comment -> Void in
+                let indexOfCommentToRemove = self.indexInCommentArrayBasedOnItemIndex(index)
+                self.comments.removeAtIndex(indexOfCommentToRemove)
+                self.cachedFormattedComments.removeAtIndex(indexOfCommentToRemove)
+                
                 fulfill()
             }.error(reject)
         }
