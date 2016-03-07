@@ -16,6 +16,7 @@ class CommentComposerView: UIView {
     
     var delegate: CommentComposerViewDelegate?
     
+    private let cornerWrapperView = UIView.newAutoLayoutView()
     private let textField = UITextField.newAutoLayoutView()
     private let activityView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     private var didUpdateConstraints = false
@@ -25,10 +26,14 @@ class CommentComposerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        backgroundColor = UIColor.backgroundGrayColor()
         
-        textField.backgroundColor = UIColor.backgroundGrayColor()
+        backgroundColor = .clearColor()
+        
+        cornerWrapperView.clipsToBounds = true
+        cornerWrapperView.backgroundColor = .RGBA(246, 248, 248, 1)
+        addSubview(cornerWrapperView)
+        
+        textField.backgroundColor = .RGBA(246, 248, 248, 1)
         textField.placeholder = NSLocalizedString("Type your comment", comment: "")
         textField.tintColor = UIColor(red: 0.3522, green: 0.3513, blue: 0.3722, alpha: 1.0)
         textField.setLeftPadding(10)
@@ -37,14 +42,14 @@ class CommentComposerView: UIView {
         textField.rightViewMode = .Always
         textField.addTarget(self, action: "textFieldValueDidChange:", forControlEvents: .EditingChanged)
         textField.rightView = button
-        addSubview(textField)
+        cornerWrapperView.addSubview(textField)
     }
     
     override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
     
-    @available(*, unavailable, message="Use init(frame: CGRect) method instead")
+    @available(*, unavailable, message="Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,7 +59,12 @@ class CommentComposerView: UIView {
         if !didUpdateConstraints {
             didUpdateConstraints = true
             
-            let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            let inset = CGFloat(20)
+            
+            cornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            cornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: -inset)
+            
+            let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5 + inset, right: 5)
             textField.autoPinEdgesToSuperviewEdgesWithInsets(insets)
         }
         
@@ -88,6 +98,13 @@ extension CommentComposerView {
     func stopAnimation() {
         textField.enabled = true
         textField.rightView = button
+    }
+    
+    func animateByRoundingCorners(round: Bool) {
+        
+        let from: CGFloat = round ? 0 : 10
+        let to: CGFloat = round ? 10 : 0
+        addCornerRadiusAnimation(from, to: to, duration: 0.3)
     }
 }
 
@@ -125,5 +142,16 @@ private extension CommentComposerView {
         activityIndicatorView.startAnimating()
         
         return activityIndicatorView
+    }
+    
+    func addCornerRadiusAnimation(from: CGFloat, to: CGFloat, duration: CFTimeInterval) {
+        
+        let animation = CABasicAnimation(keyPath:"cornerRadius")
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        animation.fromValue = from
+        animation.toValue = to
+        animation.duration = duration
+        cornerWrapperView.layer.addAnimation(animation, forKey: "cornerRadius")
+        cornerWrapperView.layer.cornerRadius = to
     }
 }

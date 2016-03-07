@@ -46,6 +46,11 @@ class ShotDetailsView: UIView {
         collectionViewCornerWrapperView.clipsToBounds = true
         collectionViewCornerWrapperView.addSubview(collectionView)
         
+        keyboardResizableView.willRelayoutSubviews = { [weak self] (_, state) in
+            let round = state == .WillAppear
+            self?.commentComposerView.animateByRoundingCorners(round)
+        }
+        
         keyboardResizableView.automaticallySnapToKeyboardTopEdge = true
         keyboardResizableView.addSubview(collectionViewCornerWrapperView)
         keyboardResizableView.addSubview(commentComposerView)
@@ -64,7 +69,7 @@ class ShotDetailsView: UIView {
             
             blurView.autoPinEdgesToSuperviewEdges()
             
-            let commentComposerViewHeight = CGFloat(50)
+            let commentComposerViewHeight = CGFloat(61)
             keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             let constraint = keyboardResizableView.autoPinEdgeToSuperviewEdge(.Bottom)
             keyboardResizableView.setReferenceBottomConstraint(constraint)

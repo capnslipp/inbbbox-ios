@@ -216,6 +216,7 @@ extension ShotDetailsViewController {
     }
 }
 
+// MARK: CommentComposerViewDelegate
 extension ShotDetailsViewController: CommentComposerViewDelegate {
     
     func didTapSendButtonInComposerView(view: CommentComposerView, comment: String) {
@@ -312,7 +313,7 @@ private extension ShotDetailsViewController {
     
     var heightForCollapsedCollectionViewHeader: CGFloat {
         
-        let margin = CGFloat(5)
+        let margin = CGFloat(10)
         let maxWidth = abs((shotDetailsView.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
         let height = viewModel.attributedShotTitleForHeader.boundingHeightUsingAvailableWidth(maxWidth) + 2 * margin
         

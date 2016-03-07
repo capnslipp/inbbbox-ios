@@ -9,7 +9,11 @@
 import UIKit
 
 private var avatarSize: CGSize {
-    return CGSize(width: 40, height: 40)
+    return CGSize(width: 32, height: 32)
+}
+
+private var horizontalSpaceBetweenAvatarAndText: CGFloat {
+    return 15
 }
 
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
@@ -83,9 +87,9 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
             avatarView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom, relation: .GreaterThanOrEqual)
             
             authorLabel.autoPinEdge(.Top, toEdge: .Top, ofView: authorLabel.superview!, withOffset: insets.top)
-            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: insets.left)
+            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: horizontalSpaceBetweenAvatarAndText)
             authorLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: insets.right)
-            authorLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
+            authorLabel.autoSetDimension(.Height, toSize: 20, relation: .GreaterThanOrEqual)
             
             commentLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorLabel, withOffset: verticalSpacing)
             commentLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: dateLabel)
@@ -135,7 +139,7 @@ extension ShotDetailsCommentCollectionViewCell {
 extension ShotDetailsCommentCollectionViewCell: AutoSizable {
     
     static var maximumContentWidth: CGFloat? {
-        return  2 * contentInsets.left + contentInsets.right + avatarSize.width
+        return  contentInsets.left + contentInsets.right + avatarSize.width + horizontalSpaceBetweenAvatarAndText
     }
     
     static var minimumRequiredHeight: CGFloat {
@@ -143,7 +147,7 @@ extension ShotDetailsCommentCollectionViewCell: AutoSizable {
     }
     
     static var contentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        return UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 10)
     }
     
     static var verticalInteritemSpacing: CGFloat {
