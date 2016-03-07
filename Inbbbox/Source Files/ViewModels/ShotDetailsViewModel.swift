@@ -16,7 +16,7 @@ final class ShotDetailsViewModel {
     
     var commentsProvider = APICommentsProvider(page: 1, pagination: 30)
     var commentsRequester = APICommentsRequester()
-    var bucketsRequester = APIBucketsRequester()
+    var bucketsRequester = BucketsRequester()
     var shotsRequester =  ShotsRequester()
     
     var itemsCount: Int {

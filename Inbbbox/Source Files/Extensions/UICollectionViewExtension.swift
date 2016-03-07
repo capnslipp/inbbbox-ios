@@ -37,4 +37,30 @@ extension UICollectionView {
             return dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: T.reuseIdentifier, forIndexPath: indexPath) as! T
         }
     }
+    
+    func sizeForAutoSizingCell<T: UICollectionViewCell where T: AutoSizable>(cell: T.Type, textToBound: [NSAttributedString?]?) -> CGSize {
+        
+        let insets = cell.contentInsets
+        let availableWidth = bounds.size.width - (cell.maximumContentWidth ?? 0) - (insets.left + insets.right)
+        var height = CGFloat(0)
+        
+        if let textToBound = textToBound {
+            
+            let textToCalculateHeight = textToBound.flatMap { $0 }
+            
+            if textToCalculateHeight.count > 0 {
+                
+                textToCalculateHeight.forEach {
+                    height += $0.boundingHeightUsingAvailableWidth(availableWidth) + cell.verticalInteritemSpacing
+                }
+                
+                height += insets.top + insets.bottom
+            }
+        }
+        
+        return CGSize(
+            width: bounds.size.width,
+            height: max(cell.minimumRequiredHeight, height)
+        )
+    }
 }

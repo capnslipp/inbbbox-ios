@@ -98,14 +98,14 @@ extension KeyboardResizableView {
     
     func keyboardWillAppear(notification: NSNotification) {
         if !isKeyboardPresent {
-            relayoutViewWithNotification(notification, keyboardPresence: true)
+            relayoutViewWithParameters(notification.userInfo!, keyboardPresence: true)
         }
         isKeyboardPresent = true
     }
     
     func keyboardWillDisappear(notification: NSNotification) {
         if isKeyboardPresent {
-            relayoutViewWithNotification(notification, keyboardPresence: false)
+            relayoutViewWithParameters(notification.userInfo!, keyboardPresence: false)
         }
         isKeyboardPresent = false
     }
@@ -115,18 +115,18 @@ extension KeyboardResizableView {
 
 private extension KeyboardResizableView {
     
-    func calculateCorrectKeyboardRectFromNotification(notification: NSNotification) -> CGRect {
+    func calculateCorrectKeyboardRectWithParameters(parameters: NSDictionary) -> CGRect {
         
-        let rawKeyboardRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]?.CGRectValue ?? CGRectZero
+        let rawKeyboardRect = parameters[UIKeyboardFrameEndUserInfoKey]?.CGRectValue ?? CGRectZero
         return superview?.window?.convertRect(rawKeyboardRect, toView: superview) ?? CGRectZero
     }
     
-    func relayoutViewWithNotification(notification: NSNotification, keyboardPresence: Bool) {
+    func relayoutViewWithParameters(parameters: NSDictionary, keyboardPresence: Bool) {
         
-        let properlyRotatedCoords = calculateCorrectKeyboardRectFromNotification(notification)
+        let properlyRotatedCoords = calculateCorrectKeyboardRectWithParameters(parameters)
         
         let height = properlyRotatedCoords.size.height
-        let animationDuration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let animationDuration = parameters[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
         
         if automaticallySnapToKeyboardTopEdge && !isKeyboardPresent {
             

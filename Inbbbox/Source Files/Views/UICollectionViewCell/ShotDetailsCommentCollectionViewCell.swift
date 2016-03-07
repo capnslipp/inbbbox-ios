@@ -14,14 +14,6 @@ private var avatarSize: CGSize {
 
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
-    class var requiredSpaceForLayout: CGFloat {
-        return 2 * insets.left + insets.right + avatarSize.width
-    }
-    
-    class var insets: UIEdgeInsets {
-        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-    }
-    
     var deleteActionHandler: (Void -> Void)?
     
     let avatarView = AvatarView(size: avatarSize, bordered: false)
@@ -70,7 +62,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let preferredMaxLayoutWidth = frame.size.width - self.dynamicType.requiredSpaceForLayout
+        let preferredMaxLayoutWidth = frame.size.width - (self.dynamicType.maximumContentWidth ?? 0)
         
         authorLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         dateLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
@@ -82,7 +74,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
             
-            let insets = self.dynamicType.insets
+            let verticalSpacing = self.dynamicType.verticalInteritemSpacing
+            let insets = self.dynamicType.contentInsets
 
             avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: insets.left)
             avatarView.autoPinEdgeToSuperviewEdge(.Top, withInset: insets.top)
@@ -94,7 +87,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
             authorLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: insets.right)
             authorLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
             
-            commentLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorLabel, withOffset: insets.top)
+            commentLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: authorLabel, withOffset: verticalSpacing)
             commentLabel.autoPinEdge(.Bottom, toEdge: .Top, ofView: dateLabel)
             commentLabel.autoPinEdge(.Left, toEdge: .Left, ofView: authorLabel)
             commentLabel.autoPinEdge(.Right, toEdge: .Right, ofView: authorLabel, withOffset: insets.right)
@@ -136,6 +129,25 @@ extension ShotDetailsCommentCollectionViewCell {
     
     func cancelButtonDidTap(_: UIButton) {
         showEditView(false)
+    }
+}
+
+extension ShotDetailsCommentCollectionViewCell: AutoSizable {
+    
+    static var maximumContentWidth: CGFloat? {
+        return  2 * contentInsets.left + contentInsets.right + avatarSize.width
+    }
+    
+    static var minimumRequiredHeight: CGFloat {
+        return contentInsets.top + contentInsets.bottom + avatarSize.height
+    }
+    
+    static var contentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+    }
+    
+    static var verticalInteritemSpacing: CGFloat {
+        return 5
     }
 }
 

@@ -9,10 +9,6 @@ import UIKit
 
 class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     
-    class var insets: UIEdgeInsets {
-        return UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
-    }
-    
     let descriptionLabel = UILabel.newAutoLayoutView()
     private let separatorView = UIView.newAutoLayoutView()
     private var didUpdateConstraints = false
@@ -37,7 +33,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let insets = self.dynamicType.insets
+        let insets = self.dynamicType.contentInsets
         descriptionLabel.preferredMaxLayoutWidth = frame.size.width - insets.left - insets.right
     }
 
@@ -46,7 +42,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
             
-            descriptionLabel.autoPinEdgesToSuperviewEdgesWithInsets(self.dynamicType.insets)
+            descriptionLabel.autoPinEdgesToSuperviewEdgesWithInsets(self.dynamicType.contentInsets)
             
             separatorView.autoSetDimension(.Height, toSize: 1)
             separatorView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
@@ -59,6 +55,13 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         descriptionLabel.attributedText = nil
+    }
+}
+
+extension ShotDetailsDescriptionCollectionViewCell: AutoSizable {
+        
+    static var contentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
     }
 }
 

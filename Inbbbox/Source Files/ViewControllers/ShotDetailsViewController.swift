@@ -184,35 +184,21 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        var width = collectionView.bounds.size.width
-        var height = CGFloat(0)
-        
         if viewModel.isShotOperationIndex(indexPath.row) {
-            height += ShotDetailsOperationCollectionViewCell.minimumRequiredHeight
+            
+            return collectionView.sizeForAutoSizingCell(ShotDetailsOperationCollectionViewCell.self, textToBound: nil)
         
         } else if viewModel.isDescriptionIndex(indexPath.row) {
             
-            let insets = ShotDetailsDescriptionCollectionViewCell.insets
-            width -= (insets.left + insets.right)
-            height += {
-                if let attributedDescription = viewModel.attributedShotDescription {
-                    return attributedDescription.boundingHeightUsingAvailableWidth(width) + insets.top + insets.bottom
-                }
-                return 0
-            }()
-            
+            let text = viewModel.attributedShotDescription
+            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text])
+
         } else {
-            let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
-            let insets = ShotDetailsDescriptionCollectionViewCell.insets
             
-            width -= ShotDetailsCommentCollectionViewCell.requiredSpaceForLayout
-            height += data.author.boundingHeightUsingAvailableWidth(width)
-            height += data.comment?.boundingHeightUsingAvailableWidth(width) ?? 0
-            height += data.date.boundingHeightUsingAvailableWidth(width)
-            height += (insets.top + insets.bottom)
+            let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
+            let text = [data.author, data.comment, data.date]
+            return collectionView.sizeForAutoSizingCell(ShotDetailsCommentCollectionViewCell.self, textToBound: text)
         }
-        
-        return CGSize(width: collectionView.bounds.size.width, height: height)
     }
 }
 

@@ -10,10 +10,6 @@ import UIKit
 
 class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
     
-    class var minimumRequiredHeight: CGFloat {
-        return  ShotDetailsOperationView.minimumRequiredHeight
-    }
-    
     let operationView = ShotDetailsOperationView.newAutoLayoutView()
     private let separatorView = UIView.newAutoLayoutView()
     private var didUpdateConstraints = false
@@ -49,6 +45,13 @@ class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
         }
         
         super.updateConstraints()
+    }
+}
+
+extension ShotDetailsOperationCollectionViewCell: AutoSizable {
+    
+    static var minimumRequiredHeight: CGFloat {
+        return ShotDetailsOperationView.minimumRequiredHeight
     }
 }
 
