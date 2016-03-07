@@ -28,8 +28,6 @@ pod 'PureLayout', '~> 3.0'
 
 pod 'SwiftyUserDefaults', '~> 2.0'
 
-pod 'KFSwiftImageLoader', '~> 2.0.1'
-
 pod 'GPUImage', '~> 0.1'
 
 pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
@@ -39,6 +37,8 @@ pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/is
 pod 'Gifu', '~> 1.0.1'
 
 pod 'ZFDragableModalTransition', '~> 0.6'
+
+pod 'HanekeSwift', '~>0.10.1'
 
 target 'Tests' do link_with 'Unit Tests'
 

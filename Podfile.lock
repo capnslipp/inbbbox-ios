@@ -4,11 +4,11 @@ PODS:
   - EasyAnimation (1.0.2)
   - Gifu (1.0.1)
   - GPUImage (0.1.7)
+  - HanekeSwift (0.10.1)
   - HockeySDK (3.8.5):
     - HockeySDK/AllFeaturesLib (= 3.8.5)
   - HockeySDK/AllFeaturesLib (3.8.5)
   - KeychainAccess (2.3.3)
-  - KFSwiftImageLoader (2.0.1)
   - Mockingjay (1.1.1):
     - Mockingjay/Core (= 1.1.1)
     - Mockingjay/XCTest (= 1.1.1)
@@ -50,9 +50,9 @@ DEPENDENCIES:
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
   - Gifu (~> 1.0.1)
   - GPUImage (~> 0.1)
+  - HanekeSwift (~> 0.10.1)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
-  - KFSwiftImageLoader (~> 2.0.1)
   - Mockingjay (~> 1.1)
   - Nimble (~> 3.1)
   - PromiseKit (~> 3.0)
@@ -78,9 +78,9 @@ SPEC CHECKSUMS:
   EasyAnimation: 9615e40f58aa7d8d6a67de66e0edda1903ffa990
   Gifu: bf7a99fe9f20a1dc18c3cb4289aebc922a2ad419
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   HockeySDK: dd11a2b9da3372fd025643bee5bc10c8c613d169
   KeychainAccess: 9b7e49e48277e329b1b3195e54697ed313d30acf
-  KFSwiftImageLoader: a2b8a33a89116c767e7af8d2c109e8c483037b19
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430
   Nimble: 79d40f4d69d47314229bbabacaa02b8838c779b9
   OMGHTTPURLRQ: 633f98ee745aeda02345935a52eec1784cddb589
