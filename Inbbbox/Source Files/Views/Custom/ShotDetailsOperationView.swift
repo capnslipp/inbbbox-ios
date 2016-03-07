@@ -15,7 +15,7 @@ private var selectableViewSize: CGSize {
 class ShotDetailsOperationView: UIView {
 
     class var minimumRequiredHeight: CGFloat {
-        let margin = CGFloat(10)
+        let margin = CGFloat(5)
         return  selectableViewSize.height + 2 * margin
     }
     
@@ -27,7 +27,7 @@ class ShotDetailsOperationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor.RGBA(246, 248, 248, 1)
+        backgroundColor = .RGBA(246, 248, 248, 1)
 
         likeSelectableView.setImage(UIImage(named: "ic-like-details-active"), forState: .Selected)
         likeSelectableView.setImage(UIImage(named: "ic-like-details"), forState: .Deselected)
@@ -52,12 +52,13 @@ class ShotDetailsOperationView: UIView {
         if !didUpdateConstraints {
             didUpdateConstraints = true
 
-            let views = [likeSelectableView, bucketSelectableView] as NSArray
-            views.autoDistributeViewsAlongAxis(.Horizontal, alignedTo: .Horizontal, withFixedSize: selectableViewSize.width, insetSpacing: true)
+            let offset = CGFloat(40)
+            likeSelectableView.autoAlignAxis(.Vertical, toSameAxisOfView: likeSelectableView.superview!, withOffset: -offset)
+            bucketSelectableView.autoAlignAxis(.Vertical, toSameAxisOfView: likeSelectableView.superview!, withOffset: offset)
             
-            views.forEach {
+            [likeSelectableView, bucketSelectableView].forEach {
                 $0.autoAlignAxis(.Horizontal, toSameAxisOfView: self)
-                $0.autoSetDimension(.Height, toSize: selectableViewSize.height)
+                $0.autoSetDimensionsToSize(selectableViewSize)
             }
         }
         

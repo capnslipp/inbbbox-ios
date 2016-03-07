@@ -10,7 +10,7 @@ import UIKit
 import PureLayout
 
 private var avatarSize: CGSize {
-    return CGSize(width: 40, height: 40)
+    return CGSize(width: 48, height: 48)
 }
 private var margin: CGFloat {
     return 10
@@ -96,17 +96,17 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             
             avatarView.autoSetDimensionsToSize(avatarSize)
             avatarView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight * 0.5 - avatarSize.height * 0.5)
-            avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: margin)
+            avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: 20)
             
-            titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: margin)
+            titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 15)
             titleLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: margin)
             titleLabel.autoPinEdgeToSuperviewEdge(.Bottom)
             titleLabel.autoSetDimension(.Height, toSize: minHeight)
             
-            overlapingTitleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: margin)
-            overlapingTitleLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: margin)
-            overlapingTitleLabel.autoPinEdgeToSuperviewEdge(.Bottom)
-            overlapingTitleLabel.autoSetDimension(.Height, toSize: minHeight)
+            overlapingTitleLabel.autoMatchDimension(.Height, toDimension: .Height, ofView: titleLabel)
+            overlapingTitleLabel.autoMatchDimension(.Width, toDimension: .Width, ofView: titleLabel)
+            overlapingTitleLabel.autoPinEdge(.Left, toEdge: .Left, ofView: titleLabel)
+            overlapingTitleLabel.autoPinEdge(.Top, toEdge: .Top, ofView: titleLabel)
             
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)

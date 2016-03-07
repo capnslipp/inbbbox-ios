@@ -61,7 +61,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
 extension ShotDetailsDescriptionCollectionViewCell: AutoSizable {
         
     static var contentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
+        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
 }
 

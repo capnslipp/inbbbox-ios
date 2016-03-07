@@ -69,7 +69,7 @@ class ShotDetailsView: UIView {
             
             blurView.autoPinEdgesToSuperviewEdges()
             
-            let commentComposerViewHeight = CGFloat(50)
+            let commentComposerViewHeight = CGFloat(61)
             keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             let constraint = keyboardResizableView.autoPinEdgeToSuperviewEdge(.Bottom)
             keyboardResizableView.setReferenceBottomConstraint(constraint)
