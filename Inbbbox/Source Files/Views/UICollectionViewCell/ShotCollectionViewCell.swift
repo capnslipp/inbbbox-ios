@@ -21,8 +21,8 @@ class ShotCollectionViewCell: UICollectionViewCell {
     let shotImageView = ShotImageView.newAutoLayoutView()
     let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"), secondImage: UIImage(named: "ic-like-swipe-filled"))
     let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
-    let bucketImageView = UIImageView(image: UIImage(named: "ic-bucket-swipe"))
-    let commentImageView = UIImageView(image: UIImage(named: "ic-comment"))
+    let bucketImageView = DoubleImageView(firstImage: UIImage(named: "ic-bucket-swipe"), secondImage: UIImage(named: "ic-bucket-swipe-filled"))
+    let commentImageView = DoubleImageView(firstImage: UIImage(named: "ic-comment"), secondImage: UIImage(named: "ic-comment-filled"))
     let gifLabel = GifIndicatorView()
     private(set) var likeImageViewLeftConstraint: NSLayoutConstraint?
     private(set) var likeImageViewWidthConstraint: NSLayoutConstraint?
@@ -44,6 +44,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private let commentActionRange = (min: CGFloat(-100), max: CGFloat(-50))
     
     private var didSetConstraints = false
+    var previousXTranslation: CGFloat = 0
 
     var liked = false {
         didSet {
@@ -158,6 +159,8 @@ class ShotCollectionViewCell: UICollectionViewCell {
         default:
             let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
             adjustConstraintsForSwipeXTranslation(xTranslation)
+            adjustActionImageViewForXTranslation(xTranslation)
+            previousXTranslation = xTranslation
         }
     }
 
@@ -167,23 +170,47 @@ class ShotCollectionViewCell: UICollectionViewCell {
         if xTranslation > bucketActionRange.max || xTranslation < commentActionRange.min {
             return
         }
+        
         shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, xTranslation, 0)
         likeImageViewLeftConstraint?.constant = abs(xTranslation) * 0.2
         likeImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), likeImageView.intrinsicContentSize().width)
-        if (likeImageView.isFirstImageVisible()) {
-            likeImageView.secondImageView.alpha = 0...40 ~= xTranslation ? 0 : min((xTranslation * xTranslation) / 4000 , 1)
-        }
-        let displaySecondActionTreshold = CGFloat(50)
-        let secondActionWidthConstant = max((abs(xTranslation * 0.6) - displaySecondActionTreshold), 0)
+
+        let secondActionWidthConstant = max((abs(xTranslation * 0.6) - likeActionRange.min), 0)
         plusImageViewWidthConstraint?.constant = min(secondActionWidthConstant, plusImageView.intrinsicContentSize().width)
-        plusImageView.alpha = min((abs(xTranslation) - displaySecondActionTreshold) / 70, 1)
+        plusImageView.alpha = min((abs(xTranslation) - likeActionRange.min) / 70, 1)
 
         bucketImageViewWidthConstraint?.constant = min(secondActionWidthConstant, bucketImageView.intrinsicContentSize().width)
-        bucketImageView.alpha = min((abs(xTranslation) - displaySecondActionTreshold) / 70, 1)
-
+        
         commentImageViewRightConstraint?.constant = -abs(xTranslation) * 0.2
         commentImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), commentImageView.intrinsicContentSize().width)
-        commentImageView.alpha = min(abs(xTranslation) / 70, 1)
+    }
+    
+    private func adjustActionImageViewForXTranslation(xTranslation: CGFloat) {
+        if xTranslation >= likeActionRange.min && xTranslation > previousXTranslation && likeImageView.isFirstImageVisible() && !liked {
+            UIView.animate(animations: {
+                self.likeImageView.displaySecondImageView()
+            })
+        } else if xTranslation < likeActionRange.min && xTranslation < previousXTranslation && likeImageView.isSecondImageVisible() && !liked {
+            UIView.animate(animations: {
+                self.likeImageView.displayFirstImageView()
+            })
+        } else if xTranslation >= bucketActionRange.min && bucketImageView.isFirstImageVisible() {
+            UIView.animate(animations: {
+                self.bucketImageView.displaySecondImageView()
+            })
+        } else if xTranslation < bucketActionRange.min && bucketImageView.isSecondImageVisible()  {
+            UIView.animate(animations: {
+                self.bucketImageView.displayFirstImageView()
+            })
+        } else if xTranslation <= commentActionRange.max && xTranslation < previousXTranslation && commentImageView.isFirstImageVisible() {
+            UIView.animate(animations: {
+                self.commentImageView.displaySecondImageView()
+            })
+        } else if xTranslation > commentActionRange.max && xTranslation > previousXTranslation && commentImageView.isSecondImageVisible() {
+            UIView.animate(animations: {
+                self.commentImageView.displayFirstImageView()
+            })
+        }
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
