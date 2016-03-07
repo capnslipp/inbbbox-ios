@@ -141,7 +141,6 @@ final class ShotDetailsFormatter {
             ])
     }
     
-    
     class func commentAuthorForComment(comment: CommentType) -> NSAttributedString {
         return NSAttributedString(string: comment.user.name ?? comment.user.username, attributes: [
                 NSForegroundColorAttributeName : UIColor.textDarkColor(),
