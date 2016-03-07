@@ -60,7 +60,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
 
         let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.likedShots[indexPath.item])
         
-        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController, contentScrollView: shotDetailsViewController.shotDetailsView.collectionView)
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
         
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom

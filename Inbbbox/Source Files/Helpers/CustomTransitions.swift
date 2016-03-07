@@ -8,14 +8,18 @@
 
 import ZFDragableModalTransition
 
+protocol ModalByDraggingClosable {
+    var scrollViewToObserve: UIScrollView { get }
+}
+
 class CustomTransitions {
     
-    class func pullDownToCloseTransitionForModalViewController(modalViewController: UIViewController, contentScrollView: UIScrollView) -> ZFModalTransitionAnimator {
+    class func pullDownToCloseTransitionForModalViewController<T: UIViewController where T: ModalByDraggingClosable>(modalViewController: T) -> ZFModalTransitionAnimator {
         
         let modalTransitionAnimator = ZFModalTransitionAnimator(modalViewController: modalViewController)
         modalTransitionAnimator.dragable = true
         modalTransitionAnimator.direction = ZFModalTransitonDirection.Bottom
-        modalTransitionAnimator.setContentScrollView(contentScrollView)
+        modalTransitionAnimator.setContentScrollView(modalViewController.scrollViewToObserve)
         modalTransitionAnimator.behindViewAlpha = 0.5
         
         return modalTransitionAnimator

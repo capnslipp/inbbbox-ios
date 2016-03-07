@@ -12,7 +12,7 @@ import KFSwiftImageLoader
 
 class ShotDetailsViewController: UIViewController {
     
-    var shotDetailsView: ShotDetailsView {
+    private var shotDetailsView: ShotDetailsView {
         return view as! ShotDetailsView
     }
     private var header: ShotDetailsHeaderView?
@@ -276,5 +276,11 @@ private extension ShotDetailsViewController {
         if let cell = shotDetailsView.collectionView.cellForItemAtIndexPath(operationViewCellIndexPath) where cell is ShotDetailsOperationCollectionViewCell {
             (cell as! ShotDetailsOperationCollectionViewCell).operationView.selectBucketButton(select)
         }
+    }
+}
+
+extension ShotDetailsViewController: ModalByDraggingClosable {
+    var scrollViewToObserve: UIScrollView {
+        return shotDetailsView.collectionView
     }
 }
