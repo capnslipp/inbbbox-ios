@@ -170,36 +170,5 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 expect(didReceiveResponse).toNot(beNil())
             }
         }
-        
-        describe("when deleting comment") {
-            
-            var didReceiveResponse: Bool?
-            
-            beforeEach {
-                didReceiveResponse = false
-                
-                waitUntil { done in
-                    sut.loadComments().then { result in
-                        done()
-                    }.error { _ in fail("This should not be invoked") }
-                }
-                
-                waitUntil { done in
-                    sut.deleteCommentAtIndex(4).then { result -> Void in
-                        didReceiveResponse = true
-                        done()
-                    }.error { _ in fail("This should not be invoked") }
-                }
-            }
-            
-            afterEach {
-                didReceiveResponse = nil
-            }
-            
-            it("should be correctly removed") {
-                expect(didReceiveResponse).to(beTruthy())
-                expect(didReceiveResponse).toNot(beNil())
-            }
-        }
     }
 }
