@@ -8,6 +8,7 @@
 
 import UIKit
 import PureLayout
+import Haneke
 
 private var avatarSize: CGSize {
     return CGSize(width: 48, height: 48)
@@ -154,7 +155,7 @@ extension ShotDetailsHeaderView {
             setupImageView()
         }
         let iv = imageView as! ShotImageView
-        iv.loadImageFromURL(url)
+        iv.loadShotImageFromURL(url)
     }
     
     func setAnimatedImageWithUrl(url: NSURL) {
@@ -168,8 +169,8 @@ extension ShotDetailsHeaderView {
     
     private func setupImageView() {
         imageViewCenterWrapperView.insertSubview(imageView, belowSubview: dimView)
-        imageView.autoMatchDimension(.Width, toDimension: .Width, ofView: imageViewCenterWrapperView)
-        imageView.autoCenterInSuperview()
+        imageViewCenterWrapperView.addSubview(imageView)
+        imageView.autoPinEdgesToSuperviewEdges()
     }
 }
 
