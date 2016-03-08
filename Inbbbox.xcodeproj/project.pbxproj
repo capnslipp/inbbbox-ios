@@ -278,7 +278,7 @@
 		F00232891C7DCABE003020BD /* ShotBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232881C7DCABE003020BD /* ShotBucketsView.swift */; };
 		F002328B1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */; };
 		F002328D1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */; };
-		F002328F1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */; };
+		F002328F1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328E1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift */; };
 		F00232911C7F2339003020BD /* ShotBucketsSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */; };
 		F00232951C7F5774003020BD /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */; };
 		F00232971C811EAC003020BD /* ManagedShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232961C811EAC003020BD /* ManagedShot.swift */; };
@@ -611,7 +611,7 @@
 		F00232881C7DCABE003020BD /* ShotBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsView.swift; sourceTree = "<group>"; };
 		F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsAddCollectionViewCell.swift; sourceTree = "<group>"; };
 		F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsSelectCollectionViewCell.swift; sourceTree = "<group>"; };
-		F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsRemoveCollectionViewCell.swift; sourceTree = "<group>"; };
+		F002328E1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsActionCollectionViewCell.swift; sourceTree = "<group>"; };
 		F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsSeparatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsFooterView.swift; sourceTree = "<group>"; };
 		F00232961C811EAC003020BD /* ManagedShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShot.swift; sourceTree = "<group>"; };
@@ -1052,7 +1052,7 @@
 				5ECBB7E91C7C7D3B001C5EEB /* ShotDetailsOperationCollectionViewCell.swift */,
 				F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */,
 				F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */,
-				F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */,
+				F002328E1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift */,
 				F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */,
 			);
 			path = UICollectionViewCell;
@@ -1712,7 +1712,7 @@
 				F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */,
 				5EDA3A961C8D7CD4002CD898 /* AutoSizable.swift in Sources */,
 				7416CD7A1C591F680051F65B /* SmallFolloweeCollectionViewCell.swift in Sources */,
-				F002328F1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift in Sources */,
+				F002328F1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift in Sources */,
 				745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */,
 				74A6C67E1C57C8F6009BDD75 /* LikeCollectionViewCell.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,

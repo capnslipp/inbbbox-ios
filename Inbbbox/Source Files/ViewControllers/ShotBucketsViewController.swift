@@ -61,7 +61,7 @@ class ShotBucketsViewController: UIViewController {
         shotBucketsView.collectionView.dataSource = self
         shotBucketsView.collectionView.registerClass(ShotBucketsAddCollectionViewCell.self, type: .Cell)
         shotBucketsView.collectionView.registerClass(ShotBucketsSelectCollectionViewCell.self, type: .Cell)
-        shotBucketsView.collectionView.registerClass(ShotBucketsRemoveCollectionViewCell.self, type: .Cell)
+        shotBucketsView.collectionView.registerClass(ShotBucketsActionCollectionViewCell.self, type: .Cell)
         shotBucketsView.collectionView.registerClass(ShotBucketsSeparatorCollectionViewCell.self, type: .Cell)
         shotBucketsView.collectionView.registerClass(ShotBucketsHeaderView.self, type: .Header)
         shotBucketsView.collectionView.registerClass(ShotBucketsFooterView.self, type: .Footer)
@@ -85,11 +85,23 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        if viewModel.isSeparatorCellAtIndex(indexPath.item) {
+            return configureSeparatorCell(collectionView, atIndexPath: indexPath)
+        }
+        
         switch viewModel.shotBucketsViewControllerMode {
         case .AddToBucket:
-            return configureCellForAddToBucketMode(collectionView, atIndexPath: indexPath)
+            if viewModel.isActionCellAtIndex(indexPath.item) {
+                return configureActionCell(collectionView, atIndexPath: indexPath, selector: "addNewBucketButtonDidTap:")
+            } else {
+                return configureAddToBucketCell(collectionView, atIndexPath: indexPath)
+            }
         case .RemoveFromBucket:
-            return configureCellForRemoveFromBucketMode(collectionView, atIndexPath: indexPath)
+            if viewModel.isActionCellAtIndex(indexPath.item) {
+                return configureActionCell(collectionView, atIndexPath: indexPath, selector: "removeButtonDidTap:")
+            } else {
+                return configureRemoveFromBucketCell(collectionView, atIndexPath: indexPath)
+            }
         }
     }
     
@@ -159,6 +171,10 @@ extension ShotBucketsViewController {
             print(error)
         }
     }
+    
+    func addNewBucketButtonDidTap(_: UIButton) {
+        // NGRTodo: implement me!
+    }
 }
 
 private extension ShotBucketsViewController {
@@ -190,41 +206,7 @@ private extension ShotBucketsViewController {
     }
     
     func backgroundColorForFooter() -> UIColor {
-        switch viewModel.shotBucketsViewControllerMode {
-        case .AddToBucket:
-            return .RGBA(255, 255, 255, 1) // color same as cell's background
-        case .RemoveFromBucket:
-            return .RGBA(246, 248, 248, 1) // color same as header title background
-        }
-    }
-    
-    func configureCellForAddToBucketMode(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(ShotBucketsAddCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        
-        let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
-        cell.bucketNameLabel.text = bucketData.bucketName
-        cell.shotsCountLabel.text = bucketData.shotsCountText
-        cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
-        return cell
-    }
-    
-    func configureCellForRemoveFromBucketMode(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        if viewModel.isSeparatorCellAtIndex(indexPath.item) {
-            return collectionView.dequeueReusableClass(ShotBucketsSeparatorCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        } else if viewModel.isRemoveCellAtIndex(indexPath.item) {
-            let cell = collectionView.dequeueReusableClass(ShotBucketsRemoveCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            cell.removeButton.addTarget(self, action: "removeButtonDidTap:", forControlEvents: .TouchUpInside)
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableClass(ShotBucketsSelectCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-            
-            let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
-            cell.bucketNameLabel.text = bucketData.bucketName
-            cell.selectBucket(viewModel.bucketShouldBeSelectedAtIndex(indexPath.item))
-            cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
-            return cell
-        }
+        return .RGBA(246, 248, 248, 1) // color same as header title background
     }
     
     func addShotToBucketAtIndexPath(indexPath: NSIndexPath) {
@@ -236,5 +218,41 @@ private extension ShotBucketsViewController {
         }.error { error in
             print(error)
         }
+    }
+}
+
+// MARK: Configuration of cells
+
+extension ShotBucketsViewController {
+    
+    func configureSeparatorCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableClass(ShotBucketsSeparatorCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    }
+    
+    func configureActionCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath, selector: Selector) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(ShotBucketsActionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        cell.button.setTitle(viewModel.titleForActionCell, forState: .Normal)
+        cell.button.addTarget(self, action: selector, forControlEvents: .TouchUpInside)
+        return cell
+    }
+    
+    func configureAddToBucketCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(ShotBucketsAddCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        
+        let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
+        cell.bucketNameLabel.text = bucketData.bucketName
+        cell.shotsCountLabel.text = bucketData.shotsCountText
+        cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
+        return cell
+    }
+    
+    func configureRemoveFromBucketCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(ShotBucketsSelectCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        
+        let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
+        cell.bucketNameLabel.text = bucketData.bucketName
+        cell.selectBucket(viewModel.bucketShouldBeSelectedAtIndex(indexPath.item))
+        cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
+        return cell
     }
 }
