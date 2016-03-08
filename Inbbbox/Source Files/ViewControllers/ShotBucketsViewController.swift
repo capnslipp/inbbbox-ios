@@ -98,8 +98,15 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
         if kind == UICollectionElementKindSectionHeader {
             if header == nil && kind == UICollectionElementKindSectionHeader {
                 header = collectionView.dequeueReusableClass(ShotBucketsHeaderView.self, forIndexPath: indexPath, type: .Header)
-                header?.imageView.loadShotImageFromURL(viewModel.shot.shotImage.normalURL)
-                
+                if viewModel.shot.animated {
+                    if let url = viewModel.shot.shotImage.hidpiURL {
+                        header?.setAnimatedImageWithUrl(url)
+                    } else {
+                        header?.setAnimatedImageWithUrl(viewModel.shot.shotImage.normalURL)
+                    }
+                } else {
+                    header?.setImageWithUrl(viewModel.shot.shotImage.normalURL)
+                }
                 header?.maxHeight = sizeForExpandedCollectionViewHeader(collectionView).height
                 header?.minHeight = heightForCollapsedCollectionViewHeader
                 

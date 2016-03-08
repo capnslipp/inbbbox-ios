@@ -339,15 +339,25 @@ private extension ShotDetailsViewController {
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
         
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
-        
+        animateHeader(false)
         shotBucketsViewController.dismissClosure =  { [weak self] in
             
             guard let certainSelf = self else { return }
-            
+            self?.animateHeader(true)
             certainSelf.viewModel.clearBucketsData()
             certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
+    }
+    
+    func animateHeader(start:Bool) {
+        if let imageView = header?.imageView as? AnimatableShotImageView {
+            if start {
+                imageView.stopAnimatingGIF()
+            } else {
+                imageView.startAnimatingGIF()
+            }
+        }
     }
 }

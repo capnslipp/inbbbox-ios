@@ -25,7 +25,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     var maxHeight = CGFloat(0)
     var minHeight = CGFloat(0)
     
-    let imageView = ShotImageView.newAutoLayoutView()
+    var imageView: UIImageView?
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     
     private let headerTitleLabel = UILabel.newAutoLayoutView()
@@ -52,7 +52,6 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         addSubview(titleLabel)
         addSubview(avatarView)
         
-        imageViewCenterWrapperView.addSubview(imageView)
         imageViewCenterWrapperView.clipsToBounds = true
         addSubview(imageViewCenterWrapperView)
         
@@ -104,9 +103,6 @@ class ShotBucketsHeaderView: UICollectionReusableView {
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
             
-            imageView.autoMatchDimension(.Width, toDimension: .Width, ofView: imageViewCenterWrapperView)
-            imageView.autoCenterInSuperview()
-            
             dimView.autoPinEdgesToSuperviewEdges()
         }
         
@@ -130,6 +126,33 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         headerTitleLabel.text = title
     }
 }
+
+extension ShotBucketsHeaderView {
+    
+    func setImageWithUrl(url: NSURL) {
+        if imageView == nil {
+            imageView = ShotImageView.newAutoLayoutView()
+            setupImageView()
+        }
+        let iv = imageView as! ShotImageView
+        iv.loadShotImageFromURL(url)
+    }
+    
+    func setAnimatedImageWithUrl(url: NSURL) {
+        if imageView == nil {
+            imageView = AnimatableShotImageView.newAutoLayoutView()
+            setupImageView()
+        }
+        let iv = imageView as! AnimatableShotImageView
+        iv.loadAnimatableShotFromUrl(url)
+    }
+    
+    private func setupImageView() {
+        imageViewCenterWrapperView.addSubview(imageView!)
+        imageView!.autoPinEdgesToSuperviewEdges()
+    }
+}
+
 
 extension ShotBucketsHeaderView: Reusable {
     
