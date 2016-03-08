@@ -48,7 +48,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
             
             describe("bucket image view") {
                 
-                var bucketImageView: UIImageView!
+                var bucketImageView: DoubleImageView!
                 
                 beforeEach {
                     bucketImageView = sut.bucketImageView
@@ -62,14 +62,18 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     expect(sut.contentView.subviews).to(contain(bucketImageView))
                 }
                 
-                it("should have proper image") {
-                    expect(UIImagePNGRepresentation(bucketImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "ic-bucket-swipe")!)))
+                it("should have proper first image") {
+                    expect(UIImagePNGRepresentation(bucketImageView.firstImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "ic-bucket-swipe")!)))
+                }
+                
+                it("should have proper second image") {
+                    expect(UIImagePNGRepresentation(bucketImageView.secondImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "ic-bucket-swipe-filled")!)))
                 }
             }
             
             describe("comment image view") {
                 
-                var commentImageView: UIImageView!
+                var commentImageView: DoubleImageView!
                 
                 beforeEach {
                     commentImageView = sut.commentImageView
@@ -83,8 +87,12 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     expect(sut.contentView.subviews).to(contain(commentImageView))
                 }
                 
-                it("should have proper image") {
-                    expect(UIImagePNGRepresentation(commentImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "ic-comment")!)))
+                it("should have proper first image") {
+                    expect(UIImagePNGRepresentation(commentImageView.firstImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "ic-comment")!)))
+                }
+                
+                it("should have proper second image") {
+                    expect(UIImagePNGRepresentation(commentImageView.secondImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "ic-comment-swipe-filled")!)))
                 }
             }
             
