@@ -169,7 +169,6 @@ extension ShotDetailsHeaderView {
     
     private func setupImageView() {
         imageViewCenterWrapperView.insertSubview(imageView, belowSubview: dimView)
-        imageViewCenterWrapperView.addSubview(imageView)
         imageView.autoPinEdgesToSuperviewEdges()
     }
 }
