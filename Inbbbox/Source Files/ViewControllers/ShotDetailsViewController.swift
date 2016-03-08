@@ -339,11 +339,11 @@ private extension ShotDetailsViewController {
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
         
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
-        animateHeader(false)
+        animateHeader(start: false)
         shotBucketsViewController.dismissClosure =  { [weak self] in
             
             guard let certainSelf = self else { return }
-            self?.animateHeader(true)
+            self?.animateHeader(start: true)
             certainSelf.viewModel.clearBucketsData()
             certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
@@ -351,7 +351,7 @@ private extension ShotDetailsViewController {
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
     
-    func animateHeader(start:Bool) {
+    func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
             if start {
                 imageView.stopAnimatingGIF()
