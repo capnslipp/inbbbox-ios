@@ -46,8 +46,8 @@ class ShotBucketsViewModel {
     let shot: ShotType
     let shotBucketsViewControllerMode: ShotBucketsViewControllerMode
     
-    var bucketsProvider = APIBucketsProvider(page: 1, pagination: 100)
-    var bucketsRequester = APIBucketsRequester()
+    var bucketsProvider = BucketsProvider()
+    var bucketsRequester = BucketsRequester()
     var shotsRequester = APIShotsRequester()
     
     private(set) var buckets = [BucketType]()
@@ -77,6 +77,16 @@ class ShotBucketsViewModel {
                     self.buckets = buckets ?? []
                 }.then(fulfill).error(reject)
             }
+        }
+    }
+    
+    func createBucket(name: String, description: NSAttributedString? = nil) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                bucketsRequester.postBucket(name, description: description)
+            }.then { bucket in
+                self.buckets.append(bucket)
+            }.then(fulfill).error(reject)
         }
     }
     

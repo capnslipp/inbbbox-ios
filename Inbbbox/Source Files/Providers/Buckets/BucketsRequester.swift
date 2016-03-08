@@ -13,6 +13,13 @@ class BucketsRequester {
     let apiBucketsRequester = APIBucketsRequester()
     let managedBucketsRequester = ManagedBucketsRequester()
     
+    func postBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
+        if UserStorage.isUserSignedIn {
+            // NGRTodo: call API
+        }
+        return managedBucketsRequester.addBucket(name, description: description)
+    }
+    
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         if UserStorage.isUserSignedIn {
             return apiBucketsRequester.addShot(shot, toBucket: bucket)

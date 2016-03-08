@@ -174,6 +174,16 @@ extension ShotBucketsViewController {
     
     func addNewBucketButtonDidTap(_: UIButton) {
         // NGRTodo: implement me!
+        firstly {
+            viewModel.createBucket("bucket")
+        }.then { () -> Void in
+            self.viewModel.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
+        }.then { () -> Void in
+            self.dismissClosure?()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }.error { error in
+            print(error)
+        }
     }
 }
 

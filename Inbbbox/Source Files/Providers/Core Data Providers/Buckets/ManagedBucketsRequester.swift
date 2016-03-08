@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import CoreData
+import SwiftyJSON
 
 class ManagedBucketsRequester {
     
@@ -20,6 +21,37 @@ class ManagedBucketsRequester {
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
     
+    func addBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
+        
+        var identifier: String
+        do {
+            let fetchRequest = NSFetchRequest(entityName: ManagedBucket.entityName)
+            let managedBuckets = try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedBucket]
+            identifier = (managedBuckets.count+1).stringValue
+        } catch {
+            return Promise(error: error)
+        }
+
+        let bucket = Bucket(
+            identifier: identifier,
+            name: name,
+            attributedDescription: description,
+            shotsCount: 0,
+            createdAt: NSDate(),
+            owner: User(json: guestJSON))
+        
+        
+        let managedBucket = managedObjectsProvider.managedBucket(bucket)
+        
+        return Promise<BucketType> { fulfill, reject in
+            do {
+                try managedObjectContext.save()
+                fulfill(managedBucket)
+            } catch {
+                reject(error)
+            }
+        }
+    }
     
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
@@ -55,4 +87,16 @@ class ManagedBucketsRequester {
             }
         }
     }
+}
+
+var guestJSON: JSON {
+    let guestString = "{\"id\" : \"guest.identifier\"" +
+        "\"name\" : \"guest.name\"," +
+        "\"username\" : \"guest.username\"," +
+        "\"avatar_url\" : \"guest.avatar.url\"," +
+        "\"shots_count\" : 0," +
+        "\"param_to_omit\" : \"guest.param\"," +
+        "\"type\" : \"User\"" +
+        "}"
+    return JSON.parse(guestString)
 }
