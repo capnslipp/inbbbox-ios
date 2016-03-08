@@ -8,8 +8,9 @@
 
 import UIKit
 import PromiseKit
+import DZNEmptyDataSet
 
-class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate {
+class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
     
     // MARK: - Lifecycle
     
@@ -22,6 +23,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
         }
         collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
+        collectionView.emptyDataSetSource = self
         viewModel.delegate = self
         self.title = viewModel.title
         viewModel.downloadInitialItems()
@@ -94,4 +96,34 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
+    
+    // MARK: Empty Data Set Data Source Methods
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "logo-empty")
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let localizedString = NSLocalizedString("Follow   someone first!", comment: "")
+        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
+        
+        let textAttachment: NSTextAttachment = NSTextAttachment()
+        
+        textAttachment.image = UIImage(named: "ic-following")
+        textAttachment.bounds = CGRect(x: 0, y: -5, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
+        
+        let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
+        
+        attributedString.replaceCharactersInRange(NSMakeRange(7, 1), withAttributedString: attributedStringWithImage)
+        return attributedString
+    }
+    
+    func spaceHeightForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return 40
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return -40
+    }
+
 }

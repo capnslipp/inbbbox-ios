@@ -9,8 +9,9 @@
 import UIKit
 import PromiseKit
 import ZFDragableModalTransition
+import DZNEmptyDataSet
 
-class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate {
+class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
     
     let viewModel = LikesViewModel()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
@@ -26,6 +27,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         }
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
+        collectionView.emptyDataSetSource = self
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -81,4 +83,34 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
+    
+    // MARK: Empty Data Set Data Source Methods
+    
+    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "logo-empty")
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let localizedString = NSLocalizedString("Like   some shots first!", comment: "")
+        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
+        
+        let textAttachment: NSTextAttachment = NSTextAttachment()
+        
+        textAttachment.image = UIImage(named: "ic-like-details")
+        textAttachment.bounds = CGRect(x: 0, y: -5, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
+        
+        let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
+        
+        attributedString.replaceCharactersInRange(NSMakeRange(5, 1), withAttributedString: attributedStringWithImage)
+        return attributedString
+    }
+    
+    func spaceHeightForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return 40
+    }
+    
+    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+        return -40
+    }
+
 }
