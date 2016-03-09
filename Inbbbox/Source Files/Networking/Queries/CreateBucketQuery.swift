@@ -17,8 +17,6 @@ struct CreateBucketQuery: Query {
     init(name: String, description: NSAttributedString?) {
         path = "/buckets"
         parameters["name"] = name
-        if let description = description {
-            parameters["description"] = description
-        }
+        parameters["description"] = description
     }
 }
