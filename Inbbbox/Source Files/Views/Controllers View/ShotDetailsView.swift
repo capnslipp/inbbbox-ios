@@ -23,7 +23,7 @@ class ShotDetailsView: UIView {
     
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-    private let keyboardResizableView = KeyboardResizableView.newAutoLayoutView()
+    let keyboardResizableView = KeyboardResizableView.newAutoLayoutView()
     private var didSetConstraints = false
 
     override init(frame: CGRect) {
@@ -45,11 +45,6 @@ class ShotDetailsView: UIView {
         collectionViewCornerWrapperView.backgroundColor = .clearColor()
         collectionViewCornerWrapperView.clipsToBounds = true
         collectionViewCornerWrapperView.addSubview(collectionView)
-        
-        keyboardResizableView.willRelayoutSubviews = { [weak self] (_, state) in
-            let round = state == .WillAppear
-            self?.commentComposerView.animateByRoundingCorners(round)
-        }
         
         keyboardResizableView.automaticallySnapToKeyboardTopEdge = true
         keyboardResizableView.addSubview(collectionViewCornerWrapperView)
