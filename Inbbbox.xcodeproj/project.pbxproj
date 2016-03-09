@@ -285,6 +285,7 @@
 		F033BBD01C8D71BF00E3DE64 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */; };
 		F033BBD41C9015C400E3DE64 /* CreateBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */; };
 		F033BBD61C902D6B00E3DE64 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */; };
+		F033BBD81C903C8F00E3DE64 /* CreateBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
@@ -621,6 +622,7 @@
 		F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
 		F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBucketQuery.swift; sourceTree = "<group>"; };
 		F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBucketQuerySpec.swift; sourceTree = "<group>"; };
 		F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistratorSpec.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1147,6 +1149,7 @@
 				5E31DBAF1C71E8B600D5C5DB /* ShotLikedByMeQuerySpec.swift */,
 				5E91A63A1C73822300C9D609 /* FollowUserQuerySpec.swift */,
 				5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */,
+				F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1948,6 +1951,7 @@
 				5E12C3691C734FF4003C6B48 /* APIShotsRequesterSpec.swift in Sources */,
 				BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */,
 				5E12C36B1C7359BD003C6B48 /* APIBucketsRequesterSpec.swift in Sources */,
+				F033BBD81C903C8F00E3DE64 /* CreateBucketQuerySpec.swift in Sources */,
 				5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */,
 				F0F122221C84505100F6949B /* APIShotsRequesterMock.swift in Sources */,
 				5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */,
