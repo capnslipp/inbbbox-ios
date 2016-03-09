@@ -73,6 +73,9 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     // MARK: Base Collection View View Model Delegate
     
     func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
+        if self.viewModel.likedShots.count == 0 {
+            collectionView!.emptyDataSetSource = self
+        }
         collectionView?.reloadData()
     }
     
@@ -96,8 +99,8 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         
         let textAttachment: NSTextAttachment = NSTextAttachment()
         
-        textAttachment.image = UIImage(named: "ic-like-details")
-        textAttachment.bounds = CGRect(x: 0, y: -5, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
+        textAttachment.image = UIImage(named: "ic-like-emptystate")
+        textAttachment.bounds = CGRect(x: 0, y: -2, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
         
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
         

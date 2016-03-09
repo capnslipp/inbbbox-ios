@@ -24,6 +24,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     
     func downloadInitialItems() {
         guard UserStorage.isUserSignedIn else {
+            self.delegate?.viewModelDidLoadInitialItems(self)
             return
         }
         firstly {

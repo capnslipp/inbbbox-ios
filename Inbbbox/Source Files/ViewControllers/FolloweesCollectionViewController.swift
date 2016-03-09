@@ -23,7 +23,6 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
         }
         collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
-        collectionView.emptyDataSetSource = self
         viewModel.delegate = self
         self.title = viewModel.title
         viewModel.downloadInitialItems()
@@ -86,6 +85,9 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     // MARK: Base Collection View View Model Delegate
     
     func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
+        if self.viewModel.followees.count == 0 {
+            collectionView!.emptyDataSetSource = self
+        }
         collectionView?.reloadData()
     }
     
@@ -109,8 +111,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
         
         let textAttachment: NSTextAttachment = NSTextAttachment()
         
-        textAttachment.image = UIImage(named: "ic-following")
-        textAttachment.bounds = CGRect(x: 0, y: -5, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
+        textAttachment.image = UIImage(named: "ic-following-emptystate")
+        textAttachment.bounds = CGRect(x: 0, y: -3, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
         
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
         

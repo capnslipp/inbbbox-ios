@@ -75,6 +75,9 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     // MARK: Base Collection View View Model Delegate
     
     func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
+        if self.viewModel.buckets.count == 0 {
+            collectionView!.emptyDataSetSource = self
+        }
         collectionView?.reloadData()
     }
     
@@ -98,8 +101,8 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
         
         let textAttachment: NSTextAttachment = NSTextAttachment()
         
-        textAttachment.image = UIImage(named: "ic-bucket-swipe-filled")
-        textAttachment.bounds = CGRect(x: 0, y: -5, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
+        textAttachment.image = UIImage(named: "ic-bucket-emptystate")
+        textAttachment.bounds = CGRect(x: 0, y: -4, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
         
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
         
