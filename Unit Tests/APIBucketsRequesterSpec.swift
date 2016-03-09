@@ -27,6 +27,54 @@ class APIBucketsRequesterSpec: QuickSpec {
             self.removeAllStubs()
         }
         
+        describe("when posting new bucket") {
+            
+            var error: ErrorType?
+            var bucket: BucketType?
+            
+            beforeEach {
+                error = nil
+                bucket = nil
+            }
+            
+            afterEach {
+                bucket = nil
+            }
+            
+            context("and token does not exist") {
+                
+                beforeEach {
+                    TokenStorage.clear()
+                }
+                
+                it("error should appear") {
+                    sut.postBucket("fixture.name", description: nil).then { _ in
+                        fail()
+                        }.error { _error in
+                            error = _error
+                    }
+                    
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+            
+            context("and token does exist") {
+                
+                beforeEach {
+                    TokenStorage.storeToken("fixture.token")
+                    self.stub(everything, builder: json(self.fixtureJSON))
+                }
+                
+                it("bucket should be created") {
+                    sut.postBucket("fixture.name", description: nil).then { _bucket in
+                        bucket = _bucket
+                        }.error { _ in fail() }
+                    
+                    expect(bucket).toNotEventually(beNil())
+                }
+            }
+        }
+        
         describe("when adding shot to bucket") {
             
             var error: ErrorType?
@@ -114,5 +162,13 @@ class APIBucketsRequesterSpec: QuickSpec {
                 }
             }
         }
+    }
+}
+
+
+private extension APIBucketsRequesterSpec {
+    
+    var fixtureJSON: [String: AnyObject] {
+        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Bucket").dictionaryObject!
     }
 }
