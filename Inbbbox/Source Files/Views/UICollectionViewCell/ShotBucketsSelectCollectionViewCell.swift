@@ -83,7 +83,7 @@ class ShotBucketsSelectCollectionViewCell: UICollectionViewCell {
             separatorLine.autoPinEdgeToSuperviewEdge(.Leading, withInset: 50)
             separatorLine.autoPinEdgeToSuperviewEdge(.Bottom)
             separatorLine.autoPinEdgeToSuperviewEdge(.Right)
-            separatorLine.autoSetDimension(.Height, toSize: 0.5h)
+            separatorLine.autoSetDimension(.Height, toSize: 0.5)
             
             contentView.autoPinEdgesToSuperviewEdges()
         }
