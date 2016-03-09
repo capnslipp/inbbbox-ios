@@ -53,7 +53,7 @@ class ShotBucketsViewController: UIViewController {
         }.then {
             self.shotBucketsView.collectionView.reloadData()
         }.error { error in
-            print(error)
+            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
         
         shotBucketsView.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
@@ -168,7 +168,7 @@ extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            print(error)
+            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
     
@@ -221,7 +221,7 @@ private extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            print(error)
+            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
     
@@ -231,7 +231,7 @@ private extension ShotBucketsViewController {
         }.then { () -> Void in
             self.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
         }.error { error in
-            print(error)
+            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
 }
