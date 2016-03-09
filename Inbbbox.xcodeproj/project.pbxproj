@@ -306,8 +306,8 @@
 		F0B1B6A91C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */; };
 		F0B1B6AB1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */; };
 		F0F1221C1C83084200F6949B /* ShotBucketsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221B1C83084200F6949B /* ShotBucketsViewModelSpec.swift */; };
-		F0F1221E1C83096100F6949B /* APIBucketsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */; };
-		F0F122201C83097800F6949B /* APIBucketsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */; };
+		F0F1221E1C83096100F6949B /* BucketsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221D1C83096100F6949B /* BucketsProviderMock.swift */; };
+		F0F122201C83097800F6949B /* BucketsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221F1C83097800F6949B /* BucketsRequesterMock.swift */; };
 		F0F122221C84505100F6949B /* APIShotsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */; };
 		F0F501031C70E40A00E8959E /* ShotDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */; };
 		F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501041C7211E200E8959E /* CommentEditView.swift */; };
@@ -645,8 +645,8 @@
 		F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICommentsProviderMock.swift; sourceTree = "<group>"; };
 		F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICommentsRequesterMock.swift; sourceTree = "<group>"; };
 		F0F1221B1C83084200F6949B /* ShotBucketsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModelSpec.swift; sourceTree = "<group>"; };
-		F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIBucketsProviderMock.swift; sourceTree = "<group>"; };
-		F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIBucketsRequesterMock.swift; sourceTree = "<group>"; };
+		F0F1221D1C83096100F6949B /* BucketsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsProviderMock.swift; sourceTree = "<group>"; };
+		F0F1221F1C83097800F6949B /* BucketsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsRequesterMock.swift; sourceTree = "<group>"; };
 		F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIShotsRequesterMock.swift; sourceTree = "<group>"; };
 		F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDescriptionView.swift; sourceTree = "<group>"; };
 		F0F501041C7211E200E8959E /* CommentEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentEditView.swift; sourceTree = "<group>"; };
@@ -1431,8 +1431,8 @@
 				BEEE9CA477EB506CA0E007FE /* UserStorageMock.swift */,
 				F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */,
 				F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */,
-				F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */,
-				F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */,
+				F0F1221D1C83096100F6949B /* BucketsProviderMock.swift */,
+				F0F1221F1C83097800F6949B /* BucketsRequesterMock.swift */,
 				F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */,
 				5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */,
 				5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */,
@@ -1899,7 +1899,7 @@
 				5EC0A7AD1C353C8800846975 /* UIImageSpecExtension.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
 				74389C411C85A0D8005C0434 /* BucketsViewModelSpec.swift in Sources */,
-				F0F122201C83097800F6949B /* APIBucketsRequesterMock.swift in Sources */,
+				F0F122201C83097800F6949B /* BucketsRequesterMock.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
 				5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */,
@@ -1955,7 +1955,7 @@
 				5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */,
 				F0F122221C84505100F6949B /* APIShotsRequesterMock.swift in Sources */,
 				5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */,
-				F0F1221E1C83096100F6949B /* APIBucketsProviderMock.swift in Sources */,
+				F0F1221E1C83096100F6949B /* BucketsProviderMock.swift in Sources */,
 				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,
 				BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */,
 				5E31AB8B1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift in Sources */,
