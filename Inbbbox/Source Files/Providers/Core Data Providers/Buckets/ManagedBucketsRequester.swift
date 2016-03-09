@@ -48,10 +48,11 @@ class ManagedBucketsRequester {
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
         let managedShot = managedObjectsProvider.managedShot(shot)
         if let _ = managedBucket.shots {
-            managedBucket.addShot(managedShot)//setByAddingObject(managedShot)
+            managedBucket.addShot(managedShot)
         } else {
             managedBucket.shots = NSSet(object: managedShot)
         }
+        managedBucket.mngd_shotsCount += 1
         print(managedBucket)
         return Promise<Void> { fulfill, reject in
             do {
@@ -70,6 +71,7 @@ class ManagedBucketsRequester {
             let mutableShots = NSMutableSet(set: managedShots)
             mutableShots.removeObject(managedShot)
             managedBucket.shots = mutableShots.copy() as? NSSet
+            managedBucket.mngd_shotsCount -= 1
         }
         return Promise<Void> { fulfill, reject in
             do {

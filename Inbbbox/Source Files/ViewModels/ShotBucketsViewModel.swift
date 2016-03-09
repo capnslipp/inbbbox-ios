@@ -37,7 +37,7 @@ class ShotBucketsViewModel {
     var titleForActionCell: String {
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
-            return NSLocalizedString("Add New Bucket", comment: "")
+            return NSLocalizedString("New Bucket", comment: "")
         case .RemoveFromBucket:
             return NSLocalizedString("Remove From Selected Buckets", comment: "")
         }
