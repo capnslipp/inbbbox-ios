@@ -20,7 +20,7 @@ class APIBucketsRequester: Verifiable {
      - parameter name: Bucket's name.
      - parameter description: Bucket's description.
      
-     - returns: Promise which resolves with void.
+     - returns: Promise which resolves with newly created bucket.
      */
     func postBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
         let query = CreateBucketQuery(name: name, description: description)
