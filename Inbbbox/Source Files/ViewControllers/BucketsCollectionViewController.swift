@@ -25,6 +25,7 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBarButtons()
         guard let collectionView = collectionView else {
             return
         }
@@ -68,6 +69,29 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // NGRTodo: present bucket details view controller
+    }
+    
+    // MARK: Configuration
+    
+    func setupBarButtons() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add New", comment: ""), style: .Plain, target: self, action: "didTapAddNewBucketButton:")
+    }
+    
+    // MARK: Actions:
+    
+    func didTapAddNewBucketButton(_: UIBarButtonItem) {
+        let alert = UIAlertController.provideBucketNameAlertController { bucketName in
+            
+            firstly {
+                self.viewModel.createBucket(bucketName)
+            }.then { () -> Void in
+                self.collectionView?.insertItemsAtIndexPaths([NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
+            }.error { error in
+                print(error)
+            }
+        }
+        self.presentViewController(alert, animated: true, completion: nil)
+        alert.view.tintColor = .pinkColor()
     }
     
     // MARK: Base Collection View View Model Delegate

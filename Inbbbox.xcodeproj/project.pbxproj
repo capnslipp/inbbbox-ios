@@ -284,6 +284,7 @@
 		F00232971C811EAC003020BD /* ManagedShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232961C811EAC003020BD /* ManagedShot.swift */; };
 		F033BBD01C8D71BF00E3DE64 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */; };
 		F033BBD41C9015C400E3DE64 /* CreateBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */; };
+		F033BBD61C902D6B00E3DE64 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
@@ -619,6 +620,7 @@
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
 		F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBucketQuery.swift; sourceTree = "<group>"; };
+		F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistratorSpec.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1290,6 +1292,7 @@
 				BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */,
 				5CD3975A1C6B84970062434C /* UIImageExtension.swift */,
 				C6BC8EE11C8DBAD800A03714 /* UIImageViewExtension.swift */,
+				F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1680,6 +1683,7 @@
 				5EE65FA61C5A7EC30055F1AB /* PageableComponent.swift in Sources */,
 				C68389931C7EE1FF0021F8EA /* BucketsForShotQuery.swift in Sources */,
 				E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */,
+				F033BBD61C902D6B00E3DE64 /* UIAlertControllerExtension.swift in Sources */,
 				5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
 				BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */,

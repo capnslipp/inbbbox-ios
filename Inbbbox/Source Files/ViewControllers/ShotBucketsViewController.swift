@@ -173,16 +173,10 @@ extension ShotBucketsViewController {
     }
     
     func addNewBucketButtonDidTap(_: UIButton) {
-        let alert = UIAlertController(title: "New Bucket", message: "Provide name for new bucket", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Create", style: .Default) { _ in
-            if let bucketName = alert.textFields?[0].text {
-                self.createBucketAndAddShot(bucketName)
-            }
-        })
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-            textField.placeholder = "Enter bucket name:"
-        })
+        
+        let alert = UIAlertController.provideBucketNameAlertController { bucketName in
+            self.createBucketAndAddShot(bucketName)
+        }
         self.presentViewController(alert, animated: true, completion: nil)
         alert.view.tintColor = .pinkColor()
     }
