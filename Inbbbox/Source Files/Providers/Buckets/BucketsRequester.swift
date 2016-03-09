@@ -15,7 +15,7 @@ class BucketsRequester {
     
     func postBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
         if UserStorage.isUserSignedIn {
-            // NGRTodo: call API
+            return apiBucketsRequester.postBucket(name, description: description)
         }
         return managedBucketsRequester.addBucket(name, description: description)
     }

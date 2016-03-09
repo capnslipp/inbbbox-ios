@@ -53,7 +53,6 @@ class ManagedBucketsRequester {
             managedBucket.shots = NSSet(object: managedShot)
         }
         managedBucket.mngd_shotsCount += 1
-        print(managedBucket)
         return Promise<Void> { fulfill, reject in
             do {
                 fulfill(try managedObjectContext.save())
@@ -84,7 +83,8 @@ class ManagedBucketsRequester {
 }
 
 var guestJSON: JSON {
-    let guestString = "{\"id\" : \"guest.identifier\"" +
+    let guestString =
+        "{\"id\" : \"guest.identifier\"" +
         "\"name\" : \"guest.name\"," +
         "\"username\" : \"guest.username\"," +
         "\"avatar_url\" : \"guest.avatar.url\"," +

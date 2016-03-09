@@ -283,6 +283,7 @@
 		F00232951C7F5774003020BD /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */; };
 		F00232971C811EAC003020BD /* ManagedShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232961C811EAC003020BD /* ManagedShot.swift */; };
 		F033BBD01C8D71BF00E3DE64 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */; };
+		F033BBD41C9015C400E3DE64 /* CreateBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
@@ -617,6 +618,7 @@
 		F00232961C811EAC003020BD /* ManagedShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShot.swift; sourceTree = "<group>"; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
+		F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBucketQuery.swift; sourceTree = "<group>"; };
 		F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistratorSpec.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
@@ -971,6 +973,7 @@
 				5E31DBAD1C71E88800D5C5DB /* ShotLikedByMeQuery.swift */,
 				5E91A6361C73802300C9D609 /* FollowUserQuery.swift */,
 				5E91A6381C73802E00C9D609 /* UnfollowUserQuery.swift */,
+				F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1766,6 +1769,7 @@
 				5C8D76D41C735C050030A44C /* ShotType.swift in Sources */,
 				5E4857BE1C280AB40027B38A /* OAuthViewController.swift in Sources */,
 				5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */,
+				F033BBD41C9015C400E3DE64 /* CreateBucketQuery.swift in Sources */,
 				5E31AB8F1C6CAAFC001BC1DF /* UpdateCommentQuery.swift in Sources */,
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				5E4857BC1C28061F0027B38A /* OAuthView.swift in Sources */,
