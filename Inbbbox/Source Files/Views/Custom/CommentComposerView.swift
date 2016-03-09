@@ -9,6 +9,7 @@
 import UIKit
 
 protocol CommentComposerViewDelegate {
+    func commentComposerViewDidBecomeActive(view: CommentComposerView)
     func didTapSendButtonInComposerView(view: CommentComposerView, comment: String)
 }
 
@@ -100,6 +101,10 @@ extension CommentComposerView {
         textField.rightView = button
     }
     
+    func makeActive() {
+        textField.becomeFirstResponder()
+    }
+    
     func animateByRoundingCorners(round: Bool) {
         
         let from: CGFloat = round ? 0 : 10
@@ -120,6 +125,10 @@ extension CommentComposerView: UITextFieldDelegate {
         
         sendButton?.enabled = false
         return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        delegate?.commentComposerViewDidBecomeActive(self)
     }
 }
 

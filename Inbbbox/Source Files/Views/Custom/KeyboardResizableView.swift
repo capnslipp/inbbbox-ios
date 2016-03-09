@@ -12,8 +12,32 @@ enum KeyboardState {
     case WillAppear, WillDisappear, DidAppear, DidDisappear
 }
 
+protocol KeyboardResizableViewDelegate {
+    
+     /**
+     Invokes when *KeyboardResizableView* is going to relayout itself (when keyboard will (dis)appear).
+     
+     - parameter view:  KeyboardResizableView instance.
+     - parameter state: Indicates state of keyboard.
+     */
+    func keyboardResizableView(view: KeyboardResizableView, willRelayoutSubviewsWithState state: KeyboardState)
+    
+    /**
+     Invokes when *KeyboardResizableView* did relayout itself (when keyboard did (dis)appear).
+     
+     - parameter view:  KeyboardResizableView instance.
+     - parameter state: Indicates state of keyboard.
+     */
+    func keyboardResizableView(view: KeyboardResizableView, didRelayoutSubviewsWithState state: KeyboardState)
+}
+
 class KeyboardResizableView: UIView {
     
+    /**
+     The KeyboardResizableView's delegate object
+     */
+    var delegate: KeyboardResizableViewDelegate?
+
     /**
      Indicates whether keyboard is present or not.
      */
@@ -26,7 +50,7 @@ class KeyboardResizableView: UIView {
     /**
      Indicates whether *KeyboardResizableView* should snap to top edge of keyboard. Default `false`
      
-     **Important**: when true, will ignore value of `bottomEdgeOffset` and treat it as `0`.
+     **Important**: when true, will ignore value of `bottomEdgeOffset` and treats it as `0`.
      */
     var automaticallySnapToKeyboardTopEdge = false
     
@@ -35,26 +59,7 @@ class KeyboardResizableView: UIView {
      */
     var bottomEdgeOffset = CGFloat(0)
     
-    /**
-     Closure invoked when *KeyboardResizableView* is going to relayout itself (when keyboard will (dis)appear).
-     Default `nil`.
-     
-     - parameter view: KeyboardResizableView instance.
-     - parameter state: Indicates state of keyboard.
-     */
-    var willRelayoutSubviews: ((view: KeyboardResizableView, state: KeyboardState) -> Void)?
-    
-    /**
-     Closure invoked when KeyboardResizableView did relayout itself (when keyboard did (dis)appear).
-     Default `nil`.
-     
-     - parameter view: KeyboardResizableView instance.
-     - parameter state: Indicates state of keyboard.
-     */
-    var didRelayoutSubviews: ((view: KeyboardResizableView, state: KeyboardState) -> Void)?
-    
     // Private variables:
-    
     private var initialBottomConstraintConstant = CGFloat(0)
     private var bottomConstraint: NSLayoutConstraint!
     private var snapOffset = CGFloat(0)
@@ -126,6 +131,7 @@ private extension KeyboardResizableView {
         let properlyRotatedCoords = calculateCorrectKeyboardRectWithParameters(parameters)
         
         let height = properlyRotatedCoords.size.height
+        print(properlyRotatedCoords.size.height)
         let animationDuration = parameters[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
         
         if automaticallySnapToKeyboardTopEdge && !isKeyboardPresent {
@@ -145,12 +151,12 @@ private extension KeyboardResizableView {
         let constant = keyboardPresence ? initialBottomConstraintConstant - addition : bottomConstraint.constant + addition
         bottomConstraint.constant = constant
         
-        willRelayoutSubviews?(view: self, state: keyboardPresence ? .WillAppear : .WillDisappear)
+        delegate?.keyboardResizableView(self, willRelayoutSubviewsWithState: keyboardPresence ? .WillAppear : .WillDisappear)
         
         UIView.animateWithDuration(animationDuration.doubleValue, animations: {
             self.layoutIfNeeded()
         }) { _ in
-            self.didRelayoutSubviews?(view: self, state: keyboardPresence ? .DidAppear : .DidDisappear)
+            self.delegate?.keyboardResizableView(self, didRelayoutSubviewsWithState: keyboardPresence ? .DidAppear : .DidDisappear)
         }
     }
 }
