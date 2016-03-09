@@ -49,8 +49,8 @@ class APIBucketsRequesterSpec: QuickSpec {
                 
                 it("error should appear") {
                     sut.postBucket("fixture.name", description: nil).then { _ in
-                        fail()
-                        }.error { _error in
+                        fail("This should not be invoked")
+                    }.error { _error in
                             error = _error
                     }
                     
@@ -68,7 +68,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 it("bucket should be created") {
                     sut.postBucket("fixture.name", description: nil).then { _bucket in
                         bucket = _bucket
-                        }.error { _ in fail() }
+                    }.error { _ in fail("This should not be invoked") }
                     
                     expect(bucket).toNotEventually(beNil())
                 }

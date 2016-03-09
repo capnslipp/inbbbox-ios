@@ -17,7 +17,7 @@ class CreateBucketQuerySpec: QuickSpec {
         
         SharedQuerySpec.performSpecForQuery( { Void -> Query in
             return CreateBucketQuery(name: "fixture.name", description: nil)
-            }) { Void -> QueryExpectation in
+        }) { Void -> QueryExpectation in
                 return (method: .POST, encoding: .JSON, path: "/buckets")
         }
         
@@ -42,7 +42,7 @@ class CreateBucketQuerySpec: QuickSpec {
             }
             
             it("should have no description parameter") {
-                expect(sut.parameters["description"] as? NSAttributedString).to(beNil())
+                expect(sut.parameters["description"]).to(beNil())
             }
         }
     }

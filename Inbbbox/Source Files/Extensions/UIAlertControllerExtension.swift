@@ -10,15 +10,15 @@ import UIKit
 
 extension UIAlertController {
     class func provideBucketNameAlertController(createHandler: (bucketName: String) -> Void) -> UIAlertController {
-        let alert = UIAlertController(title: "New Bucket", message: "Provide name for new bucket", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Create", style: .Default) { _ in
+        let alert = UIAlertController(title: NSLocalizedString("New Bucket", comment: ""), message: NSLocalizedString("Provide name for new bucket", comment: ""), preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Create", comment: ""), style: .Default) { _ in
             if let bucketName = alert.textFields?[0].text {
                 createHandler(bucketName: bucketName)
             }
         })
         alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-            textField.placeholder = "Enter bucket name:"
+            textField.placeholder = NSLocalizedString("Enter bucket name:", comment: "")
         })
         
         return alert

@@ -45,16 +45,15 @@ class ShotBucketsViewModelSpec: QuickSpec {
             }
             
             bucketsRequesterMock.postBucketStub.on(any()) { _ in
-                return Promise{ fulfill, _ in
-                    let json = JSONSpecLoader.sharedInstance.fixtureBucketsJSON(withCount: 1)
-                    let result = json.map { Bucket.map($0) }
-                    var resultBucketTypes = [BucketType]()
-                    for bucket in result {
-                        resultBucketTypes.append(bucket)
-                    }
-                    
-                    fulfill(resultBucketTypes.first!)
+                let json = JSONSpecLoader.sharedInstance.fixtureBucketsJSON(withCount: 1)
+                let result = json.map { Bucket.map($0) }
+                var resultBucketTypes = [BucketType]()
+                for bucket in result {
+                    resultBucketTypes.append(bucket)
                 }
+                
+                return Promise(resultBucketTypes.first!)
+                
             }
             
             bucketsRequesterMock.addShotStub.on(any()) { _ in
@@ -190,21 +189,21 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
                             done()
-                            }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                     }
                     
                     waitUntil { done in
                         sut.createBucket("fixture.name").then { result -> Void in
                             didCreateBucket = true
                             done()
-                            }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                     }
                     
                     waitUntil { done in
                         sut.addShotToBucketAtIndex(2).then { result -> Void in
                             didReceiveResponse = true
                             done()
-                            }.error { _ in fail("This should not be invoked") }
+                        }.error { _ in fail("This should not be invoked") }
                     }
                 }
                 

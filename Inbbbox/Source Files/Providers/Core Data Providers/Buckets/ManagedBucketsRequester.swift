@@ -29,7 +29,8 @@ class ManagedBucketsRequester {
             attributedDescription: description,
             shotsCount: 0,
             createdAt: NSDate(),
-            owner: User(json: guestJSON))
+            owner: User(json: guestJSON)
+        )
         
         
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
@@ -83,14 +84,24 @@ class ManagedBucketsRequester {
 }
 
 var guestJSON: JSON {
-    let guestString =
-        "{\"id\" : \"guest.identifier\"" +
-        "\"name\" : \"guest.name\"," +
-        "\"username\" : \"guest.username\"," +
-        "\"avatar_url\" : \"guest.avatar.url\"," +
-        "\"shots_count\" : 0," +
-        "\"param_to_omit\" : \"guest.param\"," +
-        "\"type\" : \"User\"" +
-        "}"
-    return JSON.parse(guestString)
+//    let guestString =
+//        "{\"id\" : \"guest.identifier\"" +
+//        "\"name\" : \"guest.name\"," +
+//        "\"username\" : \"guest.username\"," +
+//        "\"avatar_url\" : \"guest.avatar.url\"," +
+//        "\"shots_count\" : 0," +
+//        "\"param_to_omit\" : \"guest.param\"," +
+//        "\"type\" : \"User\"" +
+//        "}"
+    
+    let guestDictionary = [
+        "id" : "guest.identifier",
+        "name" : "guest.name",
+        "username" : "guest.username",
+        "avatar_url" : "guest.avatar.url",
+        "shots_count" : 0,
+        "param_to_omit" : "guest.param",
+        "type" : "User"
+    ]
+    return JSON(guestDictionary)
 }
