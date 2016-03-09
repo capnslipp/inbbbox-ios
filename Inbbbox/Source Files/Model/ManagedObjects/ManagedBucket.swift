@@ -18,6 +18,10 @@ class ManagedBucket: NSManagedObject {
     
     @NSManaged var shots: NSSet?
     @NSManaged var owner: User
+    
+    func addShot(shot: ManagedShot) {
+        addObject(shot, forKey: "shots")
+    }
 }
 
 extension ManagedBucket: BucketType {

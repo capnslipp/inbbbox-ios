@@ -137,7 +137,7 @@ extension ShotBucketsViewController: UICollectionViewDelegate {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotBucketsSelectCollectionViewCell {
             cell.selectBucket(viewModel.selectBucketAtIndex(indexPath.item))
         } else if let _ = collectionView.cellForItemAtIndexPath(indexPath) as? ShotBucketsAddCollectionViewCell {
-            addShotToBucketAtIndexPath(indexPath)
+            addShotToBucketAtIndex(indexPath.item)
         }
     }
 }
@@ -173,17 +173,18 @@ extension ShotBucketsViewController {
     }
     
     func addNewBucketButtonDidTap(_: UIButton) {
-        // NGRTodo: implement me!
-        firstly {
-            viewModel.createBucket("bucket")
-        }.then { () -> Void in
-            self.viewModel.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
-        }.then { () -> Void in
-            self.dismissClosure?()
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }.error { error in
-            print(error)
-        }
+        let alert = UIAlertController(title: "New Bucket", message: "Provide name for new bucket", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Create", style: .Default) { _ in
+            if let bucketName = alert.textFields?[0].text {
+                self.createBucketAndAddShot(bucketName)
+            }
+        })
+        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.placeholder = "Enter bucket name:"
+        })
+        self.presentViewController(alert, animated: true, completion: nil)
+        alert.view.tintColor = .pinkColor()
     }
 }
 
@@ -219,12 +220,22 @@ private extension ShotBucketsViewController {
         return .RGBA(246, 248, 248, 1) // color same as header title background
     }
     
-    func addShotToBucketAtIndexPath(indexPath: NSIndexPath) {
+    func addShotToBucketAtIndex(index: Int) {
         firstly {
-            viewModel.addShotToBucketAtIndex(indexPath.item)
+            viewModel.addShotToBucketAtIndex(index)
         }.then { () -> Void in
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
+        }.error { error in
+            print(error)
+        }
+    }
+    
+    func createBucketAndAddShot(bucketName: String) {
+        firstly {
+            viewModel.createBucket(bucketName)
+        }.then { () -> Void in
+            self.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
         }.error { error in
             print(error)
         }

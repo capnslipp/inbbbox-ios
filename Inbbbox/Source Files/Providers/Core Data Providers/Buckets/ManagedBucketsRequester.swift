@@ -23,17 +23,8 @@ class ManagedBucketsRequester {
     
     func addBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
         
-        var identifier: String
-        do {
-            let fetchRequest = NSFetchRequest(entityName: ManagedBucket.entityName)
-            let managedBuckets = try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedBucket]
-            identifier = (managedBuckets.count+1).stringValue
-        } catch {
-            return Promise(error: error)
-        }
-
         let bucket = Bucket(
-            identifier: identifier,
+            identifier: String.randomAlphanumericString(10),
             name: name,
             attributedDescription: description,
             shotsCount: 0,
@@ -56,11 +47,12 @@ class ManagedBucketsRequester {
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
         let managedShot = managedObjectsProvider.managedShot(shot)
-        if let managedShots = managedBucket.shots {
-            managedShots.setByAddingObject(managedShot)
+        if let _ = managedBucket.shots {
+            managedBucket.addShot(managedShot)//setByAddingObject(managedShot)
         } else {
             managedBucket.shots = NSSet(object: managedShot)
         }
+        print(managedBucket)
         return Promise<Void> { fulfill, reject in
             do {
                 fulfill(try managedObjectContext.save())
