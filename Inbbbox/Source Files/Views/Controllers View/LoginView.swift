@@ -53,7 +53,7 @@ class LoginView: UIView {
         sloganLabel.text = NSLocalizedString("Each shot swipes", comment: "")
         sloganLabel.textAlignment = .Center
         sloganLabel.textColor = UIColor.RGBA(249, 212, 226, 1)
-        sloganLabel.font = UIFont.helveticaFont(.NeueLight, size: 22)
+        sloganLabel.font = UIFont.helveticaFont(.NeueLight, size: 25)
         addSubview(sloganLabel)
         
         loadingLabel.text = NSLocalizedString("LOADING...", comment: "")
@@ -83,7 +83,7 @@ class LoginView: UIView {
             let height = 2 * cornerRadius
             loginButton.frame = CGRect(
                 x: inset,
-                y: CGRectGetMaxY(frame) - height - 120,
+                y: CGRectGetMaxY(frame) - height - 132,
                 width: CGRectGetWidth(frame) - 2 * inset,
                 height: height
             )
