@@ -40,7 +40,8 @@ class TabBarAnimator {
             x: CGRectGetWidth(tabBarView.frame) / 2 - centerButton.intrinsicContentSize().width / 2,
             y: -centerButton.intrinsicContentSize().height - 8,
             width: centerButton.intrinsicContentSize().width,
-            height: centerButton.intrinsicContentSize().height)
+            height: centerButton.intrinsicContentSize().height
+        )
     }
     
     func animateTabBar() -> Promise<Void> {
@@ -111,8 +112,8 @@ private extension TabBarAnimator {
             
             UIView.animateWithDuration(0.5, animations: {
                 self.centerButton.frame = frame
-                }, completion: { _ in
-                    fulfill()
+            }, completion: { _ in
+                fulfill()
             })
         }
     }
