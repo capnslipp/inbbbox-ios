@@ -18,7 +18,7 @@ private var horizontalSpaceBetweenAvatarAndText: CGFloat {
 
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
-    var deleteActionHandler: (Void -> Void)?
+    var deleteActionHandler: (() -> Void)?
     
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = UILabel.newAutoLayoutView()
