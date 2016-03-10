@@ -6,7 +6,7 @@ import UIKit
 
 class ShotsCollectionBackgroundView: UIView {
 
-    let logoImageView = UIImageView(image: UIImage(named: "logo-type-shots"))
+    let logoImageView = UIImageView(image: UIImage(named: "logo-type-home"))
     private var didSetConstraints = false
 
 //    MARK: - Life cycle

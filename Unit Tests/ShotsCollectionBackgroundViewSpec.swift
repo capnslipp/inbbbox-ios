@@ -30,7 +30,7 @@ class ShotsCollectionBackgroundViewSpec: QuickSpec {
             }
 
             it("should have proper image") {
-                expect(UIImagePNGRepresentation(logoImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "logo-type-shots")!)))
+                expect(UIImagePNGRepresentation(logoImageView.image!)).to(equal(UIImagePNGRepresentation(UIImage(named: "logo-type-home")!)))
             }
 
             it("should be configured for auto layout") {
