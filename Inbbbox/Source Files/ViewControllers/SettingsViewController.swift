@@ -237,8 +237,7 @@ extension SettingsViewController {
 
     func didTapLogOutButton(_: UIBarButtonItem) {
         Authenticator.logout()
-        refreshViewAccordingToAuthenticationStatus()
-        //NGRToDo: Remember to hide settings when user is logged out
+        UIApplication.sharedApplication().keyWindow?.rootViewController = LoginViewController()
     }
 }
 
