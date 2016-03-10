@@ -35,7 +35,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
         
         contentView.configureForAutoLayout()
-        contentView.backgroundColor = UIColor.RGBA(255, 255, 255, 1)
+        contentView.backgroundColor = UIColor.whiteColor()
         
         avatarView.configureForAutoLayout()
         avatarView.imageView.image = UIImage(named: "avatar_placeholder")

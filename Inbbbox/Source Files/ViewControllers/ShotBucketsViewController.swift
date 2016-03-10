@@ -199,7 +199,7 @@ private extension ShotBucketsViewController {
     func backgroundColorForFooter() -> UIColor {
         switch viewModel.shotBucketsViewControllerMode {
         case .AddToBucket:
-            return .RGBA(255, 255, 255, 1) // color same as cell's background
+            return .whiteColor() // color same as cell's background
         case .RemoveFromBucket:
             return .RGBA(246, 248, 248, 1) // color same as header title background
         }

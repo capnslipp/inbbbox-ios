@@ -17,7 +17,7 @@ class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = UIColor.RGBA(255, 255, 255, 1)
+        contentView.backgroundColor = UIColor.whiteColor()
         contentView.addSubview(operationView)
         
         separatorView.backgroundColor = UIColor.RGBA(246, 248, 248, 1)

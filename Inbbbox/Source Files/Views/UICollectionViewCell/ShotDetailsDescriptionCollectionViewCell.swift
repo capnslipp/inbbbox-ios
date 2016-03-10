@@ -27,7 +27,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        contentView.backgroundColor = UIColor.RGBA(255, 255, 255, 1)
+        contentView.backgroundColor = UIColor.whiteColor()
         
         descriptionLabel.numberOfLines = 0
         contentView.addSubview(descriptionLabel)

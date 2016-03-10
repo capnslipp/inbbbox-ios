@@ -28,7 +28,7 @@ class ShotBucketsSelectCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
         
         contentView.configureForAutoLayout()
-        contentView.backgroundColor = .RGBA(255, 255, 255, 1)
+        contentView.backgroundColor = .whiteColor()
         
         bucketNameLabel.configureForAutoLayout()
         bucketNameLabel.numberOfLines = 0

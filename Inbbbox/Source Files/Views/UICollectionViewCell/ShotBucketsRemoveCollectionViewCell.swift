@@ -22,7 +22,7 @@ class ShotBucketsRemoveCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
         
         contentView.configureForAutoLayout()
-        contentView.backgroundColor = .RGBA(255, 255, 255, 1)
+        contentView.backgroundColor = .whiteColor()
         
         removeButton.configureForAutoLayout()
         removeButton.setTitle(NSLocalizedString("Remove From Selected Buckets", comment: ""), forState: .Normal)

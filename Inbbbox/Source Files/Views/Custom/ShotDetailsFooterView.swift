@@ -36,7 +36,7 @@ class ShotDetailsFooterView: UICollectionReusableView {
         activityIndicatorView.backgroundColor = .clearColor()
         activityIndicatorView.color = .grayColor()
         
-        cornerWrapperView.backgroundColor = .RGBA(255, 255, 255, 1)
+        cornerWrapperView.backgroundColor = .whiteColor()
         cornerWrapperView.addSubview(activityIndicatorView)
         addSubview(cornerWrapperView)
         
