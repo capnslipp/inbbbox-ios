@@ -29,6 +29,9 @@ class CommentComposerView: UIView {
         super.init(frame: frame)
         
         backgroundColor = .clearColor()
+        layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
+        layer.shadowRadius = 3
+        layer.shadowOpacity = 1
         
         cornerWrapperView.clipsToBounds = true
         cornerWrapperView.backgroundColor = .RGBA(246, 248, 248, 1)
