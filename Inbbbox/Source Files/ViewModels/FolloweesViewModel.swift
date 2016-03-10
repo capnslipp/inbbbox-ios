@@ -33,7 +33,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             if let followees = followees where followees != self.followees {
                 self.followees = followees
                 self.downloadShots(followees)
-                self.delegate?.viewModelDidLoadInitialItems(self)
+                self.delegate?.viewModelDidLoadInitialItems()
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
