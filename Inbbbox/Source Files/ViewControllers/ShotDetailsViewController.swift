@@ -125,6 +125,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             cell.descriptionLabel.attributedText = viewModel.attributedShotDescription
+            
+            let hasComments = viewModel.commentsCount > 0
+            cell.shouldShowSeparatorView = hasComments
 
             return cell
             
@@ -202,7 +205,9 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
         
         } else if viewModel.isDescriptionIndex(indexPath.row) {
             let text = viewModel.attributedShotDescription
-            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text])
+            let hasComments = viewModel.commentsCount > 0
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: hasComments ? 20 : 0, right: 0)
+            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text], withInsets: insets)
 
         } else {
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)

@@ -131,7 +131,6 @@ private extension KeyboardResizableView {
         let properlyRotatedCoords = calculateCorrectKeyboardRectWithParameters(parameters)
         
         let height = properlyRotatedCoords.size.height
-        print(properlyRotatedCoords.size.height)
         let animationDuration = parameters[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
         
         if automaticallySnapToKeyboardTopEdge && !isKeyboardPresent {

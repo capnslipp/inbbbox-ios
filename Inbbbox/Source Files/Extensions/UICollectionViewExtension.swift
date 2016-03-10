@@ -38,10 +38,10 @@ extension UICollectionView {
         }
     }
     
-    func sizeForAutoSizingCell<T: UICollectionViewCell where T: AutoSizable>(cell: T.Type, textToBound: [NSAttributedString?]?) -> CGSize {
+    func sizeForAutoSizingCell<T: UICollectionViewCell where T: AutoSizable>(cell: T.Type, textToBound: [NSAttributedString?]?, withInsets additionalInsets: UIEdgeInsets = UIEdgeInsetsZero) -> CGSize {
         
         let insets = cell.contentInsets
-        let availableWidth = bounds.size.width - (cell.maximumContentWidth ?? 0) - (insets.left + insets.right)
+        let availableWidth = bounds.size.width - (cell.maximumContentWidth ?? 0) - (insets.left + insets.right + additionalInsets.left + additionalInsets.right)
         var height = CGFloat(0)
         
         if let textToBound = textToBound {
@@ -54,7 +54,7 @@ extension UICollectionView {
                     height += $0.boundingHeightUsingAvailableWidth(availableWidth) + cell.verticalInteritemSpacing
                 }
                 
-                height += insets.top + insets.bottom
+                height += insets.top + insets.bottom + additionalInsets.top + additionalInsets.bottom
             }
         }
         
