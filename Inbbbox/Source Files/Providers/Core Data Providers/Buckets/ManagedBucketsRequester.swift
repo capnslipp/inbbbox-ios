@@ -24,7 +24,7 @@ class ManagedBucketsRequester {
     func addBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
         
         let bucket = Bucket(
-            identifier: String.randomAlphanumericString(10),
+            identifier: NSProcessInfo.processInfo().globallyUniqueString.stringByReplacingOccurrencesOfString("-", withString: ""),
             name: name,
             attributedDescription: description,
             shotsCount: 0,
