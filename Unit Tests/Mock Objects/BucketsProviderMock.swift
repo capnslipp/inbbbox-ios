@@ -1,5 +1,5 @@
 //
-//  APIBucketsProviderMock.swift
+//  BucketsProviderMock.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 28/02/16.
@@ -11,7 +11,7 @@ import PromiseKit
 
 @testable import Inbbbox
 
-class APIBucketsProviderMock: APIBucketsProvider {
+class BucketsProviderMock: BucketsProvider {
     
     let provideMyBucketsStub = Stub<Void, Promise<[BucketType]?>>()
     let nextPageStub = Stub<Void, Promise<[CommentType]?>>()

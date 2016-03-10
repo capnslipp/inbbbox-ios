@@ -16,13 +16,8 @@ class ShotBucketsViewModel {
         var counter = Int(0)
 
         counter += buckets.count
+        counter += 2  // for action buttons and gap before
         
-        switch shotBucketsViewControllerMode {
-        case .AddToBucket:
-            break
-        case .RemoveFromBucket:
-            counter += 2  // for "Remove From Selected Buckets" and gap before
-        }
         return counter
     }
     
@@ -39,11 +34,20 @@ class ShotBucketsViewModel {
         }
     }
     
+    var titleForActionCell: String {
+        switch shotBucketsViewControllerMode {
+        case .AddToBucket:
+            return NSLocalizedString("New Bucket", comment: "")
+        case .RemoveFromBucket:
+            return NSLocalizedString("Remove From Selected Buckets", comment: "")
+        }
+    }
+    
     let shot: ShotType
     let shotBucketsViewControllerMode: ShotBucketsViewControllerMode
     
-    var bucketsProvider = APIBucketsProvider(page: 1, pagination: 100)
-    var bucketsRequester = APIBucketsRequester()
+    var bucketsProvider = BucketsProvider()
+    var bucketsRequester = BucketsRequester()
     var shotsRequester = APIShotsRequester()
     
     private(set) var buckets = [BucketType]()
@@ -73,6 +77,16 @@ class ShotBucketsViewModel {
                     self.buckets = buckets ?? []
                 }.then(fulfill).error(reject)
             }
+        }
+    }
+    
+    func createBucket(name: String, description: NSAttributedString? = nil) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                bucketsRequester.postBucket(name, description: description)
+            }.then { bucket in
+                self.buckets.append(bucket)
+            }.then(fulfill).error(reject)
         }
     }
     
@@ -111,21 +125,11 @@ class ShotBucketsViewModel {
     }
     
     func isSeparatorCellAtIndex(index: Int) -> Bool {
-        switch shotBucketsViewControllerMode {
-        case .AddToBucket:
-            return false
-        case .RemoveFromBucket:
-            return index == itemsCount - 2
-        }
+        return index == itemsCount - 2
     }
     
-    func isRemoveCellAtIndex(index: Int) -> Bool {
-        switch shotBucketsViewControllerMode {
-        case .AddToBucket:
-            return false
-        case .RemoveFromBucket:
-            return index == itemsCount - 1
-        }
+    func isActionCellAtIndex(index: Int) -> Bool {
+        return index == itemsCount - 1
     }
     
     func displayableDataForBucketAtIndex(index: Int) -> (bucketName: String, shotsCountText: String) {

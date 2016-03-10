@@ -1,5 +1,5 @@
 //
-//  APIBucketsRequesterMock.swift
+//  BucketsRequesterMock.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 28/02/16.
@@ -11,10 +11,15 @@ import PromiseKit
 
 @testable import Inbbbox
 
-class APIBucketsRequesterMock: APIBucketsRequester {
+class BucketsRequesterMock: BucketsRequester {
     
+    let postBucketStub = Stub<(String, NSAttributedString?), Promise<BucketType>>()
     let addShotStub = Stub<(ShotType, BucketType), Promise<Void>>()
     let removeShotStub = Stub<(ShotType, BucketType), Promise<Void>>()
+    
+    override func postBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
+        return try! postBucketStub.invoke(name, description)
+    }
     
     override func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         return try! addShotStub.invoke(shot, bucket)

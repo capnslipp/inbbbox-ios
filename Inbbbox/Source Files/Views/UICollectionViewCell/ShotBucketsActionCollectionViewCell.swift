@@ -1,5 +1,5 @@
 //
-//  ShotBucketsRemoveCollectionViewCell.swift
+//  ShotBucketsActionCollectionViewCell.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 25/02/16.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ShotBucketsRemoveCollectionViewCell: UICollectionViewCell {
+class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
     
-    let removeButton = UIButton.newAutoLayoutView()
+    let button = UIButton.newAutoLayoutView()
     
     private let cellHeight = CGFloat(44)
     
@@ -24,11 +24,10 @@ class ShotBucketsRemoveCollectionViewCell: UICollectionViewCell {
         contentView.configureForAutoLayout()
         contentView.backgroundColor = .whiteColor()
         
-        removeButton.configureForAutoLayout()
-        removeButton.setTitle(NSLocalizedString("Remove From Selected Buckets", comment: ""), forState: .Normal)
-        removeButton.setTitleColor(.pinkColor(), forState: .Normal)
-        removeButton.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 16)
-        contentView.addSubview(removeButton)
+        button.configureForAutoLayout()
+        button.setTitleColor(.pinkColor(), forState: .Normal)
+        button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 16)
+        contentView.addSubview(button)
         
         setNeedsUpdateConstraints()
     }
@@ -43,7 +42,7 @@ class ShotBucketsRemoveCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
             
-            removeButton.autoPinEdgesToSuperviewEdges()
+            button.autoPinEdgesToSuperviewEdges()
             
             contentView.autoPinEdgesToSuperviewEdges()
         }
@@ -65,9 +64,9 @@ class ShotBucketsRemoveCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension ShotBucketsRemoveCollectionViewCell: Reusable {
+extension ShotBucketsActionCollectionViewCell: Reusable {
     
     class var reuseIdentifier: String {
-        return String(ShotBucketsRemoveCollectionViewCell)
+        return String(ShotBucketsActionCollectionViewCell)
     }
 }

@@ -92,7 +92,7 @@ class ShotBucketsAddCollectionViewCell: UICollectionViewCell {
             arrowImageView.autoAlignAxis(.Horizontal, toSameAxisOfView: bucketNameLabel)
             
             separatorLine.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
-            separatorLine.autoSetDimension(.Height, toSize: 1)
+            separatorLine.autoSetDimension(.Height, toSize: 0.5)
             
             contentView.autoPinEdgesToSuperviewEdges()
         }

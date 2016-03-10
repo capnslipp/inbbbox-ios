@@ -42,8 +42,10 @@ class ShotsProvider {
     }
 
     func provideShotsForBucket(bucket: BucketType) -> Promise<[ShotType]?> {
-        assert(userStorageClass.isUserSignedIn, "Cannot provide shots for bucket bucket when user is not signed in")
-        return apiShotsProvider.provideShotsForBucket(bucket)
+        if userStorageClass.isUserSignedIn {
+            return apiShotsProvider.provideShotsForBucket(bucket)
+        }
+        return managedShotsProvider.provideShotsForBucket(bucket)
     }
 
     func nextPage() -> Promise<[ShotType]?> {

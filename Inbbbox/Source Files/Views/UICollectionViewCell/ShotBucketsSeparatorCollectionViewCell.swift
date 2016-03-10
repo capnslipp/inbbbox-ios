@@ -46,11 +46,13 @@ class ShotBucketsSeparatorCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
             
+            let separatorLineHeight = CGFloat(0.5)
+            
             topSeparatorLine.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
-            topSeparatorLine.autoSetDimension(.Height, toSize: 1)
+            topSeparatorLine.autoSetDimension(.Height, toSize: separatorLineHeight)
             
             bottomSeparatorLine.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
-            bottomSeparatorLine.autoSetDimension(.Height, toSize: 1)
+            bottomSeparatorLine.autoSetDimension(.Height, toSize: separatorLineHeight)
             
             contentView.autoPinEdgesToSuperviewEdges()
         }
