@@ -27,7 +27,7 @@ class LikesViewModel: BaseCollectionViewViewModel {
         }.then { shots -> Void in
             if let shots = shots where shots != self.likedShots {
                 self.likedShots = shots
-                self.delegate?.viewModelDidLoadInitialItems(self)
+                self.delegate?.viewModelDidLoadInitialItems()
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view

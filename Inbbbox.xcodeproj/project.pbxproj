@@ -266,6 +266,7 @@
 		BF95086B1C20790200E39242 /* ParametersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95086A1C20790200E39242 /* ParametersSpec.swift */; };
 		C616C67E1C773EB700896E70 /* LabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67D1C773EB700896E70 /* LabelItem.swift */; };
 		C616C6801C77410300896E70 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C616C67F1C77410300896E70 /* LabelCell.swift */; };
+		C63370EE1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63370ED1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift */; };
 		C663D7CF1C7C75A700353761 /* GifIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */; };
 		C68389931C7EE1FF0021F8EA /* BucketsForShotQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68389921C7EE1FF0021F8EA /* BucketsForShotQuery.swift */; };
 		C68389951C7F310A0021F8EA /* Buckets.json in Resources */ = {isa = PBXBuildFile; fileRef = C68389941C7F310A0021F8EA /* Buckets.json */; };
@@ -608,6 +609,7 @@
 		BF95086A1C20790200E39242 /* ParametersSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersSpec.swift; sourceTree = "<group>"; };
 		C616C67D1C773EB700896E70 /* LabelItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelItem.swift; sourceTree = "<group>"; };
 		C616C67F1C77410300896E70 /* LabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
+		C63370ED1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringExtension.swift; sourceTree = "<group>"; };
 		C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GifIndicatorView.swift; sourceTree = "<group>"; };
 		C68389921C7EE1FF0021F8EA /* BucketsForShotQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsForShotQuery.swift; sourceTree = "<group>"; };
 		C68389941C7F310A0021F8EA /* Buckets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Buckets.json; sourceTree = "<group>"; };
@@ -1316,6 +1318,7 @@
 				BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */,
 				5CD3975A1C6B84970062434C /* UIImageExtension.swift */,
 				C6BC8EE11C8DBAD800A03714 /* UIImageViewExtension.swift */,
+				C63370ED1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift */,
 				F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */,
 			);
 			path = Extensions;
@@ -1872,6 +1875,7 @@
 				5CE569441C74A11000D075DC /* UserType.swift in Sources */,
 				745146961C5235D600710C61 /* BucketCollectionViewCell.swift in Sources */,
 				BEEE94B758777658FD47E908 /* ShotsCollectionBackgroundView.swift in Sources */,
+				C63370EE1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift in Sources */,
 				5CE569481C74A2A500D075DC /* ManagedShotImage.swift in Sources */,
 				BEEE9C4FC72546AB195ED04C /* UIViewAnimationsExtension.swift in Sources */,
 				5C0320E91C7B6B4700F93FA3 /* ManagedProjectsProvider.swift in Sources */,

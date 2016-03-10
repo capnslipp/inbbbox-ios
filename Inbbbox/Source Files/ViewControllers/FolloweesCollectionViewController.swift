@@ -8,8 +8,9 @@
 
 import UIKit
 import PromiseKit
+import DZNEmptyDataSet
 
-class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate {
+class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
     
     // MARK: - Lifecycle
     
@@ -87,7 +88,10 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     
     // MARK: Base Collection View View Model Delegate
     
-    func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
+    func viewModelDidLoadInitialItems() {
+        if self.viewModel.followees.count == 0 {
+            collectionView!.emptyDataSetSource = self
+        }
         collectionView?.reloadData()
     }
     
@@ -98,4 +102,36 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
+    
+    // MARK: Empty Data Set Data Source Methods
+    
+    func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
+        return UIImage(named: "logo-empty")
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let localizedString = NSLocalizedString("Follow   someone first!", comment: "")
+        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
+        
+        let textAttachment: NSTextAttachment = NSTextAttachment()
+        
+        textAttachment.image = UIImage(named: "ic-following-emptystate")
+        if let image = textAttachment.image {
+            textAttachment.bounds = CGRect(x: 0, y: -3, width: image.size.width, height: image.size.height)
+        }
+        
+        let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
+        
+        attributedString.replaceCharactersInRange(NSMakeRange(7, 1), withAttributedString: attributedStringWithImage)
+        return attributedString
+    }
+    
+    func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
+        return 40
+    }
+    
+    func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
+        return -40
+    }
+
 }
