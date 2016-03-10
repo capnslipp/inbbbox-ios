@@ -396,8 +396,7 @@ private extension ShotDetailsViewController {
     }
     
     func grayOutFooterIfNeeded() {
-        if viewModel.commentsCount == 0 && !viewModel.hasDescription {
-            footer?.grayOutBackground()
-        }
+        let shouldGrayOut = viewModel.commentsCount == 0 && !viewModel.hasDescription
+        footer?.grayOutBackground(shouldGrayOut)
     }
 }
