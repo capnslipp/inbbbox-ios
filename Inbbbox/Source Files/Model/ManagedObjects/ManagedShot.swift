@@ -26,6 +26,10 @@ class ManagedShot: NSManagedObject {
     @NSManaged var liked: Bool
     @NSManaged var projects: NSSet?
     @NSManaged var buckets: NSSet?
+    
+    func addBucket(bucket: ManagedBucket) {
+        addObject(bucket, forKey: "buckets")
+    }
 }
 
 extension ManagedShot: ShotType {

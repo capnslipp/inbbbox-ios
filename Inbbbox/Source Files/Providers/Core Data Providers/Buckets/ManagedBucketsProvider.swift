@@ -19,7 +19,8 @@ class ManagedBucketsProvider {
         
         return Promise<[BucketType]?> { fulfill, reject in
             do {
-                fulfill(try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedBucket])
+                let managedBuckets = try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedBucket]
+                fulfill(managedBuckets.map { $0 as BucketType })
             } catch {
                 reject(error)
             }

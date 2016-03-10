@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import CoreData
+import SwiftyJSON
 
 class ManagedBucketsRequester {
     
@@ -20,15 +21,39 @@ class ManagedBucketsRequester {
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
     
+    func addBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
+        
+        let bucket = Bucket(
+            identifier: NSProcessInfo.processInfo().globallyUniqueString.stringByReplacingOccurrencesOfString("-", withString: ""),
+            name: name,
+            attributedDescription: description,
+            shotsCount: 0,
+            createdAt: NSDate(),
+            owner: User(json: guestJSON)
+        )
+        
+        
+        let managedBucket = managedObjectsProvider.managedBucket(bucket)
+        
+        return Promise<BucketType> { fulfill, reject in
+            do {
+                try managedObjectContext.save()
+                fulfill(managedBucket)
+            } catch {
+                reject(error)
+            }
+        }
+    }
     
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
         let managedShot = managedObjectsProvider.managedShot(shot)
-        if let managedShots = managedBucket.shots {
-            managedShots.setByAddingObject(managedShot)
+        if let _ = managedBucket.shots {
+            managedBucket.addShot(managedShot)
         } else {
             managedBucket.shots = NSSet(object: managedShot)
         }
+        managedBucket.mngd_shotsCount += 1
         return Promise<Void> { fulfill, reject in
             do {
                 fulfill(try managedObjectContext.save())
@@ -46,6 +71,7 @@ class ManagedBucketsRequester {
             let mutableShots = NSMutableSet(set: managedShots)
             mutableShots.removeObject(managedShot)
             managedBucket.shots = mutableShots.copy() as? NSSet
+            managedBucket.mngd_shotsCount -= 1
         }
         return Promise<Void> { fulfill, reject in
             do {
@@ -55,4 +81,17 @@ class ManagedBucketsRequester {
             }
         }
     }
+}
+
+var guestJSON: JSON {
+    let guestDictionary = [
+        "id" : "guest.identifier",
+        "name" : "guest.name",
+        "username" : "guest.username",
+        "avatar_url" : "guest.avatar.url",
+        "shots_count" : 0,
+        "param_to_omit" : "guest.param",
+        "type" : "User"
+    ]
+    return JSON(guestDictionary)
 }

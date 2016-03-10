@@ -16,6 +16,11 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(1)
     private var oneColumnLayoutButton: UIBarButtonItem?
     private var twoColumnsLayoutButton: UIBarButtonItem?
+    private var isCurrentLayoutOneColumn: Bool {
+        get {
+            return collectionView!.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout)
+        }
+    }
     
     convenience init(oneColumnLayoutCellHeightToWidthRatio: CGFloat, twoColumnsLayoutCellHeightToWidthRatio: CGFloat) {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
@@ -39,25 +44,28 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     
     func setupBarButtons() {
         // NGRTodo: set images instead of title
-        oneColumnLayoutButton = UIBarButtonItem(title: "1", style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
-        twoColumnsLayoutButton = UIBarButtonItem(title: "2", style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
+        oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
+        twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton!, twoColumnsLayoutButton!]
     }
     
     func updateBarButtons(layout: UICollectionViewLayout) {
-        let isCurrentLayoutOneColumn = layout.isKindOfClass(OneColumnCollectionViewFlowLayout)
-        oneColumnLayoutButton?.enabled = !isCurrentLayoutOneColumn
-        twoColumnsLayoutButton?.enabled = isCurrentLayoutOneColumn
+        oneColumnLayoutButton?.tintColor = !isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        twoColumnsLayoutButton?.tintColor = isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
     }
     
     // MARK: Actions:
     
     func didTapOneColumnLayoutButton(_: UIBarButtonItem) {
-        changeLayout()
+        if !isCurrentLayoutOneColumn {
+            changeLayout()
+        }
     }
     
     func didTapTwoColumnsLayoutButton(_: UIBarButtonItem) {
-        changeLayout()
+        if isCurrentLayoutOneColumn {
+            changeLayout()
+        }
     }
     
     // Mark: Changing layout 

@@ -13,6 +13,21 @@ import PromiseKit
 class APIBucketsRequester: Verifiable {
     
     /**
+     Creates new bucket.
+     
+     - Requires: Authenticated user.
+     
+     - parameter name: Bucket's name.
+     - parameter description: Bucket's description.
+     
+     - returns: Promise which resolves with newly created bucket.
+     */
+    func postBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
+        let query = CreateBucketQuery(name: name, description: description)
+        return sendCreateBucketQuery(query, verifyTextLength: name)
+    }
+    
+    /**
      Adds shot to given bucket.
      
      - Requires: Authenticated user.
@@ -58,6 +73,26 @@ private extension APIBucketsRequester {
                 Request(query: query).resume()
             }.then { _ -> Void in
                 fulfill()
+            }.error(reject)
+        }
+    }
+    
+    func sendCreateBucketQuery(query: Query, verifyTextLength text: String) -> Promise<BucketType> {
+        return Promise<BucketType> { fulfill, reject in
+            
+            firstly {
+                verifyAuthenticationStatus(true)
+            }.then {
+                self.verifyTextLength(text, min: 1, max: UInt.max)
+            }.then {
+                Request(query: query).resume()
+            }.then { json -> Void in
+                
+                guard let json = json else {
+                    throw ResponseError.UnexpectedResponse
+                }
+                fulfill(Bucket.map(json))
+            
             }.error(reject)
         }
     }

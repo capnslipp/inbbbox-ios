@@ -19,15 +19,15 @@ class ShotBucketsViewModelSpec: QuickSpec {
         
         var sut: ShotBucketsViewModel!
         var shot: ShotType!
-        var bucketsProviderMock: APIBucketsProviderMock!
-        var bucketsRequesterMock: APIBucketsRequesterMock!
+        var bucketsProviderMock: BucketsProviderMock!
+        var bucketsRequesterMock: BucketsRequesterMock!
         var shotsRequesterMock: APIShotsRequesterMock!
         
         beforeEach {
             
             shot = Shot.fixtureShot()
-            bucketsProviderMock = APIBucketsProviderMock()
-            bucketsRequesterMock = APIBucketsRequesterMock()
+            bucketsProviderMock = BucketsProviderMock()
+            bucketsRequesterMock = BucketsRequesterMock()
             shotsRequesterMock = APIShotsRequesterMock()
             
             bucketsProviderMock.provideMyBucketsStub.on(any()) { _ in
@@ -42,6 +42,18 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     
                     fulfill(resultBucketTypes)
                 }
+            }
+            
+            bucketsRequesterMock.postBucketStub.on(any()) { _ in
+                let json = JSONSpecLoader.sharedInstance.fixtureBucketsJSON(withCount: 1)
+                let result = json.map { Bucket.map($0) }
+                var resultBucketTypes = [BucketType]()
+                for bucket in result {
+                    resultBucketTypes.append(bucket)
+                }
+                
+                return Promise(resultBucketTypes.first!)
+                
             }
             
             bucketsRequesterMock.addShotStub.on(any()) { _ in
@@ -97,8 +109,8 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     expect(sut.buckets.count).to(equal(0))
                 }
                 
-                it("should have no items") {
-                    expect(sut.itemsCount).to(equal(0))
+                it("should have correct number of items") {
+                    expect(sut.itemsCount).to(equal(2))
                 }
             }
             
@@ -130,7 +142,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                 }
                 
                 it("view model should have correct number of items") {
-                    expect(sut.itemsCount).to(equal(2))
+                    expect(sut.itemsCount).to(equal(4))
                 }
             }
             
@@ -157,6 +169,52 @@ class ShotBucketsViewModelSpec: QuickSpec {
                 
                 afterEach {
                     didReceiveResponse = nil
+                }
+                
+                it("should be correctly added") {
+                    expect(didReceiveResponse).to(beTruthy())
+                    expect(didReceiveResponse).toNot(beNil())
+                }
+            }
+            
+            describe("adding shot to new bucket") {
+                
+                var didReceiveResponse: Bool?
+                var didCreateBucket: Bool?
+                
+                beforeEach {
+                    didReceiveResponse = false
+                    didCreateBucket = false
+                    
+                    waitUntil { done in
+                        sut.loadBuckets().then { result -> Void in
+                            done()
+                        }.error { _ in fail("This should not be invoked") }
+                    }
+                    
+                    waitUntil { done in
+                        sut.createBucket("fixture.name").then { result -> Void in
+                            didCreateBucket = true
+                            done()
+                        }.error { _ in fail("This should not be invoked") }
+                    }
+                    
+                    waitUntil { done in
+                        sut.addShotToBucketAtIndex(2).then { result -> Void in
+                            didReceiveResponse = true
+                            done()
+                        }.error { _ in fail("This should not be invoked") }
+                    }
+                }
+                
+                afterEach {
+                    didReceiveResponse = nil
+                    didCreateBucket = nil
+                }
+                
+                it("should create new bucket properly") {
+                    expect(didCreateBucket).to(beTruthy())
+                    expect(didCreateBucket).toNot(beNil())
                 }
                 
                 it("should be correctly added") {

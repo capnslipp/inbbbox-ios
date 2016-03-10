@@ -17,6 +17,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     var buckets = [BucketType]()
     var bucketsIndexedShots = [Int : [ShotType]]()
     private let bucketsProvider = BucketsProvider()
+    private let bucketsRequester = BucketsRequester()
     private let shotsProvider = ShotsProvider()
     
     var itemsCount: Int {
@@ -101,6 +102,16 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 // NGRTemp: Need mockups for error message view
                 print(error)
             }
+        }
+    }
+    
+    func createBucket(name: String, description: NSAttributedString? = nil) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                bucketsRequester.postBucket(name, description: description)
+            }.then { bucket in
+                self.buckets.append(bucket)
+            }.then(fulfill).error(reject)
         }
     }
     

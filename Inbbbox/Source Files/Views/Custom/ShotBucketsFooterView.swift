@@ -36,7 +36,7 @@ class ShotBucketsFooterView: UICollectionReusableView {
             didUpdateConstraints = true
             
             separatorLine.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
-            separatorLine.autoSetDimension(.Height, toSize: 1)
+            separatorLine.autoSetDimension(.Height, toSize: 0.5)
         }
         
         super.updateConstraints()
