@@ -57,6 +57,10 @@ class JSONSpecLoader {
     func fixtureProjectsJSON(withCount count: Int) -> [JSON] {
         return fixtureJSONArrayWithResourceName("Project", count: count)
     }
+    
+    func fixtureUsersJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("User", count: count)
+    }
 }
 
 private extension JSONSpecLoader {
