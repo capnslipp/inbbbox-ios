@@ -51,7 +51,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                     sut.postBucket("fixture.name", description: nil).then { _ in
                         fail("This should not be invoked")
                     }.error { _error in
-                            error = _error
+                        error = _error
                     }
                     
                     expect(error is VerifiableError).toEventually(beTruthy())
