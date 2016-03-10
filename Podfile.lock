@@ -1,6 +1,7 @@
 PODS:
   - AsyncSwift (1.7.2)
   - Dobby (0.4.2)
+  - DZNEmptyDataSet (1.7.3)
   - EasyAnimation (1.0.2)
   - Gifu (1.0.1)
   - GPUImage (0.1.7)
@@ -46,6 +47,7 @@ PODS:
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
   - Dobby (~> 0.4.2)
+  - DZNEmptyDataSet (~> 1.7)
   - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
   - Gifu (~> 1.0.1)
@@ -75,6 +77,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
   Dobby: 66c6fa06aac194f1b8328b2b4c988d59a01fb5f1
+  DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EasyAnimation: 9615e40f58aa7d8d6a67de66e0edda1903ffa990
   Gifu: bf7a99fe9f20a1dc18c3cb4289aebc922a2ad419
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d

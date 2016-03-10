@@ -24,6 +24,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     
     func downloadInitialItems() {
         guard UserStorage.isUserSignedIn else {
+            self.delegate?.viewModelDidLoadInitialItems()
             return
         }
         firstly {
@@ -33,7 +34,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
                 self.followees = followees
                 self.downloadShots(followees)
             }
-            self.delegate?.viewModelDidLoadInitialItems(self)
+            self.delegate?.viewModelDidLoadInitialItems()
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)

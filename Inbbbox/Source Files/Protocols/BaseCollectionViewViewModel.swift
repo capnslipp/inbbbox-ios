@@ -20,7 +20,7 @@ protocol BaseCollectionViewViewModel {
 
 protocol BaseCollectionViewViewModelDelegate {
     
-    func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel)
+    func viewModelDidLoadInitialItems()
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath])
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath)
 }
