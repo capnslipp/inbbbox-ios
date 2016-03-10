@@ -33,7 +33,7 @@ class APITeamsProviderSpec: QuickSpec {
             it("members should be properly returned") {
                 sut.provideMembersForTeam(Team.fixtureTeam()).then { _users -> Void in
                     users = _users
-                }.error { _ in fail("This should net be invoked") }
+                }.error { _ in fail("This should not be invoked") }
                 
                 expect(users).toNotEventually(beNil())
                 expect(users).toEventually(haveCount(3))
@@ -41,24 +41,24 @@ class APITeamsProviderSpec: QuickSpec {
             
         }
         
-        describe("when providing comments from next page") {
+        describe("when providing members from next page") {
             
             it("comments should be properly returned") {
                 sut.nextPage().then { _users -> Void in
                     users = _users
-                }.error { _ in fail("This should net be invoked") }
+                }.error { _ in fail("This should not be invoked") }
                 
                 expect(users).toNotEventually(beNil())
                 expect(users).toEventually(haveCount(3))
             }
         }
         
-        describe("when providing comments from previous page") {
+        describe("when providing members from previous page") {
             
             it("comments should be properly returned") {
                 sut.previousPage().then { _users -> Void in
                     users = _users
-                }.error { _ in fail("This should net be invoked") }
+                }.error { _ in fail("This should not be invoked") }
                 
                 expect(users).toNotEventually(beNil())
                 expect(users).toEventually(haveCount(3))

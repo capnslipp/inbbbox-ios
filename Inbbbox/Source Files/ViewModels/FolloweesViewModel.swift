@@ -19,7 +19,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
     
-    private let NetguruTeam = Team(identifier: "653174", name: "", username: "", avatarString: nil, createdAt: NSDate())
+    private let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarString: nil, createdAt: NSDate())
     
     var itemsCount: Int {
         return followees.count
@@ -28,7 +28,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     func downloadInitialItems() {
         
         firstly {
-            UserStorage.isUserSignedIn ? connectionsProvider.provideMyFollowees() : teamsProvider.provideMembersForTeam(NetguruTeam)
+            UserStorage.isUserSignedIn ? connectionsProvider.provideMyFollowees() : teamsProvider.provideMembersForTeam(netguruTeam)
         }.then { followees -> Void in
             if let followees = followees where followees != self.followees {
                 self.followees = followees
