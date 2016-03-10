@@ -278,11 +278,14 @@
 		F00232891C7DCABE003020BD /* ShotBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232881C7DCABE003020BD /* ShotBucketsView.swift */; };
 		F002328B1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */; };
 		F002328D1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */; };
-		F002328F1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */; };
+		F002328F1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002328E1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift */; };
 		F00232911C7F2339003020BD /* ShotBucketsSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */; };
 		F00232951C7F5774003020BD /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */; };
 		F00232971C811EAC003020BD /* ManagedShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00232961C811EAC003020BD /* ManagedShot.swift */; };
 		F033BBD01C8D71BF00E3DE64 /* CustomTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */; };
+		F033BBD41C9015C400E3DE64 /* CreateBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */; };
+		F033BBD61C902D6B00E3DE64 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */; };
+		F033BBD81C903C8F00E3DE64 /* CreateBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */; };
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
@@ -303,8 +306,8 @@
 		F0B1B6A91C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */; };
 		F0B1B6AB1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */; };
 		F0F1221C1C83084200F6949B /* ShotBucketsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221B1C83084200F6949B /* ShotBucketsViewModelSpec.swift */; };
-		F0F1221E1C83096100F6949B /* APIBucketsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */; };
-		F0F122201C83097800F6949B /* APIBucketsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */; };
+		F0F1221E1C83096100F6949B /* BucketsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221D1C83096100F6949B /* BucketsProviderMock.swift */; };
+		F0F122201C83097800F6949B /* BucketsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F1221F1C83097800F6949B /* BucketsRequesterMock.swift */; };
 		F0F122221C84505100F6949B /* APIShotsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */; };
 		F0F501031C70E40A00E8959E /* ShotDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */; };
 		F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501041C7211E200E8959E /* CommentEditView.swift */; };
@@ -611,12 +614,15 @@
 		F00232881C7DCABE003020BD /* ShotBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsView.swift; sourceTree = "<group>"; };
 		F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsAddCollectionViewCell.swift; sourceTree = "<group>"; };
 		F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsSelectCollectionViewCell.swift; sourceTree = "<group>"; };
-		F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsRemoveCollectionViewCell.swift; sourceTree = "<group>"; };
+		F002328E1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsActionCollectionViewCell.swift; sourceTree = "<group>"; };
 		F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsSeparatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsFooterView.swift; sourceTree = "<group>"; };
 		F00232961C811EAC003020BD /* ManagedShot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShot.swift; sourceTree = "<group>"; };
 		F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		F033BBCF1C8D71BF00E3DE64 /* CustomTransitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
+		F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBucketQuery.swift; sourceTree = "<group>"; };
+		F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateBucketQuerySpec.swift; sourceTree = "<group>"; };
 		F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistratorSpec.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
@@ -639,8 +645,8 @@
 		F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICommentsProviderMock.swift; sourceTree = "<group>"; };
 		F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APICommentsRequesterMock.swift; sourceTree = "<group>"; };
 		F0F1221B1C83084200F6949B /* ShotBucketsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModelSpec.swift; sourceTree = "<group>"; };
-		F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIBucketsProviderMock.swift; sourceTree = "<group>"; };
-		F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIBucketsRequesterMock.swift; sourceTree = "<group>"; };
+		F0F1221D1C83096100F6949B /* BucketsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsProviderMock.swift; sourceTree = "<group>"; };
+		F0F1221F1C83097800F6949B /* BucketsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketsRequesterMock.swift; sourceTree = "<group>"; };
 		F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIShotsRequesterMock.swift; sourceTree = "<group>"; };
 		F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDescriptionView.swift; sourceTree = "<group>"; };
 		F0F501041C7211E200E8959E /* CommentEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentEditView.swift; sourceTree = "<group>"; };
@@ -971,6 +977,7 @@
 				5E31DBAD1C71E88800D5C5DB /* ShotLikedByMeQuery.swift */,
 				5E91A6361C73802300C9D609 /* FollowUserQuery.swift */,
 				5E91A6381C73802E00C9D609 /* UnfollowUserQuery.swift */,
+				F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1052,7 +1059,7 @@
 				5ECBB7E91C7C7D3B001C5EEB /* ShotDetailsOperationCollectionViewCell.swift */,
 				F002328A1C7DE7CB003020BD /* ShotBucketsAddCollectionViewCell.swift */,
 				F002328C1C7EF39A003020BD /* ShotBucketsSelectCollectionViewCell.swift */,
-				F002328E1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift */,
+				F002328E1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift */,
 				F00232901C7F2338003020BD /* ShotBucketsSeparatorCollectionViewCell.swift */,
 			);
 			path = UICollectionViewCell;
@@ -1142,6 +1149,7 @@
 				5E31DBAF1C71E8B600D5C5DB /* ShotLikedByMeQuerySpec.swift */,
 				5E91A63A1C73822300C9D609 /* FollowUserQuerySpec.swift */,
 				5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */,
+				F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1287,6 +1295,7 @@
 				BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */,
 				5CD3975A1C6B84970062434C /* UIImageExtension.swift */,
 				C6BC8EE11C8DBAD800A03714 /* UIImageViewExtension.swift */,
+				F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1422,8 +1431,8 @@
 				BEEE9CA477EB506CA0E007FE /* UserStorageMock.swift */,
 				F0B1B6A81C7B2E9D00EF6EB3 /* APICommentsProviderMock.swift */,
 				F0B1B6AA1C7C4E9A00EF6EB3 /* APICommentsRequesterMock.swift */,
-				F0F1221D1C83096100F6949B /* APIBucketsProviderMock.swift */,
-				F0F1221F1C83097800F6949B /* APIBucketsRequesterMock.swift */,
+				F0F1221D1C83096100F6949B /* BucketsProviderMock.swift */,
+				F0F1221F1C83097800F6949B /* BucketsRequesterMock.swift */,
 				F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */,
 				5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */,
 				5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */,
@@ -1677,6 +1686,7 @@
 				5EE65FA61C5A7EC30055F1AB /* PageableComponent.swift in Sources */,
 				C68389931C7EE1FF0021F8EA /* BucketsForShotQuery.swift in Sources */,
 				E1368BC81C3BEDCC00AA3AEB /* ShotImage.swift in Sources */,
+				F033BBD61C902D6B00E3DE64 /* UIAlertControllerExtension.swift in Sources */,
 				5E781B4B1C58D8CC009A2E14 /* BucketQuery.swift in Sources */,
 				BF6961241C1B4D9D000FC5D8 /* Requestable.swift in Sources */,
 				BF69611A1C1B443E000FC5D8 /* NetworkService.swift in Sources */,
@@ -1712,7 +1722,7 @@
 				F092E25C1C3FD3DA00593D18 /* StoreData.xcdatamodeld in Sources */,
 				5EDA3A961C8D7CD4002CD898 /* AutoSizable.swift in Sources */,
 				7416CD7A1C591F680051F65B /* SmallFolloweeCollectionViewCell.swift in Sources */,
-				F002328F1C7F1ADC003020BD /* ShotBucketsRemoveCollectionViewCell.swift in Sources */,
+				F002328F1C7F1ADC003020BD /* ShotBucketsActionCollectionViewCell.swift in Sources */,
 				745146941C5217F400710C61 /* BucketsCollectionViewController.swift in Sources */,
 				74A6C67E1C57C8F6009BDD75 /* LikeCollectionViewCell.swift in Sources */,
 				BF6A6E0E1C1ED1DC001EDAB8 /* GroupItem.swift in Sources */,
@@ -1766,6 +1776,7 @@
 				5C8D76D41C735C050030A44C /* ShotType.swift in Sources */,
 				5E4857BE1C280AB40027B38A /* OAuthViewController.swift in Sources */,
 				5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */,
+				F033BBD41C9015C400E3DE64 /* CreateBucketQuery.swift in Sources */,
 				5E31AB8F1C6CAAFC001BC1DF /* UpdateCommentQuery.swift in Sources */,
 				BF6961261C1B57A5000FC5D8 /* NSErrorExtensions.swift in Sources */,
 				5E4857BC1C28061F0027B38A /* OAuthView.swift in Sources */,
@@ -1888,7 +1899,7 @@
 				5EC0A7AD1C353C8800846975 /* UIImageSpecExtension.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
 				74389C411C85A0D8005C0434 /* BucketsViewModelSpec.swift in Sources */,
-				F0F122201C83097800F6949B /* APIBucketsRequesterMock.swift in Sources */,
+				F0F122201C83097800F6949B /* BucketsRequesterMock.swift in Sources */,
 				5EE041AE1C33ED7400657751 /* ShotsStorageSpec.swift in Sources */,
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
 				5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */,
@@ -1940,10 +1951,11 @@
 				5E12C3691C734FF4003C6B48 /* APIShotsRequesterSpec.swift in Sources */,
 				BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */,
 				5E12C36B1C7359BD003C6B48 /* APIBucketsRequesterSpec.swift in Sources */,
+				F033BBD81C903C8F00E3DE64 /* CreateBucketQuerySpec.swift in Sources */,
 				5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */,
 				F0F122221C84505100F6949B /* APIShotsRequesterMock.swift in Sources */,
 				5EDB83281C48DECE00FBCA05 /* RemoveFromBucketQuerySpec.swift in Sources */,
-				F0F1221E1C83096100F6949B /* APIBucketsProviderMock.swift in Sources */,
+				F0F1221E1C83096100F6949B /* BucketsProviderMock.swift in Sources */,
 				BEEE93F3CB1DE3F261BB8FF4 /* ViewControllerMock.swift in Sources */,
 				BEEE9EC957540A6F48DC8814 /* ViewControllerPresenterMock.swift in Sources */,
 				5E31AB8B1C6BBB22001BC1DF /* CreateCommentQuerySpec.swift in Sources */,
