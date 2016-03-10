@@ -43,7 +43,7 @@ class APITeamsProviderSpec: QuickSpec {
         
         describe("when providing members from next page") {
             
-            it("comments should be properly returned") {
+            it("members should be properly returned") {
                 sut.nextPage().then { _users -> Void in
                     users = _users
                 }.error { _ in fail("This should not be invoked") }
@@ -55,7 +55,7 @@ class APITeamsProviderSpec: QuickSpec {
         
         describe("when providing members from previous page") {
             
-            it("comments should be properly returned") {
+            it("members should be properly returned") {
                 sut.previousPage().then { _users -> Void in
                     users = _users
                 }.error { _ in fail("This should not be invoked") }
