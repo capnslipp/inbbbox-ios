@@ -9,7 +9,7 @@
 import Foundation
 import PromiseKit
 
-/// Provides interface for dribbble buckets read API
+/// Provides interface for dribbble teams read API
 class APITeamsProvider: PageableProvider {
     
     /**
