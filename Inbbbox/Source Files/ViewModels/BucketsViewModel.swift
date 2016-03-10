@@ -36,7 +36,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 self.downloadShots(buckets)
             }
             if bucketsShouldBeReloaded {
-                self.delegate?.viewModelDidLoadInitialItems(self)
+                self.delegate?.viewModelDidLoadInitialItems()
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view

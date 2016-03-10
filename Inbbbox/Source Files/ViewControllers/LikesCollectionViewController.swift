@@ -72,7 +72,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     
     // MARK: Base Collection View View Model Delegate
     
-    func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
+    func viewModelDidLoadInitialItems() {
         if self.viewModel.likedShots.count == 0 {
             collectionView!.emptyDataSetSource = self
         }
@@ -100,7 +100,9 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         let textAttachment: NSTextAttachment = NSTextAttachment()
         
         textAttachment.image = UIImage(named: "ic-like-emptystate")
-        textAttachment.bounds = CGRect(x: 0, y: -2, width: (textAttachment.image?.size.width)!, height: (textAttachment.image?.size.height)!)
+        if let image = textAttachment.image {
+            textAttachment.bounds = CGRect(x: 0, y: -2, width: image.size.width, height: image.size.height)
+        }
         
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
         
@@ -108,11 +110,11 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         return attributedString
     }
     
-    func spaceHeightForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return 40
     }
     
-    func verticalOffsetForEmptyDataSet(scrollView: UIScrollView!) -> CGFloat {
+    func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
     }
 
