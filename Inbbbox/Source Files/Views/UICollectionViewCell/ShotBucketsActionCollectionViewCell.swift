@@ -22,7 +22,7 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
         
         contentView.configureForAutoLayout()
-        contentView.backgroundColor = .RGBA(255, 255, 255, 1)
+        contentView.backgroundColor = .whiteColor()
         
         button.configureForAutoLayout()
         button.setTitleColor(.pinkColor(), forState: .Normal)

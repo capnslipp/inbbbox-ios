@@ -99,11 +99,12 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
         cell.swipeCompletion = { [weak self] action in
             switch action {
-            case .Like:
-                self?.likeShot(shot)
-            case .Bucket: break
-            case .Comment: break
-            case .DoNothing: break
+                case .Like:
+                    self?.likeShot(shot)
+                case .Bucket: break
+                case .Comment:
+                    self?.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true)
+                case .DoNothing: break
             }
         }
         return cell
@@ -112,17 +113,8 @@ final class ShotsCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        definesPresentationContext = true
-
-        let shotDetailsViewController = ShotDetailsViewController(shot: shots[indexPath.item])
-        
-        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
-        
-        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
-        shotDetailsViewController.modalPresentationStyle = .Custom
-        
-        tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
+        let shot = shots[indexPath.row]
+        presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false)
     }
 
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -177,6 +169,21 @@ private extension ShotsCollectionViewController {
         }.error { error in
             // NGRToDo handle error and show alert
         }
+    }
+    
+    func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {
+        
+        definesPresentationContext = true
+        
+        let shotDetailsViewController = ShotDetailsViewController(shot: shot)
+        shotDetailsViewController.shouldScrollToMostRecentMessage = scrollToMessages
+        
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+        
+        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
+        shotDetailsViewController.modalPresentationStyle = .Custom
+        
+        tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
 }
 

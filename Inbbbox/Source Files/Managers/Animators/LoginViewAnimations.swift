@@ -40,7 +40,7 @@ class LoginViewAnimations {
         })
     }
     
-    func animateSpringShrinkingToBall(button: UIView, logo: UIView, completion: Void -> Void) {
+    func animateSpringShrinkingToBall(button: UIView, logo: UIView, completion: () -> Void) {
         
         let dimension = CGRectGetHeight(button.frame ?? CGRectZero)
         let deltaX = CGRectGetMidX(button.superview!.bounds) - dimension * 0.5 - CGRectGetMinX(button.frame)
@@ -59,7 +59,7 @@ class LoginViewAnimations {
         })
     }
     
-    func animateSpringExtendingToButton(button: UIView, logo: UIView, completion: Void -> Void) {
+    func animateSpringExtendingToButton(button: UIView, logo: UIView, completion: () -> Void) {
         
         UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [.FillModeForwards], animations: {
             
@@ -86,7 +86,7 @@ class LoginViewAnimations {
         }
     }
     
-    func moveAnimation(views: [UIView], duration: NSTimeInterval, fade: FadeStyle, easeFunction:UIViewAnimationOptions = .CurveEaseIn, transition: CGPoint, completion: (Void -> Void)? = nil) {
+    func moveAnimation(views: [UIView], duration: NSTimeInterval, fade: FadeStyle, easeFunction:UIViewAnimationOptions = .CurveEaseIn, transition: CGPoint, completion: (() -> Void)? = nil) {
         
         UIView.animateWithDuration(duration, delay: 0, options: [easeFunction], animations: {
             views.forEach {

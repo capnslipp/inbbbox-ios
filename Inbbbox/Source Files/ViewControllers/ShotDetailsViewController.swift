@@ -9,7 +9,9 @@
 import UIKit
 import PromiseKit
 
-class ShotDetailsViewController: UIViewController {
+final class ShotDetailsViewController: UIViewController {
+    
+    var shouldScrollToMostRecentMessage = false
     
     private var shotDetailsView: ShotDetailsView {
         return view as! ShotDetailsView
@@ -17,6 +19,8 @@ class ShotDetailsViewController: UIViewController {
     private var header: ShotDetailsHeaderView?
     private var footer: ShotDetailsFooterView?
     private let viewModel: ShotDetailsViewModel
+    private var scroller = ScrollViewAutoScroller()
+    private var onceTokenForShouldScrollToMessagesOnOpenFlag = dispatch_once_t(0)
     
     init(shot: ShotType) {
         self.viewModel = ShotDetailsViewModel(shot: shot)
@@ -39,6 +43,8 @@ class ShotDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scroller.scrollView = shotDetailsView.collectionView
    
         shotDetailsView.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
         shotDetailsView.collectionView.delegate = self
@@ -49,15 +55,15 @@ class ShotDetailsViewController: UIViewController {
         shotDetailsView.collectionView.registerClass(ShotDetailsFooterView.self, type: .Footer)
         shotDetailsView.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
         shotDetailsView.commentComposerView.delegate = self
+        shotDetailsView.keyboardResizableView.delegate = self
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
         
         firstly {
             viewModel.loadAllComments()
         }.then { () -> Void in
-            if self.viewModel.commentsCount == 0 && !self.viewModel.hasDescription {
-                self.footer?.grayOutBackground()
-            }
+            self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
+            self.scroller.scrollToBottomAnimated(true)
         }.error { error in
             print(error)
         }
@@ -69,6 +75,16 @@ class ShotDetailsViewController: UIViewController {
         if let layout = shotDetailsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader {
             layout.collapsableHeight = heightForCollapsedCollectionViewHeader
             layout.invalidateLayout()
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        dispatch_once(&onceTokenForShouldScrollToMessagesOnOpenFlag) {
+            if self.shouldScrollToMostRecentMessage {
+                self.shotDetailsView.commentComposerView.makeActive()
+            }
         }
     }
 }
@@ -106,6 +122,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             cell.descriptionLabel.attributedText = viewModel.attributedShotDescription
+            
+            let hasComments = viewModel.commentsCount > 0
+            cell.shouldShowSeparatorView = hasComments
 
             return cell
             
@@ -132,6 +151,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
             viewModel.isFetchingComments ? footer?.startAnimating() : footer?.stopAnimating()
+            grayOutFooterIfNeeded()
             
             return footer!
         }
@@ -183,7 +203,9 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
         
         } else if viewModel.isDescriptionIndex(indexPath.row) {
             let text = viewModel.attributedShotDescription
-            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text])
+            let hasComments = viewModel.commentsCount > 0
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: hasComments ? 20 : 0, right: 0)
+            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text], withInsets: insets)
 
         } else {
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
@@ -236,6 +258,22 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
         }.error { error in
             print(error)
         }
+    }
+    
+    func commentComposerViewDidBecomeActive(view: CommentComposerView) {
+        scroller.scrollToBottomAnimated(true)
+    }
+}
+
+extension ShotDetailsViewController: KeyboardResizableViewDelegate {
+    
+    func keyboardResizableView(view: KeyboardResizableView, didRelayoutSubviewsWithState state: KeyboardState) {
+        // intentionally left blank.
+    }
+    
+    func keyboardResizableView(view: KeyboardResizableView, willRelayoutSubviewsWithState state: KeyboardState) {
+        let round = state == .WillAppear
+        shotDetailsView.commentComposerView.animateByRoundingCorners(round)
     }
 }
 
@@ -311,7 +349,7 @@ private extension ShotDetailsViewController {
     
     var heightForCollapsedCollectionViewHeader: CGFloat {
         
-        let margin = CGFloat(10)
+        let margin = CGFloat(20)
         let maxWidth = abs((shotDetailsView.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
         let height = viewModel.attributedShotTitleForHeader.boundingHeightUsingAvailableWidth(maxWidth) + 2 * margin
         
@@ -353,11 +391,13 @@ private extension ShotDetailsViewController {
     
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
-            if start {
-                imageView.stopAnimatingGIF()
-            } else {
-                imageView.startAnimatingGIF()
-            }
+            start ? imageView.stopAnimatingGIF() : imageView.startAnimatingGIF()
+        }
+    }
+    
+    func grayOutFooterIfNeeded() {
+        if viewModel.commentsCount == 0 && !viewModel.hasDescription {
+            footer?.grayOutBackground()
         }
     }
 }

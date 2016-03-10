@@ -96,7 +96,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             didUpdateConstraints = true
             
             avatarView.autoSetDimensionsToSize(avatarSize)
-            avatarView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight * 0.5 - avatarSize.height * 0.5)
+            avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: titleLabel, withOffset: 20)
             avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: 20)
             
             titleLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: 15)

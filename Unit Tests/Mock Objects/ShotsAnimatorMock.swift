@@ -9,9 +9,9 @@ import Dobby
 
 class ShotsAnimatorMock: ShotsAnimator {
 
-    let startAnimationWithCompletionStub = Stub<(Void -> Void)?, Void>()
+    let startAnimationWithCompletionStub = Stub<(() -> Void)?, Void>()
 
-    override func startAnimationWithCompletion(completion: (Void -> Void)?) {
+    override func startAnimationWithCompletion(completion: (() -> Void)?) {
         try! startAnimationWithCompletionStub.invoke(completion)
     }
 }

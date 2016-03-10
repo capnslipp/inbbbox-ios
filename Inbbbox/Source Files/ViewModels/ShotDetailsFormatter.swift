@@ -109,9 +109,15 @@ final class ShotDetailsFormatter {
         
         let mutableBody = NSMutableAttributedString(attributedString: body)
         
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 0
+        style.maximumLineHeight = 20
+        style.minimumLineHeight = 20
+        
         mutableBody.addAttributes([
             NSForegroundColorAttributeName : UIColor.grayColor(),
-            NSFontAttributeName : UIFont.systemFontOfSize(14)
+            NSFontAttributeName : UIFont.systemFontOfSize(15),
+            NSParagraphStyleAttributeName : style
         ], range: NSMakeRange(0, mutableBody.length))
         
         return mutableBody.copy() as? NSAttributedString

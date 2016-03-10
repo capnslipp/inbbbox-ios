@@ -79,6 +79,7 @@
 		5E381C961C6BBA96002DF2DC /* CreateCommentQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E381C951C6BBA96002DF2DC /* CreateCommentQuery.swift */; };
 		5E3A984C1AA73FD500CE2F20 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98451AA73FD500CE2F20 /* LaunchScreen.xib */; };
 		5E3A984E1AA73FD500CE2F20 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E3A98481AA73FD500CE2F20 /* Images.xcassets */; };
+		5E3FCF721C904AF100B67F13 /* ScrollViewAutoScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3FCF711C904AF100B67F13 /* ScrollViewAutoScroller.swift */; };
 		5E4857B81C2805E10027B38A /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857B51C2805E10027B38A /* Authenticator.swift */; };
 		5E4857BA1C2805E10027B38A /* OAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857B71C2805E10027B38A /* OAuthViewModel.swift */; };
 		5E4857BC1C28061F0027B38A /* OAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4857BB1C28061F0027B38A /* OAuthView.swift */; };
@@ -414,6 +415,7 @@
 		5E3A98561AA741FA00CE2F20 /* Tests-Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Production.xcconfig"; path = "Configuration/Tests-Production.xcconfig"; sourceTree = "<group>"; };
 		5E3A98571AA741FA00CE2F20 /* Tests-Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Staging.xcconfig"; path = "Configuration/Tests-Staging.xcconfig"; sourceTree = "<group>"; };
 		5E3A98581AA741FA00CE2F20 /* Tests-Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Tests-Test.xcconfig"; path = "Configuration/Tests-Test.xcconfig"; sourceTree = "<group>"; };
+		5E3FCF711C904AF100B67F13 /* ScrollViewAutoScroller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewAutoScroller.swift; sourceTree = "<group>"; };
 		5E4857B51C2805E10027B38A /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		5E4857B71C2805E10027B38A /* OAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewModel.swift; sourceTree = "<group>"; };
 		5E4857BB1C28061F0027B38A /* OAuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthView.swift; sourceTree = "<group>"; };
@@ -763,6 +765,7 @@
 				5E4857B41C2805E10027B38A /* Authentication */,
 				F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */,
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
+				5E3FCF711C904AF100B67F13 /* ScrollViewAutoScroller.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1675,6 +1678,7 @@
 				5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */,
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
+				5E3FCF721C904AF100B67F13 /* ScrollViewAutoScroller.swift in Sources */,
 				C663D7CF1C7C75A700353761 /* GifIndicatorView.swift in Sources */,
 				5E91A6391C73802E00C9D609 /* UnfollowUserQuery.swift in Sources */,
 				5EE3AB251C5912E70003B639 /* ArrayExtension.swift in Sources */,

@@ -18,7 +18,7 @@ class ShotsAnimator {
 
 //    Interface
 
-    func startAnimationWithCompletion(completion: (Void -> Void)?) {
+    func startAnimationWithCompletion(completion: (() -> Void)?) {
         guard let collectionView = delegate?.collectionViewForShotsAnimator(self), items = delegate?.itemsForShotsAnimator(self) else {
             return
         }
@@ -33,7 +33,7 @@ class ShotsAnimator {
 
 //    MARK: - Helpers
 
-    private func addItems(items: [ShotType], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
+    private func addItems(items: [ShotType], collectionView: UICollectionView, interval: Double, completion: (() -> Void)?) {
         let addItemAnimation = {
             let newItemIndex = self.visibleItems.count
             let newItem = items[newItemIndex]
@@ -44,7 +44,7 @@ class ShotsAnimator {
         updateItems(items, collectionView: collectionView, interval: interval, animation: addItemAnimation, completion: completion)
     }
 
-    private func deleteItemsWithoutFirstItem(items: [ShotType], collectionView: UICollectionView, interval: Double, completion: (Void -> Void)?) {
+    private func deleteItemsWithoutFirstItem(items: [ShotType], collectionView: UICollectionView, interval: Double, completion: (() -> Void)?) {
         var reversedItemsWithoutFirstItem = items
         reversedItemsWithoutFirstItem.removeFirst()
 
@@ -57,7 +57,7 @@ class ShotsAnimator {
         updateItems(reversedItemsWithoutFirstItem, collectionView: collectionView, interval: interval, animation: removeItemAnimation, completion: completion)
     }
 
-    private func updateItems(items: [ShotType], collectionView: UICollectionView, interval: Double, animation: Void -> Void, completion: (Void -> Void)?) {
+    private func updateItems(items: [ShotType], collectionView: UICollectionView, interval: Double, animation: () -> Void, completion: (() -> Void)?) {
         for (index, _ ) in items.enumerate() {
             var updateAnimation = animation
             if index == items.endIndex - 1 {

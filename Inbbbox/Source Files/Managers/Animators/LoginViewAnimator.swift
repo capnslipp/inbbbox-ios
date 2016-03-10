@@ -55,7 +55,7 @@ class LoginViewAnimator {
         
     }
     
-    func stopAnimationWithType(type: StopAnimationType, completion: (Void -> Void)? = nil) {
+    func stopAnimationWithType(type: StopAnimationType, completion: (() -> Void)? = nil) {
         
         animations.stop()
         
