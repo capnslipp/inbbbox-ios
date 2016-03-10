@@ -1297,11 +1297,8 @@
 				BEEE91ACF1BBEDE26CD6C9C3 /* UIViewAnimationsExtension.swift */,
 				5CD3975A1C6B84970062434C /* UIImageExtension.swift */,
 				C6BC8EE11C8DBAD800A03714 /* UIImageViewExtension.swift */,
-<<<<<<< HEAD
 				C63370ED1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift */,
-=======
 				F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */,
->>>>>>> master
 			);
 			path = Extensions;
 			sourceTree = "<group>";

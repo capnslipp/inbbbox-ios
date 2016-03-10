@@ -115,7 +115,7 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     
     // MARK: Empty Data Set Data Source Methods
     
-    func imageForEmptyDataSet(scrollView: UIScrollView!) -> UIImage! {
+    func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
         return UIImage(named: "logo-empty")
     }
     
