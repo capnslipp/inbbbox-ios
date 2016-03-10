@@ -11,7 +11,6 @@ import UIKit
 class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
     
     let operationView = ShotDetailsOperationView.newAutoLayoutView()
-    private let separatorView = UIView.newAutoLayoutView()
     private var didUpdateConstraints = false
 
     override init(frame: CGRect) {
@@ -19,9 +18,6 @@ class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
         
         contentView.backgroundColor = UIColor.whiteColor()
         contentView.addSubview(operationView)
-        
-        separatorView.backgroundColor = UIColor.RGBA(246, 248, 248, 1)
-        contentView.addSubview(separatorView)
     }
     
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -39,9 +35,6 @@ class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
             didUpdateConstraints = true
 
             operationView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero)
-            
-            separatorView.autoSetDimension(.Height, toSize: 1)
-            separatorView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
         }
         
         super.updateConstraints()

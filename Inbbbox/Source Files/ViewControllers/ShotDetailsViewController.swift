@@ -61,10 +61,7 @@ final class ShotDetailsViewController: UIViewController {
         firstly {
             viewModel.loadAllComments()
         }.then { () -> Void in
-            if self.viewModel.commentsCount == 0 && !self.viewModel.hasDescription {
-                self.footer?.grayOutBackground()
-            }
-            
+            self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
         }.error { error in
@@ -154,6 +151,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
             viewModel.isFetchingComments ? footer?.startAnimating() : footer?.stopAnimating()
+            grayOutFooterIfNeeded()
             
             return footer!
         }
@@ -394,6 +392,12 @@ private extension ShotDetailsViewController {
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
             start ? imageView.stopAnimatingGIF() : imageView.startAnimatingGIF()
+        }
+    }
+    
+    func grayOutFooterIfNeeded() {
+        if viewModel.commentsCount == 0 && !viewModel.hasDescription {
+            footer?.grayOutBackground()
         }
     }
 }
