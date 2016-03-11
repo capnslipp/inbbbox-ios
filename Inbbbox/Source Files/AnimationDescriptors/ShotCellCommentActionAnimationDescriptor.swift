@@ -1,5 +1,5 @@
 //
-//  ShotCellBucketActionAnimationDescriptor.swift
+//  ShotCellCommentActionAnimationDescriptor.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 10.03.2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ShotCellBucketActionAnimationDescriptor: AnimationDescriptor {
+struct ShotCellCommentActionAnimationDescriptor: AnimationDescriptor {
     
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Plain
@@ -24,15 +24,10 @@ struct ShotCellBucketActionAnimationDescriptor: AnimationDescriptor {
         self.shotCell = shotCell
         animations = {
             let contentViewWidht = CGRectGetWidth(shotCell.contentView.bounds)
-            shotCell.likeImageViewLeftConstraint?.constant = round(contentViewWidht / 2 - (shotCell.likeImageView.intrinsicContentSize().width + shotCell.plusImageView.intrinsicContentSize().width + shotCell.bucketImageView.intrinsicContentSize().width + 2 * 15) / 2)
-            shotCell.likeImageViewWidthConstraint?.constant = shotCell.likeImageView.intrinsicContentSize().width
-            shotCell.likeImageViewWidthConstraint?.constant = shotCell.likeImageView.intrinsicContentSize().width
-            shotCell.plusImageViewWidthConstraint?.constant = shotCell.plusImageView.intrinsicContentSize().width
-            shotCell.bucketImageViewWidthConstraint?.constant = shotCell.bucketImageView.intrinsicContentSize().width
+            shotCell.commentImageViewRightConstraint?.constant = -round(contentViewWidht / 2 - shotCell.commentImageView.intrinsicContentSize().width / 2)
+            shotCell.commentImageViewWidthConstraint?.constant = shotCell.commentImageView.intrinsicContentSize().width
             shotCell.contentView.layoutIfNeeded()
-            shotCell.likeImageView.alpha = 1.0
-            shotCell.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
-            shotCell.likeImageView.displaySecondImageView()
+            shotCell.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, -contentViewWidht, 0)
         }
         completion = { _ in
             var delayedRestoreInitialStateAnimationDescriptor = ShotCellRestoreInitialStateAnimationDescriptor(shotCell: shotCell, swipeCompletion: swipeCompletion)
@@ -41,3 +36,4 @@ struct ShotCellBucketActionAnimationDescriptor: AnimationDescriptor {
         }
     }
 }
+

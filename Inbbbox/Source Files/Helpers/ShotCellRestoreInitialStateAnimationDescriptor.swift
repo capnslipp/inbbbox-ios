@@ -26,6 +26,7 @@ struct ShotCellRestoreInitialStateAnimationDescriptor: AnimationDescriptor {
             shotCell.shotImageView.transform = CGAffineTransformIdentity
         }
         completion = { _ in
+            shotCell.likeImageView.hidden = false
             shotCell.bucketImageView.hidden = false
             shotCell.plusImageView.hidden = false
             shotCell.commentImageView.hidden = false

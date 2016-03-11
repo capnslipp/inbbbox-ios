@@ -235,6 +235,12 @@ class ShotCollectionViewCell: UICollectionViewCell {
             case .Bucket:
                 commentImageView.hidden = true
                 viewClass.animateWithDescriptor(ShotCellBucketActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
+            case .Comment:
+                likeImageView.hidden = true
+                plusImageView.hidden = true
+                bucketImageView.hidden = true
+                viewClass.animateWithDescriptor(ShotCellCommentActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
+            print(likeImageViewLeftConstraint?.constant)
             default:
                 viewClass.animateWithDescriptor(ShotCellRestoreInitialStateAnimationDescriptor(shotCell: self, swipeCompletion: completion))
         }
