@@ -12,7 +12,6 @@ struct ShotCellRestoreInitialStateAnimationDescriptor: AnimationDescriptor {
 
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Spring
-    var duration = 0.3
     var delay = 0.0
     var springDamping = CGFloat(0.6)
     var springVelocity = CGFloat(0.9)

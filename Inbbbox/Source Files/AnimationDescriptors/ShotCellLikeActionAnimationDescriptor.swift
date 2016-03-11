@@ -12,10 +12,7 @@ struct ShotCellLikeActionAnimationDescriptor: AnimationDescriptor {
 
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Plain
-    var duration = 0.3
     var delay = 0.0
-    var springDamping = CGFloat(0.0)
-    var springVelocity = CGFloat(0.0)
     var options: UIViewAnimationOptions = []
     var animations: () -> Void
     var completion: ((Bool) -> Void)?
