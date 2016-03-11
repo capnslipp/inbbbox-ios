@@ -72,7 +72,7 @@ class ShotDetailsView: UIView {
             commentComposerView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
             commentComposerView.autoSetDimension(.Height, toSize: commentComposerViewHeight)
             
-            let insets = UIEdgeInsets(top: topLayoutGuideOffset, left: 10, bottom: 0, right: 10)
+            let insets = UIEdgeInsets(top: topLayoutGuideOffset + 10, left: 10, bottom: 0, right: 10)
             let commentComposerInset = shouldShowCommentComposerView ? commentComposerViewHeight : 0
             collectionViewCornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: commentComposerInset)

@@ -10,19 +10,9 @@ import UIKit
 class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     
     let descriptionLabel = UILabel.newAutoLayoutView()
-    var shouldShowSeparatorView = true {
-        willSet(newValue) {
-            let sepratorVisibilityDependentOffset = self.dynamicType.contentInsets.bottom
-            separatorView.hidden = !newValue
-            descriptionLabelBottomEdgeConstraint?.constant = newValue ? -(2 * sepratorVisibilityDependentOffset) : -sepratorVisibilityDependentOffset
-            separatorViewBottomEdgeConstraint?.constant = newValue ? -sepratorVisibilityDependentOffset : 0
-        }
-    }
     
     private let separatorView = UIView.newAutoLayoutView()
     private var didUpdateConstraints = false
-    private var descriptionLabelBottomEdgeConstraint: NSLayoutConstraint?
-    private var separatorViewBottomEdgeConstraint: NSLayoutConstraint?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,7 +22,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         descriptionLabel.numberOfLines = 0
         contentView.addSubview(descriptionLabel)
         
-        separatorView.backgroundColor = UIColor.RGBA(246, 248, 248, 1)
+        separatorView.backgroundColor = .separatorGrayColor()
         contentView.addSubview(separatorView)
     }
     
@@ -54,13 +44,10 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
             didUpdateConstraints = true
             
             let insets = self.dynamicType.contentInsets
-            descriptionLabel.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
-            descriptionLabelBottomEdgeConstraint = descriptionLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom)
+            descriptionLabel.autoPinEdgesToSuperviewEdgesWithInsets(insets)
             
             separatorView.autoSetDimension(.Height, toSize: 1)
-            separatorView.autoPinEdgeToSuperviewEdge(.Left)
-            separatorView.autoPinEdgeToSuperviewEdge(.Right)
-            separatorViewBottomEdgeConstraint = separatorView.autoPinEdgeToSuperviewEdge(.Bottom)
+            separatorView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
         }
         
         super.updateConstraints()

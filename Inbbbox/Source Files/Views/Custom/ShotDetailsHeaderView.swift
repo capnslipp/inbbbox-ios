@@ -34,6 +34,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let overlapingTitleLabel = UILabel.newAutoLayoutView()
     private let dimView = UIView.newAutoLayoutView()
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
+    private let shadowImageView = UIImageView.newAutoLayoutView()
     
     private var imageViewCenterWrapperViewBottomEdgeConstraint: NSLayoutConstraint?
     
@@ -54,6 +55,10 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         
         imageViewCenterWrapperView.clipsToBounds = true
         addSubview(imageViewCenterWrapperView)
+        
+        shadowImageView.image = UIImage(named: "DetailsShadow")
+        shadowImageView.contentMode = .ScaleToFill
+        addSubview(shadowImageView)
         
         dimView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
         dimView.alpha = 0
@@ -111,6 +116,11 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
+            
+            shadowImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: imageViewCenterWrapperView)
+            shadowImageView.autoPinEdgeToSuperviewEdge(.Left)
+            shadowImageView.autoPinEdgeToSuperviewEdge(.Right)
+            shadowImageView.autoSetDimension(.Height, toSize: shadowImageView.image?.size.height ?? 0)
             
             dimView.autoPinEdgesToSuperviewEdges()
             

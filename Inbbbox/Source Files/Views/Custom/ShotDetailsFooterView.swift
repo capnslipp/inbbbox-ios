@@ -79,8 +79,8 @@ class ShotDetailsFooterView: UICollectionReusableView {
         activityIndicatorView.stopAnimating()
     }
     
-    func grayOutBackground() {
-        cornerWrapperView.backgroundColor = .RGBA(246, 248, 248, 1)
+    func grayOutBackground(grayOut: Bool) {
+        cornerWrapperView.backgroundColor = grayOut ? .RGBA(246, 248, 248, 1) : .whiteColor()
     }
 }
 
