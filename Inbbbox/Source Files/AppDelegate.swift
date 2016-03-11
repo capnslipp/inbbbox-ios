@@ -16,8 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        let rootViewController = UserStorage.isUserSignedIn ? CenterButtonTabBarController() : LoginViewController()
+        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.rootViewController = LoginViewController()
+        window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
         window!.tintColor = UIColor.whiteColor()
         window!.backgroundColor = UIColor.backgroundGrayColor()
