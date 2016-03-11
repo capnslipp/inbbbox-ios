@@ -25,6 +25,10 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
         viewModel.delegate = self
         self.title = viewModel.title
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
     }
  

@@ -15,26 +15,26 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     let title = NSLocalizedString("Following", comment:"")
     var followees = [Followee]()
     var followeesIndexedShots = [Int : [ShotType]]()
+    private let teamsProvider = APITeamsProvider()
     private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
+    
+    private let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarString: nil, createdAt: NSDate())
     
     var itemsCount: Int {
         return followees.count
     }
     
     func downloadInitialItems() {
-        guard UserStorage.isUserSignedIn else {
-            self.delegate?.viewModelDidLoadInitialItems()
-            return
-        }
+        
         firstly {
-            connectionsProvider.provideMyFollowees()
+            UserStorage.isUserSignedIn ? connectionsProvider.provideMyFollowees() : teamsProvider.provideMembersForTeam(netguruTeam)
         }.then { followees -> Void in
-            if let followees = followees {
+            if let followees = followees where followees != self.followees {
                 self.followees = followees
                 self.downloadShots(followees)
+                self.delegate?.viewModelDidLoadInitialItems()
             }
-            self.delegate?.viewModelDidLoadInitialItems()
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)
@@ -42,11 +42,9 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     }
     
     func downloadItemsForNextPage() {
-        guard UserStorage.isUserSignedIn else {
-            return
-        }
+        
         firstly {
-            connectionsProvider.nextPage()
+            UserStorage.isUserSignedIn ? connectionsProvider.nextPage() : teamsProvider.nextPage()
         }.then { followees -> Void in
             if let followees = followees where followees.count > 0 {
                 let indexes = followees.enumerate().map { index, _ in
@@ -97,7 +95,6 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     func followeeCollectionViewCellViewData(indexPath: NSIndexPath) -> FolloweeCollectionViewCellViewData {
         return FolloweeCollectionViewCellViewData(followee: followees[indexPath.row], shots: followeesIndexedShots[indexPath.row])
     }
-    
 }
 
 extension FolloweesViewModel {
@@ -122,7 +119,8 @@ extension FolloweesViewModel {
                 case 3:
                     shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[1], allShotsImagesURLs[2], allShotsImagesURLs[0]]
                 default:
-                    shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[1], allShotsImagesURLs[2], allShotsImagesURLs[3]]                }
+                    shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[1], allShotsImagesURLs[2], allShotsImagesURLs[3]]
+                }
             } else {
                 self.shotsImagesURLs = nil
             }
