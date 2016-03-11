@@ -78,8 +78,8 @@ class ShotDetailsViewModelSpec: QuickSpec {
         
         describe("when newly initialized") {
             
-            it("view model should have no comments") {
-                expect(sut.commentsCount).to(equal(0))
+            it("view model should have no items") {
+                expect(sut.itemsCount).to(equal(2))
             }
             
             it("view model should have no items") {
@@ -111,13 +111,9 @@ class ShotDetailsViewModelSpec: QuickSpec {
                 expect(didReceiveResponse).toNot(beNil())
             }
             
-            it("view model should have correct number of commments") {
-                expect(sut.commentsCount).to(equal(10))
-            }
-            
             it("view model should have correct number of items") {
                 //NGRTemp: added 2 cause of view model changes
-                expect(sut.itemsCount).to(equal(12))
+                expect(sut.itemsCount).to(equal(13))
             }
         }
         
@@ -136,14 +132,10 @@ class ShotDetailsViewModelSpec: QuickSpec {
                     }.error { _ in fail("This should not be invoked") }
                 }
             }
-            
-            it("view model should have correct number of commments") {
-                expect(sut.commentsCount).to(equal(15))
-            }
-            
+        
             it("view model should have correct number of items") {
                 //NGRTemp: added 2 cause of view model changes
-                expect(sut.itemsCount).to(equal(17))
+                expect(sut.itemsCount).to(equal(18))
             }
         }
         
