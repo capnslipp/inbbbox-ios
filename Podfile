@@ -40,6 +40,8 @@ pod 'ZFDragableModalTransition', '~> 0.6'
 
 pod 'HanekeSwift', '~>0.10.1'
 
+pod 'DZNEmptyDataSet', '~>1.7'
+
 target 'Tests' do link_with 'Unit Tests'
 
     pod 'Quick', '~> 0.8',

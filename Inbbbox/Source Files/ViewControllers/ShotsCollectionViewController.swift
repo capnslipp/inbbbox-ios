@@ -96,15 +96,17 @@ final class ShotsCollectionViewController: UICollectionViewController {
         cell.gifLabel.hidden = !shot.animated
         cell.liked = self.isShotLiked(shot)
         cell.delegate = self
-
         cell.swipeCompletion = { [weak self] action in
             switch action {
                 case .Like:
                     self?.likeShot(shot)
-                case .Bucket: break
+                case .Bucket:
+                    self?.likeShot(shot)
+                    self?.presentShotBucketsViewController(shot)
                 case .Comment:
                     self?.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true)
-                case .DoNothing: break
+                case .DoNothing:
+                    break
             }
         }
         return cell
@@ -153,7 +155,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
 private extension ShotsCollectionViewController {
     
     func isShotLiked(shot: ShotType) -> Bool {
-        return likedShots.contains {$0.identifier == shot.identifier}
+        return likedShots.contains{ $0.identifier == shot.identifier }
     }
     
     func likeShot(shot: ShotType) {
@@ -184,6 +186,12 @@ private extension ShotsCollectionViewController {
         shotDetailsViewController.modalPresentationStyle = .Custom
         
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
+    }
+    
+    func presentShotBucketsViewController(shot: ShotType) {
+        let shotBucketsViewController = ShotBucketsViewController(shot: shot, mode: .AddToBucket)
+        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
+        presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
 }
 

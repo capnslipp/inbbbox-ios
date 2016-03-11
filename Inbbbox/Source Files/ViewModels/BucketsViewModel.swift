@@ -19,9 +19,14 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     private let bucketsProvider = BucketsProvider()
     private let bucketsRequester = BucketsRequester()
     private let shotsProvider = ShotsProvider()
+    private var userMode: UserMode
     
     var itemsCount: Int {
         return buckets.count
+    }
+    
+    init() {
+        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
     }
     
     func downloadInitialItems() {
@@ -37,7 +42,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 self.downloadShots(buckets)
             }
             if bucketsShouldBeReloaded {
-                self.delegate?.viewModelDidLoadInitialItems(self)
+                self.delegate?.viewModelDidLoadInitialItems()
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
@@ -117,6 +122,15 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     
     func bucketCollectionViewCellViewData(indexPath: NSIndexPath) -> BucketCollectionViewCellViewData {
         return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row], shots: bucketsIndexedShots[indexPath.row])
+    }
+    
+    func clearViewModelIfNeeded() {
+        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        if userMode != currentUserMode {
+            buckets = []
+            userMode = currentUserMode
+            delegate?.viewModelDidLoadInitialItems()
+        }
     }
 }
 

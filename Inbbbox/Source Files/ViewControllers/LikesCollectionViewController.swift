@@ -9,8 +9,9 @@
 import UIKit
 import PromiseKit
 import ZFDragableModalTransition
+import DZNEmptyDataSet
 
-class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate {
+class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
     
     let viewModel = LikesViewModel()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
@@ -26,8 +27,14 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         }
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
+        collectionView.emptyDataSetSource = self
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.clearViewModelIfNeeded()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
@@ -70,7 +77,10 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     
     // MARK: Base Collection View View Model Delegate
     
-    func viewModelDidLoadInitialItems(viewModel: BaseCollectionViewViewModel) {
+    func viewModelDidLoadInitialItems() {
+        if self.viewModel.likedShots.count == 0 {
+            collectionView!.emptyDataSetSource = self
+        }
         collectionView?.reloadData()
     }
     
@@ -80,5 +90,36 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
+    }
+    
+    // MARK: Empty Data Set Data Source Methods
+    
+    func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
+        return UIImage(named: "logo-empty")
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let localizedString = NSLocalizedString("Like   some shots first!", comment: "")
+        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
+        
+        let textAttachment: NSTextAttachment = NSTextAttachment()
+        
+        textAttachment.image = UIImage(named: "ic-like-emptystate")
+        if let image = textAttachment.image {
+            textAttachment.bounds = CGRect(x: 0, y: -2, width: image.size.width, height: image.size.height)
+        }
+        
+        let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
+        
+        attributedString.replaceCharactersInRange(NSMakeRange(5, 1), withAttributedString: attributedStringWithImage)
+        return attributedString
+    }
+    
+    func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
+        return 40
+    }
+    
+    func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
+        return -40
     }
 }

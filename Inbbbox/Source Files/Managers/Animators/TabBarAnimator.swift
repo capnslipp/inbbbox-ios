@@ -33,17 +33,14 @@ class TabBarAnimator {
             height: tabBarHeight
         )
         tabBarView.layoutIfNeeded()
-        
         centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
         centerButton.backgroundColor = UIColor.whiteColor()
-        view.addSubview(centerButton)
-        
-        let buttonSize = centerButton.intrinsicContentSize()
+        tabBarView.addSubview(centerButton)
         centerButton.frame = CGRect(
-            x: CGRectGetMidX(view.frame) - buttonSize.width * 0.5,
-            y: CGRectGetMaxY(view.frame) - tabBarHeight - buttonSize.height * 0.5 + 6,
-            width: buttonSize.width,
-            height: buttonSize.height
+            x: CGRectGetWidth(tabBarView.frame) / 2 - centerButton.intrinsicContentSize().width / 2,
+            y: -centerButton.intrinsicContentSize().height - 8,
+            width: centerButton.intrinsicContentSize().width,
+            height: centerButton.intrinsicContentSize().height
         )
     }
     
@@ -55,7 +52,7 @@ class TabBarAnimator {
             }.then {
                 self.fadeCenterButtonIn()
             }.then {
-                when(self.slideTabBar(), self.slideTabBarItemsSubsequently())
+                when(self.slideTabBar(), self.slideTabBarItemsSubsequently(), self.positionCenterButton())
             }.then {
                 fulfill()
             }
@@ -100,6 +97,21 @@ private extension TabBarAnimator {
             
             UIView.animateWithDuration(0.5, animations: {
                 self.tabBarView.frame = frame
+            }, completion: { _ in
+                fulfill()
+            })
+        }
+    }
+    
+    func positionCenterButton() -> Promise<Void> {
+        
+        var frame = centerButton.frame
+        frame.origin.y += tabBarHeight
+        
+        return Promise<Void> { fulfill, _ in
+            
+            UIView.animateWithDuration(0.5, animations: {
+                self.centerButton.frame = frame
             }, completion: { _ in
                 fulfill()
             })

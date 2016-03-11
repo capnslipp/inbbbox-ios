@@ -221,8 +221,8 @@ private extension SettingsViewController {
     }
 
     func refreshViewAccordingToAuthenticationStatus() {
-        let setupType = UserStorage.isUserSignedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
-        if setupType != viewModel.setupType {
+        let userMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        if userMode != viewModel.userMode {
             viewModel = SettingsViewModel(delegate: self)
             provideDataForHeader()
             tableView.reloadData()
@@ -237,8 +237,7 @@ extension SettingsViewController {
 
     func didTapLogOutButton(_: UIBarButtonItem) {
         Authenticator.logout()
-        refreshViewAccordingToAuthenticationStatus()
-        //NGRToDo: Remember to hide settings when user is logged out
+        UIApplication.sharedApplication().keyWindow?.rootViewController = LoginViewController()
     }
 }
 

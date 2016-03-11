@@ -1,0 +1,7 @@
+{
+    "id" : "fixture.identifier",
+    "name" : "fixture.name",
+    "username" : "fixture.username",
+    "avatar_url" : "fixture.avatar.url",
+    "created_at" : "2011-05-20T21:05:55Z"
+}
