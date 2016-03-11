@@ -45,6 +45,10 @@ extension UIColor {
     class func followeeShotGrayColor() -> UIColor {
         return RGBA(223, 224, 226, 1)
     }
+    
+    class func separatorGrayColor() -> UIColor {
+        return RGBA(218, 219, 221, 1)
+    }
 
     class func randomColor() -> UIColor {
 

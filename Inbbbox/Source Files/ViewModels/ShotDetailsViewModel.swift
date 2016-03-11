@@ -31,7 +31,11 @@ final class ShotDetailsViewModel {
         
         var counter = comments.count + 1 // 1 for ShotDetailsOperationCollectionViewCell
         if hasDescription {
-            counter++
+            counter++ // for ShotDetailsDescriptionCollectionViewCell
+        }
+
+        if isAllowedToDisplaySeparator {
+            counter++ // for ShotDetailsDummySpaceCollectionViewCell
         }
         
         return counter
@@ -42,7 +46,7 @@ final class ShotDetailsViewModel {
     private var userBucketsForShot = [BucketType]()
     private var isShotLikedByMe: Bool?
     private var userBucketsForShotCount: Int?
-    
+
     init(shot: ShotType) {
         self.shot = shot
     }
@@ -53,6 +57,21 @@ final class ShotDetailsViewModel {
     
     func isShotOperationIndex(index: Int) -> Bool {
         return index == 0
+    }
+    
+    func shouldDisplaySeparatorAtIndex(index: Int) -> Bool {
+        
+        guard isAllowedToDisplaySeparator else {
+            return false
+        }
+        
+        if index == 2 && hasDescription && hasComments {
+            return true
+        } else if index == 1 && !hasDescription && hasComments {
+            return true
+        }
+        
+        return false
     }
     
     func isCurrentUserOwnerOfCommentAtIndex(index: Int) -> Bool {
@@ -97,7 +116,7 @@ extension ShotDetailsViewModel {
             
             cachedFormattedComments.append(displayableData)
         }
-        
+
         return cachedFormattedComments[indexWithOffset]
     }
 }
@@ -208,12 +227,12 @@ extension ShotDetailsViewModel {
         return  false
     }
     
-    var hasMoreCommentsToFetch: Bool {
-        return UInt(comments.count) < shot.commentsCount
+    var hasComments: Bool {
+        return comments.count > 0
     }
     
-    var commentsCount: Int {
-        return comments.count
+    private var hasMoreCommentsToFetch: Bool {
+        return UInt(comments.count) < shot.commentsCount
     }
     
     func loadComments() -> Promise<Void> {
@@ -297,5 +316,16 @@ private extension ShotDetailsViewModel {
     
     func indexInCommentArrayBasedOnItemIndex(index: Int) -> Int {
         return comments.count - itemsCount + index
+    }
+    
+    private var isAllowedToDisplaySeparator: Bool {
+        
+        if isFetchingComments {
+            return false
+        } else if (hasDescription && hasComments) || (!hasDescription && hasComments) {
+            return true
+        }
+        // (hasDescription && !hasComments) || (!hasDescription && !hasComments)
+        return false
     }
 }

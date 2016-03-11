@@ -52,6 +52,7 @@ final class ShotDetailsViewController: UIViewController {
         shotDetailsView.collectionView.registerClass(ShotDetailsCommentCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsOperationCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsDescriptionCollectionViewCell.self, type: .Cell)
+        shotDetailsView.collectionView.registerClass(ShotDetailsDummySpaceCollectionViewCell.self, type: .Cell)
         shotDetailsView.collectionView.registerClass(ShotDetailsFooterView.self, type: .Footer)
         shotDetailsView.collectionView.registerClass(ShotDetailsHeaderView.self, type: .Header)
         shotDetailsView.commentComposerView.delegate = self
@@ -122,11 +123,11 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
             cell.descriptionLabel.attributedText = viewModel.attributedShotDescription
-            
-            let hasComments = viewModel.commentsCount > 0
-            cell.shouldShowSeparatorView = hasComments
 
             return cell
+            
+        } else if viewModel.shouldDisplaySeparatorAtIndex(indexPath.row) {
+            return collectionView.dequeueReusableClass(ShotDetailsDummySpaceCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
         } else {
             let cell = collectionView.dequeueReusableClass(ShotDetailsCommentCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
@@ -203,10 +204,11 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
         
         } else if viewModel.isDescriptionIndex(indexPath.row) {
             let text = viewModel.attributedShotDescription
-            let hasComments = viewModel.commentsCount > 0
-            let insets = UIEdgeInsets(top: 0, left: 0, bottom: hasComments ? 20 : 0, right: 0)
-            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text], withInsets: insets)
-
+            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text])
+            
+        } else if viewModel.shouldDisplaySeparatorAtIndex(indexPath.row) {
+            return collectionView.sizeForAutoSizingCell(ShotDetailsDummySpaceCollectionViewCell.self, textToBound: nil)
+            
         } else {
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
             let text = [data.author, data.comment, data.date]
@@ -396,7 +398,7 @@ private extension ShotDetailsViewController {
     }
     
     func grayOutFooterIfNeeded() {
-        let shouldGrayOut = viewModel.commentsCount == 0 && !viewModel.hasDescription
+        let shouldGrayOut = !viewModel.hasComments && !viewModel.hasDescription
         footer?.grayOutBackground(shouldGrayOut)
     }
 }
