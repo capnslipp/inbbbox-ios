@@ -84,7 +84,7 @@ final class ShotDetailsViewController: UIViewController {
         
         dispatch_once(&onceTokenForShouldScrollToMessagesOnOpenFlag) {
             if self.shouldScrollToMostRecentMessage {
-                self.shotDetailsView.commentComposerView.makeActive()
+                self.viewModel.isCommentingAvailable ? self.shotDetailsView.commentComposerView.makeActive() : self.scroller.scrollToBottomAnimated(true)
             }
         }
     }
