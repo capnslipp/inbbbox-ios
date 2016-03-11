@@ -27,6 +27,11 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
         self.title = viewModel.title
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.clearViewModelIfNeeded()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
@@ -133,5 +138,4 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
     }
-
 }

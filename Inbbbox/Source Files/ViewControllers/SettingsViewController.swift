@@ -221,8 +221,8 @@ private extension SettingsViewController {
     }
 
     func refreshViewAccordingToAuthenticationStatus() {
-        let setupType = UserStorage.isUserSignedIn ? SettingsViewModel.SetupType.LogedUser : .DemoUser
-        if setupType != viewModel.setupType {
+        let userMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        if userMode != viewModel.userMode {
             viewModel = SettingsViewModel(delegate: self)
             provideDataForHeader()
             tableView.reloadData()

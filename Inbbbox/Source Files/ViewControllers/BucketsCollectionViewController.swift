@@ -35,6 +35,11 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
         collectionView.emptyDataSetSource = self
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.clearViewModelIfNeeded()
+    }
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
@@ -144,4 +149,3 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
         return -40
     }
 }
-

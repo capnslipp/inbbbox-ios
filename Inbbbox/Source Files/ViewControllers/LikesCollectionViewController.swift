@@ -30,6 +30,11 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         collectionView.emptyDataSetSource = self
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.clearViewModelIfNeeded()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
@@ -117,5 +122,4 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
     }
-
 }
