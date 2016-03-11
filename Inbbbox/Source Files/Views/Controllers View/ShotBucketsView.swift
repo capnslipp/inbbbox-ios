@@ -12,7 +12,6 @@ import PureLayout
 class ShotBucketsView: UIView {
     
     let collectionView: UICollectionView
-    let closeButton = UIButton(type: .System)
     
     var topLayoutGuideOffset = CGFloat(0)
     
@@ -28,6 +27,7 @@ class ShotBucketsView: UIView {
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 0.1)
         collectionView.layer.shadowOpacity = 0.3
         collectionView.clipsToBounds = true
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         
         super.init(frame: frame)
         
@@ -41,10 +41,6 @@ class ShotBucketsView: UIView {
         collectionViewCornerWrapperView.addSubview(collectionView)
         
         addSubview(collectionViewCornerWrapperView)
-        
-        let image = UIImage(named: "ic-closemodal")?.imageWithRenderingMode(.AlwaysOriginal)
-        closeButton.setImage(image, forState: .Normal)
-        addSubview(closeButton)
     }
     
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -64,11 +60,6 @@ class ShotBucketsView: UIView {
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom)
             
             collectionView.autoPinEdgesToSuperviewEdges()
-            
-            let margin = CGFloat(5)
-            closeButton.autoSetDimensionsToSize(closeButton.imageForState(.Normal)?.size ?? CGSizeZero)
-            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: collectionViewCornerWrapperView, withOffset: -margin)
-            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: collectionViewCornerWrapperView, withOffset: margin)
         }
         
         super.updateConstraints()

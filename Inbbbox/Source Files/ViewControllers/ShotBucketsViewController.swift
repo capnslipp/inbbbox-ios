@@ -65,7 +65,6 @@ class ShotBucketsViewController: UIViewController {
         shotBucketsView.collectionView.registerClass(ShotBucketsSeparatorCollectionViewCell.self, type: .Cell)
         shotBucketsView.collectionView.registerClass(ShotBucketsHeaderView.self, type: .Header)
         shotBucketsView.collectionView.registerClass(ShotBucketsFooterView.self, type: .Footer)
-        shotBucketsView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -125,6 +124,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
                 header?.setHeaderTitle(viewModel.titleForHeader)
                 header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+                header?.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
             }
             return header!
         } else {
