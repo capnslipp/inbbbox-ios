@@ -28,6 +28,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     var imageView: UIImageView?
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     
+    let closeButton = UIButton(type: .System)
     private let headerTitleLabel = UILabel.newAutoLayoutView()
     private let titleLabel = UILabel.newAutoLayoutView()
     
@@ -63,6 +64,10 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         headerTitleLabel.textColor = .whiteColor()
         headerTitleLabel.font = .helveticaFont(.NeueMedium, size: 16)
         addSubview(headerTitleLabel)
+        
+        let image = UIImage(named: "ic-closemodal")?.imageWithRenderingMode(.AlwaysOriginal)
+        closeButton.setImage(image, forState: .Normal)
+        addSubview(closeButton)
     }
     
     @available(*, unavailable, message="Use init(frame:) method instead")
@@ -104,6 +109,10 @@ class ShotBucketsHeaderView: UICollectionReusableView {
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
             
             dimView.autoPinEdgesToSuperviewEdges()
+            
+            closeButton.autoSetDimensionsToSize(closeButton.imageForState(.Normal)?.size ?? CGSizeZero)
+            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: imageViewCenterWrapperView, withOffset: -5)
+            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: imageViewCenterWrapperView, withOffset: 5)
         }
         
         super.updateConstraints()
@@ -148,7 +157,7 @@ extension ShotBucketsHeaderView {
     }
     
     private func setupImageView() {
-        imageViewCenterWrapperView.addSubview(imageView!)
+        imageViewCenterWrapperView.insertSubview(imageView!, belowSubview: dimView)
         imageView!.autoPinEdgesToSuperviewEdges()
     }
 }
