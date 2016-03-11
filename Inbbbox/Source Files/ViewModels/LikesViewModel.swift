@@ -16,9 +16,14 @@ class LikesViewModel: BaseCollectionViewViewModel {
     let title = NSLocalizedString("Likes", comment:"")
     var likedShots = [ShotType]()
     private let shotsProvider = ShotsProvider()
+    private var userMode: UserMode
     
     var itemsCount: Int {
         return likedShots.count
+    }
+    
+    init() {
+        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
     }
     
     func downloadInitialItems() {
@@ -64,8 +69,12 @@ class LikesViewModel: BaseCollectionViewViewModel {
         return (imageURL, animated)
     }
     
-    func clearViewModel() {
-        likedShots = []
-        delegate?.viewModelDidLoadInitialItems()
+    func clearViewModelIfNeeded() {
+        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        if userMode != currentUserMode {
+            likedShots = []
+            userMode = currentUserMode
+            delegate?.viewModelDidLoadInitialItems()
+        }
     }
 }

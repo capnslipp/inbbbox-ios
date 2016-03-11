@@ -18,11 +18,16 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     private let teamsProvider = APITeamsProvider()
     private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
+    private var userMode: UserMode
     
     private let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarString: nil, createdAt: NSDate())
     
     var itemsCount: Int {
         return followees.count
+    }
+    
+    init() {
+        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
     }
     
     func downloadInitialItems() {
@@ -95,10 +100,14 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     func followeeCollectionViewCellViewData(indexPath: NSIndexPath) -> FolloweeCollectionViewCellViewData {
         return FolloweeCollectionViewCellViewData(followee: followees[indexPath.row], shots: followeesIndexedShots[indexPath.row])
     }
-    
-    func clearViewModel() {
-        followees = []
-        delegate?.viewModelDidLoadInitialItems()
+
+    func clearViewModelIfNeeded() {
+        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        if userMode != currentUserMode {
+            followees = []
+            userMode = currentUserMode
+            delegate?.viewModelDidLoadInitialItems()
+        }
     }
 }
 

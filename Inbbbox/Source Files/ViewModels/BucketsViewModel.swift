@@ -19,9 +19,14 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     private let bucketsProvider = BucketsProvider()
     private let bucketsRequester = BucketsRequester()
     private let shotsProvider = ShotsProvider()
+    private var userMode: UserMode
     
     var itemsCount: Int {
         return buckets.count
+    }
+    
+    init() {
+        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
     }
     
     func downloadInitialItems() {
@@ -119,9 +124,13 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row], shots: bucketsIndexedShots[indexPath.row])
     }
     
-    func clearViewModel() {
-        buckets = []
-        delegate?.viewModelDidLoadInitialItems()
+    func clearViewModelIfNeeded() {
+        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        if userMode != currentUserMode {
+            buckets = []
+            userMode = currentUserMode
+            delegate?.viewModelDidLoadInitialItems()
+        }
     }
 }
 

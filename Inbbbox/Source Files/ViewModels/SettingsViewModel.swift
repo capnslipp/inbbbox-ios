@@ -17,15 +17,15 @@ protocol AlertDisplayable: class {
     func displayAlert(alert: UIAlertController)
 }
 
-class SettingsViewModel: GroupedListViewModel {
+enum UserMode {
+    case LoggedUser, DemoUser
+}
 
-    enum SetupType {
-        case LogedUser, DemoUser
-    }
+class SettingsViewModel: GroupedListViewModel {
 
     let title = NSLocalizedString("Account", comment: "")
 
-    private(set) var setupType: SetupType
+    private(set) var userMode: UserMode
     private weak var delegate: ModelUpdatable?
     private weak var alertDelegate: AlertDisplayable?
     private let createAccountItem: LabelItem
@@ -46,7 +46,7 @@ class SettingsViewModel: GroupedListViewModel {
 
         self.delegate = delegate
         self.alertDelegate = delegate as? AlertDisplayable
-        self.setupType = UserStorage.isUserSignedIn ? .LogedUser : .DemoUser
+        self.userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
 
         let createAccountTitle = NSLocalizedString("Create Dribble Account", comment: "")
 
@@ -70,7 +70,7 @@ class SettingsViewModel: GroupedListViewModel {
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
         var items:[[GroupItem]]
-        if setupType == .LogedUser {
+        if userMode == .LoggedUser {
             items = [[reminderItem, reminderDateItem],
                 [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]]
         } else {
