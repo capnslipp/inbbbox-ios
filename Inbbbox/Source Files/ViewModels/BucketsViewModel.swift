@@ -118,6 +118,11 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     func bucketCollectionViewCellViewData(indexPath: NSIndexPath) -> BucketCollectionViewCellViewData {
         return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row], shots: bucketsIndexedShots[indexPath.row])
     }
+    
+    func clearViewModel() {
+        buckets = []
+        delegate?.viewModelDidLoadInitialItems()
+    }
 }
 
 extension BucketsViewModel {

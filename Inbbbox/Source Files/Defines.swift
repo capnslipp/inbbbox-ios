@@ -10,6 +10,8 @@ import Foundation
 
 enum NotificationKey: String {
     case UserNotificationSettingsRegistered = "UserNotificationSettingsRegistered"
+    case UserDidLogIn = "UserDidLogIn"
+    case UserDidLogOut = "UserDidLogOut"
 }
 
 enum DefaultsKey: String {

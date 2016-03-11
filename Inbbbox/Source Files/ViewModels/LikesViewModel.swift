@@ -63,4 +63,9 @@ class LikesViewModel: BaseCollectionViewViewModel {
         let animated = likedShots[indexPath.row].animated
         return (imageURL, animated)
     }
+    
+    func clearViewModel() {
+        likedShots = []
+        delegate?.viewModelDidLoadInitialItems()
+    }
 }

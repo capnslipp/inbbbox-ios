@@ -25,6 +25,12 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
         viewModel.delegate = self
         self.title = viewModel.title
+        
+        registerForNotifications()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -133,5 +139,18 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
     }
+}
 
+// MARK: Notifications
+
+extension FolloweesCollectionViewController {
+    
+    func registerForNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearViewContent:", name: NotificationKey.UserDidLogIn.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearViewContent:", name: NotificationKey.UserDidLogOut.rawValue, object: nil)
+    }
+    
+    func clearViewContent(_: NSNotification) {
+        viewModel.clearViewModel()
+    }
 }

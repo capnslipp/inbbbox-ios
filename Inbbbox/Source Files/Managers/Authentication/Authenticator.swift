@@ -60,6 +60,8 @@ class Authenticator {
             }.then { user in
                 self.persistUser(user)
             }.then {
+                NSNotificationCenter.defaultCenter().postNotificationName(NotificationKey.UserDidLogIn.rawValue, object: nil)
+            }.then {
                 fulfill()
             }.error(reject)
         }
@@ -69,6 +71,7 @@ class Authenticator {
         UserStorage.clear()
         TokenStorage.clear()
         WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0) , completionHandler:{})
+        NSNotificationCenter.defaultCenter().postNotificationName(NotificationKey.UserDidLogOut.rawValue, object: nil)
     }
 }
 

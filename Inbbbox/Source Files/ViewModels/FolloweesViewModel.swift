@@ -95,6 +95,11 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     func followeeCollectionViewCellViewData(indexPath: NSIndexPath) -> FolloweeCollectionViewCellViewData {
         return FolloweeCollectionViewCellViewData(followee: followees[indexPath.row], shots: followeesIndexedShots[indexPath.row])
     }
+    
+    func clearViewModel() {
+        followees = []
+        delegate?.viewModelDidLoadInitialItems()
+    }
 }
 
 extension FolloweesViewModel {

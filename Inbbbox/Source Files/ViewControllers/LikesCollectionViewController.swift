@@ -28,6 +28,12 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
+        
+        registerForNotifications()
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -117,5 +123,18 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
     }
+}
 
+// MARK: Notifications
+
+extension LikesCollectionViewController {
+    
+    func registerForNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearViewContent:", name: NotificationKey.UserDidLogIn.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearViewContent:", name: NotificationKey.UserDidLogOut.rawValue, object: nil)
+    }
+    
+    func clearViewContent(_: NSNotification) {
+        viewModel.clearViewModel()
+    }
 }
