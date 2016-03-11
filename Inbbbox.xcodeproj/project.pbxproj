@@ -19,7 +19,6 @@
 		5C24CFF61C85AD1900F0687A /* ShotsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24CFF51C85AD1900F0687A /* ShotsProviderSpec.swift */; };
 		5C24CFF81C85AF5A00F0687A /* APIShotsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */; };
 		5C24CFFA1C85B00700F0687A /* ManagedShotsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */; };
-		5C29C04C1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C29C04B1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift */; };
 		5C4A4A3C1C5772340019EADE /* ShotSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */; };
 		5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */; };
 		5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */; };
@@ -353,7 +352,6 @@
 		5C24CFF51C85AD1900F0687A /* ShotsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderSpec.swift; sourceTree = "<group>"; };
 		5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIShotsProviderMock.swift; sourceTree = "<group>"; };
 		5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShotsProviderMock.swift; sourceTree = "<group>"; };
-		5C29C04B1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultAnimationDescriptor.swift; path = ../Helpers/DefaultAnimationDescriptor.swift; sourceTree = "<group>"; };
 		5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotSpecExtension.swift; sourceTree = "<group>"; };
 		5C8D76D31C735C050030A44C /* ShotType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotType.swift; sourceTree = "<group>"; };
 		5C9549811C8479B100269467 /* ManagedShotsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShotsProviderSpec.swift; sourceTree = "<group>"; };
@@ -771,7 +769,6 @@
 			isa = PBXGroup;
 			children = (
 				BEEE9BD827DA13B5253F0FF8 /* AnimationDescriptor.swift */,
-				5C29C04B1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift */,
 				5CE595C91C68ACE00076DDA1 /* ShotCellRestoreInitialStateAnimationDescriptor.swift */,
 				5CE595CC1C68B18D0076DDA1 /* ShotCellLikeActionAnimationDescriptor.swift */,
 				74E10F5D1C91D07200D7D413 /* ShotCellBucketActionAnimationDescriptor.swift */,
@@ -1877,7 +1874,6 @@
 				BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */,
 				5CB3D5C31C761888009C722B /* CommentType.swift in Sources */,
 				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
-				5C29C04C1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift in Sources */,
 				749B578F1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift in Sources */,
 				BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */,
 				BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */,
