@@ -88,7 +88,9 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // NGRTodo: present followee details view controller
+        let userDetailsViewController = UserDetailsViewController(user: viewModel.followees[indexPath.item])
+        userDetailsViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(userDetailsViewController, animated: true)
     }
     
     // MARK: Base Collection View View Model Delegate

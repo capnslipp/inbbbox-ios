@@ -1,0 +1,219 @@
+//
+//  UserDetailsViewController.swift
+//  Inbbbox
+//
+//  Created by Peter Bruz on 14/03/16.
+//  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
+//
+
+import UIKit
+import ZFDragableModalTransition
+
+class UserDetailsViewController: UIViewController {
+    
+    private var viewModel: UserDetailsViewModel
+    
+    private var userDetailsView: UserDetailsView {
+        return view as! UserDetailsView
+    }
+    private var header: UserDetailsHeaderView?
+    
+    var modalTransitionAnimator: ZFModalTransitionAnimator?
+    
+    // Layout related properties
+    var oneColumnLayoutCellHeightToWidthRatio = CGFloat(0.75)
+    var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(0.75)
+    private var oneColumnLayoutButton: UIBarButtonItem?
+    private var twoColumnsLayoutButton: UIBarButtonItem?
+    private var isCurrentLayoutOneColumn: Bool {
+        get {
+            return userDetailsView.collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout)
+        }
+    }
+    
+    init(user: UserType) {
+        viewModel = UserDetailsViewModel(user: user)
+        super.init(nibName: nil, bundle: nil)
+        viewModel.delegate = self
+        title = viewModel.user.name ?? viewModel.user.username
+    }
+    
+    @available(*, unavailable, message="Use init(user:) instead")
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        fatalError("init(nibName:bundle:) has not been implemented")
+    }
+    
+    @available(*, unavailable, message="Use init(user:) instead")
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        view = UserDetailsView(frame: CGRectZero)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        viewModel.downloadInitialItems()
+        
+        userDetailsView.collectionView.delegate = self
+        userDetailsView.collectionView.dataSource = self
+        userDetailsView.collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
+        userDetailsView.collectionView.registerClass(UserDetailsHeaderView.self, type: .Header)
+        
+        setupBarButtons()
+        updateBarButtons(userDetailsView.collectionView.collectionViewLayout)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        userDetailsView.collectionView.collectionViewLayout.invalidateLayout()
+    }
+}
+
+// MARK: Buttons' actions
+
+extension UserDetailsViewController {
+    
+    func didTapFollowButton(_: UIButton) {
+        
+    }
+}
+
+// MARK: UICollectionViewDataSource
+
+extension UserDetailsViewController: UICollectionViewDataSource {
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.itemsCount
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        
+        let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        cell.shotImageView.image = nil
+        let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
+        cell.shotImageView.loadImageFromURL(cellData.imageURL)
+        cell.gifLabel.hidden = !cellData.animated
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        if header == nil && kind == UICollectionElementKindSectionHeader {
+            header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
+
+            header?.avatarView.imageView.loadImageFromURLString(viewModel.user.avatarString ?? "")
+            header?.button.addTarget(self, action: "didTapFollowButton:", forControlEvents: .TouchUpInside)
+        }
+        
+        return header!
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == viewModel.itemsCount {
+            viewModel.downloadItemsForNextPage()
+        }
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
+extension UserDetailsViewController: UICollectionViewDelegate {
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.userShots[indexPath.item])
+        
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+        
+        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
+        shotDetailsViewController.modalPresentationStyle = .Custom
+        
+        presentViewController(shotDetailsViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension UserDetailsViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: CGRectGetWidth(collectionView.frame), height: 150)
+    }
+}
+
+extension UserDetailsViewController: BaseCollectionViewViewModelDelegate {
+    
+    func viewModelDidLoadInitialItems() {
+        userDetailsView.collectionView.reloadData()
+    }
+    
+    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+        userDetailsView.collectionView.insertItemsAtIndexPaths(indexPaths)
+    }
+    
+    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
+        userDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+    }
+}
+
+// MARK: Changing layout related methods
+
+private extension UserDetailsViewController {
+    
+    // MARK: Configuration
+    
+    func setupBarButtons() {
+        // NGRTodo: set images instead of title
+        oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
+        twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
+        navigationItem.rightBarButtonItems = [oneColumnLayoutButton!, twoColumnsLayoutButton!]
+    }
+    
+    func updateBarButtons(layout: UICollectionViewLayout) {
+        oneColumnLayoutButton?.tintColor = !isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        twoColumnsLayoutButton?.tintColor = isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+    }
+    
+    // MARK: Actions:
+    
+    func didTapOneColumnLayoutButton(_: UIBarButtonItem) {
+        if !isCurrentLayoutOneColumn {
+            changeLayout()
+        }
+    }
+    
+    func didTapTwoColumnsLayoutButton(_: UIBarButtonItem) {
+        if isCurrentLayoutOneColumn {
+            changeLayout()
+        }
+    }
+    
+    // Mark: Changing layout
+    
+    func changeLayout() {
+        let collectionView = userDetailsView.collectionView
+        
+        if collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout) {
+            let flowLayout = TwoColumnsCollectionViewFlowLayout()
+            flowLayout.itemHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
+            collectionView.setCollectionViewLayout(flowLayout, animated: false)
+        } else {
+            let flowLayout = OneColumnCollectionViewFlowLayout()
+            flowLayout.itemHeightToWidthRatio = oneColumnLayoutCellHeightToWidthRatio
+            collectionView.setCollectionViewLayout(flowLayout, animated: false)
+        }
+        collectionView.reloadData()
+        scrollToTop(collectionView)
+        updateBarButtons(collectionView.collectionViewLayout)
+    }
+    
+    func scrollToTop(collectionView: UICollectionView) {
+        if (collectionView.numberOfItemsInSection(0) > 0) {
+            let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
+        }
+    }
+}
