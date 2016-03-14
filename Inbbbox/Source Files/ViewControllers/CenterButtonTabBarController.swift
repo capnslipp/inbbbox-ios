@@ -58,8 +58,8 @@ class CenterButtonTabBarController: UITabBarController {
 
         if let items = tabBar.items where !didUpdateTabBarItems {
             didUpdateTabBarItems = true
-            for one in items {
-                one.titlePositionAdjustment = UIOffsetMake(0, -3)
+            for tabBarItem in items {
+                tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -3)
             }
         }
         tabBar.bringSubviewToFront(centerButton)
