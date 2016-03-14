@@ -9,6 +9,7 @@ class CenterButtonTabBarController: UITabBarController {
     private var didSetConstraints = false
     let centerButton = RoundedButton()
     let shotsCollectionViewController = ShotsCollectionViewController()
+    var didUpdateTabBarItems = false
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
@@ -32,9 +33,9 @@ class CenterButtonTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tabBar.layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
-        tabBar.layer.shadowRadius = 3
-        tabBar.layer.shadowOpacity = 1
+        tabBar.layer.shadowColor = UIColor(white: 0, alpha: 0.03).CGColor
+        tabBar.layer.shadowRadius = 1
+        tabBar.layer.shadowOpacity = 0.6
         
         _ =  { // these two lines hide top border line of tabBar - can't be separated, so I packed them into closure
             tabBar.shadowImage = UIImage()
@@ -55,6 +56,12 @@ class CenterButtonTabBarController: UITabBarController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        if let items = tabBar.items where !didUpdateTabBarItems {
+            didUpdateTabBarItems = true
+            for tabBarItem in items {
+                tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -3)
+            }
+        }
         tabBar.bringSubviewToFront(centerButton)
     }
 
