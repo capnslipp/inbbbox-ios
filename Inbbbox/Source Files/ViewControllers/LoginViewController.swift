@@ -94,6 +94,7 @@ extension LoginViewController {
     
     func loginAsGuestButtonDidTap(_: UIButton) {
         Authenticator.logout()
+        AnalyticsManager.sendEvent(AnalyticKeys.Login.LoginCategory, action: AnalyticKeys.Login.LoginAsGuest)
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
     
