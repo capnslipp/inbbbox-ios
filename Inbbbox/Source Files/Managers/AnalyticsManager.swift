@@ -49,12 +49,4 @@ class AnalyticsManager {
         let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build() as [NSObject : AnyObject]
         tracker.send(event)
     }
-    
-    class func likeShot() {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        var value = defaults.integerForKey("like")
-        value = value + 1
-        let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(GAIFields.customDimensionForIndex(1), value: String(value))
-    }
 }
