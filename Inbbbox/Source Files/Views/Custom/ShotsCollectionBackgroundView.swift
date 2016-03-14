@@ -29,7 +29,7 @@ class ShotsCollectionBackgroundView: UIView {
     override func updateConstraints() {
 
         if !didSetConstraints {
-            logoImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: 50)
+            logoImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: 60)
             logoImageView.autoAlignAxisToSuperviewAxis(.Vertical)
             didSetConstraints = true
         }

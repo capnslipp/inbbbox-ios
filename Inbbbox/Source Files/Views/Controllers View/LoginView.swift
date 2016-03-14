@@ -98,7 +98,7 @@ class LoginView: UIView {
             
             loginAsGuestButton.frame = CGRect(
                 x: inset,
-                y: CGRectGetMaxY(frame) - 40 - height + 200,
+                y: CGRectGetMaxY(frame) - 56 - height + 200,
                 width: CGRectGetWidth(frame) - 2 * inset,
                 height: height
             )
