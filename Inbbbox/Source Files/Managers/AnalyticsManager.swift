@@ -8,45 +8,48 @@
 
 import Foundation
 
-enum AnalyticScreen: String {
-    case LoginViewScreenName = "Login View",
-        FolloweesViewScreenName = "Followees View",
-        ShotsViewScreenName = "Shots View",
-        SettingsViewScreenName = "Settings View",
-        BucketsViewScreenName = "Buckets View",
-        LikesViewScreenName = "Likes View",
-        ShotDetailsViewScreenName = "Shot Details View",
-        ShotBucketsViewScreenName = "Shot Buckets View"
+enum AnalyticsScreen: String {
+    case LoginView = "Login View",
+         FolloweesView = "Followees View",
+         ShotsView = "Shots View",
+         SettingsView = "Settings View",
+         BucketsView = "Buckets View",
+         LikesView = "Likes View",
+         ShotDetailsView = "Shot Details View",
+         ShotBucketsView = "Shot Buckets View"
 }
 
-struct AnalyticKeys {
-    
-    struct Login {
-        static let LoginCategory = "Login"
-        static let LoginSuccededAction = "Login success"
-        static let LoginFailedAction = "Login failed"
-        static let LoginAsGuest = "Logged as guest"
-    }
-    
+enum AnalyticsLoginEvent: String {
+    case LoginSucceeded = "Login succeeded",
+         LoginFailed = "Login failed",
+         LoginAsGuest = "Login as guest"
+}
+
+enum AnalyticsAction: Int {
+    case Like = 1,
+         AddToBucket,
+         Comment
 }
 
 class AnalyticsManager {
-    
+
     class func setupAnalytics() {
         GAI.sharedInstance().trackerWithTrackingId(Dribbble.GATrackingId)
+//        NGRTemp: Temporarily changed dispatch interval to 5 for debugging purpose.
+        GAI.sharedInstance().dispatchInterval = 5;
     }
-    
-    class func trackScreen(screen: AnalyticScreen) {
+
+    class func trackScreen(screen: AnalyticsScreen) {
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: screen.rawValue)
-        
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+
+        let screenView = GAIDictionaryBuilder.createScreenView().build() as [NSObject:AnyObject]
+        tracker.send(screenView)
     }
-    
-    class func sendEvent(category: String, action: String, label: String! = nil, value: NSNumber! = nil) {
+
+    class func trackLoginEvent(loginEvent: AnalyticsLoginEvent) {
         let tracker = GAI.sharedInstance().defaultTracker
-        let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value).build() as [NSObject : AnyObject]
+        let event = GAIDictionaryBuilder.createEventWithCategory("Login", action: loginEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
         tracker.send(event)
     }
 }

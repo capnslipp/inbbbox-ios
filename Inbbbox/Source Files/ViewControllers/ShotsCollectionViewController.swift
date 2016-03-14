@@ -49,7 +49,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        AnalyticsManager.trackScreen(.ShotsViewScreenName)
+        AnalyticsManager.trackScreen(.ShotsView)
     }
 
     override func viewDidAppear(animated: Bool) {

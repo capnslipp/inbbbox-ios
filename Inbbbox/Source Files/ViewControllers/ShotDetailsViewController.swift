@@ -96,7 +96,7 @@ final class ShotDetailsViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        AnalyticsManager.trackScreen(.ShotDetailsViewScreenName)
+        AnalyticsManager.trackScreen(.ShotDetailsView)
     }
 }
 
@@ -397,7 +397,7 @@ private extension ShotDetailsViewController {
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
         shotBucketsViewController.dismissClosure =  { [weak self] in
-            AnalyticsManager.trackScreen(.ShotDetailsViewScreenName)
+            AnalyticsManager.trackScreen(.ShotDetailsView)
             guard let certainSelf = self else { return }
             self?.animateHeader(start: true)
             certainSelf.viewModel.clearBucketsData()

@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        AnalyticsManager.trackScreen(.LoginViewScreenName)
+        AnalyticsManager.trackScreen(.LoginView)
         shotsAnimator.startScrollAnimationInfinitely()
     }
 
@@ -94,7 +94,7 @@ extension LoginViewController {
     
     func loginAsGuestButtonDidTap(_: UIButton) {
         Authenticator.logout()
-        AnalyticsManager.sendEvent(AnalyticKeys.Login.LoginCategory, action: AnalyticKeys.Login.LoginAsGuest)
+        AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginAsGuest)
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
     

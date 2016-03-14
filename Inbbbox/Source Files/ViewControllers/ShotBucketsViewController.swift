@@ -69,7 +69,7 @@ class ShotBucketsViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        AnalyticsManager.trackScreen(.ShotBucketsViewScreenName)
+        AnalyticsManager.trackScreen(.ShotBucketsView)
     }
     
     override func viewDidLayoutSubviews() {

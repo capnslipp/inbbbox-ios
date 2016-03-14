@@ -32,7 +32,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        AnalyticsManager.trackScreen(.LikesViewScreenName)
+        AnalyticsManager.trackScreen(.LikesView)
         viewModel.clearViewModelIfNeeded()
     }
 

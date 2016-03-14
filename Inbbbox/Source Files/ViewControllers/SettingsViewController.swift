@@ -37,7 +37,7 @@ class SettingsViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         refreshViewAccordingToAuthenticationStatus()
-        AnalyticsManager.trackScreen(.SettingsViewScreenName)
+        AnalyticsManager.trackScreen(.SettingsView)
     }
     
 }
