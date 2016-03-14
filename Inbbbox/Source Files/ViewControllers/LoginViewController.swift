@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
+        AnalyticsManager.trackScreen(.LoginViewScreenName)
         shotsAnimator.startScrollAnimationInfinitely()
     }
 

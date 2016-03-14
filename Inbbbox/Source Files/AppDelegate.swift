@@ -15,9 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
         let rootViewController = UserStorage.isUserSignedIn ? CenterButtonTabBarController() : LoginViewController()
-        
+        AnalyticsManager.setupAnalytics()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
@@ -64,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let userInfo = [
                 NSLocalizedDescriptionKey: "Failed to initialize the application's saved data",
                 NSLocalizedFailureReasonErrorKey: "There was an error creating or loading the application's saved data.",
-                NSUnderlyingErrorKey: error as NSError
+                NSUnderlyingErrorKey: error as! NSError
             ]
 
             let wrappedError = NSError(domain: "co.netguru.inbbbox.coredata", code: 1001, userInfo: userInfo)

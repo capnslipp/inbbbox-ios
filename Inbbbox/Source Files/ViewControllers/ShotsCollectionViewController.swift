@@ -46,6 +46,11 @@ final class ShotsCollectionViewController: UICollectionViewController {
         collectionView.userInteractionEnabled = false
         tabBarController.tabBar.userInteractionEnabled = false
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        AnalyticsManager.trackScreen(.ShotsViewScreenName)
+    }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

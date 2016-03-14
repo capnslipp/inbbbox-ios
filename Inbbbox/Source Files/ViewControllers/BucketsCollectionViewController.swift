@@ -38,8 +38,9 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.clearViewModelIfNeeded()
+        AnalyticsManager.trackScreen(.BucketsViewScreenName)
     }
-
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()

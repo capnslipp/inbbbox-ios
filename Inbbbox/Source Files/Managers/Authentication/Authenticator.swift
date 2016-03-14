@@ -53,7 +53,8 @@ class Authenticator {
         return Promise<Void> { fulfill, reject in
             firstly {
                 controller.startAuthentication()
-            }.then { accessToken in
+            }.then { accessToken -> Void in
+                AnalyticsManager.sendEvent(AnalyticKeys.Login.LoginCategory, action: AnalyticKeys.Login.LoginSuccededAction)
                 self.persistToken(accessToken)
             }.then {
                 self.fetchUser()
@@ -61,7 +62,10 @@ class Authenticator {
                 self.persistUser(user)
             }.then {
                 fulfill()
-            }.error(reject)
+            }.error { error -> Void in
+                AnalyticsManager.sendEvent(AnalyticKeys.Login.LoginCategory, action: AnalyticKeys.Login.LoginFailedAction)
+                reject(error)
+            }
         }
     }
     

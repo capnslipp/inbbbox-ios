@@ -29,6 +29,11 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        AnalyticsManager.trackScreen(.LikesViewScreenName)
+    }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

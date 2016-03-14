@@ -93,6 +93,11 @@ final class ShotDetailsViewController: UIViewController {
             }
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        AnalyticsManager.trackScreen(.ShotDetailsViewScreenName)
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -392,11 +397,12 @@ private extension ShotDetailsViewController {
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
         shotBucketsViewController.dismissClosure =  { [weak self] in
-            
+            AnalyticsManager.trackScreen(.ShotDetailsViewScreenName)
             guard let certainSelf = self else { return }
             self?.animateHeader(start: true)
             certainSelf.viewModel.clearBucketsData()
             certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
+
         }
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
@@ -404,7 +410,7 @@ private extension ShotDetailsViewController {
     
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
-            start ? imageView.stopAnimatingGIF() : imageView.startAnimatingGIF()
+            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
         }
     }
     
