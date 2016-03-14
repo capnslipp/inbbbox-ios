@@ -21,4 +21,11 @@ struct Dribbble {
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"
     static let Scope = "public+write+comment"
     static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
+    
+    #if Production
+    static let GATrackingId = "UA-74924140-2"
+    #else
+    static let GATrackingId = "UA-74924140-1"
+    #endif
+    
 }
