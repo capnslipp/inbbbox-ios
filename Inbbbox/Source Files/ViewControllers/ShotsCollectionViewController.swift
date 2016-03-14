@@ -165,6 +165,8 @@ private extension ShotsCollectionViewController {
     }
     
     func likeShot(shot: ShotType) {
+
+        AnalyticsManager.trackAction(.Like)
         if self.isShotLiked(shot) {
             return
         }

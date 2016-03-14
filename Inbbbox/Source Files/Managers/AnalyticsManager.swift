@@ -25,10 +25,11 @@ enum AnalyticsLoginEvent: String {
          LoginAsGuest = "Login as guest"
 }
 
-enum AnalyticsAction: Int {
+enum AnalyticsAction: UInt {
     case Like = 1,
          AddToBucket,
-         Comment
+         Comment,
+         SwipeDown
 }
 
 class AnalyticsManager {
@@ -51,5 +52,15 @@ class AnalyticsManager {
         let tracker = GAI.sharedInstance().defaultTracker
         let event = GAIDictionaryBuilder.createEventWithCategory("Login", action: loginEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
         tracker.send(event)
+    }
+
+    class func trackAction(action: AnalyticsAction) {
+        let tracker = GAI.sharedInstance().defaultTracker
+        let metricForAction = GAIFields.customMetricForIndex(action.rawValue)
+        var value = 1
+        if let previousValue = tracker.get(metricForAction){
+            Int(previousValue).flatMap { value += $0 }
+        }
+        tracker.set(metricForAction, value: value.stringValue)
     }
 }
