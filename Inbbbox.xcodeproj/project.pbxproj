@@ -19,7 +19,6 @@
 		5C24CFF61C85AD1900F0687A /* ShotsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24CFF51C85AD1900F0687A /* ShotsProviderSpec.swift */; };
 		5C24CFF81C85AF5A00F0687A /* APIShotsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */; };
 		5C24CFFA1C85B00700F0687A /* ManagedShotsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */; };
-		5C29C04C1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C29C04B1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift */; };
 		5C4A4A3C1C5772340019EADE /* ShotSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */; };
 		5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */; };
 		5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */; };
@@ -195,6 +194,8 @@
 		74C161881C564830004E1F9B /* BucketCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */; };
 		74C608C11C8451E30012B5DF /* LikesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C608C01C8451E30012B5DF /* LikesViewModel.swift */; };
 		74C608C31C8488840012B5DF /* LikesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C608C21C8488840012B5DF /* LikesViewModelSpec.swift */; };
+		74E10F5E1C91D07200D7D413 /* ShotCellBucketActionAnimationDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E10F5D1C91D07200D7D413 /* ShotCellBucketActionAnimationDescriptor.swift */; };
+		74E10F601C91D8C700D7D413 /* ShotCellCommentActionAnimationDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E10F5F1C91D8C700D7D413 /* ShotCellCommentActionAnimationDescriptor.swift */; };
 		74E2D96C1C808FFB0059A90C /* FolloweesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2D96B1C808FFB0059A90C /* FolloweesViewModel.swift */; };
 		74E2D96E1C80B03C0059A90C /* BaseCollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E2D96D1C80B03C0059A90C /* BaseCollectionViewViewModel.swift */; };
 		74F00B6A1C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */; };
@@ -351,7 +352,6 @@
 		5C24CFF51C85AD1900F0687A /* ShotsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderSpec.swift; sourceTree = "<group>"; };
 		5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIShotsProviderMock.swift; sourceTree = "<group>"; };
 		5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShotsProviderMock.swift; sourceTree = "<group>"; };
-		5C29C04B1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultAnimationDescriptor.swift; path = ../Helpers/DefaultAnimationDescriptor.swift; sourceTree = "<group>"; };
 		5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotSpecExtension.swift; sourceTree = "<group>"; };
 		5C8D76D31C735C050030A44C /* ShotType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotType.swift; sourceTree = "<group>"; };
 		5C9549811C8479B100269467 /* ManagedShotsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedShotsProviderSpec.swift; sourceTree = "<group>"; };
@@ -539,6 +539,8 @@
 		74C161871C564830004E1F9B /* BucketCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BucketCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		74C608C01C8451E30012B5DF /* LikesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewModel.swift; sourceTree = "<group>"; };
 		74C608C21C8488840012B5DF /* LikesViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewModelSpec.swift; sourceTree = "<group>"; };
+		74E10F5D1C91D07200D7D413 /* ShotCellBucketActionAnimationDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCellBucketActionAnimationDescriptor.swift; sourceTree = "<group>"; };
+		74E10F5F1C91D8C700D7D413 /* ShotCellCommentActionAnimationDescriptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCellCommentActionAnimationDescriptor.swift; sourceTree = "<group>"; };
 		74E2D96B1C808FFB0059A90C /* FolloweesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolloweesViewModel.swift; sourceTree = "<group>"; };
 		74E2D96D1C80B03C0059A90C /* BaseCollectionViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewViewModel.swift; sourceTree = "<group>"; };
 		74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLayoutsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -767,9 +769,10 @@
 			isa = PBXGroup;
 			children = (
 				BEEE9BD827DA13B5253F0FF8 /* AnimationDescriptor.swift */,
-				5C29C04B1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift */,
 				5CE595C91C68ACE00076DDA1 /* ShotCellRestoreInitialStateAnimationDescriptor.swift */,
 				5CE595CC1C68B18D0076DDA1 /* ShotCellLikeActionAnimationDescriptor.swift */,
+				74E10F5D1C91D07200D7D413 /* ShotCellBucketActionAnimationDescriptor.swift */,
+				74E10F5F1C91D8C700D7D413 /* ShotCellCommentActionAnimationDescriptor.swift */,
 			);
 			path = AnimationDescriptors;
 			sourceTree = "<group>";
@@ -1783,6 +1786,7 @@
 				BF69611E1C1B46BB000FC5D8 /* SecureNetworkService.swift in Sources */,
 				5E3FCF741C91A1F200B67F13 /* ShotDetailsDummySpaceCollectionViewCell.swift in Sources */,
 				5CE595CD1C68B18D0076DDA1 /* ShotCellLikeActionAnimationDescriptor.swift in Sources */,
+				74E10F5E1C91D07200D7D413 /* ShotCellBucketActionAnimationDescriptor.swift in Sources */,
 				5EA18A651C76329C004F61C1 /* ShotDetailsCollectionViewCollapsableStickyHeader.swift in Sources */,
 				74A0184C1C5A3F4B00C5BB5E /* CollectionViewLayoutSpacings.swift in Sources */,
 				BF9508541C1F15A100E39242 /* Request.swift in Sources */,
@@ -1828,6 +1832,7 @@
 				5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */,
 				5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */,
 				F0F5010B1C75E52D00E8959E /* ShotDetailsViewModel.swift in Sources */,
+				74E10F601C91D8C700D7D413 /* ShotCellCommentActionAnimationDescriptor.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
 				5EEEC9A31C71C86B00BB7237 /* Team.swift in Sources */,
 				7439A36D1C688798001DBEAE /* InfoShotsCellConfigurable.swift in Sources */,
@@ -1869,7 +1874,6 @@
 				BEEE9F5AF757105F7D2F8DF4 /* ViewControllerPresenter.swift in Sources */,
 				5CB3D5C31C761888009C722B /* CommentType.swift in Sources */,
 				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
-				5C29C04C1C68AA5100C15C25 /* DefaultAnimationDescriptor.swift in Sources */,
 				749B578F1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift in Sources */,
 				BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */,
 				BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */,

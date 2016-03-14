@@ -227,13 +227,22 @@ class ShotCollectionViewCell: UICollectionViewCell {
     
     private func animateCellAction(action: Action, completion: (() -> ())?) {
         switch action {
-        case .Like:
-            bucketImageView.hidden = true
-            plusImageView.hidden = true
-            commentImageView.hidden = true
-            viewClass.animateWithDescriptor(ShotCellLikeActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
-        default:
-            viewClass.animateWithDescriptor(ShotCellRestoreInitialStateAnimationDescriptor(shotCell: self, swipeCompletion: completion))
+            case .Like:
+                bucketImageView.hidden = true
+                plusImageView.hidden = true
+                commentImageView.hidden = true
+                viewClass.animateWithDescriptor(ShotCellLikeActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
+            case .Bucket:
+                commentImageView.hidden = true
+                viewClass.animateWithDescriptor(ShotCellBucketActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
+            case .Comment:
+                likeImageView.hidden = true
+                plusImageView.hidden = true
+                bucketImageView.hidden = true
+                viewClass.animateWithDescriptor(ShotCellCommentActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
+            print(likeImageViewLeftConstraint?.constant)
+            default:
+                viewClass.animateWithDescriptor(ShotCellRestoreInitialStateAnimationDescriptor(shotCell: self, swipeCompletion: completion))
         }
     }
 }
