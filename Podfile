@@ -51,7 +51,7 @@ pod 'HanekeSwift', '~>0.10.1'
 
 pod 'DZNEmptyDataSet', '~>1.7'
 
-pod 'Google/Analytics', '~>1.3'
+pod 'GoogleAnalytics', '~> 3.14.0'
 
 target 'Tests' do link_with 'Unit Tests'
 
