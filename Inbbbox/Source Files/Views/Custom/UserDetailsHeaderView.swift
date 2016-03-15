@@ -19,6 +19,7 @@ private var margin: CGFloat {
 class UserDetailsHeaderView: UICollectionReusableView {
     
     let avatarView = AvatarView(size: avatarSize, bordered: true, borderWidth: 3)
+    var shouldShowButton = true
     let button = UIButton.newAutoLayoutView()
     var userFollowed: Bool? {
         didSet {
@@ -27,6 +28,11 @@ class UserDetailsHeaderView: UICollectionReusableView {
         }
     }
     
+    private let activityIndicator = UIActivityIndicatorView.newAutoLayoutView()
+    
+    private var avatarOffset: CGFloat {
+        return shouldShowButton ? -20 : 0
+    }
     private var didUpdateConstraints = false
     
     override init(frame: CGRect) {
@@ -37,14 +43,18 @@ class UserDetailsHeaderView: UICollectionReusableView {
         
         addSubview(avatarView)
         
-        button.setTitleColor(.whiteColor(), forState: .Normal)
-        button.setTitleColor(UIColor.RGBA(255, 255, 255, 0.2), forState: .Highlighted)
-        button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 14)
-        button.layer.borderColor = UIColor.whiteColor().CGColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 13
-        addSubview(button)
-        
+        if shouldShowButton {
+            button.setTitleColor(.whiteColor(), forState: .Normal)
+            button.setTitleColor(UIColor.RGBA(255, 255, 255, 0.2), forState: .Highlighted)
+            button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 14)
+            button.layer.borderColor = UIColor.whiteColor().CGColor
+            button.layer.borderWidth = 1
+            button.layer.cornerRadius = 13
+            addSubview(button)
+            button.hidden = true
+            
+            addSubview(activityIndicator)
+        }
         setNeedsUpdateConstraints()
     }
     
@@ -60,14 +70,28 @@ class UserDetailsHeaderView: UICollectionReusableView {
 
             avatarView.autoSetDimensionsToSize(avatarSize)
             avatarView.autoAlignAxisToSuperviewAxis(.Vertical)
-            avatarView.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView.superview!, withOffset: -20)
-//            avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: avatarView.superview!, withOffset: 10)
+            avatarView.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView.superview!, withOffset: avatarOffset)
             
-            button.autoSetDimensionsToSize(CGSize(width: 80, height: 26))
-            button.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 10)
-            button.autoAlignAxis(.Vertical, toSameAxisOfView: avatarView)
+            if shouldShowButton {
+                button.autoSetDimensionsToSize(CGSize(width: 80, height: 26))
+                button.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 10)
+                button.autoAlignAxis(.Vertical, toSameAxisOfView: avatarView)
+                
+                activityIndicator.autoAlignAxis(.Horizontal, toSameAxisOfView: button)
+                activityIndicator.autoAlignAxis(.Vertical, toSameAxisOfView: button)
+            }
         }
         super.updateConstraints()
+    }
+    
+    func startActivityIndicator() {
+        button.hidden = true
+        activityIndicator.startAnimating()
+    }
+    
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+        button.hidden = false
     }
 }
 

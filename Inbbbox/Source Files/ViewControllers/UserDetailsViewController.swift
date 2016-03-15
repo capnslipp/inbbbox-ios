@@ -58,15 +58,6 @@ class UserDetailsViewController: UIViewController {
         
         viewModel.downloadInitialItems()
         
-        firstly {
-            viewModel.isUserFollowedByMe()
-        }.then { followed in
-            self.header?.userFollowed = followed
-        }.error { error in
-            print(error)
-            // NGRTodo: provide pop-ups with errors
-        }
-        
         userDetailsView.collectionView.delegate = self
         userDetailsView.collectionView.dataSource = self
         userDetailsView.collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
@@ -81,6 +72,23 @@ class UserDetailsViewController: UIViewController {
         updateBarButtons(userDetailsView.collectionView.collectionViewLayout)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        guard viewModel.shouldShowFollowButton else { return }
+        
+        firstly {
+            viewModel.isUserFollowedByMe()
+        }.then { followed in
+            self.header?.userFollowed = followed
+        }.always {
+            self.header?.stopActivityIndicator()
+        }.error { error in
+            print(error)
+            // NGRTodo: provide pop-ups with errors
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         userDetailsView.collectionView.collectionViewLayout.invalidateLayout()
@@ -92,12 +100,16 @@ class UserDetailsViewController: UIViewController {
 extension UserDetailsViewController {
     
     func didTapFollowButton(_: UIButton) {
+        
         if let userFollowed = header?.userFollowed {
             
+            header?.startActivityIndicator()
             firstly {
                 userFollowed ? viewModel.unfollowUser() : viewModel.followUser()
             }.then {
                 self.header?.userFollowed = !userFollowed
+            }.always {
+                self.header?.stopActivityIndicator()
             }.error { error in
                 print(error)
                 // NGRTodo: provide pop-ups with errors
@@ -116,7 +128,6 @@ extension UserDetailsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        
         let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
@@ -132,6 +143,7 @@ extension UserDetailsViewController: UICollectionViewDataSource {
 
             header?.avatarView.imageView.loadImageFromURLString(viewModel.user.avatarString ?? "")
             header?.button.addTarget(self, action: "didTapFollowButton:", forControlEvents: .TouchUpInside)
+            viewModel.shouldShowFollowButton ? header?.startActivityIndicator() : (header?.shouldShowButton = false)
         }
         
         return header!

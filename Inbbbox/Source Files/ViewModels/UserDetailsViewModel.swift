@@ -18,6 +18,10 @@ final class UserDetailsViewModel: BaseCollectionViewViewModel {
     private let shotsProvider = ShotsProvider()
     private let connectionsRequester = APIConnectionsRequester()
     
+    
+    var shouldShowFollowButton: Bool {
+        return UserStorage.isUserSignedIn
+    }
     var itemsCount: Int {
         return userShots.count
     }

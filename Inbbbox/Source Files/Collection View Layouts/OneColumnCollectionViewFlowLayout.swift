@@ -36,22 +36,24 @@ class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         let attributes = super.layoutAttributesForElementsInRect(rect)
         
-        if let collectionView = collectionView {
-            let insets = collectionView.contentInset
-            let offset = collectionView.contentOffset
-            let minY = -insets.top
+        guard let collectionView = collectionView else {
+            return attributes
+        }
+        
+        let insets = collectionView.contentInset
+        let offset = collectionView.contentOffset
+        let minY = -insets.top
+        
+        if offset.y < minY {
+            let deltaY = fabsf(Float(offset.y - minY))
             
-            if offset.y < minY {
-                let deltaY = fabsf(Float(offset.y - minY))
-                
-                attributes?.forEach {
-                    if $0.representedElementKind == UICollectionElementKindSectionHeader {
-                        var headerRect = $0.frame
-                        headerRect.size.height = max(minY, headerReferenceSize.height + CGFloat(deltaY))
-                        headerRect.origin.y = headerRect.origin.y - CGFloat(deltaY)
-                        $0.frame =  headerRect
-                        $0.zIndex = 64
-                    }
+            attributes?.forEach {
+                if $0.representedElementKind == UICollectionElementKindSectionHeader {
+                    var headerRect = $0.frame
+                    headerRect.size.height = max(minY, headerReferenceSize.height + CGFloat(deltaY))
+                    headerRect.origin.y = headerRect.origin.y - CGFloat(deltaY)
+                    $0.frame =  headerRect
+                    $0.zIndex = 64
                 }
             }
         }
