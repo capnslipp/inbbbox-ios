@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic-bucket-swipe-filled.png",
+      "filename" : "ic-bucket-swipe-filled-2.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic-bucket-swipe-filled@2x.png",
+      "filename" : "ic-bucket-swipe-filled@2x-2.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic-bucket-swipe-filled@3x.png",
+      "filename" : "ic-bucket-swipe-filled@3x-2.png",
       "scale" : "3x"
     }
   ],
