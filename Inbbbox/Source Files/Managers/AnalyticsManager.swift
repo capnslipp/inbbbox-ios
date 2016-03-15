@@ -36,8 +36,6 @@ class AnalyticsManager {
 
     class func setupAnalytics() {
         GAI.sharedInstance().trackerWithTrackingId(Dribbble.GATrackingId)
-//        NGRTemp: Temporarily changed dispatch interval to 5 for debugging purpose.
-        GAI.sharedInstance().dispatchInterval = 5;
     }
 
     class func trackScreen(screen: AnalyticsScreen) {
