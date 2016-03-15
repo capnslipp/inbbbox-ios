@@ -15,6 +15,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     let shotsProvider = ShotsProvider()
     private var didFinishInitialAnimations = false
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
+    private var maximumPageViewed = 0
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
     var modalTransitionAnimator: ZFModalTransitionAnimator?
 
@@ -46,7 +47,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         collectionView.userInteractionEnabled = false
         tabBarController.tabBar.userInteractionEnabled = false
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         AnalyticsManager.trackScreen(.ShotsView)
@@ -144,6 +145,14 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     // MARK: UIScrollViewDelegate
 
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let currentPageIndex = Int(scrollView.contentOffset.y / CGRectGetHeight(scrollView.frame))
+        if maximumPageViewed < currentPageIndex {
+            AnalyticsManager.trackAction(.SwipeDown)
+            maximumPageViewed = currentPageIndex
+        }
+    }
+
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         guard let collectionView = collectionView else {
             return
@@ -159,18 +168,18 @@ final class ShotsCollectionViewController: UICollectionViewController {
 }
 
 private extension ShotsCollectionViewController {
-    
+
     func isShotLiked(shot: ShotType) -> Bool {
         return likedShots.contains{ $0.identifier == shot.identifier }
     }
-    
+
     func likeShot(shot: ShotType) {
 
         AnalyticsManager.trackAction(.Like)
         if self.isShotLiked(shot) {
             return
         }
-        
+
         firstly {
             self.shotsRequester.likeShot(shot)
         }.then { Void -> Void in
@@ -180,22 +189,22 @@ private extension ShotsCollectionViewController {
             // NGRToDo handle error and show alert
         }
     }
-    
+
     func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {
-        
+
         definesPresentationContext = true
-        
+
         let shotDetailsViewController = ShotDetailsViewController(shot: shot)
         shotDetailsViewController.shouldScrollToMostRecentMessage = scrollToMessages
-        
+
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
-        
+
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
-        
+
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
-    
+
     func presentShotBucketsViewController(shot: ShotType) {
         let shotBucketsViewController = ShotBucketsViewController(shot: shot, mode: .AddToBucket)
         shotBucketsViewController.modalPresentationStyle = .OverFullScreen
