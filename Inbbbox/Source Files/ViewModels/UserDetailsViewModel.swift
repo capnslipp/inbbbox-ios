@@ -112,3 +112,25 @@ final class UserDetailsViewModel: BaseCollectionViewViewModel {
         return (imageURL, animated)
     }
 }
+
+// MARK: Helpers
+
+extension UserDetailsViewModel {
+    
+    func shotWithSwappedUser(shot: ShotType) -> ShotType {
+        return Shot(
+            identifier: shot.identifier,
+            title: shot.title,
+            attributedDescription: shot.attributedDescription,
+            user: user,
+            shotImage: shot.shotImage,
+            createdAt: shot.createdAt,
+            animated: shot.animated,
+            likesCount: shot.likesCount,
+            viewsCount: shot.viewsCount,
+            commentsCount: shot.commentsCount,
+            bucketsCount: shot.bucketsCount,
+            team: shot.team
+        )
+    }
+}

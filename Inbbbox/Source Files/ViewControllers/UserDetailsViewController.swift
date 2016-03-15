@@ -161,7 +161,7 @@ extension UserDetailsViewController: UICollectionViewDataSource {
 extension UserDetailsViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.userShots[indexPath.item])
+        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
         
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
         

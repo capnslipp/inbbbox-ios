@@ -68,6 +68,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
                 }
             }.error { error in
                 // NGRTemp: Need mockups for error message view
+                self.tabBarController?.tabBar.userInteractionEnabled = true
                 print(error)
             }
         }
