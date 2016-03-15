@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 /// Provides interface for dribbble followers and followees update, delete, create API
-final class APIConnectionsRequester: Verifiable {
+class APIConnectionsRequester: Verifiable {
     
     /**
      Adds authenticated user to given user followers.

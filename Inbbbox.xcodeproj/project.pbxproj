@@ -298,6 +298,9 @@
 		F065DB3C1C96B3D600A99B0E /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */; };
 		F065DB3E1C96BE5000A99B0E /* UserDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */; };
 		F065DB431C96EFCF00A99B0E /* UserFollowedByMeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */; };
+		F065DB451C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB441C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift */; };
+		F065DB471C98411F00A99B0E /* UserDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */; };
+		F065DB491C9846E800A99B0E /* APIConnectionsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */; };
 		F07B598E1C3FF02000F5CB86 /* AddToBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */; };
 		F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */; };
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
@@ -649,6 +652,9 @@
 		F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
 		F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsHeaderView.swift; sourceTree = "<group>"; };
 		F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFollowedByMeQuery.swift; sourceTree = "<group>"; };
+		F065DB441C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFollowedByMeQuerySpec.swift; sourceTree = "<group>"; };
+		F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModelSpec.swift; sourceTree = "<group>"; };
+		F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConnectionsRequesterMock.swift; sourceTree = "<group>"; };
 		F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuery.swift; sourceTree = "<group>"; };
 		F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuery.swift; sourceTree = "<group>"; };
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
@@ -928,6 +934,7 @@
 				5C9549811C8479B100269467 /* ManagedShotsProviderSpec.swift */,
 				5C24CFF51C85AD1900F0687A /* ShotsProviderSpec.swift */,
 				F0A0287C1C91A0AE0072719B /* APITeamsProviderSpec.swift */,
+				F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1188,6 +1195,7 @@
 				5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */,
 				F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */,
 				F0A028731C91963F0072719B /* TeamMembersQuerySpec.swift */,
+				F065DB441C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1486,6 +1494,7 @@
 				F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */,
 				5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */,
 				5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */,
+				F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -1957,6 +1966,7 @@
 				5EEEC9A91C71E14000BB7237 /* ProjectsQuerySpec.swift in Sources */,
 				5E3509291C6266E9009386AE /* PageableComponentSpec.swift in Sources */,
 				5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */,
+				F065DB451C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift in Sources */,
 				5ED6C5B31C5768B200A591EA /* ShotsProviderConfigurationSpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageSpecExtension.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
@@ -1966,6 +1976,7 @@
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
 				5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */,
 				74C608C31C8488840012B5DF /* LikesViewModelSpec.swift in Sources */,
+				F065DB471C98411F00A99B0E /* UserDetailsViewModelSpec.swift in Sources */,
 				5C24CFFA1C85B00700F0687A /* ManagedShotsProviderMock.swift in Sources */,
 				5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */,
 				5EE041B01C33EF9E00657751 /* OAuthAuthorizableSpec.swift in Sources */,
@@ -2012,6 +2023,7 @@
 				5EDB832A1C48DECE00FBCA05 /* UnlikeQuerySpec.swift in Sources */,
 				5E12C3691C734FF4003C6B48 /* APIShotsRequesterSpec.swift in Sources */,
 				BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */,
+				F065DB491C9846E800A99B0E /* APIConnectionsRequesterMock.swift in Sources */,
 				5E12C36B1C7359BD003C6B48 /* APIBucketsRequesterSpec.swift in Sources */,
 				F033BBD81C903C8F00E3DE64 /* CreateBucketQuerySpec.swift in Sources */,
 				5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */,

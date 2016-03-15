@@ -9,15 +9,15 @@
 import Foundation
 import PromiseKit
 
-final class UserDetailsViewModel: BaseCollectionViewViewModel {
+class UserDetailsViewModel: BaseCollectionViewViewModel {
     
     var delegate: BaseCollectionViewViewModelDelegate?
     
-    private(set) var user: UserType
     var userShots = [ShotType]()
-    private let shotsProvider = ShotsProvider()
-    private let connectionsRequester = APIConnectionsRequester()
+    var connectionsRequester = APIConnectionsRequester()
     
+    private(set) var user: UserType
+    private let shotsProvider = ShotsProvider()
     
     var shouldShowFollowButton: Bool {
         return UserStorage.isUserSignedIn
@@ -69,10 +69,6 @@ final class UserDetailsViewModel: BaseCollectionViewViewModel {
     // MARK: Users section
     
     func isUserFollowedByMe() -> Promise<Bool> {
-        
-        guard UserStorage.isUserSignedIn else {
-            return Promise(false)
-        }
         
         return Promise<Bool> { fulfill, reject in
             
