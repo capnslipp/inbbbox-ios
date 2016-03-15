@@ -45,7 +45,7 @@ class UserDetailsHeaderView: UICollectionReusableView {
         
         if shouldShowButton {
             button.setTitleColor(.whiteColor(), forState: .Normal)
-            button.setTitleColor(UIColor.RGBA(255, 255, 255, 0.2), forState: .Highlighted)
+            button.setTitleColor(UIColor(white: 1, alpha: 0.2), forState: .Highlighted)
             button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 14)
             button.layer.borderColor = UIColor.whiteColor().CGColor
             button.layer.borderWidth = 1

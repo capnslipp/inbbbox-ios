@@ -63,10 +63,10 @@ class UserDetailsViewController: UIViewController {
         userDetailsView.collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
         userDetailsView.collectionView.registerClass(UserDetailsHeaderView.self, type: .Header)
         
-        _ = { // hides bottom border of navigationBar
+        do { // hides bottom border of navigationBar
             self.navigationController?.navigationBar.shadowImage = UIImage()
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        }()
+        }
         
         setupBarButtons()
         updateBarButtons(userDetailsView.collectionView.collectionViewLayout)
