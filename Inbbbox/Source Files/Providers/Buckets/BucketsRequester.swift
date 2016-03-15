@@ -21,6 +21,7 @@ class BucketsRequester {
     }
     
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
+        AnalyticsManager.trackAction(.AddToBucket)
         if UserStorage.isUserSignedIn {
             return apiBucketsRequester.addShot(shot, toBucket: bucket)
         }

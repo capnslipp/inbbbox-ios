@@ -6,24 +6,25 @@ import Foundation
 import PromiseKit
 
 class ShotsRequester {
-
+    
     let apiShotsRequester = APIShotsRequester()
     let managedShotsRequester = ManagedShotsRequester()
-
+    
     func likeShot(shot: ShotType) -> Promise<Void> {
+        AnalyticsManager.trackAction(.Like)
         if UserStorage.isUserSignedIn {
             return apiShotsRequester.likeShot(shot)
         }
         return managedShotsRequester.likeShot(shot)
     }
-
+    
     func unlikeShot(shot: ShotType) -> Promise<Void> {
         if UserStorage.isUserSignedIn {
             return apiShotsRequester.unlikeShot(shot)
         }
         return managedShotsRequester.unlikeShot(shot)
     }
-
+    
     func isShotLikedByMe(shot: ShotType) -> Promise<Bool> {
         if UserStorage.isUserSignedIn {
             return apiShotsRequester.isShotLikedByMe(shot)
