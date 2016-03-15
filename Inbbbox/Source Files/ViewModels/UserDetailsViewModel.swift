@@ -16,6 +16,7 @@ final class UserDetailsViewModel: BaseCollectionViewViewModel {
     private(set) var user: UserType
     var userShots = [ShotType]()
     private let shotsProvider = ShotsProvider()
+    private let connectionsRequester = APIConnectionsRequester()
     
     var itemsCount: Int {
         return userShots.count
@@ -24,6 +25,8 @@ final class UserDetailsViewModel: BaseCollectionViewViewModel {
     init(user: UserType) {
         self.user = user
     }
+    
+    // MARK: Shots section
     
     func downloadInitialItems() {
         firstly {
@@ -58,6 +61,46 @@ final class UserDetailsViewModel: BaseCollectionViewViewModel {
             print(error)
         }
     }
+    
+    // MARK: Users section
+    
+    func isUserFollowedByMe() -> Promise<Bool> {
+        
+        guard UserStorage.isUserSignedIn else {
+            return Promise(false)
+        }
+        
+        return Promise<Bool> { fulfill, reject in
+            
+            firstly {
+                connectionsRequester.isUserFollowedByMe(user)
+            }.then { followed in
+                fulfill(followed)
+            }.error(reject)
+        }
+    }
+    
+    func followUser() -> Promise<Void> {
+        
+        return Promise<Void> { fulfill, reject in
+            
+            firstly {
+                connectionsRequester.followUser(user)
+            }.then(fulfill).error(reject)
+        }
+    }
+    
+    func unfollowUser() -> Promise<Void> {
+        
+        return Promise<Void> { fulfill, reject in
+            
+            firstly {
+                connectionsRequester.unfollowUser(user)
+            }.then(fulfill).error(reject)
+        }
+    }
+    
+    // MARK: Cell data section
     
     func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (imageURL: NSURL, animated: Bool) {
         let imageURL = userShots[indexPath.row].shotImage.normalURL

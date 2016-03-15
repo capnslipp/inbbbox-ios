@@ -8,6 +8,7 @@
 
 import UIKit
 import ZFDragableModalTransition
+import PromiseKit
 
 class UserDetailsViewController: UIViewController {
     
@@ -57,10 +58,24 @@ class UserDetailsViewController: UIViewController {
         
         viewModel.downloadInitialItems()
         
+        firstly {
+            viewModel.isUserFollowedByMe()
+        }.then { followed in
+            self.header?.userFollowed = followed
+        }.error { error in
+            print(error)
+            // NGRTodo: provide pop-ups with errors
+        }
+        
         userDetailsView.collectionView.delegate = self
         userDetailsView.collectionView.dataSource = self
         userDetailsView.collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
         userDetailsView.collectionView.registerClass(UserDetailsHeaderView.self, type: .Header)
+        
+        _ = { // hides bottom border of navigationBar
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        }()
         
         setupBarButtons()
         updateBarButtons(userDetailsView.collectionView.collectionViewLayout)
@@ -77,7 +92,17 @@ class UserDetailsViewController: UIViewController {
 extension UserDetailsViewController {
     
     func didTapFollowButton(_: UIButton) {
-        
+        if let userFollowed = header?.userFollowed {
+            
+            firstly {
+                userFollowed ? viewModel.unfollowUser() : viewModel.followUser()
+            }.then {
+                self.header?.userFollowed = !userFollowed
+            }.error { error in
+                print(error)
+                // NGRTodo: provide pop-ups with errors
+            }
+        }
     }
 }
 
@@ -135,14 +160,7 @@ extension UserDetailsViewController: UICollectionViewDelegate {
     }
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
-
-extension UserDetailsViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: CGRectGetWidth(collectionView.frame), height: 150)
-    }
-}
+// MARK: BaseCollectionViewViewModelDelegate
 
 extension UserDetailsViewController: BaseCollectionViewViewModelDelegate {
     
@@ -179,13 +197,13 @@ private extension UserDetailsViewController {
     
     // MARK: Actions:
     
-    func didTapOneColumnLayoutButton(_: UIBarButtonItem) {
+    dynamic func didTapOneColumnLayoutButton(_: UIBarButtonItem) {
         if !isCurrentLayoutOneColumn {
             changeLayout()
         }
     }
     
-    func didTapTwoColumnsLayoutButton(_: UIBarButtonItem) {
+    dynamic func didTapTwoColumnsLayoutButton(_: UIBarButtonItem) {
         if isCurrentLayoutOneColumn {
             changeLayout()
         }
@@ -199,10 +217,12 @@ private extension UserDetailsViewController {
         if collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout) {
             let flowLayout = TwoColumnsCollectionViewFlowLayout()
             flowLayout.itemHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
+            flowLayout.containsHeader = true
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         } else {
             let flowLayout = OneColumnCollectionViewFlowLayout()
             flowLayout.itemHeightToWidthRatio = oneColumnLayoutCellHeightToWidthRatio
+            flowLayout.containsHeader = true
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         }
         collectionView.reloadData()

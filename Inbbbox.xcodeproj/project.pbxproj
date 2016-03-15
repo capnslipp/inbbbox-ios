@@ -297,6 +297,7 @@
 		F065DB3A1C96A5E100A99B0E /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */; };
 		F065DB3C1C96B3D600A99B0E /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */; };
 		F065DB3E1C96BE5000A99B0E /* UserDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */; };
+		F065DB431C96EFCF00A99B0E /* UserFollowedByMeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */; };
 		F07B598E1C3FF02000F5CB86 /* AddToBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */; };
 		F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */; };
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
@@ -647,6 +648,7 @@
 		F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
 		F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
 		F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsHeaderView.swift; sourceTree = "<group>"; };
+		F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFollowedByMeQuery.swift; sourceTree = "<group>"; };
 		F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuery.swift; sourceTree = "<group>"; };
 		F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuery.swift; sourceTree = "<group>"; };
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
@@ -1007,6 +1009,7 @@
 				5E91A6381C73802E00C9D609 /* UnfollowUserQuery.swift */,
 				F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */,
 				F0A0286E1C9181590072719B /* TeamMembersQuery.swift */,
+				F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1757,6 +1760,7 @@
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
 				5EB87A761C5A123700CB2A7B /* Responsable.swift in Sources */,
+				F065DB431C96EFCF00A99B0E /* UserFollowedByMeQuery.swift in Sources */,
 				5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */,
 				5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */,
 				F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */,

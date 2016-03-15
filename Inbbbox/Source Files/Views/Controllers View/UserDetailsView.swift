@@ -18,6 +18,7 @@ class UserDetailsView: UIView {
         
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
         flowLayout.itemHeightToWidthRatio = 0.75
+        flowLayout.containsHeader = true
         
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flowLayout)
         collectionView.configureForAutoLayout()

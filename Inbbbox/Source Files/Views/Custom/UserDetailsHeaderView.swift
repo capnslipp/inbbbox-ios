@@ -20,6 +20,12 @@ class UserDetailsHeaderView: UICollectionReusableView {
     
     let avatarView = AvatarView(size: avatarSize, bordered: true, borderWidth: 3)
     let button = UIButton.newAutoLayoutView()
+    var userFollowed: Bool? {
+        didSet {
+            let title = userFollowed! ? NSLocalizedString("Unfollow", comment: "") : NSLocalizedString("Follow", comment: "")
+            button.setTitle(title, forState: .Normal)
+        }
+    }
     
     private var didUpdateConstraints = false
     
@@ -33,7 +39,6 @@ class UserDetailsHeaderView: UICollectionReusableView {
         
         button.setTitleColor(.whiteColor(), forState: .Normal)
         button.setTitleColor(UIColor.RGBA(255, 255, 255, 0.2), forState: .Highlighted)
-        button.setTitle("Follow", forState: .Normal)
         button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 14)
         button.layer.borderColor = UIColor.whiteColor().CGColor
         button.layer.borderWidth = 1
@@ -55,7 +60,8 @@ class UserDetailsHeaderView: UICollectionReusableView {
 
             avatarView.autoSetDimensionsToSize(avatarSize)
             avatarView.autoAlignAxisToSuperviewAxis(.Vertical)
-            avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: avatarView.superview!, withOffset: 10)
+            avatarView.autoAlignAxis(.Horizontal, toSameAxisOfView: avatarView.superview!, withOffset: -20)
+//            avatarView.autoPinEdge(.Top, toEdge: .Top, ofView: avatarView.superview!, withOffset: 10)
             
             button.autoSetDimensionsToSize(CGSize(width: 80, height: 26))
             button.autoPinEdge(.Top, toEdge: .Bottom, ofView: avatarView, withOffset: 10)
