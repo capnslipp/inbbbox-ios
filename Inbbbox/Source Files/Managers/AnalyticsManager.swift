@@ -57,9 +57,6 @@ class AnalyticsManager {
     class func trackAction(action: AnalyticsAction) {
         let tracker = GAI.sharedInstance().defaultTracker
         let metricForAction = GAIFields.customMetricForIndex(action.rawValue)
-        var value = 1
-        let previousValue: String? = tracker.get(metricForAction)
-        _ = previousValue.flatMap { Int($0).flatMap { value += $0 } }
-        tracker.set(metricForAction, value: value.stringValue)
+        tracker.set(metricForAction, value: 1.stringValue)
     }
 }
