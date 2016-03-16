@@ -8,11 +8,12 @@
 
 import UIKit
 
-class CloseButtonView:UIView {
+class CloseButtonView: UIView {
     
     let closeButton = UIButton(type: .System)
     let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark)))
     
+    private let diameterSize = CGFloat(26)
     private var didSetConstraints = false
     
     // MARK: - Life cycle
@@ -26,7 +27,7 @@ class CloseButtonView:UIView {
         super.init(frame: frame)
         
         vibrancyView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
-        vibrancyView.layer.cornerRadius = 13
+        vibrancyView.layer.cornerRadius = diameterSize/2
         vibrancyView.clipsToBounds = true
         addSubview(vibrancyView)
         
@@ -42,10 +43,8 @@ class CloseButtonView:UIView {
             
             closeButton.autoPinEdgesToSuperviewEdges()
             vibrancyView.autoPinEdgesToSuperviewEdges()
-            autoSetDimension(.Width, toSize: 26)
-            autoSetDimension(.Height, toSize: 26)
+            autoSetDimensionsToSize(CGSize(width: diameterSize, height: diameterSize))
         }
         super.updateConstraints()
     }
-    
 }
