@@ -59,7 +59,7 @@ class Authenticator {
                 self.fetchUser()
             }.then { user in
                 self.persistUser(user)
-            }.then {
+            }.then { () -> Void in
                 AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginSucceeded)
                 fulfill()
             }.error { error -> Void in
