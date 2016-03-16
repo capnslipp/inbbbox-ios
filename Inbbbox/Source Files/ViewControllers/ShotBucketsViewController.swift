@@ -66,12 +66,12 @@ class ShotBucketsViewController: UIViewController {
         shotBucketsView.collectionView.registerClass(ShotBucketsHeaderView.self, type: .Header)
         shotBucketsView.collectionView.registerClass(ShotBucketsFooterView.self, type: .Footer)
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         AnalyticsManager.trackScreen(.ShotBucketsView)
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

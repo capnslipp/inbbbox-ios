@@ -54,13 +54,13 @@ class Authenticator {
             firstly {
                 controller.startAuthentication()
             }.then { accessToken -> Void in
-                AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginSucceeded)
                 self.persistToken(accessToken)
             }.then {
                 self.fetchUser()
             }.then { user in
                 self.persistUser(user)
             }.then {
+                AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginSucceeded)
                 fulfill()
             }.error { error -> Void in
                 AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginFailed)

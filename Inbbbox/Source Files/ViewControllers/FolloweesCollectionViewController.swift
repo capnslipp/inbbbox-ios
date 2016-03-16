@@ -34,8 +34,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController, Bas
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        AnalyticsManager.trackScreen(.FolloweesView)
         viewModel.downloadInitialItems()
+        AnalyticsManager.trackScreen(.FolloweesView)
     }
     
     // MARK: UICollectionViewDataSource

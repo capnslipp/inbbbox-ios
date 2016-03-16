@@ -53,8 +53,8 @@ class LoginViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        AnalyticsManager.trackScreen(.LoginView)
         shotsAnimator.startScrollAnimationInfinitely()
+        AnalyticsManager.trackScreen(.LoginView)
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {

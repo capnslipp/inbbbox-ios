@@ -15,8 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let rootViewController = UserStorage.isUserSignedIn ? CenterButtonTabBarController() : LoginViewController()
+
         AnalyticsManager.setupAnalytics()
+        let rootViewController = UserStorage.isUserSignedIn ? CenterButtonTabBarController() : LoginViewController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
