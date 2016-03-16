@@ -125,7 +125,7 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let localizedString = NSLocalizedString("Add some shots\nto buckets   first", comment: "")
+        let localizedString = NSLocalizedString("Add some shots\nto buckets   first!", comment: "")
         let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
         
         let textAttachment: NSTextAttachment = NSTextAttachment()

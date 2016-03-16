@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 /// Provides interface for dribbble followers and followees update, delete, create API
-final class APIConnectionsRequester: Verifiable {
+class APIConnectionsRequester: Verifiable {
     
     /**
      Adds authenticated user to given user followers.
@@ -45,6 +45,33 @@ final class APIConnectionsRequester: Verifiable {
         
         let query = UnfollowUserQuery(user: user)
         return sendConnectionQuery(query)
+    }
+    
+    /**
+     Checks whether user is followed by authenticated user or not.
+     
+     - Requires: Authenticated user.
+     
+     - parameter user: User to check.
+     
+     - returns: Promise which resolves with true (if current user follows given user) or false (if doesn't)
+     */
+    func isUserFollowedByMe(user: UserType) -> Promise<Bool> {
+        
+        return Promise<Bool> { fulfill, reject in
+            
+            let query = UserFollowedByMeQuery(user: user)
+            
+            firstly {
+                sendConnectionQuery(query)
+            }.then { _ in
+                fulfill(true)
+            }.error { error in
+                // According to API documentation, when response.code is 404,
+                // then user is not followed by authenticated user.
+                (error as NSError).code == 404 ? fulfill(false) : reject(error)
+            }
+        }
     }
 }
 

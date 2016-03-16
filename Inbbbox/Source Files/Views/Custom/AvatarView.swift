@@ -12,11 +12,11 @@ class AvatarView: UIView {
     
     let imageView = UIImageView()
     
-    convenience init (size: CGSize, bordered: Bool = true) {
-        self.init(avatarFrame: CGRect(origin: CGPointZero, size: size), bordered: bordered)
+    convenience init (size: CGSize, bordered: Bool = true, borderWidth: CGFloat = 10) {
+        self.init(avatarFrame: CGRect(origin: CGPointZero, size: size), bordered: bordered, borderWidth: borderWidth)
     }
     
-    convenience init(avatarFrame: CGRect, bordered: Bool = true) {
+    convenience init(avatarFrame: CGRect, bordered: Bool = true, borderWidth: CGFloat = 10) {
         self.init(frame: avatarFrame)
         if bordered {
             layer.cornerRadius = CGRectGetHeight(frame) * 0.5
@@ -25,7 +25,7 @@ class AvatarView: UIView {
             layer.shadowRadius = 5
             layer.shadowOpacity = 1
             layer.borderColor = UIColor.whiteColor().CGColor
-            layer.borderWidth = 10
+            layer.borderWidth = borderWidth
         }
     }
     
