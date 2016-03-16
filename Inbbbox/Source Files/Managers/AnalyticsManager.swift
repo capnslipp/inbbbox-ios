@@ -9,27 +9,15 @@
 import Foundation
 
 enum AnalyticsScreen: String {
-    case LoginView = "Login View",
-         FolloweesView = "Followees View",
-         ShotsView = "Shots View",
-         SettingsView = "Settings View",
-         BucketsView = "Buckets View",
-         LikesView = "Likes View",
-         ShotDetailsView = "Shot Details View",
-         ShotBucketsView = "Shot Buckets View"
+    case LoginView, FolloweesView, ShotsView, SettingsView, BucketsView, LikesView, ShotDetailsView, ShotBucketsView
 }
 
 enum AnalyticsLoginEvent: String {
-    case LoginSucceeded = "Login succeeded",
-         LoginFailed = "Login failed",
-         LoginAsGuest = "Login as guest"
+    case LoginSucceeded, LoginFailed, LoginAsGuest
 }
 
-enum AnalyticsAction: UInt {
-    case Like = 1,
-         AddToBucket,
-         Comment,
-         SwipeDown
+enum AnalyticsUserActionEvent: String {
+    case Like, AddToBucket, Comment, SwipeDown
 }
 
 class AnalyticsManager {
@@ -52,9 +40,9 @@ class AnalyticsManager {
         tracker.send(event)
     }
 
-    class func trackAction(action: AnalyticsAction) {
+    class func trackUserActionEvent(userActionEvent: AnalyticsUserActionEvent) {
         let tracker = GAI.sharedInstance().defaultTracker
-        let metricForAction = GAIFields.customMetricForIndex(action.rawValue)
-        tracker.set(metricForAction, value: 1.stringValue)
+        let event = GAIDictionaryBuilder.createEventWithCategory("UserAction", action: userActionEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
+        tracker.send(event)
     }
 }

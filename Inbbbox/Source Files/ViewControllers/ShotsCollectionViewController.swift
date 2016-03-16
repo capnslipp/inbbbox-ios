@@ -148,7 +148,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let currentPageIndex = Int(scrollView.contentOffset.y / CGRectGetHeight(scrollView.frame))
         if maximumPageViewed < currentPageIndex {
-            AnalyticsManager.trackAction(.SwipeDown)
+            AnalyticsManager.trackUserActionEvent(.SwipeDown)
             maximumPageViewed = currentPageIndex
         }
     }
@@ -175,7 +175,7 @@ private extension ShotsCollectionViewController {
 
     func likeShot(shot: ShotType) {
 
-        AnalyticsManager.trackAction(.Like)
+        AnalyticsManager.trackUserActionEvent(.Like)
         if self.isShotLiked(shot) {
             return
         }
