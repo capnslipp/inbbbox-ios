@@ -24,8 +24,12 @@ class UserDetailsViewController: UIViewController {
     // Layout related properties
     var oneColumnLayoutCellHeightToWidthRatio = CGFloat(0.75)
     var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(0.75)
-    private var oneColumnLayoutButton: UIBarButtonItem?
-    private var twoColumnsLayoutButton: UIBarButtonItem?
+    lazy private var oneColumnLayoutButton: UIBarButtonItem = { [unowned self] in
+        return UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
+    }()
+    lazy private var twoColumnsLayoutButton: UIBarButtonItem = { [unowned self] in
+        UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
+    }()
     private var isCurrentLayoutOneColumn: Bool {
         get {
             return userDetailsView.collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout)
@@ -196,15 +200,12 @@ private extension UserDetailsViewController {
     // MARK: Configuration
     
     func setupBarButtons() {
-        // NGRTodo: set images instead of title
-        oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
-        twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
-        navigationItem.rightBarButtonItems = [oneColumnLayoutButton!, twoColumnsLayoutButton!]
+        navigationItem.rightBarButtonItems = [oneColumnLayoutButton, twoColumnsLayoutButton]
     }
     
     func updateBarButtons(layout: UICollectionViewLayout) {
-        oneColumnLayoutButton?.tintColor = !isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
-        twoColumnsLayoutButton?.tintColor = isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        oneColumnLayoutButton.tintColor = !isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        twoColumnsLayoutButton.tintColor = isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
     }
     
     // MARK: Actions:
