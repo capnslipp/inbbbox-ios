@@ -111,11 +111,15 @@ extension SettingsViewController {
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        let notificationsTitle = NSLocalizedString("NOTIFICATIONS", comment: "")
+        let streamSourcesTitle = NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
+        
         switch section {
-            case 0: return nil
-            case 1: return NSLocalizedString("NOTIFICATIONS", comment: "")
-            case 2: return NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
-            default: return ""
+            case 0: return viewModel.userMode == .LoggedUser ? notificationsTitle : nil
+            case 1: return viewModel.userMode == .LoggedUser ? streamSourcesTitle : notificationsTitle
+            case 2: return viewModel.userMode == .LoggedUser ? nil : streamSourcesTitle
+            default: return nil
         }
     }
 
