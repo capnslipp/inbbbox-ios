@@ -294,6 +294,14 @@
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
 		F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060D45A1C3170A300AFDD82 /* DatePickerView.swift */; };
+		F065DB381C96A44D00A99B0E /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */; };
+		F065DB3A1C96A5E100A99B0E /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */; };
+		F065DB3C1C96B3D600A99B0E /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */; };
+		F065DB3E1C96BE5000A99B0E /* UserDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */; };
+		F065DB431C96EFCF00A99B0E /* UserFollowedByMeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */; };
+		F065DB451C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB441C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift */; };
+		F065DB471C98411F00A99B0E /* UserDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */; };
+		F065DB491C9846E800A99B0E /* APIConnectionsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */; };
 		F07B598E1C3FF02000F5CB86 /* AddToBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */; };
 		F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */; };
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
@@ -641,6 +649,14 @@
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
 		F060D45A1C3170A300AFDD82 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
+		F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
+		F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
+		F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsHeaderView.swift; sourceTree = "<group>"; };
+		F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFollowedByMeQuery.swift; sourceTree = "<group>"; };
+		F065DB441C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFollowedByMeQuerySpec.swift; sourceTree = "<group>"; };
+		F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModelSpec.swift; sourceTree = "<group>"; };
+		F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConnectionsRequesterMock.swift; sourceTree = "<group>"; };
 		F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuery.swift; sourceTree = "<group>"; };
 		F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuery.swift; sourceTree = "<group>"; };
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
@@ -921,6 +937,7 @@
 				5C9549811C8479B100269467 /* ManagedShotsProviderSpec.swift */,
 				5C24CFF51C85AD1900F0687A /* ShotsProviderSpec.swift */,
 				F0A0287C1C91A0AE0072719B /* APITeamsProviderSpec.swift */,
+				F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */,
 			);
 			path = "Unit Tests";
 			sourceTree = "<group>";
@@ -1002,6 +1019,7 @@
 				5E91A6381C73802E00C9D609 /* UnfollowUserQuery.swift */,
 				F033BBD31C9015C400E3DE64 /* CreateBucketQuery.swift */,
 				F0A0286E1C9181590072719B /* TeamMembersQuery.swift */,
+				F065DB421C96EFCF00A99B0E /* UserFollowedByMeQuery.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1025,6 +1043,7 @@
 				F060D45A1C3170A300AFDD82 /* DatePickerView.swift */,
 				5E0D03871C760AB100DDB497 /* ShotDetailsView.swift */,
 				F00232881C7DCABE003020BD /* ShotBucketsView.swift */,
+				F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */,
 			);
 			path = "Controllers View";
 			sourceTree = "<group>";
@@ -1054,6 +1073,7 @@
 				F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */,
 				C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */,
 				5E320C621C84826F00607F48 /* ActivityIndicatorSelectableView.swift */,
+				F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1121,6 +1141,7 @@
 				74F00B691C5A0A7E00D00A39 /* TwoLayoutsCollectionViewController.swift */,
 				5E0D03851C760A7900DDB497 /* ShotDetailsViewController.swift */,
 				F00232821C7DC798003020BD /* ShotBucketsViewController.swift */,
+				F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1177,6 +1198,7 @@
 				5E91A63C1C73822C00C9D609 /* UnfollowUserQuerySpec.swift */,
 				F033BBD71C903C8F00E3DE64 /* CreateBucketQuerySpec.swift */,
 				F0A028731C91963F0072719B /* TeamMembersQuerySpec.swift */,
+				F065DB441C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -1381,6 +1403,7 @@
 				74AC19791C7DFD280008DB12 /* BucketsViewModel.swift */,
 				74E2D96B1C808FFB0059A90C /* FolloweesViewModel.swift */,
 				74C608C01C8451E30012B5DF /* LikesViewModel.swift */,
+				F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1474,6 +1497,7 @@
 				F0F122211C84505100F6949B /* APIShotsRequesterMock.swift */,
 				5C24CFF71C85AF5A00F0687A /* APIShotsProviderMock.swift */,
 				5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */,
+				F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */,
 			);
 			path = "Mock Objects";
 			sourceTree = "<group>";
@@ -1713,6 +1737,7 @@
 				5E781B491C58D8B5009A2E14 /* Bucket.swift in Sources */,
 				5EB896C61C5257E800AC2F3D /* LoginViewAnimator.swift in Sources */,
 				5E2E730A1C2BF9EF00D5BC80 /* DateCell.swift in Sources */,
+				F065DB381C96A44D00A99B0E /* UserDetailsViewController.swift in Sources */,
 				F09307CC1C2407D4005F5111 /* UIViewControllerExtension.swift in Sources */,
 				BF29C2571B4AA5500053378F /* AppDelegate.swift in Sources */,
 				5E3FCF721C904AF100B67F13 /* ScrollViewAutoScroller.swift in Sources */,
@@ -1747,6 +1772,7 @@
 				BF9508561C1F1BD000E39242 /* Shot.swift in Sources */,
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
 				5EB87A761C5A123700CB2A7B /* Responsable.swift in Sources */,
+				F065DB431C96EFCF00A99B0E /* UserFollowedByMeQuery.swift in Sources */,
 				5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */,
 				5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */,
 				F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */,
@@ -1827,7 +1853,9 @@
 				5EB896C41C5257E800AC2F3D /* AutoScrollableShotsAnimator.swift in Sources */,
 				5E4857BA1C2805E10027B38A /* OAuthViewModel.swift in Sources */,
 				5EADE3AB1C6B61D100B03DAD /* Comment.swift in Sources */,
+				F065DB3C1C96B3D600A99B0E /* UserDetailsView.swift in Sources */,
 				5E5082101C313DFF00093191 /* AutoScrollableCollectionViewCell.swift in Sources */,
+				F065DB3E1C96BE5000A99B0E /* UserDetailsHeaderView.swift in Sources */,
 				5E31AB8D1C6CAAF0001BC1DF /* DeleteCommentQuery.swift in Sources */,
 				5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */,
 				5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */,
@@ -1898,6 +1926,7 @@
 				BEEE935A1E3E91D4E77DBB78 /* ManagedShotsProvider.swift in Sources */,
 				BEEE953B2D4281A172F275E2 /* Verifiable.swift in Sources */,
 				BEEE958FADD2DF3660AF918C /* PageableProvider.swift in Sources */,
+				F065DB3A1C96A5E100A99B0E /* UserDetailsViewModel.swift in Sources */,
 				BEEE9E6C54382350400239FD /* APIBucketsProvider.swift in Sources */,
 				BEEE909720C154D685312CA5 /* APIBucketsRequester.swift in Sources */,
 				BEEE9877C29DB839BC9263D3 /* APIConnectionsProvider.swift in Sources */,
@@ -1941,6 +1970,7 @@
 				5EEEC9A91C71E14000BB7237 /* ProjectsQuerySpec.swift in Sources */,
 				5E3509291C6266E9009386AE /* PageableComponentSpec.swift in Sources */,
 				5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */,
+				F065DB451C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift in Sources */,
 				5ED6C5B31C5768B200A591EA /* ShotsProviderConfigurationSpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageSpecExtension.swift in Sources */,
 				5E0D773B1C3BDEFD002191A7 /* UserStorageSpec.swift in Sources */,
@@ -1950,6 +1980,7 @@
 				5EE041B21C34009300657751 /* FormatterSpec.swift in Sources */,
 				5E35092B1C62692F009386AE /* RequestSpec.swift in Sources */,
 				74C608C31C8488840012B5DF /* LikesViewModelSpec.swift in Sources */,
+				F065DB471C98411F00A99B0E /* UserDetailsViewModelSpec.swift in Sources */,
 				5C24CFFA1C85B00700F0687A /* ManagedShotsProviderMock.swift in Sources */,
 				5EC0A7B11C3557A400846975 /* TokenStorageSpec.swift in Sources */,
 				5EE041B01C33EF9E00657751 /* OAuthAuthorizableSpec.swift in Sources */,
@@ -1996,6 +2027,7 @@
 				5EDB832A1C48DECE00FBCA05 /* UnlikeQuerySpec.swift in Sources */,
 				5E12C3691C734FF4003C6B48 /* APIShotsRequesterSpec.swift in Sources */,
 				BEEE97C466B2B34875189A0A /* DefaultViewControllerPresenterSpec.swift in Sources */,
+				F065DB491C9846E800A99B0E /* APIConnectionsRequesterMock.swift in Sources */,
 				5E12C36B1C7359BD003C6B48 /* APIBucketsRequesterSpec.swift in Sources */,
 				F033BBD81C903C8F00E3DE64 /* CreateBucketQuerySpec.swift in Sources */,
 				5E3509251C625C2A009386AE /* RequestableSpec.swift in Sources */,

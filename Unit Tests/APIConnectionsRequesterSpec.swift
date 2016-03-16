@@ -114,5 +114,49 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 }
             }
         }
+        
+        describe("when checking if current user follows an user") {
+            
+            var error: ErrorType?
+            var didInvokePromise: Bool?
+            
+            beforeEach {
+                error = nil
+                didInvokePromise = nil
+            }
+            
+            context("and token does not exist") {
+                
+                beforeEach {
+                    TokenStorage.clear()
+                }
+                
+                it("error should appear") {
+                    sut.isUserFollowedByMe(User.fixtureUser()).then { _ in
+                        fail("This should not be invoked")
+                    }.error { _error in
+                        error = _error
+                    }
+                    
+                    expect(error is VerifiableError).toEventually(beTruthy())
+                }
+            }
+            
+            context("and token does exist") {
+                
+                beforeEach {
+                    TokenStorage.storeToken("fixture.token")
+                    self.stub(everything, builder: json([], status: 204))
+                }
+                
+                it("should unfollow user") {
+                    sut.isUserFollowedByMe(User.fixtureUser()).then { _ in
+                        didInvokePromise = true
+                    }.error { _ in fail("This should not be invoked") }
+                    
+                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+                }
+            }
+        }
     }
 }
