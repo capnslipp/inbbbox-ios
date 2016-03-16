@@ -174,7 +174,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
-            header?.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
+            header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
         }
         
         return header!

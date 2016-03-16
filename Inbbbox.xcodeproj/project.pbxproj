@@ -294,6 +294,7 @@
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
 		F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060D45A1C3170A300AFDD82 /* DatePickerView.swift */; };
+		F065DB4B1C9952A700A99B0E /* CloseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB4A1C9952A700A99B0E /* CloseButtonView.swift */; };
 		F065DB381C96A44D00A99B0E /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */; };
 		F065DB3A1C96A5E100A99B0E /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */; };
 		F065DB3C1C96B3D600A99B0E /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */; };
@@ -649,6 +650,7 @@
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
 		F060D45A1C3170A300AFDD82 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		F065DB4A1C9952A700A99B0E /* CloseButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButtonView.swift; sourceTree = "<group>"; };
 		F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
 		F065DB3B1C96B3D600A99B0E /* UserDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
@@ -1073,6 +1075,7 @@
 				F00232941C7F5774003020BD /* ShotBucketsFooterView.swift */,
 				C663D7CE1C7C75A700353761 /* GifIndicatorView.swift */,
 				5E320C621C84826F00607F48 /* ActivityIndicatorSelectableView.swift */,
+				F065DB4A1C9952A700A99B0E /* CloseButtonView.swift */,
 				F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */,
 			);
 			path = Custom;
@@ -1923,6 +1926,7 @@
 				5EEEC9AB1C71E18C00BB7237 /* Project.swift in Sources */,
 				BEEE92200B045325A990FA23 /* ManagedTeam.swift in Sources */,
 				BEEE93ADCE1ABFFE6624BA25 /* TeamType.swift in Sources */,
+				F065DB4B1C9952A700A99B0E /* CloseButtonView.swift in Sources */,
 				BEEE935A1E3E91D4E77DBB78 /* ManagedShotsProvider.swift in Sources */,
 				BEEE953B2D4281A172F275E2 /* Verifiable.swift in Sources */,
 				BEEE958FADD2DF3660AF918C /* PageableProvider.swift in Sources */,

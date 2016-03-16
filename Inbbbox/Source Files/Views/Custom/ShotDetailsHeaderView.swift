@@ -29,7 +29,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     var imageView: UIImageView!
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     
-    let closeButton = UIButton(type: .System)
+    let closeButtonView = CloseButtonView.newAutoLayoutView()
     private let titleLabel = UILabel.newAutoLayoutView()
     private let overlapingTitleLabel = UILabel.newAutoLayoutView()
     private let dimView = UIView.newAutoLayoutView()
@@ -71,9 +71,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         
         addSubview(avatarView)
         
-        let image = UIImage(named: "ic-closemodal")?.imageWithRenderingMode(.AlwaysOriginal)
-        closeButton.setImage(image, forState: .Normal)
-        addSubview(closeButton)
+        addSubview(closeButtonView)
         
         setNeedsUpdateConstraints()
     }
@@ -124,9 +122,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             
             dimView.autoPinEdgesToSuperviewEdges()
             
-            closeButton.autoSetDimensionsToSize(closeButton.imageForState(.Normal)?.size ?? CGSizeZero)
-            closeButton.autoPinEdge(.Right, toEdge: .Right, ofView: imageViewCenterWrapperView, withOffset: -5)
-            closeButton.autoPinEdge(.Top, toEdge: .Top, ofView: imageViewCenterWrapperView, withOffset: 5)
+            closeButtonView.autoPinEdge(.Right, toEdge: .Right, ofView: imageViewCenterWrapperView, withOffset: -5)
+            closeButtonView.autoPinEdge(.Top, toEdge: .Top, ofView: imageViewCenterWrapperView, withOffset: 5)
         }
         
         super.updateConstraints()
