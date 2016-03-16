@@ -19,7 +19,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController,
     // MARK: - Lifecycle
     
     convenience init(bucket: BucketType) {
-        self.init(oneColumnLayoutCellHeightToWidthRatio: LikeCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: LikeCollectionViewCell.heightToWidthRatio)
+        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
         self.viewModel = BucketContentViewModel(bucket: bucket)
     }
     
@@ -32,7 +32,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController,
             return
         }
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
-        collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
     }
     
@@ -53,7 +53,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController,
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel!.shotCollectionViewCellViewData(indexPath)
         cell.shotImageView.loadImageFromURL(cellData.imageURL)
