@@ -75,7 +75,8 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // NGRTodo: present bucket details view controller
+        let bucketContentCollectionViewController = BucketContentCollectionViewController(bucket: viewModel.buckets[indexPath.row])
+        navigationController?.pushViewController(bucketContentCollectionViewController, animated: true)
     }
     
     // MARK: Configuration
