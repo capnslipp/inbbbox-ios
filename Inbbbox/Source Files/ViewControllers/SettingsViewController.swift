@@ -190,7 +190,7 @@ private extension SettingsViewController {
             return
         }
         if let user = viewModel.loggedInUser {
-            header.usernameLabel.text = user.username
+            header.usernameLabel.text = user.name ?? user.username
         } else {
             header.usernameLabel.text = NSLocalizedString("Guest?", comment: "")
         }
