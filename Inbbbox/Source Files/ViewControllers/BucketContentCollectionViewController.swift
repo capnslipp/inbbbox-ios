@@ -23,7 +23,6 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController,
         self.viewModel = BucketContentViewModel(bucket: bucket)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.delegate = self

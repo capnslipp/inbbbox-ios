@@ -53,7 +53,7 @@ class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
     
     func setupShotsView() {
         for view in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
-            view.backgroundColor = UIColor.followeeShotGrayColor()
+            view.backgroundColor = UIColor.cellBackgroundColor()
             shotsView.addSubview(view)
         }
     }

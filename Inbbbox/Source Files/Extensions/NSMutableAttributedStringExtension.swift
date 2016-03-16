@@ -10,6 +10,6 @@ import UIKit
 
 extension NSMutableAttributedString {
     class func emptyDataSetStyledString(string: String) -> NSMutableAttributedString {
-        return NSMutableAttributedString(string: string, attributes: [NSFontAttributeName: UIFont.helveticaFont(.NeueLight, size: 25), NSForegroundColorAttributeName: UIColor.followeeShotGrayColor()])
+        return NSMutableAttributedString(string: string, attributes: [NSFontAttributeName: UIFont.helveticaFont(.NeueLight, size: 25), NSForegroundColorAttributeName: UIColor.cellBackgroundColor()])
     }
 }

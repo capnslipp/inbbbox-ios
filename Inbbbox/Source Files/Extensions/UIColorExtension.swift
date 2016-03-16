@@ -42,7 +42,7 @@ extension UIColor {
         return RGBA(41, 41, 41, 1)
     }
     
-    class func followeeShotGrayColor() -> UIColor {
+    class func cellBackgroundColor() -> UIColor {
         return RGBA(223, 224, 226, 1)
     }
     
