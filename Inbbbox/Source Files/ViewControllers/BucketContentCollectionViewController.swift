@@ -11,9 +11,9 @@ import PromiseKit
 import ZFDragableModalTransition
 import DZNEmptyDataSet
 
-class BucketContentCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
+class BucketContentCollectionViewController: TwoLayoutsCollectionViewController {
     
-    var viewModel: BucketContentViewModel?
+    var viewModel: BucketContentViewModel!
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     // MARK: - Lifecycle
@@ -25,8 +25,8 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel?.delegate = self
-        self.title = viewModel?.title
+        viewModel.delegate = self
+        self.title = viewModel.title
         guard let collectionView = collectionView else {
             return
         }
@@ -83,8 +83,9 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController,
         
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
-    
-    // MARK: Base Collection View View Model Delegate
+}
+
+extension BucketContentCollectionViewController: BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
         if self.viewModel?.shots.count == 0 {
@@ -100,8 +101,9 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController,
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
-    
-    // MARK: Empty Data Set Data Source Methods
+}
+
+extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
     
     func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
         return UIImage(named: "logo-empty")
