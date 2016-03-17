@@ -237,7 +237,7 @@ extension SettingsViewController {
 
     func didTapLogOutButton(_: UIBarButtonItem) {
         Authenticator.logout()
-         UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
+        UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
     }
 }
 
