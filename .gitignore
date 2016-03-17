@@ -17,6 +17,7 @@
 *.moved-aside
 *.hmap
 *.ipa
+.env
 
 # Xcode user-specific directories
 xcuserdata
