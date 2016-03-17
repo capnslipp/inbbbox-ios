@@ -11,7 +11,7 @@ import PromiseKit
 import ZFDragableModalTransition
 import DZNEmptyDataSet
 
-class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
+class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
     let viewModel = LikesViewModel()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
@@ -77,8 +77,9 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
-    
-    // MARK: Base Collection View View Model Delegate
+}
+
+extension LikesCollectionViewController : BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
         self.canEmptyDataBeVisible = true
@@ -92,28 +93,28 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
-    
-    // MARK: Empty Data Set Data Source Methods
+}
+
+extension LikesCollectionViewController: DZNEmptyDataSetSource {
     
     func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
         return UIImage(named: "logo-empty")
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let localizedString = NSLocalizedString("Like   some shots first!", comment: "")
-        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
-        
+        let firstLocalizedString = NSLocalizedString("Like ", comment: "")
+        let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
         let textAttachment: NSTextAttachment = NSTextAttachment()
-        
         textAttachment.image = UIImage(named: "ic-like-emptystate")
         if let image = textAttachment.image {
             textAttachment.bounds = CGRect(x: 0, y: -2, width: image.size.width, height: image.size.height)
         }
-        
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
-        
-        attributedString.replaceCharactersInRange(NSMakeRange(5, 1), withAttributedString: attributedStringWithImage)
-        return attributedString
+        compoundAttributedString.appendAttributedString(attributedStringWithImage)
+        let lastLocalizedString = NSLocalizedString(" some shots first!", comment: "")
+        let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
+        compoundAttributedString.appendAttributedString(lastAttributedString)
+        return compoundAttributedString
     }
     
     func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
