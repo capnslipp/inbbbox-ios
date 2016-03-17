@@ -28,7 +28,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     private let commentLabel = UILabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
     
-    // Regards clickable links in description label
+    // Regards clickable links in comment label
     private let layoutManager = NSLayoutManager()
     private let textContainer = NSTextContainer(size: CGSizeZero)
     lazy private var textStorage: NSTextStorage = { [unowned self] in
