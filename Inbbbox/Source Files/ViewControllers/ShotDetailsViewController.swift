@@ -420,16 +420,28 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
     
     func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer, textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
         
-        let locationOfTouchInLabel = gestureRecognizer.locationInView(gestureRecognizer.view)
-        let labelSize = gestureRecognizer.view?.bounds.size ?? CGSizeZero
-        let textBoundingBox = layoutManager.usedRectForTextContainer(textContainer)
-        let textContainerOffset = CGPointMake((labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
-            (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
-        let locationOfTouchInTextContainer = CGPointMake(locationOfTouchInLabel.x - textContainerOffset.x,
-            locationOfTouchInLabel.y - textContainerOffset.y)
-        let indexOfCharacter = layoutManager.characterIndexForPoint(locationOfTouchInTextContainer, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        guard let view = gestureRecognizer.view else { return }
         
-        let url = (gestureRecognizer.view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName, atIndex: indexOfCharacter, effectiveRange: nil) as? NSURL
+        var locationOfTouchInLabel = gestureRecognizer.locationInView(gestureRecognizer.view)
+        let glyphRange = layoutManager.glyphRangeForTextContainer(textContainer)
+        
+        let textOffset: CGPoint = {
+            var textOffset = CGPointZero
+            let textBounds = layoutManager.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer)
+            let paddingHeight = (view.bounds.size.height - textBounds.size.height) / 2;
+            if paddingHeight > 0 {
+                textOffset.y = paddingHeight;
+            }
+            return textOffset;
+        }()
+
+        locationOfTouchInLabel.x -= textOffset.x;
+        locationOfTouchInLabel.y -= textOffset.y;
+        
+        let glyphIndex = layoutManager.glyphIndexForPoint(locationOfTouchInLabel, inTextContainer: textContainer)
+        let locationIndex = layoutManager.characterIndexForGlyphAtIndex(glyphIndex)
+        
+        let url = (view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName, atIndex: locationIndex, effectiveRange: nil) as? NSURL
         
         if let url = url {
             UIApplication.sharedApplication().openURL(url)
