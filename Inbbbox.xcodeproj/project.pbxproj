@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3005FD021C9AAB910038F3E3 /* UIWindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3005FD011C9AAB910038F3E3 /* UIWindowExtension.swift */; };
 		302BA0851C68B8DD00028476 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */; };
 		5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */; };
 		5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */; };
@@ -342,6 +343,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3005FD011C9AAB910038F3E3 /* UIWindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowExtension.swift; sourceTree = "<group>"; };
 		302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -1326,6 +1328,7 @@
 				C6BC8EE11C8DBAD800A03714 /* UIImageViewExtension.swift */,
 				C63370ED1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift */,
 				F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */,
+				3005FD011C9AAB910038F3E3 /* UIWindowExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1812,6 +1815,7 @@
 				302BA0851C68B8DD00028476 /* UITextFieldExtension.swift in Sources */,
 				5E498D531C24649900CFD918 /* UINavigationControllerExtension.swift in Sources */,
 				BF6961201C1B470B000FC5D8 /* Query.swift in Sources */,
+				3005FD021C9AAB910038F3E3 /* UIWindowExtension.swift in Sources */,
 				5E31DBAE1C71E88800D5C5DB /* ShotLikedByMeQuery.swift in Sources */,
 				BF9508581C1F1D8700E39242 /* Mappable.swift in Sources */,
 				5E50820E1C3132AF00093191 /* LoginView.swift in Sources */,
