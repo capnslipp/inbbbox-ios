@@ -39,8 +39,8 @@ class BucketContentViewModel: BaseCollectionViewViewModel {
         }.then { shots -> Void in
             if let shots = shots where shots != self.shots {
                 self.shots = shots
-                self.delegate?.viewModelDidLoadInitialItems()
             }
+            self.delegate?.viewModelDidLoadInitialItems()
         }.error { error in
             // NGRTemp: Need mockups for error message view
             print(error)

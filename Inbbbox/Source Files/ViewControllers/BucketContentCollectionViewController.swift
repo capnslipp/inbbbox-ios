@@ -15,6 +15,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
     
     var viewModel: BucketContentViewModel?
     var modalTransitionAnimator: ZFModalTransitionAnimator?
+    var canEmptyDataBeVisible = false
     
     // MARK: - Lifecycle
     
@@ -33,6 +34,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self 
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -88,9 +90,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
 extension BucketContentCollectionViewController: BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
-        if self.viewModel?.shots.count == 0 {
-            collectionView!.emptyDataSetSource = self
-        }
+        canEmptyDataBeVisible = true
         collectionView?.reloadData()
     }
     
@@ -136,5 +136,12 @@ extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
     
     func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
+    }
+}
+
+extension BucketContentCollectionViewController: DZNEmptyDataSetDelegate {
+    
+    func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
+        return canEmptyDataBeVisible
     }
 }
