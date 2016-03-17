@@ -13,7 +13,7 @@ import DZNEmptyDataSet
 
 class BucketContentCollectionViewController: TwoLayoutsCollectionViewController {
     
-    var viewModel: BucketContentViewModel!
+    var viewModel: BucketContentViewModel?
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     // MARK: - Lifecycle
@@ -25,8 +25,8 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
-        self.title = viewModel.title
+        viewModel?.delegate = self
+        self.title = viewModel?.title
         guard let collectionView = collectionView else {
             return
         }
