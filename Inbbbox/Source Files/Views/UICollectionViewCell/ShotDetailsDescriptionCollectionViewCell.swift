@@ -9,7 +9,16 @@ import UIKit
 
 class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     
-    let descriptionLabel = UILabel.newAutoLayoutView()
+    var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
+    
+    private let descriptionLabel = UILabel.newAutoLayoutView()
+    
+    // Regards clickable links in description label
+    private let layoutManager = NSLayoutManager()
+    private let textContainer = NSTextContainer(size: CGSizeZero)
+    lazy private var textStorage: NSTextStorage = { [unowned self] in
+       return NSTextStorage(attributedString: self.descriptionLabel.attributedText ?? NSAttributedString())
+    }()
     
     private let separatorView = UIView.newAutoLayoutView()
     private var didUpdateConstraints = false
@@ -20,6 +29,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = UIColor.whiteColor()
         
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.userInteractionEnabled = true
         contentView.addSubview(descriptionLabel)
         
         separatorView.backgroundColor = .separatorGrayColor()
@@ -36,6 +46,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         
         let insets = self.dynamicType.contentInsets
         descriptionLabel.preferredMaxLayoutWidth = frame.size.width - insets.left - insets.right
+        textContainer.size = descriptionLabel.bounds.size
     }
 
     override func updateConstraints() {
@@ -57,6 +68,29 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         descriptionLabel.attributedText = nil
+    }
+}
+
+// MARK: Regards clickable links in description label
+
+extension ShotDetailsDescriptionCollectionViewCell {
+    
+    func setDescriptionLabelAttributedText(attributedText: NSAttributedString) {
+        
+        descriptionLabel.attributedText = attributedText
+        
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = descriptionLabel.lineBreakMode
+        textContainer.maximumNumberOfLines = descriptionLabel.numberOfLines
+        
+        descriptionLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "descriptionLabelDidTap:"))
+    }
+    
+    func descriptionLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
+        delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer, layoutManager: layoutManager)
     }
 }
 

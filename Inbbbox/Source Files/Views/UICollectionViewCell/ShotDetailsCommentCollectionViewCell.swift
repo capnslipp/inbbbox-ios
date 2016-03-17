@@ -18,13 +18,22 @@ private var horizontalSpaceBetweenAvatarAndText: CGFloat {
 
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
+    var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
+    
     var deleteActionHandler: (() -> Void)?
     
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = UILabel.newAutoLayoutView()
-    let commentLabel = UILabel.newAutoLayoutView()
     let dateLabel = UILabel.newAutoLayoutView()
+    private let commentLabel = UILabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
+    
+    // Regards clickable links in description label
+    private let layoutManager = NSLayoutManager()
+    private let textContainer = NSTextContainer(size: CGSizeZero)
+    lazy private var textStorage: NSTextStorage = { [unowned self] in
+        return NSTextStorage(attributedString: self.commentLabel.attributedText ?? NSAttributedString())
+    }()
     
     private var didUpdateConstraints = false
     
@@ -46,6 +55,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
         commentLabel.numberOfLines = 0
         commentLabel.lineBreakMode = .ByWordWrapping
+        commentLabel.userInteractionEnabled = true
         contentView.addSubview(commentLabel)
         
         dateLabel.numberOfLines = 0
@@ -71,6 +81,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         authorLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         dateLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         commentLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
+        
+        textContainer.size = commentLabel.bounds.size
     }
     
     override func updateConstraints() {
@@ -123,9 +135,27 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     func showEditView(show: Bool) {
         editView.hidden = !show
     }
+    
+    func setCommentLabelAttributedText(attributedText: NSAttributedString) {
+        
+        commentLabel.attributedText = attributedText
+        
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        textContainer.lineFragmentPadding = 0.0
+        textContainer.lineBreakMode = commentLabel.lineBreakMode
+        textContainer.maximumNumberOfLines = commentLabel.numberOfLines
+        
+        commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "commentLabelDidTap:"))
+    }
 }
 
 extension ShotDetailsCommentCollectionViewCell {
+    
+    func commentLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
+        delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer, layoutManager: layoutManager)
+    }
     
     func deleteButtonDidTap(_: UIButton) {
         deleteActionHandler?()

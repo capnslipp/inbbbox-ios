@@ -9,6 +9,11 @@
 import UIKit
 import PromiseKit
 
+protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate {
+    
+    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer, textContainer: NSTextContainer, layoutManager: NSLayoutManager)
+}
+
 final class ShotDetailsViewController: UIViewController {
     
     var shouldScrollToMostRecentMessage = false
@@ -122,7 +127,10 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             
-            cell.descriptionLabel.attributedText = viewModel.attributedShotDescription
+            if let description = viewModel.attributedShotDescription {
+                cell.setDescriptionLabelAttributedText(description)
+            }
+            cell.delegate = self
 
             return cell
             
@@ -135,12 +143,15 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
 
             cell.authorLabel.attributedText = data.author
-            cell.commentLabel.attributedText = data.comment
+            if let comment = data.comment {
+                cell.setCommentLabelAttributedText(comment)
+            }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"))
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
+            cell.delegate = self
 
             return cell
         }
@@ -402,3 +413,27 @@ private extension ShotDetailsViewController {
         footer?.grayOutBackground(shouldGrayOut)
     }
 }
+
+// MARK: UICollectionViewCellWithLabelContainingClickableLinksDelegate
+
+extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClickableLinksDelegate {
+    
+    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer, textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
+        
+        let locationOfTouchInLabel = gestureRecognizer.locationInView(gestureRecognizer.view)
+        let labelSize = gestureRecognizer.view?.bounds.size ?? CGSizeZero
+        let textBoundingBox = layoutManager.usedRectForTextContainer(textContainer)
+        let textContainerOffset = CGPointMake((labelSize.width - textBoundingBox.size.width) * 0.5 - textBoundingBox.origin.x,
+            (labelSize.height - textBoundingBox.size.height) * 0.5 - textBoundingBox.origin.y)
+        let locationOfTouchInTextContainer = CGPointMake(locationOfTouchInLabel.x - textContainerOffset.x,
+            locationOfTouchInLabel.y - textContainerOffset.y)
+        let indexOfCharacter = layoutManager.characterIndexForPoint(locationOfTouchInTextContainer, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        let url = (gestureRecognizer.view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName, atIndex: indexOfCharacter, effectiveRange: nil) as? NSURL
+        
+        if let url = url {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+}
+
