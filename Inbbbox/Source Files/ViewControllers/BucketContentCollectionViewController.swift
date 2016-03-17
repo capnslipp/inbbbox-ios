@@ -110,9 +110,9 @@ extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let localizedString = NSLocalizedString("Add some shots\nto this bucket   first", comment: "")
-        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
-        
+        let firstLocalizedString = NSLocalizedString("Add some shots\nto this bucket ", comment: "")
+       
+        let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
         let textAttachment: NSTextAttachment = NSTextAttachment()
         
         textAttachment.image = UIImage(named: "ic-bucket-emptystate")
@@ -121,9 +121,13 @@ extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
         }
         
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
+        compoundAttributedString.appendAttributedString(attributedStringWithImage)
         
-        attributedString.replaceCharactersInRange(NSMakeRange(30, 1), withAttributedString: attributedStringWithImage)
-        return attributedString
+        let lastLocalizedString = NSLocalizedString(" first", comment: "")
+        let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
+        
+        compoundAttributedString.appendAttributedString(lastAttributedString)
+        return compoundAttributedString
     }
     
     func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
