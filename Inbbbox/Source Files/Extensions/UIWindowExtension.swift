@@ -31,11 +31,6 @@ extension UIWindow {
         }
         
         /// The presenting view controllers view doesn't get removed from the window as its currently transistioning and presenting a view controller
-        if let transitionViewClass = NSClassFromString("UITransitionView") {
-            for subview in subviews where subview.isKindOfClass(transitionViewClass) {
-                subview.removeFromSuperview()
-            }
-        }
         if let previousViewController = previousViewController {
             // Allow the view controller to be deallocated
             previousViewController.dismissViewControllerAnimated(false) {
