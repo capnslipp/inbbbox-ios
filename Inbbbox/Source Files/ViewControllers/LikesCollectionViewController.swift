@@ -15,6 +15,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     
     let viewModel = LikesViewModel()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
+    private var canEmptyDataBeVisible = false
     
     // MARK: - Lifecycle
     
@@ -28,6 +29,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -79,9 +81,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     // MARK: Base Collection View View Model Delegate
     
     func viewModelDidLoadInitialItems() {
-        if self.viewModel.likedShots.count == 0 {
-            collectionView!.emptyDataSetSource = self
-        }
+        self.canEmptyDataBeVisible = true
         collectionView?.reloadData()
     }
     
@@ -122,5 +122,12 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     
     func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
+    }
+}
+
+extension LikesCollectionViewController: DZNEmptyDataSetDelegate {
+    
+    func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
+        return canEmptyDataBeVisible
     }
 }

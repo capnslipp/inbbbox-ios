@@ -15,7 +15,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
     
     var viewModel: BucketContentViewModel?
     var modalTransitionAnimator: ZFModalTransitionAnimator?
-    var canEmptyDataBeVisible = false
+    private var canEmptyDataBeVisible = false
     
     // MARK: - Lifecycle
     
