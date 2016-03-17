@@ -10,6 +10,14 @@ class CenterButtonTabBarController: UITabBarController {
     let centerButton = RoundedButton()
     let shotsCollectionViewController = ShotsCollectionViewController()
     var didUpdateTabBarItems = false
+    
+    enum CenterButtonViewControllers: Int {
+        case Likes = 0
+        case Buckets = 1
+        case Shots = 2
+        case Followees = 3
+        case Accounts = 4
+    }
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
@@ -44,13 +52,15 @@ class CenterButtonTabBarController: UITabBarController {
         
         tabBar.translucent = false
         centerButton.configureForAutoLayout()
-        centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Normal)
+        centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Selected)
+        centerButton.setImage(UIImage(named: "ic-ball-inactive"), forState: .Normal)
         centerButton.backgroundColor = UIColor.whiteColor()
         centerButton.layer.zPosition = 1;
         centerButton.addTarget(self, action: "didTapCenterButton:", forControlEvents: .TouchUpInside)
         tabBar.addSubview(centerButton)
         centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
         centerButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 8.0)
+        delegate = self
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -63,12 +73,22 @@ class CenterButtonTabBarController: UITabBarController {
             }
         }
         tabBar.bringSubviewToFront(centerButton)
+        centerButton.selected = true
     }
 
 //    MARK: - Actions
 
     func didTapCenterButton(_: UIButton) {
+        centerButton.selected = true
         selectedViewController = shotsCollectionViewController
+    }
+}
+
+extension CenterButtonTabBarController: UITabBarControllerDelegate {
+    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        if (selectedIndex != CenterButtonViewControllers.Shots.rawValue) {
+            centerButton.selected = false
+        }
     }
 }
 
