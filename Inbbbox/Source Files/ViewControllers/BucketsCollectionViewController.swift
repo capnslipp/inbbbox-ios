@@ -10,9 +10,10 @@ import UIKit
 import PromiseKit
 import DZNEmptyDataSet
 
-class BucketsCollectionViewController: UICollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
+class BucketsCollectionViewController: UICollectionViewController {
 
     private let viewModel = BucketsViewModel()
+    private var canEmptyDataBeVisible = false
 
     // MARK: - Lifecycle
 
@@ -33,6 +34,7 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(BucketCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -102,13 +104,12 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
         self.presentViewController(alert, animated: true, completion: nil)
         alert.view.tintColor = .pinkColor()
     }
-    
-    // MARK: Base Collection View View Model Delegate
+}
+
+extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
-        if self.viewModel.buckets.count == 0 {
-            collectionView!.emptyDataSetSource = self
-        }
+        canEmptyDataBeVisible = true
         collectionView?.reloadData()
     }
     
@@ -119,28 +120,28 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
-    
-    // MARK: Empty Data Set Data Source Methods
+}
+
+extension BucketsCollectionViewController: DZNEmptyDataSetSource {
     
     func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
         return UIImage(named: "logo-empty")
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let localizedString = NSLocalizedString("Add some shots\nto buckets   first!", comment: "")
-        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
-        
+        let firstLocalizedString = NSLocalizedString("Add some shots\nto buckets ", comment: "")
+        let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
         let textAttachment: NSTextAttachment = NSTextAttachment()
-        
         textAttachment.image = UIImage(named: "ic-bucket-emptystate")
         if let image = textAttachment.image {
             textAttachment.bounds = CGRect(x: 0, y: -4, width: image.size.width, height: image.size.height)
         }
-        
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
-        
-        attributedString.replaceCharactersInRange(NSMakeRange(26, 1), withAttributedString: attributedStringWithImage)
-        return attributedString
+        compoundAttributedString.appendAttributedString(attributedStringWithImage)
+        let lastLocalizedString = NSLocalizedString(" first!", comment: "")
+        let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
+        compoundAttributedString.appendAttributedString(lastAttributedString)
+        return compoundAttributedString
     }
     
     func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
@@ -149,5 +150,11 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
     
     func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
         return -40
+    }
+}
+
+extension BucketsCollectionViewController: DZNEmptyDataSetDelegate {
+    func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
+        return canEmptyDataBeVisible
     }
 }
