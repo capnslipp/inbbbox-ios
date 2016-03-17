@@ -111,21 +111,16 @@ extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
         let firstLocalizedString = NSLocalizedString("Add some shots\nto this bucket ", comment: "")
-       
         let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
         let textAttachment: NSTextAttachment = NSTextAttachment()
-        
         textAttachment.image = UIImage(named: "ic-bucket-emptystate")
         if let image = textAttachment.image {
             textAttachment.bounds = CGRect(x: 0, y: -4, width: image.size.width, height: image.size.height)
         }
-        
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
         compoundAttributedString.appendAttributedString(attributedStringWithImage)
-        
         let lastLocalizedString = NSLocalizedString(" first", comment: "")
         let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
-        
         compoundAttributedString.appendAttributedString(lastAttributedString)
         return compoundAttributedString
     }
