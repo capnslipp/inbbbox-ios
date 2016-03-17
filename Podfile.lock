@@ -10,6 +10,7 @@ PODS:
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
   - KeychainAccess (2.3.4)
+  - Keys (1.0.0)
   - Mockingjay (1.1.1):
     - Mockingjay/Core (= 1.1.1)
     - Mockingjay/XCTest (= 1.1.1)
@@ -55,6 +56,7 @@ DEPENDENCIES:
   - HanekeSwift (~> 0.10.1)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
+  - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
   - Nimble (~> 3.1)
   - PromiseKit (~> 3.0)
@@ -68,6 +70,8 @@ EXTERNAL SOURCES:
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
+  Keys:
+    :path: Pods/CocoaPodsKeys
 
 CHECKOUT OPTIONS:
   EasyAnimation:
@@ -84,6 +88,7 @@ SPEC CHECKSUMS:
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   KeychainAccess: 3a21b6944b4f2a22653f091d770cf10374961a94
+  Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430
   Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
   OMGHTTPURLRQ: 633f98ee745aeda02345935a52eec1784cddb589
