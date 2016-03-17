@@ -1,8 +1,8 @@
 //
-//  LikesCollectionViewController.swift
+//  BucketContentCollectionViewController.swift
 //  Inbbbox
 //
-//  Created by Aleksander Popko on 26.01.2016.
+//  Created by Aleksander Popko on 15.03.2016.
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
@@ -11,17 +11,22 @@ import PromiseKit
 import ZFDragableModalTransition
 import DZNEmptyDataSet
 
-class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCollectionViewViewModelDelegate, DZNEmptyDataSetSource {
+class BucketContentCollectionViewController: TwoLayoutsCollectionViewController {
     
-    let viewModel = LikesViewModel()
+    var viewModel: BucketContentViewModel?
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     // MARK: - Lifecycle
     
+    convenience init(bucket: BucketType) {
+        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
+        self.viewModel = BucketContentViewModel(bucket: bucket)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
-        self.title = viewModel.title
+        viewModel?.delegate = self
+        self.title = viewModel?.title
         guard let collectionView = collectionView else {
             return
         }
@@ -29,27 +34,27 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.clearViewModelIfNeeded()
+        viewModel?.clearViewModelIfNeeded()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.downloadInitialItems()
+        viewModel?.downloadInitialItems()
     }
     
     // MARK: UICollectionViewDataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.itemsCount
+        return viewModel!.itemsCount
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
-        let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
+        let cellData = viewModel!.shotCollectionViewCellViewData(indexPath)
         cell.shotImageView.loadImageFromURL(cellData.imageURL)
         cell.gifLabel.hidden = !cellData.animated
         return cell
@@ -58,14 +63,18 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == viewModel.itemsCount {
-            viewModel.downloadItemsForNextPage()
+        if indexPath.row == viewModel!.itemsCount {
+            viewModel?.downloadItemsForNextPage()
         }
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
-        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.likedShots[indexPath.item])
+        
+        guard let viewModel = viewModel else {
+            return
+        }
+        
+        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
         
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
         
@@ -74,11 +83,12 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
-    
-    // MARK: Base Collection View View Model Delegate
+}
+
+extension BucketContentCollectionViewController: BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
-        if self.viewModel.likedShots.count == 0 {
+        if self.viewModel?.shots.count == 0 {
             collectionView!.emptyDataSetSource = self
         }
         collectionView?.reloadData()
@@ -91,28 +101,33 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
-    
-    // MARK: Empty Data Set Data Source Methods
+}
+
+extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
     
     func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
         return UIImage(named: "logo-empty")
     }
     
     func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let localizedString = NSLocalizedString("Like   some shots first!", comment: "")
-        let attributedString = NSMutableAttributedString.emptyDataSetStyledString(localizedString)
-        
+        let firstLocalizedString = NSLocalizedString("Add some shots\nto this bucket ", comment: "")
+       
+        let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
         let textAttachment: NSTextAttachment = NSTextAttachment()
         
-        textAttachment.image = UIImage(named: "ic-like-emptystate")
+        textAttachment.image = UIImage(named: "ic-bucket-emptystate")
         if let image = textAttachment.image {
-            textAttachment.bounds = CGRect(x: 0, y: -2, width: image.size.width, height: image.size.height)
+            textAttachment.bounds = CGRect(x: 0, y: -4, width: image.size.width, height: image.size.height)
         }
         
         let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
+        compoundAttributedString.appendAttributedString(attributedStringWithImage)
         
-        attributedString.replaceCharactersInRange(NSMakeRange(5, 1), withAttributedString: attributedStringWithImage)
-        return attributedString
+        let lastLocalizedString = NSLocalizedString(" first", comment: "")
+        let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
+        
+        compoundAttributedString.appendAttributedString(lastAttributedString)
+        return compoundAttributedString
     }
     
     func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {

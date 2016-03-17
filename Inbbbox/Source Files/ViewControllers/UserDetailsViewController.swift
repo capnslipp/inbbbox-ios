@@ -64,7 +64,7 @@ class UserDetailsViewController: UIViewController {
         
         userDetailsView.collectionView.delegate = self
         userDetailsView.collectionView.dataSource = self
-        userDetailsView.collectionView.registerClass(LikeCollectionViewCell.self, type: .Cell)
+        userDetailsView.collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         userDetailsView.collectionView.registerClass(UserDetailsHeaderView.self, type: .Header)
         
         do { // hides bottom border of navigationBar
@@ -132,7 +132,7 @@ extension UserDetailsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableClass(LikeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
         cell.shotImageView.loadImageFromURL(cellData.imageURL)

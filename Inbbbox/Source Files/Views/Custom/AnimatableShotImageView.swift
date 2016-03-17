@@ -19,7 +19,7 @@ class AnimatableShotImageView: AnimatableImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .followeeShotGrayColor()
+        backgroundColor = .cellBackgroundColor()
         contentMode = .ScaleAspectFill
         
         addSubview(activityIndicatorView)

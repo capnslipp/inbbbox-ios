@@ -1,5 +1,5 @@
 //
-//  LikeCollectionViewCell.swift
+//  SimpleShotCollectionViewCell.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 26.01.2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
+class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
     
     let shotImageView = UIImageView.newAutoLayoutView()
     let gifLabel = GifIndicatorView.newAutoLayoutView()
@@ -27,6 +27,7 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeig
     }
     
     func commonInit() {
+        backgroundColor = UIColor.cellBackgroundColor()
         contentView.addSubview(shotImageView)
         contentView.addSubview(gifLabel)
         contentView.layer.cornerRadius = 5
@@ -51,7 +52,7 @@ class LikeCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeig
     
     // MARK: - Reusable
     static var reuseIdentifier: String {
-        return "LikeCollectionViewCellIdentifier"
+        return "SimpleShotCollectionViewCellIdentifier"
     }
     
     //MARK: - Width dependent height
