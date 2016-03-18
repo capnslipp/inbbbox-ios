@@ -39,10 +39,11 @@ class BucketsCollectionViewController: UICollectionViewController, BaseCollectio
         super.viewWillAppear(animated)
         viewModel.clearViewModelIfNeeded()
     }
-
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
+        AnalyticsManager.trackScreen(.BucketsView)
     }
 
     // MARK: UICollectionViewDataSource

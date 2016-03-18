@@ -66,7 +66,12 @@ class ShotBucketsViewController: UIViewController {
         shotBucketsView.collectionView.registerClass(ShotBucketsHeaderView.self, type: .Header)
         shotBucketsView.collectionView.registerClass(ShotBucketsFooterView.self, type: .Footer)
     }
-    
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        AnalyticsManager.trackScreen(.ShotBucketsView)
+    }
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -165,6 +170,7 @@ extension ShotBucketsViewController: UICollectionViewDelegateFlowLayout {
 extension ShotBucketsViewController {
     
     func closeButtonDidTap(_: UIButton) {
+        self.dismissClosure?()
         dismissViewControllerAnimated(true, completion: nil)
     }
     

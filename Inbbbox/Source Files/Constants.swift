@@ -7,18 +7,30 @@
 //
 
 import Foundation
-import Keys
 
 struct Dribbble {
     static let Host = "api.dribbble.com"
     static let APIVersion = "/v1"
-    static let ClientID: String = InbbboxKeys().clientID()
-    static let ClientSecret: String = InbbboxKeys().clientSecret()
-    static let ClientAccessToken: String = InbbboxKeys().clientAccessToken()
+    static let ClientID: String = SecretKeysProvider.secretValueForKey("ClientID")!
+    static let ClientSecret: String = SecretKeysProvider.secretValueForKey("ClientSecret")!
+    static let ClientAccessToken: String = SecretKeysProvider.secretValueForKey("ClientAccessToken")!
     static let CallbackURLString = "https://tindddler.netguru.co"
 
     static let RequestTokenURLString = "https://dribbble.com/oauth/authorize"
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"
     static let Scope = "public+write+comment"
     static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
+
+    static var GATrackingId: String? {
+#if Production
+        if let trackingId = SecretKeysProvider.secretValueForKey("ProductionGATrackingId") {
+            return trackingId
+        }
+#else
+        if let trackingId = SecretKeysProvider.secretValueForKey("StagingGATrackingId") {
+            return trackingId
+        }
+#endif
+        return nil
+    }
 }

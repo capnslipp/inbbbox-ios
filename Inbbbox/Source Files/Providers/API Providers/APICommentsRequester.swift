@@ -24,7 +24,7 @@ class APICommentsRequester: Verifiable {
      - returns: Promise which resolves with created comment.
      */
     func postCommentForShot(shot: ShotType, withText text: String) -> Promise<CommentType> {
-
+        AnalyticsManager.trackUserActionEvent(.Comment)
         let query = CreateCommentQuery(shot: shot, body: text)
         return sendCommentQuery(query, verifyTextLength: text)
     }

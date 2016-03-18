@@ -48,12 +48,10 @@ class ShotsProvider {
     }
 
     func nextPage() -> Promise<[ShotType]?> {
-        assert(userStorageClass.isUserSignedIn, "Cannot provide shots for next page when user is not signed in")
         return apiShotsProvider.nextPage()
     }
 
     func previousPage() -> Promise<[ShotType]?> {
-        assert(userStorageClass.isUserSignedIn, "Cannot provide shots for previous page when user is not signed in")
         return apiShotsProvider.previousPage()
     }
 }

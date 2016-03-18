@@ -23,7 +23,6 @@ class APIShotsRequester: Verifiable {
      - returns: Promise which resolves with void.
      */
     func likeShot(shot: ShotType) -> Promise<Void> {
-        
         let query = LikeQuery(shot: shot)
         return sendShotQuery(query)
     }

@@ -29,15 +29,16 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController, BaseCol
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.clearViewModelIfNeeded()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
+        AnalyticsManager.trackScreen(.LikesView)
     }
     
     // MARK: UICollectionViewDataSource

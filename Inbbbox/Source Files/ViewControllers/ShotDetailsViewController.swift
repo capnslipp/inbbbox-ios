@@ -94,6 +94,8 @@ final class ShotDetailsViewController: UIViewController {
                 self.viewModel.isCommentingAvailable ? self.shotDetailsView.commentComposerView.makeActive() : self.scroller.scrollToBottomAnimated(true)
             }
         }
+
+        AnalyticsManager.trackScreen(.ShotDetailsView)
     }
 }
 
@@ -394,7 +396,6 @@ private extension ShotDetailsViewController {
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
         shotBucketsViewController.dismissClosure =  { [weak self] in
-            
             guard let certainSelf = self else { return }
             self?.animateHeader(start: true)
             certainSelf.viewModel.clearBucketsData()
@@ -409,7 +410,7 @@ private extension ShotDetailsViewController {
     
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
-            start ? imageView.stopAnimatingGIF() : imageView.startAnimatingGIF()
+            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
         }
     }
     

@@ -53,15 +53,19 @@ class Authenticator {
         return Promise<Void> { fulfill, reject in
             firstly {
                 controller.startAuthentication()
-            }.then { accessToken in
+            }.then { accessToken -> Void in
                 self.persistToken(accessToken)
             }.then {
                 self.fetchUser()
             }.then { user in
                 self.persistUser(user)
-            }.then {
+            }.then { () -> Void in
+                AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginSucceeded)
                 fulfill()
-            }.error(reject)
+            }.error { error -> Void in
+                AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginFailed)
+                reject(error)
+            }
         }
     }
     
