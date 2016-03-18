@@ -23,11 +23,16 @@ enum AnalyticsUserActionEvent: String {
 class AnalyticsManager {
 
     class func setupAnalytics() {
-        GAI.sharedInstance().trackerWithTrackingId(Dribbble.GATrackingId)
+        guard let trackingId = Dribbble.GATrackingId else {
+            return
+        }
+        GAI.sharedInstance().trackerWithTrackingId(trackingId)
     }
 
     class func trackScreen(screen: AnalyticsScreen) {
-        let tracker = GAI.sharedInstance().defaultTracker
+        guard let tracker = GAI.sharedInstance().defaultTracker else {
+            return
+        }
         tracker.set(kGAIScreenName, value: screen.rawValue)
 
         let screenView = GAIDictionaryBuilder.createScreenView().build() as [NSObject:AnyObject]
@@ -35,13 +40,17 @@ class AnalyticsManager {
     }
 
     class func trackLoginEvent(loginEvent: AnalyticsLoginEvent) {
-        let tracker = GAI.sharedInstance().defaultTracker
+        guard let tracker = GAI.sharedInstance().defaultTracker else {
+            return
+        }
         let event = GAIDictionaryBuilder.createEventWithCategory("Login", action: loginEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
         tracker.send(event)
     }
 
     class func trackUserActionEvent(userActionEvent: AnalyticsUserActionEvent) {
-        let tracker = GAI.sharedInstance().defaultTracker
+        guard let tracker = GAI.sharedInstance().defaultTracker else {
+            return
+        }
         let event = GAIDictionaryBuilder.createEventWithCategory("UserAction", action: userActionEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
         tracker.send(event)
     }
