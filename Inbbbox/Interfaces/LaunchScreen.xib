@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,31 +11,71 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Netguru sp. z o.o. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="439" width="441" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shots-bcg" translatesAutoresizingMaskIntoConstraints="NO" id="hGo-67-VeM">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-intro-gradient" translatesAutoresizingMaskIntoConstraints="NO" id="Iai-Wx-v6u">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-inbbbox" translatesAutoresizingMaskIntoConstraints="NO" id="c8z-DF-Nmi">
+                    <rect key="frame" x="170" y="50" width="140" height="140"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="140" id="MAH-n0-L0q"/>
+                        <constraint firstAttribute="width" secondItem="c8z-DF-Nmi" secondAttribute="height" multiplier="1:1" id="T9l-od-Y40"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright (c) 2016 Netguru.co" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                    <rect key="frame" x="20" y="445" width="441" height="14.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" red="0.97647058819999999" green="0.84705882349999995" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inbbbox" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="140" width="441" height="43"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Each shot swipes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4n-DZ-xsB">
+                    <rect key="frame" x="145" y="220" width="189.5" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="52G-qv-cNi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="25"/>
+                    <color key="textColor" red="0.97647058823529409" green="0.84705882352941175" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-ball-splash" translatesAutoresizingMaskIntoConstraints="NO" id="Qof-uV-WkO">
+                    <rect key="frame" x="212" y="292" width="56" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="56" id="LvM-VU-6eE"/>
+                        <constraint firstAttribute="width" secondItem="Qof-uV-WkO" secondAttribute="height" multiplier="1:1" id="pRb-UK-iC4"/>
+                    </constraints>
+                </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="1/3" constant="1" id="5cJ-9S-tgC"/>
-                <constraint firstAttribute="centerX" secondItem="kId-c2-rCX" secondAttribute="centerX" id="Koa-jz-hwk"/>
+                <constraint firstAttribute="bottom" secondItem="Iai-Wx-v6u" secondAttribute="bottom" id="4S8-tc-IL1"/>
+                <constraint firstItem="E4n-DZ-xsB" firstAttribute="centerY" secondItem="Iai-Wx-v6u" secondAttribute="centerY" id="BeZ-kg-Uso"/>
+                <constraint firstItem="E4n-DZ-xsB" firstAttribute="centerX" secondItem="Iai-Wx-v6u" secondAttribute="centerX" id="Cir-7V-KDk"/>
+                <constraint firstItem="Iai-Wx-v6u" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="EDb-nM-Ieh"/>
+                <constraint firstAttribute="trailing" secondItem="hGo-67-VeM" secondAttribute="trailing" id="HSe-pj-B50"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
+                <constraint firstItem="hGo-67-VeM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PCg-Vo-5jn"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="fvb-Df-36g"/>
+                <constraint firstItem="c8z-DF-Nmi" firstAttribute="centerX" secondItem="Iai-Wx-v6u" secondAttribute="centerX" id="cfS-FL-tHt"/>
+                <constraint firstAttribute="bottom" secondItem="Qof-uV-WkO" secondAttribute="bottom" constant="132" id="eOW-3i-VbC"/>
+                <constraint firstItem="E4n-DZ-xsB" firstAttribute="top" secondItem="c8z-DF-Nmi" secondAttribute="bottom" constant="30" id="esr-V9-h4V"/>
+                <constraint firstItem="Qof-uV-WkO" firstAttribute="centerX" secondItem="Iai-Wx-v6u" secondAttribute="centerX" id="jhr-mZ-9Cl"/>
+                <constraint firstAttribute="trailing" secondItem="Iai-Wx-v6u" secondAttribute="trailing" id="mB4-DE-BSC"/>
+                <constraint firstItem="Iai-Wx-v6u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="myU-uQ-7Gr"/>
+                <constraint firstItem="hGo-67-VeM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ugJ-Fd-cGC"/>
+                <constraint firstAttribute="bottom" secondItem="hGo-67-VeM" secondAttribute="bottom" id="yax-ni-x9O"/>
             </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
+    <resources>
+        <image name="bg-intro-gradient" width="375" height="667"/>
+        <image name="ic-ball-splash" width="56" height="56"/>
+        <image name="logo-inbbbox" width="140" height="139"/>
+        <image name="shots-bcg" width="375" height="667"/>
+    </resources>
 </document>
