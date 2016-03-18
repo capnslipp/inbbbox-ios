@@ -278,3 +278,9 @@ extension ShotBucketsViewController {
         return cell
     }
 }
+
+extension ShotBucketsViewController: ModalByDraggingClosable {
+    var scrollViewToObserve: UIScrollView {
+        return shotBucketsView.collectionView
+    }
+}

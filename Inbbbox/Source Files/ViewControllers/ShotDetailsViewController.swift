@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import ZFDragableModalTransition
 
 protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate {
     
@@ -26,6 +27,7 @@ final class ShotDetailsViewController: UIViewController {
     private let viewModel: ShotDetailsViewModel
     private var scroller = ScrollViewAutoScroller()
     private var onceTokenForShouldScrollToMessagesOnOpenFlag = dispatch_once_t(0)
+    private var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     init(shot: ShotType) {
         self.viewModel = ShotDetailsViewModel(shot: shot)
@@ -398,7 +400,10 @@ private extension ShotDetailsViewController {
             certainSelf.viewModel.clearBucketsData()
             certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
-        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
+        
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
+        shotBucketsViewController.transitioningDelegate = modalTransitionAnimator
+        shotBucketsViewController.modalPresentationStyle = .Custom
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
     
