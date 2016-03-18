@@ -23,9 +23,9 @@ struct Dribbble {
     static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
     
     #if Production
-    static let GATrackingId = "UA-74924140-2"
+    static let GATrackingId = InbbboxKeys().productionGATrackingId()
     #else
-    static let GATrackingId = "UA-74924140-1"
+    static let GATrackingId = InbbboxKeys().stagingGATrackingId()
     #endif
     
 }

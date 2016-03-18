@@ -19,7 +19,9 @@ plugin 'cocoapods-keys', {
     :keys => [
         "ClientID",
         "ClientSecret",
-        "ClientAccessToken"
+        "ClientAccessToken",
+        "ProductionGATrackingId",
+        "StagingGATrackingId"
     ]
 }
 
