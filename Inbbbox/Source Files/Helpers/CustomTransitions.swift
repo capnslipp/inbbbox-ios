@@ -20,7 +20,6 @@ class CustomTransitions {
         modalTransitionAnimator.dragable = true
         modalTransitionAnimator.direction = ZFModalTransitonDirection.Bottom
         modalTransitionAnimator.setContentScrollView(modalViewController.scrollViewToObserve)
-        modalTransitionAnimator.behindViewAlpha = 0.5
         
         return modalTransitionAnimator
     }
