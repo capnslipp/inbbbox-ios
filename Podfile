@@ -5,6 +5,15 @@
 #
 
 # Pod sources
+require 'dotenv'
+require 'osx_keychain'
+Dotenv.load
+@keychain = OSXKeychain.new
+
+def has_defined_key(key)
+    @keychain["cocoapods-keys-#{key}"].nil? && ENV[key].nil?
+end
+
 source 'https://github.com/CocoaPods/Specs.git'
 
 # Initial configuration
@@ -14,15 +23,24 @@ use_frameworks!
 
 xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
 
+keys = [
+    'ClientID',
+    'ClientSecret',
+    'ClientAccessToken'
+]
+
+optional_keys = [
+    'ProductionGATrackingId',
+    'StagingGATrackingId'
+]
+
+optional_keys.each do |key|
+    keys << key unless has_defined_key(key)
+end
+
 plugin 'cocoapods-keys', {
-    :project => "Inbbbox",
-    :keys => [
-        "ClientID",
-        "ClientSecret",
-        "ClientAccessToken",
-        "ProductionGATrackingId",
-        "StagingGATrackingId"
-    ]
+    :project => 'Inbbbox',
+    :keys => keys
 }
 
 pod 'AsyncSwift', '~> 1.6'
@@ -42,8 +60,8 @@ pod 'SwiftyUserDefaults', '~> 2.0'
 pod 'GPUImage', '~> 0.1'
 
 pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
-    :git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git',
-    :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
+:git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git',
+:commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
 
 pod 'Gifu', '~> 1.0.1'
 
@@ -58,16 +76,16 @@ pod 'GoogleAnalytics', '~> 3.14.0'
 target 'Tests' do link_with 'Unit Tests'
 
     pod 'Quick', '~> 0.8',
-        :configurations => ['Test']
+    :configurations => ['Test']
 
     pod 'Nimble', '~> 3.1',
-        :configurations => ['Test']
+    :configurations => ['Test']
 
     pod 'Dobby', '~> 0.4.2',
-        :configurations => ['Test']
+    :configurations => ['Test']
 
     pod 'Mockingjay', '~> 1.1',
-        :configurations => ['Test']
+    :configurations => ['Test']
 end
 
 post_install do |installer|
@@ -77,31 +95,31 @@ post_install do |installer|
         {
             'iPhone Developer' => ['Debug', 'Development', 'Test'],
             'iPhone Distribution' => ['Release', 'Staging', 'Production'],
-        }.each { |value, configs|
-            target.set_build_setting('CODE_SIGN_IDENTITY[sdk=iphoneos*]', value, configs)
+            }.each { |value, configs|
+                target.set_build_setting('CODE_SIGN_IDENTITY[sdk=iphoneos*]', value, configs)
+            }
         }
-    }
 
-end
-
-class Xcodeproj::Project::Object::PBXNativeTarget
-
-    def set_build_setting setting, value, config = nil
-        unless config.nil?
-            if config.kind_of?(Xcodeproj::Project::Object::XCBuildConfiguration)
-                config.build_settings[setting] = value
-            elsif config.kind_of?(String)
-                build_configurations
-                .select { |config_obj| config_obj.name == config }
-                .each { |config| set_build_setting(setting, value, config) }
-            elsif config.kind_of?(Array)
-                config.each { |config| set_build_setting(setting, value, config) }
-            else
-                raise 'Unsupported configuration type: ' + config.class.inspect
-            end
-        else
-            set_build_setting(setting, value, build_configurations)
-        end
     end
 
-end
+    class Xcodeproj::Project::Object::PBXNativeTarget
+
+        def set_build_setting setting, value, config = nil
+            unless config.nil?
+                if config.kind_of?(Xcodeproj::Project::Object::XCBuildConfiguration)
+                    config.build_settings[setting] = value
+                elsif config.kind_of?(String)
+                    build_configurations
+                    .select { |config_obj| config_obj.name == config }
+                    .each { |config| set_build_setting(setting, value, config) }
+                elsif config.kind_of?(Array)
+                    config.each { |config| set_build_setting(setting, value, config) }
+                else
+                    raise 'Unsupported configuration type: ' + config.class.inspect
+                end
+            else
+                set_build_setting(setting, value, build_configurations)
+            end
+        end
+
+    end
