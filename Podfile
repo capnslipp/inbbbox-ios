@@ -14,6 +14,15 @@ use_frameworks!
 
 xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
 
+plugin 'cocoapods-keys', {
+    :project => "Inbbbox",
+    :keys => [
+        "ClientID",
+        "ClientSecret",
+        "ClientAccessToken"
+    ]
+}
+
 pod 'AsyncSwift', '~> 1.6'
 
 pod 'KeychainAccess', '~> 2.3'
