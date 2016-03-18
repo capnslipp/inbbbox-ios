@@ -203,7 +203,11 @@ private extension ShotsCollectionViewController {
 
     func presentShotBucketsViewController(shot: ShotType) {
         let shotBucketsViewController = ShotBucketsViewController(shot: shot, mode: .AddToBucket)
-        shotBucketsViewController.modalPresentationStyle = .OverFullScreen
+        
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
+        
+        shotBucketsViewController.transitioningDelegate = modalTransitionAnimator
+        shotBucketsViewController.modalPresentationStyle = .Custom
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
 }
