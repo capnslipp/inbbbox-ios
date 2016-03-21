@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3005FD021C9AAB910038F3E3 /* UIWindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3005FD011C9AAB910038F3E3 /* UIWindowExtension.swift */; };
 		302BA0851C68B8DD00028476 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */; };
+		308437BD1C9C0BF800C737D8 /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308437BC1C9C0BF800C737D8 /* DataDownloader.swift */; };
 		5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */; };
 		5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */; };
 		5A499B691C35411F009AB421 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B681C35411F009AB421 /* UIColorExtension.swift */; };
@@ -358,6 +359,7 @@
 /* Begin PBXFileReference section */
 		3005FD011C9AAB910038F3E3 /* UIWindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowExtension.swift; sourceTree = "<group>"; };
 		302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		308437BC1C9C0BF800C737D8 /* DataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDownloader.swift; sourceTree = "<group>"; };
 		5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5A499B681C35411F009AB421 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -1402,6 +1404,7 @@
 				5E498D501C2453E000CFD918 /* OAuthAuthorizable.swift */,
 				5EE65FA51C5A7EC30055F1AB /* PageableComponent.swift */,
 				5E22ADCC1C635813008D900C /* PageableComponentSerializer.swift */,
+				308437BC1C9C0BF800C737D8 /* DataDownloader.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -1883,6 +1886,7 @@
 				5E0899CE1C32A71E009FB52B /* ORLoginLabel.swift in Sources */,
 				5E0899D01C32A784009FB52B /* UIFontExtension.swift in Sources */,
 				F0F5010B1C75E52D00E8959E /* ShotDetailsViewModel.swift in Sources */,
+				308437BD1C9C0BF800C737D8 /* DataDownloader.swift in Sources */,
 				74E10F601C91D8C700D7D413 /* ShotCellCommentActionAnimationDescriptor.swift in Sources */,
 				5E4857CA1C2854F80027B38A /* UnlikeQuery.swift in Sources */,
 				5EEEC9A31C71C86B00BB7237 /* Team.swift in Sources */,
