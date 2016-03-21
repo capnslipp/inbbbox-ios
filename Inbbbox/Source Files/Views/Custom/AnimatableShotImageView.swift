@@ -70,16 +70,16 @@ class AnimatableShotImageView: AnimatableImageView {
     }
     
     private func setImageWithData(data: NSData) {
-        Async.main(block: {_ in
+        Async.main {
             self.progressView.hidden = true
             self.animateWithImageData(data)
-        })
+        }
     }
     
     private func updateWithProgress(progress: Float) {
-        Async.main(block: {_ in
+        Async.main {
             self.progressView.setProgress(progress, animated: true)
-        })
+        }
     }
 }
 
