@@ -10,10 +10,11 @@ import UIKit
 import PureLayout
 import Gifu
 import Haneke
+import Async
 
 class AnimatableShotImageView: AnimatableImageView {
-    
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
+    let downloader = DataDownloader()
+    private let progressView = UIProgressView.newAutoLayoutView()
     private var didSetupConstraints = false
     
     override init(frame: CGRect) {
@@ -21,8 +22,11 @@ class AnimatableShotImageView: AnimatableImageView {
         
         backgroundColor = .cellBackgroundColor()
         contentMode = .ScaleAspectFill
-        
-        addSubview(activityIndicatorView)
+        progressView.progressViewStyle = .Bar
+        progressView.trackTintColor = .cellBackgroundColor()
+        progressView.progressTintColor = .pinkColor()
+        progressView.setProgress(0, animated: false)
+        addSubview(progressView)
     }
     
     @available(*, unavailable, message="Use init(frame:) method instead")
@@ -38,18 +42,43 @@ class AnimatableShotImageView: AnimatableImageView {
         
         if !didSetupConstraints {
             didSetupConstraints = true
-            
-            activityIndicatorView.autoCenterInSuperview()
+
+            progressView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            let progressInset = CGFloat(10)
+            progressView.autoPinEdgeToSuperviewEdge(.Leading, withInset: progressInset)
+            progressView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: progressInset)
         }
         
         super.updateConstraints()
     }
     
     func loadAnimatableShotFromUrl(url: NSURL) {
-        activityIndicatorView.startAnimating()
-        Shared.dataCache.fetch(URL: url, formatName: CacheManager.gifFormatName, failure: nil) { [weak self] data in
-            self?.animateWithImageData(data)
-            self?.activityIndicatorView.stopAnimating()
+        Shared.dataCache.fetch(key: url.absoluteString, failure: { _ in
+            self.fetchWithURL(url)
+        }, success: { data in
+            self.setImageWithData(data)
+        })
+    }
+    
+    private func fetchWithURL(url: NSURL) {
+        downloader.fetchData(url, progress: { [weak self] progress in
+            self?.updateWithProgress(progress)
+        }) { [weak self] data in
+            self?.setImageWithData(data)
+            Shared.dataCache.set(value: data, key: url.absoluteString, formatName: CacheManager.gifFormatName, success: nil)
+        }
+    }
+    
+    private func setImageWithData(data: NSData) {
+        Async.main {
+            self.progressView.hidden = true
+            self.animateWithImageData(data)
+        }
+    }
+    
+    private func updateWithProgress(progress: Float) {
+        Async.main {
+            self.progressView.setProgress(progress, animated: true)
         }
     }
 }
