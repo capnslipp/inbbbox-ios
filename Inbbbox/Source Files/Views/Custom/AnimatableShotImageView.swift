@@ -53,31 +53,31 @@ class AnimatableShotImageView: AnimatableImageView {
     }
     
     func loadAnimatableShotFromUrl(url: NSURL) {
-        Shared.dataCache.fetch(key: url.absoluteString, failure: { (error) -> () in
+        Shared.dataCache.fetch(key: url.absoluteString, failure: { _ in
             self.fetchWithURL(url)
-            }, success: { (data) -> () in
-                self.setImageWithData(data)
+        }, success: { data in
+            self.setImageWithData(data)
         })
     }
     
     private func fetchWithURL(url: NSURL) {
         downloader.fetchData(url, progress: { [weak self] progress in
             self?.updateWithProgress(progress)
-            }) { [weak self] data in
-                self?.setImageWithData(data)
-                Shared.dataCache.set(value: data, key: url.absoluteString)
+        }) { [weak self] data in
+            self?.setImageWithData(data)
+            Shared.dataCache.set(value: data, key: url.absoluteString, formatName: CacheManager.gifFormatName, success: nil)
         }
     }
     
     private func setImageWithData(data: NSData) {
-        Async.main(block: { () -> Void in
+        Async.main(block: {_ in
             self.progressView.hidden = true
             self.animateWithImageData(data)
         })
     }
     
     private func updateWithProgress(progress: Float) {
-        Async.main(block: { () -> Void in
+        Async.main(block: {_ in
             self.progressView.setProgress(progress, animated: true)
         })
     }
