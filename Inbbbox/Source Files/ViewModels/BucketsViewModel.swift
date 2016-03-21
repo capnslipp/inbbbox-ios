@@ -35,7 +35,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         }.then { buckets -> Void in
             var bucketsShouldBeReloaded = true
             if let buckets = buckets {
-                if buckets == self.buckets {
+                if buckets == self.buckets && buckets.count != 0 {
                     bucketsShouldBeReloaded = false
                 }
                 self.buckets = buckets

@@ -30,7 +30,7 @@ class LikesViewModel: BaseCollectionViewViewModel {
         firstly {
             shotsProvider.provideMyLikedShots()
         }.then { shots -> Void in
-            if let shots = shots where shots != self.likedShots {
+            if let shots = shots where shots != self.likedShots || shots.count == 0 {
                 self.likedShots = shots
                 self.delegate?.viewModelDidLoadInitialItems()
             }
