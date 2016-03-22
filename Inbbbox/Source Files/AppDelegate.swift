@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let userInfo = [
                 NSLocalizedDescriptionKey: "Failed to initialize the application's saved data",
                 NSLocalizedFailureReasonErrorKey: "There was an error creating or loading the application's saved data.",
-                NSUnderlyingErrorKey: error as NSError
+                NSUnderlyingErrorKey: error as! NSError
             ]
 
             let wrappedError = NSError(domain: "co.netguru.inbbbox.coredata", code: 1001, userInfo: userInfo)

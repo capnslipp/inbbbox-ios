@@ -11,6 +11,13 @@ enum ShotsCollectionViewControllerState {
 class ShotsCollectionViewControllerStateManager {
 
     var currentState: ShotsCollectionViewControllerState
+    
+    let shotsCollectionViewFlowLayout = ShotsCollectionViewFlowLayout()
+    let initialAnimationsShotsCollectionViewLayout = InitialAnimationsShotsCollectionViewLayout()
+    
+    let shotsOnboardingDataSource = ShotsOnboardingDataSource()
+    let shotsInitialAnimationsDataSource = ShotsInitialAnimationsDataSource()
+    let shotsNormalDataSource = ShotsNormalDataSource()
 
     init() {
 //        let onboarding = NSUserDefaults.standardUserDefaults().boolForKey("Onboarding")
@@ -21,20 +28,20 @@ class ShotsCollectionViewControllerStateManager {
     var collectionViewLayout: UICollectionViewLayout {
         switch currentState {
         case .Onboarding, .Normal:
-            return ShotsCollectionViewFlowLayout()
+            return shotsCollectionViewFlowLayout
         case .InitialAnimations:
-            return InitialAnimationsShotsCollectionViewLayout()
+            return initialAnimationsShotsCollectionViewLayout
         }
     }
 
-    var shotsCollectionViewDataSource: UICollectionViewDataSource {
+    var shotsCollectionViewDataSource: ShotsDataSource {
         switch currentState {
         case .Onboarding:
-            return ShotsOnboardingDataSource()
+            return shotsOnboardingDataSource
         case .InitialAnimations:
-            return ShotsInitialAnimationsDataSource()
+            return shotsInitialAnimationsDataSource
         case .Normal:
-            return ShotsNormalDataSource()
+            return shotsNormalDataSource
         }
     }
 }

@@ -2,15 +2,15 @@
 // Copyright (c) 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ShotsInitialAnimationsDataSource: NSObject, UICollectionViewDataSource {
+class ShotsInitialAnimationsDataSource: ShotsDataSource {
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func itemsCountForShots(shots: [ShotType], collectionView: UICollectionView, section: Int) -> Int {
         return 0
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
         return UICollectionViewCell()
     }
 }
