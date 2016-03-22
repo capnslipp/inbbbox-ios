@@ -37,6 +37,8 @@ extension ShotsCollectionViewController {
         collectionView?.pagingEnabled = true
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
+        collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
+        tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
     }
     
     override func viewDidAppear(animated: Bool) {
