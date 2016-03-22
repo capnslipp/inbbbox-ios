@@ -45,10 +45,10 @@ class CenterButtonTabBarController: UITabBarController {
         tabBar.layer.shadowRadius = 1
         tabBar.layer.shadowOpacity = 0.6
         
-        _ =  { // these two lines hide top border line of tabBar - can't be separated, so I packed them into closure
+        do { // these two lines hide top border line of tabBar - can't be separated
             tabBar.shadowImage = UIImage()
             tabBar.backgroundImage = UIImage()
-        }()
+        }
         
         tabBar.translucent = false
         centerButton.configureForAutoLayout()
@@ -73,7 +73,9 @@ class CenterButtonTabBarController: UITabBarController {
             }
         }
         tabBar.bringSubviewToFront(centerButton)
-        centerButton.selected = true
+        if selectedViewController == shotsCollectionViewController {
+            centerButton.selected = true
+        }
     }
 
 //    MARK: - Actions
