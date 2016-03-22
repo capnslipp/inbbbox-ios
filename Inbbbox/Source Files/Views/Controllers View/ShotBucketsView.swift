@@ -13,7 +13,9 @@ class ShotBucketsView: UIView {
     
     let collectionView: UICollectionView
     
-    let topLayoutGuideOffset = CGFloat(40)
+    weak var viewController: UIViewController?
+    
+    private let offsetToTopLayoutGuide = CGFloat(20)
     
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
@@ -55,8 +57,9 @@ class ShotBucketsView: UIView {
             
             blurView.autoPinEdgesToSuperviewEdges()
             
-            let insets = UIEdgeInsets(top: topLayoutGuideOffset, left: 10, bottom: 0, right: 10)
-            collectionViewCornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
+            collectionViewCornerWrapperView.autoPinToTopLayoutGuideOfViewController(viewController ?? UIViewController(), withInset: offsetToTopLayoutGuide)
+            collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Left, withInset: 10)
+            collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Right, withInset: 10)
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom)
             
             collectionView.autoPinEdgesToSuperviewEdges()

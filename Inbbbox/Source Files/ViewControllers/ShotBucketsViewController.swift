@@ -55,7 +55,7 @@ class ShotBucketsViewController: UIViewController {
         }.error { error in
             print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
-        
+        shotBucketsView.viewController = self
         shotBucketsView.collectionView.delegate = self
         shotBucketsView.collectionView.dataSource = self
         shotBucketsView.collectionView.registerClass(ShotBucketsAddCollectionViewCell.self, type: .Cell)
