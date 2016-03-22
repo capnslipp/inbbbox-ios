@@ -11,8 +11,8 @@
 		302BA0851C68B8DD00028476 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */; };
 		3063BD711CA40A8800EA67AB /* SettingsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063BD701CA40A8800EA67AB /* SettingsSpec.swift */; };
 		308437BD1C9C0BF800C737D8 /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308437BC1C9C0BF800C737D8 /* DataDownloader.swift */; };
-		5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */; };
-		5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */; };
+		5A4005E41C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005E31C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift */; };
+		5A45E6401C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45E63F1C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift */; };
 		5A499B691C35411F009AB421 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B681C35411F009AB421 /* UIColorExtension.swift */; };
 		5A499B6B1C354154009AB421 /* ShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */; };
 		5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
@@ -342,6 +342,7 @@
 		F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501041C7211E200E8959E /* CommentEditView.swift */; };
 		F0F5010B1C75E52D00E8959E /* ShotDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5010A1C75E52D00E8959E /* ShotDetailsViewModel.swift */; };
 		FF13A3C0B9A1786150870E33 /* ShotsAnimatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A0AF874643193442C4BE /* ShotsAnimatorMock.swift */; };
+		FF13A52FC65B1DF6D519A2BA /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A48B8C3A795758FE3171 /* ShotsCollectionViewController.swift */; };
 		FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */; };
 		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */; };
 		FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */; };
@@ -365,8 +366,8 @@
 		302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		3063BD701CA40A8800EA67AB /* SettingsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSpec.swift; sourceTree = "<group>"; };
 		308437BC1C9C0BF800C737D8 /* DataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDownloader.swift; sourceTree = "<group>"; };
-		5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
-		5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
+		5A4005E31C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewControllerOld.swift; sourceTree = "<group>"; };
+		5A45E63F1C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialAnimationsShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5A499B681C35411F009AB421 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C0320E51C7B6B0E00F93FA3 /* ProjectsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsProvider.swift; sourceTree = "<group>"; };
@@ -714,6 +715,7 @@
 		FF13A1A2161AE07748341642 /* AsyncWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapper.swift; sourceTree = "<group>"; };
 		FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutSpec.swift; sourceTree = "<group>"; };
+		FF13A48B8C3A795758FE3171 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewMock.swift; sourceTree = "<group>"; };
 		FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapperMock.swift; sourceTree = "<group>"; };
@@ -1159,7 +1161,7 @@
 			isa = PBXGroup;
 			children = (
 				7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */,
-				5A4005E31C2418EB0010A500 /* ShotsCollectionViewController.swift */,
+				5A4005E31C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift */,
 				5E650B401C21884C00F8A192 /* LoginViewController.swift */,
 				F09307C71C240609005F5111 /* SettingsViewController.swift */,
 				F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */,
@@ -1171,6 +1173,7 @@
 				F00232821C7DC798003020BD /* ShotBucketsViewController.swift */,
 				F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */,
 				746F2F5B1C983CB400C1B6A8 /* BucketContentCollectionViewController.swift */,
+				FF13A48B8C3A795758FE3171 /* ShotsCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1502,7 +1505,7 @@
 		FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */ = {
 			isa = PBXGroup;
 			children = (
-				5A45E63F1C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift */,
+				5A45E63F1C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift */,
 				FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */,
 				74C161811C561ECE004E1F9B /* TwoColumnsCollectionViewFlowLayout.swift */,
 				74A6C6811C57D2F8009BDD75 /* OneColumnCollectionViewFlowLayout.swift */,
@@ -1809,9 +1812,9 @@
 				BF6A6E121C1ED1F6001EDAB8 /* SwitchItem.swift in Sources */,
 				5EB87A761C5A123700CB2A7B /* Responsable.swift in Sources */,
 				F065DB431C96EFCF00A99B0E /* UserFollowedByMeQuery.swift in Sources */,
-				5A45E6401C27E8D60071E581 /* InitialShotsCollectionViewLayout.swift in Sources */,
+				5A45E6401C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift in Sources */,
 				746F2F5C1C983CB400C1B6A8 /* BucketContentCollectionViewController.swift in Sources */,
-				5A4005E41C2418EB0010A500 /* ShotsCollectionViewController.swift in Sources */,
+				5A4005E41C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift in Sources */,
 				F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */,
 				F00232871C7DC902003020BD /* ShotBucketsHeaderView.swift in Sources */,
 				F00232891C7DCABE003020BD /* ShotBucketsView.swift in Sources */,
@@ -1989,6 +1992,7 @@
 				BEEE94E5AD53C9FE14D1F699 /* ShotsProvider.swift in Sources */,
 				BEEE9457C0CBAE837D6D6071 /* ShotsRequester.swift in Sources */,
 				BEEE90C7750B5957D42F609E /* SecretKeysProvider.m in Sources */,
+				FF13A52FC65B1DF6D519A2BA /* ShotsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

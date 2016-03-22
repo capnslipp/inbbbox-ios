@@ -15,10 +15,10 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
         
         pending("pending because of random crashes") {
             
-            var sut: ShotsCollectionViewController!
+            var sut: ShotsCollectionViewControllerOld!
             
             beforeEach {
-                sut = ShotsCollectionViewController()
+                sut = ShotsCollectionViewControllerOld()
             }
             
             afterEach {
@@ -26,7 +26,7 @@ class ShotsCollectionViewControllerSpec: QuickSpec {
             }
             
             it("should have initial shots collection view layout") {
-                expect(sut.collectionViewLayout).to(beAKindOf(InitialShotsCollectionViewLayout))
+                expect(sut.collectionViewLayout).to(beAKindOf(InitialAnimationsShotsCollectionViewLayout))
             }
             
             it("should be animation manager's delegate") {
