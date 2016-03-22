@@ -13,7 +13,7 @@ class ShotBucketsView: UIView {
     
     let collectionView: UICollectionView
     
-    var topLayoutGuideOffset = CGFloat(0)
+    let topLayoutGuideOffset = CGFloat(40)
     
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))

@@ -56,7 +56,6 @@ class ShotBucketsViewController: UIViewController {
             print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
         
-        shotBucketsView.topLayoutGuideOffset = UIApplication.sharedApplication().statusBarFrame.size.height
         shotBucketsView.collectionView.delegate = self
         shotBucketsView.collectionView.dataSource = self
         shotBucketsView.collectionView.registerClass(ShotBucketsAddCollectionViewCell.self, type: .Cell)
