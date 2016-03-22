@@ -34,7 +34,7 @@ class ShotBucketsViewModel {
         }
     }
     
-    var titleForActionCell: String {
+    var titleForActionItem: String {
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
             return NSLocalizedString("New Bucket", comment: "")
@@ -51,7 +51,7 @@ class ShotBucketsViewModel {
     var shotsRequester = APIShotsRequester()
     
     private(set) var buckets = [BucketType]()
-    private var selectedBucketsIndexes = [Int]()
+    private(set) var selectedBucketsIndexes = [Int]()
     
     init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
         self.shot = shot
@@ -124,12 +124,16 @@ class ShotBucketsViewModel {
         return index != buckets.count - 1
     }
     
-    func isSeparatorCellAtIndex(index: Int) -> Bool {
+    func isSeparatorAtIndex(index: Int) -> Bool {
         return index == itemsCount - 2
     }
     
-    func isActionCellAtIndex(index: Int) -> Bool {
+    func isActionItemAtIndex(index: Int) -> Bool {
         return index == itemsCount - 1
+    }
+    
+    func indexForRemoveFromSelectedBucketsActionItem() -> Int {
+        return itemsCount - 1
     }
     
     func displayableDataForBucketAtIndex(index: Int) -> (bucketName: String, shotsCountText: String) {

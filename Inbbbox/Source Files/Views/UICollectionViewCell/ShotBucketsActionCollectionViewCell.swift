@@ -26,6 +26,8 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
         
         button.configureForAutoLayout()
         button.setTitleColor(.pinkColor(), forState: .Normal)
+        button.setTitleColor(.textLightColor(), forState: .Disabled)
+        button.setTitleColor(.pinkColor(alpha: 0.5), forState: .Highlighted)
         button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 16)
         contentView.addSubview(button)
         
