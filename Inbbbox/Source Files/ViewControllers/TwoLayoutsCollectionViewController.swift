@@ -43,7 +43,6 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     // MARK: Configuration
     
     func setupBarButtons() {
-        // NGRTodo: set images instead of title
         oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
         twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton!, twoColumnsLayoutButton!]

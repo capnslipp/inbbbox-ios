@@ -145,7 +145,7 @@ private extension SettingsViewModel {
 
     func registerLocalNotification() {
 
-        let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: "userID", time: reminderDateItem.date) //NGRTemp: provide userID
+        let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: loggedInUser?.identifier ?? "userID", time: reminderDateItem.date)
 
         if localNotification == nil {
 
@@ -158,14 +158,14 @@ private extension SettingsViewModel {
     }
 
     func unregisterLocalNotification() {
-        LocalNotificationRegistrator.unregisterNotification(forUserID: "userID") //NGRTemp: provide userID
+        LocalNotificationRegistrator.unregisterNotification(forUserID: loggedInUser?.identifier ?? "userID")
     }
 
     // MARK: Prepare alert
 
     func preparePermissionsAlert() -> UIAlertController {
 
-        let alert = UIAlertController(title: NSLocalizedString("Permissions", comment: ""), message: NSLocalizedString("You have to give access to notifications.", comment: ""), preferredStyle: .Alert) // NGRTemp: temporary texts
+        let alert = UIAlertController(title: NSLocalizedString("Permissions", comment: ""), message: NSLocalizedString("You have to give access to notifications.", comment: ""), preferredStyle: .Alert)
 
         let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .Default) {
             _ in
