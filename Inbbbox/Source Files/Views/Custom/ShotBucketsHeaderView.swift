@@ -33,6 +33,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     private let titleLabel = UILabel.newAutoLayoutView()
     
     private let gradientView = UIView.newAutoLayoutView()
+    private let dimView = UIView.newAutoLayoutView()
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
     
     private var imageViewCenterWrapperViewBottomEdgeConstraint: NSLayoutConstraint?
@@ -59,6 +60,10 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         gradientView.backgroundColor = .clearColor()
         imageViewCenterWrapperView.addSubview(gradientView)
         
+        dimView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
+        dimView.alpha = 0
+        imageViewCenterWrapperView.addSubview(dimView)
+        
         headerTitleLabel.backgroundColor = .clearColor()
         headerTitleLabel.textColor = .whiteColor()
         headerTitleLabel.font = .helveticaFont(.NeueMedium, size: 16)
@@ -79,6 +84,8 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         let absoluteProgress = max(min(progress, 1), 0)
         
         imageViewCenterWrapperViewBottomEdgeConstraint?.constant = -minHeight + minHeight * absoluteProgress
+        
+        dimView.alpha = progress
     }
     
     override func updateConstraints() {
@@ -103,6 +110,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
             
             gradientView.autoPinEdgesToSuperviewEdges()
+            dimView.autoPinEdgesToSuperviewEdges()
             
             closeButtonView.autoPinEdge(.Right, toEdge: .Right, ofView: imageViewCenterWrapperView, withOffset: -5)
             closeButtonView.autoPinEdge(.Top, toEdge: .Top, ofView: imageViewCenterWrapperView, withOffset: 5)
