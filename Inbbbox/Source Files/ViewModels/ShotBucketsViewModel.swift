@@ -51,7 +51,7 @@ class ShotBucketsViewModel {
     var shotsRequester = APIShotsRequester()
     
     private(set) var buckets = [BucketType]()
-    private var selectedBucketsIndexes = [Int]()
+    private(set) var selectedBucketsIndexes = [Int]()
     
     init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
         self.shot = shot
@@ -130,6 +130,10 @@ class ShotBucketsViewModel {
     
     func isActionCellAtIndex(index: Int) -> Bool {
         return index == itemsCount - 1
+    }
+    
+    func indexForRemoveFromSelectedBucketsCell() -> Int {
+        return itemsCount - 1
     }
     
     func displayableDataForBucketAtIndex(index: Int) -> (bucketName: String, shotsCountText: String) {
