@@ -32,7 +32,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     private let headerTitleLabel = UILabel.newAutoLayoutView()
     private let titleLabel = UILabel.newAutoLayoutView()
     
-    private let dimView = UIView.newAutoLayoutView()
+    private let gradientView = UIView.newAutoLayoutView()
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
     
     private var imageViewCenterWrapperViewBottomEdgeConstraint: NSLayoutConstraint?
@@ -56,9 +56,8 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         imageViewCenterWrapperView.clipsToBounds = true
         addSubview(imageViewCenterWrapperView)
         
-        dimView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
-        dimView.alpha = 0
-        imageViewCenterWrapperView.addSubview(dimView)
+        gradientView.backgroundColor = .clearColor()
+        imageViewCenterWrapperView.addSubview(gradientView)
         
         headerTitleLabel.backgroundColor = .clearColor()
         headerTitleLabel.textColor = .whiteColor()
@@ -80,9 +79,6 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         let absoluteProgress = max(min(progress, 1), 0)
         
         imageViewCenterWrapperViewBottomEdgeConstraint?.constant = -minHeight + minHeight * absoluteProgress
-        
-        dimView.alpha = 0.3 + 0.7 * progress
-
     }
     
     override func updateConstraints() {
@@ -106,7 +102,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
             
-            dimView.autoPinEdgesToSuperviewEdges()
+            gradientView.autoPinEdgesToSuperviewEdges()
             
             closeButtonView.autoPinEdge(.Right, toEdge: .Right, ofView: imageViewCenterWrapperView, withOffset: -5)
             closeButtonView.autoPinEdge(.Top, toEdge: .Top, ofView: imageViewCenterWrapperView, withOffset: 5)
@@ -122,6 +118,12 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         layer.mask = mask
+        
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor(white: 0, alpha: 0.3).CGColor, UIColor(white: 1, alpha: 0).CGColor]
+        gradient.locations = [0.0 , 0.7]
+        gradient.frame = gradientView.bounds
+        gradientView.layer.insertSublayer(gradient, atIndex: 0)
     }
     
     func setAttributedTitle(title: NSAttributedString?) {
