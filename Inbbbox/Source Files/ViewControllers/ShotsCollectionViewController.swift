@@ -7,7 +7,7 @@ import PromiseKit
 
 class ShotsCollectionViewController: UICollectionViewController {
 
-    var stateManager: ShotsCollectionViewControllerStateManager
+    let stateManager = ShotsCollectionViewControllerStateManager()
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
@@ -20,7 +20,6 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 
     init() {
-        stateManager = ShotsCollectionViewControllerStateManager()
         super.init(collectionViewLayout: stateManager.collectionViewLayout)
     }
 
@@ -30,6 +29,7 @@ class ShotsCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
+        collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
     }
 
     override func viewDidAppear(animated: Bool) {

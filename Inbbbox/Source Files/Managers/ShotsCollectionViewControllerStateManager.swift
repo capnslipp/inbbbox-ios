@@ -13,8 +13,9 @@ class ShotsCollectionViewControllerStateManager {
     var currentState: ShotsCollectionViewControllerState
 
     init() {
-        let onboarding = NSUserDefaults.standardUserDefaults().boolForKey("Onboarding")
-        currentState = onboarding ? .Onboarding : .InitialAnimations
+//        let onboarding = NSUserDefaults.standardUserDefaults().boolForKey("Onboarding")
+//        currentState = onboarding ? .Onboarding : .InitialAnimations
+        currentState = .Normal
     }
 
     var collectionViewLayout: UICollectionViewLayout {
@@ -26,7 +27,7 @@ class ShotsCollectionViewControllerStateManager {
         }
     }
 
-    var collectionViewDataSource: UICollectionViewDataSource {
+    var shotsCollectionViewDataSource: UICollectionViewDataSource {
         switch currentState {
         case .Onboarding:
             return ShotsOnboardingDataSource()
