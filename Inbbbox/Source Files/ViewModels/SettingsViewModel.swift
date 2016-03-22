@@ -145,7 +145,7 @@ private extension SettingsViewModel {
 
     func registerLocalNotification() {
 
-        let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: loggedInUser?.identifier ?? "userID123", time: reminderDateItem.date)
+        let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: loggedInUser?.identifier ?? "userID", time: reminderDateItem.date)
 
         if localNotification == nil {
 
@@ -158,7 +158,7 @@ private extension SettingsViewModel {
     }
 
     func unregisterLocalNotification() {
-        LocalNotificationRegistrator.unregisterNotification(forUserID: loggedInUser?.identifier ?? "userID123")
+        LocalNotificationRegistrator.unregisterNotification(forUserID: loggedInUser?.identifier ?? "userID")
     }
 
     // MARK: Prepare alert

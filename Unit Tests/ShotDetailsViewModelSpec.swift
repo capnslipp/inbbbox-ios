@@ -111,7 +111,8 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
             
             it("view model should have correct number of items") {
-                expect(sut.itemsCount).to(equal(13)) // 10 comments + operationCell + descriptionCell + loadMoreCell
+                // 10 comments + operationCell + descriptionCell + loadMoreCell
+                expect(sut.itemsCount).to(equal(13))
             }
         }
         
@@ -132,7 +133,8 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
         
             it("view model should have correct number of items") {
-                expect(sut.itemsCount).to(equal(18)) // 10 comments + 5 comments (nextPage) + operationCell + descriptionCell + loadMoreCell
+                // 10 comments + 5 comments (nextPage) + operationCell + descriptionCell + loadMoreCell
+                expect(sut.itemsCount).to(equal(18))
             }
         }
         
