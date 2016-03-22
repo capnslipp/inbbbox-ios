@@ -16,7 +16,7 @@
 		5A499B691C35411F009AB421 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B681C35411F009AB421 /* UIColorExtension.swift */; };
 		5A499B6B1C354154009AB421 /* ShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */; };
 		5A499B6E1C354339009AB421 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09307C71C240609005F5111 /* SettingsViewController.swift */; };
-		5AFDDCAF1CA170F600CA566A /* ShotsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDDCAE1CA170F600CA566A /* ShotsDataSource.swift */; };
+		5AFDDCAF1CA170F600CA566A /* ShotsStateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AFDDCAE1CA170F600CA566A /* ShotsStateHandler.swift */; };
 		5C0320E61C7B6B0E00F93FA3 /* ProjectsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0320E51C7B6B0E00F93FA3 /* ProjectsProvider.swift */; };
 		5C0320E91C7B6B4700F93FA3 /* ManagedProjectsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0320E81C7B6B4700F93FA3 /* ManagedProjectsProvider.swift */; };
 		5C039B191C7DB9AF0030C93D /* ManagedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092E2601C3FD48600593D18 /* ManagedBucket.swift */; };
@@ -341,18 +341,18 @@
 		F0F501031C70E40A00E8959E /* ShotDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501021C70E40A00E8959E /* ShotDescriptionView.swift */; };
 		F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F501041C7211E200E8959E /* CommentEditView.swift */; };
 		F0F5010B1C75E52D00E8959E /* ShotDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5010A1C75E52D00E8959E /* ShotDetailsViewModel.swift */; };
+		FF13A274DD36A3D49301F28A /* ShotsInitialAnimationsStateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13ABE8C2A93BB4D2A9596C /* ShotsInitialAnimationsStateHandler.swift */; };
 		FF13A3C0B9A1786150870E33 /* ShotsAnimatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A0AF874643193442C4BE /* ShotsAnimatorMock.swift */; };
-		FF13A48EDAC619E814751B83 /* ShotsInitialAnimationsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13AD93326FF18CC2C6ABF8 /* ShotsInitialAnimationsDataSource.swift */; };
 		FF13A52FC65B1DF6D519A2BA /* ShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A48B8C3A795758FE3171 /* ShotsCollectionViewController.swift */; };
 		FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */; };
 		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */; };
-		FF13A9B8ECA59001CD72C689 /* ShotsOnboardingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A1FAC5249C079A16D911 /* ShotsOnboardingDataSource.swift */; };
 		FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */; };
-		FF13AA2C0F072707FB4CB2A1 /* ShotsCollectionViewControllerStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A3ACB528194481582697 /* ShotsCollectionViewControllerStateManager.swift */; };
 		FF13AB2E8D72A9EDF7DB081C /* AsyncWrapperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */; };
-		FF13AB36429B23C65B00CBB6 /* ShotsNormalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13AACEBE3AAC403BFF4029 /* ShotsNormalDataSource.swift */; };
+		FF13AB63E0B8F9F65F381323 /* ShotsNormalStateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A9A96709F7900E00CF79 /* ShotsNormalStateHandler.swift */; };
 		FF13AD5BDAA038D06F3CDFD2 /* AsyncWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A1A2161AE07748341642 /* AsyncWrapper.swift */; };
+		FF13AD76D0162C0F0AE95208 /* ShotsOnboardingStateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13AFD3A9614CB9E091A1B3 /* ShotsOnboardingStateHandler.swift */; };
 		FF13AE1673A2D15C58A49606 /* InitialShotsCollectionViewLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */; };
+		FF13AE53F3D4B30ED53786D7 /* ShotsStateHandlersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A10F8F5B8D91B6ED3808 /* ShotsStateHandlersProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -374,7 +374,7 @@
 		5A45E63F1C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialAnimationsShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5A499B681C35411F009AB421 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCell.swift; sourceTree = "<group>"; };
-		5AFDDCAE1CA170F600CA566A /* ShotsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsDataSource.swift; sourceTree = "<group>"; };
+		5AFDDCAE1CA170F600CA566A /* ShotsStateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsStateHandler.swift; sourceTree = "<group>"; };
 		5C0320E51C7B6B0E00F93FA3 /* ProjectsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsProvider.swift; sourceTree = "<group>"; };
 		5C0320E81C7B6B4700F93FA3 /* ManagedProjectsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedProjectsProvider.swift; sourceTree = "<group>"; };
 		5C24CFF51C85AD1900F0687A /* ShotsProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsProviderSpec.swift; sourceTree = "<group>"; };
@@ -717,17 +717,17 @@
 		F0F501041C7211E200E8959E /* CommentEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentEditView.swift; sourceTree = "<group>"; };
 		F0F5010A1C75E52D00E8959E /* ShotDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewModel.swift; sourceTree = "<group>"; };
 		FF13A0AF874643193442C4BE /* ShotsAnimatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimatorMock.swift; sourceTree = "<group>"; };
+		FF13A10F8F5B8D91B6ED3808 /* ShotsStateHandlersProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsStateHandlersProvider.swift; sourceTree = "<group>"; };
 		FF13A1A2161AE07748341642 /* AsyncWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapper.swift; sourceTree = "<group>"; };
-		FF13A1FAC5249C079A16D911 /* ShotsOnboardingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsOnboardingDataSource.swift; sourceTree = "<group>"; };
 		FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		FF13A3ACB528194481582697 /* ShotsCollectionViewControllerStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewControllerStateManager.swift; sourceTree = "<group>"; };
 		FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutSpec.swift; sourceTree = "<group>"; };
 		FF13A48B8C3A795758FE3171 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewMock.swift; sourceTree = "<group>"; };
 		FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapperMock.swift; sourceTree = "<group>"; };
-		FF13AACEBE3AAC403BFF4029 /* ShotsNormalDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsNormalDataSource.swift; sourceTree = "<group>"; };
-		FF13AD93326FF18CC2C6ABF8 /* ShotsInitialAnimationsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsInitialAnimationsDataSource.swift; sourceTree = "<group>"; };
+		FF13A9A96709F7900E00CF79 /* ShotsNormalStateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsNormalStateHandler.swift; sourceTree = "<group>"; };
+		FF13ABE8C2A93BB4D2A9596C /* ShotsInitialAnimationsStateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsInitialAnimationsStateHandler.swift; sourceTree = "<group>"; };
+		FF13AFD3A9614CB9E091A1B3 /* ShotsOnboardingStateHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsOnboardingStateHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -835,7 +835,7 @@
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				5E3FCF711C904AF100B67F13 /* ScrollViewAutoScroller.swift */,
 				C6E835381C9199BA005944DB /* AnalyticsManager.swift */,
-				FF13A3ACB528194481582697 /* ShotsCollectionViewControllerStateManager.swift */,
+				FF13ACCAA6BBD7AC9A4EB39D /* Shots State Handlers */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1014,7 +1014,6 @@
 				FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */,
 				F092E25A1C3FD3DA00593D18 /* StoreData.xcdatamodeld */,
 				BEEE9CE730D0D11F25452574 /* Providers */,
-				FF13A0CA04C47F56B53DC673 /* Collection View Data Source */,
 			);
 			path = "Source Files";
 			sourceTree = "<group>";
@@ -1406,7 +1405,7 @@
 				7488EBB21C71D96A00C34907 /* AvatarSettable.swift */,
 				74E2D96D1C80B03C0059A90C /* BaseCollectionViewViewModel.swift */,
 				5EDA3A951C8D7CD4002CD898 /* AutoSizable.swift */,
-				5AFDDCAE1CA170F600CA566A /* ShotsDataSource.swift */,
+				5AFDDCAE1CA170F600CA566A /* ShotsStateHandler.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1512,16 +1511,6 @@
 			name = Teams;
 			sourceTree = "<group>";
 		};
-		FF13A0CA04C47F56B53DC673 /* Collection View Data Source */ = {
-			isa = PBXGroup;
-			children = (
-				FF13A1FAC5249C079A16D911 /* ShotsOnboardingDataSource.swift */,
-				FF13AD93326FF18CC2C6ABF8 /* ShotsInitialAnimationsDataSource.swift */,
-				FF13AACEBE3AAC403BFF4029 /* ShotsNormalDataSource.swift */,
-			);
-			path = "Collection View Data Source";
-			sourceTree = "<group>";
-		};
 		FF13A0F4C87BA2D26F77E82D /* Collection View Layouts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1558,6 +1547,17 @@
 				F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */,
 			);
 			path = "Mock Objects";
+			sourceTree = "<group>";
+		};
+		FF13ACCAA6BBD7AC9A4EB39D /* Shots State Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				FF13ABE8C2A93BB4D2A9596C /* ShotsInitialAnimationsStateHandler.swift */,
+				FF13A9A96709F7900E00CF79 /* ShotsNormalStateHandler.swift */,
+				FF13AFD3A9614CB9E091A1B3 /* ShotsOnboardingStateHandler.swift */,
+				FF13A10F8F5B8D91B6ED3808 /* ShotsStateHandlersProvider.swift */,
+			);
+			path = "Shots State Handlers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1857,7 +1857,7 @@
 				5E498D511C2453E000CFD918 /* OAuthAuthorizable.swift in Sources */,
 				5EDC25F81C32AF680045B759 /* StringExtension.swift in Sources */,
 				5E1572B21C7CA49C0083B6CA /* ShotDetailsOperationView.swift in Sources */,
-				5AFDDCAF1CA170F600CA566A /* ShotsDataSource.swift in Sources */,
+				5AFDDCAF1CA170F600CA566A /* ShotsStateHandler.swift in Sources */,
 				5EB896C81C5257E800AC2F3D /* TabBarAnimator.swift in Sources */,
 				F06008F61CA3C78F007279D3 /* CAKeyframeAnimationExtension.swift in Sources */,
 				7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */,
@@ -2014,10 +2014,10 @@
 				BEEE9457C0CBAE837D6D6071 /* ShotsRequester.swift in Sources */,
 				BEEE90C7750B5957D42F609E /* SecretKeysProvider.m in Sources */,
 				FF13A52FC65B1DF6D519A2BA /* ShotsCollectionViewController.swift in Sources */,
-				FF13AA2C0F072707FB4CB2A1 /* ShotsCollectionViewControllerStateManager.swift in Sources */,
-				FF13A9B8ECA59001CD72C689 /* ShotsOnboardingDataSource.swift in Sources */,
-				FF13A48EDAC619E814751B83 /* ShotsInitialAnimationsDataSource.swift in Sources */,
-				FF13AB36429B23C65B00CBB6 /* ShotsNormalDataSource.swift in Sources */,
+				FF13A274DD36A3D49301F28A /* ShotsInitialAnimationsStateHandler.swift in Sources */,
+				FF13AB63E0B8F9F65F381323 /* ShotsNormalStateHandler.swift in Sources */,
+				FF13AD76D0162C0F0AE95208 /* ShotsOnboardingStateHandler.swift in Sources */,
+				FF13AE53F3D4B30ED53786D7 /* ShotsStateHandlersProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

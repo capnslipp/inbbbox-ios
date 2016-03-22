@@ -4,7 +4,13 @@
 
 import Foundation
 
-class ShotsOnboardingDataSource: ShotsDataSource {
+class ShotsInitialAnimationsStateHandler: ShotsStateHandler {
+
+    weak var delegate: ShotsStateHandlerDelegate?
+
+    var collectionViewLayout: UICollectionViewLayout {
+        return InitialAnimationsShotsCollectionViewLayout()
+    }
 
     func itemsCountForShots(shots: [ShotType], collectionView: UICollectionView, section: Int) -> Int {
         return 0

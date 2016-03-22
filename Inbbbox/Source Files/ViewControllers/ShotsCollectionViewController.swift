@@ -7,7 +7,11 @@ import PromiseKit
 
 class ShotsCollectionViewController: UICollectionViewController {
 
-    let stateManager = ShotsCollectionViewControllerStateManager()
+    enum State {
+        case Onboarding, InitialAnimations, Normal
+    }
+
+    let stateManager = ShotsStateHandlersProvider()
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
@@ -20,7 +24,7 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 
     init() {
-        super.init(collectionViewLayout: stateManager.collectionViewLayout)
+        super.init(collectionViewLayout: stateManager.shotsStateHandler.collectionViewLayout)
     }
 }
 
@@ -60,11 +64,11 @@ extension ShotsCollectionViewController {
 extension ShotsCollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stateManager.shotsCollectionViewDataSource.itemsCountForShots(shots, collectionView: collectionView, section: section)
+        return stateManager.shotsStateHandler.itemsCountForShots(shots, collectionView: collectionView, section: section)
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = stateManager.shotsCollectionViewDataSource.cellForShots(shots, collectionView: collectionView, indexPath: indexPath)
+        let cell = stateManager.shotsStateHandler.cellForShots(shots, collectionView: collectionView, indexPath: indexPath)
         cell.delegate = self
         return cell
     }
