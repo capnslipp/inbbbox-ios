@@ -6,21 +6,27 @@ import Foundation
 
 class ShotsNormalStateHandler: ShotsStateHandler {
 
-    weak var delegate: ShotsStateHandlerDelegate?
-
     var collectionViewLayout: UICollectionViewLayout {
         return ShotsCollectionViewFlowLayout()
     }
-
-    func itemsCountForShots(shots: [ShotType], collectionView: UICollectionView, section: Int) -> Int {
-        return shots.count
+    var tabBarInteractionEnabled: Bool {
+        return true
+    }
+    var collectionViewInteractionEnabled: Bool {
+        return true
     }
 
-    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        let shot = shots[indexPath.item]
-        cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
-        cell.gifLabel.hidden = !shot.animated
-        return cell
+    func numberOfItems(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, section: Int) -> Int {
+        return 0
+    }
+
+    func configuredCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
+        return ShotCollectionViewCell()
+    }
+
+    func didSelectItem(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) {
+    }
+
+    func willDisplayCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: NSIndexPath) {
     }
 }

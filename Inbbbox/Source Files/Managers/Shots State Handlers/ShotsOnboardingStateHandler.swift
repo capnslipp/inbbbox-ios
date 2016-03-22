@@ -6,17 +6,27 @@ import Foundation
 
 class ShotsOnboardingStateHandler: ShotsStateHandler {
 
-    weak var delegate: ShotsStateHandlerDelegate?
-
     var collectionViewLayout: UICollectionViewLayout {
         return ShotsCollectionViewFlowLayout()
     }
+    var tabBarInteractionEnabled: Bool {
+        return false
+    }
+    var collectionViewInteractionEnabled: Bool {
+        return false
+    }
 
-    func itemsCountForShots(shots: [ShotType], collectionView: UICollectionView, section: Int) -> Int {
+    func numberOfItems(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, section: Int) -> Int {
         return 0
     }
 
-    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
+    func configuredCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
         return ShotCollectionViewCell()
+    }
+
+    func didSelectItem(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) {
+    }
+
+    func willDisplayCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: NSIndexPath) {
     }
 }

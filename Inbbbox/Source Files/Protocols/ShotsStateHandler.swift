@@ -8,18 +8,19 @@
 
 import Foundation
 
-protocol ShotsStateHandlerDelegate: class {
-    func cellDidInvokeLikeAction()
-    func cellDidInvokeAddToBucketAction()
-    func cellDidInvokeCommentAction()
-}
-
 protocol ShotsStateHandler {
-    weak var delegate: ShotsStateHandlerDelegate? {get set}
 
     var collectionViewLayout: UICollectionViewLayout { get }
 
-    func itemsCountForShots(shots: [ShotType], collectionView: UICollectionView, section: Int) -> Int
+    var tabBarInteractionEnabled: Bool { get }
 
-    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell
+    var collectionViewInteractionEnabled: Bool { get }
+
+    func numberOfItems(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, section: Int) -> Int
+
+    func configuredCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell
+
+    func didSelectItem(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath)
+
+    func willDisplayCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: NSIndexPath)
 }

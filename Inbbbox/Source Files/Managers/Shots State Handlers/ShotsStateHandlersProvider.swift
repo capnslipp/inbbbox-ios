@@ -9,19 +9,15 @@ class ShotsStateHandlersProvider {
     var currentState: ShotsCollectionViewController.State {
         return .Normal
     }
-    
-    let shotsOnboardingStateHandler = ShotsOnboardingStateHandler()
-    let shotsInitialAnimationsStateHandler = ShotsInitialAnimationsStateHandler()
-    let shotsNormalStateHandler = ShotsNormalStateHandler()
 
     var shotsStateHandler: ShotsStateHandler {
         switch currentState {
         case .Onboarding:
-            return shotsOnboardingStateHandler
+            return ShotsOnboardingStateHandler()
         case .InitialAnimations:
-            return shotsInitialAnimationsStateHandler
+            return ShotsInitialAnimationsStateHandler()
         case .Normal:
-            return shotsNormalStateHandler
+            return ShotsNormalStateHandler()
         }
     }
 }
