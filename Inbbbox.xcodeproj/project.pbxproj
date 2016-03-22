@@ -24,7 +24,6 @@
 		5C24CFFA1C85B00700F0687A /* ManagedShotsProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C24CFF91C85B00700F0687A /* ManagedShotsProviderMock.swift */; };
 		5C4A4A3C1C5772340019EADE /* ShotSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4A4A3B1C5772340019EADE /* ShotSpecExtension.swift */; };
 		5C7267CE1C578BF300094CE7 /* ShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */; };
-		5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */; };
 		5C8D76D41C735C050030A44C /* ShotType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8D76D31C735C050030A44C /* ShotType.swift */; };
 		5C9549821C8479B100269467 /* ManagedShotsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9549811C8479B100269467 /* ManagedShotsProviderSpec.swift */; };
 		5CB3D5B51C75D7BE009C722B /* ManagedObjectsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB3D5B41C75D7BE009C722B /* ManagedObjectsProvider.swift */; };
@@ -346,6 +345,7 @@
 		FF13A6541AAEA0047726BC06 /* CollectionViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */; };
 		FF13A7D9256DA5FF5F961826 /* ShotsCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */; };
 		FF13A9C44D6DD23FD84082A6 /* ShotCollectionViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */; };
+		FF13AA2C0F072707FB4CB2A1 /* ShotsCollectionViewControllerStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A3ACB528194481582697 /* ShotsCollectionViewControllerStateManager.swift */; };
 		FF13AB2E8D72A9EDF7DB081C /* AsyncWrapperMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */; };
 		FF13AD5BDAA038D06F3CDFD2 /* AsyncWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A1A2161AE07748341642 /* AsyncWrapper.swift */; };
 		FF13AE1673A2D15C58A49606 /* InitialShotsCollectionViewLayoutSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */; };
@@ -714,12 +714,12 @@
 		FF13A0AF874643193442C4BE /* ShotsAnimatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsAnimatorMock.swift; sourceTree = "<group>"; };
 		FF13A1A2161AE07748341642 /* AsyncWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapper.swift; sourceTree = "<group>"; };
 		FF13A255632A76F4B0190369 /* ShotsCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		FF13A3ACB528194481582697 /* ShotsCollectionViewControllerStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewControllerStateManager.swift; sourceTree = "<group>"; };
 		FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialShotsCollectionViewLayoutSpec.swift; sourceTree = "<group>"; };
 		FF13A48B8C3A795758FE3171 /* ShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCellSpec.swift; sourceTree = "<group>"; };
 		FF13A68D4028430A1C6606D9 /* CollectionViewMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewMock.swift; sourceTree = "<group>"; };
 		FF13A723DFA8B5AA71BBC565 /* AsyncWrapperMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncWrapperMock.swift; sourceTree = "<group>"; };
-		FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewControllerSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -827,6 +827,7 @@
 				5E5082111C314F4100093191 /* AutoScrollableShotsDataSource.swift */,
 				5E3FCF711C904AF100B67F13 /* ScrollViewAutoScroller.swift */,
 				C6E835381C9199BA005944DB /* AnalyticsManager.swift */,
+				FF13A3ACB528194481582697 /* ShotsCollectionViewControllerStateManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -919,7 +920,6 @@
 				5EE041B11C34009300657751 /* FormatterSpec.swift */,
 				5EE041B31C340AAD00657751 /* AutoScrollableShotsDataSourceSpec.swift */,
 				FF13A63B7165EDFD44483027 /* ShotCollectionViewCellSpec.swift */,
-				FF13A87B1F1347B0CE54E2C0 /* ShotsCollectionViewControllerSpec.swift */,
 				FF13A3E821CD23425E7931D0 /* InitialShotsCollectionViewLayoutSpec.swift */,
 				BEEE977B6BE514078EC3967E /* ShotsCollectionViewFlowLayoutSpec.swift */,
 				BEEE9D82400E6103A1878E7E /* ShotsAnimatorSpec.swift */,
@@ -1993,6 +1993,7 @@
 				BEEE9457C0CBAE837D6D6071 /* ShotsRequester.swift in Sources */,
 				BEEE90C7750B5957D42F609E /* SecretKeysProvider.m in Sources */,
 				FF13A52FC65B1DF6D519A2BA /* ShotsCollectionViewController.swift in Sources */,
+				FF13AA2C0F072707FB4CB2A1 /* ShotsCollectionViewControllerStateManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2018,7 +2019,6 @@
 				5E781B431C58B99A009A2E14 /* JSONSpecLoader.swift in Sources */,
 				5EEEC9A91C71E14000BB7237 /* ProjectsQuerySpec.swift in Sources */,
 				5E3509291C6266E9009386AE /* PageableComponentSpec.swift in Sources */,
-				5C7267CF1C578C9900094CE7 /* ShotsCollectionViewControllerSpec.swift in Sources */,
 				F065DB451C983F1A00A99B0E /* UserFollowedByMeQuerySpec.swift in Sources */,
 				5ED6C5B31C5768B200A591EA /* ShotsProviderConfigurationSpec.swift in Sources */,
 				5EC0A7AD1C353C8800846975 /* UIImageSpecExtension.swift in Sources */,

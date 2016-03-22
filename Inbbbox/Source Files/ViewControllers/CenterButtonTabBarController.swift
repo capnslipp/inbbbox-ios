@@ -8,7 +8,7 @@ class CenterButtonTabBarController: UITabBarController {
 
     private var didSetConstraints = false
     let centerButton = RoundedButton()
-    let shotsCollectionViewController = ShotsCollectionViewControllerOld()
+    let shotsCollectionViewController = ShotsCollectionViewController()
     var didUpdateTabBarItems = false
     
     enum CenterButtonViewControllers: Int {
