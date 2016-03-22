@@ -156,7 +156,7 @@ extension ShotBucketsHeaderView {
     }
     
     private func setupImageView() {
-        imageViewCenterWrapperView.insertSubview(imageView!, belowSubview: dimView)
+        imageViewCenterWrapperView.insertSubview(imageView!, belowSubview: gradientView)
         imageView!.autoPinEdgesToSuperviewEdges()
     }
 }
