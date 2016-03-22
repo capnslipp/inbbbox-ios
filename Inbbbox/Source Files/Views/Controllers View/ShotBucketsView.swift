@@ -57,7 +57,11 @@ class ShotBucketsView: UIView {
             
             blurView.autoPinEdgesToSuperviewEdges()
             
-            collectionViewCornerWrapperView.autoPinToTopLayoutGuideOfViewController(viewController ?? UIViewController(), withInset: offsetToTopLayoutGuide)
+            if let viewController = viewController {
+                collectionViewCornerWrapperView.autoPinToTopLayoutGuideOfViewController(viewController, withInset: offsetToTopLayoutGuide)
+            } else {
+                collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Top, withInset: offsetToTopLayoutGuide)
+            }
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Left, withInset: 10)
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Right, withInset: 10)
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom)
