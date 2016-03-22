@@ -88,19 +88,19 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if viewModel.isSeparatorCellAtIndex(indexPath.item) {
+        if viewModel.isSeparatorAtIndex(indexPath.item) {
             return configureSeparatorCell(collectionView, atIndexPath: indexPath)
         }
         
         switch viewModel.shotBucketsViewControllerMode {
         case .AddToBucket:
-            if viewModel.isActionCellAtIndex(indexPath.item) {
+            if viewModel.isActionItemAtIndex(indexPath.item) {
                 return configureActionCell(collectionView, atIndexPath: indexPath, selector: "addNewBucketButtonDidTap:")
             } else {
                 return configureAddToBucketCell(collectionView, atIndexPath: indexPath)
             }
         case .RemoveFromBucket:
-            if viewModel.isActionCellAtIndex(indexPath.item) {
+            if viewModel.isActionItemAtIndex(indexPath.item) {
                 return configureActionCell(collectionView, atIndexPath: indexPath, selector: "removeButtonDidTap:")
             } else {
                 return configureRemoveFromBucketCell(collectionView, atIndexPath: indexPath)
@@ -195,7 +195,7 @@ extension ShotBucketsViewController {
     }
     
     func setRemoveFromSelectedBucketsButtonActive(active: Bool) {
-        let removeCellIndexPath =  NSIndexPath(forItem: viewModel.indexForRemoveFromSelectedBucketsCell(), inSection: 0)
+        let removeCellIndexPath =  NSIndexPath(forItem: viewModel.indexForRemoveFromSelectedBucketsActionItem(), inSection: 0)
         if let cell = shotBucketsView.collectionView.cellForItemAtIndexPath(removeCellIndexPath) as? ShotBucketsActionCollectionViewCell {
             cell.button.enabled = active
         }
@@ -266,7 +266,7 @@ extension ShotBucketsViewController {
     
     func configureActionCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath, selector: Selector) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotBucketsActionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        cell.button.setTitle(viewModel.titleForActionCell, forState: .Normal)
+        cell.button.setTitle(viewModel.titleForActionItem, forState: .Normal)
         cell.button.addTarget(self, action: selector, forControlEvents: .TouchUpInside)
         cell.button.enabled = viewModel.shotBucketsViewControllerMode == .AddToBucket
         return cell
