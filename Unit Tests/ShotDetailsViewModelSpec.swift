@@ -78,12 +78,11 @@ class ShotDetailsViewModelSpec: QuickSpec {
         
         describe("when newly initialized") {
             
-            it("view model should have no items") {
+            it("view model should have correct number of items") {
                 expect(sut.itemsCount).to(equal(2))
             }
             
-            it("view model should have no items") {
-                //NGRTemp: added 2 cause of view model changes
+            it("view model should have correct number of items") {
                 expect(sut.itemsCount).to(equal(2))
             }
         }
@@ -112,8 +111,7 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
             
             it("view model should have correct number of items") {
-                //NGRTemp: added 2 cause of view model changes
-                expect(sut.itemsCount).to(equal(13))
+                expect(sut.itemsCount).to(equal(13)) // 10 comments + operationCell + descriptionCell + loadMoreCell
             }
         }
         
@@ -134,8 +132,7 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
         
             it("view model should have correct number of items") {
-                //NGRTemp: added 2 cause of view model changes
-                expect(sut.itemsCount).to(equal(18))
+                expect(sut.itemsCount).to(equal(18)) // 10 comments + 5 comments (nextPage) + operationCell + descriptionCell + loadMoreCell
             }
         }
         

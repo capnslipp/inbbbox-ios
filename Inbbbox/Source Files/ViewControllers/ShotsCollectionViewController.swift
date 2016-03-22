@@ -19,8 +19,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
     lazy var viewControllerPresenter: DefaultViewControllerPresenter = DefaultViewControllerPresenter(presentingViewController: self)
     var modalTransitionAnimator: ZFModalTransitionAnimator?
 
-//    NGRTemp: temporary implementation - Maybe we should download shots when the ball is jumping? Or just activity indicator will be enough?
-
     var shots = [ShotType]()
     var likedShots = [ShotType]()
 
