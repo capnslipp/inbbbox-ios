@@ -20,13 +20,18 @@ final class OAuthViewModel: NSObject {
     init(oAuthAuthorizableService: OAuthAuthorizable) {
         service = oAuthAuthorizableService
         super.init()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearCookies", name: UIApplicationWillTerminateNotification, object: nil)
     }
     
     func actionPolicyForRequest(request: NSURLRequest) -> WKNavigationActionPolicy {
         
         if service.isRedirectionURL(request.URL) {
-            currentResolvers?.fulfill(request.URL!.query!)
-            return .Cancel
+            if let query = request.URL!.query {
+                currentResolvers?.fulfill(query)
+                return .Cancel
+            } else {
+                return .Cancel
+            }
         }
         
         return .Allow
@@ -51,6 +56,7 @@ final class OAuthViewModel: NSObject {
     
     func stopAuthentication(withError error: ErrorType? = nil) {
         
+        clearCookies()
         let errorToThrow = error ?? AuthenticatorError.UnknownError
         currentResolvers?.reject(errorToThrow)
     }
@@ -103,6 +109,14 @@ private extension OAuthViewModel {
             }
             
             fulfill(requestToken)
+        }
+    }
+    
+    @objc func clearCookies() {
+        WKWebsiteDataStore.defaultDataStore().fetchDataRecordsOfTypes([WKWebsiteDataTypeCookies]) { records in
+            if !records.isEmpty && !UserStorage.isUserSignedIn {
+                WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0) , completionHandler:{})
+            }
         }
     }
 }

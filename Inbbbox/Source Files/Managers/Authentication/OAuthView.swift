@@ -27,6 +27,7 @@ final class OAuthView: UIView {
         
         webView = WKWebView(frame: CGRectZero, configuration: configuration)
         webView.backgroundColor = .grayColor()
+        webView.allowsBackForwardNavigationGestures = true
         
         super.init(frame: frame)
         

@@ -85,6 +85,7 @@ extension LoginViewController {
             authenticator.loginWithService(.Dribbble)
         }.then {
             self.viewAnimator?.stopAnimationWithType(.Continue) {
+                self.aView?.loadingLabel.alpha = 0
                 self.presentNextViewController()
             }
         }.error { error in
