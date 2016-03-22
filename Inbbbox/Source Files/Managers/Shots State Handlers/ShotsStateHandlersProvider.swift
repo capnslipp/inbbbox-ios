@@ -6,12 +6,8 @@ import UIKit
 
 class ShotsStateHandlersProvider {
 
-    var currentState: ShotsCollectionViewController.State {
-        return .Normal
-    }
-
-    var shotsStateHandler: ShotsStateHandler {
-        switch currentState {
+    func shotsStateHandlerForState(state: ShotsCollectionViewController.State) -> ShotsStateHandler {
+        switch state {
         case .Onboarding:
             return ShotsOnboardingStateHandler()
         case .InitialAnimations:

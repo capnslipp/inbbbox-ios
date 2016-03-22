@@ -11,7 +11,7 @@ class ShotsCollectionViewController: UICollectionViewController {
         case Onboarding, InitialAnimations, Normal
     }
 
-    var stateHandler = ShotsStateHandlersProvider().shotsStateHandler
+    var stateHandler: ShotsStateHandler
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
@@ -24,7 +24,9 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 
     init() {
+        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(.Normal)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
+        stateHandler.delegate = self
     }
 }
 
@@ -92,6 +94,14 @@ extension ShotsCollectionViewController {
             if let shotCell = cell as? ShotCollectionViewCell {
                 shotCell.shotImageView.applyBlur(blur)
             }
+        }
+    }
+}
+
+extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
+    func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
+        if let nextState = shotsStateHandler.nextState {
+                 stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(nextState)   
         }
     }
 }

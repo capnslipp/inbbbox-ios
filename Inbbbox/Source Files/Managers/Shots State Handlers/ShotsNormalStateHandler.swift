@@ -12,6 +12,16 @@ class ShotsNormalStateHandler: ShotsStateHandler {
     let shotsProvider = ShotsProvider()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
 
+    var delegate: ShotsStateHandlerDelegate?
+
+    var state: ShotsCollectionViewController.State {
+        return .Normal
+    }
+
+    var nextState: ShotsCollectionViewController.State? {
+        return nil
+    }
+
     var collectionViewLayout: UICollectionViewLayout {
         return ShotsCollectionViewFlowLayout()
     }

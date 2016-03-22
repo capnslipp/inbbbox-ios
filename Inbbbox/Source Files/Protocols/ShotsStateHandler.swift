@@ -8,7 +8,17 @@
 
 import Foundation
 
+protocol ShotsStateHandlerDelegate: class {
+    func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler)
+}
+
 protocol ShotsStateHandler {
+
+    weak var delegate: ShotsStateHandlerDelegate? { get set }
+
+    var state: ShotsCollectionViewController.State { get }
+
+    var nextState: ShotsCollectionViewController.State? { get }
 
     var collectionViewLayout: UICollectionViewLayout { get }
 

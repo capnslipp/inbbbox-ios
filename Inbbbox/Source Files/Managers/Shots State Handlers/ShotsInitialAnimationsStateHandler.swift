@@ -6,6 +6,16 @@ import Foundation
 
 class ShotsInitialAnimationsStateHandler: ShotsStateHandler {
 
+    var delegate: ShotsStateHandlerDelegate?
+
+    var state: ShotsCollectionViewController.State {
+        return .InitialAnimations
+    }
+
+    var nextState: ShotsCollectionViewController.State? {
+        return .Normal
+    }
+
     var collectionViewLayout: UICollectionViewLayout {
         return InitialAnimationsShotsCollectionViewLayout()
     }
