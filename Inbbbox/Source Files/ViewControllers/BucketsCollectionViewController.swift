@@ -96,7 +96,11 @@ class BucketsCollectionViewController: UICollectionViewController {
             firstly {
                 self.viewModel.createBucket(bucketName)
             }.then { () -> Void in
-                self.collectionView?.insertItemsAtIndexPaths([NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
+                if self.viewModel.buckets.count == 1 {
+                    self.collectionView?.reloadData()
+                } else {
+                    self.collectionView?.insertItemsAtIndexPaths([NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
+                }
             }.error { error in
                 print(error)
             }
