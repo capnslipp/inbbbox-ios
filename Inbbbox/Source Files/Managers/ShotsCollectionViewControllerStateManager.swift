@@ -25,4 +25,15 @@ class ShotsCollectionViewControllerStateManager {
             return InitialAnimationsShotsCollectionViewLayout()
         }
     }
+
+    var collectionViewDataSource: UICollectionViewDataSource {
+        switch currentState {
+        case .Onboarding:
+            return ShotsOnboardingDataSource()
+        case .InitialAnimations:
+            return ShotsInitialAnimationsDataSource()
+        case .Normal:
+            return ShotsNormalDataSource()
+        }
+    }
 }
