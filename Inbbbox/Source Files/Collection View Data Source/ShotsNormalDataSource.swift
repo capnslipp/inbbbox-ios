@@ -10,7 +10,7 @@ class ShotsNormalDataSource: ShotsDataSource {
         return shots.count
     }
 
-    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
+    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         let shot = shots[indexPath.item]
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)

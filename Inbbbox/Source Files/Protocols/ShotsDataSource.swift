@@ -11,5 +11,5 @@ import Foundation
 protocol ShotsDataSource {
     func itemsCountForShots(shots: [ShotType], collectionView: UICollectionView, section: Int) -> Int
 
-    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell
+    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell
 }

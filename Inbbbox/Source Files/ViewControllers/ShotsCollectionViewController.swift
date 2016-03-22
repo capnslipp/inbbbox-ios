@@ -62,6 +62,19 @@ extension ShotsCollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-       return stateManager.shotsCollectionViewDataSource.cellForShots(shots, collectionView: collectionView, indexPath: indexPath)
+        let cell = stateManager.shotsCollectionViewDataSource.cellForShots(shots, collectionView: collectionView, indexPath: indexPath)
+        cell.delegate = self
+        return cell
     }
 }
+
+extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
+
+    func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
+        collectionView?.scrollEnabled = false
+    }
+    func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
+        collectionView?.scrollEnabled = true
+    }
+}
+

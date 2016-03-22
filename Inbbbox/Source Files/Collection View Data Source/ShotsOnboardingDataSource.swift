@@ -10,7 +10,7 @@ class ShotsOnboardingDataSource: ShotsDataSource {
         return 0
     }
 
-    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+    func cellForShots(shots: [ShotType], collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
+        return ShotCollectionViewCell()
     }
 }
