@@ -147,7 +147,7 @@ extension ShotBucketsViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotBucketsSelectCollectionViewCell {
             cell.selectBucket(viewModel.selectBucketAtIndex(indexPath.item))
-            setRemoveFromBucketButtonActive(viewModel.selectedBucketsIndexes.count > 0)
+            setRemoveFromSelectedBucketsButtonActive(viewModel.selectedBucketsIndexes.count > 0)
         } else if let _ = collectionView.cellForItemAtIndexPath(indexPath) as? ShotBucketsAddCollectionViewCell {
             addShotToBucketAtIndex(indexPath.item)
         }
@@ -194,7 +194,7 @@ extension ShotBucketsViewController {
         alert.view.tintColor = .pinkColor()
     }
     
-    func setRemoveFromBucketButtonActive(active: Bool) {
+    func setRemoveFromSelectedBucketsButtonActive(active: Bool) {
         let removeCellIndexPath =  NSIndexPath(forItem: viewModel.indexForRemoveFromSelectedBucketsCell(), inSection: 0)
         if let cell = shotBucketsView.collectionView.cellForItemAtIndexPath(removeCellIndexPath) as? ShotBucketsActionCollectionViewCell {
             cell.button.enabled = active
