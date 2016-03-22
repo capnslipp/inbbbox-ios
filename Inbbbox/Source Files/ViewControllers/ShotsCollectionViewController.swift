@@ -37,6 +37,8 @@ extension ShotsCollectionViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+
+        AnalyticsManager.trackScreen(.ShotsView)
         
         dispatch_once(&onceTokenForInitialShotsAnimation) {
             firstly {
@@ -68,11 +70,34 @@ extension ShotsCollectionViewController {
     }
 }
 
+//MARK - UIScrollViewDelegate
+extension ShotsCollectionViewController {
+    override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translationInView(scrollView.superview).y < 0 {
+            AnalyticsManager.trackUserActionEvent(.SwipeDown)
+        }
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard let collectionView = collectionView else {
+            return
+        }
+        let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
+        
+        for cell in collectionView.visibleCells() {
+            if let shotCell = cell as? ShotCollectionViewCell {
+                shotCell.shotImageView.applyBlur(blur)
+            }
+        }
+    }
+}
+
 extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
 
     func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
         collectionView?.scrollEnabled = false
     }
+
     func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
         collectionView?.scrollEnabled = true
     }
