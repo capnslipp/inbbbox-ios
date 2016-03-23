@@ -15,7 +15,7 @@ class ShotBucketsView: UIView {
     
     weak var viewController: UIViewController?
     
-    private let offsetToTopLayoutGuide = CGFloat(20)
+    private let offsetToTopLayoutGuide = CGFloat(10)
     
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
