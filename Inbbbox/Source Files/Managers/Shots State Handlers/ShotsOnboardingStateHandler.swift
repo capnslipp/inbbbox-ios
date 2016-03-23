@@ -9,11 +9,10 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
-    let onboardinShotsCount = 3
-    let stepsImages = [
-        (key: "onboarding-step1", image: UIImage(named: "onboarding-step1")!),
-        (key: "onboarding-step2", image: UIImage(named: "onboarding-step2")!),
-        (key: "onboarding-step3", image: UIImage(named: "onboarding-step3")!)
+    let onboardingSteps = [
+        (key: "onboarding-step1", image: UIImage(named: "onboarding-step1")!, action: ShotCollectionViewCell.Action.Like),
+        (key: "onboarding-step2", image: UIImage(named: "onboarding-step2")!, action: ShotCollectionViewCell.Action.Bucket),
+        (key: "onboarding-step3", image: UIImage(named: "onboarding-step3")!, action: ShotCollectionViewCell.Action.Comment)
     ].sort() { $0.key < $1.key }
     
     var state: ShotsCollectionViewController.State {
@@ -38,7 +37,7 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
     
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
-        for (index, stepImage) in stepsImages.enumerate() {
+        for (index, stepImage) in onboardingSteps.enumerate() {
             Shared.imageCache.set(value:stepImage.image, key: stepImage.key, formatName: CacheManager.imageFormatName) { _ in
                 self.shotsCollectionViewController?.collectionView?.reloadItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
             }
@@ -47,13 +46,13 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
-            return onboardinShotsCount
+            return onboardingSteps.count
         }
-        return onboardinShotsCount + shotsCollectionViewController.shots.count
+        return onboardingSteps.count + shotsCollectionViewController.shots.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if indexPath.row < onboardinShotsCount {
+        if indexPath.row < onboardingSteps.count {
             return cellForOnboardingShot(collectionView, indexPath: indexPath)
         } else {
             return cellForShot(collectionView, indexPath: indexPath)
@@ -70,15 +69,23 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
         cell.gifLabel.hidden = !shot.animated
+        cell.delegate = shotsCollectionViewController
         return cell
     }
     
     private func cellForOnboardingShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        let stepImageKey = stepsImages[indexPath.row].key
-        print(stepImageKey)
+        let stepImageKey = onboardingSteps[indexPath.row].key
         cell.shotImageView.loadShotImageFromURL(NSURL(string: stepImageKey)!);
         cell.gifLabel.hidden = true
+        cell.delegate = shotsCollectionViewController
+        cell.swipeCompletion = { [weak self] action in
+            if action == self?.onboardingSteps[indexPath.row].action {
+                var newContentOffset = collectionView.contentOffset
+                newContentOffset.y += CGRectGetHeight(collectionView.bounds)
+                collectionView.setContentOffset(newContentOffset, animated: true)
+            }
+        }
         return cell
     }
 }
