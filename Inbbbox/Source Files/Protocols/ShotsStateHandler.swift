@@ -12,7 +12,9 @@ protocol ShotsStateHandlerDelegate: class {
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler)
 }
 
-protocol ShotsStateHandler {
+protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate {
+
+    weak var shotsCollectionViewController: ShotsCollectionViewController? { get set }
 
     weak var delegate: ShotsStateHandlerDelegate? { get set }
 
@@ -25,12 +27,4 @@ protocol ShotsStateHandler {
     var tabBarInteractionEnabled: Bool { get }
 
     var collectionViewInteractionEnabled: Bool { get }
-
-    func numberOfItems(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, section: Int) -> Int
-
-    func configuredCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell
-
-    func didSelectItem(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath)
-
-    func willDisplayCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: NSIndexPath)
 }

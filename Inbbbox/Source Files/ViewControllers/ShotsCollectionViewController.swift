@@ -26,28 +26,29 @@ class ShotsCollectionViewController: UICollectionViewController {
     init() {
         stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(.Normal)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
+        stateHandler.shotsCollectionViewController = self
         stateHandler.delegate = self
     }
 }
 
 //MARK - UIViewController
 extension ShotsCollectionViewController {
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         collectionView?.pagingEnabled = true
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
         collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
         tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
         AnalyticsManager.trackScreen(.ShotsView)
-        
+
         dispatch_once(&onceTokenForInitialShotsAnimation) {
             firstly {
                 self.shotsProvider.provideShots()
@@ -66,13 +67,13 @@ extension ShotsCollectionViewController {
 
 //MARK - UICollectionViewDataSource
 extension ShotsCollectionViewController {
-    
+
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return stateHandler.numberOfItems(self, collectionView: collectionView, section: section)
+        return stateHandler.collectionView(collectionView, numberOfItemsInSection: section)
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return stateHandler.configuredCell(self, collectionView: collectionView, indexPath: indexPath)
+        return stateHandler.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
     }
 }
 
@@ -83,13 +84,13 @@ extension ShotsCollectionViewController {
             AnalyticsManager.trackUserActionEvent(.SwipeDown)
         }
     }
-    
+
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         guard let collectionView = collectionView else {
             return
         }
         let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
-        
+
         for cell in collectionView.visibleCells() {
             if let shotCell = cell as? ShotCollectionViewCell {
                 shotCell.shotImageView.applyBlur(blur)
@@ -101,7 +102,9 @@ extension ShotsCollectionViewController {
 extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
         if let nextState = shotsStateHandler.nextState {
-                 stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(nextState)   
+            stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(nextState)
+            stateHandler.shotsCollectionViewController = self
+            stateHandler.delegate = self
         }
     }
 }

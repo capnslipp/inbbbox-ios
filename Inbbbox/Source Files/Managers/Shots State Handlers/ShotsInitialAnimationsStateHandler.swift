@@ -4,9 +4,10 @@
 
 import Foundation
 
-class ShotsInitialAnimationsStateHandler: ShotsStateHandler {
+class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
 
-    var delegate: ShotsStateHandlerDelegate?
+    weak var shotsCollectionViewController: ShotsCollectionViewController?
+    weak var delegate: ShotsStateHandlerDelegate?
 
     var state: ShotsCollectionViewController.State {
         return .InitialAnimations
@@ -26,17 +27,12 @@ class ShotsInitialAnimationsStateHandler: ShotsStateHandler {
         return false
     }
 
-    func numberOfItems(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0
     }
 
-    func configuredCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
-        return ShotCollectionViewCell()
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
     }
 
-    func didSelectItem(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, indexPath: NSIndexPath) {
-    }
-
-    func willDisplayCell(shotsCollectionViewController: ShotsCollectionViewController, collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: NSIndexPath) {
-    }
 }
