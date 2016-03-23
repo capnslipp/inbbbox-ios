@@ -41,6 +41,7 @@ extension ShotsCollectionViewController {
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
         collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
+        collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
         tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
     }
 
@@ -119,6 +120,7 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
             stateHandler.delegate = self
             collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
             tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
+            collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
             collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
             collectionView?.reloadData()
         }
@@ -128,11 +130,11 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
 
     func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
-        collectionView?.scrollEnabled = false
+        collectionView?.scrollEnabled = false && stateHandler.colletionViewScrollEnabled
     }
 
     func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
-        collectionView?.scrollEnabled = true
+        collectionView?.scrollEnabled = true && stateHandler.colletionViewScrollEnabled
     }
 }
 

@@ -35,6 +35,10 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         return true
     }
     
+    var colletionViewScrollEnabled: Bool {
+        return false
+    }
+    
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
         for (index, stepImage) in onboardingSteps.enumerate() {
@@ -56,6 +60,12 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
             return cellForOnboardingShot(collectionView, indexPath: indexPath)
         } else {
             return cellForShot(collectionView, indexPath: indexPath)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 3 {
+            self.delegate?.shotsStateHandlerDidInvalidate(self)
         }
     }
     

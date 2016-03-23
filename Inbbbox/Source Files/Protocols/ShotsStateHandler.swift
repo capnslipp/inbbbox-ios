@@ -28,5 +28,7 @@ protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate
 
     var collectionViewInteractionEnabled: Bool { get }
     
+    var colletionViewScrollEnabled: Bool { get }
+    
     func presentData()
 }

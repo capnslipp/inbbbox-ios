@@ -22,10 +22,16 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     var collectionViewLayout: UICollectionViewLayout {
         return InitialAnimationsShotsCollectionViewLayout()
     }
+    
     var tabBarInteractionEnabled: Bool {
         return false
     }
+    
     var collectionViewInteractionEnabled: Bool {
+        return false
+    }
+    
+    var colletionViewScrollEnabled: Bool {
         return false
     }
 

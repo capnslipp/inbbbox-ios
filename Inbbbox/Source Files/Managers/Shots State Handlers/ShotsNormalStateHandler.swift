@@ -35,6 +35,10 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         return true
     }
     
+    var colletionViewScrollEnabled: Bool {
+        return true
+    }
+    
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
     }
