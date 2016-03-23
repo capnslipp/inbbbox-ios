@@ -152,9 +152,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
         case .Ended, .Cancelled, .Failed:
             let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
             let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
+            panGestureRecognizer.enabled = false
             animateCellAction(selectedAction) {
                 self.swipeCompletion?(selectedAction)
                 self.delegate?.shotCollectionViewCellDidEndSwiping(self)
+                panGestureRecognizer.enabled = true
             }
         default:
             let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
@@ -240,7 +242,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
                 plusImageView.hidden = true
                 bucketImageView.hidden = true
                 viewClass.animateWithDescriptor(ShotCellCommentActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
-            print(likeImageViewLeftConstraint?.constant)
             default:
                 viewClass.animateWithDescriptor(ShotCellRestoreInitialStateAnimationDescriptor(shotCell: self, swipeCompletion: completion))
         }
