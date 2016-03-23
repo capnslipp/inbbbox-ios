@@ -24,7 +24,7 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 
     init() {
-        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(.InitialAnimations)
+        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(.Onboarding)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
         stateHandler.shotsCollectionViewController = self
         stateHandler.delegate = self
