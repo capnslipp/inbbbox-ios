@@ -23,7 +23,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
     var likedShots = [ShotType]()
 
     private var shouldAskForMoreShots = true
-    private var shouldAllowCellSelection = true
 
     convenience init() {
         self.init(collectionViewLayout: InitialShotsCollectionViewLayout())
@@ -114,10 +113,6 @@ final class ShotsCollectionViewController: UICollectionViewController {
     }
 
     // MARK: UICollectionViewDelegate
-
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return shouldAllowCellSelection
-    }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let shot = shots[indexPath.row]
@@ -230,10 +225,10 @@ extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
 
     func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
         collectionView?.scrollEnabled = false
-        shouldAllowCellSelection = false
+        collectionView?.allowsSelection = false
     }
     func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
         collectionView?.scrollEnabled = true
-        shouldAllowCellSelection = true
+        collectionView?.allowsSelection = true
     }
 }
