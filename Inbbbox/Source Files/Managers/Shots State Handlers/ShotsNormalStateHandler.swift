@@ -26,11 +26,17 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     var collectionViewLayout: UICollectionViewLayout {
         return ShotsCollectionViewFlowLayout()
     }
+    
     var tabBarInteractionEnabled: Bool {
         return true
     }
+    
     var collectionViewInteractionEnabled: Bool {
         return true
+    }
+    
+    func presentData() {
+        shotsCollectionViewController?.collectionView?.reloadData()
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

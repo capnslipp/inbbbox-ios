@@ -27,4 +27,6 @@ protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate
     var tabBarInteractionEnabled: Bool { get }
 
     var collectionViewInteractionEnabled: Bool { get }
+    
+    func presentData()
 }

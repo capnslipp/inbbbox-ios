@@ -26,6 +26,10 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
     var collectionViewInteractionEnabled: Bool {
         return false
     }
+    
+    func presentData() {
+        
+    }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 0

@@ -24,7 +24,7 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 
     init() {
-        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(.Normal)
+        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(.InitialAnimations)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
         stateHandler.shotsCollectionViewController = self
         stateHandler.delegate = self
@@ -55,7 +55,7 @@ extension ShotsCollectionViewController {
                 }.then { shots -> Void in
                     if let shots = shots {
                         self.shots = shots
-                        self.collectionView?.reloadData()
+                        self.stateHandler.presentData()
                     }
                 }.error { error in
                     // NGRTemp: Need mockups for error message view
@@ -74,6 +74,18 @@ extension ShotsCollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return stateHandler.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+    }
+}
+
+//MARK - UICollectionViewDelegate
+extension ShotsCollectionViewController {
+
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        stateHandler.collectionView?(collectionView, didSelectItemAtIndexPath: indexPath)
+    }
+
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        stateHandler.collectionView?(collectionView, willDisplayCell: cell, forItemAtIndexPath: indexPath)
     }
 }
 
@@ -105,6 +117,10 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(nextState)
             stateHandler.shotsCollectionViewController = self
             stateHandler.delegate = self
+            collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
+            tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
+            collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
+            collectionView?.reloadData()
         }
     }
 }
