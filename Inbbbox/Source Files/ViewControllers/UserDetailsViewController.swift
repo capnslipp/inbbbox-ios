@@ -76,6 +76,12 @@ class UserDetailsViewController: UIViewController {
         updateBarButtons(userDetailsView.collectionView.collectionViewLayout)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        userDetailsView.setNeedsDisplay()
+        userDetailsView.setNeedsLayout()
+        userDetailsView.setNeedsUpdateConstraints()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         

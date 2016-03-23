@@ -42,7 +42,7 @@ final class ShotDetailsViewModel {
     }
     
     private var cachedFormattedComments = [CommentDisplayableData]()
-    private var comments = [CommentType]()
+    var comments = [CommentType]()
     private var userBucketsForShot = [BucketType]()
     private var isShotLikedByMe: Bool?
     private var userBucketsForShotCount: Int?

@@ -155,6 +155,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
+            cell.avatarView.delegate = self
             cell.delegate = self
 
             return cell
@@ -190,6 +191,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
             header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
+            header?.avatarView.delegate = self
         }
         
         return header!
@@ -453,5 +455,24 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
             UIApplication.sharedApplication().openURL(url)
         }
     }
+}
+
+extension ShotDetailsViewController: AvatarViewDelegate {
+    
+    func avatarView(avatarView: AvatarView, didTapAvatarButton: UIButton) {
+        var user: UserType?
+        if avatarView.superview == header {
+            user = viewModel.shot.user
+        } else if (avatarView.superview!.superview!.isKindOfClass(ShotDetailsCommentCollectionViewCell)) {
+            let cell = avatarView.superview!.superview! as! ShotDetailsCommentCollectionViewCell
+            let indexPath = shotDetailsView.collectionView.indexPathForCell(cell)
+            let index = indexPath!.row + viewModel.comments.count - viewModel.itemsCount
+            user = viewModel.comments[index].user
+        }
+        let userDetailsViewController = UserDetailsViewController(user: user!)
+        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+        presentViewController(navigationController, animated: true, completion: nil)
+    }
+   
 }
 
