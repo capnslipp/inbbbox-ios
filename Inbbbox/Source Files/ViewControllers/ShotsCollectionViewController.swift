@@ -23,6 +23,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
     var likedShots = [ShotType]()
 
     private var shouldAskForMoreShots = true
+    private var shouldAllowCellSelection = true
 
     convenience init() {
         self.init(collectionViewLayout: InitialShotsCollectionViewLayout())
@@ -114,6 +115,10 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
+    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return shouldAllowCellSelection
+    }
+    
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let shot = shots[indexPath.row]
         presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false)
@@ -206,7 +211,7 @@ private extension ShotsCollectionViewController {
         
         shotBucketsViewController.transitioningDelegate = modalTransitionAnimator
         shotBucketsViewController.modalPresentationStyle = .Custom
-        presentViewController(shotBucketsViewController, animated: true, completion: nil)
+        tabBarController?.presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
 }
 
@@ -225,8 +230,10 @@ extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
 
     func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
         collectionView?.scrollEnabled = false
+        shouldAllowCellSelection = false
     }
     func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
         collectionView?.scrollEnabled = true
+        shouldAllowCellSelection = true
     }
 }
