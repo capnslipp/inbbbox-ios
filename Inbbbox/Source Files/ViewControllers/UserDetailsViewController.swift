@@ -21,6 +21,10 @@ class UserDetailsViewController: UIViewController {
     
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     
+    private var isModal: Bool {
+        return self.presentingViewController?.presentedViewController == self || self.tabBarController?.presentingViewController is UITabBarController || self.navigationController?.presentingViewController?.presentedViewController == self.navigationController && (self.navigationController != nil)
+    }
+    
     // Layout related properties
     var oneColumnLayoutCellHeightToWidthRatio = CGFloat(0.75)
     var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(0.75)
@@ -207,6 +211,9 @@ private extension UserDetailsViewController {
     
     func setupBarButtons() {
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton, twoColumnsLayoutButton]
+        if (isModal) {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain , target: self, action: "didTapLeftBarButtonItem")
+        }
     }
     
     func updateBarButtons(layout: UICollectionViewLayout) {
@@ -226,6 +233,10 @@ private extension UserDetailsViewController {
         if isCurrentLayoutOneColumn {
             changeLayout()
         }
+    }
+    
+    dynamic func didTapLeftBarButtonItem() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Mark: Changing layout
