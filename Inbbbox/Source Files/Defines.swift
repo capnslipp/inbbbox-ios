@@ -9,16 +9,21 @@
 import Foundation
 
 enum NotificationKey: String {
-    case UserNotificationSettingsRegistered = "UserNotificationSettingsRegistered"
-}
-
-enum DefaultsKey: String {
     case ReminderOn = "ReminderOn"
     case ReminderDate = "ReminderDate"
+    case UserNotificationSettingsRegistered = "UserNotificationSettingsRegistered"
+    case LocalNotificationSettingsProvided = "LocalNotificationSettingsProvided"
+}
+
+enum StreamSourceKey: String {
     case StreamSourceIsSet = "StreamSourceIsSet"
     case FollowingStreamSourceOn = "FollowingStreamSourceOn"
     case NewTodayStreamSourceOn = "NewTodayStreamSourceOn"
     case PopularTodayStreamSourceOn = "PopularTodayStreamSourceOn"
     case DebutsStreamSourceOn = "DebutsStreamSourceOn"
-    case LocalNotificationSettingsProvided = "LocalNotificationSettingsProvided"
+}
+
+enum InbbboxNotificationKey: String {
+    case UserDidChangeStreamSourceSettings
+    case UserDidChangeNotificationsSettings
 }

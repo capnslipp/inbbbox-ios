@@ -60,15 +60,35 @@ class Settings {
 
 private extension Settings {
     
-    static func boolForKey(key: DefaultsKey) -> Bool {
-        return Defaults[key.rawValue].bool ?? false
+    // MARK: NotificationKey
+    
+    static func boolForKey(key: NotificationKey) -> Bool {
+        return boolForKey(key.rawValue)
     }
     
-    static func dateForKey(key: DefaultsKey) -> NSDate? {
+    static func dateForKey(key: NotificationKey) -> NSDate? {
         return Defaults[key.rawValue].date
     }
     
-    static func setValue(value: AnyObject?, forKey key: DefaultsKey) {
+    static func setValue(value: AnyObject?, forKey key: NotificationKey) {
         Defaults[key.rawValue] = value
+        NSNotificationCenter.defaultCenter().postNotificationName(InbbboxNotificationKey.UserDidChangeNotificationsSettings.rawValue, object: self)
+    }
+    
+    // MARK: StreamSourceKey
+    
+    static func boolForKey(key: StreamSourceKey) -> Bool {
+        return boolForKey(key.rawValue)
+    }
+    
+    static func setValue(value: AnyObject?, forKey key: StreamSourceKey) {
+        Defaults[key.rawValue] = value
+        NSNotificationCenter.defaultCenter().postNotificationName(InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: self)
+    }
+    
+    // MARK: General
+    
+    static func boolForKey(key: String) -> Bool {
+        return Defaults[key].bool ?? false
     }
 }
