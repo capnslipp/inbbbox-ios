@@ -53,7 +53,7 @@ class AnimatableShotImageView: AnimatableImageView {
     }
     
     func loadAnimatableShotFromUrl(url: NSURL) {
-        Shared.dataCache.fetch(key: url.absoluteString, failure: { _ in
+        Shared.dataCache.fetch(key: url.absoluteString, formatName: CacheManager.gifFormatName, failure: { _ in
             self.fetchWithURL(url)
         }, success: { data in
             self.setImageWithData(data)
