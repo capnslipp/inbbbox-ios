@@ -42,7 +42,10 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
     }
-    
+}
+
+// MARK - UICollecitonViewDataSource
+extension ShotsNormalStateHandler {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return 0
@@ -61,7 +64,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
         cell.gifLabel.hidden = !shot.animated
-        cell.delegate = shotsCollectionViewController
+        cell.delegate = self
         cell.swipeCompletion = { [weak self] action in
             switch action {
             case .Like:
@@ -77,6 +80,10 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         }
         return cell
     }
+}
+
+// MARK - UICollecitonViewDelegate
+extension ShotsNormalStateHandler {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
@@ -104,10 +111,45 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
             }
         }
     }
+}
+
+// MARK - UIScrollViewDelegate
+extension ShotsNormalStateHandler {
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translationInView(scrollView.superview).y < 0 {
+            AnalyticsManager.trackUserActionEvent(.SwipeDown)
+        }
+    }
     
-//    MARK - Helpers
-    
-    private func presentShotBucketsViewController(shot: ShotType, shotsCollectionViewController: ShotsCollectionViewController?) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard let collectionView = shotsCollectionViewController?.collectionView else {
+            return
+        }
+        let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
+        
+        for cell in collectionView.visibleCells() {
+            if let shotCell = cell as? ShotCollectionViewCell {
+                shotCell.shotImageView.applyBlur(blur)
+            }
+        }
+    }
+}
+
+extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
+
+    func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
+        shotsCollectionViewController?.collectionView?.scrollEnabled = false
+    }
+
+    func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
+        shotsCollectionViewController?.collectionView?.scrollEnabled = true
+    }
+}
+
+// MARK - Private methods
+private extension ShotsNormalStateHandler {
+
+    func presentShotBucketsViewController(shot: ShotType, shotsCollectionViewController: ShotsCollectionViewController?) {
         let shotBucketsViewController = ShotBucketsViewController(shot: shot, mode: .AddToBucket)
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
         
@@ -115,19 +157,20 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         shotBucketsViewController.modalPresentationStyle = .Custom
         shotsCollectionViewController?.presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
-
-    private func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool, shotsCollectionViewController: ShotsCollectionViewController?) {
-
+    
+    func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool, shotsCollectionViewController: ShotsCollectionViewController?) {
+        
         shotsCollectionViewController?.definesPresentationContext = true
-
+        
         let shotDetailsViewController = ShotDetailsViewController(shot: shot)
         shotDetailsViewController.shouldScrollToMostRecentMessage = scrollToMessages
-
+        
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
-
+        
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
-
+        
         shotsCollectionViewController?.tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
 }
+

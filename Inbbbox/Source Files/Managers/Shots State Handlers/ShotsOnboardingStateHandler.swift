@@ -3,17 +3,16 @@
 //
 
 import Foundation
-import Haneke
 
 class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
     let onboardingSteps = [
-        (key: "onboarding-step1", image: UIImage(named: "onboarding-step1")!, action: ShotCollectionViewCell.Action.Like),
-        (key: "onboarding-step2", image: UIImage(named: "onboarding-step2")!, action: ShotCollectionViewCell.Action.Bucket),
-        (key: "onboarding-step3", image: UIImage(named: "onboarding-step3")!, action: ShotCollectionViewCell.Action.Comment)
-    ].sort() { $0.key < $1.key }
+        (image: UIImage(named: "onboarding-step1"), action: ShotCollectionViewCell.Action.Like),
+        (image: UIImage(named: "onboarding-step2"), action: ShotCollectionViewCell.Action.Bucket),
+        (image: UIImage(named: "onboarding-step3"), action: ShotCollectionViewCell.Action.Comment)
+    ]
     
     var state: ShotsCollectionViewController.State {
         return .Onboarding
@@ -41,20 +40,19 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
     
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
-        for (index, stepImage) in onboardingSteps.enumerate() {
-            Shared.imageCache.set(value:stepImage.image, key: stepImage.key, formatName: CacheManager.imageFormatName) { _ in
-                self.shotsCollectionViewController?.collectionView?.reloadItemsAtIndexPaths([NSIndexPath(forItem: index, inSection: 0)])
-            }
-        }
     }
+}
 
+// MARK - UICollectionViewDataSource
+extension ShotsOnboardingStateHandler {
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return onboardingSteps.count
         }
         return onboardingSteps.count + shotsCollectionViewController.shots.count
     }
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if indexPath.row < onboardingSteps.count {
             return cellForOnboardingShot(collectionView, indexPath: indexPath)
@@ -62,16 +60,21 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
             return cellForShot(collectionView, indexPath: indexPath)
         }
     }
-    
+}
+
+// MARK - UICollectionViewDelegate
+extension ShotsOnboardingStateHandler {
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
             self.delegate?.shotsStateHandlerDidInvalidate(self)
         }
     }
+}
+
+// MARK - Private methods
+private extension ShotsOnboardingStateHandler {
     
-//    MARK - Helpers
-    
-    private func cellForShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
+    func cellForShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return ShotCollectionViewCell()
         }
@@ -79,16 +82,14 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
         cell.gifLabel.hidden = !shot.animated
-        cell.delegate = shotsCollectionViewController
         return cell
     }
     
-    private func cellForOnboardingShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
+    func cellForOnboardingShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        let stepImageKey = onboardingSteps[indexPath.row].key
-        cell.shotImageView.loadShotImageFromURL(NSURL(string: stepImageKey)!);
+        let stepImage = onboardingSteps[indexPath.row].image
+        cell.shotImageView.image = stepImage
         cell.gifLabel.hidden = true
-        cell.delegate = shotsCollectionViewController
         cell.swipeCompletion = { [weak self] action in
             if action == self?.onboardingSteps[indexPath.row].action {
                 var newContentOffset = collectionView.contentOffset

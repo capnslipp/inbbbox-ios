@@ -12,7 +12,7 @@ protocol ShotsStateHandlerDelegate: class {
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler)
 }
 
-protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate {
+protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
 
     weak var shotsCollectionViewController: ShotsCollectionViewController? { get set }
 

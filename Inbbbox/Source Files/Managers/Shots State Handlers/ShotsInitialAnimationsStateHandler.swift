@@ -45,11 +45,15 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
             self.delegate?.shotsStateHandlerDidInvalidate(self)
         }
     }
+}
 
+// MARK - UICollecitonViewDataSource
+extension ShotsInitialAnimationsStateHandler {
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.animationManager.visibleItems.count
     }
-
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return UICollectionViewCell()

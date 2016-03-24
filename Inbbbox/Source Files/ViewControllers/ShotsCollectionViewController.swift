@@ -93,22 +93,11 @@ extension ShotsCollectionViewController {
 //MARK - UIScrollViewDelegate
 extension ShotsCollectionViewController {
     override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translationInView(scrollView.superview).y < 0 {
-            AnalyticsManager.trackUserActionEvent(.SwipeDown)
-        }
+        stateHandler.scrollViewDidEndDecelerating?(scrollView)
     }
 
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        guard let collectionView = collectionView else {
-            return
-        }
-        let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds), CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
-
-        for cell in collectionView.visibleCells() {
-            if let shotCell = cell as? ShotCollectionViewCell {
-                shotCell.shotImageView.applyBlur(blur)
-            }
-        }
+        stateHandler.scrollViewDidScroll?(scrollView)
     }
 }
 
@@ -126,15 +115,3 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
         }
     }
 }
-
-extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
-
-    func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
-        collectionView?.scrollEnabled = false && stateHandler.colletionViewScrollEnabled
-    }
-
-    func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
-        collectionView?.scrollEnabled = true && stateHandler.colletionViewScrollEnabled
-    }
-}
-
