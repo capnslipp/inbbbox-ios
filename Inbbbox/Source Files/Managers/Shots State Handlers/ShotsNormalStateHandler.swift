@@ -181,8 +181,6 @@ private extension ShotsNormalStateHandler {
     }
 
     func likeShot(shot: ShotType) {
-
-        AnalyticsManager.trackUserActionEvent(.Like)
         if self.isShotLiked(shot) {
             return
         }
