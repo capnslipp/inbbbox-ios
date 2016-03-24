@@ -21,6 +21,10 @@ class UserDetailsViewController: UIViewController {
     
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     
+    private var isModal: Bool {
+        return self.presentingViewController?.presentedViewController == self || self.tabBarController?.presentingViewController is UITabBarController || self.navigationController?.presentingViewController?.presentedViewController == self.navigationController && (self.navigationController != nil)
+    }
+    
     // Layout related properties
     var oneColumnLayoutCellHeightToWidthRatio = CGFloat(0.75)
     var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(0.75)
@@ -74,6 +78,11 @@ class UserDetailsViewController: UIViewController {
         
         setupBarButtons()
         updateBarButtons(userDetailsView.collectionView.collectionViewLayout)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        userDetailsView.setNeedsUpdateConstraints()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -201,6 +210,21 @@ private extension UserDetailsViewController {
     
     func setupBarButtons() {
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton, twoColumnsLayoutButton]
+        if isModal {
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString(" Back", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            let textAttachment = NSTextAttachment()
+            textAttachment.image = UIImage(named: "ic-back")
+            textAttachment.bounds = CGRectMake(0, -3, textAttachment.image!.size.width, textAttachment.image!.size.height)
+            let attributedStringWithImage = NSAttributedString(attachment: textAttachment)
+            attributedString.replaceCharactersInRange(NSMakeRange(0,0), withAttributedString: attributedStringWithImage)
+
+            let backButton = UIButton()
+            backButton.setAttributedTitle(attributedString, forState: .Normal)
+            backButton.addTarget(self, action: "didTapLeftBarButtonItem", forControlEvents: .TouchUpInside)
+            backButton.sizeToFit()
+            
+            navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        }
     }
     
     func updateBarButtons(layout: UICollectionViewLayout) {
@@ -220,6 +244,10 @@ private extension UserDetailsViewController {
         if isCurrentLayoutOneColumn {
             changeLayout()
         }
+    }
+    
+    dynamic func didTapLeftBarButtonItem() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Mark: Changing layout

@@ -11,6 +11,8 @@ import UIKit
 class AvatarView: UIView {
     
     let imageView = UIImageView()
+    var delegate: AvatarViewDelegate?
+    private var avatarButton: UIButton
     
     convenience init (size: CGSize, bordered: Bool = true, borderWidth: CGFloat = 10) {
         self.init(avatarFrame: CGRect(origin: CGPointZero, size: size), bordered: bordered, borderWidth: borderWidth)
@@ -30,16 +32,27 @@ class AvatarView: UIView {
     }
     
     private override init(frame: CGRect) {
+        avatarButton = UIButton(frame: frame)
         super.init(frame: frame)
         imageView.frame.size = frame.size
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = CGRectGetHeight(frame) * 0.5
         imageView.contentMode = .ScaleAspectFit
         addSubview(imageView)
+        avatarButton.addTarget(self, action: "didTapAvatarButton", forControlEvents: .TouchUpInside)
+        addSubview(avatarButton)
     }
     
     @available(*, unavailable, message="Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func didTapAvatarButton() {
+       delegate?.avatarView(self, didTapButton: avatarButton)
+    }
+}
+
+protocol AvatarViewDelegate {
+    func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton)
 }
