@@ -211,7 +211,7 @@ private extension UserDetailsViewController {
     
     func setupBarButtons() {
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton, twoColumnsLayoutButton]
-        if (isModal) {
+        if isModal {
             let attributedString = NSMutableAttributedString(string: " Back")
             attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, attributedString.length))
             let textAttachment = NSTextAttachment()

@@ -128,6 +128,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
                 header?.setHeaderTitle(viewModel.titleForHeader)
                 header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+                header?.avatarView.delegate = self
                 header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
             }
             return header!
@@ -296,5 +297,17 @@ extension ShotBucketsViewController {
 extension ShotBucketsViewController: ModalByDraggingClosable {
     var scrollViewToObserve: UIScrollView {
         return shotBucketsView.collectionView
+    }
+}
+
+extension ShotBucketsViewController: AvatarViewDelegate {
+    
+    func avatarView(avatarView: AvatarView, didTapAvatarButton: UIButton) {
+        if avatarView.superview == header {
+            let user = viewModel.shot.user
+            let userDetailsViewController = UserDetailsViewController(user: user)
+            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+            presentViewController(navigationController, animated: true, completion: nil)
+        }
     }
 }
