@@ -68,6 +68,7 @@ extension ShotsOnboardingStateHandler {
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
             scrollViewAnimationsCompletion = {
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "OnboardingPassed")
                 self.delegate?.shotsStateHandlerDidInvalidate(self)
             }
         }

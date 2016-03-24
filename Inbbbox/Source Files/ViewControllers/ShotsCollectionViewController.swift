@@ -24,7 +24,8 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 
     init() {
-        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(.Onboarding)
+        let state: State = NSUserDefaults.standardUserDefaults().boolForKey("OnboardingPassed") ? .InitialAnimations : .Onboarding
+        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(state)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
         stateHandler.shotsCollectionViewController = self
         stateHandler.delegate = self
