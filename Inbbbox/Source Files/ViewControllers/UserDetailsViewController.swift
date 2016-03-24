@@ -211,8 +211,7 @@ private extension UserDetailsViewController {
     func setupBarButtons() {
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton, twoColumnsLayoutButton]
         if isModal {
-            let attributedString = NSMutableAttributedString(string: " Back")
-            attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSMakeRange(0, attributedString.length))
+            let attributedString = NSMutableAttributedString(string: " Back", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
             let textAttachment = NSTextAttachment()
             textAttachment.image = UIImage(named: "ic-back")
             textAttachment.bounds = CGRectMake(0, -3, textAttachment.image!.size.width, textAttachment.image!.size.height)

@@ -465,8 +465,7 @@ extension ShotDetailsViewController: AvatarViewDelegate {
             user = viewModel.shot.user
         } else if (avatarView.superview?.superview is ShotDetailsCommentCollectionViewCell) {
             let cell = avatarView.superview!.superview! as! ShotDetailsCommentCollectionViewCell
-            let indexPath = shotDetailsView.collectionView.indexPathForCell(cell)
-            if let indexPath = indexPath {
+            if let indexPath = shotDetailsView.collectionView.indexPathForCell(cell) {
                 let index = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
                 user = viewModel.comments[index].user
             }
