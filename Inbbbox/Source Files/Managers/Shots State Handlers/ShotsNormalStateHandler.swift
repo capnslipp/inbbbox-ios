@@ -117,6 +117,7 @@ extension ShotsNormalStateHandler {
 
 // MARK - UIScrollViewDelegate
 extension ShotsNormalStateHandler {
+    
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         if scrollView.panGestureRecognizer.translationInView(scrollView.superview).y < 0 {
             AnalyticsManager.trackUserActionEvent(.SwipeDown)

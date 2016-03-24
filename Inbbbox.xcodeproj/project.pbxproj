@@ -11,7 +11,6 @@
 		302BA0851C68B8DD00028476 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */; };
 		3063BD711CA40A8800EA67AB /* SettingsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063BD701CA40A8800EA67AB /* SettingsSpec.swift */; };
 		308437BD1C9C0BF800C737D8 /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 308437BC1C9C0BF800C737D8 /* DataDownloader.swift */; };
-		5A4005E41C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4005E31C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift */; };
 		5A45E6401C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45E63F1C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift */; };
 		5A499B691C35411F009AB421 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B681C35411F009AB421 /* UIColorExtension.swift */; };
 		5A499B6B1C354154009AB421 /* ShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */; };
@@ -370,7 +369,6 @@
 		302BA0841C68B8DD00028476 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		3063BD701CA40A8800EA67AB /* SettingsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSpec.swift; sourceTree = "<group>"; };
 		308437BC1C9C0BF800C737D8 /* DataDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDownloader.swift; sourceTree = "<group>"; };
-		5A4005E31C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotsCollectionViewControllerOld.swift; sourceTree = "<group>"; };
 		5A45E63F1C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialAnimationsShotsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5A499B681C35411F009AB421 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		5A499B6A1C354154009AB421 /* ShotCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1169,7 +1167,6 @@
 			isa = PBXGroup;
 			children = (
 				7416CD771C591F4F0051F65B /* FolloweesCollectionViewController.swift */,
-				5A4005E31C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift */,
 				5E650B401C21884C00F8A192 /* LoginViewController.swift */,
 				F09307C71C240609005F5111 /* SettingsViewController.swift */,
 				F02EDE301C29907C00E57EE8 /* DatePickerViewController.swift */,
@@ -1834,7 +1831,6 @@
 				F065DB431C96EFCF00A99B0E /* UserFollowedByMeQuery.swift in Sources */,
 				5A45E6401C27E8D60071E581 /* InitialAnimationsShotsCollectionViewLayout.swift in Sources */,
 				746F2F5C1C983CB400C1B6A8 /* BucketContentCollectionViewController.swift in Sources */,
-				5A4005E41C2418EB0010A500 /* ShotsCollectionViewControllerOld.swift in Sources */,
 				F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */,
 				F00232871C7DC902003020BD /* ShotBucketsHeaderView.swift in Sources */,
 				F00232891C7DCABE003020BD /* ShotBucketsView.swift in Sources */,

@@ -4,6 +4,7 @@
 
 import UIKit
 import PromiseKit
+import SwiftyUserDefaults
 
 class ShotsCollectionViewController: UICollectionViewController {
 
@@ -23,8 +24,13 @@ class ShotsCollectionViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /**
+     Initializer which creates ShotsCollectionViewController,
+     with proper collection view layout, according to current state
+     */
+    
     init() {
-        let state: State = NSUserDefaults.standardUserDefaults().boolForKey("OnboardingPassed") ? .InitialAnimations : .Onboarding
+        let state: State = Defaults[.onboardingPassed] ? .InitialAnimations : .Onboarding
         stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(state)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
         stateHandler.shotsCollectionViewController = self

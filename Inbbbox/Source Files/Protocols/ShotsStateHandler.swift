@@ -9,26 +9,46 @@
 import Foundation
 
 protocol ShotsStateHandlerDelegate: class {
+    /**
+     This method is called to inform object conforming to this protocol to configure for next state
+     */
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler)
 }
 
+
+/// Holds configuration for specific ShotsCollectionViewController.State
 protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
-
+    
+    /// Can be used in some methods
     weak var shotsCollectionViewController: ShotsCollectionViewController? { get set }
-
+    
+    /// The ShotsStateHandler's delegate object
     weak var delegate: ShotsStateHandlerDelegate? { get set }
 
+    /// State which this handler represents.
     var state: ShotsCollectionViewController.State { get }
 
+    /// State that will be after current state is invalidated.
     var nextState: ShotsCollectionViewController.State? { get }
 
+    /// Collection view layout for current state
     var collectionViewLayout: UICollectionViewLayout { get }
 
+    /// Enables/Disables user interaction on tab bar
     var tabBarInteractionEnabled: Bool { get }
 
+    /// Enables/Disables user interaction on collection view
     var collectionViewInteractionEnabled: Bool { get }
     
+    /**
+     Enables/Disables scrolling on collection view
+     Does't work if collectionViewInteractionEnabled is false
+     */
     var colletionViewScrollEnabled: Bool { get }
-    
+
+    /**
+     Reload data and possibly perform any other action or animation required by this handler.
+     ShotsCollectionViewController calls this action after downloading shots or state changes.
+     */
     func presentData()
 }

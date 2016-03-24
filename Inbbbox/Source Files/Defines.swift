@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
 enum NotificationKey: String {
     case ReminderOn = "ReminderOn"
@@ -21,6 +22,10 @@ enum StreamSourceKey: String {
     case NewTodayStreamSourceOn = "NewTodayStreamSourceOn"
     case PopularTodayStreamSourceOn = "PopularTodayStreamSourceOn"
     case DebutsStreamSourceOn = "DebutsStreamSourceOn"
+}
+
+extension DefaultsKeys {
+    static let onboardingPassed = DefaultsKey<Bool>("onboardingPassed")
 }
 
 enum InbbboxNotificationKey: String {

@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import SwiftyUserDefaults
 
 class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
@@ -68,7 +69,7 @@ extension ShotsOnboardingStateHandler {
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
             scrollViewAnimationsCompletion = {
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "OnboardingPassed")
+                Defaults[.onboardingPassed] = true
                 self.delegate?.shotsStateHandlerDidInvalidate(self)
             }
         }
