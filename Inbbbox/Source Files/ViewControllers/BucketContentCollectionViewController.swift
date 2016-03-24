@@ -15,7 +15,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
     
     var viewModel: BucketContentViewModel?
     var modalTransitionAnimator: ZFModalTransitionAnimator?
-    private var canEmptyDataBeVisible = false
+    private var shouldShowLoadingView = true
     
     // MARK: - Lifecycle
     
@@ -34,7 +34,6 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
-        collectionView.emptyDataSetDelegate = self 
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -90,7 +89,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
 extension BucketContentCollectionViewController: BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
-        canEmptyDataBeVisible = true
+        shouldShowLoadingView = false
         collectionView?.reloadData()
     }
     
@@ -104,39 +103,22 @@ extension BucketContentCollectionViewController: BaseCollectionViewViewModelDele
 }
 
 extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
-    
-    func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
-        return UIImage(named: "logo-empty")
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let firstLocalizedString = NSLocalizedString("Add some shots\nto this bucket ", comment: "")
-        let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
-        let textAttachment: NSTextAttachment = NSTextAttachment()
-        textAttachment.image = UIImage(named: "ic-bucket-emptystate")
-        if let image = textAttachment.image {
-            textAttachment.bounds = CGRect(x: 0, y: -4, width: image.size.width, height: image.size.height)
-        }
-        let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
-        compoundAttributedString.appendAttributedString(attributedStringWithImage)
-        let lastLocalizedString = NSLocalizedString(" first", comment: "")
-        let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
-        compoundAttributedString.appendAttributedString(lastAttributedString)
-        return compoundAttributedString
-    }
-    
-    func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
-        return 40
-    }
-    
-    func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
-        return -40
-    }
-}
 
-extension BucketContentCollectionViewController: DZNEmptyDataSetDelegate {
-    
-    func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
-        return canEmptyDataBeVisible
+    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
+        
+        if shouldShowLoadingView {
+            let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
+            loadingView.startAnimation()
+            return loadingView
+        } else {
+            let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
+            emptyDataSetView.setDescriptionText(
+                firstLocalizedString: NSLocalizedString("Add some shots\nto this bucket ", comment: ""),
+                attachmentImage: UIImage(named: "ic-bucket-emptystate"),
+                imageOffset: CGPoint(x: 0, y: -4),
+                lastLocalizedString: NSLocalizedString(" first!", comment: "")
+            )
+            return emptyDataSetView
+        }
     }
 }

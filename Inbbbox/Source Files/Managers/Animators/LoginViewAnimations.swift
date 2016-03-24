@@ -124,39 +124,19 @@ class LoginViewAnimations {
     
     func bounceAnimation(views: [UIView], duration: NSTimeInterval, additionalYOffset: Bool) {
         
-        if !shouldAnimate {
-            return
-        }
+        guard shouldAnimate else { return }
         
         Async.main(after: duration) {
             self.bounceAnimation(views, duration: duration, additionalYOffset: additionalYOffset)
         }
         let maxY = additionalYOffset ? 100 : 70
-        let translationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
-        translationY.values = [0, maxY, 0]
-        translationY.keyTimes = [0, 0.45, 1]
-        translationY.timingFunction = CAMediaTimingFunction(controlPoints: 0.7, 0.2, 0.3, 0.8)
-        translationY.duration = duration
-        translationY.repeatCount = 1
         
-        let scaleX = CAKeyframeAnimation(keyPath: "transform.scale.x")
-        scaleX.values = [1, 0.95, 1.1, 0.95, 1.0]
-        scaleX.keyTimes = [0, 0.44, 0.48, 0.52, 1]
-        scaleX.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        scaleX.duration = duration
-        scaleX.repeatCount = 1
+        let animations = CAKeyframeAnimation.ballBounceAnimations(maxY, duration: duration)
         
-        let scaleY = CAKeyframeAnimation(keyPath: "transform.scale.y")
-        scaleY.values = [1, 1.1, 0.9, 1.1, 1]
-        scaleY.keyTimes = [0, 0.44, 0.48, 0.52, 1]
-        scaleY.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        scaleY.duration = duration
-        scaleY.repeatCount = 1
-        
-        views.forEach {
-            $0.layer.addAnimation(scaleX, forKey: nil)
-            $0.layer.addAnimation(scaleY, forKey: nil)
-            $0.layer.addAnimation(translationY, forKey: nil)
+        views.forEach { view in
+            animations.forEach { animation in
+                view.layer.addAnimation(animation, forKey: nil)
+            }
         }
     }
 }

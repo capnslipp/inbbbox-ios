@@ -299,6 +299,8 @@
 		F038F5F81C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */; };
 		F04B1FEC1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */; };
 		F053F03D1C3541BB0068F51A /* SettingsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */; };
+		F06008F41CA2DE96007279D3 /* EmptyDataSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06008F31CA2DE96007279D3 /* EmptyDataSetView.swift */; };
+		F06008F61CA3C78F007279D3 /* CAKeyframeAnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06008F51CA3C78F007279D3 /* CAKeyframeAnimationExtension.swift */; };
 		F060D45B1C3170A300AFDD82 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F060D45A1C3170A300AFDD82 /* DatePickerView.swift */; };
 		F065DB381C96A44D00A99B0E /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */; };
 		F065DB3A1C96A5E100A99B0E /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */; };
@@ -309,6 +311,7 @@
 		F065DB471C98411F00A99B0E /* UserDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */; };
 		F065DB491C9846E800A99B0E /* APIConnectionsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */; };
 		F065DB4B1C9952A700A99B0E /* CloseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F065DB4A1C9952A700A99B0E /* CloseButtonView.swift */; };
+		F068ECFD1CA2C15300740EA7 /* EmptyDataSetLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F068ECFC1CA2C15300740EA7 /* EmptyDataSetLoadingView.swift */; };
 		F07B598E1C3FF02000F5CB86 /* AddToBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */; };
 		F07B59901C3FF03500F5CB86 /* RemoveFromBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */; };
 		F0863DC21C23F3C10062EA21 /* StringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0863DC11C23F3C10062EA21 /* StringConvertible.swift */; };
@@ -662,6 +665,8 @@
 		F038F5F71C3A4ED000C732B5 /* LocalNotificationRegistratorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistratorSpec.swift; sourceTree = "<group>"; };
 		F04B1FEB1C27E4BE00AEEE25 /* LocalNotificationRegistrator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalNotificationRegistrator.swift; sourceTree = "<group>"; };
 		F053F03C1C3541BB0068F51A /* SettingsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelSpec.swift; sourceTree = "<group>"; };
+		F06008F31CA2DE96007279D3 /* EmptyDataSetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDataSetView.swift; sourceTree = "<group>"; };
+		F06008F51CA3C78F007279D3 /* CAKeyframeAnimationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAKeyframeAnimationExtension.swift; sourceTree = "<group>"; };
 		F060D45A1C3170A300AFDD82 /* DatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		F065DB371C96A44D00A99B0E /* UserDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		F065DB391C96A5E100A99B0E /* UserDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -672,6 +677,7 @@
 		F065DB461C98411F00A99B0E /* UserDetailsViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailsViewModelSpec.swift; sourceTree = "<group>"; };
 		F065DB481C9846E800A99B0E /* APIConnectionsRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConnectionsRequesterMock.swift; sourceTree = "<group>"; };
 		F065DB4A1C9952A700A99B0E /* CloseButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButtonView.swift; sourceTree = "<group>"; };
+		F068ECFC1CA2C15300740EA7 /* EmptyDataSetLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyDataSetLoadingView.swift; sourceTree = "<group>"; };
 		F07B598D1C3FF02000F5CB86 /* AddToBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddToBucketQuery.swift; sourceTree = "<group>"; };
 		F07B598F1C3FF03500F5CB86 /* RemoveFromBucketQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuery.swift; sourceTree = "<group>"; };
 		F0863DC11C23F3C10062EA21 /* StringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringConvertible.swift; sourceTree = "<group>"; };
@@ -1067,6 +1073,7 @@
 		5E4857EC1C2957C90027B38A /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				F068ECFC1CA2C15300740EA7 /* EmptyDataSetLoadingView.swift */,
 				5E4857ED1C2957C90027B38A /* AvatarView.swift */,
 				5E4857EF1C2957C90027B38A /* SettingsTableHeaderView.swift */,
 				5E5082091C31305C00093191 /* AutoScrollableShotsView.swift */,
@@ -1091,6 +1098,7 @@
 				5E320C621C84826F00607F48 /* ActivityIndicatorSelectableView.swift */,
 				F065DB4A1C9952A700A99B0E /* CloseButtonView.swift */,
 				F065DB3D1C96BE5000A99B0E /* UserDetailsHeaderView.swift */,
+				F06008F31CA2DE96007279D3 /* EmptyDataSetView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1367,6 +1375,7 @@
 				C63370ED1C8F037B0007C1E5 /* NSMutableAttributedStringExtension.swift */,
 				F033BBD51C902D6B00E3DE64 /* UIAlertControllerExtension.swift */,
 				3005FD011C9AAB910038F3E3 /* UIWindowExtension.swift */,
+				F06008F51CA3C78F007279D3 /* CAKeyframeAnimationExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1823,6 +1832,7 @@
 				5EDC25F81C32AF680045B759 /* StringExtension.swift in Sources */,
 				5E1572B21C7CA49C0083B6CA /* ShotDetailsOperationView.swift in Sources */,
 				5EB896C81C5257E800AC2F3D /* TabBarAnimator.swift in Sources */,
+				F06008F61CA3C78F007279D3 /* CAKeyframeAnimationExtension.swift in Sources */,
 				7416CD781C591F4F0051F65B /* FolloweesCollectionViewController.swift in Sources */,
 				F0F501051C7211E200E8959E /* CommentEditView.swift in Sources */,
 				BF9508521C1F12A300E39242 /* Constants.swift in Sources */,
@@ -1869,6 +1879,7 @@
 				5E50820E1C3132AF00093191 /* LoginView.swift in Sources */,
 				5E08CD7D1C6E0E5200EF19E9 /* ShotImageView.swift in Sources */,
 				74A6C6821C57D2F8009BDD75 /* OneColumnCollectionViewFlowLayout.swift in Sources */,
+				F068ECFD1CA2C15300740EA7 /* EmptyDataSetLoadingView.swift in Sources */,
 				5C8D76D41C735C050030A44C /* ShotType.swift in Sources */,
 				5E4857BE1C280AB40027B38A /* OAuthViewController.swift in Sources */,
 				5E5082121C314F4100093191 /* AutoScrollableShotsDataSource.swift in Sources */,
@@ -1932,6 +1943,7 @@
 				BEEE9DA3FF3974F00AAA6D18 /* DefaultViewControllerPresenter.swift in Sources */,
 				749B578F1C6239D400C12DE1 /* LargeFolloweeCollectionViewCell.swift in Sources */,
 				BEEE98F7980F67D8E8A4FA36 /* CenterButtonTabBarView.swift in Sources */,
+				F06008F41CA2DE96007279D3 /* EmptyDataSetView.swift in Sources */,
 				BEEE963DA11EB678FCF6AF0C /* RoundedButton.swift in Sources */,
 				BEEE98B80B9835A634CF0192 /* CustomTabBarItemView.swift in Sources */,
 				BEEE92DB2FA773AEA5E9EBB5 /* CenterButtonTabBarController.swift in Sources */,
