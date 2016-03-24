@@ -15,7 +15,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     // MARK: - Lifecycle
     
     private let viewModel = FolloweesViewModel()
-    private var canEmptyDataBeVisible = false
+    private var shouldShowLoadingView = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,6 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         }
         collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
         collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
-        collectionView.emptyDataSetDelegate = self
         collectionView.emptyDataSetSource = self
         viewModel.delegate = self
         self.title = viewModel.title
@@ -101,7 +100,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
 extension FolloweesCollectionViewController: BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
-        canEmptyDataBeVisible = true
+        shouldShowLoadingView = false
         collectionView?.reloadData()
     }
     
@@ -116,38 +115,21 @@ extension FolloweesCollectionViewController: BaseCollectionViewViewModelDelegate
 
 extension FolloweesCollectionViewController: DZNEmptyDataSetSource {
 
-    func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
-        return UIImage(named: "logo-empty")
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let firstLocalizedString = NSLocalizedString("Follow ", comment: "")
-        let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
-        let textAttachment: NSTextAttachment = NSTextAttachment()
-        textAttachment.image = UIImage(named: "ic-following-emptystate")
-        if let image = textAttachment.image {
-            textAttachment.bounds = CGRect(x: 0, y: -3, width: image.size.width, height: image.size.height)
+    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
+        
+        if shouldShowLoadingView {
+            let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
+            loadingView.startAnimation()
+            return loadingView
+        } else {
+            let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
+            emptyDataSetView.setDescriptionText(
+                firstLocalizedString: NSLocalizedString("Follow ", comment: ""),
+                attachmentImage: UIImage(named: "ic-following-emptystate"),
+                imageOffset: CGPoint(x: 0, y: -3),
+                lastLocalizedString: NSLocalizedString(" someone first!", comment: "")
+            )
+            return emptyDataSetView
         }
-        let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
-        compoundAttributedString.appendAttributedString(attributedStringWithImage)
-        let lastLocalizedString = NSLocalizedString(" someone first!", comment: "")
-        let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
-        compoundAttributedString.appendAttributedString(lastAttributedString)
-        return compoundAttributedString
-    }
-    
-    func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
-        return 40
-    }
-    
-    func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
-        return -40
-    }
-}
-
-extension FolloweesCollectionViewController: DZNEmptyDataSetDelegate {
-
-    func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
-        return canEmptyDataBeVisible
     }
 }

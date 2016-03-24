@@ -15,7 +15,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
     let viewModel = LikesViewModel()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
-    private var canEmptyDataBeVisible = false
+    private var shouldShowLoadingView = true
     
     // MARK: - Lifecycle
     
@@ -29,7 +29,6 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
-        collectionView.emptyDataSetDelegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -82,7 +81,7 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
 extension LikesCollectionViewController : BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
-        self.canEmptyDataBeVisible = true
+        self.shouldShowLoadingView = false
         collectionView?.reloadData()
     }
     
@@ -97,38 +96,21 @@ extension LikesCollectionViewController : BaseCollectionViewViewModelDelegate {
 
 extension LikesCollectionViewController: DZNEmptyDataSetSource {
     
-    func imageForEmptyDataSet(_: UIScrollView!) -> UIImage! {
-        return UIImage(named: "logo-empty")
-    }
-    
-    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
-        let firstLocalizedString = NSLocalizedString("Like ", comment: "")
-        let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
-        let textAttachment: NSTextAttachment = NSTextAttachment()
-        textAttachment.image = UIImage(named: "ic-like-emptystate")
-        if let image = textAttachment.image {
-            textAttachment.bounds = CGRect(x: 0, y: -2, width: image.size.width, height: image.size.height)
+    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
+        
+        if shouldShowLoadingView {
+            let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
+            loadingView.startAnimation()
+            return loadingView
+        } else {
+            let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
+            emptyDataSetView.setDescriptionText(
+                firstLocalizedString: NSLocalizedString("Like ", comment: ""),
+                attachmentImage: UIImage(named: "ic-like-emptystate"),
+                imageOffset: CGPoint(x: 0, y: -2),
+                lastLocalizedString: NSLocalizedString(" some shots first!", comment: "")
+            )
+            return emptyDataSetView
         }
-        let attributedStringWithImage: NSAttributedString = NSAttributedString(attachment: textAttachment)
-        compoundAttributedString.appendAttributedString(attributedStringWithImage)
-        let lastLocalizedString = NSLocalizedString(" some shots first!", comment: "")
-        let lastAttributedString = NSMutableAttributedString.emptyDataSetStyledString(lastLocalizedString)
-        compoundAttributedString.appendAttributedString(lastAttributedString)
-        return compoundAttributedString
-    }
-    
-    func spaceHeightForEmptyDataSet(_: UIScrollView!) -> CGFloat {
-        return 40
-    }
-    
-    func verticalOffsetForEmptyDataSet(_: UIScrollView!) -> CGFloat {
-        return -40
-    }
-}
-
-extension LikesCollectionViewController: DZNEmptyDataSetDelegate {
-    
-    func emptyDataSetShouldDisplay(scrollView: UIScrollView!) -> Bool {
-        return canEmptyDataBeVisible
     }
 }
