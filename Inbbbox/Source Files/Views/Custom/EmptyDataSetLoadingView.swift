@@ -91,6 +91,9 @@ class EmptyDataSetLoadingView: UIView {
     }
     
     private func blinkLoadingLabel() {
+        
+        guard shouldAnimate else { return }
+        
         Async.main(after: animationDuration) {
             self.blinkLoadingLabel()
         }
