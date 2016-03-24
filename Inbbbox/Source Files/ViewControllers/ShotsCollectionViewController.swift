@@ -99,9 +99,14 @@ extension ShotsCollectionViewController {
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         stateHandler.scrollViewDidScroll?(scrollView)
     }
+    
+    override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        stateHandler.scrollViewDidEndScrollingAnimation?(scrollView)
+    }
 }
 
 extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
+    
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
         if let nextState = shotsStateHandler.nextState {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(nextState)
@@ -111,7 +116,8 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
             tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
             collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
             collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
-            collectionView?.reloadData()
+            collectionView?.setContentOffset(CGPointZero, animated: false)
+            stateHandler.presentData()
         }
     }
 }

@@ -13,6 +13,7 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         (image: UIImage(named: "onboarding-step2"), action: ShotCollectionViewCell.Action.Bucket),
         (image: UIImage(named: "onboarding-step3"), action: ShotCollectionViewCell.Action.Comment)
     ]
+    var scrollViewAnimationsCompletion: (() -> Void)?
     
     var state: ShotsCollectionViewController.State {
         return .Onboarding
@@ -66,8 +67,18 @@ extension ShotsOnboardingStateHandler {
 extension ShotsOnboardingStateHandler {
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
-            self.delegate?.shotsStateHandlerDidInvalidate(self)
+            scrollViewAnimationsCompletion = {
+                self.delegate?.shotsStateHandlerDidInvalidate(self)
+            }
         }
+    }
+}
+
+// MARK - UIScrollViewDelegate
+extension ShotsOnboardingStateHandler {
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        scrollViewAnimationsCompletion?()
+        scrollViewAnimationsCompletion = nil
     }
 }
 
