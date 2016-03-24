@@ -81,8 +81,7 @@ class UserDetailsViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        userDetailsView.setNeedsDisplay()
-        userDetailsView.setNeedsLayout()
+        super.viewWillAppear(animated)
         userDetailsView.setNeedsUpdateConstraints()
     }
     
