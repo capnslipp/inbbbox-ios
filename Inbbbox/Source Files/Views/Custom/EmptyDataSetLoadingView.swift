@@ -24,17 +24,19 @@ class EmptyDataSetLoadingView: UIView {
         frame = CGRect(
             x: CGRectGetMinX(frame),
             y: CGRectGetMinY(frame),
-            width: 250,
-            height: 150
+            width: 200,
+            height: 200
         )
 
         super.init(frame: frame)
         
         addSubview(ballView)
         
-        label.text = "Loading"
+        label.text = "Loading..."
         label.textColor = .cellBackgroundColor()
         label.font = UIFont.helveticaFont(.NeueMedium, size: 25)
+        label.textAlignment = .Center
+        label.alpha = 0.5
         addSubview(label)
         
     }
@@ -45,17 +47,19 @@ class EmptyDataSetLoadingView: UIView {
     
     override func layoutSubviews() {
         
+        // made on Rects because of complex animation of jumping ball, same comment as in LoginView
+        
         label.frame = CGRect(
-            x: CGRectGetMaxX(frame)/2 - 60,
-            y: CGRectGetMaxY(frame)/2 - 15,
-            width: 96,
+            x: CGRectGetMaxX(frame)/2 - 70,
+            y: CGRectGetMaxY(frame)/2,
+            width: 140,
             height: 30
         )
         
         let size = ballView.image?.size ?? CGSizeZero
         ballView.frame = CGRect(
-            x: CGRectGetMaxX(label.frame),
-            y: CGRectGetMaxY(label.frame) - size.height - CGFloat(ballJumpHeight),
+            x: CGRectGetMaxX(frame)/2 - size.width/2,
+            y: CGRectGetMinY(label.frame) - size.height - CGFloat(ballJumpHeight),
             width: size.width,
             height: size.height
         )
@@ -64,6 +68,7 @@ class EmptyDataSetLoadingView: UIView {
     func startAnimation() {
         shouldAnimate =  true
         animateBall()
+        blinkLoadingLabel()
     }
     
     func stopAnimation() {
@@ -83,5 +88,17 @@ class EmptyDataSetLoadingView: UIView {
         animations.forEach { animation in
             ballView.layer.addAnimation(animation, forKey: nil)
         }
+    }
+    
+    private func blinkLoadingLabel() {
+        Async.main(after: animationDuration) {
+            self.blinkLoadingLabel()
+        }
+        
+        UIView.animateWithDuration(animationDuration * 0.5, animations: {
+            self.label.alpha = 1.0
+        }, completion: { _ in
+            UIView.animateWithDuration(self.animationDuration * 0.5) { self.label.alpha = 0.5 }
+        })
     }
 }

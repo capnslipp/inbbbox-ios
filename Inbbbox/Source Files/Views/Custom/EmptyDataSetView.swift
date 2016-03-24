@@ -61,7 +61,7 @@ class EmptyDataSetView: UIView {
             compoundAttributedString.appendAttributedString(lastAttributedString)
             
             let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = NSTextAlignment.Center
+            paragraphStyle.alignment = .Center
             
             compoundAttributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, compoundAttributedString.length))
             
