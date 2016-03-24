@@ -302,7 +302,7 @@ extension ShotBucketsViewController: ModalByDraggingClosable {
 
 extension ShotBucketsViewController: AvatarViewDelegate {
     
-    func avatarView(avatarView: AvatarView, didTapAvatarButton: UIButton) {
+    func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton) {
         if avatarView.superview == header {
             let user = viewModel.shot.user
             let userDetailsViewController = UserDetailsViewController(user: user)

@@ -49,10 +49,10 @@ class AvatarView: UIView {
     }
     
     func didTapAvatarButton() {
-       delegate?.avatarView(self, didTapAvatarButton: avatarButton)
+       delegate?.avatarView(self, didTapButton: avatarButton)
     }
 }
 
 protocol AvatarViewDelegate {
-    func avatarView(avatarView: AvatarView, didTapAvatarButton: UIButton)
+    func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton)
 }

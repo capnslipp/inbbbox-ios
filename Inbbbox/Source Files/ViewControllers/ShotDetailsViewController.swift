@@ -459,7 +459,7 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
 
 extension ShotDetailsViewController: AvatarViewDelegate {
     
-    func avatarView(avatarView: AvatarView, didTapAvatarButton: UIButton) {
+    func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton) {
         var user: UserType?
         if avatarView.superview == header {
             user = viewModel.shot.user
