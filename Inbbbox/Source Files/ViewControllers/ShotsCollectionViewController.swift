@@ -29,6 +29,10 @@ final class ShotsCollectionViewController: UICollectionViewController {
 
         animationManager.delegate = self
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
 //    MARK: - UIViewController
 
@@ -44,6 +48,7 @@ final class ShotsCollectionViewController: UICollectionViewController {
         collectionView.registerClass(ShotCollectionViewCell.self, type: .Cell)
         collectionView.userInteractionEnabled = false
         tabBarController.tabBar.userInteractionEnabled = false
+        registerToSettingsNotifications()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -230,5 +235,26 @@ extension ShotsCollectionViewController: ShotCollectionViewCellDelegate {
     func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
         collectionView?.scrollEnabled = true
         collectionView?.allowsSelection = true
+    }
+}
+
+    // MARK: Private
+
+extension ShotsCollectionViewController {
+    private func registerToSettingsNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didChangeStreamSourceSettings:", name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
+    }
+    
+    @objc private func didChangeStreamSourceSettings(notification: NSNotification) {
+        refreshShotsData()
+    }
+    
+    private func refreshShotsData() {
+        firstly {
+            self.shotsProvider.provideShots()
+        }.then { shots -> Void in
+            self.shots = shots ?? []
+            self.collectionView?.reloadData()
+        }
     }
 }
