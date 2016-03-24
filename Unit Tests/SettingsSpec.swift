@@ -31,11 +31,11 @@ class SettingsSpec: QuickSpec {
         }
     }
     
-    @objc func streamNotification(notification: NSNotification) {
+    dynamic func streamNotification(notification: NSNotification) {
         didReceiveStreamSourceNotification = true
     }
     
-    @objc func notificationsNotification(notification: NSNotification) {
+    dynamic func notificationsNotification(notification: NSNotification) {
         didReceiveNotificationsNotification = true
     }
 }

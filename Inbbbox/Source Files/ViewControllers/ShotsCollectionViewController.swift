@@ -245,7 +245,7 @@ extension ShotsCollectionViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didChangeStreamSourceSettings:", name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
     }
     
-    @objc private func didChangeStreamSourceSettings(notification: NSNotification) {
+    dynamic private func didChangeStreamSourceSettings(notification: NSNotification) {
         refreshShotsData()
     }
     
@@ -255,6 +255,9 @@ extension ShotsCollectionViewController {
         }.then { shots -> Void in
             self.shots = shots ?? []
             self.collectionView?.reloadData()
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
         }
     }
 }
