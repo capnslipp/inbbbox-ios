@@ -463,16 +463,18 @@ extension ShotDetailsViewController: AvatarViewDelegate {
         var user: UserType?
         if avatarView.superview == header {
             user = viewModel.shot.user
-        } else if (avatarView.superview!.superview!.isKindOfClass(ShotDetailsCommentCollectionViewCell)) {
+        } else if (avatarView.superview?.superview is ShotDetailsCommentCollectionViewCell) {
             let cell = avatarView.superview!.superview! as! ShotDetailsCommentCollectionViewCell
             let indexPath = shotDetailsView.collectionView.indexPathForCell(cell)
-            let index = indexPath!.row + viewModel.comments.count - viewModel.itemsCount
-            user = viewModel.comments[index].user
+            if let indexPath = indexPath {
+                let index = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
+                user = viewModel.comments[index].user
+            }
         }
-        let userDetailsViewController = UserDetailsViewController(user: user!)
-        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-        presentViewController(navigationController, animated: true, completion: nil)
+        if let user = user {
+            let userDetailsViewController = UserDetailsViewController(user: user)
+            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+            presentViewController(navigationController, animated: true, completion: nil)
+        }
     }
-   
 }
-

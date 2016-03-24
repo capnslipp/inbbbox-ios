@@ -312,7 +312,7 @@ extension ShotDetailsViewModel {
     }
 }
 
-private extension ShotDetailsViewModel {
+extension ShotDetailsViewModel {
     
     func indexInCommentArrayBasedOnItemIndex(index: Int) -> Int {
         return comments.count - itemsCount + index
