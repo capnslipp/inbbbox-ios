@@ -11,6 +11,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     let shotsRequester =  ShotsRequester()
     let shotsProvider = ShotsProvider()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
+    var likedShots = [ShotType]()
 
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
@@ -64,16 +65,17 @@ extension ShotsNormalStateHandler {
         
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
         cell.gifLabel.hidden = !shot.animated
+        cell.liked = self.isShotLiked(shot)
         cell.delegate = self
         cell.swipeCompletion = { [weak self] action in
             switch action {
             case .Like:
-                self?.shotsRequester.likeShot(shot)
+                self?.likeShot(shot)
             case .Bucket:
-                self?.shotsRequester.likeShot(shot)
-                self?.presentShotBucketsViewController(shot, shotsCollectionViewController: self?.shotsCollectionViewController)
+                self?.likeShot(shot)
+                self?.presentShotBucketsViewController(shot)
             case .Comment:
-                self?.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true, shotsCollectionViewController: self?.shotsCollectionViewController)
+                self?.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true)
             case .DoNothing:
                 break
             }
@@ -90,7 +92,7 @@ extension ShotsNormalStateHandler {
             return
         }
         let shot = shotsCollectionViewController.shots[indexPath.row]
-        presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false, shotsCollectionViewController: shotsCollectionViewController)
+        presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false)
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -149,7 +151,7 @@ extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
 // MARK - Private methods
 private extension ShotsNormalStateHandler {
 
-    func presentShotBucketsViewController(shot: ShotType, shotsCollectionViewController: ShotsCollectionViewController?) {
+    func presentShotBucketsViewController(shot: ShotType) {
         let shotBucketsViewController = ShotBucketsViewController(shot: shot, mode: .AddToBucket)
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
         
@@ -158,7 +160,7 @@ private extension ShotsNormalStateHandler {
         shotsCollectionViewController?.presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
     
-    func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool, shotsCollectionViewController: ShotsCollectionViewController?) {
+    func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {
         
         shotsCollectionViewController?.definesPresentationContext = true
         
@@ -171,6 +173,27 @@ private extension ShotsNormalStateHandler {
         shotDetailsViewController.modalPresentationStyle = .Custom
         
         shotsCollectionViewController?.tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
+    }
+
+    func isShotLiked(shot: ShotType) -> Bool {
+        return likedShots.contains{ $0.identifier == shot.identifier }
+    }
+
+    func likeShot(shot: ShotType) {
+
+        AnalyticsManager.trackUserActionEvent(.Like)
+        if self.isShotLiked(shot) {
+            return
+        }
+
+        firstly {
+            self.shotsRequester.likeShot(shot)
+        }.then { Void -> Void in
+            self.shotsCollectionViewController?.collectionView?.reloadData()
+            self.likedShots.append(shot)
+        }.error { error in
+            // NGRToDo handle error and show alert
+        }
     }
 }
 
