@@ -48,17 +48,17 @@ class EmptyDataSetLoadingView: UIView {
     override func layoutSubviews() {
         
         // made on Rects because of complex animation of jumping ball, same comment as in LoginView
-        
+        let labelSize = CGSize(width: 140, height: 30)
         label.frame = CGRect(
-            x: CGRectGetMaxX(frame)/2 - 70,
-            y: CGRectGetMaxY(frame)/2,
-            width: 140,
-            height: 30
+            x: CGRectGetMaxX(frame) / 2 - labelSize.width / 2,
+            y: CGRectGetMaxY(frame) / 2,
+            width: labelSize.width,
+            height: labelSize.height
         )
         
         let size = ballView.image?.size ?? CGSizeZero
         ballView.frame = CGRect(
-            x: CGRectGetMaxX(frame)/2 - size.width/2,
+            x: CGRectGetMaxX(frame) / 2 - size.width / 2,
             y: CGRectGetMinY(label.frame) - size.height - CGFloat(ballJumpHeight),
             width: size.width,
             height: size.height
