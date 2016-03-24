@@ -11,7 +11,8 @@ import UIKit
 class CloseButtonView: UIView {
     
     let closeButton = UIButton(type: .System)
-    let vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: UIBlurEffect(style: .Dark)))
+    let vibrancyView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    let dimView = UIView.newAutoLayoutView()
     
     private let diameterSize = CGFloat(26)
     private var didSetConstraints = false
@@ -26,10 +27,12 @@ class CloseButtonView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        vibrancyView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
         vibrancyView.layer.cornerRadius = diameterSize/2
         vibrancyView.clipsToBounds = true
         addSubview(vibrancyView)
+        
+        dimView.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.25)
+        vibrancyView.addSubview(dimView)
         
         closeButton.configureForAutoLayout()
         let image = UIImage(named: "ic-cross-naked")?.imageWithRenderingMode(.AlwaysOriginal)
@@ -42,6 +45,7 @@ class CloseButtonView: UIView {
             didSetConstraints = true
             
             closeButton.autoPinEdgesToSuperviewEdges()
+            dimView.autoPinEdgesToSuperviewEdges()
             vibrancyView.autoPinEdgesToSuperviewEdges()
             autoSetDimensionsToSize(CGSize(width: diameterSize, height: diameterSize))
         }
