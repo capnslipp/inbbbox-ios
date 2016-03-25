@@ -73,6 +73,9 @@ pod 'DZNEmptyDataSet', '~>1.7'
 
 pod 'GoogleAnalytics', '~> 3.14.0'
 
+
+pod 'TTTAttributedLabel', '~> 1.13'
+
 target 'Tests' do link_with 'Unit Tests'
 
     pod 'Quick', '~> 0.8',

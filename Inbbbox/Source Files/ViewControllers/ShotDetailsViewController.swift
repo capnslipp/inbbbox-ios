@@ -189,6 +189,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.minHeight = heightForCollapsedCollectionViewHeader
             
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
+            header?.setLinkInTitleForRange(viewModel.rangeForLinkInTitle)
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
             header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self

@@ -9,6 +9,8 @@
 import UIKit
 import PureLayout
 import Haneke
+import TTTAttributedLabel
+
 
 private var avatarSize: CGSize {
     return CGSize(width: 48, height: 48)
@@ -30,7 +32,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     
     let closeButtonView = CloseButtonView.newAutoLayoutView()
-    private let titleLabel = UILabel.newAutoLayoutView()
+    private let titleLabel = TTTAttributedLabel.newAutoLayoutView()
     private let overlapingTitleLabel = UILabel.newAutoLayoutView()
     private let dimView = UIView.newAutoLayoutView()
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
@@ -139,7 +141,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     func setAttributedTitle(title: NSAttributedString?) {
-        titleLabel.attributedText = title
+        titleLabel.setText(title)
+        titleLabel.delegate = self
         overlapingTitleLabel.attributedText = {
             guard let title = title else {
                 return nil
@@ -151,6 +154,17 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             
             return mutableTitle.copy() as? NSAttributedString
         }()
+    }
+    
+    func setLinkInTitleForRange(range: NSRange) {
+        let linkAttributes = [
+            NSForegroundColorAttributeName : UIColor.pinkColor(),
+            NSFontAttributeName : UIFont.systemFontOfSize(14)
+        ]
+        titleLabel.linkAttributes = linkAttributes;
+        titleLabel.activeLinkAttributes = linkAttributes;
+        titleLabel.inactiveLinkAttributes = linkAttributes;
+        titleLabel.addLinkToURL(NSURL(), withRange: range)
     }
 }
 
@@ -185,4 +199,13 @@ extension ShotDetailsHeaderView: Reusable {
     class var reuseIdentifier: String {
         return String(ShotDetailsHeaderView)
     }
+}
+
+extension ShotDetailsHeaderView: TTTAttributedLabelDelegate {
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        
+    
+    }
+    
 }
