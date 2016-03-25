@@ -4,7 +4,7 @@
 
 import UIKit
 
-class InitialShotsCollectionViewLayout: UICollectionViewLayout {
+class InitialAnimationsShotsCollectionViewLayout: UICollectionViewLayout {
 
 //    MARK: - UICollectionViewLayout
 
