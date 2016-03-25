@@ -10,9 +10,7 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     let animationManager = ShotsAnimator()
     weak var shotsCollectionViewController: ShotsCollectionViewController? {
         didSet {
-            if let shotsCollectionViewController = shotsCollectionViewController {
-                shotsCollectionViewController.collectionView?.emptyDataSetSource = self
-            }
+            shotsCollectionViewController?.collectionView?.emptyDataSetSource = self
         }
     }
     
