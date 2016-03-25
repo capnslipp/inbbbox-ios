@@ -127,14 +127,15 @@ extension ShotDetailsViewModel {
     func performLikeOperation() -> Promise<Bool> {
         return Promise<Bool> { fulfill, reject in
             
-            let like = !isShotLikedByMe!
-            
-            firstly {
-                like ? shotsRequester.likeShot(shot) : shotsRequester.unlikeShot(shot)
-            }.then { _ -> Void in
-                self.isShotLikedByMe = like
-                fulfill(like)
-            }.error(reject)
+            if let shotLiked = isShotLikedByMe {
+                
+                firstly {
+                    shotLiked ? shotsRequester.unlikeShot(shot) : shotsRequester.likeShot(shot)
+                }.then { _ -> Void in
+                    self.isShotLikedByMe = !shotLiked
+                    fulfill(!shotLiked)
+                }.error(reject)
+            }
         }
     }
     
