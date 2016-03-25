@@ -3,11 +3,18 @@
 //
 
 import Foundation
+import DZNEmptyDataSet
 
 class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
 
     let animationManager = ShotsAnimator()
-    weak var shotsCollectionViewController: ShotsCollectionViewController?
+    weak var shotsCollectionViewController: ShotsCollectionViewController? {
+        didSet {
+            if let shotsCollectionViewController = shotsCollectionViewController {
+                shotsCollectionViewController.collectionView?.emptyDataSetSource = self
+            }
+        }
+    }
     
     weak var delegate: ShotsStateHandlerDelegate?
 
@@ -34,6 +41,8 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     var colletionViewScrollEnabled: Bool {
         return false
     }
+    
+    private let emptyDataSetLoadingView = EmptyDataSetLoadingView.newAutoLayoutView()
 
     override init () {
         super.init()
@@ -41,6 +50,7 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     }
     
     func presentData() {
+        hideEmptyDataSetLoadingView()
         self.animationManager.startAnimationWithCompletion() {
             self.delegate?.shotsStateHandlerDidInvalidate(self)
         }
@@ -80,5 +90,18 @@ extension ShotsInitialAnimationsStateHandler: ShotsAnimatorDelegate {
             return []
         }
         return Array(shotsCollectionViewController.shots.prefix(3))
+    }
+}
+
+extension ShotsInitialAnimationsStateHandler: DZNEmptyDataSetSource {
+    
+    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
+        emptyDataSetLoadingView.startAnimation()
+        return emptyDataSetLoadingView
+    }
+    
+    func hideEmptyDataSetLoadingView() {
+        emptyDataSetLoadingView.hidden = true
+        emptyDataSetLoadingView.stopAnimation()
     }
 }
