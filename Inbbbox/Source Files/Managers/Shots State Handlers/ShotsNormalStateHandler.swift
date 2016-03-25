@@ -102,14 +102,14 @@ extension ShotsNormalStateHandler {
         if indexPath.row == shotsCollectionViewController.shots.count - 6 {
             firstly {
                 shotsProvider.nextPage()
-                }.then { [weak self] shots -> Void in
-                    if let shots = shots, let shotsCollectionViewController = self?.shotsCollectionViewController {
-                        shotsCollectionViewController.shots.appendContentsOf(shots)
-                        shotsCollectionViewController.collectionView?.reloadData()
-                    }
-                }.error { error in
-                    // NGRTemp: Need mockups for error message view
-                    print(error)
+            }.then { [weak self] shots -> Void in
+                if let shots = shots, let shotsCollectionViewController = self?.shotsCollectionViewController {
+                    shotsCollectionViewController.shots.appendContentsOf(shots)
+                    shotsCollectionViewController.collectionView?.reloadData()
+                }
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+                print(error)
             }
         }
     }
@@ -142,10 +142,12 @@ extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
 
     func shotCollectionViewCellDidStartSwiping(_: ShotCollectionViewCell) {
         shotsCollectionViewController?.collectionView?.scrollEnabled = false
+        shotsCollectionViewController?.collectionView?.allowsSelection = false
     }
 
     func shotCollectionViewCellDidEndSwiping(_: ShotCollectionViewCell) {
         shotsCollectionViewController?.collectionView?.scrollEnabled = true
+        shotsCollectionViewController?.collectionView?.allowsSelection = true
     }
 }
 
@@ -158,7 +160,7 @@ private extension ShotsNormalStateHandler {
         
         shotBucketsViewController.transitioningDelegate = modalTransitionAnimator
         shotBucketsViewController.modalPresentationStyle = .Custom
-        shotsCollectionViewController?.presentViewController(shotBucketsViewController, animated: true, completion: nil)
+        shotsCollectionViewController?.tabBarController?.presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
     
     func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {

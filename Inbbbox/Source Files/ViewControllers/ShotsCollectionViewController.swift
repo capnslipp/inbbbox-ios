@@ -36,6 +36,10 @@ class ShotsCollectionViewController: UICollectionViewController {
         stateHandler.shotsCollectionViewController = self
         stateHandler.delegate = self
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
 
 //MARK - UIViewController
@@ -59,15 +63,12 @@ extension ShotsCollectionViewController {
 
         dispatch_once(&onceTokenForInitialShotsAnimation) {
             firstly {
-                self.shotsProvider.provideShots()
-                }.then { shots -> Void in
-                    if let shots = shots {
-                        self.shots = shots
-                        self.stateHandler.presentData()
-                    }
-                }.error { error in
-                    // NGRTemp: Need mockups for error message view
-                    print(error)
+                self.refreshShotsData()
+            }.then {
+                self.collectionView?.reloadData()
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+                print(error)
             }
         }
     }
@@ -115,16 +116,45 @@ extension ShotsCollectionViewController {
 extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
     
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
-        if let nextState = shotsStateHandler.nextState {
-            stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(nextState)
-            stateHandler.shotsCollectionViewController = self
-            stateHandler.delegate = self
-            collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
-            tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
-            collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
-            collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
-            collectionView?.setContentOffset(CGPointZero, animated: false)
-            stateHandler.presentData()
+        if let newState = shotsStateHandler.nextState {
+           configureForNewState(newState)
+        }
+    }
+}
+
+// MARK - Private methods
+private extension ShotsCollectionViewController {
+    
+    func configureForNewState(state: State) {
+        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(state)
+        stateHandler.shotsCollectionViewController = self
+        stateHandler.delegate = self
+        collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
+        tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
+        collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
+        collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
+        collectionView?.setContentOffset(CGPointZero, animated: false)
+        stateHandler.presentData()
+    }
+    
+    dynamic func didChangeStreamSourceSettings(notification: NSNotification) {
+        firstly {
+            refreshShotsData()
+        }.then {
+            self.collectionView?.reloadData()
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+            print(error)
+        }
+    }
+    
+    func refreshShotsData() -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                self.shotsProvider.provideShots()
+            }.then { shots -> Void in
+                self.shots = shots ?? []
+            }.then(fulfill).error(reject)
         }
     }
 }
