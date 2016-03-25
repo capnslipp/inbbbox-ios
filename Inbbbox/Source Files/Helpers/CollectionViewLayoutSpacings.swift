@@ -10,7 +10,7 @@ import UIKit
 
 struct CollectionViewLayoutSpacings {
     
-    // MARK General
+    // MARK: General
     
     let shotHeightToWidthRatio = CGFloat(0.75)
 
