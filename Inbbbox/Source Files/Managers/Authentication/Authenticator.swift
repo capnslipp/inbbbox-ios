@@ -73,6 +73,7 @@ class Authenticator {
         UserStorage.clear()
         TokenStorage.clear()
         WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0) , completionHandler:{})
+        APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
     }
 }
 
