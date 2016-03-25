@@ -140,6 +140,14 @@ final class APIRateLimitKeeper {
             throw APIRateLimitKeeperError.DidExceedRateLimitPerMinute(timeIntervalRemainingToResetMinuteLimit ?? 0)
         }
     }
+    
+    /**
+     Clears stored information about API rate limits. Method should be called while logging out.
+     */
+    func clearRateLimitsInfo() {
+        rateLimitRemainingPerDay = nil
+        rateLimitRemainingPerMinute = nil
+    }
 }
 
 private extension APIRateLimitKeeper {
