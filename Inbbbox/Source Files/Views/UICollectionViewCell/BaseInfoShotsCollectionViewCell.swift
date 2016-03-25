@@ -19,7 +19,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     }
     private var didSetConstraints = false
     
-    // MARK - Life cycle
+    // MARK: Life cycle
     
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +31,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
         commonInit()
     }
     
-    // Mark - Setup UI
+    // MARK: Setup UI
     
      func commonInit() {
         
@@ -50,7 +50,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(infoView)
     }
     
-    // MARK - UIView
+    // MARK: UIView
     
     override class func requiresConstraintBasedLayout() -> Bool {
         return true

@@ -45,7 +45,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     }
 }
 
-// MARK - UICollecitonViewDataSource
+// MARK: UICollecitonViewDataSource
 extension ShotsNormalStateHandler {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
@@ -84,7 +84,7 @@ extension ShotsNormalStateHandler {
     }
 }
 
-// MARK - UICollecitonViewDelegate
+// MARK: UICollecitonViewDelegate
 extension ShotsNormalStateHandler {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -115,7 +115,7 @@ extension ShotsNormalStateHandler {
     }
 }
 
-// MARK - UIScrollViewDelegate
+// MARK: UIScrollViewDelegate
 extension ShotsNormalStateHandler {
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
@@ -151,7 +151,7 @@ extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
     }
 }
 
-// MARK - Private methods
+// MARK: Private methods
 private extension ShotsNormalStateHandler {
 
     func presentShotBucketsViewController(shot: ShotType) {

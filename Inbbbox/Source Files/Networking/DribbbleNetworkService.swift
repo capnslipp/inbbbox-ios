@@ -10,11 +10,11 @@ import Foundation
 
 struct DribbbleNetworkService: SecureNetworkService, HeaderAuthorizable, OAuthAuthorizable {
     
-    //MARK: SecureNetworkService
+    // MARK: SecureNetworkService
     let host = Dribbble.Host
     let version = Dribbble.APIVersion
     
-    //MARK: OAuthAuthorizable
+    // MARK: OAuthAuthorizable
     let requestTokenURLString = Dribbble.RequestTokenURLString
     let accessTokenURLString = Dribbble.AccessTokenURLString
     let redirectURI = Dribbble.CallbackURLString

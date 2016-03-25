@@ -3,11 +3,16 @@
 //
 
 import Foundation
+import DZNEmptyDataSet
 
 class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
 
     let animationManager = ShotsAnimator()
-    weak var shotsCollectionViewController: ShotsCollectionViewController?
+    weak var shotsCollectionViewController: ShotsCollectionViewController? {
+        didSet {
+            shotsCollectionViewController?.collectionView?.emptyDataSetSource = self
+        }
+    }
     
     weak var delegate: ShotsStateHandlerDelegate?
 
@@ -34,6 +39,8 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     var colletionViewScrollEnabled: Bool {
         return false
     }
+    
+    private let emptyDataSetLoadingView = EmptyDataSetLoadingView.newAutoLayoutView()
 
     override init () {
         super.init()
@@ -41,13 +48,15 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     }
     
     func presentData() {
+        hideEmptyDataSetLoadingView()
         self.animationManager.startAnimationWithCompletion() {
             self.delegate?.shotsStateHandlerDidInvalidate(self)
         }
     }
 }
 
-// MARK - UICollecitonViewDataSource
+// MARK: UICollecitonViewDataSource
+
 extension ShotsInitialAnimationsStateHandler {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -80,5 +89,24 @@ extension ShotsInitialAnimationsStateHandler: ShotsAnimatorDelegate {
             return []
         }
         return Array(shotsCollectionViewController.shots.prefix(3))
+    }
+}
+
+extension ShotsInitialAnimationsStateHandler: DZNEmptyDataSetSource {
+    
+    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
+        emptyDataSetLoadingView.startAnimation()
+        return emptyDataSetLoadingView
+    }
+}
+
+// MARK: Private methods
+
+private extension ShotsInitialAnimationsStateHandler {
+    
+    // NGRHack: DZNEmptyDataSet does not react on `insertItemsAtIndexPaths` so we need to manually hide loading view
+    func hideEmptyDataSetLoadingView() {
+        emptyDataSetLoadingView.hidden = true
+        emptyDataSetLoadingView.stopAnimation()
     }
 }

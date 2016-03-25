@@ -34,7 +34,7 @@ class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         super.updateConstraints()
     }
     
-    // MARK - Avatar settable
+    // MARK: Avatar settable
     
     func setupAvatar() {
         avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
@@ -78,7 +78,7 @@ class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         return "LargeFolloweeCollectionViewCellIdentifier"
     }
     
-    //MARK: - Width dependent height
+    // MARK: - Width dependent height
     
     static var heightToWidthRatio: CGFloat {
         return CGFloat(0.83)

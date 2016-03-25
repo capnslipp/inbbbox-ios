@@ -40,7 +40,7 @@ class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         super.updateConstraints()
     }
     
-    // MARK - Avatar settable
+    // MARK: Avatar settable
     
     func setupAvatar() {
         avatarView = AvatarView(avatarFrame: CGRect(origin: CGPointZero, size: avatarSize), bordered: false)
@@ -117,7 +117,7 @@ class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
         return "SmallFolloweeCollectionViewCellIdentifier"
     }
     
-    //MARK: - Width dependent height
+    // MARK: - Width dependent height
     
     static var heightToWidthRatio: CGFloat {
         return CGFloat(1)

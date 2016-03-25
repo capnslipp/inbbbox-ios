@@ -10,11 +10,11 @@ import UIKit
 
 struct CollectionViewLayoutSpacings {
     
-    //MARK General
+    // MARK: General
     
     let shotHeightToWidthRatio = CGFloat(0.75)
 
-    //MARK - One Column Layout Specific
+    // MARK: One Column Layout Specific
     
     let itemMargin = CGFloat(28)
     let sectionMarginHorizontal = CGFloat(28)
@@ -22,7 +22,7 @@ struct CollectionViewLayoutSpacings {
     let minimumLineSpacing = CGFloat(29)
     let initialShotsLayoutBottomCellOffset = CGFloat(40)
     
-    //MARK - Two Columns Layout Specific
+    // MARK: Two Columns Layout Specific
     
     let twoColumnsItemMargin = CGFloat(25)
     let twoColumnsSectionMarginHorizontal = CGFloat(30)

@@ -18,7 +18,7 @@ class ShotsCollectionViewController: UICollectionViewController {
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
 
-    //MARK - Life cycle
+    // MARK: Life cycle
 
     @available(*, unavailable, message="Use init() method instead")
     required init?(coder aDecoder: NSCoder) {
@@ -40,7 +40,7 @@ class ShotsCollectionViewController: UICollectionViewController {
     }
 }
 
-//MARK - UIViewController
+// MARK: UIViewController
 extension ShotsCollectionViewController {
 
     override func viewDidLoad() {
@@ -70,7 +70,7 @@ extension ShotsCollectionViewController {
     }
 }
 
-//MARK - UICollectionViewDataSource
+// MARK: UICollectionViewDataSource
 extension ShotsCollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -82,7 +82,7 @@ extension ShotsCollectionViewController {
     }
 }
 
-//MARK - UICollectionViewDelegate
+// MARK: UICollectionViewDelegate
 extension ShotsCollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -94,7 +94,7 @@ extension ShotsCollectionViewController {
     }
 }
 
-//MARK - UIScrollViewDelegate
+// MARK: UIScrollViewDelegate
 extension ShotsCollectionViewController {
     override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         stateHandler.scrollViewDidEndDecelerating?(scrollView)
@@ -120,7 +120,7 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
     }
 }
 
-// MARK - Private methods
+// MARK: Private methods
 private extension ShotsCollectionViewController {
     
     func configureForCurrentStateHandler() {
