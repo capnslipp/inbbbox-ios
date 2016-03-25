@@ -65,7 +65,7 @@ extension ShotsCollectionViewController {
             firstly {
                 self.refreshShotsData()
             }.then {
-                self.collectionView?.reloadData()
+                self.stateHandler.presentData()
             }.error { error in
                 // NGRTemp: Need mockups for error message view
                 print(error)
