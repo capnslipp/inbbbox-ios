@@ -20,10 +20,10 @@ class TabBarAnimator {
     init(view: LoginView) {
         
         let tabBarHeight = tabBarView.intrinsicContentSize().height
-        
-        tabBarView.layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
-        tabBarView.layer.shadowRadius = 3
-        tabBarView.layer.shadowOpacity = 1
+
+        tabBarView.layer.shadowColor = UIColor(white: 0, alpha: 0.03).CGColor
+        tabBarView.layer.shadowRadius = 1
+        tabBarView.layer.shadowOpacity = 0.6
         
         view.addSubview(tabBarView)
         tabBarView.frame = CGRect(

@@ -45,7 +45,7 @@ class CustomTabBarItemView: UIView {
         if !didSetConstraints {
             iconImageView.autoPinEdgeToSuperviewEdge(.Top)
             iconImageView.autoAlignAxisToSuperviewAxis(.Vertical)
-            nameLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: iconImageView, withOffset: 5.0)
+            nameLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: iconImageView, withOffset: 2.0)
             nameLabel.autoPinEdgeToSuperviewEdge(.Bottom)
             nameLabel.autoAlignAxisToSuperviewAxis(.Vertical)
             didSetConstraints = true
