@@ -66,7 +66,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-//MARK: Actions
+// MARK: Actions
 extension LoginViewController {
     
     func loginButtonDidTap(_: UIButton) {

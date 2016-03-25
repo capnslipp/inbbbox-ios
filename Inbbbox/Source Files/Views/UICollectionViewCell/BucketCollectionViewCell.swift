@@ -99,7 +99,7 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
         return "BucketCollectionViewCellIdentifier"
     }
     
-    //MARK: - Width dependent height
+    // MARK: - Width dependent height
     static var heightToWidthRatio: CGFloat {
         return CGFloat(1.25)
     }

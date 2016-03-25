@@ -45,7 +45,7 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
     }
 }
 
-// MARK - UICollectionViewDataSource
+// MARK: UICollectionViewDataSource
 extension ShotsOnboardingStateHandler {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -64,7 +64,7 @@ extension ShotsOnboardingStateHandler {
     }
 }
 
-// MARK - UICollectionViewDelegate
+// MARK: UICollectionViewDelegate
 extension ShotsOnboardingStateHandler {
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
@@ -76,7 +76,7 @@ extension ShotsOnboardingStateHandler {
     }
 }
 
-// MARK - UIScrollViewDelegate
+// MARK: UIScrollViewDelegate
 extension ShotsOnboardingStateHandler {
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         scrollViewAnimationsCompletion?()
@@ -84,7 +84,7 @@ extension ShotsOnboardingStateHandler {
     }
 }
 
-// MARK - Private methods
+// MARK: Private methods
 private extension ShotsOnboardingStateHandler {
     
     func cellForShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {

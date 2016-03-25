@@ -55,7 +55,8 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     }
 }
 
-// MARK - UICollecitonViewDataSource
+// MARK: UICollecitonViewDataSource
+
 extension ShotsInitialAnimationsStateHandler {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,7 +98,13 @@ extension ShotsInitialAnimationsStateHandler: DZNEmptyDataSetSource {
         emptyDataSetLoadingView.startAnimation()
         return emptyDataSetLoadingView
     }
+}
+
+// MARK: Private methods
+
+private extension ShotsInitialAnimationsStateHandler {
     
+    // NGRHack: DZNEmptyDataSet does not react on `insertItemsAtIndexPaths` so we need to manually hide loading view
     func hideEmptyDataSetLoadingView() {
         emptyDataSetLoadingView.hidden = true
         emptyDataSetLoadingView.stopAnimation()

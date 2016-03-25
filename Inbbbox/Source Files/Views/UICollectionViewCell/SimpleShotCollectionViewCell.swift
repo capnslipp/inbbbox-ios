@@ -14,7 +14,7 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
     let gifLabel = GifIndicatorView.newAutoLayoutView()
     private var didSetConstraints = false
 
-    // MARK - Life cycle
+    // MARK: Life cycle
     
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
@@ -34,7 +34,7 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
         contentView.clipsToBounds = true
     }
     
-    // MARK - UIView
+    // MARK: UIView
     
     override class func requiresConstraintBasedLayout() -> Bool{
         return true
@@ -55,7 +55,7 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
         return "SimpleShotCollectionViewCellIdentifier"
     }
     
-    //MARK: - Width dependent height
+    // MARK: - Width dependent height
     static var heightToWidthRatio: CGFloat {
         return CGFloat(0.75)
     }
