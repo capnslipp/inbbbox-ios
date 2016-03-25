@@ -12,6 +12,7 @@ class ShotsCollectionViewController: UICollectionViewController {
         case Onboarding, InitialAnimations, Normal
     }
 
+    let initialState: State = Defaults[.onboardingPassed] ? .InitialAnimations : .Onboarding
     var stateHandler: ShotsStateHandler
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
@@ -30,11 +31,8 @@ class ShotsCollectionViewController: UICollectionViewController {
      */
     
     init() {
-        let state: State = Defaults[.onboardingPassed] ? .InitialAnimations : .Onboarding
-        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(state)
+        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(initialState)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
-        stateHandler.shotsCollectionViewController = self
-        stateHandler.delegate = self
     }
     
     deinit {
@@ -47,13 +45,11 @@ extension ShotsCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         collectionView?.pagingEnabled = true
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
-        collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
-        collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
-        tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
+
+        configureForCurrentStateHandler()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -117,7 +113,9 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
     
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
         if let newState = shotsStateHandler.nextState {
-           configureForNewState(newState)
+            stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(newState)
+            configureForCurrentStateHandler()
+            stateHandler.presentData()
         }
     }
 }
@@ -125,16 +123,14 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 // MARK - Private methods
 private extension ShotsCollectionViewController {
     
-    func configureForNewState(state: State) {
-        stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(state)
+    func configureForCurrentStateHandler() {
         stateHandler.shotsCollectionViewController = self
         stateHandler.delegate = self
-        collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
         tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
+        collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
         collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
         collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
         collectionView?.setContentOffset(CGPointZero, animated: false)
-        stateHandler.presentData()
     }
     
     dynamic func didChangeStreamSourceSettings(notification: NSNotification) {
