@@ -50,6 +50,7 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     func presentData() {
         hideEmptyDataSetLoadingView()
         self.animationManager.startAnimationWithCompletion() {
+            self.shotsCollectionViewController?.collectionView?.emptyDataSetSource = nil
             self.delegate?.shotsStateHandlerDidInvalidate(self)
         }
     }
