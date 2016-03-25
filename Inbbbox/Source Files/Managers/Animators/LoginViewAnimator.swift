@@ -76,7 +76,7 @@ class LoginViewAnimator {
                 when(self.loadingFade(.FadeOut), self.slideInterfaceUp(), self.sloganFadeOut(), self.saturateBackground())
             }.then {
                 self.delegate?.tabBarWillAppear()
-                return when(self.animateTabBar(), self.slideOutBallWithFadingOut(), self.addInbbboxLogo(fromTop: 50))
+                return when(self.animateTabBar(), self.slideOutBallWithFadingOut(), self.addInbbboxLogo(fromTop: 60))
             }.then {
                 completion?()
             }
