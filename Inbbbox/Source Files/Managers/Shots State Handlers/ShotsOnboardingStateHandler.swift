@@ -40,8 +40,12 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         return true
     }
     
-    var colletionViewScrollEnabled: Bool {
+    var collectionViewScrollEnabled: Bool {
         return false
+    }
+    
+    func prepareForPresentingData() {
+        // Do nothing, all set.
     }
     
     func presentData() {

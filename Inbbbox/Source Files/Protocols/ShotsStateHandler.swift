@@ -19,36 +19,41 @@ protocol ShotsStateHandlerDelegate: class {
 /// Holds configuration for specific ShotsCollectionViewController.State
 protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
     
-    /// Can be used in some methods
+    /// Can be used in some methods.
     weak var shotsCollectionViewController: ShotsCollectionViewController? { get set }
     
-    /// The ShotsStateHandler's delegate object
+    /// The ShotsStateHandler's delegate object.
     weak var delegate: ShotsStateHandlerDelegate? { get set }
 
     /// State which this handler represents.
     var state: ShotsCollectionViewController.State { get }
 
-    /// State that will be after current state is invalidated
+    /// State that will be after current state is invalidated.
     var nextState: ShotsCollectionViewController.State? { get }
 
-    /// Enables/Disables user interaction on tab bar
+    /// Enables/Disables user interaction on tab bar.
     var tabBarInteractionEnabled: Bool { get }
 
-    /// Alpha value for tab bar
+    /// Alpha value for tab bar.
     var tabBarAlpha: CGFloat { get }
 
-    /// Collection view layout for current state
+    /// Collection view layout for current state.
     var collectionViewLayout: UICollectionViewLayout { get }
 
-    /// Enables/Disables user interaction on collection view
+    /// Enables/Disables user interaction on collection view.
     var collectionViewInteractionEnabled: Bool { get }
     
     /**
-     Enables/Disables scrolling on collection view
-     Does't work if collectionViewInteractionEnabled is false
+     Enables/Disables scrolling on collection view.
+     Does't work if collectionViewInteractionEnabled is false.
      */
-    var colletionViewScrollEnabled: Bool { get }
+    var collectionViewScrollEnabled: Bool { get }
 
+    /**
+     Do any necessary steps to prepare yourself for presenting data.
+    */
+    func prepareForPresentingData()
+    
     /**
      Reload data and possibly perform any other action or animation required by this handler.
      ShotsCollectionViewController calls this action after downloading shots or state changes.

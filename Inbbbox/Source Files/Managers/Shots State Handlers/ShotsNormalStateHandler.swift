@@ -10,6 +10,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
 
     let shotsRequester =  ShotsRequester()
     let shotsProvider = ShotsProvider()
+    let likesProvider = ShotsProvider()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     var likedShots = [ShotType]()
 
@@ -40,8 +41,18 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         return true
     }
     
-    var colletionViewScrollEnabled: Bool {
+    var collectionViewScrollEnabled: Bool {
         return true
+    }
+    
+    func prepareForPresentingData() {
+        firstly {
+            fetchLikedShots()
+        }.then {
+            self.shotsCollectionViewController?.collectionView?.reloadData()
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
+        }
     }
     
     func presentData() {
@@ -187,17 +198,29 @@ private extension ShotsNormalStateHandler {
     }
 
     func likeShot(shot: ShotType) {
-        if self.isShotLiked(shot) {
+        if isShotLiked(shot) {
             return
         }
 
         firstly {
-            self.shotsRequester.likeShot(shot)
+            shotsRequester.likeShot(shot)
         }.then { Void -> Void in
             self.shotsCollectionViewController?.collectionView?.reloadData()
             self.likedShots.append(shot)
         }.error { error in
-            // NGRToDo handle error and show alert
+            // NGRTemp: Need mockups for error message view
+        }
+    }
+    
+    func fetchLikedShots() -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                self.likesProvider.provideMyLikedShots()
+            }.then { shots -> Void in
+                if let shots = shots {
+                    self.likedShots = shots
+                }
+            }.then(fulfill).error(reject)
         }
     }
 }

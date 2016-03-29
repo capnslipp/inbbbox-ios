@@ -40,7 +40,7 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
         return false
     }
     
-    var colletionViewScrollEnabled: Bool {
+    var collectionViewScrollEnabled: Bool {
         return false
     }
     
@@ -49,6 +49,10 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     override init () {
         super.init()
         animationManager.delegate = self
+    }
+    
+    func prepareForPresentingData() {
+        // Do nothing, all set.
     }
     
     func presentData() {
