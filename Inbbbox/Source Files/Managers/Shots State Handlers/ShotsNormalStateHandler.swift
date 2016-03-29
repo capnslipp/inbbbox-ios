@@ -24,12 +24,16 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         return nil
     }
 
-    var collectionViewLayout: UICollectionViewLayout {
-        return ShotsCollectionViewFlowLayout()
-    }
-    
     var tabBarInteractionEnabled: Bool {
         return true
+    }
+
+    var tabBarAlpha: CGFloat {
+        return 1.0
+    }
+
+    var collectionViewLayout: UICollectionViewLayout {
+        return ShotsCollectionViewFlowLayout()
     }
     
     var collectionViewInteractionEnabled: Bool {
