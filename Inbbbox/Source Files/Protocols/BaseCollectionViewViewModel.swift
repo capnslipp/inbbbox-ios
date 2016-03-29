@@ -21,6 +21,7 @@ protocol BaseCollectionViewViewModel {
 protocol BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems()
+    func viewModelDidFailToLoadInitialItems(error: ErrorType)
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath])
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath)
 }

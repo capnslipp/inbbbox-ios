@@ -45,8 +45,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 self.delegate?.viewModelDidLoadInitialItems()
             }
         }.error { error in
-            // NGRTemp: Need mockups for error message view
-            print(error)
+            self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
     

@@ -93,6 +93,17 @@ extension BucketContentCollectionViewController: BaseCollectionViewViewModelDele
         collectionView?.reloadData()
     }
     
+    func viewModelDidFailToLoadInitialItems(error: ErrorType) {
+        self.shouldShowLoadingView = false
+        collectionView?.reloadData()
+        
+        if let viewModel = viewModel where viewModel.shots.isEmpty {
+            let alert = UIAlertController.generalErrorAlertController()
+            presentViewController(alert, animated: true, completion: nil)
+            alert.view.tintColor = .pinkColor()
+        }
+    }
+    
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
