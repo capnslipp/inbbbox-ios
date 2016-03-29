@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyUserDefaults
+import Async
 
 private let XRateLimit = "X-RateLimit-Limit"
 private let XRateLimitRemaining = "X-RateLimit-Remaining"
@@ -72,6 +73,12 @@ final class APIRateLimitKeeper {
         return startOfNextDay.timeIntervalSinceDate(NSDate())
     }
     
+    /// Boolean that indicates if timer to reset API rate limit per minute is set
+    private var timerToResetMinuteLimitIsSet = false
+    
+    /// Boolean that indicates if timer to reset API rate limit per day is set
+    private var timerToResetDailyLimitIsSet = false
+    
     /// Shared instance.
     static let sharedKeeper = APIRateLimitKeeper()
     
@@ -133,10 +140,28 @@ final class APIRateLimitKeeper {
         }
         
         if let limit = rateLimitRemainingPerDay where limit <= 0 {
+            
+            if !timerToResetDailyLimitIsSet {
+                Async.background(after: timeIntervalRemainingToResetDailyLimit) { [weak self] in
+                    self?.rateLimitRemainingPerDay = nil
+                    self?.timerToResetDailyLimitIsSet = false
+                }
+                timerToResetDailyLimitIsSet = true
+            }
+            
             throw APIRateLimitKeeperError.DidExceedRateLimitPerDay(timeIntervalRemainingToResetDailyLimit ?? 0)
         }
         
         if let limit = rateLimitRemainingPerMinute where limit <= 1 {
+            
+            if !timerToResetMinuteLimitIsSet {
+                Async.background(after: timeIntervalRemainingToResetMinuteLimit) { [weak self] in
+                    self?.rateLimitRemainingPerMinute = nil
+                    self?.timerToResetMinuteLimitIsSet = false
+                }
+                timerToResetMinuteLimitIsSet = true
+            }
+            
             throw APIRateLimitKeeperError.DidExceedRateLimitPerMinute(timeIntervalRemainingToResetMinuteLimit ?? 0)
         }
     }
