@@ -40,7 +40,7 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
         return false
     }
     
-    var colletionViewScrollEnabled: Bool {
+    var collectionViewScrollEnabled: Bool {
         return false
     }
     

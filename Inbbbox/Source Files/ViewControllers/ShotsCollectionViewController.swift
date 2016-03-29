@@ -135,7 +135,7 @@ private extension ShotsCollectionViewController {
         tabBarController?.tabBar.userInteractionEnabled = stateHandler.tabBarInteractionEnabled
         tabBarController?.tabBar.alpha = stateHandler.tabBarAlpha
         collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
-        collectionView?.scrollEnabled = stateHandler.colletionViewScrollEnabled
+        collectionView?.scrollEnabled = stateHandler.collectionViewScrollEnabled
         collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
         collectionView?.setContentOffset(CGPointZero, animated: false)
     }

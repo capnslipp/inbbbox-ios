@@ -47,7 +47,7 @@ protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate
      Enables/Disables scrolling on collection view.
      Does't work if collectionViewInteractionEnabled is false.
      */
-    var colletionViewScrollEnabled: Bool { get }
+    var collectionViewScrollEnabled: Bool { get }
 
     /**
      Do any necessary steps to prepare yourself for presenting data.

@@ -41,7 +41,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         return true
     }
     
-    var colletionViewScrollEnabled: Bool {
+    var collectionViewScrollEnabled: Bool {
         return true
     }
     
