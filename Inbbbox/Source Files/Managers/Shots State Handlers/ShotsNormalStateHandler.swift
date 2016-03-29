@@ -9,7 +9,6 @@ import ZFDragableModalTransition
 class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
 
     let shotsRequester =  ShotsRequester()
-    let shotsProvider = ShotsProvider()
     let likesProvider = ShotsProvider()
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     var likedShots = [ShotType]()
@@ -116,7 +115,7 @@ extension ShotsNormalStateHandler {
         }
         if indexPath.row == shotsCollectionViewController.shots.count - 6 {
             firstly {
-                shotsProvider.nextPage()
+                shotsCollectionViewController.shotsProvider.nextPage()
             }.then { [weak self] shots -> Void in
                 if let shots = shots, let shotsCollectionViewController = self?.shotsCollectionViewController {
                     shotsCollectionViewController.shots.appendContentsOf(shots)

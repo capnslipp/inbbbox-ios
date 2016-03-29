@@ -64,7 +64,7 @@ class BucketContentCollectionViewController: TwoLayoutsCollectionViewController 
     // MARK: UICollectionViewDelegate
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == viewModel!.itemsCount {
+        if indexPath.row == viewModel!.itemsCount - 1 {
             viewModel?.downloadItemsForNextPage()
         }
     }
