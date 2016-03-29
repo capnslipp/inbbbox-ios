@@ -90,19 +90,14 @@ extension ShotDetailsViewModel {
     
     var rangeForLinkInTitle: NSRange {
         let author = (shot.user.name ?? shot.user.username)
-       // let string = attributedShotTitleForHeader.string as NSString
         
         let titleRange = attributedShotTitleForHeader.string.startIndex..<attributedShotTitleForHeader.string.endIndex
         let authorStringRange = attributedShotTitleForHeader.string.rangeOfString(author)
-    
         
         let start = titleRange.startIndex.distanceTo(authorStringRange!.startIndex)
         let length = authorStringRange!.startIndex.distanceTo(authorStringRange!.endIndex)
         
-        //distance(authorStringRange.startIndex, authorStringRange!.endIndex)
-        let range = NSMakeRange(start, length)
-        
-        return range
+        return NSMakeRange(start, length)
     }
     
     var attributedShotDescription: NSAttributedString? {
