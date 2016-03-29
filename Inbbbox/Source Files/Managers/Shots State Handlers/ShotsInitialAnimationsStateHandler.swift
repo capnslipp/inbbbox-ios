@@ -51,6 +51,10 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
         animationManager.delegate = self
     }
     
+    func prepareForPresentingData() {
+        // Do nothing, all set.
+    }
+    
     func presentData() {
         hideEmptyDataSetLoadingView()
         self.animationManager.startAnimationWithCompletion() {

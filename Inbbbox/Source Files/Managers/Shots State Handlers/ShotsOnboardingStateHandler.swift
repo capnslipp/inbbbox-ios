@@ -44,6 +44,10 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         return false
     }
     
+    func prepareForPresentingData() {
+        // Do nothing, all set.
+    }
+    
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
     }

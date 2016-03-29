@@ -51,6 +51,11 @@ extension ShotsCollectionViewController {
 
         configureForCurrentStateHandler()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        stateHandler.prepareForPresentingData()
+    }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -115,6 +120,7 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
         if let newState = shotsStateHandler.nextState {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(newState)
             configureForCurrentStateHandler()
+            stateHandler.prepareForPresentingData()
             stateHandler.presentData()
         }
     }
