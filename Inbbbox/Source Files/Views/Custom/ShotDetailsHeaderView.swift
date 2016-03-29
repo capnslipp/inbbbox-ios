@@ -142,7 +142,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
     func setAttributedTitle(title: NSAttributedString?) {
         titleLabel.setText(title)
-        titleLabel.delegate = self
         overlapingTitleLabel.attributedText = {
             guard let title = title else {
                 return nil
@@ -156,7 +155,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         }()
     }
     
-    func setLinkInTitleForRange(range: NSRange) {
+    func setLinkInTitle(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
             NSForegroundColorAttributeName : UIColor.pinkColor(),
             NSFontAttributeName : UIFont.systemFontOfSize(14)
@@ -164,7 +163,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         titleLabel.linkAttributes = linkAttributes;
         titleLabel.activeLinkAttributes = linkAttributes;
         titleLabel.inactiveLinkAttributes = linkAttributes;
-        titleLabel.addLinkToURL(NSURL(), withRange: range)
+        titleLabel.addLinkToURL(URL, withRange: range)
+        titleLabel.delegate = delegate
     }
 }
 
@@ -199,13 +199,4 @@ extension ShotDetailsHeaderView: Reusable {
     class var reuseIdentifier: String {
         return String(ShotDetailsHeaderView)
     }
-}
-
-extension ShotDetailsHeaderView: TTTAttributedLabelDelegate {
-    
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        
-    
-    }
-    
 }

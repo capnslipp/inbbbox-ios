@@ -90,14 +90,16 @@ extension ShotDetailsViewModel {
     
     var rangeForLinkInTitle: NSRange {
         let author = (shot.user.name ?? shot.user.username)
-        let string = attributedShotTitleForHeader.string as NSString
+       // let string = attributedShotTitleForHeader.string as NSString
         
         let titleRange = attributedShotTitleForHeader.string.startIndex..<attributedShotTitleForHeader.string.endIndex
         let authorStringRange = attributedShotTitleForHeader.string.rangeOfString(author)
+    
         
+        let start = titleRange.startIndex.distanceTo(authorStringRange!.startIndex)
+        let length = authorStringRange!.startIndex.distanceTo(authorStringRange!.endIndex)
         
-        let start = distance(titleRange.startIndex, authorStringRange!.startIndex)
-        let length = distance(authorStringRange.startIndex, authorStringRange!.endIndex)
+        //distance(authorStringRange.startIndex, authorStringRange!.endIndex)
         let range = NSMakeRange(start, length)
         
         return range
@@ -343,5 +345,18 @@ extension ShotDetailsViewModel {
         }
         // (hasDescription && !hasComments) || (!hasDescription && !hasComments)
         return false
+    }
+}
+
+// MARK: URL - User handling
+
+extension ShotDetailsViewModel {
+    
+    func urlForUser(user: UserType) -> NSURL? {
+        return NSURL(string: user.identifier)
+    }
+    
+    func userForURL(url: NSURL) -> UserType? {
+        return shot.user.identifier == url.absoluteString ? shot.user : comments.filter { $0.user.identifier == url.absoluteString }.first?.user
     }
 }
