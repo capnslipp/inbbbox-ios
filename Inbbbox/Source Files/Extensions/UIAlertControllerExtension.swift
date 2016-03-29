@@ -23,4 +23,15 @@ extension UIAlertController {
         
         return alert
     }
+    
+    class func generalErrorAlertController() -> UIAlertController {
+        let alert = UIAlertController(
+            title: NSLocalizedString("Error occurred", comment: ""),
+            message: NSLocalizedString("Try again in a while.", comment: ""),
+            preferredStyle: .Alert
+        )
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Cancel, handler: nil))
+        
+        return alert
+    }
 }

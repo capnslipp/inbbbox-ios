@@ -193,6 +193,16 @@ extension UserDetailsViewController: BaseCollectionViewViewModelDelegate {
         userDetailsView.collectionView.reloadData()
     }
     
+    func viewModelDidFailToLoadInitialItems(error: ErrorType) {
+        userDetailsView.collectionView.reloadData()
+        
+        if viewModel.userShots.isEmpty {
+            let alert = UIAlertController.generalErrorAlertController()
+            presentViewController(alert, animated: true, completion: nil)
+            alert.view.tintColor = .pinkColor()
+        }
+    }
+    
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         userDetailsView.collectionView.insertItemsAtIndexPaths(indexPaths)
     }
