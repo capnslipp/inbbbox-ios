@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 private var avatarSize: CGSize {
     return CGSize(width: 32, height: 32)
@@ -23,7 +24,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     var deleteActionHandler: (() -> Void)?
     
     let avatarView = AvatarView(size: avatarSize, bordered: false)
-    let authorLabel = UILabel.newAutoLayoutView()
+    let authorLabel = TTTAttributedLabel.newAutoLayoutView()
     let dateLabel = UILabel.newAutoLayoutView()
     private let commentLabel = UILabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
@@ -148,6 +149,18 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         textContainer.maximumNumberOfLines = commentLabel.numberOfLines
         
         commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "commentLabelDidTap:"))
+    }
+    
+    func setLinkInAuthorLabel(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
+        let linkAttributes = [
+            NSForegroundColorAttributeName : UIColor.pinkColor(),
+            NSFontAttributeName : UIFont.systemFontOfSize(14)
+        ]
+        authorLabel.linkAttributes = linkAttributes;
+        authorLabel.activeLinkAttributes = linkAttributes;
+        authorLabel.inactiveLinkAttributes = linkAttributes;
+        authorLabel.addLinkToURL(URL, withRange: range)
+        authorLabel.delegate = delegate
     }
 }
 

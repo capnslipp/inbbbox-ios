@@ -88,18 +88,6 @@ extension ShotDetailsViewModel {
         return ShotDetailsFormatter.attributedStringForHeaderFromShot(shot)
     }
     
-    var rangeForLinkInTitle: NSRange {
-        let author = (shot.user.name ?? shot.user.username)
-        
-        let titleRange = attributedShotTitleForHeader.string.startIndex..<attributedShotTitleForHeader.string.endIndex
-        let authorStringRange = attributedShotTitleForHeader.string.rangeOfString(author)
-        
-        let start = titleRange.startIndex.distanceTo(authorStringRange!.startIndex)
-        let length = authorStringRange!.startIndex.distanceTo(authorStringRange!.endIndex)
-        
-        return NSMakeRange(start, length)
-    }
-    
     var attributedShotDescription: NSAttributedString? {
         return ShotDetailsFormatter.attributedShotDescriptionFromShot(shot)
     }
@@ -130,6 +118,18 @@ extension ShotDetailsViewModel {
         }
 
         return cachedFormattedComments[indexWithOffset]
+    }
+    
+    func linkRange(user: UserType, string:String) -> NSRange {
+        let author = (user.name ?? user.username)
+        
+        let textRange = string.startIndex..<string.endIndex
+        let authorStringRange = string.rangeOfString(author)
+        
+        let start = textRange.startIndex.distanceTo(authorStringRange!.startIndex)
+        let length = authorStringRange!.startIndex.distanceTo(authorStringRange!.endIndex)
+        
+        return NSMakeRange(start, length)
     }
 }
 

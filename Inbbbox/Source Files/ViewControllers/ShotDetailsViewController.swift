@@ -147,9 +147,13 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
 
-            cell.authorLabel.attributedText = data.author
+            cell.authorLabel.setText(data.author)
             if let comment = data.comment {
                 cell.setCommentLabelAttributedText(comment)
+            }
+            if let url = viewModel.urlForUser(viewModel.comments[viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)].user) {
+                let range = viewModel.linkRange((viewModel.comments[viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)].user), string: data.author.string)
+                cell.setLinkInAuthorLabel(url, range: range, delegate: self)
             }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"))
@@ -191,7 +195,8 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
             if let url = viewModel.urlForUser(viewModel.shot.user) {
-                header?.setLinkInTitle(url, range: viewModel.rangeForLinkInTitle, delegate: self)
+                let range = viewModel.linkRange(viewModel.shot.user, string: viewModel.attributedShotTitleForHeader.string)
+                header?.setLinkInTitle(url, range: range, delegate: self)
             }
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
             header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
