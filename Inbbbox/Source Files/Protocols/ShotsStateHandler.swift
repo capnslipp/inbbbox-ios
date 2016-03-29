@@ -28,14 +28,17 @@ protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate
     /// State which this handler represents.
     var state: ShotsCollectionViewController.State { get }
 
-    /// State that will be after current state is invalidated.
+    /// State that will be after current state is invalidated
     var nextState: ShotsCollectionViewController.State? { get }
-
-    /// Collection view layout for current state
-    var collectionViewLayout: UICollectionViewLayout { get }
 
     /// Enables/Disables user interaction on tab bar
     var tabBarInteractionEnabled: Bool { get }
+
+    /// Alpha value for tab bar
+    var tabBarAlpha: CGFloat { get }
+
+    /// Collection view layout for current state
+    var collectionViewLayout: UICollectionViewLayout { get }
 
     /// Enables/Disables user interaction on collection view
     var collectionViewInteractionEnabled: Bool { get }

@@ -23,13 +23,17 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
     var nextState: ShotsCollectionViewController.State? {
         return .Normal
     }
-
-    var collectionViewLayout: UICollectionViewLayout {
-        return ShotsCollectionViewFlowLayout()
-    }
     
     var tabBarInteractionEnabled: Bool {
         return false
+    }
+
+    var tabBarAlpha: CGFloat {
+        return 0.3
+    }
+
+    var collectionViewLayout: UICollectionViewLayout {
+        return ShotsCollectionViewFlowLayout()
     }
     
     var collectionViewInteractionEnabled: Bool {

@@ -24,14 +24,18 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
         return .Normal
     }
 
-    var collectionViewLayout: UICollectionViewLayout {
-        return InitialAnimationsShotsCollectionViewLayout()
-    }
-    
     var tabBarInteractionEnabled: Bool {
         return false
     }
-    
+
+    var tabBarAlpha: CGFloat {
+        return 0.3
+    }
+
+    var collectionViewLayout: UICollectionViewLayout {
+        return InitialAnimationsShotsCollectionViewLayout()
+    }
+
     var collectionViewInteractionEnabled: Bool {
         return false
     }
