@@ -485,6 +485,10 @@ extension ShotDetailsViewController: AvatarViewDelegate {
 extension ShotDetailsViewController: TTTAttributedLabelDelegate {
     
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        ///NGRTemp: Implement this
+        if let user = viewModel.userForURL(url) {
+            let userDetailsViewController = UserDetailsViewController(user: user)
+            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+            presentViewController(navigationController, animated: true, completion: nil)
+        }
     }
 }
