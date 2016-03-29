@@ -47,7 +47,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     
     func prepareForPresentingData() {
         firstly {
-            self.fetchLikedShots()
+            fetchLikedShots()
         }.then {
             self.shotsCollectionViewController?.collectionView?.reloadData()
         }.error { error in
@@ -198,12 +198,12 @@ private extension ShotsNormalStateHandler {
     }
 
     func likeShot(shot: ShotType) {
-        if self.isShotLiked(shot) {
+        if isShotLiked(shot) {
             return
         }
 
         firstly {
-            self.shotsRequester.likeShot(shot)
+            shotsRequester.likeShot(shot)
         }.then { Void -> Void in
             self.shotsCollectionViewController?.collectionView?.reloadData()
             self.likedShots.append(shot)
@@ -216,11 +216,11 @@ private extension ShotsNormalStateHandler {
         return Promise<Void> { fulfill, reject in
             firstly {
                 self.likesProvider.provideMyLikedShots()
-                }.then { shots -> Void in
-                    if let shots = shots {
-                        self.likedShots = shots
-                    }
-                }.then(fulfill).error(reject)
+            }.then { shots -> Void in
+                if let shots = shots {
+                    self.likedShots = shots
+                }
+            }.then(fulfill).error(reject)
         }
     }
 }
