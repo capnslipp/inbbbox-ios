@@ -66,10 +66,10 @@ class APIShotsProvider: PageableProvider {
         return Promise<[ShotType]?> {fulfill, reject in
             firstly {
                 fetchLikes(max)
-                }.then {
-                    fulfill(self.likes)
-                }.error { error in
-                    reject(error)
+            }.then {
+                fulfill(self.likes)
+            }.error { error in
+                reject(error)
             }
         }
     }
