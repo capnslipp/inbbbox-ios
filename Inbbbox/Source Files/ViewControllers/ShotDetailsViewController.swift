@@ -97,6 +97,15 @@ final class ShotDetailsViewController: UIViewController {
 
         AnalyticsManager.trackScreen(.ShotDetailsView)
     }
+    
+    override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
+        
+        if let imageView = header?.imageView as? AnimatableShotImageView {
+            imageView.stopAnimatingGIF()
+        }
+        
+        super.dismissViewControllerAnimated(flag, completion: completion)
+    }
 }
 
 // MARK: UICollectionViewDataSource
