@@ -50,6 +50,7 @@ extension ShotsCollectionViewController {
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
 
         configureForCurrentStateHandler()
+        registerToSettingsNotifications()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -138,6 +139,10 @@ private extension ShotsCollectionViewController {
         collectionView?.scrollEnabled = stateHandler.collectionViewScrollEnabled
         collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
         collectionView?.setContentOffset(CGPointZero, animated: false)
+    }
+    
+    func registerToSettingsNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didChangeStreamSourceSettings:", name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
     }
     
     dynamic func didChangeStreamSourceSettings(notification: NSNotification) {
