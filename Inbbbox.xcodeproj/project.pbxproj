@@ -131,6 +131,15 @@
 		594325F453FC541B1BB008C5 /* ShotCellRestoreInitialStateAnimationDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBE90E7FF1E8EB462A07A44 /* ShotCellRestoreInitialStateAnimationDescriptor.swift */; };
 		594745E0E700E9458ABD6E48 /* CAKeyframeAnimationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C650FB9A1E35120FBC8FAED /* CAKeyframeAnimationExtension.swift */; };
 		5A9C5878D7052F8F87E2CF97 /* CreateBucketQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A24EC0E7EA1C5A7BEAF9C7 /* CreateBucketQuerySpec.swift */; };
+		5AE4B28E1CAC5511004CB534 /* Bucket.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B44F375BA1D59D203217BD5 /* Bucket.json */; };
+		5AE4B28F1CAC5511004CB534 /* Buckets.json in Resources */ = {isa = PBXBuildFile; fileRef = 394D84B62CE78D2653A1DE8A /* Buckets.json */; };
+		5AE4B2901CAC5511004CB534 /* Comment.json in Resources */ = {isa = PBXBuildFile; fileRef = 66E8708BC8C34DA3CC57BD0A /* Comment.json */; };
+		5AE4B2911CAC5511004CB534 /* FolloweeConnection.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DF654E4E2FA728096372DC0 /* FolloweeConnection.json */; };
+		5AE4B2921CAC5511004CB534 /* FollowerConnection.json in Resources */ = {isa = PBXBuildFile; fileRef = AA10BE569023512CB83FC822 /* FollowerConnection.json */; };
+		5AE4B2931CAC5511004CB534 /* Project.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CAB35CC635AABCA5071EE38 /* Project.json */; };
+		5AE4B2941CAC5511004CB534 /* Shot.json in Resources */ = {isa = PBXBuildFile; fileRef = CB993016EF1BAC5798DA74AA /* Shot.json */; };
+		5AE4B2951CAC5511004CB534 /* Team.json in Resources */ = {isa = PBXBuildFile; fileRef = 07188CB96C935F062D896B24 /* Team.json */; };
+		5AE4B2961CAC5511004CB534 /* User.json in Resources */ = {isa = PBXBuildFile; fileRef = A98D27A5717BDF29E8B0510B /* User.json */; };
 		5CA85E2FC26AB236564047DF /* ShotSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BB19ABD36CE42AFCFEF4B0 /* ShotSpecExtension.swift */; };
 		5CBDAF5435A6BBFF0B32E935 /* LikesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD08878BC9FFC1AC98D68EE0 /* LikesCollectionViewController.swift */; };
 		5D0BAC704FB5A73549526846 /* FolloweesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AF1D75B3C537E4095C7908 /* FolloweesViewModel.swift */; };
@@ -1597,6 +1606,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE4B2951CAC5511004CB534 /* Team.json in Resources */,
+				5AE4B2911CAC5511004CB534 /* FolloweeConnection.json in Resources */,
+				5AE4B28E1CAC5511004CB534 /* Bucket.json in Resources */,
+				5AE4B2921CAC5511004CB534 /* FollowerConnection.json in Resources */,
+				5AE4B2961CAC5511004CB534 /* User.json in Resources */,
+				5AE4B2941CAC5511004CB534 /* Shot.json in Resources */,
+				5AE4B28F1CAC5511004CB534 /* Buckets.json in Resources */,
+				5AE4B2901CAC5511004CB534 /* Comment.json in Resources */,
+				5AE4B2931CAC5511004CB534 /* Project.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
