@@ -15,6 +15,12 @@ class APIShotsProvider: PageableProvider {
 
     /// Used only when using provideShots() method.
     var configuration = APIShotsProviderConfiguration()
+    
+    private var likesFetched: UInt = 0
+    private var likesToFetch: UInt = 0
+    private var likes = [ShotType]()
+    private var fetchingLikes = false
+    private var lastPageOfLikesReached = false
 
     private var currentSourceType: SourceType?
     private enum SourceType {
@@ -46,6 +52,25 @@ class APIShotsProvider: PageableProvider {
                 let query = ShotsQuery(type: .LikedShots)
                 return self.provideShotsWithQueries([query], serializationKey: "shot")
             }.then(fulfill).error(reject)
+        }
+    }
+    
+    /**
+     Provides liked shots.
+     
+     - parameter max: Number of liked shots to fetch.
+     
+     - returns: Promise which resolves with liked shots or nil.
+     */
+    func provideLikedShots(max: UInt) -> Promise<[ShotType]?> {
+        return Promise<[ShotType]?> {fulfill, reject in
+            firstly {
+                fetchLikes(max)
+            }.then {
+                fulfill(self.likes)
+            }.error { error in
+                reject(error)
+            }
         }
     }
 
@@ -160,5 +185,45 @@ private extension APIShotsProvider {
             .unique
             .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
         fulfill(result.flatMap{ $0.map { $0 as ShotType } })
+    }
+    
+    private func fetchLikes(max: UInt) -> Promise<Void> {
+        likesToFetch = max
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                fetchSingleBatch()
+            }.then {
+                if self.likesFetched == self.likesToFetch || self.lastPageOfLikesReached {
+                    fulfill()
+                    return Promise()
+                }
+                return self.fetchLikes(self.likesToFetch)
+            }.then(fulfill).error(reject)
+        }
+    }
+    
+    private func fetchSingleBatch() -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                if !fetchingLikes {
+                    fetchingLikes = true
+                    return provideMyLikedShots()
+                } else {
+                    return nextPage()
+                }
+            }.then { (shots: [ShotType]?) -> Void in
+                if let shots = shots {
+                    self.likesFetched += UInt((shots.count))
+                    self.likes.appendContentsOf(shots)
+                    fulfill()
+                }
+            }.error { error in
+                if let lastPage = error as? PageableProviderError where lastPage == .DidReachLastPage {
+                    self.lastPageOfLikesReached = true
+                    return fulfill()
+                }
+                return reject(error)
+            }
+        }
     }
 }

@@ -9,9 +9,10 @@ import ZFDragableModalTransition
 class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
 
     let shotsRequester =  ShotsRequester()
-    let likesProvider = ShotsProvider()
+    let likesProvider = APIShotsProvider(page: 1, pagination: 100)
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     var likedShots = [ShotType]()
+    private let likesToFetch: UInt = 200
 
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
@@ -214,7 +215,7 @@ private extension ShotsNormalStateHandler {
     func fetchLikedShots() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
             firstly {
-                self.likesProvider.provideMyLikedShots()
+                likesProvider.provideLikedShots(likesToFetch)
             }.then { shots -> Void in
                 if let shots = shots {
                     self.likedShots = shots
