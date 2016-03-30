@@ -163,6 +163,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         titleLabel.linkAttributes = linkAttributes;
         titleLabel.activeLinkAttributes = linkAttributes;
         titleLabel.inactiveLinkAttributes = linkAttributes;
+        titleLabel.extendsLinkTouchArea = false
         titleLabel.addLinkToURL(URL, withRange: range)
         titleLabel.delegate = delegate
     }

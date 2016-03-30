@@ -159,6 +159,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         authorLabel.linkAttributes = linkAttributes;
         authorLabel.activeLinkAttributes = linkAttributes;
         authorLabel.inactiveLinkAttributes = linkAttributes;
+        authorLabel.extendsLinkTouchArea = false
         authorLabel.addLinkToURL(URL, withRange: range)
         authorLabel.delegate = delegate
     }
