@@ -218,11 +218,9 @@ private extension APIShotsProvider {
                     fulfill()
                 }
             }.error { error in
-                if let lastPage = error as? PageableProviderError {
-                    if lastPage == PageableProviderError.DidReachLastPage {
-                        self.lastPageOfLikesReached = true
-                        return fulfill()
-                    }
+                if let lastPage = error as? PageableProviderError where lastPage == .DidReachLastPage {
+                    self.lastPageOfLikesReached = true
+                    return fulfill()
                 }
                 return reject(error)
             }
