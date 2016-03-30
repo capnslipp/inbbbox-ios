@@ -151,8 +151,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             if let comment = data.comment {
                 cell.setCommentLabelAttributedText(comment)
             }
-            if let url = viewModel.urlForUser(viewModel.comments[viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)].user) {
-                let range = viewModel.linkRange((viewModel.comments[viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)].user), string: data.author.string)
+            let user = viewModel.userForCommentAtIndex(indexPath.row)
+            if let url = viewModel.urlForUser(user) {
+                let range = viewModel.linkRange(user, string: data.author.string)
                 cell.setLinkInAuthorLabel(url, range: range, delegate: self)
             }
             cell.dateLabel.attributedText = data.date

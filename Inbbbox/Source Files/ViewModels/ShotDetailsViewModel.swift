@@ -120,11 +120,15 @@ extension ShotDetailsViewModel {
         return cachedFormattedComments[indexWithOffset]
     }
     
+    func userForCommentAtIndex(index: Int) -> UserType {
+        return comments[self.indexInCommentArrayBasedOnItemIndex(index)].user
+    }
+    
     func linkRange(user: UserType, string:String) -> NSRange {
-        let author = (user.name ?? user.username)
+        let username = (user.name ?? user.username)
         
         let textRange = string.startIndex..<string.endIndex
-        let authorStringRange = string.rangeOfString(author)
+        let authorStringRange = string.rangeOfString(username)
         
         let start = textRange.startIndex.distanceTo(authorStringRange!.startIndex)
         let length = authorStringRange!.startIndex.distanceTo(authorStringRange!.endIndex)
