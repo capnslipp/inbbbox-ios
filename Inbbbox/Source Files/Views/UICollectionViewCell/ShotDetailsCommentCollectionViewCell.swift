@@ -153,8 +153,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
     func setLinkInAuthorLabel(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
-            NSForegroundColorAttributeName : UIColor.pinkColor(),
-            NSFontAttributeName : UIFont.systemFontOfSize(14)
+            NSForegroundColorAttributeName : UIColor.textDarkColor(),
+            NSFontAttributeName : UIFont.helveticaFont(.NeueMedium, size: 16)
         ]
         authorLabel.linkAttributes = linkAttributes;
         authorLabel.activeLinkAttributes = linkAttributes;
