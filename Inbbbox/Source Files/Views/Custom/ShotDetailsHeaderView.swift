@@ -75,6 +75,12 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         
         setNeedsUpdateConstraints()
     }
+    
+    deinit {
+        if let imageView = imageView as? AnimatableShotImageView {
+            imageView.destroyAnimation()
+        }
+    }
 
     @available(*, unavailable, message="Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
