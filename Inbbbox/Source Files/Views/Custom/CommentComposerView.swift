@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol CommentComposerViewDelegate {
+protocol CommentComposerViewDelegate: class {
     func commentComposerViewDidBecomeActive(view: CommentComposerView)
     func didTapSendButtonInComposerView(view: CommentComposerView, comment: String)
 }
 
 class CommentComposerView: UIView {
     
-    var delegate: CommentComposerViewDelegate?
+    weak var delegate: CommentComposerViewDelegate?
     
     private let cornerWrapperView = UIView.newAutoLayoutView()
     private let textField = UITextField.newAutoLayoutView()

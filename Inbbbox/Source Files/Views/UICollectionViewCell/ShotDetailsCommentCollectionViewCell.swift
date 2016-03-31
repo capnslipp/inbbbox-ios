@@ -18,7 +18,7 @@ private var horizontalSpaceBetweenAvatarAndText: CGFloat {
 
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
-    var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
+    weak var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
     
     var deleteActionHandler: (() -> Void)?
     

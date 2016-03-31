@@ -10,7 +10,7 @@ import UIKit
 import PromiseKit
 import ZFDragableModalTransition
 
-protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate {
+protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
     
     func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer, textContainer: NSTextContainer, layoutManager: NSLayoutManager)
 }

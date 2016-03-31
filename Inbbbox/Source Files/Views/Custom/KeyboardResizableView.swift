@@ -12,7 +12,7 @@ enum KeyboardState {
     case WillAppear, WillDisappear, DidAppear, DidDisappear
 }
 
-protocol KeyboardResizableViewDelegate {
+protocol KeyboardResizableViewDelegate: class {
     
      /**
      Invokes when *KeyboardResizableView* is going to relayout itself (when keyboard will (dis)appear).
@@ -36,7 +36,7 @@ class KeyboardResizableView: UIView {
     /**
      The KeyboardResizableView's delegate object
      */
-    var delegate: KeyboardResizableViewDelegate?
+    weak var delegate: KeyboardResizableViewDelegate?
 
     /**
      Indicates whether keyboard is present or not.
