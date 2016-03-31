@@ -128,10 +128,10 @@ extension ShotDetailsViewModel {
         let username = (user.name ?? user.username)
         
         let textRange = string.startIndex..<string.endIndex
-        let authorStringRange = string.rangeOfString(username)
+        let authorStringRange = string.rangeOfString(username)!
         
-        let start = textRange.startIndex.distanceTo(authorStringRange!.startIndex)
-        let length = authorStringRange!.startIndex.distanceTo(authorStringRange!.endIndex)
+        let start = textRange.startIndex.distanceTo(authorStringRange.startIndex)
+        let length = authorStringRange.startIndex.distanceTo(authorStringRange.endIndex)
         
         return NSMakeRange(start, length)
     }
