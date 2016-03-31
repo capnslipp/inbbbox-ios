@@ -9,6 +9,8 @@
 import UIKit
 import PureLayout
 import Haneke
+import TTTAttributedLabel
+
 
 private var avatarSize: CGSize {
     return CGSize(width: 48, height: 48)
@@ -30,7 +32,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     
     let closeButtonView = CloseButtonView.newAutoLayoutView()
-    private let titleLabel = UILabel.newAutoLayoutView()
+    private let titleLabel = TTTAttributedLabel.newAutoLayoutView()
     private let overlapingTitleLabel = UILabel.newAutoLayoutView()
     private let dimView = UIView.newAutoLayoutView()
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
@@ -139,7 +141,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     func setAttributedTitle(title: NSAttributedString?) {
-        titleLabel.attributedText = title
+        titleLabel.setText(title)
         overlapingTitleLabel.attributedText = {
             guard let title = title else {
                 return nil
@@ -151,6 +153,19 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             
             return mutableTitle.copy() as? NSAttributedString
         }()
+    }
+    
+    func setLinkInTitle(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
+        let linkAttributes = [
+            NSForegroundColorAttributeName : UIColor.pinkColor(),
+            NSFontAttributeName : UIFont.systemFontOfSize(14)
+        ]
+        titleLabel.linkAttributes = linkAttributes;
+        titleLabel.activeLinkAttributes = linkAttributes;
+        titleLabel.inactiveLinkAttributes = linkAttributes;
+        titleLabel.extendsLinkTouchArea = false
+        titleLabel.addLinkToURL(URL, withRange: range)
+        titleLabel.delegate = delegate
     }
 }
 

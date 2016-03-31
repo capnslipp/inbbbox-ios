@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import ZFDragableModalTransition
+import TTTAttributedLabel
 
 protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate {
     
@@ -146,9 +147,14 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
 
-            cell.authorLabel.attributedText = data.author
+            cell.authorLabel.setText(data.author)
             if let comment = data.comment {
                 cell.setCommentLabelAttributedText(comment)
+            }
+            let user = viewModel.userForCommentAtIndex(indexPath.row)
+            if let url = viewModel.urlForUser(user) {
+                let range = viewModel.linkRange(user, string: data.author.string)
+                cell.setLinkInAuthorLabel(url, range: range, delegate: self)
             }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"))
@@ -189,6 +195,10 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.minHeight = heightForCollapsedCollectionViewHeader
             
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
+            if let url = viewModel.urlForUser(viewModel.shot.user) {
+                let range = viewModel.linkRange(viewModel.shot.user, string: viewModel.attributedShotTitleForHeader.string)
+                header?.setLinkInTitle(url, range: range, delegate: self)
+            }
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
             header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
@@ -471,6 +481,17 @@ extension ShotDetailsViewController: AvatarViewDelegate {
             }
         }
         if let user = user {
+            let userDetailsViewController = UserDetailsViewController(user: user)
+            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+            presentViewController(navigationController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension ShotDetailsViewController: TTTAttributedLabelDelegate {
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        if let user = viewModel.userForURL(url) {
             let userDetailsViewController = UserDetailsViewController(user: user)
             let navigationController = UINavigationController(rootViewController: userDetailsViewController)
             presentViewController(navigationController, animated: true, completion: nil)

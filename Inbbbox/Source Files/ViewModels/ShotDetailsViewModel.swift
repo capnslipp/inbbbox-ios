@@ -119,6 +119,22 @@ extension ShotDetailsViewModel {
 
         return cachedFormattedComments[indexWithOffset]
     }
+    
+    func userForCommentAtIndex(index: Int) -> UserType {
+        return comments[self.indexInCommentArrayBasedOnItemIndex(index)].user
+    }
+    
+    func linkRange(user: UserType, string:String) -> NSRange {
+        let username = (user.name ?? user.username)
+        
+        let textRange = string.startIndex..<string.endIndex
+        let authorStringRange = string.rangeOfString(username)!
+        
+        let start = textRange.startIndex.distanceTo(authorStringRange.startIndex)
+        let length = authorStringRange.startIndex.distanceTo(authorStringRange.endIndex)
+        
+        return NSMakeRange(start, length)
+    }
 }
 
 // MARK: Likes handling
@@ -328,5 +344,14 @@ extension ShotDetailsViewModel {
         }
         // (hasDescription && !hasComments) || (!hasDescription && !hasComments)
         return false
+    }
+}
+
+// MARK: URL - User handling
+
+extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
+    
+    func userForURL(url: NSURL) -> UserType? {
+        return shot.user.identifier == url.absoluteString ? shot.user : comments.filter { $0.user.identifier == url.absoluteString }.first?.user
     }
 }
