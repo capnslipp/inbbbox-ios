@@ -349,11 +349,7 @@ extension ShotDetailsViewModel {
 
 // MARK: URL - User handling
 
-extension ShotDetailsViewModel {
-    
-    func urlForUser(user: UserType) -> NSURL? {
-        return NSURL(string: user.identifier)
-    }
+extension ShotDetailsViewModel: UserToURLConvertible {
     
     func userForURL(url: NSURL) -> UserType? {
         return shot.user.identifier == url.absoluteString ? shot.user : comments.filter { $0.user.identifier == url.absoluteString }.first?.user
