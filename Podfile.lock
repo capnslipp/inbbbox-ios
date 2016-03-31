@@ -52,7 +52,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet (~> 1.7)
   - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
-  - Gifu (from `git@github.com:pbruz/Gifu.git`, commit `4ccc52ae21fc1835de5af5791c3fa96dcef27497`)
+  - Gifu (~> 1.0.1)
   - GoogleAnalytics (~> 3.14.0)
   - GPUImage (~> 0.1)
   - HanekeSwift (~> 0.10.1)
@@ -72,9 +72,6 @@ EXTERNAL SOURCES:
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
-  Gifu:
-    :commit: 4ccc52ae21fc1835de5af5791c3fa96dcef27497
-    :git: git@github.com:pbruz/Gifu.git
   Keys:
     :path: Pods/CocoaPodsKeys
 
@@ -82,9 +79,6 @@ CHECKOUT OPTIONS:
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
-  Gifu:
-    :commit: 4ccc52ae21fc1835de5af5791c3fa96dcef27497
-    :git: git@github.com:pbruz/Gifu.git
 
 SPEC CHECKSUMS:
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c

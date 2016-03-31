@@ -63,9 +63,7 @@ pod 'EasyAnimation', #fork cause of https://github.com/icanzilb/EasyAnimation/is
 :git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git',
 :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
 
-pod 'Gifu', #fork cause library is broken and is never released
-:git => 'git@github.com:pbruz/Gifu.git',
-:commit => '4ccc52ae21fc1835de5af5791c3fa96dcef27497'
+pod 'Gifu', '~> 1.0.1'
 
 pod 'ZFDragableModalTransition', '~> 0.6'
 

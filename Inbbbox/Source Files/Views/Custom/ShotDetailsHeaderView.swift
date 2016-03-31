@@ -78,7 +78,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     
     deinit {
         if let imageView = imageView as? AnimatableShotImageView {
-            imageView.destroyAnimation()
+            let displayLink = imageView.valueForKey("displayLink") as? CADisplayLink
+            displayLink?.invalidate()
         }
     }
 
