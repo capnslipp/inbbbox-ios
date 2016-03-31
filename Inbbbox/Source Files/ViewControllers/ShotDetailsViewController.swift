@@ -100,6 +100,11 @@ final class ShotDetailsViewController: UIViewController {
     
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
         
+        // NGRFixme: 
+        // This is not 100% correct solution, cause Gifu library is broken and AnimatableImageViews are not released properly.
+        // Fix below stops animation, so main thread won't be any longer blocked by updating frames called by CADisplayLink inside the library.
+        // Library for GIFs should be fixed or just changed.
+        
         if let imageView = header?.imageView as? AnimatableShotImageView {
             imageView.stopAnimatingGIF()
         }
