@@ -1,0 +1,8 @@
+app_scheme_name: Inbbbox
+product_name: Inbbbox
+app_group: Inbbbox
+spec_group: Unit Tests
+debug_build_configuration: Development
+release_build_configuration: Production
+debug_product_bundle_identifier: co.netguru.inbbbox
+release_product_bundle_identifier: co.netguru.inbbbox.production

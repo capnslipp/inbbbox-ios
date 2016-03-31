@@ -1,5 +1,6 @@
 GEM
   remote: https://rubygems.org/
+  remote: https://repo.fury.io/lukwol/
   specs:
     RubyInline (3.12.4)
       ZenTest (~> 4.3)
@@ -43,7 +44,8 @@ GEM
       netrc (= 0.7.8)
     cocoapods-try (0.5.1)
     colored (1.2)
-    dotenv (2.1.0)
+    colorize (0.7.7)
+    dotenv (2.1.1)
     escape (0.0.4)
     fuzzy_match (2.0.4)
     i18n (0.7.0)
@@ -54,6 +56,22 @@ GEM
     netrc (0.7.8)
     osx_keychain (1.0.1)
       RubyInline (~> 3)
+    rake (11.1.2)
+    rouge (1.10.1)
+    rswift (0.0.109)
+      colorize
+      thor
+      xcodeproj
+    rswift-ios (0.0.43)
+      rake
+      rswift
+      xcpretty
+    rswift-shared (0.0.8)
+      colorize
+      rake
+      rswift
+      xcpretty
+    thor (0.19.1)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -61,13 +79,17 @@ GEM
       activesupport (>= 3)
       claide (~> 0.9.1)
       colored (~> 1.2)
+    xcpretty (0.2.2)
+      rouge (~> 1.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods
-  cocoapods-keys
+  cocoapods!
+  cocoapods-keys!
+  rswift-ios!
+  rswift-shared!
 
 BUNDLED WITH
-   1.10.6
+   1.11.0

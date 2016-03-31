@@ -58,3 +58,6 @@ vendor
 
 # Merge files
 *.orig
+
+# Other
+node_modules/
