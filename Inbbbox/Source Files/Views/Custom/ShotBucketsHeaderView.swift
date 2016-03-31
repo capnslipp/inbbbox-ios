@@ -73,6 +73,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     }
     
     deinit {
+        // NGRHack: animation has to be invalidated to release AnimatableShotImageView object
         if let imageView = imageView as? AnimatableShotImageView {
             let displayLink = imageView.valueForKey("displayLink") as? CADisplayLink
             displayLink?.invalidate()
