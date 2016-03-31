@@ -1,5 +1,5 @@
 //
-//  UserToURLConvertible.swift
+//  UserToURL.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 31.03.2016.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-/// Convert user to URL represantation of user and vice versa.
+/// Converts user to URL represantation of user.
 /// Uses user's identifier to create URL.
 /// Helps with using TTTAttributedLabel in the project.
 
-protocol UserToURLConvertible {
+protocol UserToURL {
     
     /**
-     Convert user to URL represantation of user.
+     Converts user to URL represantation of user.
      
      - parameter user: user who is converted
      
@@ -24,19 +24,9 @@ protocol UserToURLConvertible {
     
     func urlForUser(user: UserType) -> NSURL?
     
-    /**
-     Convert URL represantation of user to user.
-     
-     - parameter url: url which is converted to user
-     
-     - returns: user converted from URL.
-     */
-    
-    func userForURL(url: NSURL) -> UserType?
-    
 }
 
-extension UserToURLConvertible {
+extension UserToURL {
     
     func urlForUser(user: UserType) -> NSURL? {
         return NSURL(string: user.identifier)
