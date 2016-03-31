@@ -1,5 +1,5 @@
 //
-//  URLToUser.swift
+//  URLToUserProvider.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 31.03.2016.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-/// Converts URL represantation of user to user object.
+/// Provide user object from URL represantation of user.
 /// Helps with using TTTAttributedLabel in the project.
 
-protocol URLToUser {
+protocol URLToUserProvider {
     
     /**
-     Converts URL represantation of user to user object.
+     Provide user object from URL represantation of user.
      
-     - parameter url: url which is converted to user
+     - parameter url: url represantation of user
      
-     - returns: user converted from URL.
+     - returns: user provided from URL
      */
     
     func userForURL(url: NSURL) -> UserType?

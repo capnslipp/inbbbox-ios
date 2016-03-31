@@ -1,5 +1,5 @@
 //
-//  UserToURL.swift
+//  UserToURLProvider.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 31.03.2016.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-/// Converts user to URL represantation of user.
+/// Provide URL represantation of user from user.
 /// Uses user's identifier to create URL.
 /// Helps with using TTTAttributedLabel in the project.
 
-protocol UserToURL {
+protocol UserToURLProvider {
     
     /**
      Converts user to URL represantation of user.
@@ -26,7 +26,7 @@ protocol UserToURL {
     
 }
 
-extension UserToURL {
+extension UserToURLProvider {
     
     func urlForUser(user: UserType) -> NSURL? {
         return NSURL(string: user.identifier)
