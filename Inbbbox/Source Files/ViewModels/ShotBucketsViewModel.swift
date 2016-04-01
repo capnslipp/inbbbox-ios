@@ -25,6 +25,10 @@ class ShotBucketsViewModel {
         return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).attributedString
     }
     
+    var userLinkRange: NSRange {
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ?? NSMakeRange(0,0)
+    }
+    
     var titleForHeader: String {
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
@@ -145,6 +149,15 @@ class ShotBucketsViewModel {
     }
 }
 
+// MARK: URL - User handling
+
+extension ShotBucketsViewModel: URLToUserProvider, UserToURLProvider {
+    
+    func userForURL(url: NSURL) -> UserType? {
+        return shot.user.identifier == url.absoluteString ? shot.user : nil
+    }
+}
+
 private extension ShotBucketsViewModel {
     
     func toggleBucketSelectionAtIndex(index: Int) {
@@ -155,3 +168,4 @@ private extension ShotBucketsViewModel {
         }
     }
 }
+

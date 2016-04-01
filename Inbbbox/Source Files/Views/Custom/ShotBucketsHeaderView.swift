@@ -8,6 +8,7 @@
 
 import UIKit
 import PureLayout
+import TTTAttributedLabel
 
 private var avatarSize: CGSize {
     return CGSize(width: 40, height: 40)
@@ -30,7 +31,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     
     let closeButtonView = CloseButtonView.newAutoLayoutView()
     private let headerTitleLabel = UILabel.newAutoLayoutView()
-    private let titleLabel = UILabel.newAutoLayoutView()
+    private let titleLabel = TTTAttributedLabel.newAutoLayoutView()
     
     private let gradientView = UIView.newAutoLayoutView()
     private let dimView = UIView.newAutoLayoutView()
@@ -143,11 +144,24 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     }
     
     func setAttributedTitle(title: NSAttributedString?) {
-        titleLabel.attributedText = title
+        titleLabel.setText(title)
     }
     
     func setHeaderTitle(title: String) {
         headerTitleLabel.text = title
+    }
+    
+    func setLinkInTitle(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
+        let linkAttributes = [
+            NSForegroundColorAttributeName : UIColor.pinkColor(),
+            NSFontAttributeName : UIFont.systemFontOfSize(14)
+        ]
+        titleLabel.linkAttributes = linkAttributes;
+        titleLabel.activeLinkAttributes = linkAttributes;
+        titleLabel.inactiveLinkAttributes = linkAttributes;
+        titleLabel.extendsLinkTouchArea = false
+        titleLabel.addLinkToURL(URL, withRange: range)
+        titleLabel.delegate = delegate
     }
 }
 
