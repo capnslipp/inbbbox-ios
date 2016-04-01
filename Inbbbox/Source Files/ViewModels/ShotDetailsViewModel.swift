@@ -85,7 +85,7 @@ final class ShotDetailsViewModel {
 extension ShotDetailsViewModel {
     
     var attributedShotTitleForHeader: NSAttributedString {
-        return ShotDetailsFormatter.attributedStringForHeaderFromShot(shot)
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).attributedString
     }
     
     var attributedShotDescription: NSAttributedString? {
@@ -97,6 +97,10 @@ extension ShotDetailsViewModel {
             return true
         }
         return false
+    }
+    
+    var userLinkRange: NSRange {
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ?? NSMakeRange(0,0)
     }
     
     func displayableDataForCommentAtIndex(index: Int) -> CommentDisplayableData {
@@ -124,17 +128,6 @@ extension ShotDetailsViewModel {
         return comments[self.indexInCommentArrayBasedOnItemIndex(index)].user
     }
     
-    func linkRange(user: UserType, string:String) -> NSRange {
-        let username = (user.name ?? user.username)
-        
-        let textRange = string.startIndex..<string.endIndex
-        let authorStringRange = string.rangeOfString(username)!
-        
-        let start = textRange.startIndex.distanceTo(authorStringRange.startIndex)
-        let length = authorStringRange.startIndex.distanceTo(authorStringRange.endIndex)
-        
-        return NSMakeRange(start, length)
-    }
 }
 
 // MARK: Likes handling
