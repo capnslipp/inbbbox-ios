@@ -9,7 +9,7 @@ import UIKit
 
 class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     
-    var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
+    weak var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
     
     private let descriptionLabel = UILabel.newAutoLayoutView()
     

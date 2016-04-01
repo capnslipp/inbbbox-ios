@@ -72,6 +72,14 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         addSubview(closeButtonView)
     }
     
+    deinit {
+        // NGRHack: animation has to be invalidated to release AnimatableShotImageView object
+        if let imageView = imageView as? AnimatableShotImageView {
+            let displayLink = imageView.valueForKey("displayLink") as? CADisplayLink
+            displayLink?.invalidate()
+        }
+    }
+    
     @available(*, unavailable, message="Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

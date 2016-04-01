@@ -11,7 +11,7 @@ import PromiseKit
 import ZFDragableModalTransition
 import TTTAttributedLabel
 
-protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate {
+protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
     
     func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer, textContainer: NSTextContainer, layoutManager: NSLayoutManager)
 }

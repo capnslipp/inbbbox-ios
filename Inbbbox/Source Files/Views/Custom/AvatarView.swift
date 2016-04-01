@@ -11,7 +11,7 @@ import UIKit
 class AvatarView: UIView {
     
     let imageView = UIImageView()
-    var delegate: AvatarViewDelegate?
+    weak var delegate: AvatarViewDelegate?
     private var avatarButton: UIButton
     
     convenience init (size: CGSize, bordered: Bool = true, borderWidth: CGFloat = 10) {
@@ -53,6 +53,6 @@ class AvatarView: UIView {
     }
 }
 
-protocol AvatarViewDelegate {
+protocol AvatarViewDelegate: class {
     func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton)
 }

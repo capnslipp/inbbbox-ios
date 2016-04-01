@@ -50,6 +50,12 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        shotImageView.image = nil
+    }
+    
     // MARK: - Reusable
     static var reuseIdentifier: String {
         return "SimpleShotCollectionViewCellIdentifier"
