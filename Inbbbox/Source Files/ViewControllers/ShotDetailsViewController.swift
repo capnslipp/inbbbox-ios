@@ -498,3 +498,20 @@ extension ShotDetailsViewController: TTTAttributedLabelDelegate {
         }
     }
 }
+
+extension ShotDetailsViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        animateHeader(start: false)
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            animateHeader(start: true)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        animateHeader(start: true)
+    }
+}
