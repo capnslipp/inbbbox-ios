@@ -6,7 +6,7 @@
 import Foundation
 import HockeySDK
 
-class CrashManager {
+final class CrashManager {
 
     class func setup() {
         guard let identifier = Dribbble.HockeySDKIdentifier else {
