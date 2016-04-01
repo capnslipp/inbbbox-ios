@@ -60,7 +60,8 @@ final class ShotDetailsFormatter {
             authorAttributedString.setAttributes([
                 NSForegroundColorAttributeName : UIColor.grayColor(),
                 NSFontAttributeName : UIFont.systemFontOfSize(12)
-                ], range: NSMakeRange(0, prefixString.characters.count))
+                ], range: NSMakeRange(0, prefixString.characters.count)
+            )
             
             userLinkRange = NSMakeRange(mutableAttributedString.length + prefixString.characters.count, author.characters.count + 1)
             
