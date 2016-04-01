@@ -33,4 +33,17 @@ struct Dribbble {
 #endif
         return nil
     }
+
+    static var HockeySDKIdentifier: String? {
+#if Production
+        if let identifier = SecretKeysProvider.secretValueForKey("HockeySDKProduction") {
+            return identifier
+        }
+#else
+        if let identifier = SecretKeysProvider.secretValueForKey("HockeySDKStaging") {
+            return identifier
+        }
+#endif
+        return nil
+    }
 }
