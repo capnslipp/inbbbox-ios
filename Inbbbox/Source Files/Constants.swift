@@ -14,7 +14,7 @@ struct Dribbble {
     static let ClientID: String = SecretKeysProvider.secretValueForKey("ClientID")!
     static let ClientSecret: String = SecretKeysProvider.secretValueForKey("ClientSecret")!
     static let ClientAccessToken: String = SecretKeysProvider.secretValueForKey("ClientAccessToken")!
-    static let CallbackURLString = "https://tindddler.netguru.co"
+    static let CallbackURLString = "https://inbbbox.netguru.co"
 
     static let RequestTokenURLString = "https://dribbble.com/oauth/authorize"
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"
