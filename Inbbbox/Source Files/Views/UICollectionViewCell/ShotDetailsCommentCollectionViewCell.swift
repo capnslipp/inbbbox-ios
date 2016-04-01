@@ -151,11 +151,13 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "commentLabelDidTap:"))
     }
     
-    func setLinkInAuthorLabel(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
+    func setLinkInAuthorLabel(URL: NSURL, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
             NSForegroundColorAttributeName : UIColor.textDarkColor(),
             NSFontAttributeName : UIFont.helveticaFont(.NeueMedium, size: 16)
         ]
+        let authorText = authorLabel.text ?? ""
+        let range = NSMakeRange(0, authorText.characters.count)
         authorLabel.linkAttributes = linkAttributes;
         authorLabel.activeLinkAttributes = linkAttributes;
         authorLabel.inactiveLinkAttributes = linkAttributes;

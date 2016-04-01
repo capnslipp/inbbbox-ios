@@ -28,9 +28,10 @@ final class ShotDetailsFormatter {
         return formatter
     }()
     
-    class func attributedStringForHeaderFromShot(shot: ShotType) -> NSAttributedString {
+    class func attributedStringForHeaderWithLinkRangeFromShot(shot: ShotType) -> (attributedString: NSAttributedString, linkRange: NSRange?) {
         
         let mutableAttributedString = NSMutableAttributedString()
+        var userLinkRange: NSRange?
         
         if shot.title.characters.count > 0 {
             
@@ -39,7 +40,7 @@ final class ShotDetailsFormatter {
                 attributes: [
                     NSForegroundColorAttributeName : UIColor.blackColor(),
                     NSFontAttributeName : UIFont.boldSystemFontOfSize(15)
-            ])
+                ])
             
             mutableAttributedString.appendAttributedString(titleAttributedString)
             mutableAttributedString.appendAttributedString(NSAttributedString.newLineAttributedString())
@@ -54,13 +55,15 @@ final class ShotDetailsFormatter {
                 attributes: [
                     NSForegroundColorAttributeName : UIColor.pinkColor(),
                     NSFontAttributeName : UIFont.systemFontOfSize(14)
-            ])
-        
+                ])
+            
             authorAttributedString.setAttributes([
                 NSForegroundColorAttributeName : UIColor.grayColor(),
                 NSFontAttributeName : UIFont.systemFontOfSize(12)
-            ], range: NSMakeRange(0, prefixString.characters.count))
-        
+                ], range: NSMakeRange(0, prefixString.characters.count))
+            
+            userLinkRange = NSMakeRange(mutableAttributedString.length + prefixString.characters.count, author.characters.count + 1)
+            
             mutableAttributedString.appendAttributedString(authorAttributedString)
             mutableAttributedString.appendAttributedString(NSAttributedString.newLineAttributedString())
         }
@@ -73,12 +76,12 @@ final class ShotDetailsFormatter {
                 attributes: [
                     NSForegroundColorAttributeName : UIColor.pinkColor(),
                     NSFontAttributeName : UIFont.systemFontOfSize(14)
-            ])
+                ])
             
             teamAttributedString.setAttributes([
                 NSForegroundColorAttributeName : UIColor.grayColor(),
                 NSFontAttributeName : UIFont.systemFontOfSize(12)
-            ], range: NSMakeRange(0, prefixString.characters.count))
+                ], range: NSMakeRange(0, prefixString.characters.count))
             
             mutableAttributedString.appendAttributedString(teamAttributedString)
             mutableAttributedString.appendAttributedString(NSAttributedString.newLineAttributedString())
@@ -93,12 +96,12 @@ final class ShotDetailsFormatter {
                 attributes: [
                     NSForegroundColorAttributeName : UIColor.grayColor(),
                     NSFontAttributeName : UIFont.systemFontOfSize(14)
-            ])
+                ])
             
             mutableAttributedString.appendAttributedString(dateAttributedString)
         }
         
-        return mutableAttributedString.copy() as! NSAttributedString
+       return (mutableAttributedString.copy() as! NSAttributedString, userLinkRange)
     }
     
     class func attributedShotDescriptionFromShot(shot: ShotType) -> NSAttributedString? {

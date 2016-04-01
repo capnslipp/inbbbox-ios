@@ -22,7 +22,7 @@ class ShotBucketsViewModel {
     }
     
     var attributedShotTitleForHeader: NSAttributedString {
-        return ShotDetailsFormatter.attributedStringForHeaderFromShot(shot)
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).attributedString
     }
     
     var titleForHeader: String {
