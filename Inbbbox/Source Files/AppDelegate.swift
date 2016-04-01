@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
-        
+
         configureInitialSettings()
         CacheManager.setupCache()
         return true
@@ -41,21 +41,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
         NSNotificationCenter.defaultCenter().postNotificationName(NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
     }
-    
+
     // MARK: - Core Data stack
-    
+
     lazy var applicationDocumentsDirectory: NSURL? = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls.last
     }()
-    
+
     lazy var managedObjectModel: NSManagedObjectModel = {
         let modelURL = NSBundle.mainBundle().URLForResource("StoreData", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
-    
+
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        
+
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = self.applicationDocumentsDirectory?.URLByAppendingPathComponent("StoreData.sqlite")
 
@@ -64,20 +64,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             let userInfo = [
                 NSLocalizedDescriptionKey: "Failed to initialize the application's saved data",
-                NSLocalizedFailureReasonErrorKey: "There was an error creating or loading the application's saved data.",
-                NSUnderlyingErrorKey: error as! NSError
+                NSLocalizedFailureReasonErrorKey: "There was an error creating or loading the application's saved data."
             ]
 
             let wrappedError = NSError(domain: "co.netguru.inbbbox.coredata", code: 1001, userInfo: userInfo)
-            
+
             print("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            
+
             abort()
         }
-        
+
         return coordinator
     }()
-    
+
     lazy var managedObjectContext: NSManagedObjectContext = {
 
         var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
@@ -89,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 // MARK: Initial configuration
 
 private extension AppDelegate {
-    
+
     func configureInitialSettings() {
         if !Settings.StreamSource.IsSet {
             Settings.StreamSource.PopularToday = true
