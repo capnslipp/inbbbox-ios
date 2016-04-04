@@ -19,6 +19,8 @@ class UserDetailsViewController: UIViewController {
     }
     private var header: UserDetailsHeaderView?
     
+    var dismissClosure: (() -> Void)?
+    
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     private var isModal: Bool {
@@ -257,6 +259,7 @@ private extension UserDetailsViewController {
     }
     
     dynamic func didTapLeftBarButtonItem() {
+        dismissClosure?()
         dismissViewControllerAnimated(true, completion: nil)
     }
     

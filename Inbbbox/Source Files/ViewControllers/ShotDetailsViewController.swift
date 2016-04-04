@@ -418,6 +418,18 @@ private extension ShotDetailsViewController {
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
     
+    func presentUserDetailsViewControllerForUser(user: UserType) {
+        
+        let userDetailsViewController = UserDetailsViewController(user: user)
+        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+        
+        animateHeader(start: false)
+        userDetailsViewController.dismissClosure = { [weak self] in
+            self?.animateHeader(start: true)
+        }
+        presentViewController(navigationController, animated: true, completion: nil)
+    }
+    
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
             start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
@@ -479,9 +491,7 @@ extension ShotDetailsViewController: AvatarViewDelegate {
             }
         }
         if let user = user {
-            let userDetailsViewController = UserDetailsViewController(user: user)
-            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-            presentViewController(navigationController, animated: true, completion: nil)
+            presentUserDetailsViewControllerForUser(user)
         }
     }
 }
@@ -490,9 +500,24 @@ extension ShotDetailsViewController: TTTAttributedLabelDelegate {
     
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
-            let userDetailsViewController = UserDetailsViewController(user: user)
-            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-            presentViewController(navigationController, animated: true, completion: nil)
+            presentUserDetailsViewControllerForUser(user)
         }
+    }
+}
+
+extension ShotDetailsViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        animateHeader(start: false)
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            animateHeader(start: true)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        animateHeader(start: true)
     }
 }
