@@ -57,6 +57,7 @@ GEM
     osx_keychain (1.0.1)
       RubyInline (~> 3)
     rake (11.1.2)
+    redcarpet (3.3.4)
     rouge (1.10.1)
     rswift (0.0.109)
       colorize
@@ -88,8 +89,9 @@ PLATFORMS
 DEPENDENCIES
   cocoapods!
   cocoapods-keys!
+  redcarpet!
   rswift-ios!
   rswift-shared!
 
 BUNDLED WITH
-   1.11.0
+   1.11.2
