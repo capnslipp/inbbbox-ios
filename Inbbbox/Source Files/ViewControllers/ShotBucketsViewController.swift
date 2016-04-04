@@ -345,9 +345,7 @@ extension ShotBucketsViewController: TTTAttributedLabelDelegate {
     
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
-            let userDetailsViewController = UserDetailsViewController(user: user)
-            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-            presentViewController(navigationController, animated: true, completion: nil)
+            presentUserDetailsViewControllerForUser(user)
         }
     }
 }
