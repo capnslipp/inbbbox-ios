@@ -75,7 +75,7 @@ final class ShotDetailsFormatter {
             let teamAttributedString = NSMutableAttributedString(
                 string: prefixString + " " + team,
                 attributes: [
-                    NSForegroundColorAttributeName : UIColor.pinkColor(),
+                    NSForegroundColorAttributeName : UIColor.grayColor(),
                     NSFontAttributeName : UIFont.systemFontOfSize(14)
             ])
             
