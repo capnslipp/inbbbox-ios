@@ -12,14 +12,14 @@ class InbbboxKeys
     'ClientID',
     'ClientSecret',
     'ClientAccessToken'
-  ].freeze
+  ]
 
   OPTIONAL_KEYS = [
     'ProductionGATrackingId',
     'StagingGATrackingId',
     'HockeySDKProduction',
     'HockeySDKStaging'
-  ].freeze
+  ]
 
   def all_keys
     keys = REQUIRED_KEYS
