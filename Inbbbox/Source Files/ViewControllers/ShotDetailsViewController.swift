@@ -153,8 +153,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             }
             let user = viewModel.userForCommentAtIndex(indexPath.row)
             if let url = viewModel.urlForUser(user) {
-                let range = viewModel.linkRange(user, string: data.author.string)
-                cell.setLinkInAuthorLabel(url, range: range, delegate: self)
+                cell.setLinkInAuthorLabel(url, delegate: self)
             }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"))
@@ -196,8 +195,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             
             header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
             if let url = viewModel.urlForUser(viewModel.shot.user) {
-                let range = viewModel.linkRange(viewModel.shot.user, string: viewModel.attributedShotTitleForHeader.string)
-                header?.setLinkInTitle(url, range: range, delegate: self)
+                header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
             }
             header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
             header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)

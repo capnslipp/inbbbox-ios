@@ -14,7 +14,7 @@ struct Dribbble {
     static let ClientID: String = SecretKeysProvider.secretValueForKey("ClientID")!
     static let ClientSecret: String = SecretKeysProvider.secretValueForKey("ClientSecret")!
     static let ClientAccessToken: String = SecretKeysProvider.secretValueForKey("ClientAccessToken")!
-    static let CallbackURLString = "https://tindddler.netguru.co"
+    static let CallbackURLString = "https://inbbbox.netguru.co"
 
     static let RequestTokenURLString = "https://dribbble.com/oauth/authorize"
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"
@@ -29,6 +29,19 @@ struct Dribbble {
 #else
         if let trackingId = SecretKeysProvider.secretValueForKey("StagingGATrackingId") {
             return trackingId
+        }
+#endif
+        return nil
+    }
+
+    static var HockeySDKIdentifier: String? {
+#if Production
+        if let identifier = SecretKeysProvider.secretValueForKey("HockeySDKProduction") {
+            return identifier
+        }
+#else
+        if let identifier = SecretKeysProvider.secretValueForKey("HockeySDKStaging") {
+            return identifier
         }
 #endif
         return nil

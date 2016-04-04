@@ -31,7 +31,9 @@ keys = [
 
 optional_keys = [
     'ProductionGATrackingId',
-    'StagingGATrackingId'
+    'StagingGATrackingId',
+    'HockeySDKProduction',
+    'HockeySDKStaging'
 ]
 
 optional_keys.each do |key|

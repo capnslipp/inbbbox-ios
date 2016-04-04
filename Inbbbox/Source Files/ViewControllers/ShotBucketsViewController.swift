@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import TTTAttributedLabel
 
 enum ShotBucketsViewControllerMode {
     case AddToBucket
@@ -139,6 +140,9 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
                 header?.avatarView.delegate = self
                 header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
+                if let url = viewModel.urlForUser(viewModel.shot.user) {
+                    header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
+                }
             }
             return header!
         } else {
@@ -333,6 +337,17 @@ extension ShotBucketsViewController: AvatarViewDelegate {
         if avatarView.superview == header {
             let user = viewModel.shot.user
             presentUserDetailsViewControllerForUser(user)
+        }
+    }
+}
+
+extension ShotBucketsViewController: TTTAttributedLabelDelegate {
+    
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        if let user = viewModel.userForURL(url) {
+            let userDetailsViewController = UserDetailsViewController(user: user)
+            let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+            presentViewController(navigationController, animated: true, completion: nil)
         }
     }
 }
