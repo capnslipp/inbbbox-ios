@@ -12,36 +12,36 @@ import Nimble
 @testable import Inbbbox
 
 class SettingsViewModelSpec: QuickSpec {
-    
+
     override func spec() {
-        
+
         var sut: SettingsViewModel!
-        
+
         describe("when newly created as guest user") {
-            
+
             beforeEach {
                 UserStorage.clear()
                 sut = SettingsViewModel(delegate: SettingsViewController())
             }
-            
+
             afterEach {
                 sut = nil
             }
-            
+
             it("should have account title") {
                 expect(sut.title).to(equal("Account"))
             }
-            
-            it("should have 3 sections") {
-                expect(sut.sectionsCount()).to(equal(3))
+
+            it("should have 4 sections") {
+                expect(sut.sectionsCount()).to(equal(4))
             }
-            
+
             describe("first section") {
-                
+
                 it("should have 1 items") {
                     expect(sut.sections[0].count).to(equal(1))
                 }
-                
+
                 describe("first item") {
                     it("should be label item") {
                         let item = sut.sections[0][0]
@@ -49,20 +49,20 @@ class SettingsViewModelSpec: QuickSpec {
                     }
                 }
             }
-            
+
             describe("second section") {
-                
+
                 it("should have 2 items") {
                     expect(sut.sections[1].count).to(equal(2))
                 }
-                
+
                 describe("first item") {
                     it("should be switch item") {
                         let item = sut.sections[1][0]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
-                
+
                 describe("second item") {
                     it("should be date item") {
                         let item = sut.sections[1][1]
@@ -70,27 +70,27 @@ class SettingsViewModelSpec: QuickSpec {
                     }
                 }
             }
-            
+
             describe("third section") {
-                
+
                 it("should have 3 items") {
                     expect(sut.sections[2].count).to(equal(3))
                 }
-                
+
                 describe("first item") {
                     it("should be switch item") {
                         let item = sut.sections[2][0]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
-                
+
                 describe("second item") {
                     it("should be switch item") {
                         let item = sut.sections[2][1]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
-                
+
                 describe("third item") {
                     it("should be switch item") {
                         let item = sut.sections[2][2]
@@ -99,40 +99,40 @@ class SettingsViewModelSpec: QuickSpec {
                 }
             }
         }
-        
+
         describe("when newly created as loged user") {
-            
+
             beforeEach {
                 UserStorage.storeUser(User.fixtureUser())
                 sut = SettingsViewModel(delegate: SettingsViewController())
             }
-            
+
             afterEach {
                 sut = nil
                 UserStorage.clear()
             }
-            
+
             it("should have account title") {
                 expect(sut.title).to(equal("Account"))
             }
-            
-            it("should have 2 sections") {
-                expect(sut.sectionsCount()).to(equal(2))
+
+            it("should have 3 sections") {
+                expect(sut.sectionsCount()).to(equal(3))
             }
-            
+
             describe("first section") {
-                
+
                 it("should have 2 items") {
                     expect(sut.sections[0].count).to(equal(2))
                 }
-                
+
                 describe("first item") {
                     it("should be switch item") {
                         let item = sut.sections[0][0]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
-                
+
                 describe("second item") {
                     it("should be date item") {
                         let item = sut.sections[0][1]
@@ -140,34 +140,34 @@ class SettingsViewModelSpec: QuickSpec {
                     }
                 }
             }
-            
+
             describe("second section") {
-                
+
                 it("should have 4 items") {
                     expect(sut.sections[1].count).to(equal(4))
                 }
-                
+
                 describe("first item") {
                     it("should be switch item") {
                         let item = sut.sections[1][0]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
-                
+
                 describe("second item") {
                     it("should be switch item") {
                         let item = sut.sections[1][1]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
-                
+
                 describe("third item") {
                     it("should be switch item") {
                         let item = sut.sections[1][2]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
-                
+
                 describe("fourth item") {
                     it("should be switch item") {
                         let item = sut.sections[1][3]
