@@ -32,7 +32,7 @@ GEM
       fuzzy_match (~> 2.0.4)
       nap (~> 1.0)
     cocoapods-downloader (0.9.3)
-    cocoapods-keys (1.6.0)
+    cocoapods-keys (1.6.1)
       dotenv
       osx_keychain
     cocoapods-plugins (0.4.2)
@@ -57,8 +57,9 @@ GEM
     osx_keychain (1.0.1)
       RubyInline (~> 3)
     rake (11.1.2)
+    redcarpet (3.3.4)
     rouge (1.10.1)
-    rswift (0.0.109)
+    rswift (0.0.110)
       colorize
       thor
       xcodeproj
@@ -66,7 +67,7 @@ GEM
       rake
       rswift
       xcpretty
-    rswift-shared (0.0.8)
+    rswift-shared (0.0.9)
       colorize
       rake
       rswift
@@ -88,8 +89,9 @@ PLATFORMS
 DEPENDENCIES
   cocoapods!
   cocoapods-keys!
+  redcarpet!
   rswift-ios!
   rswift-shared!
 
 BUNDLED WITH
-   1.11.0
+   1.11.2

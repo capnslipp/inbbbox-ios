@@ -16,13 +16,14 @@ class SettingsViewController: UITableViewController {
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
         viewModel = SettingsViewModel(delegate: self)
+        viewModel.settingsViewController = self
         title = viewModel.title
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureLogoutButton()
-        
+
         tableView.registerClass(SwitchCell.self)
         tableView.registerClass(DateCell.self)
         tableView.registerClass(LabelCell.self)
@@ -116,10 +117,10 @@ extension SettingsViewController {
     }
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
+
         let notificationsTitle = NSLocalizedString("NOTIFICATIONS", comment: "")
         let streamSourcesTitle = NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
-        
+
         switch section {
             case 0: return viewModel.userMode == .LoggedUser ? notificationsTitle : nil
             case 1: return viewModel.userMode == .LoggedUser ? streamSourcesTitle : notificationsTitle
@@ -142,8 +143,8 @@ extension SettingsViewController {
 
             navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: completion), animated: true)
         }
-        if item is LabelItem {
-            authenticateUser()
+        if let labelItem = item as? LabelItem {
+            labelItem.onSelect?()
         }
         tableView.deselectRowIfSelectedAnimated(true)
     }
@@ -183,7 +184,7 @@ private extension SettingsViewController {
 // MARK: Configuration
 
 private extension SettingsViewController {
-    
+
     func configureLogoutButton() {
         navigationItem.rightBarButtonItem = viewModel.loggedInUser != nil ? UIBarButtonItem(
             title: NSLocalizedString("Log Out", comment: ""),
@@ -214,7 +215,7 @@ private extension SettingsViewController {
 
 // MARK: Authentication
 
-private extension SettingsViewController {
+extension SettingsViewController {
 
     func authenticateUser() {
         let interactionHandler: (UIViewController -> Void) = { controller in
@@ -247,6 +248,11 @@ extension SettingsViewController {
     func didTapLogOutButton(_: UIBarButtonItem) {
         Authenticator.logout()
         UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
+    }
+
+    func presentAcknowledgements() {
+        let acknowledgementsNavigationController = UINavigationController(rootViewController: AcknowledgementsViewController())
+        presentViewController(acknowledgementsNavigationController, animated: true, completion: nil)
     }
 }
 

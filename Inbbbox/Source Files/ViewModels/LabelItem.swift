@@ -9,9 +9,10 @@
 import Foundation
 
 class LabelItem: GroupItem {
-    
+
     var highlighted = false
-    
+    var onSelect: (() -> Void)?
+
     init(title: String) {
         super.init(title: title, category: .String)
     }

@@ -25,6 +25,8 @@ class SettingsViewModel: GroupedListViewModel {
 
     let title = NSLocalizedString("Account", comment: "")
 
+    weak var settingsViewController: SettingsViewController?
+
     private(set) var userMode: UserMode
     private weak var delegate: ModelUpdatable?
     private weak var alertDelegate: AlertDisplayable?
@@ -69,19 +71,30 @@ class SettingsViewModel: GroupedListViewModel {
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Settings.StreamSource.NewToday)
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
+        let acknowledgementItem = LabelItem(title: NSLocalizedString("Acknowledgements", comment: ""))
         var items:[[GroupItem]]
         if userMode == .LoggedUser {
             items = [[reminderItem, reminderDateItem],
-                [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]]
+                [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
+                [acknowledgementItem]]
         } else {
             items = [[createAccountItem],
                 [reminderItem, reminderDateItem],
-                [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem]]
+                [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
+                [acknowledgementItem]]
         }
 
         // MARK: Super init
 
         super.init(items: items as [[GroupItem]])
+
+        createAccountItem.onSelect = { [weak self] in
+            self?.settingsViewController?.authenticateUser()
+        }
+
+        acknowledgementItem.onSelect = { [weak self] in
+            self?.settingsViewController?.presentAcknowledgements()
+        }
 
         // MARK: onValueChanged blocks
 
