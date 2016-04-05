@@ -29,12 +29,12 @@ class ShotsCollectionViewController: UICollectionViewController {
      Initializer which creates ShotsCollectionViewController,
      with proper collection view layout, according to current state
      */
-    
+
     init() {
         stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(initialState)
         super.init(collectionViewLayout: stateHandler.collectionViewLayout)
     }
-    
+
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -52,7 +52,7 @@ extension ShotsCollectionViewController {
         configureForCurrentStateHandler()
         registerToSettingsNotifications()
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         stateHandler.prepareForPresentingData()
@@ -69,8 +69,9 @@ extension ShotsCollectionViewController {
             }.then {
                 self.stateHandler.presentData()
             }.error { error in
-                // NGRTemp: Need mockups for error message view
-                print(error)
+                let alertController = self.signOutAlertController()
+                self.presentViewController(alertController, animated: true, completion: nil)
+                alertController.view.tintColor = .pinkColor()
             }
         }
     }
@@ -109,14 +110,14 @@ extension ShotsCollectionViewController {
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         stateHandler.scrollViewDidScroll?(scrollView)
     }
-    
+
     override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         stateHandler.scrollViewDidEndScrollingAnimation?(scrollView)
     }
 }
 
 extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
-    
+
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
         if let newState = shotsStateHandler.nextState {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(newState)
@@ -129,7 +130,7 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 
 // MARK: Private methods
 private extension ShotsCollectionViewController {
-    
+
     func configureForCurrentStateHandler() {
         stateHandler.shotsCollectionViewController = self
         stateHandler.delegate = self
@@ -140,11 +141,11 @@ private extension ShotsCollectionViewController {
         collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
         collectionView?.setContentOffset(CGPointZero, animated: false)
     }
-    
+
     func registerToSettingsNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didChangeStreamSourceSettings:", name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
     }
-    
+
     dynamic func didChangeStreamSourceSettings(notification: NSNotification) {
         firstly {
             refreshShotsData()
@@ -155,7 +156,7 @@ private extension ShotsCollectionViewController {
             print(error)
         }
     }
-    
+
     func refreshShotsData() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
             firstly {
@@ -164,5 +165,19 @@ private extension ShotsCollectionViewController {
                 self.shots = shots ?? []
             }.then(fulfill).error(reject)
         }
+    }
+
+    func signOutAlertController() -> UIAlertController {
+        let alertController = UIAlertController(
+            title: NSLocalizedString("Error occurred", comment: ""),
+            message: NSLocalizedString("Signing out...", comment: ""),
+            preferredStyle: .Alert
+        )
+        let logoutAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Cancel) { _ in
+            Authenticator.logout()
+            UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
+        }
+        alertController.addAction(logoutAction)
+        return alertController
     }
 }
