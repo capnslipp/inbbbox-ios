@@ -249,6 +249,11 @@ extension SettingsViewController {
         Authenticator.logout()
         UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
     }
+
+    func presentAcknowledgements() {
+        let acknowledgementsNavigationController = UINavigationController(rootViewController: AcknowledgementsViewController())
+        presentViewController(acknowledgementsNavigationController, animated: true, completion: nil)
+    }
 }
 
 private extension UITableView {

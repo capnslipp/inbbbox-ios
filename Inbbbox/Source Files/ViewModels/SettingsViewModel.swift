@@ -93,8 +93,7 @@ class SettingsViewModel: GroupedListViewModel {
         }
 
         acknowledgementItem.onSelect = { [weak self] in
-            let acknowledgementsNavigationController = UINavigationController(rootViewController: AcknowledgementsViewController())
-            self?.settingsViewController?.presentViewController(acknowledgementsNavigationController, animated: true, completion: nil)
+            self?.settingsViewController?.presentAcknowledgements()
         }
 
         // MARK: onValueChanged blocks

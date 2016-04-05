@@ -12,7 +12,7 @@ extension AcknowledgementsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "didTapBackButton:")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .Plain, target: self, action: "didTapBackButton:")
         webView.loadHTMLString(acknowledgementsHTMLString(), baseURL: nil)
     }
 
@@ -32,9 +32,9 @@ extension AcknowledgementsViewController {
 private extension AcknowledgementsViewController {
     func acknowledgementsHTMLString() -> String {
         guard
-        let file = NSBundle.mainBundle().pathForResource("Acknowledgements", ofType:"html"),
-        let data = NSData(contentsOfFile: file),
-        let htmlString = String(data: data, encoding: NSUTF8StringEncoding)
+            let file = NSBundle.mainBundle().pathForResource("Acknowledgements", ofType:"html"),
+            let data = NSData(contentsOfFile: file),
+            let htmlString = String(data: data, encoding: NSUTF8StringEncoding)
         else {
             return ""
         }
