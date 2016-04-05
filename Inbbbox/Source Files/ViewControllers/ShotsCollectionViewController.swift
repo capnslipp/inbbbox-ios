@@ -173,7 +173,7 @@ private extension ShotsCollectionViewController {
             message: NSLocalizedString("Signing out...", comment: ""),
             preferredStyle: .Alert
         )
-        let logoutAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .Cancel) { _ in
+        let logoutAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .Cancel) { _ in
             Authenticator.logout()
             UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
         }
