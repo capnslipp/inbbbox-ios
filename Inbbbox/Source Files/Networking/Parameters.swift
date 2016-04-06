@@ -35,6 +35,9 @@ struct Parameters {
     
     private var underlyingDictionary = [String: AnyObject]()
     
+    /// Initialize with encoding.
+    ///
+    /// - parameter encoding: Encoding for parameters.
     init(encoding: Encoding) {
         self.encoding = encoding
     }

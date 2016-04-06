@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Method for HTTP query.
 enum Method: String {
     case GET = "GET"
     case POST = "POST"
@@ -15,10 +16,15 @@ enum Method: String {
     case DELETE = "DELETE"
 }
 
+/// Query for request.
 protocol Query {
+    /// Query's method.
     var method: Method { get }
+    /// Query's path.
     var path: String { get }
+    /// Query's service.
     var service: SecureNetworkService { get }
+    /// Query's parameters.
     var parameters: Parameters { get set }
 }
 

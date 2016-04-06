@@ -15,12 +15,18 @@ import SwiftyJSON
  *  Requestable value type
  */
 struct Request: Requestable, Responsable {
+    
+    /// Query used to create request.
     let query: Query
     
+    // Session for request.
     var session: NSURLSession {
         return NSURLSession.sharedSession()
     }
     
+    /// Invoke request.
+    ///
+    /// - returns: Promise which resolves with data converted to JSON or *nil*
     func resume() -> Promise<JSON?> {
         return Promise<JSON?> { fulfill, reject in
             
