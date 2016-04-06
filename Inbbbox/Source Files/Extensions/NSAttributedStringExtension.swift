@@ -32,6 +32,8 @@ extension NSAttributedString {
         self.init(attributedString: attributedString!)
     }
     
+    /// Returns attributed string while removing
+    /// new line character at the end.
     func attributedStringByTrimingNewLineCharactersAtTheEnd() -> NSAttributedString {
         
         let possibleNewLineCharacter = string.substringFromIndex(string.endIndex.advancedBy(-1))
@@ -43,10 +45,13 @@ extension NSAttributedString {
         return self
     }
     
+    /// Returns new line `\n` of type NSAttributedString.
     class func newLineAttributedString() -> NSAttributedString {
         return NSAttributedString(string: "\n")
     }
     
+    /// Returns bounding height appropiate to available width.
+    /// - parameter width Available width.
     func boundingHeightUsingAvailableWidth(width: CGFloat) -> CGFloat {
         
         let options = unsafeBitCast(

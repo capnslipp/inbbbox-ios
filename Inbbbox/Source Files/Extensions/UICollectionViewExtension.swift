@@ -7,13 +7,18 @@
 //
 
 import UIKit
-
 extension UICollectionView {
 
+    /// Defines type used during registering class for reusable view.
     enum Type {
         case Cell, Header, Footer
     }
 
+    /// Registers class for reuse.
+    /// Specific registration method is choosed based on view type.
+    /// - parameter aClass: Class to register.
+    /// - parameter type: Type of reusable view.
+    /// - SeeAlso: `Type` enum.
     func registerClass<T: UICollectionReusableView where T: Reusable>(aClass: T.Type, type: Type) {
 
         switch(type) {
@@ -26,6 +31,12 @@ extension UICollectionView {
         }
     }
 
+    /// Dequeues reusable cell or suplementary view based on type.
+    /// - parameter aClass: Class to dequeue.
+    /// - parameter forIndexPath: The index path specifying the location of the cell or view.
+    /// - parameter type: Type of reusable view.
+    /// - SeeAlso: `Type` enum.
+    /// - Returns: A valid UICollectionReusableView object.
     func dequeueReusableClass<T: UICollectionReusableView where T: Reusable>(aClass: T.Type, forIndexPath indexPath: NSIndexPath, type: Type) -> T {
 
         switch(type) {
@@ -38,6 +49,12 @@ extension UICollectionView {
         }
     }
     
+    /// Calculates size for auto sizing cell.
+    /// - parameter cell: Cell for which calculation happens. Must be of `Type`.
+    /// - parameter textToBound: Optional text that will be considered during calculations.
+    /// - parameter withInsets: Set insets if needed.
+    /// - SeeAlso: `Type` enum.
+    /// - Returns: Size of cell.
     func sizeForAutoSizingCell<T: UICollectionViewCell where T: AutoSizable>(cell: T.Type, textToBound: [NSAttributedString?]?, withInsets additionalInsets: UIEdgeInsets = UIEdgeInsetsZero) -> CGSize {
         
         let insets = cell.contentInsets

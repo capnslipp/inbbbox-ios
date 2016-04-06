@@ -9,6 +9,9 @@
 import Foundation
 
 extension CollectionType {
+    
+    /// Shuffle CollectionType.
+    /// Returns same collection with random order of elements.
     func shuffle() -> [Generator.Element] {
         var list = Array(self)
         list.shuffleInPlace()
