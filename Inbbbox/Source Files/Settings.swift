@@ -21,25 +21,25 @@ class Settings {
             set { Settings.setValue(newValue, forKey: .StreamSourceIsSet) }
         }
         
-        /// Indicates if stream source for Following is on.
+        /// Indicates if stream's source for Following is on.
         static var Following: Bool {
             get { return Settings.boolForKey(.FollowingStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .FollowingStreamSourceOn) }
         }
         
-        /// Indicates if stream source for NewToday is on.
+        /// Indicates if stream's source for NewToday is on.
         static var NewToday: Bool {
             get { return Settings.boolForKey(.NewTodayStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .NewTodayStreamSourceOn) }
         }
         
-        /// Indicates if stream source for PopularToday is on.
+        /// Indicates if stream's source for PopularToday is on.
         static var PopularToday: Bool {
             get { return Settings.boolForKey(.PopularTodayStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .PopularTodayStreamSourceOn) }
         }
         
-        /// Indicates if stream source for Debuts is on.
+        /// Indicates if stream's source for Debuts is on.
         static var Debuts: Bool {
             get { return Settings.boolForKey(.DebutsStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .DebutsStreamSourceOn) }
