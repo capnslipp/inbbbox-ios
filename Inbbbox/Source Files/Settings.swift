@@ -9,48 +9,59 @@
 import Foundation
 import SwiftyUserDefaults
 
+/// Provides interface for application settings kept in user defaults.
 class Settings {
     
+    /// Manages settings related to streams' sources.
     struct StreamSource {
         
+        /// Indicates if streams' sources are initially set.
         static var IsSet: Bool {
             get { return Settings.boolForKey(.StreamSourceIsSet) }
             set { Settings.setValue(newValue, forKey: .StreamSourceIsSet) }
         }
         
+        /// Indicates if stream source for Following is on.
         static var Following: Bool {
             get { return Settings.boolForKey(.FollowingStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .FollowingStreamSourceOn) }
         }
         
+        /// Indicates if stream source for NewToday is on.
         static var NewToday: Bool {
             get { return Settings.boolForKey(.NewTodayStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .NewTodayStreamSourceOn) }
         }
         
+        /// Indicates if stream source for PopularToday is on.
         static var PopularToday: Bool {
             get { return Settings.boolForKey(.PopularTodayStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .PopularTodayStreamSourceOn) }
         }
         
+        /// Indicates if stream source for Debuts is on.
         static var Debuts: Bool {
             get { return Settings.boolForKey(.DebutsStreamSourceOn) }
             set { Settings.setValue(newValue, forKey: .DebutsStreamSourceOn) }
         }
     }
     
+    /// Manages settings related to reminder.
     struct Reminder {
         
+        /// Indicates if reminder is enabled.
         static var Enabled: Bool {
             get { return Settings.boolForKey(.ReminderOn) }
             set { Settings.setValue(newValue, forKey: .ReminderOn) }
         }
         
+        /// Indicates date that reminder should appear.
         static var Date: NSDate? {
             get { return Settings.dateForKey(.ReminderDate) }
             set { Settings.setValue(newValue, forKey: .ReminderDate) }
         }
         
+        /// Indicates if settings for local notifications are provided.
         static var LocalNotificationSettingsProvided: Bool {
             get { return Settings.boolForKey(.LocalNotificationSettingsProvided) }
             set { Settings.setValue(newValue, forKey: .LocalNotificationSettingsProvided) }
