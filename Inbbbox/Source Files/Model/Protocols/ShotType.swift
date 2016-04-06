@@ -19,24 +19,41 @@ protocol ShotType {
 
     /**
      Owner of this shot
-     
+
      - returns: User
      */
     var user: UserType { get }
 
     /**
      Shot image can be a GIF, JPG, or PNG
-     
+
      - returns: Shot image with available URLs
      */
     var shotImage: ShotImageType { get }
-    
+
+    /// Date when shot was created
     var createdAt: NSDate { get }
+
+    /// Indicates whether Shot image is GIF
     var animated: Bool { get }
+
+    /// Total number of likes from all users
     var likesCount: UInt { get }
+
+    /// Total number of views
     var viewsCount: UInt { get }
+
+    /// Total number of comments
     var commentsCount: UInt { get }
+
+    /// Total number of buckets, shot is contained in
     var bucketsCount: UInt { get }
+
+    /**
+     Team associated with the Shot
+
+     - returns: Team
+    */
     var team: TeamType? { get }
 }
 
