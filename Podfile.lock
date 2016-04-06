@@ -49,14 +49,14 @@ PODS:
 
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
-  - Dobby (~> 0.4.2)
+  - Dobby (~> 0.4)
   - DZNEmptyDataSet (~> 1.7)
   - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
-  - Gifu (~> 1.0.1)
-  - GoogleAnalytics (~> 3.14.0)
+  - Gifu (~> 1.0)
+  - GoogleAnalytics (~> 3.14)
   - GPUImage (~> 0.1)
-  - HanekeSwift (~> 0.10.1)
+  - HanekeSwift (~> 0.10)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
