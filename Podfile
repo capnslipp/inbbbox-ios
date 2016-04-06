@@ -23,7 +23,7 @@ plugin 'cocoapods-keys', {
 
 pod 'AsyncSwift', '~> 1.6'
 pod 'KeychainAccess', '~> 2.3'
-pod 'PromiseKit', '~> 3.0'
+pod 'PromiseKit', '~> 3.1'
 pod 'SwiftyJSON', '~> 2.3'
 pod 'HockeySDK', '~> 3.8'
 pod 'PureLayout', '~> 3.0'
@@ -40,7 +40,7 @@ pod 'TTTAttributedLabel', '~> 1.13'
 target 'Tests' do link_with 'Unit Tests'
   pod 'Quick', '~> 0.8', :configurations => ['Test']
   pod 'Nimble', '~> 3.1', :configurations => ['Test']
-  pod 'Dobby', '~> 0.4.2', :configurations => ['Test']
+  pod 'Dobby', '~> 0.5.0', :configurations => ['Test']
   pod 'Mockingjay', '~> 1.1', :configurations => ['Test']
 end
 
