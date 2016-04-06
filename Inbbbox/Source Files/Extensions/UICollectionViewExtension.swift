@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 extension UICollectionView {
 
     /// Defines type used during registering class for reusable view.
