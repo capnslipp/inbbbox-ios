@@ -137,7 +137,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 
                 header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
                 header?.setHeaderTitle(viewModel.titleForHeader)
-                header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+                header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarURL?.absoluteString ?? "")
                 header?.avatarView.delegate = self
                 header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
                 if let url = viewModel.urlForUser(viewModel.shot.user) {

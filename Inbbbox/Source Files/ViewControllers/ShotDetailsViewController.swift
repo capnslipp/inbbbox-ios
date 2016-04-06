@@ -197,7 +197,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             if let url = viewModel.urlForUser(viewModel.shot.user) {
                 header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
             }
-            header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+            header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarURL?.absoluteString ?? "")
             header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
         }

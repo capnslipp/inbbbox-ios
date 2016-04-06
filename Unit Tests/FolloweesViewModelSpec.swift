@@ -20,7 +20,7 @@ class FolloweesViewModelSpec: QuickSpec {
         let fixtureImagesURLs: [NSURL]? = [fixtureImageURL!, fixtureImageURL!, fixtureImageURL!, fixtureImageURL!]
         let fixtureFolloweeName = "fixture.name"
         let fixtureNumberOfShots = "1 shot"
-        let fixtureAvatarString = "fixture.avatar.url"
+        let fixtureAvatarURL = NSURL(string:"fixture.avatar.url")
         
         beforeEach {
             sut = FolloweesViewModelMock()
@@ -53,7 +53,7 @@ class FolloweesViewModelSpec: QuickSpec {
                 expect(cellData.name).to(equal(fixtureFolloweeName))
                 expect(cellData.numberOfShots).to(equal(fixtureNumberOfShots))
                 expect(cellData.shotsImagesURLs).to(equal(fixtureImagesURLs))
-                expect(cellData.avatarString).to(equal(fixtureAvatarString))
+                expect(cellData.avatarString).to(equal(fixtureAvatarURL))
             }
         }
         
@@ -73,7 +73,7 @@ class FolloweesViewModelSpec: QuickSpec {
                 expect(cellData.name).to(equal(fixtureFolloweeName))
                 expect(cellData.numberOfShots).to(equal(fixtureNumberOfShots))
                 expect(cellData.shotsImagesURLs).to(equal(fixtureImagesURLs))
-                expect(cellData.avatarString).to(equal(fixtureAvatarString))
+                expect(cellData.avatarString).to(equal(fixtureAvatarURL))
             }
         }
     }

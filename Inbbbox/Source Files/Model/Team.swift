@@ -14,7 +14,7 @@ struct Team: TeamType {
     let identifier: String
     let name: String
     let username: String
-    let avatarString: String?
+    let avatarURL: NSURL?
     let createdAt: NSDate
     
 }
@@ -29,7 +29,7 @@ extension Team: Mappable {
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].stringValue,
                 username: json[Key.Username.rawValue].stringValue,
-                avatarString: json[Key.Avatar.rawValue].string,
+                avatarURL: json[Key.Avatar.rawValue].URL,
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!
             )
         }

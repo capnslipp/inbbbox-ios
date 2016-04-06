@@ -13,6 +13,6 @@ protocol TeamType {
     var identifier: String { get }
     var name: String { get }
     var username: String { get }
-    var avatarString: String? { get }
+    var avatarURL: NSURL? { get }
     var createdAt: NSDate { get }
 }

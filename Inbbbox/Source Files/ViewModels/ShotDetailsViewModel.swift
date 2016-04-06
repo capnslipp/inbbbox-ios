@@ -115,7 +115,7 @@ extension ShotDetailsViewModel {
                 author: ShotDetailsFormatter.commentAuthorForComment(comment),
                 comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
                 date: ShotDetailsFormatter.commentDateForComment(comment),
-                avatarURLString: comment.user.avatarString ?? ""
+                avatarURLString: comment.user.avatarURL?.absoluteString ?? ""
             )
             
             cachedFormattedComments.append(displayableData)
