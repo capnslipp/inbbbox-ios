@@ -9,11 +9,37 @@
 import Foundation
 
 protocol BucketType {
+
+    /**
+     Unique identifier
+     */
     var identifier: String { get }
+
+    /**
+     Name of the Bucket
+     */
     var name: String { get }
+
+    /**
+     Description of the Bucket
+     */
     var attributedDescription: NSAttributedString? { get }
+
+    /**
+     Number of shots contained in this Bucket
+     */
     var shotsCount: UInt { get }
+
+    /**
+     Date when Bucket was created
+     */
     var createdAt: NSDate { get }
+
+    /**
+     Owner of this Bucket
+
+     - returns: User
+     */
     var owner: UserType { get }
 }
 
