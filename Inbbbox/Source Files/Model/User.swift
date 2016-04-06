@@ -79,7 +79,7 @@ extension User: Mappable {
     }
 }
 
-extension User: CustomDebugStringConvertible {
+extension User {
     
     override var debugDescription: String {
         return

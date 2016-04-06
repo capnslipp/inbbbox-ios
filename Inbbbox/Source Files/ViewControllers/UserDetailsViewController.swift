@@ -31,10 +31,10 @@ class UserDetailsViewController: UIViewController {
     var oneColumnLayoutCellHeightToWidthRatio = CGFloat(0.75)
     var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(0.75)
     lazy private var oneColumnLayoutButton: UIBarButtonItem = { [unowned self] in
-        return UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
+        return UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: #selector(didTapOneColumnLayoutButton(_:)))
     }()
     lazy private var twoColumnsLayoutButton: UIBarButtonItem = { [unowned self] in
-        UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
+        UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: #selector(didTapTwoColumnsLayoutButton(_:)))
     }()
     private var isCurrentLayoutOneColumn: Bool {
         get {
@@ -157,7 +157,7 @@ extension UserDetailsViewController: UICollectionViewDataSource {
             header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
 
             header?.avatarView.imageView.loadImageFromURLString(viewModel.user.avatarString ?? "")
-            header?.button.addTarget(self, action: "didTapFollowButton:", forControlEvents: .TouchUpInside)
+            header?.button.addTarget(self, action: #selector(didTapFollowButton(_:)), forControlEvents: .TouchUpInside)
             viewModel.shouldShowFollowButton ? header?.startActivityIndicator() : (header?.shouldShowButton = false)
         }
         
@@ -232,7 +232,7 @@ private extension UserDetailsViewController {
 
             let backButton = UIButton()
             backButton.setAttributedTitle(attributedString, forState: .Normal)
-            backButton.addTarget(self, action: "didTapLeftBarButtonItem", forControlEvents: .TouchUpInside)
+            backButton.addTarget(self, action: #selector(didTapLeftBarButtonItem), forControlEvents: .TouchUpInside)
             backButton.sizeToFit()
             
             navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)

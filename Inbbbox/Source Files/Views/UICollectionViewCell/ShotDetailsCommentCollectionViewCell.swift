@@ -62,8 +62,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         dateLabel.numberOfLines = 0
         contentView.addSubview(dateLabel)
         
-        editView.deleteButton.addTarget(self, action: "deleteButtonDidTap:", forControlEvents: .TouchUpInside)
-        editView.cancelButton.addTarget(self, action: "cancelButtonDidTap:", forControlEvents: .TouchUpInside)
+        editView.deleteButton.addTarget(self, action: #selector(deleteButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        editView.cancelButton.addTarget(self, action: #selector(cancelButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         contentView.addSubview(editView)
         
         setNeedsUpdateConstraints()
@@ -148,7 +148,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         textContainer.lineBreakMode = commentLabel.lineBreakMode
         textContainer.maximumNumberOfLines = commentLabel.numberOfLines
         
-        commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "commentLabelDidTap:"))
+        commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(commentLabelDidTap(_:))))
     }
     
     func setLinkInAuthorLabel(URL: NSURL, delegate: TTTAttributedLabelDelegate) {

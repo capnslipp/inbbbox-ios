@@ -135,7 +135,7 @@ class SettingsViewModel: GroupedListViewModel {
         }
 
         // MARK: add observer
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didProvideNotificationSettings", name: NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didProvideNotificationSettings), name: NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
     }
 
     deinit {

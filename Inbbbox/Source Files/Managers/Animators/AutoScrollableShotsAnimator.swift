@@ -33,7 +33,7 @@ class AutoScrollableShotsAnimator {
             AutoScrollableShotsDataSource(collectionView: $0.collectionView, content: $0.shots)
         }
         
-        displayLink = CADisplayLink(target: self, selector: "displayLinkDidTick:")
+        displayLink = CADisplayLink(target: self, selector: #selector(displayLinkDidTick(_:)))
         displayLink?.frameInterval = 1
     }
     

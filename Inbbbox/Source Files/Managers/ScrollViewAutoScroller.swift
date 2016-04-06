@@ -31,7 +31,7 @@ class ScrollViewAutoScroller {
     func scrollToBottomAnimated(animated: Bool) {
         
         guard let scrollView = self.scrollView where shouldAllowScrollAction else {
-            autoScrollInvocationSuppressCounter++
+            autoScrollInvocationSuppressCounter += 1
             return
         }
         

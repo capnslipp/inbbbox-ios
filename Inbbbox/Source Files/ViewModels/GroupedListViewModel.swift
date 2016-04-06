@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ExtendedIndexPathOperatable: IndexPathOperatable {
+protocol IndexPathsGettable {
     func indexPathsForItems(items: [GroupItem]) -> [NSIndexPath]?
     func indexPathsForItemOfType(itemType: GroupItem.Type) -> [NSIndexPath]?
 }
@@ -20,7 +20,7 @@ class GroupedListViewModel: ListViewModel<GroupItem> {
     }
 }
 
-extension GroupedListViewModel: ExtendedIndexPathOperatable {
+extension GroupedListViewModel: IndexPathsGettable {
     
     func indexPathsForItems(items: [GroupItem]) -> [NSIndexPath]? {
         var indexPaths: [NSIndexPath] = []

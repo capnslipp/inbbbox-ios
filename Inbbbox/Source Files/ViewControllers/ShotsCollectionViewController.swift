@@ -143,7 +143,7 @@ private extension ShotsCollectionViewController {
     }
 
     func registerToSettingsNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didChangeStreamSourceSettings:", name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didChangeStreamSourceSettings(_:)), name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
     }
 
     dynamic func didChangeStreamSourceSettings(notification: NSNotification) {

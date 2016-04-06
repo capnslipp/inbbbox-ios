@@ -20,7 +20,7 @@ final class OAuthViewModel: NSObject {
     init(oAuthAuthorizableService: OAuthAuthorizable) {
         service = oAuthAuthorizableService
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearCookies", name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clearCookies), name: UIApplicationWillTerminateNotification, object: nil)
     }
     
     func actionPolicyForRequest(request: NSURLRequest) -> WKNavigationActionPolicy {

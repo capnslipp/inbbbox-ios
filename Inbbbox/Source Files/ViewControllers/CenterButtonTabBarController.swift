@@ -56,7 +56,7 @@ class CenterButtonTabBarController: UITabBarController {
         centerButton.setImage(UIImage(named: "ic-ball-inactive"), forState: .Normal)
         centerButton.backgroundColor = UIColor.whiteColor()
         centerButton.layer.zPosition = 1;
-        centerButton.addTarget(self, action: "didTapCenterButton:", forControlEvents: .TouchUpInside)
+        centerButton.addTarget(self, action: #selector(didTapCenterButton(_:)), forControlEvents: .TouchUpInside)
         tabBar.addSubview(centerButton)
         centerButton.autoAlignAxisToSuperviewAxis(.Vertical)
         centerButton.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 8.0)

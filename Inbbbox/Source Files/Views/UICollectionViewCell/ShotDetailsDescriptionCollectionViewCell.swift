@@ -86,7 +86,7 @@ extension ShotDetailsDescriptionCollectionViewCell {
         textContainer.lineBreakMode = descriptionLabel.lineBreakMode
         textContainer.maximumNumberOfLines = descriptionLabel.numberOfLines
         
-        descriptionLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "descriptionLabelDidTap:"))
+        descriptionLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(descriptionLabelDidTap(_:))))
     }
     
     func descriptionLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {

@@ -12,12 +12,12 @@ import Foundation
 typealias Path = (section: Int, row: Int)
 
 protocol Itemizable {
-    typealias T
+    associatedtype T
     func itemize(closure: (path: Path, item: T) -> ())
 }
 
 protocol IndexPathOperatable {
-    typealias T
+    associatedtype T
     func addItem(item: T, atIndexPath indexPath: NSIndexPath)
     func removeAtIndexPath(indexPath: NSIndexPath)
     func removeItemsAtIndexPaths(indexPaths: [NSIndexPath])

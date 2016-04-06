@@ -105,13 +105,13 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
         switch viewModel.shotBucketsViewControllerMode {
         case .AddToBucket:
             if viewModel.isActionItemAtIndex(indexPath.item) {
-                return configureActionCell(collectionView, atIndexPath: indexPath, selector: "addNewBucketButtonDidTap:")
+                return configureActionCell(collectionView, atIndexPath: indexPath, selector: #selector(addNewBucketButtonDidTap(_:)))
             } else {
                 return configureAddToBucketCell(collectionView, atIndexPath: indexPath)
             }
         case .RemoveFromBucket:
             if viewModel.isActionItemAtIndex(indexPath.item) {
-                return configureActionCell(collectionView, atIndexPath: indexPath, selector: "removeButtonDidTap:")
+                return configureActionCell(collectionView, atIndexPath: indexPath, selector: #selector(removeButtonDidTap(_:)))
             } else {
                 return configureRemoveFromBucketCell(collectionView, atIndexPath: indexPath)
             }
@@ -139,7 +139,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 header?.setHeaderTitle(viewModel.titleForHeader)
                 header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
                 header?.avatarView.delegate = self
-                header?.closeButtonView.closeButton.addTarget(self, action: "closeButtonDidTap:", forControlEvents: .TouchUpInside)
+                header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
                 if let url = viewModel.urlForUser(viewModel.shot.user) {
                     header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
                 }

@@ -21,11 +21,11 @@ class SwitchItem: GroupItem {
     
     func bindSwitchControl(switchControl: UISwitch) {
         self.switchControl = switchControl
-        self.switchControl?.addTarget(self, action: "didChangeSwitchState:forEvents:", forControlEvents: .ValueChanged)
+        self.switchControl?.addTarget(self, action: #selector(didChangeSwitchState(_:forEvents:)), forControlEvents: .ValueChanged)
     }
     
     func unbindSwitchControl() {
-        switchControl?.removeTarget(self, action: "didChangeSwitchState:forEvents:", forControlEvents: .ValueChanged)
+        switchControl?.removeTarget(self, action: #selector(didChangeSwitchState(_:forEvents:)), forControlEvents: .ValueChanged)
     }
     
     dynamic func didChangeSwitchState(sender: UISwitch, forEvents events: UIControlEvents) {

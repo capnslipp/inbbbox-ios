@@ -44,16 +44,16 @@ class PageableProvider: Verifiable {
      */
     init() {}
     
-    func firstPageForQueries<T: Mappable>(var queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
+    func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
             
             resetPages()
             serializationKey = key
             didDefineProviderMethodBefore = true
             
-            queries = queries.map { queryByPagingConfiguration($0) }
+            let mappedQueries = queries.map { queryByPagingConfiguration($0) }
             
-            pageWithQueries(queries).then(fulfill).error(reject)
+            pageWithQueries(mappedQueries).then(fulfill).error(reject)
         }
     }
     
@@ -135,11 +135,11 @@ private extension PageableProvider {
         }
     }
     
-    func queryByPagingConfiguration(var query: Query) -> Query {
+    func queryByPagingConfiguration(query: Query) -> Query {
+        var resultQuery = query
+        resultQuery.parameters["page"] = page
+        resultQuery.parameters["per_page"] = pagination
         
-        query.parameters["page"] = page
-        query.parameters["per_page"] = pagination
-        
-        return query
+        return resultQuery
     }
 }

@@ -84,7 +84,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     // MARK: Configuration
     
     func setupBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add New", comment: ""), style: .Plain, target: self, action: "didTapAddNewBucketButton:")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add New", comment: ""), style: .Plain, target: self, action: #selector(didTapAddNewBucketButton(_:)))
     }
     
     // MARK: Actions:

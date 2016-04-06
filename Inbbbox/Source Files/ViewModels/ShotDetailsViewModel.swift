@@ -31,11 +31,11 @@ final class ShotDetailsViewModel {
         
         var counter = comments.count + 1 // 1 for ShotDetailsOperationCollectionViewCell
         if hasDescription {
-            counter++ // for ShotDetailsDescriptionCollectionViewCell
+            counter += 1 // for ShotDetailsDescriptionCollectionViewCell
         }
 
         if isAllowedToDisplaySeparator {
-            counter++ // for ShotDetailsDummySpaceCollectionViewCell
+            counter += 1 // for ShotDetailsDummySpaceCollectionViewCell
         }
         
         return counter

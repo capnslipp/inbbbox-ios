@@ -44,7 +44,7 @@ class CommentComposerView: UIView {
         textField.delegate = self
         textField.autocorrectionType = .No
         textField.rightViewMode = .Always
-        textField.addTarget(self, action: "textFieldValueDidChange:", forControlEvents: .EditingChanged)
+        textField.addTarget(self, action: #selector(textFieldValueDidChange(_:)), forControlEvents: .EditingChanged)
         textField.rightView = button
         cornerWrapperView.addSubview(textField)
     }
@@ -142,7 +142,7 @@ private extension CommentComposerView {
         button.enabled = false
         button.frame = CGRect(x: 0, y: 0, width: 65, height: 40)
         button.setImage(UIImage(named: "ic-sendmessage"), forState: .Normal)
-        button.addTarget(self, action: "addCommentButtonDidTap:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(addCommentButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         
         return button
     }

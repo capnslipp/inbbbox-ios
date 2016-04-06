@@ -35,9 +35,9 @@ class LoginViewController: UIViewController {
         } ?? []
 
         shotsAnimator = AutoScrollableShotsAnimator(bindForAnimation: bindForAnimation)
-        aView?.loginButton.addTarget(self, action: "loginButtonDidTap:", forControlEvents: .TouchUpInside)
-        aView?.loginAsGuestButton.addTarget(self, action: "loginAsGuestButtonDidTap:", forControlEvents: .TouchUpInside)
-        let tapGesture = UITapGestureRecognizer(target: self, action: "logoTapped:")
+        aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        aView?.loginAsGuestButton.addTarget(self, action: #selector(loginAsGuestButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(logoTapped(_:)))
         aView?.logoImageView.addGestureRecognizer(tapGesture)
         aView?.logoImageView.userInteractionEnabled = true
         aView?.loadingLabel.alpha = 0
@@ -100,7 +100,7 @@ extension LoginViewController {
     }
     
     func logoTapped(sender: UITapGestureRecognizer) {
-        logoTappedCount++
+        logoTappedCount += 1
         if logoTappedCount == 5 {
             viewAnimator?.showLoginAsGuest()
             sender.enabled = false
