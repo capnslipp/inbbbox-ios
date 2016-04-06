@@ -13,11 +13,11 @@ class ManagedBucket: NSManagedObject {
     @NSManaged var mngd_identifier: String
     @NSManaged var mngd_name: String
     @NSManaged var mngd_htmlDescription: NSAttributedString?
-    @NSManaged var mngd_shotsCount: Int
+    @NSManaged var mngd_shotsCount: UInt
     @NSManaged var mngd_createdAt: NSDate
+    @NSManaged var mngd_owner: ManagedUser
     
     @NSManaged var shots: NSSet?
-    @NSManaged var owner: User
     
     func addShot(shot: ManagedShot) {
         addObject(shot, forKey: "shots")
@@ -28,6 +28,7 @@ extension ManagedBucket: BucketType {
     var identifier: String { return mngd_identifier }
     var name: String { return mngd_name }
     var attributedDescription: NSAttributedString? { return mngd_htmlDescription }
-    var shotsCount: Int { return mngd_shotsCount}
+    var shotsCount: UInt { return mngd_shotsCount}
     var createdAt: NSDate { return mngd_createdAt }
+    var owner: UserType { return mngd_owner }
 }

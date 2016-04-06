@@ -31,18 +31,18 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private(set) var commentImageViewRightConstraint: NSLayoutConstraint?
     private(set) var commentImageViewWidthConstraint: NSLayoutConstraint?
 
-    
+
     var viewClass = UIView.self
     var swipeCompletion: (Action -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
 
     private let panGestureRecognizer = UIPanGestureRecognizer()
-    
-    private let doNothingActionRange = (min: CGFloat(-50), max: CGFloat(50))
-    private let likeActionRange = (min: CGFloat(50), max: CGFloat(150))
-    private let bucketActionRange = (min: CGFloat(150), max: CGFloat(200))
-    private let commentActionRange = (min: CGFloat(-100), max: CGFloat(-50))
-    
+
+    private let doNothingActionRange = (min: CGFloat(-40), max: CGFloat(40))
+    private let likeActionRange = (min: CGFloat(40), max: CGFloat(130))
+    private let bucketActionRange = (min: CGFloat(130), max: CGFloat(180))
+    private let commentActionRange = (min: CGFloat(-80), max: CGFloat(-40))
+
     private var didSetConstraints = false
     var previousXTranslation: CGFloat = 0
 
@@ -82,7 +82,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(commentImageView)
 
         contentView.addSubview(shotImageView)
-        
+
         gifLabel.configureForAutoLayout()
         contentView.addSubview(gifLabel)
 
@@ -125,7 +125,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
                 withMultiplier: commentImageView.intrinsicContentSize().height / commentImageView.intrinsicContentSize().width)
             commentImageViewRightConstraint = commentImageView.autoPinEdgeToSuperviewEdge(.Right)
             commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
-            
+
             gifLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 10)
             gifLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: 10)
 
@@ -172,9 +172,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
         if xTranslation > bucketActionRange.max || xTranslation < commentActionRange.min {
             return
         }
-        
+
         shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, xTranslation, 0)
-        likeImageViewLeftConstraint?.constant = abs(xTranslation) * 0.2
+        likeImageViewLeftConstraint?.constant = abs(xTranslation) * 0.17
         likeImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), likeImageView.intrinsicContentSize().width)
 
         let secondActionWidthConstant = max((abs(xTranslation * 0.6) - likeActionRange.min), 0)
@@ -182,11 +182,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
         plusImageView.alpha = min((abs(xTranslation) - likeActionRange.min) / 70, 1)
 
         bucketImageViewWidthConstraint?.constant = min(secondActionWidthConstant, bucketImageView.intrinsicContentSize().width)
-        
+
         commentImageViewRightConstraint?.constant = -abs(xTranslation) * 0.2
         commentImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), commentImageView.intrinsicContentSize().width)
     }
-    
+
     private func adjustActionImageViewForXTranslation(xTranslation: CGFloat) {
         if xTranslation >= likeActionRange.min && xTranslation > previousXTranslation && likeImageView.isFirstImageVisible() && !liked {
             UIView.animate(animations: {
@@ -226,7 +226,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             return .Comment
         }
     }
-    
+
     private func animateCellAction(action: Action, completion: (() -> ())?) {
         switch action {
             case .Like:

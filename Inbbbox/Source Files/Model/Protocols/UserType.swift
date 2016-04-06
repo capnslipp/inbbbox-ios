@@ -19,7 +19,7 @@ protocol UserType {
     var name: String? { get }
     var username: String { get }
     var avatarString: String? { get }
-    var shotsCount: Int { get }
+    var shotsCount: UInt { get }
     var accountType: UserAccountType? { get }
 }
 

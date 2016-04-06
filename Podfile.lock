@@ -10,7 +10,7 @@ PODS:
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
-  - KeychainAccess (2.3.4)
+  - KeychainAccess (2.3.5)
   - Keys (1.0.0)
   - Mockingjay (1.1.1):
     - Mockingjay/Core (= 1.1.1)
@@ -27,17 +27,17 @@ PODS:
     - OMGHTTPURLRQ/FormURLEncode
     - OMGHTTPURLRQ/UserAgent
   - OMGHTTPURLRQ/UserAgent (3.1.1)
-  - PromiseKit (3.0.3):
-    - PromiseKit/Foundation (= 3.0.3)
-    - PromiseKit/QuartzCore (= 3.0.3)
-    - PromiseKit/UIKit (= 3.0.3)
-  - PromiseKit/CorePromise (3.0.3)
-  - PromiseKit/Foundation (3.0.3):
+  - PromiseKit (3.1.0):
+    - PromiseKit/Foundation (= 3.1.0)
+    - PromiseKit/QuartzCore (= 3.1.0)
+    - PromiseKit/UIKit (= 3.1.0)
+  - PromiseKit/CorePromise (3.1.0)
+  - PromiseKit/Foundation (3.1.0):
     - OMGHTTPURLRQ (~> 3.1.0)
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.0.3):
+  - PromiseKit/QuartzCore (3.1.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.0.3):
+  - PromiseKit/UIKit (3.1.0):
     - PromiseKit/CorePromise
   - PureLayout (3.0.1)
   - Quick (0.9.1)
@@ -49,14 +49,14 @@ PODS:
 
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
-  - Dobby (~> 0.4.2)
+  - Dobby (~> 0.4)
   - DZNEmptyDataSet (~> 1.7)
   - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
     `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
-  - Gifu (~> 1.0.1)
-  - GoogleAnalytics (~> 3.14.0)
+  - Gifu (~> 1.0)
+  - GoogleAnalytics (~> 3.14)
   - GPUImage (~> 0.1)
-  - HanekeSwift (~> 0.10.1)
+  - HanekeSwift (~> 0.10)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
@@ -92,12 +92,12 @@ SPEC CHECKSUMS:
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
-  KeychainAccess: 3a21b6944b4f2a22653f091d770cf10374961a94
+  KeychainAccess: e283c1981a6c5655e1984cd411c6faf16fa165ae
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430
   Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
   OMGHTTPURLRQ: 633f98ee745aeda02345935a52eec1784cddb589
-  PromiseKit: 00ec2a219bf5ad2833f95977698e921932b8dfd3
+  PromiseKit: 7ed2a3fc5217695305a55a8c47cb3a17ff5fde0d
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   Quick: a5221fc21788b6aeda934805e68b061839bc3165
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
