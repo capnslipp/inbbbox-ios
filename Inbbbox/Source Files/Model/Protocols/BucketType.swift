@@ -12,9 +12,9 @@ protocol BucketType {
     var identifier: String { get }
     var name: String { get }
     var attributedDescription: NSAttributedString? { get }
-    var shotsCount: Int { get }
+    var shotsCount: UInt { get }
     var createdAt: NSDate { get }
-    var owner: User { get }
+    var owner: UserType { get }
 }
 
 func ==(lhs: BucketType, rhs: BucketType) -> Bool {
