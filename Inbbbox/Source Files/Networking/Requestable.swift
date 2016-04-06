@@ -21,6 +21,7 @@ protocol Requestable {
 // MARK: - Common implementation for Requestable
 extension Requestable {
     
+    /// Foundation request based on query.
     var foundationRequest: NSURLRequest {
         
         let queryItems = query.parameters.queryItems
