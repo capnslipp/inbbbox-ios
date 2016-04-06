@@ -15,6 +15,11 @@ class DataDownloader: NSObject {
     private var progress:((Float) -> Void)?
     private var completion:((NSData) -> Void)?
     
+    /// Fetches data from given URL and gives information about progress and completion of operation.
+    /// 
+    /// - parameter url: URL to fetch data from.
+    /// - parameter progress: Block called every time when portion of data is fetched. Gives information about progress.
+    /// - parameter completion: Block called when fetching is complete. It returns fetched data as parameter.
     func fetchData(url: NSURL, progress:(progress: Float) -> Void, completion:(data: NSData) -> Void) {
         self.progress = progress
         self.completion = completion
