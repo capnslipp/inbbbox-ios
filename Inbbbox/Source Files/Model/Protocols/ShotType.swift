@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Interface for Shot and ManagedShot
 protocol ShotType {
 
     /// Unique identifier

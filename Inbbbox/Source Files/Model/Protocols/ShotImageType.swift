@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Interface for ShotImage and ManagedShotImage
 protocol ShotImageType {
 
     /// The hidpi image may or may not be present, but will always be 800x600

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Interface for Bucket and ManagedBucket
 protocol BucketType {
 
     /// Unique identifier
