@@ -14,6 +14,10 @@ struct RemoveFromBucketQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .JSON)
     
+    /// Initialize query for removing shot from bucket.
+    ///
+    /// - parameter shot:   Shot that should be removed.
+    /// - parameter bucket: Bucket that shot should be removed from.
     init(shot: ShotType, bucket: BucketType) {
         path = "/buckets/" + bucket.identifier.stringValue + "/shots"
         parameters["shot_id"] = shot.identifier

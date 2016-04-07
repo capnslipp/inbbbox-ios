@@ -14,6 +14,10 @@ struct UserFollowedByMeQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
+    /// Initialize query for checking
+    /// if given user is followed by currently signed in user.
+    ///
+    /// - parameter user: User to check.
     init(user: UserType) {
         path = "/user/following/" + user.identifier
     }

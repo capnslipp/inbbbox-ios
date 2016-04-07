@@ -14,6 +14,9 @@ struct TeamMembersQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
+    /// Initialize query for list of given team's members.
+    ///
+    /// - parameter team: Team to list members for.
     init(team: TeamType) {
         path = "/teams/" + team.identifier + "/members"
     }
