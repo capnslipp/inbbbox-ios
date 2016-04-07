@@ -99,7 +99,6 @@ class UserDetailsViewController: UIViewController {
         }.always {
             self.header?.stopActivityIndicator()
         }.error { error in
-            print(error)
             // NGRTodo: provide pop-ups with errors
         }
     }
@@ -126,7 +125,6 @@ extension UserDetailsViewController {
             }.always {
                 self.header?.stopActivityIndicator()
             }.error { error in
-                print(error)
                 // NGRTodo: provide pop-ups with errors
             }
         }

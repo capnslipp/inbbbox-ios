@@ -54,7 +54,7 @@ class ShotBucketsViewController: UIViewController {
         }.then {
             self.shotBucketsView.collectionView.reloadData()
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
         shotBucketsView.viewController = self
         shotBucketsView.collectionView.delegate = self
@@ -195,7 +195,7 @@ extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
     
@@ -273,7 +273,7 @@ private extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
     
@@ -283,7 +283,7 @@ private extension ShotBucketsViewController {
         }.then { () -> Void in
             self.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
 }

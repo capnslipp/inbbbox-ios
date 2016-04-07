@@ -89,7 +89,7 @@ struct ManagedObjectsProvider {
                 return managedShotImage
             }
         } catch {
-            print(error)
+            // NGRTemp: Handle error.
         }
         let managedShotImageEntity = NSEntityDescription.entityForName(ManagedShotImage.entityName, inManagedObjectContext: managedObjectContext)!
         let managedShotImage = ManagedShotImage(entity: managedShotImageEntity, insertIntoManagedObjectContext: managedObjectContext)
