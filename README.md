@@ -24,6 +24,7 @@ We at Netguru strongly believe in open-source software. Inbbbox isn’t our only
 5. Type `pod install`
 	* You will see `CocoaPods-Keys has detected a keys mismatch for your setup.
  What is the key for ClientID`. Fear not! This is how Inbbbox authenticates with Dribbble API to fetch all data! Go to `https://dribbble.com/account/applications/` to create your own application. After that you should have `ClientID`, `Client Secret` and `Client Access Token`. After providing `ClientID` you will be asked for other keys. We are using `cocoapods-key` to store them securely.
+ 	* As an alternative way of storing keys, you can add them to `.env` file to root directory of project. During pod installation, `cocoapods-keys` will actually search for keys in `.env` file in the first place, and ask you to provide them, if not found.
 6. You are good to go! Just open `Inbbbox.xcworkspace`. In case of any problems don't hesitate to contact with us!
 
 
