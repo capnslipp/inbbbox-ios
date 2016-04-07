@@ -14,7 +14,7 @@ struct CommentDisplayableData {
     let author: NSAttributedString
     let comment: NSAttributedString?
     let date: NSAttributedString
-    let avatarURLString: String
+    let avatarURL: NSURL?
 }
 
 final class ShotDetailsViewModel {
@@ -115,7 +115,7 @@ extension ShotDetailsViewModel {
                 author: ShotDetailsFormatter.commentAuthorForComment(comment),
                 comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
                 date: ShotDetailsFormatter.commentDateForComment(comment),
-                avatarURLString: comment.user.avatarURL?.absoluteString ?? ""
+                avatarURL: comment.user.avatarURL
             )
             
             cachedFormattedComments.append(displayableData)

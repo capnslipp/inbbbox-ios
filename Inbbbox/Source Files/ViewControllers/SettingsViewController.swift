@@ -204,12 +204,7 @@ private extension SettingsViewController {
         } else {
             header.usernameLabel.text = NSLocalizedString("Guest?", comment: "")
         }
-
-        if let urlString = viewModel.loggedInUser?.avatarURL?.absoluteString {
-            header.avatarView.imageView.loadImageFromURLString(urlString)
-        } else {
-            header.avatarView.imageView.image = UIImage(named: "avatar_placeholder")
-        }
+        header.avatarView.imageView.loadImageFromURL(viewModel.loggedInUser?.avatarURL, placeholderImage: UIImage(named: "avatar_placeholder"))
     }
 }
 

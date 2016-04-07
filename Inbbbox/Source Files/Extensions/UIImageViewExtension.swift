@@ -11,8 +11,9 @@ import Haneke
 
 extension UIImageView {
     
-    func loadImageFromURL(url: NSURL, placeholderImage: UIImage? = nil) {
+    func loadImageFromURL(url: NSURL?, placeholderImage: UIImage? = nil) {
         image = placeholderImage
+        guard let url = url else { return }
         Shared.imageCache.fetch(URL: url, formatName: CacheManager.imageFormatName, failure: nil, success: {[weak self] image in
                 self?.image = image
             })
