@@ -9,10 +9,7 @@
 import Foundation
 import PromiseKit
 
-/**
- *  Requestable
- *  Defines how Requestable type should behave
- */
+/// Defines how Requestable type should behave
 protocol Requestable {
     var query: Query { get }
     var foundationRequest: NSURLRequest { get }

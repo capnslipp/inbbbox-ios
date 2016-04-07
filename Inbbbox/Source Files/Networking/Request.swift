@@ -10,10 +10,7 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
-/**
- *  Request
- *  Requestable value type
- */
+/// Requestable value type
 struct Request: Requestable, Responsable {
     
     /// Query used to create request.
