@@ -8,27 +8,27 @@
 
 import Foundation
 
-/// Interface for Bucket and ManagedBucket
+/// Interface for Bucket and ManagedBucket.
 protocol BucketType {
 
-    /// Unique identifier
+    /// Unique identifier.
     var identifier: String { get }
 
-    /// Name of the Bucket
+    /// Name of the Bucket.
     var name: String { get }
 
-    /// Description of the Bucket
+    /// Description of the Bucket.
     var attributedDescription: NSAttributedString? { get }
 
-    /// Number of shots contained in this Bucket
+    /// Number of shots contained in this Bucket.
     var shotsCount: UInt { get }
 
-    /// Date when Bucket was created
+    /// Date when Bucket was created.
     var createdAt: NSDate { get }
 
-    /// Owner of this Bucket
+    /// Owner of this Bucket.
     ///
-    /// - returns: User
+    /// - returns: User.
     var owner: UserType { get }
 }
 

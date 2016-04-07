@@ -9,21 +9,21 @@
 
 import Foundation
 
-/// Interface for Team and ManagedTeam
+/// Interface for Team and ManagedTeam.
 protocol TeamType {
 
-    /// Unique identifier
+    /// Unique identifier.
     var identifier: String { get }
 
-    /// Name of the Team
+    /// Name of the Team.
     var name: String { get }
 
-    /// Username of the Team
+    /// Username of the Team.
     var username: String { get }
 
-    /// URL to avatar image
+    /// URL to avatar image.
     var avatarURL: NSURL? { get }
 
-    /// Date when Team was created
+    /// Date when Team was created.
     var createdAt: NSDate { get }
 }

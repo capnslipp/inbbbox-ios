@@ -14,26 +14,26 @@ enum UserAccountType: String {
     case Team = "Team"
 }
 
-/// Interface for User and ManagedUser
+/// Interface for User and ManagedUser.
 protocol UserType {
 
-    /// Unique identifier
+    /// Unique identifier.
     var identifier: String { get }
 
-    /// Name of the User
+    /// Name of the User.
     var name: String? { get }
 
-    /// Username of the User
+    /// Username of the User.
     var username: String { get }
 
-    /// URL to avatar image
+    /// URL to avatar image.
     var avatarURL: NSURL? { get }
 
-    /// Number of shots created by User
+    /// Number of shots created by User.
     var shotsCount: UInt { get }
 
-    /// Account type of User
-    /// Can be User, Player, Team
+    /// Account type of User.
+    /// Can be User, Player, Team.
     var accountType: UserAccountType? { get }
 }
 

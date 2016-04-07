@@ -8,21 +8,21 @@
 
 import Foundation
 
-/// Interface for Project and ManagedProject
+/// Interface for Project and ManagedProject.
 protocol ProjectType {
 
-    /// Unique identifier
+    /// Unique identifier.
     var identifier: String { get }
 
-    /// Name of the Project
+    /// Name of the Project.
     var name: String? { get }
 
-    /// Description of the Project
+    /// Description of the Project.
     var attributedDescription: NSAttributedString? { get }
 
-    /// Date when Project was created
+    /// Date when Project was created.
     var createdAt: NSDate { get }
 
-    /// Number of shots associated to this Project
+    /// Number of shots associated to this Project.
     var shotsCount: UInt { get }
 }

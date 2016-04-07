@@ -8,20 +8,20 @@
 
 import Foundation
 
-/// Interface for Comment
+/// Interface for Comment.
 protocol CommentType {
 
     /// Unique identifier
     var identifier: String { get }
 
-    /// Comment's content
+    /// Comment's content.
     var body: NSAttributedString? { get }
 
-    /// Date when Comment was created
+    /// Date when Comment was created.
     var createdAt: NSDate { get }
 
-    /// User which created this comment
+    /// User which created this comment.
     ///
-    /// - returns: User
+    /// - returns: User.
     var user: UserType { get }
 }

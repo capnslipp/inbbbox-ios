@@ -8,49 +8,49 @@
 
 import Foundation
 
-/// Interface for Shot and ManagedShot
+/// Interface for Shot and ManagedShot.
 protocol ShotType {
 
-    /// Unique identifier
+    /// Unique identifier.
     var identifier: String { get }
 
-    /// The title of the Shot
+    /// The title of the Shot.
     var title: String { get }
 
-    /// Description of the Shot
+    /// Description of the Shot.
     var attributedDescription: NSAttributedString? { get }
 
-    /// Owner of this Shot
+    /// Owner of this Shot.
     ///
-    /// - returns: User
+    /// - returns: User.
     var user: UserType { get }
 
-    /// Shot image can be a GIF, JPG, or PNG
+    /// Shot image can be a GIF, JPG, or PNG.
     ///
-    /// - returns: Shot image with available URLs
+    /// - returns: Shot image with available URLs.
     var shotImage: ShotImageType { get }
 
-    /// Date when Shot was created
+    /// Date when Shot was created.
     var createdAt: NSDate { get }
 
-    /// Indicates whether Shot image is GIF
+    /// Indicates whether Shot image is GIF.
     var animated: Bool { get }
 
-    /// Total number of likes from all users
+    /// Total number of likes from all users.
     var likesCount: UInt { get }
 
-    /// Total number of views
+    /// Total number of views.
     var viewsCount: UInt { get }
 
-    /// Total number of comments
+    /// Total number of comments.
     var commentsCount: UInt { get }
 
-    /// Total number of buckets, Shot is contained in
+    /// Total number of buckets, Shot is contained in.
     var bucketsCount: UInt { get }
 
-    /// Team associated with the Shot
+    /// Team associated with the Shot.
     ///
-    /// - returns: Team
+    /// - returns: Team.
     var team: TeamType? { get }
 }
 
