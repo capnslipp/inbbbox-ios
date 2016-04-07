@@ -21,6 +21,7 @@ protocol TeamType {
     /// Username of the Team
     var username: String { get }
 
+    /// URL to avatar image
     var avatarURL: NSURL? { get }
 
     /// Date when Team was created
