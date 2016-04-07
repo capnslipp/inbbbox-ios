@@ -18,9 +18,30 @@ protocol OAuthAuthorizable {
     var redirectURI: String { get }
     var scope: String { get }
 
+    /// Provide `NSURLRequest` that should be used to receive token from API.
+    /// 
+    /// - returns: Request needed to get token.
     func requestTokenURLRequest() -> NSURLRequest
+    
+    /// Provide `NSURLRequest` that should be used to receive access token from API based on request token.
+    ///
+    /// - parameter token: Request token.
+    ///
+    /// - returns: Request needed to get access token.
     func accessTokenURLRequestWithRequestToken(token: String) -> NSURLRequest
+    
+    /// Check if URL is redirection URL.
+    ///
+    /// - parameter url: URL to check.
+    ///
+    /// - returns: `true` if given URL is redirection URL, `false` otherwise
     func isRedirectionURL(url: NSURL?) -> Bool
+    
+    /// Check if URL is silent authentication URL.
+    ///
+    /// - parameter url: URL to check.
+    ///
+    /// - returns: `true` if given URL is silent authentication URL, `false` otherwise
     func isSilentAuthenticationURL(url: NSURL?) -> Bool
 }
 
