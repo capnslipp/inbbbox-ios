@@ -101,7 +101,7 @@ class BucketsCollectionViewController: UICollectionViewController {
                     self.collectionView?.insertItemsAtIndexPaths([NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
                 }
             }.error { error in
-                print(error)
+                // NGRTemp: Handle error.
             }
         }
         self.presentViewController(alert, animated: true, completion: nil)

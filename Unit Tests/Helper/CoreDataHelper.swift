@@ -16,7 +16,7 @@ func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
     do {
         try persistentStoreCoordinator.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
     } catch {
-        print("Adding in-memory persistent store coordinator failed")
+        // NGRTemp: Adding in-memory persistent store coordinator failed
     }
     
     let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)

@@ -63,7 +63,6 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
-            print(error)
         }
     }
     
@@ -91,7 +90,6 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
                 self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
             }.error { error in
                 // NGRTemp: Need mockups for error message view
-                print(error)
             }
         }
     }

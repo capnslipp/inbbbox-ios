@@ -58,7 +58,6 @@ class LikesViewModel: BaseCollectionViewViewModel {
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
-            print(error)
         }
     }
     

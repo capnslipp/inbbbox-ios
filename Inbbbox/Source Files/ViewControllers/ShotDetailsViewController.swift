@@ -74,7 +74,7 @@ final class ShotDetailsViewController: UIViewController {
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -283,7 +283,7 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
         }.always {
             view.stopAnimation()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -335,7 +335,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -350,7 +350,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -370,7 +370,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -397,7 +397,7 @@ private extension ShotDetailsViewController {
         }.then { () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
 
