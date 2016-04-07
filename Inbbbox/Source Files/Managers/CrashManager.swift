@@ -6,6 +6,7 @@
 import Foundation
 import HockeySDK
 
+/// CrashManger class is used to handle integration with HockeyApp SDK.
 final class CrashManager {
 
     class func setup() {
