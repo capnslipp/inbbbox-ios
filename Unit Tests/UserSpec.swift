@@ -44,7 +44,7 @@ class UserSpec: QuickSpec {
             }
             
             it("user's avatar url should be properly mapped") {
-                expect(sut.avatarString).to(equal("fixture.avatar.url"))
+                expect(sut.avatarURL).to(equal(NSURL(string: "fixture.avatar.url")))
             }
             
             it("user's id should be properly mapped") {
@@ -90,7 +90,7 @@ class UserSpec: QuickSpec {
                 }
                 
                 it("user's avatar url should be properly decoded") {
-                    expect(sut.avatarString).to(equal(decodedUser!.avatarString))
+                    expect(sut.avatarURL).to(equal(decodedUser!.avatarURL))
                 }
                 
                 it("user's id should be properly decoded") {

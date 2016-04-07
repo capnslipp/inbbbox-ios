@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="ManagedBucket" representedClassName=".ManagedBucket" syncable="YES">
         <attribute name="mngd_createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="mngd_htmlDescription" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -41,7 +41,7 @@
         <relationship name="shot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedShot" inverseName="mngd_shotImage" inverseEntity="ManagedShot" syncable="YES"/>
     </entity>
     <entity name="ManagedTeam" representedClassName=".ManagedTeam" syncable="YES">
-        <attribute name="mngd_avatarString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mngd_avatarURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mngd_createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="mngd_identifier" attributeType="String" syncable="YES"/>
         <attribute name="mngd_name" attributeType="String" syncable="YES"/>
@@ -50,7 +50,7 @@
     </entity>
     <entity name="ManagedUser" representedClassName=".ManagedUser" syncable="YES">
         <attribute name="mngd_accountType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mngd_avatarString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mngd_avatarURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mngd_identifier" attributeType="String" syncable="YES"/>
         <attribute name="mngd_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mngd_shotsCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -64,6 +64,6 @@
         <element name="ManagedShot" positionX="-9" positionY="-324" width="128" height="270"/>
         <element name="ManagedShotImage" positionX="216" positionY="-288" width="128" height="103"/>
         <element name="ManagedTeam" positionX="232" positionY="-126" width="128" height="133"/>
-        <element name="ManagedUser" positionX="216" positionY="35" width="128" height="165"/>
+        <element name="ManagedUser" positionX="216" positionY="35" width="128" height="163"/>
     </elements>
 </model>

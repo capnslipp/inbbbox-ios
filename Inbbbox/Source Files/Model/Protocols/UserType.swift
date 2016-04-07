@@ -18,7 +18,7 @@ protocol UserType {
     var identifier: String { get }
     var name: String? { get }
     var username: String { get }
-    var avatarString: String? { get }
+    var avatarURL: NSURL? { get }
     var shotsCount: UInt { get }
     var accountType: UserAccountType? { get }
 }

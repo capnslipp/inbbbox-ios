@@ -155,8 +155,7 @@ extension UserDetailsViewController: UICollectionViewDataSource {
         
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
-
-            header?.avatarView.imageView.loadImageFromURLString(viewModel.user.avatarString ?? "")
+            header?.avatarView.imageView.loadImageFromURL(viewModel.user.avatarURL)
             header?.button.addTarget(self, action: "didTapFollowButton:", forControlEvents: .TouchUpInside)
             viewModel.shouldShowFollowButton ? header?.startActivityIndicator() : (header?.shouldShowButton = false)
         }
