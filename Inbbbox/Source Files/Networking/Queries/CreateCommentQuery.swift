@@ -14,6 +14,10 @@ struct CreateCommentQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .JSON)
     
+    /// Initialize query for posting comment.
+    ///
+    /// - parameter shot:   Shot that should be commented.
+    /// - parameter body:   Comment's body.
     init(shot: ShotType, body: String) {
         path = "/shots/" + shot.identifier + "/comments"
         parameters["body"] = body

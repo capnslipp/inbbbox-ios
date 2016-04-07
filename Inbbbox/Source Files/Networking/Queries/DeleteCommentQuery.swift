@@ -14,6 +14,10 @@ struct DeleteCommentQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
+    /// Initialize query for removing comment.
+    ///
+    /// - parameter shot:       Shot that contains the comment.
+    /// - parameter comment:    Comment to remove.
     init(shot: ShotType, comment: CommentType) {
         path = "/shots/" + shot.identifier + "/comments/" + comment.identifier
     }

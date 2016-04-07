@@ -14,16 +14,14 @@ struct FolloweesQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
-    /**
-    Initialize query for list who the authenticated user is following.
-    */
+    /// Initialize query for list who the authenticated user is following.
     init() {
         path = "/user/following"
     }
     
-    /**
-     Initialize query for list who given user is following.
-     */
+     /// Initialize query for list who given user is following.
+     ///
+     /// - parameter followeesOfUser: User that follows listed users.
     init(followeesOfUser user: UserType) {
         path = "/users/\(user.username)/following"
     }
