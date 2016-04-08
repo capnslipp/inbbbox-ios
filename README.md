@@ -21,9 +21,9 @@ We at Netguru strongly believe in open-source software. Inbbbox isn’t our only
 2. Within Terminal navigate to `inbbbox-ios` directory
 3. Type `bundle install`
 4. Type `carthage bootstrap`
-5. Type `pod install`
+5. Type `bundle exec pod install`
 	* You will see `CocoaPods-Keys has detected a keys mismatch for your setup.
- What is the key for ClientID`. Fear not! This is how Inbbbox authenticates with Dribbble API to fetch all data! Go to `https://dribbble.com/account/applications/` to create your own application. After that you should have `ClientID`, `Client Secret` and `Client Access Token`. After providing `ClientID` you will be asked for other keys. We are using `cocoapods-key` to store them securely.
+ What is the key for ClientID`. Fear not! This is how Inbbbox authenticates with Dribbble API to fetch all data! Go to `https://dribbble.com/account/applications/` to create your own application. After that you should have `ClientID`, `Client Secret` and `Client Access Token`. After providing `ClientID` you will be asked for other keys. We are using `cocoapods-keys` to store them securely.
 	* As an alternative way of storing keys, you can add them to `.env` file to root directory of project. 
 All required keys can be found in `.env.required` file, so all you need to do is to copy them to `.env` file and provide your values.
 During pod installation, `cocoapods-keys` will actually search for keys in `.env` file in the first place.
@@ -36,16 +36,27 @@ Optional keys can be found in `.env.optional`, but are not required for project 
 You're more than welcome to contribute. Just try to follow our [coding-style](https://github.com/netguru/swift-style-guide) or report an issue in case of any problems, questions or improvement proposals.
 
 
-## Authors v2
+## Authors
 * [Designers Team](https://dribbble.com/netguru)
-	* [Bartosz Bąk](https://dribbble.com/bartoszbak) 
-	* [Bartosz Białek] (https://dribbble.com/bkbl) 
-	* [Mateusz Czajka] (https://dribbble.com/czajkovsky) 
-	* [Łukasz Łanecki] (https://dribbble.com/LukaszLanecki) 
-	* [Michał Parulski] (https://dribbble.com/Shuma87) 
-	* [Magdalena Sitarek] (https://www.linkedin.com/in/magdalenasitarek) 
-	* [Dawid Woźniak] (https://dribbble.com/dawidw) 
+	* [Bartosz Bąk](https://dribbble.com/bartoszbak)
+	* [Bartosz Białek] (https://dribbble.com/bkbl)
+	* [Mateusz Czajka] (https://dribbble.com/czajkovsky)
+	* [Łukasz Łanecki] (https://dribbble.com/LukaszLanecki)
+	* [Michał Parulski] (https://dribbble.com/Shuma87)
+	* [Magdalena Sitarek] (https://www.linkedin.com/in/magdalenasitarek)
+	* [Dawid Woźniak] (https://dribbble.com/dawidw)
 
 * [Developers Team](https://github.com/netguru/inbbbox-ios/graphs/contributors)
+	* [Piotr Bruź](https://github.com/pbruz)
+	* [Patryk Kaczmarek](https://github.com/PatrykKaczmarek)
+	* [Adrian Kashivskyy](https://github.com/akashivskyy)
+	* [Lukasz Pikor](https://github.com/pikor)
+	* [Aleksander Popko](https://github.com/APbjj)
+	* [Marcin Siemaszko](https://github.com/Siemian)
+	* [Radosław Szeja](https://github.com/rad3ks)
+	* [Kamil Tomaszewski](https://github.com/kamil-tomaszewski)
+	* [Łukasz Wolańczyk](https://github.com/lukwol)
 
 Copyright © 2016 [Netguru](http://netguru.co)
+
+License [MIT](https://github.com/netguru/inbbbox-ios/blob/master/LICENSE.md)
