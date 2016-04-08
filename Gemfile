@@ -1,10 +1,6 @@
-source 'https://rubygems.org' do
-  gem 'cocoapods'
-  gem 'cocoapods-keys'
-  gem 'redcarpet'
-end
+source 'https://rubygems.org'
 
-source 'https://repo.fury.io/lukwol/' do
-  gem 'rswift-shared'
-  gem 'rswift-ios'
-end
+gem 'cocoapods'
+gem 'cocoapods-keys'
+gem 'redcarpet'
+gem 'rswift-ios'
