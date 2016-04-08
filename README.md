@@ -36,16 +36,26 @@ Optional keys can be found in `.env.optional`, but are not required for project 
 You're more than welcome to contribute. Just try to follow our [coding-style](https://github.com/netguru/swift-style-guide) or report an issue in case of any problems, questions or improvement proposals.
 
 
-## Authors v2
+## Authors
 * [Designers Team](https://dribbble.com/netguru)
-	* [Bartosz Bąk](https://dribbble.com/bartoszbak) 
-	* [Bartosz Białek] (https://dribbble.com/bkbl) 
-	* [Mateusz Czajka] (https://dribbble.com/czajkovsky) 
-	* [Łukasz Łanecki] (https://dribbble.com/LukaszLanecki) 
-	* [Michał Parulski] (https://dribbble.com/Shuma87) 
-	* [Magdalena Sitarek] (https://www.linkedin.com/in/magdalenasitarek) 
-	* [Dawid Woźniak] (https://dribbble.com/dawidw) 
+	* [Bartosz Bąk](https://dribbble.com/bartoszbak)
+	* [Bartosz Białek] (https://dribbble.com/bkbl)
+	* [Mateusz Czajka] (https://dribbble.com/czajkovsky)
+	* [Łukasz Łanecki] (https://dribbble.com/LukaszLanecki)
+	* [Michał Parulski] (https://dribbble.com/Shuma87)
+	* [Magdalena Sitarek] (https://www.linkedin.com/in/magdalenasitarek)
+	* [Dawid Woźniak] (https://dribbble.com/dawidw)
 
 * [Developers Team](https://github.com/netguru/inbbbox-ios/graphs/contributors)
+	* [Piotr Bruź](https://github.com/pbruz)
+	* [Patryk Kaczmarek](https://github.com/PatrykKaczmarek)
+	* [Lukasz Pikor](https://github.com/pikor)
+	* [Aleksander Popko](https://github.com/APbjj)
+	* [Marcin Siemaszko](https://github.com/Siemian)
+	* [Radek Szeja](https://github.com/rad3ks)
+	* [Kamil Tomaszewski](https://github.com/kamil-tomaszewski)
+	* [Łukasz Wolańczyk](https://github.com/lukwol)
 
 Copyright © 2016 [Netguru](http://netguru.co)
+
+License [MIT](https://github.com/netguru/inbbbox-ios/blob/master/LICENSE.md)
