@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyUserDefaults
 
-/// Keys related to reminders and notifications
+/// Keys related to reminders and notifications.
 enum NotificationKey: String {
     case ReminderOn = "ReminderOn"
     case ReminderDate = "ReminderDate"
@@ -17,7 +17,7 @@ enum NotificationKey: String {
     case LocalNotificationSettingsProvided = "LocalNotificationSettingsProvided"
 }
 
-/// Keys related to streams' sources
+/// Keys related to streams' sources.
 enum StreamSourceKey: String {
     case StreamSourceIsSet = "StreamSourceIsSet"
     case FollowingStreamSourceOn = "FollowingStreamSourceOn"
@@ -30,7 +30,7 @@ extension DefaultsKeys {
     static let onboardingPassed = DefaultsKey<Bool>("onboardingPassed")
 }
 
-/// Keys for notifications about changing settings
+/// Keys for notifications about changing settings.
 enum InbbboxNotificationKey: String {
     case UserDidChangeStreamSourceSettings
     case UserDidChangeNotificationsSettings
