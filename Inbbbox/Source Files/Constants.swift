@@ -22,7 +22,7 @@ struct Dribbble {
     static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
 
     static var GATrackingId: String? {
-#if Production
+#if ENV_PRODUCTION
         if let trackingId = SecretKeysProvider.secretValueForKey("ProductionGATrackingId") {
             return trackingId
         }
@@ -35,7 +35,7 @@ struct Dribbble {
     }
 
     static var HockeySDKIdentifier: String? {
-#if Production
+#if ENV_PRODUCTION
         if let identifier = SecretKeysProvider.secretValueForKey("HockeySDKProduction") {
             return identifier
         }
