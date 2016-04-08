@@ -14,7 +14,7 @@ class UserStorage {
     private static let KeychainService = "co.netguru.inbbbox.keychain.user"
     private static let keychain = Keychain(service: KeychainService)
 
-    /// Currently signed in user. If there isn't any then returns *nil*
+    /// Currently signed in user. If there isn't any then returns *nil*.
     class var currentUser: User? {
         guard let data = keychain[data: Key.Token.rawValue] else {
             return nil

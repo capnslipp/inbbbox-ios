@@ -14,8 +14,8 @@ extension UIWindow {
     /// Fix for http://stackoverflow.com/a/27153956/849645
     /// Solution from http://stackoverflow.com/a/27153956/1671168
     ///
-    /// - parameter newRootViewController: new root view controller
-    /// - parameter transition: optional transition animation
+    /// - parameter newRootViewController:  new root view controller
+    /// - parameter transition:             optional transition animation
     func setRootViewController(newRootViewController: UIViewController, transition: CATransition? = nil) {
         
         let previousViewController = rootViewController

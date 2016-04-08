@@ -44,6 +44,7 @@ extension UITableView {
     /// Dequeues reusable cell
     ///
     /// - parameter aClass: type of UITableViewCell which conforms to Reusable protocol
+    ///
     /// - returns: reusable cell with proper reuse identifier. Used to acquire an already allocated cell, in lieu of allocating a new one.
     func dequeueReusableCell<T: UITableViewCell where T: Reusable>(aClass: T.Type) -> T {
         return dequeueReusableCellWithIdentifier(T.reuseIdentifier) as! T

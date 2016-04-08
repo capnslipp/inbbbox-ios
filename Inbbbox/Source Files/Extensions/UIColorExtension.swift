@@ -14,10 +14,10 @@ extension UIColor {
 
     /// Color based on RGB color model and alpha parameter
     ///
-    /// - parameter red: integer value of red color 
-    /// - parameter green: integer value of green color
-    /// - parameter blue: integer value of blue color
-    /// - parameter alpha: float value of alpha. Needs to be between 0 and 1.
+    /// - parameter red:    integer value of red color
+    /// - parameter green:  integer value of green color
+    /// - parameter blue:   integer value of blue color
+    /// - parameter alpha:  float value of alpha. Needs to be between 0 and 1.
     ///
     /// - returns instance of UIColor
     class func RGBA(red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) -> UIColor {

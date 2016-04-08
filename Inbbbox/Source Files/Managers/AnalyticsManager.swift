@@ -34,6 +34,7 @@ class AnalyticsManager {
     }
 
     /// Method to track specific screen.
+    ///
     /// - parameter screen: Screen to track.
     class func trackScreen(screen: AnalyticsScreen) {
         guard let tracker = GAI.sharedInstance().defaultTracker else {
@@ -46,6 +47,7 @@ class AnalyticsManager {
     }
 
     /// Method to track login event.
+    ///
     /// - parameter loginEvent: Login event to track.
     class func trackLoginEvent(loginEvent: AnalyticsLoginEvent) {
         guard let tracker = GAI.sharedInstance().defaultTracker else {
@@ -56,6 +58,7 @@ class AnalyticsManager {
     }
 
     /// Method to track user action event.
+    ///
     /// - parameter userActionEvent: action to track.
     class func trackUserActionEvent(userActionEvent: AnalyticsUserActionEvent) {
         guard let tracker = GAI.sharedInstance().defaultTracker else {

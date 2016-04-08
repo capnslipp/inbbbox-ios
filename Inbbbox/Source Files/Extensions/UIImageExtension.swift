@@ -15,7 +15,7 @@ extension UIImage {
     ///
     /// - parameter blur: float value of blur added to image
     ///
-    /// - returns blurred image
+    /// - returns: blurred image
     func imageByBlurringImageWithBlur(blur: CGFloat) -> UIImage {
         let maxBlurRadius = CGFloat(1)
         let blurFilter = GPUImageGaussianBlurFilter()

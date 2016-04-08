@@ -29,7 +29,7 @@ extension UIFont {
     /// - parameter type: type of helvetica font
     /// - parameter size: size of font
     ///
-    /// - returns helvetica font with set type and size.
+    /// - returns: helvetica font with set type and size.
     class func helveticaFont(type: Helvetica, size: CGFloat = UIFont.systemFontSize()) -> UIFont {
         return UIFont(name: type.name, size: size)!
     }

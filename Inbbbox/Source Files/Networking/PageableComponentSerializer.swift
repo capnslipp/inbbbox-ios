@@ -12,7 +12,7 @@ class PageableComponentSerializer {
     
     /// Provides component for next page for given query.
     /// 
-    /// - parameter query: Query which the next page component should be created for.
+    /// - parameter query:          Query which the next page component should be created for.
     /// - parameter receivedHeader: Received response's header.
     /// 
     /// - returns: Component for next page.
@@ -22,7 +22,7 @@ class PageableComponentSerializer {
     
     /// Provides component for previous page for given query.
     ///
-    /// - parameter query: Query which the previous page component should be created for.
+    /// - parameter query:          Query which the previous page component should be created for.
     /// - parameter receivedHeader: Received response's header.
     ///
     /// - returns: Component for previous page.
