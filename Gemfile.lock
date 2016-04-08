@@ -58,7 +58,7 @@ GEM
     rake (11.1.2)
     redcarpet (3.3.4)
     rouge (1.10.1)
-    rswift (0.1.0)
+    rswift (0.1.1)
       colorize
       thor
       xcodeproj
