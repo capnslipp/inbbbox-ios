@@ -1,0 +1,16 @@
+//
+//  Release.xcconfig
+//
+//  Copyright (c) 2015 Netguru Sp. z o.o. All rights reserved.
+//
+
+#include "../Carthage/Checkouts/xcconfigs/Base/Configurations/Release.xcconfig"
+#include "../Carthage/Checkouts/xcconfigs/iOS/iOS-Application.xcconfig"
+#include "../Pods/Target Support Files/Pods/Pods.release.xcconfig"
+
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) ENV_PRODUCTION
+OTHER_SWIFT_FLAGS = $(inherited) -D ENV_PRODUCTION
+
+PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.release
+PRODUCT_BUNDLE_VERSION_STRING = 1.0
+PRODUCT_BUNDLE_VERSION = 1034
