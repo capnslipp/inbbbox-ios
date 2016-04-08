@@ -1,6 +1,6 @@
 PODS:
   - AsyncSwift (1.7.2)
-  - Dobby (0.4.2)
+  - Dobby (0.5.0)
   - DZNEmptyDataSet (1.7.3)
   - EasyAnimation (1.0.2)
   - Gifu (1.0.1)
@@ -49,7 +49,7 @@ PODS:
 
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
-  - Dobby (~> 0.4)
+  - Dobby (~> 0.5)
   - DZNEmptyDataSet (~> 1.7)
   - EasyAnimation (from `https://git@github.com/PatrykKaczmarek/EasyAnimation.git`,
     commit `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
@@ -62,7 +62,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
   - Nimble (~> 3.1)
-  - PromiseKit (~> 3.1)
+  - PromiseKit (~> 3.0)
   - PureLayout (~> 3.0)
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
