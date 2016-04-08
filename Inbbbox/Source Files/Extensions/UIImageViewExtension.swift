@@ -14,7 +14,7 @@ extension UIImageView {
     /// Loads image form URL
     ///
     /// - parameter url:                URL where image is located
-	/// - parameter placeholderImage:   optional placeholder image
+    /// - parameter placeholderImage:   optional placeholder image
     func loadImageFromURL(url: NSURL?, placeholderImage: UIImage? = nil) {
         image = placeholderImage
         guard let url = url else { return }
