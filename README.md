@@ -1,7 +1,7 @@
 # Inbbbox
 
 With Inbbbox you can discover excellent visual works from Dribbble, the global directory for digital design. 
-If you want to grab a copy for yourself just go straight to [App Store](link to App Store after release). However, if you are interested in the core of Inbbbox, check out [Configuration](#Configuration) section. Note that Dribbble account is necessary for using the app.
+If you want to grab a copy for yourself just go straight to [App Store](link to App Store after release). However, if you are interested in the core of Inbbbox, check out [Configuration](#configuration) section. Note that Dribbble account is necessary for using the app.
 
 We at Netguru strongly believe in open-source software. Inbbbox isn’t our only project repo where you can find the app’s full source code. Explore other [open source projects](https://www.netguru.co/opensource) created by our team. 
 
