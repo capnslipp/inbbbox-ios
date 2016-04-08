@@ -14,7 +14,7 @@ platform :ios, '8.2'
 inhibit_all_warnings!
 use_frameworks!
 
-xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
+xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug, 'Release' => :release
 
 plugin 'cocoapods-keys', {
   :project => 'Inbbbox',
@@ -30,7 +30,7 @@ pod 'PureLayout', '~> 3.0'
 pod 'SwiftyUserDefaults', '~> 2.0'
 pod 'GPUImage', '~> 0.1'
 #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
-pod 'EasyAnimation', :git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git', :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
+pod 'EasyAnimation', :git => 'https://git@github.com/PatrykKaczmarek/EasyAnimation.git', :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
 pod 'Gifu', '~> 1.0'
 pod 'ZFDragableModalTransition', '~> 0.6'
 pod 'HanekeSwift', '~> 0.10'
