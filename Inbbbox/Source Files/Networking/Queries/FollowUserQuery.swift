@@ -14,6 +14,9 @@ struct FollowUserQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
+    /// Initialize query for following a given user.
+    ///
+    /// - parameter user: User to follow.
     init(user: UserType) {
         path = "/users/" + user.identifier + "/follow"
     }

@@ -14,6 +14,9 @@ struct CommentQuery: Query {
     let path: String
     var parameters = Parameters(encoding: .URL)
     
+    /// Initialize query for list of comments under given shot.
+    ///
+    /// - parameter shot: Shot that comments should be related to.
     init(shot: ShotType) {
         path = "/shots/" + shot.identifier + "/comments"
     }

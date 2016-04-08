@@ -9,6 +9,9 @@
 import Foundation
 
 extension Array where Element : Equatable {
+    
+    /// Returns Array with unique elements.
+    /// Contents of Array must conform to `Equatable` protocol.
     var unique: [Element] {
         var uniqueValues: [Element] = []
         forEach { item in

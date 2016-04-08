@@ -10,14 +10,12 @@ import Foundation
 
 struct ShotsQuery: Query {
     
-    /**
-     ShotsType specify source of shots.
-     
-     - List:           General list of the shots.
-     - UserShots:      List of the given user's shots.
-     - BucketShots:    List of the given bucket's shots.
-     - UserLikedShots: List of the given user's liked shots.
-     */
+    /// ShotsType specify source of shots.
+    ///
+    /// - List:           General list of the shots.
+    /// - UserShots:      List of the given user's shots.
+    /// - BucketShots:    List of the given bucket's shots.
+    /// - UserLikedShots: List of the given user's liked shots.
     enum ShotsType {
         case List, UserShots(UserType), BucketShots(BucketType), UserLikedShots(UserType), LikedShots
         
@@ -38,7 +36,7 @@ struct ShotsQuery: Query {
         }
     }
     
-    /// Query definition
+    // Query definition
     
     let method = Method.GET
     var parameters = Parameters(encoding: .URL)
@@ -49,14 +47,12 @@ struct ShotsQuery: Query {
         }
     }
     
-    /**
-     Initialize query for list of the shots of given type.
-     */
+    /// Initialize query for list of the shots of given type.
     init(type: ShotsType) {
         path = type.path
     }
     
-    /// Types
+    // Types
     
     enum List: String {
         case Animated = "animated"
@@ -80,7 +76,7 @@ struct ShotsQuery: Query {
         case Views = "views"
     }
     
-    /// Parameters keys
+    // Parameters keys
     
     private enum Key: String {
         case List = "list"
@@ -89,7 +85,7 @@ struct ShotsQuery: Query {
         case Sort = "sort"
     }
     
-    /// Parameters accessors
+    // Parameters accessors
     
     var list: List? {
         get {

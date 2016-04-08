@@ -13,12 +13,20 @@ import SwiftyJSON
 typealias PageResponse = (json: JSON?, pages: (next: PageableComponent?, previous: PageableComponent?))
 
 struct PageRequest: Requestable, Responsable {
+    
+    /// Query used to create page request.
     let query: Query
     
+    // Session for page request.
     var session: NSURLSession {
         return NSURLSession.sharedSession()
     }
     
+    /// Invoke page request.
+    ///
+    /// - returns:  Promise which resolves with `PageResponse`
+    ///             that contains response as JSON and components for
+    ///             next and previous pages.
     func resume() -> Promise<PageResponse> {
         return Promise<PageResponse> { fulfill, reject in
             

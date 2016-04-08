@@ -11,17 +11,30 @@ import Foundation
 struct DribbbleNetworkService: SecureNetworkService, HeaderAuthorizable, OAuthAuthorizable {
     
     // MARK: SecureNetworkService
+    
+    /// Host for Dribbble service.
     let host = Dribbble.Host
+    /// API version for Dribbble service.
     let version = Dribbble.APIVersion
     
     // MARK: OAuthAuthorizable
+    
+    /// URL string for request token for Dribbble service.
     let requestTokenURLString = Dribbble.RequestTokenURLString
+    /// URL string for access token for Dribbble service.
     let accessTokenURLString = Dribbble.AccessTokenURLString
+    /// Redirect URL string for Dribbble service.
     let redirectURI = Dribbble.CallbackURLString
+    /// Client ID for Dribbble service.
     let clientID = Dribbble.ClientID
+    /// Client secret ID for Dribbble service.
     let clientSecret = Dribbble.ClientSecret
+    /// Scope for Dribbble service.
     let scope = Dribbble.Scope
     
+    /// Authorize given request.
+    ///
+    /// - parameter request: Request to authorize.
     func authorizeRequest(request: NSMutableURLRequest) {
         
         let token = TokenStorage.currentToken ?? Dribbble.ClientAccessToken
