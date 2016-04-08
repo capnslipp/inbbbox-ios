@@ -86,6 +86,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
+      customArchiveName = "Inbbbox"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
