@@ -16,7 +16,7 @@ struct BucketsForShotQuery: Query {
     
     /// Initialize query for list of buckets that contain given shot.
     ///
-    /// - parameter shot:   Shot that listed buckets should contain.
+    /// - parameter shot: Shot that listed buckets should contain.
     init(shot: ShotType) {
         path = "/shots/" + shot.identifier + "/buckets"
     }

@@ -21,7 +21,7 @@ struct BucketQuery: Query {
 
     /// Initialize query for list of the given user's buckets.
     /// 
-    /// - parameter user:   User whose buckets should be listed.
+    /// - parameter user: User whose buckets should be listed.
     init(user: UserType) {
         path = "/users/\(user.username)/buckets"
     }

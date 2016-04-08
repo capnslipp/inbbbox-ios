@@ -30,7 +30,7 @@ extension DefaultsKeys {
     static let onboardingPassed = DefaultsKey<Bool>("onboardingPassed")
 }
 
-/// Keys for notifications about changing settings.
+/// Keys for NSNotifications about changing settings.
 enum InbbboxNotificationKey: String {
     case UserDidChangeStreamSourceSettings
     case UserDidChangeNotificationsSettings

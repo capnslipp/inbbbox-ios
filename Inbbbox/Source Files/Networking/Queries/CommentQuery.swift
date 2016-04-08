@@ -16,7 +16,7 @@ struct CommentQuery: Query {
     
     /// Initialize query for list of comments under given shot.
     ///
-    /// - parameter shot:   Shot that comments should be related to.
+    /// - parameter shot: Shot that comments should be related to.
     init(shot: ShotType) {
         path = "/shots/" + shot.identifier + "/comments"
     }

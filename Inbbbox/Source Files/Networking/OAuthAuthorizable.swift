@@ -34,14 +34,14 @@ protocol OAuthAuthorizable {
     ///
     /// - parameter url: URL to check.
     ///
-    /// - returns: `true` if given URL is redirection URL, `false` otherwise
+    /// - returns: `true` if given URL is redirection URL, `false` otherwise.
     func isRedirectionURL(url: NSURL?) -> Bool
     
     /// Check if URL is silent authentication URL.
     ///
     /// - parameter url: URL to check.
     ///
-    /// - returns: `true` if given URL is silent authentication URL, `false` otherwise
+    /// - returns: `true` if given URL is silent authentication URL, `false` otherwise.
     func isSilentAuthenticationURL(url: NSURL?) -> Bool
 }
 

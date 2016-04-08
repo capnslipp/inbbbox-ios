@@ -25,8 +25,8 @@ protocol Responsable {
     
     /// Convert response data to `Response` object that may contain JSON and header
     /// 
-    /// - parameter data:       Data to convert.
-    /// - parameter response:   `NSURLResponse` received from server
+    /// - parameter data:     Data to convert.
+    /// - parameter response: `NSURLResponse` received from server
     /// 
     /// - returns: Promise which resolves with `Response`
     func responseWithData(data: NSData?, response: NSURLResponse?) -> Promise<Response>

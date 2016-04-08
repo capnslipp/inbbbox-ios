@@ -9,7 +9,6 @@
 import UIKit
 
 /// Extension for predefined colors in Inbbbox app.
-
 extension UIColor {
 
     /// Color based on RGB color model and alpha parameter

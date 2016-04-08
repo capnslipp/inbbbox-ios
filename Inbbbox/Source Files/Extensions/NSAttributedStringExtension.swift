@@ -32,7 +32,7 @@ extension NSAttributedString {
         self.init(attributedString: attributedString!)
     }
     
-    /// - returns: Attributed string while removing new line character at the end.
+    /// - returns: Attributed string by removing new line character at the end.
     func attributedStringByTrimingNewLineCharactersAtTheEnd() -> NSAttributedString {
         
         let possibleNewLineCharacter = string.substringFromIndex(string.endIndex.advancedBy(-1))

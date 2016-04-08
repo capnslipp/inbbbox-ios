@@ -29,7 +29,7 @@ class UserStorage {
 
     /// Store given user.
     /// 
-    /// - parameter user: User that should be stored
+    /// - parameter user: User that should be stored.
     class func storeUser(user: User) {
         keychain[data: Key.Token.rawValue] = NSKeyedArchiver.archivedDataWithRootObject(user)
     }

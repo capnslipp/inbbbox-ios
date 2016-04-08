@@ -10,7 +10,7 @@ import Foundation
 
 class PageableComponentSerializer {
     
-    /// Provides component for next page for given query.
+    /// Provides next page component for given query.
     /// 
     /// - parameter query:          Query which the next page component should be created for.
     /// - parameter receivedHeader: Received response's header.
@@ -20,7 +20,7 @@ class PageableComponentSerializer {
         return stringComponentFromLinkHeader(header, withName: "next")?.url?.pageableComponentFromQuery(query)
     }
     
-    /// Provides component for previous page for given query.
+    /// Provides previous page component for given query.
     ///
     /// - parameter query:          Query which the previous page component should be created for.
     /// - parameter receivedHeader: Received response's header.

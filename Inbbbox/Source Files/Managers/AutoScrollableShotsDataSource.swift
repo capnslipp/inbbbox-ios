@@ -36,7 +36,7 @@ class AutoScrollableShotsDataSource: NSObject {
         fatalError("init() has not been implemented")
     }
     
-    /// Prepares itself for animation and reloads collectionView
+    /// Prepares itself for animation and reloads collectionView.
     func prepareForAnimation() {
         extendedScrollableItemsCount = Int(ceil(CGRectGetHeight(collectionView.bounds) / itemSize.height))
         prepareExtendedContentToDisplayWithOffset(extendedScrollableItemsCount)

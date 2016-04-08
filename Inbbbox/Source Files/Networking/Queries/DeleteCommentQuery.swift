@@ -16,8 +16,8 @@ struct DeleteCommentQuery: Query {
     
     /// Initialize query for removing comment.
     ///
-    /// - parameter shot:       Shot that contains the comment.
-    /// - parameter comment:    Comment to remove.
+    /// - parameter shot:    Shot that contains the comment.
+    /// - parameter comment: Comment to remove.
     init(shot: ShotType, comment: CommentType) {
         path = "/shots/" + shot.identifier + "/comments/" + comment.identifier
     }

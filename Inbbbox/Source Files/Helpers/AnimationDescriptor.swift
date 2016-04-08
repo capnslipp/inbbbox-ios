@@ -9,7 +9,6 @@ enum AnimationType {
     case Spring
 }
 
-
 /// AnimationDescriptor hold all necessary information to perform animation.
 /// Used for ShotCollectionViewCell swipe animations.
 protocol AnimationDescriptor {
@@ -42,10 +41,10 @@ protocol AnimationDescriptor {
     var completion: ((Bool) -> Void)? { get set }
 
 
-    /// Initialize animation descriptor with ShotCollectionViewCell and completion/
+    /// Initialize animation descriptor with ShotCollectionViewCell and completion.
     ///
     /// - parameter shotCell:           Cell on which animations will be perfomed.
-    /// - parameter swipeCompletion:    Close which will be perfomed after animation finishes.
+    /// - parameter swipeCompletion:    Closure which will be perfomed after animation finishes.
     init(shotCell: ShotCollectionViewCell, swipeCompletion: (() -> ())?)
 }
 
