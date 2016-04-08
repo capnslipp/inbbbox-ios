@@ -10,6 +10,12 @@ import UIKit
 
 extension CAKeyframeAnimation {
     
+    /// Class method used to perform ball bounce animation.
+    ///
+    /// - parameter jumpHeight: Defines how height ball should jump.
+    /// - parameter duration:   Animation duration.
+    /// 
+    /// - returns: Array of animations to perform.
     class func ballBounceAnimations(jumpHeight: Int, duration: NSTimeInterval) -> [CAKeyframeAnimation] {
         
         let translationY = CAKeyframeAnimation(keyPath: "transform.translation.y")

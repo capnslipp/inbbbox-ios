@@ -10,6 +10,7 @@ import UIKit
 
 struct ShotsStorage {
     
+    /// Images for shots from asset catalog.
     var shotsFromAssetCatalog: [UIImage] {
         
         let assetsEnumarator = (min: 1, max: 16)

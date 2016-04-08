@@ -35,15 +35,18 @@ struct Parameters {
     
     private var underlyingDictionary = [String: AnyObject]()
     
+    /// Initialize with encoding.
+    ///
+    /// - parameter encoding: Encoding for parameters.
     init(encoding: Encoding) {
         self.encoding = encoding
     }
     
-    /**
-     Subscript for accessing/setting each parameter for key
-     - parameter key: String key for accessing parameter value
-     - returns: AnyObject that can be kept in [String: AnyObject]
-     */
+    /// Subscript for accessing/setting each parameter for key
+    ///
+    /// - parameter key: String key for accessing parameter value
+    ///
+    /// - returns: AnyObject that can be kept in [String: AnyObject]
     subscript(key: String) -> AnyObject? {
         get { return underlyingDictionary[key] }
         set(value) { underlyingDictionary[key] = value }

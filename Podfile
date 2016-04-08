@@ -14,7 +14,7 @@ platform :ios, '8.2'
 inhibit_all_warnings!
 use_frameworks!
 
-xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug
+xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug, 'Release' => :release
 
 plugin 'cocoapods-keys', {
   :project => 'Inbbbox',
@@ -23,24 +23,24 @@ plugin 'cocoapods-keys', {
 
 pod 'AsyncSwift', '~> 1.6'
 pod 'KeychainAccess', '~> 2.3'
-pod 'PromiseKit', '~> 3.1'
+pod 'PromiseKit', '~> 3.0'
 pod 'SwiftyJSON', '~> 2.3'
 pod 'HockeySDK', '~> 3.8'
 pod 'PureLayout', '~> 3.0'
 pod 'SwiftyUserDefaults', '~> 2.0'
 pod 'GPUImage', '~> 0.1'
 #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
-pod 'EasyAnimation', :git => 'git@github.com:PatrykKaczmarek/EasyAnimation.git', :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
-pod 'Gifu', '~> 1.0.1'
+pod 'EasyAnimation', :git => 'https://git@github.com/PatrykKaczmarek/EasyAnimation.git', :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
+pod 'Gifu', '~> 1.0'
 pod 'ZFDragableModalTransition', '~> 0.6'
-pod 'HanekeSwift', '~>0.10.1'
-pod 'DZNEmptyDataSet', '~>1.7'
-pod 'GoogleAnalytics', '~> 3.14.0'
+pod 'HanekeSwift', '~> 0.10'
+pod 'DZNEmptyDataSet', '~> 1.7'
+pod 'GoogleAnalytics', '~> 3.14'
 pod 'TTTAttributedLabel', '~> 1.13'
 target 'Tests' do link_with 'Unit Tests'
   pod 'Quick', '~> 0.8', :configurations => ['Test']
   pod 'Nimble', '~> 3.1', :configurations => ['Test']
-  pod 'Dobby', '~> 0.5.0', :configurations => ['Test']
+  pod 'Dobby', '~> 0.4', :configurations => ['Test']
   pod 'Mockingjay', '~> 1.1', :configurations => ['Test']
 end
 

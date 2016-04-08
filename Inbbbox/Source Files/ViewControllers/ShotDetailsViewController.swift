@@ -74,7 +74,7 @@ final class ShotDetailsViewController: UIViewController {
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -156,7 +156,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                 cell.setLinkInAuthorLabel(url, delegate: self)
             }
             cell.dateLabel.attributedText = data.date
-            cell.avatarView.imageView.loadImageFromURLString(data.avatarURLString, placeholderImage: UIImage(named: "avatar_placeholder"))
+            cell.avatarView.imageView.loadImageFromURL(data.avatarURL, placeholderImage: UIImage(named: "avatar_placeholder"))
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
@@ -197,7 +197,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             if let url = viewModel.urlForUser(viewModel.shot.user) {
                 header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
             }
-            header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+            header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
         }
@@ -283,7 +283,7 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
         }.always {
             view.stopAnimation()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -335,7 +335,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -350,7 +350,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -370,7 +370,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
     
@@ -397,7 +397,7 @@ private extension ShotDetailsViewController {
         }.then { () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
         }.error { error in
-            print(error)
+            // NGRTemp: Handle error.
         }
     }
 

@@ -6,7 +6,7 @@
         <attribute name="mngd_identifier" attributeType="String" syncable="YES"/>
         <attribute name="mngd_name" attributeType="String" syncable="YES"/>
         <attribute name="mngd_shotsCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedUser" inverseName="buckets" inverseEntity="ManagedUser" syncable="YES"/>
+        <relationship name="mngd_owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedUser" inverseName="buckets" inverseEntity="ManagedUser" syncable="YES"/>
         <relationship name="shots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedShot" inverseName="buckets" inverseEntity="ManagedShot" syncable="YES"/>
     </entity>
     <entity name="ManagedProject" syncable="YES">
@@ -41,7 +41,7 @@
         <relationship name="shot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedShot" inverseName="mngd_shotImage" inverseEntity="ManagedShot" syncable="YES"/>
     </entity>
     <entity name="ManagedTeam" representedClassName=".ManagedTeam" syncable="YES">
-        <attribute name="mngd_avatarString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mngd_avatarURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mngd_createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="mngd_identifier" attributeType="String" syncable="YES"/>
         <attribute name="mngd_name" attributeType="String" syncable="YES"/>
@@ -50,20 +50,20 @@
     </entity>
     <entity name="ManagedUser" representedClassName=".ManagedUser" syncable="YES">
         <attribute name="mngd_accountType" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="mngd_avatarString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mngd_avatarURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mngd_identifier" attributeType="String" syncable="YES"/>
         <attribute name="mngd_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="mngd_shotsCount" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="mngd_username" attributeType="String" syncable="YES"/>
-        <relationship name="buckets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedBucket" inverseName="owner" inverseEntity="ManagedBucket" syncable="YES"/>
+        <relationship name="buckets" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ManagedBucket" inverseName="mngd_owner" inverseEntity="ManagedBucket" syncable="YES"/>
         <relationship name="shots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedShot" inverseName="mngd_user" inverseEntity="ManagedShot" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ManagedBucket" positionX="-306" positionY="-217" width="128" height="150"/>
+        <element name="ManagedBucket" positionX="-236" positionY="-157" width="128" height="148"/>
         <element name="ManagedProject" positionX="-243" positionY="35" width="128" height="135"/>
         <element name="ManagedShot" positionX="-9" positionY="-324" width="128" height="270"/>
         <element name="ManagedShotImage" positionX="216" positionY="-288" width="128" height="103"/>
         <element name="ManagedTeam" positionX="232" positionY="-126" width="128" height="133"/>
-        <element name="ManagedUser" positionX="216" positionY="35" width="128" height="165"/>
+        <element name="ManagedUser" positionX="216" positionY="35" width="128" height="163"/>
     </elements>
 </model>

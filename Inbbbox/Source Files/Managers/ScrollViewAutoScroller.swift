@@ -24,7 +24,7 @@ class ScrollViewAutoScroller {
     /**
      Scrolls owned UIScrollView instance (if any) to bottom.
      
-     - Warning: scroll action will be perfomed only if invocation counter will be greater or eqaul to supress counter.
+     - Warning: scroll action will be perfomed only if invocation counter will be greater or equal to supress counter.
      
      - parameter animated: Indicates whether scroll should be animated or not.
      */

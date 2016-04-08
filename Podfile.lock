@@ -1,6 +1,6 @@
 PODS:
   - AsyncSwift (1.7.2)
-  - Dobby (0.5.0)
+  - Dobby (0.4.2)
   - DZNEmptyDataSet (1.7.3)
   - EasyAnimation (1.0.2)
   - Gifu (1.0.1)
@@ -49,14 +49,14 @@ PODS:
 
 DEPENDENCIES:
   - AsyncSwift (~> 1.6)
-  - Dobby (~> 0.5.0)
+  - Dobby (~> 0.4)
   - DZNEmptyDataSet (~> 1.7)
-  - EasyAnimation (from `git@github.com:PatrykKaczmarek/EasyAnimation.git`, commit
-    `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
-  - Gifu (~> 1.0.1)
-  - GoogleAnalytics (~> 3.14.0)
+  - EasyAnimation (from `https://git@github.com/PatrykKaczmarek/EasyAnimation.git`,
+    commit `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
+  - Gifu (~> 1.0)
+  - GoogleAnalytics (~> 3.14)
   - GPUImage (~> 0.1)
-  - HanekeSwift (~> 0.10.1)
+  - HanekeSwift (~> 0.10)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
@@ -73,14 +73,14 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
-    :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
+    :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
   Keys:
     :path: Pods/CocoaPodsKeys
 
 CHECKOUT OPTIONS:
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
-    :git: git@github.com:PatrykKaczmarek/EasyAnimation.git
+    :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
 
 SPEC CHECKSUMS:
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c

@@ -1,6 +1,5 @@
 GEM
   remote: https://rubygems.org/
-  remote: https://repo.fury.io/lukwol/
   specs:
     RubyInline (3.12.4)
       ZenTest (~> 4.3)
@@ -59,15 +58,16 @@ GEM
     rake (11.1.2)
     redcarpet (3.3.4)
     rouge (1.10.1)
-    rswift (0.0.110)
+    rswift (0.1.0)
       colorize
       thor
       xcodeproj
-    rswift-ios (0.0.43)
+    rswift-ios (0.1.0)
       rake
       rswift
+      rswift-shared
       xcpretty
-    rswift-shared (0.0.9)
+    rswift-shared (0.1.0)
       colorize
       rake
       rswift
@@ -87,11 +87,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cocoapods!
-  cocoapods-keys!
-  redcarpet!
-  rswift-ios!
-  rswift-shared!
+  cocoapods
+  cocoapods-keys
+  redcarpet
+  rswift-ios
 
 BUNDLED WITH
-   1.11.2
+   1.10.6

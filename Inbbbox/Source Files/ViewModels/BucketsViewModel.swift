@@ -69,7 +69,6 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
-            print(error)
         }
     }
     
@@ -104,7 +103,6 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 }
             }.error { error in
                 // NGRTemp: Need mockups for error message view
-                print(error)
             }
         }
     }

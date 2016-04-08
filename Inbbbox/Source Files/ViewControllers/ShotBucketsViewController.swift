@@ -54,7 +54,7 @@ class ShotBucketsViewController: UIViewController {
         }.then {
             self.shotBucketsView.collectionView.reloadData()
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
         shotBucketsView.viewController = self
         shotBucketsView.collectionView.delegate = self
@@ -137,7 +137,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 
                 header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
                 header?.setHeaderTitle(viewModel.titleForHeader)
-                header?.avatarView.imageView.loadImageFromURLString(viewModel.shot.user.avatarString ?? "")
+                header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
                 header?.avatarView.delegate = self
                 header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
                 if let url = viewModel.urlForUser(viewModel.shot.user) {
@@ -195,7 +195,7 @@ extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
     
@@ -273,7 +273,7 @@ private extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
     
@@ -283,7 +283,7 @@ private extension ShotBucketsViewController {
         }.then { () -> Void in
             self.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
         }.error { error in
-            print(error) // NGRTodo: get rid of printing, when nice pop-up gets ready
+            // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
 }

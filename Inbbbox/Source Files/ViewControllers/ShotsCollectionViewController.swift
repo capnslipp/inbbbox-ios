@@ -153,7 +153,6 @@ private extension ShotsCollectionViewController {
             self.collectionView?.reloadData()
         }.error { error in
             // NGRTemp: Need mockups for error message view
-            print(error)
         }
     }
 

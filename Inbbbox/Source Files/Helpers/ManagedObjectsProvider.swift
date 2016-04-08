@@ -57,7 +57,7 @@ struct ManagedObjectsProvider {
         managedUser.mngd_identifier = user.identifier
         managedUser.mngd_name = user.name
         managedUser.mngd_username = user.username
-        managedUser.mngd_avatarString = user.avatarString
+        managedUser.mngd_avatarURL = user.avatarURL?.absoluteString
         managedUser.mngd_shotsCount = user.shotsCount
         managedUser.mngd_accountType = user.accountType?.rawValue
         return managedUser
@@ -76,7 +76,7 @@ struct ManagedObjectsProvider {
         managedTeam.mngd_identifier = team.identifier
         managedTeam.mngd_name = team.name
         managedTeam.mngd_username = team.username
-        managedTeam.mngd_avatarString = team.avatarString
+        managedTeam.mngd_avatarURL = team.avatarURL?.absoluteString
         managedTeam.mngd_createdAt = team.createdAt
         return managedTeam
     }
@@ -89,7 +89,7 @@ struct ManagedObjectsProvider {
                 return managedShotImage
             }
         } catch {
-            print(error)
+            // NGRTemp: Handle error.
         }
         let managedShotImageEntity = NSEntityDescription.entityForName(ManagedShotImage.entityName, inManagedObjectContext: managedObjectContext)!
         let managedShotImage = ManagedShotImage(entity: managedShotImageEntity, insertIntoManagedObjectContext: managedObjectContext)

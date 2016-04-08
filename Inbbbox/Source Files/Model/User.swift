@@ -14,8 +14,8 @@ final class User: NSObject, UserType {
     let identifier: String
     let name: String?
     let username: String
-    let avatarString: String?
-    let shotsCount: Int
+    let avatarURL: NSURL?
+    let shotsCount: UInt
     let accountType: UserAccountType?
     
     
@@ -23,8 +23,8 @@ final class User: NSObject, UserType {
         identifier = json[Key.Identifier.rawValue].stringValue
         name = json[Key.Name.rawValue].string
         username = json[Key.Username.rawValue].stringValue
-        avatarString = json[Key.Avatar.rawValue].string
-        shotsCount = json[Key.ShotsCount.rawValue].intValue
+        avatarURL = json[Key.Avatar.rawValue].URL
+        shotsCount = json[Key.ShotsCount.rawValue].uIntValue
         accountType = UserAccountType(rawValue: json[Key.AccountType.rawValue].stringValue)
     }
     
@@ -32,8 +32,8 @@ final class User: NSObject, UserType {
         identifier = aDecoder.decodeObjectForKey(Key.Identifier.rawValue) as! String
         name = aDecoder.decodeObjectForKey(Key.Name.rawValue) as? String
         username = aDecoder.decodeObjectForKey(Key.Username.rawValue) as! String
-        avatarString = aDecoder.decodeObjectForKey(Key.Avatar.rawValue) as? String
-        shotsCount = aDecoder.decodeObjectForKey(Key.ShotsCount.rawValue) as? Int ?? 0
+        avatarURL = aDecoder.decodeObjectForKey(Key.Avatar.rawValue) as? NSURL
+        shotsCount = aDecoder.decodeObjectForKey(Key.ShotsCount.rawValue) as? UInt ?? 0
         accountType = {
             if let key = aDecoder.decodeObjectForKey(Key.AccountType.rawValue) as? String {
                 return UserAccountType(rawValue: key)
@@ -46,7 +46,7 @@ final class User: NSObject, UserType {
         aCoder.encodeObject(identifier, forKey: Key.Identifier.rawValue)
         aCoder.encodeObject(name, forKey: Key.Name.rawValue)
         aCoder.encodeObject(username, forKey: Key.Username.rawValue)
-        aCoder.encodeObject(avatarString, forKey: Key.Avatar.rawValue)
+        aCoder.encodeObject(avatarURL, forKey: Key.Avatar.rawValue)
         aCoder.encodeObject(shotsCount, forKey: Key.ShotsCount.rawValue)
         aCoder.encodeObject(accountType?.rawValue, forKey: Key.AccountType.rawValue)
     }

@@ -10,9 +10,11 @@ import UIKit
 
 extension UIFont {
     
+    /// Enumerated type of helvetica font.
     enum Helvetica {
         case Neue, NeueMedium, NeueLight
         
+        /// Font name
         var name: String {
             switch self {
                 case .Neue: return "HelveticaNeue"
@@ -22,6 +24,12 @@ extension UIFont {
         }
     }
     
+    /// Helvetica font with set type and size.
+    ///
+    /// - parameter type: type of helvetica font
+    /// - parameter size: size of font
+    ///
+    /// - returns: helvetica font with set type and size.
     class func helveticaFont(type: Helvetica, size: CGFloat = UIFont.systemFontSize()) -> UIFont {
         return UIFont(name: type.name, size: size)!
     }

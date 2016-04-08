@@ -10,6 +10,9 @@ import UIKit
 
 extension UINavigationController {
     
+    /// Progress view embeding in navigation bar
+    ///
+    /// - returns: instance of UIProgressView
     func progressViewByEmbedingInNavigationBar() -> UIProgressView {
 
         let progressView = UIProgressView(progressViewStyle: .Bar)

@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             let wrappedError = NSError(domain: "co.netguru.inbbbox.coredata", code: 1001, userInfo: userInfo)
 
-            print("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+            // NGRTemp: Handle wrappedError
 
             abort()
         }

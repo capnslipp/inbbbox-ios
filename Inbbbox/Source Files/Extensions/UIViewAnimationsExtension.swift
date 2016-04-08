@@ -6,6 +6,9 @@ import UIKit
 
 extension UIView {
     
+    /// Animate UIView with descriptor
+    ///
+    /// - parameter animationDescriptor: animation descriptor with values for animation aspects.
     class func animateWithDescriptor(animationDescriptor: AnimationDescriptor) {
         let duration = animationDescriptor.duration
         let delay = animationDescriptor.delay

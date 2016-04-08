@@ -51,11 +51,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
-            if let avatarString = cellData.avatarString {
-                cell.avatarView.imageView.loadImageFromURLString(avatarString)
-            } else {
-                cell.avatarView.imageView.image = nil
-            }
+            cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
             cell.nameLabel.text = cellData.name
             cell.numberOfShotsLabel.text = cellData.numberOfShots
             if cellData.shotsImagesURLs?.count > 0 {
@@ -68,11 +64,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         } else {
             let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
-            if let avatarString = cellData.avatarString {
-                cell.avatarView.imageView.loadImageFromURLString(avatarString)
-            } else {
-                cell.avatarView.imageView.image = nil
-            }
+            cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
             cell.nameLabel.text = cellData.name
             cell.numberOfShotsLabel.text = cellData.numberOfShots
             if let imageURL = cellData.shotsImagesURLs?.first {

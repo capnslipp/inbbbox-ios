@@ -12,6 +12,12 @@ final class LocalNotificationRegistrator {
     
     private static let LocalNotificationUserIDKey = "notificationID"
     
+    /// Registers user for local notifications.
+    ///
+    /// - parameter userID: User ID.
+    /// - parameter time:   Fire date of notification.
+    /// 
+    /// - returns: Local Notification object.
     class func registerNotification(forUserID userID: String, time: NSDate) -> UILocalNotification? {
         
         if let localNotificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings() {
@@ -29,6 +35,8 @@ final class LocalNotificationRegistrator {
         }
     }
     
+    /// Unregisters user from local notifications.
+    /// - parameter forUserID: User ID.
     class func unregisterNotification(forUserID userID: String) {
         
         if let registeredNotification = registeredNotification(forUserID: userID) {

@@ -99,7 +99,6 @@ class UserDetailsViewController: UIViewController {
         }.always {
             self.header?.stopActivityIndicator()
         }.error { error in
-            print(error)
             // NGRTodo: provide pop-ups with errors
         }
     }
@@ -126,7 +125,6 @@ extension UserDetailsViewController {
             }.always {
                 self.header?.stopActivityIndicator()
             }.error { error in
-                print(error)
                 // NGRTodo: provide pop-ups with errors
             }
         }
@@ -155,8 +153,7 @@ extension UserDetailsViewController: UICollectionViewDataSource {
         
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
-
-            header?.avatarView.imageView.loadImageFromURLString(viewModel.user.avatarString ?? "")
+            header?.avatarView.imageView.loadImageFromURL(viewModel.user.avatarURL)
             header?.button.addTarget(self, action: #selector(didTapFollowButton(_:)), forControlEvents: .TouchUpInside)
             viewModel.shouldShowFollowButton ? header?.startActivityIndicator() : (header?.shouldShowButton = false)
         }

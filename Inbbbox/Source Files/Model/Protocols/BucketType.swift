@@ -8,13 +8,28 @@
 
 import Foundation
 
+/// Interface for Bucket and ManagedBucket.
 protocol BucketType {
+
+    /// Unique identifier.
     var identifier: String { get }
+
+    /// Name of the Bucket.
     var name: String { get }
+
+    /// Description of the Bucket.
     var attributedDescription: NSAttributedString? { get }
-    var shotsCount: Int { get }
+
+    /// Number of shots contained in this Bucket.
+    var shotsCount: UInt { get }
+
+    /// Date when Bucket was created.
     var createdAt: NSDate { get }
-    var owner: User { get }
+
+    /// Owner of this Bucket.
+    ///
+    /// - returns: User.
+    var owner: UserType { get }
 }
 
 func ==(lhs: BucketType, rhs: BucketType) -> Bool {
@@ -22,16 +37,16 @@ func ==(lhs: BucketType, rhs: BucketType) -> Bool {
 }
 
 func ==(lhs: [BucketType], rhs: [BucketType]) -> Bool {
-    
+
     guard lhs.count == rhs.count else { return false }
-    
+
     var indexingGenerators = (left: lhs.generate(), right: rhs.generate())
-    
+
     var isEqual = true
     while let leftElement = indexingGenerators.left.next(), rightElement = indexingGenerators.right.next() where isEqual {
         isEqual = leftElement == rightElement
     }
-    
+
     return isEqual
 }
 

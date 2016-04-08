@@ -20,7 +20,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     private let shotsProvider = ShotsProvider()
     private var userMode: UserMode
     
-    private let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarString: nil, createdAt: NSDate())
+    private let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarURL: nil, createdAt: NSDate())
     
     var itemsCount: Int {
         return followees.count
@@ -63,7 +63,6 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
-            print(error)
         }
     }
     
@@ -91,7 +90,6 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
                 self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
             }.error { error in
                 // NGRTemp: Need mockups for error message view
-                print(error)
             }
         }
     }
@@ -114,13 +112,13 @@ extension FolloweesViewModel {
     
     struct FolloweeCollectionViewCellViewData {
         let name: String?
-        let avatarString: String?
+        let avatarURL: NSURL?
         let numberOfShots: String
         let shotsImagesURLs: [NSURL]?
         
         init(followee: Followee, shots: [ShotType]?) {
             self.name = followee.name
-            self.avatarString = followee.avatarString
+            self.avatarURL = followee.avatarURL
             self.numberOfShots = followee.shotsCount == 1 ? "\(followee.shotsCount) shot" : "\(followee.shotsCount) shots"
             if let shots = shots where shots.count > 0 {
                 let allShotsImagesURLs = shots.map { $0.shotImage.normalURL }
