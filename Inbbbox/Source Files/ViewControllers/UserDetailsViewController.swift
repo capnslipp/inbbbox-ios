@@ -162,7 +162,7 @@ extension UserDetailsViewController: UICollectionViewDataSource {
             (cellData.teaserURL, isCurrentLayoutOneColumn ? cellData.normalURL : nil, nil),
             teaserImageCompletion: imageLoadingCompletion,
             normalImageCompletion: imageLoadingCompletion,
-            hidpiImageCompletion: imageLoadingCompletion
+            hidpiImageCompletion: nil
         )
         
         cell.gifLabel.hidden = !cellData.animated

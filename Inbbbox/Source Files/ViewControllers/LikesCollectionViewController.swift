@@ -17,6 +17,8 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     private var shouldShowLoadingView = true
     
+    private var indexPathsNeededImageUpdate = [NSIndexPath]()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -52,7 +54,24 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
-        cell.shotImageView.loadImageFromURL(cellData.imageURL)
+        
+        if !indexPathsNeededImageUpdate.contains(indexPath) {
+            indexPathsNeededImageUpdate.append(indexPath)
+        }
+        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+            
+            guard let certainSelf = self else { return }
+            
+            if certainSelf.indexPathsNeededImageUpdate.contains(indexPath) {
+                cell.shotImageView.image = image
+            }
+        }
+        ImageProvider.lazyLoadImageFromURLs(
+            (cellData.teaserURL, isCurrentLayoutOneColumn ? cellData.normalURL : nil, nil),
+            teaserImageCompletion: imageLoadingCompletion,
+            normalImageCompletion: imageLoadingCompletion,
+            hidpiImageCompletion: nil
+        )
         cell.gifLabel.hidden = !cellData.animated
         return cell
     }
@@ -75,6 +94,12 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         shotDetailsViewController.modalPresentationStyle = .Custom
         
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
+            indexPathsNeededImageUpdate.removeAtIndex(index)
+        }
     }
 }
 
