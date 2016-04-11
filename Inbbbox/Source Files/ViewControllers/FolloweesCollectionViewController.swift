@@ -16,6 +16,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     
     private let viewModel = FolloweesViewModel()
     private var shouldShowLoadingView = true
+    private var indexPathsNeededImageUpdate = [NSIndexPath]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,11 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cellData = viewModel.followeeCollectionViewCellViewData(indexPath)
+        
+        if !indexPathsNeededImageUpdate.contains(indexPath) {
+            indexPathsNeededImageUpdate.append(indexPath)
+        }
+        
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
             let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
@@ -67,8 +73,22 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
             cell.nameLabel.text = cellData.name
             cell.numberOfShotsLabel.text = cellData.numberOfShots
-            if let imageURL = cellData.shotsImagesURLs?.first {
-                cell.shotImageView.loadImageFromURL(imageURL)
+            if let shotImage = cellData.firstShotImage {
+                
+                let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+                    
+                    guard let certainSelf = self else { return }
+                    
+                    if certainSelf.indexPathsNeededImageUpdate.contains(indexPath) {
+                        cell.shotImageView.image = image
+                    }
+                }
+                ImageProvider.lazyLoadImageFromURLs(
+                    (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
+                    teaserImageCompletion: imageLoadingCompletion,
+                    normalImageCompletion: imageLoadingCompletion,
+                    hidpiImageCompletion: nil
+                )
             }
             return cell
         }
@@ -86,6 +106,12 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         let userDetailsViewController = UserDetailsViewController(user: viewModel.followees[indexPath.item])
         userDetailsViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(userDetailsViewController, animated: true)
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
+            indexPathsNeededImageUpdate.removeAtIndex(index)
+        }
     }
 }
 
