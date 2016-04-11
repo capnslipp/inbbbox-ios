@@ -34,7 +34,7 @@ class ActivityIndicatorSelectableView: UIView {
         button.imageView?.backgroundColor = .clearColor()
         button.contentMode = .ScaleAspectFit
         button.setImage(UIImage(), forState: .Disabled)
-        button.addTarget(self, action: "buttonDidTap:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(buttonDidTap(_:)), forControlEvents: .TouchUpInside)
         addSubview(button)
         
         activityIndicatorView.configureForAutoLayout()

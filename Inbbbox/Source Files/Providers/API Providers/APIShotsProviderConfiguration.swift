@@ -27,22 +27,22 @@ class APIShotsProviderConfiguration {
         return [.NewToday, .PopularToday, .Debuts, .Following].filter { $0.isActive }
     }
     
-    func queryByConfigurationForQuery(var query: ShotsQuery, source: ShotsSource) -> ShotsQuery {
-    
+    func queryByConfigurationForQuery(query: ShotsQuery, source: ShotsSource) -> ShotsQuery {
+        var resultQuery = query
         switch source {
             case .NewToday:
-                query.parameters["sort"] = "recent"
+                resultQuery.parameters["sort"] = "recent"
             case .PopularToday:
                 break
             case .Debuts:
-                query.parameters["list"] = "debuts"
-                query.parameters["sort"] = "recent"
+                resultQuery.parameters["list"] = "debuts"
+                resultQuery.parameters["sort"] = "recent"
             case .Following:
-                query.followingUsersShotsQuery = true
+                resultQuery.followingUsersShotsQuery = true
         }
         
-        query.date = NSDate()
+        resultQuery.date = NSDate()
     
-        return query
+        return resultQuery
     }
 }

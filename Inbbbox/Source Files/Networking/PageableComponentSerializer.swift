@@ -49,10 +49,7 @@ private extension String {
             return nil
         }
         
-        let range = Range<String.Index>(
-            start: leftBracket.startIndex.advancedBy(1),
-            end: rightBracket.endIndex.advancedBy(-1)
-        )
+        let range: Range<String.Index> = leftBracket.startIndex.advancedBy(1) ..< rightBracket.endIndex.advancedBy(-1)
         let urlString = substringWithRange(range)
         
         return  NSURL(string: urlString)

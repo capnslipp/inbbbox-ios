@@ -136,7 +136,8 @@ final class APIRateLimitKeeper {
     func verifyRateLimit() throws {
         
         if var perDayRemainingLimit = rateLimitRemainingPerDay {
-            rateLimitRemainingPerDay = perDayRemainingLimit--
+            perDayRemainingLimit -= 1
+            rateLimitRemainingPerDay = perDayRemainingLimit
         }
         
         if let limit = rateLimitRemainingPerDay where limit <= 0 {

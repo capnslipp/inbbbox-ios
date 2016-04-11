@@ -10,7 +10,7 @@ import Foundation
 
 protocol Listable {
     
-    typealias Type
+    associatedtype Type
     
     var count: Int { get }
     

@@ -49,7 +49,7 @@ final class OAuthViewController: UIViewController {
         super.viewWillAppear(animated)
         
         progressView = navigationController?.progressViewByEmbedingInNavigationBar()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .Plain, target: self, action: "cancelBarButtonDidTap:")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .Plain, target: self, action: #selector(cancelBarButtonDidTap(_:)))
     }
     
     deinit {

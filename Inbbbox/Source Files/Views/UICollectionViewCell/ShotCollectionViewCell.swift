@@ -86,7 +86,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         gifLabel.configureForAutoLayout()
         contentView.addSubview(gifLabel)
 
-        panGestureRecognizer.addTarget(self, action: "didSwipeCell:")
+        panGestureRecognizer.addTarget(self, action: #selector(didSwipeCell(_:)))
         panGestureRecognizer.delegate = self
         contentView.addGestureRecognizer(panGestureRecognizer)
     }

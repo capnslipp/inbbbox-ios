@@ -40,7 +40,7 @@ pod 'TTTAttributedLabel', '~> 1.13'
 target 'Tests' do link_with 'Unit Tests'
   pod 'Quick', '~> 0.8', :configurations => ['Test']
   pod 'Nimble', '~> 3.1', :configurations => ['Test']
-  pod 'Dobby', '~> 0.4', :configurations => ['Test']
+  pod 'Dobby', '~> 0.5', :configurations => ['Test']
   pod 'Mockingjay', '~> 1.1', :configurations => ['Test']
 end
 

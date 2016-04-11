@@ -41,7 +41,7 @@ class DatePickerViewController: UIViewController {
         
         title = NSLocalizedString("Set Reminder", comment: "")
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "didTapSaveButton:")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(didTapSaveButton(_:)))
         
         aView?.datePicker.date = initialDate
     }

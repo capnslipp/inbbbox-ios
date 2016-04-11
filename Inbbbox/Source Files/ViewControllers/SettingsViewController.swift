@@ -190,7 +190,7 @@ private extension SettingsViewController {
             title: NSLocalizedString("Log Out", comment: ""),
             style: .Plain,
             target: self,
-            action: "didTapLogOutButton:"
+            action: #selector(didTapLogOutButton(_:))
         ) : nil
     }
 

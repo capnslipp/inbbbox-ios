@@ -43,8 +43,8 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     // MARK: Configuration
     
     func setupBarButtons() {
-        oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: "didTapOneColumnLayoutButton:")
-        twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: "didTapTwoColumnsLayoutButton:")
+        oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: #selector(didTapOneColumnLayoutButton(_:)))
+        twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: #selector(didTapTwoColumnsLayoutButton(_:)))
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton!, twoColumnsLayoutButton!]
     }
     

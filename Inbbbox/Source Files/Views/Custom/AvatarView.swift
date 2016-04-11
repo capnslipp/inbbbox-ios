@@ -39,7 +39,7 @@ class AvatarView: UIView {
         imageView.layer.cornerRadius = CGRectGetHeight(frame) * 0.5
         imageView.contentMode = .ScaleAspectFit
         addSubview(imageView)
-        avatarButton.addTarget(self, action: "didTapAvatarButton", forControlEvents: .TouchUpInside)
+        avatarButton.addTarget(self, action: #selector(didTapAvatarButton), forControlEvents: .TouchUpInside)
         addSubview(avatarButton)
     }
     
