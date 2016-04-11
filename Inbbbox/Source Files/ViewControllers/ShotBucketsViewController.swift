@@ -130,7 +130,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                         header?.setAnimatedImageWithUrl(viewModel.shot.shotImage.normalURL)
                     }
                 } else {
-                    header?.setImageWithUrl(viewModel.shot.shotImage.normalURL)
+                    header?.setImageWithShotImage(viewModel.shot.shotImage)
                 }
                 header?.maxHeight = sizeForExpandedCollectionViewHeader(collectionView).height
                 header?.minHeight = heightForCollapsedCollectionViewHeader
