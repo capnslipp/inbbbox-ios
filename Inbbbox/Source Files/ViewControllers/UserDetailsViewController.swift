@@ -19,6 +19,8 @@ class UserDetailsViewController: UIViewController {
     }
     private var header: UserDetailsHeaderView?
     
+    private var indexPathsNeededImageUpdate = [NSIndexPath]()
+    
     var dismissClosure: (() -> Void)?
     
     var modalTransitionAnimator: ZFModalTransitionAnimator?
@@ -144,7 +146,25 @@ extension UserDetailsViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
-        cell.shotImageView.loadImageFromURL(cellData.imageURL)
+        
+        if !indexPathsNeededImageUpdate.contains(indexPath) {
+            indexPathsNeededImageUpdate.append(indexPath)
+        }
+        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+            
+            guard let certainSelf = self else { return }
+
+            if certainSelf.indexPathsNeededImageUpdate.contains(indexPath) {
+                cell.shotImageView.image = image
+            }
+        }
+        ImageProvider.lazyLoadImageFromURLs(
+            (cellData.teaserURL, isCurrentLayoutOneColumn ? cellData.normalURL : nil, nil),
+            teaserImageCompletion: imageLoadingCompletion,
+            normalImageCompletion: imageLoadingCompletion,
+            hidpiImageCompletion: imageLoadingCompletion
+        )
+        
         cell.gifLabel.hidden = !cellData.animated
         return cell
     }
@@ -159,12 +179,6 @@ extension UserDetailsViewController: UICollectionViewDataSource {
         }
         
         return header!
-    }
-    
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == viewModel.itemsCount - 1 {
-            viewModel.downloadItemsForNextPage()
-        }
     }
 }
 
@@ -181,6 +195,18 @@ extension UserDetailsViewController: UICollectionViewDelegate {
         shotDetailsViewController.modalPresentationStyle = .Custom
         
         presentViewController(shotDetailsViewController, animated: true, completion: nil)
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == viewModel.itemsCount - 1 {
+            viewModel.downloadItemsForNextPage()
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
+            indexPathsNeededImageUpdate.removeAtIndex(index)
+        }
     }
 }
 
