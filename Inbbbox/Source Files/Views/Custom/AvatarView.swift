@@ -20,14 +20,13 @@ class AvatarView: UIView {
     
     convenience init(avatarFrame: CGRect, bordered: Bool = true, borderWidth: CGFloat = 10) {
         self.init(frame: avatarFrame)
+        
+        backgroundColor = .whiteColor()
+        layer.mask = roundedMaskLayer(avatarFrame)
+        
         if bordered {
-            layer.cornerRadius = CGRectGetHeight(frame) * 0.5
-            layer.shadowColor = UIColor(white: 1, alpha: 0.1).CGColor
-            layer.shadowOffset = CGSizeZero
-            layer.shadowRadius = 5
-            layer.shadowOpacity = 1
-            layer.borderColor = UIColor.whiteColor().CGColor
-            layer.borderWidth = borderWidth
+            let maskFrame = CGRect(x: borderWidth, y: borderWidth, width: CGRectGetWidth(avatarFrame) - 2 * borderWidth, height: CGRectGetHeight(avatarFrame) - 2 * borderWidth)
+            imageView.layer.mask = roundedMaskLayer(maskFrame)
         }
     }
     
@@ -35,8 +34,6 @@ class AvatarView: UIView {
         avatarButton = UIButton(frame: frame)
         super.init(frame: frame)
         imageView.frame.size = frame.size
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = CGRectGetHeight(frame) * 0.5
         imageView.contentMode = .ScaleAspectFit
         addSubview(imageView)
         avatarButton.addTarget(self, action: #selector(didTapAvatarButton), forControlEvents: .TouchUpInside)
@@ -50,6 +47,13 @@ class AvatarView: UIView {
     
     func didTapAvatarButton() {
        delegate?.avatarView(self, didTapButton: avatarButton)
+    }
+    
+    private func roundedMaskLayer(maskFrame: CGRect) -> CAShapeLayer {
+        let maskLayer = CAShapeLayer()
+        let ovalPath = UIBezierPath(ovalInRect: maskFrame)
+        maskLayer.path = ovalPath.CGPath
+        return maskLayer
     }
 }
 
