@@ -140,7 +140,7 @@ extension BucketsViewModel {
         
         init(bucket: BucketType, shots: [ShotType]?) {
             self.name = bucket.name
-            self.numberOfShots = bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
+            self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots", comment: "How many shots in collection?"), bucket.shotsCount)
             if let shots = shots where shots.count > 0 {
                 let allShotsImagesURLs = shots.map { $0.shotImage.teaserURL }
                 self.shotsImagesURLs =  Array(Array(Array(count: 4, repeatedValue: allShotsImagesURLs).flatten())[0...3])

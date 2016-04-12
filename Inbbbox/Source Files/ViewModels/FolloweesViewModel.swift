@@ -120,7 +120,7 @@ extension FolloweesViewModel {
         init(followee: Followee, shots: [ShotType]?) {
             self.name = followee.name
             self.avatarURL = followee.avatarURL
-            self.numberOfShots = followee.shotsCount == 1 ? "\(followee.shotsCount) shot" : "\(followee.shotsCount) shots"
+            self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots", comment: "How many shots in collection?"), followee.shotsCount)
             if let shots = shots where shots.count > 0 {
                 let allShotsImagesURLs = shots.map { $0.shotImage.teaserURL }
                 switch allShotsImagesURLs.count {
