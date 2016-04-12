@@ -17,6 +17,8 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     private var shouldShowLoadingView = true
     
+    private var indexPathsNeededImageUpdate = [NSIndexPath]()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -52,7 +54,10 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
-        cell.shotImageView.loadImageFromURL(cellData.imageURL)
+        
+        indexPathsNeededImageUpdate.append(indexPath)
+        lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
+        
         cell.gifLabel.hidden = !cellData.animated
         return cell
     }
@@ -75,6 +80,12 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         shotDetailsViewController.modalPresentationStyle = .Custom
         
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
+    }
+    
+    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
+            indexPathsNeededImageUpdate.removeAtIndex(index)
+        }
     }
 }
 
@@ -123,5 +134,24 @@ extension LikesCollectionViewController: DZNEmptyDataSetSource {
             )
             return emptyDataSetView
         }
+    }
+}
+
+// MARK: Lazy loading of image
+
+private extension LikesCollectionViewController {
+    
+    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+            
+            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+            
+            cell.shotImageView.image = image
+        }
+        ImageProvider.lazyLoadImageFromURLs(
+            (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
+            teaserImageCompletion: imageLoadingCompletion,
+            normalImageCompletion: imageLoadingCompletion
+        )
     }
 }

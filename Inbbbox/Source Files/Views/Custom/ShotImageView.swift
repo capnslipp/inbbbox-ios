@@ -13,9 +13,10 @@ import Haneke
 
 class ShotImageView: UIImageView {
 
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
+    var originalImage: UIImage?
+    let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
+    
     private var didSetupConstraints = false
-    private var originalImage: UIImage?
     private var imageUrl: NSURL?
 
     override init(frame: CGRect) {
@@ -46,7 +47,7 @@ class ShotImageView: UIImageView {
 
         super.updateConstraints()
     }
-
+    
     func loadShotImageFromURL(url: NSURL, blur: CGFloat = 0) {
         imageUrl = url
         image = nil

@@ -16,7 +16,7 @@ class FolloweesViewModelSpec: QuickSpec {
     override func spec() {
 
         var sut: FolloweesViewModelMock!
-        let fixtureImageURL = NSURL(string: "https://fixture.domain/fixture.image.normal.png")
+        let fixtureImageURL = NSURL(string: "https://fixture.domain/fixture.image.teaser.png")
         let fixtureImagesURLs: [NSURL]? = [fixtureImageURL!, fixtureImageURL!, fixtureImageURL!, fixtureImageURL!]
         let fixtureFolloweeName = "fixture.name"
         let fixtureNumberOfShots = "1 shot"

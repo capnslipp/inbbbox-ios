@@ -14,13 +14,15 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     
     var oneColumnLayoutCellHeightToWidthRatio = CGFloat(1)
     var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(1)
-    private var oneColumnLayoutButton: UIBarButtonItem?
-    private var twoColumnsLayoutButton: UIBarButtonItem?
-    private var isCurrentLayoutOneColumn: Bool {
+    
+    var isCurrentLayoutOneColumn: Bool {
         get {
             return collectionView!.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout)
         }
     }
+    
+    private var oneColumnLayoutButton: UIBarButtonItem?
+    private var twoColumnsLayoutButton: UIBarButtonItem?
     
     convenience init(oneColumnLayoutCellHeightToWidthRatio: CGFloat, twoColumnsLayoutCellHeightToWidthRatio: CGFloat) {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()

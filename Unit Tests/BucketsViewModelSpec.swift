@@ -16,7 +16,7 @@ class BucketsViewModelSpec: QuickSpec {
     override func spec() {
         
         var sut: BucketsViewModelMock!
-        let fixtureImageURL = NSURL(string: "https://fixture.domain/fixture.image.normal.png")
+        let fixtureImageURL = NSURL(string: "https://fixture.domain/fixture.image.teaser.png")
         let fixtureImagesURLs: [NSURL]? = [fixtureImageURL!, fixtureImageURL!, fixtureImageURL!, fixtureImageURL!]
         let fixtureBucketName = "fixture.name"
         let fixtureNumberOfShots = "250 shots"

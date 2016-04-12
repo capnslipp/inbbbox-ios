@@ -115,13 +115,14 @@ extension FolloweesViewModel {
         let avatarURL: NSURL?
         let numberOfShots: String
         let shotsImagesURLs: [NSURL]?
+        let firstShotImage: ShotImageType?
         
         init(followee: Followee, shots: [ShotType]?) {
             self.name = followee.name
             self.avatarURL = followee.avatarURL
             self.numberOfShots = followee.shotsCount == 1 ? "\(followee.shotsCount) shot" : "\(followee.shotsCount) shots"
             if let shots = shots where shots.count > 0 {
-                let allShotsImagesURLs = shots.map { $0.shotImage.normalURL }
+                let allShotsImagesURLs = shots.map { $0.shotImage.teaserURL }
                 switch allShotsImagesURLs.count {
                 case 1:
                     shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[0], allShotsImagesURLs[0], allShotsImagesURLs[0]]
@@ -132,8 +133,10 @@ extension FolloweesViewModel {
                 default:
                     shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[1], allShotsImagesURLs[2], allShotsImagesURLs[3]]
                 }
+                firstShotImage = shots[0].shotImage
             } else {
                 self.shotsImagesURLs = nil
+                self.firstShotImage = nil
             }
         }
     }

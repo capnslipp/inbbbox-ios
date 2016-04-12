@@ -167,13 +167,24 @@ class ShotBucketsHeaderView: UICollectionReusableView {
 
 extension ShotBucketsHeaderView {
     
-    func setImageWithUrl(url: NSURL) {
+    func setImageWithShotImage(shotImage: ShotImageType) {
         if imageView == nil {
             imageView = ShotImageView.newAutoLayoutView()
             setupImageView()
         }
-        let iv = imageView as! ShotImageView
-        iv.loadShotImageFromURL(url)
+        
+        let imageCompletion: UIImage -> Void = { [weak self] image in
+            if let imageView = self?.imageView {
+                imageView.image = image
+            }
+        }
+        
+        ImageProvider.lazyLoadImageFromURLs(
+            (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
+            teaserImageCompletion: imageCompletion,
+            normalImageCompletion: imageCompletion,
+            hidpiImageCompletion: imageCompletion
+        )
     }
     
     func setAnimatedImageWithUrl(url: NSURL) {

@@ -100,10 +100,10 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
     
     // MARK: Cell data section
     
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (imageURL: NSURL, animated: Bool) {
-        let imageURL = userShots[indexPath.row].shotImage.normalURL
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+        let shotImage = userShots[indexPath.row].shotImage
         let animated = userShots[indexPath.row].animated
-        return (imageURL, animated)
+        return (shotImage, animated)
     }
 }
 

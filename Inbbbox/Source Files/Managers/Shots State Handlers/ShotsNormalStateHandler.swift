@@ -45,6 +45,8 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         return true
     }
     
+    private var indexPathsNeededImageUpdate = [NSIndexPath]()
+    
     func prepareForPresentingData() {
         firstly {
             fetchLikedShots()
@@ -78,7 +80,13 @@ extension ShotsNormalStateHandler {
         
         let shot = shotsCollectionViewController.shots[indexPath.item]
         
-        cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
+        cell.shotImageView.image = nil
+        cell.shotImageView.originalImage = nil
+        cell.shotImageView.activityIndicatorView.startAnimating()
+        
+        indexPathsNeededImageUpdate.append(indexPath)
+        lazyLoadImage(shot.shotImage, forCell: cell, atIndexPath: indexPath)
+        
         cell.gifLabel.hidden = !shot.animated
         cell.liked = self.isShotLiked(shot)
         cell.delegate = self
@@ -125,6 +133,12 @@ extension ShotsNormalStateHandler {
             }.error { error in
                 // NGRTemp: Need mockups for error message view
             }
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
+            indexPathsNeededImageUpdate.removeAtIndex(index)
         }
     }
 }
@@ -221,6 +235,34 @@ private extension ShotsNormalStateHandler {
                 }
             }.then(fulfill).error(reject)
         }
+    }
+}
+
+// MARK: Lazy loading of image
+
+private extension ShotsNormalStateHandler {
+    
+    func lazyLoadImage(shotImage: ShotImageType, forCell cell: ShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+        let teaserImageLoadingCompletion: UIImage -> Void = { [weak self] image in
+            
+            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+            
+            cell.shotImageView.activityIndicatorView.stopAnimating()
+            cell.shotImageView.originalImage = image
+            cell.shotImageView.image = image
+        }
+        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+            
+            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+            
+            cell.shotImageView.originalImage = image
+            cell.shotImageView.image = image
+        }
+        ImageProvider.lazyLoadImageFromURLs(
+            (shotImage.teaserURL, shotImage.normalURL, nil),
+            teaserImageCompletion: teaserImageLoadingCompletion,
+            normalImageCompletion: imageLoadingCompletion
+        )
     }
 }
 

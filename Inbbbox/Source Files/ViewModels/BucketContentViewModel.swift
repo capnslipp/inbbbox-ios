@@ -68,10 +68,10 @@ class BucketContentViewModel: BaseCollectionViewViewModel {
         }
     }
     
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (imageURL: NSURL, animated: Bool) {
-        let imageURL = shots[indexPath.row].shotImage.normalURL
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+        let shotImage = shots[indexPath.row].shotImage
         let animated = shots[indexPath.row].animated
-        return (imageURL, animated)
+        return (shotImage, animated)
     }
     
     func clearViewModelIfNeeded() {
