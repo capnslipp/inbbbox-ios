@@ -61,12 +61,10 @@ class LikesViewModel: BaseCollectionViewViewModel {
         }
     }
     
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (teaserURL: NSURL, normalURL: NSURL, hidpiURL: NSURL?, animated: Bool) {
-        let teaserURL = likedShots[indexPath.row].shotImage.teaserURL
-        let normalURL = likedShots[indexPath.row].shotImage.normalURL
-        let hidpiURL = likedShots[indexPath.row].shotImage.hidpiURL
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+        let shotImage = likedShots[indexPath.row].shotImage
         let animated = likedShots[indexPath.row].animated
-        return (teaserURL, normalURL, hidpiURL, animated)
+        return (shotImage, animated)
     }
     
     func clearViewModelIfNeeded() {

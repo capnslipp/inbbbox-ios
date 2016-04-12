@@ -147,23 +147,8 @@ extension UserDetailsViewController: UICollectionViewDataSource {
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
         
-        if !indexPathsNeededImageUpdate.contains(indexPath) {
-            indexPathsNeededImageUpdate.append(indexPath)
-        }
-        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
-            
-            guard let certainSelf = self else { return }
-
-            if certainSelf.indexPathsNeededImageUpdate.contains(indexPath) {
-                cell.shotImageView.image = image
-            }
-        }
-        ImageProvider.lazyLoadImageFromURLs(
-            (cellData.teaserURL, isCurrentLayoutOneColumn ? cellData.normalURL : nil, nil),
-            teaserImageCompletion: imageLoadingCompletion,
-            normalImageCompletion: imageLoadingCompletion,
-            hidpiImageCompletion: nil
-        )
+        indexPathsNeededImageUpdate.append(indexPath)
+        lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
         
         cell.gifLabel.hidden = !cellData.animated
         return cell
@@ -286,7 +271,7 @@ private extension UserDetailsViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // Mark: Changing layout
+    // MARK: Changing layout
     
     func changeLayout() {
         let collectionView = userDetailsView.collectionView
@@ -312,5 +297,24 @@ private extension UserDetailsViewController {
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
         }
+    }
+}
+
+// MARK: Lazy loading of image
+
+extension UserDetailsViewController {
+    
+    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+            
+            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+            
+            cell.shotImageView.image = image
+        }
+        ImageProvider.lazyLoadImageFromURLs(
+            (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
+            teaserImageCompletion: imageLoadingCompletion,
+            normalImageCompletion: imageLoadingCompletion
+        )
     }
 }

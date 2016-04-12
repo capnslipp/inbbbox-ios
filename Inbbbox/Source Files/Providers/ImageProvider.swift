@@ -14,9 +14,9 @@ final class ImageProvider {
     ///
     /// - parameter urls:                  Tuple consisting of max 3 urls that are loaded one by one.
     /// - parameter teaserImageCompletion: Completion called after downloading teaser image.
-    /// - parameter normalImageCompletion: Completion called after downloading normal image.
-    /// - parameter hidpiImageCompletion:  Completion called after downloading hidpi image.
-    class func lazyLoadImageFromURLs(urls: (teaserURL: NSURL, normalURL: NSURL?, hidpiURL: NSURL?), teaserImageCompletion: UIImage -> Void, normalImageCompletion: (UIImage -> Void)?, hidpiImageCompletion: (UIImage -> Void)?) {
+    /// - parameter normalImageCompletion: Optional completion called after downloading normal image.
+    /// - parameter hidpiImageCompletion:  Optional completion called after downloading hidpi image.
+    class func lazyLoadImageFromURLs(urls: (teaserURL: NSURL, normalURL: NSURL? , hidpiURL: NSURL?), teaserImageCompletion: UIImage -> Void, normalImageCompletion: (UIImage -> Void)? = nil, hidpiImageCompletion: (UIImage -> Void)? = nil) {
         
         loadImageFromURL(urls.teaserURL) { teaserImage in
             teaserImageCompletion(teaserImage)
@@ -24,10 +24,8 @@ final class ImageProvider {
             if let normalURL = urls.normalURL {
                 loadImageFromURL(normalURL) { normalImage in
                     normalImageCompletion?(normalImage)
-                    print("normal loaded for \(normalURL.absoluteString)")
                     if let hidpiURL = urls.hidpiURL {
                         loadImageFromURL(hidpiURL) { hidpiImage in
-                            print("hidpi loaded for \(hidpiURL.absoluteString)")
                             hidpiImageCompletion?(hidpiImage)
                         }
                     }

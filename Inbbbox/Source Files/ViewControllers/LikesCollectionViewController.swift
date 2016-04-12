@@ -55,23 +55,9 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
         
-        if !indexPathsNeededImageUpdate.contains(indexPath) {
-            indexPathsNeededImageUpdate.append(indexPath)
-        }
-        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
-            
-            guard let certainSelf = self else { return }
-            
-            if certainSelf.indexPathsNeededImageUpdate.contains(indexPath) {
-                cell.shotImageView.image = image
-            }
-        }
-        ImageProvider.lazyLoadImageFromURLs(
-            (cellData.teaserURL, isCurrentLayoutOneColumn ? cellData.normalURL : nil, nil),
-            teaserImageCompletion: imageLoadingCompletion,
-            normalImageCompletion: imageLoadingCompletion,
-            hidpiImageCompletion: nil
-        )
+        indexPathsNeededImageUpdate.append(indexPath)
+        lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
+        
         cell.gifLabel.hidden = !cellData.animated
         return cell
     }
@@ -148,5 +134,24 @@ extension LikesCollectionViewController: DZNEmptyDataSetSource {
             )
             return emptyDataSetView
         }
+    }
+}
+
+// MARK: Lazy loading of image
+
+extension LikesCollectionViewController {
+    
+    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+            
+            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+            
+            cell.shotImageView.image = image
+        }
+        ImageProvider.lazyLoadImageFromURLs(
+            (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
+            teaserImageCompletion: imageLoadingCompletion,
+            normalImageCompletion: imageLoadingCompletion
+        )
     }
 }
