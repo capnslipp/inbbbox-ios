@@ -7,10 +7,11 @@
 //
 
 import Haneke
+import PromiseKit
 
 final class ImageProvider {
     
-    /// Lazily loads images from URLs
+    /// Lazily loads images from URLs. Uses cache for `imageFormatName`.
     ///
     /// - parameter urls:                  Tuple consisting of max 3 urls that are loaded one by one.
     /// - parameter teaserImageCompletion: Completion called after downloading teaser image.
@@ -18,30 +19,48 @@ final class ImageProvider {
     /// - parameter hidpiImageCompletion:  Optional completion called after downloading hidpi image.
     class func lazyLoadImageFromURLs(urls: (teaserURL: NSURL, normalURL: NSURL? , hidpiURL: NSURL?), teaserImageCompletion: UIImage -> Void, normalImageCompletion: (UIImage -> Void)? = nil, hidpiImageCompletion: (UIImage -> Void)? = nil) {
         
-        loadImageFromURL(urls.teaserURL) { teaserImage in
-            teaserImageCompletion(teaserImage)
-            
-            if let normalURL = urls.normalURL {
-                loadImageFromURL(normalURL) { normalImage in
-                    normalImageCompletion?(normalImage)
-                    if let hidpiURL = urls.hidpiURL {
-                        loadImageFromURL(hidpiURL) { hidpiImage in
-                            hidpiImageCompletion?(hidpiImage)
-                        }
-                    }
-                }
+        loadImageFromURL(urls.teaserURL)
+        firstly {
+            loadImageFromURL(urls.teaserURL)
+        }.then { image -> Void in
+            if let image = image {
+                teaserImageCompletion(image)
+            }
+        }.then {
+            loadImageFromURL(urls.normalURL)
+        }.then { image -> Void in
+            if let image = image {
+                normalImageCompletion?(image)
+            }
+        }.then {
+            loadImageFromURL(urls.hidpiURL)
+        }.then { image -> Void in
+            if let image = image {
+                hidpiImageCompletion?(image)
             }
         }
     }
+}
+
+private extension ImageProvider {
     
-    /// Loads image from URL
-    ///
-    /// - parameter url:        URL where image is located
-    /// - parameter completion: Complation that contains downloaded image.
-    class func loadImageFromURL(url: NSURL, completion: UIImage -> Void) {
-        Shared.imageCache.fetch(URL: url, formatName: CacheManager.imageFormatName, failure: nil, success: { image in
-            completion(image)
-            }
-        )
+    class func loadImageFromURL(url: NSURL?) -> Promise<UIImage?> {
+        
+        guard let url = url else { return Promise<UIImage?>(nil) }
+        
+        return Promise<UIImage?> { fulfill, reject in
+            Shared.imageCache.fetch(
+                URL: url,
+                formatName: CacheManager.imageFormatName,
+                failure: { error in
+                    if let error = error {
+                        reject(error)
+                    }
+                },
+                success: { image in
+                    fulfill(image)
+                }
+            )
+        }
     }
 }
