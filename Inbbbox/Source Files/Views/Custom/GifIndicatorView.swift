@@ -26,7 +26,7 @@ class GifIndicatorView:UIView {
         super.init(frame: frame)
         
         gifLabel.configureForAutoLayout()
-        gifLabel.text = NSLocalizedString("GIF", comment: "")
+        gifLabel.text = NSLocalizedString("GifIndicatorView.GIF", comment: "GIF file type.")
         gifLabel.font = UIFont.helveticaFont(.NeueMedium, size: 11)
         gifLabel.textColor = UIColor.textDarkColor()
         gifLabel.textAlignment = .Center

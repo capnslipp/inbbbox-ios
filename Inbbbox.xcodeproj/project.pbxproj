@@ -67,6 +67,8 @@
 		2AF4DF2882A7E45E73B0253F /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697E4400DF149C466788A41 /* Requestable.swift */; };
 		2D4EB542C282717ACCCDD53E /* APIConnectionsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9A75F53B4797803D4FB49 /* APIConnectionsRequesterMock.swift */; };
 		2F3EF3B7C3E6841B46924AAE /* UserDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8E247C367E7CD816FFC6E7 /* UserDetailsViewModelSpec.swift */; };
+		306F24901CBBBE8200D81B14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 306F24921CBBBE8200D81B14 /* Localizable.strings */; };
+		306F24A51CBBC6BC00D81B14 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 306F24A31CBBC6BC00D81B14 /* Localizable.stringsdict */; };
 		309EBC711CAD56860074FB8A /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EBC701CAD56860074FB8A /* CrashManager.swift */; };
 		30D1ED34355F08C05F0B1DBC /* CollectionViewLayoutSpacings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C8043ECC97F0591EA9579 /* CollectionViewLayoutSpacings.swift */; };
 		31D562CBC51E85CCFBF18C5F /* ShotBucketsActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8F4F4DC52ABC426E05B98 /* ShotBucketsActionCollectionViewCell.swift */; };
@@ -436,6 +438,8 @@
 		2ED8F794058015E61BF82B95 /* ShotDetailsDescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsDescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EEA38900364C70AF4820470 /* PageableQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PageableQuery.swift; sourceTree = "<group>"; };
 		2F59A124425AD6181A4B6CF2 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		306F24961CBBC0CD00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		306F24A41CBBC6BC00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		309EBC701CAD56860074FB8A /* CrashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		30B635F69F1F9B5A4BB997EB /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
 		30ED40221B9A46F946A93D9F /* ShotBucketsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModel.swift; sourceTree = "<group>"; };
@@ -1177,6 +1181,8 @@
 			children = (
 				E10F0FAAC490B249E42A22B3 /* Images.xcassets */,
 				37CA97648E23F476DA3DF992 /* Acknowledgements.html */,
+				306F24921CBBBE8200D81B14 /* Localizable.strings */,
+				306F24A31CBBC6BC00D81B14 /* Localizable.stringsdict */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1609,8 +1615,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C06B5AB1CB2770D0060A558 /* Acknowledgements.html in Resources */,
+				306F24901CBBBE8200D81B14 /* Localizable.strings in Resources */,
 				566CD09E193410412EE63755 /* LaunchScreen.xib in Resources */,
 				A2B45AC3FCEF1486A99615BF /* Images.xcassets in Resources */,
+				306F24A51CBBC6BC00D81B14 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2100,6 +2108,25 @@
 			targetProxy = 5E3A983C1AA73A6500CE2F20 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		306F24921CBBBE8200D81B14 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				306F24961CBBC0CD00D81B14 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		306F24A31CBBC6BC00D81B14 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				306F24A41CBBC6BC00D81B14 /* en */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3A188DA01CB69D8C00E5B011 /* Release */ = {

@@ -24,13 +24,13 @@ class CenterButtonTabBarController: UITabBarController {
         
         
         let likesViewController = UINavigationController(rootViewController: LikesCollectionViewController(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio))
-        likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Likes", comment: ""), imageName: "ic-likes")
+        likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"), imageName: "ic-likes")
         let bucketsViewController = UINavigationController(rootViewController: BucketsCollectionViewController())
-        bucketsViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Buckets", comment: ""), imageName: "ic-buckets")
+        bucketsViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"), imageName: "ic-buckets")
         let followeesViewController = UINavigationController(rootViewController: FolloweesCollectionViewController(oneColumnLayoutCellHeightToWidthRatio: LargeFolloweeCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SmallFolloweeCollectionViewCell.heightToWidthRatio))
-        followeesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Following", comment: ""), imageName: "ic-following")
+        followeesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"), imageName: "ic-following")
         let accountViewController = UINavigationController(rootViewController: SettingsViewController())
-        accountViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("Account", comment: ""), imageName: "ic-account")
+        accountViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("CenterButtonTabBar.Account", comment: "Main view, bottom bar"), imageName: "ic-account")
         
         viewControllers = [likesViewController, bucketsViewController, shotsCollectionViewController, followeesViewController, accountViewController]
         selectedViewController = shotsCollectionViewController

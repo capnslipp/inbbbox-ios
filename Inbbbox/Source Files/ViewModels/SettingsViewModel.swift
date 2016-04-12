@@ -23,7 +23,7 @@ enum UserMode {
 
 class SettingsViewModel: GroupedListViewModel {
 
-    let title = NSLocalizedString("Account", comment: "")
+    let title = NSLocalizedString("SettingsViewModel.Account", comment: "Title for account screen")
 
     weak var settingsViewController: SettingsViewController?
 
@@ -50,15 +50,15 @@ class SettingsViewModel: GroupedListViewModel {
         self.alertDelegate = delegate as? AlertDisplayable
         self.userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
 
-        let createAccountTitle = NSLocalizedString("Create Dribble Account", comment: "")
+        let createAccountTitle = NSLocalizedString("SettingsViewModel.CreateAccount", comment: "Button text allowing user to create new account.")
 
-        let reminderTitle = NSLocalizedString("Enable daily reminder", comment: "")
-        let reminderDateTitle = NSLocalizedString("Send daily reminder at", comment: "")
+        let reminderTitle = NSLocalizedString("SettingsViewModel.EnableDailyReminders", comment: "User settings, enable daily reminders")
+        let reminderDateTitle = NSLocalizedString("SettingsViewModel.SendDailyReminders", comment: "User settings, send daily reminders")
 
-        let followingStreamSourceTitle = NSLocalizedString("Following", comment: "")
-        let newTodayStreamSourceTitle = NSLocalizedString("New Today", comment: "")
-        let popularTodayStreamSourceTitle = NSLocalizedString("Popular Today", comment: "")
-        let debutsStreamSourceTitle = NSLocalizedString("Debuts", comment: "")
+        let followingStreamSourceTitle = NSLocalizedString("SettingsViewModel.Following", comment: "User settings, enable following")
+        let newTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.NewToday", comment: "User settings, enable new today.")
+        let popularTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.Popular", comment: "User settings, enable popular today.")
+        let debutsStreamSourceTitle = NSLocalizedString("SettingsViewModel.Debuts", comment: "User settings, show debuts.")
 
         // MARK: Create items
 
@@ -71,7 +71,7 @@ class SettingsViewModel: GroupedListViewModel {
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Settings.StreamSource.NewToday)
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
-        let acknowledgementItem = LabelItem(title: NSLocalizedString("Acknowledgements", comment: ""))
+        let acknowledgementItem = LabelItem(title: NSLocalizedString("SettingsViewModel.AcknowledgementsButton", comment: "Acknowledgements button"))
         var items:[[GroupItem]]
         if userMode == .LoggedUser {
             items = [[reminderItem, reminderDateItem],
@@ -178,13 +178,13 @@ private extension SettingsViewModel {
 
     func preparePermissionsAlert() -> UIAlertController {
 
-        let alert = UIAlertController(title: NSLocalizedString("Permissions", comment: ""), message: NSLocalizedString("You have to give access to notifications.", comment: ""), preferredStyle: .Alert)
+        let alert = UIAlertController(title: NSLocalizedString("SettingsViewModel.Permissions", comment: "Title of alert, asking user to grant notifications permission"), message: NSLocalizedString("SettingsViewModel.AccessToNotifications", comment: "Body of alert, asking user to grant notifications permission."), preferredStyle: .Alert)
 
-        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .Default) {
+        let settingsAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Settings", comment: "Redirect user to Settings app"), style: .Default) {
             _ in
             UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .Default, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Dismiss", comment: "Notifications alert, dismiss button."), style: .Default, handler: nil)
 
         alert.addAction(settingsAction)
         alert.addAction(cancelAction)

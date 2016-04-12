@@ -84,7 +84,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     // MARK: Configuration
     
     func setupBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add New", comment: ""), style: .Plain, target: self, action: #selector(didTapAddNewBucketButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew", comment: "Button for adding new bucket"), style: .Plain, target: self, action: #selector(didTapAddNewBucketButton(_:)))
     }
     
     // MARK: Actions:
@@ -147,10 +147,10 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: NSLocalizedString("Add some shots\nto buckets ", comment: ""),
+                firstLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.FirstLocalizedString", comment: "Displayed when empty data in view"),
                 attachmentImage: UIImage(named: "ic-bucket-emptystate"),
                 imageOffset: CGPoint(x: 0, y: -4),
-                lastLocalizedString: NSLocalizedString(" first!", comment: "")
+                lastLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.LastLocalizedString", comment: "Displayed when empty data in view")
             )
             return emptyDataSetView
         }

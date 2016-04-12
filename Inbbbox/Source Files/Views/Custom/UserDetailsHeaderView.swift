@@ -23,7 +23,7 @@ class UserDetailsHeaderView: UICollectionReusableView {
     let button = UIButton.newAutoLayoutView()
     var userFollowed: Bool? {
         didSet {
-            let title = userFollowed! ? NSLocalizedString("Unfollow", comment: "") : NSLocalizedString("Follow", comment: "")
+            let title = userFollowed! ? NSLocalizedString("UserDetailsHeaderView.Unfollow", comment: "Allows user to unfollow another user.") : NSLocalizedString("UserDetailsHeaderView.Follow", comment: "Allows user to follow another user.")
             button.setTitle(title, forState: .Normal)
         }
     }

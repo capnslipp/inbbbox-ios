@@ -168,11 +168,11 @@ private extension ShotsCollectionViewController {
 
     func signOutAlertController() -> UIAlertController {
         let alertController = UIAlertController(
-            title: NSLocalizedString("Error occurred", comment: ""),
-            message: NSLocalizedString("Signing out...", comment: ""),
+            title: NSLocalizedString("ShotsCollectionViewController.Error", comment: "Title of alert visible after upon error detection."),
+            message: NSLocalizedString("ShotsCollectionViewController.SignOut", comment: "Message to use informing she will be logged out because of error."),
             preferredStyle: .Alert
         )
-        let logoutAction = UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .Cancel) { _ in
+        let logoutAction = UIAlertAction(title: NSLocalizedString("ShotsCollectionViewController.Dismiss", comment: "Dismiss error alert."), style: .Cancel) { _ in
             Authenticator.logout()
             UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
         }

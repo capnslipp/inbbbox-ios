@@ -38,7 +38,7 @@ class CommentComposerView: UIView {
         addSubview(cornerWrapperView)
         
         textField.backgroundColor = .RGBA(246, 248, 248, 1)
-        textField.placeholder = NSLocalizedString("Type your comment", comment: "")
+        textField.placeholder = NSLocalizedString("CommentComposerView.TypeComment", comment: "Placeholder text, for comment text field.")
         textField.tintColor = UIColor(red: 0.3522, green: 0.3513, blue: 0.3722, alpha: 1.0)
         textField.setLeftPadding(10)
         textField.delegate = self
