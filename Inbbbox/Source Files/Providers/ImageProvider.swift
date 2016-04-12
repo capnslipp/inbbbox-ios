@@ -19,7 +19,6 @@ final class ImageProvider {
     /// - parameter hidpiImageCompletion:  Optional completion called after downloading hidpi image.
     class func lazyLoadImageFromURLs(urls: (teaserURL: NSURL, normalURL: NSURL? , hidpiURL: NSURL?), teaserImageCompletion: UIImage -> Void, normalImageCompletion: (UIImage -> Void)? = nil, hidpiImageCompletion: (UIImage -> Void)? = nil) {
         
-        loadImageFromURL(urls.teaserURL)
         firstly {
             loadImageFromURL(urls.teaserURL)
         }.then { image -> Void in
