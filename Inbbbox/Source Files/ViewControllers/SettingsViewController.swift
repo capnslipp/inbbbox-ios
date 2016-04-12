@@ -118,8 +118,8 @@ extension SettingsViewController {
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
-        let notificationsTitle = NSLocalizedString("NOTIFICATIONS", comment: "")
-        let streamSourcesTitle = NSLocalizedString("INBBBOX STREAM SOURCE", comment: "")
+        let notificationsTitle = NSLocalizedString("SettingsViewController.Notifications", comment: "Title of group of buttons for notifications settings")
+        let streamSourcesTitle = NSLocalizedString("SettingsViewController.StreamSource", comment: "Title of group of buttons for stream source settings")
 
         switch section {
             case 0: return viewModel.userMode == .LoggedUser ? notificationsTitle : nil
@@ -187,7 +187,7 @@ private extension SettingsViewController {
 
     func configureLogoutButton() {
         navigationItem.rightBarButtonItem = viewModel.loggedInUser != nil ? UIBarButtonItem(
-            title: NSLocalizedString("Log Out", comment: ""),
+            title: NSLocalizedString("SettingsViewController.LogOut", comment: "Log out button"),
             style: .Plain,
             target: self,
             action: #selector(didTapLogOutButton(_:))
@@ -202,7 +202,7 @@ private extension SettingsViewController {
         if let user = viewModel.loggedInUser {
             header.usernameLabel.text = user.name ?? user.username
         } else {
-            header.usernameLabel.text = NSLocalizedString("Guest?", comment: "")
+            header.usernameLabel.text = NSLocalizedString("SettingsViewController.Guest", comment: "Is user a guest without account?")
         }
         header.avatarView.imageView.loadImageFromURL(viewModel.loggedInUser?.avatarURL, placeholderImage: UIImage(named: "avatar_placeholder"))
     }

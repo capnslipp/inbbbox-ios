@@ -49,7 +49,7 @@ final class ShotDetailsFormatter {
         let author = (shot.user.name ?? shot.user.username)
         if author.characters.count > 0 {
             
-            let prefixString = NSLocalizedString("by", comment: "")
+            let prefixString = NSLocalizedString("ShotDetailsFormatter.By", comment: "Preposition describing author of shot.")
             let authorAttributedString = NSMutableAttributedString(
                 string: prefixString + " " + author,
                 attributes: [
@@ -71,7 +71,7 @@ final class ShotDetailsFormatter {
         
         if let team = shot.team?.name where team.characters.count > 0 {
             
-            let prefixString = NSLocalizedString("for", comment: "")
+            let prefixString = NSLocalizedString("ShotDetailsFormatter.For", comment: "Preposition describing for who shot was made.")
             let teamAttributedString = NSMutableAttributedString(
                 string: prefixString + " " + team,
                 attributes: [
@@ -91,7 +91,7 @@ final class ShotDetailsFormatter {
         let dateSting = shotDateFormatter.stringFromDate(shot.createdAt)
         if dateSting.characters.count > 0 {
             
-            let prefixString = NSLocalizedString("on", comment: "")
+            let prefixString = NSLocalizedString("ShotDetailsFormatter.On", comment: "Preposition describing when shot was made.")
             let dateAttributedString = NSAttributedString(
                 string: prefixString + " " + dateSting,
                 attributes: [

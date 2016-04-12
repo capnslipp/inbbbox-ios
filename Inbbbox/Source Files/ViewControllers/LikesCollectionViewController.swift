@@ -116,10 +116,10 @@ extension LikesCollectionViewController: DZNEmptyDataSetSource {
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: NSLocalizedString("Like ", comment: ""),
+                firstLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.FirstLocalizedString", comment: "LikesCollectionView, empty data set view"),
                 attachmentImage: UIImage(named: "ic-like-emptystate"),
                 imageOffset: CGPoint(x: 0, y: -2),
-                lastLocalizedString: NSLocalizedString(" some shots first!", comment: "")
+                lastLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.LastLocalizedString", comment: "LikesCollectionView, empty data set view")
             )
             return emptyDataSetView
         }

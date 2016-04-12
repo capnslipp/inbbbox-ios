@@ -32,18 +32,18 @@ class ShotBucketsViewModel {
     var titleForHeader: String {
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
-            return NSLocalizedString("Add To Bucket", comment: "")
+            return NSLocalizedString("ShotBucketsViewModel.AddToBucket", comment: "Allows user to add shot to bucket")
         case .RemoveFromBucket:
-            return NSLocalizedString("Remove From Bucket", comment: "")
+            return NSLocalizedString("ShotBucketsViewModel.RemoveFromBucket", comment: "Allows user to remove shot from bucket")
         }
     }
     
     var titleForActionItem: String {
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
-            return NSLocalizedString("New Bucket", comment: "")
+            return NSLocalizedString("ShotBucketsViewModel.NewBucket", comment: "Allows user to create new bucket")
         case .RemoveFromBucket:
-            return NSLocalizedString("Remove From Selected Buckets", comment: "")
+            return NSLocalizedString("ShotBucketsViewModel.RemoveFromSelectedBuckets", comment: "Allows user to remove from multiple backets")
         }
     }
     

@@ -124,10 +124,10 @@ extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: NSLocalizedString("Add some shots\nto this bucket ", comment: ""),
+                firstLocalizedString: NSLocalizedString("BucketContent.EmptyData.FirstLocalizedString", comment: "BucketContentCollectionView, empty data set view"),
                 attachmentImage: UIImage(named: "ic-bucket-emptystate"),
                 imageOffset: CGPoint(x: 0, y: -4),
-                lastLocalizedString: NSLocalizedString(" first!", comment: "")
+                lastLocalizedString: NSLocalizedString("BucketContent.EmptyData.LastLocalizedString", comment: "BucketContentCollectionView, empty data set view")
             )
             return emptyDataSetView
         }

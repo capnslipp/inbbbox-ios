@@ -105,14 +105,14 @@ class CommentEditView: UIView {
     private func setupCancelLabel() {
         cancelLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         cancelLabel.textColor = UIColor.textLightColor()
-        cancelLabel.text = NSLocalizedString("Cancel", comment: "")
+        cancelLabel.text = NSLocalizedString("CommentEditView.Cancel", comment: "Cancel editing comment.")
         blurView.addSubview(cancelLabel)
     }
     
     private func setupDeleteLabel() {
         deleteLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         deleteLabel.textColor = UIColor.textLightColor()
-        deleteLabel.text = NSLocalizedString("Delete", comment: "")
+        deleteLabel.text = NSLocalizedString("CommentEditView.Delete", comment: "Editing comment, delete.")
         blurView.addSubview(deleteLabel)
     }
 }

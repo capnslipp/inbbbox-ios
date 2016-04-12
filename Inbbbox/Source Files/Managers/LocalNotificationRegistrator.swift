@@ -54,8 +54,8 @@ private extension LocalNotificationRegistrator {
         let localNotification = UILocalNotification()
         localNotification.userInfo = [LocalNotificationUserIDKey: userID]
         localNotification.fireDate = time
-        localNotification.alertBody = NSLocalizedString("Check Inbbbox for daily dose of design shots", comment: "")
-        localNotification.alertAction = NSLocalizedString("Show", comment: "")
+        localNotification.alertBody = NSLocalizedString("LocalNotificationRegistrator.AlertBody", comment: "Check Inbbbox for daily dose of design shots")
+        localNotification.alertAction = NSLocalizedString("LocalNotificationRegistrator.Show", comment: "Action for notification")
         localNotification.repeatInterval = .Day
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)

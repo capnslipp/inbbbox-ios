@@ -12,8 +12,8 @@ extension AcknowledgementsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = NSLocalizedString("Acknowledgements", comment: "")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Back", comment: ""), style: .Plain, target: self, action: #selector(didTapBackButton(_:)))
+        title = NSLocalizedString("AcknowledgementsView.Title", comment: "Acknowledgements view title")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("AcknowledgementsView.Back", comment: "Back button"), style: .Plain, target: self, action: #selector(didTapBackButton(_:)))
         webView.loadHTMLString(acknowledgementsHTMLString(), baseURL: nil)
     }
 
