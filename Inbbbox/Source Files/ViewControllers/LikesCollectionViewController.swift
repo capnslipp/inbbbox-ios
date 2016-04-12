@@ -139,7 +139,7 @@ extension LikesCollectionViewController: DZNEmptyDataSetSource {
 
 // MARK: Lazy loading of image
 
-extension LikesCollectionViewController {
+private extension LikesCollectionViewController {
     
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in

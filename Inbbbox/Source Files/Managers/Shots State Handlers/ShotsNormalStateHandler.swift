@@ -240,7 +240,7 @@ private extension ShotsNormalStateHandler {
 
 // MARK: Lazy loading of image
 
-extension ShotsNormalStateHandler {
+private extension ShotsNormalStateHandler {
     
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: ShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         let teaserImageLoadingCompletion: UIImage -> Void = { [weak self] image in

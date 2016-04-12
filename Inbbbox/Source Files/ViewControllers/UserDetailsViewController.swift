@@ -302,7 +302,7 @@ private extension UserDetailsViewController {
 
 // MARK: Lazy loading of image
 
-extension UserDetailsViewController {
+private extension UserDetailsViewController {
     
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in

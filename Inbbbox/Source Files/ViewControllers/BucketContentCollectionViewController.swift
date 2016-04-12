@@ -147,7 +147,7 @@ extension BucketContentCollectionViewController: DZNEmptyDataSetSource {
 
 // MARK: Lazy loading of image
 
-extension BucketContentCollectionViewController {
+private extension BucketContentCollectionViewController {
     
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
