@@ -14,7 +14,7 @@ final class ShotDetailsFormatter {
     static var shotDateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        formatter.locale = NSLocale.currentLocale()
         
         return formatter
     }()
@@ -22,7 +22,7 @@ final class ShotDetailsFormatter {
     static var commentDateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        formatter.locale = NSLocale.currentLocale()
         formatter.timeStyle = .ShortStyle
         
         return formatter
