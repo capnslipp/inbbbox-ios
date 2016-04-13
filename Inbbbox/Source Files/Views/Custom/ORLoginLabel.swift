@@ -19,7 +19,7 @@ class ORLoginLabel: UILabel {
         text = NSLocalizedString("ORLoginLabel.OR", comment: "Visible as a text allowing user to choose login method.")
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message = "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -27,7 +27,8 @@ class ORLoginLabel: UILabel {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
 
-        let boundingTextRect = text?.boundingRectWithFont(font!, constrainedToWidth: CGRectGetWidth(rect)) ?? CGRect.zero
+        let boundingTextRect = text?.boundingRectWithFont(font!, constrainedToWidth: CGRectGetWidth(rect)) ??
+                CGRect.zero
         let space = CGFloat(10)
         let y = CGRectGetMidY(rect)
 

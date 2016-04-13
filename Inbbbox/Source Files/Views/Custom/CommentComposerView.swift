@@ -10,6 +10,7 @@ import UIKit
 
 protocol CommentComposerViewDelegate: class {
     func commentComposerViewDidBecomeActive(view: CommentComposerView)
+
     func didTapSendButtonInComposerView(view: CommentComposerView, comment: String)
 }
 
@@ -38,7 +39,8 @@ class CommentComposerView: UIView {
         addSubview(cornerWrapperView)
 
         textField.backgroundColor = .RGBA(246, 248, 248, 1)
-        textField.placeholder = NSLocalizedString("CommentComposerView.TypeComment", comment: "Placeholder text, for comment text field.")
+        textField.placeholder = NSLocalizedString("CommentComposerView.TypeComment",
+                comment: "Placeholder text, for comment text field.")
         textField.tintColor = UIColor(red: 0.3522, green: 0.3513, blue: 0.3722, alpha: 1.0)
         textField.setLeftPadding(10)
         textField.delegate = self
@@ -53,7 +55,7 @@ class CommentComposerView: UIView {
         return true
     }
 
-    @available(*, unavailable, message="Use init(frame:) method instead")
+    @available(*, unavailable, message = "Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -114,9 +116,9 @@ extension CommentComposerView {
     
     func animateByRoundingCorners(round: Bool) {
 
-        let from: CGFloat = round ? 0 : 10
-        let to: CGFloat = round ? 10 : 0
-        addCornerRadiusAnimation(from, to: to, duration: 0.3)
+        let fromValue: CGFloat = round ? 0 : 10
+        let toValue: CGFloat = round ? 10 : 0
+        addCornerRadiusAnimation(fromValue, toValue: toValue, duration: 0.3)
     }
 }
 
@@ -160,14 +162,14 @@ private extension CommentComposerView {
         return activityIndicatorView
     }
 
-    func addCornerRadiusAnimation(from: CGFloat, to: CGFloat, duration: CFTimeInterval) {
+    func addCornerRadiusAnimation(fromValue: CGFloat, toValue: CGFloat, duration: CFTimeInterval) {
 
-        let animation = CABasicAnimation(keyPath:"cornerRadius")
+        let animation = CABasicAnimation(keyPath: "cornerRadius")
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        animation.fromValue = from
-        animation.toValue = to
+        animation.fromValue = fromValue
+        animation.toValue = toValue
         animation.duration = duration
         cornerWrapperView.layer.addAnimation(animation, forKey: "cornerRadius")
-        cornerWrapperView.layer.cornerRadius = to
+        cornerWrapperView.layer.cornerRadius = toValue
     }
 }

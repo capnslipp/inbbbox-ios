@@ -28,7 +28,8 @@ class ShotDetailsView: UIView {
 
     override init(frame: CGRect) {
 
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
+        collectionView = UICollectionView(frame: CGRect.zero,
+                collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
         collectionView.backgroundColor = .clearColor()
         collectionView.layer.shadowColor = UIColor.grayColor().CGColor
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 0.1)
@@ -52,7 +53,7 @@ class ShotDetailsView: UIView {
         addSubview(keyboardResizableView)
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message = "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -86,7 +87,8 @@ class ShotDetailsView: UIView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
 
-        let path = UIBezierPath(roundedRect: collectionViewCornerWrapperView.bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
+        let path = UIBezierPath(roundedRect: collectionViewCornerWrapperView.bounds,
+                byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         collectionViewCornerWrapperView.layer.mask = mask

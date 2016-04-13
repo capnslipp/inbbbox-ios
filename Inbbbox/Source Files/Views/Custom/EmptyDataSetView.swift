@@ -46,7 +46,8 @@ class EmptyDataSetView: UIView {
         super.updateConstraints()
     }
 
-    func setDescriptionText(firstLocalizedString firstLocalizedString: String, attachmentImage: UIImage?, imageOffset: CGPoint, lastLocalizedString: String) {
+    func setDescriptionText(firstLocalizedString firstLocalizedString: String, attachmentImage: UIImage?,
+                            imageOffset: CGPoint, lastLocalizedString: String) {
 
         descriptionLabel.attributedText = {
             let compoundAttributedString = NSMutableAttributedString.emptyDataSetStyledString(firstLocalizedString)
@@ -63,7 +64,8 @@ class EmptyDataSetView: UIView {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = .Center
 
-            compoundAttributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, compoundAttributedString.length))
+            compoundAttributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle,
+                    range: NSRange(location: 0, length: compoundAttributedString.length))
 
             return compoundAttributedString
         }()

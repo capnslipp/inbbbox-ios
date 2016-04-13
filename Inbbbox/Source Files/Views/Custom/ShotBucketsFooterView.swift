@@ -25,7 +25,7 @@ class ShotBucketsFooterView: UICollectionReusableView {
 
     }
 
-    @available(*, unavailable, message="Use init(frame:) method instead")
+    @available(*, unavailable, message = "Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -45,7 +45,8 @@ class ShotBucketsFooterView: UICollectionReusableView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
 
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: CGSize(width: 15, height: 15))
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.BottomLeft, .BottomRight],
+                cornerRadii: CGSize(width: 15, height: 15))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         layer.mask = mask

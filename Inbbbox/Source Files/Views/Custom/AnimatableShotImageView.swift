@@ -29,7 +29,7 @@ class AnimatableShotImageView: AnimatableImageView {
         addSubview(progressView)
     }
 
-    @available(*, unavailable, message="Use init(frame:) method instead")
+    @available(*, unavailable, message = "Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,19 +53,24 @@ class AnimatableShotImageView: AnimatableImageView {
     }
 
     func loadAnimatableShotFromUrl(url: NSURL) {
-        Shared.dataCache.fetch(key: url.absoluteString, formatName: CacheManager.gifFormatName, failure: { _ in
+        Shared.dataCache.fetch(key: url.absoluteString, formatName: CacheManager.gifFormatName, failure: {
+            _ in
             self.fetchWithURL(url)
-        }, success: { data in
+        }, success: {
+            data in
             self.setImageWithData(data)
         })
     }
 
     private func fetchWithURL(url: NSURL) {
-        downloader.fetchData(url, progress: { [weak self] progress in
+        downloader.fetchData(url, progress: {
+            [weak self] progress in
             self?.updateWithProgress(progress)
-        }) { [weak self] data in
+        }) {
+            [weak self] data in
             self?.setImageWithData(data)
-            Shared.dataCache.set(value: data, key: url.absoluteString, formatName: CacheManager.gifFormatName, success: nil)
+            Shared.dataCache.set(value: data, key: url.absoluteString, formatName: CacheManager.gifFormatName,
+                    success: nil)
         }
     }
 

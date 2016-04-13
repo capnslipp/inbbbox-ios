@@ -23,7 +23,8 @@ class ShotBucketsView: UIView {
 
     override init(frame: CGRect) {
 
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
+        collectionView = UICollectionView(frame: CGRect.zero,
+                collectionViewLayout: ShotDetailsCollectionCollapsableViewStickyHeader())
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.layer.shadowColor = UIColor.grayColor().CGColor
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 0.1)
@@ -45,7 +46,7 @@ class ShotBucketsView: UIView {
         addSubview(collectionViewCornerWrapperView)
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message = "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -58,7 +59,8 @@ class ShotBucketsView: UIView {
             blurView.autoPinEdgesToSuperviewEdges()
 
             if let viewController = viewController {
-                collectionViewCornerWrapperView.autoPinToTopLayoutGuideOfViewController(viewController, withInset: offsetToTopLayoutGuide)
+                collectionViewCornerWrapperView.autoPinToTopLayoutGuideOfViewController(viewController,
+                        withInset: offsetToTopLayoutGuide)
             } else {
                 collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Top, withInset: offsetToTopLayoutGuide)
             }
@@ -75,7 +77,8 @@ class ShotBucketsView: UIView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
 
-        let path = UIBezierPath(roundedRect: collectionViewCornerWrapperView.bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
+        let path = UIBezierPath(roundedRect: collectionViewCornerWrapperView.bounds,
+                byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         collectionViewCornerWrapperView.layer.mask = mask

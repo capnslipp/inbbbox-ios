@@ -14,12 +14,12 @@ enum KeyboardState {
 
 protocol KeyboardResizableViewDelegate: class {
 
-     /**
-     Invokes when *KeyboardResizableView* is going to relayout itself (when keyboard will (dis)appear).
+    /**
+    Invokes when *KeyboardResizableView* is going to relayout itself (when keyboard will (dis)appear).
 
-     - parameter view:  KeyboardResizableView instance.
-     - parameter state: Indicates state of keyboard.
-     */
+    - parameter view:  KeyboardResizableView instance.
+    - parameter state: Indicates state of keyboard.
+    */
     func keyboardResizableView(view: KeyboardResizableView, willRelayoutSubviewsWithState state: KeyboardState)
 
     /**
@@ -43,7 +43,9 @@ class KeyboardResizableView: UIView {
      */
     private(set) var isKeyboardPresent = false {
         willSet(newValue) {
-            if !newValue { snapOffset = 0 }
+            if !newValue {
+                snapOffset = 0
+            }
         }
     }
 
@@ -69,16 +71,18 @@ class KeyboardResizableView: UIView {
 
         clipsToBounds = true
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear(_:)),
+        name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear(_:)),
+        name: UIKeyboardWillHideNotification, object: nil)
     }
 
-    @available(*, unavailable, message="Use init() instead")
+    @available(*, unavailable, message = "Use init() instead")
     override init(frame: CGRect) {
         fatalError("init(frame:) has not been implemented")
     }
 
-    @available(*, unavailable, message="Use init() instead")
+    @available(*, unavailable, message = "Use init() instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -131,12 +135,16 @@ private extension KeyboardResizableView {
         let properlyRotatedCoords = calculateCorrectKeyboardRectWithParameters(parameters)
 
         let height = properlyRotatedCoords.size.height
-        let animationDuration = parameters[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+
+        guard let animationDuration = parameters[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else {
+            return
+        }
 
         if automaticallySnapToKeyboardTopEdge && !isKeyboardPresent {
 
             let rectInSuperviewCoordinateSpace = superview!.convertRect(bounds, toView: self)
-            let keyboardTopEdgeAndSelfBottomEdgeOffsetY = CGRectGetHeight(superview!.frame) - CGRectGetHeight(rectInSuperviewCoordinateSpace) + CGRectGetMinY(rectInSuperviewCoordinateSpace)
+            let keyboardTopEdgeAndSelfBottomEdgeOffsetY = CGRectGetHeight(superview!.frame) -
+                    CGRectGetHeight(rectInSuperviewCoordinateSpace) + CGRectGetMinY(rectInSuperviewCoordinateSpace)
 
             snapOffset = keyboardTopEdgeAndSelfBottomEdgeOffsetY
         }
@@ -147,15 +155,19 @@ private extension KeyboardResizableView {
             addition += bottomEdgeOffset
         }
 
-        let constant = keyboardPresence ? initialBottomConstraintConstant - addition : bottomConstraint.constant + addition
+        let constant = keyboardPresence ? initialBottomConstraintConstant - addition :
+                bottomConstraint.constant + addition
         bottomConstraint.constant = constant
 
-        delegate?.keyboardResizableView(self, willRelayoutSubviewsWithState: keyboardPresence ? .WillAppear : .WillDisappear)
+        let state: KeyboardState = keyboardPresence ? .WillAppear : .WillDisappear
+        delegate?.keyboardResizableView(self, willRelayoutSubviewsWithState: state)
 
         UIView.animateWithDuration(animationDuration.doubleValue, animations: {
             self.layoutIfNeeded()
-        }) { _ in
-            self.delegate?.keyboardResizableView(self, didRelayoutSubviewsWithState: keyboardPresence ? .DidAppear : .DidDisappear)
+        }) {
+            _ in
+            let state: KeyboardState = keyboardPresence ? .DidAppear : .DidDisappear
+            self.delegate?.keyboardResizableView(self, didRelayoutSubviewsWithState: state)
         }
     }
 }

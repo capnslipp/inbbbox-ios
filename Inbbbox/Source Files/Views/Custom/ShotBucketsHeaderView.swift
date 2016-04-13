@@ -37,7 +37,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     private let dimView = UIView.newAutoLayoutView()
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
 
-    private var imageViewCenterWrapperViewBottomEdgeConstraint: NSLayoutConstraint?
+    private var imageViewCenterWrapperBottomConstraint: NSLayoutConstraint?
 
     private var didUpdateConstraints = false
     private var collapseProgress: CGFloat {
@@ -81,7 +81,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         }
     }
 
-    @available(*, unavailable, message="Use init(frame:) method instead")
+    @available(*, unavailable, message = "Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -92,7 +92,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         let progress = collapseProgress
         let absoluteProgress = max(min(progress, 1), 0)
 
-        imageViewCenterWrapperViewBottomEdgeConstraint?.constant = -minHeight + minHeight * absoluteProgress
+        imageViewCenterWrapperBottomConstraint?.constant = -minHeight + minHeight * absoluteProgress
 
         dimView.alpha = progress
     }
@@ -116,7 +116,8 @@ class ShotBucketsHeaderView: UICollectionReusableView {
             titleLabel.autoSetDimension(.Height, toSize: minHeight)
 
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
-            imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
+            imageViewCenterWrapperBottomConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom,
+                    withInset: minHeight)
 
             gradientView.autoPinEdgesToSuperviewEdges()
             dimView.autoPinEdgesToSuperviewEdges()
@@ -131,7 +132,8 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
 
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.TopLeft, .TopRight],
+                cornerRadii: CGSize(width: 15, height: 15))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         layer.mask = mask
@@ -153,8 +155,8 @@ class ShotBucketsHeaderView: UICollectionReusableView {
 
     func setLinkInTitle(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
-            NSForegroundColorAttributeName : UIColor.pinkColor(),
-            NSFontAttributeName : UIFont.systemFontOfSize(14)
+                NSForegroundColorAttributeName: UIColor.pinkColor(),
+                NSFontAttributeName: UIFont.systemFontOfSize(14)
         ]
         titleLabel.linkAttributes = linkAttributes
         titleLabel.activeLinkAttributes = linkAttributes
@@ -173,17 +175,18 @@ extension ShotBucketsHeaderView {
             setupImageView()
         }
 
-        let imageCompletion: UIImage -> Void = { [weak self] image in
+        let imageCompletion: UIImage -> Void = {
+            [weak self] image in
             if let imageView = self?.imageView {
                 imageView.image = image
             }
         }
 
         ImageProvider.lazyLoadImageFromURLs(
-            (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
-            teaserImageCompletion: imageCompletion,
-            normalImageCompletion: imageCompletion,
-            hidpiImageCompletion: imageCompletion
+        (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
+                teaserImageCompletion: imageCompletion,
+                normalImageCompletion: imageCompletion,
+                hidpiImageCompletion: imageCompletion
         )
     }
 
@@ -192,8 +195,8 @@ extension ShotBucketsHeaderView {
             imageView = AnimatableShotImageView.newAutoLayoutView()
             setupImageView()
         }
-        let iv = imageView as! AnimatableShotImageView
-        iv.loadAnimatableShotFromUrl(url)
+        let iv = imageView as? AnimatableShotImageView
+        iv?.loadAnimatableShotFromUrl(url)
     }
 
     private func setupImageView() {

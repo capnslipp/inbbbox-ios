@@ -34,7 +34,7 @@ class CommentEditView: UIView {
         setupSubviews()
     }
 
-    @available(*, unavailable, message="Use init(frame: CGRect) method instead")
+    @available(*, unavailable, message = "Use init(frame: CGRect) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -55,15 +55,19 @@ class CommentEditView: UIView {
 
             blurView.autoPinEdgesToSuperviewEdges()
 
-            deleteButton.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton.superview!, withOffset: buttonsCenterOffset)
-            deleteButton.autoAlignAxis(.Vertical, toSameAxisOfView: deleteButton.superview!, withOffset: -(distanceBetweenButtons/2 + buttonSize/2))
+            deleteButton.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton.superview!,
+                    withOffset: buttonsCenterOffset)
+            deleteButton.autoAlignAxis(.Vertical, toSameAxisOfView: deleteButton.superview!,
+                    withOffset: -(distanceBetweenButtons / 2 + buttonSize / 2))
             deleteButton.autoSetDimensionsToSize(CGSize(width: buttonSize, height: buttonSize))
 
-            deleteLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton, withOffset: buttonSize/2 + buttonsToLabelsAdditionalOffset)
+            deleteLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton,
+                    withOffset: buttonSize / 2 + buttonsToLabelsAdditionalOffset)
             deleteLabel.autoAlignAxis(.Vertical, toSameAxisOfView: deleteButton)
 
             cancelButton.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton)
-            cancelButton.autoAlignAxis(.Vertical, toSameAxisOfView: cancelButton.superview!, withOffset: distanceBetweenButtons/2 + buttonSize/2)
+            cancelButton.autoAlignAxis(.Vertical, toSameAxisOfView: cancelButton.superview!,
+                    withOffset: distanceBetweenButtons / 2 + buttonSize / 2)
             cancelButton.autoSetDimensionsToSize(CGSize(width: buttonSize, height: buttonSize))
 
             cancelLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteLabel)

@@ -13,14 +13,14 @@ private var cornerRadius: CGFloat {
     return 30
 }
 
-private var spaceBetweenBottomEdgeOfFooterAndCollectionView: CGFloat {
+private var footerBottomEdgeSpace: CGFloat {
     return 20
 }
 
 class ShotDetailsFooterView: UICollectionReusableView {
 
     class var minimumRequiredHeight: CGFloat {
-        return cornerRadius + spaceBetweenBottomEdgeOfFooterAndCollectionView
+        return cornerRadius + footerBottomEdgeSpace
     }
 
     private var didUpdateConstraints = false
@@ -43,7 +43,7 @@ class ShotDetailsFooterView: UICollectionReusableView {
         setNeedsUpdateConstraints()
     }
 
-    @available(*, unavailable, message="Use init(frame:) method instead")
+    @available(*, unavailable, message = "Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -52,7 +52,8 @@ class ShotDetailsFooterView: UICollectionReusableView {
         super.layoutSubviews()
 
         let radii = CGSize(width: cornerRadius, height: cornerRadius)
-        let path = UIBezierPath(roundedRect: cornerWrapperView.bounds, byRoundingCorners: [.BottomLeft, .BottomRight], cornerRadii: radii)
+        let path = UIBezierPath(roundedRect: cornerWrapperView.bounds, byRoundingCorners: [.BottomLeft, .BottomRight],
+                cornerRadii: radii)
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         layer.mask = mask

@@ -26,24 +26,29 @@ class ShotBucketsViewModel {
     }
 
     var userLinkRange: NSRange {
-        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ?? NSRange(location: 0, length: 0)
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ??
+                NSRange(location: 0, length: 0)
     }
 
     var titleForHeader: String {
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
-            return NSLocalizedString("ShotBucketsViewModel.AddToBucket", comment: "Allows user to add shot to bucket")
+            return NSLocalizedString("ShotBucketsViewModel.AddToBucket",
+                    comment: "Allows user to add shot to bucket")
         case .RemoveFromBucket:
-            return NSLocalizedString("ShotBucketsViewModel.RemoveFromBucket", comment: "Allows user to remove shot from bucket")
+            return NSLocalizedString("ShotBucketsViewModel.RemoveFromBucket",
+                    comment: "Allows user to remove shot from bucket")
         }
     }
 
     var titleForActionItem: String {
         switch shotBucketsViewControllerMode {
         case .AddToBucket:
-            return NSLocalizedString("ShotBucketsViewModel.NewBucket", comment: "Allows user to create new bucket")
+            return NSLocalizedString("ShotBucketsViewModel.NewBucket",
+                    comment: "Allows user to create new bucket")
         case .RemoveFromBucket:
-            return NSLocalizedString("ShotBucketsViewModel.RemoveFromSelectedBuckets", comment: "Allows user to remove from multiple backets")
+            return NSLocalizedString("ShotBucketsViewModel.RemoveFromSelectedBuckets",
+                    comment: "Allows user to remove from multiple backets")
         }
     }
 
@@ -63,21 +68,24 @@ class ShotBucketsViewModel {
     }
 
     func loadBuckets() -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
 
             switch shotBucketsViewControllerMode {
 
             case .AddToBucket:
                 firstly {
                     bucketsProvider.provideMyBuckets()
-                }.then { buckets in
+                }.then {
+                    buckets in
                     self.buckets = buckets ?? []
                 }.then(fulfill).error(reject)
 
             case .RemoveFromBucket:
                 firstly {
                     shotsRequester.userBucketsForShot(shot)
-                }.then { buckets in
+                }.then {
+                    buckets in
                     self.buckets = buckets ?? []
                 }.then(fulfill).error(reject)
             }
@@ -85,17 +93,20 @@ class ShotBucketsViewModel {
     }
 
     func createBucket(name: String, description: NSAttributedString? = nil) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
             firstly {
                 bucketsRequester.postBucket(name, description: description)
-            }.then { bucket in
+            }.then {
+                bucket in
                 self.buckets.append(bucket)
             }.then(fulfill).error(reject)
         }
     }
 
     func addShotToBucketAtIndex(index: Int) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
 
             firstly {
                 bucketsRequester.addShot(shot, toBucket: buckets[index])
@@ -104,14 +115,17 @@ class ShotBucketsViewModel {
     }
 
     func removeShotFromSelectedBuckets() -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
 
             var bucketsToRemoveShot = [BucketType]()
             selectedBucketsIndexes.forEach {
                 bucketsToRemoveShot.append(buckets[$0])
             }
 
-            when(bucketsToRemoveShot.map { bucketsRequester.removeShot(shot, fromBucket: $0) }).then(fulfill).error(reject)
+            when(bucketsToRemoveShot.map {
+                bucketsRequester.removeShot(shot, fromBucket: $0)
+            }).then(fulfill).error(reject)
         }
     }
 
@@ -140,11 +154,11 @@ class ShotBucketsViewModel {
         return itemsCount - 1
     }
 
-    func displayableDataForBucketAtIndex(index: Int) -> (bucketName: String, shotsCountText: String) {
+    func displayableDataForBucketAtIndex(index: Int) -> (bucketName:String, shotsCountText:String) {
         let bucket = buckets[index]
         return (
-            bucketName: bucket.name,
-            shotsCountText: bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
+        bucketName: bucket.name,
+                shotsCountText: bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
         )
     }
 }

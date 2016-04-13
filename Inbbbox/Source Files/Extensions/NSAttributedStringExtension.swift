@@ -16,9 +16,9 @@ extension NSAttributedString {
             return nil
         }
 
-        let attributedOptions: [String: AnyObject] = [
-            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-            NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding
+        let attributedOptions: [String:AnyObject] = [
+                NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+                NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding
         ]
 
         var attributedString: NSAttributedString?
@@ -37,7 +37,7 @@ extension NSAttributedString {
 
         let possibleNewLineCharacter = string.substringFromIndex(string.endIndex.advancedBy(-1))
         if possibleNewLineCharacter == "\n" {
-            let range = NSMakeRange(0, length - 1)
+            let range = NSRange(location: 0, length: length - 1)
             return attributedSubstringFromRange(range).attributedStringByTrimingNewLineCharactersAtTheEnd()
         }
 
@@ -57,9 +57,9 @@ extension NSAttributedString {
     func boundingHeightUsingAvailableWidth(width: CGFloat) -> CGFloat {
 
         let options = unsafeBitCast(
-            NSStringDrawingOptions.UsesLineFragmentOrigin.rawValue,
-            NSStringDrawingOptions.self
+        NSStringDrawingOptions.UsesLineFragmentOrigin.rawValue,
+                NSStringDrawingOptions.self
         )
-        return ceil(boundingRectWithSize(CGSizeMake(width, CGFloat.max), options:options, context:nil).size.height)
+        return ceil(boundingRectWithSize(CGSizeMake(width, CGFloat.max), options: options, context: nil).size.height)
     }
 }

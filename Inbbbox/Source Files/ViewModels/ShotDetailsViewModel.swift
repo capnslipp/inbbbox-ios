@@ -25,7 +25,7 @@ final class ShotDetailsViewModel {
     var commentsProvider = APICommentsProvider(page: 1, pagination: 30)
     var commentsRequester = APICommentsRequester()
     var bucketsRequester = BucketsRequester()
-    var shotsRequester =  ShotsRequester()
+    var shotsRequester = ShotsRequester()
 
     var itemsCount: Int {
 
@@ -82,6 +82,7 @@ final class ShotDetailsViewModel {
 }
 
 // MARK: Data formatting
+
 extension ShotDetailsViewModel {
 
     var attributedShotTitleForHeader: NSAttributedString {
@@ -100,7 +101,8 @@ extension ShotDetailsViewModel {
     }
 
     var userLinkRange: NSRange {
-        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ?? NSRange(location: 0, length: 0)
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ??
+                NSRange(location: 0, length: 0)
     }
 
     func displayableDataForCommentAtIndex(index: Int) -> CommentDisplayableData {
@@ -112,10 +114,10 @@ extension ShotDetailsViewModel {
 
             let comment = comments[indexWithOffset]
             let displayableData = CommentDisplayableData(
-                author: ShotDetailsFormatter.commentAuthorForComment(comment),
-                comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
-                date: ShotDetailsFormatter.commentDateForComment(comment),
-                avatarURL: comment.user.avatarURL
+            author: ShotDetailsFormatter.commentAuthorForComment(comment),
+                    comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
+                    date: ShotDetailsFormatter.commentDateForComment(comment),
+                    avatarURL: comment.user.avatarURL
             )
 
             cachedFormattedComments.append(displayableData)
@@ -131,16 +133,19 @@ extension ShotDetailsViewModel {
 }
 
 // MARK: Likes handling
+
 extension ShotDetailsViewModel {
 
     func performLikeOperation() -> Promise<Bool> {
-        return Promise<Bool> { fulfill, reject in
+        return Promise<Bool> {
+            fulfill, reject in
 
             if let shotLiked = isShotLikedByMe {
 
                 firstly {
                     shotLiked ? shotsRequester.unlikeShot(shot) : shotsRequester.likeShot(shot)
-                }.then { _ -> Void in
+                }.then {
+                    _ -> Void in
                     self.isShotLikedByMe = !shotLiked
                     fulfill(!shotLiked)
                 }.error(reject)
@@ -154,11 +159,13 @@ extension ShotDetailsViewModel {
             return Promise(isShotLikedByMe)
         }
 
-        return Promise<Bool> { fulfill, reject in
+        return Promise<Bool> {
+            fulfill, reject in
 
             firstly {
                 shotsRequester.isShotLikedByMe(shot)
-            }.then { isShotLikedByMe -> Void in
+            }.then {
+                isShotLikedByMe -> Void in
                 self.isShotLikedByMe = isShotLikedByMe
                 fulfill(isShotLikedByMe)
             }.error(reject)
@@ -167,14 +174,17 @@ extension ShotDetailsViewModel {
 }
 
 // MARK: Buckets handling
+
 extension ShotDetailsViewModel {
 
     func checkShotAffiliationToUserBuckets() -> Promise<Bool> {
-        return Promise<Bool> { fulfill, reject in
+        return Promise<Bool> {
+            fulfill, reject in
 
             firstly {
                 checkNumberOfUserBucketsForShot()
-            }.then { number -> Void in
+            }.then {
+                number -> Void in
                 fulfill(Bool(number))
             }.error(reject)
         }
@@ -186,11 +196,13 @@ extension ShotDetailsViewModel {
             return Promise(userBucketsForShotCount)
         }
 
-        return Promise<Int> { fulfill, reject in
+        return Promise<Int> {
+            fulfill, reject in
 
             firstly {
                 shotsRequester.userBucketsForShot(shot)
-            }.then { buckets -> Void in
+            }.then {
+                buckets -> Void in
                 self.userBucketsForShot = buckets
                 self.userBucketsForShotCount = self.userBucketsForShot.count
                 fulfill(self.userBucketsForShotCount!)
@@ -204,18 +216,21 @@ extension ShotDetailsViewModel {
     }
 
     func removeShotFromBucketIfExistsInExactlyOneBucket() -> Promise<(removed: Bool, bucketsNumber: Int?)> {
-        return Promise<(removed: Bool, bucketsNumber: Int?)> { fulfill, reject in
+        return Promise<(removed: Bool, bucketsNumber: Int?)> {
+            fulfill, reject in
 
             var numberOfBuckets: Int?
 
             firstly {
                 checkNumberOfUserBucketsForShot()
-            }.then { number -> Void in
+            }.then {
+                number -> Void in
                 numberOfBuckets = number
                 if numberOfBuckets == 1 {
                     self.bucketsRequester.removeShot(self.shot, fromBucket: self.userBucketsForShot[0])
                 }
-            }.then { () -> Void in
+            }.then {
+                () -> Void in
                 if numberOfBuckets == 1 {
                     self.clearBucketsData()
                     fulfill((removed: true, bucketsNumber: nil))
@@ -228,13 +243,14 @@ extension ShotDetailsViewModel {
 }
 
 // MARK: Comments handling
+
 extension ShotDetailsViewModel {
 
     var isCommentingAvailable: Bool {
         if let accountType = UserStorage.currentUser?.accountType {
             return accountType == .Player || accountType == .Team
         }
-        return  false
+        return false
     }
 
     var hasComments: Bool {
@@ -246,14 +262,16 @@ extension ShotDetailsViewModel {
     }
 
     func loadComments() -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
 
             isFetchingComments = true
 
             if comments.count == 0 {
                 firstly {
                     commentsProvider.provideCommentsForShot(shot)
-                }.then { comments -> Void in
+                }.then {
+                    comments -> Void in
                     self.comments = comments ?? []
                 }.always {
                     self.isFetchingComments = false
@@ -263,7 +281,8 @@ extension ShotDetailsViewModel {
 
                 firstly {
                     commentsProvider.nextPage()
-                }.then { comments -> Void in
+                }.then {
+                    comments -> Void in
                     if let comments = comments {
                         self.comments.appendContentsOf(comments)
                     }
@@ -280,7 +299,8 @@ extension ShotDetailsViewModel {
             return Promise()
         }
 
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
 
             firstly {
                 loadComments()
@@ -294,24 +314,28 @@ extension ShotDetailsViewModel {
     }
 
     func postComment(message: String) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
 
             firstly {
                 commentsRequester.postCommentForShot(shot, withText: message)
-            }.then { comment in
+            }.then {
+                comment in
                 self.comments.append(comment)
             }.then(fulfill).error(reject)
         }
     }
 
     func deleteCommentAtIndex(index: Int) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
 
             let comment = comments[indexInCommentArrayBasedOnItemIndex(index)]
 
             firstly {
                 commentsRequester.deleteComment(comment, forShot: shot)
-            }.then { comment -> Void in
+            }.then {
+                comment -> Void in
                 let indexOfCommentToRemove = self.indexInCommentArrayBasedOnItemIndex(index)
                 self.comments.removeAtIndex(indexOfCommentToRemove)
                 self.cachedFormattedComments.removeAtIndex(indexOfCommentToRemove)
@@ -345,6 +369,8 @@ extension ShotDetailsViewModel {
 extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
 
     func userForURL(url: NSURL) -> UserType? {
-        return shot.user.identifier == url.absoluteString ? shot.user : comments.filter { $0.user.identifier == url.absoluteString }.first?.user
+        return shot.user.identifier == url.absoluteString ? shot.user : comments.filter {
+            $0.user.identifier == url.absoluteString
+        }.first?.user
     }
 }

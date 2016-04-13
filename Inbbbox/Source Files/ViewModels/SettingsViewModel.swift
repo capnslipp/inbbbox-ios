@@ -50,55 +50,69 @@ class SettingsViewModel: GroupedListViewModel {
         self.alertDelegate = delegate as? AlertDisplayable
         self.userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
 
-        let createAccountTitle = NSLocalizedString("SettingsViewModel.CreateAccount", comment: "Button text allowing user to create new account.")
-
-        let reminderTitle = NSLocalizedString("SettingsViewModel.EnableDailyReminders", comment: "User settings, enable daily reminders")
-        let reminderDateTitle = NSLocalizedString("SettingsViewModel.SendDailyReminders", comment: "User settings, send daily reminders")
-
-        let followingStreamSourceTitle = NSLocalizedString("SettingsViewModel.Following", comment: "User settings, enable following")
-        let newTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.NewToday", comment: "User settings, enable new today.")
-        let popularTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.Popular", comment: "User settings, enable popular today.")
-        let debutsStreamSourceTitle = NSLocalizedString("SettingsViewModel.Debuts", comment: "User settings, show debuts.")
+        let createAccountTitle = NSLocalizedString("SettingsViewModel.CreateAccount",
+                comment: "Button text allowing user to create new account.")
+        let reminderTitle = NSLocalizedString("SettingsViewModel.EnableDailyReminders",
+                comment: "User settings, enable daily reminders")
+        let reminderDateTitle = NSLocalizedString("SettingsViewModel.SendDailyReminders",
+                comment: "User settings, send daily reminders")
+        let followingStreamSourceTitle = NSLocalizedString("SettingsViewModel.Following",
+                comment: "User settings, enable following")
+        let newTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.NewToday",
+                comment: "User settings, enable new today.")
+        let popularTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.Popular",
+                comment: "User settings, enable popular today.")
+        let debutsStreamSourceTitle = NSLocalizedString("SettingsViewModel.Debuts",
+                comment: "User settings, show debuts.")
 
         // MARK: Create items
 
         createAccountItem = LabelItem(title: createAccountTitle)
 
-        reminderItem = SwitchItem(title: reminderTitle, on: Settings.Reminder.Enabled)
+        reminderItem = SwitchItem(title: reminderTitle, isOn: Settings.Reminder.Enabled)
         reminderDateItem = DateItem(title: reminderDateTitle, date: Settings.Reminder.Date)
 
-        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle, on: Settings.StreamSource.Following)
-        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle, on: Settings.StreamSource.NewToday)
-        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
-        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
-        let acknowledgementItem = LabelItem(title: NSLocalizedString("SettingsViewModel.AcknowledgementsButton", comment: "Acknowledgements button"))
+        followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle,
+                isOn: Settings.StreamSource.Following)
+        newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle,
+                isOn: Settings.StreamSource.NewToday)
+        popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle,
+                isOn: Settings.StreamSource.PopularToday)
+        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle,
+                isOn: Settings.StreamSource.Debuts)
+        let acknowledgementItem = LabelItem(title: NSLocalizedString("SettingsViewModel.AcknowledgementsButton",
+                comment: "Acknowledgements button"))
         var items: [[GroupItem]]
         if userMode == .LoggedUser {
             items = [[reminderItem, reminderDateItem],
-                [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
-                [acknowledgementItem]]
+                     [followingStreamSourceItem, newTodayStreamSourceItem,
+                      popularTodayStreamSourceItem, debutsStreamSourceItem],
+                     [acknowledgementItem]]
         } else {
             items = [[createAccountItem],
-                [reminderItem, reminderDateItem],
-                [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
-                [acknowledgementItem]]
+                     [reminderItem, reminderDateItem],
+                     [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
+                     [acknowledgementItem]]
         }
 
         // MARK: Super init
 
         super.init(items: items as [[GroupItem]])
 
-        createAccountItem.onSelect = { [weak self] in
+        createAccountItem.onSelect = {
+            [weak self] in
             self?.settingsViewController?.authenticateUser()
         }
 
-        acknowledgementItem.onSelect = { [weak self] in
+        acknowledgementItem.onSelect = {
+            [weak self] in
             self?.settingsViewController?.presentAcknowledgements()
         }
 
         // MARK: onValueChanged blocks
 
-        reminderItem.onValueChanged = { on in
+        reminderItem.onValueChanged = {
+            on in
             Settings.Reminder.Enabled = on
             if on {
                 self.registerUserNotificationSettings()
@@ -111,31 +125,38 @@ class SettingsViewModel: GroupedListViewModel {
             }
         }
 
-        reminderDateItem.onValueChanged = { date -> Void in
-            if self.reminderItem.on {
+        reminderDateItem.onValueChanged = {
+            date -> Void in
+            if self.reminderItem.isOn {
                 self.registerLocalNotification()
             }
             Settings.Reminder.Date = date
         }
 
-        followingStreamSourceItem.onValueChanged = { on in
+        followingStreamSourceItem.onValueChanged = {
+            on in
             Settings.StreamSource.Following = on
         }
 
-        newTodayStreamSourceItem.onValueChanged = { on in
+        newTodayStreamSourceItem.onValueChanged = {
+            on in
             Settings.StreamSource.NewToday = on
         }
 
-        popularTodayStreamSourceItem.onValueChanged = { on in
+        popularTodayStreamSourceItem.onValueChanged = {
+            on in
             Settings.StreamSource.PopularToday = on
         }
 
-        debutsStreamSourceItem.onValueChanged = { on in
+        debutsStreamSourceItem.onValueChanged = {
+            on in
             Settings.StreamSource.Debuts = on
         }
 
         // MARK: add observer
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didProvideNotificationSettings), name: NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                selector: #selector(didProvideNotificationSettings),
+        name: NotificationKey.UserNotificationSettingsRegistered.rawValue, object: nil)
     }
 
     deinit {
@@ -153,18 +174,20 @@ class SettingsViewModel: GroupedListViewModel {
 private extension SettingsViewModel {
 
     func registerUserNotificationSettings() {
-        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil))
+        UIApplication.sharedApplication().registerUserNotificationSettings(
+        UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil))
     }
 
     func registerLocalNotification() {
 
-        let localNotification = LocalNotificationRegistrator.registerNotification(forUserID: loggedInUser?.identifier ?? "userID", time: reminderDateItem.date)
+        let localNotification = LocalNotificationRegistrator.registerNotification(
+        forUserID: loggedInUser?.identifier ?? "userID", time: reminderDateItem.date)
 
         if localNotification == nil {
 
             alertDelegate?.displayAlert(preparePermissionsAlert())
 
-            reminderItem.on = false
+            reminderItem.isOn = false
             Settings.Reminder.Enabled = false
             delegate?.didChangeItemsAtIndexPaths(indexPathsForItems([reminderItem])!)
         }
@@ -178,13 +201,19 @@ private extension SettingsViewModel {
 
     func preparePermissionsAlert() -> UIAlertController {
 
-        let alert = UIAlertController(title: NSLocalizedString("SettingsViewModel.Permissions", comment: "Title of alert, asking user to grant notifications permission"), message: NSLocalizedString("SettingsViewModel.AccessToNotifications", comment: "Body of alert, asking user to grant notifications permission."), preferredStyle: .Alert)
+        let alert = UIAlertController(title: NSLocalizedString("SettingsViewModel.Permissions",
+                comment: "Title of alert, asking user to grant notifications permission"),
+                message: NSLocalizedString("SettingsViewModel.AccessToNotifications",
+                        comment: "Body of alert, asking user to grant notifications permission."),
+                preferredStyle: .Alert)
 
-        let settingsAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Settings", comment: "Redirect user to Settings app"), style: .Default) {
+        let settingsAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Settings",
+                comment: "Redirect user to Settings app"), style: .Default) {
             _ in
             UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Dismiss", comment: "Notifications alert, dismiss button."), style: .Default, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Dismiss",
+                comment: "Notifications alert, dismiss button."), style: .Default, handler: nil)
 
         alert.addAction(settingsAction)
         alert.addAction(cancelAction)

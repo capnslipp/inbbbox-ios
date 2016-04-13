@@ -20,7 +20,7 @@ class ShotsCollectionViewController: UICollectionViewController {
 
     // MARK: Life cycle
 
-    @available(*, unavailable, message="Use init() method instead")
+    @available(*, unavailable, message = "Use init() method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -41,6 +41,7 @@ class ShotsCollectionViewController: UICollectionViewController {
 }
 
 // MARK: UIViewController
+
 extension ShotsCollectionViewController {
 
     override func viewDidLoad() {
@@ -68,7 +69,8 @@ extension ShotsCollectionViewController {
                 self.refreshShotsData()
             }.then {
                 self.stateHandler.presentData()
-            }.error { error in
+            }.error {
+                error in
                 let alertController = self.signOutAlertController()
                 self.presentViewController(alertController, animated: true, completion: nil)
                 alertController.view.tintColor = .pinkColor()
@@ -78,29 +80,34 @@ extension ShotsCollectionViewController {
 }
 
 // MARK: UICollectionViewDataSource
+
 extension ShotsCollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return stateHandler.collectionView(collectionView, numberOfItemsInSection: section)
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(collectionView: UICollectionView,
+                                 cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return stateHandler.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
     }
 }
 
 // MARK: UICollectionViewDelegate
+
 extension ShotsCollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         stateHandler.collectionView?(collectionView, didSelectItemAtIndexPath: indexPath)
     }
 
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
+                                 forItemAtIndexPath indexPath: NSIndexPath) {
         stateHandler.collectionView?(collectionView, willDisplayCell: cell, forItemAtIndexPath: indexPath)
     }
 
-    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell,
+                                 forItemAtIndexPath indexPath: NSIndexPath) {
         if stateHandler is ShotsNormalStateHandler {
             stateHandler.collectionView?(collectionView, didEndDisplayingCell: cell, forItemAtIndexPath: indexPath)
         }
@@ -108,6 +115,7 @@ extension ShotsCollectionViewController {
 }
 
 // MARK: UIScrollViewDelegate
+
 extension ShotsCollectionViewController {
     override func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         stateHandler.scrollViewDidEndDecelerating?(scrollView)
@@ -135,6 +143,7 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 }
 
 // MARK: Private methods
+
 private extension ShotsCollectionViewController {
 
     func configureForCurrentStateHandler() {
@@ -149,7 +158,8 @@ private extension ShotsCollectionViewController {
     }
 
     func registerToSettingsNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didChangeStreamSourceSettings(_:)), name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didChangeStreamSourceSettings(_:)),
+        name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
     }
 
     dynamic func didChangeStreamSourceSettings(notification: NSNotification) {
@@ -157,16 +167,19 @@ private extension ShotsCollectionViewController {
             refreshShotsData()
         }.then {
             self.collectionView?.reloadData()
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Need mockups for error message view
         }
     }
 
     func refreshShotsData() -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
             firstly {
                 self.shotsProvider.provideShots()
-            }.then { shots -> Void in
+            }.then {
+                shots -> Void in
                 self.shots = shots ?? []
             }.then(fulfill).error(reject)
         }
@@ -174,11 +187,15 @@ private extension ShotsCollectionViewController {
 
     func signOutAlertController() -> UIAlertController {
         let alertController = UIAlertController(
-            title: NSLocalizedString("ShotsCollectionViewController.Error", comment: "Title of alert visible after upon error detection."),
-            message: NSLocalizedString("ShotsCollectionViewController.SignOut", comment: "Message to use informing she will be logged out because of error."),
-            preferredStyle: .Alert
+        title: NSLocalizedString("ShotsCollectionViewController.Error",
+                comment: "Title of alert visible after upon error detection."),
+                message: NSLocalizedString("ShotsCollectionViewController.SignOut",
+                        comment: "Message to use informing she will be logged out because of error."),
+                preferredStyle: .Alert
         )
-        let logoutAction = UIAlertAction(title: NSLocalizedString("ShotsCollectionViewController.Dismiss", comment: "Dismiss error alert."), style: .Cancel) { _ in
+        let logoutAction = UIAlertAction(title: NSLocalizedString("ShotsCollectionViewController.Dismiss",
+                comment: "Dismiss error alert."), style: .Cancel) {
+            _ in
             Authenticator.logout()
             UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
         }
