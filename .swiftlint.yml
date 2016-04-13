@@ -1,2 +1,3 @@
 included: # paths to include during linting. `--path` is ignored if present.
   - Inbbbox
+line_length: 120
