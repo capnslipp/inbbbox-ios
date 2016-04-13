@@ -12,7 +12,7 @@ import PromiseKit
 
 class BucketContentViewModel: SimpleShotsViewModel {
     
-    var delegate: BaseCollectionViewViewModelDelegate?
+    weak var delegate: BaseCollectionViewViewModelDelegate?
     var shots = [ShotType]()
     private let shotsProvider = ShotsProvider()
     private var userMode: UserMode

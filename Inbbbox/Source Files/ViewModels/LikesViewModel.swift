@@ -12,7 +12,7 @@ import PromiseKit
 
 class LikesViewModel: SimpleShotsViewModel {
     
-    var delegate: BaseCollectionViewViewModelDelegate?
+    weak var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Likes", comment:"")
     var shots = [ShotType]()
     private let shotsProvider = ShotsProvider()

@@ -11,7 +11,7 @@ import PromiseKit
 
 class UserDetailsViewModel: BaseCollectionViewViewModel {
     
-    var delegate: BaseCollectionViewViewModelDelegate?
+    weak var delegate: BaseCollectionViewViewModelDelegate?
     
     var userShots = [ShotType]()
     var connectionsRequester = APIConnectionsRequester()
