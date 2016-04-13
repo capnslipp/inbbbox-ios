@@ -1,3 +1,2 @@
 included: # paths to include during linting. `--path` is ignored if present.
   - Inbbbox
-  - Unit Tests
