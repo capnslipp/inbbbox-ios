@@ -34,7 +34,7 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
         setNeedsUpdateConstraints()
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message = "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -52,7 +52,8 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
         super.updateConstraints()
     }
 
-    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes)
+                    -> UICollectionViewLayoutAttributes {
 
         layoutAttributes.frame = {
 
@@ -60,7 +61,7 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
             frame.size.height = cellHeight
 
             return CGRectIntegral(frame)
-            }()
+        }()
 
         return layoutAttributes
     }

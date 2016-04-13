@@ -8,11 +8,12 @@
 
 import UIKit
 
-class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight, InfoShotsCellConfigurable, AvatarSettable {
+class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight,
+        InfoShotsCellConfigurable, AvatarSettable {
 
     let shotImageView = UIImageView.newAutoLayoutView()
     var avatarView: AvatarView!
-    let avatarSize = CGSize(width:16, height:16)
+    let avatarSize = CGSize(width: 16, height: 16)
     private var didSetConstraints = false
 
     // MARK: - Lifecycle

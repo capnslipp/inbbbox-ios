@@ -16,7 +16,7 @@ class ShotDetailsOperationView: UIView {
 
     class var minimumRequiredHeight: CGFloat {
         let margin = CGFloat(5)
-        return  selectableViewSize.height + 2 * margin
+        return selectableViewSize.height + 2 * margin
     }
 
     let likeSelectableView = ActivityIndicatorSelectableView.newAutoLayoutView()
@@ -38,7 +38,7 @@ class ShotDetailsOperationView: UIView {
         addSubview(bucketSelectableView)
     }
 
-    @available(*, unavailable, message="Use init(withImage: UIImage) method instead")
+    @available(*, unavailable, message = "Use init(withImage: UIImage) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -53,8 +53,10 @@ class ShotDetailsOperationView: UIView {
             didUpdateConstraints = true
 
             let offset = CGFloat(40)
-            likeSelectableView.autoAlignAxis(.Vertical, toSameAxisOfView: likeSelectableView.superview!, withOffset: -offset)
-            bucketSelectableView.autoAlignAxis(.Vertical, toSameAxisOfView: likeSelectableView.superview!, withOffset: offset)
+            likeSelectableView.autoAlignAxis(.Vertical, toSameAxisOfView: likeSelectableView.superview!,
+                    withOffset: -offset)
+            bucketSelectableView.autoAlignAxis(.Vertical, toSameAxisOfView: likeSelectableView.superview!,
+                    withOffset: offset)
 
             [likeSelectableView, bucketSelectableView].forEach {
                 $0.autoAlignAxis(.Horizontal, toSameAxisOfView: self, withOffset: -10)

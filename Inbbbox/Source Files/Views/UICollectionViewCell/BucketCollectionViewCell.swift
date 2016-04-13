@@ -8,7 +8,8 @@
 
 import UIKit
 
-class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight, InfoShotsCellConfigurable {
+class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight,
+        InfoShotsCellConfigurable {
 
     let firstShotImageView = UIImageView.newAutoLayoutView()
     let secondShotImageView = UIImageView.newAutoLayoutView()
