@@ -9,7 +9,7 @@ class RoundedButton: UIButton {
 //    MARK: - Life cycle
 
     let diameter = CGFloat(70)
-    
+
     @available(*, unavailable, message = "Use init() or init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -18,7 +18,7 @@ class RoundedButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         layer.cornerRadius = diameter/2
         layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
         layer.shadowOffset = CGSize(width: 0, height: 2)

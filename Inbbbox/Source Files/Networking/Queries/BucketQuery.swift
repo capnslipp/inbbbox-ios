@@ -9,18 +9,18 @@
 import Foundation
 
 struct BucketQuery: Query {
-    
+
     let method = Method.GET
     var parameters = Parameters(encoding: .URL)
     private(set) var path: String
-    
+
     /// Initialize query for list of the authenticated user's buckets.
     init() {
         path = "/user/buckets"
     }
 
     /// Initialize query for list of the given user's buckets.
-    /// 
+    ///
     /// - parameter user: User whose buckets should be listed.
     init(user: UserType) {
         path = "/users/\(user.username)/buckets"

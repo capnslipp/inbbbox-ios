@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITableView {
-    
+
     /// Deselects row if is already selected
     ///
     /// -parameter animated: bool value that indicates if deselection should be animated
@@ -18,29 +18,29 @@ extension UITableView {
             deselectRowAtIndexPath(indexPath, animated: animated)
         }
     }
-    
+
     /// Reloads and deselects row at index path.
     ///
     /// -parameter indexPath: index path of row
     /// -parameter animated: bool value that indicates if deselection should be animated. Default is true.
-    func reloadAndDeselectRowAtIndexPath(indexPath: NSIndexPath, animated: Bool = true)  {
+    func reloadAndDeselectRowAtIndexPath(indexPath: NSIndexPath, animated: Bool = true) {
         reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)
         deselectRowAtIndexPath(indexPath, animated: animated)
     }
-    
+
     /// Hides separator for empty cells
     func hideSeparatorForEmptyCells() {
-        tableFooterView = UIView(frame: CGRectZero)
+        tableFooterView = UIView(frame: CGRect.zero)
     }
-    
+
     /// Registers class
     ///
     /// - parameter aClass: type of UITableViewCell which conforms to Reusable protocol
     func registerClass<T: UITableViewCell where T: Reusable>(aClass: T.Type) {
         registerClass(aClass, forCellReuseIdentifier: T.reuseIdentifier)
     }
-    
+
     /// Dequeues reusable cell
     ///
     /// - parameter aClass: type of UITableViewCell which conforms to Reusable protocol

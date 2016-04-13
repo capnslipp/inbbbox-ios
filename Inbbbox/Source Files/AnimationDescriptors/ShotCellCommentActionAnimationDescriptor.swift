@@ -8,15 +8,15 @@
 
 import UIKit
 
-struct ShotCellCommentActionAnimationDescriptor : AnimationDescriptor {
-    
+struct ShotCellCommentActionAnimationDescriptor: AnimationDescriptor {
+
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Plain
     var delay = 0.0
     var options: UIViewAnimationOptions = []
     var animations: () -> Void
     var completion: ((Bool) -> Void)?
-    
+
     init(shotCell: ShotCollectionViewCell, swipeCompletion: (() -> ())?) {
         self.shotCell = shotCell
         animations = {
@@ -33,4 +33,3 @@ struct ShotCellCommentActionAnimationDescriptor : AnimationDescriptor {
         }
     }
 }
-

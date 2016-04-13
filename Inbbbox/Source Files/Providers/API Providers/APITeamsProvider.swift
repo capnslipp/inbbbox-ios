@@ -11,14 +11,14 @@ import PromiseKit
 
 /// Provides interface for dribbble teams read API
 class APITeamsProvider: PageableProvider {
-    
+
     /**
      Provides team's members.
-     
+
      - returns: Promise which resolves with users or nil.
      */
     func provideMembersForTeam(team: TeamType) -> Promise<[UserType]?> {
-        
+
         let query = TeamMembersQuery(team: team)
         return Promise<[UserType]?> { fulfill, reject in
             firstly {
@@ -28,13 +28,13 @@ class APITeamsProvider: PageableProvider {
             }.error(reject)
         }
     }
-    
+
     /**
      Provides next page of team's members.
-     
+
      - Warning: You have to use any of provide... method first to be able to use this method.
      Otherwise an exception will appear.
-     
+
      - returns: Promise which resolves with users or nil.
      */
     func nextPage() -> Promise<[UserType]?> {
@@ -42,17 +42,17 @@ class APITeamsProvider: PageableProvider {
             firstly {
                 nextPageFor(User)
             }.then { buckets -> Void in
-                fulfill(buckets.flatMap{ $0.map { $0 as UserType } })
+                fulfill(buckets.flatMap { $0.map { $0 as UserType } })
             }.error(reject)
         }
     }
-    
+
     /**
      Provides previous page of team's members.
-     
+
      - Warning: You have to use any of provide... method first to be able to use this method.
      Otherwise an exception will appear.
-     
+
      - returns: Promise which resolves with users or nil.
      */
     func previousPage() -> Promise<[UserType]?> {
@@ -60,7 +60,7 @@ class APITeamsProvider: PageableProvider {
             firstly {
                 previousPageFor(User)
             }.then { buckets -> Void in
-                fulfill(buckets.flatMap{ $0.map { $0 as UserType } })
+                fulfill(buckets.flatMap { $0.map { $0 as UserType } })
             }.error(reject)
         }
     }

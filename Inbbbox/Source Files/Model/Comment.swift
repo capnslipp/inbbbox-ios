@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct Comment: CommentType {
-    
+
     let identifier: String
     let body: NSAttributedString?
     let createdAt: NSDate
@@ -20,7 +20,7 @@ struct Comment: CommentType {
 extension Comment: Mappable {
     static var map: JSON -> Comment {
         return { json in
-            
+
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
             let htmlBody: NSAttributedString? = {
                 guard let htmlString = json[Key.Body.rawValue].string else {
@@ -28,7 +28,7 @@ extension Comment: Mappable {
                 }
                 return NSAttributedString(htmlString: htmlString)
             }()
-            
+
             return Comment(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 body: htmlBody,
@@ -37,7 +37,7 @@ extension Comment: Mappable {
             )
         }
     }
-    
+
     private enum Key: String {
         case Identifier = "id"
         case Body = "body"

@@ -9,10 +9,10 @@
 import Foundation
 
 class APIShotsProviderConfiguration {
-    
+
     enum ShotsSource {
         case NewToday, PopularToday, Debuts, Following
-        
+
         var isActive: Bool {
             switch self {
                 case .NewToday: return Settings.StreamSource.NewToday
@@ -22,11 +22,11 @@ class APIShotsProviderConfiguration {
             }
         }
     }
-    
+
     var sources: [ShotsSource] {
         return [.NewToday, .PopularToday, .Debuts, .Following].filter { $0.isActive }
     }
-    
+
     func queryByConfigurationForQuery(query: ShotsQuery, source: ShotsSource) -> ShotsQuery {
         var resultQuery = query
         switch source {
@@ -40,9 +40,9 @@ class APIShotsProviderConfiguration {
             case .Following:
                 resultQuery.followingUsersShotsQuery = true
         }
-        
+
         resultQuery.date = NSDate()
-    
+
         return resultQuery
     }
 }

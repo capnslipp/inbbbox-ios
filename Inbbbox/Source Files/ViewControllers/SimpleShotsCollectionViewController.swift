@@ -17,6 +17,7 @@ class SimpleShotsCollectionViewController: TwoLayoutsCollectionViewController {
     var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     private var shouldShowLoadingView = true
+
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
     
 }
@@ -53,12 +54,12 @@ extension SimpleShotsCollectionViewController {
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
     }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         viewModel?.clearViewModelIfNeeded()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel?.downloadInitialItems()
@@ -72,15 +73,15 @@ extension SimpleShotsCollectionViewController {
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel!.itemsCount
     }
-    
+
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel!.shotCollectionViewCellViewData(indexPath)
-        
+
         indexPathsNeededImageUpdate.append(indexPath)
         lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
-        
+
         cell.gifLabel.hidden = !cellData.animated
         return cell
     }
@@ -96,23 +97,23 @@ extension SimpleShotsCollectionViewController {
             viewModel?.downloadItemsForNextPage()
         }
     }
-    
+
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+
         guard let viewModel = viewModel else {
             return
         }
-        
+
         let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
-        
+
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
-        
+
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
-        
+
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
-    
+
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
             indexPathsNeededImageUpdate.removeAtIndex(index)
@@ -126,22 +127,22 @@ extension SimpleShotsCollectionViewController: BaseCollectionViewViewModelDelega
         shouldShowLoadingView = false
         collectionView?.reloadData()
     }
-    
+
     func viewModelDidFailToLoadInitialItems(error: ErrorType) {
         self.shouldShowLoadingView = false
         collectionView?.reloadData()
-        
+
         if let viewModel = viewModel where viewModel.shots.isEmpty {
             let alert = UIAlertController.generalErrorAlertController()
             presentViewController(alert, animated: true, completion: nil)
             alert.view.tintColor = .pinkColor()
         }
     }
-    
+
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
-    
+
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
@@ -177,9 +178,9 @@ private extension SimpleShotsCollectionViewController {
     
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
-            
+
             guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
-            
+
             cell.shotImageView.image = image
         }
         ImageProvider.lazyLoadImageFromURLs(

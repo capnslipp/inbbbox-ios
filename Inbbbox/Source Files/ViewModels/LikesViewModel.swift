@@ -17,15 +17,15 @@ class LikesViewModel: SimpleShotsViewModel {
     var shots = [ShotType]()
     private let shotsProvider = ShotsProvider()
     private var userMode: UserMode
-    
+
     var itemsCount: Int {
         return shots.count
     }
-    
+
     init() {
         userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
     }
-    
+
     func downloadInitialItems() {
         firstly {
             shotsProvider.provideMyLikedShots()
@@ -38,7 +38,7 @@ class LikesViewModel: SimpleShotsViewModel {
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
-    
+
     func downloadItemsForNextPage() {
         guard UserStorage.isUserSignedIn else {
             return
@@ -76,7 +76,7 @@ class LikesViewModel: SimpleShotsViewModel {
         let animated = shots[indexPath.row].animated
         return (shotImage, animated)
     }
-    
+
     func clearViewModelIfNeeded() {
         let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
         if userMode != currentUserMode {

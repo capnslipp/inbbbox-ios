@@ -15,7 +15,7 @@ class ShotImageView: UIImageView {
 
     var originalImage: UIImage?
     let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
-    
+
     private var didSetupConstraints = false
     private var imageUrl: NSURL?
 
@@ -47,7 +47,7 @@ class ShotImageView: UIImageView {
 
         super.updateConstraints()
     }
-    
+
     func loadShotImageFromURL(url: NSURL, blur: CGFloat = 0) {
         imageUrl = url
         image = nil
@@ -60,7 +60,7 @@ class ShotImageView: UIImageView {
             self?.applyBlur()
         }
     }
-    
+
     func applyBlur(blur: CGFloat = 0) {
         if blur == 0 {
             self.image = originalImage

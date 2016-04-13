@@ -9,11 +9,11 @@
 import Foundation
 
 struct CommentQuery: Query {
-    
+
     let method = Method.GET
     let path: String
     var parameters = Parameters(encoding: .URL)
-    
+
     /// Initialize query for list of comments under given shot.
     ///
     /// - parameter shot: Shot that comments should be related to.

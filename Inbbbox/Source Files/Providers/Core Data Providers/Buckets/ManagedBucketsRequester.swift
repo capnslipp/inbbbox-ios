@@ -12,17 +12,17 @@ import CoreData
 import SwiftyJSON
 
 class ManagedBucketsRequester {
-    
+
     let managedObjectContext: NSManagedObjectContext
     let managedObjectsProvider: ManagedObjectsProvider
-    
+
     init() {
         managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
-    
+
     func addBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
-        
+
         let bucket = Bucket(
             identifier: NSProcessInfo.processInfo().globallyUniqueString.stringByReplacingOccurrencesOfString("-", withString: ""),
             name: name,
@@ -31,10 +31,10 @@ class ManagedBucketsRequester {
             createdAt: NSDate(),
             owner: User(json: guestJSON)
         )
-        
-        
+
+
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
-        
+
         return Promise<BucketType> { fulfill, reject in
             do {
                 try managedObjectContext.save()
@@ -44,7 +44,7 @@ class ManagedBucketsRequester {
             }
         }
     }
-    
+
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
         let managedShot = managedObjectsProvider.managedShot(shot)
@@ -67,7 +67,7 @@ class ManagedBucketsRequester {
 
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
         let managedShot = managedObjectsProvider.managedShot(shot)
-        if let managedShots = managedBucket.shots{
+        if let managedShots = managedBucket.shots {
             let mutableShots = NSMutableSet(set: managedShots)
             mutableShots.removeObject(managedShot)
             managedBucket.shots = mutableShots.copy() as? NSSet

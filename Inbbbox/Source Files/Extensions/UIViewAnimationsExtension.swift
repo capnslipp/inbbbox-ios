@@ -5,7 +5,7 @@
 import UIKit
 
 extension UIView {
-    
+
     /// Animate UIView with descriptor
     ///
     /// - parameter animationDescriptor: animation descriptor with values for animation aspects.
@@ -16,7 +16,7 @@ extension UIView {
         let animationType = animationDescriptor.animationType
         let animations = animationDescriptor.animations
         let completion = animationDescriptor.completion
-        
+
         switch animationType {
         case AnimationType.Plain:
             self.animateWithDuration(duration,

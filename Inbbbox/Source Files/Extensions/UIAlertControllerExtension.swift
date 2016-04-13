@@ -20,10 +20,10 @@ extension UIAlertController {
         alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
             textField.placeholder = NSLocalizedString("UIAlertControllerExtension.BucketName", comment: "Asks user to enter bucket name.")
         })
-        
+
         return alert
     }
-    
+
     class func generalErrorAlertController() -> UIAlertController {
         let alert = UIAlertController(
             title: NSLocalizedString("UIAlertControllerExtension.Error", comment: "General popup informing about error."),
@@ -31,7 +31,7 @@ extension UIAlertController {
             preferredStyle: .Alert
         )
         alert.addAction(UIAlertAction(title: NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK"), style: .Cancel, handler: nil))
-        
+
         return alert
     }
 }

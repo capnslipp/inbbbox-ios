@@ -7,13 +7,13 @@
 //
 
 protocol InfoShotsCellConfigurable {
-    
+
     func setupShotsView()
-    
+
     func setShotsViewConstraints()
-    
+
     func setInfoViewConstraints()
-    
+
     func clearImages()
-    
+
 }

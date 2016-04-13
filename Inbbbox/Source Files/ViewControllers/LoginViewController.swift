@@ -68,19 +68,19 @@ class LoginViewController: UIViewController {
 
 // MARK: Actions
 extension LoginViewController {
-    
+
     func loginButtonDidTap(_: UIButton) {
-        
+
         viewAnimator?.startLoginAnimation()
-        
+
         let interactionHandler: (UIViewController -> Void) = { controller in
             after(0.6).then {
                 self.presentViewController(controller, animated: true, completion: nil)
             }
         }
-        
+
         let authenticator = Authenticator(interactionHandler: interactionHandler)
-        
+
         firstly {
             authenticator.loginWithService(.Dribbble)
         }.then {
@@ -92,13 +92,13 @@ extension LoginViewController {
             self.viewAnimator?.stopAnimationWithType(.Undo)
         }
     }
-    
+
     func loginAsGuestButtonDidTap(_: UIButton) {
         Authenticator.logout()
         AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginAsGuest)
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
-    
+
     func logoTapped(sender: UITapGestureRecognizer) {
         logoTappedCount += 1
         if logoTappedCount == 5 {
@@ -109,11 +109,11 @@ extension LoginViewController {
 }
 
 extension LoginViewController: LoginViewAnimatorDelegate {
-    
+
     func tabBarWillAppear() {
         statusBarStyle = .Default
     }
-    
+
     func shrinkAnimationDidFinish() {
         self.viewAnimator?.stopAnimationWithType(.Continue) {
             self.presentNextViewController()
@@ -122,7 +122,7 @@ extension LoginViewController: LoginViewAnimatorDelegate {
 }
 
 private extension LoginViewController {
-    
+
     func presentNextViewController() {
         self.presentViewController(CenterButtonTabBarController(), animated: false, completion: nil)
     }

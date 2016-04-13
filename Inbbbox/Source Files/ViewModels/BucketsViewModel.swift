@@ -20,15 +20,15 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     private let bucketsRequester = BucketsRequester()
     private let shotsProvider = ShotsProvider()
     private var userMode: UserMode
-    
+
     var itemsCount: Int {
         return buckets.count
     }
-    
+
     init() {
         userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
     }
-    
+
     func downloadInitialItems() {
         firstly {
             bucketsProvider.provideMyBuckets()
@@ -48,7 +48,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
-    
+
     func downloadItemsForNextPage() {
         guard UserStorage.isUserSignedIn else {
             return
@@ -71,7 +71,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             // NGRTemp: Need mockups for error message view
         }
     }
-    
+
     func downloadShots(buckets: [BucketType]) {
         for bucket in buckets {
             firstly {
@@ -79,24 +79,24 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             }.then { shots -> Void in
                 var bucketShotsShouldBeReloaded = true
                 var indexOfBucket: Int?
-                for (index, item) in self.buckets.enumerate(){
+                for (index, item) in self.buckets.enumerate() {
                     if item.identifier == bucket.identifier {
                         indexOfBucket = index
                         break
                     }
                 }
                 guard let index = indexOfBucket else { return }
-                
+
                 if let oldShots = self.bucketsIndexedShots[index], newShots = shots {
                      bucketShotsShouldBeReloaded = oldShots != newShots
                 }
-                
+
                 if let shots = shots {
                     self.bucketsIndexedShots[index] = shots
                 } else {
                     self.bucketsIndexedShots[index] = [ShotType]()
                 }
-                
+
                 if bucketShotsShouldBeReloaded {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
                     self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
@@ -106,7 +106,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             }
         }
     }
-    
+
     func createBucket(name: String, description: NSAttributedString? = nil) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
             firstly {
@@ -116,11 +116,11 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             }.then(fulfill).error(reject)
         }
     }
-    
+
     func bucketCollectionViewCellViewData(indexPath: NSIndexPath) -> BucketCollectionViewCellViewData {
         return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row], shots: bucketsIndexedShots[indexPath.row])
     }
-    
+
     func clearViewModelIfNeeded() {
         let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
         if userMode != currentUserMode {
@@ -132,12 +132,12 @@ class BucketsViewModel: BaseCollectionViewViewModel {
 }
 
 extension BucketsViewModel {
-    
+
     struct BucketCollectionViewCellViewData {
         let name: String
         let numberOfShots: String
         let shotsImagesURLs: [NSURL]?
-        
+
         init(bucket: BucketType, shots: [ShotType]?) {
             self.name = bucket.name
             self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots", comment: "How many shots in collection?"), bucket.shotsCount)

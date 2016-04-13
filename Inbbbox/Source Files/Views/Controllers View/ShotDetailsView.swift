@@ -10,17 +10,17 @@ import UIKit
 import PureLayout
 
 class ShotDetailsView: UIView {
-    
+
     let collectionView: UICollectionView
     let commentComposerView = CommentComposerView.newAutoLayoutView()
-    
+
     var shouldShowCommentComposerView = true {
         willSet(newValue) {
             commentComposerView.hidden = !newValue
         }
     }
     var topLayoutGuideOffset = CGFloat(0)
-    
+
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
     let keyboardResizableView = KeyboardResizableView.newAutoLayoutView()
@@ -34,18 +34,18 @@ class ShotDetailsView: UIView {
         collectionView.layer.shadowOffset = CGSize(width: 0, height: 0.1)
         collectionView.layer.shadowOpacity = 0.3
         collectionView.clipsToBounds = true
-        
+
         super.init(frame: frame)
-        
+
         backgroundColor = .clearColor()
 
         blurView.configureForAutoLayout()
         addSubview(blurView)
-        
+
         collectionViewCornerWrapperView.backgroundColor = .clearColor()
         collectionViewCornerWrapperView.clipsToBounds = true
         collectionViewCornerWrapperView.addSubview(collectionView)
-        
+
         keyboardResizableView.automaticallySnapToKeyboardTopEdge = true
         keyboardResizableView.addSubview(collectionViewCornerWrapperView)
         keyboardResizableView.addSubview(commentComposerView)
@@ -58,34 +58,34 @@ class ShotDetailsView: UIView {
     }
 
     override func updateConstraints() {
-        
+
         if !didSetConstraints {
             didSetConstraints = true
-            
+
             blurView.autoPinEdgesToSuperviewEdges()
-            
+
             let commentComposerViewHeight = CGFloat(61)
             keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             let constraint = keyboardResizableView.autoPinEdgeToSuperviewEdge(.Bottom)
             keyboardResizableView.setReferenceBottomConstraint(constraint)
-            
+
             commentComposerView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
             commentComposerView.autoSetDimension(.Height, toSize: commentComposerViewHeight)
-            
+
             let insets = UIEdgeInsets(top: topLayoutGuideOffset + 10, left: 10, bottom: 0, right: 10)
             let commentComposerInset = shouldShowCommentComposerView ? commentComposerViewHeight : 0
             collectionViewCornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(insets, excludingEdge: .Bottom)
             collectionViewCornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: commentComposerInset)
-            
+
             collectionView.autoPinEdgesToSuperviewEdges()
         }
-        
+
         super.updateConstraints()
     }
-    
+
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        
+
         let path = UIBezierPath(roundedRect: collectionViewCornerWrapperView.bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
         let mask = CAShapeLayer()
         mask.path = path.CGPath

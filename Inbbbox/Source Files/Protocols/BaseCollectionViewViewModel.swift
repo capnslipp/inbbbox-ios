@@ -12,7 +12,7 @@ protocol BaseCollectionViewViewModel {
     
     weak var delegate: BaseCollectionViewViewModelDelegate? { get set }
     var itemsCount: Int { get }
-    
+
     func downloadInitialItems()
     func downloadItemsForNextPage()
 }
@@ -26,7 +26,7 @@ protocol BaseCollectionViewViewModelDelegate: class {
 }
 
 extension BaseCollectionViewViewModelDelegate {
-    
+
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         // Empty by design - optional function.
     }

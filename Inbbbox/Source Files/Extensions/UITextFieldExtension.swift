@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITextField {
-    
+
     /// Sets left padding in text field
     ///
     /// - parameter padding: float value of padding
@@ -18,7 +18,7 @@ extension UITextField {
         leftView = view
         leftViewMode = .Always
     }
-    
+
     /// Sets right padding in text field
     ///
     /// - parameter padding: float value of padding

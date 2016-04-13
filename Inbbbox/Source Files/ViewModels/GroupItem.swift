@@ -13,15 +13,15 @@ protocol Updatable {
 }
 
 class GroupItem: Equatable {
-    
+
     enum Category {
         case Date, Boolean, String
     }
-    
+
     var title: String
     let category: Category
     var active = true
-    
+
     init(title: String, category: Category) {
         self.title = title
         self.category = category

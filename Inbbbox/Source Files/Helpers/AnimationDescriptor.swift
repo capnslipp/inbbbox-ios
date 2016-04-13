@@ -12,31 +12,31 @@ enum AnimationType {
 /// AnimationDescriptor hold all necessary information to perform animation.
 /// Used for ShotCollectionViewCell swipe animations.
 protocol AnimationDescriptor {
-    
+
     /// Type of animation, can be Plain or Spring.
     var animationType: AnimationType { get set }
-    
+
     /// Animation duration value.
     /// Default is 0.3.
     var duration: NSTimeInterval { get }
-    
+
     /// Animation delay value.
     var delay: NSTimeInterval { get set }
-    
+
     /// Animation spring damping value.
     /// Default is 0.0.
     var springDamping: CGFloat { get }
-    
+
     /// Animation spring velocity value.
     /// Default is 0.0.
     var springVelocity: CGFloat { get }
-    
+
     /// Animation options.
     var options: UIViewAnimationOptions { get set }
-    
+
     /// Closure where all animations will be performed on ShotCollectionViewCell.
     var animations: () -> Void { get set }
-    
+
     /// Completion closure will be invoked after animations finishes.
     var completion: ((Bool) -> Void)? { get set }
 

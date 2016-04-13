@@ -9,11 +9,11 @@
 import Foundation
 
 struct LikeQuery: Query {
-    
+
     let method = Method.POST
     let path: String
     var parameters = Parameters(encoding: .JSON)
-    
+
     /// Initialize query for liking a shot.
     ///
     /// - parameter shot: Shot to like.

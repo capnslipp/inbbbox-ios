@@ -9,10 +9,10 @@
 import UIKit
 
 class ORLoginLabel: UILabel {
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         textAlignment = .Center
         textColor = UIColor.RGBA(249, 212, 226, 1)
         font = UIFont.helveticaFont(.NeueMedium, size: 11)
@@ -23,25 +23,25 @@ class ORLoginLabel: UILabel {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        
-        let boundingTextRect = text?.boundingRectWithFont(font!, constrainedToWidth: CGRectGetWidth(rect)) ?? CGRectZero
+
+        let boundingTextRect = text?.boundingRectWithFont(font!, constrainedToWidth: CGRectGetWidth(rect)) ?? CGRect.zero
         let space = CGFloat(10)
         let y = CGRectGetMidY(rect)
-        
+
         let context = UIGraphicsGetCurrentContext()
-        
+
         CGContextSetStrokeColorWithColor(context, textColor!.CGColor)
         CGContextSetLineWidth(context, 1)
-        
+
         CGContextMoveToPoint(context, 0, y)
         CGContextAddLineToPoint(context, CGRectGetMidX(rect) - CGRectGetWidth(boundingTextRect) * 0.5 - space, y)
-        
+
         CGContextMoveToPoint(context, CGRectGetMidX(rect) + CGRectGetWidth(boundingTextRect) * 0.5 + space, y)
         CGContextAddLineToPoint(context, CGRectGetMaxX(rect), y)
-        
+
         CGContextStrokePath(context)
     }
 }

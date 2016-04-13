@@ -9,12 +9,12 @@
 import UIKit
 
 class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
-    
+
     var itemHeightToWidthRatio = CGFloat(1)
     var containsHeader = false
-    
+
     override func prepareLayout() {
-        
+
         if let collectionView = collectionView {
             let spacings = CollectionViewLayoutSpacings()
             let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - 2 * spacings.itemMargin
@@ -27,26 +27,26 @@ class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
         }
     }
-    
+
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
         return true
     }
-    
+
     override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        
+
         let attributes = super.layoutAttributesForElementsInRect(rect)
-        
+
         guard let collectionView = collectionView else {
             return attributes
         }
-        
+
         let insets = collectionView.contentInset
         let offset = collectionView.contentOffset
         let minY = -insets.top
-        
+
         if offset.y < minY {
             let deltaY = fabsf(Float(offset.y - minY))
-            
+
             attributes?.forEach {
                 if $0.representedElementKind == UICollectionElementKindSectionHeader {
                     var headerRect = $0.frame
@@ -57,6 +57,6 @@ class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
                 }
             }
         }
-        return attributes;
+        return attributes
     }
 }

@@ -12,14 +12,14 @@ import PromiseKit
 class BucketsRequester {
     let apiBucketsRequester = APIBucketsRequester()
     let managedBucketsRequester = ManagedBucketsRequester()
-    
+
     func postBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
         if UserStorage.isUserSignedIn {
             return apiBucketsRequester.postBucket(name, description: description)
         }
         return managedBucketsRequester.addBucket(name, description: description)
     }
-    
+
     func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         AnalyticsManager.trackUserActionEvent(.AddToBucket)
         if UserStorage.isUserSignedIn {
@@ -27,7 +27,7 @@ class BucketsRequester {
         }
         return managedBucketsRequester.addShot(shot, toBucket: bucket)
     }
-    
+
     func removeShot(shot: ShotType, fromBucket bucket: BucketType) -> Promise<Void> {
         if UserStorage.isUserSignedIn {
             return apiBucketsRequester.removeShot(shot, fromBucket: bucket)

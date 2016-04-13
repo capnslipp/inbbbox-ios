@@ -16,39 +16,39 @@ enum ShotBucketsViewControllerMode {
 }
 
 class ShotBucketsViewController: UIViewController {
-    
+
     var shotBucketsView: ShotBucketsView {
         return view as! ShotBucketsView
     }
-    
+
     var dismissClosure: (() -> Void)?
-    
+
     private var header: ShotBucketsHeaderView?
     private var footer: ShotBucketsFooterView?
     private let viewModel: ShotBucketsViewModel
-    
+
     init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
         viewModel = ShotBucketsViewModel(shot: shot, mode: mode)
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     @available(*, unavailable, message="Use init(shot:) instead")
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         fatalError("init(nibName:bundle:) has not been implemented")
     }
-    
+
     @available(*, unavailable, message="Use init(shot:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         view = loadViewWithClass(ShotBucketsView)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         firstly {
             viewModel.loadBuckets()
         }.then {
@@ -74,34 +74,34 @@ class ShotBucketsViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         setEstimatedSizeIfNeeded()
         (shotBucketsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
     }
-    
+
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
-        
+
         if let imageView = header?.imageView as? AnimatableShotImageView {
             imageView.stopAnimatingGIF()
         }
-        
+
         super.dismissViewControllerAnimated(flag, completion: completion)
     }
 }
 
 // MARK: UICollectionViewDataSource
 extension ShotBucketsViewController: UICollectionViewDataSource {
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.itemsCount
     }
-    
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
+
         if viewModel.isSeparatorAtIndex(indexPath.item) {
             return configureSeparatorCell(collectionView, atIndexPath: indexPath)
         }
-        
+
         switch viewModel.shotBucketsViewControllerMode {
         case .AddToBucket:
             if viewModel.isActionItemAtIndex(indexPath.item) {
@@ -117,9 +117,9 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
             }
         }
     }
-    
+
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        
+
         if kind == UICollectionElementKindSectionHeader {
             if header == nil && kind == UICollectionElementKindSectionHeader {
                 header = collectionView.dequeueReusableClass(ShotBucketsHeaderView.self, forIndexPath: indexPath, type: .Header)
@@ -134,7 +134,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 }
                 header?.maxHeight = sizeForExpandedCollectionViewHeader(collectionView).height
                 header?.minHeight = heightForCollapsedCollectionViewHeader
-                
+
                 header?.setAttributedTitle(viewModel.attributedShotTitleForHeader)
                 header?.setHeaderTitle(viewModel.titleForHeader)
                 header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
@@ -157,7 +157,7 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
 
 // MARK: UICollectionViewDelegate
 extension ShotBucketsViewController: UICollectionViewDelegate {
-    
+
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotBucketsSelectCollectionViewCell {
             cell.selectBucket(viewModel.selectBucketAtIndex(indexPath.item))
@@ -170,11 +170,11 @@ extension ShotBucketsViewController: UICollectionViewDelegate {
 
 // MARK: UICollectionViewDelegateFlowLayout
 extension ShotBucketsViewController: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return sizeForExpandedCollectionViewHeader(collectionView)
     }
-    
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: floor(collectionView.bounds.width), height: 20)
     }
@@ -182,12 +182,12 @@ extension ShotBucketsViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: Actions
 extension ShotBucketsViewController {
-    
+
     func closeButtonDidTap(_: UIButton) {
         self.dismissClosure?()
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     func removeButtonDidTap(_: UIButton) {
         firstly {
             viewModel.removeShotFromSelectedBuckets()
@@ -198,16 +198,16 @@ extension ShotBucketsViewController {
             // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
-    
+
     func addNewBucketButtonDidTap(_: UIButton) {
-        
+
         let alert = UIAlertController.provideBucketNameAlertController { bucketName in
             self.createBucketAndAddShot(bucketName)
         }
         self.presentViewController(alert, animated: true, completion: nil)
         alert.view.tintColor = .pinkColor()
     }
-    
+
     func setRemoveFromSelectedBucketsButtonActive(active: Bool) {
         let removeCellIndexPath =  NSIndexPath(forItem: viewModel.indexForRemoveFromSelectedBucketsActionItem(), inSection: 0)
         if let cell = shotBucketsView.collectionView.cellForItemAtIndexPath(removeCellIndexPath) as? ShotBucketsActionCollectionViewCell {
@@ -217,34 +217,34 @@ extension ShotBucketsViewController {
 }
 
 private extension ShotBucketsViewController {
-    
+
     func presentUserDetailsViewControllerForUser(user: UserType) {
-        
+
         let userDetailsViewController = UserDetailsViewController(user: user)
         let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-        
+
         animateHeader(start: false)
         userDetailsViewController.dismissClosure = { [weak self] in
             self?.animateHeader(start: true)
         }
         presentViewController(navigationController, animated: true, completion: nil)
     }
-    
+
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
             start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
         }
     }
-    
+
     var heightForCollapsedCollectionViewHeader: CGFloat {
-        
+
         let margin = CGFloat(5)
         let maxWidth = abs((shotBucketsView.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
         let height = viewModel.attributedShotTitleForHeader.boundingHeightUsingAvailableWidth(maxWidth) + 2 * margin
-        
+
         return max(70, height)
     }
-    
+
     func sizeForExpandedCollectionViewHeader(collectionView: UICollectionView) -> CGSize {
         let dribbbleImageRatio = CGFloat(0.75)
         return CGSize(
@@ -252,20 +252,20 @@ private extension ShotBucketsViewController {
             height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
         )
     }
-    
+
     func setEstimatedSizeIfNeeded() {
-        
+
         let width = shotBucketsView.collectionView.frame.size.width ?? 0
         if let layout = shotBucketsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
             layout.estimatedItemSize = CGSize(width: width, height: 40)
             layout.invalidateLayout()
         }
     }
-    
+
     func backgroundColorForFooter() -> UIColor {
         return .RGBA(246, 248, 248, 1) // color same as header title background
     }
-    
+
     func addShotToBucketAtIndex(index: Int) {
         firstly {
             viewModel.addShotToBucketAtIndex(index)
@@ -276,7 +276,7 @@ private extension ShotBucketsViewController {
             // NGRTodo: get rid of printing, when nice pop-up gets ready
         }
     }
-    
+
     func createBucketAndAddShot(bucketName: String) {
         firstly {
             viewModel.createBucket(bucketName)
@@ -291,11 +291,11 @@ private extension ShotBucketsViewController {
 // MARK: Configuration of cells
 
 extension ShotBucketsViewController {
-    
+
     func configureSeparatorCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableClass(ShotBucketsSeparatorCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
     }
-    
+
     func configureActionCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath, selector: Selector) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotBucketsActionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.button.setTitle(viewModel.titleForActionItem, forState: .Normal)
@@ -303,20 +303,20 @@ extension ShotBucketsViewController {
         cell.button.enabled = viewModel.shotBucketsViewControllerMode == .AddToBucket
         return cell
     }
-    
+
     func configureAddToBucketCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotBucketsAddCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        
+
         let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
         cell.bucketNameLabel.text = bucketData.bucketName
         cell.shotsCountLabel.text = bucketData.shotsCountText
         cell.showBottomSeparator(viewModel.showBottomSeparatorForBucketAtIndex(indexPath.item))
         return cell
     }
-    
+
     func configureRemoveFromBucketCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotBucketsSelectCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
-        
+
         let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
         cell.bucketNameLabel.text = bucketData.bucketName
         cell.selectBucket(viewModel.bucketShouldBeSelectedAtIndex(indexPath.item))
@@ -332,7 +332,7 @@ extension ShotBucketsViewController: ModalByDraggingClosable {
 }
 
 extension ShotBucketsViewController: AvatarViewDelegate {
-    
+
     func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton) {
         if avatarView.superview == header {
             let user = viewModel.shot.user
@@ -342,7 +342,7 @@ extension ShotBucketsViewController: AvatarViewDelegate {
 }
 
 extension ShotBucketsViewController: TTTAttributedLabelDelegate {
-    
+
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
             presentUserDetailsViewControllerForUser(user)
@@ -351,17 +351,17 @@ extension ShotBucketsViewController: TTTAttributedLabelDelegate {
 }
 
 extension ShotBucketsViewController: UIScrollViewDelegate {
-    
+
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         animateHeader(start: false)
     }
-    
+
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             animateHeader(start: true)
         }
     }
-    
+
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         animateHeader(start: true)
     }

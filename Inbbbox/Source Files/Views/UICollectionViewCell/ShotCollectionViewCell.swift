@@ -93,7 +93,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     // MARK: - UIView
 
-    override class func requiresConstraintBasedLayout() -> Bool{
+    override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
 
@@ -200,7 +200,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             UIView.animate(animations: {
                 self.bucketImageView.displaySecondImageView()
             })
-        } else if xTranslation < bucketActionRange.min && bucketImageView.isSecondImageVisible()  {
+        } else if xTranslation < bucketActionRange.min && bucketImageView.isSecondImageVisible() {
             UIView.animate(animations: {
                 self.bucketImageView.displayFirstImageView()
             })
@@ -220,7 +220,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             return .DoNothing
         } else if likeActionRange.min...likeActionRange.max ~= xTranslation {
             return .Like
-        } else if xTranslation > likeActionRange.max   {
+        } else if xTranslation > likeActionRange.max {
             return .Bucket
         } else {
             return .Comment

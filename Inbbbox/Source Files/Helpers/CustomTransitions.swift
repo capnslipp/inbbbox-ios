@@ -13,14 +13,14 @@ protocol ModalByDraggingClosable {
 }
 
 class CustomTransitions {
-    
+
     class func pullDownToCloseTransitionForModalViewController<T: UIViewController where T: ModalByDraggingClosable>(modalViewController: T) -> ZFModalTransitionAnimator {
-        
+
         let modalTransitionAnimator = ZFModalTransitionAnimator(modalViewController: modalViewController)
         modalTransitionAnimator.dragable = true
         modalTransitionAnimator.direction = ZFModalTransitonDirection.Bottom
         modalTransitionAnimator.setContentScrollView(modalViewController.scrollViewToObserve)
-        
+
         return modalTransitionAnimator
     }
 }

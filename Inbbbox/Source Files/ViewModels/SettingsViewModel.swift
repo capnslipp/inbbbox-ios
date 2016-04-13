@@ -72,7 +72,7 @@ class SettingsViewModel: GroupedListViewModel {
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle, on: Settings.StreamSource.PopularToday)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, on: Settings.StreamSource.Debuts)
         let acknowledgementItem = LabelItem(title: NSLocalizedString("SettingsViewModel.AcknowledgementsButton", comment: "Acknowledgements button"))
-        var items:[[GroupItem]]
+        var items: [[GroupItem]]
         if userMode == .LoggedUser {
             items = [[reminderItem, reminderDateItem],
                 [followingStreamSourceItem, newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],

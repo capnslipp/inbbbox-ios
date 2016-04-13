@@ -29,7 +29,7 @@ extension ManagedUser: UserType {
         }
         return NSURL(string: encodedString)
     }
-    
+
     var shotsCount: UInt { return mngd_shotsCount }
     var accountType: UserAccountType? {
         return mngd_accountType.flatMap { UserAccountType(rawValue: $0) }

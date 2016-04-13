@@ -18,7 +18,7 @@ extension AcknowledgementsViewController {
     }
 
     override func loadView() {
-        view = WKWebView(frame: CGRectZero)
+        view = WKWebView(frame: CGRect.zero)
     }
 }
 

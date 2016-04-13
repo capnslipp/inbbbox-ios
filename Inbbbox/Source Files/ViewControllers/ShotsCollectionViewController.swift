@@ -99,7 +99,7 @@ extension ShotsCollectionViewController {
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         stateHandler.collectionView?(collectionView, willDisplayCell: cell, forItemAtIndexPath: indexPath)
     }
-    
+
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if stateHandler is ShotsNormalStateHandler {
             stateHandler.collectionView?(collectionView, didEndDisplayingCell: cell, forItemAtIndexPath: indexPath)
@@ -145,7 +145,7 @@ private extension ShotsCollectionViewController {
         collectionView?.userInteractionEnabled = stateHandler.collectionViewInteractionEnabled
         collectionView?.scrollEnabled = stateHandler.collectionViewScrollEnabled
         collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
-        collectionView?.setContentOffset(CGPointZero, animated: false)
+        collectionView?.setContentOffset(CGPoint.zero, animated: false)
     }
 
     func registerToSettingsNotifications() {

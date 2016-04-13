@@ -11,30 +11,30 @@ import PromiseKit
 import WebKit
 
 class Authenticator {
-    
+
     private let interactionHandler: (UIViewController -> Void)
-    
+
     enum Service {
         case Dribbble
-        
+
         var instance: NetworkService {
             switch self {
                 case .Dribbble: return DribbbleNetworkService()
             }
         }
     }
-    
+
     init(interactionHandler: (UIViewController -> Void)) {
         self.interactionHandler = interactionHandler
     }
-    
+
     func loginWithService(service: Service, trySilent: Bool = true) -> Promise<Void> {
-        
+
         let serviceInstance = service.instance
         var controller: OAuthViewController!
-        
+
         if let oAuthAuthorizableService = serviceInstance as? OAuthAuthorizable {
-            
+
             controller = OAuthViewController(oAuthAuthorizableService: oAuthAuthorizableService) { controller in
                 if trySilent {
                     self.interactionHandler(UINavigationController(rootViewController: controller))
@@ -45,11 +45,11 @@ class Authenticator {
             // in case of other services integration which don't support oAuth authentication
             // please define controller here
         }
-        
+
         if !trySilent {
             interactionHandler(UINavigationController(rootViewController: controller))
         }
-        
+
         return Promise<Void> { fulfill, reject in
             firstly {
                 controller.startAuthentication()
@@ -68,23 +68,23 @@ class Authenticator {
             }
         }
     }
-    
+
     class func logout() {
         UserStorage.clear()
         TokenStorage.clear()
-        WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0) , completionHandler:{})
+        WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0), completionHandler: {})
         APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
     }
 }
 
 private extension Authenticator {
-    
+
     func fetchUser() -> Promise<User> {
         return Promise<User> { fulfill, reject in
-            
+
             let query = UserQuery()
             let request = Request(query: query)
-            
+
             firstly {
                 request.resume()
             }.then { json -> Void in
@@ -92,17 +92,17 @@ private extension Authenticator {
                     throw AuthenticatorError.UnableToFetchUser
                 }
                 fulfill(User.map(json))
-                
+
             }.error { error in
                 reject(error)
             }
         }
     }
-    
+
     func persistToken(token: String) {
         TokenStorage.storeToken(token)
     }
-    
+
     func persistUser(user: User) {
         UserStorage.storeUser(user)
     }

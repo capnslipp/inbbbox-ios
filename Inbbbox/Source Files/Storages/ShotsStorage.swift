@@ -9,19 +9,19 @@
 import UIKit
 
 struct ShotsStorage {
-    
+
     /// Images for shots from asset catalog.
     var shotsFromAssetCatalog: [UIImage] {
-        
+
         let assetsEnumarator = (min: 1, max: 16)
         var images = [UIImage]()
-        
+
         for index in assetsEnumarator.min...assetsEnumarator.max {
             if let image = UIImage(named: ("shot-" + String(index))) {
                 images.append(image)
             }
         }
-        
+
         return images
     }
 }

@@ -15,7 +15,7 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         (image: UIImage(named: "onboarding-step3"), action: ShotCollectionViewCell.Action.Comment)
     ]
     var scrollViewAnimationsCompletion: (() -> Void)?
-    
+
     var state: ShotsCollectionViewController.State {
         return .Onboarding
     }
@@ -23,7 +23,7 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
     var nextState: ShotsCollectionViewController.State? {
         return .Normal
     }
-    
+
     var tabBarInteractionEnabled: Bool {
         return false
     }
@@ -35,19 +35,19 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
     var collectionViewLayout: UICollectionViewLayout {
         return ShotsCollectionViewFlowLayout()
     }
-    
+
     var collectionViewInteractionEnabled: Bool {
         return true
     }
-    
+
     var collectionViewScrollEnabled: Bool {
         return false
     }
-    
+
     func prepareForPresentingData() {
         // Do nothing, all set.
     }
-    
+
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
     }
@@ -55,14 +55,14 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
 // MARK: UICollectionViewDataSource
 extension ShotsOnboardingStateHandler {
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return onboardingSteps.count
         }
         return onboardingSteps.count + shotsCollectionViewController.shots.count
     }
-    
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if indexPath.row < onboardingSteps.count {
             return cellForOnboardingShot(collectionView, indexPath: indexPath)
@@ -94,7 +94,7 @@ extension ShotsOnboardingStateHandler {
 
 // MARK: Private methods
 private extension ShotsOnboardingStateHandler {
-    
+
     func cellForShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return ShotCollectionViewCell()
@@ -105,7 +105,7 @@ private extension ShotsOnboardingStateHandler {
         cell.gifLabel.hidden = !shot.animated
         return cell
     }
-    
+
     func cellForOnboardingShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         let stepImage = onboardingSteps[indexPath.row].image

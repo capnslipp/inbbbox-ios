@@ -9,23 +9,23 @@
 import UIKit
 
 class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDependentHeight {
-    
+
     let shotImageView = UIImageView.newAutoLayoutView()
     let gifLabel = GifIndicatorView.newAutoLayoutView()
     private var didSetConstraints = false
 
     // MARK: Life cycle
-    
+
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     func commonInit() {
         contentView.backgroundColor = UIColor.cellBackgroundColor()
         contentView.addSubview(shotImageView)
@@ -33,13 +33,13 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
         contentView.layer.cornerRadius = 5
         contentView.clipsToBounds = true
     }
-    
+
     // MARK: UIView
-    
-    override class func requiresConstraintBasedLayout() -> Bool{
+
+    override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
-    
+
     override func updateConstraints() {
         super.updateConstraints()
         if !didSetConstraints {
@@ -49,18 +49,18 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
             gifLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 5)
         }
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         shotImageView.image = nil
     }
-    
+
     // MARK: - Reusable
     static var reuseIdentifier: String {
         return "SimpleShotCollectionViewCellIdentifier"
     }
-    
+
     // MARK: - Width dependent height
     static var heightToWidthRatio: CGFloat {
         return CGFloat(0.75)

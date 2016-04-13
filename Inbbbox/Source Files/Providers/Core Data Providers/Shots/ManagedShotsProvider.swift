@@ -23,12 +23,12 @@ class ManagedShotsProvider {
             }
         }
     }
-    
+
     func provideShotsForBucket(bucket: BucketType) -> Promise<[ShotType]?> {
-        
+
         let fetchRequest = NSFetchRequest(entityName: ManagedShot.entityName)
         fetchRequest.predicate = NSPredicate(format: "ANY buckets.mngd_identifier == %@", bucket.identifier)
-        
+
         return Promise<[ShotType]?> { fulfill, reject in
             do {
                 let managedShots = try managedObjectContext.executeFetchRequest(fetchRequest) as! [ManagedShot]

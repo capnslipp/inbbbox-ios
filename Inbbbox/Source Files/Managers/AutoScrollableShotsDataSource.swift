@@ -12,30 +12,30 @@ class AutoScrollableShotsDataSource: NSObject {
 
     private typealias AutoScrollableImageContent = (image: UIImage, isDuplicateForExtendedContent: Bool)
     private var content: [AutoScrollableImageContent]!
-    
+
     private(set) var extendedScrollableItemsCount = 0
     var itemSize: CGSize {
         return CGSize(width: CGRectGetWidth(collectionView.bounds), height: CGRectGetWidth(collectionView.bounds))
     }
     let collectionView: UICollectionView
-    
+
     init(collectionView: UICollectionView, content: [UIImage]) {
         self.collectionView = collectionView
         self.content = content.map { ($0, false) }
-        
+
         super.init()
-        
+
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.registerClass(AutoScrollableCollectionViewCell.self, type: .Cell)
         prepareExtendedContentToDisplayWithOffset(0)
     }
-    
+
     @available(*, unavailable, message="Use init(collectionView:content:) instead")
     override init() {
         fatalError("init() has not been implemented")
     }
-    
+
     /// Prepares itself for animation and reloads collectionView.
     func prepareForAnimation() {
         extendedScrollableItemsCount = Int(ceil(CGRectGetHeight(collectionView.bounds) / itemSize.height))
@@ -47,19 +47,19 @@ class AutoScrollableShotsDataSource: NSObject {
 // MARK: UICollectionViewDataSource
 
 extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
-    
+
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(AutoScrollableCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
 
         cell.imageView.image = content[indexPath.row].image
-        
+
         return cell
     }
-    
+
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return content.count
     }
@@ -68,7 +68,7 @@ extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegateFlowLayout
 
 extension AutoScrollableShotsDataSource: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return itemSize
     }
@@ -77,32 +77,32 @@ extension AutoScrollableShotsDataSource: UICollectionViewDelegateFlowLayout {
 // MARK: Private
 
 private extension AutoScrollableShotsDataSource {
-    
+
     func prepareExtendedContentToDisplayWithOffset(offset: Int) {
-        
+
         let images = content.filter { !$0.isDuplicateForExtendedContent }
-        
+
         var extendedContent = [AutoScrollableImageContent]()
-        
+
         for index in 0..<(images.count + 2 * offset) {
-            
+
             let indexSubscript: Int
             var isDuplicateForExtendedContent = true
-            
+
             if index < offset {
                 indexSubscript = images.count - offset + index
-                
+
             } else if index > images.count + offset - 1 {
                 indexSubscript = index - images.count - offset
-                
+
             } else {
                 isDuplicateForExtendedContent = false
                 indexSubscript = index - offset
             }
-            
+
             extendedContent.append((images[indexSubscript].image, isDuplicateForExtendedContent))
         }
-        
+
         content = extendedContent
     }
 }

@@ -41,7 +41,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with updated comment.
      */
-    func updateComment(comment: CommentType, forShot shot: ShotType, withText text: String) -> Promise<CommentType>  {
+    func updateComment(comment: CommentType, forShot shot: ShotType, withText text: String) -> Promise<CommentType> {
 
         let query = UpdateCommentQuery(shot: shot, comment: comment, withBody: text)
         return sendCommentQuery(query, verifyTextLength: text)
@@ -58,7 +58,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with Void.
      */
-    func deleteComment(comment: CommentType, forShot shot: ShotType) -> Promise<Void>  {
+    func deleteComment(comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             let query = DeleteCommentQuery(shot: shot, comment: comment)
@@ -102,10 +102,10 @@ private extension APICommentsRequester {
             }.error(reject)
         }
     }
-    
+
     func sendCommentDeleteQuery(query: Query) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
-            
+
             firstly {
                 verifyAuthenticationStatus(true)
             }.then {

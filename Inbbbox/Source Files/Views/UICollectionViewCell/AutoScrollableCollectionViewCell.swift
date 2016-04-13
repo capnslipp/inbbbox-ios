@@ -10,43 +10,43 @@ import UIKit.UICollectionViewCell
 import PureLayout
 
 class AutoScrollableCollectionViewCell: UICollectionViewCell {
-    
+
     let imageView = UIImageView.newAutoLayoutView()
     private var didSetConstraints = false
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-      
+
         contentView.addSubview(imageView)
 
         setNeedsUpdateConstraints()
     }
-    
+
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func updateConstraints() {
-        
+
         if !didSetConstraints {
             didSetConstraints = true
-            
-            imageView.autoPinEdgesToSuperviewEdges()            
+
+            imageView.autoPinEdgesToSuperviewEdges()
         }
 
         super.updateConstraints()
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         imageView.image = nil
     }
 }
 
 extension AutoScrollableCollectionViewCell: Reusable {
-    
+
     class var reuseIdentifier: String {
         return "AutoScrollableCollectionViewCellReuseIdentifier"
     }

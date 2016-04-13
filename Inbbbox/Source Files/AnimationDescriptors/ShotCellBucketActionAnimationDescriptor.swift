@@ -9,14 +9,14 @@
 import UIKit
 
 struct ShotCellBucketActionAnimationDescriptor: AnimationDescriptor {
-    
+
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Plain
     var delay = 0.0
     var options: UIViewAnimationOptions = []
     var animations: () -> Void
     var completion: ((Bool) -> Void)?
-    
+
     init(shotCell: ShotCollectionViewCell, swipeCompletion: (() -> ())?) {
         self.shotCell = shotCell
         animations = {

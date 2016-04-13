@@ -19,7 +19,7 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     convenience init() {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
-        flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio;
+        flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio
         self.init(collectionViewLayout: flowLayout)
         title = viewModel.title
         viewModel.delegate = self
@@ -40,7 +40,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         viewModel.clearViewModelIfNeeded()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
@@ -69,7 +69,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     }
 
     // MARK: UICollectionViewDelegate
-    
+
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == viewModel.itemsCount - 1 {
             viewModel.downloadItemsForNextPage()
@@ -80,18 +80,18 @@ class BucketsCollectionViewController: UICollectionViewController {
         let bucketContentCollectionViewController = SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
         navigationController?.pushViewController(bucketContentCollectionViewController, animated: true)
     }
-    
+
     // MARK: Configuration
-    
+
     func setupBarButtons() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew", comment: "Button for adding new bucket"), style: .Plain, target: self, action: #selector(didTapAddNewBucketButton(_:)))
     }
-    
+
     // MARK: Actions:
-    
+
     func didTapAddNewBucketButton(_: UIBarButtonItem) {
         let alert = UIAlertController.provideBucketNameAlertController { bucketName in
-            
+
             firstly {
                 self.viewModel.createBucket(bucketName)
             }.then { () -> Void in
@@ -110,27 +110,27 @@ class BucketsCollectionViewController: UICollectionViewController {
 }
 
 extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
-    
+
     func viewModelDidLoadInitialItems() {
         shouldShowLoadingView = false
         collectionView?.reloadData()
     }
-    
+
     func viewModelDidFailToLoadInitialItems(error: ErrorType) {
         self.shouldShowLoadingView = false
         collectionView?.reloadData()
-        
+
         if viewModel.buckets.isEmpty {
             let alert = UIAlertController.generalErrorAlertController()
             presentViewController(alert, animated: true, completion: nil)
             alert.view.tintColor = .pinkColor()
         }
     }
-    
+
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
-    
+
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
@@ -139,7 +139,7 @@ extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
 extension BucketsCollectionViewController: DZNEmptyDataSetSource {
 
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
-        
+
         if shouldShowLoadingView {
             let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
             loadingView.startAnimation()

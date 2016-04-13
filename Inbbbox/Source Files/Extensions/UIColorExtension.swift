@@ -27,7 +27,7 @@ extension UIColor {
     class func pinkColor() -> UIColor {
         return pinkColor(alpha: 1)
     }
-    
+
     /// Brand pink color with additional parameter alpha.
     ///
     /// - parameter alpha: float value of alpha. Needs to be between 0 and 1.
@@ -46,12 +46,12 @@ extension UIColor {
     class func textDarkColor() -> UIColor {
         return RGBA(51, 51, 51, 1)
     }
-    
+
     /// Brand text light color.
     class func textLightColor() -> UIColor {
         return RGBA(109, 109, 114, 1)
     }
-    
+
     /// Brand text gray color used in followee cell.
     class func followeeTextGrayColor() -> UIColor {
         return RGBA(164, 180, 188, 1)
@@ -61,12 +61,12 @@ extension UIColor {
     class func tabBarGrayColor() -> UIColor {
         return RGBA(41, 41, 41, 1)
     }
-    
+
     /// Brand background color used in collection view cells.
     class func cellBackgroundColor() -> UIColor {
         return RGBA(223, 224, 226, 1)
     }
-    
+
     /// Brand gray color used for separator in shot details.
     class func separatorGrayColor() -> UIColor {
         return RGBA(218, 219, 221, 1)

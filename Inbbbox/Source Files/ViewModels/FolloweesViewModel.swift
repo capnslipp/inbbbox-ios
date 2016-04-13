@@ -19,19 +19,19 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
     private var userMode: UserMode
-    
+
     private let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarURL: nil, createdAt: NSDate())
-    
+
     var itemsCount: Int {
         return followees.count
     }
-    
+
     init() {
         userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
     }
-    
+
     func downloadInitialItems() {
-        
+
         firstly {
             UserStorage.isUserSignedIn ? connectionsProvider.provideMyFollowees() : teamsProvider.provideMembersForTeam(netguruTeam)
         }.then { followees -> Void in
@@ -44,9 +44,9 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
-    
+
     func downloadItemsForNextPage() {
-        
+
         firstly {
             UserStorage.isUserSignedIn ? connectionsProvider.nextPage() : teamsProvider.nextPage()
         }.then { followees -> Void in
@@ -65,14 +65,14 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             // NGRTemp: Need mockups for error message view
         }
     }
-    
+
     func downloadShots(followees: [Followee]) {
         for followee in followees {
             firstly {
                 shotsProvider.provideShotsForUser(followee)
             }.then { shots -> Void in
                 var indexOfFollowee: Int?
-                for (index, item) in self.followees.enumerate(){
+                for (index, item) in self.followees.enumerate() {
                     if item.identifier == followee.identifier {
                         indexOfFollowee = index
                         break
@@ -93,7 +93,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             }
         }
     }
-    
+
     func followeeCollectionViewCellViewData(indexPath: NSIndexPath) -> FolloweeCollectionViewCellViewData {
         return FolloweeCollectionViewCellViewData(followee: followees[indexPath.row], shots: followeesIndexedShots[indexPath.row])
     }
@@ -109,14 +109,14 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
 }
 
 extension FolloweesViewModel {
-    
+
     struct FolloweeCollectionViewCellViewData {
         let name: String?
         let avatarURL: NSURL?
         let numberOfShots: String
         let shotsImagesURLs: [NSURL]?
         let firstShotImage: ShotImageType?
-        
+
         init(followee: Followee, shots: [ShotType]?) {
             self.name = followee.name
             self.avatarURL = followee.avatarURL
