@@ -217,7 +217,7 @@ private extension LoginViewAnimator {
         let logoImageView = UIImageView(image: UIImage(named: "logo-type-home"))
         logoImageView.alpha = 0.0
 
-        let size = logoImageView.image?.size ?? CGSizeZero
+        let size = logoImageView.image?.size ?? CGSize.zero
         let origin = CGPoint(x: CGRectGetMidX(view!.frame) - size.width * 0.5, y: y)
         logoImageView.frame = CGRect(origin: origin, size: size)
 
