@@ -38,7 +38,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
     private let shadowImageView = UIImageView.newAutoLayoutView()
 
-    private var imageViewCenterWrapperViewBottomEdgeConstraint: NSLayoutConstraint?
+    private var imageViewCenterWrapperBottomConstraint: NSLayoutConstraint?
 
     private var didUpdateConstraints = false
     private var collapseProgress: CGFloat {
@@ -86,7 +86,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         }
     }
 
-    @available(*, unavailable, message="Use init(frame:) method instead")
+    @available(*, unavailable, message = "Use init(frame:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -97,7 +97,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         let progress = collapseProgress
         let absoluteProgress = max(min(progress, 1), 0)
 
-        imageViewCenterWrapperViewBottomEdgeConstraint?.constant = -minHeight + minHeight * absoluteProgress
+        imageViewCenterWrapperBottomConstraint?.constant = -minHeight + minHeight * absoluteProgress
 
         dimView.alpha = progress
         overlapingTitleLabel.alpha = progress
@@ -123,7 +123,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             overlapingTitleLabel.autoPinEdge(.Top, toEdge: .Top, ofView: titleLabel)
 
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
-            imageViewCenterWrapperViewBottomEdgeConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: minHeight)
+            imageViewCenterWrapperBottomConstraint = imageViewCenterWrapperView.autoPinEdgeToSuperviewEdge(.Bottom,
+                    withInset: minHeight)
 
             shadowImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: imageViewCenterWrapperView)
             shadowImageView.autoPinEdgeToSuperviewEdge(.Left)
@@ -142,7 +143,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
 
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.TopLeft, .TopRight], cornerRadii: CGSize(width: 15, height: 15))
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.TopLeft, .TopRight],
+                cornerRadii: CGSize(width: 15, height: 15))
         let mask = CAShapeLayer()
         mask.path = path.CGPath
         layer.mask = mask
@@ -156,7 +158,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             }
 
             let mutableTitle = NSMutableAttributedString(attributedString: title)
-            let range = NSMakeRange(0, title.length)
+            let range = NSRange(location: 0, length: title.length)
             mutableTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: range)
 
             return mutableTitle.copy() as? NSAttributedString
@@ -165,8 +167,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
 
     func setLinkInTitle(URL: NSURL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
-            NSForegroundColorAttributeName : UIColor.pinkColor(),
-            NSFontAttributeName : UIFont.systemFontOfSize(14)
+                NSForegroundColorAttributeName: UIColor.pinkColor(),
+                NSFontAttributeName: UIFont.systemFontOfSize(14)
         ]
         titleLabel.linkAttributes = linkAttributes
         titleLabel.activeLinkAttributes = linkAttributes
@@ -185,17 +187,18 @@ extension ShotDetailsHeaderView {
             setupImageView()
         }
 
-        let imageCompletion: UIImage -> Void = { [weak self] image in
+        let imageCompletion: UIImage -> Void = {
+            [weak self] image in
             if let imageView = self?.imageView {
                 imageView.image = image
             }
         }
 
         ImageProvider.lazyLoadImageFromURLs(
-            (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
-            teaserImageCompletion: imageCompletion,
-            normalImageCompletion: imageCompletion,
-            hidpiImageCompletion: imageCompletion
+        (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
+                teaserImageCompletion: imageCompletion,
+                normalImageCompletion: imageCompletion,
+                hidpiImageCompletion: imageCompletion
         )
     }
 
@@ -204,8 +207,8 @@ extension ShotDetailsHeaderView {
             imageView = AnimatableShotImageView.newAutoLayoutView()
             setupImageView()
         }
-        let iv = imageView as! AnimatableShotImageView
-        iv.loadAnimatableShotFromUrl(url)
+        let iv = imageView as? AnimatableShotImageView
+        iv?.loadAnimatableShotFromUrl(url)
     }
 
     private func setupImageView() {
