@@ -61,4 +61,4 @@ You're more than welcome to contribute. Just try to follow our [coding style gui
 
 Copyright © 2016 [Netguru](http://netguru.co).
 
-Licensed under the [GPLv3 License](LICENSE.md).
+Licensed under the [GPLv3 License](LICENSE.txt).
