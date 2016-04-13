@@ -5,6 +5,7 @@
 //  Created by Patryk Kaczmarek on 19/02/16.
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
+
 import UIKit
 
 class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
@@ -16,8 +17,9 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     // Regards clickable links in description label
     private let layoutManager = NSLayoutManager()
     private let textContainer = NSTextContainer(size: CGSize.zero)
-    lazy private var textStorage: NSTextStorage = { [unowned self] in
-       return NSTextStorage(attributedString: self.descriptionLabel.attributedText ?? NSAttributedString())
+    lazy private var textStorage: NSTextStorage = {
+        [unowned self] in
+        return NSTextStorage(attributedString: self.descriptionLabel.attributedText ?? NSAttributedString())
     }()
 
     private let separatorView = UIView.newAutoLayoutView()
@@ -36,7 +38,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(separatorView)
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message = "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -86,11 +88,13 @@ extension ShotDetailsDescriptionCollectionViewCell {
         textContainer.lineBreakMode = descriptionLabel.lineBreakMode
         textContainer.maximumNumberOfLines = descriptionLabel.numberOfLines
 
-        descriptionLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(descriptionLabelDidTap(_:))))
+        descriptionLabel.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                action: #selector(descriptionLabelDidTap(_:))))
     }
 
     func descriptionLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
-        delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer, layoutManager: layoutManager)
+        delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer,
+                layoutManager: layoutManager)
     }
 }
 

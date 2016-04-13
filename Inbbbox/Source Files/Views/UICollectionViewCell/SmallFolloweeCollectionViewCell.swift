@@ -8,7 +8,8 @@
 
 import UIKit
 
-class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight, InfoShotsCellConfigurable, AvatarSettable {
+class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight,
+        InfoShotsCellConfigurable, AvatarSettable {
 
     let firstShotImageView = UIImageView.newAutoLayoutView()
     let secondShotImageView = UIImageView.newAutoLayoutView()
@@ -16,7 +17,7 @@ class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
     let fourthShotImageView = UIImageView.newAutoLayoutView()
 
     var avatarView: AvatarView!
-    let avatarSize = CGSize(width:16, height:16)
+    let avatarSize = CGSize(width: 16, height: 16)
 
     private var didSetConstraints = false
 
@@ -106,7 +107,8 @@ class SmallFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
     }
 
     func clearImages() {
-        for imageView in [avatarView.imageView, firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
+        for imageView in [avatarView.imageView, firstShotImageView, secondShotImageView,
+                          thirdShotImageView, fourthShotImageView] {
             imageView.image = nil
         }
     }

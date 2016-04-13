@@ -32,7 +32,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     // Regards clickable links in comment label
     private let layoutManager = NSLayoutManager()
     private let textContainer = NSTextContainer(size: CGSize.zero)
-    lazy private var textStorage: NSTextStorage = { [unowned self] in
+    lazy private var textStorage: NSTextStorage = {
+        [unowned self] in
         return NSTextStorage(attributedString: self.commentLabel.attributedText ?? NSAttributedString())
     }()
 
@@ -62,14 +63,16 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         dateLabel.numberOfLines = 0
         contentView.addSubview(dateLabel)
 
-        editView.deleteButton.addTarget(self, action: #selector(deleteButtonDidTap(_:)), forControlEvents: .TouchUpInside)
-        editView.cancelButton.addTarget(self, action: #selector(cancelButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        editView.deleteButton.addTarget(self,
+                action: #selector(deleteButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        editView.cancelButton.addTarget(self,
+                action: #selector(cancelButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         contentView.addSubview(editView)
 
         setNeedsUpdateConstraints()
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message = "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -100,7 +103,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
             avatarView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom, relation: .GreaterThanOrEqual)
 
             authorLabel.autoPinEdge(.Top, toEdge: .Top, ofView: authorLabel.superview!, withOffset: insets.top)
-            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView, withOffset: horizontalSpaceBetweenAvatarAndText)
+            authorLabel.autoPinEdge(.Left, toEdge: .Right, ofView: avatarView,
+                    withOffset: horizontalSpaceBetweenAvatarAndText)
             authorLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: insets.right)
             authorLabel.autoSetDimension(.Height, toSize: 20, relation: .GreaterThanOrEqual)
 
@@ -148,16 +152,17 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         textContainer.lineBreakMode = commentLabel.lineBreakMode
         textContainer.maximumNumberOfLines = commentLabel.numberOfLines
 
-        commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(commentLabelDidTap(_:))))
+        commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                action: #selector(commentLabelDidTap(_:))))
     }
 
     func setLinkInAuthorLabel(URL: NSURL, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
-            NSForegroundColorAttributeName : UIColor.textDarkColor(),
-            NSFontAttributeName : UIFont.helveticaFont(.NeueMedium, size: 16)
+                NSForegroundColorAttributeName: UIColor.textDarkColor(),
+                NSFontAttributeName: UIFont.helveticaFont(.NeueMedium, size: 16)
         ]
         let authorText = authorLabel.text ?? ""
-        let range = NSMakeRange(0, authorText.characters.count)
+        let range = NSRange(location: 0, length: authorText.characters.count)
         authorLabel.linkAttributes = linkAttributes
         authorLabel.activeLinkAttributes = linkAttributes
         authorLabel.inactiveLinkAttributes = linkAttributes
@@ -170,7 +175,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 extension ShotDetailsCommentCollectionViewCell {
 
     func commentLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
-        delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer, layoutManager: layoutManager)
+        delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer,
+                layoutManager: layoutManager)
     }
 
     func deleteButtonDidTap(_: UIButton) {
@@ -185,7 +191,7 @@ extension ShotDetailsCommentCollectionViewCell {
 extension ShotDetailsCommentCollectionViewCell: AutoSizable {
 
     static var maximumContentWidth: CGFloat? {
-        return  contentInsets.left + contentInsets.right + avatarSize.width + horizontalSpaceBetweenAvatarAndText
+        return contentInsets.left + contentInsets.right + avatarSize.width + horizontalSpaceBetweenAvatarAndText
     }
 
     static var minimumRequiredHeight: CGFloat {
