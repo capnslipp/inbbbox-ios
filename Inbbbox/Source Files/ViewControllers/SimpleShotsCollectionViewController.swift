@@ -1,8 +1,8 @@
 //
-//  LikesCollectionViewController.swift
+//  SimpleShotsCollectionViewController.swift
 //  Inbbbox
 //
-//  Created by Aleksander Popko on 26.01.2016.
+//  Created by Peter Bruz on 13/04/16.
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
@@ -11,20 +11,41 @@ import PromiseKit
 import ZFDragableModalTransition
 import DZNEmptyDataSet
 
-class LikesCollectionViewController: TwoLayoutsCollectionViewController {
+class SimpleShotsCollectionViewController: TwoLayoutsCollectionViewController {
     
-    let viewModel = LikesViewModel()
+    var viewModel: SimpleShotsViewModel?
     var modalTransitionAnimator: ZFModalTransitionAnimator?
-    private var shouldShowLoadingView = true
     
+    private var shouldShowLoadingView = true
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
     
-    // MARK: - Lifecycle
+}
+
+// MARK: Lifecycle
+
+extension SimpleShotsCollectionViewController {
     
+    /// Use this `init` to display shots from given bucket.
+    convenience init(bucket: BucketType) {
+        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
+        self.viewModel = BucketContentViewModel(bucket: bucket)
+    }
+    
+    /// Use this `init` to display liked shots.
+    convenience init() {
+        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
+        self.viewModel = LikesViewModel()
+    }
+}
+
+// MARK: UIViewController
+
+extension SimpleShotsCollectionViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.delegate = self
-        self.title = viewModel.title
+        viewModel?.delegate = self
+        self.title = viewModel?.title
         guard let collectionView = collectionView else {
             return
         }
@@ -35,25 +56,27 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.clearViewModelIfNeeded()
+        viewModel?.clearViewModelIfNeeded()
     }
-
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.downloadInitialItems()
-        AnalyticsManager.trackScreen(.LikesView)
+        viewModel?.downloadInitialItems()
     }
-    
-    // MARK: UICollectionViewDataSource
-    
+}
+
+// MARK: UICollectionViewDataSource
+
+extension SimpleShotsCollectionViewController {
+
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.itemsCount
+        return viewModel!.itemsCount
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
-        let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
+        let cellData = viewModel!.shotCollectionViewCellViewData(indexPath)
         
         indexPathsNeededImageUpdate.append(indexPath)
         lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
@@ -62,16 +85,24 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
         return cell
     }
     
-    // MARK: UICollectionViewDelegate
+}
+
+// MARK: UICollectionViewDelegate
+
+extension SimpleShotsCollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == viewModel.itemsCount - 1 {
-            viewModel.downloadItemsForNextPage()
+        if indexPath.row == viewModel!.itemsCount - 1 {
+            viewModel?.downloadItemsForNextPage()
         }
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-
+        
+        guard let viewModel = viewModel else {
+            return
+        }
+        
         let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
         
         modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
@@ -89,10 +120,10 @@ class LikesCollectionViewController: TwoLayoutsCollectionViewController {
     }
 }
 
-extension LikesCollectionViewController : BaseCollectionViewViewModelDelegate {
+extension SimpleShotsCollectionViewController: BaseCollectionViewViewModelDelegate {
     
     func viewModelDidLoadInitialItems() {
-        self.shouldShowLoadingView = false
+        shouldShowLoadingView = false
         collectionView?.reloadData()
     }
     
@@ -100,7 +131,7 @@ extension LikesCollectionViewController : BaseCollectionViewViewModelDelegate {
         self.shouldShowLoadingView = false
         collectionView?.reloadData()
         
-        if viewModel.shots.isEmpty {
+        if let viewModel = viewModel where viewModel.shots.isEmpty {
             let alert = UIAlertController.generalErrorAlertController()
             presentViewController(alert, animated: true, completion: nil)
             alert.view.tintColor = .pinkColor()
@@ -116,7 +147,7 @@ extension LikesCollectionViewController : BaseCollectionViewViewModelDelegate {
     }
 }
 
-extension LikesCollectionViewController: DZNEmptyDataSetSource {
+extension SimpleShotsCollectionViewController: DZNEmptyDataSetSource {
     
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
         
@@ -126,11 +157,12 @@ extension LikesCollectionViewController: DZNEmptyDataSetSource {
             return loadingView
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
+            let descriptionAttributes = viewModel?.emptyCollectionDescriptionAttributes()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.FirstLocalizedString", comment: "LikesCollectionView, empty data set view"),
-                attachmentImage: UIImage(named: "ic-like-emptystate"),
-                imageOffset: CGPoint(x: 0, y: -2),
-                lastLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.LastLocalizedString", comment: "LikesCollectionView, empty data set view")
+                firstLocalizedString: descriptionAttributes?.firstLocalizedString ?? "",
+                attachmentImage: UIImage(named: descriptionAttributes?.attachmentImageName ?? ""),
+                imageOffset: descriptionAttributes?.imageOffset ?? CGPointZero,
+                lastLocalizedString: descriptionAttributes?.lastLocalizedString ?? ""
             )
             return emptyDataSetView
         }
@@ -139,7 +171,7 @@ extension LikesCollectionViewController: DZNEmptyDataSetSource {
 
 // MARK: Lazy loading of image
 
-private extension LikesCollectionViewController {
+private extension SimpleShotsCollectionViewController {
     
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in

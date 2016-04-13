@@ -7,12 +7,10 @@
 //
 
 import Foundation
-
-import Foundation
 import PromiseKit
 
 
-class BucketContentViewModel: BaseCollectionViewViewModel {
+class BucketContentViewModel: SimpleShotsViewModel {
     
     var delegate: BaseCollectionViewViewModelDelegate?
     var shots = [ShotType]()
@@ -66,6 +64,16 @@ class BucketContentViewModel: BaseCollectionViewViewModel {
         }.error { error in
             // NGRTemp: Need mockups for error message view
         }
+    }
+    
+    func emptyCollectionDescriptionAttributes() -> EmptyCollectionViewDescription {
+        let description = EmptyCollectionViewDescription(
+            firstLocalizedString: NSLocalizedString("BucketContent.EmptyData.FirstLocalizedString", comment: "BucketContentCollectionView, empty data set view"),
+            attachmentImageName: "ic-bucket-emptystate",
+            imageOffset: CGPoint(x: 0, y: -4),
+            lastLocalizedString: NSLocalizedString("BucketContent.EmptyData.LastLocalizedString", comment: "BucketContentCollectionView, empty data set view")
+        )
+        return description
     }
     
     func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {

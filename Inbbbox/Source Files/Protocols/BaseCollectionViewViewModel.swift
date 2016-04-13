@@ -10,12 +10,11 @@ import Foundation
 
 protocol BaseCollectionViewViewModel {
     
-    var delegate: BaseCollectionViewViewModelDelegate? { get }
+    var delegate: BaseCollectionViewViewModelDelegate? { get set }
     var itemsCount: Int { get }
     
     func downloadInitialItems()
     func downloadItemsForNextPage()
-    
 }
 
 protocol BaseCollectionViewViewModelDelegate {

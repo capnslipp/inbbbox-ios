@@ -10,16 +10,16 @@ import Foundation
 import PromiseKit
 
 
-class LikesViewModel: BaseCollectionViewViewModel {
+class LikesViewModel: SimpleShotsViewModel {
     
     var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Likes", comment:"")
-    var likedShots = [ShotType]()
+    var shots = [ShotType]()
     private let shotsProvider = ShotsProvider()
     private var userMode: UserMode
     
     var itemsCount: Int {
-        return likedShots.count
+        return shots.count
     }
     
     init() {
@@ -30,8 +30,8 @@ class LikesViewModel: BaseCollectionViewViewModel {
         firstly {
             shotsProvider.provideMyLikedShots()
         }.then { shots -> Void in
-            if let shots = shots where shots != self.likedShots || shots.count == 0 {
-                self.likedShots = shots
+            if let shots = shots where shots != self.shots || shots.count == 0 {
+                self.shots = shots
                 self.delegate?.viewModelDidLoadInitialItems()
             }
         }.error { error in
@@ -48,9 +48,9 @@ class LikesViewModel: BaseCollectionViewViewModel {
         }.then { shots -> Void in
             if let shots = shots where shots.count > 0 {
                 let indexes = shots.enumerate().map { index, _ in
-                    return index + self.likedShots.count
+                    return index + self.shots.count
                 }
-                self.likedShots.appendContentsOf(shots)
+                self.shots.appendContentsOf(shots)
                 let indexPaths = indexes.map {
                     NSIndexPath(forRow:($0), inSection: 0)
                 }
@@ -61,16 +61,26 @@ class LikesViewModel: BaseCollectionViewViewModel {
         }
     }
     
+    func emptyCollectionDescriptionAttributes() -> EmptyCollectionViewDescription {
+        let description = EmptyCollectionViewDescription(
+            firstLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.FirstLocalizedString", comment: "LikesCollectionView, empty data set view"),
+            attachmentImageName: "ic-like-emptystate",
+            imageOffset: CGPoint(x: 0, y: -2),
+            lastLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.LastLocalizedString", comment: "LikesCollectionView, empty data set view")
+        )
+        return description
+    }
+    
     func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
-        let shotImage = likedShots[indexPath.row].shotImage
-        let animated = likedShots[indexPath.row].animated
+        let shotImage = shots[indexPath.row].shotImage
+        let animated = shots[indexPath.row].animated
         return (shotImage, animated)
     }
     
     func clearViewModelIfNeeded() {
         let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
         if userMode != currentUserMode {
-            likedShots = []
+            shots = []
             userMode = currentUserMode
             delegate?.viewModelDidLoadInitialItems()
         }
