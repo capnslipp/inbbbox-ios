@@ -17,14 +17,19 @@ class TwoColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         if let collectionView = collectionView {
             let spacings = CollectionViewLayoutSpacings()
-            let calculatedItemWidth = (round(CGRectGetWidth(collectionView.bounds)) - 3 * spacings.twoColumnsItemMargin) / 2
+            let calculatedItemWidth = (round(CGRectGetWidth(collectionView.bounds)) -
+                    3 * spacings.twoColumnsItemMargin) / 2
             let calculatedItemHeight = calculatedItemWidth * itemHeightToWidthRatio
             itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
             minimumLineSpacing = spacings.twoColumnsMinimumLineSpacing
             minimumInteritemSpacing = spacings.twoColumnsMinimymInterimSpacing
-            sectionInset = UIEdgeInsets(top: spacings.twoColumnsSectionMarginVertical, left: spacings.twoColumnsSectionMarginVertical, bottom: spacings.twoColumnsSectionMarginHorizontal, right: spacings.twoColumnsSectionMarginVertical)
+            sectionInset = UIEdgeInsets(top: spacings.twoColumnsSectionMarginVertical,
+                                       left: spacings.twoColumnsSectionMarginVertical,
+                                     bottom: spacings.twoColumnsSectionMarginHorizontal,
+                                      right: spacings.twoColumnsSectionMarginVertical)
             if containsHeader {
-                headerReferenceSize = CGSize(width: CGRectGetWidth(collectionView.bounds), height: 150)
+                headerReferenceSize = CGSize(width: CGRectGetWidth(collectionView.bounds),
+                                            height: 150)
             }
         }
     }
@@ -33,7 +38,8 @@ class TwoColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return true
     }
 
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect)
+                    -> [UICollectionViewLayoutAttributes]? {
 
         let attributes = super.layoutAttributesForElementsInRect(rect)
 

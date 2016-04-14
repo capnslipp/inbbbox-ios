@@ -16,7 +16,8 @@ extension UIWindow {
     ///
     /// - parameter newRootViewController:  new root view controller
     /// - parameter transition:             optional transition animation
-    func setRootViewController(newRootViewController: UIViewController, transition: CATransition? = nil) {
+    func setRootViewController(newRootViewController: UIViewController,
+                                          transition: CATransition? = nil) {
 
         let previousViewController = rootViewController
 
@@ -35,7 +36,8 @@ extension UIWindow {
             newRootViewController.setNeedsStatusBarAppearanceUpdate()
         }
 
-        /// The presenting view controllers view doesn't get removed from the window as its currently transistioning and presenting a view controller
+        /// The presenting view controllers view doesn't get removed from the window
+        /// as its currently transistioning and presenting a view controller
         if let previousViewController = previousViewController {
             // Allow the view controller to be deallocated
             previousViewController.dismissViewControllerAnimated(false) {

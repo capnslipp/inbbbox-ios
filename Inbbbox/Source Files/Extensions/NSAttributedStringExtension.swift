@@ -24,7 +24,8 @@ extension NSAttributedString {
         var attributedString: NSAttributedString?
 
         do {
-            attributedString = try NSAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil)
+            attributedString = try NSAttributedString(data: encodedData,
+                options: attributedOptions, documentAttributes: nil)
         } catch {
             return nil
         }
@@ -33,12 +34,12 @@ extension NSAttributedString {
     }
 
     /// - returns: Attributed string by removing new line character at the end.
-    func attributedStringByTrimingNewLineCharactersAtTheEnd() -> NSAttributedString {
+    func attributedStringByTrimingTrailingNewLine() -> NSAttributedString {
 
         let possibleNewLineCharacter = string.substringFromIndex(string.endIndex.advancedBy(-1))
         if possibleNewLineCharacter == "\n" {
             let range = NSRange(location: 0, length: length - 1)
-            return attributedSubstringFromRange(range).attributedStringByTrimingNewLineCharactersAtTheEnd()
+            return attributedSubstringFromRange(range).attributedStringByTrimingTrailingNewLine()
         }
 
         return self
@@ -60,6 +61,7 @@ extension NSAttributedString {
         NSStringDrawingOptions.UsesLineFragmentOrigin.rawValue,
                 NSStringDrawingOptions.self
         )
-        return ceil(boundingRectWithSize(CGSize(width: width, height: CGFloat.max), options: options, context: nil).size.height)
+        return ceil(boundingRectWithSize(CGSize(width: width, height: CGFloat.max),
+                options: options, context: nil).size.height)
     }
 }

@@ -26,7 +26,8 @@ class ShotDetailsCollectionCollapsableHeader: UICollectionViewFlowLayout {
         return true
     }
 
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect)
+                    -> [UICollectionViewLayoutAttributes]? {
 
         var superAttributes = super.layoutAttributesForElementsInRect(rect)
 
@@ -56,8 +57,9 @@ class ShotDetailsCollectionCollapsableHeader: UICollectionViewFlowLayout {
                 return attributes
             }
 
-            let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withIndexPath: NSIndexPath(forItem: 0, inSection:
-                0))
+            let attributes = UICollectionViewLayoutAttributes(
+                    forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                 withIndexPath: NSIndexPath(forItem: 0, inSection: 0))
             superAttributes?.append(attributes)
 
             return attributes
@@ -70,13 +72,17 @@ class ShotDetailsCollectionCollapsableHeader: UICollectionViewFlowLayout {
             frame = {
                 var frame = headerAtributes.frame
                 frame.origin.y = frame.origin.y + deltaY
-                frame.size.height = max(headerAtributes.size.height - currentOffsetY, collapsableHeight)
+                frame.size.height = max(headerAtributes.size.height -
+                        currentOffsetY, collapsableHeight)
 
                 return frame
             }()
 
         } else {
-            frame = CGRect(x: 0, y: currentOffsetY, width: collectionView.frame.size.width, height: collapsableHeight)
+            frame = CGRect(x: 0,
+                           y: currentOffsetY,
+                       width: collectionView.frame.size.width,
+                      height: collapsableHeight)
         }
 
         headerAtributes.zIndex = 64

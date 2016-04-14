@@ -21,7 +21,10 @@ extension String {
 
         let size = CGSize(width: width, height: CGFloat.max)
         let attributes = [NSFontAttributeName: font]
-        let rect = NSString(string: self).boundingRectWithSize(size, options: .UsesLineFragmentOrigin, attributes: attributes, context: nil)
+        let rect = NSString(string: self).boundingRectWithSize(size,
+                                                      options: .UsesLineFragmentOrigin,
+                                                   attributes: attributes,
+                                                      context: nil)
 
         return CGRectIntegral(rect)
     }

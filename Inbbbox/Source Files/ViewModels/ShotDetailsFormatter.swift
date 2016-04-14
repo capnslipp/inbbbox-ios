@@ -55,7 +55,7 @@ final class ShotDetailsFormatter {
 
     class func attributedShotDescriptionFromShot(shot: ShotType) -> NSAttributedString? {
 
-        guard let body = shot.attributedDescription?.attributedStringByTrimingNewLineCharactersAtTheEnd() else {
+        guard let body = shot.attributedDescription?.attributedStringByTrimingTrailingNewLine() else {
             return nil
         }
 
@@ -81,7 +81,7 @@ final class ShotDetailsFormatter {
             return nil
         }
 
-        let mutableBody = body.attributedStringByTrimingNewLineCharactersAtTheEnd().mutableCopy()
+        let mutableBody = body.attributedStringByTrimingTrailingNewLine().mutableCopy()
         let range = NSRange(location: 0, length: mutableBody.length)
 
         mutableBody.addAttributes([

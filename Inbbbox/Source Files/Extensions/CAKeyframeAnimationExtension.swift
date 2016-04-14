@@ -16,7 +16,8 @@ extension CAKeyframeAnimation {
     /// - parameter duration:   Animation duration.
     ///
     /// - returns: Array of animations to perform.
-    class func ballBounceAnimations(jumpHeight: Int, duration: NSTimeInterval) -> [CAKeyframeAnimation] {
+    class func ballBounceAnimations(jumpHeight: Int, duration: NSTimeInterval)
+                    -> [CAKeyframeAnimation] {
 
         let translationY = CAKeyframeAnimation(keyPath: "transform.translation.y")
         translationY.values = [0, jumpHeight, 0]

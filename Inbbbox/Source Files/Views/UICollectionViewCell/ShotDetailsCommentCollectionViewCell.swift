@@ -32,8 +32,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     // Regards clickable links in comment label
     private let layoutManager = NSLayoutManager()
     private let textContainer = NSTextContainer(size: CGSize.zero)
-    lazy private var textStorage: NSTextStorage = {
-        [unowned self] in
+    lazy private var textStorage: NSTextStorage = { [unowned self] in
         return NSTextStorage(attributedString: self.commentLabel.attributedText ?? NSAttributedString())
     }()
 

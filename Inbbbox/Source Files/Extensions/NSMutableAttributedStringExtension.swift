@@ -16,6 +16,8 @@ extension NSMutableAttributedString {
 
 
     class func emptyDataSetStyledString(string: String) -> NSMutableAttributedString {
-        return NSMutableAttributedString(string: string, attributes: [NSFontAttributeName: UIFont.helveticaFont(.NeueLight, size: 25), NSForegroundColorAttributeName: UIColor.cellBackgroundColor()])
+        let attributes = [NSFontAttributeName: UIFont.helveticaFont(.NeueLight, size: 25),
+               NSForegroundColorAttributeName: UIColor.cellBackgroundColor()]
+        return NSMutableAttributedString(string: string, attributes: attributes)
     }
 }

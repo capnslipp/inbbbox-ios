@@ -21,13 +21,19 @@ struct ShotCellCommentActionAnimationDescriptor: AnimationDescriptor {
         self.shotCell = shotCell
         animations = {
             let contentViewWidht = CGRectGetWidth(shotCell.contentView.bounds)
-            shotCell.commentImageViewRightConstraint?.constant = -round(contentViewWidht / 2 - shotCell.commentImageView.intrinsicContentSize().width / 2)
-            shotCell.commentImageViewWidthConstraint?.constant = shotCell.commentImageView.intrinsicContentSize().width
+            shotCell.commentImageViewRightConstraint?.constant =
+                    -round(contentViewWidht / 2 -
+                    shotCell.commentImageView.intrinsicContentSize().width / 2)
+            shotCell.commentImageViewWidthConstraint?.constant =
+                    shotCell.commentImageView.intrinsicContentSize().width
             shotCell.contentView.layoutIfNeeded()
-            shotCell.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, -contentViewWidht, 0)
+            shotCell.shotImageView.transform =
+                    CGAffineTransformTranslate(CGAffineTransformIdentity, -contentViewWidht, 0)
         }
         completion = { _ in
-            var delayedRestoreInitialStateAnimationDescriptor = ShotCellInitialStateAnimationDescriptor(shotCell: shotCell, swipeCompletion: swipeCompletion)
+            var delayedRestoreInitialStateAnimationDescriptor =
+                    ShotCellInitialStateAnimationDescriptor(shotCell: shotCell,
+                                                     swipeCompletion: swipeCompletion)
             delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
             shotCell.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
         }

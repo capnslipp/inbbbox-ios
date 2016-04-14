@@ -17,13 +17,18 @@ class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
         if let collectionView = collectionView {
             let spacings = CollectionViewLayoutSpacings()
-            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) - 2 * spacings.itemMargin
+            let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) -
+                    2 * spacings.itemMargin
             let calculatedItemHeight = calculatedItemWidth * itemHeightToWidthRatio
             itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
             minimumLineSpacing = spacings.minimumLineSpacing
-            sectionInset = UIEdgeInsets(top: spacings.sectionMarginVertical, left: spacings.sectionMarginHorizontal, bottom: spacings.sectionMarginVertical, right: spacings.sectionMarginHorizontal)
+            sectionInset = UIEdgeInsets(top: spacings.sectionMarginVertical,
+                                       left: spacings.sectionMarginHorizontal,
+                                     bottom: spacings.sectionMarginVertical,
+                                      right: spacings.sectionMarginHorizontal)
             if containsHeader {
-                headerReferenceSize = CGSize(width: CGRectGetWidth(collectionView.bounds), height: 150)
+                headerReferenceSize = CGSize(width: CGRectGetWidth(collectionView.bounds),
+                                            height: 150)
             }
         }
     }
@@ -32,7 +37,8 @@ class OneColumnCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return true
     }
 
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElementsInRect(rect: CGRect)
+                    -> [UICollectionViewLayoutAttributes]? {
 
         let attributes = super.layoutAttributesForElementsInRect(rect)
 

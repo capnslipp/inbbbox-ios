@@ -22,7 +22,10 @@ extension UIColor {
 
 
     class func RGBA(red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) -> UIColor {
-        return UIColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: alpha)
+        return UIColor(red: CGFloat(red) / 255.0,
+                     green: CGFloat(green) / 255.0,
+                      blue: CGFloat(blue) / 255.0,
+                     alpha: alpha)
     }
 
     /// Brand pink color.
