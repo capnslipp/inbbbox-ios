@@ -12,30 +12,33 @@ import ZFDragableModalTransition
 import DZNEmptyDataSet
 
 class SimpleShotsCollectionViewController: TwoLayoutsCollectionViewController {
-    
+
     var viewModel: SimpleShotsViewModel?
     var modalTransitionAnimator: ZFModalTransitionAnimator?
-    
+
     private var shouldShowLoadingView = true
 
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
-    
+
 }
 
 // MARK: Lifecycle
 
 extension SimpleShotsCollectionViewController {
-    
+
     /// Use this `init` to display shots from given bucket.
+
+
     convenience init(bucket: BucketType) {
         self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio,
                 twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
         self.viewModel = BucketContentViewModel(bucket: bucket)
     }
-    
+
     /// Use this `init` to display liked shots.
     convenience init() {
-        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
+        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio,
+            twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
         self.viewModel = LikesViewModel()
     }
 }
@@ -88,14 +91,15 @@ extension SimpleShotsCollectionViewController {
         cell.gifLabel.hidden = !cellData.animated
         return cell
     }
-    
+
 }
 
 // MARK: UICollectionViewDelegate
 
 extension SimpleShotsCollectionViewController {
-    
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
+            forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == viewModel!.itemsCount - 1 {
             viewModel?.downloadItemsForNextPage()
         }
@@ -127,7 +131,7 @@ extension SimpleShotsCollectionViewController {
 }
 
 extension SimpleShotsCollectionViewController: BaseCollectionViewViewModelDelegate {
-    
+
     func viewModelDidLoadInitialItems() {
         shouldShowLoadingView = false
         collectionView?.reloadData()
@@ -154,11 +158,11 @@ extension SimpleShotsCollectionViewController: BaseCollectionViewViewModelDelega
 }
 
 extension SimpleShotsCollectionViewController: DZNEmptyDataSetSource {
-    
+
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
-        
+
         guard let viewModel = viewModel else { return UIView() }
-        
+
         if shouldShowLoadingView {
             let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
             loadingView.startAnimation()
@@ -180,11 +184,14 @@ extension SimpleShotsCollectionViewController: DZNEmptyDataSetSource {
 // MARK: Lazy loading of image
 
 private extension SimpleShotsCollectionViewController {
-    
-    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
+
+    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell,
+            atIndexPath indexPath: NSIndexPath) {
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
 
-            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else {
+                return
+            }
 
             cell.shotImageView.image = image
         }

@@ -46,7 +46,8 @@ class CommentComposerView: UIView {
         textField.delegate = self
         textField.autocorrectionType = .No
         textField.rightViewMode = .Always
-        textField.addTarget(self, action: #selector(textFieldValueDidChange(_:)), forControlEvents: .EditingChanged)
+        textField.addTarget(self, action: #selector(textFieldValueDidChange(_:)),
+                        forControlEvents: .EditingChanged)
         textField.rightView = button
         cornerWrapperView.addSubview(textField)
     }
@@ -67,7 +68,8 @@ class CommentComposerView: UIView {
 
             let inset = CGFloat(20)
 
-            cornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            cornerWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero,
+                    excludingEdge: .Bottom)
             cornerWrapperView.autoPinEdgeToSuperviewEdge(.Bottom, withInset: -inset)
 
             let insets = UIEdgeInsets(top: 5, left: 5, bottom: 5 + inset, right: 5)
@@ -109,11 +111,11 @@ extension CommentComposerView {
     func makeActive() {
         textField.becomeFirstResponder()
     }
-    
+
     func makeInactive() {
         textField.resignFirstResponder()
     }
-    
+
     func animateByRoundingCorners(round: Bool) {
 
         let fromValue: CGFloat = round ? 0 : 10
@@ -148,7 +150,8 @@ private extension CommentComposerView {
         button.enabled = false
         button.frame = CGRect(x: 0, y: 0, width: 65, height: 40)
         button.setImage(UIImage(named: "ic-sendmessage"), forState: .Normal)
-        button.addTarget(self, action: #selector(addCommentButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(addCommentButtonDidTap(_:)),
+                forControlEvents: .TouchUpInside)
 
         return button
     }

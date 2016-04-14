@@ -23,7 +23,7 @@ class LoginViewAnimator {
     private weak var view: LoginView?
     private var animations = LoginViewAnimations()
     private weak var delegate: LoginViewAnimatorDelegate?
-    
+
     private var loginButtonTitle: String?
     private let loopDuration = NSTimeInterval(1)
     private var loginAsGuestShown = false

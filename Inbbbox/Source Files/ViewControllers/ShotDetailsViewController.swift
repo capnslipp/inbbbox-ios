@@ -13,7 +13,8 @@ import TTTAttributedLabel
 
 protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
 
-    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer, textContainer: NSTextContainer, layoutManager: NSLayoutManager)
+    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
+            textContainer: NSTextContainer, layoutManager: NSLayoutManager)
 }
 
 final class ShotDetailsViewController: UIViewController {
@@ -440,9 +441,9 @@ private extension ShotDetailsViewController {
     }
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
-        
+
         shotDetailsView.commentComposerView.makeInactive()
-        
+
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
         shotBucketsViewController.dismissClosure = { [weak self] in
@@ -529,8 +530,10 @@ extension ShotDetailsViewController: AvatarViewDelegate {
         var user: UserType?
         if avatarView.superview == header {
             user = viewModel.shot.user
-        } else if (avatarView.superview?.superview is ShotDetailsCommentCollectionViewCell) {
-            let cell = avatarView.superview!.superview! as! ShotDetailsCommentCollectionViewCell
+        } else if avatarView.superview?.superview is ShotDetailsCommentCollectionViewCell {
+            guard let cell = avatarView.superview?.superview? as? ShotDetailsCommentCollectionViewCell else {
+                return
+            }
             if let indexPath = shotDetailsView.collectionView.indexPathForCell(cell) {
                 let index = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
                 user = viewModel.comments[index].user

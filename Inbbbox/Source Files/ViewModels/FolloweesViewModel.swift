@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 
 class FolloweesViewModel: BaseCollectionViewViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Following", comment:"")
     var followees = [Followee]()

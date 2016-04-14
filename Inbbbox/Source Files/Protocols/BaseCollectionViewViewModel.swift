@@ -9,7 +9,7 @@
 import Foundation
 
 protocol BaseCollectionViewViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate? { get set }
     var itemsCount: Int { get }
 
@@ -18,7 +18,7 @@ protocol BaseCollectionViewViewModel {
 }
 
 protocol BaseCollectionViewViewModelDelegate: class {
-    
+
     func viewModelDidLoadInitialItems()
     func viewModelDidFailToLoadInitialItems(error: ErrorType)
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath])

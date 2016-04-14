@@ -11,7 +11,7 @@ import PromiseKit
 
 
 class BucketsViewModel: BaseCollectionViewViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Buckets", comment:"")
     var buckets = [BucketType]()

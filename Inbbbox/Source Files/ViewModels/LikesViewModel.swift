@@ -11,7 +11,7 @@ import PromiseKit
 
 
 class LikesViewModel: SimpleShotsViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Likes", comment:"")
     var shots = [ShotType]()
@@ -60,18 +60,21 @@ class LikesViewModel: SimpleShotsViewModel {
             // NGRTemp: Need mockups for error message view
         }
     }
-    
+
     func emptyCollectionDescriptionAttributes() -> EmptyCollectionViewDescription {
         let description = EmptyCollectionViewDescription(
-            firstLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.FirstLocalizedString", comment: "LikesCollectionView, empty data set view"),
+            firstLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.FirstLocalizedString",
+                comment: "LikesCollectionView, empty data set view"),
             attachmentImageName: "ic-like-emptystate",
             imageOffset: CGPoint(x: 0, y: -2),
-            lastLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.LastLocalizedString", comment: "LikesCollectionView, empty data set view")
+            lastLocalizedString: NSLocalizedString("LikesCollectionView.EmptyData.LastLocalizedString",
+                comment: "LikesCollectionView, empty data set view")
         )
         return description
     }
-    
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath)
+            -> (shotImage: ShotImageType, animated: Bool) {
         let shotImage = shots[indexPath.row].shotImage
         let animated = shots[indexPath.row].animated
         return (shotImage, animated)

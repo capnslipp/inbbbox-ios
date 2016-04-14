@@ -11,7 +11,7 @@ import PromiseKit
 
 
 class BucketContentViewModel: SimpleShotsViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate?
     var shots = [ShotType]()
     private let shotsProvider = ShotsProvider()
@@ -65,18 +65,21 @@ class BucketContentViewModel: SimpleShotsViewModel {
             // NGRTemp: Need mockups for error message view
         }
     }
-    
+
     func emptyCollectionDescriptionAttributes() -> EmptyCollectionViewDescription {
         let description = EmptyCollectionViewDescription(
-            firstLocalizedString: NSLocalizedString("BucketContent.EmptyData.FirstLocalizedString", comment: "BucketContentCollectionView, empty data set view"),
+            firstLocalizedString: NSLocalizedString("BucketContent.EmptyData.FirstLocalizedString",
+                comment: "BucketContentCollectionView, empty data set view"),
             attachmentImageName: "ic-bucket-emptystate",
             imageOffset: CGPoint(x: 0, y: -4),
-            lastLocalizedString: NSLocalizedString("BucketContent.EmptyData.LastLocalizedString", comment: "BucketContentCollectionView, empty data set view")
+            lastLocalizedString: NSLocalizedString("BucketContent.EmptyData.LastLocalizedString",
+                comment: "BucketContentCollectionView, empty data set view")
         )
         return description
     }
-    
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath)
+            -> (shotImage: ShotImageType, animated: Bool) {
         let shotImage = shots[indexPath.row].shotImage
         let animated = shots[indexPath.row].animated
         return (shotImage, animated)
