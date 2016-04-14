@@ -19,7 +19,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
         let fixtureSecondItemAttributes = FixtureSecondItemAttributes()
 
         beforeEach {
-            sut = InitialAnimationsShotsCollectionViewLayout()
+            sut = InitialShotsCollectionViewLayout()
             collectionViewMock = CollectionViewMock(frame: CGRectZero, collectionViewLayout: sut!)
         }
 
