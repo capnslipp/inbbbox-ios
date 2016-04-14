@@ -11,7 +11,7 @@ import PromiseKit
 
 class FolloweesViewModel: BaseCollectionViewViewModel {
     
-    var delegate: BaseCollectionViewViewModelDelegate?
+    weak var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Following", comment:"")
     var followees = [Followee]()
     var followeesIndexedShots = [Int : [ShotType]]()

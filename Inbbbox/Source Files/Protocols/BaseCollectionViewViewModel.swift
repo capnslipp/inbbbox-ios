@@ -10,15 +10,14 @@ import Foundation
 
 protocol BaseCollectionViewViewModel {
     
-    var delegate: BaseCollectionViewViewModelDelegate? { get }
+    weak var delegate: BaseCollectionViewViewModelDelegate? { get set }
     var itemsCount: Int { get }
     
     func downloadInitialItems()
     func downloadItemsForNextPage()
-    
 }
 
-protocol BaseCollectionViewViewModelDelegate {
+protocol BaseCollectionViewViewModelDelegate: class {
     
     func viewModelDidLoadInitialItems()
     func viewModelDidFailToLoadInitialItems(error: ErrorType)

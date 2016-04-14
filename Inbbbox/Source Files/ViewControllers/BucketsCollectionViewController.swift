@@ -77,7 +77,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let bucketContentCollectionViewController = BucketContentCollectionViewController(bucket: viewModel.buckets[indexPath.row])
+        let bucketContentCollectionViewController = SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
         navigationController?.pushViewController(bucketContentCollectionViewController, animated: true)
     }
     

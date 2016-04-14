@@ -23,7 +23,7 @@ class CenterButtonTabBarController: UITabBarController {
         self.init(nibName: nil, bundle: nil)
         
         
-        let likesViewController = UINavigationController(rootViewController: LikesCollectionViewController(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio))
+        let likesViewController = UINavigationController(rootViewController: SimpleShotsCollectionViewController())
         likesViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"), imageName: "ic-likes")
         let bucketsViewController = UINavigationController(rootViewController: BucketsCollectionViewController())
         bucketsViewController.tabBarItem = tabBarItemWithTitle(NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"), imageName: "ic-buckets")
