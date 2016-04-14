@@ -70,7 +70,8 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
+                                 forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == viewModel.itemsCount - 1 {
             viewModel.downloadItemsForNextPage()
         }
@@ -84,7 +85,9 @@ class BucketsCollectionViewController: UICollectionViewController {
     // MARK: Configuration
 
     func setupBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew", comment: "Button for adding new bucket"), style: .Plain, target: self, action: #selector(didTapAddNewBucketButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew",
+                comment: "Button for adding new bucket"), style: .Plain,
+                target: self, action: #selector(didTapAddNewBucketButton(_:)))
     }
 
     // MARK: Actions:
@@ -98,7 +101,8 @@ class BucketsCollectionViewController: UICollectionViewController {
                 if self.viewModel.buckets.count == 1 {
                     self.collectionView?.reloadData()
                 } else {
-                    self.collectionView?.insertItemsAtIndexPaths([NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
+                    self.collectionView?.insertItemsAtIndexPaths([NSIndexPath(forItem: self.viewModel.buckets.count-1,
+                            inSection: 0)])
                 }
             }.error { error in
                 // NGRTemp: Handle error.
@@ -147,7 +151,9 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.FirstLocalizedString", comment: "Displayed when empty data in view"),
+                firstLocalizedString:
+                NSLocalizedString("BucketsCollectionViewController.EmptyData.FirstLocalizedString",
+                        comment: "Displayed when empty data in view"),
                 attachmentImage: UIImage(named: "ic-bucket-emptystate"),
                 imageOffset: CGPoint(x: 0, y: -4),
                 lastLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.LastLocalizedString", comment: "Displayed when empty data in view")

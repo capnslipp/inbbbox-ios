@@ -35,8 +35,10 @@ class LoginViewController: UIViewController {
         } ?? []
 
         shotsAnimator = AutoScrollableShotsAnimator(bindForAnimation: bindForAnimation)
-        aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)), forControlEvents: .TouchUpInside)
-        aView?.loginAsGuestButton.addTarget(self, action: #selector(loginAsGuestButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)),
+        forControlEvents: .TouchUpInside)
+        aView?.loginAsGuestButton.addTarget(self, action: #selector(loginAsGuestButtonDidTap(_:)),
+        forControlEvents: .TouchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(logoTapped(_:)))
         aView?.logoImageView.addGestureRecognizer(tapGesture)
         aView?.logoImageView.userInteractionEnabled = true

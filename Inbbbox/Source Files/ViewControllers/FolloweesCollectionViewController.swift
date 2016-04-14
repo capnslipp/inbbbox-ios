@@ -47,13 +47,15 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         return viewModel.itemsCount
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(collectionView: UICollectionView,
+                                 cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cellData = viewModel.followeeCollectionViewCellViewData(indexPath)
 
         indexPathsNeededImageUpdate.append(indexPath)
 
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
-            let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self,
+                    forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
             cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
             cell.nameLabel.text = cellData.name
@@ -66,7 +68,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             }
             return cell
         } else {
-            let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self,
+                    forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
             cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
             cell.nameLabel.text = cellData.name
@@ -75,7 +78,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
 
                 let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
 
-                    guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+                    guard let certainSelf = self
+                            where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
 
                     cell.shotImageView.image = image
                 }
@@ -91,7 +95,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
 
     // MARK: UICollectionViewDelegate
 
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
+                                 forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == viewModel.itemsCount - 1 {
             viewModel.downloadItemsForNextPage()
         }
@@ -103,7 +108,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         self.navigationController?.pushViewController(userDetailsViewController, animated: true)
     }
 
-    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell,
+                                 forItemAtIndexPath indexPath: NSIndexPath) {
         if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
             indexPathsNeededImageUpdate.removeAtIndex(index)
         }
@@ -148,10 +154,12 @@ extension FolloweesCollectionViewController: DZNEmptyDataSetSource {
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: NSLocalizedString("FolloweesCollectionView.EmptyData.FirstLocalizedString", comment: "FolloweesCollectionView, empty data set view"),
+                firstLocalizedString: NSLocalizedString("FolloweesCollectionView.EmptyData.FirstLocalizedString",
+                        comment: "FolloweesCollectionView, empty data set view"),
                 attachmentImage: UIImage(named: "ic-following-emptystate"),
                 imageOffset: CGPoint(x: 0, y: -3),
-                lastLocalizedString: NSLocalizedString("FolloweesCollectionView.EmptyData.LastLocalizedString", comment: "FolloweesCollectionView, empty data set view")
+                lastLocalizedString: NSLocalizedString("FolloweesCollectionView.EmptyData.LastLocalizedString",
+                        comment: "FolloweesCollectionView, empty data set view")
             )
             return emptyDataSetView
         }

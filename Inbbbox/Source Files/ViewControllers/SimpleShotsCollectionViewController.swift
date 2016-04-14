@@ -28,7 +28,8 @@ extension SimpleShotsCollectionViewController {
     
     /// Use this `init` to display shots from given bucket.
     convenience init(bucket: BucketType) {
-        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio, twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
+        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio,
+                twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
         self.viewModel = BucketContentViewModel(bucket: bucket)
     }
     
@@ -74,8 +75,10 @@ extension SimpleShotsCollectionViewController {
         return viewModel!.itemsCount
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    override func collectionView(collectionView: UICollectionView,
+                                 cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath,
+                type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel!.shotCollectionViewCellViewData(indexPath)
 
@@ -106,7 +109,8 @@ extension SimpleShotsCollectionViewController {
 
         let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
 
-        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+        modalTransitionAnimator =
+                CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
 
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
@@ -114,7 +118,8 @@ extension SimpleShotsCollectionViewController {
         tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
 
-    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell,
+                                 forItemAtIndexPath indexPath: NSIndexPath) {
         if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
             indexPathsNeededImageUpdate.removeAtIndex(index)
         }

@@ -83,7 +83,8 @@ private extension Settings {
 
     static func setValue(value: AnyObject?, forKey key: NotificationKey) {
         Defaults[key.rawValue] = value
-        NSNotificationCenter.defaultCenter().postNotificationName(InbbboxNotificationKey.UserDidChangeNotificationsSettings.rawValue, object: self)
+        NSNotificationCenter.defaultCenter().
+        postNotificationName(InbbboxNotificationKey.UserDidChangeNotificationsSettings.rawValue, object: self)
     }
 
     // MARK: StreamSourceKey
@@ -94,7 +95,8 @@ private extension Settings {
 
     static func setValue(value: AnyObject?, forKey key: StreamSourceKey) {
         Defaults[key.rawValue] = value
-        NSNotificationCenter.defaultCenter().postNotificationName(InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: self)
+        NSNotificationCenter.defaultCenter().
+        postNotificationName(InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: self)
     }
 
     // MARK: General
