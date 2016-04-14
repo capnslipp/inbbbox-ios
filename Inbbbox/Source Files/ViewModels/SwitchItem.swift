@@ -10,12 +10,12 @@ import UIKit
 
 class SwitchItem: GroupItem {
 
-    var isOn = false
-    var onValueChanged: ((bool: Bool) -> Void)?
+    var enabled = false
+    var valueChanged: ((newValue: Bool) -> Void)?
     private weak var switchControl: UISwitch?
 
-    init(title: String, isOn: Bool? = false) {
-        self.isOn = isOn ?? false
+    init(title: String, enabled: Bool? = false) {
+        self.enabled = enabled ?? false
         super.init(title: title, category: .Boolean)
     }
 
@@ -31,7 +31,7 @@ class SwitchItem: GroupItem {
     }
 
     dynamic func didChangeSwitchState(sender: UISwitch, forEvents events: UIControlEvents) {
-        isOn = sender.on
-        onValueChanged?(bool: sender.on)
+        enabled = sender.on
+        valueChanged?(newValue: sender.on)
     }
 }

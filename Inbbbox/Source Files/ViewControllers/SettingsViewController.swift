@@ -166,7 +166,7 @@ private extension SettingsViewController {
 
     func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem) {
         cell.textLabel?.text = item.title
-        cell.switchControl.on = item.isOn
+        cell.switchControl.on = item.enabled
         cell.selectionStyle = .None
     }
 

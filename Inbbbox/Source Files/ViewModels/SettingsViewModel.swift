@@ -37,6 +37,7 @@ class SettingsViewModel: GroupedListViewModel {
     private let newTodayStreamSourceItem: SwitchItem
     private let popularTodayStreamSourceItem: SwitchItem
     private let debutsStreamSourceItem: SwitchItem
+    private let acknowledgementItem: LabelItem
 
     var loggedInUser: User? {
         return UserStorage.currentUser
@@ -69,18 +70,18 @@ class SettingsViewModel: GroupedListViewModel {
 
         createAccountItem = LabelItem(title: createAccountTitle)
 
-        reminderItem = SwitchItem(title: reminderTitle, isOn: Settings.Reminder.Enabled)
+        reminderItem = SwitchItem(title: reminderTitle, enabled: Settings.Reminder.Enabled)
         reminderDateItem = DateItem(title: reminderDateTitle, date: Settings.Reminder.Date)
 
         followingStreamSourceItem = SwitchItem(title: followingStreamSourceTitle,
-                isOn: Settings.StreamSource.Following)
+                enabled: Settings.StreamSource.Following)
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle,
-                isOn: Settings.StreamSource.NewToday)
+                enabled: Settings.StreamSource.NewToday)
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle,
-                isOn: Settings.StreamSource.PopularToday)
+                enabled: Settings.StreamSource.PopularToday)
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle,
-                isOn: Settings.StreamSource.Debuts)
-        let acknowledgementItem = LabelItem(title: NSLocalizedString("SettingsViewModel.AcknowledgementsButton",
+                enabled: Settings.StreamSource.Debuts)
+        acknowledgementItem = LabelItem(title: NSLocalizedString("SettingsViewModel.AcknowledgementsButton",
                 comment: "Acknowledgements button"))
         var items: [[GroupItem]]
         if userMode == .LoggedUser {
@@ -99,59 +100,7 @@ class SettingsViewModel: GroupedListViewModel {
 
         super.init(items: items as [[GroupItem]])
 
-        createAccountItem.onSelect = {
-            [weak self] in
-            self?.settingsViewController?.authenticateUser()
-        }
-
-        acknowledgementItem.onSelect = {
-            [weak self] in
-            self?.settingsViewController?.presentAcknowledgements()
-        }
-
-        // MARK: onValueChanged blocks
-
-        reminderItem.onValueChanged = {
-            on in
-            Settings.Reminder.Enabled = on
-            if on {
-                self.registerUserNotificationSettings()
-
-                if Settings.Reminder.LocalNotificationSettingsProvided == true {
-                    self.registerLocalNotification()
-                }
-            } else {
-                self.unregisterLocalNotification()
-            }
-        }
-
-        reminderDateItem.onValueChanged = {
-            date -> Void in
-            if self.reminderItem.isOn {
-                self.registerLocalNotification()
-            }
-            Settings.Reminder.Date = date
-        }
-
-        followingStreamSourceItem.onValueChanged = {
-            on in
-            Settings.StreamSource.Following = on
-        }
-
-        newTodayStreamSourceItem.onValueChanged = {
-            on in
-            Settings.StreamSource.NewToday = on
-        }
-
-        popularTodayStreamSourceItem.onValueChanged = {
-            on in
-            Settings.StreamSource.PopularToday = on
-        }
-
-        debutsStreamSourceItem.onValueChanged = {
-            on in
-            Settings.StreamSource.Debuts = on
-        }
+        configureItemsActions()
 
         // MARK: add observer
         NSNotificationCenter.defaultCenter().addObserver(self,
@@ -173,6 +122,62 @@ class SettingsViewModel: GroupedListViewModel {
 
 private extension SettingsViewModel {
 
+    func configureItemsActions() {
+        createAccountItem.onSelect = {
+            [weak self] in
+            self?.settingsViewController?.authenticateUser()
+        }
+
+        acknowledgementItem.onSelect = {
+            [weak self] in
+            self?.settingsViewController?.presentAcknowledgements()
+        }
+
+        // MARK: onValueChanged blocks
+
+        reminderItem.valueChanged = {
+            newValue in
+            Settings.Reminder.Enabled = newValue
+            if newValue == true {
+                self.registerUserNotificationSettings()
+
+                if Settings.Reminder.LocalNotificationSettingsProvided == true {
+                    self.registerLocalNotification()
+                }
+            } else {
+                self.unregisterLocalNotification()
+            }
+        }
+
+        reminderDateItem.onValueChanged = {
+            date -> Void in
+            if self.reminderItem.enabled {
+                self.registerLocalNotification()
+            }
+            Settings.Reminder.Date = date
+        }
+
+        followingStreamSourceItem.valueChanged = {
+            newValue in
+            Settings.StreamSource.Following = newValue
+        }
+
+        newTodayStreamSourceItem.valueChanged = {
+            newValue in
+            Settings.StreamSource.NewToday = newValue
+        }
+
+        popularTodayStreamSourceItem.valueChanged = {
+            newValue in
+            Settings.StreamSource.PopularToday = newValue
+        }
+
+        debutsStreamSourceItem.valueChanged = {
+            newValue in
+            Settings.StreamSource.Debuts = newValue
+        }
+    }
+
     func registerUserNotificationSettings() {
         UIApplication.sharedApplication().registerUserNotificationSettings(
         UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil))
@@ -187,7 +192,7 @@ private extension SettingsViewModel {
 
             alertDelegate?.displayAlert(preparePermissionsAlert())
 
-            reminderItem.isOn = false
+            reminderItem.enabled = false
             Settings.Reminder.Enabled = false
             delegate?.didChangeItemsAtIndexPaths(indexPathsForItems([reminderItem])!)
         }

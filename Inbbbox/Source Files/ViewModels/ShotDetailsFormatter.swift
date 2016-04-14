@@ -29,7 +29,7 @@ final class ShotDetailsFormatter {
     }()
 
     class func attributedStringForHeaderWithLinkRangeFromShot(shot: ShotType)
-                    -> (attributedString:NSAttributedString, linkRange:NSRange?) {
+                    -> (attributedString: NSAttributedString, linkRange: NSRange?) {
         let mutableAttributedString = NSMutableAttributedString()
         var userLinkRange: NSRange?
 
@@ -50,7 +50,7 @@ final class ShotDetailsFormatter {
         if dateSting.characters.count > 0 {
             appendDateAttributedString(mutableAttributedString, dateSting: dateSting)
         }
-        return (mutableAttributedString.copy() as! NSAttributedString, userLinkRange)
+        return (NSAttributedString(attributedString: mutableAttributedString), userLinkRange)
     }
 
     class func attributedShotDescriptionFromShot(shot: ShotType) -> NSAttributedString? {

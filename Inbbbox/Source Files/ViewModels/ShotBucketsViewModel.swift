@@ -154,7 +154,7 @@ class ShotBucketsViewModel {
         return itemsCount - 1
     }
 
-    func displayableDataForBucketAtIndex(index: Int) -> (bucketName:String, shotsCountText:String) {
+    func displayableDataForBucketAtIndex(index: Int) -> (bucketName: String, shotsCountText: String) {
         let bucket = buckets[index]
         return (
         bucketName: bucket.name,
