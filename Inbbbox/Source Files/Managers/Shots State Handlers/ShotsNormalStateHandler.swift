@@ -258,7 +258,7 @@ private extension ShotsNormalStateHandler {
             cell.shotImageView.originalImage = image
             cell.shotImageView.image = image
         }
-        ImageProvider.lazyLoadImageFromURLs(
+        LazyImageProvider.lazyLoadImageFromURLs(
             (shotImage.teaserURL, shotImage.normalURL, nil),
             teaserImageCompletion: teaserImageLoadingCompletion,
             normalImageCompletion: imageLoadingCompletion

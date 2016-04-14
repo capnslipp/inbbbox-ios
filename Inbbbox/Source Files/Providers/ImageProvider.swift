@@ -1,5 +1,5 @@
 //
-//  ImageProvider.swift
+//  LazyImageProvider.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 11/04/16.
@@ -9,7 +9,7 @@
 import Haneke
 import PromiseKit
 
-final class ImageProvider {
+final class LazyImageProvider {
     
     /// Lazily loads images from URLs. Uses cache for `imageFormatName`.
     ///
@@ -41,7 +41,7 @@ final class ImageProvider {
     }
 }
 
-private extension ImageProvider {
+private extension LazyImageProvider {
     
     class func loadImageFromURL(url: NSURL?) -> Promise<UIImage?> {
         

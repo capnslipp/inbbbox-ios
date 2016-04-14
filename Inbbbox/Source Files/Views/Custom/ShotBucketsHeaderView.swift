@@ -179,7 +179,7 @@ extension ShotBucketsHeaderView {
             }
         }
         
-        ImageProvider.lazyLoadImageFromURLs(
+        LazyImageProvider.lazyLoadImageFromURLs(
             (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
             teaserImageCompletion: imageCompletion,
             normalImageCompletion: imageCompletion,

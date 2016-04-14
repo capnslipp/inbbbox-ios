@@ -10,6 +10,7 @@ PODS:
   - HockeySDK (3.8.6):
     - HockeySDK/AllFeaturesLib (= 3.8.6)
   - HockeySDK/AllFeaturesLib (3.8.6)
+  - ImageViewer (2.0)
   - KeychainAccess (2.3.5)
   - Keys (1.0.0)
   - Mockingjay (1.1.1):
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - GPUImage (~> 0.1)
   - HanekeSwift (~> 0.10)
   - HockeySDK (~> 3.8)
+  - ImageViewer (~> 2.0)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
@@ -92,6 +94,7 @@ SPEC CHECKSUMS:
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
+  ImageViewer: 00eae024d0cb2eebb4b228f4669b6c4872afadb9
   KeychainAccess: e283c1981a6c5655e1984cd411c6faf16fa165ae
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430

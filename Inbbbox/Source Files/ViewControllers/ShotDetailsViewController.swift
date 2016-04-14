@@ -10,6 +10,7 @@ import UIKit
 import PromiseKit
 import ZFDragableModalTransition
 import TTTAttributedLabel
+import ImageViewer
 
 protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
     
@@ -200,6 +201,11 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
+            
+            header?.imageDidTap = { [weak self] _ in
+                guard let certainSelf = self else { return }
+                certainSelf.presentShotFullscreen()
+            }
         }
         
         return header!
@@ -430,6 +436,18 @@ private extension ShotDetailsViewController {
         presentViewController(navigationController, animated: true, completion: nil)
     }
     
+    func presentShotFullscreen() {
+        
+        guard let header = header else { return }
+        
+        let closeImageName = "ic-cross-naked"
+        let buttonAssets = CloseButtonAssets(normal: UIImage(named:closeImageName)!, highlighted: UIImage(named: closeImageName))
+        let configuration = ImageViewerConfiguration(imageSize: CGSize(width: 40, height: 40), closeButtonAssets: buttonAssets)
+        
+        let imageViewer = ImageViewer(imageProvider: self, configuration: configuration, displacedView: header.imageView)
+        presentImageViewer(imageViewer)
+    }
+    
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
             start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
@@ -519,5 +537,19 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         animateHeader(start: true)
+    }
+}
+
+
+extension ShotDetailsViewController: ImageProvider {
+    
+    func provideImage(completion: UIImage? -> Void) {
+        if let image = header?.imageView.image {
+            completion(image)
+        }
+    }
+    
+    func provideImage(atIndex index: Int, completion: UIImage? -> Void) {
+        // empty by design
     }
 }
