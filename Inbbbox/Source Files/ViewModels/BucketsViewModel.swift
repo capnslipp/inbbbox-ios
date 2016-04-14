@@ -15,7 +15,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     weak var delegate: BaseCollectionViewViewModelDelegate?
     let title = NSLocalizedString("Buckets", comment:"")
     var buckets = [BucketType]()
-    var bucketsIndexedShots = [Int : [ShotType]]()
+    var bucketsIndexedShots = [Int: [ShotType]]()
     private let bucketsProvider = BucketsProvider()
     private let bucketsRequester = BucketsRequester()
     private let shotsProvider = ShotsProvider()
@@ -32,7 +32,8 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     func downloadInitialItems() {
         firstly {
             bucketsProvider.provideMyBuckets()
-        }.then { buckets -> Void in
+        }.then {
+            buckets -> Void in
             var bucketsShouldBeReloaded = true
             if let buckets = buckets {
                 if buckets == self.buckets && buckets.count != 0 {
@@ -44,7 +45,8 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             if bucketsShouldBeReloaded {
                 self.delegate?.viewModelDidLoadInitialItems()
             }
-        }.error { error in
+        }.error {
+            error in
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
@@ -55,19 +57,22 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         }
         firstly {
             bucketsProvider.nextPage()
-        }.then { buckets -> Void in
+        }.then {
+            buckets -> Void in
             if let buckets = buckets where buckets.count > 0 {
-                let indexes = buckets.enumerate().map { index, _ in
+                let indexes = buckets.enumerate().map {
+                    index, _ in
                     return index + self.buckets.count
                 }
                 self.buckets.appendContentsOf(buckets)
                 let indexPaths = indexes.map {
-                    NSIndexPath(forRow:($0), inSection: 0)
+                    NSIndexPath(forRow: ($0), inSection: 0)
                 }
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
                 self.downloadShots(buckets)
             }
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Need mockups for error message view
         }
     }
@@ -76,7 +81,8 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         for bucket in buckets {
             firstly {
                 shotsProvider.provideShotsForBucket(bucket)
-            }.then { shots -> Void in
+            }.then {
+                shots -> Void in
                 var bucketShotsShouldBeReloaded = true
                 var indexOfBucket: Int?
                 for (index, item) in self.buckets.enumerate() {
@@ -85,10 +91,12 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                         break
                     }
                 }
-                guard let index = indexOfBucket else { return }
+                guard let index = indexOfBucket else {
+                    return
+                }
 
                 if let oldShots = self.bucketsIndexedShots[index], newShots = shots {
-                     bucketShotsShouldBeReloaded = oldShots != newShots
+                    bucketShotsShouldBeReloaded = oldShots != newShots
                 }
 
                 if let shots = shots {
@@ -101,24 +109,28 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
                     self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
                 }
-            }.error { error in
+            }.error {
+                error in
                 // NGRTemp: Need mockups for error message view
             }
         }
     }
 
     func createBucket(name: String, description: NSAttributedString? = nil) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
+        return Promise<Void> {
+            fulfill, reject in
             firstly {
                 bucketsRequester.postBucket(name, description: description)
-            }.then { bucket in
+            }.then {
+                bucket in
                 self.buckets.append(bucket)
             }.then(fulfill).error(reject)
         }
     }
 
     func bucketCollectionViewCellViewData(indexPath: NSIndexPath) -> BucketCollectionViewCellViewData {
-        return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row], shots: bucketsIndexedShots[indexPath.row])
+        return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row],
+                shots: bucketsIndexedShots[indexPath.row])
     }
 
     func clearViewModelIfNeeded() {
@@ -140,13 +152,18 @@ extension BucketsViewModel {
 
         init(bucket: BucketType, shots: [ShotType]?) {
             self.name = bucket.name
-            self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots", comment: "How many shots in collection?"), bucket.shotsCount)
+            self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots",
+                    comment: "How many shots in collection?"), bucket.shotsCount)
             if let shots = shots where shots.count > 0 {
-                let allShotsImagesURLs = shots.map { $0.shotImage.teaserURL }
-                self.shotsImagesURLs =  Array(Array(Array(count: 4, repeatedValue: allShotsImagesURLs).flatten())[0...3])
+                let allShotsImagesURLs = shots.map {
+                    $0.shotImage.teaserURL
+                }
+                self.shotsImagesURLs = Array(Array(Array(count: 4,
+                        repeatedValue: allShotsImagesURLs).flatten())[0 ... 3])
             } else {
                 self.shotsImagesURLs = nil
             }
         }
     }
+
 }

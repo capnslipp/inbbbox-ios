@@ -30,6 +30,22 @@ class SettingsViewModel: GroupedListViewModel {
     private(set) var userMode: UserMode
     private weak var delegate: ModelUpdatable?
     private weak var alertDelegate: AlertDisplayable?
+
+    private let createAccountTitle = NSLocalizedString("SettingsViewModel.CreateAccount",
+            comment: "Button text allowing user to create new account.")
+    private let reminderTitle = NSLocalizedString("SettingsViewModel.EnableDailyReminders",
+            comment: "User settings, enable daily reminders")
+    private let reminderDateTitle = NSLocalizedString("SettingsViewModel.SendDailyReminders",
+            comment: "User settings, send daily reminders")
+    private let followingStreamSourceTitle = NSLocalizedString("SettingsViewModel.Following",
+            comment: "User settings, enable following")
+    private let newTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.NewToday",
+            comment: "User settings, enable new today.")
+    private let popularTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.Popular",
+            comment: "User settings, enable popular today.")
+    private let debutsStreamSourceTitle = NSLocalizedString("SettingsViewModel.Debuts",
+            comment: "User settings, show debuts.")
+
     private let createAccountItem: LabelItem
     private let reminderItem: SwitchItem
     private let reminderDateItem: DateItem
@@ -50,21 +66,6 @@ class SettingsViewModel: GroupedListViewModel {
         self.delegate = delegate
         self.alertDelegate = delegate as? AlertDisplayable
         self.userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
-
-        let createAccountTitle = NSLocalizedString("SettingsViewModel.CreateAccount",
-                comment: "Button text allowing user to create new account.")
-        let reminderTitle = NSLocalizedString("SettingsViewModel.EnableDailyReminders",
-                comment: "User settings, enable daily reminders")
-        let reminderDateTitle = NSLocalizedString("SettingsViewModel.SendDailyReminders",
-                comment: "User settings, send daily reminders")
-        let followingStreamSourceTitle = NSLocalizedString("SettingsViewModel.Following",
-                comment: "User settings, enable following")
-        let newTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.NewToday",
-                comment: "User settings, enable new today.")
-        let popularTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.Popular",
-                comment: "User settings, enable popular today.")
-        let debutsStreamSourceTitle = NSLocalizedString("SettingsViewModel.Debuts",
-                comment: "User settings, show debuts.")
 
         // MARK: Create items
 

@@ -28,6 +28,6 @@ class GroupItem: Equatable {
     }
 }
 
-func ==(lhs: GroupItem, rhs: GroupItem) -> Bool {
+func == (lhs: GroupItem, rhs: GroupItem) -> Bool {
     return lhs.title == rhs.title && lhs.category == rhs.category && lhs.active == rhs.active
 }

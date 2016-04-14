@@ -20,14 +20,14 @@ final class ShotDetailsViewController: UIViewController {
 
     var shouldScrollToMostRecentMessage = false
 
-    private var shotDetailsView: ShotDetailsView {
-        return view as! ShotDetailsView
+    private var shotDetailsView: ShotDetailsView! {
+        return view as? ShotDetailsView
     }
     private var header: ShotDetailsHeaderView?
     private var footer: ShotDetailsFooterView?
     private let viewModel: ShotDetailsViewModel
     private var scroller = ScrollViewAutoScroller()
-    private var onceTokenForShouldScrollToMessagesOnOpenFlag = dispatch_once_t(0)
+    private var onceTokenForShouldScrollToMessagesOnOpen = dispatch_once_t(0)
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
 
     init(shot: ShotType) {
@@ -35,12 +35,12 @@ final class ShotDetailsViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    @available(*, unavailable, message="Use init(shot:) instead")
+    @available(*, unavailable, message = "Use init(shot:) instead")
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         fatalError("init(nibName:bundle:) has not been implemented")
     }
 
-    @available(*, unavailable, message="Use init(shot:) instead")
+    @available(*, unavailable, message = "Use init(shot:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -69,11 +69,13 @@ final class ShotDetailsViewController: UIViewController {
 
         firstly {
             viewModel.loadAllComments()
-        }.then { () -> Void in
+        }.then {
+            () -> Void in
             self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Handle error.
         }
     }
@@ -81,7 +83,8 @@ final class ShotDetailsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        if let layout = shotDetailsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader {
+        if let layout = shotDetailsView.collectionView.collectionViewLayout as?
+                ShotDetailsCollectionCollapsableViewStickyHeader {
             layout.collapsableHeight = heightForCollapsedCollectionViewHeader
             layout.invalidateLayout()
         }
@@ -90,9 +93,10 @@ final class ShotDetailsViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        dispatch_once(&onceTokenForShouldScrollToMessagesOnOpenFlag) {
+        dispatch_once(&onceTokenForShouldScrollToMessagesOnOpen) {
             if self.shouldScrollToMostRecentMessage {
-                self.viewModel.isCommentingAvailable ? self.shotDetailsView.commentComposerView.makeActive() : self.scroller.scrollToBottomAnimated(true)
+                self.viewModel.isCommentingAvailable ? self.shotDetailsView.commentComposerView.makeActive() :
+                        self.scroller.scrollToBottomAnimated(true)
             }
         }
 
@@ -101,16 +105,19 @@ final class ShotDetailsViewController: UIViewController {
 }
 
 // MARK: UICollectionViewDataSource
+
 extension ShotDetailsViewController: UICollectionViewDataSource {
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.itemsCount
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView,
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         if viewModel.isShotOperationIndex(indexPath.row) {
-            let cell = collectionView.dequeueReusableClass(ShotDetailsOperationCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            let cell = collectionView.dequeueReusableClass(ShotDetailsOperationCollectionViewCell.self,
+                    forIndexPath: indexPath, type: .Cell)
 
             let likeSelectableView = cell.operationView.likeSelectableView
             let bucketSelectableView = cell.operationView.bucketSelectableView
@@ -130,7 +137,8 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 
         } else if viewModel.isDescriptionIndex(indexPath.row) {
 
-            let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self,
+                    forIndexPath: indexPath, type: .Cell)
 
             if let description = viewModel.attributedShotDescription {
                 cell.setDescriptionLabelAttributedText(description)
@@ -140,10 +148,12 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             return cell
 
         } else if viewModel.shouldDisplaySeparatorAtIndex(indexPath.row) {
-            return collectionView.dequeueReusableClass(ShotDetailsDummySpaceCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            return collectionView.dequeueReusableClass(ShotDetailsDummySpaceCollectionViewCell.self,
+                    forIndexPath: indexPath, type: .Cell)
 
         } else {
-            let cell = collectionView.dequeueReusableClass(ShotDetailsCommentCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+            let cell = collectionView.dequeueReusableClass(ShotDetailsCommentCollectionViewCell.self,
+                    forIndexPath: indexPath, type: .Cell)
 
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
 
@@ -156,7 +166,8 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                 cell.setLinkInAuthorLabel(url, delegate: self)
             }
             cell.dateLabel.attributedText = data.date
-            cell.avatarView.imageView.loadImageFromURL(data.avatarURL, placeholderImage: UIImage(named: "avatar_placeholder"))
+            cell.avatarView.imageView.loadImageFromURL(data.avatarURL,
+                    placeholderImage: UIImage(named: "avatar_placeholder"))
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
@@ -167,11 +178,13 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         }
     }
 
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
+                        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 
         if kind == UICollectionElementKindSectionFooter {
 
-            footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath, type: .Footer)
+            footer = collectionView.dequeueReusableClass(ShotDetailsFooterView.self, forIndexPath: indexPath,
+                    type: .Footer)
             viewModel.isFetchingComments ? footer?.startAnimating() : footer?.stopAnimating()
             grayOutFooterIfNeeded()
 
@@ -179,7 +192,8 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         }
 
         if header == nil && kind == UICollectionElementKindSectionHeader {
-            header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
+            header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath,
+                    type: .Header)
             if viewModel.shot.animated {
                 if let url = viewModel.shot.shotImage.hidpiURL {
                     header?.setAnimatedImageWithUrl(url)
@@ -198,7 +212,8 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                 header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
             }
             header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
-            header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+            header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
+            forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
         }
 
@@ -207,6 +222,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegate
+
 extension ShotDetailsViewController: UICollectionViewDelegate {
 
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -222,14 +238,16 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
         }
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 
         if viewModel.isShotOperationIndex(indexPath.row) {
             return collectionView.sizeForAutoSizingCell(ShotDetailsOperationCollectionViewCell.self, textToBound: nil)
 
         } else if viewModel.isDescriptionIndex(indexPath.row) {
             let text = viewModel.attributedShotDescription
-            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self, textToBound: [text])
+            return collectionView.sizeForAutoSizingCell(ShotDetailsDescriptionCollectionViewCell.self,
+                    textToBound: [text])
 
         } else if viewModel.shouldDisplaySeparatorAtIndex(indexPath.row) {
             return collectionView.sizeForAutoSizingCell(ShotDetailsDummySpaceCollectionViewCell.self, textToBound: nil)
@@ -243,19 +261,23 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
+
 extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
         return sizeForExpandedCollectionViewHeader(collectionView)
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
         let height: CGFloat = viewModel.isFetchingComments ? 64 : ShotDetailsFooterView.minimumRequiredHeight
         return CGSize(width: CGRectGetWidth(collectionView.frame), height: height)
     }
 }
 
 // MARK: Actions
+
 extension ShotDetailsViewController {
 
     func closeButtonDidTap(_: UIButton) {
@@ -264,6 +286,7 @@ extension ShotDetailsViewController {
 }
 
 // MARK: CommentComposerViewDelegate
+
 extension ShotDetailsViewController: CommentComposerViewDelegate {
 
     func didTapSendButtonInComposerView(view: CommentComposerView, comment: String) {
@@ -272,17 +295,23 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
 
         firstly {
             viewModel.postComment(comment)
-        }.then { () -> Void in
+        }.then {
+            () -> Void in
 
-            let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0), inSection: 0)
-            self.shotDetailsView.collectionView.performBatchUpdates({ () -> Void in
+            let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0),
+                    inSection: 0)
+            self.shotDetailsView.collectionView.performBatchUpdates({
+                () -> Void in
                 self.shotDetailsView.collectionView.insertItemsAtIndexPaths([indexPath])
-            }, completion: { _ -> Void in
-                self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .CenteredVertically, animated: true)
+            }, completion: {
+                _ -> Void in
+                self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPath,
+                        atScrollPosition: .CenteredVertically, animated: true)
             })
         }.always {
             view.stopAnimation()
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Handle error.
         }
     }
@@ -330,11 +359,13 @@ private extension ShotDetailsViewController {
 
         firstly {
             action()
-        }.then { selected in
+        }.then {
+            selected in
             view.selected = selected
         }.always {
             view.stopAnimating()
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Handle error.
         }
     }
@@ -345,11 +376,13 @@ private extension ShotDetailsViewController {
 
         firstly {
             viewModel.performLikeOperation()
-        }.then { isShotLikedByUser in
+        }.then {
+            isShotLikedByUser in
             view.selected = isShotLikedByUser
         }.always {
             view.stopAnimating()
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Handle error.
         }
     }
@@ -360,7 +393,8 @@ private extension ShotDetailsViewController {
 
         firstly {
             viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
-        }.then { result -> Void in
+        }.then {
+            result -> Void in
             if let bucketNumber = result.bucketsNumber where !result.removed {
                 let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
                 self.presentShotBucketsViewControllerWithMode(mode)
@@ -369,7 +403,8 @@ private extension ShotDetailsViewController {
             }
         }.always {
             view.stopAnimating()
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Handle error.
         }
     }
@@ -377,7 +412,8 @@ private extension ShotDetailsViewController {
     var heightForCollapsedCollectionViewHeader: CGFloat {
 
         let margin = CGFloat(20)
-        let maxWidth = abs((shotDetailsView.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
+        let maxWidth = abs((shotDetailsView.collectionView.frame.size.width ?? 0) -
+                (header?.availableWidthForTitle ?? 0))
         let height = viewModel.attributedShotTitleForHeader.boundingHeightUsingAvailableWidth(maxWidth) + 2 * margin
 
         return max(70, height)
@@ -386,17 +422,19 @@ private extension ShotDetailsViewController {
     func sizeForExpandedCollectionViewHeader(collectionView: UICollectionView) -> CGSize {
         let dribbbleImageRatio = CGFloat(0.75)
         return CGSize(
-            width: floor(collectionView.bounds.width),
-            height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
+        width: floor(collectionView.bounds.width),
+                height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
         )
     }
 
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
         firstly {
             viewModel.deleteCommentAtIndex(indexPath.item)
-        }.then { () -> Void in
+        }.then {
+            () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
-        }.error { error in
+        }.error {
+            error in
             // NGRTemp: Handle error.
         }
     }
@@ -414,7 +452,8 @@ private extension ShotDetailsViewController {
             certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
 
-        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
+        modalTransitionAnimator =
+                CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
         shotBucketsViewController.transitioningDelegate = modalTransitionAnimator
         shotBucketsViewController.modalPresentationStyle = .Custom
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
@@ -426,7 +465,8 @@ private extension ShotDetailsViewController {
         let navigationController = UINavigationController(rootViewController: userDetailsViewController)
 
         animateHeader(start: false)
-        userDetailsViewController.dismissClosure = { [weak self] in
+        userDetailsViewController.dismissClosure = {
+            [weak self] in
             self?.animateHeader(start: true)
         }
         presentViewController(navigationController, animated: true, completion: nil)
@@ -448,9 +488,12 @@ private extension ShotDetailsViewController {
 
 extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClickableLinksDelegate {
 
-    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer, textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
+    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
+                                             textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
 
-        guard let view = gestureRecognizer.view else { return }
+        guard let view = gestureRecognizer.view else {
+            return
+        }
 
         var locationOfTouchInLabel = gestureRecognizer.locationInView(gestureRecognizer.view)
         let glyphRange = layoutManager.glyphRangeForTextContainer(textContainer)
@@ -471,7 +514,8 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
         let glyphIndex = layoutManager.glyphIndexForPoint(locationOfTouchInLabel, inTextContainer: textContainer)
         let locationIndex = layoutManager.characterIndexForGlyphAtIndex(glyphIndex)
 
-        let url = (view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName, atIndex: locationIndex, effectiveRange: nil) as? NSURL
+        let url = (view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName,
+                atIndex: locationIndex, effectiveRange: nil) as? NSURL
 
         if let url = url {
             UIApplication.sharedApplication().openURL(url)

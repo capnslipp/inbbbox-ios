@@ -94,7 +94,8 @@ extension SettingsViewController {
 
 extension SettingsViewController {
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+                            forRowAtIndexPath indexPath: NSIndexPath) {
         let item = viewModel[indexPath.section][indexPath.row]
 
         if let item = item as? SwitchItem, cell = cell as? SwitchCell {
@@ -102,7 +103,8 @@ extension SettingsViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell,
+                            forRowAtIndexPath indexPath: NSIndexPath) {
         let cellIndexPath = tableView.indexPathForCell(cell) ?? indexPath
         let section = cellIndexPath.section
         let row = cellIndexPath.row
@@ -118,8 +120,10 @@ extension SettingsViewController {
 
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
-        let notificationsTitle = NSLocalizedString("SettingsViewController.Notifications", comment: "Title of group of buttons for notifications settings")
-        let streamSourcesTitle = NSLocalizedString("SettingsViewController.StreamSource", comment: "Title of group of buttons for stream source settings")
+        let notificationsTitle = NSLocalizedString("SettingsViewController.Notifications",
+                comment: "Title of group of buttons for notifications settings")
+        let streamSourcesTitle = NSLocalizedString("SettingsViewController.StreamSource",
+                comment: "Title of group of buttons for stream source settings")
 
         switch section {
             case 0: return viewModel.userMode == .LoggedUser ? notificationsTitle : nil
@@ -141,7 +145,8 @@ extension SettingsViewController {
                 self.didChangeItemsAtIndexPaths([indexPath])
             }
 
-            navigationController?.pushViewController(DatePickerViewController(date: item.date, completion: completion), animated: true)
+            navigationController?.pushViewController(DatePickerViewController(date: item.date,
+                    completion: completion), animated: true)
         }
         if let labelItem = item as? LabelItem {
             labelItem.onSelect?()
@@ -202,9 +207,11 @@ private extension SettingsViewController {
         if let user = viewModel.loggedInUser {
             header.usernameLabel.text = user.name ?? user.username
         } else {
-            header.usernameLabel.text = NSLocalizedString("SettingsViewController.Guest", comment: "Is user a guest without account?")
+            header.usernameLabel.text = NSLocalizedString("SettingsViewController.Guest",
+                    comment: "Is user a guest without account?")
         }
-        header.avatarView.imageView.loadImageFromURL(viewModel.loggedInUser?.avatarURL, placeholderImage: UIImage(named: "avatar_placeholder"))
+        header.avatarView.imageView.loadImageFromURL(viewModel.loggedInUser?.avatarURL,
+                placeholderImage: UIImage(named: "avatar_placeholder"))
     }
 }
 
@@ -246,7 +253,8 @@ extension SettingsViewController {
     }
 
     func presentAcknowledgements() {
-        let acknowledgementsNavigationController = UINavigationController(rootViewController: AcknowledgementsViewController())
+        let acknowledgementsNavigationController =
+        UINavigationController(rootViewController: AcknowledgementsViewController())
         presentViewController(acknowledgementsNavigationController, animated: true, completion: nil)
     }
 }

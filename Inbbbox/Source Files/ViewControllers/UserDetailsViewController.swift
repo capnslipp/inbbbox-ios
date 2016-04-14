@@ -14,8 +14,8 @@ class UserDetailsViewController: UIViewController {
 
     private var viewModel: UserDetailsViewModel
 
-    private var userDetailsView: UserDetailsView {
-        return view as! UserDetailsView
+    private var userDetailsView: UserDetailsView! {
+        return view as? UserDetailsView
     }
     private var header: UserDetailsHeaderView?
 
@@ -26,22 +26,27 @@ class UserDetailsViewController: UIViewController {
     var modalTransitionAnimator: ZFModalTransitionAnimator?
 
     private var isModal: Bool {
-        return self.presentingViewController?.presentedViewController == self || self.tabBarController?.presentingViewController is UITabBarController || self.navigationController?.presentingViewController?.presentedViewController == self.navigationController && (self.navigationController != nil)
+        return self.presentingViewController?.presentedViewController == self ||
+                self.tabBarController?.presentingViewController is UITabBarController ||
+                self.navigationController?.presentingViewController?.presentedViewController ==
+                self.navigationController && (self.navigationController != nil)
     }
 
     // Layout related properties
     var oneColumnLayoutCellHeightToWidthRatio = CGFloat(0.75)
     var twoColumnsLayoutCellHeightToWidthRatio = CGFloat(0.75)
-    lazy private var oneColumnLayoutButton: UIBarButtonItem = { [unowned self] in
-        return UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: #selector(didTapOneColumnLayoutButton(_:)))
+    lazy private var oneColumnLayoutButton: UIBarButtonItem = {
+        [unowned self] in
+        return UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self,
+                action: #selector(didTapOneColumnLayoutButton(_:)))
     }()
-    lazy private var twoColumnsLayoutButton: UIBarButtonItem = { [unowned self] in
-        UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: #selector(didTapTwoColumnsLayoutButton(_:)))
+    lazy private var twoColumnsLayoutButton: UIBarButtonItem = {
+        [unowned self] in
+        UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self,
+                action: #selector(didTapTwoColumnsLayoutButton(_:)))
     }()
     private var isCurrentLayoutOneColumn: Bool {
-        get {
-            return userDetailsView.collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout)
-        }
+        return userDetailsView.collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout)
     }
 
     init(user: UserType) {
@@ -51,12 +56,12 @@ class UserDetailsViewController: UIViewController {
         title = viewModel.user.name ?? viewModel.user.username
     }
 
-    @available(*, unavailable, message="Use init(user:) instead")
+    @available(*, unavailable, message = "Use init(user:) instead")
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         fatalError("init(nibName:bundle:) has not been implemented")
     }
 
-    @available(*, unavailable, message="Use init(user:) instead")
+    @available(*, unavailable, message = "Use init(user:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -75,7 +80,8 @@ class UserDetailsViewController: UIViewController {
         userDetailsView.collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         userDetailsView.collectionView.registerClass(UserDetailsHeaderView.self, type: .Header)
 
-        do { // hides bottom border of navigationBar
+        do {
+            // hides bottom border of navigationBar
             self.navigationController?.navigationBar.shadowImage = UIImage()
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         }
@@ -92,15 +98,19 @@ class UserDetailsViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard viewModel.shouldShowFollowButton else { return }
+        guard viewModel.shouldShowFollowButton else {
+            return
+        }
 
         firstly {
             viewModel.isUserFollowedByMe()
-        }.then { followed in
+        }.then {
+            followed in
             self.header?.userFollowed = followed
         }.always {
             self.header?.stopActivityIndicator()
-        }.error { error in
+        }.error {
+            error in
             // NGRTodo: provide pop-ups with errors
         }
     }
@@ -126,7 +136,8 @@ extension UserDetailsViewController {
                 self.header?.userFollowed = !userFollowed
             }.always {
                 self.header?.stopActivityIndicator()
-            }.error { error in
+            }.error {
+                error in
                 // NGRTodo: provide pop-ups with errors
             }
         }
@@ -141,9 +152,11 @@ extension UserDetailsViewController: UICollectionViewDataSource {
         return viewModel.itemsCount
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView,
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.image = nil
         let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
 
@@ -154,10 +167,12 @@ extension UserDetailsViewController: UICollectionViewDataSource {
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
+                        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 
         if header == nil && kind == UICollectionElementKindSectionHeader {
-            header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath, type: .Header)
+            header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath,
+                    type: .Header)
             header?.avatarView.imageView.loadImageFromURL(viewModel.user.avatarURL)
             header?.button.addTarget(self, action: #selector(didTapFollowButton(_:)), forControlEvents: .TouchUpInside)
             viewModel.shouldShowFollowButton ? header?.startActivityIndicator() : (header?.shouldShowButton = false)
@@ -172,9 +187,11 @@ extension UserDetailsViewController: UICollectionViewDataSource {
 extension UserDetailsViewController: UICollectionViewDelegate {
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
+        let shotDetailsViewController =
+                ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
 
-        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+        modalTransitionAnimator =
+                CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
 
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
@@ -182,13 +199,15 @@ extension UserDetailsViewController: UICollectionViewDelegate {
         presentViewController(shotDetailsViewController, animated: true, completion: nil)
     }
 
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
+                        forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == viewModel.itemsCount - 1 {
             viewModel.downloadItemsForNextPage()
         }
     }
 
-    func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell,
+                        forItemAtIndexPath indexPath: NSIndexPath) {
         if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
             indexPathsNeededImageUpdate.removeAtIndex(index)
         }
@@ -231,12 +250,16 @@ private extension UserDetailsViewController {
     func setupBarButtons() {
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton, twoColumnsLayoutButton]
         if isModal {
-            let attributedString = NSMutableAttributedString(string: NSLocalizedString("UserDetails.BackButton", comment: "Back button, user details"), attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            let attributedString = NSMutableAttributedString(string: NSLocalizedString("UserDetails.BackButton",
+                    comment: "Back button, user details"),
+                    attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
             let textAttachment = NSTextAttachment()
             textAttachment.image = UIImage(named: "ic-back")
-            textAttachment.bounds = CGRectMake(0, -3, textAttachment.image!.size.width, textAttachment.image!.size.height)
+            textAttachment.bounds = CGRect(x: 0, y: -3,
+                    width: textAttachment.image!.size.width, height: textAttachment.image!.size.height)
             let attributedStringWithImage = NSAttributedString(attachment: textAttachment)
-            attributedString.replaceCharactersInRange(NSRange(location: 0, length: 0), withAttributedString: attributedStringWithImage)
+            attributedString.replaceCharactersInRange(NSRange(location: 0, length: 0),
+                    withAttributedString: attributedStringWithImage)
 
             let backButton = UIButton()
             backButton.setAttributedTitle(attributedString, forState: .Normal)
@@ -248,8 +271,10 @@ private extension UserDetailsViewController {
     }
 
     func updateBarButtons(layout: UICollectionViewLayout) {
-        oneColumnLayoutButton.tintColor = !isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
-        twoColumnsLayoutButton.tintColor = isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        oneColumnLayoutButton.tintColor = !isCurrentLayoutOneColumn ?
+                UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        twoColumnsLayoutButton.tintColor = isCurrentLayoutOneColumn ?
+                UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
     }
 
     // MARK: Actions:
@@ -293,7 +318,7 @@ private extension UserDetailsViewController {
     }
 
     func scrollToTop(collectionView: UICollectionView) {
-        if (collectionView.numberOfItemsInSection(0) > 0) {
+        if collectionView.numberOfItemsInSection(0) > 0 {
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
         }
@@ -304,17 +329,21 @@ private extension UserDetailsViewController {
 
 private extension UserDetailsViewController {
 
-    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
-        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell,
+                       atIndexPath indexPath: NSIndexPath) {
+        let imageLoadingCompletion: UIImage -> Void = {
+            [weak self] image in
 
-            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else {
+                return
+            }
 
             cell.shotImageView.image = image
         }
         ImageProvider.lazyLoadImageFromURLs(
-            (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
-            teaserImageCompletion: imageLoadingCompletion,
-            normalImageCompletion: imageLoadingCompletion
+        (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
+                teaserImageCompletion: imageLoadingCompletion,
+                normalImageCompletion: imageLoadingCompletion
         )
     }
 }

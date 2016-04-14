@@ -17,8 +17,8 @@ enum ShotBucketsViewControllerMode {
 
 class ShotBucketsViewController: UIViewController {
 
-    var shotBucketsView: ShotBucketsView {
-        return view as! ShotBucketsView
+    var shotBucketsView: ShotBucketsView! {
+        return view as? ShotBucketsView
     }
 
     var dismissClosure: (() -> Void)?
@@ -76,7 +76,9 @@ class ShotBucketsViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
         setEstimatedSizeIfNeeded()
-        (shotBucketsView.collectionView.collectionViewLayout as? ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight = heightForCollapsedCollectionViewHeader
+        (shotBucketsView.collectionView.collectionViewLayout as?
+                ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight =
+                heightForCollapsedCollectionViewHeader
     }
 
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
@@ -96,7 +98,8 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
         return viewModel.itemsCount
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView,
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
         if viewModel.isSeparatorAtIndex(indexPath.item) {
             return configureSeparatorCell(collectionView, atIndexPath: indexPath)
@@ -105,24 +108,28 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
         switch viewModel.shotBucketsViewControllerMode {
         case .AddToBucket:
             if viewModel.isActionItemAtIndex(indexPath.item) {
-                return configureActionCell(collectionView, atIndexPath: indexPath, selector: #selector(addNewBucketButtonDidTap(_:)))
+                return configureActionCell(collectionView, atIndexPath: indexPath,
+                        selector: #selector(addNewBucketButtonDidTap(_:)))
             } else {
                 return configureAddToBucketCell(collectionView, atIndexPath: indexPath)
             }
         case .RemoveFromBucket:
             if viewModel.isActionItemAtIndex(indexPath.item) {
-                return configureActionCell(collectionView, atIndexPath: indexPath, selector: #selector(removeButtonDidTap(_:)))
+                return configureActionCell(collectionView, atIndexPath: indexPath,
+                        selector: #selector(removeButtonDidTap(_:)))
             } else {
                 return configureRemoveFromBucketCell(collectionView, atIndexPath: indexPath)
             }
         }
     }
 
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
+                        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 
         if kind == UICollectionElementKindSectionHeader {
             if header == nil && kind == UICollectionElementKindSectionHeader {
-                header = collectionView.dequeueReusableClass(ShotBucketsHeaderView.self, forIndexPath: indexPath, type: .Header)
+                header = collectionView.dequeueReusableClass(ShotBucketsHeaderView.self, forIndexPath: indexPath,
+                        type: .Header)
                 if viewModel.shot.animated {
                     if let url = viewModel.shot.shotImage.hidpiURL {
                         header?.setAnimatedImageWithUrl(url)
@@ -139,7 +146,8 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 header?.setHeaderTitle(viewModel.titleForHeader)
                 header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
                 header?.avatarView.delegate = self
-                header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+                header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
+                forControlEvents: .TouchUpInside)
                 if let url = viewModel.urlForUser(viewModel.shot.user) {
                     header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
                 }
@@ -147,7 +155,8 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
             return header!
         } else {
             if footer == nil {
-                footer = collectionView.dequeueReusableClass(ShotBucketsFooterView.self, forIndexPath: indexPath, type: .Footer)
+                footer = collectionView.dequeueReusableClass(ShotBucketsFooterView.self, forIndexPath: indexPath,
+                        type: .Footer)
                 footer?.backgroundColor = backgroundColorForFooter()
             }
             return footer!
@@ -171,11 +180,13 @@ extension ShotBucketsViewController: UICollectionViewDelegate {
 // MARK: UICollectionViewDelegateFlowLayout
 extension ShotBucketsViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
         return sizeForExpandedCollectionViewHeader(collectionView)
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: floor(collectionView.bounds.width), height: 20)
     }
 }
@@ -209,8 +220,10 @@ extension ShotBucketsViewController {
     }
 
     func setRemoveFromSelectedBucketsButtonActive(active: Bool) {
-        let removeCellIndexPath =  NSIndexPath(forItem: viewModel.indexForRemoveFromSelectedBucketsActionItem(), inSection: 0)
-        if let cell = shotBucketsView.collectionView.cellForItemAtIndexPath(removeCellIndexPath) as? ShotBucketsActionCollectionViewCell {
+        let removeCellIndexPath =  NSIndexPath(forItem: viewModel.indexForRemoveFromSelectedBucketsActionItem(),
+                inSection: 0)
+        if let cell = shotBucketsView.collectionView.cellForItemAtIndexPath(removeCellIndexPath)
+                as? ShotBucketsActionCollectionViewCell {
             cell.button.enabled = active
         }
     }
@@ -239,7 +252,8 @@ private extension ShotBucketsViewController {
     var heightForCollapsedCollectionViewHeader: CGFloat {
 
         let margin = CGFloat(5)
-        let maxWidth = abs((shotBucketsView.collectionView.frame.size.width ?? 0) - (header?.availableWidthForTitle ?? 0))
+        let maxWidth = abs((shotBucketsView.collectionView.frame.size.width ?? 0) -
+                (header?.availableWidthForTitle ?? 0))
         let height = viewModel.attributedShotTitleForHeader.boundingHeightUsingAvailableWidth(maxWidth) + 2 * margin
 
         return max(70, height)
@@ -256,7 +270,8 @@ private extension ShotBucketsViewController {
     func setEstimatedSizeIfNeeded() {
 
         let width = shotBucketsView.collectionView.frame.size.width ?? 0
-        if let layout = shotBucketsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
+        if let layout = shotBucketsView.collectionView.collectionViewLayout as?
+                UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
             layout.estimatedItemSize = CGSize(width: width, height: 40)
             layout.invalidateLayout()
         }
@@ -292,20 +307,26 @@ private extension ShotBucketsViewController {
 
 extension ShotBucketsViewController {
 
-    func configureSeparatorCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableClass(ShotBucketsSeparatorCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    func configureSeparatorCell(collectionView: UICollectionView,
+                                atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableClass(ShotBucketsSeparatorCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
     }
 
-    func configureActionCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath, selector: Selector) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(ShotBucketsActionCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    func configureActionCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath,
+                             selector: Selector) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(ShotBucketsActionCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
         cell.button.setTitle(viewModel.titleForActionItem, forState: .Normal)
         cell.button.addTarget(self, action: selector, forControlEvents: .TouchUpInside)
         cell.button.enabled = viewModel.shotBucketsViewControllerMode == .AddToBucket
         return cell
     }
 
-    func configureAddToBucketCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(ShotBucketsAddCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    func configureAddToBucketCell(collectionView: UICollectionView,
+                                  atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(ShotBucketsAddCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
 
         let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
         cell.bucketNameLabel.text = bucketData.bucketName
@@ -314,8 +335,10 @@ extension ShotBucketsViewController {
         return cell
     }
 
-    func configureRemoveFromBucketCell(collectionView: UICollectionView, atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(ShotBucketsSelectCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    func configureRemoveFromBucketCell(collectionView: UICollectionView,
+                                       atIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(ShotBucketsSelectCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
 
         let bucketData = viewModel.displayableDataForBucketAtIndex(indexPath.item)
         cell.bucketNameLabel.text = bucketData.bucketName

@@ -45,14 +45,18 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     // MARK: Configuration
 
     func setupBarButtons() {
-        oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"), style: .Plain, target: self, action: #selector(didTapOneColumnLayoutButton(_:)))
-        twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"), style: .Plain, target: self, action: #selector(didTapTwoColumnsLayoutButton(_:)))
+        oneColumnLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-listview"),
+                style: .Plain, target: self, action: #selector(didTapOneColumnLayoutButton(_:)))
+        twoColumnsLayoutButton = UIBarButtonItem(image: UIImage(named: "ic-gridview-active"),
+                style: .Plain, target: self, action: #selector(didTapTwoColumnsLayoutButton(_:)))
         navigationItem.rightBarButtonItems = [oneColumnLayoutButton!, twoColumnsLayoutButton!]
     }
 
     func updateBarButtons(layout: UICollectionViewLayout) {
-        oneColumnLayoutButton?.tintColor = !isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
-        twoColumnsLayoutButton?.tintColor = isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        oneColumnLayoutButton?.tintColor =
+                !isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
+        twoColumnsLayoutButton?.tintColor =
+                isCurrentLayoutOneColumn ? UIColor.whiteColor().colorWithAlphaComponent(0.35) : UIColor.whiteColor()
     }
 
     // MARK: Actions:
@@ -90,7 +94,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
     }
 
     func scrollToTop(collectionView: UICollectionView) {
-        if (collectionView.numberOfItemsInSection(0) > 0) {
+        if collectionView.numberOfItemsInSection(0) > 0 {
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: false)
         }
