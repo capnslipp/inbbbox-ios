@@ -23,25 +23,25 @@ protocol URLQueryItemStringConvertible {
 *  HTTP Request parameters. Wrapper for [String: AnyObject] to simplify URL Encoding.
 */
 struct Parameters {
-    
+
     // MARK: ParamatersEncoding declaration
     enum Encoding {
         case URL
         case JSON
     }
-    
+
     /// encoding specifies the encoding type, URL or Body encoding
     let encoding: Encoding
-    
+
     private var underlyingDictionary = [String: AnyObject]()
-    
+
     /// Initialize with encoding.
     ///
     /// - parameter encoding: Encoding for parameters.
     init(encoding: Encoding) {
         self.encoding = encoding
     }
-    
+
     /// Subscript for accessing/setting each parameter for key
     ///
     /// - parameter key: String key for accessing parameter value
@@ -55,7 +55,7 @@ struct Parameters {
 
 // MARK: - Create query items from given Parameters
 extension Parameters {
-    
+
     /// Maps Parameters values conforming to URLQueryItemStringConvertible, to NSURLQueryItem.
     ///
     /// This computed property will return empty array for parameters encoding different then .URL
@@ -84,7 +84,7 @@ extension Parameters {
 
 // MARK: - Convert parameters into optional NSData
 extension Parameters {
-    
+
     /// Checks if encoding is .JSON and parameters are valid JSON object, then uses NSJSONSerialization
     /// Otherwise returns nil
     var body: NSData? {
@@ -94,7 +94,7 @@ extension Parameters {
 }
 
 extension Parameters: CustomDebugStringConvertible {
-    
+
     var debugDescription: String {
         return String(underlyingDictionary)
     }
@@ -110,7 +110,7 @@ extension URLQueryItemStringConvertible {
 /**
  *  URLParameterStringConvertible basic types conformance
  */
- 
+
  /// Simplifies conversion from Parameters to NSURLQueryItem
 extension String: URLQueryItemStringConvertible {
     var stringValue: String { return self }

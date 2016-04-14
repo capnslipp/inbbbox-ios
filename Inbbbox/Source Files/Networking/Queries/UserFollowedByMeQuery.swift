@@ -9,11 +9,11 @@
 import Foundation
 
 struct UserFollowedByMeQuery: Query {
-    
+
     let method = Method.GET
     let path: String
     var parameters = Parameters(encoding: .URL)
-    
+
     /// Initialize query for checking
     /// if given user is followed by currently signed in user.
     ///

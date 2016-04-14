@@ -12,7 +12,7 @@ class ShotsCollectionBackgroundView: UIView {
 //    MARK: - Life cycle
 
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
 
         backgroundColor = UIColor.backgroundGrayColor()
 

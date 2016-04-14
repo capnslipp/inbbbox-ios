@@ -13,7 +13,7 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
             shotsCollectionViewController?.collectionView?.emptyDataSetSource = self
         }
     }
-    
+
     weak var delegate: ShotsStateHandlerDelegate?
 
     var state: ShotsCollectionViewController.State {
@@ -33,28 +33,28 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     }
 
     var collectionViewLayout: UICollectionViewLayout {
-        return InitialAnimationsShotsCollectionViewLayout()
+        return InitialShotsCollectionViewLayout()
     }
 
     var collectionViewInteractionEnabled: Bool {
         return false
     }
-    
+
     var collectionViewScrollEnabled: Bool {
         return false
     }
-    
+
     private let emptyDataSetLoadingView = EmptyDataSetLoadingView.newAutoLayoutView()
 
     override init () {
         super.init()
         animationManager.delegate = self
     }
-    
+
     func prepareForPresentingData() {
         // Do nothing, all set.
     }
-    
+
     func presentData() {
         hideEmptyDataSetLoadingView()
         self.animationManager.startAnimationWithCompletion() {
@@ -67,17 +67,20 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
 // MARK: UICollecitonViewDataSource
 
 extension ShotsInitialAnimationsStateHandler {
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+    func collectionView(collectionView: UICollectionView,
+            numberOfItemsInSection section: Int) -> Int {
         return self.animationManager.visibleItems.count
     }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+
+    func collectionView(collectionView: UICollectionView,
+            cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return UICollectionViewCell()
         }
-        
-        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+
+        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
         let shot = shotsCollectionViewController.shots[indexPath.item]
         let shouldBlurShotImage = indexPath.row != 0
         let blur = shouldBlurShotImage ? CGFloat(1) : CGFloat(0)
@@ -102,7 +105,7 @@ extension ShotsInitialAnimationsStateHandler: ShotsAnimatorDelegate {
 }
 
 extension ShotsInitialAnimationsStateHandler: DZNEmptyDataSetSource {
-    
+
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
         emptyDataSetLoadingView.startAnimation()
         return emptyDataSetLoadingView
@@ -112,8 +115,9 @@ extension ShotsInitialAnimationsStateHandler: DZNEmptyDataSetSource {
 // MARK: Private methods
 
 private extension ShotsInitialAnimationsStateHandler {
-    
-    // NGRHack: DZNEmptyDataSet does not react on `insertItemsAtIndexPaths` so we need to manually hide loading view
+
+    // NGRHack: DZNEmptyDataSet does not react on `insertItemsAtIndexPaths`
+    // so we need to manually hide loading view
     func hideEmptyDataSetLoadingView() {
         emptyDataSetLoadingView.hidden = true
         emptyDataSetLoadingView.stopAnimation()

@@ -9,16 +9,16 @@
 import Foundation
 
 protocol BaseCollectionViewViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate? { get set }
     var itemsCount: Int { get }
-    
+
     func downloadInitialItems()
     func downloadItemsForNextPage()
 }
 
 protocol BaseCollectionViewViewModelDelegate: class {
-    
+
     func viewModelDidLoadInitialItems()
     func viewModelDidFailToLoadInitialItems(error: ErrorType)
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath])
@@ -26,7 +26,7 @@ protocol BaseCollectionViewViewModelDelegate: class {
 }
 
 extension BaseCollectionViewViewModelDelegate {
-    
+
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         // Empty by design - optional function.
     }

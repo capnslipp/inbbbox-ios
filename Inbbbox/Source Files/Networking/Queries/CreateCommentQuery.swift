@@ -9,11 +9,11 @@
 import Foundation
 
 struct CreateCommentQuery: Query {
-    
+
     let method = Method.POST
     let path: String
     var parameters = Parameters(encoding: .JSON)
-    
+
     /// Initialize query for posting comment.
     ///
     /// - parameter shot: Shot that should be commented.

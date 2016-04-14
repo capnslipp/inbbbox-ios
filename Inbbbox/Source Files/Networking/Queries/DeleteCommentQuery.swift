@@ -9,11 +9,11 @@
 import Foundation
 
 struct DeleteCommentQuery: Query {
-    
+
     let method = Method.DELETE
     let path: String
     var parameters = Parameters(encoding: .URL)
-    
+
     /// Initialize query for removing comment.
     ///
     /// - parameter shot:    Shot that contains the comment.

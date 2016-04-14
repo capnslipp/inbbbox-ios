@@ -11,15 +11,15 @@ import PromiseKit
 import CoreData
 
 class ManagedProjectsProvider {
-    
+
     let managedObjectContext: NSManagedObjectContext
     let managedObjectsProvider: ManagedObjectsProvider
-    
+
     init() {
-        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)!.managedObjectContext
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
-    
+
     func provideProjectsForShot(shot: ShotType) -> Promise<[ProjectType]?> {
         return Promise<[ProjectType]?> { fulfill, reject in
             let managedShot = managedObjectsProvider.managedShot(shot)

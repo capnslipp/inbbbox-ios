@@ -10,21 +10,21 @@ import UIKit
 import PromiseKit
 
 class TabBarAnimator {
-    
+
     private let centerButton = RoundedButton()
     private let tabBarView = CenterButtonTabBarView()
     private var tabBarHeight: CGFloat {
         return tabBarView.intrinsicContentSize().height
     }
-    
+
     init(view: LoginView) {
-        
+
         let tabBarHeight = tabBarView.intrinsicContentSize().height
 
         tabBarView.layer.shadowColor = UIColor(white: 0, alpha: 0.03).CGColor
         tabBarView.layer.shadowRadius = 1
         tabBarView.layer.shadowOpacity = 0.6
-        
+
         view.addSubview(tabBarView)
         tabBarView.frame = CGRect(
             x: 0,
@@ -43,10 +43,10 @@ class TabBarAnimator {
             height: centerButton.intrinsicContentSize().height
         )
     }
-    
+
     func animateTabBar() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            
+
             firstly {
                 prepare()
             }.then {
@@ -61,10 +61,10 @@ class TabBarAnimator {
 }
 
 private extension TabBarAnimator {
-    
+
     func slideTabBarItemsSubsequently() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            
+
             UIView.animateKeyframesWithDuration(1, delay: 0, options: .LayoutSubviews, animations: {
                 UIView.addKeyframeWithRelativeStartTime(0.0, relativeDuration: 0.25, animations: {
                     self.tabBarView.likesItemViewVerticalConstraint?.constant -= self.tabBarHeight
@@ -87,14 +87,14 @@ private extension TabBarAnimator {
             })
         }
     }
-    
+
     func slideTabBar() -> Promise<Void> {
-        
+
         var frame = tabBarView.frame
         frame.origin.y -= tabBarHeight
-        
+
         return Promise<Void> { fulfill, _ in
-            
+
             UIView.animateWithDuration(0.5, animations: {
                 self.tabBarView.frame = frame
             }, completion: { _ in
@@ -102,14 +102,14 @@ private extension TabBarAnimator {
             })
         }
     }
-    
+
     func positionCenterButton() -> Promise<Void> {
-        
+
         var frame = centerButton.frame
         frame.origin.y += tabBarHeight
-        
+
         return Promise<Void> { fulfill, _ in
-            
+
             UIView.animateWithDuration(0.5, animations: {
                 self.centerButton.frame = frame
             }, completion: { _ in
@@ -117,27 +117,26 @@ private extension TabBarAnimator {
             })
         }
     }
-    
+
     func fadeCenterButtonIn() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            UIView.animateWithDuration(0.5, delay: 0.1, options: [],  animations: {
+            UIView.animateWithDuration(0.5, delay: 0.1, options: [], animations: {
                 self.centerButton.alpha = 1
             }, completion: { _ in
                 fulfill()
             })
         }
     }
-    
+
     func prepare() -> Promise<Void> {
-        
+
         tabBarView.likesItemViewVerticalConstraint?.constant += tabBarHeight
         tabBarView.bucketsItemViewVerticalConstraint?.constant += tabBarHeight
         tabBarView.followingItemViewVerticalConstraint?.constant += tabBarHeight
         tabBarView.accountItemViewVerticalConstraint?.constant += tabBarHeight
-        
+
         centerButton.alpha = 0.0
-        
+
         return Promise()
     }
 }
-

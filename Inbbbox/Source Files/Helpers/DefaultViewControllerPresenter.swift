@@ -14,8 +14,12 @@ class DefaultViewControllerPresenter: ViewControllerPresenter {
 
 //    MARK: - ViewControllerPresenter
 
-    func presentViewController(viewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
-        presentingViewController?.presentViewController(viewController, animated: animated, completion: completion)
+    func presentViewController(viewController: UIViewController,
+                                     animated: Bool,
+                                   completion: (() -> Void)?) {
+        presentingViewController?.presentViewController(viewController,
+                                              animated: animated,
+                                            completion: completion)
     }
 
     func dismissViewControllerAnimated(animated: Bool, completion: (() -> Void)?) {

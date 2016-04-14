@@ -12,7 +12,7 @@ import SwiftyJSON
 
 /**
  Shot image URL.
- 
+
  - hidpiURL: url of image with resolution 800x600. May not be present.
  - normalURL: url of image with typical resolution 400x300. May be smaller if created before October 4th, 2012.
  - teaserURL: url of image with typical resolution 200x150. May be smaller if created before October 4th, 2012.
@@ -34,7 +34,7 @@ extension ShotImage: Mappable {
             )
         }
     }
-    
+
     private enum Key: String {
         case Hidpi = "hidpi"
         case Normal = "normal"

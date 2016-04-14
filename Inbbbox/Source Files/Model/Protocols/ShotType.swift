@@ -54,24 +54,25 @@ protocol ShotType {
     var team: TeamType? { get }
 }
 
-func ==(lhs: ShotType, rhs: ShotType) -> Bool {
+func == (lhs: ShotType, rhs: ShotType) -> Bool {
     return lhs.identifier == rhs.identifier
 }
 
-func ==(lhs: [ShotType], rhs: [ShotType]) -> Bool {
+func == (lhs: [ShotType], rhs: [ShotType]) -> Bool {
 
     guard lhs.count == rhs.count else { return false }
 
     var indexingGenerators = (left: lhs.generate(), right: rhs.generate())
 
     var isEqual = true
-    while let leftElement = indexingGenerators.left.next(), rightElement = indexingGenerators.right.next() where isEqual {
+    while let leftElement = indexingGenerators.left.next(),
+            rightElement = indexingGenerators.right.next() where isEqual {
         isEqual = leftElement == rightElement
     }
 
     return isEqual
 }
 
-func !=(lhs: [ShotType], rhs: [ShotType]) -> Bool {
+func != (lhs: [ShotType], rhs: [ShotType]) -> Bool {
     return !(lhs == rhs)
 }

@@ -15,13 +15,13 @@ class APICommentsProvider: PageableProvider {
 
     /**
      Provides comments for given shot.
-     
+
      - parameter shot: Shot which comments should be fetched
-     
+
      - returns: Promise which resolves with comments or nil.
      */
     func provideCommentsForShot(shot: ShotType) -> Promise<[CommentType]?> {
-        
+
         let query = CommentQuery(shot: shot)
         return Promise<[CommentType]?> { fulfill, reject in
             firstly {
@@ -31,13 +31,13 @@ class APICommentsProvider: PageableProvider {
             }.error(reject)
         }
     }
-    
+
     /**
      Provides next page of comments.
-     
+
      - Warning: You have to use any of provide... method first to be able to use this method.
      Otherwise an exception will appear.
-     
+
      - returns: Promise which resolves with comments or nil.
      */
     func nextPage() -> Promise<[CommentType]?> {
@@ -49,13 +49,13 @@ class APICommentsProvider: PageableProvider {
             }.error(reject)
         }
     }
-    
+
     /**
      Provides previous page of comments.
-     
+
      - Warning: You have to use any of provide... method first to be able to use this method.
      Otherwise an exception will appear.
-     
+
      - returns: Promise which resolves with comments or nil.
      */
     func previousPage() -> Promise<[CommentType]?> {

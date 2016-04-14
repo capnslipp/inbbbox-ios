@@ -9,16 +9,16 @@
 import Foundation
 
 struct UserQuery: Query {
-    
+
     let method = Method.GET
     let path: String
     var parameters = Parameters(encoding: .URL)
-    
+
     /// Initialize query for getting currently signed in user.
     init() {
         path = "/user"
     }
-    
+
     /// Initialize query for getting a user with given identifier.
     ///
     /// - parameter identifier: User's identifier.

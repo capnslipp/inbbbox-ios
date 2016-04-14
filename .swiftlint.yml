@@ -1,0 +1,31 @@
+included: # paths to include during linting. `--path` is ignored if present.
+  - Inbbbox
+# TODO: Refactor code to remove following rules
+line_length: 120
+variable_name:
+  excluded: # excluded via string array
+    - mngd_identifier
+    - mngd_name
+    - mngd_title
+    - mngd_username
+    - mngd_createdAt
+    - mngd_user
+    - mngd_team
+    - mngd_owner
+    - mngd_animated
+    - mngd_likesCount
+    - mngd_viewsCount
+    - mngd_shotsCount
+    - mngd_bucketsCount
+    - mngd_commentsCount
+    - mngd_avatarURL
+    - mngd_htmlDescription
+    - mngd_accountType
+    - mngd_shotImage
+    - mngd_hidpiURL
+    - mngd_normalURL
+    - mngd_teaserURL
+file_length:
+  warning: 600
+  error: 600
+

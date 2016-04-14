@@ -37,20 +37,20 @@ class CenterButtonTabBarView: UITabBar {
         super.init(frame: frame)
 
         userInteractionEnabled = false
-        
-        _ =  { // these two lines hide top border line of tabBar - can't be separated, so I packed them into closure
+
+        _ = { // these two lines hide top border line of tabBar - can't be separated, so I packed them into closure
             shadowImage = UIImage()
             backgroundImage = UIImage()
         }()
 
         translucent = false
-        
+
         likesItemView.configureForAutoLayout()
         addSubview(likesItemView)
 
         bucketsItemView.configureForAutoLayout()
         addSubview(bucketsItemView)
-        
+
         dummyItemView.configureForAutoLayout()
         addSubview(dummyItemView)
 
@@ -65,7 +65,7 @@ class CenterButtonTabBarView: UITabBar {
 
         if !didSetConstraints {
             didSetConstraints = true
-            
+
             likesItemViewVerticalConstraint = likesItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
             likesItemView.autoPinEdgeToSuperviewEdge(.Left)
             likesItemView.autoPinEdge(.Right, toEdge: .Left, ofView: bucketsItemView)
