@@ -68,16 +68,19 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
 
 extension ShotsInitialAnimationsStateHandler {
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView,
+            numberOfItemsInSection section: Int) -> Int {
         return self.animationManager.visibleItems.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView,
+            cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let shotsCollectionViewController = shotsCollectionViewController else {
             return UICollectionViewCell()
         }
 
-        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
         let shot = shotsCollectionViewController.shots[indexPath.item]
         let shouldBlurShotImage = indexPath.row != 0
         let blur = shouldBlurShotImage ? CGFloat(1) : CGFloat(0)
@@ -113,7 +116,8 @@ extension ShotsInitialAnimationsStateHandler: DZNEmptyDataSetSource {
 
 private extension ShotsInitialAnimationsStateHandler {
 
-    // NGRHack: DZNEmptyDataSet does not react on `insertItemsAtIndexPaths` so we need to manually hide loading view
+    // NGRHack: DZNEmptyDataSet does not react on `insertItemsAtIndexPaths`
+    // so we need to manually hide loading view
     func hideEmptyDataSetLoadingView() {
         emptyDataSetLoadingView.hidden = true
         emptyDataSetLoadingView.stopAnimation()

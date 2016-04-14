@@ -10,12 +10,14 @@ import UIKit
 
 class AutoScrollableShotsDataSource: NSObject {
 
-    private typealias AutoScrollableImageContent = (image: UIImage, isDuplicateForExtendedContent: Bool)
+    private typealias AutoScrollableImageContent = (image: UIImage,
+                            isDuplicateForExtendedContent: Bool)
     private var content: [AutoScrollableImageContent]!
 
     private(set) var extendedScrollableItemsCount = 0
     var itemSize: CGSize {
-        return CGSize(width: CGRectGetWidth(collectionView.bounds), height: CGRectGetWidth(collectionView.bounds))
+        return CGSize(width: CGRectGetWidth(collectionView.bounds),
+                     height: CGRectGetWidth(collectionView.bounds))
     }
     let collectionView: UICollectionView
 
@@ -38,7 +40,8 @@ class AutoScrollableShotsDataSource: NSObject {
 
     /// Prepares itself for animation and reloads collectionView.
     func prepareForAnimation() {
-        extendedScrollableItemsCount = Int(ceil(CGRectGetHeight(collectionView.bounds) / itemSize.height))
+        extendedScrollableItemsCount = Int(ceil(CGRectGetHeight(collectionView.bounds) /
+             itemSize.height))
         prepareExtendedContentToDisplayWithOffset(extendedScrollableItemsCount)
         collectionView.reloadData()
     }
@@ -48,8 +51,11 @@ class AutoScrollableShotsDataSource: NSObject {
 
 extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(AutoScrollableCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    func collectionView(collectionView: UICollectionView,
+            cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(AutoScrollableCollectionViewCell.self,
+                                         forIndexPath: indexPath,
+                                                 type: .Cell)
 
         cell.imageView.image = content[indexPath.row].image
 
@@ -60,7 +66,8 @@ extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
         return 1
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView,
+            numberOfItemsInSection section: Int) -> Int {
         return content.count
     }
 }
@@ -69,7 +76,9 @@ extension AutoScrollableShotsDataSource: UICollectionViewDataSource {
 
 extension AutoScrollableShotsDataSource: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(collectionView: UICollectionView,
+            layout collectionViewLayout: UICollectionViewLayout,
+            sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return itemSize
     }
 }

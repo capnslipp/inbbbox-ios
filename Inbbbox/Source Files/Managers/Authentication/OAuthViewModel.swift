@@ -20,7 +20,10 @@ final class OAuthViewModel: NSObject {
     init(oAuthAuthorizableService: OAuthAuthorizable) {
         service = oAuthAuthorizableService
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(clearCookies), name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                               selector: #selector(clearCookies),
+                                                   name: UIApplicationWillTerminateNotification,
+                                                 object: nil)
     }
 
     func actionPolicyForRequest(request: NSURLRequest) -> WKNavigationActionPolicy {
@@ -85,7 +88,8 @@ private extension OAuthViewModel {
                 NSURLSession.POST(request.URL!.absoluteString)
             }.then { data -> Void in
 
-                guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) else {
+                guard let json = try? NSJSONSerialization.JSONObjectWithData(data,
+                                                                    options: .AllowFragments) else {
                     throw AuthenticatorError.DataDecodingFailure
                 }
 
@@ -113,9 +117,11 @@ private extension OAuthViewModel {
     }
 
     @objc func clearCookies() {
-        WKWebsiteDataStore.defaultDataStore().fetchDataRecordsOfTypes([WKWebsiteDataTypeCookies]) { records in
+        WKWebsiteDataStore.defaultDataStore().fetchDataRecordsOfTypes([WKWebsiteDataTypeCookies]) {
+            records in
             if !records.isEmpty && !UserStorage.isUserSignedIn {
-                WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0), completionHandler: {})
+                WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies],
+                        modifiedSince: NSDate(timeIntervalSince1970: 0), completionHandler: {})
             }
         }
     }

@@ -35,7 +35,8 @@ class Authenticator {
 
         if let oAuthAuthorizableService = serviceInstance as? OAuthAuthorizable {
 
-            controller = OAuthViewController(oAuthAuthorizableService: oAuthAuthorizableService) { controller in
+            controller = OAuthViewController(oAuthAuthorizableService: oAuthAuthorizableService) {
+                    controller in
                 if trySilent {
                     self.interactionHandler(UINavigationController(rootViewController: controller))
                 }
@@ -72,7 +73,8 @@ class Authenticator {
     class func logout() {
         UserStorage.clear()
         TokenStorage.clear()
-        WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies], modifiedSince:NSDate(timeIntervalSince1970: 0), completionHandler: {})
+        WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies],
+                modifiedSince:NSDate(timeIntervalSince1970: 0), completionHandler: {})
         APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
     }
 }

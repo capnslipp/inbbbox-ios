@@ -10,7 +10,8 @@ import Foundation
 
 /// Defines which views can be tracked.
 enum AnalyticsScreen: String {
-    case LoginView, FolloweesView, ShotsView, SettingsView, BucketsView, LikesView, ShotDetailsView, ShotBucketsView
+    case LoginView, FolloweesView, ShotsView, SettingsView,
+            BucketsView, LikesView, ShotDetailsView, ShotBucketsView
 }
 
 /// Defines which login events can be tracked.
@@ -53,7 +54,8 @@ class AnalyticsManager {
         guard let tracker = GAI.sharedInstance().defaultTracker else {
             return
         }
-        let event = GAIDictionaryBuilder.createEventWithCategory("Login", action: loginEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
+        let event = GAIDictionaryBuilder.createEventWithCategory("Login",
+                action: loginEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
         tracker.send(event)
     }
 
@@ -64,7 +66,9 @@ class AnalyticsManager {
         guard let tracker = GAI.sharedInstance().defaultTracker else {
             return
         }
-        let event = GAIDictionaryBuilder.createEventWithCategory("UserAction", action: userActionEvent.rawValue, label: nil, value: nil).build() as [NSObject:AnyObject]
+        let event = GAIDictionaryBuilder.createEventWithCategory("UserAction",
+                action: userActionEvent.rawValue,
+                label: nil, value: nil).build() as [NSObject:AnyObject]
         tracker.send(event)
     }
 }

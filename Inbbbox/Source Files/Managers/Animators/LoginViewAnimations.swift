@@ -43,12 +43,15 @@ class LoginViewAnimations {
     func animateSpringShrinkingToBall(button: UIView, logo: UIView, completion: () -> Void) {
 
         let dimension = CGRectGetHeight(button.frame ?? CGRect.zero)
-        let deltaX = CGRectGetMidX(button.superview!.bounds) - dimension * 0.5 - CGRectGetMinX(button.frame)
+        let deltaX = CGRectGetMidX(button.superview!.bounds) - dimension *
+                0.5 - CGRectGetMinX(button.frame)
 
         buttonPositionDelta = (x: deltaX, width: CGRectGetWidth(button.frame))
         logoPositionDeltaX = CGRectGetMidX(logo.superview!.bounds) - CGRectGetMidX(logo.frame)
 
-        UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [.FillModeForwards], animations: {
+        UIView.animateWithDuration(1.5, delay: 0.0,
+                usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0,
+                options: [.FillModeForwards], animations: {
 
             button.layer.position.x += deltaX
             button.layer.frame.size.width = dimension
@@ -61,7 +64,8 @@ class LoginViewAnimations {
 
     func animateSpringExtendingToButton(button: UIView, logo: UIView, completion: () -> Void) {
 
-        UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [.FillModeForwards], animations: {
+        UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: 0.25,
+                initialSpringVelocity: 0.0, options: [.FillModeForwards], animations: {
 
             button.layer.position.x -= self.buttonPositionDelta.x
             button.layer.frame.size.width = self.buttonPositionDelta.width
@@ -79,14 +83,17 @@ class LoginViewAnimations {
         rotationAnimation.duration = duration
         rotationAnimation.cumulative = true
         rotationAnimation.repeatCount = 1.0
-        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        rotationAnimation.timingFunction =
+                CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
 
         views.forEach {
             $0.layer.addAnimation(rotationAnimation, forKey: nil)
         }
     }
 
-    func moveAnimation(views: [UIView], duration: NSTimeInterval, fade: FadeStyle, easeFunction: UIViewAnimationOptions = .CurveEaseIn, transition: CGPoint, completion: (() -> Void)? = nil) {
+    func moveAnimation(views: [UIView], duration: NSTimeInterval,
+            fade: FadeStyle, easeFunction: UIViewAnimationOptions = .CurveEaseIn,
+            transition: CGPoint, completion: (() -> Void)? = nil) {
 
         UIView.animateWithDuration(duration, delay: 0, options: [easeFunction], animations: {
             views.forEach {

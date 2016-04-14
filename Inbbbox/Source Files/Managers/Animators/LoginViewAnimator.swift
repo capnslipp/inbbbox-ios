@@ -60,9 +60,7 @@ class LoginViewAnimator {
         animations.stop()
 
         guard let view = view where view.isAnimating else { return }
-
         if type == .Undo {
-
             firstly {
                 when(self.extendToButtonWithRotation(), self.loadingFade(.FadeOut))
             }.then { _ -> Void in
@@ -71,12 +69,13 @@ class LoginViewAnimator {
             }
 
         } else {
-
             firstly {
-                when(self.loadingFade(.FadeOut), self.slideInterfaceUp(), self.sloganFadeOut(), self.saturateBackground())
+                when(self.loadingFade(.FadeOut), self.slideInterfaceUp(),
+                        self.sloganFadeOut(), self.saturateBackground())
             }.then {
                 self.delegate?.tabBarWillAppear()
-                return when(self.animateTabBar(), self.slideOutBallWithFadingOut(), self.addInbbboxLogo(fromTop: 60))
+                return when(self.animateTabBar(), self.slideOutBallWithFadingOut(),
+                        self.addInbbboxLogo(fromTop: 60))
             }.then {
                 completion?()
             }
@@ -85,8 +84,10 @@ class LoginViewAnimator {
 
     func showLoginAsGuest() {
         loginAsGuestShown = true
-        animations.moveAnimation([view!.loginButton, view!.dribbbleLogoImageView], duration: 0.5, fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -32))
-        animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.5, fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -200))
+        animations.moveAnimation([view!.loginButton, view!.dribbbleLogoImageView], duration: 0.5,
+                fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -32))
+        animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.5,
+                fade: .FadeIn, easeFunction: .CurveEaseInOut, transition: CGPoint(x: 0, y: -200))
     }
 }
 
@@ -110,13 +111,15 @@ private extension LoginViewAnimator {
     }
 
     func ballBounce() -> Promise<Void> {
-        animations.bounceAnimation([view!.loginButton, view!.dribbbleLogoImageView], duration: loopDuration, additionalYOffset: loginAsGuestShown)
+        animations.bounceAnimation([view!.loginButton, view!.dribbbleLogoImageView],
+                duration: loopDuration, additionalYOffset: loginAsGuestShown)
         return Promise()
     }
 
     func loadingFade(fade: LoginViewAnimations.FadeStyle) -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            animations.moveAnimation([view!.loadingLabel], duration: 0.4, fade: fade, transition: CGPoint.zero) {
+            animations.moveAnimation([view!.loadingLabel], duration: 0.4,
+                    fade: fade, transition: CGPoint.zero) {
                 fulfill()
             }
         }
@@ -134,13 +137,15 @@ private extension LoginViewAnimator {
             animations.rotationAnimation([view!.dribbbleLogoImageView], duration: 0.8, cycles: 5)
 
             // fade out button + label animation:
-            animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.8, fade: .FadeOut, transition: CGPoint(x: 0, y: 200))
+            animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.8,
+                    fade: .FadeOut, transition: CGPoint(x: 0, y: 200))
 
             // login button corner radius animation
             animations.animateCornerRadiusForthAndBack(view!.loginButton)
 
             // spring animation uibutton and logo
-            animations.animateSpringShrinkingToBall(view!.loginButton, logo: view!.dribbbleLogoImageView) {
+            animations.animateSpringShrinkingToBall(view!.loginButton,
+                    logo: view!.dribbbleLogoImageView) {
                 fulfill()
             }
         }
@@ -153,13 +158,15 @@ private extension LoginViewAnimator {
             animations.rotationAnimation([view!.dribbbleLogoImageView], duration: 0.8, cycles: 5)
 
             // fade out button + label animation:
-            animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.8, fade: .FadeIn, transition: CGPoint(x: 0, y: -200))
+            animations.moveAnimation([view!.orLabel, view!.loginAsGuestButton], duration: 0.8,
+                    fade: .FadeIn, transition: CGPoint(x: 0, y: -200))
 
             // login button corner radius animation
             animations.animateCornerRadiusForthAndBack(view!.loginButton)
 
             // spring animation uibutton and logo
-            animations.animateSpringExtendingToButton(view!.loginButton, logo: view!.dribbbleLogoImageView) {
+            animations.animateSpringExtendingToButton(view!.loginButton,
+                    logo: view!.dribbbleLogoImageView) {
                 fulfill()
             }
 
@@ -184,7 +191,8 @@ private extension LoginViewAnimator {
 
     func sloganFadeOut() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            animations.moveAnimation([view!.sloganLabel], duration: 0.4, fade: .FadeOut, transition: CGPoint.zero) {
+            animations.moveAnimation([view!.sloganLabel], duration: 0.4,
+                    fade: .FadeOut, transition: CGPoint.zero) {
                 fulfill()
             }
         }
@@ -206,7 +214,8 @@ private extension LoginViewAnimator {
             whiteView.alpha = 0.0
             view!.insertSubview(whiteView, belowSubview: view!.pinkOverlayView)
 
-            animations.moveAnimation([whiteView], duration: 0.4, fade: .FadeIn, transition: transition) {
+            animations.moveAnimation([whiteView], duration: 0.4,
+                    fade: .FadeIn, transition: transition) {
                 fulfill()
             }
         }
@@ -234,7 +243,8 @@ private extension LoginViewAnimator {
 
     func slideOutBallWithFadingOut() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            animations.moveAnimation([view!.dribbbleLogoImageView, view!.loginButton], duration: 0.3, fade: .FadeOut, transition: CGPoint(x: 0, y: 200)) {
+            animations.moveAnimation([view!.dribbbleLogoImageView, view!.loginButton],
+                    duration: 0.3, fade: .FadeOut, transition: CGPoint(x: 0, y: 200)) {
                 fulfill()
             }
         }

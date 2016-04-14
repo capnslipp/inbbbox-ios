@@ -19,18 +19,21 @@ final class OAuthViewController: UIViewController {
     private var progressView: UIProgressView?
     private weak var aView: OAuthView?
 
-    init(oAuthAuthorizableService: OAuthAuthorizable, silentAuthenticationFailureHandler: (UIViewController -> Void)) {
+    init(oAuthAuthorizableService: OAuthAuthorizable,
+                silentAuthenticationFailureHandler: (UIViewController -> Void)) {
         viewModel = OAuthViewModel(oAuthAuthorizableService: oAuthAuthorizableService)
         self.silentAuthenticationFailureHandler = silentAuthenticationFailureHandler
         super.init(nibName: nil, bundle: nil)
     }
 
-    @available(*, unavailable, message="Use init(oAuthAuthorizableService:silentAuthenticationFailureHandler:) instead")
+    @available(*, unavailable,
+          message="Use init(oAuthAuthorizableService:silentAuthenticationFailureHandler:) instead")
     override init(nibName: String?, bundle: NSBundle?) {
         fatalError("init(nibName:bundle:) has not been implemented")
     }
 
-    @available(*, unavailable, message="Use init(oAuthAuthorizableService:silentAuthenticationFailureHandler:) instead")
+    @available(*, unavailable,
+          message="Use init(oAuthAuthorizableService:silentAuthenticationFailureHandler:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -38,7 +41,8 @@ final class OAuthViewController: UIViewController {
     override func loadView() {
         aView = loadViewWithClass(OAuthView.self)
         aView?.webView.navigationDelegate = self
-        aView?.webView.addObserver(self, forKeyPath: keyPathForObservingProgress, options: .New, context: nil)
+        aView?.webView.addObserver(self, forKeyPath: keyPathForObservingProgress,
+                options: .New, context: nil)
 
         viewModel.loadRequestReverseClosure = { [weak self] request in
             self?.aView?.webView.loadRequest(request)
@@ -49,7 +53,12 @@ final class OAuthViewController: UIViewController {
         super.viewWillAppear(animated)
 
         progressView = navigationController?.progressViewByEmbedingInNavigationBar()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("OAuthViewController.Cancel", comment: "Cancel logging in."), style: .Plain, target: self, action: #selector(cancelBarButtonDidTap(_:)))
+        navigationItem.leftBarButtonItem =
+                UIBarButtonItem(title: NSLocalizedString("OAuthViewController.Cancel",
+                              comment: "Cancel logging in."),
+                                style: .Plain,
+                               target: self,
+                               action: #selector(cancelBarButtonDidTap(_:)))
     }
 
     deinit {
@@ -73,7 +82,8 @@ final class OAuthViewController: UIViewController {
         }
     }
 
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?,
+            change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
 
         if let progressView = progressView where keyPath == keyPathForObservingProgress {
             progressView.progress = Float(aView?.webView.estimatedProgress ?? 0)
@@ -101,7 +111,8 @@ extension OAuthViewController: WKNavigationDelegate {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+    func webView(webView: WKWebView, decidePolicyForNavigationAction
+        navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
 
         if !viewModel.service.isSilentAuthenticationURL(navigationAction.request.URL) {
             silentAuthenticationFailureHandler(self)

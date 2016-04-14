@@ -1,6 +1,7 @@
 included: # paths to include during linting. `--path` is ignored if present.
   - Inbbbox
 # TODO: Refactor code to remove following rules
+line_length: 120
 variable_name:
   excluded: # excluded via string array
     - mngd_identifier

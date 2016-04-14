@@ -18,9 +18,11 @@ final class LocalNotificationRegistrator {
     /// - parameter time:   Fire date of notification.
     ///
     /// - returns: Local Notification object.
-    class func registerNotification(forUserID userID: String, time: NSDate) -> UILocalNotification? {
+    class func registerNotification(forUserID userID: String, time: NSDate)
+                    -> UILocalNotification? {
 
-        if let localNotificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings() {
+        if let localNotificationSettings =
+                UIApplication.sharedApplication().currentUserNotificationSettings() {
 
             guard localNotificationSettings.types == [.Alert, .Sound] else {
                 return nil
@@ -54,8 +56,10 @@ private extension LocalNotificationRegistrator {
         let localNotification = UILocalNotification()
         localNotification.userInfo = [LocalNotificationUserIDKey: userID]
         localNotification.fireDate = time
-        localNotification.alertBody = NSLocalizedString("LocalNotificationRegistrator.AlertBody", comment: "Check Inbbbox for daily dose of design shots")
-        localNotification.alertAction = NSLocalizedString("LocalNotificationRegistrator.Show", comment: "Action for notification")
+        localNotification.alertBody = NSLocalizedString("LocalNotificationRegistrator.AlertBody",
+                comment: "Check Inbbbox for daily dose of design shots")
+        localNotification.alertAction = NSLocalizedString("LocalNotificationRegistrator.Show",
+                comment: "Action for notification")
         localNotification.repeatInterval = .Day
 
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
@@ -69,7 +73,8 @@ private extension LocalNotificationRegistrator {
 
     class func registeredNotification(forUserID userID: String) -> UILocalNotification? {
 
-        guard let scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications else {
+        guard let scheduledLocalNotifications =
+                UIApplication.sharedApplication().scheduledLocalNotifications else {
             return nil
         }
 
