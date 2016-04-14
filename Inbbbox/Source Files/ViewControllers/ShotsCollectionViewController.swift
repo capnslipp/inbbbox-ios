@@ -46,6 +46,7 @@ extension ShotsCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         collectionView?.pagingEnabled = true
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
@@ -97,11 +98,13 @@ extension ShotsCollectionViewController {
 
 extension ShotsCollectionViewController {
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView,
+                                 didSelectItemAtIndexPath indexPath: NSIndexPath) {
         stateHandler.collectionView?(collectionView, didSelectItemAtIndexPath: indexPath)
     }
 
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
+    override func collectionView(collectionView: UICollectionView,
+                                 willDisplayCell cell: UICollectionViewCell,
                                  forItemAtIndexPath indexPath: NSIndexPath) {
         stateHandler.collectionView?(collectionView, willDisplayCell: cell, forItemAtIndexPath: indexPath)
     }

@@ -81,57 +81,39 @@ class LoginView: UIView {
 
             let inset = CGFloat(30)
             let height = 2 * cornerRadius
-            loginButton.frame = CGRect(
-                x: inset,
-                y: CGRectGetMaxY(frame) - height - 132,
-                width: CGRectGetWidth(frame) - 2 * inset,
-                height: height
+            loginButton.frame = CGRect(x: inset, y: CGRectGetMaxY(frame) - height - 132,
+                width: CGRectGetWidth(frame) - 2 * inset, height: height
             )
 
             let size = dribbbleLogoImageView.image?.size ?? CGSize.zero
-            dribbbleLogoImageView.frame = CGRect(
-                x: CGRectGetMinX(loginButton.frame) + 30,
+            dribbbleLogoImageView.frame = CGRect(x: CGRectGetMinX(loginButton.frame) + 30,
                 y: CGRectGetMidY(loginButton.frame) - size.height * 0.5,
-                width: size.width,
-                height: size.height
+                width: size.width, height: size.height
             )
 
-            loginAsGuestButton.frame = CGRect(
-                x: inset,
-                y: CGRectGetMaxY(frame) - 56 - height + 200,
-                width: CGRectGetWidth(frame) - 2 * inset,
-                height: height
+            loginAsGuestButton.frame = CGRect(x: inset, y: CGRectGetMaxY(frame) - 56 - height + 200,
+                width: CGRectGetWidth(frame) - 2 * inset, height: height
             )
 
             let width = CGFloat(150)
-            orLabel.frame = CGRect(
-                x: CGRectGetMidX(frame) - width * 0.5,
+            orLabel.frame = CGRect(x: CGRectGetMidX(frame) - width * 0.5,
                 y: CGRectGetMinY(loginAsGuestButton.frame) - height,
-                width: width,
-                height: 60
+                width: width, height: 60
             )
 
-            loadingLabel.frame = CGRect(
-                x: 0,
-                y: CGRectGetMaxY(frame) - 50,
-                width: CGRectGetWidth(frame),
-                height: 20
+            loadingLabel.frame = CGRect(x: 0, y: CGRectGetMaxY(frame) - 50,
+                width: CGRectGetWidth(frame), height: 20
             )
 
             let sloganHeight = CGFloat(40)
-            sloganLabel.frame = CGRect(
-                x: 0,
-                y: CGRectGetMidY(frame) - sloganHeight * 0.5,
-                width: CGRectGetWidth(frame),
-                height: sloganHeight
+            sloganLabel.frame = CGRect(x: 0, y: CGRectGetMidY(frame) - sloganHeight * 0.5,
+                width: CGRectGetWidth(frame), height: sloganHeight
             )
 
             let imageSize = logoImageView.image!.size ?? CGSize.zero
-            logoImageView.frame = CGRect(
-                x: CGRectGetMidX(frame) - imageSize.width * 0.5,
+            logoImageView.frame = CGRect(x: CGRectGetMidX(frame) - imageSize.width * 0.5,
                 y: CGRectGetMinY(sloganLabel.frame) - 30 - imageSize.height,
-                width: imageSize.width,
-                height: imageSize.height
+                width: imageSize.width, height: imageSize.height
             )
 
             shotsView.frame = frame
