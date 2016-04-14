@@ -237,10 +237,14 @@ private extension ShotBucketsViewController {
     
     func presentShotFullscreen() {
         
-        guard let header = header else { return }
+        guard
+            let header = header,
+            let closeImage = UIImage(named: "ic-cross-naked")
+        else {
+            return
+        }
         
-        let closeImageName = "ic-cross-naked"
-        let buttonAssets = CloseButtonAssets(normal: UIImage(named:closeImageName)!, highlighted: UIImage(named: closeImageName))
+        let buttonAssets = CloseButtonAssets(normal: closeImage, highlighted: closeImage)
         let configuration = ImageViewerConfiguration(imageSize: CGSize(width: 40, height: 40), closeButtonAssets: buttonAssets)
         
         let imageViewer = ImageViewer(imageProvider: self, configuration: configuration, displacedView: header.imageView)
