@@ -151,18 +151,20 @@ extension SimpleShotsCollectionViewController: DZNEmptyDataSetSource {
     
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
         
+        guard let viewModel = viewModel else { return UIView() }
+        
         if shouldShowLoadingView {
             let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
             loadingView.startAnimation()
             return loadingView
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
-            let descriptionAttributes = viewModel?.emptyCollectionDescriptionAttributes()
+            let descriptionAttributes = viewModel.emptyCollectionDescriptionAttributes()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: descriptionAttributes?.firstLocalizedString ?? "",
-                attachmentImage: UIImage(named: descriptionAttributes?.attachmentImageName ?? ""),
-                imageOffset: descriptionAttributes?.imageOffset ?? CGPointZero,
-                lastLocalizedString: descriptionAttributes?.lastLocalizedString ?? ""
+                firstLocalizedString: descriptionAttributes.firstLocalizedString,
+                attachmentImage: UIImage(named: descriptionAttributes.attachmentImageName),
+                imageOffset: descriptionAttributes.imageOffset,
+                lastLocalizedString: descriptionAttributes.lastLocalizedString
             )
             return emptyDataSetView
         }
