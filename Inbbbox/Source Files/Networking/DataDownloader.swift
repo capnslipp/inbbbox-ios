@@ -14,6 +14,7 @@ class DataDownloader: NSObject {
     private var totalSize = Float(0)
     private var progress:((Float) -> Void)?
     private var completion:((NSData) -> Void)?
+    private var session: NSURLSession?
     
     /// Fetches data from given URL and gives information about progress and completion of operation.
     /// 
@@ -23,8 +24,8 @@ class DataDownloader: NSObject {
     func fetchData(url: NSURL, progress:(progress: Float) -> Void, completion:(data: NSData) -> Void) {
         self.progress = progress
         self.completion = completion
-        let session = NSURLSession.init(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
-        let task = session.dataTaskWithURL(url)
+        self.session = NSURLSession.init(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
+        let task = session!.dataTaskWithURL(url)
         
         task.resume()
     }
@@ -48,6 +49,7 @@ extension DataDownloader: NSURLSessionDataDelegate {
         }
         if let completion = self.completion {
             completion(NSData(data: self.data))
+            self.session?.finishTasksAndInvalidate()
         }
     }
 }
