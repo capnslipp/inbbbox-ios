@@ -77,7 +77,7 @@ class ShotBucketsViewController: UIViewController {
 
         setEstimatedSizeIfNeeded()
         (shotBucketsView.collectionView.collectionViewLayout as?
-                ShotDetailsCollectionCollapsableViewStickyHeader)?.collapsableHeight =
+                ShotDetailsCollectionCollapsableHeader)?.collapsableHeight =
                 heightForCollapsedCollectionViewHeader
     }
 

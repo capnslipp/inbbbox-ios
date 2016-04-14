@@ -1,5 +1,5 @@
 //
-//  ShotDetailsCollectionViewCollapsableStickyHeader.swift
+//  ShotDetailsCollectionCollapsableHeader.swift
 //  Inbbbox
 //
 //  Created by Patryk Kaczmarek on 18/02/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ShotDetailsCollectionCollapsableViewStickyHeader: UICollectionViewFlowLayout {
+class ShotDetailsCollectionCollapsableHeader: UICollectionViewFlowLayout {
 
     var collapsableHeight: CGFloat!
 
@@ -86,7 +86,7 @@ class ShotDetailsCollectionCollapsableViewStickyHeader: UICollectionViewFlowLayo
     }
 }
 
-private extension ShotDetailsCollectionCollapsableViewStickyHeader {
+private extension ShotDetailsCollectionCollapsableHeader {
 
     func setupLayout() {
         sectionInset = UIEdgeInsetsZero

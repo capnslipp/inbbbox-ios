@@ -46,6 +46,6 @@ extension Team: Mappable {
 
 extension Team: Equatable {}
 
-func ==(lhs: Team, rhs: Team) -> Bool {
+func == (lhs: Team, rhs: Team) -> Bool {
     return lhs.identifier == rhs.identifier
 }

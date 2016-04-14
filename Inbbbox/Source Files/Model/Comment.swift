@@ -48,6 +48,6 @@ extension Comment: Mappable {
 
 extension Comment: Equatable {}
 
-func ==(lhs: Comment, rhs: Comment) -> Bool {
+func == (lhs: Comment, rhs: Comment) -> Bool {
     return lhs.identifier == rhs.identifier
 }

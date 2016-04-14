@@ -29,7 +29,7 @@ struct ShotCellLikeActionAnimationDescriptor: AnimationDescriptor {
             shotCell.likeImageView.displaySecondImageView()
         }
         completion = { _ in
-            var delayedRestoreInitialStateAnimationDescriptor = ShotCellRestoreInitialStateAnimationDescriptor(shotCell: shotCell, swipeCompletion: swipeCompletion)
+            var delayedRestoreInitialStateAnimationDescriptor = ShotCellInitialStateAnimationDescriptor(shotCell: shotCell, swipeCompletion: swipeCompletion)
             delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
             shotCell.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
         }

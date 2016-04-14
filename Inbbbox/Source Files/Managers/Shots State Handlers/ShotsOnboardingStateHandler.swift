@@ -63,7 +63,8 @@ extension ShotsOnboardingStateHandler {
         return onboardingSteps.count + shotsCollectionViewController.shots.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView,
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         if indexPath.row < onboardingSteps.count {
             return cellForOnboardingShot(collectionView, indexPath: indexPath)
         } else {
@@ -74,7 +75,8 @@ extension ShotsOnboardingStateHandler {
 
 // MARK: UICollectionViewDelegate
 extension ShotsOnboardingStateHandler {
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
+                        forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 3 {
             scrollViewAnimationsCompletion = {
                 Defaults[.onboardingPassed] = true
@@ -100,14 +102,16 @@ private extension ShotsOnboardingStateHandler {
             return ShotCollectionViewCell()
         }
         let shot = shotsCollectionViewController.shots[0]
-        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
         cell.gifLabel.hidden = !shot.animated
         return cell
     }
 
     func cellForOnboardingShot(collectionView: UICollectionView, indexPath: NSIndexPath) -> ShotCollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+        let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
         let stepImage = onboardingSteps[indexPath.row].image
         cell.shotImageView.image = stepImage
         cell.gifLabel.hidden = true

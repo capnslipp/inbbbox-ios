@@ -84,7 +84,7 @@ final class ShotDetailsViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
         if let layout = shotDetailsView.collectionView.collectionViewLayout as?
-                ShotDetailsCollectionCollapsableViewStickyHeader {
+                ShotDetailsCollectionCollapsableHeader {
             layout.collapsableHeight = heightForCollapsedCollectionViewHeader
             layout.invalidateLayout()
         }

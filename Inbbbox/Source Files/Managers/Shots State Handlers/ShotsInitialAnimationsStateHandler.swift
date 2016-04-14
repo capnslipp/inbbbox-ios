@@ -33,7 +33,7 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     }
 
     var collectionViewLayout: UICollectionViewLayout {
-        return InitialAnimationsShotsCollectionViewLayout()
+        return InitialShotsCollectionViewLayout()
     }
 
     var collectionViewInteractionEnabled: Bool {

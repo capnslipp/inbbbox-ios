@@ -262,7 +262,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             viewClass.animateWithDescriptor(ShotCellCommentActionAnimationDescriptor(shotCell: self,
                     swipeCompletion: completion))
         default:
-            viewClass.animateWithDescriptor(ShotCellRestoreInitialStateAnimationDescriptor(shotCell: self,
+            viewClass.animateWithDescriptor(ShotCellInitialStateAnimationDescriptor(shotCell: self,
                     swipeCompletion: completion))
         }
     }

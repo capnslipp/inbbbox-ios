@@ -21,8 +21,8 @@ struct ManagedObjectsProvider {
         let fetchRequest = NSFetchRequest(entityName: ManagedShot.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", shot.identifier)
 
-        if let managedShot = try! managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedShot {
-            return managedShot
+        if let managedShot = try? managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedShot {
+            return managedShot!
         }
 
         let managedShotEntity = NSEntityDescription.entityForName(ManagedShot.entityName, inManagedObjectContext: managedObjectContext)!
@@ -48,8 +48,8 @@ struct ManagedObjectsProvider {
         let fetchRequest = NSFetchRequest(entityName: ManagedUser.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", user.identifier)
 
-        if let managedUser = try! managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedUser {
-            return managedUser
+        if let managedUser = try? managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedUser {
+            return managedUser!
         }
 
         let managedUserEntity = NSEntityDescription.entityForName(ManagedUser.entityName, inManagedObjectContext: managedObjectContext)!
@@ -67,8 +67,8 @@ struct ManagedObjectsProvider {
         let fetchRequest = NSFetchRequest(entityName: ManagedTeam.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", team.identifier)
 
-        if let managedTeam = try! managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedTeam {
-            return managedTeam
+        if let managedTeam = try? managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedTeam {
+            return managedTeam!
         }
 
         let managedTeamEntity = NSEntityDescription.entityForName(ManagedTeam.entityName, inManagedObjectContext: managedObjectContext)!
@@ -103,8 +103,8 @@ struct ManagedObjectsProvider {
         let fetchRequest = NSFetchRequest(entityName: ManagedBucket.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", bucket.identifier)
 
-        if let managedBucket = try! managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedBucket {
-            return managedBucket
+        if let managedBucket = try? managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedBucket {
+            return managedBucket!
         }
         let managedBucketEntity = NSEntityDescription.entityForName(ManagedBucket.entityName, inManagedObjectContext: managedObjectContext)!
         let managedBucket = ManagedBucket(entity: managedBucketEntity, insertIntoManagedObjectContext: managedObjectContext)
@@ -120,8 +120,8 @@ struct ManagedObjectsProvider {
         let fetchRequest = NSFetchRequest(entityName: ManagedProject.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_identifier == %@", project.identifier)
 
-        if let managedProject = try! managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedProject {
-            return managedProject
+        if let managedProject = try? managedObjectContext.executeFetchRequest(fetchRequest).first as? ManagedProject {
+            return managedProject!
         }
         let managedProjectEntity = NSEntityDescription.entityForName(ManagedProject.entityName, inManagedObjectContext: managedObjectContext)!
         let managedProject = ManagedProject(entity: managedProjectEntity, insertIntoManagedObjectContext: managedObjectContext)

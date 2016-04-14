@@ -37,7 +37,7 @@ struct ShotCellBucketActionAnimationDescriptor: AnimationDescriptor {
         }
         completion = { _ in
             var delayedRestoreInitialStateAnimationDescriptor =
-                    ShotCellRestoreInitialStateAnimationDescriptor(shotCell: shotCell, swipeCompletion: swipeCompletion)
+                    ShotCellInitialStateAnimationDescriptor(shotCell: shotCell, swipeCompletion: swipeCompletion)
             delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
             shotCell.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
         }

@@ -12,7 +12,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
 
     override func spec() {
 
-        var sut: InitialAnimationsShotsCollectionViewLayout!
+        var sut: InitialShotsCollectionViewLayout!
         var collectionViewMock: CollectionViewMock!
         let fixtureCollectionViewBounds = FixtureCollectionViewBounds()
         let fixtureFirstItemAttributes = FixtureFirstItemAttributes()

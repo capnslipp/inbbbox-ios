@@ -212,13 +212,13 @@ private extension LoginViewAnimator {
         }
     }
 
-    func addInbbboxLogo(fromTop y: CGFloat) -> Promise<Void> {
+    func addInbbboxLogo(fromTop fromTop: CGFloat) -> Promise<Void> {
 
         let logoImageView = UIImageView(image: UIImage(named: "logo-type-home"))
         logoImageView.alpha = 0.0
 
         let size = logoImageView.image?.size ?? CGSize.zero
-        let origin = CGPoint(x: CGRectGetMidX(view!.frame) - size.width * 0.5, y: y)
+        let origin = CGPoint(x: CGRectGetMidX(view!.frame) - size.width * 0.5, y: fromTop)
         logoImageView.frame = CGRect(origin: origin, size: size)
 
         view!.insertSubview(logoImageView, belowSubview: view!.pinkOverlayView)

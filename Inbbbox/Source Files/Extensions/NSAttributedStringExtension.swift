@@ -60,6 +60,6 @@ extension NSAttributedString {
         NSStringDrawingOptions.UsesLineFragmentOrigin.rawValue,
                 NSStringDrawingOptions.self
         )
-        return ceil(boundingRectWithSize(CGSizeMake(width, CGFloat.max), options: options, context: nil).size.height)
+        return ceil(boundingRectWithSize(CGSize(width: width, height: CGFloat.max), options: options, context: nil).size.height)
     }
 }

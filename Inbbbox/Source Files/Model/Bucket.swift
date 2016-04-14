@@ -60,6 +60,6 @@ extension Bucket: Hashable {
 
 extension Bucket: Equatable {}
 
-func ==(lhs: Bucket, rhs: Bucket) -> Bool {
+func == (lhs: Bucket, rhs: Bucket) -> Bool {
     return lhs.identifier == rhs.identifier
 }

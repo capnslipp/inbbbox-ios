@@ -12,7 +12,7 @@ import PromiseKit
 
 final class OAuthViewController: UIViewController {
 
-    private let KeyPathForObservingProgress = "estimatedProgress"
+    private let keyPathForObservingProgress = "estimatedProgress"
     private let viewModel: OAuthViewModel
     private let silentAuthenticationFailureHandler: (UIViewController -> Void)
 
@@ -38,7 +38,7 @@ final class OAuthViewController: UIViewController {
     override func loadView() {
         aView = loadViewWithClass(OAuthView.self)
         aView?.webView.navigationDelegate = self
-        aView?.webView.addObserver(self, forKeyPath: KeyPathForObservingProgress, options: .New, context: nil)
+        aView?.webView.addObserver(self, forKeyPath: keyPathForObservingProgress, options: .New, context: nil)
 
         viewModel.loadRequestReverseClosure = { [weak self] request in
             self?.aView?.webView.loadRequest(request)
@@ -53,7 +53,7 @@ final class OAuthViewController: UIViewController {
     }
 
     deinit {
-        aView?.webView.removeObserver(self, forKeyPath: KeyPathForObservingProgress)
+        aView?.webView.removeObserver(self, forKeyPath: keyPathForObservingProgress)
     }
 
     func startAuthentication() -> Promise<String> {
@@ -75,7 +75,7 @@ final class OAuthViewController: UIViewController {
 
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
 
-        if let progressView = progressView where keyPath == KeyPathForObservingProgress {
+        if let progressView = progressView where keyPath == keyPathForObservingProgress {
             progressView.progress = Float(aView?.webView.estimatedProgress ?? 0)
             if progressView.progress >= 1 {
                 progressView.hidden = true

@@ -24,7 +24,7 @@ extension UICollectionView {
     /// - SeeAlso: `Type` enum.
     func registerClass<T: UICollectionReusableView where T: Reusable>(aClass: T.Type, type: Type) {
 
-        switch(type) {
+        switch type {
         case .Cell:
             registerClass(aClass, forCellWithReuseIdentifier: T.reuseIdentifier)
         case .Header:
@@ -45,13 +45,13 @@ extension UICollectionView {
     /// - returns: A valid UICollectionReusableView object.
     func dequeueReusableClass<T: UICollectionReusableView where T: Reusable>(aClass: T.Type, forIndexPath indexPath: NSIndexPath, type: Type) -> T {
 
-        switch(type) {
+        switch type {
         case .Cell:
-            return dequeueReusableCellWithReuseIdentifier(T.reuseIdentifier, forIndexPath: indexPath) as! T
+            return (dequeueReusableCellWithReuseIdentifier(T.reuseIdentifier, forIndexPath: indexPath) as? T)!
         case .Header:
-            return dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: T.reuseIdentifier, forIndexPath: indexPath) as! T
+            return (dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: T.reuseIdentifier, forIndexPath: indexPath) as? T)!
         case .Footer:
-            return dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: T.reuseIdentifier, forIndexPath: indexPath) as! T
+            return (dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionFooter, withReuseIdentifier: T.reuseIdentifier, forIndexPath: indexPath) as? T)!
         }
     }
 

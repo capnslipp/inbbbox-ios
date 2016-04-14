@@ -35,6 +35,8 @@ protocol AnimationDescriptor {
     var options: UIViewAnimationOptions { get set }
 
     /// Closure where all animations will be performed on ShotCollectionViewCell.
+
+
     var animations: () -> Void { get set }
 
     /// Completion closure will be invoked after animations finishes.

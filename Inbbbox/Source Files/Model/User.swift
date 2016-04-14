@@ -29,9 +29,9 @@ final class User: NSObject, UserType {
     }
 
     required init(coder aDecoder: NSCoder) {
-        identifier = aDecoder.decodeObjectForKey(Key.Identifier.rawValue) as! String
+        identifier = aDecoder.decodeObjectForKey(Key.Identifier.rawValue) as? String ?? ""
         name = aDecoder.decodeObjectForKey(Key.Name.rawValue) as? String
-        username = aDecoder.decodeObjectForKey(Key.Username.rawValue) as! String
+        username = aDecoder.decodeObjectForKey(Key.Username.rawValue) as? String ?? ""
         avatarURL = aDecoder.decodeObjectForKey(Key.Avatar.rawValue) as? NSURL
         shotsCount = aDecoder.decodeObjectForKey(Key.ShotsCount.rawValue) as? UInt ?? 0
         accountType = {

@@ -52,6 +52,6 @@ extension Project: Mappable {
 
 extension Project: Equatable {}
 
-func ==(lhs: Project, rhs: Project) -> Bool {
+func == (lhs: Project, rhs: Project) -> Bool {
     return lhs.identifier == rhs.identifier
 }
