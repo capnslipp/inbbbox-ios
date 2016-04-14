@@ -145,9 +145,8 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                     header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
                 }
                 
-                header?.imageDidTap = { [weak self] _ in
-                    guard let certainSelf = self else { return }
-                    certainSelf.presentShotFullscreen()
+                header?.imageDidTap = { [weak self] in
+                    self?.presentShotFullscreen()
                 }
             }
             return header!

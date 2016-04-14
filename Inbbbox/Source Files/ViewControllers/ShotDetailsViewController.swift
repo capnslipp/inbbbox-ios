@@ -202,9 +202,8 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
             
-            header?.imageDidTap = { [weak self] _ in
-                guard let certainSelf = self else { return }
-                certainSelf.presentShotFullscreen()
+            header?.imageDidTap = { [weak self] in
+                self?.presentShotFullscreen()
             }
         }
         

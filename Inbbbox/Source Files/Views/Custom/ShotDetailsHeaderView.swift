@@ -29,7 +29,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     var minHeight = CGFloat(0)
     
     var imageView: UIImageView!
-    var imageDidTap: (UIImage -> Void)?
+    var imageDidTap: (() -> Void)?
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     
     let closeButtonView = CloseButtonView.newAutoLayoutView()
@@ -224,9 +224,7 @@ extension ShotDetailsHeaderView {
 private extension ShotDetailsHeaderView {
     
     dynamic func shotImageDidTap(_: UITapGestureRecognizer) {
-        if let image = imageView.image {
-            imageDidTap?(image)
-        }
+        imageDidTap?()
     }
 }
 
