@@ -16,7 +16,7 @@ class ManagedProjectsProvider {
     let managedObjectsProvider: ManagedObjectsProvider
 
     init() {
-        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)!.managedObjectContext
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
 

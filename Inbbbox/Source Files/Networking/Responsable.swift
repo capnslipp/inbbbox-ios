@@ -11,7 +11,7 @@ import SwiftyJSON
 import PromiseKit
 import Async
 
-let NetworkErrorDomain = "co.netguru.inbbbox.error.network"
+let networkErrorDomain = "co.netguru.inbbbox.error.network"
 
 enum ResponseError: ErrorType {
     case UnexpectedResponse
@@ -70,8 +70,9 @@ extension Responsable {
             } else if let httpResponse = response as? NSHTTPURLResponse where httpResponse.statusCode == 204 {
                 fulfill((json: nil, header: header))
             } else {
-                let message = NSLocalizedString("Responsable.RetrievingFailed", comment: "Visible when failed to retrieve data.")
-                throw NSError(domain: NetworkErrorDomain, code: 0, message: message)
+                let message = NSLocalizedString("Responsable.RetrievingFailed",
+                        comment: "Visible when failed to retrieve data.")
+                throw NSError(domain: networkErrorDomain, code: 0, message: message)
             }
         }
     }
@@ -96,7 +97,7 @@ private extension Responsable {
             return nil
         }
 
-        return NSError(domain: NetworkErrorDomain, code: response.statusCode, message: message)
+        return NSError(domain: networkErrorDomain, code: response.statusCode, message: message)
     }
 
     func checkResponseForError(response: NSURLResponse?) -> NSError? {
@@ -107,10 +108,11 @@ private extension Responsable {
 
         let message: String = {
             if response.statusCode == 401 {
-                return NSLocalizedString("Responsable.AuthorizationExpired", comment: "Visible when user authorization expired.")
+                return NSLocalizedString("Responsable.AuthorizationExpired",
+                        comment: "Visible when user authorization expired.")
             }
             return NSLocalizedString("Responsable.RetrievingFailed", comment: "Visible when failed to retrieve data.")
         }()
-        return NSError(domain: NetworkErrorDomain, code: response.statusCode, message: message)
+        return NSError(domain: networkErrorDomain, code: response.statusCode, message: message)
     }
 }

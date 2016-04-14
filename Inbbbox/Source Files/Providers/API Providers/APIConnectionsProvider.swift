@@ -12,8 +12,8 @@ import PromiseKit
 typealias Followee = UserType
 typealias Follower = UserType
 
-private let FollowerSerializationKey = "follower"
-private let FolloweeSerializationKey = "followee"
+private let followerSerializationKey = "follower"
+private let followeeSerializationKey = "followee"
 
 /// Provides interface for dribbble followers and followees read API
 class APIConnectionsProvider: PageableProvider {
@@ -28,7 +28,8 @@ class APIConnectionsProvider: PageableProvider {
     func provideMyFollowers() -> Promise<[Follower]?> {
 
         let query = FollowersQuery()
-        return provideUsersWithQueries([query], serializationKey: FollowerSerializationKey, authentizationRequired: true)
+        return provideUsersWithQueries([query], serializationKey: followerSerializationKey,
+                authentizationRequired: true)
     }
 
     /**
@@ -41,7 +42,8 @@ class APIConnectionsProvider: PageableProvider {
     func provideMyFollowees() -> Promise<[Followee]?> {
 
         let query = FolloweesQuery()
-        return provideUsersWithQueries([query], serializationKey: FolloweeSerializationKey, authentizationRequired: true)
+        return provideUsersWithQueries([query], serializationKey: followeeSerializationKey,
+                authentizationRequired: true)
     }
 
     /**
@@ -65,7 +67,8 @@ class APIConnectionsProvider: PageableProvider {
     func provideFollowersForUsers(users: [UserType]) -> Promise<[Follower]?> {
 
         let queries = users.map { FollowersQuery(followersOfUser: $0) } as [Query]
-        return provideUsersWithQueries(queries, serializationKey: FollowerSerializationKey, authentizationRequired: false)
+        return provideUsersWithQueries(queries, serializationKey: followerSerializationKey,
+                authentizationRequired: false)
     }
 
     /**
@@ -89,7 +92,8 @@ class APIConnectionsProvider: PageableProvider {
     func provideFolloweesForUsers(users: [UserType]) -> Promise<[Followee]?> {
 
         let queries = users.map { FolloweesQuery(followeesOfUser: $0) } as [Query]
-        return provideUsersWithQueries(queries, serializationKey: FolloweeSerializationKey, authentizationRequired: false)
+        return provideUsersWithQueries(queries, serializationKey: followeeSerializationKey,
+                authentizationRequired: false)
     }
 
     /**
@@ -119,7 +123,8 @@ class APIConnectionsProvider: PageableProvider {
 
 private extension APIConnectionsProvider {
 
-    func provideUsersWithQueries(queries: [Query], serializationKey key: String? = nil, authentizationRequired: Bool) -> Promise<[UserType]?> {
+    func provideUsersWithQueries(queries: [Query], serializationKey key: String? = nil,
+                                 authentizationRequired: Bool) -> Promise<[UserType]?> {
         return Promise<[UserType]?> { fulfill, reject in
 
             firstly {

@@ -40,7 +40,8 @@ extension Verifiable {
     func verifyAccountType() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
 
-            guard let user = UserStorage.currentUser where user.accountType == .Team || user.accountType == .Player else {
+            guard let user = UserStorage.currentUser where user.accountType == .Team ||
+                    user.accountType == .Player else {
                 throw VerifiableError.WrongAccountType
             }
 

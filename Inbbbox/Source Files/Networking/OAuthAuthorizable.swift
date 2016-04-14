@@ -91,6 +91,9 @@ private extension OAuthAuthorizable {
         let mutableRequest = NSMutableURLRequest(URL: components!.URL!)
         mutableRequest.HTTPMethod = HTTPMethod.rawValue
 
-        return mutableRequest.copy() as! NSURLRequest
+        guard let immutableRequest = mutableRequest.copy() as? NSURLRequest else {
+            return NSURLRequest()
+        }
+        return immutableRequest
     }
 }

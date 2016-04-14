@@ -94,7 +94,7 @@ class ResponsableSpec: QuickSpec {
             }
             
             it("error should have corect localized message") {
-                expect((error as! NSError).domain).toEventually(equal(NetworkErrorDomain))
+                expect((error as! NSError).domain).toEventually(equal(networkErrorDomain))
             }
         }
         

@@ -12,7 +12,7 @@ class ManagedShotsRequester {
     let managedObjectsProvider: ManagedObjectsProvider
 
     init() {
-        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)!.managedObjectContext
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
 
@@ -48,6 +48,6 @@ class ManagedShotsRequester {
 
     func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
         let managedShot = managedObjectsProvider.managedShot(shot)
-        return Promise<[BucketType]!>((managedShot.buckets?.allObjects as! [ManagedBucket]).map { $0 as BucketType })
+        return Promise<[BucketType]!>((managedShot.buckets?.allObjects as? [ManagedBucket])?.map { $0 as BucketType })
     }
 }

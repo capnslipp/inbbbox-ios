@@ -125,7 +125,8 @@ private extension PageableProvider {
                 }()
 
                 let result = responses
-                    .map { $0.json?.arrayValue.map { T.map( self.serializationKey != nil ? $0[self.serializationKey!] : $0 ) } }
+                    .map { $0.json?.arrayValue.map { T.map( self.serializationKey != nil ?
+                        $0[self.serializationKey!] : $0 ) } }
                     .flatMap { $0 }
                     .flatMap { $0 }
 

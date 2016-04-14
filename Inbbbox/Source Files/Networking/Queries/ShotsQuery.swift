@@ -48,6 +48,8 @@ struct ShotsQuery: Query {
     }
 
     /// Initialize query for list of the shots of given type.
+
+
     init(type: ShotsType) {
         path = type.path
     }

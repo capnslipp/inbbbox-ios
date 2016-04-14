@@ -42,7 +42,9 @@ extension Requestable {
         }
 
         query.service.authorizeRequest(mutableRequest)
-
-        return mutableRequest.copy() as! NSURLRequest
+        guard let immutableRequest = mutableRequest.copy() as? NSURLRequest else {
+            return NSURLRequest()
+        }
+        return immutableRequest
     }
 }

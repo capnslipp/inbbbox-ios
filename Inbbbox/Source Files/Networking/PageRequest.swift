@@ -51,8 +51,10 @@ struct PageRequest: Requestable, Responsable {
                     var previous: PageableComponent?
 
                     if let header = response.header {
-                        next = PageableComponentSerializer.nextPageableComponentWithSentQuery(self.query, receivedHeader: header)
-                        previous = PageableComponentSerializer.previousPageableComponentWithSentQuery(self.query, receivedHeader: header)
+                        next = PageableComponentSerializer.nextPageableComponentWithSentQuery(self.query,
+                                receivedHeader: header)
+                        previous = PageableComponentSerializer.previousPageableComponentWithSentQuery(self.query,
+                                receivedHeader: header)
                     }
 
                     fulfill((

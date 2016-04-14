@@ -16,7 +16,8 @@ class PageableComponentSerializer {
     /// - parameter receivedHeader: Received response's header.
     ///
     /// - returns: Component for next page.
-    class func nextPageableComponentWithSentQuery(query: Query, receivedHeader header: [String: AnyObject]) -> PageableComponent? {
+    class func nextPageableComponentWithSentQuery(query: Query,
+                                                  receivedHeader header: [String: AnyObject]) -> PageableComponent? {
         return stringComponentFromLinkHeader(header, withName: "next")?.url?.pageableComponentFromQuery(query)
     }
 
@@ -26,7 +27,8 @@ class PageableComponentSerializer {
     /// - parameter receivedHeader: Received response's header.
     ///
     /// - returns: Component for previous page.
-    class func previousPageableComponentWithSentQuery(query: Query, receivedHeader header: [String: AnyObject]) -> PageableComponent? {
+    class func previousPageableComponentWithSentQuery(query: Query, receivedHeader header: [String: AnyObject])
+                    -> PageableComponent? {
         return stringComponentFromLinkHeader(header, withName: "prev")?.url?.pageableComponentFromQuery(query)
     }
 }

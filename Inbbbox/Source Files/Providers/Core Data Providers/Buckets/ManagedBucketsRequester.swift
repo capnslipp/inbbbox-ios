@@ -17,14 +17,15 @@ class ManagedBucketsRequester {
     let managedObjectsProvider: ManagedObjectsProvider
 
     init() {
-        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)!.managedObjectContext
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
 
     func addBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
 
         let bucket = Bucket(
-            identifier: NSProcessInfo.processInfo().globallyUniqueString.stringByReplacingOccurrencesOfString("-", withString: ""),
+            identifier: NSProcessInfo.processInfo().globallyUniqueString.stringByReplacingOccurrencesOfString("-",
+                    withString: ""),
             name: name,
             attributedDescription: description,
             shotsCount: 0,

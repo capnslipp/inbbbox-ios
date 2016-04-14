@@ -18,12 +18,14 @@ class DataDownloader: NSObject {
     /// Fetches data from given URL and gives information about progress and completion of operation.
     ///
     /// - parameter url:        URL to fetch data from.
-    /// - parameter progress:   Block called every time when portion of data is fetched. Gives information about progress.
+    /// - parameter progress:   Block called every time when portion of data is fetched.
+    ///                         Gives information about progress.
     /// - parameter completion: Block called when fetching is complete. It returns fetched data as parameter.
     func fetchData(url: NSURL, progress:(progress: Float) -> Void, completion:(data: NSData) -> Void) {
         self.progress = progress
         self.completion = completion
-        let session = NSURLSession.init(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(), delegate: self, delegateQueue: nil)
+        let session = NSURLSession.init(configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+                delegate: self, delegateQueue: nil)
         let task = session.dataTaskWithURL(url)
 
         task.resume()

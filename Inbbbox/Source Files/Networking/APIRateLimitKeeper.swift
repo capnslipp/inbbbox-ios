@@ -10,10 +10,10 @@ import Foundation
 import SwiftyUserDefaults
 import Async
 
-private let XRateLimit = "X-RateLimit-Limit"
-private let XRateLimitRemaining = "X-RateLimit-Remaining"
-private let XRateLimitReset = "X-RateLimit-Reset"
-private let DailyRateLimitRemainingKey = "DailyRateLimitRemainingKey"
+private let xRateLimit = "X-RateLimit-Limit"
+private let xRateLimitRemaining = "X-RateLimit-Remaining"
+private let xRateLimitReset = "X-RateLimit-Reset"
+private let dailyRateLimitRemainingKey = "DailyRateLimitRemainingKey"
 
 /**
  Error related to rate limit of API.
@@ -36,7 +36,8 @@ final class APIRateLimitKeeper {
 
     /// Daily rate limit.
     /// When user is **not** authenticated, then limit is uknown due to client access token usage.
-    /// Inbbbox will use own client access token which is available globally for other Inbbbox aplications installed on other devices.
+    /// Inbbbox will use own client access token which is available globally for other Inbbbox aplications
+    /// installed on other devices.
     var rateLimitPerDay: UInt? {
         return TokenStorage.currentToken != nil ?
             Dribbble.RequestPerDayLimitForAuthenticatedUser : nil
@@ -50,13 +51,13 @@ final class APIRateLimitKeeper {
     /// The number is unknown if user is not currently logged in.
     private(set) var rateLimitRemainingPerDay: UInt? {
         get {
-            if let value = Defaults[DailyRateLimitRemainingKey].int {
+            if let value = Defaults[dailyRateLimitRemainingKey].int {
                 return UInt(value)
             }
             return  nil
         }
         set {
-            Defaults[DailyRateLimitRemainingKey] = newValue != nil ? Int(newValue!) : nil
+            Defaults[dailyRateLimitRemainingKey] = newValue != nil ? Int(newValue!) : nil
         }
     }
 
@@ -68,7 +69,8 @@ final class APIRateLimitKeeper {
     var timeIntervalRemainingToResetDailyLimit: NSTimeInterval {
 
         let oneDayTimeInterval = NSTimeInterval(60 * 60 * 24)
-        let startOfNextDay = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.startOfDayForDate(NSDate(timeIntervalSinceNow: oneDayTimeInterval))
+        let startOfNextDay = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!.startOfDayForDate(
+                NSDate(timeIntervalSinceNow: oneDayTimeInterval))
 
         return startOfNextDay.timeIntervalSinceDate(NSDate())
     }
@@ -89,9 +91,9 @@ final class APIRateLimitKeeper {
      */
     func setCurrentLimitFromHeader(header: [String: AnyObject]) {
 
-        rateLimitPerMinute = integerFromHeader(header, forKey: XRateLimit)
+        rateLimitPerMinute = integerFromHeader(header, forKey: xRateLimit)
 
-        if let interval = integerFromHeader(header, forKey: XRateLimitReset) {
+        if let interval = integerFromHeader(header, forKey: xRateLimitReset) {
 
             let previousTimeIntervalRemainingToResetMinuteLimit = timeIntervalRemainingToResetMinuteLimit
 
@@ -102,14 +104,16 @@ final class APIRateLimitKeeper {
 
             // Checks whether API respond with greater value of time needed to reset than stored one.
             // If yes then sets remaining rate limit to default one.
-            let isNewMinuteSlotForSendingRequest = previousTimeIntervalRemainingToResetMinuteLimit < timeIntervalRemainingToResetMinuteLimit
+            let isNewMinuteSlotForSendingRequest =
+                    previousTimeIntervalRemainingToResetMinuteLimit < timeIntervalRemainingToResetMinuteLimit
             if isNewMinuteSlotForSendingRequest {
                 rateLimitRemainingPerMinute = rateLimitPerMinute
             }
 
-            // Checks whether incoming request contains lower value for XRateLimitRemaining than stored one in current request minute slot.
+            // Checks whether incoming request contains lower value for XRateLimitRemaining
+            // than stored one in current request minute slot.
             // If yes then assign them to stored one. Otherwise do nothing.
-            let incomingRateLimitRemainingPerMinute = integerFromHeader(header, forKey: XRateLimitRemaining)
+            let incomingRateLimitRemainingPerMinute = integerFromHeader(header, forKey: xRateLimitRemaining)
             if incomingRateLimitRemainingPerMinute < rateLimitRemainingPerMinute {
                 rateLimitRemainingPerMinute = incomingRateLimitRemainingPerMinute
             }
@@ -121,7 +125,8 @@ final class APIRateLimitKeeper {
 
      - parameter response: Response to verify.
 
-     - throws: APIRateLimitKeeperError.DidExceedRateLimitPerDay error with time interval remaining to reset daily limit as parameter.
+     - throws: APIRateLimitKeeperError.DidExceedRateLimitPerDay error with time interval remaining
+               to reset daily limit as parameter.
      */
     func verifyResponseForRateLimitation(response: NSURLResponse?) throws {
 
@@ -133,6 +138,7 @@ final class APIRateLimitKeeper {
     /**
      Verifies rate limit. Throws with APIRateLimitKeeperError if limit is known and exceeded.
      */
+
     func verifyRateLimit() throws {
 
         if var perDayRemainingLimit = rateLimitRemainingPerDay {
