@@ -403,11 +403,13 @@ private extension ShotDetailsViewController {
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
         
+        shotDetailsView.commentComposerView.makeInactive()
+        
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
         shotBucketsViewController.dismissClosure =  { [weak self] in
             guard let certainSelf = self else { return }
-            self?.animateHeader(start: true)
+            certainSelf.animateHeader(start: true)
             certainSelf.viewModel.clearBucketsData()
             certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }

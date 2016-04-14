@@ -108,6 +108,10 @@ extension CommentComposerView {
         textField.becomeFirstResponder()
     }
     
+    func makeInactive() {
+        textField.resignFirstResponder()
+    }
+    
     func animateByRoundingCorners(round: Bool) {
         
         let from: CGFloat = round ? 0 : 10
