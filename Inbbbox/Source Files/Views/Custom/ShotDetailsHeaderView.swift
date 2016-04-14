@@ -47,7 +47,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     }
     
     private lazy var imageTapGestureRecognizer: UITapGestureRecognizer = { [unowned self] in
-        return UITapGestureRecognizer(target: self, action: #selector(someMethod(_:)))
+        return UITapGestureRecognizer(target: self, action: #selector(shotImageDidTap(_:)))
     }()
     
     override init(frame: CGRect) {
@@ -223,7 +223,7 @@ extension ShotDetailsHeaderView {
 
 private extension ShotDetailsHeaderView {
     
-    dynamic func someMethod(_: UITapGestureRecognizer) {
+    dynamic func shotImageDidTap(_: UITapGestureRecognizer) {
         if let image = imageView.image {
             imageDidTap?(image)
         }
