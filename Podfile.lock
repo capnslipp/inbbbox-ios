@@ -84,7 +84,7 @@ CHECKOUT OPTIONS:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
   HanekeSwift:
-    :commit: 9f82608f6a86becc8a8d215b6246f1d4601ead06
+    :commit: 3664b33b543eece40bd3cf83c59619211301c3bf
     :git: https://github.com/pikor/HanekeSwift.git
 
 SPEC CHECKSUMS:
