@@ -56,10 +56,8 @@ extension NSAttributedString {
     /// - returns: Bounding height.
     func boundingHeightUsingAvailableWidth(width: CGFloat) -> CGFloat {
         
-        let options = unsafeBitCast(
-            NSStringDrawingOptions.UsesLineFragmentOrigin.rawValue,
-            NSStringDrawingOptions.self
-        )
-        return ceil(boundingRectWithSize(CGSizeMake(width, CGFloat.max), options:options, context:nil).size.height)
+        let options: NSStringDrawingOptions = [.UsesLineFragmentOrigin]
+        
+        return ceil(boundingRectWithSize(CGSizeMake(width, CGFloat.max), options:options, context: nil).size.height)
     }
 }
