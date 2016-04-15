@@ -56,7 +56,7 @@ DEPENDENCIES:
   - Gifu (~> 1.0)
   - GoogleAnalytics (~> 3.14)
   - GPUImage (~> 0.1)
-  - HanekeSwift (~> 0.10)
+  - HanekeSwift (from `https://github.com/pikor/HanekeSwift.git`)
   - HockeySDK (~> 3.8)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
@@ -74,6 +74,8 @@ EXTERNAL SOURCES:
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
+  HanekeSwift:
+    :git: https://github.com/pikor/HanekeSwift.git
   Keys:
     :path: Pods/CocoaPodsKeys
 
@@ -81,6 +83,9 @@ CHECKOUT OPTIONS:
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
+  HanekeSwift:
+    :commit: 3664b33b543eece40bd3cf83c59619211301c3bf
+    :git: https://github.com/pikor/HanekeSwift.git
 
 SPEC CHECKSUMS:
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
@@ -90,7 +95,7 @@ SPEC CHECKSUMS:
   Gifu: bf7a99fe9f20a1dc18c3cb4289aebc922a2ad419
   GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
-  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
+  HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
   HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
   KeychainAccess: e283c1981a6c5655e1984cd411c6faf16fa165ae
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
