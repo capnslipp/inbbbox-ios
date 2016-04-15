@@ -341,6 +341,7 @@
 		EFD89D4338FFEEEE76392087 /* UIViewAnimationsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FDA9EBA0DF86EFAF923FC /* UIViewAnimationsExtension.swift */; };
 		EFEB4F05F24BBFC4C907F611 /* SettingsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1D5F10E1D439D514FDB604 /* SettingsSpec.swift */; };
 		F03764FC1CBB9F81008183F3 /* LazyImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03764FB1CBB9F81008183F3 /* LazyImageProvider.swift */; };
+		F0B898D71CC0F189004A807C /* ImageViewerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */; };
 		F0EE2870B58F0E2F0AEF5922 /* AvatarSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93BA6AA99E90D52C6A09F6 /* AvatarSettable.swift */; };
 		F0FD0A841CBE496400735933 /* SimpleShotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD0A831CBE496400735933 /* SimpleShotsCollectionViewController.swift */; };
 		F0FD0A861CBE56D100735933 /* SimpleShotsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FD0A851CBE56D100735933 /* SimpleShotsViewModel.swift */; };
@@ -731,6 +732,7 @@
 		EFAD56AC35062CE4A617CB43 /* LargeFolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LargeFolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
 		F03764FB1CBB9F81008183F3 /* LazyImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImageProvider.swift; sourceTree = "<group>"; };
 		F049C867F1FCCDB672E8597F /* CoreDataHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerExtension.swift; sourceTree = "<group>"; };
 		F0FD0A831CBE496400735933 /* SimpleShotsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleShotsCollectionViewController.swift; sourceTree = "<group>"; };
 		F0FD0A851CBE56D100735933 /* SimpleShotsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleShotsViewModel.swift; sourceTree = "<group>"; };
 		F41BD6B6AA49D25024800E9F /* FollowersQuerySpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FollowersQuerySpec.swift; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 				472FDA9EBA0DF86EFAF923FC /* UIViewAnimationsExtension.swift */,
 				24917648B4ED154568BCFB6D /* UIViewControllerExtension.swift */,
 				BBC5F88643B64405114F960D /* UIWindowExtension.swift */,
+				F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1829,6 +1832,7 @@
 				21F5288D98600950DCDFE98D /* Team.swift in Sources */,
 				426C9C893103E0D0D9E92CEA /* User.swift in Sources */,
 				F9B5AA8896F72F2AA4AC8DFC /* ManagedBucket.swift in Sources */,
+				F0B898D71CC0F189004A807C /* ImageViewerExtension.swift in Sources */,
 				DA618D628131746C346E13D8 /* ManagedProject.swift in Sources */,
 				8299D5B63CAEE6716B8E2E95 /* ManagedShot.swift in Sources */,
 				E4FBE300D48D18EDF5CB255F /* ManagedShotImage.swift in Sources */,

@@ -250,20 +250,9 @@ private extension ShotBucketsViewController {
 
     func presentShotFullscreen() {
 
-        guard
-            let header = header,
-            let closeImage = UIImage(named: "ic-cross-naked")
-        else {
-            return
-        }
+        guard let header = header else { return }
 
-        let buttonAssets = CloseButtonAssets(normal: closeImage, highlighted: closeImage)
-        let imageSize = CGSize(width: 40, height: 40)
-        let configuration = ImageViewerConfiguration(imageSize: imageSize, closeButtonAssets: buttonAssets)
-
-        let imageViewer = ImageViewer(imageProvider: self,
-                                      configuration: configuration,
-                                      displacedView: header.imageView)
+        let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
         presentImageViewer(imageViewer)
     }
 
@@ -422,7 +411,5 @@ extension ShotBucketsViewController: ImageProvider {
         }
     }
 
-    func provideImage(atIndex index: Int, completion: UIImage? -> Void) {
-        // empty by design
-    }
+    func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
 }
