@@ -15,7 +15,7 @@ class ShotsProvider {
     func provideShots() -> Promise<[ShotType]?> {
         return apiShotsProvider.provideShots()
     }
-    
+
     func provideMyLikedShots() -> Promise<[ShotType]?> {
         if userStorageClass.isUserSignedIn {
             return apiShotsProvider.provideMyLikedShots()
@@ -33,11 +33,13 @@ class ShotsProvider {
             firstly {
                 apiShotsProvider.provideLikedShotsForUser(user)
             }.then { shots -> Void in
-                let shotsSorted = shots?.sort{return $0.createdAt.compare($1.createdAt) == NSComparisonResult.OrderedAscending}
+                let shotsSorted = shots?.sort {
+                    return $0.createdAt.compare($1.createdAt) == NSComparisonResult.OrderedAscending
+                }
                 fulfill(shotsSorted)
             }.error(reject)
         }
-        
+
     }
 
     func provideShotsForBucket(bucket: BucketType) -> Promise<[ShotType]?> {

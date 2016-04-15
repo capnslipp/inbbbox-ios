@@ -15,7 +15,7 @@ class APIShotsProvider: PageableProvider {
 
     /// Used only when using provideShots() method.
     var configuration = APIShotsProviderConfiguration()
-    
+
     private var likesFetched: UInt = 0
     private var likesToFetch: UInt = 0
     private var likes = [ShotType]()
@@ -36,10 +36,10 @@ class APIShotsProvider: PageableProvider {
         resetAnUseSourceType(.General)
         return provideShotsWithQueries(activeQueries)
     }
-    
+
     /**
      Provides shots for current user.
-     
+
      - returns: Promise which resolves with shots or nil.
      */
     func provideMyLikedShots() -> Promise<[ShotType]?> {
@@ -48,18 +48,18 @@ class APIShotsProvider: PageableProvider {
                 verifyAuthenticationStatus(true)
             }.then {
                 self.resetAnUseSourceType(.Liked)
-                
+
                 let query = ShotsQuery(type: .LikedShots)
                 return self.provideShotsWithQueries([query], serializationKey: "shot")
             }.then(fulfill).error(reject)
         }
     }
-    
+
     /**
      Provides liked shots.
-     
+
      - parameter max: Number of liked shots to fetch.
-     
+
      - returns: Promise which resolves with liked shots or nil.
      */
     func provideLikedShots(max: UInt) -> Promise<[ShotType]?> {
@@ -184,9 +184,9 @@ private extension APIShotsProvider {
         let result = shots?
             .unique
             .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
-        fulfill(result.flatMap{ $0.map { $0 as ShotType } })
+        fulfill(result.flatMap { $0.map { $0 as ShotType } })
     }
-    
+
     private func fetchLikes(max: UInt) -> Promise<Void> {
         likesToFetch = max
         return Promise<Void> { fulfill, reject in
@@ -201,7 +201,7 @@ private extension APIShotsProvider {
             }.then(fulfill).error(reject)
         }
     }
-    
+
     private func fetchSingleBatch() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
             firstly {

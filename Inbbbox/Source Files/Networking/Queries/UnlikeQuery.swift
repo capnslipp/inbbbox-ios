@@ -9,11 +9,11 @@
 import Foundation
 
 struct UnlikeQuery: Query {
-    
+
     let method = Method.DELETE
     let path: String
     var parameters = Parameters(encoding: .JSON)
-    
+
     /// Initialize query for unliking a shot.
     ///
     /// - parameter shot: Shot to unlike.

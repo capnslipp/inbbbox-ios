@@ -9,16 +9,16 @@
 import CoreData
 
 class ManagedBucket: NSManagedObject {
-    
+
     @NSManaged var mngd_identifier: String
     @NSManaged var mngd_name: String
     @NSManaged var mngd_htmlDescription: NSAttributedString?
     @NSManaged var mngd_shotsCount: UInt
     @NSManaged var mngd_createdAt: NSDate
     @NSManaged var mngd_owner: ManagedUser
-    
+
     @NSManaged var shots: NSSet?
-    
+
     func addShot(shot: ManagedShot) {
         addObject(shot, forKey: "shots")
     }

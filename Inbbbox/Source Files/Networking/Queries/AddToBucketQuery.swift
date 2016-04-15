@@ -9,11 +9,11 @@
 import Foundation
 
 struct AddToBucketQuery: Query {
-    
+
     let method = Method.PUT
     let path: String
     var parameters = Parameters(encoding: .JSON)
-    
+
     /// Initialize query for adding shot to bucket.
     ///
     /// - parameter shot:   Shot that should be added.

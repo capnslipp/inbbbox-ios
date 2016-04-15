@@ -2,8 +2,8 @@ import UIKit
 import WebKit
 
 class AcknowledgementsViewController: UIViewController {
-    var webView: WKWebView {
-        return view as! WKWebView
+    var webView: WKWebView! {
+        return view as? WKWebView
     }
 }
 
@@ -13,12 +13,13 @@ extension AcknowledgementsViewController {
         super.viewDidLoad()
 
         title = NSLocalizedString("AcknowledgementsView.Title", comment: "Acknowledgements view title")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("AcknowledgementsView.Back", comment: "Back button"), style: .Plain, target: self, action: #selector(didTapBackButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("AcknowledgementsView.Back",
+                comment: "Back button"), style: .Plain, target: self, action: #selector(didTapBackButton(_:)))
         webView.loadHTMLString(acknowledgementsHTMLString(), baseURL: nil)
     }
 
     override func loadView() {
-        view = WKWebView(frame: CGRectZero)
+        view = WKWebView(frame: CGRect.zero)
     }
 }
 

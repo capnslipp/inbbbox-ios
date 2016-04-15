@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AutoSizable {
-    
+
     static var maximumContentWidth: CGFloat? { get }
     static var minimumRequiredHeight: CGFloat { get }
     static var contentInsets: UIEdgeInsets { get }
@@ -21,15 +21,15 @@ extension AutoSizable {
     static var maximumContentWidth: CGFloat? {
         return nil
     }
-    
+
     static var minimumRequiredHeight: CGFloat {
         return 0
     }
-    
+
     static var contentInsets: UIEdgeInsets {
         return UIEdgeInsetsZero
     }
-    
+
     static var verticalInteritemSpacing: CGFloat {
         return 0
     }

@@ -18,10 +18,10 @@ protocol ShotsStateHandlerDelegate: class {
 
 /// Holds configuration for specific ShotsCollectionViewController.State
 protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {
-    
+
     /// Can be used in some methods.
     weak var shotsCollectionViewController: ShotsCollectionViewController? { get set }
-    
+
     /// The ShotsStateHandler's delegate object.
     weak var delegate: ShotsStateHandlerDelegate? { get set }
 
@@ -42,7 +42,7 @@ protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate
 
     /// Enables/Disables user interaction on collection view.
     var collectionViewInteractionEnabled: Bool { get }
-    
+
     /**
      Enables/Disables scrolling on collection view.
      Does't work if collectionViewInteractionEnabled is false.
@@ -53,7 +53,7 @@ protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate
      Do any necessary steps to prepare yourself for presenting data.
     */
     func prepareForPresentingData()
-    
+
     /**
      Reload data and possibly perform any other action or animation required by this handler.
      ShotsCollectionViewController calls this action after downloading shots or state changes.

@@ -9,17 +9,17 @@
 import Foundation
 
 protocol SimpleShotsViewModel: BaseCollectionViewViewModel {
-    
+
     var title: String { get }
     var shots: [ShotType] { get set }
-    
+
     func emptyCollectionDescriptionAttributes() -> EmptyCollectionViewDescription
     func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool)
     func clearViewModelIfNeeded()
 }
 
 struct EmptyCollectionViewDescription {
-    
+
     var firstLocalizedString: String
     var attachmentImageName: String
     var imageOffset: CGPoint

@@ -9,11 +9,11 @@
 import Foundation
 
 struct UnfollowUserQuery: Query {
-    
+
     let method = Method.DELETE
     let path: String
     var parameters = Parameters(encoding: .URL)
-    
+
     /// Initialize query for unfollowing a given user.
     ///
     /// - parameter user: User to unfollow.

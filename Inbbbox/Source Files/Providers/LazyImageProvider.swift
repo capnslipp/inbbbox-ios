@@ -10,15 +10,18 @@ import Haneke
 import PromiseKit
 
 final class LazyImageProvider {
-    
+
     /// Lazily loads images from URLs. Uses cache for `imageFormatName`.
     ///
     /// - parameter urls:                  Tuple consisting of max 3 urls that are loaded one by one.
     /// - parameter teaserImageCompletion: Completion called after downloading teaser image.
     /// - parameter normalImageCompletion: Optional completion called after downloading normal image.
     /// - parameter hidpiImageCompletion:  Optional completion called after downloading hidpi image.
-    class func lazyLoadImageFromURLs(urls: (teaserURL: NSURL, normalURL: NSURL? , hidpiURL: NSURL?), teaserImageCompletion: UIImage -> Void, normalImageCompletion: (UIImage -> Void)? = nil, hidpiImageCompletion: (UIImage -> Void)? = nil) {
-        
+    class func lazyLoadImageFromURLs(urls: (teaserURL: NSURL, normalURL: NSURL?, hidpiURL: NSURL?),
+                                     teaserImageCompletion: UIImage -> Void,
+                                     normalImageCompletion: (UIImage -> Void)? = nil,
+                                     hidpiImageCompletion: (UIImage -> Void)? = nil) {
+
         firstly {
             loadImageFromURL(urls.teaserURL)
         }.then { image -> Void in
@@ -42,11 +45,11 @@ final class LazyImageProvider {
 }
 
 private extension LazyImageProvider {
-    
+
     class func loadImageFromURL(url: NSURL?) -> Promise<UIImage?> {
-        
+
         guard let url = url else { return Promise<UIImage?>(nil) }
-        
+
         return Promise<UIImage?> { fulfill, reject in
             Shared.imageCache.fetch(
                 URL: url,
@@ -58,8 +61,7 @@ private extension LazyImageProvider {
                 },
                 success: { image in
                     fulfill(image)
-                }
-            )
+                })
         }
     }
 }

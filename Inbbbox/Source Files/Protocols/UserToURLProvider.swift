@@ -13,23 +13,23 @@ import Foundation
 /// Helps with using TTTAttributedLabel in the project.
 
 protocol UserToURLProvider {
-    
+
     /**
      Converts user to URL represantation of user.
-     
+
      - parameter user: user who is converted
-     
+
      - returns: URL represantation of user.
      */
-    
+
     func urlForUser(user: UserType) -> NSURL?
-    
+
 }
 
 extension UserToURLProvider {
-    
+
     func urlForUser(user: UserType) -> NSURL? {
         return NSURL(string: user.identifier)
     }
-    
+
 }

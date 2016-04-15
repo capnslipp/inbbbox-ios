@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct Bucket: BucketType {
-    
+
     let identifier: String
     let name: String
     let attributedDescription: NSAttributedString?
@@ -22,7 +22,7 @@ struct Bucket: BucketType {
 extension Bucket: Mappable {
     static var map: JSON -> Bucket {
         return { json in
-            
+
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
             let attributedDescription: NSAttributedString? = {
                 guard let htmlString = json[Key.Description.rawValue].string else {
@@ -30,7 +30,7 @@ extension Bucket: Mappable {
                 }
                 return NSAttributedString(htmlString: htmlString)
             }()
-            
+
             return Bucket(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].stringValue,
@@ -60,6 +60,6 @@ extension Bucket: Hashable {
 
 extension Bucket: Equatable {}
 
-func ==(lhs: Bucket, rhs: Bucket) -> Bool {
+func == (lhs: Bucket, rhs: Bucket) -> Bool {
     return lhs.identifier == rhs.identifier
 }

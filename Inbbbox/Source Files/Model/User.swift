@@ -17,8 +17,8 @@ final class User: NSObject, UserType {
     let avatarURL: NSURL?
     let shotsCount: UInt
     let accountType: UserAccountType?
-    
-    
+
+
     init(json: JSON) {
         identifier = json[Key.Identifier.rawValue].stringValue
         name = json[Key.Name.rawValue].string
@@ -27,11 +27,11 @@ final class User: NSObject, UserType {
         shotsCount = json[Key.ShotsCount.rawValue].uIntValue
         accountType = UserAccountType(rawValue: json[Key.AccountType.rawValue].stringValue)
     }
-    
+
     required init(coder aDecoder: NSCoder) {
-        identifier = aDecoder.decodeObjectForKey(Key.Identifier.rawValue) as! String
+        identifier = aDecoder.decodeObjectForKey(Key.Identifier.rawValue) as? String ?? ""
         name = aDecoder.decodeObjectForKey(Key.Name.rawValue) as? String
-        username = aDecoder.decodeObjectForKey(Key.Username.rawValue) as! String
+        username = aDecoder.decodeObjectForKey(Key.Username.rawValue) as? String ?? ""
         avatarURL = aDecoder.decodeObjectForKey(Key.Avatar.rawValue) as? NSURL
         shotsCount = aDecoder.decodeObjectForKey(Key.ShotsCount.rawValue) as? UInt ?? 0
         accountType = {
@@ -41,7 +41,7 @@ final class User: NSObject, UserType {
             return nil
         }()
     }
-    
+
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(identifier, forKey: Key.Identifier.rawValue)
         aCoder.encodeObject(name, forKey: Key.Name.rawValue)
@@ -53,7 +53,7 @@ final class User: NSObject, UserType {
 }
 
 private extension User {
-    
+
     enum Key: String {
         case Identifier = "id"
         case Name = "name"
@@ -65,7 +65,7 @@ private extension User {
 }
 
 extension User: NSSecureCoding {
-    
+
     static func supportsSecureCoding() -> Bool {
         return true
     }
@@ -80,7 +80,7 @@ extension User: Mappable {
 }
 
 extension User {
-    
+
     override var debugDescription: String {
         return
             "<Class: " + String(self.dynamicType) + "> " +

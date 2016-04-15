@@ -10,7 +10,7 @@ import UIKit
 import GPUImage
 
 extension UIImage {
-    
+
     /// Blurred image.
     ///
     /// - parameter blur: float value of blur added to image
@@ -20,7 +20,7 @@ extension UIImage {
         let maxBlurRadius = CGFloat(1)
         let blurFilter = GPUImageGaussianBlurFilter()
         blurFilter.blurRadiusInPixels = blur * maxBlurRadius
-        
+
         return blurFilter.imageByFilteringImage(self)
     }
 }

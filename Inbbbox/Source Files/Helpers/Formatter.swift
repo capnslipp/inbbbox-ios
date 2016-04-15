@@ -14,7 +14,7 @@ struct Formatter {
         static var Basic: NSDateFormatter {
             return Date.basicDateFormatter
         }
-        
+
         /// Timestamp date formatter with ISO 8601 format yyyy-MM-dd'T'HH:mm:ssZZZZZ
         static var Timestamp: NSDateFormatter {
             return Date.timestampDateFormatter
@@ -26,7 +26,7 @@ private extension Formatter.Date {
     static var basicDateFormatter = { Void -> NSDateFormatter in
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        
+
         return formatter
     }()
 
@@ -34,7 +34,7 @@ private extension Formatter.Date {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        
+
         return formatter
     }()
 }

@@ -10,15 +10,15 @@ import UIKit
 import Async
 
 class EmptyDataSetLoadingView: UIView {
-    
+
     let ballView = UIImageView(image: UIImage(named: "ic-ball-loader"))
     let label = UILabel()
     let animator = LoginViewAnimations()
-    
+
     private var shouldAnimate = false
     private let animationDuration = NSTimeInterval(1)
     private let ballJumpHeight = 50
-    
+
     override init(frame: CGRect) {
         var frame = frame
         frame = CGRect(
@@ -29,24 +29,24 @@ class EmptyDataSetLoadingView: UIView {
         )
 
         super.init(frame: frame)
-        
+
         addSubview(ballView)
-        
+
         label.text = "Loading..."
         label.textColor = .cellBackgroundColor()
         label.font = UIFont.helveticaFont(.NeueMedium, size: 25)
         label.textAlignment = .Center
         label.alpha = 0.5
         addSubview(label)
-        
+
     }
     @available(*, unavailable, message="Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func layoutSubviews() {
-        
+
         // made on Rects because of complex animation of jumping ball, same comment as in LoginView
         let labelSize = CGSize(width: 140, height: 30)
         label.frame = CGRect(
@@ -55,8 +55,8 @@ class EmptyDataSetLoadingView: UIView {
             width: labelSize.width,
             height: labelSize.height
         )
-        
-        let size = ballView.image?.size ?? CGSizeZero
+
+        let size = ballView.image?.size ?? CGSize.zero
         ballView.frame = CGRect(
             x: CGRectGetMaxX(frame) / 2 - size.width / 2,
             y: CGRectGetMinY(label.frame) - size.height - CGFloat(ballJumpHeight),
@@ -64,40 +64,40 @@ class EmptyDataSetLoadingView: UIView {
             height: size.height
         )
     }
-    
+
     func startAnimation() {
         shouldAnimate =  true
         animateBall()
         blinkLoadingLabel()
     }
-    
+
     func stopAnimation() {
         shouldAnimate = false
     }
-    
+
     private func animateBall() {
-        
+
         guard shouldAnimate else { return }
-        
+
         Async.main(after: animationDuration) {
             self.animateBall()
         }
-        
+
         let animations = CAKeyframeAnimation.ballBounceAnimations(ballJumpHeight, duration: animationDuration)
-        
+
         animations.forEach { animation in
             ballView.layer.addAnimation(animation, forKey: nil)
         }
     }
-    
+
     private func blinkLoadingLabel() {
-        
+
         guard shouldAnimate else { return }
-        
+
         Async.main(after: animationDuration) {
             self.blinkLoadingLabel()
         }
-        
+
         UIView.animateWithDuration(animationDuration * 0.5, animations: {
             self.label.alpha = 1.0
         }, completion: { _ in

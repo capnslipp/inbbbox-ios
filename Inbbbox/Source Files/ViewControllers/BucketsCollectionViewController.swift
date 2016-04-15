@@ -19,7 +19,7 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     convenience init() {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
-        flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio;
+        flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio
         self.init(collectionViewLayout: flowLayout)
         title = viewModel.title
         viewModel.delegate = self
@@ -40,7 +40,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         viewModel.clearViewModelIfNeeded()
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
@@ -49,12 +49,15 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView,
+                    numberOfItemsInSection section: Int) -> Int {
         return viewModel.itemsCount
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableClass(BucketCollectionViewCell.self, forIndexPath: indexPath, type: .Cell)
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath
+                    indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableClass(BucketCollectionViewCell.self,
+                forIndexPath: indexPath, type: .Cell)
         cell.clearImages()
         let cellData = viewModel.bucketCollectionViewCellViewData(indexPath)
         cell.nameLabel.text = cellData.name
@@ -69,36 +72,45 @@ class BucketsCollectionViewController: UICollectionViewController {
     }
 
     // MARK: UICollectionViewDelegate
-    
-    override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+
+    override func collectionView(collectionView: UICollectionView,
+                           willDisplayCell cell: UICollectionViewCell,
+                   forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == viewModel.itemsCount - 1 {
             viewModel.downloadItemsForNextPage()
         }
     }
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let bucketContentCollectionViewController = SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
-        navigationController?.pushViewController(bucketContentCollectionViewController, animated: true)
+    override func collectionView(collectionView: UICollectionView,
+             didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let bucketContentCollectionViewController =
+                SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
+        navigationController?.pushViewController(bucketContentCollectionViewController,
+                animated: true)
     }
-    
+
     // MARK: Configuration
-    
+
     func setupBarButtons() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew", comment: "Button for adding new bucket"), style: .Plain, target: self, action: #selector(didTapAddNewBucketButton(_:)))
+        navigationItem.rightBarButtonItem =
+                UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew",
+                comment: "Button for adding new bucket"), style: .Plain,
+                target: self, action: #selector(didTapAddNewBucketButton(_:)))
     }
-    
+
     // MARK: Actions:
-    
+
     func didTapAddNewBucketButton(_: UIBarButtonItem) {
         let alert = UIAlertController.provideBucketNameAlertController { bucketName in
-            
+
             firstly {
                 self.viewModel.createBucket(bucketName)
             }.then { () -> Void in
                 if self.viewModel.buckets.count == 1 {
                     self.collectionView?.reloadData()
                 } else {
-                    self.collectionView?.insertItemsAtIndexPaths([NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
+                    self.collectionView?.insertItemsAtIndexPaths(
+                        [NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
                 }
             }.error { error in
                 // NGRTemp: Handle error.
@@ -110,28 +122,30 @@ class BucketsCollectionViewController: UICollectionViewController {
 }
 
 extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
-    
+
     func viewModelDidLoadInitialItems() {
         shouldShowLoadingView = false
         collectionView?.reloadData()
     }
-    
+
     func viewModelDidFailToLoadInitialItems(error: ErrorType) {
         self.shouldShowLoadingView = false
         collectionView?.reloadData()
-        
+
         if viewModel.buckets.isEmpty {
             let alert = UIAlertController.generalErrorAlertController()
             presentViewController(alert, animated: true, completion: nil)
             alert.view.tintColor = .pinkColor()
         }
     }
-    
-    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+
+    func viewModel(viewModel: BaseCollectionViewViewModel,
+            didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
-    
-    func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
+
+    func viewModel(viewModel: BaseCollectionViewViewModel,
+            didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         collectionView?.reloadItemsAtIndexPaths([indexPath])
     }
 }
@@ -139,7 +153,7 @@ extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
 extension BucketsCollectionViewController: DZNEmptyDataSetSource {
 
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
-        
+
         if shouldShowLoadingView {
             let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
             loadingView.startAnimation()
@@ -147,10 +161,13 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
             emptyDataSetView.setDescriptionText(
-                firstLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.FirstLocalizedString", comment: "Displayed when empty data in view"),
+                firstLocalizedString:
+                NSLocalizedString("BucketsCollectionViewController.EmptyData.FirstLocalizedString",
+                        comment: "Displayed when empty data in view"),
                 attachmentImage: UIImage(named: "ic-bucket-emptystate"),
                 imageOffset: CGPoint(x: 0, y: -4),
-                lastLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.LastLocalizedString", comment: "Displayed when empty data in view")
+                lastLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.LastLocalizedString",
+                    comment: "Displayed when empty data in view")
             )
             return emptyDataSetView
         }

@@ -14,11 +14,11 @@ extension NSManagedObject {
     class var entityName: String {
         return String(self)
     }
-    
+
     func addObject(value: NSManagedObject, forKey: String) {
         mutableSetValueForKey(forKey).addObject(value)
     }
-    
+
     func removeObject(value: NSManagedObject, forKey: String) {
         mutableSetValueForKey(forKey).removeObject(value)
     }

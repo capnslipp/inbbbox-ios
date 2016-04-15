@@ -6,6 +6,7 @@ import UIKit
 
 protocol ShotCollectionViewCellDelegate: class {
     func shotCollectionViewCellDidStartSwiping(shotCollectionViewCell: ShotCollectionViewCell)
+
     func shotCollectionViewCellDidEndSwiping(shotCollectionViewCell: ShotCollectionViewCell)
 }
 
@@ -19,10 +20,13 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     let shotImageView = ShotImageView.newAutoLayoutView()
-    let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"), secondImage: UIImage(named: "ic-like-swipe-filled"))
+    let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"),
+            secondImage: UIImage(named: "ic-like-swipe-filled"))
     let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
-    let bucketImageView = DoubleImageView(firstImage: UIImage(named: "ic-bucket-swipe"), secondImage: UIImage(named: "ic-bucket-swipe-filled"))
-    let commentImageView = DoubleImageView(firstImage: UIImage(named: "ic-comment"), secondImage: UIImage(named: "ic-comment-filled"))
+    let bucketImageView = DoubleImageView(firstImage: UIImage(named: "ic-bucket-swipe"),
+            secondImage: UIImage(named: "ic-bucket-swipe-filled"))
+    let commentImageView = DoubleImageView(firstImage: UIImage(named: "ic-comment"),
+            secondImage: UIImage(named: "ic-comment-filled"))
     let gifLabel = GifIndicatorView()
     private(set) var likeImageViewLeftConstraint: NSLayoutConstraint?
     private(set) var likeImageViewWidthConstraint: NSLayoutConstraint?
@@ -57,7 +61,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
     // MARK: - Life cycle
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message = "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -93,7 +97,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     // MARK: - UIView
 
-    override class func requiresConstraintBasedLayout() -> Bool{
+    override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
 
@@ -104,25 +108,29 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
             likeImageViewWidthConstraint = likeImageView.autoSetDimension(.Width, toSize: 0)
             likeImageView.autoConstrainAttribute(.Height, toAttribute: .Width, ofView: likeImageView,
-                withMultiplier: likeImageView.intrinsicContentSize().height / likeImageView.intrinsicContentSize().width)
+                    withMultiplier: likeImageView.intrinsicContentSize().height /
+                            likeImageView.intrinsicContentSize().width)
             likeImageViewLeftConstraint = likeImageView.autoPinEdgeToSuperviewEdge(.Left)
             likeImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
             plusImageViewWidthConstraint = plusImageView.autoSetDimension(.Width, toSize: 0)
             plusImageView.autoConstrainAttribute(.Height, toAttribute: .Width, ofView: plusImageView,
-                withMultiplier: plusImageView.intrinsicContentSize().height / plusImageView.intrinsicContentSize().width)
+                    withMultiplier: plusImageView.intrinsicContentSize().height /
+                            plusImageView.intrinsicContentSize().width)
             plusImageView.autoPinEdge(.Left, toEdge: .Right, ofView: likeImageView, withOffset: 15)
             plusImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
             bucketImageViewWidthConstraint = bucketImageView.autoSetDimension(.Width, toSize: 0)
             bucketImageView.autoConstrainAttribute(.Height, toAttribute: .Width, ofView: bucketImageView,
-                withMultiplier: bucketImageView.intrinsicContentSize().height / bucketImageView.intrinsicContentSize().width)
+                    withMultiplier: bucketImageView.intrinsicContentSize().height /
+                            bucketImageView.intrinsicContentSize().width)
             bucketImageView.autoPinEdge(.Left, toEdge: .Right, ofView: plusImageView, withOffset: 15)
             bucketImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
             commentImageViewWidthConstraint = commentImageView.autoSetDimension(.Width, toSize: 0)
             commentImageView.autoConstrainAttribute(.Height, toAttribute: .Width, ofView: commentImageView,
-                withMultiplier: commentImageView.intrinsicContentSize().height / commentImageView.intrinsicContentSize().width)
+                    withMultiplier: commentImageView.intrinsicContentSize().height /
+                            commentImageView.intrinsicContentSize().width)
             commentImageViewRightConstraint = commentImageView.autoPinEdgeToSuperviewEdge(.Right)
             commentImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
@@ -175,24 +183,30 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
         shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, xTranslation, 0)
         likeImageViewLeftConstraint?.constant = abs(xTranslation) * 0.17
-        likeImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), likeImageView.intrinsicContentSize().width)
+        likeImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6),
+                likeImageView.intrinsicContentSize().width)
 
         let secondActionWidthConstant = max((abs(xTranslation * 0.6) - likeActionRange.min), 0)
-        plusImageViewWidthConstraint?.constant = min(secondActionWidthConstant, plusImageView.intrinsicContentSize().width)
+        plusImageViewWidthConstraint?.constant = min(secondActionWidthConstant,
+                plusImageView.intrinsicContentSize().width)
         plusImageView.alpha = min((abs(xTranslation) - likeActionRange.min) / 70, 1)
 
-        bucketImageViewWidthConstraint?.constant = min(secondActionWidthConstant, bucketImageView.intrinsicContentSize().width)
+        bucketImageViewWidthConstraint?.constant = min(secondActionWidthConstant,
+                bucketImageView.intrinsicContentSize().width)
 
         commentImageViewRightConstraint?.constant = -abs(xTranslation) * 0.2
-        commentImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6), commentImageView.intrinsicContentSize().width)
+        commentImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6),
+                commentImageView.intrinsicContentSize().width)
     }
 
     private func adjustActionImageViewForXTranslation(xTranslation: CGFloat) {
-        if xTranslation >= likeActionRange.min && xTranslation > previousXTranslation && likeImageView.isFirstImageVisible() && !liked {
+        if xTranslation >= likeActionRange.min && xTranslation > previousXTranslation &&
+                likeImageView.isFirstImageVisible() && !liked {
             UIView.animate(animations: {
                 self.likeImageView.displaySecondImageView()
             })
-        } else if xTranslation < likeActionRange.min && xTranslation < previousXTranslation && likeImageView.isSecondImageVisible() && !liked {
+        } else if xTranslation < likeActionRange.min && xTranslation < previousXTranslation &&
+                likeImageView.isSecondImageVisible() && !liked {
             UIView.animate(animations: {
                 self.likeImageView.displayFirstImageView()
             })
@@ -200,15 +214,17 @@ class ShotCollectionViewCell: UICollectionViewCell {
             UIView.animate(animations: {
                 self.bucketImageView.displaySecondImageView()
             })
-        } else if xTranslation < bucketActionRange.min && bucketImageView.isSecondImageVisible()  {
+        } else if xTranslation < bucketActionRange.min && bucketImageView.isSecondImageVisible() {
             UIView.animate(animations: {
                 self.bucketImageView.displayFirstImageView()
             })
-        } else if xTranslation <= commentActionRange.max && xTranslation < previousXTranslation && commentImageView.isFirstImageVisible() {
+        } else if xTranslation <= commentActionRange.max && xTranslation < previousXTranslation &&
+                commentImageView.isFirstImageVisible() {
             UIView.animate(animations: {
                 self.commentImageView.displaySecondImageView()
             })
-        } else if xTranslation > commentActionRange.max && xTranslation > previousXTranslation && commentImageView.isSecondImageVisible() {
+        } else if xTranslation > commentActionRange.max && xTranslation > previousXTranslation &&
+                commentImageView.isSecondImageVisible() {
             UIView.animate(animations: {
                 self.commentImageView.displayFirstImageView()
             })
@@ -216,11 +232,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
-        if doNothingActionRange.min...doNothingActionRange.max ~= xTranslation {
+        if doNothingActionRange.min ... doNothingActionRange.max ~= xTranslation {
             return .DoNothing
-        } else if likeActionRange.min...likeActionRange.max ~= xTranslation {
+        } else if likeActionRange.min ... likeActionRange.max ~= xTranslation {
             return .Like
-        } else if xTranslation > likeActionRange.max   {
+        } else if xTranslation > likeActionRange.max {
             return .Bucket
         } else {
             return .Comment
@@ -229,21 +245,25 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     private func animateCellAction(action: Action, completion: (() -> ())?) {
         switch action {
-            case .Like:
-                bucketImageView.hidden = true
-                plusImageView.hidden = true
-                commentImageView.hidden = true
-                viewClass.animateWithDescriptor(ShotCellLikeActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
-            case .Bucket:
-                commentImageView.hidden = true
-                viewClass.animateWithDescriptor(ShotCellBucketActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
-            case .Comment:
-                likeImageView.hidden = true
-                plusImageView.hidden = true
-                bucketImageView.hidden = true
-                viewClass.animateWithDescriptor(ShotCellCommentActionAnimationDescriptor(shotCell: self, swipeCompletion: completion))
-            default:
-                viewClass.animateWithDescriptor(ShotCellRestoreInitialStateAnimationDescriptor(shotCell: self, swipeCompletion: completion))
+        case .Like:
+            bucketImageView.hidden = true
+            plusImageView.hidden = true
+            commentImageView.hidden = true
+            viewClass.animateWithDescriptor(ShotCellLikeActionAnimationDescriptor(shotCell: self,
+                    swipeCompletion: completion))
+        case .Bucket:
+            commentImageView.hidden = true
+            viewClass.animateWithDescriptor(ShotCellBucketActionAnimationDescriptor(shotCell: self,
+                    swipeCompletion: completion))
+        case .Comment:
+            likeImageView.hidden = true
+            plusImageView.hidden = true
+            bucketImageView.hidden = true
+            viewClass.animateWithDescriptor(ShotCellCommentActionAnimationDescriptor(shotCell: self,
+                    swipeCompletion: completion))
+        default:
+            viewClass.animateWithDescriptor(ShotCellInitialStateAnimationDescriptor(shotCell: self,
+                    swipeCompletion: completion))
         }
     }
 }
@@ -257,7 +277,9 @@ extension ShotCollectionViewCell: Reusable {
 
 extension ShotCollectionViewCell: UIGestureRecognizerDelegate {
 
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWithGestureRecognizer
+                           otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }

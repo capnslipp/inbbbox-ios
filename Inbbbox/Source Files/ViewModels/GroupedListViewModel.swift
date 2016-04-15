@@ -14,29 +14,29 @@ protocol IndexPathsGettable {
 }
 
 class GroupedListViewModel: ListViewModel<GroupItem> {
-    
+
     init(items: [[GroupItem]]) {
         super.init(sections: items.map { Section($0) })
     }
 }
 
 extension GroupedListViewModel: IndexPathsGettable {
-    
+
     func indexPathsForItems(items: [GroupItem]) -> [NSIndexPath]? {
         var indexPaths: [NSIndexPath] = []
-        
+
         itemize { (path, item) -> () in
             if items.contains(item) {
                 indexPaths.append(NSIndexPath(forRow: path.row, inSection: path.section))
             }
         }
-        
+
         return indexPaths.isEmpty ? nil : indexPaths
     }
-    
+
     func indexPathsForItemOfType<T>(itemType: T.Type) -> [NSIndexPath]? {
         var indexPaths: [NSIndexPath] = []
-        
+
         itemize { path, item in
             if item is T {
                 indexPaths.append(NSIndexPath(forRow: path.row, inSection: path.section))

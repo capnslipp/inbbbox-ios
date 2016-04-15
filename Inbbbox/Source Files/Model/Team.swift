@@ -10,21 +10,21 @@ import Foundation
 import SwiftyJSON
 
 struct Team: TeamType {
-    
+
     let identifier: String
     let name: String
     let username: String
     let avatarURL: NSURL?
     let createdAt: NSDate
-    
+
 }
 
 extension Team: Mappable {
     static var map: JSON -> Team {
         return { json in
-            
+
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
-            
+
             return Team(
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].stringValue,
@@ -34,7 +34,7 @@ extension Team: Mappable {
             )
         }
     }
-    
+
     private enum Key: String {
         case Identifier = "id"
         case Name = "name"
@@ -46,6 +46,6 @@ extension Team: Mappable {
 
 extension Team: Equatable {}
 
-func ==(lhs: Team, rhs: Team) -> Bool {
+func == (lhs: Team, rhs: Team) -> Bool {
     return lhs.identifier == rhs.identifier
 }

@@ -64,7 +64,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
   - Nimble (~> 3.1)
-  - PromiseKit (~> 3.0)
+  - PromiseKit (~> 3.1)
   - PureLayout (~> 3.0)
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)

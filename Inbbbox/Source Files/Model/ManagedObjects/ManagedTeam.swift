@@ -22,7 +22,9 @@ extension ManagedTeam: TeamType {
     var name: String { return mngd_name }
     var username: String { return mngd_username }
     var avatarURL: NSURL? {
-        guard let encodedString = mngd_avatarURL?.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) else {
+        guard let encodedString =
+                mngd_avatarURL?.stringByAddingPercentEncodingWithAllowedCharacters(
+                NSCharacterSet.URLQueryAllowedCharacterSet()) else {
             return nil
         }
         return NSURL(string: encodedString)

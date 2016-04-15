@@ -9,11 +9,11 @@
 import Foundation
 
 struct RemoveFromBucketQuery: Query {
-    
+
     let method = Method.DELETE
     let path: String
     var parameters = Parameters(encoding: .JSON)
-    
+
     /// Initialize query for removing shot from bucket.
     ///
     /// - parameter shot:   Shot that should be removed.
