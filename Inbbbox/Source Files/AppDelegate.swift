@@ -66,8 +66,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory?.URLByAppendingPathComponent("StoreData.sqlite")
 
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil,
-                    URL: url, options: nil)
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType,
+                configuration: nil,
+                URL: url,
+                options: [NSMigratePersistentStoresAutomaticallyOption: true,
+                          NSInferMappingModelAutomaticallyOption: true])
         } catch {
             let userInfo = [
                     NSLocalizedDescriptionKey: "Failed to initialize the application's saved data",
