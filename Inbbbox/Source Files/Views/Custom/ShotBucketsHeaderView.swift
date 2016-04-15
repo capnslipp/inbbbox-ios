@@ -48,7 +48,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     private lazy var imageTapGestureRecognizer: UITapGestureRecognizer = { [unowned self] in
         return UITapGestureRecognizer(target: self, action: #selector(shotImageDidTap(_:)))
     }()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -212,7 +212,7 @@ extension ShotBucketsHeaderView {
 }
 
 private extension ShotBucketsHeaderView {
-    
+
     dynamic func shotImageDidTap(_: UITapGestureRecognizer) {
         imageDidTap?()
     }

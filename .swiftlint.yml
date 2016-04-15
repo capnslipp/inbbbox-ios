@@ -26,6 +26,6 @@ variable_name:
     - mngd_normalURL
     - mngd_teaserURL
 file_length:
-  warning: 600
-  error: 600
+  warning: 700
+  error: 700
 
