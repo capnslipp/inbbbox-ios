@@ -38,6 +38,7 @@ pod 'HanekeSwift', :git => 'https://github.com/pikor/HanekeSwift.git'
 pod 'DZNEmptyDataSet', '~> 1.7'
 pod 'GoogleAnalytics', '~> 3.14'
 pod 'TTTAttributedLabel', '~> 1.13'
+pod 'ImageViewer', '~> 2.0'
 target 'Tests' do link_with 'Unit Tests'
   pod 'Quick', '~> 0.8', :configurations => ['Test']
   pod 'Nimble', '~> 3.1', :configurations => ['Test']

@@ -26,7 +26,8 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     var maxHeight = CGFloat(0)
     var minHeight = CGFloat(0)
 
-    var imageView: UIImageView?
+    var imageView: UIImageView!
+    var imageDidTap: (() -> Void)?
     let avatarView = AvatarView(size: avatarSize, bordered: false)
 
     let closeButtonView = CloseButtonView.newAutoLayoutView()
@@ -43,6 +44,10 @@ class ShotBucketsHeaderView: UICollectionReusableView {
     private var collapseProgress: CGFloat {
         return 1 - (frame.size.height - minHeight) / (maxHeight - minHeight)
     }
+
+    private lazy var imageTapGestureRecognizer: UITapGestureRecognizer = { [unowned self] in
+        return UITapGestureRecognizer(target: self, action: #selector(shotImageDidTap(_:)))
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,7 +67,8 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         imageViewCenterWrapperView.addSubview(gradientView)
 
         dimView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
-        dimView.alpha = 0
+        dimView.alpha = 0.05
+        dimView.addGestureRecognizer(imageTapGestureRecognizer)
         imageViewCenterWrapperView.addSubview(dimView)
 
         headerTitleLabel.backgroundColor = .clearColor()
@@ -94,7 +100,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
 
         imageViewCenterWrapperBottomConstraint?.constant = -minHeight + minHeight * absoluteProgress
 
-        dimView.alpha = progress
+        dimView.alpha = 0.05 + 0.95 * progress
     }
 
     override func updateConstraints() {
@@ -182,11 +188,11 @@ extension ShotBucketsHeaderView {
             }
         }
 
-        ImageProvider.lazyLoadImageFromURLs(
-        (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
-                teaserImageCompletion: imageCompletion,
-                normalImageCompletion: imageCompletion,
-                hidpiImageCompletion: imageCompletion
+        LazyImageProvider.lazyLoadImageFromURLs(
+            (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
+            teaserImageCompletion: imageCompletion,
+            normalImageCompletion: imageCompletion,
+            hidpiImageCompletion: imageCompletion
         )
     }
 
@@ -205,6 +211,12 @@ extension ShotBucketsHeaderView {
     }
 }
 
+private extension ShotBucketsHeaderView {
+
+    dynamic func shotImageDidTap(_: UITapGestureRecognizer) {
+        imageDidTap?()
+    }
+}
 
 extension ShotBucketsHeaderView: Reusable {
 

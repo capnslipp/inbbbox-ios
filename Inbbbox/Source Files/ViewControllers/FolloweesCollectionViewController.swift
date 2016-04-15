@@ -83,7 +83,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
 
                     cell.shotImageView.image = image
                 }
-                ImageProvider.lazyLoadImageFromURLs(
+                LazyImageProvider.lazyLoadImageFromURLs(
                     (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
                     teaserImageCompletion: imageLoadingCompletion,
                     normalImageCompletion: imageLoadingCompletion

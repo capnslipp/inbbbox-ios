@@ -29,6 +29,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     var minHeight = CGFloat(0)
 
     var imageView: UIImageView!
+    var imageDidTap: (() -> Void)?
     let avatarView = AvatarView(size: avatarSize, bordered: false)
 
     let closeButtonView = CloseButtonView.newAutoLayoutView()
@@ -44,6 +45,10 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private var collapseProgress: CGFloat {
         return 1 - (frame.size.height - minHeight) / (maxHeight - minHeight)
     }
+
+    private lazy var imageTapGestureRecognizer: UITapGestureRecognizer = { [unowned self] in
+        return UITapGestureRecognizer(target: self, action: #selector(shotImageDidTap(_:)))
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,7 +68,8 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         addSubview(shadowImageView)
 
         dimView.backgroundColor = UIColor(white: 0.3, alpha: 0.5)
-        dimView.alpha = 0
+        dimView.alpha = 0.05
+        dimView.addGestureRecognizer(imageTapGestureRecognizer)
         imageViewCenterWrapperView.addSubview(dimView)
 
         overlapingTitleLabel.backgroundColor = .clearColor()
@@ -99,7 +105,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
 
         imageViewCenterWrapperBottomConstraint?.constant = -minHeight + minHeight * absoluteProgress
 
-        dimView.alpha = progress
+        dimView.alpha = 0.05 + 0.95 * progress
         overlapingTitleLabel.alpha = progress
     }
 
@@ -194,11 +200,11 @@ extension ShotDetailsHeaderView {
             }
         }
 
-        ImageProvider.lazyLoadImageFromURLs(
-        (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
-                teaserImageCompletion: imageCompletion,
-                normalImageCompletion: imageCompletion,
-                hidpiImageCompletion: imageCompletion
+        LazyImageProvider.lazyLoadImageFromURLs(
+            (teaserURL: shotImage.teaserURL, normalURL: shotImage.normalURL, hidpiURL: shotImage.hidpiURL),
+            teaserImageCompletion: imageCompletion,
+            normalImageCompletion: imageCompletion,
+            hidpiImageCompletion: imageCompletion
         )
     }
 
@@ -214,6 +220,13 @@ extension ShotDetailsHeaderView {
     private func setupImageView() {
         imageViewCenterWrapperView.insertSubview(imageView, belowSubview: dimView)
         imageView.autoPinEdgesToSuperviewEdges()
+    }
+}
+
+private extension ShotDetailsHeaderView {
+
+    dynamic func shotImageDidTap(_: UITapGestureRecognizer) {
+        imageDidTap?()
     }
 }
 

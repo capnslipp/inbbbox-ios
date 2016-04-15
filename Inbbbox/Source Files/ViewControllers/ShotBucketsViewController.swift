@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import TTTAttributedLabel
+import ImageViewer
 
 enum ShotBucketsViewControllerMode {
     case AddToBucket
@@ -151,6 +152,10 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 if let url = viewModel.urlForUser(viewModel.shot.user) {
                     header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
                 }
+
+                header?.imageDidTap = { [weak self] in
+                    self?.presentShotFullscreen()
+                }
             }
             return header!
         } else {
@@ -241,6 +246,14 @@ private extension ShotBucketsViewController {
             self?.animateHeader(start: true)
         }
         presentViewController(navigationController, animated: true, completion: nil)
+    }
+
+    func presentShotFullscreen() {
+
+        guard let header = header else { return }
+
+        let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
+        presentImageViewer(imageViewer)
     }
 
     func animateHeader(start start: Bool) {
@@ -388,4 +401,15 @@ extension ShotBucketsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         animateHeader(start: true)
     }
+}
+
+extension ShotBucketsViewController: ImageProvider {
+
+    func provideImage(completion: UIImage? -> Void) {
+        if let image = header?.imageView.image {
+            completion(image)
+        }
+    }
+
+    func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
 }

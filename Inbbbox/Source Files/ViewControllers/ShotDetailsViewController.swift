@@ -10,6 +10,7 @@ import UIKit
 import PromiseKit
 import ZFDragableModalTransition
 import TTTAttributedLabel
+import ImageViewer
 
 protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
 
@@ -216,6 +217,10 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
             forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
+
+            header?.imageDidTap = { [weak self] in
+                self?.presentShotFullscreen()
+            }
         }
 
         return header!
@@ -473,6 +478,14 @@ private extension ShotDetailsViewController {
         presentViewController(navigationController, animated: true, completion: nil)
     }
 
+    func presentShotFullscreen() {
+
+        guard let header = header else { return }
+
+        let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
+        presentImageViewer(imageViewer)
+    }
+
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
             start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
@@ -569,4 +582,16 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         animateHeader(start: true)
     }
+}
+
+
+extension ShotDetailsViewController: ImageProvider {
+
+    func provideImage(completion: UIImage? -> Void) {
+        if let image = header?.imageView.image {
+            completion(image)
+        }
+    }
+
+    func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
 }
