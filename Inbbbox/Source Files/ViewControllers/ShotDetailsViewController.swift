@@ -217,7 +217,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
             forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
-            
+
             header?.imageDidTap = { [weak self] in
                 self?.presentShotFullscreen()
             }
@@ -597,13 +597,13 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
 
 
 extension ShotDetailsViewController: ImageProvider {
-    
+
     func provideImage(completion: UIImage? -> Void) {
         if let image = header?.imageView.image {
             completion(image)
         }
     }
-    
+
     func provideImage(atIndex index: Int, completion: UIImage? -> Void) {
         // empty by design
     }

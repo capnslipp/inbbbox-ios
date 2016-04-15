@@ -415,13 +415,13 @@ extension ShotBucketsViewController: UIScrollViewDelegate {
 }
 
 extension ShotBucketsViewController: ImageProvider {
-    
+
     func provideImage(completion: UIImage? -> Void) {
         if let image = header?.imageView.image {
             completion(image)
         }
     }
-    
+
     func provideImage(atIndex index: Int, completion: UIImage? -> Void) {
         // empty by design
     }

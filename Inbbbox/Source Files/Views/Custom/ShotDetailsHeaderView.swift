@@ -82,7 +82,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         addSubview(closeButtonView)
 
         setNeedsUpdateConstraints()
-        
     }
 
     deinit {
@@ -225,7 +224,7 @@ extension ShotDetailsHeaderView {
 }
 
 private extension ShotDetailsHeaderView {
-    
+
     dynamic func shotImageDidTap(_: UITapGestureRecognizer) {
         imageDidTap?()
     }
