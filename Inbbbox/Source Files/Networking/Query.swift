@@ -29,7 +29,7 @@ protocol Query {
 }
 
 extension Query {
-    
+
     var service: SecureNetworkService {
         return DribbbleNetworkService()
     }

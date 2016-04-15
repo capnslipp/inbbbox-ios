@@ -10,44 +10,44 @@ import UIKit
 import PureLayout
 
 class DateCell: UITableViewCell, Reusable {
-    
+
     class var reuseIdentifier: String {
         return "TableViewDateCellReuseIdentifier"
     }
-    
+
     let dateLabel = UILabel.newAutoLayoutView()
-    
+
     private var didSetConstraints = false
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         accessoryType = .DisclosureIndicator
-        
+
         dateLabel.textColor = UIColor.RGBA(164, 180, 188, 1)
         dateLabel.textAlignment = .Right
         contentView.addSubview(dateLabel)
-        
+
         setNeedsUpdateConstraints()
     }
-    
+
     @available(*, unavailable, message="Use init(style:reuseIdentifier:) method instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func updateConstraints() {
         if !didSetConstraints {
             didSetConstraints = true
-            
+
             dateLabel.autoPinEdgeToSuperviewEdge(.Trailing)
             dateLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 12)
             dateLabel.autoSetDimensionsToSize(CGSize(width: 80, height: 21))
         }
-        
+
         super.updateConstraints()
     }
-    
+
     func setDateText(text: String) {
         dateLabel.text = text
     }

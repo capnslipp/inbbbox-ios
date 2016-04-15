@@ -9,7 +9,7 @@
 import Foundation
 
 extension CollectionType {
-    
+
     /// Shuffle CollectionType.
     ///
     /// - returns: Same collection with random order of elements.
@@ -23,7 +23,7 @@ extension CollectionType {
 private extension MutableCollectionType where Index == Int {
     mutating func shuffleInPlace() {
         if count < 2 { return }
-        
+
         for i in 0..<count - 1 {
             let j = Int(arc4random_uniform(UInt32(count - i))) + i
             guard i != j else { continue }

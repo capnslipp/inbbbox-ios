@@ -15,16 +15,16 @@ class APIProjectsProvider: PageableProvider {
 
     /**
      Provides projects for given shot.
-     
+
      - parameter shot: Shot which projects should be provided.
-     
+
      - returns: Promise which resolves with projects or nil.
      Theoretically should return 1 project only.
      */
     func provideProjectsForShot(shot: ShotType) -> Promise<[ProjectType]?> {
-        
+
         let query = ProjectsQuery(shot: shot)
-        
+
         return Promise<[ProjectType]?> { fulfill, reject in
             firstly {
                 firstPageForQueries([query], withSerializationKey: nil)

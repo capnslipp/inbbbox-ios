@@ -13,8 +13,8 @@ class CustomTabBarItemView: UIView {
 //    MARK: - Life cycle
 
     init(name: String?, icon: UIImage?) {
-        super.init(frame: CGRectZero)
-        
+        super.init(frame: CGRect.zero)
+
         nameLabel.font = UIFont.systemFontOfSize(10)
         nameLabel.textColor = UIColor.tabBarGrayColor()
         nameLabel.text = name
@@ -23,23 +23,23 @@ class CustomTabBarItemView: UIView {
         iconImageView.image = icon?.imageWithRenderingMode(.AlwaysOriginal)
         addSubview(iconImageView)
     }
-    
+
     @available(*, unavailable, message="Use init(name:icon:) instead")
     override init(frame: CGRect) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     @available(*, unavailable, message="Use init(name:icon:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
 //    MARK: - UIView
-    
+
     override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
-    
+
     override func updateConstraints() {
 
         if !didSetConstraints {
@@ -50,7 +50,7 @@ class CustomTabBarItemView: UIView {
             nameLabel.autoAlignAxisToSuperviewAxis(.Vertical)
             didSetConstraints = true
         }
-        
+
         super.updateConstraints()
     }
 }

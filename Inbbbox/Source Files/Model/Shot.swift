@@ -78,6 +78,6 @@ extension Shot: Mappable {
 
 extension Shot: Equatable {}
 
-func ==(lhs: Shot, rhs: Shot) -> Bool {
+func == (lhs: Shot, rhs: Shot) -> Bool {
     return lhs.identifier == rhs.identifier
 }

@@ -19,45 +19,56 @@ class ShotsAnimator {
 //    Interface
 
     func startAnimationWithCompletion(completion: (() -> Void)?) {
-        guard let collectionView = delegate?.collectionViewForShotsAnimator(self), items = delegate?.itemsForShotsAnimator(self) else {
+        guard let collectionView = delegate?.collectionViewForShotsAnimator(self),
+                items = delegate?.itemsForShotsAnimator(self) else {
             return
         }
 
         let interval = 0.1
         addItems(items, collectionView: collectionView, interval: interval) {
             self.asyncWrapper.main(after: 1.0) {
-                self.deleteItemsWithoutFirstItem(items, collectionView: collectionView, interval: interval, completion: completion)
+                self.deleteItemsWithoutFirstItem(items,
+                                 collectionView: collectionView,
+                                       interval: interval,
+                                     completion: completion)
             }
         }
     }
 
 //    MARK: - Helpers
 
-    private func addItems(items: [ShotType], collectionView: UICollectionView, interval: Double, completion: (() -> Void)?) {
+    private func addItems(items: [ShotType], collectionView: UICollectionView,
+                    interval: Double, completion: (() -> Void)?) {
         let addItemAnimation = {
             let newItemIndex = self.visibleItems.count
             let newItem = items[newItemIndex]
             self.visibleItems.append(newItem)
-            collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: newItemIndex, inSection: 0)])
+            collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: newItemIndex,
+                                                              inSection: 0)])
         }
 
-        updateItems(items, collectionView: collectionView, interval: interval, animation: addItemAnimation, completion: completion)
+        updateItems(items, collectionView: collectionView, interval: interval,
+                animation: addItemAnimation, completion: completion)
     }
 
-    private func deleteItemsWithoutFirstItem(items: [ShotType], collectionView: UICollectionView, interval: Double, completion: (() -> Void)?) {
+    private func deleteItemsWithoutFirstItem(items: [ShotType], collectionView: UICollectionView,
+            interval: Double, completion: (() -> Void)?) {
         var reversedItemsWithoutFirstItem = items
         reversedItemsWithoutFirstItem.removeFirst()
 
         let removeItemAnimation = {
             let lastItemIndex = self.visibleItems.count - 1
             self.visibleItems.removeLast()
-            collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: lastItemIndex, inSection: 0)])
+            collectionView.deleteItemsAtIndexPaths([NSIndexPath(forItem: lastItemIndex,
+                                                              inSection: 0)])
         }
 
-        updateItems(reversedItemsWithoutFirstItem, collectionView: collectionView, interval: interval, animation: removeItemAnimation, completion: completion)
+        updateItems(reversedItemsWithoutFirstItem, collectionView: collectionView,
+                interval: interval, animation: removeItemAnimation, completion: completion)
     }
 
-    private func updateItems(items: [ShotType], collectionView: UICollectionView, interval: Double, animation: () -> Void, completion: (() -> Void)?) {
+    private func updateItems(items: [ShotType], collectionView: UICollectionView,
+            interval: Double, animation: () -> Void, completion: (() -> Void)?) {
         for (index, _ ) in items.enumerate() {
             var updateAnimation = animation
             if index == items.endIndex - 1 {
@@ -65,7 +76,8 @@ class ShotsAnimator {
                     completion?()
                 }
                 updateAnimation = {
-                    collectionView.performBatchUpdates(animation, completion: batchUpdatesCompletion)
+                    collectionView.performBatchUpdates(animation,
+                                           completion: batchUpdatesCompletion)
                 }
             }
             asyncWrapper.main(after: Double(index + 1) * interval, block: updateAnimation)

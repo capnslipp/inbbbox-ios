@@ -9,11 +9,11 @@
 import Foundation
 
 struct FollowUserQuery: Query {
-    
+
     let method = Method.PUT
     let path: String
     var parameters = Parameters(encoding: .URL)
-    
+
     /// Initialize query for following a given user.
     ///
     /// - parameter user: User to follow.

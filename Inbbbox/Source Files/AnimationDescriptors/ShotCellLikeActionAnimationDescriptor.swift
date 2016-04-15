@@ -21,15 +21,21 @@ struct ShotCellLikeActionAnimationDescriptor: AnimationDescriptor {
         self.shotCell = shotCell
         animations = {
             let contentViewWidht = CGRectGetWidth(shotCell.contentView.bounds)
-            shotCell.likeImageViewLeftConstraint?.constant = round(contentViewWidht / 2 - shotCell.likeImageView.intrinsicContentSize().width / 2)
-            shotCell.likeImageViewWidthConstraint?.constant = shotCell.likeImageView.intrinsicContentSize().width
+            shotCell.likeImageViewLeftConstraint?.constant =
+                    round(contentViewWidht / 2 -
+                    shotCell.likeImageView.intrinsicContentSize().width / 2)
+            shotCell.likeImageViewWidthConstraint?.constant =
+                    shotCell.likeImageView.intrinsicContentSize().width
             shotCell.contentView.layoutIfNeeded()
             shotCell.likeImageView.alpha = 1.0
-            shotCell.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
+            shotCell.shotImageView.transform =
+                    CGAffineTransformTranslate(CGAffineTransformIdentity, contentViewWidht, 0)
             shotCell.likeImageView.displaySecondImageView()
         }
         completion = { _ in
-            var delayedRestoreInitialStateAnimationDescriptor = ShotCellRestoreInitialStateAnimationDescriptor(shotCell: shotCell, swipeCompletion: swipeCompletion)
+            var delayedRestoreInitialStateAnimationDescriptor =
+                    ShotCellInitialStateAnimationDescriptor(shotCell: shotCell,
+                                                     swipeCompletion: swipeCompletion)
             delayedRestoreInitialStateAnimationDescriptor.delay = 0.2
             shotCell.viewClass.animateWithDescriptor(delayedRestoreInitialStateAnimationDescriptor)
         }

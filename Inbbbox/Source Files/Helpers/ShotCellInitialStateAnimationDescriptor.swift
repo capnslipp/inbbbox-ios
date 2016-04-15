@@ -1,5 +1,5 @@
 //
-//  ShotCellRestoreInitialStateAnimationDescriptor.swift
+//  ShotCellInitialStateAnimationDescriptor.swift
 //  Inbbbox
 //
 //  Created by Lukasz Wolanczyk on 2/8/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ShotCellRestoreInitialStateAnimationDescriptor: AnimationDescriptor {
+struct ShotCellInitialStateAnimationDescriptor: AnimationDescriptor {
 
     weak var shotCell: ShotCollectionViewCell?
     var animationType = AnimationType.Spring

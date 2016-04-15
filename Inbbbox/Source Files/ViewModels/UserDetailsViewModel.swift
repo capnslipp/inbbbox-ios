@@ -10,28 +10,28 @@ import Foundation
 import PromiseKit
 
 class UserDetailsViewModel: BaseCollectionViewViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate?
-    
+
     var userShots = [ShotType]()
     var connectionsRequester = APIConnectionsRequester()
-    
+
     private(set) var user: UserType
     private let shotsProvider = ShotsProvider()
-    
+
     var shouldShowFollowButton: Bool {
         return UserStorage.isUserSignedIn
     }
     var itemsCount: Int {
         return userShots.count
     }
-    
+
     init(user: UserType) {
         self.user = user
     }
-    
+
     // MARK: Shots section
-    
+
     func downloadInitialItems() {
         firstly {
             shotsProvider.provideShotsForUser(user)
@@ -44,7 +44,7 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
-    
+
     func downloadItemsForNextPage() {
         firstly {
             shotsProvider.nextPage()
@@ -63,13 +63,13 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
             // NGRTemp: Need mockups for error message view
         }
     }
-    
+
     // MARK: Users section
-    
+
     func isUserFollowedByMe() -> Promise<Bool> {
-        
+
         return Promise<Bool> { fulfill, reject in
-            
+
             firstly {
                 connectionsRequester.isUserFollowedByMe(user)
             }.then { followed in
@@ -77,30 +77,31 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
             }.error(reject)
         }
     }
-    
+
     func followUser() -> Promise<Void> {
-        
+
         return Promise<Void> { fulfill, reject in
-            
+
             firstly {
                 connectionsRequester.followUser(user)
             }.then(fulfill).error(reject)
         }
     }
-    
+
     func unfollowUser() -> Promise<Void> {
-        
+
         return Promise<Void> { fulfill, reject in
-            
+
             firstly {
                 connectionsRequester.unfollowUser(user)
             }.then(fulfill).error(reject)
         }
     }
-    
+
     // MARK: Cell data section
-    
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath)
+            -> (shotImage: ShotImageType, animated: Bool) {
         let shotImage = userShots[indexPath.row].shotImage
         let animated = userShots[indexPath.row].animated
         return (shotImage, animated)
@@ -110,7 +111,7 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
 // MARK: Helpers
 
 extension UserDetailsViewModel {
-    
+
     func shotWithSwappedUser(shot: ShotType) -> ShotType {
         return Shot(
             identifier: shot.identifier,

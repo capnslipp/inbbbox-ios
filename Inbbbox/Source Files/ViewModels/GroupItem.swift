@@ -13,21 +13,21 @@ protocol Updatable {
 }
 
 class GroupItem: Equatable {
-    
+
     enum Category {
         case Date, Boolean, String
     }
-    
+
     var title: String
     let category: Category
     var active = true
-    
+
     init(title: String, category: Category) {
         self.title = title
         self.category = category
     }
 }
 
-func ==(lhs: GroupItem, rhs: GroupItem) -> Bool {
+func == (lhs: GroupItem, rhs: GroupItem) -> Bool {
     return lhs.title == rhs.title && lhs.category == rhs.category && lhs.active == rhs.active
 }

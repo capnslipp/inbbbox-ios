@@ -12,7 +12,10 @@ extension Numeric {
         let formatter = NSNumberFormatter()
         formatter.locale = NSLocale.currentLocale()
         formatter.numberStyle = .DecimalStyle
-        return formatter.stringFromNumber(self as! NSNumber)
+        guard let number = self as? NSNumber else {
+            return nil
+        }
+        return formatter.stringFromNumber(number)
     }
 }
 

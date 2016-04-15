@@ -9,11 +9,11 @@
 import UIKit
 
 extension UIFont {
-    
+
     /// Enumerated type of helvetica font.
     enum Helvetica {
         case Neue, NeueMedium, NeueLight
-        
+
         /// Font name
         var name: String {
             switch self {
@@ -23,7 +23,7 @@ extension UIFont {
             }
         }
     }
-    
+
     /// Helvetica font with set type and size.
     ///
     /// - parameter type: type of helvetica font

@@ -9,11 +9,11 @@
 import Foundation
 
 struct UpdateCommentQuery: Query {
-    
+
     let method = Method.PUT
     let path: String
     var parameters = Parameters(encoding: .JSON)
-    
+
     /// Initialize query for updating comment.
     ///
     /// - parameter shot:     Shot that contains comments to update.

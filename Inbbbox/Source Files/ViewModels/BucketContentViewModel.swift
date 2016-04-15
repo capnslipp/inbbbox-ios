@@ -11,26 +11,26 @@ import PromiseKit
 
 
 class BucketContentViewModel: SimpleShotsViewModel {
-    
+
     weak var delegate: BaseCollectionViewViewModelDelegate?
     var shots = [ShotType]()
     private let shotsProvider = ShotsProvider()
     private var userMode: UserMode
     private var bucket: BucketType
-    
+
     var itemsCount: Int {
         return shots.count
     }
-    
+
     var title: String {
         return bucket.name
     }
-    
+
     init(bucket: BucketType) {
         userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
         self.bucket = bucket
     }
-    
+
     func downloadInitialItems() {
         firstly {
             shotsProvider.provideShotsForBucket(self.bucket)
@@ -43,7 +43,7 @@ class BucketContentViewModel: SimpleShotsViewModel {
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
-    
+
     func downloadItemsForNextPage() {
         guard UserStorage.isUserSignedIn else {
             return
@@ -65,23 +65,26 @@ class BucketContentViewModel: SimpleShotsViewModel {
             // NGRTemp: Need mockups for error message view
         }
     }
-    
+
     func emptyCollectionDescriptionAttributes() -> EmptyCollectionViewDescription {
         let description = EmptyCollectionViewDescription(
-            firstLocalizedString: NSLocalizedString("BucketContent.EmptyData.FirstLocalizedString", comment: "BucketContentCollectionView, empty data set view"),
+            firstLocalizedString: NSLocalizedString("BucketContent.EmptyData.FirstLocalizedString",
+                comment: "BucketContentCollectionView, empty data set view"),
             attachmentImageName: "ic-bucket-emptystate",
             imageOffset: CGPoint(x: 0, y: -4),
-            lastLocalizedString: NSLocalizedString("BucketContent.EmptyData.LastLocalizedString", comment: "BucketContentCollectionView, empty data set view")
+            lastLocalizedString: NSLocalizedString("BucketContent.EmptyData.LastLocalizedString",
+                comment: "BucketContentCollectionView, empty data set view")
         )
         return description
     }
-    
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath)
+            -> (shotImage: ShotImageType, animated: Bool) {
         let shotImage = shots[indexPath.row].shotImage
         let animated = shots[indexPath.row].animated
         return (shotImage, animated)
     }
-    
+
     func clearViewModelIfNeeded() {
         let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
         if userMode != currentUserMode {

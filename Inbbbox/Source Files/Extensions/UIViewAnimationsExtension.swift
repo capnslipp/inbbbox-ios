@@ -5,7 +5,7 @@
 import UIKit
 
 extension UIView {
-    
+
     /// Animate UIView with descriptor
     ///
     /// - parameter animationDescriptor: animation descriptor with values for animation aspects.
@@ -16,24 +16,24 @@ extension UIView {
         let animationType = animationDescriptor.animationType
         let animations = animationDescriptor.animations
         let completion = animationDescriptor.completion
-        
+
         switch animationType {
         case AnimationType.Plain:
             self.animateWithDuration(duration,
-                delay: delay,
-                options: options,
-                animations: animations,
-                completion: completion)
+                              delay: delay,
+                            options: options,
+                         animations: animations,
+                         completion: completion)
         case AnimationType.Spring:
             let springDamping = animationDescriptor.springDamping
             let springVelocity = animationDescriptor.springVelocity
             self.animateWithDuration(duration,
-                delay: delay,
-                usingSpringWithDamping: springDamping,
-                initialSpringVelocity: springVelocity,
-                options: options,
-                animations: animations,
-                completion: completion)
+                              delay: delay,
+             usingSpringWithDamping: springDamping,
+              initialSpringVelocity: springVelocity,
+                            options: options,
+                         animations: animations,
+                         completion: completion)
         }
     }
 }

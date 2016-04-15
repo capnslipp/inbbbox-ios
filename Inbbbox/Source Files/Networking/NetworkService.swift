@@ -10,16 +10,16 @@ import Foundation
 
 /// Protocol describing network service.
 protocol NetworkService {
-    
+
     /// Scheme of network service.
     var scheme: String { get }
-    
+
     /// Host of network service.
     var host: String { get }
-    
+
     /// Version of network service.
     var version: String { get }
-    
+
     /// Authorize given request.
     ///
     /// - parameter request: Request to authorize.

@@ -23,7 +23,7 @@ plugin 'cocoapods-keys', {
 
 pod 'AsyncSwift', '~> 1.6'
 pod 'KeychainAccess', '~> 2.3'
-pod 'PromiseKit', '~> 3.0'
+pod 'PromiseKit', '~> 3.1'
 pod 'SwiftyJSON', '~> 2.3'
 pod 'HockeySDK', '~> 3.8'
 pod 'PureLayout', '~> 3.0'

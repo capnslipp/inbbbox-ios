@@ -9,10 +9,10 @@
 import UIKit
 
 protocol AvatarSettable {
-    
+
     var avatarView: AvatarView! { get }
     var avatarSize: CGSize { get }
-    
+
     func setupAvatar()
 
 }

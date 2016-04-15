@@ -9,11 +9,11 @@
 import Foundation
 
 struct ShotLikedByMeQuery: Query {
-    
+
     let method = Method.GET
     let path: String
     var parameters = Parameters(encoding: .URL)
-    
+
     /// Initialize query for checking
     /// if given shot is liked by currently signed in user.
     ///

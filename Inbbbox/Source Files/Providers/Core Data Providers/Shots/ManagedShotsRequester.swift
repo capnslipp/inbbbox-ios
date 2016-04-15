@@ -7,15 +7,15 @@ import PromiseKit
 import CoreData
 
 class ManagedShotsRequester {
-    
+
     let managedObjectContext: NSManagedObjectContext
     let managedObjectsProvider: ManagedObjectsProvider
-    
+
     init() {
-        managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+        managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)!.managedObjectContext
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
-    
+
 
     func likeShot(shot: ShotType) -> Promise<Void> {
         let managedShot = managedObjectsProvider.managedShot(shot)
@@ -45,9 +45,9 @@ class ManagedShotsRequester {
         let managedShot = managedObjectsProvider.managedShot(shot)
         return Promise<Bool>(managedShot.liked)
     }
-    
+
     func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
         let managedShot = managedObjectsProvider.managedShot(shot)
-        return Promise<[BucketType]!>((managedShot.buckets?.allObjects as! [ManagedBucket]).map { $0 as BucketType })
+        return Promise<[BucketType]!>((managedShot.buckets?.allObjects as? [ManagedBucket])?.map { $0 as BucketType })
     }
 }
