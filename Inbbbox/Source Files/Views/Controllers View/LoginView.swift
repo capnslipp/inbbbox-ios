@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PureLayout
 
 class LoginView: UIView {
 
@@ -17,11 +18,13 @@ class LoginView: UIView {
     let shotsView = AutoScrollableShotsView(numberOfColumns: 4)
     let dribbbleLogoImageView = UIImageView(image: UIImage(named: "ic-ball"))
     let orLabel = ORLoginLabel()
+    let copyrightlabel = UILabel()
     let loadingLabel = UILabel()
 
     let logoImageView = UIImageView(image: UIImage(named: "logo-inbbbox"))
     let pinkOverlayView = UIImageView(image: UIImage(named: "bg-intro-gradient"))
     let sloganLabel = UILabel()
+    let defaultWhiteColor = UIColor.RGBA(249, 212, 226, 1)
 
     var isAnimating = false
 
@@ -34,14 +37,16 @@ class LoginView: UIView {
         addSubview(orLabel)
         addSubview(dribbbleLogoImageView)
 
-        loginButton.setTitle(NSLocalizedString("Login with Dribbble", comment: ""), forState: .Normal)
+        loginButton.setTitle(NSLocalizedString("LoginView.LoginButtonTitle", comment: "Title of log in button"),
+                             forState: .Normal)
         loginButton.backgroundColor = UIColor.whiteColor()
         loginButton.layer.cornerRadius = cornerRadius
         loginButton.setTitleColor(UIColor.pinkColor(), forState: .Normal)
         loginButton.titleLabel?.font = UIFont.helveticaFont(.NeueMedium, size: 14)
         insertSubview(loginButton, belowSubview: dribbbleLogoImageView)
 
-        loginAsGuestButton.setTitle(NSLocalizedString("Use as guest", comment: ""), forState: .Normal)
+        loginAsGuestButton.setTitle(NSLocalizedString("LoginView.GuestButtonTitle", comment: "Title of guest button"),
+                                    forState: .Normal)
         loginAsGuestButton.backgroundColor = UIColor.clearColor()
         loginAsGuestButton.layer.cornerRadius = cornerRadius
         loginAsGuestButton.layer.borderWidth = 1
@@ -50,17 +55,23 @@ class LoginView: UIView {
         loginButton.titleLabel?.font = UIFont.helveticaFont(.NeueMedium, size: 14)
         addSubview(loginAsGuestButton)
 
-        sloganLabel.text = NSLocalizedString("Each shot swipes", comment: "")
+        sloganLabel.text = NSLocalizedString("LoginView.Slogan", comment: "Slogan")
         sloganLabel.textAlignment = .Center
-        sloganLabel.textColor = UIColor.RGBA(249, 212, 226, 1)
+        sloganLabel.textColor = defaultWhiteColor
         sloganLabel.font = UIFont.helveticaFont(.NeueLight, size: 25)
         addSubview(sloganLabel)
 
-        loadingLabel.text = NSLocalizedString("LOADING...", comment: "")
+        loadingLabel.text = NSLocalizedString("LoginView.Loading", comment: "")
         loadingLabel.textAlignment = .Center
-        loadingLabel.textColor = UIColor.RGBA(249, 212, 226, 1)
+        loadingLabel.textColor = defaultWhiteColor
         loadingLabel.font = UIFont.helveticaFont(.Neue, size: 12)
         addSubview(loadingLabel)
+
+        copyrightlabel.text = NSLocalizedString("LoginView.Copyright", comment:"Describes copyright holder")
+        copyrightlabel.textAlignment = .Center
+        copyrightlabel.textColor = defaultWhiteColor
+        copyrightlabel.font = UIFont.helveticaFont(.NeueMedium, size: 12)
+        addSubview(copyrightlabel)
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -101,7 +112,7 @@ class LoginView: UIView {
                 width: width, height: 60
             )
 
-            loadingLabel.frame = CGRect(x: 0, y: CGRectGetMaxY(frame) - 50,
+            loadingLabel.frame = CGRect(x: 0, y: CGRectGetMaxY(frame) - 65,
                 width: CGRectGetWidth(frame), height: 20
             )
 
@@ -118,6 +129,12 @@ class LoginView: UIView {
 
             shotsView.frame = frame
             pinkOverlayView.frame = frame
+
+            let standardSpacing: CGFloat = 20
+            copyrightlabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: standardSpacing)
+            copyrightlabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: standardSpacing)
+            copyrightlabel.autoSetDimension(.Height, toSize: 14.5)
+            copyrightlabel.autoAlignAxisToSuperviewAxis(.Vertical)
         }
     }
 }
