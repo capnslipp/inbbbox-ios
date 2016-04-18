@@ -71,4 +71,17 @@ class AnalyticsManager {
                 label: nil, value: nil).build() as [NSObject:AnyObject]
         tracker.send(event)
     }
+
+    /// Method to track Dribbble API Rate Limit (X-RateLimit-Remaining).
+    ///
+    /// - parameter requests: The number of requests remaining in the current rate limit window (per minute).
+    class func trackRemaining(requests: UInt) {
+        guard let tracker = GAI.sharedInstance().defaultTracker else {
+            return
+        }
+        let event = GAIDictionaryBuilder.createEventWithCategory("API",
+                action: "X-RateLimit-Remaining",
+                label: nil, value: requests).build() as [NSObject:AnyObject]
+        tracker.send(event)
+    }
 }
