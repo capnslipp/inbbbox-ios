@@ -117,6 +117,10 @@ final class APIRateLimitKeeper {
             if incomingRateLimitRemainingPerMinute < rateLimitRemainingPerMinute {
                 rateLimitRemainingPerMinute = incomingRateLimitRemainingPerMinute
             }
+
+            if let limit = rateLimitRemainingPerMinute {
+                AnalyticsManager.trackRemaining(limit)
+            }
         }
     }
 
