@@ -24,17 +24,17 @@ class ShotDetailsFooterView: UICollectionReusableView {
     }
 
     private var didUpdateConstraints = false
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    private let activityIndicatorView: BouncingView
     private let cornerWrapperView = UIView.newAutoLayoutView()
 
     override init(frame: CGRect) {
+        let height = Int(cornerRadius)
+        activityIndicatorView = BouncingView(frame: frame, jumpHeight: height, jumpDuration: NSTimeInterval(1))
         super.init(frame: frame)
 
         backgroundColor = .clearColor()
 
         activityIndicatorView.configureForAutoLayout()
-        activityIndicatorView.backgroundColor = .clearColor()
-        activityIndicatorView.color = .grayColor()
 
         cornerWrapperView.backgroundColor = .whiteColor()
         cornerWrapperView.addSubview(activityIndicatorView)

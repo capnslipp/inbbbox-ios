@@ -11,7 +11,7 @@ import Async
 
 class EmptyDataSetLoadingView: UIView {
 
-    let ballView = UIImageView(image: UIImage(named: "ic-ball-loader"))
+    let ballView: BouncingView
     let label = UILabel()
     let animator = LoginViewAnimations()
 
@@ -27,7 +27,7 @@ class EmptyDataSetLoadingView: UIView {
             width: 200,
             height: 200
         )
-
+        ballView = BouncingView(frame: frame, jumpHeight: ballJumpHeight, jumpDuration: animationDuration)
         super.init(frame: frame)
 
         addSubview(ballView)
@@ -56,7 +56,7 @@ class EmptyDataSetLoadingView: UIView {
             height: labelSize.height
         )
 
-        let size = ballView.image?.size ?? CGSize.zero
+        let size = ballView.imageView.image?.size ?? CGSize.zero
         ballView.frame = CGRect(
             x: CGRectGetMaxX(frame) / 2 - size.width / 2,
             y: CGRectGetMinY(label.frame) - size.height - CGFloat(ballJumpHeight),
@@ -67,27 +67,12 @@ class EmptyDataSetLoadingView: UIView {
 
     func startAnimation() {
         shouldAnimate =  true
-        animateBall()
+        ballView.startAnimating()
         blinkLoadingLabel()
     }
 
     func stopAnimation() {
         shouldAnimate = false
-    }
-
-    private func animateBall() {
-
-        guard shouldAnimate else { return }
-
-        Async.main(after: animationDuration) {
-            self.animateBall()
-        }
-
-        let animations = CAKeyframeAnimation.ballBounceAnimations(ballJumpHeight, duration: animationDuration)
-
-        animations.forEach { animation in
-            ballView.layer.addAnimation(animation, forKey: nil)
-        }
     }
 
     private func blinkLoadingLabel() {
