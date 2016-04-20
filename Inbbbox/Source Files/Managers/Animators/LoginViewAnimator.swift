@@ -249,10 +249,10 @@ private extension LoginViewAnimator {
             }
         }
     }
-    
+
     func copyrightFade(fade: LoginViewAnimations.FadeStyle) -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            animations.moveAnimation([view!.copyrightlabel], duration: 0.4, fade: fade, transition: CGPointZero)
+            animations.moveAnimation([view!.copyrightlabel], duration: 0.4, fade: fade, transition: CGPoint.zero)
             fulfill()
         }
     }
