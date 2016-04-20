@@ -155,12 +155,10 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         switch action {
         case .Editing:
             editView.configureForEditing()
-            print("will add delete target for cell: \(authorLabel.attributedText)")
             editView.deleteButton.addTarget(self,
                                             action: #selector(deleteButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         case .Reporting:
             editView.configureForReporting()
-            print("will add report target for cell: \(authorLabel.attributedText)")
             editView.deleteButton.addTarget(self,
                                             action: #selector(reportButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         }
