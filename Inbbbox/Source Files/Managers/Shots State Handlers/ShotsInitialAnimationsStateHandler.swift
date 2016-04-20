@@ -107,7 +107,7 @@ extension ShotsInitialAnimationsStateHandler: ShotsAnimatorDelegate {
 extension ShotsInitialAnimationsStateHandler: DZNEmptyDataSetSource {
 
     func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
-        emptyDataSetLoadingView.startAnimation()
+        emptyDataSetLoadingView.startAnimating()
         return emptyDataSetLoadingView
     }
 }
@@ -120,6 +120,6 @@ private extension ShotsInitialAnimationsStateHandler {
     // so we need to manually hide loading view
     func hideEmptyDataSetLoadingView() {
         emptyDataSetLoadingView.hidden = true
-        emptyDataSetLoadingView.stopAnimation()
+        emptyDataSetLoadingView.stopAnimating()
     }
 }

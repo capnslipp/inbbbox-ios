@@ -65,13 +65,13 @@ class EmptyDataSetLoadingView: UIView {
         )
     }
 
-    func startAnimation() {
+    func startAnimating() {
         shouldAnimate =  true
         ballView.startAnimating()
         blinkLoadingLabel()
     }
 
-    func stopAnimation() {
+    func stopAnimating() {
         shouldAnimate = false
     }
 
