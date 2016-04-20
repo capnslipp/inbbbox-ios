@@ -21,13 +21,15 @@ class ActivityIndicatorSelectableView: UIView {
 
     var tapHandler: (() -> Void)?
 
-    private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
+    private let bouncingBall: BouncingView
     private let button = UIButton(type: .Custom)
 
     private var didSetConstraints = false
     private var wasSelectedBeforeAnimationStart = false
 
     override init(frame: CGRect) {
+        bouncingBall = BouncingView(frame: frame, jumpHeight: 20, jumpDuration: 0.8)
+        bouncingBall.configureForAutoLayout()
         super.init(frame: frame)
 
         button.configureForAutoLayout()
@@ -37,10 +39,7 @@ class ActivityIndicatorSelectableView: UIView {
         button.addTarget(self, action: #selector(buttonDidTap(_:)), forControlEvents: .TouchUpInside)
         addSubview(button)
 
-        activityIndicatorView.configureForAutoLayout()
-        activityIndicatorView.backgroundColor = .clearColor()
-        activityIndicatorView.color = UIColor.grayColor()
-        addSubview(activityIndicatorView)
+        addSubview(bouncingBall)
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -57,7 +56,7 @@ class ActivityIndicatorSelectableView: UIView {
             didSetConstraints = true
 
             button.autoPinEdgesToSuperviewEdges()
-            activityIndicatorView.autoPinEdgesToSuperviewEdges()
+            bouncingBall.autoPinEdgesToSuperviewEdges()
         }
         super.updateConstraints()
     }
@@ -67,13 +66,15 @@ class ActivityIndicatorSelectableView: UIView {
     }
 
     func startAnimating() {
-        activityIndicatorView.startAnimating()
+        if !bouncingBall.shouldAnimate {
+            bouncingBall.startAnimating()
+        }
         button.hidden = true
     }
 
     func stopAnimating() {
         button.hidden = false
-        activityIndicatorView.stopAnimating()
+        bouncingBall.stopAnimating()
     }
 }
 

@@ -20,7 +20,6 @@ class CommentComposerView: UIView {
 
     private let cornerWrapperView = UIView.newAutoLayoutView()
     private let textField = UITextField.newAutoLayoutView()
-    private let activityView = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
     private var didUpdateConstraints = false
     private var sendButton: UIButton? {
         return textField.rightView as? UIButton

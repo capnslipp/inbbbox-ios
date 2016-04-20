@@ -59,7 +59,7 @@ class ShotDetailsOperationView: UIView {
                     withOffset: offset)
 
             [likeSelectableView, bucketSelectableView].forEach {
-                $0.autoAlignAxis(.Horizontal, toSameAxisOfView: self, withOffset: -10)
+                $0.autoAlignAxis(.Horizontal, toSameAxisOfView: self, withOffset: -5)
                 $0.autoSetDimensionsToSize(selectableViewSize)
             }
         }

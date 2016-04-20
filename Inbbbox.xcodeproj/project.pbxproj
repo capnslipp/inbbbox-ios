@@ -67,9 +67,11 @@
 		2AF4DF2882A7E45E73B0253F /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697E4400DF149C466788A41 /* Requestable.swift */; };
 		2D4EB542C282717ACCCDD53E /* APIConnectionsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9A75F53B4797803D4FB49 /* APIConnectionsRequesterMock.swift */; };
 		2F3EF3B7C3E6841B46924AAE /* UserDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8E247C367E7CD816FFC6E7 /* UserDetailsViewModelSpec.swift */; };
+		300E4F7C1CC622A200DF9ABE /* BouncingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E4F7B1CC622A200DF9ABE /* BouncingView.swift */; };
 		306F24901CBBBE8200D81B14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 306F24921CBBBE8200D81B14 /* Localizable.strings */; };
 		306F24A51CBBC6BC00D81B14 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 306F24A31CBBC6BC00D81B14 /* Localizable.stringsdict */; };
 		309EBC711CAD56860074FB8A /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EBC701CAD56860074FB8A /* CrashManager.swift */; };
+		30C184651CC674920032798C /* DefaultImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C184641CC674920032798C /* DefaultImage.swift */; };
 		30D1ED34355F08C05F0B1DBC /* CollectionViewLayoutSpacings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C8043ECC97F0591EA9579 /* CollectionViewLayoutSpacings.swift */; };
 		31D562CBC51E85CCFBF18C5F /* ShotBucketsActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8F4F4DC52ABC426E05B98 /* ShotBucketsActionCollectionViewCell.swift */; };
 		32E1DA0DB8D745C554EC6169 /* APIProjectsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6129CA56060FB003308C4A /* APIProjectsProviderSpec.swift */; };
@@ -441,10 +443,12 @@
 		2ED8F794058015E61BF82B95 /* ShotDetailsDescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsDescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EEA38900364C70AF4820470 /* PageableQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PageableQuery.swift; sourceTree = "<group>"; };
 		2F59A124425AD6181A4B6CF2 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		300E4F7B1CC622A200DF9ABE /* BouncingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BouncingView.swift; sourceTree = "<group>"; };
 		306F24961CBBC0CD00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		306F24A41CBBC6BC00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		309EBC701CAD56860074FB8A /* CrashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		30B635F69F1F9B5A4BB997EB /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
+		30C184641CC674920032798C /* DefaultImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultImage.swift; sourceTree = "<group>"; };
 		30ED40221B9A46F946A93D9F /* ShotBucketsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModel.swift; sourceTree = "<group>"; };
 		311AEE14AEDBB81210947F5D /* ShotDetailsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsView.swift; sourceTree = "<group>"; };
 		3196E77844BB63271CD1D9BB /* PageableComponentSerializerSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PageableComponentSerializerSpec.swift; sourceTree = "<group>"; };
@@ -1173,6 +1177,7 @@
 				7449D9871CAD4A8D00E37CE9 /* URLToUserProvider.swift */,
 				65BA2813D25CE6EA657CBA73 /* Numeric.swift */,
 				F0FD0A851CBE56D100735933 /* SimpleShotsViewModel.swift */,
+				30C184641CC674920032798C /* DefaultImage.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1481,6 +1486,7 @@
 				3ABC35EFB52C4F2370227A85 /* ShotsCollectionBackgroundView.swift */,
 				397297ADA0D7B1F46850C1D2 /* SwitchableImageView.swift */,
 				6555960C38668047CA05A063 /* UserDetailsHeaderView.swift */,
+				300E4F7B1CC622A200DF9ABE /* BouncingView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1549,6 +1555,7 @@
 				167F8D30F1ADCADD56793386 /* Embed Pods Frameworks */,
 				05CBF50C3479CFCF14DDF382 /* Copy Pods Resources */,
 				5E6ED5931ACC37C8001CC9AB /* Search for warning flags */,
+				309E50361CC11F8000198711 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1679,6 +1686,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		309E50361CC11F8000198711 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		5E6ED5931ACC37C8001CC9AB /* Search for warning flags */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1946,6 +1966,7 @@
 				C25B633C950E27D050F626AF /* SettingsViewModel.swift in Sources */,
 				B294B1595A334D797AE5FA45 /* ShotBucketsViewModel.swift in Sources */,
 				E15CC225A6EB56CA0FDE1867 /* ShotDetailsFormatter.swift in Sources */,
+				30C184651CC674920032798C /* DefaultImage.swift in Sources */,
 				FD5B662B964074F226A06035 /* ShotDetailsViewModel.swift in Sources */,
 				AAF3820647B62F0AE36A6205 /* SwitchItem.swift in Sources */,
 				EE2AACF3017E0000EA7F8164 /* UserDetailsViewModel.swift in Sources */,
@@ -1981,6 +2002,7 @@
 				0CBCB5AB38C1413ACD226FD9 /* ShotsCollectionBackgroundView.swift in Sources */,
 				2670412B8802A0C735FBF283 /* SwitchableImageView.swift in Sources */,
 				993B955A86C797E40BF7D498 /* UserDetailsHeaderView.swift in Sources */,
+				300E4F7C1CC622A200DF9ABE /* BouncingView.swift in Sources */,
 				25FFF6B2C6ECB6C90B59E7F2 /* AutoScrollableCollectionViewCell.swift in Sources */,
 				B57824CB176FA6995ABC9884 /* BaseInfoShotsCollectionViewCell.swift in Sources */,
 				393A9DFA41E4F8CDDEA161D9 /* BucketCollectionViewCell.swift in Sources */,

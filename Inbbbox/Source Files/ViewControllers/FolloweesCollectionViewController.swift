@@ -149,7 +149,7 @@ extension FolloweesCollectionViewController: DZNEmptyDataSetSource {
 
         if shouldShowLoadingView {
             let loadingView = EmptyDataSetLoadingView.newAutoLayoutView()
-            loadingView.startAnimation()
+            loadingView.startAnimating()
             return loadingView
         } else {
             let emptyDataSetView = EmptyDataSetView.newAutoLayoutView()
