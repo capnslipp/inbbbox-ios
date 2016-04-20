@@ -37,9 +37,8 @@ struct Dribbble {
     /// Daily request limit. By default it is set to 1440.
     static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
 
-
+    /// Email address used to report inappropriate content.
     static let ReportInappropriateContentEmail = "report@report"
-
 
     /// Tracking ID used for Google Analytics.
     static var GATrackingId: String? {
