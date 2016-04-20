@@ -11,6 +11,7 @@ import PromiseKit
 import ZFDragableModalTransition
 import TTTAttributedLabel
 import ImageViewer
+import MessageUI
 
 protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
 
@@ -173,6 +174,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
+            cell.reportActionHandler = { [weak self] in
+                self?.reportCommentAtIndexPath(indexPath)
+            }
             cell.avatarView.delegate = self
             cell.delegate = self
 
@@ -234,11 +238,7 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotDetailsCommentCollectionViewCell {
             let isOwner = viewModel.isCurrentUserOwnerOfCommentAtIndex(indexPath.row)
-            if isOwner {
-                cell.showEditView(true, forActionType: .Editing)
-            } else {
-                cell.showEditView(true, forActionType: .Reporting)
-            }
+            cell.showEditView(true, forActionType: isOwner ? EditActionType.Editing : .Reporting)
         }
     }
 
@@ -432,15 +432,29 @@ private extension ShotDetailsViewController {
     }
 
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
-        firstly {
-            viewModel.deleteCommentAtIndex(indexPath.item)
-        }.then {
-            () -> Void in
-            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
-        }.error {
-            error in
-            // NGRTemp: Handle error.
-        }
+        print("DELETE")
+//        firstly {
+//            viewModel.deleteCommentAtIndex(indexPath.item)
+//        }.then {
+//            () -> Void in
+//            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
+//        }.error {
+//            error in
+//            // NGRTemp: Handle error.
+//        }
+    }
+
+    func reportCommentAtIndexPath(indexPath: NSIndexPath) {
+        print("REPORT")
+        let comment = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
+
+        let composer = MFMailComposeViewController()
+
+
+
+        // TODO: show mail composer
+        // TODO: add comment (text) + comment ID to body of email
+        // TODO: discuss to which email we should send comment
     }
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
