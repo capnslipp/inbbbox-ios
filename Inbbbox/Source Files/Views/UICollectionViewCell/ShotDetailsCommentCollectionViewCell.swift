@@ -17,6 +17,11 @@ private var horizontalSpaceBetweenAvatarAndText: CGFloat {
     return 15
 }
 
+enum EditActionType {
+    case Editing
+    case Reporting
+}
+
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
     weak var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
@@ -136,7 +141,13 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         showEditView(false)
     }
 
-    func showEditView(show: Bool) {
+    func showEditView(show: Bool, forActionType action: EditActionType = .Editing) {
+        switch action {
+        case .Editing:
+            editView.configureForEditing()
+        case .Reporting:
+            editView.configureForReporting()
+        }
         editView.hidden = !show
     }
 

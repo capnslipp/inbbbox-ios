@@ -231,16 +231,14 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 
 extension ShotDetailsViewController: UICollectionViewDelegate {
 
-    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if collectionView.cellForItemAtIndexPath(indexPath) is ShotDetailsCommentCollectionViewCell {
-            return viewModel.isCurrentUserOwnerOfCommentAtIndex(indexPath.row)
-        }
-        return false
-    }
-
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotDetailsCommentCollectionViewCell {
-            cell.showEditView(true)
+            let isOwner = viewModel.isCurrentUserOwnerOfCommentAtIndex(indexPath.row)
+            if isOwner {
+                cell.showEditView(true, forActionType: .Editing)
+            } else {
+                cell.showEditView(true, forActionType: .Reporting)
+            }
         }
     }
 

@@ -33,6 +33,7 @@ class BouncingView: UIView, DefaultImage {
 
     private var didSetupConstraints = false
 
+    // MARK: Life Cycle
 
     init(frame: CGRect, jumpHeight: Int, jumpDuration: NSTimeInterval, image: UIImage? = nil) {
         self.jumpHeight = jumpHeight
@@ -51,6 +52,8 @@ class BouncingView: UIView, DefaultImage {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: UI
+
     override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
@@ -64,6 +67,8 @@ class BouncingView: UIView, DefaultImage {
 
         super.updateConstraints()
     }
+
+    // MARK: Public
 
     /// Starts the animation.
     /// - SeeAlso: shouldAnimate, hidesWhenStopped
@@ -79,6 +84,8 @@ class BouncingView: UIView, DefaultImage {
         shouldAnimate = false
         hidden = true
     }
+
+    // MARK: Private
 
     private func animateBall() {
 
