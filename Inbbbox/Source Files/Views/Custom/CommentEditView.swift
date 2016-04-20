@@ -18,6 +18,8 @@ class CommentEditView: UIView {
     private var isEditing = true {
         didSet {
             deleteLabel.text = deleteLabelText
+            let imageName = isEditing ? "bt-delete-comment" : "bt-report-comment"
+            deleteButton.setImage(UIImage(named: imageName), forState: .Normal)
         }
     }
 

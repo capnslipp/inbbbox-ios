@@ -67,6 +67,7 @@
 		2AF4DF2882A7E45E73B0253F /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697E4400DF149C466788A41 /* Requestable.swift */; };
 		2D4EB542C282717ACCCDD53E /* APIConnectionsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9A75F53B4797803D4FB49 /* APIConnectionsRequesterMock.swift */; };
 		2F3EF3B7C3E6841B46924AAE /* UserDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8E247C367E7CD816FFC6E7 /* UserDetailsViewModelSpec.swift */; };
+		300BDCA91CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300BDCA81CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift */; };
 		300E4F7C1CC622A200DF9ABE /* BouncingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300E4F7B1CC622A200DF9ABE /* BouncingView.swift */; };
 		306F24901CBBBE8200D81B14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 306F24921CBBBE8200D81B14 /* Localizable.strings */; };
 		306F24A51CBBC6BC00D81B14 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 306F24A31CBBC6BC00D81B14 /* Localizable.stringsdict */; };
@@ -443,6 +444,7 @@
 		2ED8F794058015E61BF82B95 /* ShotDetailsDescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsDescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EEA38900364C70AF4820470 /* PageableQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PageableQuery.swift; sourceTree = "<group>"; };
 		2F59A124425AD6181A4B6CF2 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		300BDCA81CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMailComposeViewControllerExtension.swift; sourceTree = "<group>"; };
 		300E4F7B1CC622A200DF9ABE /* BouncingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BouncingView.swift; sourceTree = "<group>"; };
 		306F24961CBBC0CD00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		306F24A41CBBC6BC00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -861,6 +863,7 @@
 				24917648B4ED154568BCFB6D /* UIViewControllerExtension.swift */,
 				BBC5F88643B64405114F960D /* UIWindowExtension.swift */,
 				F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */,
+				300BDCA81CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1955,6 +1958,7 @@
 				D8C4CA83F356EB5AFB912AA4 /* UserDetailsViewController.swift in Sources */,
 				40D05F4E7045592D38F4BC6C /* BucketContentViewModel.swift in Sources */,
 				452D62F9AF926CC12B39B6E9 /* BucketsViewModel.swift in Sources */,
+				300BDCA91CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift in Sources */,
 				2181497D4F64A8078749A076 /* DateItem.swift in Sources */,
 				5D0BAC704FB5A73549526846 /* FolloweesViewModel.swift in Sources */,
 				07284AFD9E7770553074663D /* GroupedListViewModel.swift in Sources */,

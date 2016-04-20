@@ -237,6 +237,7 @@ extension ShotDetailsViewController: UICollectionViewDelegate {
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotDetailsCommentCollectionViewCell {
+            hideUnusedCommentEditingViews()
             let isOwner = viewModel.isCurrentUserOwnerOfCommentAtIndex(indexPath.row)
             cell.showEditView(true, forActionType: isOwner ? EditActionType.Editing : .Reporting)
         }
@@ -432,33 +433,30 @@ private extension ShotDetailsViewController {
     }
 
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
-        print("DELETE")
-//        firstly {
-//            viewModel.deleteCommentAtIndex(indexPath.item)
-//        }.then {
-//            () -> Void in
-//            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
-//        }.error {
-//            error in
-//            // NGRTemp: Handle error.
-//        }
+        firstly {
+            viewModel.deleteCommentAtIndex(indexPath.item)
+        }.then {
+            () -> Void in
+            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
+        }.error {
+            error in
+            // NGRTemp: Handle error.
+        }
     }
 
     func reportCommentAtIndexPath(indexPath: NSIndexPath) {
-        print("REPORT")
-        let comment = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
-
         let composer = MFMailComposeViewController()
         composer.mailComposeDelegate = self
 
         composer.setToRecipients([Dribbble.ReportInappropriateContentEmail])
-        composer.setSubject("Inappropriate content! (temp)")
-        composer.setMessageBody("Inappropriate content found (temp)", isHTML: false)
+        let subject = NSLocalizedString("ShotDetailsViewController.Inappropriate",
+                                        comment: "Title of email with abusive content.")
+        composer.setSubject(subject)
+        let body = viewModel.reportBodyForAbusiveComment(indexPath)
+        composer.setMessageBody(body, isHTML: false)
 
         presentViewController(composer, animated: true, completion: nil)
         composer.navigationBar.tintColor = .whiteColor()
-        // TODO: add comment (text) + comment ID to body of email
-        // TODO: discuss to which email we should send comment
     }
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
@@ -511,6 +509,14 @@ private extension ShotDetailsViewController {
     func grayOutFooterIfNeeded() {
         let shouldGrayOut = !viewModel.hasComments && !viewModel.hasDescription
         footer?.grayOutBackground(shouldGrayOut)
+    }
+
+    func hideUnusedCommentEditingViews() {
+        shotDetailsView.collectionView.visibleCells().forEach {
+            if let commentCell = $0 as? ShotDetailsCommentCollectionViewCell {
+                commentCell.showEditView(false)
+            }
+        }
     }
 }
 
@@ -617,14 +623,18 @@ extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(controller: MFMailComposeViewController,
                                didFinishWithResult result: MFMailComposeResult, error: NSError?) {
 
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismissViewControllerAnimated(true) {
+            self.hideUnusedCommentEditingViews()
+        }
 
         switch result {
-        case MFMailComposeResultSent:
-            let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
-            presentViewController(contentReportedAlert, animated: true, completion: nil)
-            contentReportedAlert.view.tintColor = .pinkColor()
-        default: break
+            case MFMailComposeResultSent:
+                let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
+                presentViewController(contentReportedAlert, animated: true) {
+                    contentReportedAlert.view.tintColor = .pinkColor()
+                }
+                contentReportedAlert.view.tintColor = .pinkColor()
+            default: break
         }
     }
 }
