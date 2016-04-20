@@ -51,4 +51,17 @@ extension UIAlertController {
 
         return alert
     }
+
+    class func inappropriateContentReportedAlertController() -> UIAlertController {
+        let alert = UIAlertController(
+            title: nil,
+            message: NSLocalizedString("UIAlertControllerExtension.InappropriateContentReported",
+                comment: "Inappropriate content has been reported."),
+            preferredStyle: .Alert
+        )
+        let cancelActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
+        alert.addAction(UIAlertAction(title: cancelActionTitle, style: .Cancel, handler: nil))
+
+        return alert
+    }
 }

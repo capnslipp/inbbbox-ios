@@ -449,10 +449,14 @@ private extension ShotDetailsViewController {
         let comment = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
 
         let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
 
+        composer.setToRecipients([Dribbble.ReportInappropriateContentEmail])
+        composer.setSubject("Inappropriate content! (temp)")
+        composer.setMessageBody("Inappropriate content found (temp)", isHTML: false)
 
-
-        // TODO: show mail composer
+        presentViewController(composer, animated: true, completion: nil)
+        composer.navigationBar.tintColor = .whiteColor()
         // TODO: add comment (text) + comment ID to body of email
         // TODO: discuss to which email we should send comment
     }
@@ -606,4 +610,21 @@ extension ShotDetailsViewController: ImageProvider {
     }
 
     func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
+}
+
+extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(controller: MFMailComposeViewController,
+                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+
+        controller.dismissViewControllerAnimated(true, completion: nil)
+
+        switch result {
+        case MFMailComposeResultSent:
+            let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
+            presentViewController(contentReportedAlert, animated: true, completion: nil)
+            contentReportedAlert.view.tintColor = .pinkColor()
+        default: break
+        }
+    }
 }
