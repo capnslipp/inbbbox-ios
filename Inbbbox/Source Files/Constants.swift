@@ -38,7 +38,7 @@ struct Dribbble {
     static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
 
     /// Email address used to report inappropriate content.
-    static let ReportInappropriateContentEmail = "report@report"
+    static let ReportInappropriateContentEmail = "inbbbox-abuse@netguru.co"
 
     /// Tracking ID used for Google Analytics.
     static var GATrackingId: String? {
