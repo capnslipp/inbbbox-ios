@@ -34,4 +34,17 @@ extension UIAlertController {
         
         return alert
     }
+
+    class func inappropriateContentReportedAlertController() -> UIAlertController {
+        let alert = UIAlertController(
+            title: nil,
+            message: NSLocalizedString("Inappropriate content has been reported. Verification and blocking will take up to 24 hours.",
+                comment: ""),
+            preferredStyle: .Alert
+        )
+        let okActionTitle = NSLocalizedString("OK", comment: "")
+        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))
+
+        return alert
+    }
 }

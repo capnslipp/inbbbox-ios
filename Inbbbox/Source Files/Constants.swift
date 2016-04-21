@@ -20,6 +20,8 @@ struct Dribbble {
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"
     static let Scope = "public+write+comment"
     static let RequestPerDayLimitForAuthenticatedUser = UInt(1440)
+    /// Email address used to report inappropriate content.
+    static let ReportInappropriateContentEmail = "inbbbox-abuse@netguru.co"
 
     static var GATrackingId: String? {
 #if ENV_PRODUCTION
