@@ -25,9 +25,9 @@ class CommentEditView: UIView {
 
     private var deleteLabelText: String {
         if isEditing {
-            return NSLocalizedString("CommentEditView.Delete", comment: "Editing comment, delete.")
+            return NSLocalizedString("Delete", comment: "")
         } else {
-            return NSLocalizedString("CommentEditView.Report", comment: "Editing comment, report content")
+            return NSLocalizedString("Report", comment: "")
         }
     }
     
