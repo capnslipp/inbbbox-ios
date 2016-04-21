@@ -11,6 +11,7 @@ import PromiseKit
 import ZFDragableModalTransition
 import TTTAttributedLabel
 import ImageViewer
+import MessageUI
 
 protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
 
@@ -173,6 +174,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
+            cell.reportActionHandler = { [weak self] in
+                self?.reportCommentAtIndexPath(indexPath)
+            }
             cell.avatarView.delegate = self
             cell.delegate = self
 
@@ -231,16 +235,11 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 
 extension ShotDetailsViewController: UICollectionViewDelegate {
 
-    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if collectionView.cellForItemAtIndexPath(indexPath) is ShotDetailsCommentCollectionViewCell {
-            return viewModel.isCurrentUserOwnerOfCommentAtIndex(indexPath.row)
-        }
-        return false
-    }
-
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotDetailsCommentCollectionViewCell {
-            cell.showEditView(true)
+            hideUnusedCommentEditingViews()
+            let isOwner = viewModel.isCurrentUserOwnerOfCommentAtIndex(indexPath.row)
+            cell.showEditView(true, forActionType: isOwner ? EditActionType.Editing : .Reporting)
         }
     }
 
@@ -445,6 +444,21 @@ private extension ShotDetailsViewController {
         }
     }
 
+    func reportCommentAtIndexPath(indexPath: NSIndexPath) {
+        let composer = MFMailComposeViewController()
+        composer.mailComposeDelegate = self
+
+        composer.setToRecipients([Dribbble.ReportInappropriateContentEmail])
+        let subject = NSLocalizedString("ShotDetailsViewController.Inappropriate",
+                                        comment: "Title of email with abusive content.")
+        composer.setSubject(subject)
+        let body = viewModel.reportBodyForAbusiveComment(indexPath)
+        composer.setMessageBody(body, isHTML: false)
+
+        presentViewController(composer, animated: true, completion: nil)
+        composer.navigationBar.tintColor = .whiteColor()
+    }
+
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
 
         shotDetailsView.commentComposerView.makeInactive()
@@ -495,6 +509,14 @@ private extension ShotDetailsViewController {
     func grayOutFooterIfNeeded() {
         let shouldGrayOut = !viewModel.hasComments && !viewModel.hasDescription
         footer?.grayOutBackground(shouldGrayOut)
+    }
+
+    func hideUnusedCommentEditingViews() {
+        shotDetailsView.collectionView.visibleCells().forEach {
+            if let commentCell = $0 as? ShotDetailsCommentCollectionViewCell {
+                commentCell.showEditView(false)
+            }
+        }
     }
 }
 
@@ -594,4 +616,25 @@ extension ShotDetailsViewController: ImageProvider {
     }
 
     func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
+}
+
+extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(controller: MFMailComposeViewController,
+                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+
+        controller.dismissViewControllerAnimated(true) {
+            self.hideUnusedCommentEditingViews()
+        }
+
+        switch result {
+            case MFMailComposeResultSent:
+                let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
+                presentViewController(contentReportedAlert, animated: true) {
+                    contentReportedAlert.view.tintColor = .pinkColor()
+                }
+                contentReportedAlert.view.tintColor = .pinkColor()
+            default: break
+        }
+    }
 }

@@ -46,8 +46,21 @@ extension UIAlertController {
                               comment: "Allows user to try again after error occurred."),
             preferredStyle: .Alert
         )
-        let cancelActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
-        alert.addAction(UIAlertAction(title: cancelActionTitle, style: .Cancel, handler: nil))
+        let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
+        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))
+
+        return alert
+    }
+
+    class func inappropriateContentReportedAlertController() -> UIAlertController {
+        let alert = UIAlertController(
+            title: nil,
+            message: NSLocalizedString("UIAlertControllerExtension.InappropriateContentReported",
+                comment: "Inappropriate content has been reported."),
+            preferredStyle: .Alert
+        )
+        let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
+        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))
 
         return alert
     }
