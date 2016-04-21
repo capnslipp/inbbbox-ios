@@ -67,6 +67,7 @@
 		2AF4DF2882A7E45E73B0253F /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5697E4400DF149C466788A41 /* Requestable.swift */; };
 		2D4EB542C282717ACCCDD53E /* APIConnectionsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA9A75F53B4797803D4FB49 /* APIConnectionsRequesterMock.swift */; };
 		2F3EF3B7C3E6841B46924AAE /* UserDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8E247C367E7CD816FFC6E7 /* UserDetailsViewModelSpec.swift */; };
+		30015E671CC8CC4400BB9911 /* MFMailComposeViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30015E661CC8CC4400BB9911 /* MFMailComposeViewControllerExtension.swift */; };
 		309EBC711CAD56860074FB8A /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EBC701CAD56860074FB8A /* CrashManager.swift */; };
 		30D1ED34355F08C05F0B1DBC /* CollectionViewLayoutSpacings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C8043ECC97F0591EA9579 /* CollectionViewLayoutSpacings.swift */; };
 		31D562CBC51E85CCFBF18C5F /* ShotBucketsActionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8F4F4DC52ABC426E05B98 /* ShotBucketsActionCollectionViewCell.swift */; };
@@ -436,6 +437,7 @@
 		2ED8F794058015E61BF82B95 /* ShotDetailsDescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsDescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2EEA38900364C70AF4820470 /* PageableQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PageableQuery.swift; sourceTree = "<group>"; };
 		2F59A124425AD6181A4B6CF2 /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		30015E661CC8CC4400BB9911 /* MFMailComposeViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFMailComposeViewControllerExtension.swift; sourceTree = "<group>"; };
 		309EBC701CAD56860074FB8A /* CrashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		30B635F69F1F9B5A4BB997EB /* DefaultViewControllerPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DefaultViewControllerPresenter.swift; sourceTree = "<group>"; };
 		30ED40221B9A46F946A93D9F /* ShotBucketsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModel.swift; sourceTree = "<group>"; };
@@ -846,6 +848,7 @@
 				472FDA9EBA0DF86EFAF923FC /* UIViewAnimationsExtension.swift */,
 				24917648B4ED154568BCFB6D /* UIViewControllerExtension.swift */,
 				BBC5F88643B64405114F960D /* UIWindowExtension.swift */,
+				30015E661CC8CC4400BB9911 /* MFMailComposeViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1939,6 +1942,7 @@
 				F5009E1D960AB0A804BB1CEC /* ActivityIndicatorSelectableView.swift in Sources */,
 				B1B57D6B3A17E953A5DC9FE1 /* AnimatableShotImageView.swift in Sources */,
 				749F37177406FA4671A31735 /* AutoScrollableShotsView.swift in Sources */,
+				30015E671CC8CC4400BB9911 /* MFMailComposeViewControllerExtension.swift in Sources */,
 				706212225CCFF89D35423D58 /* AvatarView.swift in Sources */,
 				DAFF71D6FB9428913E4AB25D /* CenterButtonTabBarView.swift in Sources */,
 				4F69CBC1A9E71612ADBE84AE /* CloseButtonView.swift in Sources */,

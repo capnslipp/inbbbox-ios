@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ExtendedIndexPathOperatable: IndexPathOperatable {
+protocol ExtendedIndexPathOperatable {
     func indexPathsForItems(items: [GroupItem]) -> [NSIndexPath]?
     func indexPathsForItemOfType(itemType: GroupItem.Type) -> [NSIndexPath]?
 }

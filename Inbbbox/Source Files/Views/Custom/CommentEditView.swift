@@ -15,6 +15,21 @@ class CommentEditView: UIView {
     private let topInset = CGFloat(10)
     private let bottomInset = CGFloat(10)
     private let buttonSize = CGFloat(24)
+    private var isEditing = true {
+        didSet {
+            deleteLabel.text = deleteLabelText
+            let imageName = isEditing ? "bt-delete-comment" : "bt-report-comment"
+            deleteButton.setImage(UIImage(named: imageName), forState: .Normal)
+        }
+    }
+
+    private var deleteLabelText: String {
+        if isEditing {
+            return NSLocalizedString("CommentEditView.Delete", comment: "Editing comment, delete.")
+        } else {
+            return NSLocalizedString("CommentEditView.Report", comment: "Editing comment, report content")
+        }
+    }
     
     // Colors
     private let viewBackgroundColor = UIColor.clearColor()
@@ -74,6 +89,15 @@ class CommentEditView: UIView {
         
         super.updateConstraints()
     }
+
+    // MARK: Public
+    func configureForEditing() {
+        isEditing = true
+    }
+
+    func configureForReporting() {
+        isEditing = false
+    }
     
     // MARK: Private
     
@@ -112,7 +136,7 @@ class CommentEditView: UIView {
     private func setupDeleteLabel() {
         deleteLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         deleteLabel.textColor = UIColor.textLightColor()
-        deleteLabel.text = NSLocalizedString("Delete", comment: "")
+        deleteLabel.text = deleteLabelText
         blurView.addSubview(deleteLabel)
     }
 }

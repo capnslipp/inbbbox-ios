@@ -17,11 +17,17 @@ private var horizontalSpaceBetweenAvatarAndText: CGFloat {
     return 15
 }
 
+enum EditActionType {
+    case Editing
+    case Reporting
+}
+
 class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
     
     var deleteActionHandler: (() -> Void)?
+    var reportActionHandler: (() -> Void)?
     
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = TTTAttributedLabel.newAutoLayoutView()
@@ -125,16 +131,36 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
         authorLabel.attributedText = nil
         commentLabel.attributedText = nil
         dateLabel.attributedText = nil
         avatarView.imageView.image = nil
+        editView.deleteButton.removeTarget(self,
+                                           action: #selector(deleteButtonDidTap(_:)),
+                                           forControlEvents: .TouchUpInside)
+        editView.deleteButton.removeTarget(self,
+                                           action: #selector(reportButtonDidTap(_:)),
+                                           forControlEvents: .TouchUpInside)
         showEditView(false)
     }
-    
-    func showEditView(show: Bool) {
+
+    func showEditView(show: Bool, forActionType action: EditActionType = .Editing) {
+
         editView.hidden = !show
+
+        guard show else { return }
+
+        switch action {
+        case .Editing:
+            editView.configureForEditing()
+            editView.deleteButton.addTarget(self,
+                                            action: #selector(deleteButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        case .Reporting:
+            editView.configureForReporting()
+            editView.deleteButton.addTarget(self,
+                                            action: #selector(reportButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        }
     }
     
     func setCommentLabelAttributedText(attributedText: NSAttributedString) {
@@ -172,7 +198,11 @@ extension ShotDetailsCommentCollectionViewCell {
     func commentLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
         delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer, layoutManager: layoutManager)
     }
-    
+
+    func reportButtonDidTap(_: UIButton) {
+        reportActionHandler?()
+    }
+
     func deleteButtonDidTap(_: UIButton) {
         deleteActionHandler?()
     }

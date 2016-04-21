@@ -320,6 +320,24 @@ extension ShotDetailsViewModel {
             }.error(reject)
         }
     }
+
+    func reportBodyForAbusiveComment(indexPath: NSIndexPath) -> String {
+
+        let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
+        let comment = comments[index]
+
+        let commentBody = comment.body?.string ?? ""
+
+        let separator = "***********************************"
+        let report = separator + "\n" +
+            commentBody + "\n" +
+            "Author: " + comment.user.username + "\n" +
+            "Author ID: " + comment.user.identifier + "\n" +
+            "Comment ID: " + comment.identifier + "\n" +
+            "Shot ID: " + shot.identifier + "\n" +
+        separator
+        return report
+    }
 }
 
 extension ShotDetailsViewModel {
@@ -335,7 +353,7 @@ extension ShotDetailsViewModel {
         } else if (hasDescription && hasComments) || (!hasDescription && hasComments) {
             return true
         }
-        // (hasDescription && !hasComments) || (!hasDescription && !hasComments)
+
         return false
     }
 }
