@@ -151,6 +151,13 @@ class ShotCollectionViewCell: UICollectionViewCell {
         return fabs(velocity.x) > fabs(velocity.y)
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        shotImageView.image = nil
+        shotImageView.originalImage = nil
+    }
+
     // MARK: - Actions
 
     func didSwipeCell(panGestureRecognizer: UIPanGestureRecognizer) {

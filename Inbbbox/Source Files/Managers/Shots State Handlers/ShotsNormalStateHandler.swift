@@ -50,16 +50,14 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     func prepareForPresentingData() {
         firstly {
             fetchLikedShots()
-        }.then {
-            self.shotsCollectionViewController?.collectionView?.reloadData()
+        }.then { () -> Void in
+            self.updateLikeImage()
         }.error { error in
             // NGRTemp: Need mockups for error message view
         }
     }
 
-    func presentData() {
-        shotsCollectionViewController?.collectionView?.reloadData()
-    }
+    func presentData() { /* empty by design */ }
 }
 
 // MARK: UICollecitonViewDataSource
@@ -85,8 +83,6 @@ extension ShotsNormalStateHandler {
 
         let shot = shotsCollectionViewController.shots[indexPath.item]
 
-        cell.shotImageView.image = nil
-        cell.shotImageView.originalImage = nil
         cell.shotImageView.activityIndicatorView.startAnimating()
 
         indexPathsNeededImageUpdate.append(indexPath)
@@ -96,14 +92,25 @@ extension ShotsNormalStateHandler {
         cell.liked = self.isShotLiked(shot)
         cell.delegate = self
         cell.swipeCompletion = { [weak self] action in
+
+            guard let certainSelf = self else { return }
+
             switch action {
             case .Like:
-                self?.likeShot(shot)
+                firstly {
+                    certainSelf.likeShot(shot)
+                }.then {
+                    cell.liked = true
+                }
             case .Bucket:
-                self?.likeShot(shot)
-                self?.presentShotBucketsViewController(shot)
+                firstly {
+                    certainSelf.likeShot(shot)
+                }.then {
+                    cell.liked = true
+                }
+                certainSelf.presentShotBucketsViewController(shot)
             case .Comment:
-                self?.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true)
+                certainSelf.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true)
             case .DoNothing:
                 break
             }
@@ -226,18 +233,21 @@ private extension ShotsNormalStateHandler {
         return likedShots.contains { $0.identifier == shot.identifier }
     }
 
-    func likeShot(shot: ShotType) {
+    func likeShot(shot: ShotType) -> Promise<Void> {
         if isShotLiked(shot) {
-            return
+            return Promise()
         }
 
-        firstly {
-            shotsRequester.likeShot(shot)
-        }.then { Void -> Void in
-            self.shotsCollectionViewController?.collectionView?.reloadData()
-            self.likedShots.append(shot)
-        }.error { error in
-            // NGRTemp: Need mockups for error message view
+        return Promise() { fulfill, reject in
+            firstly {
+                shotsRequester.likeShot(shot)
+            }.then { () -> Void in
+                self.likedShots.append(shot)
+                fulfill()
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+                reject(error)
+            }
         }
     }
 
@@ -250,6 +260,21 @@ private extension ShotsNormalStateHandler {
                     self.likedShots = shots
                 }
             }.then(fulfill).error(reject)
+        }
+    }
+
+    func updateLikeImage() {
+        guard
+            let viewController = shotsCollectionViewController,
+            let collectionView = viewController.collectionView
+        else {
+            return
+        }
+        let visibleShot = collectionView.indexPathsForVisibleItems().map { return viewController.shots[$0.item] }.first
+        let visibleCell = collectionView.visibleCells().first as? ShotCollectionViewCell
+
+        if let shot = visibleShot, let cell = visibleCell {
+            cell.liked = isShotLiked(shot)
         }
     }
 }

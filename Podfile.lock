@@ -59,7 +59,7 @@ DEPENDENCIES:
   - GPUImage (~> 0.1)
   - HanekeSwift (from `https://github.com/pikor/HanekeSwift.git`)
   - HockeySDK (~> 3.8)
-  - ImageViewer (~> 2.0)
+  - ImageViewer (from `https://github.com/MailOnline/ImageViewer.git`, tag `2.0.4`)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
@@ -78,6 +78,9 @@ EXTERNAL SOURCES:
     :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
   HanekeSwift:
     :git: https://github.com/pikor/HanekeSwift.git
+  ImageViewer:
+    :git: https://github.com/MailOnline/ImageViewer.git
+    :tag: 2.0.4
   Keys:
     :path: Pods/CocoaPodsKeys
 
@@ -88,6 +91,9 @@ CHECKOUT OPTIONS:
   HanekeSwift:
     :commit: 3664b33b543eece40bd3cf83c59619211301c3bf
     :git: https://github.com/pikor/HanekeSwift.git
+  ImageViewer:
+    :git: https://github.com/MailOnline/ImageViewer.git
+    :tag: 2.0.4
 
 SPEC CHECKSUMS:
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
