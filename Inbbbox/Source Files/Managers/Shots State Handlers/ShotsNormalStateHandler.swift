@@ -48,22 +48,16 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
 
     func prepareForPresentingData() {
-        let likedShotsOld = likedShots
         firstly {
             fetchLikedShots()
         }.then { () -> Void in
-            if self.likedShots != likedShotsOld {
-//                self.shotsCollectionViewController?.collectionView?.reloadData()
-            }
             self.updateLikeImage()
         }.error { error in
             // NGRTemp: Need mockups for error message view
         }
     }
 
-    func presentData() {
-        shotsCollectionViewController?.collectionView?.reloadData()
-    }
+    func presentData() { /* empty by design */ }
 }
 
 // MARK: UICollecitonViewDataSource
