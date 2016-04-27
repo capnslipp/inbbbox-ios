@@ -32,9 +32,50 @@
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>ic-likes</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Homescreen.Shortcuts.Inbbbox.Likes</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>co.netguru.inbbbox.likes</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>ic-buckets</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Homescreen.Shortcuts.Inbbbox.Buckets</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>co.netguru.inbbbox.buckets</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>ic-ball-inactive</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Homescreen.Shortcuts.Inbbbox.Shots</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>co.netguru.inbbbox.shots</string>
+			<key>New item</key>
+			<string></string>
+			<key>New item - 2</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>ic-following</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Homescreen.Shortcuts.Inbbbox.Followees</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>co.netguru.inbbbox.followees</string>
+		</dict>
 	</array>
 </dict>
 </plist>

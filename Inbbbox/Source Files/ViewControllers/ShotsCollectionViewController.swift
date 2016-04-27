@@ -200,7 +200,8 @@ private extension ShotsCollectionViewController {
                 comment: "Dismiss error alert."), style: .Cancel) {
             _ in
             Authenticator.logout()
-            UIApplication.sharedApplication().keyWindow?.setRootViewController(LoginViewController(), transition: nil)
+            let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            delegate?.rollbackToLoginViewController()
         }
         alertController.addAction(logoutAction)
         return alertController

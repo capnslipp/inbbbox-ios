@@ -11,6 +11,8 @@ import PromiseKit
 
 class LoginViewController: UIViewController {
 
+    var centerButtonTabBarController: CenterButtonTabBarController
+
     private var shotsAnimator: AutoScrollableShotsAnimator!
     private weak var aView: LoginView?
     private var viewAnimator: LoginViewAnimator?
@@ -20,6 +22,16 @@ class LoginViewController: UIViewController {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
         }
+    }
+
+    init(tabBarController: CenterButtonTabBarController) {
+        centerButtonTabBarController = tabBarController
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable, message="Use init(tabBarController:) instead")
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func loadView() {
@@ -64,7 +76,7 @@ class LoginViewController: UIViewController {
     }
 
     deinit {
-        shotsAnimator.stopAnimation()
+        shotsAnimator?.stopAnimation()
     }
 }
 
@@ -126,6 +138,6 @@ extension LoginViewController: LoginViewAnimatorDelegate {
 private extension LoginViewController {
 
     func presentNextViewController() {
-        self.presentViewController(CenterButtonTabBarController(), animated: false, completion: nil)
+        self.presentViewController(centerButtonTabBarController, animated: false, completion: nil)
     }
 }
