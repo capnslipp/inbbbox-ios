@@ -24,6 +24,7 @@ final class ShotDetailsViewModel {
 
     var commentsProvider = APICommentsProvider(page: 1, pagination: 30)
     var commentsRequester = APICommentsRequester()
+    var userProvider = APIUsersProvider()
     var bucketsRequester = BucketsRequester()
     var shotsRequester = ShotsRequester()
 
@@ -399,5 +400,14 @@ extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
         return shot.user.identifier == url.absoluteString ? shot.user : comments.filter {
             $0.user.identifier == url.absoluteString
         }.first?.user
+    }
+
+    func userForId(identifier: String) -> Promise<UserType> {
+
+        return Promise<UserType> { fulfill, reject in
+            firstly {
+                userProvider.provideUser(identifier)
+            }.then(fulfill).error(reject)
+        }
     }
 }
