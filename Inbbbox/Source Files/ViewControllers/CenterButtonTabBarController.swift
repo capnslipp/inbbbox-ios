@@ -21,7 +21,7 @@ class CenterButtonTabBarController: UITabBarController {
 
     override var selectedIndex: Int {
         didSet {
-            centerButton.selected = selectedViewController == shotsCollectionViewController ? true : false
+            centerButton.selected = selectedViewController == shotsCollectionViewController
         }
     }
 
