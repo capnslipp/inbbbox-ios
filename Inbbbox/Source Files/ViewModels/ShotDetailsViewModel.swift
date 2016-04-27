@@ -399,8 +399,6 @@ extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
     }
 
     func userForId(identifier: String) -> Promise<UserType> {
-        return Promise<UserType> { fulfill, reject in
-            userProvider.provideUser(identifier).then(fulfill).error(reject)
-        }
+        return userProvider.provideUser(identifier)
     }
 }
