@@ -527,9 +527,7 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
     func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
                                              textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
 
-        guard let view = gestureRecognizer.view else {
-            return
-        }
+        guard let view = gestureRecognizer.view else { return }
 
         var locationOfTouchInLabel = gestureRecognizer.locationInView(gestureRecognizer.view)
         let glyphRange = layoutManager.glyphRangeForTextContainer(textContainer)
@@ -554,7 +552,11 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
                 atIndex: locationIndex, effectiveRange: nil) as? NSURL
 
         if let url = url {
-            UIApplication.sharedApplication().openURL(url)
+            if viewModel.shouldOpenUserDetailsFromUrl(url) {
+                presentUserDetailsViewControllerForUser(viewModel.shot.user) // NGRTemp: provide correct user
+            } else {
+                UIApplication.sharedApplication().openURL(url)
+            }
         }
     }
 }

@@ -366,6 +366,15 @@ extension ShotDetailsViewModel {
 
 extension ShotDetailsViewModel {
 
+    func shouldOpenUserDetailsFromUrl(url: NSURL) -> Bool {
+        let userUrlPattern = "^https://dribbble.com/[0-9]{1,9}$"
+
+        if let _ = url.absoluteString.rangeOfString(userUrlPattern, options: .RegularExpressionSearch) {
+            return true
+        }
+        return false
+    }
+
     func indexInCommentArrayBasedOnItemIndex(index: Int) -> Int {
         return comments.count - itemsCount + index
     }

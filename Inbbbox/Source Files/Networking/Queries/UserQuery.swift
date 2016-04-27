@@ -22,7 +22,7 @@ struct UserQuery: Query {
     /// Initialize query for getting a user with given identifier.
     ///
     /// - parameter identifier: User's identifier.
-    init(identifier: String) {  // NGRTodo: change from String to UserType and get id with `user.identifier`
+    init(identifier: String) {
         path = "/users/" + identifier
     }
 }
