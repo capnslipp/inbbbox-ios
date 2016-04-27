@@ -19,6 +19,12 @@ class CenterButtonTabBarController: UITabBarController {
         case Accounts = 4
     }
 
+    override var selectedIndex: Int {
+        didSet {
+            centerButton.selected = selectedViewController == shotsCollectionViewController
+        }
+    }
+
     convenience init() {
         self.init(nibName: nil, bundle: nil)
 

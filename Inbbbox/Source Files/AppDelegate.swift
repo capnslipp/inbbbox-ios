@@ -13,13 +13,24 @@ import Haneke
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var centerButtonTabBarController: CenterButtonTabBarController?
+    var launchedShortcut: UIApplicationShortcutItem?
+
+    enum Shortcut: String {
+        case Likes = "co.netguru.inbbbox.likes"
+        case Buckets = "co.netguru.inbbbox.buckets"
+        case Shots = "co.netguru.inbbbox.shots"
+        case Followees = "co.netguru.inbbbox.followees"
+    }
 
     func application(application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject:AnyObject]?) -> Bool {
 
         AnalyticsManager.setupAnalytics()
         CrashManager.setup()
-        let rootViewController = UserStorage.isUserSignedIn ? CenterButtonTabBarController() : LoginViewController()
+        centerButtonTabBarController = CenterButtonTabBarController()
+        let loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
+        let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
@@ -32,7 +43,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         configureInitialSettings()
         CacheManager.setupCache()
-        return true
+
+        var shouldPerformAdditionalDelegateHandling = true
+        if let shortcut = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
+            launchedShortcut = shortcut
+            shouldPerformAdditionalDelegateHandling = false
+        }
+
+        return shouldPerformAdditionalDelegateHandling
     }
 
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?,
@@ -45,6 +63,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
         let notificationName = NotificationKey.UserNotificationSettingsRegistered.rawValue
         NSNotificationCenter.defaultCenter().postNotificationName(notificationName, object: nil)
+    }
+
+    func applicationDidBecomeActive(application: UIApplication) {
+        guard let shortcut = launchedShortcut else { return }
+
+        handleShortcutItem(shortcut)
+        launchedShortcut = nil
+    }
+
+    func application(application: UIApplication,
+                     performActionForShortcutItem shortcutItem: UIApplicationShortcutItem,
+                                                  completionHandler: (Bool) -> Void) {
+        let handledShortcutItem = handleShortcutItem(shortcutItem)
+        completionHandler(handledShortcutItem)
     }
 
     // MARK: - Core Data stack
@@ -104,5 +136,33 @@ private extension AppDelegate {
             Settings.StreamSource.PopularToday = true
             Settings.StreamSource.IsSet = true
         }
+    }
+}
+
+// MARK: 3D Touch Support
+
+private extension AppDelegate {
+
+    private func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+
+        guard UserStorage.isUserSignedIn else { return false }
+
+        var handled = false
+        if let shortcut = Shortcut(rawValue: shortcutItem.type) {
+            typealias index = CenterButtonTabBarController.CenterButtonViewControllers
+            switch shortcut {
+            case .Likes:
+                centerButtonTabBarController?.selectedIndex = index.Likes.rawValue
+            case .Buckets:
+                centerButtonTabBarController?.selectedIndex = index.Buckets.rawValue
+            case .Shots:
+                centerButtonTabBarController?.selectedIndex = index.Shots.rawValue
+            case .Followees:
+                centerButtonTabBarController?.selectedIndex = index.Followees.rawValue
+            }
+            handled = true
+        }
+
+        return handled
     }
 }
