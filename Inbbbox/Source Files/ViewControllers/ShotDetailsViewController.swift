@@ -549,7 +549,7 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
         let locationIndex = layoutManager.characterIndexForGlyphAtIndex(glyphIndex)
 
         guard let url = (view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName,
-                                                atIndex: locationIndex, effectiveRange: nil) as? NSURL else { return }
+                        atIndex: locationIndex, effectiveRange: nil) as? NSURL else { return }
 
         if viewModel.shouldOpenUserDetailsFromUrl(url) {
             if let identifier = url.absoluteString.componentsSeparatedByString("/").last {

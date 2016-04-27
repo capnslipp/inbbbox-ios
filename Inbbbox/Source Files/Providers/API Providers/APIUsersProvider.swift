@@ -10,7 +10,7 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
-/// Provides interface for dribbble comments read API
+/// Provides interface for dribbble user API
 class APIUsersProvider: PageableProvider {
 
     /**
@@ -24,7 +24,7 @@ class APIUsersProvider: PageableProvider {
 
         let query = UserQuery(identifier: identifier)
         return Promise<UserType> { fulfill, reject in
-            
+
             let request = Request(query: query)
 
             firstly {
@@ -34,8 +34,8 @@ class APIUsersProvider: PageableProvider {
 
                 fulfill(User.map(json) as UserType)
 
-                }.error { error in
-                    reject(error)
+            }.error { error in
+                reject(error)
             }
         }
     }

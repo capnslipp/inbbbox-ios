@@ -369,11 +369,7 @@ extension ShotDetailsViewModel {
 
     func shouldOpenUserDetailsFromUrl(url: NSURL) -> Bool {
         let userUrlPattern = "^https://dribbble.com/[0-9]{1,9}$"
-
-        if let _ = url.absoluteString.rangeOfString(userUrlPattern, options: .RegularExpressionSearch) {
-            return true
-        }
-        return false
+        return url.absoluteString.rangeOfString(userUrlPattern, options: .RegularExpressionSearch) != nil
     }
 
     func indexInCommentArrayBasedOnItemIndex(index: Int) -> Int {
@@ -403,11 +399,8 @@ extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
     }
 
     func userForId(identifier: String) -> Promise<UserType> {
-
         return Promise<UserType> { fulfill, reject in
-            firstly {
-                userProvider.provideUser(identifier)
-            }.then(fulfill).error(reject)
+            userProvider.provideUser(identifier).then(fulfill).error(reject)
         }
     }
 }
