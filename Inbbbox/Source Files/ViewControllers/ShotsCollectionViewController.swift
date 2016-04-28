@@ -70,8 +70,7 @@ extension ShotsCollectionViewController {
                 self.refreshShotsData()
             }.then {
                 self.stateHandler.presentData()
-            }.error {
-                error in
+            }.error { error in
                 let alertController = self.signOutAlertController()
                 self.presentViewController(alertController, animated: true, completion: nil)
                 alertController.view.tintColor = .pinkColor()
@@ -170,19 +169,16 @@ private extension ShotsCollectionViewController {
             refreshShotsData()
         }.then {
             self.collectionView?.reloadData()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Need mockups for error message view
         }
     }
 
     func refreshShotsData() -> Promise<Void> {
-        return Promise<Void> {
-            fulfill, reject in
+        return Promise<Void> { fulfill, reject in
             firstly {
                 self.shotsProvider.provideShots()
-            }.then {
-                shots -> Void in
+            }.then { shots -> Void in
                 self.shots = shots ?? []
             }.then(fulfill).error(reject)
         }
@@ -197,8 +193,7 @@ private extension ShotsCollectionViewController {
                 preferredStyle: .Alert
         )
         let logoutAction = UIAlertAction(title: NSLocalizedString("ShotsCollectionViewController.Dismiss",
-                comment: "Dismiss error alert."), style: .Cancel) {
-            _ in
+                comment: "Dismiss error alert."), style: .Cancel) { _ in
             Authenticator.logout()
             let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
             delegate?.rollbackToLoginViewController()

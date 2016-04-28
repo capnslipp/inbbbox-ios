@@ -70,15 +70,11 @@ final class ShotDetailsViewController: UIViewController {
         shotDetailsView.keyboardResizableView.delegate = self
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
 
-        firstly {
-            viewModel.loadAllComments()
-        }.then {
-            () -> Void in
+        viewModel.loadAllComments().then { () -> Void in
             self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -298,25 +294,19 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
 
         view.startAnimation()
 
-        firstly {
-            viewModel.postComment(comment)
-        }.then {
-            () -> Void in
+        viewModel.postComment(comment).then { () -> Void in
 
             let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0),
                     inSection: 0)
-            self.shotDetailsView.collectionView.performBatchUpdates({
-                () -> Void in
+            self.shotDetailsView.collectionView.performBatchUpdates({ () -> Void in
                 self.shotDetailsView.collectionView.insertItemsAtIndexPaths([indexPath])
-            }, completion: {
-                _ -> Void in
+            }, completion: { _ -> Void in
                 self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPath,
                         atScrollPosition: .CenteredVertically, animated: true)
             })
         }.always {
             view.stopAnimation()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -362,15 +352,11 @@ private extension ShotDetailsViewController {
 
         view.startAnimating()
 
-        firstly {
-            action()
-        }.then {
-            selected in
+        action().then { selected in
             view.selected = selected
         }.always {
             view.stopAnimating()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -379,15 +365,11 @@ private extension ShotDetailsViewController {
 
         view.startAnimating()
 
-        firstly {
-            viewModel.performLikeOperation()
-        }.then {
-            isShotLikedByUser in
+        viewModel.performLikeOperation().then { isShotLikedByUser in
             view.selected = isShotLikedByUser
         }.always {
             view.stopAnimating()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -396,10 +378,7 @@ private extension ShotDetailsViewController {
 
         view.startAnimating()
 
-        firstly {
-            viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
-        }.then {
-            result -> Void in
+        viewModel.removeShotFromBucketIfExistsInExactlyOneBucket().then { result -> Void in
             if let bucketNumber = result.bucketsNumber where !result.removed {
                 let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
                 self.presentShotBucketsViewControllerWithMode(mode)
@@ -408,8 +387,7 @@ private extension ShotDetailsViewController {
             }
         }.always {
             view.stopAnimating()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -433,13 +411,9 @@ private extension ShotDetailsViewController {
     }
 
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
-        firstly {
-            viewModel.deleteCommentAtIndex(indexPath.item)
-        }.then {
-            () -> Void in
+        viewModel.deleteCommentAtIndex(indexPath.item).then { () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -485,8 +459,7 @@ private extension ShotDetailsViewController {
         let navigationController = UINavigationController(rootViewController: userDetailsViewController)
 
         animateHeader(start: false)
-        userDetailsViewController.dismissClosure = {
-            [weak self] in
+        userDetailsViewController.dismissClosure = { [weak self] in
             self?.animateHeader(start: true)
         }
         presentViewController(navigationController, animated: true, completion: nil)
@@ -527,35 +500,16 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
     func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
                                              textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
 
-        guard let view = gestureRecognizer.view else { return }
-
-        var locationOfTouchInLabel = gestureRecognizer.locationInView(gestureRecognizer.view)
-        let glyphRange = layoutManager.glyphRangeForTextContainer(textContainer)
-
-        let textOffset: CGPoint = {
-            var textOffset = CGPoint.zero
-            let textBounds = layoutManager.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer)
-            let paddingHeight = (view.bounds.size.height - textBounds.size.height) / 2
-            if paddingHeight > 0 {
-                textOffset.y = paddingHeight
-            }
-            return textOffset
-        }()
-
-        locationOfTouchInLabel.x -= textOffset.x
-        locationOfTouchInLabel.y -= textOffset.y
-
-        let glyphIndex = layoutManager.glyphIndexForPoint(locationOfTouchInLabel, inTextContainer: textContainer)
-        let locationIndex = layoutManager.characterIndexForGlyphAtIndex(glyphIndex)
-
-        guard let url = (view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName,
-                        atIndex: locationIndex, effectiveRange: nil) as? NSURL else { return }
+        guard let url = UrlDetector.detectUrlFromGestureRecognizer(gestureRecognizer,
+                                                                   textContainer: textContainer,
+                                                                   layoutManager: layoutManager)
+        else {
+            return
+        }
 
         if viewModel.shouldOpenUserDetailsFromUrl(url) {
             if let identifier = url.absoluteString.componentsSeparatedByString("/").last {
-                firstly {
-                    viewModel.userForId(identifier)
-                }.then { [weak self] user in
+                viewModel.userForId(identifier).then { [weak self] user in
                     self?.presentUserDetailsViewControllerForUser(user)
                 }
             }
@@ -620,8 +574,6 @@ extension ShotDetailsViewController: ImageProvider {
             completion(image)
         }
     }
-
-    func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
 }
 
 extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
