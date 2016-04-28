@@ -24,6 +24,7 @@ final class ShotDetailsViewModel {
 
     var commentsProvider = APICommentsProvider(page: 1, pagination: 30)
     var commentsRequester = APICommentsRequester()
+    var userProvider = APIUsersProvider()
     var bucketsRequester = BucketsRequester()
     var shotsRequester = ShotsRequester()
 
@@ -366,6 +367,11 @@ extension ShotDetailsViewModel {
 
 extension ShotDetailsViewModel {
 
+    func shouldOpenUserDetailsFromUrl(url: NSURL) -> Bool {
+        let userUrlPattern = "^https://dribbble.com/[0-9]{1,9}$"
+        return url.absoluteString.rangeOfString(userUrlPattern, options: .RegularExpressionSearch) != nil
+    }
+
     func indexInCommentArrayBasedOnItemIndex(index: Int) -> Int {
         return comments.count - itemsCount + index
     }
@@ -390,5 +396,9 @@ extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
         return shot.user.identifier == url.absoluteString ? shot.user : comments.filter {
             $0.user.identifier == url.absoluteString
         }.first?.user
+    }
+
+    func userForId(identifier: String) -> Promise<UserType> {
+        return userProvider.provideUser(identifier)
     }
 }

@@ -345,6 +345,7 @@
 		EE2AACF3017E0000EA7F8164 /* UserDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEA03D83A79AA83801134F0 /* UserDetailsViewModel.swift */; };
 		EFD89D4338FFEEEE76392087 /* UIViewAnimationsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472FDA9EBA0DF86EFAF923FC /* UIViewAnimationsExtension.swift */; };
 		EFEB4F05F24BBFC4C907F611 /* SettingsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1D5F10E1D439D514FDB604 /* SettingsSpec.swift */; };
+		F023FD901CD0D22100CA650D /* APIUsersProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F023FD8F1CD0D22100CA650D /* APIUsersProvider.swift */; };
 		F03764FC1CBB9F81008183F3 /* LazyImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03764FB1CBB9F81008183F3 /* LazyImageProvider.swift */; };
 		F0B898D71CC0F189004A807C /* ImageViewerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */; };
 		F0EE2870B58F0E2F0AEF5922 /* AvatarSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93BA6AA99E90D52C6A09F6 /* AvatarSettable.swift */; };
@@ -740,6 +741,7 @@
 		ED14B7F90B5F3A56E09857D8 /* ShotsStateHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsStateHandler.swift; sourceTree = "<group>"; };
 		EF1B71814BD31275DACE75B1 /* RemoveFromBucketQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RemoveFromBucketQuery.swift; sourceTree = "<group>"; };
 		EFAD56AC35062CE4A617CB43 /* LargeFolloweeCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LargeFolloweeCollectionViewCell.swift; sourceTree = "<group>"; };
+		F023FD8F1CD0D22100CA650D /* APIUsersProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIUsersProvider.swift; sourceTree = "<group>"; };
 		F03764FB1CBB9F81008183F3 /* LazyImageProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyImageProvider.swift; sourceTree = "<group>"; };
 		F049C867F1FCCDB672E8597F /* CoreDataHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerExtension.swift; sourceTree = "<group>"; };
@@ -1546,6 +1548,7 @@
 				4A6E65F94C815CC78C3533D3 /* APITeamsProvider.swift */,
 				4F5A7FAAA58E1C5E792679C7 /* PageableProvider.swift */,
 				236971B1D64CB8B5084BD649 /* Verifiable.swift */,
+				F023FD8F1CD0D22100CA650D /* APIUsersProvider.swift */,
 			);
 			path = "API Providers";
 			sourceTree = "<group>";
@@ -1881,6 +1884,7 @@
 				59290C9F2CCEA2A6D85C5E9F /* DribbbleNetworkService.swift in Sources */,
 				3BC8D5284656ECF2F51C26A7 /* HeaderAuthorizable.swift in Sources */,
 				7449D9881CAD4A8D00E37CE9 /* URLToUserProvider.swift in Sources */,
+				F023FD901CD0D22100CA650D /* APIUsersProvider.swift in Sources */,
 				792F6175B792842F448E45A5 /* NetworkService.swift in Sources */,
 				25FCDA8EDB592D7C547F294C /* OAuthAuthorizable.swift in Sources */,
 				9A8F7EE7A12211088EEAF115 /* PageableComponent.swift in Sources */,
