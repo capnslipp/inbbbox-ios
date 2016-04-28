@@ -15,4 +15,4 @@ PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.staging
 PRODUCT_BUNDLE_VERSION_STRING = 1.0
 PRODUCT_BUNDLE_VERSION = 1
 
-CODE_SIGN_IDENTITY = iPhone Developer
+CODE_SIGN_IDENTITY = iPhone Distribution: netguru sp. z o. o.
