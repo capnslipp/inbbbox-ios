@@ -69,22 +69,19 @@ class OAuthAuthorizableSpec: QuickSpec {
                 accessTokenURLRequest = sut?.accessTokenURLRequestWithRequestToken("fixture.request.token")
             }
 
-            pending("sth is wrong in here") {
-
-                it("should have proper url") {
-                    let absoluteString = {
-                        "https://fixturerequest/accesstokenurl" +
-                            "?" +
-                            "code=fixture.request.token" +
-                            "&" +
-                            "client_id=fixture.clientID" +
-                            "&" +
-                            "redirect_uri=https://redirecturi" +
-                            "&" +
-                        "client_secret=fixture.clientSecret"
-                    }()
-                    expect(accessTokenURLRequest.URL?.absoluteString).to(equal(absoluteString))
-                }
+            it("should have proper url") {
+                let absoluteString = {
+                    "https://fixturerequest/accesstokenurl" +
+                    "?" +
+                    "client_id=fixture.clientID" +
+                    "&" +
+                    "client_secret=fixture.clientSecret" +
+                    "&" +
+                    "code=fixture.request.token" +
+                    "&" +
+                    "redirect_uri=https://redirecturi"
+                }()
+                expect(accessTokenURLRequest.URL?.absoluteString).to(equal(absoluteString))
             }
 
             it("should use POST method") {
