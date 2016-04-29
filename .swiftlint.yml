@@ -2,6 +2,7 @@ included: # paths to include during linting. `--path` is ignored if present.
   - Inbbbox
 disabled_rules:
   - legacy_cggeometry_functions
+  - valid_docs
 # TODO: Refactor code to remove following rules
 line_length: 120
 function_body_length: 45
