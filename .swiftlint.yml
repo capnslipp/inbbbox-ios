@@ -1,5 +1,7 @@
 included: # paths to include during linting. `--path` is ignored if present.
   - Inbbbox
+disabled_rules:
+  - LegacyCGGeometryFunctionsRule
 # TODO: Refactor code to remove following rules
 line_length: 120
 function_body_length: 45

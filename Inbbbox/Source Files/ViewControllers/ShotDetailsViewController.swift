@@ -405,8 +405,8 @@ private extension ShotDetailsViewController {
     func sizeForExpandedCollectionViewHeader(collectionView: UICollectionView) -> CGSize {
         let dribbbleImageRatio = CGFloat(0.75)
         return CGSize(
-        width: floor(collectionView.bounds.width),
-                height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
+            width: floor(collectionView.bounds.width),
+            height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
         )
     }
 
@@ -440,10 +440,9 @@ private extension ShotDetailsViewController {
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
         shotBucketsViewController.dismissClosure = { [weak self] in
-            guard let certainSelf = self else { return }
-            certainSelf.animateHeader(start: true)
-            certainSelf.viewModel.clearBucketsData()
-            certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
+            self?.animateHeader(start: true)
+            self?.viewModel.clearBucketsData()
+            self?.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
 
         modalTransitionAnimator =
@@ -502,10 +501,7 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
 
         guard let url = UrlDetector.detectUrlFromGestureRecognizer(gestureRecognizer,
                                                                    textContainer: textContainer,
-                                                                   layoutManager: layoutManager)
-        else {
-            return
-        }
+                                                                   layoutManager: layoutManager) else { return }
 
         if viewModel.shouldOpenUserDetailsFromUrl(url) {
             if let identifier = url.absoluteString.componentsSeparatedByString("/").last {
@@ -564,13 +560,10 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
     }
 }
 
-
 extension ShotDetailsViewController: ImageProvider {
 
     func provideImage(completion: UIImage? -> Void) {
-        if let image = header?.imageView.image {
-            completion(image)
-        }
+        completion(header?.imageView.image)
     }
 }
 
