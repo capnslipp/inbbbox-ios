@@ -11,14 +11,14 @@ import UIKit
 /// Extension for predefined colors in Inbbbox app.
 extension UIColor {
 
-    /// Color based on RGB color model and alpha parameter
+    /// Color based on RGB color model and alpha parameter.
     ///
-    /// - parameter red:    integer value of red color
-    /// - parameter green:  integer value of green color
-    /// - parameter blue:   integer value of blue color
-    /// - parameter alpha:  float value of alpha. Needs to be between 0 and 1.
+    /// - parameter red:    Integer value of red color.
+    /// - parameter green:  Integer value of green color.
+    /// - parameter blue:   Integer value of blue color.
+    /// - parameter alpha:  Float value of alpha. Needs to be between 0 and 1.
     ///
-    /// - returns instance of UIColor
+    /// - returns: Instance of UIColor.
     class func RGBA(red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) -> UIColor {
         return UIColor(red: CGFloat(red) / 255.0,
                      green: CGFloat(green) / 255.0,
