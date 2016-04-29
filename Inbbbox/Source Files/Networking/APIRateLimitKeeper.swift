@@ -142,7 +142,6 @@ final class APIRateLimitKeeper {
     /**
      Verifies rate limit. Throws with APIRateLimitKeeperError if limit is known and exceeded.
      */
-
     func verifyRateLimit() throws {
 
         if var perDayRemainingLimit = rateLimitRemainingPerDay {
