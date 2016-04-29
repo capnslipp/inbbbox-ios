@@ -218,13 +218,13 @@ class APICommentsRequesterSpec: QuickSpec {
                     self.removeAllStubs()
                 }
                 
-                it("comment should be posted") {
-                    sut.deleteComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
-                        didInvokePromise = true
-                    }.error { _ in fail() }
-                    
-                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
-                }
+//                it("comment should be posted") {
+//                    sut.deleteComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
+//                        didInvokePromise = true
+//                    }.error { _ in fail() }
+//                    
+//                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+//                }
             }
         }
     }

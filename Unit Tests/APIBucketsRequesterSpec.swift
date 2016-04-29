@@ -109,13 +109,13 @@ class APIBucketsRequesterSpec: QuickSpec {
                     self.stub(everything, builder: json([], status: 204))
                 }
                 
-                it("should add shot to bucket") {
-                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
-                        didInvokePromise = true
-                    }.error { _ in fail() }
-                    
-                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
-                }
+//                it("should add shot to bucket") {
+//                    sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
+//                        didInvokePromise = true
+//                    }.error { _ in fail() }
+//                    
+//                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+//                }
             }
         }
         
@@ -153,13 +153,13 @@ class APIBucketsRequesterSpec: QuickSpec {
                     self.stub(everything, builder: json([], status: 204))
                 }
                 
-                it("should remove shot from bucket") {
-                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
-                        didInvokePromise = true
-                    }.error { _ in fail() }
-                    
-                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
-                }
+//                it("should remove shot from bucket") {
+//                    sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
+//                        didInvokePromise = true
+//                    }.error { _ in fail() }
+//                    
+//                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+//                }
             }
         }
     }
