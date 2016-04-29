@@ -13,8 +13,6 @@ extension UITableView {
     /// Deselects row if is already selected
     ///
     /// -parameter animated: bool value that indicates if deselection should be animated
-
-
     func deselectRowIfSelectedAnimated(animated: Bool) {
         if let indexPath = indexPathForSelectedRow {
             deselectRowAtIndexPath(indexPath, animated: animated)
@@ -26,8 +24,6 @@ extension UITableView {
     /// -parameter indexPath: index path of row
     /// -parameter animated: bool value that indicates if deselection should be animated.
     ///                      Default is true.
-
-
     func reloadAndDeselectRowAtIndexPath(indexPath: NSIndexPath, animated: Bool = true) {
         reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
         selectRowAtIndexPath(indexPath, animated: false, scrollPosition: .None)

@@ -14,10 +14,11 @@ class APITeamsProvider: PageableProvider {
 
     /**
      Provides team's members.
+     
+     - parameter team: Team to get members for.
 
      - returns: Promise which resolves with users or nil.
      */
-
     func provideMembersForTeam(team: TeamType) -> Promise<[UserType]?> {
 
         let query = TeamMembersQuery(team: team)

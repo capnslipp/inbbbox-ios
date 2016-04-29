@@ -33,10 +33,10 @@ extension AcknowledgementsViewController {
 // MARK: Private methods
 private extension AcknowledgementsViewController {
     func acknowledgementsHTMLString() -> String {
-        guard
-            let file = NSBundle.mainBundle().pathForResource("Acknowledgements", ofType:"html"),
-            let data = NSData(contentsOfFile: file),
-            let htmlString = String(data: data, encoding: NSUTF8StringEncoding)
+        guard let
+            file = NSBundle.mainBundle().pathForResource("Acknowledgements", ofType:"html"),
+            data = NSData(contentsOfFile: file),
+            htmlString = String(data: data, encoding: NSUTF8StringEncoding)
         else {
             return ""
         }
