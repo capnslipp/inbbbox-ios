@@ -318,10 +318,6 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
 
 extension ShotDetailsViewController: KeyboardResizableViewDelegate {
 
-    func keyboardResizableView(view: KeyboardResizableView, didRelayoutSubviewsWithState state: KeyboardState) {
-        // intentionally left blank.
-    }
-
     func keyboardResizableView(view: KeyboardResizableView, willRelayoutSubviewsWithState state: KeyboardState) {
         let round = state == .WillAppear
         shotDetailsView.commentComposerView.animateByRoundingCorners(round)
@@ -550,9 +546,7 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
     }
 
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            animateHeader(start: true)
-        }
+        !decelerate ? animateHeader(start: true) : {}()
     }
 
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
