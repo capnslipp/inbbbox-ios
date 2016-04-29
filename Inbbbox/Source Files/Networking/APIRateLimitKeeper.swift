@@ -141,6 +141,9 @@ final class APIRateLimitKeeper {
 
     /**
      Verifies rate limit. Throws with APIRateLimitKeeperError if limit is known and exceeded.
+     
+     - throws: APIRateLimitKeeperError.DidExceedRateLimitPerDay or APIRateLimitKeeperError.DidExceedRateLimitPerMinute
+               error with time interval remaining to reset limit as parameter.
      */
     func verifyRateLimit() throws {
 
