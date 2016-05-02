@@ -61,16 +61,16 @@ class APIBucketsProviderSpec: QuickSpec {
                 afterEach {
                     buckets = nil
                 }
-//                
-//                it("buckets should be properly returned") {
-//                    sut.provideMyBuckets().then { _buckets -> Void in
-//                        buckets = _buckets
-//                    }.error { _ in fail() }
-//                    
-//                    expect(buckets).toNotEventually(beNil(), timeout: 3)
-//                    expect(buckets).toEventually(haveCount(3))
-//                    expect(buckets?.first?.identifier).toEventually(equal("1"))
-//                }
+                
+                it("buckets should be properly returned") {
+                    sut.provideMyBuckets().then { _buckets -> Void in
+                        buckets = _buckets
+                    }.error { _ in fail() }
+                    
+                    expect(buckets).toNotEventually(beNil(), timeout: 3)
+                    expect(buckets).toEventually(haveCount(3))
+                    expect(buckets?.first?.identifier).toEventually(equal("1"))
+                }
             }
         }
         

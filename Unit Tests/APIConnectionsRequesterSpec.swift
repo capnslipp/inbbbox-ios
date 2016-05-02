@@ -61,13 +61,13 @@ class APIConnectionsRequesterSpec: QuickSpec {
                     self.stub(everything, builder: json([], status: 204))
                 }
                 
-//                it("should follow user") {
-//                    sut.followUser(User.fixtureUser()).then {
-//                        didInvokePromise = true
-//                    }.error { _ in fail() }
-//                    
-//                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
-//                }
+                it("should follow user") {
+                    sut.followUser(User.fixtureUser()).then {
+                        didInvokePromise = true
+                    }.error { _ in fail() }
+                    
+                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+                }
             }
         }
         
@@ -105,13 +105,13 @@ class APIConnectionsRequesterSpec: QuickSpec {
                     self.stub(everything, builder: json([], status: 204))
                 }
                 
-//                it("should unfollow user") {
-//                    sut.followUser(User.fixtureUser()).then {
-//                        didInvokePromise = true
-//                    }.error { _ in fail() }
-//                    
-//                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
-//                }
+                it("should unfollow user") {
+                    sut.followUser(User.fixtureUser()).then {
+                        didInvokePromise = true
+                    }.error { _ in fail() }
+                    
+                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+                }
             }
         }
         
@@ -149,13 +149,13 @@ class APIConnectionsRequesterSpec: QuickSpec {
                     self.stub(everything, builder: json([], status: 204))
                 }
                 
-//                it("should unfollow user") {
-//                    sut.isUserFollowedByMe(User.fixtureUser()).then { _ in
-//                        didInvokePromise = true
-//                    }.error { _ in fail("This should not be invoked") }
-//                    
-//                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
-//                }
+                it("should unfollow user") {
+                    sut.isUserFollowedByMe(User.fixtureUser()).then { _ in
+                        didInvokePromise = true
+                    }.error { _ in fail("This should not be invoked") }
+                    
+                    expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+                }
             }
         }
     }
