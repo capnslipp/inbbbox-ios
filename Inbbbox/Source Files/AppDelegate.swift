@@ -160,6 +160,7 @@ private extension AppDelegate {
             case .Followees:
                 centerButtonTabBarController?.selectedIndex = index.Followees.rawValue
             }
+            centerButtonTabBarController?.configureForLaunchingWithForceTouchShortcut()
             handled = true
         }
 
