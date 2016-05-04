@@ -60,7 +60,7 @@ extension UIAlertController {
             preferredStyle: .Alert
         )
         let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
-        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))        
+        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))
 
         return alert
     }
