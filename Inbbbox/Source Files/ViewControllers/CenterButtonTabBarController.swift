@@ -121,6 +121,14 @@ class CenterButtonTabBarController: UITabBarController {
         }
     }
 
+// MARK: - Public
+    /// Do any additional configuration in situation
+    /// where app was launched with 3D Touch shortcut.
+    func configureForLaunchingWithForceTouchShortcut() {
+        tabBar.alpha = 1.0
+        tabBar.userInteractionEnabled = true
+    }
+
 //    MARK: - Actions
 
     func didTapCenterButton(_: UIButton) {
