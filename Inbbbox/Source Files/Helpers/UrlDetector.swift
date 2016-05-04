@@ -9,6 +9,14 @@
 import UIKit
 
 final class UrlDetector {
+
+    /// Detect URL in text container based on tap parameters from gesture recognizer.
+    ///
+    /// - parameter gestureRecognizer: Gesture recognizer of view containing text.
+    /// - parameter textContainer: Text container to detect url in.
+    /// - parameter layoutManager: Layout manager of tapped view.
+    ///
+    /// - returns: Detected URL if exists, otherwise returns `nil`.
     class func detectUrlFromGestureRecognizer(gestureRecognizer: UIGestureRecognizer,
                                               textContainer: NSTextContainer,
                                               layoutManager: NSLayoutManager) -> NSURL? {

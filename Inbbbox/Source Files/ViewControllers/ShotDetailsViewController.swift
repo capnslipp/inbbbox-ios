@@ -9,15 +9,8 @@
 import UIKit
 import PromiseKit
 import ZFDragableModalTransition
-import TTTAttributedLabel
 import ImageViewer
 import MessageUI
-
-protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
-
-    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
-            textContainer: NSTextContainer, layoutManager: NSLayoutManager)
-}
 
 final class ShotDetailsViewController: UIViewController {
 
@@ -280,6 +273,8 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: Private extension
+
 private extension ShotDetailsViewController {
 
     func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
@@ -398,18 +393,6 @@ private extension ShotDetailsViewController {
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
     }
 
-    func presentUserDetailsViewControllerForUser(user: UserType) {
-
-        let userDetailsViewController = UserDetailsViewController(user: user)
-        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-
-        animateHeader(start: false)
-        userDetailsViewController.dismissClosure = { [weak self] in
-            self?.animateHeader(start: true)
-        }
-        presentViewController(navigationController, animated: true, completion: nil)
-    }
-
     func presentShotFullscreen() {
 
         guard let header = header else { return }
@@ -418,15 +401,24 @@ private extension ShotDetailsViewController {
         presentImageViewer(imageViewer)
     }
 
+    func grayOutFooterIfNeeded() {
+        let shouldGrayOut = !viewModel.hasComments && !viewModel.hasDescription
+        footer?.grayOutBackground(shouldGrayOut)
+    }
+
+    dynamic func closeButtonDidTap(_: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+// MARK: Public extension
+
+extension ShotDetailsViewController {
+
     func animateHeader(start start: Bool) {
         if let imageView = header?.imageView as? AnimatableShotImageView {
             start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
         }
-    }
-
-    func grayOutFooterIfNeeded() {
-        let shouldGrayOut = !viewModel.hasComments && !viewModel.hasDescription
-        footer?.grayOutBackground(shouldGrayOut)
     }
 
     func hideUnusedCommentEditingViews() {
@@ -437,94 +429,15 @@ private extension ShotDetailsViewController {
         }
     }
 
-    dynamic func closeButtonDidTap(_: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-}
+    func presentUserDetailsViewControllerForUser(user: UserType) {
 
-// MARK: UICollectionViewCellWithLabelContainingClickableLinksDelegate
+        let userDetailsViewController = UserDetailsViewController(user: user)
+        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
 
-extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClickableLinksDelegate {
-
-    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
-                                             textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
-
-        guard let url = UrlDetector.detectUrlFromGestureRecognizer(gestureRecognizer,
-                                                                   textContainer: textContainer,
-                                                                   layoutManager: layoutManager) else { return }
-
-        if viewModel.shouldOpenUserDetailsFromUrl(url) {
-            if let identifier = url.absoluteString.componentsSeparatedByString("/").last {
-                viewModel.userForId(identifier).then { [weak self] user in
-                    self?.presentUserDetailsViewControllerForUser(user)
-                }
-            }
-        } else {
-            UIApplication.sharedApplication().openURL(url)
-        }
-    }
-}
-
-extension ShotDetailsViewController: AvatarViewDelegate {
-
-    func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton) {
-        var user: UserType?
-        if avatarView.superview == header {
-            user = viewModel.shot.user
-        } else if avatarView.superview?.superview is ShotDetailsCommentCollectionViewCell {
-            guard let cell = avatarView.superview?.superview as? ShotDetailsCommentCollectionViewCell else { return }
-            if let indexPath = shotDetailsView.collectionView.indexPathForCell(cell) {
-                let index = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
-                user = viewModel.comments[index].user
-            }
-        }
-        if let user = user {
-            presentUserDetailsViewControllerForUser(user)
-        }
-    }
-}
-
-extension ShotDetailsViewController: TTTAttributedLabelDelegate {
-
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        if let user = viewModel.userForURL(url) {
-            presentUserDetailsViewControllerForUser(user)
-        }
-    }
-}
-
-extension ShotDetailsViewController: UIScrollViewDelegate {
-
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         animateHeader(start: false)
-    }
-
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        !decelerate ? animateHeader(start: true) : {}()
-    }
-
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        animateHeader(start: true)
-    }
-}
-
-extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
-
-    func mailComposeController(controller: MFMailComposeViewController,
-                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-
-        controller.dismissViewControllerAnimated(true) {
-            self.hideUnusedCommentEditingViews()
+        userDetailsViewController.dismissClosure = { [weak self] in
+            self?.animateHeader(start: true)
         }
-
-        switch result {
-            case MFMailComposeResultSent:
-                let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
-                presentViewController(contentReportedAlert, animated: true) {
-                    contentReportedAlert.view.tintColor = .pinkColor()
-                }
-                contentReportedAlert.view.tintColor = .pinkColor()
-            default: break
-        }
+        presentViewController(navigationController, animated: true, completion: nil)
     }
 }
