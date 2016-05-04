@@ -20,7 +20,10 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
     private let shotsProvider = ShotsProvider()
 
     var shouldShowFollowButton: Bool {
-        return UserStorage.isUserSignedIn
+        if let currentUser = UserStorage.currentUser where currentUser.identifier != user.identifier {
+            return true
+        }
+        return false
     }
     var itemsCount: Int {
         return userShots.count
