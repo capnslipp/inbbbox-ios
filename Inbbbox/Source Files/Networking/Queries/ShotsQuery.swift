@@ -37,7 +37,6 @@ struct ShotsQuery: Query {
     }
 
     // Query definition
-
     let method = Method.GET
     var parameters = Parameters(encoding: .URL)
     private(set) var path = "/shots"
@@ -48,14 +47,13 @@ struct ShotsQuery: Query {
     }
 
     /// Initialize query for list of the shots of given type.
-
-
+    ///
+    /// - parameter type: Shot's type.
     init(type: ShotsType) {
         path = type.path
     }
 
     // Types
-
     enum List: String {
         case Animated = "animated"
         case Attachments = "attachments"
@@ -79,7 +77,6 @@ struct ShotsQuery: Query {
     }
 
     // Parameters keys
-
     private enum Key: String {
         case List = "list"
         case Timeframe = "timeframe"
@@ -88,7 +85,6 @@ struct ShotsQuery: Query {
     }
 
     // Parameters accessors
-
     var list: List? {
         get {
             if let listValue = parameters[Key.List.rawValue] as? String {

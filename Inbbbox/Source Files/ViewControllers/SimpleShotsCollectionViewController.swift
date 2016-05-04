@@ -27,8 +27,8 @@ class SimpleShotsCollectionViewController: TwoLayoutsCollectionViewController {
 extension SimpleShotsCollectionViewController {
 
     /// Use this `init` to display shots from given bucket.
-
-
+    ///
+    /// - parameter bucket: Bucket to display shots for.
     convenience init(bucket: BucketType) {
         self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio,
                 twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)

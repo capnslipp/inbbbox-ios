@@ -31,6 +31,10 @@ protocol KeyboardResizableViewDelegate: class {
     func keyboardResizableView(view: KeyboardResizableView, didRelayoutSubviewsWithState state: KeyboardState)
 }
 
+extension KeyboardResizableViewDelegate {
+    func keyboardResizableView(view: KeyboardResizableView, didRelayoutSubviewsWithState state: KeyboardState) { }
+}
+
 class KeyboardResizableView: UIView {
 
     /**

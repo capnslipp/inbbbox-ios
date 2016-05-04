@@ -160,11 +160,11 @@ extension SettingsViewController {
 private extension SettingsViewController {
 
     func configureSettingCell(cell: UITableViewCell, forItem item: GroupItem) {
-        if let item = item as? SwitchItem, let switchCell = cell as? SwitchCell {
+        if let item = item as? SwitchItem, switchCell = cell as? SwitchCell {
             configureSwitchCell(switchCell, forItem: item)
-        } else if let item = item as? DateItem, let dateCell = cell as? DateCell {
+        } else if let item = item as? DateItem, dateCell = cell as? DateCell {
             configureDateCell(dateCell, forItem: item)
-        } else if let item = item as? LabelItem, let labelCell = cell as? LabelCell {
+        } else if let item = item as? LabelItem, labelCell = cell as? LabelCell {
             configureLabelCell(labelCell, forItem: item)
         }
     }

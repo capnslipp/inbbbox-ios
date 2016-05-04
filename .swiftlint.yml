@@ -1,5 +1,8 @@
 included: # paths to include during linting. `--path` is ignored if present.
   - Inbbbox
+disabled_rules:
+  - legacy_cggeometry_functions
+  - valid_docs # temporary disabled cause one issue can't be fixed with this version of `valid_docs` rule
 # TODO: Refactor code to remove following rules
 line_length: 120
 function_body_length: 45

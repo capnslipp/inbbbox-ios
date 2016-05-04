@@ -11,16 +11,14 @@ import UIKit
 /// Extension for predefined colors in Inbbbox app.
 extension UIColor {
 
-    /// Color based on RGB color model and alpha parameter
+    /// Color based on RGB color model and alpha parameter.
     ///
-    /// - parameter red:    integer value of red color
-    /// - parameter green:  integer value of green color
-    /// - parameter blue:   integer value of blue color
-    /// - parameter alpha:  float value of alpha. Needs to be between 0 and 1.
+    /// - parameter red:    Integer value of red color.
+    /// - parameter green:  Integer value of green color.
+    /// - parameter blue:   Integer value of blue color.
+    /// - parameter alpha:  Float value of alpha. Needs to be between 0 and 1.
     ///
-    /// - returns instance of UIColor
-
-
+    /// - returns: Instance of UIColor.
     class func RGBA(red: Int, _ green: Int, _ blue: Int, _ alpha: CGFloat) -> UIColor {
         return UIColor(red: CGFloat(red) / 255.0,
                      green: CGFloat(green) / 255.0,
@@ -28,9 +26,7 @@ extension UIColor {
                      alpha: alpha)
     }
 
-    /// Brand pink color.
-
-
+    /// Returns brand pink color.
     class func pinkColor() -> UIColor {
         return pinkColor(alpha: 1)
     }
@@ -44,58 +40,42 @@ extension UIColor {
         return RGBA(240, 55, 126, alpha)
     }
 
-    /// Brand background gray color.
-
-
+    /// Returns brand background gray color.
     class func backgroundGrayColor() -> UIColor {
         return RGBA(246, 248, 248, 1)
     }
 
-    /// Brand text dark color.
-
-
+    /// Returns brand text dark color.
     class func textDarkColor() -> UIColor {
         return RGBA(51, 51, 51, 1)
     }
 
-    /// Brand text light color.
-
-
+    /// Returns brand text light color.
     class func textLightColor() -> UIColor {
         return RGBA(109, 109, 114, 1)
     }
 
-    /// Brand text gray color used in followee cell.
-
-
+    /// Returns brand text gray color used in followee cell.
     class func followeeTextGrayColor() -> UIColor {
         return RGBA(164, 180, 188, 1)
     }
 
-    /// Brand gray color used in tabulator bar.
-
-
+    /// Returns brand gray color used in tabulator bar.
     class func tabBarGrayColor() -> UIColor {
         return RGBA(41, 41, 41, 1)
     }
 
-    /// Brand background color used in collection view cells.
-
-
+    /// Returns brand background color used in collection view cells.
     class func cellBackgroundColor() -> UIColor {
         return RGBA(223, 224, 226, 1)
     }
 
-    /// Brand gray color used for separator in shot details.
-
-
+    /// Returns brand gray color used for separator in shot details.
     class func separatorGrayColor() -> UIColor {
         return RGBA(218, 219, 221, 1)
     }
 
-    /// Random color.
-
-
+    /// Returns random color.
     class func randomColor() -> UIColor {
 
         let red = Int(arc4random() % 256)

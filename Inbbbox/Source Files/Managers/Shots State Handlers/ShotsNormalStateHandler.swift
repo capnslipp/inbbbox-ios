@@ -124,24 +124,21 @@ extension ShotsNormalStateHandler {
 
     func collectionView(collectionView: UICollectionView,
             didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let shotsCollectionViewController = shotsCollectionViewController else {
-            return
-        }
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return }
+
         let shot = shotsCollectionViewController.shots[indexPath.row]
         presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false)
     }
 
     func collectionView(collectionView: UICollectionView,
             willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        guard let shotsCollectionViewController = shotsCollectionViewController else {
-            return
-        }
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return }
+
         if indexPath.row == shotsCollectionViewController.shots.count - 6 {
             firstly {
                 shotsCollectionViewController.shotsProvider.nextPage()
             }.then { [weak self] shots -> Void in
-                if let shots = shots,
-                        let shotsCollectionViewController = self?.shotsCollectionViewController {
+                if let shots = shots, shotsCollectionViewController = self?.shotsCollectionViewController {
                     shotsCollectionViewController.shots.appendContentsOf(shots)
                     shotsCollectionViewController.collectionView?.reloadData()
                 }
@@ -170,9 +167,8 @@ extension ShotsNormalStateHandler {
     }
 
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        guard let collectionView = shotsCollectionViewController?.collectionView else {
-            return
-        }
+        guard let collectionView = shotsCollectionViewController?.collectionView else { return }
+
         let blur = min(scrollView.contentOffset.y % CGRectGetHeight(scrollView.bounds),
                 CGRectGetHeight(scrollView.bounds) - scrollView.contentOffset.y %
                 CGRectGetHeight(scrollView.bounds)) / (CGRectGetHeight(scrollView.bounds) / 2)
@@ -264,16 +260,16 @@ private extension ShotsNormalStateHandler {
     }
 
     func updateLikeImage() {
-        guard
-            let viewController = shotsCollectionViewController,
-            let collectionView = viewController.collectionView
+        guard let
+            viewController = shotsCollectionViewController,
+            collectionView = viewController.collectionView
         else {
             return
         }
         let visibleShot = collectionView.indexPathsForVisibleItems().map { return viewController.shots[$0.item] }.first
         let visibleCell = collectionView.visibleCells().first as? ShotCollectionViewCell
 
-        if let shot = visibleShot, let cell = visibleCell {
+        if let shot = visibleShot, cell = visibleCell {
             cell.liked = isShotLiked(shot)
         }
     }

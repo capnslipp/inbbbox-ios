@@ -9,27 +9,22 @@
 import UIKit
 import PromiseKit
 import ZFDragableModalTransition
-import TTTAttributedLabel
 import ImageViewer
 import MessageUI
-
-protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
-
-    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
-            textContainer: NSTextContainer, layoutManager: NSLayoutManager)
-}
 
 final class ShotDetailsViewController: UIViewController {
 
     var shouldScrollToMostRecentMessage = false
 
-    private var shotDetailsView: ShotDetailsView! {
+    var shotDetailsView: ShotDetailsView! {
         return view as? ShotDetailsView
     }
-    private var header: ShotDetailsHeaderView?
+
+    let viewModel: ShotDetailsViewModel
+
+    private(set) var header: ShotDetailsHeaderView?
     private var footer: ShotDetailsFooterView?
-    private let viewModel: ShotDetailsViewModel
-    private var scroller = ScrollViewAutoScroller()
+    private(set) var scroller = ScrollViewAutoScroller()
     private var onceTokenForShouldScrollToMessagesOnOpen = dispatch_once_t(0)
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
 
@@ -72,13 +67,11 @@ final class ShotDetailsViewController: UIViewController {
 
         firstly {
             viewModel.loadAllComments()
-        }.then {
-            () -> Void in
+        }.then { () -> Void in
             self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -281,68 +274,38 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: Actions
+// MARK: Public extension
 
 extension ShotDetailsViewController {
 
-    func closeButtonDidTap(_: UIButton) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-}
-
-// MARK: CommentComposerViewDelegate
-
-extension ShotDetailsViewController: CommentComposerViewDelegate {
-
-    func didTapSendButtonInComposerView(view: CommentComposerView, comment: String) {
-
-        view.startAnimation()
-
-        firstly {
-            viewModel.postComment(comment)
-        }.then {
-            () -> Void in
-
-            let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0),
-                    inSection: 0)
-            self.shotDetailsView.collectionView.performBatchUpdates({
-                () -> Void in
-                self.shotDetailsView.collectionView.insertItemsAtIndexPaths([indexPath])
-            }, completion: {
-                _ -> Void in
-                self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPath,
-                        atScrollPosition: .CenteredVertically, animated: true)
-            })
-        }.always {
-            view.stopAnimation()
-        }.error {
-            error in
-            // NGRTemp: Handle error.
+    func animateHeader(start start: Bool) {
+        if let imageView = header?.imageView as? AnimatableShotImageView {
+            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
         }
     }
 
-    func commentComposerViewDidBecomeActive(view: CommentComposerView) {
-        scroller.scrollToBottomAnimated(true)
+    func hideUnusedCommentEditingViews() {
+        shotDetailsView.collectionView.visibleCells().forEach {
+            if let commentCell = $0 as? ShotDetailsCommentCollectionViewCell {
+                commentCell.showEditView(false)
+            }
+        }
+    }
+
+    func presentUserDetailsViewControllerForUser(user: UserType) {
+
+        let userDetailsViewController = UserDetailsViewController(user: user)
+        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+
+        animateHeader(start: false)
+        userDetailsViewController.dismissClosure = { [weak self] in
+            self?.animateHeader(start: true)
+        }
+        presentViewController(navigationController, animated: true, completion: nil)
     }
 }
 
-extension ShotDetailsViewController: KeyboardResizableViewDelegate {
-
-    func keyboardResizableView(view: KeyboardResizableView, didRelayoutSubviewsWithState state: KeyboardState) {
-        // intentionally left blank.
-    }
-
-    func keyboardResizableView(view: KeyboardResizableView, willRelayoutSubviewsWithState state: KeyboardState) {
-        let round = state == .WillAppear
-        shotDetailsView.commentComposerView.animateByRoundingCorners(round)
-    }
-}
-
-extension ShotDetailsViewController: ModalByDraggingClosable {
-    var scrollViewToObserve: UIScrollView {
-        return shotDetailsView.collectionView
-    }
-}
+// MARK: Private extension
 
 private extension ShotDetailsViewController {
 
@@ -364,13 +327,11 @@ private extension ShotDetailsViewController {
 
         firstly {
             action()
-        }.then {
-            selected in
+        }.then { selected in
             view.selected = selected
         }.always {
             view.stopAnimating()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -381,13 +342,11 @@ private extension ShotDetailsViewController {
 
         firstly {
             viewModel.performLikeOperation()
-        }.then {
-            isShotLikedByUser in
+        }.then { isShotLikedByUser in
             view.selected = isShotLikedByUser
         }.always {
             view.stopAnimating()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -398,8 +357,7 @@ private extension ShotDetailsViewController {
 
         firstly {
             viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
-        }.then {
-            result -> Void in
+        }.then { result -> Void in
             if let bucketNumber = result.bucketsNumber where !result.removed {
                 let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
                 self.presentShotBucketsViewControllerWithMode(mode)
@@ -408,8 +366,7 @@ private extension ShotDetailsViewController {
             }
         }.always {
             view.stopAnimating()
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -427,19 +384,17 @@ private extension ShotDetailsViewController {
     func sizeForExpandedCollectionViewHeader(collectionView: UICollectionView) -> CGSize {
         let dribbbleImageRatio = CGFloat(0.75)
         return CGSize(
-        width: floor(collectionView.bounds.width),
-                height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
+            width: floor(collectionView.bounds.width),
+            height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
         )
     }
 
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
         firstly {
             viewModel.deleteCommentAtIndex(indexPath.item)
-        }.then {
-            () -> Void in
+        }.then { () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
-        }.error {
-            error in
+        }.error { error in
             // NGRTemp: Handle error.
         }
     }
@@ -466,10 +421,9 @@ private extension ShotDetailsViewController {
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
         shotBucketsViewController.dismissClosure = { [weak self] in
-            guard let certainSelf = self else { return }
-            certainSelf.animateHeader(start: true)
-            certainSelf.viewModel.clearBucketsData()
-            certainSelf.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
+            self?.animateHeader(start: true)
+            self?.viewModel.clearBucketsData()
+            self?.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
         }
 
         modalTransitionAnimator =
@@ -477,19 +431,6 @@ private extension ShotDetailsViewController {
         shotBucketsViewController.transitioningDelegate = modalTransitionAnimator
         shotBucketsViewController.modalPresentationStyle = .Custom
         presentViewController(shotBucketsViewController, animated: true, completion: nil)
-    }
-
-    func presentUserDetailsViewControllerForUser(user: UserType) {
-
-        let userDetailsViewController = UserDetailsViewController(user: user)
-        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-
-        animateHeader(start: false)
-        userDetailsViewController.dismissClosure = {
-            [weak self] in
-            self?.animateHeader(start: true)
-        }
-        presentViewController(navigationController, animated: true, completion: nil)
     }
 
     func presentShotFullscreen() {
@@ -500,147 +441,12 @@ private extension ShotDetailsViewController {
         presentImageViewer(imageViewer)
     }
 
-    func animateHeader(start start: Bool) {
-        if let imageView = header?.imageView as? AnimatableShotImageView {
-            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
-        }
-    }
-
     func grayOutFooterIfNeeded() {
         let shouldGrayOut = !viewModel.hasComments && !viewModel.hasDescription
         footer?.grayOutBackground(shouldGrayOut)
     }
 
-    func hideUnusedCommentEditingViews() {
-        shotDetailsView.collectionView.visibleCells().forEach {
-            if let commentCell = $0 as? ShotDetailsCommentCollectionViewCell {
-                commentCell.showEditView(false)
-            }
-        }
-    }
-}
-
-// MARK: UICollectionViewCellWithLabelContainingClickableLinksDelegate
-
-extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClickableLinksDelegate {
-
-    func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
-                                             textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
-
-        guard let view = gestureRecognizer.view else { return }
-
-        var locationOfTouchInLabel = gestureRecognizer.locationInView(gestureRecognizer.view)
-        let glyphRange = layoutManager.glyphRangeForTextContainer(textContainer)
-
-        let textOffset: CGPoint = {
-            var textOffset = CGPoint.zero
-            let textBounds = layoutManager.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer)
-            let paddingHeight = (view.bounds.size.height - textBounds.size.height) / 2
-            if paddingHeight > 0 {
-                textOffset.y = paddingHeight
-            }
-            return textOffset
-        }()
-
-        locationOfTouchInLabel.x -= textOffset.x
-        locationOfTouchInLabel.y -= textOffset.y
-
-        let glyphIndex = layoutManager.glyphIndexForPoint(locationOfTouchInLabel, inTextContainer: textContainer)
-        let locationIndex = layoutManager.characterIndexForGlyphAtIndex(glyphIndex)
-
-        guard let url = (view as? UILabel)?.attributedText?.attribute(NSLinkAttributeName,
-                        atIndex: locationIndex, effectiveRange: nil) as? NSURL else { return }
-
-        if viewModel.shouldOpenUserDetailsFromUrl(url) {
-            if let identifier = url.absoluteString.componentsSeparatedByString("/").last {
-                firstly {
-                    viewModel.userForId(identifier)
-                }.then { [weak self] user in
-                    self?.presentUserDetailsViewControllerForUser(user)
-                }
-            }
-        } else {
-            UIApplication.sharedApplication().openURL(url)
-        }
-    }
-}
-
-extension ShotDetailsViewController: AvatarViewDelegate {
-
-    func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton) {
-        var user: UserType?
-        if avatarView.superview == header {
-            user = viewModel.shot.user
-        } else if avatarView.superview?.superview is ShotDetailsCommentCollectionViewCell {
-            guard let cell = avatarView.superview?.superview as? ShotDetailsCommentCollectionViewCell else {
-                return
-            }
-            if let indexPath = shotDetailsView.collectionView.indexPathForCell(cell) {
-                let index = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
-                user = viewModel.comments[index].user
-            }
-        }
-        if let user = user {
-            presentUserDetailsViewControllerForUser(user)
-        }
-    }
-}
-
-extension ShotDetailsViewController: TTTAttributedLabelDelegate {
-
-    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
-        if let user = viewModel.userForURL(url) {
-            presentUserDetailsViewControllerForUser(user)
-        }
-    }
-}
-
-extension ShotDetailsViewController: UIScrollViewDelegate {
-
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        animateHeader(start: false)
-    }
-
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            animateHeader(start: true)
-        }
-    }
-
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        animateHeader(start: true)
-    }
-}
-
-
-extension ShotDetailsViewController: ImageProvider {
-
-    func provideImage(completion: UIImage? -> Void) {
-        if let image = header?.imageView.image {
-            completion(image)
-        }
-    }
-
-    func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
-}
-
-extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
-
-    func mailComposeController(controller: MFMailComposeViewController,
-                               didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-
-        controller.dismissViewControllerAnimated(true) {
-            self.hideUnusedCommentEditingViews()
-        }
-
-        switch result {
-            case MFMailComposeResultSent:
-                let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
-                presentViewController(contentReportedAlert, animated: true) {
-                    contentReportedAlert.view.tintColor = .pinkColor()
-                }
-                contentReportedAlert.view.tintColor = .pinkColor()
-            default: break
-        }
+    dynamic func closeButtonDidTap(_: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

@@ -12,9 +12,9 @@ extension UIViewController {
 
     /// Loads view with type of UIView
     ///
-    /// - parameter viewType: type of UIView to be loaded
-
-
+    /// - parameter viewType: Type of UIView to be loaded.
+    ///
+    /// - returns: View based on given class.
     func loadViewWithClass<T: UIView>(viewType: T.Type) -> T {
 
         view = T(frame: UIScreen.mainScreen().bounds)
