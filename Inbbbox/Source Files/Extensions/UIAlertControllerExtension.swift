@@ -60,7 +60,20 @@ extension UIAlertController {
             preferredStyle: .Alert
         )
         let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
-        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))
+        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))        
+
+        return alert
+    }
+
+    class func emailAccountNotFoundAlertController() -> UIAlertController {
+        let alert = UIAlertController(
+            title: nil,
+            message: NSLocalizedString("UIAlertControllerExtension.EmailError",
+            comment: "Displayed when user device is not capable of/configured to send emails."),
+            preferredStyle: .Alert
+        )
+        let dismissActionTitle = NSLocalizedString("UIAlertControllerExtension.Dismiss", comment: "Dismiss")
+        alert.addAction(UIAlertAction(title: dismissActionTitle, style: .Default, handler: nil))
 
         return alert
     }
