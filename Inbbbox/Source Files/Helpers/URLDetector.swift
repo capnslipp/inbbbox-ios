@@ -1,5 +1,5 @@
 //
-//  UrlDetector.swift
+//  URLDetector.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 28/04/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class UrlDetector {
+final class URLDetector {
 
     /// Detect URL in text container based on tap parameters from gesture recognizer.
     ///

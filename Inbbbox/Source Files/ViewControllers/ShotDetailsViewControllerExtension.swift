@@ -10,6 +10,7 @@ import Foundation
 import ImageViewer
 import MessageUI
 import TTTAttributedLabel
+import PromiseKit
 
 // MARK: ImageProvider
 
@@ -46,7 +47,9 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
 
         view.startAnimation()
 
-        viewModel.postComment(comment).then { () -> Void in
+        firstly {
+            viewModel.postComment(comment)
+        }.then { () -> Void in
 
             let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0),
                 inSection: 0)
@@ -149,13 +152,15 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
     func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
                                              textContainer: NSTextContainer, layoutManager: NSLayoutManager) {
 
-        guard let url = UrlDetector.detectUrlFromGestureRecognizer(gestureRecognizer,
+        guard let url = URLDetector.detectUrlFromGestureRecognizer(gestureRecognizer,
                                                                    textContainer: textContainer,
                                                                    layoutManager: layoutManager) else { return }
 
         if viewModel.shouldOpenUserDetailsFromUrl(url) {
             if let identifier = url.absoluteString.componentsSeparatedByString("/").last {
-                viewModel.userForId(identifier).then { [weak self] user in
+                firstly {
+                    viewModel.userForId(identifier)
+                }.then { [weak self] user in
                     self?.presentUserDetailsViewControllerForUser(user)
                 }
             }

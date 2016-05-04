@@ -17,8 +17,7 @@ final class ShotDetailsViewController: UIViewController {
     var shouldScrollToMostRecentMessage = false
 
     var shotDetailsView: ShotDetailsView! {
-        get { return view as? ShotDetailsView }
-        set(value) { }
+        return view as? ShotDetailsView
     }
 
     let viewModel: ShotDetailsViewModel
@@ -66,7 +65,9 @@ final class ShotDetailsViewController: UIViewController {
         shotDetailsView.keyboardResizableView.delegate = self
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
 
-        viewModel.loadAllComments().then { () -> Void in
+        firstly {
+            viewModel.loadAllComments()
+        }.then { () -> Void in
             self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
@@ -273,6 +274,37 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: Public extension
+
+extension ShotDetailsViewController {
+
+    func animateHeader(start start: Bool) {
+        if let imageView = header?.imageView as? AnimatableShotImageView {
+            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
+        }
+    }
+
+    func hideUnusedCommentEditingViews() {
+        shotDetailsView.collectionView.visibleCells().forEach {
+            if let commentCell = $0 as? ShotDetailsCommentCollectionViewCell {
+                commentCell.showEditView(false)
+            }
+        }
+    }
+
+    func presentUserDetailsViewControllerForUser(user: UserType) {
+
+        let userDetailsViewController = UserDetailsViewController(user: user)
+        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+
+        animateHeader(start: false)
+        userDetailsViewController.dismissClosure = { [weak self] in
+            self?.animateHeader(start: true)
+        }
+        presentViewController(navigationController, animated: true, completion: nil)
+    }
+}
+
 // MARK: Private extension
 
 private extension ShotDetailsViewController {
@@ -293,7 +325,9 @@ private extension ShotDetailsViewController {
 
         view.startAnimating()
 
-        action().then { selected in
+        firstly {
+            action()
+        }.then { selected in
             view.selected = selected
         }.always {
             view.stopAnimating()
@@ -306,7 +340,9 @@ private extension ShotDetailsViewController {
 
         view.startAnimating()
 
-        viewModel.performLikeOperation().then { isShotLikedByUser in
+        firstly {
+            viewModel.performLikeOperation()
+        }.then { isShotLikedByUser in
             view.selected = isShotLikedByUser
         }.always {
             view.stopAnimating()
@@ -319,7 +355,9 @@ private extension ShotDetailsViewController {
 
         view.startAnimating()
 
-        viewModel.removeShotFromBucketIfExistsInExactlyOneBucket().then { result -> Void in
+        firstly {
+            viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
+        }.then { result -> Void in
             if let bucketNumber = result.bucketsNumber where !result.removed {
                 let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
                 self.presentShotBucketsViewControllerWithMode(mode)
@@ -352,7 +390,9 @@ private extension ShotDetailsViewController {
     }
 
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
-        viewModel.deleteCommentAtIndex(indexPath.item).then { () -> Void in
+        firstly {
+            viewModel.deleteCommentAtIndex(indexPath.item)
+        }.then { () -> Void in
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
         }.error { error in
             // NGRTemp: Handle error.
@@ -408,36 +448,5 @@ private extension ShotDetailsViewController {
 
     dynamic func closeButtonDidTap(_: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
-    }
-}
-
-// MARK: Public extension
-
-extension ShotDetailsViewController {
-
-    func animateHeader(start start: Bool) {
-        if let imageView = header?.imageView as? AnimatableShotImageView {
-            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
-        }
-    }
-
-    func hideUnusedCommentEditingViews() {
-        shotDetailsView.collectionView.visibleCells().forEach {
-            if let commentCell = $0 as? ShotDetailsCommentCollectionViewCell {
-                commentCell.showEditView(false)
-            }
-        }
-    }
-
-    func presentUserDetailsViewControllerForUser(user: UserType) {
-
-        let userDetailsViewController = UserDetailsViewController(user: user)
-        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
-
-        animateHeader(start: false)
-        userDetailsViewController.dismissClosure = { [weak self] in
-            self?.animateHeader(start: true)
-        }
-        presentViewController(navigationController, animated: true, completion: nil)
     }
 }
