@@ -118,6 +118,12 @@ extension ShotDetailsViewController: TTTAttributedLabelDelegate {
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
             presentUserDetailsViewControllerForUser(user)
+        } else {
+            firstly {
+                viewModel.userForId(url.absoluteString)
+            }.then { [weak self] user in
+                self?.presentUserDetailsViewControllerForUser(user)
+            }
         }
     }
 }

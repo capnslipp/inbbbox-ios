@@ -26,7 +26,7 @@ class ShotBucketsViewModel {
     }
 
     var userLinkRange: NSRange {
-        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ??
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).userLinkRange ??
                 NSRange(location: 0, length: 0)
     }
 

@@ -20,4 +20,11 @@ struct FollowUserQuery: Query {
     init(user: UserType) {
         path = "/users/" + user.identifier + "/follow"
     }
+
+    /// Initialize query for following a given team.
+    ///
+    /// - parameter team: Team to follow.
+    init(team: TeamType) {
+        path = "/users/" + team.identifier + "/follow"
+    }
 }

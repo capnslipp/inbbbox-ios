@@ -20,4 +20,11 @@ struct UnfollowUserQuery: Query {
     init(user: UserType) {
         path = "/users/" + user.identifier + "/follow"
     }
+
+    /// Initialize query for unfollowing a given team.
+    ///
+    /// - parameter team: Team to unfollow.
+    init(team: TeamType) {
+        path = "/users/" + team.identifier + "/follow"
+    }
 }

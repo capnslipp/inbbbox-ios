@@ -12,7 +12,7 @@ import PromiseKit
 
 class UserDetailsViewController: TwoLayoutsCollectionViewController {
 
-    private var viewModel: UserDetailsViewModel!
+    private var viewModel: ProfileViewModel!
 
     private var header: UserDetailsHeaderView?
 
@@ -37,12 +37,33 @@ class UserDetailsViewController: TwoLayoutsCollectionViewController {
 extension UserDetailsViewController {
     convenience init(user: UserType) {
 
-        self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio,
-            twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
+        guard let accountType = user.accountType where accountType == .Team else {
+            self.init(oneColumnLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio,
+                      twoColumnsLayoutCellHeightToWidthRatio: SimpleShotCollectionViewCell.heightToWidthRatio)
+            viewModel = UserDetailsViewModel(user: user)
+            viewModel.delegate = self
+            title = viewModel.title
+            return
+        }
 
-        viewModel = UserDetailsViewModel(user: user)
+        let team = Team(
+            identifier: user.identifier,
+            name: user.name ?? "",
+            username: user.username,
+            avatarURL: user.avatarURL,
+            createdAt: NSDate()
+        )
+        self.init(team: team)
+    }
+
+    convenience init(team: TeamType) {
+
+        self.init(oneColumnLayoutCellHeightToWidthRatio: LargeFolloweeCollectionViewCell.heightToWidthRatio,
+                  twoColumnsLayoutCellHeightToWidthRatio: SmallFolloweeCollectionViewCell.heightToWidthRatio)
+
+        viewModel = TeamDetailsViewModel(team: team)
         viewModel.delegate = self
-        title = viewModel.user.name ?? viewModel.user.username
+        title = viewModel.title
     }
 
     override func viewDidLoad() {
@@ -53,6 +74,8 @@ extension UserDetailsViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
         collectionView.registerClass(UserDetailsHeaderView.self, type: .Header)
 
         do {
@@ -74,7 +97,7 @@ extension UserDetailsViewController {
         }
 
         firstly {
-            viewModel.isUserFollowedByMe()
+            viewModel.isProfileFollowedByMe()
         }.then {
             followed in
             self.header?.userFollowed = followed
@@ -97,7 +120,7 @@ extension UserDetailsViewController {
 
             header?.startActivityIndicator()
             firstly {
-                userFollowed ? viewModel.unfollowUser() : viewModel.followUser()
+                userFollowed ? viewModel.unfollowProfile() : viewModel.followProfile()
             }.then {
                 self.header?.userFollowed = !userFollowed
             }.always {
@@ -121,16 +144,65 @@ extension UserDetailsViewController {
     override func collectionView(collectionView: UICollectionView,
                         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 
-        let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self,
-                forIndexPath: indexPath, type: .Cell)
-        cell.shotImageView.image = nil
-        let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
+        if let viewModel = viewModel as? UserDetailsViewModel {
+            let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self,
+                                                           forIndexPath: indexPath, type: .Cell)
+            cell.shotImageView.image = nil
+            let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
 
-        indexPathsNeededImageUpdate.append(indexPath)
-        lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
+            indexPathsNeededImageUpdate.append(indexPath)
+            lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
 
-        cell.gifLabel.hidden = !cellData.animated
-        return cell
+            cell.gifLabel.hidden = !cellData.animated
+            return cell
+        }
+
+        if let viewModel = viewModel as? TeamDetailsViewModel {
+            let cellData = viewModel.followeeCollectionViewCellViewData(indexPath)
+
+            indexPathsNeededImageUpdate.append(indexPath)
+
+            if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
+                let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self,
+                                                               forIndexPath: indexPath, type: .Cell)
+                cell.clearImages()
+                cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
+                cell.nameLabel.text = cellData.name
+                cell.numberOfShotsLabel.text = cellData.numberOfShots
+                if cellData.shotsImagesURLs?.count > 0 {
+                    cell.firstShotImageView.loadImageFromURL(cellData.shotsImagesURLs![0])
+                    cell.secondShotImageView.loadImageFromURL(cellData.shotsImagesURLs![1])
+                    cell.thirdShotImageView.loadImageFromURL(cellData.shotsImagesURLs![2])
+                    cell.fourthShotImageView.loadImageFromURL(cellData.shotsImagesURLs![3])
+                }
+                return cell
+            } else {
+                let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self,
+                                                               forIndexPath: indexPath, type: .Cell)
+                cell.clearImages()
+                cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
+                cell.nameLabel.text = cellData.name
+                cell.numberOfShotsLabel.text = cellData.numberOfShots
+                if let shotImage = cellData.firstShotImage {
+
+                    let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
+
+                        guard let certainSelf = self
+                            where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else { return }
+
+                        cell.shotImageView.image = image
+                    }
+                    LazyImageProvider.lazyLoadImageFromURLs(
+                        (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
+                        teaserImageCompletion: imageLoadingCompletion,
+                        normalImageCompletion: imageLoadingCompletion
+                    )
+                }
+                return cell
+            }
+        }
+
+        return UICollectionViewCell()
     }
 
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String,
@@ -139,7 +211,7 @@ extension UserDetailsViewController {
         if header == nil && kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath,
                     type: .Header)
-            header?.avatarView.imageView.loadImageFromURL(viewModel.user.avatarURL)
+            header?.avatarView.imageView.loadImageFromURL(viewModel.avatarURL)
             header?.button.addTarget(self, action: #selector(didTapFollowButton(_:)), forControlEvents: .TouchUpInside)
             viewModel.shouldShowFollowButton ? header?.startActivityIndicator() : (header?.shouldShowButton = false)
         }
@@ -153,16 +225,25 @@ extension UserDetailsViewController {
 extension UserDetailsViewController {
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let shotDetailsViewController =
+
+        if let viewModel = viewModel as? UserDetailsViewModel {
+            let shotDetailsViewController =
                 ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
 
-        modalTransitionAnimator =
+            modalTransitionAnimator =
                 CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
 
-        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
-        shotDetailsViewController.modalPresentationStyle = .Custom
+            shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
+            shotDetailsViewController.modalPresentationStyle = .Custom
 
-        presentViewController(shotDetailsViewController, animated: true, completion: nil)
+            presentViewController(shotDetailsViewController, animated: true, completion: nil)
+        }
+        if let viewModel = viewModel as? TeamDetailsViewModel {
+
+            let userDetailsViewController = UserDetailsViewController(user: viewModel.teamMembers[indexPath.item])
+            userDetailsViewController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(userDetailsViewController, animated: true)
+        }
     }
 
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
@@ -191,7 +272,7 @@ extension UserDetailsViewController: BaseCollectionViewViewModelDelegate {
     func viewModelDidFailToLoadInitialItems(error: ErrorType) {
         collectionView?.reloadData()
 
-        if viewModel.userShots.isEmpty {
+        if viewModel.collectionIsEmpty {
             let alert = UIAlertController.generalErrorAlertController()
             presentViewController(alert, animated: true, completion: nil)
             alert.view.tintColor = .pinkColor()

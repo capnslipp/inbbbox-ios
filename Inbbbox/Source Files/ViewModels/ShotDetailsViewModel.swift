@@ -102,8 +102,13 @@ extension ShotDetailsViewModel {
     }
 
     var userLinkRange: NSRange {
-        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).linkRange ??
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).userLinkRange ??
                 NSRange(location: 0, length: 0)
+    }
+
+    var teamLinkRange: NSRange {
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).teamLinkRange ??
+            NSRange(location: 0, length: 0)
     }
 
     func displayableDataForCommentAtIndex(index: Int) -> CommentDisplayableData {

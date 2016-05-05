@@ -210,6 +210,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             if let url = viewModel.urlForUser(viewModel.shot.user) {
                 header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
             }
+            if let team = viewModel.shot.team, url = viewModel.urlForTeam(team) {
+                header?.setLinkInTitle(url, range: viewModel.teamLinkRange, delegate: self)
+            }
             header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
             forControlEvents: .TouchUpInside)

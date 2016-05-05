@@ -21,4 +21,12 @@ struct UserFollowedByMeQuery: Query {
     init(user: UserType) {
         path = "/user/following/" + user.identifier
     }
+
+    /// Initialize query for checking
+    /// if given team is followed by currently signed in user.
+    ///
+    /// - parameter team: Team to check.
+    init(team: TeamType) {
+        path = "/user/following/" + team.identifier
+    }
 }

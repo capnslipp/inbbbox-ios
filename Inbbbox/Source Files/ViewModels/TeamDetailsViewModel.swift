@@ -9,21 +9,39 @@
 import Foundation
 import PromiseKit
 
-class TeamDetailsViewModel: BaseCollectionViewViewModel {
+class TeamDetailsViewModel: ProfileViewModel {
 
     weak var delegate: BaseCollectionViewViewModelDelegate?
-    let title = NSLocalizedString("Following", comment:"")
+
+    var title: String {
+        return team.name
+    }
+
+    var avatarURL: NSURL? {
+        return team.avatarURL
+    }
+
+    var collectionIsEmpty: Bool {
+        return teamMembers.isEmpty
+    }
+
+    var shouldShowFollowButton: Bool {
+        return UserStorage.isUserSignedIn
+    }
+
+    var itemsCount: Int {
+        return teamMembers.count
+    }
+
     var teamMembers = [UserType]()
-    var followeesIndexedShots = [Int: [ShotType]]()
+    var memberIndexedShots = [Int: [ShotType]]()
+
+    private let connectionsRequester = APIConnectionsRequester()
     private let teamsProvider = APITeamsProvider()
     private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
 
     private let team: TeamType
-
-    var itemsCount: Int {
-        return teamMembers.count
-    }
 
     init(team: TeamType) {
         self.team = team
@@ -48,54 +66,53 @@ class TeamDetailsViewModel: BaseCollectionViewViewModel {
 
         firstly {
             UserStorage.isUserSignedIn ? connectionsProvider.nextPage() : teamsProvider.nextPage()
-            }.then { followees -> Void in
-                if let followees = followees where followees.count > 0 {
-                    let indexes = followees.enumerate().map { index, _ in
-                        return index + self.teamMembers.count
-                    }
-                    self.teamMembers.appendContentsOf(followees)
-                    let indexPaths = indexes.map {
-                        NSIndexPath(forRow: ($0), inSection: 0)
-                    }
-                    self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
-                    self.downloadShots(followees)
+        }.then { followees -> Void in
+            if let followees = followees where followees.count > 0 {
+                let indexes = followees.enumerate().map { index, _ in
+                    return index + self.teamMembers.count
                 }
-            }.error { error in
-                // NGRTemp: Need mockups for error message view
+                self.teamMembers.appendContentsOf(followees)
+                let indexPaths = indexes.map {
+                    NSIndexPath(forRow: ($0), inSection: 0)
+                }
+                self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
+                self.downloadShots(followees)
+            }
+        }.error { error in
+            // NGRTemp: Need mockups for error message view
         }
     }
 
-    func downloadShots(teamMembers: [UserType]) {
-        for followee in teamMembers {
+    func isProfileFollowedByMe() -> Promise<Bool> {
+
+        return Promise<Bool> { fulfill, reject in
             firstly {
-                shotsProvider.provideShotsForUser(followee)
-                }.then { shots -> Void in
-                    var indexOfFollowee: Int?
-                    for (index, item) in self.teamMembers.enumerate() {
-                        if item.identifier == followee.identifier {
-                            indexOfFollowee = index
-                            break
-                        }
-                    }
-                    guard let index = indexOfFollowee else {
-                        return
-                    }
-                    if let shots = shots {
-                        self.followeesIndexedShots[index] = shots
-                    } else {
-                        self.followeesIndexedShots[index] = [ShotType]()
-                    }
-                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                    self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
-                }.error { error in
-                    // NGRTemp: Need mockups for error message view
-            }
+                connectionsRequester.isTeamFollowedByMe(team)
+            }.then(fulfill).error(reject)
+        }
+    }
+
+    func followProfile() -> Promise<Void> {
+
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                connectionsRequester.followTeam(team)
+            }.then(fulfill).error(reject)
+        }
+    }
+
+    func unfollowProfile() -> Promise<Void> {
+
+        return Promise<Void> { fulfill, reject in
+            firstly {
+                connectionsRequester.unfollowTeam(team)
+            }.then(fulfill).error(reject)
         }
     }
 
     func followeeCollectionViewCellViewData(indexPath: NSIndexPath) -> FolloweeCollectionViewCellViewData {
         return FolloweeCollectionViewCellViewData(followee: teamMembers[indexPath.row],
-                                                  shots: followeesIndexedShots[indexPath.row])
+                                                  shots: memberIndexedShots[indexPath.row])
     }
 }
 
@@ -114,9 +131,9 @@ extension TeamDetailsViewModel {
             self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots",
                 comment: "How many shots in collection?"), followee.shotsCount)
             if let shots = shots where shots.count > 0 {
-                let allShotsImagesURLs = shots.map {
-                    $0.shotImage.teaserURL
-                }
+
+                let allShotsImagesURLs = shots.map { $0.shotImage.teaserURL }
+
                 switch allShotsImagesURLs.count {
                 case 1:
                     shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[0],
@@ -138,5 +155,34 @@ extension TeamDetailsViewModel {
             }
         }
     }
-    
+}
+
+private extension TeamDetailsViewModel {
+    func downloadShots(teamMembers: [UserType]) {
+        for member in teamMembers {
+            firstly {
+                shotsProvider.provideShotsForUser(member)
+            }.then { shots -> Void in
+                var indexOfMember: Int?
+                for (index, item) in self.teamMembers.enumerate() {
+                    if item.identifier == member.identifier {
+                        indexOfMember = index
+                        break
+                    }
+                }
+
+                guard let index = indexOfMember else { return }
+
+                if let shots = shots {
+                    self.memberIndexedShots[index] = shots
+                } else {
+                    self.memberIndexedShots[index] = [ShotType]()
+                }
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
+            }.error { error in
+                // NGRTemp: Need mockups for error message view
+            }
+        }
+    }
 }

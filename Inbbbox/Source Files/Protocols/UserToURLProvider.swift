@@ -23,6 +23,7 @@ protocol UserToURLProvider {
      */
 
     func urlForUser(user: UserType) -> NSURL?
+    func urlForTeam(team: TeamType) -> NSURL?
 
 }
 
@@ -32,4 +33,7 @@ extension UserToURLProvider {
         return NSURL(string: user.identifier)
     }
 
+    func urlForTeam(team: TeamType) -> NSURL? {
+        return NSURL(string: team.identifier)
+    }
 }
