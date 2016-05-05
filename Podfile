@@ -23,7 +23,9 @@ plugin 'cocoapods-keys', {
 
 pod 'AsyncSwift', '~> 1.6'
 pod 'KeychainAccess', '~> 2.3'
-pod 'PromiseKit', '~> 3.1'
+pod 'PromiseKit', # fork because issue: https://github.com/mxcl/PromiseKit/issues/415
+  :git => 'git@github.com:rad3ks/PromiseKit.git',
+  :branch => 'bug/415'
 pod 'SwiftyJSON', '~> 2.3'
 pod 'HockeySDK', '~> 3.8'
 pod 'PureLayout', '~> 3.0'
@@ -38,7 +40,7 @@ pod 'HanekeSwift', :git => 'https://github.com/pikor/HanekeSwift.git'
 pod 'DZNEmptyDataSet', '~> 1.7'
 pod 'GoogleAnalytics', '~> 3.14'
 pod 'TTTAttributedLabel', '~> 1.13'
-#has to be given tag `2.0.4` explicitly cause CocoaPods do not take latest version 
+#has to be given tag `2.0.4` explicitly cause CocoaPods do not take latest version
 pod 'ImageViewer', :git => 'https://github.com/MailOnline/ImageViewer.git', :tag => '2.0.4'
 target 'Tests' do link_with 'Unit Tests'
   pod 'Quick', '~> 0.8', :configurations => ['Test']
