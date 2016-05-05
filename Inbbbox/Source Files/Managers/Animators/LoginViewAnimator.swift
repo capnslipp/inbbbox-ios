@@ -62,7 +62,7 @@ class LoginViewAnimator {
         guard let view = view where view.isAnimating else { return }
         if type == .Undo {
             firstly {
-                when(self.extendToButtonWithRotation(), self.loadingFade(.FadeOut), self.copyrightFade(.FadeOut))
+                when(self.extendToButtonWithRotation(), self.loadingFade(.FadeOut))
             }.then { _ -> Void in
                 self.restoreInitialState()
                 completion?()
@@ -71,7 +71,7 @@ class LoginViewAnimator {
         } else {
             firstly {
                 when(self.loadingFade(.FadeOut), self.slideInterfaceUp(),
-                        self.sloganFadeOut(), self.saturateBackground(), self.copyrightFade(.FadeOut))
+                        self.sloganFadeOut(), self.saturateBackground())
             }.then {
                 self.delegate?.tabBarWillAppear()
                 return when(self.animateTabBar(), self.slideOutBallWithFadingOut(),
@@ -247,13 +247,6 @@ private extension LoginViewAnimator {
                     duration: 0.3, fade: .FadeOut, transition: CGPoint(x: 0, y: 200)) {
                 fulfill()
             }
-        }
-    }
-
-    func copyrightFade(fade: LoginViewAnimations.FadeStyle) -> Promise<Void> {
-        return Promise<Void> { fulfill, _ in
-            animations.moveAnimation([view!.copyrightlabel], duration: 0.4, fade: fade, transition: CGPoint.zero)
-            fulfill()
         }
     }
 
