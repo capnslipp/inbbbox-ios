@@ -1,5 +1,5 @@
 //
-//  LargeFolloweeCollectionViewCell.swift
+//  LargeUserCollectionViewCell.swift
 //  Inbbbox
 //
 //  Created by Aleksander Popko on 03.02.2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight,
+class LargeUserCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, WidthDependentHeight,
         InfoShotsCellConfigurable, AvatarSettable {
 
     let shotImageView = UIImageView.newAutoLayoutView()
@@ -76,7 +76,7 @@ class LargeFolloweeCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable
     // MARK: - Reusable
 
     static var reuseIdentifier: String {
-        return "LargeFolloweeCollectionViewCellIdentifier"
+        return String(LargeUserCollectionViewCell)
     }
 
     // MARK: - Width dependent height

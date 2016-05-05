@@ -66,17 +66,17 @@ class TeamDetailsViewModel: ProfileViewModel {
 
         firstly {
             UserStorage.isUserSignedIn ? connectionsProvider.nextPage() : teamsProvider.nextPage()
-        }.then { followees -> Void in
-            if let followees = followees where followees.count > 0 {
-                let indexes = followees.enumerate().map { index, _ in
+        }.then { teamMembers -> Void in
+            if let teamMembers = teamMembers where teamMembers.count > 0 {
+                let indexes = teamMembers.enumerate().map { index, _ in
                     return index + self.teamMembers.count
                 }
-                self.teamMembers.appendContentsOf(followees)
+                self.teamMembers.appendContentsOf(teamMembers)
                 let indexPaths = indexes.map {
                     NSIndexPath(forRow: ($0), inSection: 0)
                 }
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
-                self.downloadShots(followees)
+                self.downloadShots(teamMembers)
             }
         }.error { error in
             // NGRTemp: Need mockups for error message view
@@ -110,26 +110,26 @@ class TeamDetailsViewModel: ProfileViewModel {
         }
     }
 
-    func followeeCollectionViewCellViewData(indexPath: NSIndexPath) -> FolloweeCollectionViewCellViewData {
-        return FolloweeCollectionViewCellViewData(followee: teamMembers[indexPath.row],
+    func userCollectionViewCellViewData(indexPath: NSIndexPath) -> UserCollectionViewCellViewData {
+        return UserCollectionViewCellViewData(user: teamMembers[indexPath.row],
                                                   shots: memberIndexedShots[indexPath.row])
     }
 }
 
 extension TeamDetailsViewModel {
 
-    struct FolloweeCollectionViewCellViewData {
+    struct UserCollectionViewCellViewData {
         let name: String?
         let avatarURL: NSURL?
         let numberOfShots: String
         let shotsImagesURLs: [NSURL]?
         let firstShotImage: ShotImageType?
 
-        init(followee: Followee, shots: [ShotType]?) {
-            self.name = followee.name
-            self.avatarURL = followee.avatarURL
+        init(user: UserType, shots: [ShotType]?) {
+            self.name = user.name
+            self.avatarURL = user.avatarURL
             self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots",
-                comment: "How many shots in collection?"), followee.shotsCount)
+                comment: "How many shots in collection?"), user.shotsCount)
             if let shots = shots where shots.count > 0 {
 
                 let allShotsImagesURLs = shots.map { $0.shotImage.teaserURL }

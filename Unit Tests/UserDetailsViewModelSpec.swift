@@ -105,7 +105,7 @@ class UserDetailsViewModelSpec: QuickSpec {
                 didReceiveResponse = false
                 
                 waitUntil { done in
-                    sut.isUserFollowedByMe().then { result -> Void in
+                    sut.isProfileFollowedByMe().then { result -> Void in
                         didReceiveResponse = true
                         done()
                     }.error { _ in fail("This should not be invoked") }
@@ -130,7 +130,7 @@ class UserDetailsViewModelSpec: QuickSpec {
                 didReceiveResponse = false
                 
                 waitUntil { done in
-                    sut.followUser().then { result -> Void in
+                    sut.followProfile().then { result -> Void in
                         didReceiveResponse = true
                         done()
                     }.error { _ in fail("This should not be invoked") }
@@ -155,7 +155,7 @@ class UserDetailsViewModelSpec: QuickSpec {
                 didReceiveResponse = false
                 
                 waitUntil { done in
-                    sut.unfollowUser().then { result -> Void in
+                    sut.unfollowProfile().then { result -> Void in
                         didReceiveResponse = true
                         done()
                     }.error { _ in fail("This should not be invoked") }

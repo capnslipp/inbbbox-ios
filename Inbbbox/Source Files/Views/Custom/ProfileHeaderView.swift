@@ -1,5 +1,5 @@
 //
-//  UserDetailsHeaderView.swift
+//  ProfileHeaderView.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 14/03/16.
@@ -16,7 +16,7 @@ private var margin: CGFloat {
     return 10
 }
 
-class UserDetailsHeaderView: UICollectionReusableView {
+class ProfileHeaderView: UICollectionReusableView {
 
     let avatarView = AvatarView(size: avatarSize, bordered: true, borderWidth: 3)
     var shouldShowButton = true
@@ -24,9 +24,9 @@ class UserDetailsHeaderView: UICollectionReusableView {
     var userFollowed: Bool? {
         didSet {
             let title = userFollowed! ?
-                    NSLocalizedString("UserDetailsHeaderView.Unfollow",
+                    NSLocalizedString("ProfileHeaderView.Unfollow",
                             comment: "Allows user to unfollow another user.") :
-                    NSLocalizedString("UserDetailsHeaderView.Follow",
+                    NSLocalizedString("ProfileHeaderView.Follow",
                             comment: "Allows user to follow another user.")
             button.setTitle(title, forState: .Normal)
         }
@@ -99,9 +99,9 @@ class UserDetailsHeaderView: UICollectionReusableView {
     }
 }
 
-extension UserDetailsHeaderView: Reusable {
+extension ProfileHeaderView: Reusable {
 
     class var reuseIdentifier: String {
-        return String(UserDetailsHeaderView)
+        return String(ProfileHeaderView)
     }
 }

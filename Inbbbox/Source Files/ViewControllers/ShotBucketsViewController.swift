@@ -236,13 +236,13 @@ extension ShotBucketsViewController {
 
 private extension ShotBucketsViewController {
 
-    func presentUserDetailsViewControllerForUser(user: UserType) {
+    func presentProfileViewControllerForUser(user: UserType) {
 
-        let userDetailsViewController = UserDetailsViewController(user: user)
-        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+        let profileViewController = ProfileViewController(user: user)
+        let navigationController = UINavigationController(rootViewController: profileViewController)
 
         animateHeader(start: false)
-        userDetailsViewController.dismissClosure = { [weak self] in
+        profileViewController.dismissClosure = { [weak self] in
             self?.animateHeader(start: true)
         }
         presentViewController(navigationController, animated: true, completion: nil)
@@ -372,7 +372,7 @@ extension ShotBucketsViewController: AvatarViewDelegate {
     func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton) {
         if avatarView.superview == header {
             let user = viewModel.shot.user
-            presentUserDetailsViewControllerForUser(user)
+            presentProfileViewControllerForUser(user)
         }
     }
 }
@@ -381,7 +381,7 @@ extension ShotBucketsViewController: TTTAttributedLabelDelegate {
 
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
-            presentUserDetailsViewControllerForUser(user)
+            presentProfileViewControllerForUser(user)
         }
     }
 }

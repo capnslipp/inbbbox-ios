@@ -1,5 +1,5 @@
 //
-//  UserDetailsViewController.swift
+//  ProfileViewController.swift
 //  Inbbbox
 //
 //  Created by Peter Bruz on 14/03/16.
@@ -10,11 +10,11 @@ import UIKit
 import ZFDragableModalTransition
 import PromiseKit
 
-class UserDetailsViewController: TwoLayoutsCollectionViewController {
+class ProfileViewController: TwoLayoutsCollectionViewController {
 
     private var viewModel: ProfileViewModel!
 
-    private var header: UserDetailsHeaderView?
+    private var header: ProfileHeaderView?
 
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
 
@@ -34,7 +34,7 @@ class UserDetailsViewController: TwoLayoutsCollectionViewController {
     }
 }
 
-extension UserDetailsViewController {
+extension ProfileViewController {
     convenience init(user: UserType) {
 
         guard let accountType = user.accountType where accountType == .Team else {
@@ -58,8 +58,8 @@ extension UserDetailsViewController {
 
     convenience init(team: TeamType) {
 
-        self.init(oneColumnLayoutCellHeightToWidthRatio: LargeFolloweeCollectionViewCell.heightToWidthRatio,
-                  twoColumnsLayoutCellHeightToWidthRatio: SmallFolloweeCollectionViewCell.heightToWidthRatio)
+        self.init(oneColumnLayoutCellHeightToWidthRatio: LargeUserCollectionViewCell.heightToWidthRatio,
+                  twoColumnsLayoutCellHeightToWidthRatio: SmallUserCollectionViewCell.heightToWidthRatio)
 
         viewModel = TeamDetailsViewModel(team: team)
         viewModel.delegate = self
@@ -74,9 +74,9 @@ extension UserDetailsViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
-        collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
-        collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
-        collectionView.registerClass(UserDetailsHeaderView.self, type: .Header)
+        collectionView.registerClass(SmallUserCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(LargeUserCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(ProfileHeaderView.self, type: .Header)
 
         do {
             // hides bottom border of navigationBar
@@ -112,7 +112,7 @@ extension UserDetailsViewController {
 
 // MARK: Buttons' actions
 
-extension UserDetailsViewController {
+extension ProfileViewController {
 
     func didTapFollowButton(_: UIButton) {
 
@@ -135,7 +135,7 @@ extension UserDetailsViewController {
 
 // MARK: UICollectionViewDataSource
 
-extension UserDetailsViewController {
+extension ProfileViewController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.itemsCount
@@ -158,12 +158,12 @@ extension UserDetailsViewController {
         }
 
         if let viewModel = viewModel as? TeamDetailsViewModel {
-            let cellData = viewModel.followeeCollectionViewCellViewData(indexPath)
+            let cellData = viewModel.userCollectionViewCellViewData(indexPath)
 
             indexPathsNeededImageUpdate.append(indexPath)
 
             if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
-                let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self,
+                let cell = collectionView.dequeueReusableClass(SmallUserCollectionViewCell.self,
                                                                forIndexPath: indexPath, type: .Cell)
                 cell.clearImages()
                 cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
@@ -177,7 +177,7 @@ extension UserDetailsViewController {
                 }
                 return cell
             } else {
-                let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self,
+                let cell = collectionView.dequeueReusableClass(LargeUserCollectionViewCell.self,
                                                                forIndexPath: indexPath, type: .Cell)
                 cell.clearImages()
                 cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
@@ -209,7 +209,7 @@ extension UserDetailsViewController {
                         atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
 
         if header == nil && kind == UICollectionElementKindSectionHeader {
-            header = collectionView.dequeueReusableClass(UserDetailsHeaderView.self, forIndexPath: indexPath,
+            header = collectionView.dequeueReusableClass(ProfileHeaderView.self, forIndexPath: indexPath,
                     type: .Header)
             header?.avatarView.imageView.loadImageFromURL(viewModel.avatarURL)
             header?.button.addTarget(self, action: #selector(didTapFollowButton(_:)), forControlEvents: .TouchUpInside)
@@ -222,7 +222,7 @@ extension UserDetailsViewController {
 
 // MARK: UICollectionViewDelegate
 
-extension UserDetailsViewController {
+extension ProfileViewController {
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
@@ -240,9 +240,9 @@ extension UserDetailsViewController {
         }
         if let viewModel = viewModel as? TeamDetailsViewModel {
 
-            let userDetailsViewController = UserDetailsViewController(user: viewModel.teamMembers[indexPath.item])
-            userDetailsViewController.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(userDetailsViewController, animated: true)
+            let profileViewController = ProfileViewController(user: viewModel.teamMembers[indexPath.item])
+            profileViewController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(profileViewController, animated: true)
         }
     }
 
@@ -263,7 +263,7 @@ extension UserDetailsViewController {
 
 // MARK: BaseCollectionViewViewModelDelegate
 
-extension UserDetailsViewController: BaseCollectionViewViewModelDelegate {
+extension ProfileViewController: BaseCollectionViewViewModelDelegate {
 
     func viewModelDidLoadInitialItems() {
         collectionView?.reloadData()
@@ -290,7 +290,7 @@ extension UserDetailsViewController: BaseCollectionViewViewModelDelegate {
 
 // MARK: Private extension
 
-private extension UserDetailsViewController {
+private extension ProfileViewController {
 
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell,
                        atIndexPath indexPath: NSIndexPath) {
@@ -313,7 +313,7 @@ private extension UserDetailsViewController {
     func setupBackButton() {
         if isModal {
             let attributedString = NSMutableAttributedString(
-                string: NSLocalizedString("UserDetails.BackButton",
+                string: NSLocalizedString("Profile.BackButton",
                 comment: "Back button, user details"),
                 attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
             let textAttachment = NSTextAttachment()

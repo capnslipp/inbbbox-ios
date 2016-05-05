@@ -20,4 +20,3 @@ protocol ProfileViewModel: BaseCollectionViewViewModel {
     func followProfile() -> Promise<Void>
     func unfollowProfile() -> Promise<Void>
 }
-

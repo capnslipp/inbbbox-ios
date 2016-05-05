@@ -47,9 +47,9 @@ class CenterButtonTabBarController: UITabBarController {
         let followeesViewController = UINavigationController(
             rootViewController: FolloweesCollectionViewController(
                 oneColumnLayoutCellHeightToWidthRatio:
-                    LargeFolloweeCollectionViewCell.heightToWidthRatio,
+                    LargeUserCollectionViewCell.heightToWidthRatio,
                 twoColumnsLayoutCellHeightToWidthRatio:
-                    SmallFolloweeCollectionViewCell.heightToWidthRatio
+                    SmallUserCollectionViewCell.heightToWidthRatio
             )
         )
 

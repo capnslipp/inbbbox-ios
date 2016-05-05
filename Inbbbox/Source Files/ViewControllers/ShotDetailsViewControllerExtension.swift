@@ -117,12 +117,12 @@ extension ShotDetailsViewController: TTTAttributedLabelDelegate {
 
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
-            presentUserDetailsViewControllerForUser(user)
+            presentProfileViewControllerForUser(user)
         } else {
             firstly {
                 viewModel.userForId(url.absoluteString)
             }.then { [weak self] user in
-                self?.presentUserDetailsViewControllerForUser(user)
+                self?.presentProfileViewControllerForUser(user)
             }
         }
     }
@@ -146,7 +146,7 @@ extension ShotDetailsViewController: AvatarViewDelegate {
             }
         }
         if let user = user {
-            presentUserDetailsViewControllerForUser(user)
+            presentProfileViewControllerForUser(user)
         }
     }
 }
@@ -167,7 +167,7 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
                 firstly {
                     viewModel.userForId(identifier)
                 }.then { [weak self] user in
-                    self?.presentUserDetailsViewControllerForUser(user)
+                    self?.presentProfileViewControllerForUser(user)
                 }
             }
         } else {
