@@ -23,7 +23,7 @@ plugin 'cocoapods-keys', {
 
 pod 'AsyncSwift', '~> 1.6'
 pod 'KeychainAccess', '~> 2.3'
-pod 'PromiseKit', # fork because issue: https://github.com/mxcl/PromiseKit/issues/415
+pod 'PromiseKit', # fork because of issue: https://github.com/mxcl/PromiseKit/issues/415
   :git => 'git@github.com:rad3ks/PromiseKit.git',
   :branch => 'bug/415'
 pod 'SwiftyJSON', '~> 2.3'
