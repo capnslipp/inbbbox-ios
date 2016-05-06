@@ -152,7 +152,9 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 if let url = viewModel.urlForUser(viewModel.shot.user) {
                     header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
                 }
-
+                if let team = viewModel.shot.team, url = viewModel.urlForTeam(team) {
+                    header?.setLinkInTitle(url, range: viewModel.teamLinkRange, delegate: self)
+                }
                 header?.imageDidTap = { [weak self] in
                     self?.presentShotFullscreen()
                 }
@@ -236,13 +238,13 @@ extension ShotBucketsViewController {
 
 private extension ShotBucketsViewController {
 
-    func presentUserDetailsViewControllerForUser(user: UserType) {
+    func presentProfileViewControllerForUser(user: UserType) {
 
-        let userDetailsViewController = UserDetailsViewController(user: user)
-        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+        let profileViewController = ProfileViewController(user: user)
+        let navigationController = UINavigationController(rootViewController: profileViewController)
 
         animateHeader(start: false)
-        userDetailsViewController.dismissClosure = { [weak self] in
+        profileViewController.dismissClosure = { [weak self] in
             self?.animateHeader(start: true)
         }
         presentViewController(navigationController, animated: true, completion: nil)
@@ -372,7 +374,7 @@ extension ShotBucketsViewController: AvatarViewDelegate {
     func avatarView(avatarView: AvatarView, didTapButton avatarButton: UIButton) {
         if avatarView.superview == header {
             let user = viewModel.shot.user
-            presentUserDetailsViewControllerForUser(user)
+            presentProfileViewControllerForUser(user)
         }
     }
 }
@@ -381,7 +383,13 @@ extension ShotBucketsViewController: TTTAttributedLabelDelegate {
 
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
-            presentUserDetailsViewControllerForUser(user)
+            presentProfileViewControllerForUser(user)
+        } else {
+            firstly {
+                viewModel.userForId(url.absoluteString)
+            }.then { [weak self] user in
+                self?.presentProfileViewControllerForUser(user)
+            }
         }
     }
 }

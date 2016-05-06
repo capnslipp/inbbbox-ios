@@ -9,15 +9,21 @@
 import Foundation
 import PromiseKit
 
-class UserDetailsViewModel: BaseCollectionViewViewModel {
+class UserDetailsViewModel: ProfileViewModel {
 
     weak var delegate: BaseCollectionViewViewModelDelegate?
 
-    var userShots = [ShotType]()
-    var connectionsRequester = APIConnectionsRequester()
+    var title: String {
+        return user.name ?? user.username
+    }
 
-    private(set) var user: UserType
-    private let shotsProvider = ShotsProvider()
+    var avatarURL: NSURL? {
+        return user.avatarURL
+    }
+
+    var collectionIsEmpty: Bool {
+        return userShots.isEmpty
+    }
 
     var shouldShowFollowButton: Bool {
         if let currentUser = UserStorage.currentUser where currentUser.identifier != user.identifier {
@@ -25,9 +31,16 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
         }
         return false
     }
+
     var itemsCount: Int {
         return userShots.count
     }
+
+    var userShots = [ShotType]()
+    var connectionsRequester = APIConnectionsRequester()
+
+    private(set) var user: UserType
+    private let shotsProvider = ShotsProvider()
 
     init(user: UserType) {
         self.user = user
@@ -69,7 +82,7 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
 
     // MARK: Users section
 
-    func isUserFollowedByMe() -> Promise<Bool> {
+    func isProfileFollowedByMe() -> Promise<Bool> {
 
         return Promise<Bool> { fulfill, reject in
 
@@ -81,7 +94,7 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
         }
     }
 
-    func followUser() -> Promise<Void> {
+    func followProfile() -> Promise<Void> {
 
         return Promise<Void> { fulfill, reject in
 
@@ -91,7 +104,7 @@ class UserDetailsViewModel: BaseCollectionViewViewModel {
         }
     }
 
-    func unfollowUser() -> Promise<Void> {
+    func unfollowProfile() -> Promise<Void> {
 
         return Promise<Void> { fulfill, reject in
 

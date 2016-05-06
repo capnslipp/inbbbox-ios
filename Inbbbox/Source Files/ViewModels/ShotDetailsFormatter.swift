@@ -29,9 +29,10 @@ final class ShotDetailsFormatter {
     }()
 
     class func attributedStringForHeaderWithLinkRangeFromShot(shot: ShotType)
-                    -> (attributedString: NSAttributedString, linkRange: NSRange?) {
+                    -> (attributedString: NSAttributedString, userLinkRange: NSRange?, teamLinkRange: NSRange?) {
         let mutableAttributedString = NSMutableAttributedString()
         var userLinkRange: NSRange?
+        var teamLinkRange: NSRange?
 
         if shot.title.characters.count > 0 {
             appendTitleAttributedString(mutableAttributedString, shot: shot)
@@ -43,14 +44,14 @@ final class ShotDetailsFormatter {
         }
 
         if let team = shot.team?.name where team.characters.count > 0 {
-            appendTeamAttributedString(mutableAttributedString, team: team)
+            teamLinkRange = appendTeamAttributedString(mutableAttributedString, team: team)
         }
 
         let dateSting = shotDateFormatter.stringFromDate(shot.createdAt)
         if dateSting.characters.count > 0 {
             appendDateAttributedString(mutableAttributedString, dateSting: dateSting)
         }
-        return (NSAttributedString(attributedString: mutableAttributedString), userLinkRange)
+        return (NSAttributedString(attributedString: mutableAttributedString), userLinkRange, teamLinkRange)
     }
 
     class func attributedShotDescriptionFromShot(shot: ShotType) -> NSAttributedString? {
@@ -134,18 +135,21 @@ private extension ShotDetailsFormatter {
         return userLinkRange
     }
 
-    class func appendTeamAttributedString(mutableAttributedString: NSMutableAttributedString, team: String) {
+    class func appendTeamAttributedString(mutableAttributedString: NSMutableAttributedString, team: String) -> NSRange {
         let prefixString = NSLocalizedString("ShotDetailsFormatter.For",
                 comment: "Preposition describing for who shot was made.")
         let teamAttributedString = NSMutableAttributedString(
-        string: prefixString + " " + team, attributes: [NSForegroundColorAttributeName: UIColor.grayColor(),
+        string: prefixString + " " + team, attributes: [NSForegroundColorAttributeName: UIColor.pinkColor(),
                                                         NSFontAttributeName: UIFont.systemFontOfSize(14)])
         teamAttributedString.setAttributes([
                 NSForegroundColorAttributeName: UIColor.grayColor(),
                 NSFontAttributeName: UIFont.systemFontOfSize(12)
         ], range: NSRange(location: 0, length: prefixString.characters.count))
+        let teamLinkRange = NSRange(location: mutableAttributedString.length + prefixString.characters.count,
+                                    length: team.characters.count + 1)
         mutableAttributedString.appendAttributedString(teamAttributedString)
         mutableAttributedString.appendAttributedString(NSAttributedString.newLineAttributedString())
+        return teamLinkRange
     }
 
     class func appendDateAttributedString(mutableAttributedString: NSMutableAttributedString, dateSting: String) {

@@ -23,8 +23,8 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         guard let collectionView = collectionView else {
             return
         }
-        collectionView.registerClass(SmallFolloweeCollectionViewCell.self, type: .Cell)
-        collectionView.registerClass(LargeFolloweeCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(SmallUserCollectionViewCell.self, type: .Cell)
+        collectionView.registerClass(LargeUserCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
         viewModel.delegate = self
         self.title = viewModel.title
@@ -54,7 +54,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         indexPathsNeededImageUpdate.append(indexPath)
 
         if collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
-            let cell = collectionView.dequeueReusableClass(SmallFolloweeCollectionViewCell.self,
+            let cell = collectionView.dequeueReusableClass(SmallUserCollectionViewCell.self,
                     forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
             cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
@@ -68,7 +68,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             }
             return cell
         } else {
-            let cell = collectionView.dequeueReusableClass(LargeFolloweeCollectionViewCell.self,
+            let cell = collectionView.dequeueReusableClass(LargeUserCollectionViewCell.self,
                     forIndexPath: indexPath, type: .Cell)
             cell.clearImages()
             cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
@@ -103,9 +103,9 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let userDetailsViewController = UserDetailsViewController(user: viewModel.followees[indexPath.item])
-        userDetailsViewController.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(userDetailsViewController, animated: true)
+        let profileViewController = ProfileViewController(user: viewModel.followees[indexPath.item])
+        profileViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(profileViewController, animated: true)
     }
 
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell,

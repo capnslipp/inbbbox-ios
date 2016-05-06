@@ -21,6 +21,10 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         }
     }
 
+    var containsHeader: Bool {
+        return false
+    }
+
     private var oneColumnLayoutButton: UIBarButtonItem?
     private var twoColumnsLayoutButton: UIBarButtonItem?
 
@@ -28,6 +32,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
         flowLayout.itemHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
         self.init(collectionViewLayout: flowLayout)
+        flowLayout.containsHeader = containsHeader
         self.oneColumnLayoutCellHeightToWidthRatio = oneColumnLayoutCellHeightToWidthRatio
         self.twoColumnsLayoutCellHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
     }
@@ -82,10 +87,12 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
         if collectionView.collectionViewLayout.isKindOfClass(OneColumnCollectionViewFlowLayout) {
             let flowLayout = TwoColumnsCollectionViewFlowLayout()
             flowLayout.itemHeightToWidthRatio = twoColumnsLayoutCellHeightToWidthRatio
+            flowLayout.containsHeader = containsHeader
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         } else {
             let flowLayout = OneColumnCollectionViewFlowLayout()
             flowLayout.itemHeightToWidthRatio = oneColumnLayoutCellHeightToWidthRatio
+            flowLayout.containsHeader = containsHeader
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         }
         collectionView.reloadData()

@@ -210,6 +210,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             if let url = viewModel.urlForUser(viewModel.shot.user) {
                 header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
             }
+            if let team = viewModel.shot.team, url = viewModel.urlForTeam(team) {
+                header?.setLinkInTitle(url, range: viewModel.teamLinkRange, delegate: self)
+            }
             header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
             forControlEvents: .TouchUpInside)
@@ -292,13 +295,13 @@ extension ShotDetailsViewController {
         }
     }
 
-    func presentUserDetailsViewControllerForUser(user: UserType) {
+    func presentProfileViewControllerForUser(user: UserType) {
 
-        let userDetailsViewController = UserDetailsViewController(user: user)
-        let navigationController = UINavigationController(rootViewController: userDetailsViewController)
+        let profileViewController = ProfileViewController(user: user)
+        let navigationController = UINavigationController(rootViewController: profileViewController)
 
         animateHeader(start: false)
-        userDetailsViewController.dismissClosure = { [weak self] in
+        profileViewController.dismissClosure = { [weak self] in
             self?.animateHeader(start: true)
         }
         presentViewController(navigationController, animated: true, completion: nil)
