@@ -32,9 +32,7 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
                 self.navigationController?.presentingViewController?.presentedViewController ==
                 self.navigationController && (self.navigationController != nil)
     }
-}
 
-extension ProfileViewController {
     convenience init(user: UserType) {
 
         guard let accountType = user.accountType where accountType == .Team else {
