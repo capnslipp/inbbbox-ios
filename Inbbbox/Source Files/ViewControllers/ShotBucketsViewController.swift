@@ -152,7 +152,9 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
                 if let url = viewModel.urlForUser(viewModel.shot.user) {
                     header?.setLinkInTitle(url, range: viewModel.userLinkRange, delegate: self)
                 }
-
+                if let team = viewModel.shot.team, url = viewModel.urlForTeam(team) {
+                    header?.setLinkInTitle(url, range: viewModel.teamLinkRange, delegate: self)
+                }
                 header?.imageDidTap = { [weak self] in
                     self?.presentShotFullscreen()
                 }
@@ -382,6 +384,12 @@ extension ShotBucketsViewController: TTTAttributedLabelDelegate {
     func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
         if let user = viewModel.userForURL(url) {
             presentProfileViewControllerForUser(user)
+        } else {
+            firstly {
+                viewModel.userForId(url.absoluteString)
+            }.then { [weak self] user in
+                self?.presentProfileViewControllerForUser(user)
+            }
         }
     }
 }

@@ -27,7 +27,12 @@ class ShotBucketsViewModel {
 
     var userLinkRange: NSRange {
         return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).userLinkRange ??
-                NSRange(location: 0, length: 0)
+            NSRange(location: 0, length: 0)
+    }
+
+    var teamLinkRange: NSRange {
+        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).teamLinkRange ??
+            NSRange(location: 0, length: 0)
     }
 
     var titleForHeader: String {
@@ -55,6 +60,7 @@ class ShotBucketsViewModel {
     let shot: ShotType
     let shotBucketsViewControllerMode: ShotBucketsViewControllerMode
 
+    var userProvider = APIUsersProvider()
     var bucketsProvider = BucketsProvider()
     var bucketsRequester = BucketsRequester()
     var shotsRequester = APIShotsRequester()
@@ -169,6 +175,10 @@ extension ShotBucketsViewModel: URLToUserProvider, UserToURLProvider {
 
     func userForURL(url: NSURL) -> UserType? {
         return shot.user.identifier == url.absoluteString ? shot.user : nil
+    }
+
+    func userForId(identifier: String) -> Promise<UserType> {
+        return userProvider.provideUser(identifier)
     }
 }
 

@@ -78,8 +78,7 @@ extension ProfileViewController {
         collectionView.registerClass(LargeUserCollectionViewCell.self, type: .Cell)
         collectionView.registerClass(ProfileHeaderView.self, type: .Header)
 
-        do {
-            // hides bottom border of navigationBar
+        do { // hides bottom border of navigationBar
             self.navigationController?.navigationBar.shadowImage = UIImage()
             self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         }
@@ -92,19 +91,15 @@ extension ProfileViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        guard viewModel.shouldShowFollowButton else {
-            return
-        }
+        guard viewModel.shouldShowFollowButton else { return }
 
         firstly {
             viewModel.isProfileFollowedByMe()
-        }.then {
-            followed in
+        }.then { followed in
             self.header?.userFollowed = followed
         }.always {
             self.header?.stopActivityIndicator()
-        }.error {
-            error in
+        }.error { error in
             // NGRTodo: provide pop-ups with errors
         }
     }
@@ -125,8 +120,7 @@ extension ProfileViewController {
                 self.header?.userFollowed = !userFollowed
             }.always {
                 self.header?.stopActivityIndicator()
-            }.error {
-                error in
+            }.error { error in
                 // NGRTodo: provide pop-ups with errors
             }
         }
@@ -294,8 +288,7 @@ private extension ProfileViewController {
 
     func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell,
                        atIndexPath indexPath: NSIndexPath) {
-        let imageLoadingCompletion: UIImage -> Void = {
-            [weak self] image in
+        let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
 
             guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else {
                 return
@@ -317,9 +310,10 @@ private extension ProfileViewController {
                 comment: "Back button, user details"),
                 attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
             let textAttachment = NSTextAttachment()
-            textAttachment.image = UIImage(named: "ic-back")
-            textAttachment.bounds = CGRect(x: 0, y: -3,
-                                    width: textAttachment.image!.size.width, height: textAttachment.image!.size.height)
+            if let image = UIImage(named: "ic-back") {
+                textAttachment.image = image
+                textAttachment.bounds = CGRect(x: 0, y: -3, width: image.size.width, height: image.size.height)
+            }
             let attributedStringWithImage = NSAttributedString(attachment: textAttachment)
             attributedString.replaceCharactersInRange(NSRange(location: 0, length: 0),
                                                       withAttributedString: attributedStringWithImage)
