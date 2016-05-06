@@ -21,24 +21,24 @@ PODS:
   - Mockingjay/XCTest (1.1.1):
     - Mockingjay/Core
   - Nimble (3.2.0)
-  - OMGHTTPURLRQ (3.1.1):
-    - OMGHTTPURLRQ/RQ (= 3.1.1)
-  - OMGHTTPURLRQ/FormURLEncode (3.1.1)
-  - OMGHTTPURLRQ/RQ (3.1.1):
+  - OMGHTTPURLRQ (3.0.2):
+    - OMGHTTPURLRQ/RQ (= 3.0.2)
+  - OMGHTTPURLRQ/FormURLEncode (3.0.2)
+  - OMGHTTPURLRQ/RQ (3.0.2):
     - OMGHTTPURLRQ/FormURLEncode
     - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (3.1.1)
-  - PromiseKit (3.1.0):
-    - PromiseKit/Foundation (= 3.1.0)
-    - PromiseKit/QuartzCore (= 3.1.0)
-    - PromiseKit/UIKit (= 3.1.0)
-  - PromiseKit/CorePromise (3.1.0)
-  - PromiseKit/Foundation (3.1.0):
-    - OMGHTTPURLRQ (~> 3.1.0)
+  - OMGHTTPURLRQ/UserAgent (3.0.2)
+  - PromiseKit (3.0.0):
+    - PromiseKit/Foundation (= 3.0.0)
+    - PromiseKit/QuartzCore (= 3.0.0)
+    - PromiseKit/UIKit (= 3.0.0)
+  - PromiseKit/CorePromise (3.0.0)
+  - PromiseKit/Foundation (3.0.0):
+    - OMGHTTPURLRQ (~> 3.0.0)
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.1.0):
+  - PromiseKit/QuartzCore (3.0.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.1.0):
+  - PromiseKit/UIKit (3.0.0):
     - PromiseKit/CorePromise
   - PureLayout (3.0.1)
   - Quick (0.9.1)
@@ -64,7 +64,7 @@ DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
   - Nimble (~> 3.1)
-  - PromiseKit (~> 3.1)
+  - PromiseKit (from `git@github.com:rad3ks/PromiseKit.git`, branch `bug/415`)
   - PureLayout (~> 3.0)
   - Quick (~> 0.8)
   - SwiftyJSON (~> 2.3)
@@ -83,6 +83,9 @@ EXTERNAL SOURCES:
     :tag: 2.0.4
   Keys:
     :path: Pods/CocoaPodsKeys
+  PromiseKit:
+    :branch: bug/415
+    :git: git@github.com:rad3ks/PromiseKit.git
 
 CHECKOUT OPTIONS:
   EasyAnimation:
@@ -94,6 +97,9 @@ CHECKOUT OPTIONS:
   ImageViewer:
     :git: https://github.com/MailOnline/ImageViewer.git
     :tag: 2.0.4
+  PromiseKit:
+    :commit: f4201bcaf91cab1a215662ea3154ca0955f50d4c
+    :git: git@github.com:rad3ks/PromiseKit.git
 
 SPEC CHECKSUMS:
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
@@ -110,8 +116,8 @@ SPEC CHECKSUMS:
   Keys: 7d2ff6ff42f6903358267ce56e9392f83c31acfe
   Mockingjay: 757f80abc947b5ec2918b1bb14f3066574720430
   Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
-  OMGHTTPURLRQ: 633f98ee745aeda02345935a52eec1784cddb589
-  PromiseKit: 7ed2a3fc5217695305a55a8c47cb3a17ff5fde0d
+  OMGHTTPURLRQ: 8376dc887d76a5a7e2a67881dc788f917a2f437c
+  PromiseKit: f196dac172600f95e77c3f9c478eae62007f4286
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   Quick: a5221fc21788b6aeda934805e68b061839bc3165
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
