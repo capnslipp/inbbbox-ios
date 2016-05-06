@@ -33,6 +33,12 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
                 self.navigationController && (self.navigationController != nil)
     }
 
+    /// Initialize view controller to show user's or team's details.
+    ///
+    /// - Note: According to Dribble API - Team is a particular case of User,
+    ///         so if you want to show team's details - pass it as `UserType` with `accountType = .Team`.
+    ///
+    /// - parameter user: User to initialize view controller with.
     convenience init(user: UserType) {
 
         guard let accountType = user.accountType where accountType == .Team else {
@@ -54,7 +60,7 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
         self.init(team: team)
     }
 
-    convenience init(team: TeamType) {
+    private convenience init(team: TeamType) {
 
         self.init(oneColumnLayoutCellHeightToWidthRatio: LargeUserCollectionViewCell.heightToWidthRatio,
                   twoColumnsLayoutCellHeightToWidthRatio: SmallUserCollectionViewCell.heightToWidthRatio)
