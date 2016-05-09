@@ -7,8 +7,24 @@
 //
 
 import UIKit
+import AOAlertController
 
 extension UIAlertController {
+
+    class func setupAlertControllerSharedSettings() {
+        AOAlertSettings.sharedSettings.backgroundColor = .backgroundGrayColor()
+        AOAlertSettings.sharedSettings.linesColor = .backgroundGrayColor()
+        AOAlertSettings.sharedSettings.defaultActionColor = .pinkColor()
+        AOAlertSettings.sharedSettings.cancelActionColor = .pinkColor()
+
+        AOAlertSettings.sharedSettings.messageFont = UIFont.helveticaFont(.NeueMedium, size: 17)
+        AOAlertSettings.sharedSettings.defaultActionFont = UIFont.helveticaFont(.Neue, size: 16)
+        AOAlertSettings.sharedSettings.cancelActionFont = UIFont.helveticaFont(.Neue, size: 16)
+        AOAlertSettings.sharedSettings.destructiveActionFont = UIFont.helveticaFont(.Neue, size: 16)
+
+        AOAlertSettings.sharedSettings.blurredBackground = true
+    }
+
     class func provideBucketNameAlertController(createHandler: (bucketName: String) -> Void)
                     -> UIAlertController {
         let alertTitle = NSLocalizedString("UIAlertControllerExtension.NewBucket",

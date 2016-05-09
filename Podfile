@@ -42,6 +42,8 @@ pod 'GoogleAnalytics', '~> 3.14'
 pod 'TTTAttributedLabel', '~> 1.13'
 #has to be given tag `2.0.4` explicitly cause CocoaPods do not take latest version
 pod 'ImageViewer', :git => 'https://github.com/MailOnline/ImageViewer.git', :tag => '2.0.4'
+#fork because of styling private properties
+pod 'AOAlertController', :git => 'https://github.com/pikor/AOAlertController/', :commit => '81b2af960af96a5b9308220b01e33edcd189c111'
 target 'Tests' do link_with 'Unit Tests'
   pod 'Quick', '~> 0.8', :configurations => ['Test']
   pod 'Nimble', '~> 3.1', :configurations => ['Test']

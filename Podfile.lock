@@ -1,4 +1,5 @@
 PODS:
+  - AOAlertController (1.1)
   - AsyncSwift (1.7.2)
   - Dobby (0.5.0)
   - DZNEmptyDataSet (1.7.3)
@@ -49,6 +50,8 @@ PODS:
   - ZFDragableModalTransition (0.6)
 
 DEPENDENCIES:
+  - AOAlertController (from `https://github.com/pikor/AOAlertController/`, commit
+    `81b2af960af96a5b9308220b01e33edcd189c111`)
   - AsyncSwift (~> 1.6)
   - Dobby (~> 0.5)
   - DZNEmptyDataSet (~> 1.7)
@@ -73,6 +76,9 @@ DEPENDENCIES:
   - ZFDragableModalTransition (~> 0.6)
 
 EXTERNAL SOURCES:
+  AOAlertController:
+    :commit: 81b2af960af96a5b9308220b01e33edcd189c111
+    :git: https://github.com/pikor/AOAlertController/
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
@@ -88,6 +94,9 @@ EXTERNAL SOURCES:
     :git: git@github.com:rad3ks/PromiseKit.git
 
 CHECKOUT OPTIONS:
+  AOAlertController:
+    :commit: 81b2af960af96a5b9308220b01e33edcd189c111
+    :git: https://github.com/pikor/AOAlertController/
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
     :git: https://git@github.com/PatrykKaczmarek/EasyAnimation.git
@@ -102,6 +111,7 @@ CHECKOUT OPTIONS:
     :git: git@github.com:rad3ks/PromiseKit.git
 
 SPEC CHECKSUMS:
+  AOAlertController: d5f62b122eeeea7de3fb7dfac4ea58490ba823a5
   AsyncSwift: 46a78bceb11f0e5bb52747f740d9692ec78d2d7c
   Dobby: bb7920d6b191fb1fbad2cc5f6ef42d067dddf5dd
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
