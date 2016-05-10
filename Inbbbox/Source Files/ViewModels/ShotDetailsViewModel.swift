@@ -381,7 +381,7 @@ extension ShotDetailsViewModel {
         return comments.count - itemsCount + index
     }
 
-    private var isAllowedToDisplaySeparator: Bool {
+    var isAllowedToDisplaySeparator: Bool {
 
         if isFetchingComments {
             return false

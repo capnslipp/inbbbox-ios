@@ -47,16 +47,22 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
 
         view.startAnimation()
 
+        let isAllowedToDisplaySeparator = viewModel.isAllowedToDisplaySeparator
+
         firstly {
             viewModel.postComment(comment)
         }.then { () -> Void in
 
-            let indexPath = NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0),
-                inSection: 0)
+            var indexPaths = [NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0),
+                inSection: 0)]
+            if isAllowedToDisplaySeparator != self.viewModel.isAllowedToDisplaySeparator {
+                indexPaths.append(NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0) + 1,
+                    inSection: 0))
+            }
             self.shotDetailsView.collectionView.performBatchUpdates({ () -> Void in
-                self.shotDetailsView.collectionView.insertItemsAtIndexPaths([indexPath])
+                self.shotDetailsView.collectionView.insertItemsAtIndexPaths(indexPaths)
             }, completion: { _ -> Void in
-                self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPath,
+                self.shotDetailsView.collectionView.scrollToItemAtIndexPath(indexPaths[0],
                         atScrollPosition: .CenteredVertically, animated: true)
             })
         }.always {
