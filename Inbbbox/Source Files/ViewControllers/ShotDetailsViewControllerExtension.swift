@@ -102,10 +102,7 @@ extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
         switch result {
         case MFMailComposeResultSent:
             let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
-            presentViewController(contentReportedAlert, animated: true) {
-                contentReportedAlert.view.tintColor = .pinkColor()
-            }
-            contentReportedAlert.view.tintColor = .pinkColor()
+            presentViewController(contentReportedAlert, animated: true, completion: nil)
         default: break
         }
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import AOAlertController
 
 class SettingsViewController: UITableViewController {
 
@@ -62,9 +63,8 @@ extension SettingsViewController: ModelUpdatable {
 
 extension SettingsViewController: AlertDisplayable {
 
-    func displayAlert(alert: UIAlertController) {
+    func displayAlert(alert: AOAlertController) {
         presentViewController(alert, animated: true, completion: nil)
-        alert.view.tintColor = UIColor.blackColor()
     }
 }
 

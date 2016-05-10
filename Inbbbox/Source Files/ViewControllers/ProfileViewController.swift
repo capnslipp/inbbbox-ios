@@ -273,7 +273,6 @@ extension ProfileViewController: BaseCollectionViewViewModelDelegate {
         if viewModel.collectionIsEmpty {
             let alert = UIAlertController.generalErrorAlertController()
             presentViewController(alert, animated: true, completion: nil)
-            alert.view.tintColor = .pinkColor()
         }
     }
 

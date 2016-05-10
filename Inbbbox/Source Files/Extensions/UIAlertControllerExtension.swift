@@ -54,42 +54,57 @@ extension UIAlertController {
         return alert
     }
 
-    class func generalErrorAlertController() -> UIAlertController {
-        let alert = UIAlertController(
-            title: NSLocalizedString("UIAlertControllerExtension.Error",
-                            comment: "General popup informing about error."),
-            message: NSLocalizedString("UIAlertControllerExtension.TryAgain",
-                              comment: "Allows user to try again after error occurred."),
-            preferredStyle: .Alert
-        )
+    class func generalErrorAlertController() -> AOAlertController {
+        let message = NSLocalizedString("UIAlertControllerExtension.TryAgain",
+                                        comment: "Allows user to try again after error occurred.")
+        let alert = AOAlertController(title: nil, message: message, style: .Alert)
+
         let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
-        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))
+        let okAction = AOAlertAction(title: okActionTitle, style: .Default, handler: nil)
+
+        alert.addAction(okAction)
 
         return alert
     }
 
-    class func inappropriateContentReportedAlertController() -> UIAlertController {
-        let alert = UIAlertController(
-            title: nil,
-            message: NSLocalizedString("UIAlertControllerExtension.InappropriateContentReported",
-                comment: "Inappropriate content has been reported."),
-            preferredStyle: .Alert
-        )
+    class func inappropriateContentReportedAlertController() -> AOAlertController {
+        let message = NSLocalizedString("UIAlertControllerExtension.InappropriateContentReported", comment: "nil")
+        let alert = AOAlertController(title: nil, message: message, style: .Alert)
+
         let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
-        alert.addAction(UIAlertAction(title: okActionTitle, style: .Default, handler: nil))
+        let okAction = AOAlertAction(title: okActionTitle, style: .Default, handler: nil)
+
+        alert.addAction(okAction)
 
         return alert
     }
 
-    class func emailAccountNotFoundAlertController() -> UIAlertController {
-        let alert = UIAlertController(
-            title: nil,
-            message: NSLocalizedString("UIAlertControllerExtension.EmailError",
-            comment: "Displayed when user device is not capable of/configured to send emails."),
-            preferredStyle: .Alert
-        )
+    class func emailAccountNotFoundAlertController() -> AOAlertController {
+        let message = NSLocalizedString("UIAlertControllerExtension.EmailError",
+                comment: "Displayed when user device is not capable of/configured to send emails.")
+        let alert = AOAlertController(title: nil, message: message, style: .Alert)
+
         let dismissActionTitle = NSLocalizedString("UIAlertControllerExtension.Dismiss", comment: "Dismiss")
-        alert.addAction(UIAlertAction(title: dismissActionTitle, style: .Default, handler: nil))
+        let dismissAction = AOAlertAction(title: dismissActionTitle, style: .Default, handler: nil)
+
+        alert.addAction(dismissAction)
+
+        return alert
+    }
+
+    class func signOutAlertController() -> AOAlertController {
+        let message = NSLocalizedString("ShotsCollectionViewController.SignOut",
+                comment: "Message informing user will be logged out because of an error.")
+        let alert = AOAlertController(title: nil, message: message, style: .Alert)
+
+        let dismissActionTitle = NSLocalizedString("ShotsCollectionViewController.Dismiss",
+                comment: "Dismiss error alert.")
+        let dismissAction = AOAlertAction(title: dismissActionTitle, style: .Default) { _ in
+            Authenticator.logout()
+            let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+            delegate?.rollbackToLoginViewController()
+        }
+        alert.addAction(dismissAction)
 
         return alert
     }
