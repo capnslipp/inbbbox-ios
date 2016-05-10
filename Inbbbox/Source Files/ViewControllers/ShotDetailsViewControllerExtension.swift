@@ -53,10 +53,11 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
             viewModel.postComment(comment)
         }.then { () -> Void in
 
-            var indexPaths = [NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0),
+            let numberOfItemsInFirstSection = self.shotDetailsView.collectionView.numberOfItemsInSection(0)
+            var indexPaths = [NSIndexPath(forItem: numberOfItemsInFirstSection,
                 inSection: 0)]
             if isAllowedToDisplaySeparator != self.viewModel.isAllowedToDisplaySeparator {
-                indexPaths.append(NSIndexPath(forItem: self.shotDetailsView.collectionView.numberOfItemsInSection(0) + 1,
+                indexPaths.append(NSIndexPath(forItem: numberOfItemsInFirstSection + 1,
                     inSection: 0))
             }
             self.shotDetailsView.collectionView.performBatchUpdates({ () -> Void in
