@@ -101,8 +101,9 @@ extension UIAlertController {
                 comment: "Dismiss error alert.")
         let dismissAction = AOAlertAction(title: dismissActionTitle, style: .Default) { _ in
             Authenticator.logout()
-            let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-            delegate?.rollbackToLoginViewController()
+            if let delegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+                delegate.rollbackToLoginViewController()
+            }
         }
         alert.addAction(dismissAction)
 
