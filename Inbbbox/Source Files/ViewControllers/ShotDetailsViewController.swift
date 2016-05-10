@@ -393,10 +393,15 @@ private extension ShotDetailsViewController {
     }
 
     func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
+        let isAllowedToDisplaySeparator = viewModel.isAllowedToDisplaySeparator
         firstly {
             viewModel.deleteCommentAtIndex(indexPath.item)
         }.then { () -> Void in
-            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths([indexPath])
+            var indexPaths = [indexPath]
+            if isAllowedToDisplaySeparator != self.viewModel.isAllowedToDisplaySeparator {
+                indexPaths.append(NSIndexPath(forItem: indexPath.item - 1, inSection: 0))
+            }
+            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths(indexPaths)
         }.error { error in
             // NGRTemp: Handle error.
         }
