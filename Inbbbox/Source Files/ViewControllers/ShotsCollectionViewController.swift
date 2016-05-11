@@ -71,7 +71,7 @@ extension ShotsCollectionViewController {
             }.then {
                 self.stateHandler.presentData()
             }.error { error in
-                let alertController = self.signOutAlertController()
+                let alertController = UIAlertController.signOutAlertController()
                 self.presentViewController(alertController, animated: true, completion: nil)
                 alertController.view.tintColor = .pinkColor()
             }
@@ -182,23 +182,5 @@ private extension ShotsCollectionViewController {
                 self.shots = shots ?? []
             }.then(fulfill).error(reject)
         }
-    }
-
-    func signOutAlertController() -> UIAlertController {
-        let alertController = UIAlertController(
-        title: NSLocalizedString("ShotsCollectionViewController.Error",
-                comment: "Title of alert visible after upon error detection."),
-                message: NSLocalizedString("ShotsCollectionViewController.SignOut",
-                        comment: "Message to use informing she will be logged out because of error."),
-                preferredStyle: .Alert
-        )
-        let logoutAction = UIAlertAction(title: NSLocalizedString("ShotsCollectionViewController.Dismiss",
-                comment: "Dismiss error alert."), style: .Cancel) { _ in
-            Authenticator.logout()
-            let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
-            delegate?.rollbackToLoginViewController()
-        }
-        alertController.addAction(logoutAction)
-        return alertController
     }
 }

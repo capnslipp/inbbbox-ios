@@ -8,13 +8,14 @@
 
 import UIKit
 import Async
+import AOAlertController
 
 protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
 }
 
 protocol AlertDisplayable: class {
-    func displayAlert(alert: UIAlertController)
+    func displayAlert(alert: AOAlertController)
 }
 
 enum UserMode {
@@ -205,21 +206,20 @@ private extension SettingsViewModel {
 
     // MARK: Prepare alert
 
-    func preparePermissionsAlert() -> UIAlertController {
+    func preparePermissionsAlert() -> AOAlertController {
+        let message = NSLocalizedString("SettingsViewModel.AccessToNotifications",
+                                        comment: "Body of alert, asking user to grant notifications permission.")
+        let alert = AOAlertController(title: nil, message: message, style: .Alert)
 
-        let alert = UIAlertController(title: NSLocalizedString("SettingsViewModel.Permissions",
-                comment: "Title of alert, asking user to grant notifications permission"),
-                message: NSLocalizedString("SettingsViewModel.AccessToNotifications",
-                        comment: "Body of alert, asking user to grant notifications permission."),
-                preferredStyle: .Alert)
-
-        let settingsAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Settings",
-                comment: "Redirect user to Settings app"), style: .Default) {
-            _ in
+        let settingsActionTitle = NSLocalizedString("SettingsViewModel.Settings",
+                                                    comment: "Redirect user to Settings app")
+        let settingsAction = AOAlertAction(title: settingsActionTitle, style: .Default) { _ in
             UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
         }
-        let cancelAction = UIAlertAction(title: NSLocalizedString("SettingsViewModel.Dismiss",
-                comment: "Notifications alert, dismiss button."), style: .Default, handler: nil)
+
+        let cancelActionTitle = NSLocalizedString("SettingsViewModel.Dismiss",
+                                                  comment: "Notifications alert, dismiss button.")
+        let cancelAction = AOAlertAction(title: cancelActionTitle, style: .Default, handler: nil)
 
         alert.addAction(settingsAction)
         alert.addAction(cancelAction)

@@ -411,12 +411,7 @@ private extension ShotDetailsViewController {
 
         guard MFMailComposeViewController.canSendMail() else {
             let alert = UIAlertController.emailAccountNotFoundAlertController()
-            // You may want to move this line to UIAlertControllerExtension,
-            // but bear in mind, since few releases iOS cannot into rendering colors in Alert Controller.
-            alert.view.tintColor = .pinkColor()
-            presentViewController(alert, animated: true) {
-                alert.view.tintColor  = .pinkColor()
-            }
+            presentViewController(alert, animated: true, completion: nil)
             return
         }
 
