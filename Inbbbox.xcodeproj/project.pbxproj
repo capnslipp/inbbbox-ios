@@ -211,6 +211,7 @@
 		89F6A18D88715072C7BABDE1 /* UserStorageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D493EBA01C91E4521D11A489 /* UserStorageMock.swift */; };
 		89FF6FB0D096F9C23558965C /* UIImageSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCC4CA1C2C895D8060128D7 /* UIImageSpecExtension.swift */; };
 		8A9E412BFEF0131112E41E6B /* ShotsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CB3402C9CBB868DB56EA037 /* ShotsStorage.swift */; };
+		8AC52CAE0D885025C186F3F2 /* Pods_Inbbbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DEB8F844F7FD12799C9501 /* Pods_Inbbbox.framework */; };
 		8B71AA21B931EA155F2C7343 /* ORLoginLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17B6FC075A4D604A46D7401 /* ORLoginLabel.swift */; };
 		8BB7A817EF3D83F73906B368 /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75854D574F24ACCF457CB1 /* ViewControllerPresenter.swift */; };
 		8BF3559B4E11B923E5D74DF8 /* ShotsNormalStateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C293E57C35C383AA44755DAF /* ShotsNormalStateHandler.swift */; };
@@ -625,6 +626,7 @@
 		8E8CEB89CF64E054E73B352B /* Constants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8FE199DB9FDA42D6BCC42E3E /* NSAttributedStringExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtension.swift; sourceTree = "<group>"; };
 		909E3331984E4FD8B5EC79C1 /* APICommentsRequesterMock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APICommentsRequesterMock.swift; sourceTree = "<group>"; };
+		90DEB8F844F7FD12799C9501 /* Pods_Inbbbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Inbbbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924CF41C504ED7174FA661DF /* UIColorExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		924FBF153FAC98F7B18F9493 /* ManagedShot.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ManagedShot.swift; sourceTree = "<group>"; };
 		934A127FC9BE65F9FEA88ACD /* CommentEditView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommentEditView.swift; sourceTree = "<group>"; };
@@ -775,6 +777,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AC52CAE0D885025C186F3F2 /* Pods_Inbbbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -847,6 +850,7 @@
 			children = (
 				5E0759062D32339F0F1B138E /* Pods.framework */,
 				DD8A03E1986E72122B87A47A /* Pods_Unit_Tests.framework */,
+				90DEB8F844F7FD12799C9501 /* Pods_Inbbbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1570,11 +1574,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5E3A98071AA72F0A00CE2F20 /* Build configuration list for PBXNativeTarget "Inbbbox" */;
 			buildPhases = (
+				D084FEB7B98567D14C689620 /* 📦 Check Pods Manifest.lock */,
 				5E3A97E41AA72F0A00CE2F20 /* Sources */,
 				5E3A97E51AA72F0A00CE2F20 /* Frameworks */,
 				5E3A97E61AA72F0A00CE2F20 /* Resources */,
 				5E6ED5931ACC37C8001CC9AB /* Search for warning flags */,
 				309E50361CC11F8000198711 /* ShellScript */,
+				CD016289A2BC46D9DB544FF5 /* 📦 Embed Pods Frameworks */,
+				2E76AC9DB7A0ED5E56608A26 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1678,6 +1685,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2E76AC9DB7A0ED5E56608A26 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inbbbox/Pods-Inbbbox-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		309E50361CC11F8000198711 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1733,6 +1755,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unit Tests/Pods-Unit Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD016289A2BC46D9DB544FF5 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inbbbox/Pods-Inbbbox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D084FEB7B98567D14C689620 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E8C8763099C341F5A6E3E95F /* 📦 Check Pods Manifest.lock */ = {
