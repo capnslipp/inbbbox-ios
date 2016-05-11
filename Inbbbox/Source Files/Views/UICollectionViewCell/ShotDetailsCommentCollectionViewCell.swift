@@ -32,7 +32,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = TTTAttributedLabel.newAutoLayoutView()
     let dateLabel = UILabel.newAutoLayoutView()
-    private let commentLabel = UILabel.newAutoLayoutView()
+    private let commentLabel = TTTAttributedLabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
 
     // Regards clickable links in comment label
@@ -63,6 +63,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         commentLabel.numberOfLines = 0
         commentLabel.lineBreakMode = .ByWordWrapping
         commentLabel.userInteractionEnabled = true
+        commentLabel.linkAttributes = [NSForegroundColorAttributeName : UIColor.pinkColor()]
         contentView.addSubview(commentLabel)
 
         dateLabel.numberOfLines = 0
@@ -166,7 +167,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
     func setCommentLabelAttributedText(attributedText: NSAttributedString) {
 
-        commentLabel.attributedText = attributedText
+        commentLabel.setText(attributedText)
 
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
