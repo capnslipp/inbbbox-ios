@@ -44,7 +44,7 @@ pod 'TTTAttributedLabel', '~> 1.13'
 pod 'ImageViewer', :git => 'https://github.com/MailOnline/ImageViewer.git', :tag => '2.0.4'
 #fork because of styling private properties
 pod 'AOAlertController', :git => 'https://github.com/pikor/AOAlertController/', :commit => '81b2af960af96a5b9308220b01e33edcd189c111'
-target 'Tests' do link_with 'Unit Tests'
+target 'Unit Tests' do
   pod 'Quick', '~> 0.8', :configurations => ['Test']
   pod 'Nimble', '~> 3.1', :configurations => ['Test']
   pod 'Dobby', '~> 0.5', :configurations => ['Test']

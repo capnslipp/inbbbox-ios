@@ -6,7 +6,7 @@
 
 #include "../Carthage/Checkouts/xcconfigs/Base/Configurations/Test.xcconfig"
 #include "../Carthage/Checkouts/xcconfigs/iOS/iOS-Application.xcconfig"
-#include "../Pods/Target Support Files/Pods-Tests/Pods-Tests.test.xcconfig"
+#include "../Pods/Target Support Files/Pods-Unit Tests/Pods-Unit Tests.test.xcconfig"
 
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) ENV_TEST
 OTHER_SWIFT_FLAGS = $(inherited) -D ENV_TEST
