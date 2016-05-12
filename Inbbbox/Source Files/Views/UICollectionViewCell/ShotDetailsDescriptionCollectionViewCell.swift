@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
 
     weak var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
 
-    private let descriptionLabel = UILabel.newAutoLayoutView()
+    private let descriptionLabel = TTTAttributedLabel.newAutoLayoutView()
 
     // Regards clickable links in description label
     private let layoutManager = NSLayoutManager()
@@ -32,6 +33,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
 
         descriptionLabel.numberOfLines = 0
         descriptionLabel.userInteractionEnabled = true
+        descriptionLabel.linkAttributes = [NSForegroundColorAttributeName : UIColor.pinkColor()]
         contentView.addSubview(descriptionLabel)
 
         separatorView.backgroundColor = .separatorGrayColor()
@@ -79,7 +81,7 @@ extension ShotDetailsDescriptionCollectionViewCell {
 
     func setDescriptionLabelAttributedText(attributedText: NSAttributedString) {
 
-        descriptionLabel.attributedText = attributedText
+        descriptionLabel.setText(attributedText)
 
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
