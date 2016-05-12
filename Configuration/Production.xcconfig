@@ -6,7 +6,7 @@
 
 #include "../Carthage/Checkouts/xcconfigs/Base/Configurations/Release.xcconfig"
 #include "../Carthage/Checkouts/xcconfigs/iOS/iOS-Application.xcconfig"
-#include "../Pods/Target Support Files/Pods/Pods.production.xcconfig"
+#include "../Pods/Target Support Files/Pods-Inbbbox/Pods-Inbbbox.production.xcconfig"
 
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) ENV_PRODUCTION
 OTHER_SWIFT_FLAGS = $(inherited) -D ENV_PRODUCTION

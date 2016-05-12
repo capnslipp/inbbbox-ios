@@ -21,34 +21,40 @@ plugin 'cocoapods-keys', {
   :keys => InbbboxKeys.new.all_keys
 }
 
-pod 'AsyncSwift', '~> 1.6'
-pod 'KeychainAccess', '~> 2.3'
-pod 'PromiseKit', # fork because of issue: https://github.com/mxcl/PromiseKit/issues/415
-  :git => 'git@github.com:rad3ks/PromiseKit.git',
-  :branch => 'bug/415'
-pod 'SwiftyJSON', '~> 2.3'
-pod 'HockeySDK', '~> 3.8'
-pod 'PureLayout', '~> 3.0'
-pod 'SwiftyUserDefaults', '~> 2.0'
-pod 'GPUImage', '~> 0.1'
-#fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
-pod 'EasyAnimation', :git => 'https://git@github.com/PatrykKaczmarek/EasyAnimation.git', :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
-pod 'Gifu', '~> 1.0'
-pod 'ZFDragableModalTransition', '~> 0.6'
-#fork cause of https://github.com/Haneke/HanekeSwift/pull/307
-pod 'HanekeSwift', :git => 'https://github.com/pikor/HanekeSwift.git'
-pod 'DZNEmptyDataSet', '~> 1.7'
-pod 'GoogleAnalytics', '~> 3.14'
-pod 'TTTAttributedLabel', '~> 2.0'
-#has to be given tag `2.0.4` explicitly cause CocoaPods do not take latest version
-pod 'ImageViewer', :git => 'https://github.com/MailOnline/ImageViewer.git', :tag => '2.0.4'
-#fork because of styling private properties
-pod 'AOAlertController', :git => 'https://github.com/pikor/AOAlertController/', :commit => '81b2af960af96a5b9308220b01e33edcd189c111'
-target 'Tests' do link_with 'Unit Tests'
-  pod 'Quick', '~> 0.8', :configurations => ['Test']
-  pod 'Nimble', '~> 3.1', :configurations => ['Test']
-  pod 'Dobby', '~> 0.5', :configurations => ['Test']
-  pod 'Mockingjay', '~> 1.1', :configurations => ['Test']
+target 'Inbbbox' do
+
+  pod 'AsyncSwift', '~> 1.6'
+  pod 'KeychainAccess', '~> 2.3'
+  pod 'PromiseKit', # fork because of issue: https://github.com/mxcl/PromiseKit/issues/415
+    :git => 'git@github.com:rad3ks/PromiseKit.git',
+    :branch => 'bug/415'
+  pod 'SwiftyJSON', '~> 2.3'
+  pod 'HockeySDK', '~> 3.8'
+  pod 'PureLayout', '~> 3.0'
+  pod 'SwiftyUserDefaults', '~> 2.0'
+  pod 'GPUImage', '~> 0.1'
+  #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
+  pod 'EasyAnimation', :git => 'https://git@github.com/PatrykKaczmarek/EasyAnimation.git', :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
+  pod 'Gifu', '~> 1.0'
+  pod 'ZFDragableModalTransition', '~> 0.6'
+  #fork cause of https://github.com/Haneke/HanekeSwift/pull/307
+  pod 'HanekeSwift', :git => 'https://github.com/pikor/HanekeSwift.git'
+  pod 'DZNEmptyDataSet', '~> 1.7'
+  pod 'GoogleAnalytics', '~> 3.14'
+  pod 'TTTAttributedLabel', '~> 2.0'
+  #has to be given tag `2.0.4` explicitly cause CocoaPods do not take latest version
+  pod 'ImageViewer', :git => 'https://github.com/MailOnline/ImageViewer.git', :tag => '2.0.4'
+  #fork because of styling private properties
+  pod 'AOAlertController', :git => 'https://github.com/pikor/AOAlertController/', :commit => '81b2af960af96a5b9308220b01e33edcd189c111'
+
+  target 'Unit Tests' do
+    inherit! :search_paths
+    pod 'Quick', '~> 0.8', :configurations => ['Test']
+    pod 'Nimble', '~> 3.1', :configurations => ['Test']
+    pod 'Dobby', '~> 0.5', :configurations => ['Test']
+    pod 'Mockingjay', '~> 1.1', :configurations => ['Test']
+  end
+
 end
 
 post_install do |installer|
