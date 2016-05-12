@@ -43,6 +43,10 @@ final class OAuthViewController: UIViewController {
         aView?.webView.navigationDelegate = self
         aView?.webView.addObserver(self, forKeyPath: keyPathForObservingProgress,
                 options: .New, context: nil)
+        aView?.back.target = self
+        aView?.back.action = #selector(backDidTap)
+        aView?.forward.target = self
+        aView?.forward.action = #selector(forwardDidTap)
 
         viewModel.loadRequestReverseClosure = { [weak self] request in
             self?.aView?.webView.loadRequest(request)
@@ -99,6 +103,14 @@ final class OAuthViewController: UIViewController {
         viewModel.stopAuthentication(withError: AuthenticatorError.AuthenticationDidCancel)
         dismissViewControllerAnimated(true, completion: nil)
     }
+
+    func backDidTap() {
+        aView?.webView.goBack()
+    }
+
+    func forwardDidTap() {
+        aView?.webView.goForward()
+    }
 }
 
 extension OAuthViewController: WKNavigationDelegate {
@@ -108,6 +120,7 @@ extension OAuthViewController: WKNavigationDelegate {
     }
 
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation) {
+        configureNavigationButtonsState()
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
@@ -136,6 +149,13 @@ private extension OAuthViewController {
     func forceViewToLoadIfNeeded() {
         if !isViewLoaded() {
             let _ = view
+        }
+    }
+
+    func configureNavigationButtonsState() {
+        if let view = aView {
+            view.back.enabled = view.webView.canGoBack
+            view.forward.enabled = view.webView.canGoForward
         }
     }
 }
