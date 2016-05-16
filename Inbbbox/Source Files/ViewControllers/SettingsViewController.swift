@@ -64,7 +64,7 @@ extension SettingsViewController: ModelUpdatable {
 extension SettingsViewController: AlertDisplayable {
 
     func displayAlert(alert: AOAlertController) {
-        presentViewController(alert, animated: true, completion: nil)
+        tabBarController?.presentViewController(alert, animated: true, completion: nil)
     }
 }
 

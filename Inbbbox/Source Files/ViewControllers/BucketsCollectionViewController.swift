@@ -134,7 +134,7 @@ extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
 
         if viewModel.buckets.isEmpty {
             let alert = UIAlertController.generalErrorAlertController()
-            presentViewController(alert, animated: true, completion: nil)
+            tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
 

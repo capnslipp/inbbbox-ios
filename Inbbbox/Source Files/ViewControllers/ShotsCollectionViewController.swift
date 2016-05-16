@@ -72,8 +72,7 @@ extension ShotsCollectionViewController {
                 self.stateHandler.presentData()
             }.error { error in
                 let alertController = UIAlertController.signOutAlertController()
-                self.presentViewController(alertController, animated: true, completion: nil)
-                alertController.view.tintColor = .pinkColor()
+                self.tabBarController?.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
