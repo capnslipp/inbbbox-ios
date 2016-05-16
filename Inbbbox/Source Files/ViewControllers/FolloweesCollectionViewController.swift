@@ -129,7 +129,7 @@ extension FolloweesCollectionViewController: BaseCollectionViewViewModelDelegate
 
         if viewModel.followees.isEmpty {
             let alert = UIAlertController.generalErrorAlertController()
-            presentViewController(alert, animated: true, completion: nil)
+            tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
 

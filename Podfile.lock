@@ -50,7 +50,7 @@ PODS:
   - ZFDragableModalTransition (0.6)
 
 DEPENDENCIES:
-  - AOAlertController (from `https://github.com/pikor/AOAlertController/`, commit `81b2af960af96a5b9308220b01e33edcd189c111`)
+  - AOAlertController (from `https://github.com/pikor/AOAlertController/`, commit `30e32c5cc66acf83dc1ec0d0649c234f4eee7846`)
   - AsyncSwift (~> 1.6)
   - Dobby (~> 0.5)
   - DZNEmptyDataSet (~> 1.7)
@@ -75,7 +75,7 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   AOAlertController:
-    :commit: 81b2af960af96a5b9308220b01e33edcd189c111
+    :commit: 30e32c5cc66acf83dc1ec0d0649c234f4eee7846
     :git: https://github.com/pikor/AOAlertController/
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
@@ -93,7 +93,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   AOAlertController:
-    :commit: 81b2af960af96a5b9308220b01e33edcd189c111
+    :commit: 30e32c5cc66acf83dc1ec0d0649c234f4eee7846
     :git: https://github.com/pikor/AOAlertController/
   EasyAnimation:
     :commit: 3e97dc7e2f262222e2fd614ff5143d6432f73a7d
@@ -134,6 +134,6 @@ SPEC CHECKSUMS:
   URITemplate: 398a48d6559e23b77bd41176b675b017ad1fc959
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: b70a0ea7dbd18f839315faa0f712c5743185733d
+PODFILE CHECKSUM: 495b3766c6c59f9fd325d78e57685f1eb3179b07
 
 COCOAPODS: 1.0.0
