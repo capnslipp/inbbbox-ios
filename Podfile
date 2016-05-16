@@ -45,7 +45,7 @@ target 'Inbbbox' do
   #has to be given tag `2.0.4` explicitly cause CocoaPods do not take latest version
   pod 'ImageViewer', :git => 'https://github.com/MailOnline/ImageViewer.git', :tag => '2.0.4'
   #fork because of styling private properties
-  pod 'AOAlertController', :git => 'https://github.com/pikor/AOAlertController/', :commit => '81b2af960af96a5b9308220b01e33edcd189c111'
+  pod 'AOAlertController', :git => 'https://github.com/pikor/AOAlertController/', :commit => '30e32c5cc66acf83dc1ec0d0649c234f4eee7846'
 
   target 'Unit Tests' do
     inherit! :search_paths
