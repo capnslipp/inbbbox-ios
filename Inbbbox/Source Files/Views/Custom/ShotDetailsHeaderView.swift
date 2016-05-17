@@ -146,16 +146,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         super.updateConstraints()
     }
 
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: [.TopLeft, .TopRight],
-                cornerRadii: CGSize(width: 15, height: 15))
-        let mask = CAShapeLayer()
-        mask.path = path.CGPath
-        layer.mask = mask
-    }
-
     func setAttributedTitle(title: NSAttributedString?) {
         titleLabel.setText(title)
         overlapingTitleLabel.attributedText = {
