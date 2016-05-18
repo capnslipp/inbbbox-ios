@@ -95,16 +95,17 @@ extension LoginViewController {
 
         let authenticator = Authenticator(interactionHandler: interactionHandler)
 
-        firstly {
-            authenticator.loginWithService(.Dribbble)
-        }.then {
-            self.viewAnimator?.stopAnimationWithType(.Continue) {
-                self.aView?.loadingLabel.alpha = 0
-                self.presentNextViewController()
-            }
-        }.error { error in
-            self.viewAnimator?.stopAnimationWithType(.Undo)
-        }
+        authenticator.newLoginWithService(.Dribbble)
+//        firstly {
+//            authenticator.loginWithService(.Dribbble)
+//        }.then {
+//            self.viewAnimator?.stopAnimationWithType(.Continue) {
+//                self.aView?.loadingLabel.alpha = 0
+//                self.presentNextViewController()
+//            }
+//        }.error { error in
+//            self.viewAnimator?.stopAnimationWithType(.Undo)
+//        }
     }
 
     func loginAsGuestButtonDidTap(_: UIButton) {

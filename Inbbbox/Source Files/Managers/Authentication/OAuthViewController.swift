@@ -14,13 +14,13 @@ final class OAuthViewController: UIViewController {
 
     private let keyPathForObservingProgress = "estimatedProgress"
     private let viewModel: OAuthViewModel
-    private let silentAuthenticationFailureHandler: (UIViewController -> Void)
+    private let silentAuthenticationFailureHandler: (UIViewController, NSURL) -> Void
 
     private var progressView: UIProgressView?
     private weak var aView: OAuthView?
 
     init(oAuthAuthorizableService: OAuthAuthorizable,
-                silentAuthenticationFailureHandler: (UIViewController -> Void)) {
+                silentAuthenticationFailureHandler: (UIViewController, NSURL) -> Void) {
         viewModel = OAuthViewModel(oAuthAuthorizableService: oAuthAuthorizableService)
         self.silentAuthenticationFailureHandler = silentAuthenticationFailureHandler
         super.init(nibName: nil, bundle: nil)
@@ -79,6 +79,7 @@ final class OAuthViewController: UIViewController {
             }.always {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }.then { accessToken -> Void in
+                print("[OAuthVC] will fulfill startAuthentication Promise")
                 fulfill(accessToken)
             }.error { error in
                 reject(error)
@@ -128,7 +129,7 @@ extension OAuthViewController: WKNavigationDelegate {
         navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
 
         if !viewModel.service.isSilentAuthenticationURL(navigationAction.request.URL) {
-            silentAuthenticationFailureHandler(self)
+            silentAuthenticationFailureHandler(self, navigationAction.request.URL!)
         }
 
         let policy = viewModel.actionPolicyForRequest(navigationAction.request)

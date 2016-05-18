@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AnalyticsManager.setupAnalytics()
         CrashManager.setup()
+        Authenticator.logout()
         UIAlertController.setupAlertControllerSharedSettings()
         centerButtonTabBarController = CenterButtonTabBarController()
         let loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
@@ -140,11 +141,25 @@ private extension AppDelegate {
     }
 }
 
-// MARK: 3D Touch Support
-
 private extension AppDelegate {
 
-    private func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+    // MARK: Safari & OAuth
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        print("ohhhh yeesssss")
+
+        if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] {
+            if String(sourceApplication) == "com.apple.SafariViewService" {
+                return true
+            }
+        }
+
+        return true
+    }
+
+
+    // MARK: 3D Touch Support
+
+    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
 
         guard UserStorage.isUserSignedIn else { return false }
 
