@@ -98,8 +98,10 @@ final class ShotDetailsViewController: UIViewController {
 
         AnalyticsManager.trackScreen(.ShotDetailsView)
     }
-    
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
+    func scrollViewWillEndDragging(scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if fabs(velocity.y) > 2.0 { //2.0 is considered fast scroll which means user intends to dismiss the keyboard
             view.endEditing(true)
         }
