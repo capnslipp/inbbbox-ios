@@ -55,7 +55,7 @@ class ShotBucketsViewController: UIViewController {
         }.then {
             self.shotBucketsView.collectionView.reloadData()
         }.error { error in
-            let alert = UIAlertController.unableToDownloadItemsAlertController()
+            let alert = UIAlertController.unableToDownloadItems()
             self.presentViewController(alert, animated: true, completion: nil)
         }
         shotBucketsView.viewController = self
@@ -221,7 +221,7 @@ extension ShotBucketsViewController {
 
     func addNewBucketButtonDidTap(_: UIButton) {
 
-        let alert = UIAlertController.provideBucketNameAlertController { bucketName in
+        let alert = UIAlertController.provideBucketName { bucketName in
             self.createBucketAndAddShot(bucketName)
         }
         self.presentViewController(alert, animated: true, completion: nil)

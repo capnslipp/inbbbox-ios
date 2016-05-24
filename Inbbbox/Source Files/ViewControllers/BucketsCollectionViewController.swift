@@ -101,7 +101,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     // MARK: Actions:
 
     func didTapAddNewBucketButton(_: UIBarButtonItem) {
-        let alert = UIAlertController.provideBucketNameAlertController { bucketName in
+        let alert = UIAlertController.provideBucketName { bucketName in
 
             firstly {
                 self.viewModel.createBucket(bucketName)
@@ -135,13 +135,13 @@ extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
         collectionView?.reloadData()
 
         if viewModel.buckets.isEmpty {
-            let alert = UIAlertController.generalErrorAlertController()
+            let alert = UIAlertController.generalError()
             tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
     func viewModelDidFailToLoadItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItemsAlertController()
+        let alert = UIAlertController.unableToDownloadItems()
         tabBarController?.presentViewController(alert, animated: true, completion: nil)
     }
 

@@ -406,7 +406,7 @@ private extension ShotDetailsViewController {
     func reportCommentAtIndexPath(indexPath: NSIndexPath) {
 
         guard MFMailComposeViewController.canSendMail() else {
-            let alert = UIAlertController.emailAccountNotFoundAlertController()
+            let alert = UIAlertController.emailAccountNotFound()
             presentViewController(alert, animated: true, completion: nil)
             return
         }

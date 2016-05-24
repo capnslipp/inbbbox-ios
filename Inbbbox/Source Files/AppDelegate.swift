@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AnalyticsManager.setupAnalytics()
         CrashManager.setup()
-        UIAlertController.setupAlertControllerSharedSettings()
+        UIAlertController.setupSharedSettings()
         centerButtonTabBarController = CenterButtonTabBarController()
         let loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
         let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController

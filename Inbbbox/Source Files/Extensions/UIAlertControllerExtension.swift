@@ -13,7 +13,7 @@ extension UIAlertController {
 
     // MARK: Shared Settings
 
-    class func setupAlertControllerSharedSettings() {
+    class func setupSharedSettings() {
         AOAlertSettings.sharedSettings.backgroundColor = .backgroundGrayColor()
         AOAlertSettings.sharedSettings.linesColor = .backgroundGrayColor()
         AOAlertSettings.sharedSettings.defaultActionColor = .pinkColor()
@@ -29,7 +29,7 @@ extension UIAlertController {
 
     // MARK: Buckets
 
-    class func provideBucketNameAlertController(createHandler: (bucketName: String) -> Void)
+    class func provideBucketName(createHandler: (bucketName: String) -> Void)
                     -> UIAlertController {
         let alertTitle = NSLocalizedString("UIAlertControllerExtension.NewBucket",
                                   comment: "Allows user to create new bucket.")
@@ -90,7 +90,7 @@ extension UIAlertController {
 
     // MARK: Downloads
 
-    class func unableToDownloadItemsAlertController() -> AOAlertController {
+    class func unableToDownloadItems() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.UnableToDownload",
                                         comment: "Informing user about problems with downloading items.")
 
@@ -99,14 +99,14 @@ extension UIAlertController {
 
     // MARK: Other
 
-    class func generalErrorAlertController() -> AOAlertController {
+    class func generalError() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.TryAgain",
                 comment: "Allows user to try again after error occurred.")
 
         return UIAlertController.createAlert(message)
     }
 
-    class func inappropriateContentReportedAlertController() -> AOAlertController {
+    class func inappropriateContentReported() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.InappropriateContentReported", comment: "nil")
 
         let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
@@ -115,14 +115,14 @@ extension UIAlertController {
         return UIAlertController.createAlert(message, action: okAction)
     }
 
-    class func emailAccountNotFoundAlertController() -> AOAlertController {
+    class func emailAccountNotFound() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.EmailError",
                 comment: "Displayed when user device is not capable of/configured to send emails.")
 
         return UIAlertController.createAlert(message)
     }
 
-    class func signOutAlertController() -> AOAlertController {
+    class func willSignOutUser() -> AOAlertController {
         let message = NSLocalizedString("ShotsCollectionViewController.SignOut",
                 comment: "Message informing user will be logged out because of an error.")
         let alert = AOAlertController(title: nil, message: message, style: .Alert)

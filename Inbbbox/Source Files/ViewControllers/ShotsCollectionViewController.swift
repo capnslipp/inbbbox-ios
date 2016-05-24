@@ -71,7 +71,7 @@ extension ShotsCollectionViewController {
             }.then {
                 self.stateHandler.presentData()
             }.error { error in
-                let alertController = UIAlertController.signOutAlertController()
+                let alertController = UIAlertController.willSignOutUser()
                 self.tabBarController?.presentViewController(alertController, animated: true, completion: nil)
             }
         }
@@ -143,7 +143,7 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
     }
 
     func shotsStateHandlerDidFailToFetchItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItemsAlertController()
+        let alert = UIAlertController.unableToDownloadItems()
         self.presentViewController(alert, animated: true, completion: nil)
     }
 }
@@ -174,7 +174,7 @@ private extension ShotsCollectionViewController {
         }.then {
             self.collectionView?.reloadData()
         }.error { error in
-            let alert = UIAlertController.unableToDownloadItemsAlertController()
+            let alert = UIAlertController.unableToDownloadItems()
             self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
     }

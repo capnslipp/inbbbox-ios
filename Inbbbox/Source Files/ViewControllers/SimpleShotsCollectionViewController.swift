@@ -142,13 +142,13 @@ extension SimpleShotsCollectionViewController: BaseCollectionViewViewModelDelega
         collectionView?.reloadData()
 
         if let viewModel = viewModel where viewModel.shots.isEmpty {
-            let alert = UIAlertController.generalErrorAlertController()
+            let alert = UIAlertController.generalError()
             tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
     func viewModelDidFailToLoadItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItemsAlertController()
+        let alert = UIAlertController.unableToDownloadItems()
         tabBarController?.presentViewController(alert, animated: true, completion: nil)
     }
 
