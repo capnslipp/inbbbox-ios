@@ -46,7 +46,8 @@ class CloseButtonView: UIView {
             didSetConstraints = true
             
             closeButton.autoPinEdgesToSuperviewEdges()
-            dimView.autoPinEdgesToSuperviewEdges()
+            dimView.autoCenterInSuperview()
+            dimView.autoSetDimensionsToSize(CGSizeMake(diameterSize, diameterSize))
             vibrancyView.autoCenterInSuperview()
             vibrancyView.autoSetDimensionsToSize(CGSizeMake(diameterSize, diameterSize))
             autoSetDimensionsToSize(CGSize(width: diameterSize*1.2, height: diameterSize*1.2))
