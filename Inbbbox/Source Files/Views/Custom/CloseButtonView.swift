@@ -44,12 +44,12 @@ class CloseButtonView: UIView {
     override func updateConstraints() {
         if !didSetConstraints {
             didSetConstraints = true
-            
+
             closeButton.autoPinEdgesToSuperviewEdges()
             dimView.autoCenterInSuperview()
-            dimView.autoSetDimensionsToSize(CGSizeMake(diameterSize, diameterSize))
+            dimView.autoSetDimensionsToSize(CGSize(width: diameterSize, height: diameterSize))
             vibrancyView.autoCenterInSuperview()
-            vibrancyView.autoSetDimensionsToSize(CGSizeMake(diameterSize, diameterSize))
+            vibrancyView.autoSetDimensionsToSize(CGSize(width: diameterSize, height: diameterSize))
             autoSetDimensionsToSize(CGSize(width: diameterSize*1.2, height: diameterSize*1.2))
         }
         super.updateConstraints()
