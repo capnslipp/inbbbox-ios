@@ -75,7 +75,8 @@ extension UIAlertController {
     // MARK: Comments
 
     class func unableToDeleteComment() -> AOAlertController {
-        let message = NSLocalizedString("ShotDetailsViewController.RemovingCommentError", comment: "Error while removing comment.")
+        let message = NSLocalizedString("ShotDetailsViewController.RemovingCommentError",
+                                        comment: "Error while removing comment.")
 
         return UIAlertController.createAlert(message)
     }
