@@ -53,7 +53,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         }.then { () -> Void in
             self.updateLikeImage()
         }.error { error in
-            // NGRTemp: Need mockups for error message view
+            self.delegate?.shotsStateHandlerDidFailToFetchItems(error)
         }
     }
 
@@ -101,12 +101,16 @@ extension ShotsNormalStateHandler {
                     certainSelf.likeShot(shot)
                 }.then {
                     cell.liked = true
+                }.error { error in
+                    cell.liked = false
                 }
             case .Bucket:
                 firstly {
                     certainSelf.likeShot(shot)
                 }.then {
                     cell.liked = true
+                }.error { error in
+                    cell.liked = false
                 }
                 certainSelf.presentShotBucketsViewController(shot)
             case .Comment:
@@ -143,7 +147,7 @@ extension ShotsNormalStateHandler {
                     shotsCollectionViewController.collectionView?.reloadData()
                 }
             }.error { error in
-                // NGRTemp: Need mockups for error message view
+                self.delegate?.shotsStateHandlerDidFailToFetchItems(error)
             }
         }
     }
@@ -241,7 +245,6 @@ private extension ShotsNormalStateHandler {
                 self.likedShots.append(shot)
                 fulfill()
             }.error { error in
-                // NGRTemp: Need mockups for error message view
                 reject(error)
             }
         }

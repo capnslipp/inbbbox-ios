@@ -113,7 +113,9 @@ class BucketsCollectionViewController: UICollectionViewController {
                         [NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
                 }
             }.error { error in
-                // NGRTemp: Handle error.
+                let alert = UIAlertController.unableToCreateNewBucket()
+                self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
+                return
             }
         }
         self.presentViewController(alert, animated: true, completion: nil)
@@ -136,6 +138,11 @@ extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
             let alert = UIAlertController.generalErrorAlertController()
             tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
+    }
+
+    func viewModelDidFailToLoadItems(error: ErrorType) {
+        let alert = UIAlertController.unableToDownloadItemsAlertController()
+        tabBarController?.presentViewController(alert, animated: true, completion: nil)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel,

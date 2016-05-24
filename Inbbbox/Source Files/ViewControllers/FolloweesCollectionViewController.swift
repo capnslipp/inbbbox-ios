@@ -133,6 +133,11 @@ extension FolloweesCollectionViewController: BaseCollectionViewViewModelDelegate
         }
     }
 
+    func viewModelDidFailToLoadItems(error: ErrorType) {
+        let alert = UIAlertController.unableToDownloadItemsAlertController()
+        tabBarController?.presentViewController(alert, animated: true, completion: nil)
+    }
+
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
         collectionView?.insertItemsAtIndexPaths(indexPaths)
     }

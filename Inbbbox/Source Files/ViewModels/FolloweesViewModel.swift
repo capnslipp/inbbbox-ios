@@ -65,9 +65,8 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
                 self.downloadShots(followees)
             }
-        }.error {
-            error in
-            // NGRTemp: Need mockups for error message view
+        }.error { error in
+            self.notifyDelegateAboutFailure(error)
         }
     }
 
@@ -94,9 +93,8 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
                 }
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
-            }.error {
-                error in
-                // NGRTemp: Need mockups for error message view
+            }.error { error in
+                self.notifyDelegateAboutFailure(error)
             }
         }
     }

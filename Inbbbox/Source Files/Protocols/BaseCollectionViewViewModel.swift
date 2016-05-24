@@ -21,6 +21,7 @@ protocol BaseCollectionViewViewModelDelegate: class {
 
     func viewModelDidLoadInitialItems()
     func viewModelDidFailToLoadInitialItems(error: ErrorType)
+    func viewModelDidFailToLoadItems(error: ErrorType)
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath])
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath)
 }
@@ -29,5 +30,16 @@ extension BaseCollectionViewViewModelDelegate {
 
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadShotsForItemAtIndexPath indexPath: NSIndexPath) {
         // Empty by design - optional function.
+    }
+}
+
+extension BaseCollectionViewViewModel {
+
+    func notifyDelegateAboutFailure(error: ErrorType) {
+        if let downloadError = error as? PageableProviderError where
+            downloadError != PageableProviderError.DidReachLastPage {
+            self.delegate?.viewModelDidFailToLoadItems(downloadError)
+            return
+        }
     }
 }

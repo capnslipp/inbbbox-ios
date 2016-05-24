@@ -101,10 +101,8 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
             viewModel.isProfileFollowedByMe()
         }.then { followed in
             self.header?.userFollowed = followed
-        }.always {
+        }.then { _ in
             self.header?.stopActivityIndicator()
-        }.error { error in
-            // NGRTodo: provide pop-ups with errors
         }
     }
 }
@@ -125,7 +123,8 @@ extension ProfileViewController {
             }.always {
                 self.header?.stopActivityIndicator()
             }.error { error in
-                // NGRTodo: provide pop-ups with errors
+                let alert = UIAlertController.generalErrorAlertController()
+                self.presentViewController(alert, animated: true, completion: nil)
             }
         }
     }
@@ -274,6 +273,11 @@ extension ProfileViewController: BaseCollectionViewViewModelDelegate {
             let alert = UIAlertController.generalErrorAlertController()
             presentViewController(alert, animated: true, completion: nil)
         }
+    }
+
+    func viewModelDidFailToLoadItems(error: ErrorType) {
+        let alert = UIAlertController.unableToDownloadItemsAlertController()
+        tabBarController?.presentViewController(alert, animated: true, completion: nil)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {

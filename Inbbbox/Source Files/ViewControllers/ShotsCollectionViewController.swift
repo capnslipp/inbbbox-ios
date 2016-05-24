@@ -141,6 +141,11 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
             stateHandler.presentData()
         }
     }
+
+    func shotsStateHandlerDidFailToFetchItems(error: ErrorType) {
+        let alert = UIAlertController.unableToDownloadItemsAlertController()
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: Private methods
@@ -169,7 +174,8 @@ private extension ShotsCollectionViewController {
         }.then {
             self.collectionView?.reloadData()
         }.error { error in
-            // NGRTemp: Need mockups for error message view
+            let alert = UIAlertController.unableToDownloadItemsAlertController()
+            self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
 

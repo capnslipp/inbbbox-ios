@@ -71,8 +71,6 @@ final class ShotDetailsViewController: UIViewController {
             self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
-        }.error { error in
-            // NGRTemp: Handle error.
         }
     }
 
@@ -334,8 +332,6 @@ private extension ShotDetailsViewController {
             view.selected = selected
         }.always {
             view.stopAnimating()
-        }.error { error in
-            // NGRTemp: Handle error.
         }
     }
 
@@ -349,8 +345,6 @@ private extension ShotDetailsViewController {
             view.selected = isShotLikedByUser
         }.always {
             view.stopAnimating()
-        }.error { error in
-            // NGRTemp: Handle error.
         }
     }
 
@@ -370,7 +364,8 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            // NGRTemp: Handle error.
+            let alert = UIAlertController.addRemoveShotToBucketFail()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
@@ -403,7 +398,8 @@ private extension ShotDetailsViewController {
             }
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths(indexPaths)
         }.error { error in
-            // NGRTemp: Handle error.
+            let alert = UIAlertController.unableToDeleteComment()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 

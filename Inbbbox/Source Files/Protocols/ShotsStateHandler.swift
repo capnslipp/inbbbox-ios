@@ -9,12 +9,22 @@
 import Foundation
 
 protocol ShotsStateHandlerDelegate: class {
-    /**
-     This method is called to inform object conforming to this protocol to configure for next state
-     */
+
+    /// This method is called to inform object conforming to this protocol to configure for next state
+    ///
+    /// - parameter shotsStateHandler: Instance of ShotsStateHandler2
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler)
+
+    /// Optional method, called to inform delegate about failure.
+    /// - parameter error: Describes failure.
+    func shotsStateHandlerDidFailToFetchItems(error: ErrorType)
 }
 
+extension ShotsStateHandlerDelegate {
+    func shotsStateHandlerDidFailToFetchItems(error: ErrorType) {
+        // Optional delegate method.
+    }
+}
 
 /// Holds configuration for specific ShotsCollectionViewController.State
 protocol ShotsStateHandler: UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate {

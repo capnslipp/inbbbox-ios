@@ -67,7 +67,8 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
         }.always {
             view.stopAnimation()
         }.error { error in
-            // NGRTemp: Handle error.
+            let alert = UIAlertController.unableToAddComment()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
