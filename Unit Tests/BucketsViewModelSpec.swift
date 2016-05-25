@@ -73,13 +73,31 @@ class BucketsViewModelSpec: QuickSpec {
                 expect(cellData.shotsImagesURLs).to(equal(fixtureImagesURLs))
             }
         }
+
+        /// In this test, we won't override `downloadItemsForNextPage` method.
+        describe("When truly downloading data for next page") {
+
+            let fakeDelegate = ViewModelDelegate()
+
+            beforeEach {
+                sut.delegate = fakeDelegate
+                sut.shouldCallNextPageDownloadSuper = true
+                sut.downloadItemsForNextPage()
+            }
+
+            it("should notify delegate about failure") {
+                expect(fakeDelegate.didCallDelegate).toEventually(beTrue())
+            }
+        }
     }
 }
 
 //Explanation: Create mock class to override methods from BaseCollectionViewViewModel.
 
 private class BucketsViewModelMock: BucketsViewModel {
-    
+
+    var shouldCallNextPageDownloadSuper = false
+
     override func downloadInitialItems() {
         let bucket = Bucket.fixtureBucket()
         buckets = [bucket, bucket]
@@ -90,6 +108,10 @@ private class BucketsViewModelMock: BucketsViewModel {
         let bucket = Bucket.fixtureBucket()
         buckets = [bucket, bucket, bucket]
         downloadShots(buckets)
+
+        if shouldCallNextPageDownloadSuper {
+            super.downloadItemsForNextPage()
+        }
     }
     
     override func downloadShots(buckets: [BucketType]) {

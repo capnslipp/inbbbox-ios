@@ -128,9 +128,14 @@ extension FolloweesCollectionViewController: BaseCollectionViewViewModelDelegate
         collectionView?.reloadData()
 
         if viewModel.followees.isEmpty {
-            let alert = UIAlertController.generalErrorAlertController()
+            let alert = UIAlertController.generalError()
             tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
+    }
+
+    func viewModelDidFailToLoadItems(error: ErrorType) {
+        let alert = UIAlertController.unableToDownloadItems()
+        tabBarController?.presentViewController(alert, animated: true, completion: nil)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {

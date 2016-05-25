@@ -76,12 +76,30 @@ class FolloweesViewModelSpec: QuickSpec {
                 expect(cellData.avatarURL).to(equal(fixtureAvatarURL))
             }
         }
+
+        /// In this test, we won't override `downloadItemsForNextPage` method.
+        describe("When truly downloading data for next page") {
+
+            let fakeDelegate = ViewModelDelegate()
+
+            beforeEach {
+                sut.delegate = fakeDelegate
+                sut.shouldCallNextPageDownloadSuper = true
+                sut.downloadItemsForNextPage()
+            }
+
+            it("should notify delegate about failure") {
+                expect(fakeDelegate.didCallDelegate).toEventually(beTrue())
+            }
+        }
     }
 }
 
 //Explanation: Create mock class to override methods from BaseCollectionViewViewModel.
 
 private class FolloweesViewModelMock: FolloweesViewModel {
+
+    var shouldCallNextPageDownloadSuper = false
 
     override func downloadInitialItems() {
         let followee = User.fixtureUser()
@@ -93,6 +111,10 @@ private class FolloweesViewModelMock: FolloweesViewModel {
         let followee = User.fixtureUser()
         followees = [followee, followee, followee]
         downloadShots(followees)
+
+        if shouldCallNextPageDownloadSuper {
+            super.downloadItemsForNextPage()
+        }
     }
 
     override func downloadShots(followees: [Followee]) {

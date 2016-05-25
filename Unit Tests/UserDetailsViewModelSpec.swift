@@ -171,12 +171,30 @@ class UserDetailsViewModelSpec: QuickSpec {
                 expect(didReceiveResponse).toNot(beNil())
             }
         }
+
+        /// In this test, we won't override `downloadItemsForNextPage` method.
+        describe("When truly downloading data for next page") {
+
+            let fakeDelegate = ViewModelDelegate()
+
+            beforeEach {
+                sut.delegate = fakeDelegate
+                sut.shouldCallNextPageDownloadSuper = true
+                sut.downloadItemsForNextPage()
+            }
+
+            it("should notify delegate about failure") {
+                expect(fakeDelegate.didCallDelegate).toEventually(beTrue())
+            }
+        }
     }
 }
 
 //Explanation: Create UserDetailsViewModelMock to override methods from BaseCollectionViewViewModel.
 
 private class UserDetailsViewModelMock: UserDetailsViewModel {
+
+    var shouldCallNextPageDownloadSuper = false
 
     override func downloadInitialItems() {
         let shot = Shot.fixtureShot()
@@ -186,5 +204,9 @@ private class UserDetailsViewModelMock: UserDetailsViewModel {
     override func downloadItemsForNextPage() {
         let shot = Shot.fixtureShot()
         userShots = [shot, shot, shot]
+
+        if shouldCallNextPageDownloadSuper {
+            super.downloadItemsForNextPage()
+        }
     }
 }

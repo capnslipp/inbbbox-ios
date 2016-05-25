@@ -79,7 +79,7 @@ class TeamDetailsViewModel: ProfileViewModel {
                 self.downloadShots(teamMembers)
             }
         }.error { error in
-            // NGRTemp: Need mockups for error message view
+            self.notifyDelegateAboutFailure(error)
         }
     }
 
@@ -181,7 +181,7 @@ private extension TeamDetailsViewModel {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
             }.error { error in
-                // NGRTemp: Need mockups for error message view
+                self.notifyDelegateAboutFailure(error)
             }
         }
     }
