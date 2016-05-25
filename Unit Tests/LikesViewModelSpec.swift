@@ -76,13 +76,31 @@ class LikesViewModelSpec: QuickSpec {
                 expect(cellData.shotImage.hidpiURL).to(equal(fixtureShotImage.hidpiURL))
             }
         }
+
+        /// In this test, we won't override `downloadItemsForNextPage` method.
+        describe("When truly downloading data for next page") {
+
+            let fakeDelegate = ViewModelDelegate()
+
+            beforeEach {
+                sut.delegate = fakeDelegate
+                sut.shouldCallNextPageDownloadSuper = true
+                sut.downloadItemsForNextPage()
+            }
+
+            it("should notify delegate about failure") {
+                expect(fakeDelegate.didCallDelegate).toEventually(beTrue())
+            }
+        }
     }
 }
 
 //Explanation: Create LikesViewModelMock to override methods from BaseCollectionViewViewModel.
 
 private class LikesViewModelMock: LikesViewModel {
- 
+
+    var shouldCallNextPageDownloadSuper = false
+
     override func downloadInitialItems() {
         let shot = Shot.fixtureShot()
         shots = [shot, shot]
@@ -91,5 +109,9 @@ private class LikesViewModelMock: LikesViewModel {
     override func downloadItemsForNextPage() {
         let shot = Shot.fixtureShot()
         shots = [shot, shot, shot]
+
+        if shouldCallNextPageDownloadSuper {
+            super.downloadItemsForNextPage()
+        }
     }
 }
