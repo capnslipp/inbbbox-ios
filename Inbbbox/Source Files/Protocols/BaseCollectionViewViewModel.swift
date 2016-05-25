@@ -36,10 +36,12 @@ extension BaseCollectionViewViewModelDelegate {
 extension BaseCollectionViewViewModel {
 
     func notifyDelegateAboutFailure(error: ErrorType) {
-        if let downloadError = error as? PageableProviderError where
-            downloadError != PageableProviderError.DidReachLastPage {
-            self.delegate?.viewModelDidFailToLoadItems(downloadError)
-            return
+        if let downloadError = error as? PageableProviderError {
+            if downloadError != .DidReachLastPage {
+                self.delegate?.viewModelDidFailToLoadItems(error)
+            }
+        } else {
+            self.delegate?.viewModelDidFailToLoadItems(error)
         }
     }
 }
