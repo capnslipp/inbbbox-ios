@@ -121,14 +121,17 @@ extension SettingsViewController {
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
         let notificationsTitle = NSLocalizedString("SettingsViewController.Notifications",
-                comment: "Title of group of buttons for notifications settings")
+                                                   comment: "Title of group of buttons for notifications settings")
         let streamSourcesTitle = NSLocalizedString("SettingsViewController.StreamSource",
-                comment: "Title of group of buttons for stream source settings")
+                                                   comment: "Title of group of buttons for stream source settings")
+        let customizationTitle = NSLocalizedString("SettingsViewController.Customization",
+                                                   comment: "Title of group of buttons for customization settings")
 
         switch section {
             case 0: return viewModel.userMode == .LoggedUser ? notificationsTitle : nil
             case 1: return viewModel.userMode == .LoggedUser ? streamSourcesTitle : notificationsTitle
-            case 2: return viewModel.userMode == .LoggedUser ? nil : streamSourcesTitle
+            case 2: return viewModel.userMode == .LoggedUser ? customizationTitle : streamSourcesTitle
+            case 3: return viewModel.userMode == .LoggedUser ? nil : customizationTitle
             default: return nil
         }
     }
