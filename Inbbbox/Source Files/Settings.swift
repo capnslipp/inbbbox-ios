@@ -67,6 +67,16 @@ class Settings {
             set { Settings.setValue(newValue, forKey: .LocalNotificationSettingsProvided) }
         }
     }
+
+    /// Manages settings related to customization.
+    struct Customization {
+
+        /// Indicates if "showing author on homescreen" is enabled.
+        static var ShowAuthor: Bool {
+            get { return Settings.boolForKey(.ShowAuthorOnHomeScreen) }
+            set { Settings.setValue(newValue, forKey: .ShowAuthorOnHomeScreen) }
+        }
+    }
 }
 
 private extension Settings {
@@ -97,6 +107,16 @@ private extension Settings {
         Defaults[key.rawValue] = value
         NSNotificationCenter.defaultCenter().postNotificationName(
         InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: self)
+    }
+
+    // MARK: CusotmizationKey
+
+    static func boolForKey(key: CustomizationKey) -> Bool {
+        return boolForKey(key.rawValue)
+    }
+
+    static func setValue(value: AnyObject?, forKey key: CustomizationKey) {
+        Defaults[key.rawValue] = value
     }
 
     // MARK: General
