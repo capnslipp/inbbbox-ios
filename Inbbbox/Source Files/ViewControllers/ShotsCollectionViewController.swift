@@ -58,6 +58,7 @@ extension ShotsCollectionViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         stateHandler.prepareForPresentingData()
+        stateHandler.collectionViewLayout.prepareLayout()
     }
 
     override func viewDidAppear(animated: Bool) {
