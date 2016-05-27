@@ -14,7 +14,7 @@ import Async
 
 class AnimatableShotImageView: AnimatableImageView {
     let downloader = DataDownloader()
-    private let progressView = UIProgressView.newAutoLayoutView()
+    private let progressAnimator = ProgressAnimator(imageBaseName: "loadgif_")
     private var didSetupConstraints = false
 
     override init(frame: CGRect) {
@@ -22,11 +22,8 @@ class AnimatableShotImageView: AnimatableImageView {
 
         backgroundColor = .cellBackgroundColor()
         contentMode = .ScaleAspectFill
-        progressView.progressViewStyle = .Bar
-        progressView.trackTintColor = .cellBackgroundColor()
-        progressView.progressTintColor = .pinkColor()
-        progressView.setProgress(0, animated: false)
-        addSubview(progressView)
+        progressAnimator.progressImageView.configureForAutoLayout()
+        addSubview(progressAnimator.progressImageView)
     }
 
     @available(*, unavailable, message = "Use init(frame:) method instead")
@@ -43,10 +40,11 @@ class AnimatableShotImageView: AnimatableImageView {
         if !didSetupConstraints {
             didSetupConstraints = true
 
-            progressView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            progressAnimator.progressImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
             let progressInset = CGFloat(10)
-            progressView.autoPinEdgeToSuperviewEdge(.Leading, withInset: progressInset)
-            progressView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: progressInset)
+            progressAnimator.progressImageView.autoPinEdgeToSuperviewEdge(.Leading, withInset: progressInset)
+            progressAnimator.progressImageView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: progressInset)
+            progressAnimator.progressImageView.autoMatchDimension(.Height, toDimension: .Width, ofView: progressAnimator.progressImageView, withMultiplier: 0.3563218391)
         }
 
         super.updateConstraints()
@@ -76,14 +74,14 @@ class AnimatableShotImageView: AnimatableImageView {
 
     private func setImageWithData(data: NSData) {
         Async.main {
-            self.progressView.hidden = true
+            self.progressAnimator.progressImageView.hidden = true
             self.animateWithImageData(data)
         }
     }
 
     private func updateWithProgress(progress: Float) {
         Async.main {
-            self.progressView.setProgress(progress, animated: true)
+            self.progressAnimator.updateProgress(progress)
         }
     }
 }
