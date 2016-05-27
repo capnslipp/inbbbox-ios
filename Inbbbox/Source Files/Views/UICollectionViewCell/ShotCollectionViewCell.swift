@@ -80,6 +80,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         contentView.layer.cornerRadius = cornerRadius
         contentView.clipsToBounds = true
 
+        shotContainer.backgroundColor = .pinkColor()
         shotContainer.layer.cornerRadius = cornerRadius
         shotContainer.clipsToBounds = true
 
