@@ -30,7 +30,7 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
             let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) -
                     (fixedLeftMargin + fixedRightMargin) * (indexMultiplier + 1)
 
-            var calculatedItemHeight: CGFloat
+            let calculatedItemHeight: CGFloat
             if Settings.Customization.ShowAuthor {
                 calculatedItemHeight = calculatedItemWidth * spacings.biggerShotHeightToWidthRatio
             } else {

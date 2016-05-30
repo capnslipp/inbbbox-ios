@@ -11,7 +11,7 @@ import PureLayout
 class ShotAuthorCompactView: UIView {
 
     // Public
-    lazy var avatarView: AvatarView = AvatarView(size: CGSize(width: self.avatarSize, height: self.avatarSize),
+    lazy var avatarView: AvatarView = AvatarView(size: self.avatarSize,
                                                  bordered: false)
     var authorLabel = UILabel.newAutoLayoutView()
 
@@ -29,7 +29,7 @@ class ShotAuthorCompactView: UIView {
 
     // Private
     private var didSetupConstraints = false
-    private let avatarSize = 16
+    private let avatarSize = CGSize(width: 16, height: 16)
 
     // MARK: Life Cycle
 
@@ -58,7 +58,7 @@ class ShotAuthorCompactView: UIView {
     override func updateConstraints() {
         if !didSetupConstraints {
 
-            avatarView.autoSetDimensionsToSize(CGSize(width: avatarSize, height: avatarSize))
+            avatarView.autoSetDimensionsToSize(self.avatarSize)
             avatarView.autoPinEdgeToSuperviewEdge(.Leading)
             avatarView.autoAlignAxisToSuperviewAxis(.Horizontal)
 

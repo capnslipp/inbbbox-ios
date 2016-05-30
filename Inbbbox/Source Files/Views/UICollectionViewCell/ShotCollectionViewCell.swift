@@ -182,7 +182,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
         shotImageView.image = nil
         shotImageView.originalImage = nil
-        self.authorView.alpha = 0
+        authorView.alpha = 0
     }
 
     // MARK: - Public
