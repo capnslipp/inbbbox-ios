@@ -327,6 +327,7 @@
 		DF326C23DCDF58359FEE6D04 /* APIBucketsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8DC1F4B61694B2EC222DEE /* APIBucketsProvider.swift */; };
 		DF3C8AC778E09291E38F6DFB /* ShotBucketsSelectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F970B82F7D73B2703DB93110 /* ShotBucketsSelectCollectionViewCell.swift */; };
 		E15CC225A6EB56CA0FDE1867 /* ShotDetailsFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD87FDF0C02C0EF4B1D6AA8B /* ShotDetailsFormatter.swift */; };
+		E16930341CF5AD6900F192C4 /* ProgressAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16930331CF5AD6900F192C4 /* ProgressAnimator.swift */; };
 		E1995A46237DF07CF3D5078D /* JSONSpecLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79B5042B929A92A53835D8 /* JSONSpecLoader.swift */; };
 		E21C3240BB1DB54E019FA8A5 /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6C738B207AA4DFB0CAC98E /* Mappable.swift */; };
 		E22083BEA72A26FFA5515AC6 /* ShotsCollectionBackgroundViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CCFCBF07387130864BB26C /* ShotsCollectionBackgroundViewSpec.swift */; };
@@ -732,6 +733,7 @@
 		DF48D628E0463224F78C42FB /* ShotDetailsOperationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsOperationView.swift; sourceTree = "<group>"; };
 		E0814C84390923F668F9ED8D /* UnfollowUserQuerySpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UnfollowUserQuerySpec.swift; sourceTree = "<group>"; };
 		E10F0FAAC490B249E42A22B3 /* Images.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E16930331CF5AD6900F192C4 /* ProgressAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressAnimator.swift; sourceTree = "<group>"; };
 		E29E21C5B0F92725CD71CA94 /* UserQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserQuery.swift; sourceTree = "<group>"; };
 		E3133716752F33A06B3C88CF /* DataDownloader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DataDownloader.swift; sourceTree = "<group>"; };
 		E7658C28C0BDFCD056941617 /* ParametersSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ParametersSpec.swift; sourceTree = "<group>"; };
@@ -838,6 +840,7 @@
 				7A4BBB799A856B5917F6398E /* SecretKeysProvider.m */,
 				CCBE90E7FF1E8EB462A07A44 /* ShotCellInitialStateAnimationDescriptor.swift */,
 				F077D0931CD23457008948A9 /* URLDetector.swift */,
+				E16930331CF5AD6900F192C4 /* ProgressAnimator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2045,6 +2048,7 @@
 				993B955A86C797E40BF7D498 /* ProfileHeaderView.swift in Sources */,
 				300E4F7C1CC622A200DF9ABE /* BouncingView.swift in Sources */,
 				25FFF6B2C6ECB6C90B59E7F2 /* AutoScrollableCollectionViewCell.swift in Sources */,
+				E16930341CF5AD6900F192C4 /* ProgressAnimator.swift in Sources */,
 				B57824CB176FA6995ABC9884 /* BaseInfoShotsCollectionViewCell.swift in Sources */,
 				393A9DFA41E4F8CDDEA161D9 /* BucketCollectionViewCell.swift in Sources */,
 				766D38BA2C3852B7445EC895 /* LargeUserCollectionViewCell.swift in Sources */,
@@ -2260,7 +2264,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.development;
 				PRODUCT_NAME = Inbbbox;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2376,7 +2380,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.development;
 				PRODUCT_NAME = Inbbbox;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2394,7 +2398,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.development;
 				PRODUCT_NAME = Inbbbox;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2496,7 +2500,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.development;
 				PRODUCT_NAME = Inbbbox;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2573,7 +2577,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
+				PRODUCT_BUNDLE_IDENTIFIER = co.netguru.inbbbox.development;
 				PRODUCT_NAME = Inbbbox;
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
