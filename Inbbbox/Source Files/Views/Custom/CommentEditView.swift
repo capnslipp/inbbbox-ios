@@ -18,7 +18,7 @@ class CommentEditView: UIView {
     private var isEditing = true {
         didSet {
             deleteLabel.text = deleteLabelText
-            let imageName = isEditing ? "bt-delete-comment" : "bt-report-comment"
+            let imageName = isEditing ? "ic-delete-comment" : "ic-report-comment"
             deleteButton.setImage(UIImage(named: imageName), forState: .Normal)
         }
     }
@@ -119,13 +119,13 @@ class CommentEditView: UIView {
     }
 
     private func setupCancelButton() {
-        cancelButton.setImage(UIImage(named: "bt-cancel-comment"), forState: .Normal)
+        cancelButton.setImage(UIImage(named: "ic-cancel-comment"), forState: .Normal)
         cancelButton.contentMode = .ScaleAspectFit
         blurView.addSubview(cancelButton)
     }
 
     private func setupDeleteButton() {
-        deleteButton.setImage(UIImage(named: "bt-delete-comment"), forState: .Normal)
+        deleteButton.setImage(UIImage(named: "ic-delete-comment"), forState: .Normal)
         deleteButton.contentMode = .ScaleAspectFit
         blurView.addSubview(deleteButton)
     }
