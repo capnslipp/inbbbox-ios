@@ -13,21 +13,33 @@ class ProgressAnimator {
     var progressImageView = UIImageView()
 
     private var baseName: String
+    private var maximumImageCount: Int
 
     // MARK: Public
 
-    init(imageBaseName: String) {
+    /// Default initializer
+    ///
+    /// - parameter imageBaseName:     Common part of files' names with separator i.e loadgif_
+    /// - parameter imageCount:     Number of files that should become the animation.
+    ///
+    /// - returns: instance of ProgressAnimator
+    init(imageBaseName: String, imageCount: Int) {
         baseName = imageBaseName
+        maximumImageCount = imageCount
     }
 
+    /// Updates progress of animation according to passed value
+    ///
+    /// - parameter progress:     Progress value between 0.0 - 1.0. If you pass higher value than 1.0 it will be 
+    //                            locked to 1.0 value
     func updateProgress(progress: Float) {
-        progressImageView.image = image(progress)
+        progressImageView.image = image(min(1.0, progress))
     }
 
     //MARK: Private
 
     private func interpolateProgress(progress: Float) -> Int {
-        let maximum = Float(59)
+        let maximum = Float(maximumImageCount)
         let animationFrameKey = maximum * progress
         return Int(animationFrameKey)
     }

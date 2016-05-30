@@ -14,7 +14,7 @@ import Async
 
 class AnimatableShotImageView: AnimatableImageView {
     let downloader = DataDownloader()
-    private let progressAnimator = ProgressAnimator(imageBaseName: "loadgif_")
+    private let progressAnimator = ProgressAnimator(imageBaseName: "loadgif_", imageCount: 59)
     private var didSetupConstraints = false
 
     override init(frame: CGRect) {
