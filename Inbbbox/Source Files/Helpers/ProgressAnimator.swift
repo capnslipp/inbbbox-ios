@@ -19,7 +19,7 @@ class ProgressAnimator {
     init(imageBaseName: String) {
         baseName = imageBaseName
     }
-    
+
     func updateProgress(progress: Float) {
         progressImageView.image = image(progress)
     }
