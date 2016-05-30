@@ -62,7 +62,7 @@ class SmallUserCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Wi
     func setShotsViewConstraints() {
         let spacings = CollectionViewLayoutSpacings()
         let shotImageViewWidth = contentView.bounds.width / 2
-        let shotImageViewHeight = shotImageViewWidth * spacings.shotHeightToWidthRatio
+        let shotImageViewHeight = shotImageViewWidth * spacings.smallerShotHeightToWidthRatio
 
         firstShotImageView.autoSetDimension(.Height, toSize: shotImageViewHeight)
         firstShotImageView.autoSetDimension(.Width, toSize: shotImageViewWidth)
