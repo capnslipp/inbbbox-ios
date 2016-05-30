@@ -30,7 +30,7 @@ class ProgressAnimator {
 
     /// Updates progress of animation according to passed value
     ///
-    /// - parameter progress:     Progress value between 0.0 - 1.0. If you pass higher value than 1.0 it will be 
+    /// - parameter progress:     Progress value between 0.0 - 1.0. If you pass higher value than 1.0 it will be
     //                            locked to 1.0 value
     func updateProgress(progress: Float) {
         progressImageView.image = image(min(1.0, progress))
