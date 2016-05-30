@@ -9,15 +9,15 @@
 import Foundation
 
 class ProgressAnimator {
-    
+
     private var baseName: String
-    
+
     var progressImageView = UIImageView()
-    
+
     init(imageBaseName: String) {
         baseName = imageBaseName
     }
-    
+
     private func interpolateProgress(progress: Float) -> Int {
         let maximum = Float(59)
         print("progress: " + String(progress))
@@ -25,18 +25,16 @@ class ProgressAnimator {
         print("key: " + String(animationFrameKey))
         return Int(animationFrameKey)
     }
-    
+
     private func imageName(progress: Float) -> String {
         return baseName + String(interpolateProgress(progress))
     }
-    
+
     private func image(progress: Float) -> UIImage? {
         return UIImage(named: imageName(progress))
     }
-    
+
     func updateProgress(progress: Float) {
         progressImageView.image = image(progress)
     }
 }
-
-

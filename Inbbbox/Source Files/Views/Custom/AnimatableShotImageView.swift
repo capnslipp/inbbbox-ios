@@ -44,7 +44,9 @@ class AnimatableShotImageView: AnimatableImageView {
             let progressInset = CGFloat(10)
             progressAnimator.progressImageView.autoPinEdgeToSuperviewEdge(.Leading, withInset: progressInset)
             progressAnimator.progressImageView.autoPinEdgeToSuperviewEdge(.Trailing, withInset: progressInset)
-            progressAnimator.progressImageView.autoMatchDimension(.Height, toDimension: .Width, ofView: progressAnimator.progressImageView, withMultiplier: 0.3563218391)
+            progressAnimator.progressImageView.autoMatchDimension(.Height, toDimension: .Width,
+                                                                  ofView: progressAnimator.progressImageView,
+                                                                  withMultiplier: 0.3563218391)
         }
 
         super.updateConstraints()
