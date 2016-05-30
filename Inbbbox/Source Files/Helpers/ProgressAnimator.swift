@@ -20,9 +20,7 @@ class ProgressAnimator {
 
     private func interpolateProgress(progress: Float) -> Int {
         let maximum = Float(59)
-        print("progress: " + String(progress))
         let animationFrameKey = maximum * progress
-        print("key: " + String(animationFrameKey))
         return Int(animationFrameKey)
     }
 
