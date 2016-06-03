@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AnalyticsManager.setupAnalytics()
         CrashManager.setup()
-        Authenticator.logout()
         UIAlertController.setupAlertControllerSharedSettings()
         centerButtonTabBarController = CenterButtonTabBarController()
         let loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
@@ -141,23 +140,27 @@ private extension AppDelegate {
     }
 }
 
-private extension AppDelegate {
+// MARK: Safari OAuth
 
-    // MARK: Safari & OAuth
+extension AppDelegate {
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
-        print("ohhhh yeesssss")
 
         if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] {
+
             if String(sourceApplication) == "com.apple.SafariViewService" {
+                let notification = Dribbble.SafariControllerDidReceiveCallbackNotification
+                NSNotificationCenter.defaultCenter().postNotificationName(notification,
+                                                                          object: url)
                 return true
             }
         }
-
-        return true
+        return false
     }
+}
 
+// MARK: 3D Touch Support
 
-    // MARK: 3D Touch Support
+extension AppDelegate {
 
     func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
 

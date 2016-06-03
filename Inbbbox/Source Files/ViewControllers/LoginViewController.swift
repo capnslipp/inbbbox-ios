@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SafariServices
 
 class LoginViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class LoginViewController: UIViewController {
     private var shotsAnimator: AutoScrollableShotsAnimator!
     private weak var aView: LoginView?
     private var viewAnimator: LoginViewAnimator?
+    private var authenticator: Authenticator?
     private var onceTokenForScrollToMiddleInstantly = dispatch_once_t(0)
     private var logoTappedCount = 0
     private var statusBarStyle: UIStatusBarStyle = .LightContent {
@@ -47,10 +49,12 @@ class LoginViewController: UIViewController {
         } ?? []
 
         shotsAnimator = AutoScrollableShotsAnimator(bindForAnimation: bindForAnimation)
-        aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)),
-        forControlEvents: .TouchUpInside)
-        aView?.loginAsGuestButton.addTarget(self, action: #selector(loginAsGuestButtonDidTap(_:)),
-        forControlEvents: .TouchUpInside)
+
+aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap_safari(_:)), forControlEvents: .TouchUpInside)
+
+        aView?.loginAsGuestButton.addTarget(self,
+                                            action: #selector(loginAsGuestButtonDidTap(_:)),
+                                            forControlEvents: .TouchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(logoTapped(_:)))
         aView?.logoImageView.addGestureRecognizer(tapGesture)
         aView?.logoImageView.userInteractionEnabled = true
@@ -81,7 +85,38 @@ class LoginViewController: UIViewController {
 }
 
 // MARK: Actions
+
 extension LoginViewController {
+
+    func loginButtonDidTap_safari(_: UIButton) {
+
+        viewAnimator?.startLoginAnimation()
+
+        let interactionHandler: (SFSafariViewController -> Void) = { controller in
+//            after(0.6).then { result -> Void in
+                controller.delegate = self
+                self.presentViewController(controller, animated: true, completion: nil)
+//            }
+        }
+
+        let success: (Void -> Void) = {
+            self.dismissViewControllerAnimated(true) {
+                self.viewAnimator?.stopAnimationWithType(.Continue) {
+                    self.aView?.loadingLabel.alpha = 0
+                    self.aView?.copyrightlabel.alpha = 0
+                    self.presentNextViewController()
+                }
+            }
+        }
+
+        let failure: (ErrorType -> Void) = { error in
+            self.viewAnimator?.stopAnimationWithType(.Undo)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+
+        authenticator = Authenticator(interactionHandler: interactionHandler, success: success, failure: failure)
+        authenticator?.loginSafariWithService(.Dribbble, trySilent: false)
+    }
 
     func loginButtonDidTap(_: UIButton) {
 
@@ -93,19 +128,9 @@ extension LoginViewController {
             }
         }
 
-        let authenticator = Authenticator(interactionHandler: interactionHandler)
-
-        authenticator.newLoginWithService(.Dribbble)
-//        firstly {
-//            authenticator.loginWithService(.Dribbble)
-//        }.then {
-//            self.viewAnimator?.stopAnimationWithType(.Continue) {
-//                self.aView?.loadingLabel.alpha = 0
-//                self.presentNextViewController()
-//            }
-//        }.error { error in
-//            self.viewAnimator?.stopAnimationWithType(.Undo)
-//        }
+        let authenticator = Authenticator(interactionHandler: interactionHandler, success: {
+            }, failure: { error in
+        })
     }
 
     func loginAsGuestButtonDidTap(_: UIButton) {
@@ -132,6 +157,18 @@ extension LoginViewController: LoginViewAnimatorDelegate {
     func shrinkAnimationDidFinish() {
         self.viewAnimator?.stopAnimationWithType(.Continue) {
             self.presentNextViewController()
+        }
+    }
+}
+
+extension LoginViewController: SFSafariViewControllerDelegate {
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        dismissViewControllerAnimated(true, completion: nil)
+
+        after(0.5).then { result -> Void in
+            // TODO (PIKOR): Why this line is not called, when inside completion of dismissVC?
+            self.aView?.loadingLabel.alpha = 0
+            self.viewAnimator?.stopAnimationWithType(.Undo)
         }
     }
 }

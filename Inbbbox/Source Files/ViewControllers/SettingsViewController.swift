@@ -220,16 +220,17 @@ private extension SettingsViewController {
 extension SettingsViewController {
 
     func authenticateUser() {
-        let interactionHandler: (UIViewController -> Void) = { controller in
-            self.presentViewController(controller, animated: true, completion: nil)
-        }
-        let authenticator = Authenticator(interactionHandler: interactionHandler)
-
-        firstly {
-            authenticator.loginWithService(.Dribbble)
-        }.then { result -> Void in
-            self.refreshViewAccordingToAuthenticationStatus()
-        }
+// TODO (Pikor): Temporarily turning it off, until finishing final API for Authenticator
+//        let interactionHandler: (UIViewController -> Void) = { controller in
+//            self.presentViewController(controller, animated: true, completion: nil)
+//        }
+//        let authenticator = Authenticator(interactionHandler: interactionHandler)
+//
+//        firstly {
+//            authenticator.loginWithService(.Dribbble)
+//        }.then { result -> Void in
+//            self.refreshViewAccordingToAuthenticationStatus()
+//        }
     }
 
     func refreshViewAccordingToAuthenticationStatus() {

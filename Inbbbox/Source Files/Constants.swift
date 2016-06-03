@@ -12,6 +12,10 @@ struct Dribbble {
     static let Host = "api.dribbble.com"
     static let APIVersion = "/v1"
 
+    /// Name of notification used by AppDelegate to inform interested class
+    /// about handling application(app:openURL:options:) method.
+    static let SafariControllerDidReceiveCallbackNotification = "SafariControllerDidReceiveCallbackNotification"
+
      /// `ClientID` is used to communicate with dribbble API.
      /// Value is set during project setup, after typing `pod install`,
      /// then securely stored in OSX Keychain.
@@ -26,7 +30,7 @@ struct Dribbble {
      /// Value is set during project setup, after typing `pod install`,
      /// then securely stored in OSX Keychain.
     static let ClientAccessToken: String = SecretKeysProvider.secretValueForKey("ClientAccessToken")!
-    static let CallbackURLString = "inbbbox://oauth"
+    static let CallbackURLString = "safaritest://oauth"
 
     static let RequestTokenURLString = "https://dribbble.com/oauth/authorize"
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"

@@ -13,8 +13,9 @@ import SafariServices
 
 class Authenticator: NSObject {
 
-    private let interactionHandler: (UIViewController -> Void)
-    var safari: SFSafariViewController?
+    private let interactionHandler: (SFSafariViewController -> Void)
+    private let success: (Void -> Void)
+    private let failure: (ErrorType -> Void)
 
     enum Service {
         case Dribbble
@@ -26,27 +27,32 @@ class Authenticator: NSObject {
         }
     }
 
-    init(interactionHandler: (UIViewController -> Void)) {
+    init(interactionHandler: (SFSafariViewController -> Void), success: (Void -> Void), failure: (ErrorType -> Void)) {
         self.interactionHandler = interactionHandler
+        self.success = success
+        self.failure = failure
+
+        NSNotificationCenter.defaultCenter().addObserver(self,
+                                                         selector: #selector(safariControllerDidSendNotification(_:)),
+                                                         name: Dribbble.SafariControllerDidReceiveCallbackNotification,
+                                                         object: nil)
     }
 
-    func newLoginWithService(service: Service, trySient: Bool = true) {
-        let serviceInstance = service.instance
-        var fakeController: OAuthViewController?
+    deinit {
+         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 
-        if let oAuthAuthorizableService = serviceInstance as? OAuthAuthorizable {
-            fakeController = OAuthViewController(oAuthAuthorizableService: oAuthAuthorizableService) {
-                controller, url in
-                print("\(url.absoluteString)")
-                self.safari = SFSafariViewController(URL: url)
-                self.safari!.delegate = self
-                self.interactionHandler(UINavigationController(rootViewController: self.safari!))
-            }
+    // TODO (PIKOR): Change name
+    func loginSafariWithService(service: Service, trySilent: Bool = true) -> Void {
+        if trySilent {
+            // TODO (PIKOR): Implement
+        } else {
+            let url = DribbbleNetworkService().requestTokenURLRequest().URL!
+            interactionHandler(SFSafariViewController(URL: url))
         }
-
-        fakeController?.startAuthentication()
     }
 
+    // Will be removed when done with Safari.
     func loginWithService(service: Service, trySilent: Bool = true) -> Promise<Void> {
 
         let serviceInstance = service.instance
@@ -55,9 +61,9 @@ class Authenticator: NSObject {
         if let oAuthAuthorizableService = serviceInstance as? OAuthAuthorizable {
 
             controller = OAuthViewController(oAuthAuthorizableService: oAuthAuthorizableService) {
-                    controller, url in
+                    controller in
                 if trySilent {
-                    self.interactionHandler(UINavigationController(rootViewController: controller))
+//                    self.interactionHandler(UINavigationController(rootViewController: controller))
                 }
             }
         } else {
@@ -67,7 +73,7 @@ class Authenticator: NSObject {
         }
 
         if !trySilent {
-            interactionHandler(UINavigationController(rootViewController: controller))
+//            interactionHandler(UINavigationController(rootViewController: controller))
         }
 
         return Promise<Void> { fulfill, reject in
@@ -92,27 +98,85 @@ class Authenticator: NSObject {
     class func logout() {
         UserStorage.clear()
         TokenStorage.clear()
-        Authenticator.clearCookies()
-        APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
-    }
-
-    class func clearCookies() {
         WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies],
-                                                                modifiedSince:NSDate(timeIntervalSince1970: 0), completionHandler: {})
-    }
-}
-
-extension Authenticator: SFSafariViewControllerDelegate {
-    func safariViewControllerDidFinish(controller: SFSafariViewController) {
-        print("[Authenticator] safariViewControllerDidFinish")
-    }
-
-    func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
-        print("[Authenticator] didCompleteInitialLoad")
+                modifiedSince:NSDate(timeIntervalSince1970: 0), completionHandler: {})
+        APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
     }
 }
 
 private extension Authenticator {
+
+    dynamic func safariControllerDidSendNotification(notification: NSNotification) {
+
+        guard let callbackURL = notification.object as? NSURL else {
+            failure(AuthenticatorError.InvalidCallbackURL)
+            return
+        }
+
+        proceed(callbackURL)
+    }
+
+    func proceed(url: NSURL) {
+        firstly {
+            decodeRequestTokenFromCallback(url)
+        }.then { requestToken in
+            self.gainAccessTokenWithReqestToken(requestToken)
+        }.then { accessToken in
+            self.persistToken(accessToken)
+        }.then {
+            self.fetchUser()
+        }.then { user in
+            self.persistUser(user)
+        }.then { () -> Void in
+            AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginSucceeded)
+            self.success()
+        }.error { error in
+            AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginFailed)
+            self.failure(error)
+        }
+    }
+
+    func decodeRequestTokenFromCallback(url: NSURL) -> Promise<String> {
+        return Promise { fulfill, reject in
+            var code: String?
+            let components = url.query?.componentsSeparatedByString("&")
+            if let components = components {
+                for component in components {
+                    if component.rangeOfString("code=") != nil {
+                        code = component.componentsSeparatedByString("=").last
+                    }
+                }
+                code != nil ? fulfill(code!) : reject(AuthenticatorError.AuthTokenMissing)
+            } else {
+                reject(AuthenticatorError.AuthTokenMissing)
+            }
+        }
+    }
+
+    }
+
+    func gainAccessTokenWithReqestToken(token: String) -> Promise<String> {
+        return Promise<String> { fulfill, reject in
+
+            let request = DribbbleNetworkService().accessTokenURLRequestWithRequestToken(token)
+
+            firstly {
+                NSURLSession.POST(request.URL!.absoluteString)
+            }.then { data -> Void in
+                guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) else {
+                    throw AuthenticatorError.DataDecodingFailure
+                }
+
+                guard let accessToken = json["access_token"] as? String else {
+                    throw AuthenticatorError.AccessTokenMissing
+                }
+                fulfill(accessToken)
+
+            }.error { error in
+                reject(error)
+            }
+        }
+    }
 
     func fetchUser() -> Promise<User> {
         return Promise<User> { fulfill, reject in
