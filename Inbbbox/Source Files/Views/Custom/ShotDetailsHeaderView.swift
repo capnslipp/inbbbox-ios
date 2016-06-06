@@ -77,6 +77,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
         overlapingTitleLabel.alpha = 0
         addSubview(overlapingTitleLabel)
 
+        avatarView.imageView.image = UIImage(named: "ic-author-mugshot-nopicture")
         addSubview(avatarView)
 
         addSubview(closeButtonView)
