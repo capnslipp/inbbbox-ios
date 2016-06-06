@@ -23,7 +23,8 @@ class ShotAuthorCompactView: UIView {
     var viewData: ViewData? {
         didSet {
             authorLabel.text = viewData?.author
-            avatarView.imageView.loadImageFromURL((viewData?.avatarURL)!)
+            let placeholder = UIImage(named: "ic-account-nopicture")
+            avatarView.imageView.loadImageFromURL((viewData?.avatarURL)!, placeholderImage: placeholder)
         }
     }
 

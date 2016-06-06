@@ -169,7 +169,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURL(data.avatarURL,
-                    placeholderImage: UIImage(named: "avatar_placeholder"))
+                                                       placeholderImage: UIImage(named: "ic-comments-nopicture"))
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
@@ -219,7 +219,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             if let team = viewModel.shot.team, url = viewModel.urlForTeam(team) {
                 header?.setLinkInTitle(url, range: viewModel.teamLinkRange, delegate: self)
             }
-            header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
+            let placeholderAvatar = UIImage(named: "ic-author-mugshot-nopicture")
+            header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL,
+                                                          placeholderImage: placeholderAvatar)
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
             forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self

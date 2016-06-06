@@ -214,7 +214,7 @@ private extension SettingsViewController {
                     comment: "Is user a guest without account?")
         }
         header.avatarView.imageView.loadImageFromURL(viewModel.loggedInUser?.avatarURL,
-                placeholderImage: UIImage(named: "avatar_placeholder"))
+                placeholderImage: UIImage(named: "ic-guest-avatar"))
     }
 }
 
