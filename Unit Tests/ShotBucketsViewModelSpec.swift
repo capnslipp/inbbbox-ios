@@ -102,7 +102,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
             describe("when newly initialized") {
                 
                 it("should have correct title") {
-                    expect(sut.titleForHeader).to(equal("Add To Bucket"))
+                    expect(sut.titleForHeader).to(equal("Add to Bucket"))
                 }
                 
                 it("should have no buckets") {
@@ -240,7 +240,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
             describe("when newly initialized") {
                 
                 it("should have correct title") {
-                    expect(sut.titleForHeader).to(equal("Remove From Bucket"))
+                    expect(sut.titleForHeader).to(equal("Remove from Bucket"))
                 }
                 
                 it("should have no buckets") {
