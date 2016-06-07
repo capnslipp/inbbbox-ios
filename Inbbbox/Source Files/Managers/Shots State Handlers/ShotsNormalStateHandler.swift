@@ -46,6 +46,11 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
 
     func prepareForPresentingData() {
+        if !UserStorage.isUserSignedIn {
+            updateAuthorData()
+            return
+        }
+
         firstly {
             fetchLikedShots()
         }.then { () -> Void in
