@@ -95,7 +95,7 @@ final class ShotDetailsFormatter {
 
     class func commentDateForComment(comment: CommentType) -> NSAttributedString {
         return NSAttributedString(string: commentDateFormatter.stringFromDate(comment.createdAt), attributes: [
-                NSForegroundColorAttributeName: UIColor.RGBA(164, 180, 188, 1),
+                NSForegroundColorAttributeName: UIColor.followeeTextGrayColor(),
                 NSFontAttributeName: UIFont.helveticaFont(.Neue, size: 10)
         ])
     }

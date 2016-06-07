@@ -38,7 +38,7 @@ class ShotBucketsAddCollectionViewCell: UICollectionViewCell {
 
         shotsCountLabel.configureForAutoLayout()
         shotsCountLabel.numberOfLines = 1
-        shotsCountLabel.textColor = .RGBA(164, 180, 188, 1)
+        shotsCountLabel.textColor = .followeeTextGrayColor()
         shotsCountLabel.font = UIFont.helveticaFont(.Neue, size: 17)
         contentView.addSubview(shotsCountLabel)
 
