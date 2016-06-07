@@ -20,7 +20,7 @@ class AnimatableShotImageView: AnimatableImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = .cellBackgroundColor()
+        backgroundColor = .whiteColor()
         contentMode = .ScaleAspectFill
         progressAnimator.progressImageView.configureForAutoLayout()
         addSubview(progressAnimator.progressImageView)
