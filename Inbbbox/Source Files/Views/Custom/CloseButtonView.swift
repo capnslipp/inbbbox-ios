@@ -50,7 +50,10 @@ class CloseButtonView: UIView {
             dimView.autoSetDimensionsToSize(CGSize(width: diameterSize, height: diameterSize))
             vibrancyView.autoCenterInSuperview()
             vibrancyView.autoSetDimensionsToSize(CGSize(width: diameterSize, height: diameterSize))
-            autoSetDimensionsToSize(CGSize(width: diameterSize*1.2, height: diameterSize*1.2))
+
+            let diameterMultiplier = CGFloat(1.5)
+            let selfSize = CGSize(width: diameterSize * diameterMultiplier, height: diameterSize * diameterMultiplier)
+            autoSetDimensionsToSize(selfSize)
         }
         super.updateConstraints()
     }
