@@ -82,6 +82,10 @@ aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap_safari(_:
     deinit {
         shotsAnimator?.stopAnimation()
     }
+
+    func handleOpenURL(url: NSURL) {
+        authenticator?.loginWithOAuthURLCallback(url)
+    }
 }
 
 // MARK: Actions
@@ -162,6 +166,7 @@ extension LoginViewController: LoginViewAnimatorDelegate {
 }
 
 extension LoginViewController: SFSafariViewControllerDelegate {
+
     func safariViewControllerDidFinish(controller: SFSafariViewController) {
         dismissViewControllerAnimated(true, completion: nil)
 

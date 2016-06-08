@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var centerButtonTabBarController: CenterButtonTabBarController?
+    var loginViewController: LoginViewController?
     var launchedShortcut: UIApplicationShortcutItem?
 
     enum Shortcut: String {
@@ -30,8 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CrashManager.setup()
         UIAlertController.setupAlertControllerSharedSettings()
         centerButtonTabBarController = CenterButtonTabBarController()
-        let loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
-        let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController
+        loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
+        let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController!
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
@@ -148,9 +149,7 @@ extension AppDelegate {
         if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] {
 
             if String(sourceApplication) == "com.apple.SafariViewService" {
-                let notification = Dribbble.SafariControllerDidReceiveCallbackNotification
-                NSNotificationCenter.defaultCenter().postNotificationName(notification,
-                                                                          object: url)
+                loginViewController?.handleOpenURL(url)
                 return true
             }
         }

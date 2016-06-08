@@ -31,15 +31,6 @@ class Authenticator: NSObject {
         self.interactionHandler = interactionHandler
         self.success = success
         self.failure = failure
-        super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self,
-                                                         selector: #selector(safariControllerDidSendNotification(_:)),
-                                                         name: Dribbble.SafariControllerDidReceiveCallbackNotification,
-                                                         object: nil)
-    }
-
-    deinit {
-         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     // TODO (PIKOR): Change name
@@ -95,28 +86,20 @@ class Authenticator: NSObject {
         }
     }
 
+    func loginWithOAuthURLCallback(url: NSURL) {
+        login(url)
+    }
+
     class func logout() {
         UserStorage.clear()
         TokenStorage.clear()
-        WKWebsiteDataStore.defaultDataStore().removeDataOfTypes([WKWebsiteDataTypeCookies],
-                modifiedSince:NSDate(timeIntervalSince1970: 0), completionHandler: {})
         APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
     }
 }
 
 private extension Authenticator {
 
-    dynamic func safariControllerDidSendNotification(notification: NSNotification) {
-
-        guard let callbackURL = notification.object as? NSURL else {
-            failure(AuthenticatorError.InvalidCallbackURL)
-            return
-        }
-
-        proceed(callbackURL)
-    }
-
-    func proceed(url: NSURL) {
+    func login(url: NSURL) {
         firstly {
             decodeRequestTokenFromCallback(url)
         }.then { requestToken in
@@ -154,12 +137,14 @@ private extension Authenticator {
     }
 
     func gainAccessTokenWithReqestToken(token: String) -> Promise<String> {
+        print("[Authenticator] gainAccessTokenWithReqestToken/")
         return Promise<String> { fulfill, reject in
 
             let request = DribbbleNetworkService().accessTokenURLRequestWithRequestToken(token)
 
-            firstly {
-                NSURLSession.POST(request.URL!.absoluteString)
+            firstly { obj -> Promise<NSData> in
+                print("[Authenticator] gainAccessTokenWithReqestToken/firstly/NSURLSession.POST")
+                return NSURLSession.POST(request.URL!.absoluteString)
             }.then { data -> Void in
                 guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) else {
                     throw AuthenticatorError.DataDecodingFailure
@@ -168,6 +153,8 @@ private extension Authenticator {
                 guard let accessToken = json["access_token"] as? String else {
                     throw AuthenticatorError.AccessTokenMissing
                 }
+                print("[Authenticator] Access Token: \(accessToken)")
+                print("####################################################################################")
                 fulfill(accessToken)
 
             }.error { error in
