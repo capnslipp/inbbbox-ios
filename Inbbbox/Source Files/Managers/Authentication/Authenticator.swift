@@ -31,7 +31,7 @@ class Authenticator: NSObject {
         self.interactionHandler = interactionHandler
         self.success = success
         self.failure = failure
-
+        super.init()
         NSNotificationCenter.defaultCenter().addObserver(self,
                                                          selector: #selector(safariControllerDidSendNotification(_:)),
                                                          name: Dribbble.SafariControllerDidReceiveCallbackNotification,
@@ -151,8 +151,6 @@ private extension Authenticator {
                 reject(AuthenticatorError.AuthTokenMissing)
             }
         }
-    }
-
     }
 
     func gainAccessTokenWithReqestToken(token: String) -> Promise<String> {
