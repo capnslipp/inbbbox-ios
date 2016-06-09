@@ -49,9 +49,9 @@ class LoginViewController: UIViewController {
         } ?? []
 
         shotsAnimator = AutoScrollableShotsAnimator(bindForAnimation: bindForAnimation)
-
-aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap_safari(_:)), forControlEvents: .TouchUpInside)
-
+        aView?.loginButton.addTarget(self,
+                                     action: #selector(loginButtonDidTap_safari(_:)),
+                                     forControlEvents: .TouchUpInside)
         aView?.loginAsGuestButton.addTarget(self,
                                             action: #selector(loginAsGuestButtonDidTap(_:)),
                                             forControlEvents: .TouchUpInside)
@@ -119,7 +119,7 @@ extension LoginViewController {
         }
 
         authenticator = Authenticator(interactionHandler: interactionHandler, success: success, failure: failure)
-        authenticator?.loginSafariWithService(.Dribbble, trySilent: false)
+        authenticator?.loginSafariWithService(.Dribbble)
     }
 
     func loginButtonDidTap(_: UIButton) {

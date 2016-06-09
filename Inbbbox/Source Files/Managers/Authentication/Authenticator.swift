@@ -27,20 +27,20 @@ class Authenticator: NSObject {
         }
     }
 
+    // MARK: Init
+
     init(interactionHandler: (SFSafariViewController -> Void), success: (Void -> Void), failure: (ErrorType -> Void)) {
         self.interactionHandler = interactionHandler
         self.success = success
         self.failure = failure
     }
 
+    // MARK: Public
+
     // TODO (PIKOR): Change name
-    func loginSafariWithService(service: Service, trySilent: Bool = true) -> Void {
-        if trySilent {
-            // TODO (PIKOR): Implement
-        } else {
-            let url = DribbbleNetworkService().requestTokenURLRequest().URL!
-            interactionHandler(SFSafariViewController(URL: url))
-        }
+    func loginSafariWithService(service: Service) -> Void {
+        let url = DribbbleNetworkService().requestTokenURLRequest().URL!
+        interactionHandler(SFSafariViewController(URL: url))
     }
 
     // Will be removed when done with Safari.
@@ -96,6 +96,8 @@ class Authenticator: NSObject {
         APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
     }
 }
+
+// MARK: Private
 
 private extension Authenticator {
 
