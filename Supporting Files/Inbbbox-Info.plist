@@ -86,14 +86,9 @@
 			<string>co.netguru.inbbbox</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>safaritest</string>
+				<string>inbbbbox</string>
 			</array>
 		</dict>
 	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 </dict>
 </plist>

@@ -93,10 +93,8 @@ extension LoginViewController {
         viewAnimator?.startLoginAnimation()
 
         let interactionHandler: (SFSafariViewController -> Void) = { controller in
-//            after(0.6).then { result -> Void in
-                controller.delegate = self
-                self.presentViewController(controller, animated: true, completion: nil)
-//            }
+            controller.delegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
         }
 
         let success: (Void -> Void) = {

@@ -11,7 +11,7 @@ import PromiseKit
 import WebKit
 import SafariServices
 
-class Authenticator: NSObject {
+class Authenticator {
 
     var networkService: OAuthAuthorizable?
 
