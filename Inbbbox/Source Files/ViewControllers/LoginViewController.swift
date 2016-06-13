@@ -162,7 +162,6 @@ extension LoginViewController: SFSafariViewControllerDelegate {
         dismissViewControllerAnimated(true, completion: nil)
 
         after(0.5).then { result -> Void in
-            // TODO (PIKOR): Why this line is not called, when inside completion of dismissVC?
             self.aView?.loadingLabel.alpha = 0
             self.viewAnimator?.stopAnimationWithType(.Undo)
         }
