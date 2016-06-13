@@ -28,7 +28,7 @@ class UserStorageSpec: QuickSpec {
         }
         
         beforeEach {
-            UserStorage.clear()
+            UserStorage.clearUser()
         }
         
         describe("when storing user") {
@@ -68,7 +68,7 @@ class UserStorageSpec: QuickSpec {
             context("and clearing storage") {
                 
                 beforeEach {
-                    UserStorage.clear()
+                    UserStorage.clearUser()
                 }
                 
                 it("user should be nil") {
