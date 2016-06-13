@@ -16,4 +16,5 @@ enum AuthenticatorError: ErrorType {
     case AuthTokenMissing
     case UnknownError
     case InvalidCallbackURL
+    case RequestTokenURLFailure
 }

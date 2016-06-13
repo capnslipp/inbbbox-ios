@@ -13,6 +13,8 @@ import SafariServices
 
 class Authenticator: NSObject {
 
+    var networkService: OAuthAuthorizable?
+
     private let interactionHandler: (SFSafariViewController -> Void)
     private let success: (Void -> Void)
     private let failure: (ErrorType -> Void)
@@ -29,7 +31,8 @@ class Authenticator: NSObject {
 
     // MARK: Init
 
-    init(interactionHandler: (SFSafariViewController -> Void), success: (Void -> Void), failure: (ErrorType -> Void)) {
+    init(service: Service, interactionHandler: (SFSafariViewController -> Void), success: (Void -> Void), failure: (ErrorType -> Void)) {
+        self.networkService = service.instance as? OAuthAuthorizable
         self.interactionHandler = interactionHandler
         self.success = success
         self.failure = failure
@@ -37,10 +40,12 @@ class Authenticator: NSObject {
 
     // MARK: Public
 
-    // TODO (PIKOR): Change name
-    func loginSafariWithService(service: Service) -> Void {
-        let url = DribbbleNetworkService().requestTokenURLRequest().URL!
-        interactionHandler(SFSafariViewController(URL: url))
+    func login() {
+        if let networkService = networkService {
+            interactionHandler(SFSafariViewController(URL: networkService.requestTokenURLRequest().URL!))
+        } else {
+            self.failure(AuthenticatorError.RequestTokenURLFailure)
+        }
     }
 
     // Will be removed when done with Safari.
@@ -105,7 +110,7 @@ private extension Authenticator {
         firstly {
             decodeRequestTokenFromCallback(url)
         }.then { requestToken in
-            self.gainAccessTokenWithReqestToken(requestToken)
+            self.gainAccessTokenWithRequestToken(requestToken)
         }.then { accessToken in
             self.persistToken(accessToken)
         }.then {
@@ -137,15 +142,15 @@ private extension Authenticator {
             }
         }
     }
-
-    func gainAccessTokenWithReqestToken(token: String) -> Promise<String> {
-        print("[Authenticator] gainAccessTokenWithReqestToken/")
+    
+    func gainAccessTokenWithRequestToken(token: String) -> Promise<String> {
         return Promise<String> { fulfill, reject in
 
-            let request = DribbbleNetworkService().accessTokenURLRequestWithRequestToken(token)
+            guard let request = self.networkService?.accessTokenURLRequestWithRequestToken(token) else {
+                return reject(AuthenticatorError.AuthTokenMissing)
+            }
 
-            firstly { obj -> Promise<NSData> in
-                print("[Authenticator] gainAccessTokenWithReqestToken/firstly/NSURLSession.POST")
+            firstly {
                 return NSURLSession.POST(request.URL!.absoluteString)
             }.then { data -> Void in
                 guard let json = try? NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) else {
@@ -155,8 +160,6 @@ private extension Authenticator {
                 guard let accessToken = json["access_token"] as? String else {
                     throw AuthenticatorError.AccessTokenMissing
                 }
-                print("[Authenticator] Access Token: \(accessToken)")
-                print("####################################################################################")
                 fulfill(accessToken)
 
             }.error { error in
