@@ -82,10 +82,6 @@ class LoginViewController: UIViewController {
     deinit {
         shotsAnimator?.stopAnimation()
     }
-
-    func handleOpenURL(url: NSURL) {
-        authenticator?.loginWithOAuthURLCallback(url)
-    }
 }
 
 // MARK: Actions
@@ -127,6 +123,7 @@ extension LoginViewController {
 
     func loginAsGuestButtonDidTap(_: UIButton) {
         Authenticator.logout()
+        UserStorage.storeGuestUser()
         AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginAsGuest)
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
@@ -150,6 +147,12 @@ extension LoginViewController: LoginViewAnimatorDelegate {
         self.viewAnimator?.stopAnimationWithType(.Continue) {
             self.presentNextViewController()
         }
+    }
+}
+
+extension LoginViewController: SafariAuthorizable {
+    func handleOpenURL(url: NSURL) {
+        authenticator?.loginWithOAuthURLCallback(url)
     }
 }
 

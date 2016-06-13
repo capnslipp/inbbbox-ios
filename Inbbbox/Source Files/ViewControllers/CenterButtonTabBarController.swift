@@ -9,6 +9,7 @@ class CenterButtonTabBarController: UITabBarController {
     private var didSetConstraints = false
     let centerButton = RoundedButton()
     let shotsCollectionViewController = ShotsCollectionViewController()
+    let settingsViewController = SettingsViewController()
     var didUpdateTabBarItems = false
 
     enum CenterButtonViewControllers: Int {
@@ -58,9 +59,9 @@ class CenterButtonTabBarController: UITabBarController {
             imageName: "ic-following"
         )
 
-        let accountViewController =
-                UINavigationController(rootViewController: SettingsViewController())
-        accountViewController.tabBarItem = tabBarItemWithTitle(
+        let settingsViewController =
+                UINavigationController(rootViewController: self.settingsViewController)
+        settingsViewController.tabBarItem = tabBarItemWithTitle(
             NSLocalizedString("CenterButtonTabBar.Account", comment: "Main view, bottom bar"),
             imageName: "ic-account"
         )
@@ -70,7 +71,7 @@ class CenterButtonTabBarController: UITabBarController {
             bucketsViewController,
             shotsCollectionViewController,
             followeesViewController,
-            accountViewController
+            settingsViewController
         ]
         selectedViewController = shotsCollectionViewController
     }

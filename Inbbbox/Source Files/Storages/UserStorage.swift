@@ -9,14 +9,14 @@
 import Foundation
 import KeychainAccess
 
-class UserStorage {
+final class UserStorage {
 
     private static let KeychainService = "co.netguru.inbbbox.keychain.user"
     private static let keychain = Keychain(service: KeychainService)
 
     /// Currently signed in user. If there isn't any then returns *nil*.
     class var currentUser: User? {
-        guard let data = keychain[data: Key.Token.rawValue] else {
+        guard let data = keychain[data: Key.UserToken.rawValue] else {
             return nil
         }
         return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
@@ -27,22 +27,38 @@ class UserStorage {
         return currentUser != nil
     }
 
+    /// Indicates if user is using app as an guest.
+    class var isGuestUser: Bool {
+        return keychain[data: Key.GuestToken.rawValue] != nil ? true : false
+    }
+
     /// Store given user.
     ///
     /// - parameter user: User that should be stored.
     class func storeUser(user: User) {
-        keychain[data: Key.Token.rawValue] = NSKeyedArchiver.archivedDataWithRootObject(user)
+        keychain[data: Key.UserToken.rawValue] = NSKeyedArchiver.archivedDataWithRootObject(user)
+    }
+
+    /// Store bool flag indicating guest mode on.
+    class func storeGuestUser() {
+        keychain[data: Key.GuestToken.rawValue] = NSKeyedArchiver.archivedDataWithRootObject(true)
     }
 
     /// Clear stored user.
-    class func clear() {
-        keychain[Key.Token.rawValue] = nil
+    class func clearUser() {
+        keychain[Key.UserToken.rawValue] = nil
+    }
+
+    /// Clear guest user.
+    class func clearGuestUser() {
+        keychain[Key.GuestToken.rawValue] = nil
     }
 }
 
 private extension UserStorage {
 
     enum Key: String {
-        case Token = "co.netguru.inbbbox.keychain.user.key"
+        case UserToken = "co.netguru.inbbbox.keychain.user.key"
+        case GuestToken = "co.netguru.inbbbox.keychain.guest.key"
     }
 }

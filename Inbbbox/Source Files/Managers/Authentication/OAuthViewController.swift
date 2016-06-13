@@ -79,7 +79,6 @@ final class OAuthViewController: UIViewController {
             }.always {
                 self.dismissViewControllerAnimated(true, completion: nil)
             }.then { accessToken -> Void in
-                print("[OAuthVC] will fulfill startAuthentication Promise")
                 fulfill(accessToken)
             }.error { error in
                 reject(error)

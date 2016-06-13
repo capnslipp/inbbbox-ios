@@ -9,10 +9,12 @@
 import UIKit
 import PromiseKit
 import AOAlertController
+import SafariServices
 
 class SettingsViewController: UITableViewController {
 
     private var viewModel: SettingsViewModel!
+    private var authenticator: Authenticator?
 
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
@@ -215,22 +217,37 @@ private extension SettingsViewController {
     }
 }
 
+// MARK: SafariAuthorizable
+
+extension SettingsViewController: SafariAuthorizable {
+    func handleOpenURL(url: NSURL) {
+        authenticator?.loginWithOAuthURLCallback(url)
+    }
+}
+
 // MARK: Authentication
 
 extension SettingsViewController {
 
     func authenticateUser() {
-// TODO (Pikor): Temporarily turning it off, until finishing final API for Authenticator
-//        let interactionHandler: (UIViewController -> Void) = { controller in
-//            self.presentViewController(controller, animated: true, completion: nil)
-//        }
-//        let authenticator = Authenticator(interactionHandler: interactionHandler)
-//
-//        firstly {
-//            authenticator.loginWithService(.Dribbble)
-//        }.then { result -> Void in
-//            self.refreshViewAccordingToAuthenticationStatus()
-//        }
+        let interactionHandler: (SFSafariViewController -> Void) = { controller in
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+
+        let success: (Void -> Void) = {
+            self.dismissViewControllerAnimated(true, completion: nil)
+            self.refreshViewAccordingToAuthenticationStatus()
+        }
+
+        let failure: (ErrorType -> Void) = { error in
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+
+        authenticator = Authenticator(service: .Dribbble,
+                                      interactionHandler: interactionHandler,
+                                      success: success,
+                                      failure: failure)
+        authenticator?.login()
     }
 
     func refreshViewAccordingToAuthenticationStatus() {

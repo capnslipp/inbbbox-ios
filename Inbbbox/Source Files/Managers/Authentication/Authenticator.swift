@@ -96,7 +96,7 @@ class Authenticator: NSObject {
     }
 
     class func logout() {
-        UserStorage.clear()
+        UserStorage.clearUser()
         TokenStorage.clear()
         APIRateLimitKeeper.sharedKeeper.clearRateLimitsInfo()
     }
@@ -194,5 +194,6 @@ private extension Authenticator {
 
     func persistUser(user: User) {
         UserStorage.storeUser(user)
+        UserStorage.clearGuestUser()
     }
 }

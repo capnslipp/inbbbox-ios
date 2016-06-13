@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AnalyticsManager.setupAnalytics()
         CrashManager.setup()
+        UserStorage.clearGuestUser()
         UIAlertController.setupAlertControllerSharedSettings()
         centerButtonTabBarController = CenterButtonTabBarController()
         loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
@@ -149,7 +150,14 @@ extension AppDelegate {
         if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] {
 
             if String(sourceApplication) == "com.apple.SafariViewService" {
-                loginViewController?.handleOpenURL(url)
+
+                if UserStorage.isGuestUser {
+                    let settingsViewController = centerButtonTabBarController?.settingsViewController
+                    settingsViewController?.handleOpenURL(url)
+                } else {
+                    loginViewController?.handleOpenURL(url)
+                }
+
                 return true
             }
         }
