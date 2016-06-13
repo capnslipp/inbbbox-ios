@@ -42,7 +42,9 @@ class Authenticator: NSObject {
 
     func login() {
         if let networkService = networkService {
-            interactionHandler(SFSafariViewController(URL: networkService.requestTokenURLRequest().URL!))
+            let controller = SFSafariViewController(URL: networkService.requestTokenURLRequest().URL!)
+            controller.view.tintColor = .pinkColor()
+            interactionHandler(controller)
         } else {
             self.failure(AuthenticatorError.RequestTokenURLFailure)
         }
@@ -142,7 +144,7 @@ private extension Authenticator {
             }
         }
     }
-    
+
     func gainAccessTokenWithRequestToken(token: String) -> Promise<String> {
         return Promise<String> { fulfill, reject in
 
