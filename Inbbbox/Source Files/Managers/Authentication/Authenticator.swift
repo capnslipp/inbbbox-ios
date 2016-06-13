@@ -31,7 +31,10 @@ class Authenticator: NSObject {
 
     // MARK: Init
 
-    init(service: Service, interactionHandler: (SFSafariViewController -> Void), success: (Void -> Void), failure: (ErrorType -> Void)) {
+    init(service: Service,
+         interactionHandler: (SFSafariViewController -> Void),
+         success: (Void -> Void),
+         failure: (ErrorType -> Void)) {
         self.networkService = service.instance as? OAuthAuthorizable
         self.interactionHandler = interactionHandler
         self.success = success
