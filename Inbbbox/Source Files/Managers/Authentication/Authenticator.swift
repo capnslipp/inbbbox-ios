@@ -50,49 +50,6 @@ class Authenticator: NSObject {
         }
     }
 
-    // Will be removed when done with Safari.
-    func loginWithService(service: Service, trySilent: Bool = true) -> Promise<Void> {
-
-        let serviceInstance = service.instance
-        var controller: OAuthViewController!
-
-        if let oAuthAuthorizableService = serviceInstance as? OAuthAuthorizable {
-
-            controller = OAuthViewController(oAuthAuthorizableService: oAuthAuthorizableService) {
-                    controller in
-                if trySilent {
-//                    self.interactionHandler(UINavigationController(rootViewController: controller))
-                }
-            }
-        } else {
-            // FUTURE:
-            // in case of other services integration which don't support oAuth authentication
-            // please define controller here
-        }
-
-        if !trySilent {
-//            interactionHandler(UINavigationController(rootViewController: controller))
-        }
-
-        return Promise<Void> { fulfill, reject in
-            firstly {
-                controller.startAuthentication()
-            }.then { accessToken -> Void in
-                self.persistToken(accessToken)
-            }.then {
-                self.fetchUser()
-            }.then { user in
-                self.persistUser(user)
-            }.then { () -> Void in
-                AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginSucceeded)
-                fulfill()
-            }.error { error -> Void in
-                AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginFailed)
-                reject(error)
-            }
-        }
-    }
-
     func loginWithOAuthURLCallback(url: NSURL) {
         login(url)
     }
