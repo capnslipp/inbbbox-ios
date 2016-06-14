@@ -26,7 +26,7 @@ struct Dribbble {
      /// Value is set during project setup, after typing `pod install`,
      /// then securely stored in OSX Keychain.
     static let ClientAccessToken: String = SecretKeysProvider.secretValueForKey("ClientAccessToken")!
-    static let CallbackURLString = "inbbbbox://oauth"
+    static let CallbackURLString = "inbbbox://oauth"
 
     static let RequestTokenURLString = "https://dribbble.com/oauth/authorize"
     static let AccessTokenURLString = "https://dribbble.com/oauth/token"

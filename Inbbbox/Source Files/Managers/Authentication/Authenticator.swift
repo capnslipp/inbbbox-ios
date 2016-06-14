@@ -33,7 +33,7 @@ class Authenticator {
 
     init(service: Service,
          interactionHandler: (SFSafariViewController -> Void),
-         success: (Void -> Void),
+         success: (() -> Void),
          failure: (ErrorType -> Void)) {
         self.networkService = service.instance as? OAuthAuthorizable
         self.interactionHandler = interactionHandler
