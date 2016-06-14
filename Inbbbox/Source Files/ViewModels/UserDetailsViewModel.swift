@@ -76,7 +76,7 @@ class UserDetailsViewModel: ProfileViewModel {
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
             }
         }.error { error in
-            // NGRTemp: Need mockups for error message view
+            self.notifyDelegateAboutFailure(error)
         }
     }
 

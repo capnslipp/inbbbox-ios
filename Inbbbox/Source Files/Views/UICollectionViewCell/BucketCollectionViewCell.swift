@@ -52,11 +52,12 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
         let spacings = CollectionViewLayoutSpacings()
         let shotImageViewSideLenght = contentView.bounds.width
         let secondaryImageViewWidth = contentView.bounds.width / 3
-        let secondaryImageViewHeight = secondaryImageViewWidth * spacings.shotHeightToWidthRatio
+        let secondaryImageViewHeight = secondaryImageViewWidth * spacings.smallerShotHeightToWidthRatio
 
 
         firstShotImageView.autoSetDimension(.Width, toSize: shotImageViewSideLenght)
-        firstShotImageView.autoSetDimension(.Height, toSize: shotImageViewSideLenght * spacings.shotHeightToWidthRatio)
+        let firstShotImageViewHeight = shotImageViewSideLenght * spacings.smallerShotHeightToWidthRatio
+        firstShotImageView.autoSetDimension(.Height, toSize: firstShotImageViewHeight)
 
         for imageView in [secondShotImageView, thirdShotImageView, fourthShotImageView] {
             imageView.autoSetDimension(.Width, toSize: secondaryImageViewWidth)

@@ -32,4 +32,6 @@ variable_name:
 file_length:
   warning: 700
   error: 700
-
+type_body_length:
+  warning: 250
+  error: 400

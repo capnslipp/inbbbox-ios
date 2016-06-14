@@ -17,13 +17,18 @@ enum NotificationKey: String {
     case LocalNotificationSettingsProvided = "LocalNotificationSettingsProvided"
 }
 
-/// Keys related to streams' sources.
+/// Keys related to streams sources.
 enum StreamSourceKey: String {
     case StreamSourceIsSet = "StreamSourceIsSet"
     case FollowingStreamSourceOn = "FollowingStreamSourceOn"
     case NewTodayStreamSourceOn = "NewTodayStreamSourceOn"
     case PopularTodayStreamSourceOn = "PopularTodayStreamSourceOn"
     case DebutsStreamSourceOn = "DebutsStreamSourceOn"
+}
+
+/// Keys related to customization settings.
+enum CustomizationKey: String {
+    case ShowAuthorOnHomeScreen = "ShowAuthorOnHomeScreen"
 }
 
 extension DefaultsKeys {

@@ -58,6 +58,7 @@ extension ShotsCollectionViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         stateHandler.prepareForPresentingData()
+        stateHandler.collectionViewLayout.prepareLayout()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -71,7 +72,7 @@ extension ShotsCollectionViewController {
             }.then {
                 self.stateHandler.presentData()
             }.error { error in
-                let alertController = UIAlertController.signOutAlertController()
+                let alertController = UIAlertController.willSignOutUser()
                 self.tabBarController?.presentViewController(alertController, animated: true, completion: nil)
             }
         }
@@ -141,6 +142,11 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
             stateHandler.presentData()
         }
     }
+
+    func shotsStateHandlerDidFailToFetchItems(error: ErrorType) {
+        let alert = UIAlertController.unableToDownloadItems()
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: Private methods
@@ -169,7 +175,8 @@ private extension ShotsCollectionViewController {
         }.then {
             self.collectionView?.reloadData()
         }.error { error in
-            // NGRTemp: Need mockups for error message view
+            let alert = UIAlertController.unableToDownloadItems()
+            self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
     }
 

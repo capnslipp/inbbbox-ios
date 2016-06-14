@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AnalyticsManager.setupAnalytics()
         CrashManager.setup()
         UserStorage.clearGuestUser()
-        UIAlertController.setupAlertControllerSharedSettings()
+        UIAlertController.setupSharedSettings()
         centerButtonTabBarController = CenterButtonTabBarController()
         loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
         let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController!
@@ -107,16 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 options: [NSMigratePersistentStoresAutomaticallyOption: true,
                           NSInferMappingModelAutomaticallyOption: true])
         } catch {
-            let userInfo = [
-                    NSLocalizedDescriptionKey: "Failed to initialize the application's saved data",
-                    NSLocalizedFailureReasonErrorKey: "There was an error creating " +
-                            "or loading the application's saved data."
-            ]
-
-            let wrappedError = NSError(domain: "co.netguru.inbbbox.coredata", code: 1001, userInfo: userInfo)
-
-            // NGRTemp: Handle wrappedError
-
             abort()
         }
 

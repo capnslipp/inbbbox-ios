@@ -11,7 +11,9 @@ import AOAlertController
 
 extension UIAlertController {
 
-    class func setupAlertControllerSharedSettings() {
+    // MARK: Shared Settings
+
+    class func setupSharedSettings() {
         AOAlertSettings.sharedSettings.backgroundColor = .backgroundGrayColor()
         AOAlertSettings.sharedSettings.linesColor = .backgroundGrayColor()
         AOAlertSettings.sharedSettings.defaultActionColor = .pinkColor()
@@ -25,7 +27,9 @@ extension UIAlertController {
         AOAlertSettings.sharedSettings.blurredBackground = true
     }
 
-    class func provideBucketNameAlertController(createHandler: (bucketName: String) -> Void)
+    // MARK: Buckets
+
+    class func provideBucketName(createHandler: (bucketName: String) -> Void)
                     -> UIAlertController {
         let alertTitle = NSLocalizedString("UIAlertControllerExtension.NewBucket",
                                   comment: "Allows user to create new bucket.")
@@ -54,45 +58,71 @@ extension UIAlertController {
         return alert
     }
 
-    class func generalErrorAlertController() -> AOAlertController {
+    class func unableToCreateNewBucket() -> AOAlertController {
+        let message = NSLocalizedString("BucketsCollectionViewController.NewBucketFail",
+                                        comment: "Displayed when creating new bucket fails.")
+
+        return UIAlertController.createAlert(message)
+    }
+
+    class func addRemoveShotToBucketFail() -> AOAlertController {
+        let message = NSLocalizedString("ShotDetailsViewController.BucketError",
+                                        comment: "Error while adding/removing shot to bucket.")
+
+        return UIAlertController.createAlert(message)
+    }
+
+    // MARK: Comments
+
+    class func unableToDeleteComment() -> AOAlertController {
+        let message = NSLocalizedString("ShotDetailsViewController.RemovingCommentError",
+                                        comment: "Error while removing comment.")
+
+        return UIAlertController.createAlert(message)
+    }
+
+    class func unableToAddComment() -> AOAlertController {
+        let message = NSLocalizedString("ShotDetailsViewController.AddingCommentError",
+                                        comment: "Error while adding comment.")
+
+        return UIAlertController.createAlert(message)
+    }
+
+    // MARK: Downloads
+
+    class func unableToDownloadItems() -> AOAlertController {
+        let message = NSLocalizedString("UIAlertControllerExtension.UnableToDownload",
+                                        comment: "Informing user about problems with downloading items.")
+
+        return UIAlertController.createAlert(message)
+    }
+
+    // MARK: Other
+
+    class func generalError() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.TryAgain",
-                                        comment: "Allows user to try again after error occurred.")
-        let alert = AOAlertController(title: nil, message: message, style: .Alert)
+                comment: "Allows user to try again after error occurred.")
 
-        let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
-        let okAction = AOAlertAction(title: okActionTitle, style: .Default, handler: nil)
-
-        alert.addAction(okAction)
-
-        return alert
+        return UIAlertController.createAlert(message)
     }
 
-    class func inappropriateContentReportedAlertController() -> AOAlertController {
+    class func inappropriateContentReported() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.InappropriateContentReported", comment: "nil")
-        let alert = AOAlertController(title: nil, message: message, style: .Alert)
 
         let okActionTitle = NSLocalizedString("UIAlertControllerExtension.OK", comment: "OK")
         let okAction = AOAlertAction(title: okActionTitle, style: .Default, handler: nil)
 
-        alert.addAction(okAction)
-
-        return alert
+        return UIAlertController.createAlert(message, action: okAction)
     }
 
-    class func emailAccountNotFoundAlertController() -> AOAlertController {
+    class func emailAccountNotFound() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.EmailError",
                 comment: "Displayed when user device is not capable of/configured to send emails.")
-        let alert = AOAlertController(title: nil, message: message, style: .Alert)
 
-        let dismissActionTitle = NSLocalizedString("UIAlertControllerExtension.Dismiss", comment: "Dismiss")
-        let dismissAction = AOAlertAction(title: dismissActionTitle, style: .Default, handler: nil)
-
-        alert.addAction(dismissAction)
-
-        return alert
+        return UIAlertController.createAlert(message)
     }
 
-    class func signOutAlertController() -> AOAlertController {
+    class func willSignOutUser() -> AOAlertController {
         let message = NSLocalizedString("ShotsCollectionViewController.SignOut",
                 comment: "Message informing user will be logged out because of an error.")
         let alert = AOAlertController(title: nil, message: message, style: .Alert)
@@ -106,6 +136,24 @@ extension UIAlertController {
             }
         }
         alert.addAction(dismissAction)
+
+        return alert
+    }
+
+    // MARK: Private
+
+    private class func defaultDismissAction(style: AOAlertActionStyle = .Default) -> AOAlertAction {
+        let title = NSLocalizedString("UIAlertControllerExtension.Dismiss", comment: "Dismiss")
+        let action = AOAlertAction(title: title, style: style, handler: nil)
+
+        return action
+    }
+
+    private class func createAlert(message: String,
+                                   action: AOAlertAction = UIAlertController.defaultDismissAction(),
+                                   style: AOAlertControllerStyle = .Alert) -> AOAlertController {
+        let alert = AOAlertController(title: nil, message: message, style: style)
+        alert.addAction(action)
 
         return alert
     }

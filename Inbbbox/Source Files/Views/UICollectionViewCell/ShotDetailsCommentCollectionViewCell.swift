@@ -54,7 +54,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = UIColor.whiteColor()
 
         avatarView.configureForAutoLayout()
-        avatarView.imageView.image = UIImage(named: "avatar_placeholder")
+        avatarView.imageView.image = UIImage(named: "ic-comments-nopicture")
         contentView.addSubview(avatarView)
 
         authorLabel.numberOfLines = 0

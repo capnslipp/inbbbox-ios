@@ -12,7 +12,8 @@ struct CollectionViewLayoutSpacings {
 
     // MARK: General
 
-    let shotHeightToWidthRatio = CGFloat(0.75)
+    let smallerShotHeightToWidthRatio = CGFloat(0.75)
+    let biggerShotHeightToWidthRatio = CGFloat(0.83)
 
     // MARK: One Column Layout Specific
 

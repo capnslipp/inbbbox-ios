@@ -71,8 +71,6 @@ final class ShotDetailsViewController: UIViewController {
             self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
             self.scroller.scrollToBottomAnimated(true)
-        }.error { error in
-            // NGRTemp: Handle error.
         }
     }
 
@@ -97,6 +95,14 @@ final class ShotDetailsViewController: UIViewController {
         }
 
         AnalyticsManager.trackScreen(.ShotDetailsView)
+    }
+
+    func scrollViewWillEndDragging(scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if fabs(velocity.y) > 2.0 { //2.0 is considered fast scroll which means user intends to dismiss the keyboard
+            view.endEditing(true)
+        }
     }
 }
 
@@ -163,7 +169,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURL(data.avatarURL,
-                    placeholderImage: UIImage(named: "avatar_placeholder"))
+                                                       placeholderImage: UIImage(named: "ic-comments-nopicture"))
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }
@@ -213,7 +219,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             if let team = viewModel.shot.team, url = viewModel.urlForTeam(team) {
                 header?.setLinkInTitle(url, range: viewModel.teamLinkRange, delegate: self)
             }
-            header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL)
+            let placeholderAvatar = UIImage(named: "ic-author-mugshot-nopicture")
+            header?.avatarView.imageView.loadImageFromURL(viewModel.shot.user.avatarURL,
+                                                          placeholderImage: placeholderAvatar)
             header?.closeButtonView.closeButton.addTarget(self, action: #selector(closeButtonDidTap(_:)),
             forControlEvents: .TouchUpInside)
             header?.avatarView.delegate = self
@@ -334,8 +342,6 @@ private extension ShotDetailsViewController {
             view.selected = selected
         }.always {
             view.stopAnimating()
-        }.error { error in
-            // NGRTemp: Handle error.
         }
     }
 
@@ -349,8 +355,6 @@ private extension ShotDetailsViewController {
             view.selected = isShotLikedByUser
         }.always {
             view.stopAnimating()
-        }.error { error in
-            // NGRTemp: Handle error.
         }
     }
 
@@ -370,7 +374,8 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            // NGRTemp: Handle error.
+            let alert = UIAlertController.addRemoveShotToBucketFail()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
@@ -403,14 +408,15 @@ private extension ShotDetailsViewController {
             }
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths(indexPaths)
         }.error { error in
-            // NGRTemp: Handle error.
+            let alert = UIAlertController.unableToDeleteComment()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
     func reportCommentAtIndexPath(indexPath: NSIndexPath) {
 
         guard MFMailComposeViewController.canSendMail() else {
-            let alert = UIAlertController.emailAccountNotFoundAlertController()
+            let alert = UIAlertController.emailAccountNotFound()
             presentViewController(alert, animated: true, completion: nil)
             return
         }

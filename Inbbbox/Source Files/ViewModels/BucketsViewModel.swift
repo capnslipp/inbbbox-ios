@@ -71,9 +71,8 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
                 self.downloadShots(buckets)
             }
-        }.error {
-            error in
-            // NGRTemp: Need mockups for error message view
+        }.error { error in
+            self.notifyDelegateAboutFailure(error)
         }
     }
 
@@ -109,9 +108,8 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
                     self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
                 }
-            }.error {
-                error in
-                // NGRTemp: Need mockups for error message view
+            }.error { error in
+                self.notifyDelegateAboutFailure(error)
             }
         }
     }

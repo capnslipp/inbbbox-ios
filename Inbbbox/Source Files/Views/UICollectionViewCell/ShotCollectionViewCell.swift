@@ -21,20 +21,24 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     let shotImageView = ShotImageView.newAutoLayoutView()
     let likeImageView = DoubleImageView(firstImage: UIImage(named: "ic-like-swipe"),
-            secondImage: UIImage(named: "ic-like-swipe-filled"))
+                                        secondImage: UIImage(named: "ic-like-swipe-filled"))
     let plusImageView = UIImageView(image: UIImage(named: "ic-plus"))
     let bucketImageView = DoubleImageView(firstImage: UIImage(named: "ic-bucket-swipe"),
-            secondImage: UIImage(named: "ic-bucket-swipe-filled"))
+                                          secondImage: UIImage(named: "ic-bucket-swipe-filled"))
     let commentImageView = DoubleImageView(firstImage: UIImage(named: "ic-comment"),
-            secondImage: UIImage(named: "ic-comment-filled"))
+                                           secondImage: UIImage(named: "ic-comment-filled"))
     let gifLabel = GifIndicatorView()
+
+    let shotContainer = UIView.newAutoLayoutView()
+    let authorView = ShotAuthorCompactView.newAutoLayoutView()
+
     private(set) var likeImageViewLeftConstraint: NSLayoutConstraint?
     private(set) var likeImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var plusImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var bucketImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var commentImageViewRightConstraint: NSLayoutConstraint?
     private(set) var commentImageViewWidthConstraint: NSLayoutConstraint?
-
+    private var authorInfoHeightConstraint: NSLayoutConstraint?
 
     var viewClass = UIView.self
     var swipeCompletion: (Action -> Void)?
@@ -46,6 +50,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private let likeActionRange = (min: CGFloat(40), max: CGFloat(130))
     private let bucketActionRange = (min: CGFloat(130), max: CGFloat(180))
     private let commentActionRange = (min: CGFloat(-80), max: CGFloat(-40))
+    private let authorInfoHeight: CGFloat = 25
 
     private var didSetConstraints = false
     var previousXTranslation: CGFloat = 0
@@ -59,6 +64,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+
     // MARK: - Life cycle
 
     @available(*, unavailable, message = "Use init(frame:) instead")
@@ -69,26 +75,36 @@ class ShotCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentView.backgroundColor = UIColor.pinkColor()
-        contentView.layer.cornerRadius = 5
+        let cornerRadius: CGFloat = 5
+
+        contentView.layer.cornerRadius = cornerRadius
         contentView.clipsToBounds = true
 
+        shotContainer.backgroundColor = .pinkColor()
+        shotContainer.layer.cornerRadius = cornerRadius
+        shotContainer.clipsToBounds = true
+
         likeImageView.configureForAutoLayout()
-        contentView.addSubview(likeImageView)
+        shotContainer.addSubview(likeImageView)
 
         plusImageView.configureForAutoLayout()
-        contentView.addSubview(plusImageView)
+        shotContainer.addSubview(plusImageView)
 
         bucketImageView.configureForAutoLayout()
-        contentView.addSubview(bucketImageView)
+        shotContainer.addSubview(bucketImageView)
 
         commentImageView.configureForAutoLayout()
-        contentView.addSubview(commentImageView)
+        shotContainer.addSubview(commentImageView)
 
-        contentView.addSubview(shotImageView)
+        shotContainer.addSubview(shotImageView)
 
         gifLabel.configureForAutoLayout()
-        contentView.addSubview(gifLabel)
+        shotContainer.addSubview(gifLabel)
+
+        contentView.addSubview(shotContainer)
+
+        authorView.alpha = 0
+        contentView.addSubview(authorView)
 
         panGestureRecognizer.addTarget(self, action: #selector(didSwipeCell(_:)))
         panGestureRecognizer.delegate = self
@@ -104,12 +120,22 @@ class ShotCollectionViewCell: UICollectionViewCell {
     override func updateConstraints() {
 
         if !didSetConstraints {
+            shotContainer.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            shotContainer.autoPinEdge(.Bottom, toEdge: .Top, ofView: authorView)
+
+            authorInfoHeightConstraint = authorView.autoSetDimension(.Height, toSize: authorInfoHeight)
+            authorView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 2)
+            authorView.autoPinEdgeToSuperviewEdge(.Trailing)
+            authorView.autoPinEdgeToSuperviewEdge(.Bottom)
+
             shotImageView.autoPinEdgesToSuperviewEdges()
 
             likeImageViewWidthConstraint = likeImageView.autoSetDimension(.Width, toSize: 0)
-            likeImageView.autoConstrainAttribute(.Height, toAttribute: .Width, ofView: likeImageView,
-                    withMultiplier: likeImageView.intrinsicContentSize().height /
-                            likeImageView.intrinsicContentSize().width)
+            likeImageView.autoConstrainAttribute(.Height,
+                                                 toAttribute: .Width,
+                                                 ofView: likeImageView,
+                                                 withMultiplier: likeImageView.intrinsicContentSize().height /
+                                                                 likeImageView.intrinsicContentSize().width)
             likeImageViewLeftConstraint = likeImageView.autoPinEdgeToSuperviewEdge(.Left)
             likeImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
@@ -156,6 +182,21 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
         shotImageView.image = nil
         shotImageView.originalImage = nil
+        authorView.alpha = 0
+    }
+
+    // MARK: - Public
+
+    func displayAuthor(shouldDisplay: Bool, animated: Bool) {
+
+        if animated {
+            UIView.animate(duration: 1.0, delay: 0, options: UIViewAnimationOptions(), animations: {
+                self.configureAuthorView(shouldDisplay)
+            })
+        } else {
+            configureAuthorView(shouldDisplay)
+        }
+        authorInfoHeightConstraint?.constant = shouldDisplay ? authorInfoHeight : 0
     }
 
     // MARK: - Actions
@@ -181,7 +222,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         }
     }
 
-//    MARK: - Helpers
+    // MARK: - Private Helpers
 
     private func adjustConstraintsForSwipeXTranslation(xTranslation: CGFloat) {
         if xTranslation > bucketActionRange.max || xTranslation < commentActionRange.min {
@@ -272,6 +313,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
             viewClass.animateWithDescriptor(ShotCellInitialStateAnimationDescriptor(shotCell: self,
                     swipeCompletion: completion))
         }
+    }
+
+    private func configureAuthorView(shouldDisplay: Bool) {
+        authorView.alpha = shouldDisplay ? 1 : 0
+        authorView.hidden = !shouldDisplay
     }
 }
 

@@ -38,7 +38,6 @@ class TeamDetailsViewModel: ProfileViewModel {
 
     private let connectionsRequester = APIConnectionsRequester()
     private let teamsProvider = APITeamsProvider()
-    private let connectionsProvider = APIConnectionsProvider()
     private let shotsProvider = ShotsProvider()
 
     private let team: TeamType
@@ -65,7 +64,7 @@ class TeamDetailsViewModel: ProfileViewModel {
     func downloadItemsForNextPage() {
 
         firstly {
-            UserStorage.isUserSignedIn ? connectionsProvider.nextPage() : teamsProvider.nextPage()
+            teamsProvider.nextPage()
         }.then { teamMembers -> Void in
             if let teamMembers = teamMembers where teamMembers.count > 0 {
                 let indexes = teamMembers.enumerate().map { index, _ in
@@ -79,7 +78,7 @@ class TeamDetailsViewModel: ProfileViewModel {
                 self.downloadShots(teamMembers)
             }
         }.error { error in
-            // NGRTemp: Need mockups for error message view
+            self.notifyDelegateAboutFailure(error)
         }
     }
 
@@ -181,7 +180,7 @@ private extension TeamDetailsViewModel {
                 let indexPath = NSIndexPath(forRow: index, inSection: 0)
                 self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
             }.error { error in
-                // NGRTemp: Need mockups for error message view
+                self.notifyDelegateAboutFailure(error)
             }
         }
     }

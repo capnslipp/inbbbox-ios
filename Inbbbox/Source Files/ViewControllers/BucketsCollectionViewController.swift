@@ -101,7 +101,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     // MARK: Actions:
 
     func didTapAddNewBucketButton(_: UIBarButtonItem) {
-        let alert = UIAlertController.provideBucketNameAlertController { bucketName in
+        let alert = UIAlertController.provideBucketName { bucketName in
 
             firstly {
                 self.viewModel.createBucket(bucketName)
@@ -113,7 +113,9 @@ class BucketsCollectionViewController: UICollectionViewController {
                         [NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
                 }
             }.error { error in
-                // NGRTemp: Handle error.
+                let alert = UIAlertController.unableToCreateNewBucket()
+                self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
+                return
             }
         }
         self.presentViewController(alert, animated: true, completion: nil)
@@ -133,9 +135,14 @@ extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
         collectionView?.reloadData()
 
         if viewModel.buckets.isEmpty {
-            let alert = UIAlertController.generalErrorAlertController()
+            let alert = UIAlertController.generalError()
             tabBarController?.presentViewController(alert, animated: true, completion: nil)
         }
+    }
+
+    func viewModelDidFailToLoadItems(error: ErrorType) {
+        let alert = UIAlertController.unableToDownloadItems()
+        tabBarController?.presentViewController(alert, animated: true, completion: nil)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel,

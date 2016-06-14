@@ -33,9 +33,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         return 1.0
     }
 
-    var collectionViewLayout: UICollectionViewLayout {
-        return ShotsCollectionViewFlowLayout()
-    }
+    var collectionViewLayout: UICollectionViewLayout = ShotsCollectionViewFlowLayout()
 
     var collectionViewInteractionEnabled: Bool {
         return true
@@ -48,12 +46,19 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
 
     func prepareForPresentingData() {
+        if !UserStorage.isUserSignedIn {
+            updateAuthorData()
+            return
+        }
+
         firstly {
             fetchLikedShots()
         }.then { () -> Void in
             self.updateLikeImage()
+        }.then { () -> Void  in
+            self.updateAuthorData()
         }.error { error in
-            // NGRTemp: Need mockups for error message view
+            self.delegate?.shotsStateHandlerDidFailToFetchItems(error)
         }
     }
 
@@ -76,10 +81,9 @@ extension ShotsNormalStateHandler {
             return UICollectionViewCell()
         }
 
-        let cell: ShotCollectionViewCell =
-                collectionView.dequeueReusableClass(ShotCollectionViewCell.self,
-                                      forIndexPath: indexPath,
-                                              type: .Cell)
+        let cell: ShotCollectionViewCell =  collectionView.dequeueReusableClass(ShotCollectionViewCell.self,
+                                                                                forIndexPath: indexPath,
+                                                                                type: .Cell)
 
         let shot = shotsCollectionViewController.shots[indexPath.item]
 
@@ -90,6 +94,12 @@ extension ShotsNormalStateHandler {
 
         cell.gifLabel.hidden = !shot.animated
         cell.liked = self.isShotLiked(shot)
+
+        cell.displayAuthor(Settings.Customization.ShowAuthor, animated: true)
+        if let user = shot.user.name, url = shot.user.avatarURL {
+            cell.authorView.viewData = ShotAuthorCompactView.ViewData(author: user, avatarURL: url)
+        }
+
         cell.delegate = self
         cell.swipeCompletion = { [weak self] action in
 
@@ -101,12 +111,16 @@ extension ShotsNormalStateHandler {
                     certainSelf.likeShot(shot)
                 }.then {
                     cell.liked = true
+                }.error { error in
+                    cell.liked = false
                 }
             case .Bucket:
                 firstly {
                     certainSelf.likeShot(shot)
                 }.then {
                     cell.liked = true
+                }.error { error in
+                    cell.liked = false
                 }
                 certainSelf.presentShotBucketsViewController(shot)
             case .Comment:
@@ -143,7 +157,7 @@ extension ShotsNormalStateHandler {
                     shotsCollectionViewController.collectionView?.reloadData()
                 }
             }.error { error in
-                // NGRTemp: Need mockups for error message view
+                self.delegate?.shotsStateHandlerDidFailToFetchItems(error)
             }
         }
     }
@@ -180,6 +194,8 @@ extension ShotsNormalStateHandler {
         }
     }
 }
+
+// MARK: ShotCollectionViewCellDelegate
 
 extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
 
@@ -241,7 +257,6 @@ private extension ShotsNormalStateHandler {
                 self.likedShots.append(shot)
                 fulfill()
             }.error { error in
-                // NGRTemp: Need mockups for error message view
                 reject(error)
             }
         }
@@ -260,18 +275,47 @@ private extension ShotsNormalStateHandler {
     }
 
     func updateLikeImage() {
-        guard let
-            viewController = shotsCollectionViewController,
-            collectionView = viewController.collectionView
-        else {
-            return
-        }
-        let visibleShot = collectionView.indexPathsForVisibleItems().map { return viewController.shots[$0.item] }.first
-        let visibleCell = collectionView.visibleCells().first as? ShotCollectionViewCell
+
+        let visibleShot = self.visibleShot()
+        let visibleCell = self.visibleCell()
 
         if let shot = visibleShot, cell = visibleCell {
             cell.liked = isShotLiked(shot)
         }
+    }
+
+    func updateAuthorData() {
+
+        let visibleShot = self.visibleShot()
+        let visibleCell = self.visibleCell()
+
+        if let cell = visibleCell, shot = visibleShot {
+            cell.displayAuthor(Settings.Customization.ShowAuthor, animated: true)
+
+            if let user = shot.user.name, url = shot.user.avatarURL {
+                cell.authorView.viewData = ShotAuthorCompactView.ViewData(author: user, avatarURL: url)
+            }
+        }
+    }
+
+    func visibleShot() -> ShotType? {
+        guard let
+            viewController = shotsCollectionViewController,
+            collectionView = viewController.collectionView else {
+                return nil
+        }
+
+        return collectionView.indexPathsForVisibleItems().map { return viewController.shots[$0.item] }.first
+    }
+
+    func visibleCell() -> ShotCollectionViewCell? {
+        guard let
+            viewController = shotsCollectionViewController,
+            collectionView = viewController.collectionView else {
+                return nil
+        }
+
+        return collectionView.visibleCells().first as? ShotCollectionViewCell
     }
 }
 

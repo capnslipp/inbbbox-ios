@@ -33,19 +33,21 @@ class SettingsViewModel: GroupedListViewModel {
     private weak var alertDelegate: AlertDisplayable?
 
     private let createAccountTitle = NSLocalizedString("SettingsViewModel.CreateAccount",
-            comment: "Button text allowing user to create new account.")
+                                                       comment: "Button text allowing user to create new account.")
     private let reminderTitle = NSLocalizedString("SettingsViewModel.EnableDailyReminders",
-            comment: "User settings, enable daily reminders")
+                                                  comment: "User settings, enable daily reminders")
     private let reminderDateTitle = NSLocalizedString("SettingsViewModel.SendDailyReminders",
-            comment: "User settings, send daily reminders")
+                                                      comment: "User settings, send daily reminders")
     private let followingStreamSourceTitle = NSLocalizedString("SettingsViewModel.Following",
-            comment: "User settings, enable following")
+                                                               comment: "User settings, enable following")
     private let newTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.NewToday",
-            comment: "User settings, enable new today.")
+                                                              comment: "User settings, enable new today.")
     private let popularTodayStreamSourceTitle = NSLocalizedString("SettingsViewModel.Popular",
-            comment: "User settings, enable popular today.")
+                                                                  comment: "User settings, enable popular today.")
     private let debutsStreamSourceTitle = NSLocalizedString("SettingsViewModel.Debuts",
-            comment: "User settings, show debuts.")
+                                                            comment: "User settings, show debuts.")
+    private let shotAuthorTitle = NSLocalizedString("SettingsViewModel.DisplayAuthor",
+                                                    comment: "User Settings, show author.")
 
     private let createAccountItem: LabelItem
     private let reminderItem: SwitchItem
@@ -54,6 +56,7 @@ class SettingsViewModel: GroupedListViewModel {
     private let newTodayStreamSourceItem: SwitchItem
     private let popularTodayStreamSourceItem: SwitchItem
     private let debutsStreamSourceItem: SwitchItem
+    private let showAuthorItem: SwitchItem
     private let acknowledgementItem: LabelItem
 
     var loggedInUser: User? {
@@ -80,21 +83,26 @@ class SettingsViewModel: GroupedListViewModel {
         newTodayStreamSourceItem = SwitchItem(title: newTodayStreamSourceTitle,
                 enabled: Settings.StreamSource.NewToday)
         popularTodayStreamSourceItem = SwitchItem(title: popularTodayStreamSourceTitle,
-                enabled: Settings.StreamSource.PopularToday)
-        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle,
-                enabled: Settings.StreamSource.Debuts)
-        acknowledgementItem = LabelItem(title: NSLocalizedString("SettingsViewModel.AcknowledgementsButton",
-                comment: "Acknowledgements button"))
+                                                  enabled: Settings.StreamSource.PopularToday)
+
+        debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, enabled: Settings.StreamSource.Debuts)
+
+        showAuthorItem = SwitchItem(title: shotAuthorTitle, enabled: Settings.Customization.ShowAuthor)
+
+        let aTitle = NSLocalizedString("SettingsViewModel.AcknowledgementsButton", comment: "Acknowledgements button")
+        acknowledgementItem = LabelItem(title: aTitle)
         var items: [[GroupItem]]
         if userMode == .LoggedUser {
             items = [[reminderItem, reminderDateItem],
                      [followingStreamSourceItem, newTodayStreamSourceItem,
                       popularTodayStreamSourceItem, debutsStreamSourceItem],
+                     [showAuthorItem],
                      [acknowledgementItem]]
         } else {
             items = [[createAccountItem],
                      [reminderItem, reminderDateItem],
                      [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
+                     [showAuthorItem],
                      [acknowledgementItem]]
         }
 
@@ -151,32 +159,31 @@ private extension SettingsViewModel {
             }
         }
 
-        reminderDateItem.onValueChanged = {
-            date -> Void in
+        reminderDateItem.onValueChanged = { date -> Void in
             if self.reminderItem.enabled {
                 self.registerLocalNotification()
             }
             Settings.Reminder.Date = date
         }
 
-        followingStreamSourceItem.valueChanged = {
-            newValue in
+        followingStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.Following = newValue
         }
 
-        newTodayStreamSourceItem.valueChanged = {
-            newValue in
+        newTodayStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.NewToday = newValue
         }
 
-        popularTodayStreamSourceItem.valueChanged = {
-            newValue in
+        popularTodayStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.PopularToday = newValue
         }
 
-        debutsStreamSourceItem.valueChanged = {
-            newValue in
+        debutsStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.Debuts = newValue
+        }
+
+        showAuthorItem.valueChanged = { newValue in
+            Settings.Customization.ShowAuthor = newValue
         }
     }
 

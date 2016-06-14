@@ -22,22 +22,10 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(PRODUCT_BUNDLE_VERSION)</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
@@ -57,16 +45,16 @@
 			<string>co.netguru.inbbbox.buckets</string>
 		</dict>
 		<dict>
+			<key>New item</key>
+			<string></string>
+			<key>New item - 2</key>
+			<string></string>
 			<key>UIApplicationShortcutItemIconFile</key>
 			<string>ic-ball-inactive</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Homescreen.Shortcuts.Inbbbox.Shots</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>co.netguru.inbbbox.shots</string>
-			<key>New item</key>
-			<string></string>
-			<key>New item - 2</key>
-			<string></string>
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
@@ -77,6 +65,18 @@
 			<string>co.netguru.inbbbox.followees</string>
 		</dict>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -86,7 +86,7 @@
 			<string>co.netguru.inbbbox</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>inbbbbox</string>
+				<string>inbbbox</string>
 			</array>
 		</dict>
 	</array>

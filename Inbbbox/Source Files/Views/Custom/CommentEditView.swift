@@ -18,7 +18,7 @@ class CommentEditView: UIView {
     private var isEditing = true {
         didSet {
             deleteLabel.text = deleteLabelText
-            let imageName = isEditing ? "bt-delete-comment" : "bt-report-comment"
+            let imageName = isEditing ? "ic-delete-comment" : "ic-report-comment"
             deleteButton.setImage(UIImage(named: imageName), forState: .Normal)
         }
     }
@@ -119,13 +119,13 @@ class CommentEditView: UIView {
     }
 
     private func setupCancelButton() {
-        cancelButton.setImage(UIImage(named: "bt-cancel-comment"), forState: .Normal)
+        cancelButton.setImage(UIImage(named: "ic-cancel-comment"), forState: .Normal)
         cancelButton.contentMode = .ScaleAspectFit
         blurView.addSubview(cancelButton)
     }
 
     private func setupDeleteButton() {
-        deleteButton.setImage(UIImage(named: "bt-delete-comment"), forState: .Normal)
+        deleteButton.setImage(UIImage(named: "ic-delete-comment"), forState: .Normal)
         deleteButton.contentMode = .ScaleAspectFit
         blurView.addSubview(deleteButton)
     }
@@ -134,6 +134,7 @@ class CommentEditView: UIView {
         cancelLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         cancelLabel.textColor = UIColor.textLightColor()
         cancelLabel.text = NSLocalizedString("CommentEditView.Cancel", comment: "Cancel editing comment.")
+        cancelLabel.textColor = .followeeTextGrayColor()
         blurView.addSubview(cancelLabel)
     }
 
@@ -141,6 +142,7 @@ class CommentEditView: UIView {
         deleteLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         deleteLabel.textColor = UIColor.textLightColor()
         deleteLabel.text = deleteLabelText
+        deleteLabel.textColor = .followeeTextGrayColor()
         blurView.addSubview(deleteLabel)
     }
 }

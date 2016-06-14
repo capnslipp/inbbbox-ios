@@ -55,7 +55,8 @@ class ShotBucketsViewController: UIViewController {
         }.then {
             self.shotBucketsView.collectionView.reloadData()
         }.error { error in
-            // NGRTodo: get rid of printing, when nice pop-up gets ready
+            let alert = UIAlertController.unableToDownloadItems()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
         shotBucketsView.viewController = self
         shotBucketsView.collectionView.delegate = self
@@ -213,13 +214,14 @@ extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            // NGRTodo: get rid of printing, when nice pop-up gets ready
+            let alert = UIAlertController.addRemoveShotToBucketFail()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
     func addNewBucketButtonDidTap(_: UIButton) {
 
-        let alert = UIAlertController.provideBucketNameAlertController { bucketName in
+        let alert = UIAlertController.provideBucketName { bucketName in
             self.createBucketAndAddShot(bucketName)
         }
         self.presentViewController(alert, animated: true, completion: nil)
@@ -303,7 +305,8 @@ private extension ShotBucketsViewController {
             self.dismissClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            // NGRTodo: get rid of printing, when nice pop-up gets ready
+            let alert = UIAlertController.addRemoveShotToBucketFail()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
@@ -313,7 +316,8 @@ private extension ShotBucketsViewController {
         }.then { () -> Void in
             self.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
         }.error { error in
-            // NGRTodo: get rid of printing, when nice pop-up gets ready
+            let alert = UIAlertController.unableToCreateNewBucket()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 }

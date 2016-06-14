@@ -29,7 +29,14 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
             let indexMultiplier = CGFloat(indexPath.item)
             let calculatedItemWidth = round(CGRectGetWidth(collectionView.bounds)) -
                     (fixedLeftMargin + fixedRightMargin) * (indexMultiplier + 1)
-            let calculatedItemHeight = calculatedItemWidth * spacings.shotHeightToWidthRatio
+
+            let calculatedItemHeight: CGFloat
+            if Settings.Customization.ShowAuthor {
+                calculatedItemHeight = calculatedItemWidth * spacings.biggerShotHeightToWidthRatio
+            } else {
+                calculatedItemHeight = calculatedItemWidth * spacings.smallerShotHeightToWidthRatio
+            }
+
             layoutAttributes.size = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
             layoutAttributes.center = CGPoint(x: collectionView.center.x,
                     y: collectionView.center.y +

@@ -67,7 +67,8 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
         }.always {
             view.stopAnimation()
         }.error { error in
-            // NGRTemp: Handle error.
+            let alert = UIAlertController.unableToAddComment()
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
 
@@ -106,7 +107,7 @@ extension ShotDetailsViewController: MFMailComposeViewControllerDelegate {
 
         switch result {
         case MFMailComposeResultSent:
-            let contentReportedAlert = UIAlertController.inappropriateContentReportedAlertController()
+            let contentReportedAlert = UIAlertController.inappropriateContentReported()
             presentViewController(contentReportedAlert, animated: true, completion: nil)
         default: break
         }
