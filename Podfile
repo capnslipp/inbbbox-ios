@@ -14,7 +14,7 @@ platform :ios, '8.2'
 inhibit_all_warnings!
 use_frameworks!
 
-xcodeproj 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug, 'Release' => :release
+project 'Inbbbox', 'Development' => :debug, 'Production' => :release, 'Staging' => :release, 'Test' => :debug, 'Release' => :release
 
 plugin 'cocoapods-keys', {
   :project => 'Inbbbox',
