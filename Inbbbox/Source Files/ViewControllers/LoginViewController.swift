@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SafariServices
 
 class LoginViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class LoginViewController: UIViewController {
     private var shotsAnimator: AutoScrollableShotsAnimator!
     private weak var aView: LoginView?
     private var viewAnimator: LoginViewAnimator?
+    private var authenticator: Authenticator?
     private var onceTokenForScrollToMiddleInstantly = dispatch_once_t(0)
     private var logoTappedCount = 0
     private var statusBarStyle: UIStatusBarStyle = .LightContent {
@@ -47,10 +49,12 @@ class LoginViewController: UIViewController {
         } ?? []
 
         shotsAnimator = AutoScrollableShotsAnimator(bindForAnimation: bindForAnimation)
-        aView?.loginButton.addTarget(self, action: #selector(loginButtonDidTap(_:)),
-        forControlEvents: .TouchUpInside)
-        aView?.loginAsGuestButton.addTarget(self, action: #selector(loginAsGuestButtonDidTap(_:)),
-        forControlEvents: .TouchUpInside)
+        aView?.loginButton.addTarget(self,
+                                     action: #selector(loginButtonDidTap(_:)),
+                                     forControlEvents: .TouchUpInside)
+        aView?.loginAsGuestButton.addTarget(self,
+                                            action: #selector(loginAsGuestButtonDidTap(_:)),
+                                            forControlEvents: .TouchUpInside)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(logoTapped(_:)))
         aView?.logoImageView.addGestureRecognizer(tapGesture)
         aView?.logoImageView.userInteractionEnabled = true
@@ -81,34 +85,43 @@ class LoginViewController: UIViewController {
 }
 
 // MARK: Actions
+
 extension LoginViewController {
 
     func loginButtonDidTap(_: UIButton) {
 
         viewAnimator?.startLoginAnimation()
 
-        let interactionHandler: (UIViewController -> Void) = { controller in
-            after(0.6).then {
-                self.presentViewController(controller, animated: true, completion: nil)
+        let interactionHandler: (SFSafariViewController -> Void) = { controller in
+            controller.delegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+
+        let success: (Void -> Void) = {
+            self.dismissViewControllerAnimated(true) {
+                self.viewAnimator?.stopAnimationWithType(.Continue) {
+                    self.aView?.loadingLabel.alpha = 0
+                    self.aView?.copyrightlabel.alpha = 0
+                    self.presentNextViewController()
+                }
             }
         }
 
-        let authenticator = Authenticator(interactionHandler: interactionHandler)
-
-        firstly {
-            authenticator.loginWithService(.Dribbble)
-        }.then {
-            self.viewAnimator?.stopAnimationWithType(.Continue) {
-                self.aView?.loadingLabel.alpha = 0
-                self.presentNextViewController()
-            }
-        }.error { error in
+        let failure: (ErrorType -> Void) = { error in
             self.viewAnimator?.stopAnimationWithType(.Undo)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
+
+        authenticator = Authenticator(service: .Dribbble,
+                                      interactionHandler: interactionHandler,
+                                      success: success,
+                                      failure: failure)
+        authenticator?.login()
     }
 
     func loginAsGuestButtonDidTap(_: UIButton) {
         Authenticator.logout()
+        UserStorage.storeGuestUser()
         AnalyticsManager.trackLoginEvent(AnalyticsLoginEvent.LoginAsGuest)
         viewAnimator?.startLoginAnimation(stopAfterShrink: true)
     }
@@ -131,6 +144,24 @@ extension LoginViewController: LoginViewAnimatorDelegate {
     func shrinkAnimationDidFinish() {
         self.viewAnimator?.stopAnimationWithType(.Continue) {
             self.presentNextViewController()
+        }
+    }
+}
+
+extension LoginViewController: SafariAuthorizable {
+    func handleOpenURL(url: NSURL) {
+        authenticator?.loginWithOAuthURLCallback(url)
+    }
+}
+
+extension LoginViewController: SFSafariViewControllerDelegate {
+
+    func safariViewControllerDidFinish(controller: SFSafariViewController) {
+        dismissViewControllerAnimated(true, completion: nil)
+
+        after(0.5).then { result -> Void in
+            self.aView?.loadingLabel.alpha = 0
+            self.viewAnimator?.stopAnimationWithType(.Undo)
         }
     }
 }

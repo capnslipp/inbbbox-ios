@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var centerButtonTabBarController: CenterButtonTabBarController?
+    var loginViewController: LoginViewController?
     var launchedShortcut: UIApplicationShortcutItem?
 
     enum Shortcut: String {
@@ -28,10 +29,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         AnalyticsManager.setupAnalytics()
         CrashManager.setup()
+        UserStorage.clearGuestUser()
         UIAlertController.setupSharedSettings()
         centerButtonTabBarController = CenterButtonTabBarController()
-        let loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
-        let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController
+        loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
+        let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController!
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
@@ -130,11 +132,34 @@ private extension AppDelegate {
     }
 }
 
+// MARK: Safari OAuth
+
+extension AppDelegate {
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+
+        if let sourceApplication = options["UIApplicationOpenURLOptionsSourceApplicationKey"] {
+
+            if String(sourceApplication) == "com.apple.SafariViewService" {
+
+                if UserStorage.isGuestUser {
+                    let settingsViewController = centerButtonTabBarController?.settingsViewController
+                    settingsViewController?.handleOpenURL(url)
+                } else {
+                    loginViewController?.handleOpenURL(url)
+                }
+
+                return true
+            }
+        }
+        return false
+    }
+}
+
 // MARK: 3D Touch Support
 
-private extension AppDelegate {
+extension AppDelegate {
 
-    private func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
 
         guard UserStorage.isUserSignedIn else { return false }
 

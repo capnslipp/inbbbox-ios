@@ -123,7 +123,7 @@ class VerifiableSpec: QuickSpec {
         describe("when verifying account type") {
             
             beforeEach {
-                UserStorage.clear()
+                UserStorage.clearUser()
             }
             
             context("and user does not exist") {

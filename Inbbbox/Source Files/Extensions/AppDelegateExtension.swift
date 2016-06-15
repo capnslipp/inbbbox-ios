@@ -9,7 +9,8 @@ extension AppDelegate {
 
     func rollbackToLoginViewController() {
         let centerTabBarController = CenterButtonTabBarController()
-        let rootViewController = LoginViewController(tabBarController: centerTabBarController)
+        loginViewController = LoginViewController(tabBarController: centerTabBarController)
+        let rootViewController = loginViewController!
         centerButtonTabBarController = rootViewController.centerButtonTabBarController
         UIApplication.sharedApplication().keyWindow?.setRootViewController(rootViewController, transition: nil)
     }

@@ -36,7 +36,7 @@ class APICommentsRequesterSpec: QuickSpec {
 
                 afterEach {
                     TokenStorage.clear()
-                    UserStorage.clear()
+                    UserStorage.clearUser()
                 }
                 
                 context("when token does not exist") {
@@ -100,7 +100,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 
                 afterEach {
                     TokenStorage.clear()
-                    UserStorage.clear()
+                    UserStorage.clearUser()
                 }
                 
                 context("when token does not exist") {
@@ -170,7 +170,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 
                 afterEach {
                     TokenStorage.clear()
-                    UserStorage.clear()
+                    UserStorage.clearUser()
                 }
                 
                 context("when token does not exist") {
