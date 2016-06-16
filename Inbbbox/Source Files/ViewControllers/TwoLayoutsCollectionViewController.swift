@@ -95,6 +95,7 @@ class TwoLayoutsCollectionViewController: UICollectionViewController {
             flowLayout.containsHeader = containsHeader
             collectionView.setCollectionViewLayout(flowLayout, animated: false)
         }
+        collectionView.reloadData()
         scrollToTop(collectionView)
         updateBarButtons(collectionView.collectionViewLayout)
     }
