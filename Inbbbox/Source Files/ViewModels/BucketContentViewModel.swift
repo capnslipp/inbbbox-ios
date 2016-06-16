@@ -78,8 +78,7 @@ class BucketContentViewModel: SimpleShotsViewModel {
         return description
     }
 
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath)
-            -> (shotImage: ShotImageType, animated: Bool) {
+    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
         let shotImage = shots[indexPath.row].shotImage
         let animated = shots[indexPath.row].animated
         return (shotImage, animated)
