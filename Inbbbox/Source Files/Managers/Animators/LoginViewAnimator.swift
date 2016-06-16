@@ -118,7 +118,7 @@ private extension LoginViewAnimator {
 
     func loadingFade(fade: LoginViewAnimations.FadeStyle) -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-            animations.moveAnimation([view!.loadingLabel], duration: 0.4,
+            animations.moveAnimation([view!.loadingLabel, view!.copyrightlabel], duration: 0.4,
                     fade: fade, transition: CGPoint.zero) {
                 fulfill()
             }
