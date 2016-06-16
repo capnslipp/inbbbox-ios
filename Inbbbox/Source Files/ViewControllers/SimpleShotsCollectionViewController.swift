@@ -17,9 +17,7 @@ class SimpleShotsCollectionViewController: TwoLayoutsCollectionViewController {
     var modalTransitionAnimator: ZFModalTransitionAnimator?
 
     private var shouldShowLoadingView = true
-
-    private var indexPathsNeededImageUpdate = [NSIndexPath]()
-
+    private var indexesToUpdateCellImage = [Int]()
 }
 
 // MARK: Lifecycle
@@ -82,11 +80,10 @@ extension SimpleShotsCollectionViewController {
                                  cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath,
                 type: .Cell)
-        cell.shotImageView.image = nil
         let cellData = viewModel!.shotCollectionViewCellViewData(indexPath)
 
-        indexPathsNeededImageUpdate.append(indexPath)
-        lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
+        indexesToUpdateCellImage.append(indexPath.row)
+        lazyLoadImage(cellData.shotImage, atIndexPath: indexPath)
 
         cell.gifLabel.hidden = !cellData.animated
         return cell
@@ -124,8 +121,8 @@ extension SimpleShotsCollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell,
                                  forItemAtIndexPath indexPath: NSIndexPath) {
-        if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
-            indexPathsNeededImageUpdate.removeAtIndex(index)
+        if let index = indexesToUpdateCellImage.indexOf(indexPath.row) {
+            indexesToUpdateCellImage.removeAtIndex(index)
         }
     }
 }
@@ -189,16 +186,20 @@ extension SimpleShotsCollectionViewController: DZNEmptyDataSetSource {
 
 private extension SimpleShotsCollectionViewController {
 
-    func lazyLoadImage(shotImage: ShotImageType, forCell cell: SimpleShotCollectionViewCell,
-            atIndexPath indexPath: NSIndexPath) {
+    func lazyLoadImage(shotImage: ShotImageType, atIndexPath indexPath: NSIndexPath) {
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
 
-            guard let certainSelf = self where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else {
+            guard let certainSelf = self where certainSelf.indexesToUpdateCellImage.contains(indexPath.row) else {
                 return
             }
 
-            cell.shotImageView.image = image
+            typealias cellType = SimpleShotCollectionViewCell
+            if let cell = certainSelf.collectionView?.cellForItemAtIndexPath(indexPath) as? cellType {
+                cell.shotImageView.image = nil
+                cell.shotImageView.image = image
+            }
         }
+
         LazyImageProvider.lazyLoadImageFromURLs(
             (shotImage.teaserURL, isCurrentLayoutOneColumn ? shotImage.normalURL : nil, nil),
             teaserImageCompletion: imageLoadingCompletion,
