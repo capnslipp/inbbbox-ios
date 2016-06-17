@@ -95,7 +95,6 @@ extension ShotsNormalStateHandler {
         cell.gifLabel.hidden = !shot.animated
         cell.liked = self.isShotLiked(shot)
 
-        cell.displayAuthor(Settings.Customization.ShowAuthor, animated: true)
         if let user = shot.user.name, url = shot.user.avatarURL {
             cell.authorView.viewData = ShotAuthorCompactView.ViewData(author: user, avatarURL: url)
         }
@@ -147,6 +146,10 @@ extension ShotsNormalStateHandler {
     func collectionView(collectionView: UICollectionView,
             willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         guard let shotsCollectionViewController = shotsCollectionViewController else { return }
+
+        if let cell = cell as? ShotCollectionViewCell {
+            cell.displayAuthor(Settings.Customization.ShowAuthor, animated: true)
+        }
 
         if indexPath.row == shotsCollectionViewController.shots.count - 6 {
             firstly {

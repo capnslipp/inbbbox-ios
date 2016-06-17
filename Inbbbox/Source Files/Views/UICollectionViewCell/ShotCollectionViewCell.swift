@@ -31,6 +31,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     let shotContainer = UIView.newAutoLayoutView()
     let authorView = ShotAuthorCompactView.newAutoLayoutView()
+    var configureForDisplayingAuthorView = false
 
     private(set) var likeImageViewLeftConstraint: NSLayoutConstraint?
     private(set) var likeImageViewWidthConstraint: NSLayoutConstraint?
@@ -122,8 +123,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
         if !didSetConstraints {
             shotContainer.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             shotContainer.autoPinEdge(.Bottom, toEdge: .Top, ofView: authorView)
+            let height = configureForDisplayingAuthorView ? authorInfoHeight : 0
 
-            authorInfoHeightConstraint = authorView.autoSetDimension(.Height, toSize: authorInfoHeight)
+            authorInfoHeightConstraint = authorView.autoSetDimension(.Height, toSize: height)
             authorView.autoPinEdgeToSuperviewEdge(.Leading, withInset: 2)
             authorView.autoPinEdgeToSuperviewEdge(.Trailing)
             authorView.autoPinEdgeToSuperviewEdge(.Bottom)
@@ -189,14 +191,15 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     func displayAuthor(shouldDisplay: Bool, animated: Bool) {
 
+        self.layoutIfNeeded()
         if animated {
             UIView.animate(duration: 1.0, delay: 0, options: UIViewAnimationOptions(), animations: {
                 self.configureAuthorView(shouldDisplay)
+                self.layoutIfNeeded()
             })
         } else {
             configureAuthorView(shouldDisplay)
         }
-        authorInfoHeightConstraint?.constant = shouldDisplay ? authorInfoHeight : 0
     }
 
     // MARK: - Actions
@@ -318,6 +321,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private func configureAuthorView(shouldDisplay: Bool) {
         authorView.alpha = shouldDisplay ? 1 : 0
         authorView.hidden = !shouldDisplay
+        authorInfoHeightConstraint?.constant = shouldDisplay ? authorInfoHeight : 0
     }
 }
 
