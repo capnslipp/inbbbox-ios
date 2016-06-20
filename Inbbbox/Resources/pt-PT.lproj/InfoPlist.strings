@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Inbbbox
+
+  Created by Lukasz Pikor on 25.04.2016.
+  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
+*/
+"Homescreen.Shortcuts.Inbbbox.Likes" = "Os gostos";
+"Homescreen.Shortcuts.Inbbbox.Buckets" = "Os catálogos";
+"Homescreen.Shortcuts.Inbbbox.Shots" = "Shots";
+"Homescreen.Shortcuts.Inbbbox.Followees" = "Os autores seguidos";
