@@ -1,13 +1,7 @@
-Ein leichter Fingerwisch nach rechts, um den Shot zu liken.
-
-Shot zum Album hinzufügen- ein Fingerwisch nach rechts
-
-Click, um die Eigenschaften des Shots einzusehen oder Fingerwisch nach links, um ein Kommentar zu schreiben.
-
-/********* UserDetailsViewController *********/
+/********* ProfileViewController *********/
 
 /* Back button, user details */
-"UserDetails.BackButton" = "Zurück";
+"Profile.BackButton" = "Zurück";
 
 /********* BucketContentCollectionViewController *********/
 

@@ -1,13 +1,7 @@
-Desliza un poco a la derecha para dar a me gusta a este plano
-
-Desliza completamente a la derecha para añadir el plano al catálogo
-
-Puntea para abrir la vista de detalles o mueve la pantalla a la izquierda para añadir a un comentario
-
-/********* UserDetailsViewController *********/
+/********* ProfileViewController *********/
 
 /* Back button, user details */
-"UserDetails.BackButton" = " Atras";
+"Profile.BackButton" = " Atras";
 
 /********* BucketContentCollectionViewController *********/
 

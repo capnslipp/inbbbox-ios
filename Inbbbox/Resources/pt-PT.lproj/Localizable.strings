@@ -1,13 +1,7 @@
-Mova a tela um pouco para à direita para dar gosto a esta foto
-
-Mova a tela completamente à direita para adicionar a foto ao catálogo
-
-Toque para abrir a vista dos detalhes o mova a tela à esquerda para adicionar a um comentário
-
-/********* UserDetailsViewController *********/
+/********* ProfileViewController *********/
 
 /* Back button, user details */
-"UserDetails.BackButton" = " Retorne";
+"Profile.BackButton" = " Retorne";
 
 /********* BucketContentCollectionViewController *********/
 

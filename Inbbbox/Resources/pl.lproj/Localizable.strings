@@ -1,13 +1,7 @@
-Przesuń ekran lekko w prawo, żeby polubić ten shot.
-
-Przesuń ekran całkiem w prawo, żeby dodać shot do katalogu.
-
-Kliknij, żeby otworzyć szczegóły projektu, albo przesuń ekran w lewo, żeby dodać komentarz.
-
-/********* UserDetailsViewController *********/
+/********* ProfileViewController *********/
 
 /* Back button, user details */
-"UserDetails.BackButton" = " Wróć";
+"Profile.BackButton" = " Wróć";
 
 /********* BucketContentCollectionViewController *********/
 

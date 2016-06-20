@@ -1,13 +1,7 @@
-Faire glisser l'écran légèrement vers la gauche pour aimer ce shot.
-
-Faire glisser l'écran  entièrement vers la droite pour ajouter le shot au catalogue.
-
-Cliquer pour ouvrir les détails du projet ou faire glisser l’écran vers la gauche pour ajouter un commentaire
-
-/********* UserDetailsViewController *********/
+/********* ProfileViewController *********/
 
 /* Back button, user details */
-"UserDetails.BackButton" = "Retour";
+"Profile.BackButton" = "Retour";
 
 /********* BucketContentCollectionViewController *********/
 
