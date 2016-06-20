@@ -223,13 +223,13 @@
 /* Dismiss error alert. */
 "ShotsCollectionViewController.Dismiss" = "Feche";
 
-/********** UserDetailsHeaderView *********/
+/********** ProfileHeaderView *********/
 
 /* Allows user to follow another user. */
-"UserDetailsHeaderView.Follow" = "Siga";
+"ProfileHeaderView.Follow" = "Siga";
 
 /* Allows user to unfollow another user. */
-"UserDetailsHeaderView.Unfollow" = "Deixe seguir";
+"ProfileHeaderView.Unfollow" = "Deixe seguir";
 
 /********* GifIndicatorView *********/
 
