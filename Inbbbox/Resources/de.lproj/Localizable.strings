@@ -155,7 +155,7 @@
 "LocalNotificationRegistrator.AlertBody" = "Prüfen Sie ihren Inbbbox, um jeden Tag neue Inspirationen und Bilder zu finden. ";
 
 /* Action for notification */
-"LocalNotificationRegistrator.Show" = "Anzeigen ;
+"LocalNotificationRegistrator.Show" = "Anzeigen";
 
 /********* SettingsViewModel *********/
 
@@ -266,4 +266,4 @@
 "LoginView.Loading" = "Laden...";
 
 /* Describes copyright holder */
-"LoginView.Copyright" = "Alle Rechte vorbehalten (c) 2016 Netguru.co"; Alle Rechte vorbehalten
+"LoginView.Copyright" = "Alle Rechte vorbehalten (c) 2016 Netguru.co";

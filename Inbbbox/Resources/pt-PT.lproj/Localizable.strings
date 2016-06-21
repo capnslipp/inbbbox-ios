@@ -201,7 +201,7 @@
 /********* SettingsViewController *********/
 
 /* Title of group of buttons for stream source settings */
-"SettingsViewController.StreamSource" = "A fonte da caixa de entrada"
+"SettingsViewController.StreamSource" = "A fonte da caixa de entrada";
 
 /********* Is user a guest without account? *********/
 "SettingsViewController.Guest" = "Convidado?";
