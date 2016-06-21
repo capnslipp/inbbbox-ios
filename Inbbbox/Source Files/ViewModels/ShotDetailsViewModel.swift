@@ -287,10 +287,6 @@ extension ShotDetailsViewModel {
 
     func loadAllComments() -> Promise<Void> {
 
-        if comments.count >= Int(shot.commentsCount) {
-            return Promise()
-        }
-
         return Promise<Void> { fulfill, reject in
 
             firstly {
@@ -298,6 +294,7 @@ extension ShotDetailsViewModel {
             }.then {
                 if !self.hasMoreCommentsToFetch {
                     fulfill()
+                    return Promise()
                 }
                 return self.loadAllComments()
             }.then(fulfill).error(reject)
