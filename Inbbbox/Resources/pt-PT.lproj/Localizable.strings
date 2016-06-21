@@ -27,6 +27,16 @@
 /* FolloweesCollectionView, empty data set view */
 "FolloweesCollectionView.EmptyData.LastLocalizedString" = " siga algum autor!";
 
+/********* FolloweesViewModel *********/
+
+/* Title of Following screen */
+"FolloweesViewModel.Title" = "Os autores seguidos";
+
+//******** LikesViewModel ********
+
+/* Title of Likes screen */
+"LikesViewModel.Title" = "Os gostos";
+
 /********* CenterButtonTabBarController *********/
 
 /* Main view, bottom bar */

@@ -27,6 +27,16 @@
 /* FolloweesCollectionView, empty data set view */
 "FolloweesCollectionView.EmptyData.LastLocalizedString" = " einen Autoren abonnieren!";
 
+/********* FolloweesViewModel *********/
+
+/* Title of Following screen */
+"FolloweesViewModel.Title" = "Abonnierte Autoren";
+
+//******** LikesViewModel ********
+
+/* Title of Likes screen */
+"LikesViewModel.Title" = "Likes";
+
 /********* CenterButtonTabBarController *********/
 
 /* Main view, bottom bar */
