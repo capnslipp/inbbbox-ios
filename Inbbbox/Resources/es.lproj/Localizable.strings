@@ -254,7 +254,7 @@
 /********* LoginView *********/
 
 /* Title of log in button */
-"LoginView.LoginButtonTitle" = "Inicia sesión en Dribble";
+"LoginView.LoginButtonTitle" = "Inicia sesión en Dribbble";
 
 /* Title of guest button */
 "LoginView.GuestButtonTitle" = "Usa la aplicación como Invitado";
