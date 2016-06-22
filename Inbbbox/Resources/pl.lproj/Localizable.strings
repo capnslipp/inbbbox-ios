@@ -25,12 +25,12 @@
 "FolloweesCollectionView.EmptyData.FirstLocalizedString" = " Najpierw ";
 
 /* FolloweesCollectionView, empty data set view */
-"FolloweesCollectionView.EmptyData.LastLocalizedString" = " obserwuj jekiegoś autora!";
+"FolloweesCollectionView.EmptyData.LastLocalizedString" = " obserwuj jakiegoś autora!";
 
 /********* FolloweesViewModel *********/
 
 /* Title of Following screen */
-"FolloweesViewModel.Title" = "Obserwowani autorzy";
+"FolloweesViewModel.Title" = "Obserwowani";
 
 //******** LikesViewModel ********
 
@@ -46,7 +46,7 @@
 "CenterButtonTabBar.Buckets" = "Katalogi";
 
 /* Main view, bottom bar */
-"CenterButtonTabBar.Following" = "Obserwowani autorzy";
+"CenterButtonTabBar.Following" = "Obserwowani";
 
 /* Main view, bottom bar */
 "CenterButtonTabBar.Account" = "Konto";
@@ -62,7 +62,7 @@
 /********* BucketsCollectionViewController *********/
 
 /* Button for adding new bucket */
-"BucketsCollectionView.AddNew" = "Dodaj nowy";
+"BucketsCollectionView.AddNew" = "Nowy";
 
 /* Displayed when empty data in view */
 "BucketsCollectionViewController.EmptyData.FirstLocalizedString" = "Najpierw ";
@@ -98,10 +98,10 @@
 "ShotDetailsFormatter.By" = "Autor";
 
 /* Preposition describing for who shot was made. */
-"ShotDetailsFormatter.For" = "Klient";
+"ShotDetailsFormatter.For" = "Dla";
 
 /* Preposition describing when shot was made. */
-"ShotDetailsFormatter.On" = "Data";
+"ShotDetailsFormatter.On" = "Dnia";
 
 /********* ShotDetailsViewController *********/
 
@@ -188,7 +188,7 @@
 "SettingsViewModel.Popular" = "Popularne dzisiaj";
 
 /* User settings, send daily reminders */
-"SettingsViewModel.SendDailyReminders" = "Wyślij przypomnienie na";
+"SettingsViewModel.SendDailyReminders" = "Wyślij przypomnienie o";
 
 /* User settings, enable following */
 "SettingsViewModel.Following" = "Obserwowani";
