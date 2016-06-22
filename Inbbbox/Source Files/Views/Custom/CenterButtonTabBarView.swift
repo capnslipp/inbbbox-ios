@@ -45,7 +45,7 @@ class CenterButtonTabBarView: UITabBar {
 
         let followingName = NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar")
         followingItemView = CustomTabBarItemView(name: followingName, icon: UIImage(named: "ic-following"))
-        
+
         super.init(frame: frame)
 
         userInteractionEnabled = false
