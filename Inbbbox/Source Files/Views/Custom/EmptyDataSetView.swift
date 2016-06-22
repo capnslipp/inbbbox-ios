@@ -23,6 +23,7 @@ class EmptyDataSetView: UIView {
         addSubview(imageView)
 
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.textAlignment = .Center
         addSubview(descriptionLabel)
     }
 
@@ -42,6 +43,8 @@ class EmptyDataSetView: UIView {
 
             descriptionLabel.autoAlignAxisToSuperviewAxis(.Vertical)
             descriptionLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: imageView, withOffset: 40)
+            descriptionLabel.autoPinEdgeToSuperviewMargin(.Leading)
+            descriptionLabel.autoPinEdgeToSuperviewMargin(.Trailing)
         }
         super.updateConstraints()
     }

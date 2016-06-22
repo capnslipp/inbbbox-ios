@@ -32,7 +32,7 @@ class EmptyDataSetLoadingView: UIView {
 
         addSubview(ballView)
 
-        label.text = "Loading..."
+        label.text = NSLocalizedString("EmptyDataSetLoadingView.Loading", comment: "Loading view, when empty data")
         label.textColor = .cellBackgroundColor()
         label.font = UIFont.helveticaFont(.NeueMedium, size: 25)
         label.textAlignment = .Center
@@ -48,7 +48,7 @@ class EmptyDataSetLoadingView: UIView {
     override func layoutSubviews() {
 
         // made on Rects because of complex animation of jumping ball, same comment as in LoginView
-        let labelSize = CGSize(width: 140, height: 30)
+        let labelSize = CGSize(width: frame.width, height: 30)
         label.frame = CGRect(
             x: CGRectGetMaxX(frame) / 2 - labelSize.width / 2,
             y: CGRectGetMaxY(frame) / 2,

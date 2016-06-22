@@ -277,3 +277,8 @@
 
 /* Describes copyright holder */
 "LoginView.Copyright" = "Tous droits réservés (c) 2016 Netguru.co";
+
+/********* EmptyDataSetLoadingView *********/
+
+/* Loading view, when empty data */
+"EmptyDataSetLoadingView.Loading" = "Chargement...";
