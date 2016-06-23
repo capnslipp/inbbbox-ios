@@ -1,0 +1,284 @@
+/********* ProfileViewController *********/
+
+/* Back button, user details */
+"Profile.BackButton" = " Atras";
+
+/********* BucketContentCollectionViewController *********/
+
+/* BucketContentCollectionView, empty data set view */
+"BucketContent.EmptyData.FirstLocalizedString" = "Primero ";
+
+/* BucketContentCollectionView, empty data set view */
+"BucketContent.EmptyData.LastLocalizedString" = " añade algunos planos a este catálogo!";
+
+/********* LikesCollectionViewController *********/
+
+/* LikesCollectionView, empty data set view */
+"LikesCollectionView.EmptyData.FirstLocalizedString" = "Primero ";
+
+/* LikesCollectionView, empty data set view */
+"LikesCollectionView.EmptyData.LastLocalizedString" = " Me gusta!";
+
+/********* LikesCollectionViewController *********/
+
+/* FolloweesCollectionView, empty data set view */
+"FolloweesCollectionView.EmptyData.FirstLocalizedString" = " Primero";
+
+/* FolloweesCollectionView, empty data set view */
+"FolloweesCollectionView.EmptyData.LastLocalizedString" = " Seguir";
+
+/********* FolloweesViewModel *********/
+
+/* Title of Following screen */
+"FolloweesViewModel.Title" = "Siguiendo";
+
+//******** LikesViewModel ********
+
+/* Title of Likes screen */
+"LikesViewModel.Title" = "Me gustas";
+
+/********* CenterButtonTabBarController *********/
+
+/* Main view, bottom bar */
+"CenterButtonTabBar.Likes" = "Me gustas";
+
+/* Main view, bottom bar */
+"CenterButtonTabBar.Buckets" = "Catálogos";
+
+/* Main view, bottom bar */
+"CenterButtonTabBar.Following" = "Siguiendo";
+
+/* Main view, bottom bar */
+"CenterButtonTabBar.Account" = "Cuenta";
+
+/********* AcknowledgementsViewController *********/
+
+/* Acknowledgements view title*/
+"AcknowledgementsView.Title" = "Las explicaciones"; (can be “Cómo funciona”)
+
+/* Back button */
+"AcknowledgementsView.Back" = "Atras";
+
+/********* BucketsCollectionViewController *********/
+
+/* Button for adding new bucket */
+"BucketsCollectionView.AddNew" = "Nuevo catalogo ";
+
+/* Displayed when empty data in view */
+"BucketsCollectionViewController.EmptyData.FirstLocalizedString" = "Primero ";
+
+/* Displayed when empty data in view. */
+"BucketsCollectionViewController.EmptyData.LastLocalizedString" = " añade algunos planes a los catálogos!";
+
+/********* ShotBucketsViewModel *********/
+
+/* Allows user to add shot to bucket */
+"ShotBucketsViewModel.AddToBucket" = "Añadir";
+
+/* Allows user to remove shot from bucket */
+"ShotBucketsViewModel.RemoveFromBucket" = "Quita del catálogo";
+
+/* Allows user to create new bucket */
+"ShotBucketsViewModel.NewBucket" = "Nuevo catálogo";
+
+/* Allows user to remove from multiple buckets */
+"ShotBucketsViewModel.RemoveFromSelectedBuckets" = "Quita de los catálogos seleccionados";
+
+/********* Responsable *********/
+
+/* Visible when user authorization expired. */
+"Responsable.AuthorizationExpired" = "Autorización expirada. Inicia sesión de nuevo.";
+
+/* Visible when failed to retrieve data. */
+"Responsable.RetrievingFailed" = "No se podía bajar los datos";
+
+/********* ShotDetailsFormatter *********/
+
+/* Preposition describing author of shot. */
+"ShotDetailsFormatter.By" = "Autor";
+
+/* Preposition describing for who shot was made. */
+"ShotDetailsFormatter.For" = "Cliente";
+
+/* Preposition describing when shot was made. */
+"ShotDetailsFormatter.On" = "Fecha";
+
+/********* ShotDetailsViewController *********/
+
+/* Title of email with abusive content. */
+"ShotDetailsViewController.Inappropriate" = "Contenido prohibido!";
+
+/********* CommentEditView *********/
+
+/* Cancel editing comment. */
+"CommentEditView.Cancel" = "Anula";
+
+/* Editing comment, delete. */
+"CommentEditView.Delete" = "Quita";
+
+/* Editing comment, report. */
+"CommentEditView.Report" = "Avisa";
+
+/********* OAuthViewController *********/
+
+/* Cancel logging in. */
+"OAuthViewController.Cancel" = "Anula";
+
+/********* UIAlertControllerExtension *********/
+
+/* Allows user to create new bucket. */
+"UIAlertControllerExtension.NewBucket" = "Nuevo catálogo";
+
+/* Asks user to provide name for bucket */
+"UIAlertControllerExtension.ProvideName" = "Nombra a un nuevo catálogo";
+
+/* Cancel creating new bucket. */
+"UIAlertControllerExtension.Cancel" = "Anula";
+
+/* Create new bucket. */
+"UIAlertControllerExtension.Create" = "Crea";
+
+/* Asks user to enter bucket name. */
+"UIAlertControllerExtension.BucketName" = "Introduce el nombre del catálogo:";
+
+/* General popup informing about error. */
+"UIAlertControllerExtension.Error" = "Error";
+
+/* Allows user to try again after error occurred. */
+"UIAlertControllerExtension.TryAgain" = "Intenta otra vez en un momento.";
+
+/* OK */
+"UIAlertControllerExtension.OK" = "OK";
+
+/* Dismiss */
+"UIAlertControllerExtension.Dismiss" = "Cierra";
+
+/* Inappropriate content has been reported. */
+"UIAlertControllerExtension.InappropriateContentReported" = "El aviso sobre el contenido prohibido fue enviado. La verificación y el bloqueo de la cuenta puede tardar 24 horas.";
+
+/* Displayed when user device is not capable of/configured to send emails. */
+"UIAlertControllerExtension.EmailError" = "No podemos enviar a un e-mail con tu aviso sobre el contenido prohibido porque no ha sido configurada ninguna cuenta de correo electrónico.";
+
+/********* LocalNotificationRegistrator *********/
+
+/* Text of notification encouraging user to use app */
+"LocalNotificationRegistrator.AlertBody" = "Verifica tu bandeja de entrada. Todos los días encontrarás unas nuevas vistas inspiradoras..";
+
+/* Action for notification */
+"LocalNotificationRegistrator.Show" = "Muestra";
+
+/********* SettingsViewModel *********/
+
+/* Title for account screen */
+"SettingsViewModel.Account" = "Cuenta";
+
+/* Button text allowing user to create new account. */
+"SettingsViewModel.CreateAccount" = "Crea una cuenta Dribbble";
+
+/* User settings, show debuts */
+"SettingsViewModel.Debuts" = "Los debuts";
+
+/* User settings, enable daily reminders */
+"SettingsViewModel.EnableDailyReminders" = "Habilita un recordatorio diario";
+
+/* User settings, enable new today. */
+"SettingsViewModel.NewToday" = "Añadidos hoy";
+
+/* User settings, enable popular today. */
+"SettingsViewModel.Popular" = "Populares hoy";
+
+/* User settings, send daily reminders */
+"SettingsViewModel.SendDailyReminders" = "Envia un recordatorio a";
+
+/* User settings, enable following */
+"SettingsViewModel.Following" = "Seguidos";
+
+/* Notifications alert, dismiss button. */
+"SettingsViewModel.Dismiss" = "Cierra";
+
+/* Title of alert, asking user to grant notifications permission. */
+"SettingsViewModel.Permissions" = "Los permisos";
+
+/* Redirect user to Settings app */
+"SettingsViewModel.Settings" = "Configuración";
+
+/********* Acknowledgements button *********/
+"SettingsViewModel.AcknowledgementsButton" = "Los reconocimientos";
+
+/* Body of alert, asking user to grant notifications permission. */
+"SettingsViewModel.AccessToNotifications" = "Tienes que dar tu permiso para habilitar a los recordatorios.";
+
+/********* SettingsViewController *********/
+
+/* Title of group of buttons for stream source settings */
+"SettingsViewController.StreamSource" = "La fuente de la bandeja de entrada"
+
+/********* Is user a guest without account? *********/
+"SettingsViewController.Guest" = "Invitado?";
+
+/* Log out button */
+"SettingsViewController.LogOut" = "Cierra sesión";
+
+/* Title of group of buttons for notifications settings */
+"SettingsViewController.Notifications" = "RECORDATORIOS";
+
+/********* ShotsCollectionViewController *********/
+
+/* Title of alert visible after upon error detection. */
+"ShotsCollectionViewController.Error" = "Error";
+
+/* Message to use informing she will be logged out because of error. */
+"ShotsCollectionViewController.SignOut" = "Cerrando sesión...";
+
+/* Dismiss error alert. */
+"ShotsCollectionViewController.Dismiss" = "Cierra";
+
+/********** ProfileHeaderView *********/
+
+/* Allows user to follow another user. */
+"ProfileHeaderView.Follow" = "Sigue";
+
+/* Allows user to unfollow another user. */
+"ProfileHeaderView.Unfollow" = "Deja seguir";
+
+/********* GifIndicatorView *********/
+
+/* GIF file type. */
+"GifIndicatorView.GIF" = "GIF";
+
+/********* ORLoginLabel *********/
+
+/* Visible as a text allowing user to choose login method. */
+"ORLoginLabel.OR" = "O";
+
+/********* DatePickerViewController *********/
+
+/* Button title when users accepts selected date for reminder. */
+"DatePickerViewController.SetReminder" = "Crea recordatorio";
+
+/********* CommentComposerView *********/
+
+/* Placeholder text, for comment text field. */
+"CommentComposerView.TypeComment" = "Inserta comentario";
+
+/********* LoginView *********/
+
+/* Title of log in button */
+"LoginView.LoginButtonTitle" = "Inicia sesión en Dribbble";
+
+/* Title of guest button */
+"LoginView.GuestButtonTitle" = "Usa la aplicación como Invitado";
+
+/* Slogan */
+"LoginView.Slogan" = "Cada plano es un crack";
+
+/**/
+"LoginView.Loading" = "INICIANDO...";
+
+/* Describes copyright holder */
+"LoginView.Copyright" = "Contenido protegido por derechos de autor (c) 2016 Netguru.co";
+
+/********* EmptyDataSetLoadingView *********/
+
+/* Loading view, when empty data */
+"EmptyDataSetLoadingView.Loading" = "Iniciando...";

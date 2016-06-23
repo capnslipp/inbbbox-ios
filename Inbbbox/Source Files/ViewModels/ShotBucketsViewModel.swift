@@ -162,10 +162,10 @@ class ShotBucketsViewModel {
 
     func displayableDataForBucketAtIndex(index: Int) -> (bucketName: String, shotsCountText: String) {
         let bucket = buckets[index]
-        return (
-        bucketName: bucket.name,
-                shotsCountText: bucket.shotsCount == 1 ? "\(bucket.shotsCount) shot" : "\(bucket.shotsCount) shots"
-        )
+        let localizedString = NSLocalizedString("%d shots", comment: "How many shots in collection?")
+        let shotsCountText = String.localizedStringWithFormat(localizedString, bucket.shotsCount)
+
+        return (bucketName: bucket.name, shotsCountText: shotsCountText)
     }
 }
 

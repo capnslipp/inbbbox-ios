@@ -20,10 +20,10 @@ class CenterButtonTabBarView: UITabBar {
     private(set) var followingItemViewVerticalConstraint: NSLayoutConstraint?
     private(set) var accountItemViewVerticalConstraint: NSLayoutConstraint?
 
-    private let likesItemView = CustomTabBarItemView(name: "Likes", icon: UIImage(named: "ic-likes"))
-    private let bucketsItemView = CustomTabBarItemView(name: "Buckets", icon: UIImage(named: "ic-buckets"))
-    private let followingItemView = CustomTabBarItemView(name: "Following", icon: UIImage(named: "ic-following"))
-    private let accountItemView = CustomTabBarItemView(name: "Account", icon: UIImage(named: "ic-account"))
+    private let likesItemView: CustomTabBarItemView
+    private let bucketsItemView: CustomTabBarItemView
+    private let followingItemView: CustomTabBarItemView
+    private let accountItemView: CustomTabBarItemView
     private let dummyItemView = CustomTabBarItemView(name: "", icon: nil)
 
 //    MARK: - Life cycle
@@ -34,6 +34,18 @@ class CenterButtonTabBarView: UITabBar {
     }
 
     override init(frame: CGRect) {
+        let likesName = NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar")
+        likesItemView = CustomTabBarItemView(name: likesName, icon: UIImage(named: "ic-likes"))
+
+        let bucketsName = NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar")
+        bucketsItemView = CustomTabBarItemView(name: bucketsName, icon: UIImage(named: "ic-buckets"))
+
+        let accountName = NSLocalizedString("CenterButtonTabBar.Account", comment: "Main view, bottom bar")
+        accountItemView = CustomTabBarItemView(name: accountName, icon: UIImage(named: "ic-account"))
+
+        let followingName = NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar")
+        followingItemView = CustomTabBarItemView(name: followingName, icon: UIImage(named: "ic-following"))
+
         super.init(frame: frame)
 
         userInteractionEnabled = false

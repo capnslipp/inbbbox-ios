@@ -12,7 +12,7 @@ import PromiseKit
 class FolloweesViewModel: BaseCollectionViewViewModel {
 
     weak var delegate: BaseCollectionViewViewModelDelegate?
-    let title = NSLocalizedString("Following", comment:"")
+    let title = NSLocalizedString("FolloweesViewModel.Title", comment:"Title of Following screen")
     var followees = [Followee]()
     var followeesIndexedShots = [Int: [ShotType]]()
     private let teamsProvider = APITeamsProvider()
