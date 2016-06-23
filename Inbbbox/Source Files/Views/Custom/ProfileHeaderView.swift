@@ -52,7 +52,7 @@ class ProfileHeaderView: UICollectionReusableView {
             button.setTitleColor(UIColor(white: 1, alpha: 0.2), forState: .Highlighted)
             button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 14)
             button.layer.borderColor = UIColor.whiteColor().CGColor
-            button.contentEdgeInsets = UIEdgeInsetsMake(5, 13, 5, 13)
+            button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 13, bottom: 5, right: 13)
             button.layer.borderWidth = 1
             button.layer.cornerRadius = 13
             addSubview(button)
