@@ -70,6 +70,9 @@
 /* Displayed when empty data in view. */
 "BucketsCollectionViewController.EmptyData.LastLocalizedString" = " Shots zum Album hinzufügen!";
 
+/* Displayed when creating new bucket fails. */
+"BucketsCollectionViewController.NewBucketFail" = "Album erstellen fehlgeschlagen";
+
 /********* ShotBucketsViewModel *********/
 
 /* Allows user to add shot to bucket */
@@ -107,6 +110,15 @@
 
 /* Title of email with abusive content. */
 "ShotDetailsViewController.Inappropriate" = "Verbotener Inhalt";
+
+/* Error while adding/removing shot to bucket. */
+"ShotDetailsViewController.BucketError" = "Oh nein! Wir können derzeit dein Album nicht bearbeiten. Versuche es gleich nochmal.";
+
+/* Error while removing comment. */
+"ShotDetailsViewController.RemovingCommentError" = "Oh nein! Wir können gerade dein Kommentar nicht löschen. Versuche es gleich nochmal.";
+
+/* Error while adding comment. */
+"ShotDetailsViewController.AddingCommentError" = "Oh nein! Wir können gerade dein Kommentar nicht hinzufügen. Versuche es gleich nochmal.";
 
 /********* CommentEditView *********/
 
@@ -157,7 +169,10 @@
 "UIAlertControllerExtension.InappropriateContentReported" = "Wir haben eine Meldung über die Verbreitung von verbotenen Inhalten erhalten. Die Kontosperre und Überprüfung kann bis zu 24 Stunden dauern.";
 
 /* Displayed when user device is not capable of/configured to send emails. */
-"UIAlertControllerExtension.EmailError" = "Deine Meldung über die verbotenen Inhalte kann leider nicht verschickt werden, da keine E-Mail-Adresse hinterlegt wurde. ";
+"UIAlertControllerExtension.EmailError" = "Deine Meldung über die verbotenen Inhalte kann leider nicht verschickt werden, da keine E-Mail-Adresse hinterlegt wurde.";
+
+/* Informing user about problems with downloading items. */
+"UIAlertControllerExtension.UnableToDownload" = "Oh nein! Sie können gerade die Shots nicht downloaden.";
 
 /********* LocalNotificationRegistrator *********/
 
@@ -208,6 +223,9 @@
 /* Body of alert, asking user to grant notifications permission. */
 "SettingsViewModel.AccessToNotifications" = "Du musst den Benachrichtigungen zustimmen.";
 
+/* User Settings, show author. */
+"SettingsViewModel.DisplayAuthor" = "Show Author on Homescreen";
+
 /********* SettingsViewController *********/
 
 /* Title of group of buttons for stream source settings */
@@ -221,6 +239,9 @@
 
 /* Title of group of buttons for notifications settings */
 "SettingsViewController.Notifications" = "Benachrichtigungen ";
+
+/* Title of group of buttons for customization settings */
+"SettingsViewController.Customization" = "Personalisieren";
 
 /********* ShotsCollectionViewController *********/
 
