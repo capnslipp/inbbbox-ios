@@ -71,7 +71,7 @@
 "BucketsCollectionViewController.EmptyData.LastLocalizedString" = " ajouter des shot aux catalogues!";
 
 /* Displayed when creating new bucket fails. */
-"BucketsCollectionViewController.NewBucketFail" = "Il est impossible de créer un nouveau catalogue.“;
+"BucketsCollectionViewController.NewBucketFail" = "Il est impossible de créer un nouveau catalogue.";
 
 
 /********* ShotBucketsViewModel *********/
@@ -113,13 +113,13 @@
 "ShotDetailsViewController.Inappropriate" = "Contenu illicite!";
 
 /* Error while adding/removing shot to bucket. */
-"ShotDetailsViewController.BucketError" = "Zut! Nous ne pouvons pas créer un nouveau catalogue. Réessayez dans un instant.“;
+"ShotDetailsViewController.BucketError" = "Zut! Nous ne pouvons pas créer un nouveau catalogue. Réessayez dans un instant.";
 
 /* Error while removing comment. */
-"ShotDetailsViewController.RemovingCommentError" = "Zut! nous n'avons pas pu supprimer votre commentaire. Réessayez dans un instant.“;
+"ShotDetailsViewController.RemovingCommentError" = "Zut! nous n'avons pas pu supprimer votre commentaire. Réessayez dans un instant.";
 
 /* Error while adding comment. */
-"ShotDetailsViewController.AddingCommentError" = "Zut! Nous n'avons pas pu ajouter votre nouveau commentaire. Réessayez dans un instant.“;
+"ShotDetailsViewController.AddingCommentError" = "Zut! Nous n'avons pas pu ajouter votre nouveau commentaire. Réessayez dans un instant.";
 
 /********* CommentEditView *********/
 
@@ -173,7 +173,7 @@
 "UIAlertControllerExtension.EmailError" = "Nous ne pouvons pas envoyer un e-mail avec votre signalement du contenu illicite car aucun compte e-mail n’a pas été configuré.";
 
 /* Informing user about problems with downloading items. */
-"UIAlertControllerExtension.UnableToDownload" = "Zut! nous n'avons pas pu télécharger des shot.“;
+"UIAlertControllerExtension.UnableToDownload" = "Zut! nous n'avons pas pu télécharger des shot.";
 
 /********* LocalNotificationRegistrator *********/
 
