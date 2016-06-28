@@ -70,6 +70,10 @@
 /* Displayed when empty data in view. */
 "BucketsCollectionViewController.EmptyData.LastLocalizedString" = " ajouter des shot aux catalogues!";
 
+/* Displayed when creating new bucket fails. */
+"BucketsCollectionViewController.NewBucketFail" = "Il est impossible de créer un nouveau catalogue.“;
+
+
 /********* ShotBucketsViewModel *********/
 
 /* Allows user to add shot to bucket */
@@ -107,6 +111,15 @@
 
 /* Title of email with abusive content. */
 "ShotDetailsViewController.Inappropriate" = "Contenu illicite!";
+
+/* Error while adding/removing shot to bucket. */
+"ShotDetailsViewController.BucketError" = "Zut! Nous ne pouvons pas créer un nouveau catalogue. Réessayez dans un instant.“;
+
+/* Error while removing comment. */
+"ShotDetailsViewController.RemovingCommentError" = "Zut! nous n'avons pas pu supprimer votre commentaire. Réessayez dans un instant.“;
+
+/* Error while adding comment. */
+"ShotDetailsViewController.AddingCommentError" = "Zut! Nous n'avons pas pu ajouter votre nouveau commentaire. Réessayez dans un instant.“;
 
 /********* CommentEditView *********/
 
@@ -159,6 +172,9 @@
 /* Displayed when user device is not capable of/configured to send emails. */
 "UIAlertControllerExtension.EmailError" = "Nous ne pouvons pas envoyer un e-mail avec votre signalement du contenu illicite car aucun compte e-mail n’a pas été configuré.";
 
+/* Informing user about problems with downloading items. */
+"UIAlertControllerExtension.UnableToDownload" = "Zut! nous n'avons pas pu télécharger des shot.“;
+
 /********* LocalNotificationRegistrator *********/
 
 /* Text of notification encouraging user to use app */
@@ -208,6 +224,9 @@
 /* Body of alert, asking user to grant notifications permission. */
 "SettingsViewModel.AccessToNotifications" = "Vous devez donner votre accord pour activer les notifications.";
 
+/* User Settings, show author. */
+"SettingsViewModel.DisplayAuthor" = "Montrer Auteur à la page d'accueil";
+
 /********* SettingsViewController *********/
 
 /* Title of group of buttons for stream source settings */
@@ -221,6 +240,9 @@
 
 /* Title of group of buttons for notifications settings */
 "SettingsViewController.Notifications" = "NOTIFICATIONS";
+
+/* Title of group of buttons for customization settings */
+"SettingsViewController.Customization" = "Personnaliser";
 
 /********* ShotsCollectionViewController *********/
 
