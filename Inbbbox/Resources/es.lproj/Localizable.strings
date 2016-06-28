@@ -70,6 +70,9 @@
 /* Displayed when empty data in view. */
 "BucketsCollectionViewController.EmptyData.LastLocalizedString" = " añade algunos planes a los catálogos!";
 
+/* Displayed when creating new bucket fails. */
+"BucketsCollectionViewController.NewBucketFail" = "No se podía crear una nueva cubeta";
+
 /********* ShotBucketsViewModel *********/
 
 /* Allows user to add shot to bucket */
@@ -107,6 +110,15 @@
 
 /* Title of email with abusive content. */
 "ShotDetailsViewController.Inappropriate" = "Contenido prohibido!";
+
+/* Error while adding/removing shot to bucket. */
+"ShotDetailsViewController.BucketError" = "¡Ay! No podemos procesar tus cubetas ahora. Intenta otra vez en un rato.";
+
+/* Error while removing comment. */
+"ShotDetailsViewController.RemovingCommentError" = "¡Ay! No podemos eliminar el comentario ahora. Intenta otra vez en un rato.";
+
+/* Error while adding comment. */
+"ShotDetailsViewController.AddingCommentError" = "¡Ay! No podemos añadir el comentario ahora. Intenta otra vez en un rato.";
 
 /********* CommentEditView *********/
 
@@ -159,6 +171,9 @@
 /* Displayed when user device is not capable of/configured to send emails. */
 "UIAlertControllerExtension.EmailError" = "No podemos enviar a un e-mail con tu aviso sobre el contenido prohibido porque no ha sido configurada ninguna cuenta de correo electrónico.";
 
+/* Informing user about problems with downloading items. */
+"UIAlertControllerExtension.UnableToDownload" = " ¡Ay! No podemos bajar las fotos ahora.";
+
 /********* LocalNotificationRegistrator *********/
 
 /* Text of notification encouraging user to use app */
@@ -208,6 +223,9 @@
 /* Body of alert, asking user to grant notifications permission. */
 "SettingsViewModel.AccessToNotifications" = "Tienes que dar tu permiso para habilitar a los recordatorios.";
 
+/* User Settings, show author. */
+"SettingsViewModel.DisplayAuthor" = "Mostrar Autor en la pantalla de inicio";
+
 /********* SettingsViewController *********/
 
 /* Title of group of buttons for stream source settings */
@@ -221,6 +239,9 @@
 
 /* Title of group of buttons for notifications settings */
 "SettingsViewController.Notifications" = "RECORDATORIOS";
+
+/* Title of group of buttons for customization settings */
+"SettingsViewController.Customization" = "PERSONALIZACIÓN";
 
 /********* ShotsCollectionViewController *********/
 
