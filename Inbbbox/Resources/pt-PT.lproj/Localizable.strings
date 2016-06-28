@@ -70,6 +70,9 @@
 /* Displayed when empty data in view. */
 "BucketsCollectionViewController.EmptyData.LastLocalizedString" = " adicione algumas fotos aos catálogos!";
 
+/* Displayed when creating new bucket fails. */
+"BucketsCollectionViewController.NewBucketFail" = "Não foi possivel criar um novo catálogo";
+
 /********* ShotBucketsViewModel *********/
 
 /* Allows user to add shot to bucket */
@@ -107,6 +110,15 @@
 
 /* Title of email with abusive content. */
 "ShotDetailsViewController.Inappropriate" = "Conteúdo proibido!";
+
+/* Error while adding/removing shot to bucket. */
+"ShotDetailsViewController.BucketError" = "¡Ai! Não podemos processar os seus catálogos agora. Tente novamente em um tempo.";
+
+/* Error while removing comment. */
+"ShotDetailsViewController.RemovingCommentError" = "¡Ai! Não podemos remover o comentário agora. Tente novamente em um tempo.";
+
+/* Error while adding comment. */
+"ShotDetailsViewController.AddingCommentError" = "¡Ai! Não podemos adicionar o comentário agora. Tente novamente em um tempo.";
 
 /********* CommentEditView *********/
 
@@ -159,6 +171,9 @@
 /* Displayed when user device is not capable of/configured to send emails. */
 "UIAlertControllerExtension.EmailError" = "Não podemos enviar um e-mail com o seu aviso sobre o conteúdo proibido porque não foi configurada nenhuma conta de e-mail.";
 
+/* Informing user about problems with downloading items. */
+"UIAlertControllerExtension.UnableToDownload" = " ¡Ai! Não podemos baixar as fotos agora.";
+
 /********* LocalNotificationRegistrator *********/
 
 /* Text of notification encouraging user to use app */
@@ -207,6 +222,12 @@
 
 /* Body of alert, asking user to grant notifications permission. */
 "SettingsViewModel.AccessToNotifications" = "Tem que dar a sua autorização para habilitar a os lembretes.";
+
+/* User Settings, show author. */
+"SettingsViewModel.DisplayAuthor" = "Mostrar Autor na tela de inicio";
+
+/* Title of group of buttons for customization settings */
+"SettingsViewController.Customization" = "Personalização";
 
 /********* SettingsViewController *********/
 
