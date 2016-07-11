@@ -202,6 +202,9 @@
 /* Redirect user to Settings app */
 "SettingsViewModel.Settings" = "Ustawienia";
 
+/* User Settings, show author. */
+"SettingsViewModel.DisplayAuthor" = "Pokaż autora pod shotem";
+
 /********* Acknowledgements button *********/
 "SettingsViewModel.AcknowledgementsButton" = "Objaśnienia";
 
