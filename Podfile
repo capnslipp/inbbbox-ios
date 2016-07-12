@@ -25,9 +25,7 @@ target 'Inbbbox' do
 
   pod 'AsyncSwift', '~> 1.6'
   pod 'KeychainAccess', '~> 2.3'
-  pod 'PromiseKit', # fork because of issue: https://github.com/mxcl/PromiseKit/issues/415
-    :git => 'git@github.com:rad3ks/PromiseKit.git',
-    :branch => 'bug/415'
+  pod 'PromiseKit', '~> 3.2'
   pod 'SwiftyJSON', '~> 2.3'
   pod 'HockeySDK', '~> 3.8'
   pod 'PureLayout', '~> 3.0'
