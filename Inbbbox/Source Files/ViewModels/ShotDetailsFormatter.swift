@@ -11,6 +11,9 @@ import UIKit.NSAttributedString
 
 final class ShotDetailsFormatter {
 
+    static let ShotDetailsFormatterSmallFontSize: CGFloat = 12
+    static let ShotDetailsFormatterBigFontSize: CGFloat = 14
+
     static var shotDateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
@@ -87,7 +90,7 @@ final class ShotDetailsFormatter {
 
         mutableBody.addAttributes([
                 NSForegroundColorAttributeName: UIColor.grayColor(),
-                NSFontAttributeName: UIFont.systemFontOfSize(14)
+                NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterBigFontSize)
         ], range: range)
 
         return mutableBody.copy() as? NSAttributedString
@@ -124,9 +127,9 @@ private extension ShotDetailsFormatter {
                 comment: "Preposition describing author of shot.")
         let authorAttributedString = NSMutableAttributedString(
         string: prefixString + " " + author, attributes: [NSForegroundColorAttributeName: UIColor.pinkColor(),
-                                                          NSFontAttributeName: UIFont.systemFontOfSize(14)])
+                                                          NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterBigFontSize)])
         authorAttributedString.setAttributes([NSForegroundColorAttributeName: UIColor.grayColor(),
-                                              NSFontAttributeName: UIFont.systemFontOfSize(12)],
+                                              NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterSmallFontSize)],
                 range: NSRange(location: 0, length: prefixString.characters.count))
         let userLinkRange = NSRange(location: mutableAttributedString.length + prefixString.characters.count,
                 length: author.characters.count + 1)
@@ -140,10 +143,10 @@ private extension ShotDetailsFormatter {
                 comment: "Preposition describing for who shot was made.")
         let teamAttributedString = NSMutableAttributedString(
         string: prefixString + " " + team, attributes: [NSForegroundColorAttributeName: UIColor.pinkColor(),
-                                                        NSFontAttributeName: UIFont.systemFontOfSize(14)])
+                                                        NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterBigFontSize)])
         teamAttributedString.setAttributes([
                 NSForegroundColorAttributeName: UIColor.grayColor(),
-                NSFontAttributeName: UIFont.systemFontOfSize(12)
+                NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterSmallFontSize)
         ], range: NSRange(location: 0, length: prefixString.characters.count))
         let teamLinkRange = NSRange(location: mutableAttributedString.length + prefixString.characters.count,
                                     length: team.characters.count + 1)
@@ -157,7 +160,7 @@ private extension ShotDetailsFormatter {
                 comment: "Preposition describing when shot was made.")
         let dateAttributedString = NSAttributedString(
         string: prefixString + " " + dateSting, attributes: [NSForegroundColorAttributeName: UIColor.grayColor(),
-                                                             NSFontAttributeName: UIFont.systemFontOfSize(14)])
+                                                             NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterSmallFontSize)])
         mutableAttributedString.appendAttributedString(dateAttributedString)
     }
 }
