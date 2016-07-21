@@ -221,7 +221,7 @@
 "SettingsViewModel.AcknowledgementsButton" = "Os reconhecimentos";
 
 /* Body of alert, asking user to grant notifications permission. */
-"SettingsViewModel.AccessToNotifications" = "Tem que dar a sua autorização para habilitar a os lembretes.";
+"SettingsViewModel.AccessToNotifications" = "Tem que dar a sua autorização para habilitar\na os lembretes.";
 
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor na tela de inicio";

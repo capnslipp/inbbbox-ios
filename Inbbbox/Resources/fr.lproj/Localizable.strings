@@ -102,10 +102,10 @@
 "ShotDetailsFormatter.By" = "Auteur";
 
 /* Preposition describing for who shot was made. */
-"ShotDetailsFormatter.For" = "Klient";
+"ShotDetailsFormatter.For" = "Client";
 
 /* Preposition describing when shot was made. */
-"ShotDetailsFormatter.On" = "Data";
+"ShotDetailsFormatter.On" = "Date";
 
 /********* ShotDetailsViewController *********/
 
@@ -222,7 +222,7 @@
 "SettingsViewModel.AcknowledgementsButton" = "Mentions sur la politique de confidentialité";
 
 /* Body of alert, asking user to grant notifications permission. */
-"SettingsViewModel.AccessToNotifications" = "Vous devez donner votre accord pour activer les notifications.";
+"SettingsViewModel.AccessToNotifications" = "Vous devez donner votre accord pour activer\nles notifications.";
 
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Montrer Auteur à la page d'accueil";

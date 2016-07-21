@@ -221,7 +221,7 @@
 "SettingsViewModel.AcknowledgementsButton" = "Definitionen";
 
 /* Body of alert, asking user to grant notifications permission. */
-"SettingsViewModel.AccessToNotifications" = "Du musst den Benachrichtigungen zustimmen.";
+"SettingsViewModel.AccessToNotifications" = "Du musst den Benachrichtigungen\nzustimmen.";
 
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Show Author on Homescreen";
