@@ -303,3 +303,9 @@
 
 /* Loading view, when empty data */
 "EmptyDataSetLoadingView.Loading" = "Iniciando...";
+
+/********* ShotsOnboardingStateHandler *********/
+/* Below (steps 1 - 3) is localization of Onboarding images contained in Images.xcassets*/
+"ShotsOnboardingStateHandler.Onboarding-Step1" = "onboarding-step1-pt";
+"ShotsOnboardingStateHandler.Onboarding-Step2" = "onboarding-step2-pt";
+"ShotsOnboardingStateHandler.Onboarding-Step3" = "onboarding-step3-pt";

@@ -9,11 +9,9 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
-    let onboardingSteps = [
-        (image: UIImage(named: "onboarding-step1"), action: ShotCollectionViewCell.Action.Like),
-        (image: UIImage(named: "onboarding-step2"), action: ShotCollectionViewCell.Action.Bucket),
-        (image: UIImage(named: "onboarding-step3"), action: ShotCollectionViewCell.Action.Comment)
-    ]
+    let onboardingSteps: [(image: UIImage?, action: ShotCollectionViewCell.Action)]
+
+
     var scrollViewAnimationsCompletion: (() -> Void)?
 
     var state: ShotsCollectionViewController.State {
@@ -50,6 +48,17 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
     func presentData() {
         shotsCollectionViewController?.collectionView?.reloadData()
+    }
+
+    override init() {
+        let step1 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step1", comment: "")
+        let step2 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step2", comment: "")
+        let step3 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step3", comment: "")
+        onboardingSteps = [
+            (image: UIImage(named: step1), action: ShotCollectionViewCell.Action.Like),
+            (image: UIImage(named: step2), action: ShotCollectionViewCell.Action.Bucket),
+            (image: UIImage(named: step3), action: ShotCollectionViewCell.Action.Comment)
+        ]
     }
 }
 
