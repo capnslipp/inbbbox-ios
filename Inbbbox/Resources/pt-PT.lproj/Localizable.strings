@@ -112,13 +112,13 @@
 "ShotDetailsViewController.Inappropriate" = "Conteúdo proibido!";
 
 /* Error while adding/removing shot to bucket. */
-"ShotDetailsViewController.BucketError" = "¡Ai! Não podemos processar os seus catálogos agora. Tente novamente em um tempo.";
+"ShotDetailsViewController.BucketError" = "¡Ai! Não podemos processar os seus catálogos agora. Tente novamente em um\ntempo.";
 
 /* Error while removing comment. */
-"ShotDetailsViewController.RemovingCommentError" = "¡Ai! Não podemos remover o comentário agora. Tente novamente em um tempo.";
+"ShotDetailsViewController.RemovingCommentError" = "¡Ai! Não podemos remover o comentário agora. Tente novamente em um\ntempo.";
 
 /* Error while adding comment. */
-"ShotDetailsViewController.AddingCommentError" = "¡Ai! Não podemos adicionar o comentário agora. Tente novamente em um tempo.";
+"ShotDetailsViewController.AddingCommentError" = "¡Ai! Não podemos adicionar o comentário agora. Tente novamente em um\ntempo.";
 
 /********* CommentEditView *********/
 
