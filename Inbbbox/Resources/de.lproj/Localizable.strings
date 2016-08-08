@@ -191,7 +191,7 @@
 "SettingsViewModel.CreateAccount" = "Dribbble-Benutzerkonto anlegen ";
 
 /* User settings, show debuts */
-"SettingsViewModel.Debuts" = " Debüts";
+"SettingsViewModel.Debuts" = "Debüts";
 
 /* User settings, enable daily reminders */
 "SettingsViewModel.EnableDailyReminders" = "Tägliche Benachrichtigungen zulassen";
