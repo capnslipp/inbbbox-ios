@@ -11,6 +11,9 @@ import UIKit.NSAttributedString
 
 final class ShotDetailsFormatter {
 
+    static let ShotDetailsFormatterSmallFontSize: CGFloat = 12
+    static let ShotDetailsFormatterBigFontSize: CGFloat = 14
+
     static var shotDateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
@@ -87,7 +90,7 @@ final class ShotDetailsFormatter {
 
         mutableBody.addAttributes([
                 NSForegroundColorAttributeName: UIColor.grayColor(),
-                NSFontAttributeName: UIFont.systemFontOfSize(14)
+                NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterBigFontSize)
         ], range: range)
 
         return mutableBody.copy() as? NSAttributedString
@@ -122,11 +125,13 @@ private extension ShotDetailsFormatter {
                                             author: String) -> NSRange {
         let prefixString = NSLocalizedString("ShotDetailsFormatter.By",
                 comment: "Preposition describing author of shot.")
+        let bigFont = UIFont.systemFontOfSize(ShotDetailsFormatterBigFontSize)
+        let smallFont = UIFont.systemFontOfSize(ShotDetailsFormatterSmallFontSize)
         let authorAttributedString = NSMutableAttributedString(
         string: prefixString + " " + author, attributes: [NSForegroundColorAttributeName: UIColor.pinkColor(),
-                                                          NSFontAttributeName: UIFont.systemFontOfSize(14)])
+                                                          NSFontAttributeName: bigFont])
         authorAttributedString.setAttributes([NSForegroundColorAttributeName: UIColor.grayColor(),
-                                              NSFontAttributeName: UIFont.systemFontOfSize(12)],
+                                              NSFontAttributeName: smallFont],
                 range: NSRange(location: 0, length: prefixString.characters.count))
         let userLinkRange = NSRange(location: mutableAttributedString.length + prefixString.characters.count,
                 length: author.characters.count + 1)
@@ -138,12 +143,13 @@ private extension ShotDetailsFormatter {
     class func appendTeamAttributedString(mutableAttributedString: NSMutableAttributedString, team: String) -> NSRange {
         let prefixString = NSLocalizedString("ShotDetailsFormatter.For",
                 comment: "Preposition describing for who shot was made.")
+        let font = UIFont.systemFontOfSize(ShotDetailsFormatterBigFontSize)
         let teamAttributedString = NSMutableAttributedString(
         string: prefixString + " " + team, attributes: [NSForegroundColorAttributeName: UIColor.pinkColor(),
-                                                        NSFontAttributeName: UIFont.systemFontOfSize(14)])
+                                                        NSFontAttributeName: font])
         teamAttributedString.setAttributes([
                 NSForegroundColorAttributeName: UIColor.grayColor(),
-                NSFontAttributeName: UIFont.systemFontOfSize(12)
+                NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterSmallFontSize)
         ], range: NSRange(location: 0, length: prefixString.characters.count))
         let teamLinkRange = NSRange(location: mutableAttributedString.length + prefixString.characters.count,
                                     length: team.characters.count + 1)
@@ -155,9 +161,10 @@ private extension ShotDetailsFormatter {
     class func appendDateAttributedString(mutableAttributedString: NSMutableAttributedString, dateSting: String) {
         let prefixString = NSLocalizedString("ShotDetailsFormatter.On",
                 comment: "Preposition describing when shot was made.")
+        let font = UIFont.systemFontOfSize(ShotDetailsFormatterSmallFontSize)
         let dateAttributedString = NSAttributedString(
         string: prefixString + " " + dateSting, attributes: [NSForegroundColorAttributeName: UIColor.grayColor(),
-                                                             NSFontAttributeName: UIFont.systemFontOfSize(14)])
+                                                             NSFontAttributeName: font])
         mutableAttributedString.appendAttributedString(dateAttributedString)
     }
 }

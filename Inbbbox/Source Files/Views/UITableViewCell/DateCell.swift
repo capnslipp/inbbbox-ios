@@ -16,6 +16,7 @@ class DateCell: UITableViewCell, Reusable {
     }
 
     let dateLabel = UILabel.newAutoLayoutView()
+    let titleLabel = UILabel.newAutoLayoutView()
 
     private var didSetConstraints = false
 
@@ -23,6 +24,11 @@ class DateCell: UITableViewCell, Reusable {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         accessoryType = .DisclosureIndicator
+
+        titleLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
+        titleLabel.textColor = .blackColor()
+        titleLabel.adjustsFontSizeToFitWidth = true
+        contentView.addSubview(titleLabel)
 
         dateLabel.textColor = UIColor.followeeTextGrayColor()
         dateLabel.textAlignment = .Right
@@ -40,9 +46,12 @@ class DateCell: UITableViewCell, Reusable {
         if !didSetConstraints {
             didSetConstraints = true
 
+            titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: 16)
+            titleLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            dateLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: titleLabel, withOffset: 5)
             dateLabel.autoPinEdgeToSuperviewEdge(.Trailing)
             dateLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 12)
-            dateLabel.autoSetDimensionsToSize(CGSize(width: 80, height: 21))
         }
 
         super.updateConstraints()

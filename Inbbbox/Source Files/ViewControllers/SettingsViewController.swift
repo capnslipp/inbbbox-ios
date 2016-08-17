@@ -175,18 +175,19 @@ private extension SettingsViewController {
     }
 
     func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem) {
-        cell.textLabel?.text = item.title
+        cell.titleLabel.text = item.title
         cell.switchControl.on = item.enabled
         cell.selectionStyle = .None
     }
 
     func configureDateCell(cell: DateCell, forItem item: DateItem) {
-        cell.textLabel?.text = item.title
+        cell.titleLabel.text = item.title
         cell.setDateText(item.dateString)
     }
 
     func configureLabelCell(cell: LabelCell, forItem item: LabelItem) {
         cell.titleLabel.text = item.title
+        cell.titleLabel.adjustsFontSizeToFitWidth = true
     }
 
 }

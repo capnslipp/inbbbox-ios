@@ -15,11 +15,18 @@ class SwitchCell: UITableViewCell, Reusable {
     }
 
     let switchControl = UISwitch.newAutoLayoutView()
+    let titleLabel = UILabel.newAutoLayoutView()
+    let edgesInset: CGFloat = 16
 
     private var didSetConstraints = false
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        titleLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
+        titleLabel.textColor = .blackColor()
+        titleLabel.adjustsFontSizeToFitWidth = true
+        contentView.addSubview(titleLabel)
 
         switchControl.tintColor = UIColor.RGBA(143, 142, 148, 1)
         switchControl.backgroundColor = switchControl.tintColor
@@ -40,8 +47,12 @@ class SwitchCell: UITableViewCell, Reusable {
         if !didSetConstraints {
             didSetConstraints = true
 
-            switchControl.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 16)
-            switchControl.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
+            titleLabel.autoPinEdgeToSuperviewEdge(.Leading, withInset: edgesInset)
+            titleLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            switchControl.autoPinEdge(.Leading, toEdge: .Trailing, ofView: titleLabel, withOffset: 5)
+            switchControl.autoPinEdgeToSuperviewEdge(.Trailing, withInset: edgesInset)
+            switchControl.autoAlignAxisToSuperviewAxis(.Horizontal)
         }
 
         super.updateConstraints()

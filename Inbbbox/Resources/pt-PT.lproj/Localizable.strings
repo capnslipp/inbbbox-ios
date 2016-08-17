@@ -112,13 +112,13 @@
 "ShotDetailsViewController.Inappropriate" = "Conteúdo proibido!";
 
 /* Error while adding/removing shot to bucket. */
-"ShotDetailsViewController.BucketError" = "¡Ai! Não podemos processar os seus catálogos agora. Tente novamente em um tempo.";
+"ShotDetailsViewController.BucketError" = "¡Ai! Não podemos processar os seus catálogos agora. Tente novamente em um\ntempo.";
 
 /* Error while removing comment. */
-"ShotDetailsViewController.RemovingCommentError" = "¡Ai! Não podemos remover o comentário agora. Tente novamente em um tempo.";
+"ShotDetailsViewController.RemovingCommentError" = "¡Ai! Não podemos remover o comentário agora. Tente novamente em um\ntempo.";
 
 /* Error while adding comment. */
-"ShotDetailsViewController.AddingCommentError" = "¡Ai! Não podemos adicionar o comentário agora. Tente novamente em um tempo.";
+"ShotDetailsViewController.AddingCommentError" = "¡Ai! Não podemos adicionar o comentário agora. Tente novamente em um\ntempo.";
 
 /********* CommentEditView *********/
 
@@ -221,7 +221,7 @@
 "SettingsViewModel.AcknowledgementsButton" = "Os reconhecimentos";
 
 /* Body of alert, asking user to grant notifications permission. */
-"SettingsViewModel.AccessToNotifications" = "Tem que dar a sua autorização para habilitar a os lembretes.";
+"SettingsViewModel.AccessToNotifications" = "Tem que dar a sua autorização para habilitar\na os lembretes.";
 
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor na tela de inicio";
@@ -303,3 +303,9 @@
 
 /* Loading view, when empty data */
 "EmptyDataSetLoadingView.Loading" = "Iniciando...";
+
+/********* ShotsOnboardingStateHandler *********/
+/* Below (steps 1 - 3) is localization of Onboarding images contained in Images.xcassets*/
+"ShotsOnboardingStateHandler.Onboarding-Step1" = "onboarding-step1-pt";
+"ShotsOnboardingStateHandler.Onboarding-Step2" = "onboarding-step2-pt";
+"ShotsOnboardingStateHandler.Onboarding-Step3" = "onboarding-step3-pt";

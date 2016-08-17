@@ -13,7 +13,7 @@ import PromiseKit
 class BucketsViewModel: BaseCollectionViewViewModel {
 
     weak var delegate: BaseCollectionViewViewModelDelegate?
-    let title = NSLocalizedString("Buckets", comment:"")
+    let title = NSLocalizedString("CenterButtonTabBar.Buckets", comment:"Main view, bottom bar & view title")
     var buckets = [BucketType]()
     var bucketsIndexedShots = [Int: [ShotType]]()
     private let bucketsProvider = BucketsProvider()
