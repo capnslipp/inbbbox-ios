@@ -224,7 +224,7 @@
 "SettingsViewModel.AccessToNotifications" = "Du musst den Benachrichtigungen\nzustimmen.";
 
 /* User Settings, show author. */
-"SettingsViewModel.DisplayAuthor" = "Show Author on Homescreen";
+"SettingsViewModel.DisplayAuthor" = "Zeige den Autoren auf dem Hauptbildschirm an";
 
 /********* SettingsViewController *********/
 
