@@ -43,6 +43,10 @@ class LoginView: UIView {
         loginButton.layer.cornerRadius = cornerRadius
         loginButton.setTitleColor(UIColor.pinkColor(), forState: .Normal)
         loginButton.titleLabel?.font = UIFont.helveticaFont(.NeueMedium, size: 14)
+        loginButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        loginButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        loginButton.titleEdgeInsets.left = 2.5 * cornerRadius
+        loginButton.titleEdgeInsets.right = cornerRadius
         insertSubview(loginButton, belowSubview: dribbbleLogoImageView)
 
         loginAsGuestButton.setTitle(NSLocalizedString("LoginView.GuestButtonTitle", comment: "Title of guest button"),
