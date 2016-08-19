@@ -86,7 +86,7 @@
 "ShotBucketsViewModel.NewBucket" = "Nouveau catalogue";
 
 /* Allows user to remove from multiple buckets */
-"ShotBucketsViewModel.RemoveFromSelectedBuckets" = "Usuń z wybranych katalogów";
+"ShotBucketsViewModel.RemoveFromSelectedBuckets" = "Supprimer des catalogues choisis";
 
 /********* Responsable *********/
 
