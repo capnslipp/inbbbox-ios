@@ -15,9 +15,17 @@ class ShotAuthorCompactView: UIView {
                                                  bordered: false)
     var authorLabel = UILabel.newAutoLayoutView()
 
+    lazy var likesImageView: UIImageView = UIImageView(image: UIImage(named: "ic-like-emptystate"))
+    var likesLabel = UILabel.newAutoLayoutView()
+
+    lazy var commentsImageView: UIImageView = UIImageView(image: UIImage(named: "ic-like-emptystate"))
+    var commentsLabel = UILabel.newAutoLayoutView()
+
     struct ViewData {
         let author: String
         let avatarURL: NSURL
+        let likesCount: UInt
+        let commentsCount: UInt
     }
 
     var viewData: ViewData? {
@@ -25,6 +33,8 @@ class ShotAuthorCompactView: UIView {
             authorLabel.text = viewData?.author
             let placeholder = UIImage(named: "ic-account-nopicture")
             avatarView.imageView.loadImageFromURL((viewData?.avatarURL)!, placeholderImage: placeholder)
+            likesLabel.text = "\(viewData?.likesCount ?? 0)"
+            commentsLabel.text = "\(viewData?.commentsCount ?? 0)"
         }
     }
 
@@ -43,6 +53,18 @@ class ShotAuthorCompactView: UIView {
         authorLabel.font = UIFont.helveticaFont(.Neue, size: 13)
         authorLabel.textColor = .followeeTextGrayColor()
         addSubview(authorLabel)
+
+        addSubview(likesImageView)
+
+        likesLabel.font = UIFont.helveticaFont(.Neue, size: 13)
+        likesLabel.textColor = .followeeTextGrayColor()
+        addSubview(likesLabel)
+
+        addSubview(commentsImageView)
+
+        commentsLabel.font = UIFont.helveticaFont(.Neue, size: 13)
+        commentsLabel.textColor = .followeeTextGrayColor()
+        addSubview(commentsLabel)
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")
@@ -65,6 +87,20 @@ class ShotAuthorCompactView: UIView {
 
             authorLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: avatarView, withOffset: 3)
             authorLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            commentsLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 3)
+            commentsLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            commentsImageView.autoSetDimensionsToSize(self.avatarSize)
+            commentsImageView.autoPinEdge(.Trailing, toEdge: .Leading, ofView: commentsLabel, withOffset: -3)
+            commentsImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            likesLabel.autoPinEdge(.Trailing, toEdge: .Leading, ofView: commentsImageView, withOffset: -8)
+            likesLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
+
+            likesImageView.autoSetDimensionsToSize(self.avatarSize)
+            likesImageView.autoPinEdge(.Trailing, toEdge: .Leading, ofView: likesLabel, withOffset: -3)
+            likesImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
             didSetupConstraints = true
         }

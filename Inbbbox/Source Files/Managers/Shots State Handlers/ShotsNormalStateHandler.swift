@@ -96,7 +96,9 @@ extension ShotsNormalStateHandler {
         cell.liked = self.isShotLiked(shot)
 
         if let user = shot.user.name, url = shot.user.avatarURL {
-            cell.authorView.viewData = ShotAuthorCompactView.ViewData(author: user, avatarURL: url)
+            let likes = shot.likesCount, comments = shot.commentsCount
+            cell.authorView.viewData = ShotAuthorCompactView
+                .ViewData(author: user, avatarURL: url, likesCount: likes, commentsCount: comments)
         }
 
         cell.delegate = self
@@ -296,7 +298,9 @@ private extension ShotsNormalStateHandler {
             cell.displayAuthor(Settings.Customization.ShowAuthor, animated: true)
 
             if let user = shot.user.name, url = shot.user.avatarURL {
-                cell.authorView.viewData = ShotAuthorCompactView.ViewData(author: user, avatarURL: url)
+                let likes = shot.likesCount, comments = shot.commentsCount
+                cell.authorView.viewData = ShotAuthorCompactView
+                    .ViewData(author: user, avatarURL: url, likesCount: likes, commentsCount: comments)
             }
         }
     }
