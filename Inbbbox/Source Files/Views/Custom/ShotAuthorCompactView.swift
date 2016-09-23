@@ -15,10 +15,10 @@ class ShotAuthorCompactView: UIView {
                                                  bordered: false)
     var authorLabel = UILabel.newAutoLayoutView()
 
-    lazy var likesImageView: UIImageView = UIImageView(image: UIImage(named: "ic-likes-count"))
+    private let likesImageView: UIImageView = UIImageView(image: UIImage(named: "ic-likes-count"))
     var likesLabel = UILabel.newAutoLayoutView()
 
-    lazy var commentsImageView: UIImageView = UIImageView(image: UIImage(named: "ic-comment-count"))
+    private let commentsImageView: UIImageView = UIImageView(image: UIImage(named: "ic-comment-count"))
     var commentsLabel = UILabel.newAutoLayoutView()
 
     struct ViewData {
@@ -50,9 +50,10 @@ class ShotAuthorCompactView: UIView {
         super.init(frame: frame)
 
         avatarView.backgroundColor = .clearColor()
-        customizeLabel(&authorLabel)
-        customizeLabel(&likesLabel)
-        customizeLabel(&commentsLabel)
+        [authorLabel, likesLabel, commentsLabel].forEach { (label) in
+            label.font = UIFont.helveticaFont(.Neue, size: 10)
+            label.textColor = .followeeTextGrayColor()
+        }
 
         addSubview(avatarView)
         addSubview(authorLabel)
@@ -76,7 +77,7 @@ class ShotAuthorCompactView: UIView {
     override func updateConstraints() {
         if !didSetupConstraints {
 
-            avatarView.autoSetDimensionsToSize(self.avatarSize)
+            avatarView.autoSetDimensionsToSize(avatarSize)
             avatarView.autoPinEdgeToSuperviewEdge(.Leading)
             avatarView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
@@ -86,14 +87,14 @@ class ShotAuthorCompactView: UIView {
             commentsLabel.autoPinEdgeToSuperviewEdge(.Trailing, withInset: 3)
             commentsLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
 
-            commentsImageView.autoSetDimensionsToSize(self.commentsSize)
+            commentsImageView.autoSetDimensionsToSize(commentsSize)
             commentsImageView.autoPinEdge(.Trailing, toEdge: .Leading, ofView: commentsLabel, withOffset: -3)
             commentsImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
             likesLabel.autoPinEdge(.Trailing, toEdge: .Leading, ofView: commentsImageView, withOffset: -8)
             likesLabel.autoAlignAxisToSuperviewAxis(.Horizontal)
 
-            likesImageView.autoSetDimensionsToSize(self.likesSize)
+            likesImageView.autoSetDimensionsToSize(likesSize)
             likesImageView.autoPinEdge(.Trailing, toEdge: .Leading, ofView: likesLabel, withOffset: -3)
             likesImageView.autoAlignAxisToSuperviewAxis(.Horizontal)
 
@@ -101,13 +102,6 @@ class ShotAuthorCompactView: UIView {
         }
 
         super.updateConstraints()
-    }
-
-    // MARK: Customization
-
-    private func customizeLabel(inout label: UILabel) {
-        label.font = UIFont.helveticaFont(.Neue, size: 10)
-        label.textColor = .followeeTextGrayColor()
     }
 
 }
