@@ -10,16 +10,18 @@ import PureLayout
 
 class ShotAuthorCompactView: UIView {
 
-    // Public
+    // MARK: Public
     lazy var avatarView: AvatarView = AvatarView(size: self.avatarSize,
                                                  bordered: false)
-    var authorLabel = UILabel.newAutoLayoutView()
+
+    // MARK: Private
+    private let authorLabel = UILabel.newAutoLayoutView()
 
     private let likesImageView: UIImageView = UIImageView(image: UIImage(named: "ic-likes-count"))
-    var likesLabel = UILabel.newAutoLayoutView()
+    private let likesLabel = UILabel.newAutoLayoutView()
 
     private let commentsImageView: UIImageView = UIImageView(image: UIImage(named: "ic-comment-count"))
-    var commentsLabel = UILabel.newAutoLayoutView()
+    private let commentsLabel = UILabel.newAutoLayoutView()
 
     struct ViewData {
         let author: String
