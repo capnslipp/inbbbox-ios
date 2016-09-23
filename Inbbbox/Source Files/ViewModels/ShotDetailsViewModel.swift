@@ -15,6 +15,7 @@ struct CommentDisplayableData {
     let comment: NSAttributedString?
     let date: NSAttributedString
     let avatarURL: NSURL?
+    let likesCount: NSAttributedString
 }
 
 final class ShotDetailsViewModel {
@@ -120,10 +121,11 @@ extension ShotDetailsViewModel {
 
             let comment = comments[indexWithOffset]
             let displayableData = CommentDisplayableData(
-            author: ShotDetailsFormatter.commentAuthorForComment(comment),
+                    author: ShotDetailsFormatter.commentAuthorForComment(comment),
                     comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
                     date: ShotDetailsFormatter.commentDateForComment(comment),
-                    avatarURL: comment.user.avatarURL
+                    avatarURL: comment.user.avatarURL,
+                    likesCount: ShotDetailsFormatter.commentLikesCountForComment(comment)
             )
 
             cachedFormattedComments.append(displayableData)

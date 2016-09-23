@@ -170,6 +170,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURL(data.avatarURL,
                                                        placeholderImage: UIImage(named: "ic-comments-nopicture"))
+            cell.likesCountLabel.attributedText = data.likesCount
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteCommentAtIndexPath(indexPath)
             }

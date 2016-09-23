@@ -24,4 +24,7 @@ protocol CommentType {
     ///
     /// - returns: User.
     var user: UserType { get }
+
+    /// Number of likes received by comment
+    var likesCount: Int { get }
 }
