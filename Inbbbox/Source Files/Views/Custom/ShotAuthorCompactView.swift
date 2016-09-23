@@ -52,20 +52,17 @@ class ShotAuthorCompactView: UIView {
         avatarView.backgroundColor = .clearColor()
         addSubview(avatarView)
 
-        authorLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        authorLabel.textColor = .followeeTextGrayColor()
+        customizeLabel(&authorLabel)
         addSubview(authorLabel)
 
         addSubview(likesImageView)
 
-        likesLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        likesLabel.textColor = .followeeTextGrayColor()
+        customizeLabel(&likesLabel)
         addSubview(likesLabel)
 
         addSubview(commentsImageView)
 
-        commentsLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        commentsLabel.textColor = .followeeTextGrayColor()
+        customizeLabel(&commentsLabel)
         addSubview(commentsLabel)
     }
 
@@ -109,4 +106,12 @@ class ShotAuthorCompactView: UIView {
 
         super.updateConstraints()
     }
+
+    // MARK: Customization
+
+    private func customizeLabel(inout label: UILabel) {
+        label.font = UIFont.helveticaFont(.Neue, size: 10)
+        label.textColor = .followeeTextGrayColor()
+    }
+
 }
