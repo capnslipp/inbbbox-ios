@@ -50,19 +50,15 @@ class ShotAuthorCompactView: UIView {
         super.init(frame: frame)
 
         avatarView.backgroundColor = .clearColor()
-        addSubview(avatarView)
-
         customizeLabel(&authorLabel)
-        addSubview(authorLabel)
-
-        addSubview(likesImageView)
-
         customizeLabel(&likesLabel)
-        addSubview(likesLabel)
-
-        addSubview(commentsImageView)
-
         customizeLabel(&commentsLabel)
+
+        addSubview(avatarView)
+        addSubview(authorLabel)
+        addSubview(likesImageView)
+        addSubview(likesLabel)
+        addSubview(commentsImageView)
         addSubview(commentsLabel)
     }
 
