@@ -194,6 +194,7 @@ private extension APIShotsProvider {
                 fetchSingleBatch()
             }.then {
                 if self.likesFetched == self.likesToFetch || self.lastPageOfLikesReached {
+                    self.fetchingLikes = false
                     fulfill()
                     return Promise()
                 }
