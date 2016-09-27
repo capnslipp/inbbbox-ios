@@ -87,28 +87,28 @@ class CommentEditView: UIView {
             blurView.autoPinEdgesToSuperviewEdges()
 
             likeButton.autoAlignAxis(.Horizontal, toSameAxisOfView: likeButton.superview!,
-                                     withOffset: buttonsCenterOffset)
+                withOffset: buttonsCenterOffset)
             likeButton.autoAlignAxis(.Vertical, toSameAxisOfView: likeButton.superview!,
-                                     withOffset: -(distanceBetweenButtons + buttonSize))
+                withOffset: -(distanceBetweenButtons + buttonSize))
             likeButton.autoSetDimensionsToSize(CGSize(width: buttonSize, height: buttonSize))
 
             likeLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: likeButton,
-                                    withOffset: buttonSize / 2 + buttonsToLabelsAdditionalOffset)
+                withOffset: buttonSize / 2 + buttonsToLabelsAdditionalOffset)
             likeLabel.autoAlignAxis(.Vertical, toSameAxisOfView: likeButton)
 
             deleteButton.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton.superview!,
-                                       withOffset: buttonsCenterOffset)
+                withOffset: buttonsCenterOffset)
             deleteButton.autoAlignAxis(.Vertical, toSameAxisOfView: deleteButton.superview!,
-                                       withOffset: deleteButtonOffset)
+                withOffset: deleteButtonOffset)
             deleteButton.autoSetDimensionsToSize(CGSize(width: buttonSize, height: buttonSize))
 
             deleteLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton,
-                                      withOffset: buttonSize / 2 + buttonsToLabelsAdditionalOffset)
+                withOffset: buttonSize / 2 + buttonsToLabelsAdditionalOffset)
             deleteLabel.autoAlignAxis(.Vertical, toSameAxisOfView: deleteButton)
 
             cancelButton.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteButton)
             cancelButton.autoAlignAxis(.Vertical, toSameAxisOfView: cancelButton.superview!,
-                                       withOffset: cancelButtonOffset)
+                withOffset: cancelButtonOffset)
             cancelButton.autoSetDimensionsToSize(CGSize(width: buttonSize, height: buttonSize))
 
             cancelLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: deleteLabel)

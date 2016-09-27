@@ -172,10 +172,13 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                                                        placeholderImage: UIImage(named: "ic-comments-nopicture"))
             cell.likesCountLabel.attributedText = data.likesCount
             cell.deleteActionHandler = { [weak self] in
-                self?.deleteCommentAtIndexPath(indexPath)
+                self?.deleteComment(atIndexPath: indexPath)
             }
             cell.reportActionHandler = { [weak self] in
-                self?.reportCommentAtIndexPath(indexPath)
+                self?.reportComment(atIndexPath: indexPath)
+            }
+            cell.likeActionHandler = { [weak self] in
+                self?.likeComment(atIndexPath: indexPath)
             }
             cell.avatarView.delegate = self
             cell.delegate = self
@@ -398,7 +401,7 @@ private extension ShotDetailsViewController {
         )
     }
 
-    func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
+    func deleteComment(atIndexPath indexPath: NSIndexPath) {
         let isAllowedToDisplaySeparator = viewModel.isAllowedToDisplaySeparator
         firstly {
             viewModel.deleteCommentAtIndex(indexPath.item)
@@ -414,7 +417,7 @@ private extension ShotDetailsViewController {
         }
     }
 
-    func reportCommentAtIndexPath(indexPath: NSIndexPath) {
+    func reportComment(atIndexPath indexPath: NSIndexPath) {
 
         guard MFMailComposeViewController.canSendMail() else {
             let alert = UIAlertController.emailAccountNotFound()
@@ -434,6 +437,10 @@ private extension ShotDetailsViewController {
 
         presentViewController(composer, animated: true, completion: nil)
         composer.navigationBar.tintColor = .whiteColor()
+    }
+
+    func likeComment(atIndexPath indexPath: NSIndexPath) {
+
     }
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
