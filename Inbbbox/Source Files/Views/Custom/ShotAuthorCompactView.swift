@@ -36,7 +36,7 @@ class ShotAuthorCompactView: UIView {
             authorLabel.text = viewData?.author
             let placeholder = UIImage(named: "ic-account-nopicture")
             avatarView.imageView.loadImageFromURL((viewData?.avatarURL)!, placeholderImage: placeholder)
-            if viewData?.liked ?? false {
+            if let viewData = viewData where viewData.liked {
                 likesImageView.image = UIImage(named: "ic-like-details-active")
             } else {
                 likesImageView.image = UIImage(named: "ic-likes-count")
