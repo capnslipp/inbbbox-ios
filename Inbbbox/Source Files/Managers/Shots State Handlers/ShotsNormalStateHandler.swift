@@ -98,7 +98,11 @@ extension ShotsNormalStateHandler {
         if let user = shot.user.name, url = shot.user.avatarURL {
             let likes = shot.likesCount, comments = shot.commentsCount
             cell.authorView.viewData = ShotAuthorCompactView
-                .ViewData(author: user, avatarURL: url, likesCount: likes, commentsCount: comments)
+                .ViewData(author: user,
+                          avatarURL: url,
+                          liked: cell.liked,
+                          likesCount: likes,
+                          commentsCount: comments)
         }
 
         cell.delegate = self
@@ -258,8 +262,10 @@ private extension ShotsNormalStateHandler {
         return Promise() { fulfill, reject in
             firstly {
                 shotsRequester.likeShot(shot)
+            }.then {
+                self.fetchLikedShots()
             }.then { () -> Void in
-                self.likedShots.append(shot)
+                self.updateAuthorData()
                 fulfill()
             }.error { error in
                 reject(error)
@@ -294,13 +300,22 @@ private extension ShotsNormalStateHandler {
         let visibleShot = self.visibleShot()
         let visibleCell = self.visibleCell()
 
-        if let cell = visibleCell, shot = visibleShot {
+        if let cell = visibleCell, var shot = visibleShot {
             cell.displayAuthor(Settings.Customization.ShowAuthor, animated: true)
+            cell.liked = self.isShotLiked(shot)
+
+            if cell.liked {
+                shot = likedShots.filter({ $0.identifier == shot.identifier }).first ?? shot
+            }
 
             if let user = shot.user.name, url = shot.user.avatarURL {
                 let likes = shot.likesCount, comments = shot.commentsCount
                 cell.authorView.viewData = ShotAuthorCompactView
-                    .ViewData(author: user, avatarURL: url, likesCount: likes, commentsCount: comments)
+                    .ViewData(author: user,
+                              avatarURL: url,
+                              liked: cell.liked,
+                              likesCount: likes,
+                              commentsCount: comments)
             }
         }
     }
