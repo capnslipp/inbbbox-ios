@@ -170,6 +170,9 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         editView.deleteButton.removeTarget(self,
                                            action: #selector(reportButtonDidTap(_:)),
                                            forControlEvents: .TouchUpInside)
+        editView.likeButton.removeTarget(self,
+                                         action: #selector(likeButtonDidTap(_:)),
+                                         forControlEvents: .TouchUpInside)
         showEditView(false)
     }
 
@@ -240,7 +243,7 @@ extension ShotDetailsCommentCollectionViewCell {
     func cancelButtonDidTap(_: UIButton) {
         showEditView(false)
     }
-    
+
     func likeButtonDidTap(_: UIButton) {
         likeActionHandler?()
     }

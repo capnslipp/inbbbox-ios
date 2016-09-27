@@ -121,11 +121,11 @@ extension ShotDetailsViewModel {
 
             let comment = comments[indexWithOffset]
             let displayableData = CommentDisplayableData(
-                    author: ShotDetailsFormatter.commentAuthorForComment(comment),
-                    comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
-                    date: ShotDetailsFormatter.commentDateForComment(comment),
-                    avatarURL: comment.user.avatarURL,
-                    likesCount: ShotDetailsFormatter.commentLikesCountForComment(comment)
+                author: ShotDetailsFormatter.commentAuthorForComment(comment),
+                comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
+                date: ShotDetailsFormatter.commentDateForComment(comment),
+                avatarURL: comment.user.avatarURL,
+                likesCount: ShotDetailsFormatter.commentLikesCountForComment(comment)
             )
 
             cachedFormattedComments.append(displayableData)
@@ -175,6 +175,20 @@ extension ShotDetailsViewModel {
             }.error(reject)
         }
     }
+}
+
+// MARK: Comments like handling
+
+extension ShotDetailsViewModel {
+
+    func performCommentLikeOperation() {
+
+    }
+
+    func checkLikeStatusOfComment() {
+
+    }
+
 }
 
 // MARK: Buckets handling

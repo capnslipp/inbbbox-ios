@@ -440,7 +440,7 @@ private extension ShotDetailsViewController {
     }
 
     func likeComment(atIndexPath indexPath: NSIndexPath) {
-
+        viewModel.performCommentLikeOperation()
     }
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
