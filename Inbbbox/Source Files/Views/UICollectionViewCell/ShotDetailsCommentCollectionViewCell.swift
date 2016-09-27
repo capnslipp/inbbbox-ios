@@ -40,8 +40,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = TTTAttributedLabel.newAutoLayoutView()
     let dateLabel = UILabel.newAutoLayoutView()
-    private let separatorView = UIView.newAutoLayoutView()
-    private let likeLabel = UILabel.newAutoLayoutView()
     private let likesImageView: UIImageView = UIImageView(image: UIImage(named: "ic-like-emptystate"))
     let likesCountLabel = UILabel.newAutoLayoutView()
     private let commentLabel = TTTAttributedLabel.newAutoLayoutView()
@@ -81,19 +79,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         dateLabel.numberOfLines = 0
         contentView.addSubview(dateLabel)
 
-        separatorView.backgroundColor = UIColor.followeeTextGrayColor()
-        contentView.addSubview(separatorView)
-
-        [likeLabel, likesCountLabel].forEach { (label) in
-            label.font = UIFont.helveticaFont(.Neue, size: 10)
-            label.textColor = .followeeTextGrayColor()
-        }
-
-        likeLabel.text = "Like?"
-        likeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self,
-            action: #selector(likeLabelDidTap(_:))))
-        likeLabel.userInteractionEnabled = true
-        contentView.addSubview(likeLabel)
+        likesCountLabel.font = UIFont.helveticaFont(.Neue, size: 10)
+        likesCountLabel.textColor = .followeeTextGrayColor()
 
         contentView.addSubview(likesImageView)
         contentView.addSubview(likesCountLabel)
@@ -148,13 +135,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
             dateLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom)
             dateLabel.autoPinEdge(.Left, toEdge: .Left, ofView: authorLabel)
             dateLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
-
-            separatorView.autoSetDimensionsToSize(separatorSize)
-            separatorView.autoAlignAxis(.Horizontal, toSameAxisOfView: dateLabel)
-            separatorView.autoPinEdge(.Leading, toEdge: .Trailing, ofView: dateLabel, withOffset: insets.right)
-
-            likeLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: dateLabel)
-            likeLabel.autoPinEdge(.Leading, toEdge: .Trailing, ofView: separatorView, withOffset: insets.right)
 
             likesCountLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: dateLabel)
             likesCountLabel.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -insets.right)
@@ -254,23 +234,6 @@ extension ShotDetailsCommentCollectionViewCell {
 
     func cancelButtonDidTap(_: UIButton) {
         showEditView(false)
-    }
-
-    func likeLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
-        if let text = likeLabel.text {
-            switch text {
-            case "Like?":
-                likeLabel.text = "Like"
-                likeLabel.textColor = UIColor.pinkColor()
-                likesImageView.image = UIImage(named: "ic-like-details-active")
-            case "Like":
-                likeLabel.text = "Like?"
-                likeLabel.textColor = UIColor.followeeTextGrayColor()
-                likesImageView.image = UIImage(named: "ic-like-emptystate")
-            default:
-                break
-            }
-        }
     }
 
 }
