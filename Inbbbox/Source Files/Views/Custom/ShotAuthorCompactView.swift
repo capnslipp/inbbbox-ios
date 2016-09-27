@@ -26,6 +26,7 @@ class ShotAuthorCompactView: UIView {
     struct ViewData {
         let author: String
         let avatarURL: NSURL
+        let liked: Bool
         let likesCount: UInt
         let commentsCount: UInt
     }
@@ -35,6 +36,11 @@ class ShotAuthorCompactView: UIView {
             authorLabel.text = viewData?.author
             let placeholder = UIImage(named: "ic-account-nopicture")
             avatarView.imageView.loadImageFromURL((viewData?.avatarURL)!, placeholderImage: placeholder)
+            if let viewData = viewData where viewData.liked {
+                likesImageView.image = UIImage(named: "ic-like-details-active")
+            } else {
+                likesImageView.image = UIImage(named: "ic-likes-count")
+            }
             likesLabel.text = "\(viewData?.likesCount ?? 0)"
             commentsLabel.text = "\(viewData?.commentsCount ?? 0)"
         }
