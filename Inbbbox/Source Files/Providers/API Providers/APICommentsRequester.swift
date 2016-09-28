@@ -91,6 +91,27 @@ class APICommentsRequester: Verifiable {
     }
 
     /**
+     Unlikes given comment for provided shot.
+
+     - Warning: Unliking comments requires authenticated user with the *write* scope.
+
+     - parameter comment: Comment for which a like mark should be removed.
+     - parameter shot:    Shot which belongs to comment.
+
+     - returns: Promise which resolves with Void.
+     */
+    func unlikeComment(comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+
+            let query = CommentUnlikeQuery(shot: shot, comment: comment)
+
+            firstly {
+                sendCommentOperationQuery(query)
+                }.then(fulfill).error(reject)
+        }
+    }
+
+    /**
      Checks like status of comment for provided shot.
 
      - parameter comment: Comment for check.

@@ -37,6 +37,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     var deleteActionHandler: (() -> Void)?
     var reportActionHandler: (() -> Void)?
     var likeActionHandler: (() -> Void)?
+    var unlikeActionHandler: (() -> Void)?
 
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = TTTAttributedLabel.newAutoLayoutView()
@@ -176,9 +177,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         editView.deleteButton.removeTarget(self,
                                            action: #selector(reportButtonDidTap(_:)),
                                            forControlEvents: .TouchUpInside)
-        editView.likeButton.removeTarget(self,
-                                         action: #selector(likeButtonDidTap(_:)),
-                                         forControlEvents: .TouchUpInside)
         showEditView(false)
         isLikedByMe = false
     }
@@ -253,7 +251,7 @@ extension ShotDetailsCommentCollectionViewCell {
 
     func likeButtonDidTap(_: UIButton) {
         if isLikedByMe {
-
+            unlikeActionHandler?()
         } else {
             likeActionHandler?()
         }

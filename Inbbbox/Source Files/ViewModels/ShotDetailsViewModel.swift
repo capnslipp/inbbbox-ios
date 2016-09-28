@@ -371,6 +371,21 @@ extension ShotDetailsViewModel {
         }
     }
 
+    func performUnlikeOperationForComment(atIndexPath indexPath: NSIndexPath) -> Promise<Void> {
+
+        let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
+        let comment = comments[index]
+
+        return Promise<Void> { fulfill, reject in
+
+            firstly {
+                commentsRequester.unlikeComment(comment, forShot: shot)
+            }.then {
+                fulfill()
+            }.error(reject)
+        }
+    }
+
     func checkLikeStatusForComment(atIndexPath indexPath: NSIndexPath, force: Bool) -> Promise<Bool> {
 
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
@@ -389,7 +404,7 @@ extension ShotDetailsViewModel {
             }
         }
 
-        return Promise(false)
+        return Promise(comment.isLikedByMe)
     }
 
     func setLikeStatusForComment(atIndexPath indexPath: NSIndexPath, withValue isLiked: Bool) {
@@ -397,19 +412,18 @@ extension ShotDetailsViewModel {
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
         var comment = comments[index]
 
-        if comment.checkedForLike {
-            var diff = isLiked ? 1 : -1
-            diff = comment.isLikedByMe == isLiked ? 0 : diff
+        if comment.isLikedByMe != isLiked {
+            let diff = isLiked ? 1 : -1
             comment.likesCount = comment.likesCount + diff
+
+            comment.isLikedByMe = isLiked
+
+            let displayableData = createDisplayableData(withComment: comment)
+            cachedFormattedComments[index] = displayableData
         }
 
-        comment.isLikedByMe = isLiked
         comment.checkedForLike = true
-
         comments[index] = comment
-
-        let displayableData = createDisplayableData(withComment: comment)
-        cachedFormattedComments[index] = displayableData
     }
 }
 

@@ -179,6 +179,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             cell.likeActionHandler = { [weak self] in
                 self?.likeComment(atIndexPath: indexPath)
             }
+            cell.unlikeActionHandler = { [weak self] in
+                self?.unlikeComment(atIndexPath: indexPath)
+            }
             cell.avatarView.delegate = self
             cell.delegate = self
 
@@ -441,6 +444,18 @@ private extension ShotDetailsViewController {
     func likeComment(atIndexPath indexPath: NSIndexPath) {
         firstly {
             viewModel.performLikeOperationForComment(atIndexPath: indexPath)
+        }.then {
+            self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
+        }.then { isLiked in
+            self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
+        }.then {
+            self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+        }
+    }
+
+    func unlikeComment(atIndexPath indexPath: NSIndexPath) {
+        firstly {
+            viewModel.performUnlikeOperationForComment(atIndexPath: indexPath)
         }.then {
             self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
         }.then { isLiked in
