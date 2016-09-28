@@ -389,12 +389,10 @@ extension ShotDetailsViewModel {
     func checkLikeStatusForComment(atIndexPath indexPath: NSIndexPath, force: Bool) -> Promise<Bool> {
 
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
-
         let comment = comments[index]
 
         if force || comment.checkedForLike == false {
             return Promise<Bool> { fulfill, reject in
-                print("checked")
 
                 firstly {
                     commentsRequester.checkIfLikeComment(comment, forShot: shot)
