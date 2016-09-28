@@ -68,6 +68,27 @@ class APICommentsRequester: Verifiable {
             }.then(fulfill).error(reject)
         }
     }
+
+    /**
+     Likes given comment for provided shot.
+
+     - Warning: Liking comments requires authenticated user with the *write* scope.
+
+     - parameter comment: Comment which should be marked as liked.
+     - parameter shot:    Shot which belongs to comment.
+
+     - returns: Promise which resolves with Void.
+     */
+    func likeComment(comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+
+            let query = CommentLikeQuery(shot: shot, comment: comment)
+
+            firstly {
+                sendCommentOperationQuery(query)
+            }.then(fulfill).error(reject)
+        }
+    }
 }
 
 private extension APICommentsRequester {
@@ -111,6 +132,15 @@ private extension APICommentsRequester {
             }.then {
                 self.verifyAccountType()
             }.then {
+                Request(query: query).resume()
+            }.then { _ in fulfill() }.error(reject)
+        }
+    }
+
+    func sendCommentOperationQuery(query: Query) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+
+            firstly {
                 Request(query: query).resume()
             }.then { _ in fulfill() }.error(reject)
         }

@@ -177,20 +177,6 @@ extension ShotDetailsViewModel {
     }
 }
 
-// MARK: Comments like handling
-
-extension ShotDetailsViewModel {
-
-    func performCommentLikeOperation() {
-
-    }
-
-    func checkLikeStatusOfComment() {
-
-    }
-
-}
-
 // MARK: Buckets handling
 
 extension ShotDetailsViewModel {
@@ -361,6 +347,25 @@ extension ShotDetailsViewModel {
                      "Shot ID: " + shot.identifier + "\n" +
                      separator
         return report
+    }
+
+    func performLikeOperationForComment(atIndexPath indexPath: NSIndexPath) -> Promise<Void> {
+
+        let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
+        let comment = comments[index]
+
+        return Promise<Void> { fulfill, reject in
+
+            firstly {
+                commentsRequester.likeComment(comment, forShot: shot)
+                }.then {
+                    fulfill()
+                }.error(reject)
+        }
+    }
+
+    func checkLikeStatusOfComment() {
+
     }
 }
 
