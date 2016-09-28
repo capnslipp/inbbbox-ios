@@ -45,6 +45,12 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     let likesCountLabel = UILabel.newAutoLayoutView()
     private let commentLabel = TTTAttributedLabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
+    var isLikedByMe: Bool = false {
+        didSet {
+            editView.setLiked(withValue: isLikedByMe)
+            likesImageView.image = UIImage(named: (isLikedByMe ? "ic-like-details-active" : "ic-like-emptystate"))
+        }
+    }
 
     // Regards clickable links in comment label
     private let layoutManager = NSLayoutManager()
@@ -174,6 +180,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
                                          action: #selector(likeButtonDidTap(_:)),
                                          forControlEvents: .TouchUpInside)
         showEditView(false)
+        isLikedByMe = false
     }
 
     func showEditView(show: Bool, forActionType action: EditActionType = .Editing) {
@@ -245,7 +252,11 @@ extension ShotDetailsCommentCollectionViewCell {
     }
 
     func likeButtonDidTap(_: UIButton) {
-        likeActionHandler?()
+        if isLikedByMe {
+
+        } else {
+            likeActionHandler?()
+        }
     }
 
 }

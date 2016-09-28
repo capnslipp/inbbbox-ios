@@ -89,6 +89,27 @@ class APICommentsRequester: Verifiable {
             }.then(fulfill).error(reject)
         }
     }
+
+    /**
+     Checks like status of comment for provided shot.
+
+     - parameter comment: Comment for check.
+     - parameter shot:    Shot which belongs to comment.
+
+     - returns: Promise which resolves with Bool.
+     */
+    func checkIfLikeComment(comment: CommentType, forShot shot: ShotType) -> Promise<Bool> {
+        return Promise<Bool> { fulfill, reject in
+
+            let query = CommentLikedQuery(shot: shot, comment: comment)
+
+            firstly {
+                sendCommentLikedQuery(query)
+            }.then { result in
+                fulfill(result)
+            }.error(reject)
+        }
+    }
 }
 
 private extension APICommentsRequester {
@@ -143,6 +164,21 @@ private extension APICommentsRequester {
             firstly {
                 Request(query: query).resume()
             }.then { _ in fulfill() }.error(reject)
+        }
+    }
+
+    func sendCommentLikedQuery(query: Query) -> Promise<Bool> {
+        return Promise<Bool> { fulfill, reject in
+
+            firstly {
+                Request(query: query).resume()
+            }.then { _ in
+                fulfill(true)
+            }.error { error in
+                // According to API documentation, when response.code is 404,
+                // then comment is not liked by authenticated user.
+                (error as NSError).code == 404 ? fulfill(false) : reject(error)
+            }
         }
     }
 }

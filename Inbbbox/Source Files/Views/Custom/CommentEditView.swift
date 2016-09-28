@@ -127,6 +127,10 @@ class CommentEditView: UIView {
         isEditing = false
     }
 
+    func setLiked(withValue value: Bool) {
+        isLiked = value
+    }
+
     // MARK: Private
 
     private func setupSubviews() {

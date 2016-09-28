@@ -15,7 +15,9 @@ struct Comment: CommentType {
     let body: NSAttributedString?
     let createdAt: NSDate
     let user: UserType
-    let likesCount: Int
+    var likesCount: Int
+    var isLikedByMe: Bool
+    var checkedForLike: Bool
 }
 
 extension Comment: Mappable {
@@ -35,7 +37,9 @@ extension Comment: Mappable {
                 body: htmlBody,
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
                 user: User.map(json[Key.User.rawValue]),
-                likesCount: json[Key.LikesCount.rawValue].intValue
+                likesCount: json[Key.LikesCount.rawValue].intValue,
+                isLikedByMe:  false,
+                checkedForLike: false
             )
         }
     }

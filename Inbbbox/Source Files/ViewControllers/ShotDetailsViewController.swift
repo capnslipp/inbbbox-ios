@@ -138,7 +138,6 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             return cell
 
         } else if viewModel.isDescriptionIndex(indexPath.row) {
-
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self,
                     forIndexPath: indexPath, type: .Cell)
 
@@ -158,7 +157,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                     forIndexPath: indexPath, type: .Cell)
 
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
-
+            cell.isLikedByMe = data.isLikedByMe
             cell.authorLabel.setText(data.author)
             if let comment = data.comment {
                 cell.setCommentLabelAttributedText(comment)
@@ -169,7 +168,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURL(data.avatarURL,
-                                                       placeholderImage: UIImage(named: "ic-comments-nopicture"))
+                                                    placeholderImage: UIImage(named: "ic-comments-nopicture"))
             cell.likesCountLabel.attributedText = data.likesCount
             cell.deleteActionHandler = { [weak self] in
                 self?.deleteComment(atIndexPath: indexPath)
@@ -440,7 +439,15 @@ private extension ShotDetailsViewController {
     }
 
     func likeComment(atIndexPath indexPath: NSIndexPath) {
-        viewModel.performLikeOperationForComment(atIndexPath: indexPath)
+        firstly {
+            viewModel.performLikeOperationForComment(atIndexPath: indexPath)
+        }.then {
+            self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
+        }.then { isLiked in
+            self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
+        }.then {
+            self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+        }
     }
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {

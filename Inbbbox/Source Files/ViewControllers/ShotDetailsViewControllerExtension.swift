@@ -86,11 +86,34 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
     }
 
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        !decelerate ? animateHeader(start: true) : {}()
+        !decelerate ? {
+            animateHeader(start: true)
+            checkForCommentsLikes()
+        }() : {}()
     }
 
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         animateHeader(start: true)
+        checkForCommentsLikes()
+    }
+
+    private func checkForCommentsLikes() {
+        let visibleCells = shotDetailsView.collectionView.indexPathsForVisibleItems()
+
+        for indexPath in visibleCells {
+            let index = self.viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
+
+            if index >= 0 && index < self.viewModel.comments.count {
+                firstly {
+                    self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: false)
+                }.then { isLiked -> Void in
+                    self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
+                    if isLiked {
+                        self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+                    }
+                }
+            }
+        }
     }
 }
 

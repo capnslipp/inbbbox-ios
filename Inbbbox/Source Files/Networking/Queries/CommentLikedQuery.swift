@@ -19,6 +19,6 @@ struct CommentLikedQuery: Query {
     /// - parameter shot: Shot that comment is related to.
     /// - parameter comment: Comment to be checked.
     init(shot: ShotType, comment: CommentType) {
-        path = "/shots/" + shot.identifier + "/comment/" + comment.identifier + "/like"
+        path = "/shots/" + shot.identifier + "/comments/" + comment.identifier + "/like"
     }
 }
