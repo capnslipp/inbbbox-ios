@@ -157,7 +157,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                     forIndexPath: indexPath, type: .Cell)
 
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
-            cell.isLikedByMe = data.isLikedByMe
+            cell.likedByMe = data.likedByMe
             cell.authorLabel.setText(data.author)
             if let comment = data.comment {
                 cell.setCommentLabelAttributedText(comment)
@@ -446,9 +446,8 @@ private extension ShotDetailsViewController {
             viewModel.performLikeOperationForComment(atIndexPath: indexPath)
         }.then {
             self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
-        }.then { isLiked in
+        }.then { isLiked -> Void in
             self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
-        }.then {
             self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
         }
     }
@@ -458,9 +457,8 @@ private extension ShotDetailsViewController {
             viewModel.performUnlikeOperationForComment(atIndexPath: indexPath)
         }.then {
             self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
-        }.then { isLiked in
+        }.then { isLiked -> Void in
             self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
-        }.then {
             self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
         }
     }

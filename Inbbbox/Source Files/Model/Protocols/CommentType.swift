@@ -29,7 +29,7 @@ protocol CommentType {
     var likesCount: Int { get set}
 
     /// Is comment marked as liked by user
-    var isLikedByMe: Bool { get set }
+    var likedByMe: Bool { get set }
 
     /// Was like data already fetched
     var checkedForLike: Bool { get set }

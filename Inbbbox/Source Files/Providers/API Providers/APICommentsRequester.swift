@@ -107,7 +107,7 @@ class APICommentsRequester: Verifiable {
 
             firstly {
                 sendCommentOperationQuery(query)
-                }.then(fulfill).error(reject)
+            }.then(fulfill).error(reject)
         }
     }
 

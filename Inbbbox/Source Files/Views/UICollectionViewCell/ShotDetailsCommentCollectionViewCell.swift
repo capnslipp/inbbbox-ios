@@ -46,10 +46,10 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     let likesCountLabel = UILabel.newAutoLayoutView()
     private let commentLabel = TTTAttributedLabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
-    var isLikedByMe: Bool = false {
+    var likedByMe: Bool = false {
         didSet {
-            editView.setLiked(withValue: isLikedByMe)
-            likesImageView.image = UIImage(named: (isLikedByMe ? "ic-like-details-active" : "ic-like-emptystate"))
+            editView.setLiked(withValue: likedByMe)
+            likesImageView.image = UIImage(named: (likedByMe ? "ic-like-details-active" : "ic-like-emptystate"))
         }
     }
 
@@ -178,7 +178,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
                                            action: #selector(reportButtonDidTap(_:)),
                                            forControlEvents: .TouchUpInside)
         showEditView(false)
-        isLikedByMe = false
+        likedByMe = false
     }
 
     func showEditView(show: Bool, forActionType action: EditActionType = .Editing) {
@@ -250,7 +250,7 @@ extension ShotDetailsCommentCollectionViewCell {
     }
 
     func likeButtonDidTap(_: UIButton) {
-        if isLikedByMe {
+        if likedByMe {
             unlikeActionHandler?()
         } else {
             likeActionHandler?()

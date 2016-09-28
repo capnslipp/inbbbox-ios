@@ -16,7 +16,7 @@ struct Comment: CommentType {
     let createdAt: NSDate
     let user: UserType
     var likesCount: Int
-    var isLikedByMe: Bool
+    var likedByMe: Bool
     var checkedForLike: Bool
 }
 
@@ -38,7 +38,7 @@ extension Comment: Mappable {
                 createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
                 user: User.map(json[Key.User.rawValue]),
                 likesCount: json[Key.LikesCount.rawValue].intValue,
-                isLikedByMe:  false,
+                likedByMe:  false,
                 checkedForLike: false
             )
         }

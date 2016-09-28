@@ -16,7 +16,7 @@ struct CommentDisplayableData {
     let date: NSAttributedString
     let avatarURL: NSURL?
     var likesCount: NSAttributedString
-    var isLikedByMe: Bool
+    var likedByMe: Bool
 }
 
 final class ShotDetailsViewModel {
@@ -140,7 +140,7 @@ extension ShotDetailsViewModel {
             date: ShotDetailsFormatter.commentDateForComment(comment),
             avatarURL: comment.user.avatarURL,
             likesCount: ShotDetailsFormatter.commentLikesCountForComment(comment),
-            isLikedByMe: comment.isLikedByMe
+            likedByMe: comment.likedByMe
         )
         return displayableData
     }
@@ -404,7 +404,7 @@ extension ShotDetailsViewModel {
             }
         }
 
-        return Promise(comment.isLikedByMe)
+        return Promise(comment.likedByMe)
     }
 
     func setLikeStatusForComment(atIndexPath indexPath: NSIndexPath, withValue isLiked: Bool) {
@@ -412,11 +412,11 @@ extension ShotDetailsViewModel {
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
         var comment = comments[index]
 
-        if comment.isLikedByMe != isLiked {
+        if comment.likedByMe != isLiked {
             let diff = isLiked ? 1 : -1
             comment.likesCount = comment.likesCount + diff
 
-            comment.isLikedByMe = isLiked
+            comment.likedByMe = isLiked
 
             let displayableData = createDisplayableData(withComment: comment)
             cachedFormattedComments[index] = displayableData
