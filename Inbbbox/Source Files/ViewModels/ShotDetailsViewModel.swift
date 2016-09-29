@@ -15,6 +15,8 @@ struct CommentDisplayableData {
     let comment: NSAttributedString?
     let date: NSAttributedString
     let avatarURL: NSURL?
+    var likesCount: NSAttributedString
+    var likedByMe: Bool
 }
 
 final class ShotDetailsViewModel {
@@ -119,12 +121,7 @@ extension ShotDetailsViewModel {
         if !existsCachedComment {
 
             let comment = comments[indexWithOffset]
-            let displayableData = CommentDisplayableData(
-            author: ShotDetailsFormatter.commentAuthorForComment(comment),
-                    comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
-                    date: ShotDetailsFormatter.commentDateForComment(comment),
-                    avatarURL: comment.user.avatarURL
-            )
+            let displayableData = createDisplayableData(withComment: comment)
 
             cachedFormattedComments.append(displayableData)
         }
@@ -134,6 +131,18 @@ extension ShotDetailsViewModel {
 
     func userForCommentAtIndex(index: Int) -> UserType {
         return comments[self.indexInCommentArrayBasedOnItemIndex(index)].user
+    }
+
+    private func createDisplayableData(withComment comment: CommentType) -> CommentDisplayableData {
+        let displayableData = CommentDisplayableData(
+            author: ShotDetailsFormatter.commentAuthorForComment(comment),
+            comment: ShotDetailsFormatter.attributedCommentBodyForComment(comment),
+            date: ShotDetailsFormatter.commentDateForComment(comment),
+            avatarURL: comment.user.avatarURL,
+            likesCount: ShotDetailsFormatter.commentLikesCountForComment(comment),
+            likedByMe: comment.likedByMe
+        )
+        return displayableData
     }
 
 }
@@ -345,6 +354,68 @@ extension ShotDetailsViewModel {
                      "Shot ID: " + shot.identifier + "\n" +
                      separator
         return report
+    }
+
+    func performLikeOperationForComment(atIndexPath indexPath: NSIndexPath) -> Promise<Void> {
+
+        let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
+        let comment = comments[index]
+
+        return Promise<Void> { fulfill, reject in
+
+            firstly {
+                commentsRequester.likeComment(comment, forShot: shot)
+            }.then(fulfill).error(reject)
+        }
+    }
+
+    func performUnlikeOperationForComment(atIndexPath indexPath: NSIndexPath) -> Promise<Void> {
+
+        let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
+        let comment = comments[index]
+
+        return Promise<Void> { fulfill, reject in
+
+            firstly {
+                commentsRequester.unlikeComment(comment, forShot: shot)
+            }.then(fulfill).error(reject)
+        }
+    }
+
+    func checkLikeStatusForComment(atIndexPath indexPath: NSIndexPath, force: Bool) -> Promise<Bool> {
+
+        let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
+        let comment = comments[index]
+
+        if force || !comment.checkedForLike {
+            return Promise<Bool> { fulfill, reject in
+
+                firstly {
+                    commentsRequester.checkIfLikeComment(comment, forShot: shot)
+                }.then(fulfill).error(reject)
+            }
+        }
+
+        return Promise(comment.likedByMe)
+    }
+
+    func setLikeStatusForComment(atIndexPath indexPath: NSIndexPath, withValue isLiked: Bool) {
+
+        let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
+        var comment = comments[index]
+
+        if comment.likedByMe != isLiked {
+            let diff = isLiked ? 1 : -1
+            comment.likesCount = comment.likesCount + diff
+
+            comment.likedByMe = isLiked
+
+            let displayableData = createDisplayableData(withComment: comment)
+            cachedFormattedComments[index] = displayableData
+        }
+
+        comment.checkedForLike = true
+        comments[index] = comment
     }
 }
 

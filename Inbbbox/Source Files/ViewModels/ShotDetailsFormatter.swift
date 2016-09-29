@@ -109,6 +109,13 @@ final class ShotDetailsFormatter {
                 NSFontAttributeName: UIFont.helveticaFont(.NeueMedium, size: 16)
         ])
     }
+
+    class func commentLikesCountForComment(comment: CommentType) -> NSAttributedString {
+        return NSAttributedString(string: "\(comment.likesCount)", attributes: [
+            NSForegroundColorAttributeName: UIColor.followeeTextGrayColor(),
+            NSFontAttributeName: UIFont.helveticaFont(.Neue, size: 10)
+        ])
+    }
 }
 
 private extension ShotDetailsFormatter {

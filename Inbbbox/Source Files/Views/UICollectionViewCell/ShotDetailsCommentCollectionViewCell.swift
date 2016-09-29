@@ -13,6 +13,10 @@ private var avatarSize: CGSize {
     return CGSize(width: 32, height: 32)
 }
 
+private var likesImageSize: CGSize {
+    return CGSize(width: 12, height: 12)
+}
+
 private var horizontalSpaceBetweenAvatarAndText: CGFloat {
     return 15
 }
@@ -28,12 +32,22 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
     var deleteActionHandler: (() -> Void)?
     var reportActionHandler: (() -> Void)?
+    var likeActionHandler: (() -> Void)?
+    var unlikeActionHandler: (() -> Void)?
 
     let avatarView = AvatarView(size: avatarSize, bordered: false)
     let authorLabel = TTTAttributedLabel.newAutoLayoutView()
     let dateLabel = UILabel.newAutoLayoutView()
+    private let likesImageView: UIImageView = UIImageView(image: UIImage(named: "ic-like-emptystate"))
+    let likesCountLabel = UILabel.newAutoLayoutView()
     private let commentLabel = TTTAttributedLabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
+    var likedByMe: Bool = false {
+        didSet {
+            editView.setLiked(withValue: likedByMe)
+            likesImageView.image = UIImage(named: (likedByMe ? "ic-like-details-active" : "ic-like-emptystate"))
+        }
+    }
 
     // Regards clickable links in comment label
     private let layoutManager = NSLayoutManager()
@@ -69,8 +83,18 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         dateLabel.numberOfLines = 0
         contentView.addSubview(dateLabel)
 
+        likesCountLabel.font = UIFont.helveticaFont(.Neue, size: 10)
+        likesCountLabel.textColor = .followeeTextGrayColor()
+
+        contentView.addSubview(likesImageView)
+        contentView.addSubview(likesCountLabel)
+
         editView.cancelButton.addTarget(self,
                 action: #selector(cancelButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        contentView.addSubview(editView)
+
+        editView.likeButton.addTarget(self,
+                action: #selector(likeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         contentView.addSubview(editView)
 
         setNeedsUpdateConstraints()
@@ -87,7 +111,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         let preferredMaxLayoutWidth = frame.size.width - (self.dynamicType.maximumContentWidth ?? 0)
 
         authorLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
-        dateLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         commentLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
 
         textContainer.size = commentLabel.bounds.size
@@ -119,8 +142,14 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
             dateLabel.autoPinEdgeToSuperviewEdge(.Bottom, withInset: insets.bottom)
             dateLabel.autoPinEdge(.Left, toEdge: .Left, ofView: authorLabel)
-            dateLabel.autoPinEdge(.Right, toEdge: .Right, ofView: authorLabel)
             dateLabel.autoSetDimension(.Height, toSize: 26, relation: .GreaterThanOrEqual)
+
+            likesCountLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: dateLabel)
+            likesCountLabel.autoPinEdge(.Right, toEdge: .Right, ofView: self, withOffset: -insets.right)
+
+            likesImageView.autoSetDimensionsToSize(likesImageSize)
+            likesImageView.autoAlignAxis(.Horizontal, toSameAxisOfView: dateLabel)
+            likesImageView.autoPinEdge(.Trailing, toEdge: .Leading, ofView: likesCountLabel, withOffset: -3)
 
             editView.autoPinEdge(.Right, toEdge: .Right, ofView: self)
             editView.autoPinEdge(.Left, toEdge: .Left, ofView: self)
@@ -145,6 +174,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
                                            action: #selector(reportButtonDidTap(_:)),
                                            forControlEvents: .TouchUpInside)
         showEditView(false)
+        likedByMe = false
     }
 
     func showEditView(show: Bool, forActionType action: EditActionType = .Editing) {
@@ -177,7 +207,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         textContainer.maximumNumberOfLines = commentLabel.numberOfLines
 
         commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self,
-                action: #selector(commentLabelDidTap(_:))))
+            action: #selector(commentLabelDidTap(_:))))
     }
 
     func setLinkInAuthorLabel(URL: NSURL, delegate: TTTAttributedLabelDelegate) {
@@ -214,6 +244,11 @@ extension ShotDetailsCommentCollectionViewCell {
     func cancelButtonDidTap(_: UIButton) {
         showEditView(false)
     }
+
+    func likeButtonDidTap(_: UIButton) {
+        likedByMe ? unlikeActionHandler?() : likeActionHandler?()
+    }
+
 }
 
 extension ShotDetailsCommentCollectionViewCell: AutoSizable {

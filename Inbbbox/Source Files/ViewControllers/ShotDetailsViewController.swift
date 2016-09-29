@@ -138,7 +138,6 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             return cell
 
         } else if viewModel.isDescriptionIndex(indexPath.row) {
-
             let cell = collectionView.dequeueReusableClass(ShotDetailsDescriptionCollectionViewCell.self,
                     forIndexPath: indexPath, type: .Cell)
 
@@ -158,7 +157,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                     forIndexPath: indexPath, type: .Cell)
 
             let data = viewModel.displayableDataForCommentAtIndex(indexPath.row)
-
+            cell.likedByMe = data.likedByMe
             cell.authorLabel.setText(data.author)
             if let comment = data.comment {
                 cell.setCommentLabelAttributedText(comment)
@@ -169,12 +168,19 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             }
             cell.dateLabel.attributedText = data.date
             cell.avatarView.imageView.loadImageFromURL(data.avatarURL,
-                                                       placeholderImage: UIImage(named: "ic-comments-nopicture"))
+                                                    placeholderImage: UIImage(named: "ic-comments-nopicture"))
+            cell.likesCountLabel.attributedText = data.likesCount
             cell.deleteActionHandler = { [weak self] in
-                self?.deleteCommentAtIndexPath(indexPath)
+                self?.deleteComment(atIndexPath: indexPath)
             }
             cell.reportActionHandler = { [weak self] in
-                self?.reportCommentAtIndexPath(indexPath)
+                self?.reportComment(atIndexPath: indexPath)
+            }
+            cell.likeActionHandler = { [weak self] in
+                self?.likeComment(atIndexPath: indexPath)
+            }
+            cell.unlikeActionHandler = { [weak self] in
+                self?.unlikeComment(atIndexPath: indexPath)
             }
             cell.avatarView.delegate = self
             cell.delegate = self
@@ -397,7 +403,7 @@ private extension ShotDetailsViewController {
         )
     }
 
-    func deleteCommentAtIndexPath(indexPath: NSIndexPath) {
+    func deleteComment(atIndexPath indexPath: NSIndexPath) {
         let isAllowedToDisplaySeparator = viewModel.isAllowedToDisplaySeparator
         firstly {
             viewModel.deleteCommentAtIndex(indexPath.item)
@@ -413,7 +419,7 @@ private extension ShotDetailsViewController {
         }
     }
 
-    func reportCommentAtIndexPath(indexPath: NSIndexPath) {
+    func reportComment(atIndexPath indexPath: NSIndexPath) {
 
         guard MFMailComposeViewController.canSendMail() else {
             let alert = UIAlertController.emailAccountNotFound()
@@ -433,6 +439,28 @@ private extension ShotDetailsViewController {
 
         presentViewController(composer, animated: true, completion: nil)
         composer.navigationBar.tintColor = .whiteColor()
+    }
+
+    func likeComment(atIndexPath indexPath: NSIndexPath) {
+        firstly {
+            viewModel.performLikeOperationForComment(atIndexPath: indexPath)
+        }.then {
+            self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
+        }.then { isLiked -> Void in
+            self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
+            self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+        }
+    }
+
+    func unlikeComment(atIndexPath indexPath: NSIndexPath) {
+        firstly {
+            viewModel.performUnlikeOperationForComment(atIndexPath: indexPath)
+        }.then {
+            self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
+        }.then { isLiked -> Void in
+            self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
+            self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+        }
     }
 
     func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
