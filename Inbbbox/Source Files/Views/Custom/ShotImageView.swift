@@ -65,14 +65,17 @@ class ShotImageView: UIImageView {
             self.image = originalImage
             return
         }
-        let bluredImageUrl = imageUrl?.copy()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { [weak self] in
-            let bluredImage = self?.originalImage?.imageByBlurringImageWithBlur(blur)
-            dispatch_async(dispatch_get_main_queue(), {
-                if self?.imageUrl?.absoluteString == bluredImageUrl?.absoluteString {
-                    self?.image = bluredImage
-                }
-            })
-        })
+//        let bluredImageUrl = imageUrl?.copy()
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { [weak self] in
+//            print("blur image")
+//            let bluredImage = self?.originalImage?.imageByBlurringImageWithBlur(blur)
+//
+//            dispatch_async(dispatch_get_main_queue(), {
+//                print("blurred image")
+//                if self?.imageUrl?.absoluteString == bluredImageUrl?.absoluteString {
+//                    self?.image = bluredImage
+//                }
+//            })
+//        })
     }
 }

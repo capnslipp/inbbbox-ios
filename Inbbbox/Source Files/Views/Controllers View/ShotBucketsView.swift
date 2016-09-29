@@ -18,7 +18,7 @@ class ShotBucketsView: UIView {
     private let offsetToTopLayoutGuide = CGFloat(10)
 
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
-    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+//    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
     private var didSetConstraints = false
 
     override init(frame: CGRect) {
@@ -34,10 +34,10 @@ class ShotBucketsView: UIView {
 
         super.init(frame: frame)
 
-        backgroundColor = .clearColor()
+        backgroundColor = UIColor.backgroundGrayColor()//.clearColor()
 
-        blurView.configureForAutoLayout()
-        addSubview(blurView)
+//        blurView.configureForAutoLayout()
+//        addSubview(blurView)
 
         collectionViewCornerWrapperView.backgroundColor = .clearColor()
         collectionViewCornerWrapperView.clipsToBounds = true
@@ -56,7 +56,7 @@ class ShotBucketsView: UIView {
         if !didSetConstraints {
             didSetConstraints = true
 
-            blurView.autoPinEdgesToSuperviewEdges()
+//            blurView.autoPinEdgesToSuperviewEdges()
 
             if let viewController = viewController {
                 collectionViewCornerWrapperView.autoPinToTopLayoutGuideOfViewController(viewController,
