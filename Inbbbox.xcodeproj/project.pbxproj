@@ -179,6 +179,7 @@
 		706212225CCFF89D35423D58 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D86F0D3CB41BCD1D56D9AC5 /* AvatarView.swift */; };
 		70A9390D8C1FC18E771C9A21 /* FollowUserQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A8EC52138981168880334D /* FollowUserQuerySpec.swift */; };
 		738000923C392AA96CEB1C32 /* APIBucketsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74061C3F8179787B1B2A764F /* APIBucketsProviderSpec.swift */; };
+		74008FB71D9D501B003E66EB /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74008FB61D9D501B003E66EB /* UIDeviceExtension.swift */; };
 		742F7F7C45218BBF696179BD /* RemoveFromBucketQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B71814BD31275DACE75B1 /* RemoveFromBucketQuery.swift */; };
 		7449D9861CAD4A7500E37CE9 /* UserToURLProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449D9851CAD4A7500E37CE9 /* UserToURLProvider.swift */; };
 		7449D9881CAD4A8D00E37CE9 /* URLToUserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7449D9871CAD4A8D00E37CE9 /* URLToUserProvider.swift */; };
@@ -598,6 +599,7 @@
 		7277F2A2B3ABE9E8C70E55CE /* PageableComponentSerializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PageableComponentSerializer.swift; sourceTree = "<group>"; };
 		73AE0E38438C576F26771C97 /* UnfollowUserQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UnfollowUserQuery.swift; sourceTree = "<group>"; };
 		73ED7991095A44326D902553 /* ShotBucketsFooterView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotBucketsFooterView.swift; sourceTree = "<group>"; };
+		74008FB61D9D501B003E66EB /* UIDeviceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		74061C3F8179787B1B2A764F /* APIBucketsProviderSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIBucketsProviderSpec.swift; sourceTree = "<group>"; };
 		7449D9851CAD4A7500E37CE9 /* UserToURLProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserToURLProvider.swift; sourceTree = "<group>"; };
 		7449D9871CAD4A8D00E37CE9 /* URLToUserProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLToUserProvider.swift; sourceTree = "<group>"; };
@@ -904,6 +906,7 @@
 				300BDCA81CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift */,
 				65BA28208F809949B73B35D2 /* AppDelegateExtension.swift */,
 				F077D0951CD236AA008948A9 /* ImageProviderExtension.swift */,
+				74008FB61D9D501B003E66EB /* UIDeviceExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2083,6 +2086,7 @@
 				9FE9B94F4EF53E804FF71D4B /* APIShotsRequester.swift in Sources */,
 				AA3A2942ED29B257AB5C596D /* APITeamsProvider.swift in Sources */,
 				AAE5BCBBAF5336684FE1E3CF /* PageableProvider.swift in Sources */,
+				74008FB71D9D501B003E66EB /* UIDeviceExtension.swift in Sources */,
 				DCBD14DFDEA71ED1A0339F83 /* Verifiable.swift in Sources */,
 				3917846A0BD9F21A50C78245 /* BucketsProvider.swift in Sources */,
 				8015966E31E6B97353F986B8 /* BucketsRequester.swift in Sources */,
