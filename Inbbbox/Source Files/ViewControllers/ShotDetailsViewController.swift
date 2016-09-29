@@ -296,9 +296,7 @@ extension ShotDetailsViewController: UICollectionViewDelegateFlowLayout {
 extension ShotDetailsViewController {
 
     func animateHeader(start start: Bool) {
-        if let imageView = header?.imageView as? AnimatableShotImageView {
-            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
-        }
+        start ? header?.imageView.startAnimating() : header?.imageView.stopAnimating()
     }
 
     func hideUnusedCommentEditingViews() {
