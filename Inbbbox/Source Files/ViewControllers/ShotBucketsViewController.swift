@@ -85,10 +85,7 @@ class ShotBucketsViewController: UIViewController {
 
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
 
-        if let imageView = header?.imageView as? AnimatableShotImageView {
-            imageView.stopAnimatingGIF()
-        }
-
+        header?.imageView.startAnimating()
         super.dismissViewControllerAnimated(flag, completion: completion)
     }
 }
@@ -261,9 +258,7 @@ private extension ShotBucketsViewController {
     }
 
     func animateHeader(start start: Bool) {
-        if let imageView = header?.imageView as? AnimatableShotImageView {
-            start ? imageView.startAnimatingGIF() : imageView.stopAnimatingGIF()
-        }
+        start ? header?.imageView.startAnimating() : header?.imageView.stopAnimating()
     }
 
     var heightForCollapsedCollectionViewHeader: CGFloat {

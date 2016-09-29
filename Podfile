@@ -33,7 +33,7 @@ target 'Inbbbox' do
   pod 'GPUImage', '~> 0.1'
   #fork cause of https://github.com/icanzilb/EasyAnimation/issues/25
   pod 'EasyAnimation', :git => 'https://git@github.com/PatrykKaczmarek/EasyAnimation.git', :commit => '3e97dc7e2f262222e2fd614ff5143d6432f73a7d'
-  pod 'Gifu', '~> 1.0'
+  pod 'FLAnimatedImage', '~> 1.0'
   pod 'ZFDragableModalTransition', '~> 0.6'
   #fork cause of https://github.com/Haneke/HanekeSwift/pull/307
   pod 'HanekeSwift', :git => 'https://github.com/pikor/HanekeSwift.git'
