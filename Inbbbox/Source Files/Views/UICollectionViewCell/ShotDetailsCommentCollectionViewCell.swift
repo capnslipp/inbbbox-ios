@@ -13,10 +13,6 @@ private var avatarSize: CGSize {
     return CGSize(width: 32, height: 32)
 }
 
-private var separatorSize: CGSize {
-    return CGSize(width: 1, height: 12)
-}
-
 private var likesImageSize: CGSize {
     return CGSize(width: 12, height: 12)
 }
@@ -250,11 +246,7 @@ extension ShotDetailsCommentCollectionViewCell {
     }
 
     func likeButtonDidTap(_: UIButton) {
-        if likedByMe {
-            unlikeActionHandler?()
-        } else {
-            likeActionHandler?()
-        }
+        likedByMe ? unlikeActionHandler?() : likeActionHandler?()
     }
 
 }

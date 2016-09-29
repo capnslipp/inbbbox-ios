@@ -365,9 +365,7 @@ extension ShotDetailsViewModel {
 
             firstly {
                 commentsRequester.likeComment(comment, forShot: shot)
-            }.then {
-                fulfill()
-            }.error(reject)
+            }.then(fulfill).error(reject)
         }
     }
 
@@ -380,9 +378,7 @@ extension ShotDetailsViewModel {
 
             firstly {
                 commentsRequester.unlikeComment(comment, forShot: shot)
-            }.then {
-                fulfill()
-            }.error(reject)
+            }.then(fulfill).error(reject)
         }
     }
 
@@ -391,14 +387,12 @@ extension ShotDetailsViewModel {
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
         let comment = comments[index]
 
-        if force || comment.checkedForLike == false {
+        if force || !comment.checkedForLike {
             return Promise<Bool> { fulfill, reject in
 
                 firstly {
                     commentsRequester.checkIfLikeComment(comment, forShot: shot)
-                }.then { result in
-                    fulfill(result)
-                }.error(reject)
+                }.then(fulfill).error(reject)
             }
         }
 

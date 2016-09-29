@@ -85,7 +85,7 @@ class APICommentsRequester: Verifiable {
             let query = CommentLikeQuery(shot: shot, comment: comment)
 
             firstly {
-                sendCommentOperationQuery(query)
+                sendCommentLikeQuery(query)
             }.then(fulfill).error(reject)
         }
     }
@@ -106,7 +106,7 @@ class APICommentsRequester: Verifiable {
             let query = CommentUnlikeQuery(shot: shot, comment: comment)
 
             firstly {
-                sendCommentOperationQuery(query)
+                sendCommentLikeQuery(query)
             }.then(fulfill).error(reject)
         }
     }
@@ -179,7 +179,7 @@ private extension APICommentsRequester {
         }
     }
 
-    func sendCommentOperationQuery(query: Query) -> Promise<Void> {
+    func sendCommentLikeQuery(query: Query) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             firstly {

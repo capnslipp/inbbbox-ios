@@ -101,11 +101,11 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
         let visibleCells = shotDetailsView.collectionView.indexPathsForVisibleItems()
 
         for indexPath in visibleCells {
-            let index = self.viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
+            let index = viewModel.indexInCommentArrayBasedOnItemIndex(indexPath.row)
 
-            if index >= 0 && index < self.viewModel.comments.count {
+            if index >= 0 && index < viewModel.comments.count {
                 firstly {
-                    self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: false)
+                    viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: false)
                 }.then { isLiked -> Void in
                     self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
                     if isLiked {
