@@ -6,15 +6,11 @@
 //  Copyright © 2016 Netguru Sp. z o.o. All rights reserved.
 //
 
-import UIKit
+import DeviceKit
 
-class DeviceInfo {
+final class DeviceInfo {
 
     class func shouldDowngrade() -> Bool {
-        if UIDevice.currentDevice().deviceType == DeviceType.iPadMini
-            || UIDevice.currentDevice().deviceType == DeviceType.iPhone4S {
-            return true
-        }
-        return false
+        return Device().isOneOf([Device.iPadMini, Device.iPhone4s])
     }
 }
