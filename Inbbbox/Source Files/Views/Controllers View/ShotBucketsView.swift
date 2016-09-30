@@ -19,7 +19,6 @@ class ShotBucketsView: UIView {
 
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
-
     private var didSetConstraints = false
 
     override init(frame: CGRect) {

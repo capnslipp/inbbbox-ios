@@ -68,7 +68,6 @@ class ShotImageView: UIImageView {
         let bluredImageUrl = imageUrl?.copy()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { [weak self] in
             let bluredImage = self?.originalImage?.imageByBlurringImageWithBlur(blur)
-
             dispatch_async(dispatch_get_main_queue(), {
                 if self?.imageUrl?.absoluteString == bluredImageUrl?.absoluteString {
                     self?.image = bluredImage
