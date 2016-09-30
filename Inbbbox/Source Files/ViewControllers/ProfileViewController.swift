@@ -26,6 +26,13 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
         return true
     }
 
+    func isDisplayingUser(user: UserType) -> Bool {
+        if let userDetailsViewModel = viewModel as? UserDetailsViewModel where userDetailsViewModel.user == user {
+            return true
+        }
+        return false
+    }
+
     private var isModal: Bool {
         return self.presentingViewController?.presentedViewController == self ||
                 self.tabBarController?.presentingViewController is UITabBarController ||
