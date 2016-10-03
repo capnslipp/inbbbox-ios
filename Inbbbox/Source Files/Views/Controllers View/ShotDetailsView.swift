@@ -38,10 +38,13 @@ class ShotDetailsView: UIView {
 
         super.init(frame: frame)
 
-        backgroundColor = .clearColor()
-
-        blurView.configureForAutoLayout()
-        addSubview(blurView)
+        if DeviceInfo.shouldDowngrade() {
+            backgroundColor = .backgroundGrayColor()
+        } else {
+            backgroundColor = .clearColor()
+            blurView.configureForAutoLayout()
+            addSubview(blurView)
+        }
 
         collectionViewCornerWrapperView.backgroundColor = .clearColor()
         collectionViewCornerWrapperView.clipsToBounds = true
@@ -63,7 +66,9 @@ class ShotDetailsView: UIView {
         if !didSetConstraints {
             didSetConstraints = true
 
-            blurView.autoPinEdgesToSuperviewEdges()
+            if !DeviceInfo.shouldDowngrade() {
+                blurView.autoPinEdgesToSuperviewEdges()
+            }
 
             let commentComposerViewHeight = CGFloat(61)
             keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)

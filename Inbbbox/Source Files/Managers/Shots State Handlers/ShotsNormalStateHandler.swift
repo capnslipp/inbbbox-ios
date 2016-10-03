@@ -198,7 +198,9 @@ extension ShotsNormalStateHandler {
 
         for cell in collectionView.visibleCells() {
             if let shotCell = cell as? ShotCollectionViewCell {
-                shotCell.shotImageView.applyBlur(blur)
+                if !DeviceInfo.shouldDowngrade() {
+                    shotCell.shotImageView.applyBlur(blur)
+                }
             }
         }
     }
