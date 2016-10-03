@@ -34,10 +34,13 @@ class ShotBucketsView: UIView {
 
         super.init(frame: frame)
 
-        backgroundColor = .clearColor()
-
-        blurView.configureForAutoLayout()
-        addSubview(blurView)
+        if DeviceInfo.shouldDowngrade() {
+            backgroundColor = .backgroundGrayColor()
+        } else {
+            backgroundColor = .clearColor()
+            blurView.configureForAutoLayout()
+            addSubview(blurView)
+        }
 
         collectionViewCornerWrapperView.backgroundColor = .clearColor()
         collectionViewCornerWrapperView.clipsToBounds = true
@@ -56,7 +59,9 @@ class ShotBucketsView: UIView {
         if !didSetConstraints {
             didSetConstraints = true
 
-            blurView.autoPinEdgesToSuperviewEdges()
+            if !DeviceInfo.shouldDowngrade() {
+                blurView.autoPinEdgesToSuperviewEdges()
+            }
 
             if let viewController = viewController {
                 collectionViewCornerWrapperView.autoPinToTopLayoutGuideOfViewController(viewController,
