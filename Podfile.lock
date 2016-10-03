@@ -4,7 +4,7 @@ PODS:
   - Dobby (0.5.0)
   - DZNEmptyDataSet (1.7.3)
   - EasyAnimation (1.0.2)
-  - Gifu (1.0.1)
+  - FLAnimatedImage (1.0.12)
   - GoogleAnalytics (3.14.0)
   - GPUImage (0.1.7)
   - HanekeSwift (0.10.1)
@@ -55,7 +55,7 @@ DEPENDENCIES:
   - Dobby (~> 0.5)
   - DZNEmptyDataSet (~> 1.7)
   - EasyAnimation (from `https://git@github.com/PatrykKaczmarek/EasyAnimation.git`, commit `3e97dc7e2f262222e2fd614ff5143d6432f73a7d`)
-  - Gifu (~> 1.0)
+  - FLAnimatedImage (~> 1.0)
   - GoogleAnalytics (~> 3.14)
   - GPUImage (~> 0.1)
   - HanekeSwift (from `https://github.com/pikor/HanekeSwift.git`)
@@ -108,7 +108,7 @@ SPEC CHECKSUMS:
   Dobby: bb7920d6b191fb1fbad2cc5f6ef42d067dddf5dd
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EasyAnimation: 9615e40f58aa7d8d6a67de66e0edda1903ffa990
-  Gifu: bf7a99fe9f20a1dc18c3cb4289aebc922a2ad419
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
@@ -128,6 +128,6 @@ SPEC CHECKSUMS:
   URITemplate: 398a48d6559e23b77bd41176b675b017ad1fc959
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: 2061071d9f168e04b911f832760ed279370b925e
+PODFILE CHECKSUM: 08197edcfecdbd94df62eeb0681f8124b54bcb99
 
 COCOAPODS: 1.0.0
