@@ -17,7 +17,9 @@ import PromiseKit
 extension ShotDetailsViewController: ImageProvider {
 
     func provideImage(completion: UIImage? -> Void) {
-        completion(header?.imageView.image)
+        if !viewModel.shot.animated {
+            completion(header?.imageView.image)
+        }
     }
 }
 

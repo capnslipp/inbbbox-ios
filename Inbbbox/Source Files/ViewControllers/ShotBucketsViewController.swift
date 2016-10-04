@@ -252,9 +252,19 @@ private extension ShotBucketsViewController {
     func presentShotFullscreen() {
 
         guard let header = header else { return }
+        if viewModel.shot.animated {
+            let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
+            let animatableImageView = AnimatableShotImageView(frame: CGRect.zero)
+            animatableImageView.backgroundColor = .clearColor()
+            let url = viewModel.shot.shotImage.hidpiURL ?? viewModel.shot.shotImage.normalURL
+            animatableImageView.loadAnimatableShotFromUrl(url)
 
-        let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
-        presentImageViewer(imageViewer)
+            imageViewer.imageView = animatableImageView
+            presentImageViewer(imageViewer)
+        } else {
+            let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
+            presentImageViewer(imageViewer)
+        }
     }
 
     func animateHeader(start start: Bool) {
@@ -413,8 +423,10 @@ extension ShotBucketsViewController: UIScrollViewDelegate {
 extension ShotBucketsViewController: ImageProvider {
 
     func provideImage(completion: UIImage? -> Void) {
-        if let image = header?.imageView.image {
-            completion(image)
+        if !viewModel.shot.animated {
+            if let image = header?.imageView.image {
+                completion(image)
+            }
         }
     }
 
