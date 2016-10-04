@@ -31,6 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CrashManager.setup()
         UserStorage.clearGuestUser()
         UIAlertController.setupSharedSettings()
+        FPSInspector.startInspectingIfNecessary()
         centerButtonTabBarController = CenterButtonTabBarController()
         loginViewController = LoginViewController(tabBarController: centerButtonTabBarController!)
         let rootViewController = UserStorage.isUserSignedIn ? centerButtonTabBarController! : loginViewController!
