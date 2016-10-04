@@ -1,0 +1,135 @@
+#
+# bitrise.yml
+#
+# Copyright (c) 2016 Netguru Sp. z o.o. All rights reserved.
+#
+
+# CLI metadata
+
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
+# Environment configuration
+
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: "./Inbbbox.xcworkspace"
+    opts:
+      is_expand: false
+  - BITRISE_SCHEME: Inbbbox
+    opts:
+      is_expand: false
+  - opts:
+      is_expand: true
+    BITRISE_INFO_PLIST_PATH: Supporting Files/Inbbbox-Info.plist
+
+# Workflow trigger map
+
+trigger_map:
+- push_branch: Inbbbox-v2
+  workflow: Inbbbox-v2
+- push_branch: task/*
+  workflow: pull-requests
+- push_branch: bug/*
+  workflow: pull-requests
+- push_branch: chore/*
+  workflow: pull-requests
+- push_branch: master
+  workflow: master
+
+# Workflow declarations
+
+workflows:
+
+  # The default workflow
+
+  master:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - set-xcode-build-number@1.0.3:
+        inputs:
+        - plist_path: "$BITRISE_INFO_PLIST_PATH"
+    - cocoapods-install:
+        inputs:
+        - is_update_cocoapods: 'true'
+    - certificate-and-profile-installer: {}
+    - xcode-test@1.13.7:
+        title: 'Xcode: Unit Test'
+        inputs:
+        - simulator_device: iPhone 6s
+        - is_clean_build: 'yes'
+        - output_tool: xcodebuild
+    - xcode-archive:
+        inputs:
+        - configuration: Staging
+        - is_clean_build: 'yes'
+    - hockeyapp-deploy@2.3.0:
+        inputs:
+        - api_token: "$HOCKEY_APP_TOKEN_STAGING"
+        - app_id: "$HOCKEY_APP_ID_STAGING"
+    - git::git@github.com:netguru/bitrise-step-slack.git@master:
+        title: slack
+        inputs:
+        - webhook_url: https://hooks.slack.com/services/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
+        - channel: "#project-inbbbox"
+    before_run: 
+    after_run: 
+
+  # The pull-requests workflow
+
+  pull-requests:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - cocoapods-install:
+        inputs:
+        - is_update_cocoapods: 'true'
+    - xcode-test@1.13.7:
+        title: 'Xcode: Unit Test'
+    before_run: 
+    after_run: 
+
+  # The development workflow
+
+  Inbbbox-v2:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - set-xcode-build-number@1.0.3:
+        inputs:
+        - plist_path: "$BITRISE_INFO_PLIST_PATH"
+    - cocoapods-install:
+        inputs:
+        - is_update_cocoapods: 'true'
+    - certificate-and-profile-installer: {}
+    - xcode-test@1.13.7:
+        title: 'Xcode: Unit Test'
+        inputs:
+        - simulator_device: iPhone 6s
+        - is_clean_build: 'yes'
+        - output_tool: xcodebuild
+    - xcode-archive:
+        inputs:
+        - configuration: Staging
+        - is_clean_build: 'yes'
+    - hockeyapp-deploy@2.3.0:
+        inputs:
+        - api_token: "$HOCKEY_APP_TOKEN_STAGING"
+        - app_id: "$HOCKEY_APP_ID_STAGING"
+    - git::git@github.com:netguru/bitrise-step-slack.git@master:
+        title: slack
+        inputs:
+        - webhook_url: https://hooks.slack.com/services/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
+        - channel: "#project-inbbbox"
+    before_run: 
+    after_run: 
