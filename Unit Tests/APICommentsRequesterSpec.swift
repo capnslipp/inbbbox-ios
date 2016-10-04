@@ -229,6 +229,58 @@ class APICommentsRequesterSpec: QuickSpec {
                     }
                 }
             }
+            
+            describe("when liking comment") {
+                
+                var didInvokePromise: Bool?
+                
+                beforeEach {
+                    didInvokePromise = nil
+                }
+                
+                afterEach {
+                    TokenStorage.clear()
+                    UserStorage.clearUser()
+                }
+                
+                context("when token does not exist") {
+                    
+                    beforeEach {
+                        TokenStorage.clear()
+                    }
+                    
+                    it("error should occur") {
+                        sut.likeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
+                            fail()
+                            }.error { _error in
+                                error = _error
+                        }
+                        
+                        expect(error is VerifiableError).toEventually(beTruthy())
+                    }
+                }
+                
+                context("when token exists") {
+                    
+                    beforeEach {
+                        UserStorage.storeUser(User.fixtureUserForAccountType(.Player))
+                        TokenStorage.storeToken("fixture.token")
+                        self.stub(everything, builder: json(self.fixtureJSON))
+                    }
+                    
+                    afterEach {
+                        self.removeAllStubs()
+                    }
+                    
+                    it("comment should be posted") {
+                        sut.likeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
+                            didInvokePromise = true
+                            }.error { _ in fail() }
+                        
+                        expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
+                    }
+                }
+            }
         }
     }
 }
