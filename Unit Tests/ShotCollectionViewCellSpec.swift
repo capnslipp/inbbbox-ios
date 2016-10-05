@@ -289,17 +289,17 @@ class ShotCollectionViewCellSpec: QuickSpec {
                             }
                             
                             it("should display first image view") {
-                                expect(likeImageView.firstImageView.alpha).to(equal(1))
+                                expect(likeImageView.firstImageView.alpha).to(equal(0))
                             }
                             
                             it("should hide second image view") {
-                                expect(likeImageView.secondImageView.alpha).to(equal(0))
+                                expect(likeImageView.secondImageView.alpha).to(equal(1))
                             }
                         }
                     }
                 }
                 
-                context("when user swiped slightly right") {
+                /*context("when user swiped slightly right") {
                     
                     var capturedLikeActionDuration: NSTimeInterval!
                     var capturedLikeActionDelay: NSTimeInterval!
@@ -367,7 +367,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                         }
                     }
                     
-                    /*describe("like action completion block") {
+                    describe("like action completion block") {
                         
                         beforeEach {
                             capturedLikeActionCompletion(true)
@@ -377,36 +377,126 @@ class ShotCollectionViewCellSpec: QuickSpec {
                             ["expectedDelay": 0.2,
                              "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Like)]
                         }
-                    }*/
-                }
+                    }
+                }*/
                 
-                /*context("when user swiped considerably right") {
+                context("when user swiped considerably right") {
+                    
+                    var capturedBucketActionDuration: NSTimeInterval!
+                    var capturedBucketActionDelay: NSTimeInterval!
+                    var capturedBucketActionOptions: UIViewAnimationOptions!
+                    var capturedBucketActionAnimations: (() -> Void)!
+                    var capturedBucketActionCompletion: ((Bool) -> Void)!
                     
                     beforeEach {
+                        viewClassMock.animationStub.on(any()) { duration, delay, options, animations, completion in
+                            capturedBucketActionDuration = duration
+                            capturedBucketActionDelay = delay
+                            capturedBucketActionOptions = options
+                            capturedBucketActionAnimations = animations
+                            capturedBucketActionCompletion = completion
+                        }
                         panGestureRecognizerMock.translationInViewStub.on(any()) { _ in
                             return CGPoint(x: 150, y:0)
                         }
                         panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
                     }
                     
-                    itBehavesLike("returning to initial cell state animation") {
-                        ["expectedDelay": 0.0,
-                         "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Bucket)]
+                    it("should animate bucket action with duration 0.3") {
+                        expect(capturedBucketActionDuration).to(equal(0.3))
+                    }
+                    
+                    it("should animate bucket action without delay") {
+                        expect(capturedBucketActionDelay).to(equal(0))
+                    }
+                    
+                    it("should animate bucket action without options") {
+                        expect(capturedBucketActionOptions).to(equal([]))
+                    }
+                    
+                    describe("bucket action animations block") {
+                        
+                        beforeEach {
+                            sut.contentView.bounds = CGRect(x: 0, y: 0, width: 100, height: 0)
+                            sut.bucketImageView.alpha = 0
+                            capturedBucketActionAnimations()
+                        }
+                        
+                        it("should set shot image view tranform") {
+                            expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0))).to(beTruthy())
+                        }
+                    }
+                    
+                    describe("bucket action completion block") {
+                        
+                        beforeEach {
+                            capturedBucketActionCompletion(true)
+                        }
+                        
+                        itBehavesLike("returning to initial cell state animation") {
+                            ["expectedDelay": 0.2,
+                             "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Bucket)]
+                        }
                     }
                 }
                 
-                context("when user swiped slightly left") {
+                /*context("when user swiped slightly left") {
+                    
+                    var capturedCommentActionDuration: NSTimeInterval!
+                    var capturedCommentActionDelay: NSTimeInterval!
+                    var capturedCommentActionOptions: UIViewAnimationOptions!
+                    var capturedCommentActionAnimations: (() -> Void)!
+                    var capturedCommentActionCompletion: ((Bool) -> Void)!
                     
                     beforeEach {
+                        viewClassMock.animationStub.on(any()) { duration, delay, options, animations, completion in
+                            capturedCommentActionDuration = duration
+                            capturedCommentActionDelay = delay
+                            capturedCommentActionOptions = options
+                            capturedCommentActionAnimations = animations
+                            capturedCommentActionCompletion = completion
+                        }
                         panGestureRecognizerMock.translationInViewStub.on(any()) { _ in
                             return CGPoint(x: -50, y:0)
                         }
                         panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
                     }
                     
-                    itBehavesLike("returning to initial cell state animation") {
-                        ["expectedDelay": 0.0,
-                         "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Comment)]
+                    it("should animate comment action with duration 0.3") {
+                        expect(capturedCommentActionDuration).to(equal(0.3))
+                    }
+                    
+                    it("should animate comment action without delay") {
+                        expect(capturedCommentActionDelay).to(equal(0))
+                    }
+                    
+                    it("should animate comment action without options") {
+                        expect(capturedCommentActionOptions).to(equal([]))
+                    }
+                    
+                    describe("comment action animations block") {
+                        
+                        beforeEach {
+                            sut.contentView.bounds = CGRect(x: 0, y: 0, width: 100, height: 0)
+                            sut.commentImageView.alpha = 0
+                            capturedCommentActionAnimations()
+                        }
+                        
+                        it("should set shot image view tranform") {
+                            expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformTranslate(CGAffineTransformIdentity, -100, 0))).to(beTruthy())
+                        }
+                    }
+                    
+                    describe("comment action completion block") {
+                        
+                        beforeEach {
+                            capturedCommentActionCompletion(true)
+                        }
+                        
+                        itBehavesLike("returning to initial cell state animation") {
+                            ["expectedDelay": 0.2,
+                             "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Comment)]
+                        }
                     }
                 }*/
             }
