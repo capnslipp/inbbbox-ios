@@ -83,11 +83,6 @@ workflows:
 
   pull-requests:
     steps:
-    - activate-ssh-key@3.1.0:
-        title: Activate App SSH key
-        inputs:
-        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
-    - git-clone@3.2.0: {}
     - cocoapods-install:
         inputs:
         - is_update_cocoapods: 'true'
