@@ -18,7 +18,9 @@ extension ShotDetailsViewController: ImageProvider {
 
     func provideImage(completion: UIImage? -> Void) {
         if !viewModel.shot.animated {
-            completion(header?.imageView.image)
+            if let image = header?.imageView.image {
+                completion(image)
+            }
         }
     }
 }
