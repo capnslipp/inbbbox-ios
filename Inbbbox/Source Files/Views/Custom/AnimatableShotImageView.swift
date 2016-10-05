@@ -23,6 +23,7 @@ class AnimatableShotImageView: FLAnimatedImageView {
         backgroundColor = .whiteColor()
         contentMode = .ScaleAspectFill
         progressAnimator.progressImageView.configureForAutoLayout()
+        progressAnimator.progressImageView.backgroundColor = .whiteColor()
         addSubview(progressAnimator.progressImageView)
     }
 

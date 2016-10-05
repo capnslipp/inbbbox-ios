@@ -491,21 +491,15 @@ private extension ShotDetailsViewController {
 
         guard let header = header else { return }
 
+        var imageViewer: ImageViewer
         if viewModel.shot.animated {
-            let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
-            let animatableImageView = AnimatableShotImageView(frame: CGRect.zero)
-            animatableImageView.backgroundColor = .clearColor()
-            
             let url = viewModel.shot.shotImage.hidpiURL ?? viewModel.shot.shotImage.normalURL
-
-            animatableImageView.loadAnimatableShotFromUrl(url)
-
-            imageViewer.imageView = animatableImageView
-            presentImageViewer(imageViewer)
+            imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView, animatedUrl: url)
         } else {
-            let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
-            presentImageViewer(imageViewer)
+            imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
         }
+
+        presentImageViewer(imageViewer)
     }
 
     func grayOutFooterIfNeeded() {
