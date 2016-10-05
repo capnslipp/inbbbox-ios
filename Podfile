@@ -42,7 +42,7 @@ target 'Inbbbox' do
   pod 'DZNEmptyDataSet', '~> 1.7'
   pod 'GoogleAnalytics', '~> 3.14'
   pod 'TTTAttributedLabel', '~> 2.0'
-  #has to be given tag `2.0.4` explicitly cause CocoaPods do not take latest version
+  #fork because of private imageView property, overwrited with animated ImageView subclass
   pod 'ImageViewer', :git => 'https://github.com/twalenciak/ImageViewer.git', :branch => 'gif_loading'
   #fork because of styling private properties
   pod 'AOAlertController', :git => 'https://github.com/pikor/AOAlertController/', :commit => '30e32c5cc66acf83dc1ec0d0649c234f4eee7846'
