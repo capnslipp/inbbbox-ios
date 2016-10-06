@@ -342,6 +342,9 @@
 		EA0CFB1A1D9564D200CFF21A /* CommentLikedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CFB191D9564D200CFF21A /* CommentLikedQuery.swift */; };
 		EA0CFB1C1D95652200CFF21A /* CommentLikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CFB1B1D95652200CFF21A /* CommentLikeQuery.swift */; };
 		EA0CFB1E1D95654700CFF21A /* CommentUnlikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CFB1D1D95654700CFF21A /* CommentUnlikeQuery.swift */; };
+		EA93739F1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93739E1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift */; };
+		EA9373A11DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9373A01DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift */; };
+		EA9373A31DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9373A21DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift */; };
 		EB8445BCBBBA89F623F082A5 /* APICommentsRequesterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232B42A3981C34A125C02AC /* APICommentsRequesterSpec.swift */; };
 		EC9FD454158035FD9C9D29A7 /* RequestableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5213E66AC3206BED462B88C /* RequestableSpec.swift */; };
 		ECFBA598DE6524F332283B52 /* ShotDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADCFFD5DDF3B47FC025E19 /* ShotDetailsViewModelSpec.swift */; };
@@ -764,6 +767,9 @@
 		EA0CFB1D1D95654700CFF21A /* CommentUnlikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentUnlikeQuery.swift; sourceTree = "<group>"; };
 		EA25956B9FC4631945428870 /* ShotImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotImageView.swift; sourceTree = "<group>"; };
 		EA26B57AF334AAA327E47C15 /* AutoScrollableCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AutoScrollableCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA93739E1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLikeQuerySpec.swift; sourceTree = "<group>"; };
+		EA9373A01DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentUnlikeQuerySpec.swift; sourceTree = "<group>"; };
+		EA9373A21DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLikedQuerySpec.swift; sourceTree = "<group>"; };
 		EAA9A75F53B4797803D4FB49 /* APIConnectionsRequesterMock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIConnectionsRequesterMock.swift; sourceTree = "<group>"; };
 		EB41D0A2DF7B02038309E194 /* CustomTransitions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
 		EBEA5EF5490AF23C82A7DC91 /* LoginViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginViewAnimator.swift; sourceTree = "<group>"; };
@@ -1473,6 +1479,9 @@
 				5EC068A78BA3FECB347FA74F /* UpdateCommentQuerySpec.swift */,
 				4043E4CCE771DEA3109F896D /* UserFollowedByMeQuerySpec.swift */,
 				428CB6FB990FBDA35ED19F80 /* UserQuerySpec.swift */,
+				EA93739E1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift */,
+				EA9373A01DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift */,
+				EA9373A21DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift */,
 			);
 			path = Queries;
 			sourceTree = "<group>";
@@ -2210,6 +2219,7 @@
 				32E1DA0DB8D745C554EC6169 /* APIProjectsProviderSpec.swift in Sources */,
 				D402ECB27C9F8A00D7A99966 /* APIRateLimitKeeperSpec.swift in Sources */,
 				30D57BA91CF59AB0004C7D54 /* BaseCollectionViewViewModelSpec.swift in Sources */,
+				EA93739F1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift in Sources */,
 				DDD981B586A1038B6D3DAF8D /* APIShotsProviderSpec.swift in Sources */,
 				85D3B262DEFFC133C6E290BC /* APIShotsRequesterSpec.swift in Sources */,
 				BF48E9481F8839521F829A1F /* APITeamsProviderSpec.swift in Sources */,
@@ -2231,6 +2241,7 @@
 				7E4C2EA011391887E1F660E0 /* PageableComponentSpec.swift in Sources */,
 				D6C37F599AB84610C10FCD8B /* PageableProviderSpec.swift in Sources */,
 				DBE24991D644239A591CEC2E /* PageRequestSpec.swift in Sources */,
+				EA9373A31DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift in Sources */,
 				D4D7C1220A89441712F096AD /* ParametersSpec.swift in Sources */,
 				ACE3BA66ECCB04566EBE5CCD /* QuerySpec.swift in Sources */,
 				EC9FD454158035FD9C9D29A7 /* RequestableSpec.swift in Sources */,
@@ -2273,6 +2284,7 @@
 				CCBBD15819D4A213AFA940EF /* CollectionViewMock.swift in Sources */,
 				78DE6C2963EDD1E1C9BF9C59 /* ManagedShotsProviderMock.swift in Sources */,
 				8BF8A3D101DD2E4C488CE1B8 /* MockLoginService.swift in Sources */,
+				EA9373A11DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift in Sources */,
 				91675D355B6A3B0EE205551F /* PanGestureRecognizerMock.swift in Sources */,
 				2286B2C834EBDADAF9307955 /* ShotCollectionViewCellDelegateMock.swift in Sources */,
 				8EF4E9F350CC826C4F3BD01B /* ShotsAnimatorDelegateMock.swift in Sources */,

@@ -183,6 +183,8 @@ private extension APICommentsRequester {
         return Promise<Void> { fulfill, reject in
 
             firstly {
+                verifyAuthenticationStatus(true)
+            }.then {
                 Request(query: query).resume()
             }.then { _ in fulfill() }.error(reject)
         }
@@ -192,6 +194,8 @@ private extension APICommentsRequester {
         return Promise<Bool> { fulfill, reject in
 
             firstly {
+                verifyAuthenticationStatus(true)
+            }.then {
                 Request(query: query).resume()
             }.then { _ in
                 fulfill(true)
