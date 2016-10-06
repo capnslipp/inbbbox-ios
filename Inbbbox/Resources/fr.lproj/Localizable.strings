@@ -123,6 +123,9 @@
 
 /********* CommentEditView *********/
 
+/* Mark selected comment as liked. */
+"CommentEditView.Like" = "$Like";
+
 /* Cancel editing comment. */
 "CommentEditView.Cancel" = "Annuler";
 

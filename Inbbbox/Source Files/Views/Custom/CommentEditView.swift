@@ -185,8 +185,8 @@ class CommentEditView: UIView {
     private func setupLikeLabel() {
         likeLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         likeLabel.textColor = UIColor.textLightColor()
-        likeLabel.text = NSLocalizedString("LikesCollectionView.EmptyData.FirstLocalizedString",
-                                           comment: "LikesCollectionView, empty data set view")
+        likeLabel.text = NSLocalizedString("CommentEditView.Like",
+                                           comment: "Mark selected comment as liked.")
         likeLabel.textColor = .followeeTextGrayColor()
         blurView.addSubview(likeLabel)
     }
