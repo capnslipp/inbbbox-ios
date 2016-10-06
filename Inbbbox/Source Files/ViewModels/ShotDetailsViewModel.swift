@@ -45,6 +45,9 @@ final class ShotDetailsViewModel {
     }
 
     private var cachedFormattedComments = [CommentDisplayableData]()
+    private var cachedFormattedTitle: NSAttributedString?
+    private var cachedFormattedDescription: NSAttributedString?
+    
     var comments = [CommentType]()
     private var userBucketsForShot = [BucketType]()
     private var isShotLikedByMe: Bool?
@@ -89,11 +92,21 @@ final class ShotDetailsViewModel {
 extension ShotDetailsViewModel {
 
     var attributedShotTitleForHeader: NSAttributedString {
-        return ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).attributedString
+
+        if let cachedFormattedTitle = cachedFormattedTitle {
+            return cachedFormattedTitle
+        }
+        cachedFormattedTitle = ShotDetailsFormatter.attributedStringForHeaderWithLinkRangeFromShot(shot).attributedString
+        return cachedFormattedTitle!
     }
 
     var attributedShotDescription: NSAttributedString? {
-        return ShotDetailsFormatter.attributedShotDescriptionFromShot(shot)
+
+        if let cachedFormattedDescription = cachedFormattedDescription {
+            return cachedFormattedDescription
+        }
+        cachedFormattedDescription = ShotDetailsFormatter.attributedShotDescriptionFromShot(shot)
+        return cachedFormattedDescription!
     }
 
     var hasDescription: Bool {
