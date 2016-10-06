@@ -253,7 +253,15 @@ private extension ShotBucketsViewController {
 
         guard let header = header else { return }
 
-        let imageViewer = ImageViewer(imageProvider: self, displacedView: header.imageView)
+        var imageViewer: ImageViewer {
+            if viewModel.shot.animated {
+                let url = viewModel.shot.shotImage.hidpiURL ?? viewModel.shot.shotImage.normalURL
+                return ImageViewer(imageProvider: self, displacedView: header.imageView, animatedUrl: url)
+            } else {
+                return ImageViewer(imageProvider: self, displacedView: header.imageView)
+            }
+        }
+
         presentImageViewer(imageViewer)
     }
 
@@ -413,8 +421,10 @@ extension ShotBucketsViewController: UIScrollViewDelegate {
 extension ShotBucketsViewController: ImageProvider {
 
     func provideImage(completion: UIImage? -> Void) {
-        if let image = header?.imageView.image {
-            completion(image)
+        if !viewModel.shot.animated {
+            if let image = header?.imageView.image {
+                completion(image)
+            }
         }
     }
 
