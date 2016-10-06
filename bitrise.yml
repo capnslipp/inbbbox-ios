@@ -52,7 +52,7 @@ workflows:
         inputs:
         - is_update_cocoapods: 'true'
     - certificate-and-profile-installer: {}
-    - xcode-test@1.13.7:
+    - xcode-test@1.17.0:
         title: 'Xcode: Unit Test'
         inputs:
         - simulator_device: iPhone 6s
@@ -81,7 +81,7 @@ workflows:
     - cocoapods-install:
         inputs:
         - is_update_cocoapods: 'true'
-    - xcode-test@1.13.7:
+    - xcode-test@1.17.0:
         title: 'Xcode: Unit Test'
     before_run: 
     after_run: 
@@ -97,7 +97,7 @@ workflows:
         inputs:
         - is_update_cocoapods: 'true'
     - certificate-and-profile-installer: {}
-    - xcode-test@1.13.7:
+    - xcode-test@1.17.0:
         title: 'Xcode: Unit Test'
         inputs:
         - simulator_device: iPhone 6s
