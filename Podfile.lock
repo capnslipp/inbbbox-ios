@@ -63,7 +63,7 @@ DEPENDENCIES:
   - GPUImage (~> 0.1)
   - HanekeSwift (from `https://github.com/pikor/HanekeSwift.git`)
   - HockeySDK (~> 3.8)
-  - ImageViewer (from `https://github.com/MailOnline/ImageViewer.git`, tag `2.0.4`)
+  - ImageViewer (from `https://github.com/twalenciak/ImageViewer.git`, branch `gif_loading`)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
@@ -90,8 +90,8 @@ EXTERNAL SOURCES:
   HanekeSwift:
     :git: https://github.com/pikor/HanekeSwift.git
   ImageViewer:
-    :git: https://github.com/MailOnline/ImageViewer.git
-    :tag: 2.0.4
+    :branch: gif_loading
+    :git: https://github.com/twalenciak/ImageViewer.git
   Keys:
     :path: Pods/CocoaPodsKeys
 
@@ -109,8 +109,8 @@ CHECKOUT OPTIONS:
     :commit: 3664b33b543eece40bd3cf83c59619211301c3bf
     :git: https://github.com/pikor/HanekeSwift.git
   ImageViewer:
-    :git: https://github.com/MailOnline/ImageViewer.git
-    :tag: 2.0.4
+    :commit: d59518ac3fac72a77d1eb59f06d5f253386ced67
+    :git: https://github.com/twalenciak/ImageViewer.git
 
 SPEC CHECKSUMS:
   AOAlertController: d5f62b122eeeea7de3fb7dfac4ea58490ba823a5
@@ -140,6 +140,6 @@ SPEC CHECKSUMS:
   WatchdogInspector: 01bc3a992c2602c3090d0ae29e8ff284049515ca
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: 5b5f125aaf351ddf441c1916cf2977d83ca8a4e0
+PODFILE CHECKSUM: 5be7c5d2841332c7f3c0739f911a8a510632b9e0
 
 COCOAPODS: 1.0.0
