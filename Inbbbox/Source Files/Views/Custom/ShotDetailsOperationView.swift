@@ -21,6 +21,8 @@ class ShotDetailsOperationView: UIView {
 
     let likeSelectableView = ActivityIndicatorSelectableView.newAutoLayoutView()
     let bucketSelectableView = ActivityIndicatorSelectableView.newAutoLayoutView()
+    let likeCounterLabel = UILabel.newAutoLayoutView()
+    let bucketCounterLabel = UILabel.newAutoLayoutView()
 
     private var didUpdateConstraints = false
 
@@ -36,6 +38,14 @@ class ShotDetailsOperationView: UIView {
         bucketSelectableView.setImage(UIImage(named: "ic-bucket-details-active"), forState: .Selected)
         bucketSelectableView.setImage(UIImage(named: "ic-bucket-details"), forState: .Deselected)
         addSubview(bucketSelectableView)
+
+        likeCounterLabel.text = "213"
+        configureCounterLabel(likeCounterLabel)
+        addSubview(likeCounterLabel)
+
+        bucketCounterLabel.text = "12"
+        configureCounterLabel(bucketCounterLabel)
+        addSubview(bucketCounterLabel)
     }
 
     @available(*, unavailable, message = "Use init(withImage: UIImage) method instead")
@@ -45,6 +55,11 @@ class ShotDetailsOperationView: UIView {
 
     override func intrinsicContentSize() -> CGSize {
         return CGSize(width: 0, height: self.dynamicType.minimumRequiredHeight)
+    }
+
+    func configureCounterLabel(label: UILabel) {
+        label.font = UIFont.helveticaFont(.Neue, size: 12)
+        label.textColor = .followeeTextGrayColor()
     }
 
     override func updateConstraints() {
@@ -62,6 +77,14 @@ class ShotDetailsOperationView: UIView {
                 $0.autoAlignAxis(.Horizontal, toSameAxisOfView: self, withOffset: -5)
                 $0.autoSetDimensionsToSize(selectableViewSize)
             }
+
+            likeCounterLabel.autoConstrainAttribute(.Left, toAttribute: .Right,
+                                                    ofView: likeSelectableView, withOffset: 5)
+            likeCounterLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: likeSelectableView)
+
+            bucketCounterLabel.autoConstrainAttribute(.Left, toAttribute: .Right,
+                                                    ofView: bucketSelectableView, withOffset: 5)
+            bucketCounterLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: bucketSelectableView)
         }
 
         super.updateConstraints()
