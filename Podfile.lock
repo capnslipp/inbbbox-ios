@@ -43,7 +43,7 @@ PODS:
   - PromiseKit/UIKit (3.5.1):
     - PromiseKit/CorePromise
   - PureLayout (3.0.2)
-  - Quick (0.10.0)
+  - Quick (0.9.3)
   - SwiftyJSON (2.4.0)
   - SwiftyUserDefaults (2.2.1)
   - TTTAttributedLabel (2.0.0)
@@ -70,7 +70,7 @@ DEPENDENCIES:
   - Nimble (~> 3.1)
   - PromiseKit (~> 3.2)
   - PureLayout (~> 3.0)
-  - Quick (~> 0.8)
+  - Quick (~> 0.9.2)
   - SwiftyJSON (~> 2.3)
   - SwiftyUserDefaults (~> 2.0)
   - TTTAttributedLabel (~> 2.0)
@@ -132,7 +132,7 @@ SPEC CHECKSUMS:
   OMGHTTPURLRQ: 1e54807cb7d5dbb506926e53498e1e9ac5720c79
   PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
+  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
   SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
   SwiftyUserDefaults: 7abdba50a50ea0c18ee8903af3c88e4c1cb8448d
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
@@ -140,6 +140,6 @@ SPEC CHECKSUMS:
   WatchdogInspector: 01bc3a992c2602c3090d0ae29e8ff284049515ca
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: 7c0e01c48c88b0fabcec6ff3a93012bdaeb6b0a5
+PODFILE CHECKSUM: 82d4af839da3764096cc3597a3628b30d110c70e
 
 COCOAPODS: 1.0.0

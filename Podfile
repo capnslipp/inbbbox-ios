@@ -50,7 +50,7 @@ target 'Inbbbox' do
 
   target 'Unit Tests' do
     inherit! :search_paths
-    pod 'Quick', '~> 0.8', :configurations => ['Test']
+    pod 'Quick', '~> 0.9.2', :configurations => ['Test']
     pod 'Nimble', '~> 3.1', :configurations => ['Test']
     pod 'Dobby', '~> 0.5', :configurations => ['Test']
     pod 'Mockingjay', '~> 1.1', :configurations => ['Test']
