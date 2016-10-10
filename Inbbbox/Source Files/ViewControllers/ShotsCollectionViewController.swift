@@ -162,6 +162,15 @@ private extension ShotsCollectionViewController {
         collectionView?.scrollEnabled = stateHandler.collectionViewScrollEnabled
         collectionView?.setCollectionViewLayout(stateHandler.collectionViewLayout, animated: false)
         collectionView?.setContentOffset(CGPoint.zero, animated: false)
+
+        if let normalStateHandler = stateHandler as? ShotsNormalStateHandler, centerButtonTabBarController = tabBarController as? CenterButtonTabBarController {
+            normalStateHandler.didLikeShotCompletionHandler = {
+                centerButtonTabBarController.animateTabBarItem(.Likes)
+            }
+            normalStateHandler.didAddShotToBucketCompletionHandler = {
+                centerButtonTabBarController.animateTabBarItem(.Buckets)
+            }
+        }
     }
 
     func registerToSettingsNotifications() {

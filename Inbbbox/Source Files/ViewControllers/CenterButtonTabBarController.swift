@@ -11,6 +11,8 @@ class CenterButtonTabBarController: UITabBarController {
     let shotsCollectionViewController = ShotsCollectionViewController()
     let settingsViewController = SettingsViewController()
     var didUpdateTabBarItems = false
+    var animatableLikesTabBarItem: UIImageView?
+    var animatableBucketsTabBarItem: UIImageView?
 
     enum CenterButtonViewControllers: Int {
         case Likes = 0
@@ -120,6 +122,7 @@ class CenterButtonTabBarController: UITabBarController {
         if selectedViewController == shotsCollectionViewController {
             centerButton.selected = true
         }
+        prepareAnimatableTabBarItems()
     }
 
 // MARK: - Public
@@ -128,6 +131,25 @@ class CenterButtonTabBarController: UITabBarController {
     func configureForLaunchingWithForceTouchShortcut() {
         tabBar.alpha = 1.0
         tabBar.userInteractionEnabled = true
+    }
+
+    func animateTabBarItem(item: CenterButtonViewControllers) {
+        guard item == .Likes || item == .Buckets else { return }
+
+        let bounceAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+        bounceAnimation.values = [1.0 ,1.4, 0.9, 1.15, 0.95, 1.02, 1.0]
+        bounceAnimation.duration = NSTimeInterval(0.5)
+        bounceAnimation.calculationMode = kCAAnimationCubic
+
+        let itemToAnimate = item == .Likes ? animatableLikesTabBarItem : animatableBucketsTabBarItem
+
+        itemToAnimate?.layer.addAnimation(bounceAnimation, forKey: nil)
+
+        if let iconImage = itemToAnimate?.image {
+            let renderImage = iconImage.imageWithRenderingMode(.AlwaysOriginal)
+            itemToAnimate?.image = renderImage
+            itemToAnimate?.tintColor = .blackColor()
+        }
     }
 
 //    MARK: - Actions
@@ -170,5 +192,13 @@ private extension CenterButtonTabBarController {
             forState: .Normal
         )
         return tabBarItem
+    }
+
+    func prepareAnimatableTabBarItems() {
+        guard animatableLikesTabBarItem == nil else { return }
+
+        animatableLikesTabBarItem = tabBar.subviews[CenterButtonViewControllers.Likes.rawValue].subviews.first as? UIImageView
+        animatableBucketsTabBarItem = tabBar.subviews[CenterButtonViewControllers.Buckets.rawValue].subviews.first as? UIImageView
+        animatableLikesTabBarItem?.contentMode = .Center
     }
 }

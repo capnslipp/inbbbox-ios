@@ -22,7 +22,8 @@ class ShotBucketsViewController: UIViewController {
         return view as? ShotBucketsView
     }
 
-    var dismissClosure: (() -> Void)?
+    var willDismissViewControllerClosure: (() -> Void)?
+    var didDismissViewControllerClosure: (() -> Void)?
 
     private var header: ShotBucketsHeaderView?
     private var footer: ShotBucketsFooterView?
@@ -86,7 +87,9 @@ class ShotBucketsViewController: UIViewController {
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
 
         header?.imageView.startAnimating()
-        super.dismissViewControllerAnimated(flag, completion: completion)
+        super.dismissViewControllerAnimated(flag) {
+            self.didDismissViewControllerClosure?()
+        }
     }
 }
 
@@ -200,7 +203,7 @@ extension ShotBucketsViewController: UICollectionViewDelegateFlowLayout {
 extension ShotBucketsViewController {
 
     func closeButtonDidTap(_: UIButton) {
-        self.dismissClosure?()
+        self.willDismissViewControllerClosure?()
         dismissViewControllerAnimated(true, completion: nil)
     }
 
@@ -208,7 +211,7 @@ extension ShotBucketsViewController {
         firstly {
             viewModel.removeShotFromSelectedBuckets()
         }.then { () -> Void in
-            self.dismissClosure?()
+            self.willDismissViewControllerClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
             let alert = UIAlertController.addRemoveShotToBucketFail()
@@ -305,7 +308,7 @@ private extension ShotBucketsViewController {
         firstly {
             viewModel.addShotToBucketAtIndex(index)
         }.then { () -> Void in
-            self.dismissClosure?()
+            self.willDismissViewControllerClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
             let alert = UIAlertController.addRemoveShotToBucketFail()
