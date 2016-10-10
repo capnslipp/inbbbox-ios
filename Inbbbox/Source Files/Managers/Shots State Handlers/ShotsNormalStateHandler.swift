@@ -43,6 +43,9 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         return true
     }
 
+    var didLikeShotCompletionHandler: (() -> Void)?
+    var didAddShotToBucketCompletionHandler: (() -> Void)?
+
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
 
     func prepareForPresentingData() {
@@ -116,6 +119,8 @@ extension ShotsNormalStateHandler {
                     certainSelf.likeShot(shot)
                 }.then {
                     cell.liked = true
+                }.then {
+                    self?.didLikeShotCompletionHandler?()
                 }.error { error in
                     cell.liked = false
                 }
@@ -226,8 +231,11 @@ private extension ShotsNormalStateHandler {
 
     func presentShotBucketsViewController(shot: ShotType) {
         let shotBucketsViewController = ShotBucketsViewController(shot: shot, mode: .AddToBucket)
-        modalTransitionAnimator =
-        CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
+        shotBucketsViewController.didDismissViewControllerClosure = { [weak self] in
+            self?.didAddShotToBucketCompletionHandler?()
+        }
+        
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(shotBucketsViewController)
 
         shotBucketsViewController.transitioningDelegate = modalTransitionAnimator
         shotBucketsViewController.modalPresentationStyle = .Custom

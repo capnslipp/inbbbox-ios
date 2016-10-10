@@ -474,7 +474,7 @@ private extension ShotDetailsViewController {
 
         let shotBucketsViewController = ShotBucketsViewController(shot: viewModel.shot, mode: mode)
         animateHeader(start: false)
-        shotBucketsViewController.dismissClosure = { [weak self] in
+        shotBucketsViewController.willDismissViewControllerClosure = { [weak self] in
             self?.animateHeader(start: true)
             self?.viewModel.clearBucketsData()
             self?.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])

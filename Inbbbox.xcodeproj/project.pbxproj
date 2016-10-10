@@ -1615,7 +1615,6 @@
 			buildPhases = (
 				36F3F57B8130E76F77E91B08 /* 📦 Check Pods Manifest.lock */,
 				D084FEB7B98567D14C689620 /* [CP] Check Pods Manifest.lock */,
-				309E50361CC11F8000198711 /* Run SwiftLint */,
 				5E3A97E41AA72F0A00CE2F20 /* Sources */,
 				5E3A97E51AA72F0A00CE2F20 /* Frameworks */,
 				5E3A97E61AA72F0A00CE2F20 /* Resources */,
@@ -1778,20 +1777,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Inbbbox/Pods-Inbbbox-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		309E50361CC11F8000198711 /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		36F3F57B8130E76F77E91B08 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
