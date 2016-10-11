@@ -17,9 +17,13 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     private let viewModel = FolloweesViewModel()
     private var shouldShowLoadingView = true
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
+    
+    // View controller used to 3DTouch Peek & Pop actions
+    weak var cachedViewController: ProfileViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerTo3DTouch()
         guard let collectionView = collectionView else {
             return
         }
@@ -114,6 +118,14 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             indexPathsNeededImageUpdate.removeAtIndex(index)
         }
     }
+    
+    // Mark: Configuration
+    
+    func registerTo3DTouch() {
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
+    }
 }
 
 extension FolloweesCollectionViewController: BaseCollectionViewViewModelDelegate {
@@ -167,5 +179,40 @@ extension FolloweesCollectionViewController: DZNEmptyDataSetSource {
             )
             return emptyDataSetView
         }
+    }
+}
+
+// MARK: UIViewControllerPreviewingDelegate
+
+extension FolloweesCollectionViewController: UIViewControllerPreviewingDelegate {
+    
+    /// Create a previewing view controller to be shown at "Peek".
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = collectionView?.indexPathForItemAtPoint(location) else { return nil }
+        
+        if let collectionView = collectionView where
+            collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
+            guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SmallUserCollectionViewCell else { return nil }
+            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+        } else {
+            guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? LargeUserCollectionViewCell else { return nil }
+            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+        }
+        
+        
+        let profileViewController = ProfileViewController(user: viewModel.followees[indexPath.item])
+        cachedViewController = profileViewController
+        
+        return profileViewController
+    }
+    
+    /// Present the view controller for the "Pop" action.
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        if let controller = cachedViewController {
+            controller.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        cachedViewController = nil
     }
 }
