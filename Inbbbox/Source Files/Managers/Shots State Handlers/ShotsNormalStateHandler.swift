@@ -16,6 +16,9 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
 
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
+    
+    // View controller used to 3DTouch Peek & Pop actions
+    weak var cachedShotDetailsViewController: ShotDetailsViewController?
 
     var state: ShotsCollectionViewController.State {
         return .Normal
@@ -226,6 +229,31 @@ extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
     }
 }
 
+// Mark: 3DTouch
+
+extension ShotsNormalStateHandler {
+    
+    func getViewControllerForPreviewing(atIndexPath indexPath: NSIndexPath) -> UIViewController? {
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return nil }
+        
+        let shot = shotsCollectionViewController.shots[indexPath.row]
+        let shotDetailsViewController = ShotDetailsViewController(shot: shot)
+        
+        cachedShotDetailsViewController = shotDetailsViewController
+        
+        return shotDetailsViewController
+    }
+    
+    func presentCachedViewController() {
+        shotsCollectionViewController?.definesPresentationContext = true
+        if let controller = cachedShotDetailsViewController {
+            controller.shouldScrollToMostRecentMessage = true
+            presentShotDetails(withViewController: controller)
+        }
+        cachedShotDetailsViewController = nil
+    }
+}
+
 // MARK: Private methods
 private extension ShotsNormalStateHandler {
 
@@ -244,20 +272,23 @@ private extension ShotsNormalStateHandler {
     }
 
     func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {
-
         shotsCollectionViewController?.definesPresentationContext = true
 
         let shotDetailsViewController = ShotDetailsViewController(shot: shot)
         shotDetailsViewController.shouldScrollToMostRecentMessage = scrollToMessages
-
+        
+        presentShotDetails(withViewController: shotDetailsViewController)
+    }
+    
+    func presentShotDetails(withViewController controller: ShotDetailsViewController) {
         modalTransitionAnimator =
-        CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
-
-        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
-        shotDetailsViewController.modalPresentationStyle = .Custom
-
+            CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+        
+        controller.transitioningDelegate = modalTransitionAnimator
+        controller.modalPresentationStyle = .Custom
+        
         shotsCollectionViewController?.tabBarController?.presentViewController(
-                shotDetailsViewController, animated: true, completion: nil)
+            controller, animated: true, completion: nil)
     }
 
     func isShotLiked(shot: ShotType) -> Bool {
