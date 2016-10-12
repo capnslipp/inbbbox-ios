@@ -78,10 +78,16 @@ class ShotBucketsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        setEstimatedSizeIfNeeded()
+        
+        if let layout = shotBucketsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.estimatedItemSize = itemSizeFor(collectionView: shotBucketsView.collectionView)
+        }
+        
         (shotBucketsView.collectionView.collectionViewLayout as?
                 ShotDetailsCollectionCollapsableHeader)?.collapsableHeight =
                 heightForCollapsedCollectionViewHeader
+        
+        shotBucketsView.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
@@ -290,15 +296,18 @@ private extension ShotBucketsViewController {
         )
     }
 
-    func setEstimatedSizeIfNeeded() {
+    func itemSizeFor(collectionView collectionView: UICollectionView) -> CGSize {
 
-        let width = shotBucketsView.collectionView.frame.size.width ?? 0
-        if let layout = shotBucketsView.collectionView.collectionViewLayout as?
-                UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
-            layout.estimatedItemSize = CGSize(width: width, height: 40)
-        }
+        let width = collectionView.frame.size.width ?? 0
         
-        shotBucketsView.collectionView.collectionViewLayout.invalidateLayout()
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            if layout.estimatedItemSize.width != width {
+                return CGSize(width: width, height: 40)
+            } else {
+                return layout.estimatedItemSize
+            }
+        }
+        return CGSizeZero
     }
 
     func backgroundColorForFooter() -> UIColor {
