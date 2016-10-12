@@ -48,6 +48,9 @@ extension ShotsCollectionViewController {
         super.viewDidLoad()
 
         collectionView?.pagingEnabled = true
+        if #available(iOS 10.0, *) {
+            collectionView?.prefetchDataSource = self
+        }
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
 
@@ -112,6 +115,20 @@ extension ShotsCollectionViewController {
                                  forItemAtIndexPath indexPath: NSIndexPath) {
         if stateHandler is ShotsNormalStateHandler {
             stateHandler.collectionView?(collectionView, didEndDisplayingCell: cell, forItemAtIndexPath: indexPath)
+        }
+    }
+}
+
+extension ShotsCollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(collectionView: UICollectionView, prefetchItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+        if let stateHandler = stateHandler as? ShotsNormalStateHandler {
+            stateHandler.collectionView(collectionView, prefetchItemsAtIndexPaths: indexPaths)
+        }
+    }
+
+    func collectionView(collectionView: UICollectionView, cancelPrefetchingForItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+        if let stateHandler = stateHandler as? ShotsNormalStateHandler {
+            stateHandler.collectionView(collectionView, cancelPrefetchingForItemsAtIndexPaths: indexPaths)
         }
     }
 }
