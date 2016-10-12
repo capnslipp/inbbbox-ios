@@ -83,6 +83,10 @@ workflows:
         - is_update_cocoapods: 'true'
     - xcode-test@1.17.0:
         title: 'Xcode: Unit Test'
+        inputs:
+        - simulator_device: iPhone 6s
+        - is_clean_build: 'yes'
+        - output_tool: xcodebuild
     before_run: 
     after_run: 
 

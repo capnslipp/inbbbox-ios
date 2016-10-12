@@ -98,4 +98,13 @@ class ShotDetailsView: UIView {
         mask.path = path.CGPath
         collectionViewCornerWrapperView.layer.mask = mask
     }
+    
+    // MARK: public
+    
+    func hideBlurViewFor3DTouch(hidden: Bool) {
+        if !DeviceInfo.shouldDowngrade() {
+            backgroundColor = hidden ? .backgroundGrayColor() : .clearColor()
+            blurView.hidden = hidden
+        }
+    }
 }
