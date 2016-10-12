@@ -226,6 +226,36 @@ extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
     }
 }
 
+// Mark: 3DTouch
+
+extension ShotsNormalStateHandler {
+    
+    func getViewControllerForPreviewing(atIndexPath indexPath: NSIndexPath) -> UIViewController? {
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return nil }
+        
+        let shot = shotsCollectionViewController.shots[indexPath.row]
+        let shotDetailsViewController = ShotDetailsViewController(shot: shot)
+        shotDetailsViewController.hideBlurViewFor3DTouch(true)
+        
+        return shotDetailsViewController
+    }
+    
+    func popViewController(controller: UIViewController) {
+        if let controller = controller as? ShotDetailsViewController {
+            controller.shouldScrollToMostRecentMessage = false
+            controller.hideBlurViewFor3DTouch(false)
+            
+            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+            modalTransitionAnimator?.behindViewScale = 1
+            
+            controller.transitioningDelegate = modalTransitionAnimator
+            controller.modalPresentationStyle = .Custom
+            
+            shotsCollectionViewController?.tabBarController?.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+}
+
 // MARK: Private methods
 private extension ShotsNormalStateHandler {
 
@@ -244,20 +274,19 @@ private extension ShotsNormalStateHandler {
     }
 
     func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {
-
         shotsCollectionViewController?.definesPresentationContext = true
 
         let shotDetailsViewController = ShotDetailsViewController(shot: shot)
         shotDetailsViewController.shouldScrollToMostRecentMessage = scrollToMessages
-
+        
         modalTransitionAnimator =
-        CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
-
+            CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+        
         shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
         shotDetailsViewController.modalPresentationStyle = .Custom
-
+        
         shotsCollectionViewController?.tabBarController?.presentViewController(
-                shotDetailsViewController, animated: true, completion: nil)
+            shotDetailsViewController, animated: true, completion: nil)
     }
 
     func isShotLiked(shot: ShotType) -> Bool {
