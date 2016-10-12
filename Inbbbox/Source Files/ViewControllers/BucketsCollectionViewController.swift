@@ -28,6 +28,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBarButtons()
+        registerTo3DTouch()
         guard let collectionView = collectionView else {
             return
         }
@@ -96,6 +97,12 @@ class BucketsCollectionViewController: UICollectionViewController {
                 UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew",
                 comment: "Button for adding new bucket"), style: .Plain,
                 target: self, action: #selector(didTapAddNewBucketButton(_:)))
+    }
+    
+    func registerTo3DTouch() {
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
     }
 
     // MARK: Actions:
@@ -177,5 +184,29 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
             )
             return emptyDataSetView
         }
+    }
+}
+
+// MARK: UIViewControllerPreviewingDelegate
+
+extension BucketsCollectionViewController: UIViewControllerPreviewingDelegate {
+    
+    /// Create a previewing view controller to be shown at "Peek".
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = collectionView?.indexPathForItemAtPoint(location),
+            let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? BucketCollectionViewCell else { return nil }
+        previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+        
+        let bucketContentCollectionViewController =
+            SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
+        
+        return bucketContentCollectionViewController
+    }
+    
+    /// Present the view controller for the "Pop" action.
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit,
+                                                 animated: true)
     }
 }
