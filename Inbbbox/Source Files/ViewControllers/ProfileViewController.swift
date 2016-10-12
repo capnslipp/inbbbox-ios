@@ -346,6 +346,6 @@ private extension ProfileViewController {
 
     dynamic func didTapLeftBarButtonItem() {
         dismissClosure?()
-        dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
     }
 }

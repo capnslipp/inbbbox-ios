@@ -17,9 +17,6 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
     private let viewModel = FolloweesViewModel()
     private var shouldShowLoadingView = true
     private var indexPathsNeededImageUpdate = [NSIndexPath]()
-    
-    // View controller used to 3DTouch Peek & Pop actions
-    weak var cachedViewController: ProfileViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -200,19 +197,15 @@ extension FolloweesCollectionViewController: UIViewControllerPreviewingDelegate 
             previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
         }
         
-        
         let profileViewController = ProfileViewController(user: viewModel.followees[indexPath.item])
-        cachedViewController = profileViewController
+        profileViewController.hidesBottomBarWhenPushed = true
         
         return profileViewController
     }
     
     /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        if let controller = cachedViewController {
-            controller.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
-        cachedViewController = nil
+        navigationController?.pushViewController(viewControllerToCommit,
+                                                 animated: false)
     }
 }

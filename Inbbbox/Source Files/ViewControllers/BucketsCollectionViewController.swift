@@ -14,9 +14,6 @@ class BucketsCollectionViewController: UICollectionViewController {
 
     private let viewModel = BucketsViewModel()
     private var shouldShowLoadingView = true
-    
-    // View controller used to 3DTouch Peek & Pop actions
-    weak var cachedViewController: SimpleShotsCollectionViewController?
 
     // MARK: - Lifecycle
 
@@ -203,17 +200,13 @@ extension BucketsCollectionViewController: UIViewControllerPreviewingDelegate {
         
         let bucketContentCollectionViewController =
             SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
-        cachedViewController = bucketContentCollectionViewController
         
         return bucketContentCollectionViewController
     }
     
     /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        if let controller = cachedViewController {
-            navigationController?.pushViewController(controller,
-                                                     animated: true)
-        }
-        cachedViewController = nil
+        navigationController?.pushViewController(viewControllerToCommit,
+                                                 animated: true)
     }
 }
