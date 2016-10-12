@@ -220,7 +220,7 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
             let indexPath = collectionView?.indexPathsForVisibleItems().first else { return nil }
         
         let imageView = visibleCell.shotImageView
-        previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view);
+        previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view)
         
         guard let detailViewController = normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath) else { return nil }
         return detailViewController
