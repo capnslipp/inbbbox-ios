@@ -245,15 +245,13 @@ extension ShotsNormalStateHandler {
             controller.shouldScrollToMostRecentMessage = false
             controller.hideBlurViewFor3DTouch(false)
             
-            modalTransitionAnimator =
-                CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
             modalTransitionAnimator?.behindViewScale = 1
             
             controller.transitioningDelegate = modalTransitionAnimator
             controller.modalPresentationStyle = .Custom
             
-            shotsCollectionViewController?.tabBarController?.presentViewController(
-                controller, animated: true, completion: nil)
+            shotsCollectionViewController?.tabBarController?.presentViewController(controller, animated: true, completion: nil)
         }
     }
 }

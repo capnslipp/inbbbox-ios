@@ -215,15 +215,16 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
     /// Create a previewing view controller to be shown at "Peek".
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        guard let visibleCell = collectionView?.visibleCells().first as? ShotCollectionViewCell,
+        guard
+            let visibleCell = collectionView?.visibleCells().first as? ShotCollectionViewCell,
             let normalStateHandler = stateHandler as? ShotsNormalStateHandler,
-            let indexPath = collectionView?.indexPathsForVisibleItems().first else { return nil }
+            let indexPath = collectionView?.indexPathsForVisibleItems().first
+        else { return nil }
         
         let imageView = visibleCell.shotImageView
         previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view)
         
-        guard let detailViewController = normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath) else { return nil }
-        return detailViewController
+        return normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath)
     }
     
     /// Present the view controller for the "Pop" action.
