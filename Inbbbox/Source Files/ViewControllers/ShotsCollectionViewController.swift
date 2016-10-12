@@ -215,22 +215,21 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
     /// Create a previewing view controller to be shown at "Peek".
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        if let visibleCell = collectionView?.visibleCells().first as? ShotCollectionViewCell {
-            let imageView = visibleCell.shotImageView
-            previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view);
-        }
+        guard let visibleCell = collectionView?.visibleCells().first as? ShotCollectionViewCell,
+            let normalStateHandler = stateHandler as? ShotsNormalStateHandler,
+            let indexPath = collectionView?.indexPathsForVisibleItems().first else { return nil }
         
-        if let normalStateHandler = stateHandler as? ShotsNormalStateHandler,
-            let indexPath = collectionView?.indexPathsForVisibleItems().first {
-            let detailViewController = normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath)
-            return detailViewController
-        } else { return nil }
+        let imageView = visibleCell.shotImageView
+        previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view);
+        
+        guard let detailViewController = normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath) else { return nil }
+        return detailViewController
     }
     
     /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         if let normalStateHandler = stateHandler as? ShotsNormalStateHandler {
-            normalStateHandler.presentCachedViewController()
+            normalStateHandler.popViewController(viewControllerToCommit)
         }
     }
 }
