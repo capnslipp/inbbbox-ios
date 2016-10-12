@@ -33,17 +33,20 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
 
     func makeRotationOnImages() {
         
+        // representation of animation state
         positionShift -= 1
         if positionShift < 0 {
             positionShift+=4
         }
         
         if let animatableConstraints = animatableConstraints, valuesConstants = imagesConstants {
+        
             for (index, constraints) in animatableConstraints.enumerate() {
-                // index for
+            
+                // index of values in constraints array, shifted by animation state
                 let valsIndex = (index + positionShift) % animatableConstraints.count
                 
-                // view z-index repositions for best animation effect
+                // views z-index repositions, for last and first animation frame
                 if valsIndex == 3 {
                     if let view = constraints.top.firstItem as? UIView {
                         shotsView.sendSubviewToBack(view)
@@ -55,7 +58,7 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
                     }
                 }
                 
-                //
+                // constants apply
                 self.updateConstraints(constraints, withValues: valuesConstants[valsIndex])
             }
         }
