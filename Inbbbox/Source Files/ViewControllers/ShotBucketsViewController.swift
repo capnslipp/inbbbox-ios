@@ -296,8 +296,9 @@ private extension ShotBucketsViewController {
         if let layout = shotBucketsView.collectionView.collectionViewLayout as?
                 UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
             layout.estimatedItemSize = CGSize(width: width, height: 40)
-            layout.invalidateLayout()
         }
+        
+        shotBucketsView.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     func backgroundColorForFooter() -> UIColor {
