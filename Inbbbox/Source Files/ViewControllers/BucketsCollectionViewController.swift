@@ -194,7 +194,7 @@ extension BucketsCollectionViewController: UIViewControllerPreviewingDelegate {
     /// Create a previewing view controller to be shown at "Peek".
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        guard let indexPath = collectionView?.indexPathForItemAtPoint(location),
+        guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)),
             let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? BucketCollectionViewCell else { return nil }
         previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
         

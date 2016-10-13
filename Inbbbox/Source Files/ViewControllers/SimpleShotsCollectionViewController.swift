@@ -55,6 +55,7 @@ extension SimpleShotsCollectionViewController {
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
+        registerTo3DTouch()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -65,6 +66,50 @@ extension SimpleShotsCollectionViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         viewModel?.downloadInitialItems()
+    }
+}
+
+// MARK: UIViewControllerPreviewingDelegate
+
+extension SimpleShotsCollectionViewController: UIViewControllerPreviewingDelegate {
+    
+    func registerTo3DTouch() {
+        // Check for force touch feature, and add force touch/previewing capability.
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
+    }
+    
+    /// Create a previewing view controller to be shown at "Peek".
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard
+            let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)),
+            let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? SimpleShotCollectionViewCell,
+            let viewModel = viewModel
+        else { return nil }
+        
+        let imageView = cell.shotImageView
+        previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view)
+        let detailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
+        detailsViewController.hideBlurViewFor3DTouch(true)
+        
+        return detailsViewController
+    }
+    
+    /// Present the view controller for the "Pop" action.
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        
+        if let controller = viewControllerToCommit as? ShotDetailsViewController {
+            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+            modalTransitionAnimator?.behindViewScale = 1
+            
+            controller.transitioningDelegate = modalTransitionAnimator
+            controller.modalPresentationStyle = .Custom
+            controller.hideBlurViewFor3DTouch(false)
+            
+            tabBarController?.presentViewController(controller, animated: true, completion: nil)
+        }
     }
 }
 
