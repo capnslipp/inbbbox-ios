@@ -143,6 +143,9 @@ extension ShotsNormalStateHandler {
 }
 
 // MARK: UICollectionViewDataSourcePrefetching
+
+// NGRTodo: iOS 10 only API. Remove after updating project.
+#if swift(>=2.3)
 extension ShotsNormalStateHandler: UICollectionViewDataSourcePrefetching {
 
     func collectionView(collectionView: UICollectionView, prefetchItemsAtIndexPaths indexPaths: [NSIndexPath]) {
@@ -158,6 +161,7 @@ extension ShotsNormalStateHandler: UICollectionViewDataSourcePrefetching {
         indexPathsNeededImageUpdate.removeAll()
     }
 }
+#endif
 
 // MARK: UICollecitonViewDelegate
 extension ShotsNormalStateHandler {
