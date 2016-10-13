@@ -15,6 +15,8 @@ class BucketsCollectionViewController: UICollectionViewController {
     private let viewModel = BucketsViewModel()
     private var shouldShowLoadingView = true
 
+    private var cellsAnimateTimer: NSTimer?
+
     // MARK: - Lifecycle
 
     convenience init() {
@@ -46,6 +48,15 @@ class BucketsCollectionViewController: UICollectionViewController {
         super.viewDidAppear(animated)
         viewModel.downloadInitialItems()
         AnalyticsManager.trackScreen(.BucketsView)
+        
+        cellsAnimateTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(BucketsCollectionViewController.makeRandomRotation), userInfo: nil, repeats: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        cellsAnimateTimer?.invalidate()
+        cellsAnimateTimer = nil
     }
 
     // MARK: UICollectionViewDataSource
@@ -127,6 +138,15 @@ class BucketsCollectionViewController: UICollectionViewController {
         }
         self.presentViewController(alert, animated: true, completion: nil)
         alert.view.tintColor = .pinkColor()
+    }
+
+    func makeRandomRotation() {
+        if let visCells = self.collectionView?.visibleCells() where visCells.count > 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(visCells.count)))
+            if let randomCell = visCells[randomIndex] as? BucketCollectionViewCell {
+                randomCell.makeRotationOnImages()
+            }
+        }
     }
 }
 
