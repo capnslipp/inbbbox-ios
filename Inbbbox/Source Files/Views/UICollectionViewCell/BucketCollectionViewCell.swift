@@ -20,6 +20,7 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
     var imagesConstants: [ConstantValues]?
     var animatableConstraints: [PositionsConstraints]?
     var positionShift = 0
+    let rotationDuration = 1.25
 
     let firstShotImageView = UIImageView.newAutoLayoutView()
     let secondShotImageView = UIImageView.newAutoLayoutView()
@@ -36,7 +37,7 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
         // representation of animation state
         positionShift -= 1
         if positionShift < 0 {
-            positionShift+=4
+            positionShift=3
         }
         
         if let animatableConstraints = animatableConstraints, valuesConstants = imagesConstants {
@@ -63,7 +64,7 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
             }
         }
         
-        UIView.animateWithDuration(1.25, delay: 0, options: .CurveEaseInOut, animations: { [weak self] in
+        UIView.animateWithDuration(rotationDuration, delay: 0, options: .CurveEaseInOut, animations: { [weak self] in
             
             self?.shotsView.layoutIfNeeded()
             
@@ -148,9 +149,9 @@ private extension BucketCollectionViewCell {
         let subimageWidth = contentView.bounds.width / 3
         let subimageHeight = subimageWidth * spacings.smallerShotHeightToWidthRatio
         
-        return [ConstantValues(top: 0,           left: 0,                 width: largeWidth,    height: largeHeight),
-                ConstantValues(top: largeHeight, left: 0,                 width: subimageWidth, height: subimageHeight),
-                ConstantValues(top: largeHeight, left: subimageWidth,     width: subimageWidth, height: subimageHeight),
+        return [ConstantValues(top: 0, left: 0, width: largeWidth, height: largeHeight),
+                ConstantValues(top: largeHeight, left: 0, width: subimageWidth, height: subimageHeight),
+                ConstantValues(top: largeHeight, left: subimageWidth, width: subimageWidth, height: subimageHeight),
                 ConstantValues(top: largeHeight, left: 2 * subimageWidth, width: subimageWidth, height: subimageHeight)]
     }
     
