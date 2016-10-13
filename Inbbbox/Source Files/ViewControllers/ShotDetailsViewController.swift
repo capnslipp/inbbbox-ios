@@ -25,6 +25,7 @@ final class ShotDetailsViewController: UIViewController {
     private(set) var header: ShotDetailsHeaderView?
     private var footer: ShotDetailsFooterView?
     private(set) var scroller = ScrollViewAutoScroller()
+    private(set) var operationalCell: ShotDetailsOperationCollectionViewCell?
     private var onceTokenForShouldScrollToMessagesOnOpen = dispatch_once_t(0)
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
 
@@ -120,6 +121,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
         if viewModel.isShotOperationIndex(indexPath.row) {
             let cell = collectionView.dequeueReusableClass(ShotDetailsOperationCollectionViewCell.self,
                     forIndexPath: indexPath, type: .Cell)
+            operationalCell = cell
 
             let likeSelectableView = cell.operationView.likeSelectableView
             let bucketSelectableView = cell.operationView.bucketSelectableView
@@ -137,7 +139,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 
             setLikesCountForLabel(cell.operationView.likeCounterLabel)
             setBucketsCountForLabel(cell.operationView.bucketCounterLabel)
-            
+
             return cell
 
         } else if viewModel.isDescriptionIndex(indexPath.row) {
@@ -338,6 +340,25 @@ extension ShotDetailsViewController {
 
 private extension ShotDetailsViewController {
 
+    func refreshWithShot(shot: ShotType) {
+    
+        if let operationalCell = self.operationalCell {
+            operationalCell.operationView.likeCounterLabel.text = "\(shot.likesCount)"
+            operationalCell.operationView.bucketCounterLabel.text = "\(shot.bucketsCount)"
+        }
+    }
+
+    func refreshLikesBucketsCounter() {
+
+        firstly {
+            self.viewModel.checkDetailOfShot()
+        }.then { shot in
+            self.refreshWithShot(shot)
+            
+        }.error { error in
+        }
+    }
+
     func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
         handleSelectableViewStatus(view) {
             self.viewModel.checkLikeStatusOfShot()
@@ -372,13 +393,17 @@ private extension ShotDetailsViewController {
     }
 
     func likeSelectableViewDidTap(view: ActivityIndicatorSelectableView) {
-
+        
         view.startAnimating()
 
         firstly {
             viewModel.performLikeOperation()
         }.then { isShotLikedByUser in
             view.selected = isShotLikedByUser
+        }.then {
+            self.viewModel.checkDetailOfShot()
+        }.then { shot in
+            self.refreshWithShot(shot)
         }.always {
             view.stopAnimating()
         }
@@ -397,6 +422,10 @@ private extension ShotDetailsViewController {
             } else {
                 view.selected = false
             }
+        }.then {
+            self.viewModel.checkDetailOfShot()
+        }.then { shot in
+            self.refreshWithShot(shot)
         }.always {
             view.stopAnimating()
         }.error { error in

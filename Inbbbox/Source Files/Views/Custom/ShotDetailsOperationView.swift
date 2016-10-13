@@ -39,11 +39,11 @@ class ShotDetailsOperationView: UIView {
         bucketSelectableView.setImage(UIImage(named: "ic-bucket-details"), forState: .Deselected)
         addSubview(bucketSelectableView)
 
-        likeCounterLabel.text = "213"
+        likeCounterLabel.text = ".."
         configureCounterLabel(likeCounterLabel)
         addSubview(likeCounterLabel)
 
-        bucketCounterLabel.text = "12"
+        bucketCounterLabel.text = ".."
         configureCounterLabel(bucketCounterLabel)
         addSubview(bucketCounterLabel)
     }
@@ -55,11 +55,6 @@ class ShotDetailsOperationView: UIView {
 
     override func intrinsicContentSize() -> CGSize {
         return CGSize(width: 0, height: self.dynamicType.minimumRequiredHeight)
-    }
-
-    func configureCounterLabel(label: UILabel) {
-        label.font = UIFont.helveticaFont(.Neue, size: 12)
-        label.textColor = .followeeTextGrayColor()
     }
 
     override func updateConstraints() {
@@ -88,5 +83,10 @@ class ShotDetailsOperationView: UIView {
         }
 
         super.updateConstraints()
+    }
+    
+    func configureCounterLabel(label: UILabel) {
+        label.font = UIFont.helveticaFont(.Neue, size: 12)
+        label.textColor = .followeeTextGrayColor()
     }
 }

@@ -95,6 +95,24 @@ class APIShotsRequester: Verifiable {
             }.error(reject)
         }
     }
+
+    func fetchShotDetailsForShot(shot: ShotType) -> Promise<ShotType> {
+
+        return Promise<ShotType> { fulfill, reject in
+
+            let query = ShotLikesQuery(shot: shot)
+            firstly {
+                sendShotQueryForRespone(query)
+            }.then { json -> Void in
+
+                guard let json = json else {
+                    throw AuthenticatorError.UnableToFetchUser
+                }
+                fulfill(Shot.map(json) as ShotType)
+
+            }.error(reject)
+        }
+    }
 }
 
 private extension APIShotsRequester {

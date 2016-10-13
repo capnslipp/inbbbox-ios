@@ -182,6 +182,10 @@ extension ShotDetailsViewModel {
             }.error(reject)
         }
     }
+
+    func checkDetailOfShot() -> Promise<ShotType> {
+        return shotsRequester.fetchShotDetails(shot)
+    }
 }
 
 // MARK: Buckets handling
