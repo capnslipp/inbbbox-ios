@@ -46,7 +46,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     var didLikeShotCompletionHandler: (() -> Void)?
     var didAddShotToBucketCompletionHandler: (() -> Void)?
 
-    private var indexPathsNeededImageUpdate = [NSIndexPath]()
+    private var indexPathsNeededImageUpdate = [UpdateableIndexPaths]()
 
     func prepareForPresentingData() {
         if !UserStorage.isUserSignedIn {
@@ -92,8 +92,7 @@ extension ShotsNormalStateHandler {
 
         cell.shotImageView.activityIndicatorView.startAnimating()
 
-        indexPathsNeededImageUpdate.append(indexPath)
-        lazyLoadImage(shot.shotImage, forCell: cell, atIndexPath: indexPath)
+        load(shot.shotImage, for: indexPath)
 
         cell.gifLabel.hidden = !shot.animated
         cell.liked = self.isShotLiked(shot)
@@ -143,6 +142,27 @@ extension ShotsNormalStateHandler {
     }
 }
 
+// MARK: UICollectionViewDataSourcePrefetching
+
+// NGRTodo: iOS 10 only API. Remove after updating project.
+#if swift(>=2.3)
+extension ShotsNormalStateHandler: UICollectionViewDataSourcePrefetching {
+
+    func collectionView(collectionView: UICollectionView, prefetchItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return }
+
+        indexPaths.forEach {
+            let shot = shotsCollectionViewController.shots[$0.item]
+            load(shot.shotImage, for: $0)
+        }
+    }
+
+    func collectionView(collectionView: UICollectionView, cancelPrefetchingForItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+        indexPathsNeededImageUpdate.removeAll()
+    }
+}
+#endif
+
 // MARK: UICollecitonViewDelegate
 extension ShotsNormalStateHandler {
 
@@ -154,34 +174,23 @@ extension ShotsNormalStateHandler {
         presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false)
     }
 
-    func collectionView(collectionView: UICollectionView,
-            willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        guard let shotsCollectionViewController = shotsCollectionViewController else { return }
-
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = cell as? ShotCollectionViewCell {
             cell.displayAuthor(Settings.Customization.ShowAuthor, animated: true)
-        }
 
-        if indexPath.row == shotsCollectionViewController.shots.count - 6 {
-            firstly {
-                shotsCollectionViewController.shotsProvider.nextPage()
-            }.then { [weak self] shots -> Void in
-                if let shots = shots, shotsCollectionViewController = self?.shotsCollectionViewController {
-                    shotsCollectionViewController.shots.appendContentsOf(shots)
-                    shotsCollectionViewController.collectionView?.reloadData()
-                }
-            }.error { error in
-                self.delegate?.shotsStateHandlerDidFailToFetchItems(error)
+            if let shotsCollectionViewController = shotsCollectionViewController {
+                let shot = shotsCollectionViewController.shots[indexPath.item]
+                load(shot.shotImage, for: indexPath)
             }
         }
+
+        downloadNextPageIfNeeded(for: indexPath)
     }
 
     func collectionView(collectionView: UICollectionView,
             didEndDisplayingCell cell: UICollectionViewCell,
             forItemAtIndexPath indexPath: NSIndexPath) {
-        if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
-            indexPathsNeededImageUpdate.removeAtIndex(index)
-        }
+        indexPathsNeededImageUpdate = indexPathsNeededImageUpdate.filter { $0.indexPath != indexPath }
     }
 }
 
@@ -378,38 +387,85 @@ private extension ShotsNormalStateHandler {
 
         return collectionView.visibleCells().first as? ShotCollectionViewCell
     }
+
+    func load(image: ShotImageType, for indexPath: NSIndexPath) {
+        indexPathsNeededImageUpdate.append(UpdateableIndexPaths(indexPath: indexPath))
+        lazyLoadImage(image, for: indexPath)
+    }
+
+    func downloadNextPageIfNeeded(for indexPath: NSIndexPath) {
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return }
+
+        if indexPath.row == shotsCollectionViewController.shots.count - 6 {
+
+            firstly {
+                shotsCollectionViewController.shotsProvider.nextPage()
+                }.then { [weak self] shots -> Void in
+                    if let shots = shots, shotsCollectionViewController = self?.shotsCollectionViewController {
+                        shotsCollectionViewController.shots.appendContentsOf(shots)
+                        shotsCollectionViewController.collectionView?.reloadData()
+                    }
+                }.error { error in
+                    self.delegate?.shotsStateHandlerDidFailToFetchItems(error)
+            }
+        }
+    }
 }
 
 // MARK: Lazy loading of image
 
 private extension ShotsNormalStateHandler {
 
-    func lazyLoadImage(shotImage: ShotImageType, forCell cell: ShotCollectionViewCell,
-            atIndexPath indexPath: NSIndexPath) {
+    /// Returns UpdateableIndexPaths object that matches given NSIndexPath (if any)
+    /// - parameter indexPath: indexPath to match.
+    /// - returns: Matched UpdateableIndexPaths object.
+    func updateableIndexPath(for indexPath: NSIndexPath) -> UpdateableIndexPaths? {
+        return indexPathsNeededImageUpdate.filter { $0.indexPath == indexPath }.first
+    }
+
+    func lazyLoadImage(shotImage: ShotImageType, for indexPath: NSIndexPath) {
         let teaserImageLoadingCompletion: UIImage -> Void = { [weak self] image in
 
-            guard let certainSelf = self
-                where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else {
-                return
-             }
-            cell.shotImageView.activityIndicatorView.stopAnimating()
-            cell.shotImageView.originalImage = image
-            cell.shotImageView.image = image
+            guard let certainSelf = self else { return }
+            guard let _ = certainSelf.updateableIndexPath(for: indexPath) else { return }
+
+            if let collectionView = certainSelf.shotsCollectionViewController?.collectionView {
+                if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotCollectionViewCell {
+                    cell.shotImageView.activityIndicatorView.stopAnimating()
+                    cell.shotImageView.originalImage = image
+                    cell.shotImageView.image = image
+                }
+            }
         }
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
 
-            guard let certainSelf = self
-                where certainSelf.indexPathsNeededImageUpdate.contains(indexPath) else {
-                return
+            guard let certainSelf = self else {return}
+            guard var indexPathToUpdate = certainSelf.updateableIndexPath(for: indexPath) else { return }
+
+            if let index = certainSelf.indexPathsNeededImageUpdate.indexOf({$0 == indexPathToUpdate}) {
+                indexPathToUpdate.status = .Updated
+                certainSelf.indexPathsNeededImageUpdate[index] = indexPathToUpdate
             }
 
-            cell.shotImageView.originalImage = image
-            cell.shotImageView.image = image
+            if let collectionView = certainSelf.shotsCollectionViewController?.collectionView {
+                if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotCollectionViewCell {
+                    cell.shotImageView.originalImage = image
+                    cell.shotImageView.image = image
+                }
+            }
         }
-        LazyImageProvider.lazyLoadImageFromURLs(
-            (shotImage.teaserURL, shotImage.normalURL, nil),
-            teaserImageCompletion: teaserImageLoadingCompletion,
-            normalImageCompletion: imageLoadingCompletion
-        )
+
+        guard var indexPathToUpdate = self.updateableIndexPath(for: indexPath) else { return }
+        if indexPathToUpdate.status == .NotStarted || indexPathToUpdate.status == .Updated {
+            if let index = indexPathsNeededImageUpdate.indexOf({$0 == indexPathToUpdate}) {
+                indexPathToUpdate.status = .InProgress
+                indexPathsNeededImageUpdate[index] = indexPathToUpdate
+            }
+            LazyImageProvider.lazyLoadImageFromURLs(
+                (shotImage.teaserURL, shotImage.normalURL, nil),
+                teaserImageCompletion: teaserImageLoadingCompletion,
+                normalImageCompletion: imageLoadingCompletion
+            )
+        }
     }
 }

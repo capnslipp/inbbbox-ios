@@ -48,6 +48,12 @@ extension ShotsCollectionViewController {
         super.viewDidLoad()
 
         collectionView?.pagingEnabled = true
+        // NGRTodo: iOS 10 only API. Remove after updating project.
+        #if swift(>=2.3)
+        if #available(iOS 10.0, *) {
+            collectionView?.prefetchDataSource = self
+        }
+        #endif
         collectionView?.backgroundView = ShotsCollectionBackgroundView()
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
 
@@ -116,6 +122,23 @@ extension ShotsCollectionViewController {
         }
     }
 }
+
+// NGRTodo: iOS 10 only API. Remove after updating project.
+#if swift(>=2.3)
+extension ShotsCollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(collectionView: UICollectionView, prefetchItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+        if let stateHandler = stateHandler as? ShotsNormalStateHandler {
+            stateHandler.collectionView(collectionView, prefetchItemsAtIndexPaths: indexPaths)
+        }
+    }
+
+    func collectionView(collectionView: UICollectionView, cancelPrefetchingForItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+        if let stateHandler = stateHandler as? ShotsNormalStateHandler {
+            stateHandler.collectionView(collectionView, cancelPrefetchingForItemsAtIndexPaths: indexPaths)
+        }
+    }
+}
+#endif
 
 // MARK: UIScrollViewDelegate
 
