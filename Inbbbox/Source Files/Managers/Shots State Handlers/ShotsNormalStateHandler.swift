@@ -133,7 +133,8 @@ extension ShotsNormalStateHandler {
                 }
                 certainSelf.presentShotBucketsViewController(shot)
             case .Comment:
-                certainSelf.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true)
+                let shotUpdated = self?.shotDummyRecent(shot)
+                certainSelf.presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: true)
             case .DoNothing:
                 break
             }
@@ -171,7 +172,8 @@ extension ShotsNormalStateHandler {
         guard let shotsCollectionViewController = shotsCollectionViewController else { return }
 
         let shot = shotsCollectionViewController.shots[indexPath.row]
-        presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false)
+        let shotUpdated = self.shotDummyRecent(shot)
+        presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: false)
     }
 
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -300,6 +302,16 @@ private extension ShotsNormalStateHandler {
 
     func isShotLiked(shot: ShotType) -> Bool {
         return likedShots.contains { $0.identifier == shot.identifier }
+    }
+    
+    // shot with most recent likes/buckets count
+    func shotDummyRecent(shot: ShotType) -> ShotType {
+        let likedShot = likedShots.filter{ $0.identifier == shot.identifier}
+        
+        if let betterShot = likedShot.first {
+            return betterShot
+        }
+        return shot
     }
 
     func likeShot(shot: ShotType) -> Promise<Void> {

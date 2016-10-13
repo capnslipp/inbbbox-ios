@@ -135,6 +135,9 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             setLikeStateInSelectableView(likeSelectableView)
             setBucketStatusInSelectableView(bucketSelectableView)
 
+            setLikesCountForLabel(cell.operationView.likeCounterLabel)
+            setBucketsCountForLabel(cell.operationView.bucketCounterLabel)
+            
             return cell
 
         } else if viewModel.isDescriptionIndex(indexPath.row) {
@@ -345,6 +348,14 @@ private extension ShotDetailsViewController {
         handleSelectableViewStatus(view) {
             self.viewModel.checkShotAffiliationToUserBuckets()
         }
+    }
+    
+    func setLikesCountForLabel(label: UILabel) {
+        label.text = "\(viewModel.shot.likesCount)"
+    }
+
+    func setBucketsCountForLabel(label: UILabel) {
+        label.text = "\(viewModel.shot.bucketsCount)"
     }
 
     func handleSelectableViewStatus(view: ActivityIndicatorSelectableView, withAction action: (() -> Promise<Bool>)) {
