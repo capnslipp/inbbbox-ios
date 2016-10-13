@@ -186,7 +186,7 @@ extension FolloweesCollectionViewController: UIViewControllerPreviewingDelegate 
     /// Create a previewing view controller to be shown at "Peek".
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        guard let indexPath = collectionView?.indexPathForItemAtPoint(location) else { return nil }
+        guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)) else { return nil }
         
         if let collectionView = collectionView where
             collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
