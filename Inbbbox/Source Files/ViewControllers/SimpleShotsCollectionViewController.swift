@@ -87,9 +87,7 @@ extension SimpleShotsCollectionViewController: UIViewControllerPreviewingDelegat
             let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)),
             let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? SimpleShotCollectionViewCell,
             let viewModel = viewModel
-        else {
-                return nil
-        }
+        else { return nil }
         
         let imageView = cell.shotImageView
         previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view)
