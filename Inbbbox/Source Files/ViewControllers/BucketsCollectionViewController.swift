@@ -16,7 +16,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     private var shouldShowLoadingView = true
 
     private var cellsAnimateTimer: NSTimer?
-    private let animationCycleInterval = 6
+    private let animationCycleInterval = 6.0
 
     // MARK: - Lifecycle
 
