@@ -16,6 +16,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     private var shouldShowLoadingView = true
 
     private var cellsAnimateTimer: NSTimer?
+    private let animationCycleInterval = 6
 
     // MARK: - Lifecycle
 
@@ -49,7 +50,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         viewModel.downloadInitialItems()
         AnalyticsManager.trackScreen(.BucketsView)
         
-        cellsAnimateTimer = NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: #selector(BucketsCollectionViewController.makeRandomRotation), userInfo: nil, repeats: true)
+        cellsAnimateTimer = NSTimer.scheduledTimerWithTimeInterval(animationCycleInterval, target: self, selector: #selector(BucketsCollectionViewController.makeRandomRotation), userInfo: nil, repeats: true)
     }
     
     override func viewWillDisappear(animated: Bool) {
