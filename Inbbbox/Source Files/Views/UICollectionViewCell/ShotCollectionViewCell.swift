@@ -337,6 +337,6 @@ extension ShotCollectionViewCell: UIGestureRecognizerDelegate {
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWithGestureRecognizer
                            otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return false
     }
 }
