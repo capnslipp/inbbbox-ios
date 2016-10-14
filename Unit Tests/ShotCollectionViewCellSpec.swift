@@ -550,8 +550,8 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     shouldRecognizeSimultaneously = sut.gestureRecognizer(UIGestureRecognizer(), shouldRecognizeSimultaneouslyWithGestureRecognizer: UIGestureRecognizer())
                 }
                 
-                it("should alwawys recognize simultaneously all gesture recognizers") {
-                    expect(shouldRecognizeSimultaneously).to(beTruthy())
+                it("should alwawys block other gesture recognizers") {
+                    expect(shouldRecognizeSimultaneously).to(beFalsy())
                 }
             }
         }
