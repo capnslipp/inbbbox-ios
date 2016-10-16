@@ -212,8 +212,9 @@ private extension ShotsCollectionViewController {
     dynamic func didChangeStreamSourceSettings(notification: NSNotification) {
         firstly {
             refreshShotsData()
-        }.then {
+        }.then { () -> Void in
             self.collectionView?.reloadData()
+            self.collectionView?.setContentOffset(CGPointZero, animated: true)
         }.error { error in
             let alert = UIAlertController.unableToDownloadItems()
             self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
