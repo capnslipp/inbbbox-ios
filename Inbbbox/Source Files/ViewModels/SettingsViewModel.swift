@@ -157,6 +157,7 @@ private extension SettingsViewModel {
             } else {
                 self.unregisterLocalNotification()
             }
+            AnalyticsManager.trackSettingChanged(.DailyRemainderEnabled, state: newValue)
         }
 
         reminderDateItem.onValueChanged = { date -> Void in
@@ -168,22 +169,27 @@ private extension SettingsViewModel {
 
         followingStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.Following = newValue
+            AnalyticsManager.trackSettingChanged(.FollowingStreamSource, state: newValue)
         }
 
         newTodayStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.NewToday = newValue
+            AnalyticsManager.trackSettingChanged(.NewTodayStreamSource, state: newValue)
         }
 
         popularTodayStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.PopularToday = newValue
+            AnalyticsManager.trackSettingChanged(.PopularTodayStreamSource, state: newValue)
         }
 
         debutsStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.Debuts = newValue
+            AnalyticsManager.trackSettingChanged(.DebutsStreamSource, state: newValue)
         }
 
         showAuthorItem.valueChanged = { newValue in
             Settings.Customization.ShowAuthor = newValue
+            AnalyticsManager.trackSettingChanged(.AuthorOnHomeScreen, state: newValue)
         }
     }
 
