@@ -133,9 +133,8 @@ extension ShotsNormalStateHandler {
                 }
                 certainSelf.presentShotBucketsViewController(shot)
             case .Comment:
-//                let shotUpdated = self?.shotDummyRecent(shot)
-//                certainSelf.presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: true)
-                certainSelf.presentShotDetailsViewControllerWithShot(shot, scrollToMessages: true)
+                let shotUpdated = self?.shotDummyRecent(shot)
+                certainSelf.presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: true)
             case .DoNothing:
                 break
             }
@@ -173,9 +172,8 @@ extension ShotsNormalStateHandler {
         guard let shotsCollectionViewController = shotsCollectionViewController else { return }
 
         let shot = shotsCollectionViewController.shots[indexPath.row]
-//        let shotUpdated = self.shotDummyRecent(shot)
-//        presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: false)
-        presentShotDetailsViewControllerWithShot(shot, scrollToMessages: false)
+        let shotUpdated = self.shotDummyRecent(shot)
+        presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: false)
     }
 
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {

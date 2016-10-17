@@ -358,6 +358,12 @@ private extension ShotDetailsViewController {
         }.error { error in
         }
     }
+    
+    func delayedRefreshLikesBucketsCounter() {
+        after(1.5).then {
+            self.refreshLikesBucketsCounter()
+        }
+    }
 
     func setLikeStateInSelectableView(view: ActivityIndicatorSelectableView) {
         handleSelectableViewStatus(view) {
@@ -400,11 +406,8 @@ private extension ShotDetailsViewController {
             viewModel.performLikeOperation()
         }.then { isShotLikedByUser in
             view.selected = isShotLikedByUser
-        }.then {
-            self.viewModel.checkDetailOfShot()
-        }.then { shot in
-            self.refreshWithShot(shot)
         }.always {
+            self.delayedRefreshLikesBucketsCounter()
             view.stopAnimating()
         }
     }
@@ -418,14 +421,13 @@ private extension ShotDetailsViewController {
         }.then { result -> Void in
             if let bucketNumber = result.bucketsNumber where !result.removed {
                 let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
-                self.presentShotBucketsViewControllerWithMode(mode)
+                self.presentShotBucketsViewControllerWithMode(mode, onModalCompletion: {
+                    self.delayedRefreshLikesBucketsCounter()
+                })
             } else {
+                self.delayedRefreshLikesBucketsCounter()
                 view.selected = false
             }
-        }.then {
-            self.viewModel.checkDetailOfShot()
-        }.then { shot in
-            self.refreshWithShot(shot)
         }.always {
             view.stopAnimating()
         }.error { error in
@@ -512,7 +514,7 @@ private extension ShotDetailsViewController {
         }
     }
 
-    func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode) {
+    func presentShotBucketsViewControllerWithMode(mode: ShotBucketsViewControllerMode, onModalCompletion completion:(() -> Void)? = nil) {
 
         shotDetailsView.commentComposerView.makeInactive()
 
@@ -522,6 +524,7 @@ private extension ShotDetailsViewController {
             self?.animateHeader(start: true)
             self?.viewModel.clearBucketsData()
             self?.shotDetailsView.collectionView.reloadItemsAtIndexPaths([NSIndexPath(forItem: 0, inSection: 0)])
+            completion?()
         }
 
         modalTransitionAnimator =
