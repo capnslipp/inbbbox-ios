@@ -78,6 +78,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         commentLabel.lineBreakMode = .ByWordWrapping
         commentLabel.userInteractionEnabled = true
         commentLabel.linkAttributes = [NSForegroundColorAttributeName : UIColor.pinkColor()]
+        commentLabel.delegate = self
         contentView.addSubview(commentLabel)
 
         dateLabel.numberOfLines = 0
@@ -205,9 +206,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         textContainer.lineFragmentPadding = 0.0
         textContainer.lineBreakMode = commentLabel.lineBreakMode
         textContainer.maximumNumberOfLines = commentLabel.numberOfLines
-
-        commentLabel.addGestureRecognizer(UITapGestureRecognizer(target: self,
-            action: #selector(commentLabelDidTap(_:))))
     }
 
     func setLinkInAuthorLabel(URL: NSURL, delegate: TTTAttributedLabelDelegate) {
@@ -228,11 +226,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
 extension ShotDetailsCommentCollectionViewCell {
 
-    func commentLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
-        delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer,
-                layoutManager: layoutManager)
-    }
-
     func reportButtonDidTap(_: UIButton) {
         reportActionHandler?()
     }
@@ -249,6 +242,12 @@ extension ShotDetailsCommentCollectionViewCell {
         likedByMe ? unlikeActionHandler?() : likeActionHandler?()
     }
 
+}
+
+extension ShotDetailsCommentCollectionViewCell: TTTAttributedLabelDelegate {
+    func attributedLabel(label: TTTAttributedLabel!, didSelectLinkWithURL url: NSURL!) {
+        delegate?.urlInLabelTapped(url)
+    }
 }
 
 extension ShotDetailsCommentCollectionViewCell: AutoSizable {

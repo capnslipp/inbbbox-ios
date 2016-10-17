@@ -191,13 +191,21 @@ extension ShotDetailsViewController: UICollectionViewCellWithLabelContainingClic
         guard let url = URLDetector.detectUrlFromGestureRecognizer(gestureRecognizer,
                                                                    textContainer: textContainer,
                                                                    layoutManager: layoutManager) else { return }
-
+        handleTappedUrl(url)
+        
+    }
+    
+    func urlInLabelTapped(url: NSURL) {
+        handleTappedUrl(url)
+    }
+    
+    private func handleTappedUrl(url: NSURL) {
         if viewModel.shouldOpenUserDetailsFromUrl(url) {
             if let identifier = url.absoluteString.componentsSeparatedByString("/").last {
                 firstly {
                     viewModel.userForId(identifier)
-                }.then { [weak self] user in
-                    self?.presentProfileViewControllerForUser(user)
+                    }.then { [weak self] user in
+                        self?.presentProfileViewControllerForUser(user)
                 }
             }
         } else {
@@ -212,4 +220,5 @@ protocol UICollectionViewCellWithLabelContainingClickableLinksDelegate: class {
 
     func labelContainingClickableLinksDidTap(gestureRecognizer: UITapGestureRecognizer,
                                              textContainer: NSTextContainer, layoutManager: NSLayoutManager)
+    func urlInLabelTapped(url: NSURL)
 }
