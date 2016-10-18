@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ShotLikesQuery: Query {
+struct ShotDetailsQuery: Query {
 
     let method = Method.GET
     let path: String

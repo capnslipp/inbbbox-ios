@@ -40,9 +40,6 @@ class ShotsRequester {
     }
 
     func fetchShotDetails(shot: ShotType) -> Promise<ShotType> {
-    // NGRTodo: check if necessary
-//        if UserStorage.isUserSignedIn
-
         return apiShotsRequester.fetchShotDetailsForShot(shot)
     }
 }

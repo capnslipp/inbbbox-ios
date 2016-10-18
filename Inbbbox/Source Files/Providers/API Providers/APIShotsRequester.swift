@@ -96,11 +96,20 @@ class APIShotsRequester: Verifiable {
         }
     }
 
+    /**
+     Get shot details for a given shot in case we need updated data
+
+     - Requires: Authenticated user.
+
+     - parameter shot: Shot to check.
+
+     - returns: Updated shot details
+     */
     func fetchShotDetailsForShot(shot: ShotType) -> Promise<ShotType> {
 
         return Promise<ShotType> { fulfill, reject in
 
-            let query = ShotLikesQuery(shot: shot)
+            let query = ShotDetailsQuery(shot: shot)
             firstly {
                 sendShotQueryForRespone(query)
             }.then { json -> Void in

@@ -39,13 +39,14 @@ class ShotDetailsOperationView: UIView {
         bucketSelectableView.setImage(UIImage(named: "ic-bucket-details"), forState: .Deselected)
         addSubview(bucketSelectableView)
 
-        likeCounterLabel.text = ".."
-        configureCounterLabel(likeCounterLabel)
-        addSubview(likeCounterLabel)
-
-        bucketCounterLabel.text = ".."
-        configureCounterLabel(bucketCounterLabel)
-        addSubview(bucketCounterLabel)
+        for label in [likeCounterLabel, bucketCounterLabel] {
+            
+            label.font = UIFont.helveticaFont(.Neue, size: 12)
+            label.textColor = .followeeTextGrayColor()
+            
+            addSubview(label)
+        }
+        
     }
 
     @available(*, unavailable, message = "Use init(withImage: UIImage) method instead")
@@ -74,19 +75,14 @@ class ShotDetailsOperationView: UIView {
             }
 
             likeCounterLabel.autoConstrainAttribute(.Left, toAttribute: .Right,
-                                                    ofView: likeSelectableView, withOffset: 5)
+                                                    ofView: likeSelectableView, withOffset: 0)
             likeCounterLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: likeSelectableView)
 
             bucketCounterLabel.autoConstrainAttribute(.Left, toAttribute: .Right,
-                                                    ofView: bucketSelectableView, withOffset: 5)
+                                                    ofView: bucketSelectableView, withOffset: 0)
             bucketCounterLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: bucketSelectableView)
         }
 
         super.updateConstraints()
-    }
-    
-    func configureCounterLabel(label: UILabel) {
-        label.font = UIFont.helveticaFont(.Neue, size: 12)
-        label.textColor = .followeeTextGrayColor()
     }
 }

@@ -360,7 +360,7 @@ private extension ShotDetailsViewController {
     }
     
     func delayedRefreshLikesBucketsCounter() {
-        after(1.5).then {
+        after(0.5).then {
             self.refreshLikesBucketsCounter()
         }
     }
