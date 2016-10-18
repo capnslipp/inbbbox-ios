@@ -126,6 +126,18 @@ class SettingsViewModel: GroupedListViewModel {
         Settings.Reminder.LocalNotificationSettingsProvided = true
         registerLocalNotification()
     }
+
+    func updateStatus() {
+        reminderItem.enabled = Settings.Reminder.Enabled
+        if let date = Settings.Reminder.Date {
+            reminderDateItem.date = date
+        }
+        followingStreamSourceItem.enabled = Settings.StreamSource.Following
+        newTodayStreamSourceItem.enabled = Settings.StreamSource.NewToday
+        popularTodayStreamSourceItem.enabled = Settings.StreamSource.PopularToday
+        debutsStreamSourceItem.enabled = Settings.StreamSource.Debuts
+        showAuthorItem.enabled = Settings.Customization.ShowAuthor
+    }
 }
 
 // MARK: Private extension

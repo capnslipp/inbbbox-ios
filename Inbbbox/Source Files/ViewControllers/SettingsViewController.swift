@@ -41,6 +41,7 @@ class SettingsViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         refreshViewAccordingToAuthenticationStatus()
+        viewModel.updateStatus()
     }
 
     override func viewDidAppear(animated: Bool) {
