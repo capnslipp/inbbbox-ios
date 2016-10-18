@@ -354,8 +354,6 @@ private extension ShotDetailsViewController {
             self.viewModel.checkDetailOfShot()
         }.then { shot in
             self.refreshWithShot(shot)
-            
-        }.error { error in
         }
     }
     

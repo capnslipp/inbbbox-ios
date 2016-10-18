@@ -306,12 +306,9 @@ private extension ShotsNormalStateHandler {
     
     // shot with most recent likes/buckets count
     func shotDummyRecent(shot: ShotType) -> ShotType {
-        let likedShot = likedShots.filter{ $0.identifier == shot.identifier}
+        let likedShot = likedShots.filter{ $0.identifier == shot.identifier }
         
-        if let betterShot = likedShot.first {
-            return betterShot
-        }
-        return shot
+        return likedShot.first ?? shot
     }
 
     func likeShot(shot: ShotType) -> Promise<Void> {
