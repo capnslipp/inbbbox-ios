@@ -70,6 +70,9 @@
 /* Displayed when empty data in view. */
 "BucketsCollectionViewController.EmptyData.LastLocalizedString" = " dodaj jakieś shoty do katalogów!";
 
+/* Displayed when creating new bucket fails. */
+"BucketsCollectionViewController.NewBucketFail" = "Nie udało się stworzyć katalogu.";
+
 /********* ShotBucketsViewModel *********/
 
 /* Allows user to add shot to bucket */
