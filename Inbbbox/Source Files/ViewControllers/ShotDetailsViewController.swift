@@ -357,6 +357,8 @@ private extension ShotDetailsViewController {
         }
     }
     
+    // Dribbble's API is not providing updated counters instantly,
+    // this 0.5sec delay gives us more chance to obtain more precise values
     func delayedRefreshLikesBucketsCounter() {
         after(0.5).then {
             self.refreshLikesBucketsCounter()
