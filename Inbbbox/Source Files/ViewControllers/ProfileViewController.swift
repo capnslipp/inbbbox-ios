@@ -34,8 +34,7 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
     }
 
     private var isModal: Bool {
-        return self.presentingViewController?.presentedViewController == self ||
-                self.tabBarController?.presentingViewController is UITabBarController ||
+        return self.tabBarController?.presentingViewController is UITabBarController ||
                 self.navigationController?.presentingViewController?.presentedViewController ==
                 self.navigationController && (self.navigationController != nil)
     }
@@ -79,8 +78,6 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        registerTo3DTouch()
 
         guard let collectionView = collectionView else { return }
 
@@ -102,6 +99,8 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
         setupBackButton()
 
         viewModel.downloadInitialItems()
+        
+        registerTo3DTouch()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -369,18 +368,24 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
         
         guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)) else { return nil }
         
-        if let collectionView = collectionView where
-            collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
-            guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SmallUserCollectionViewCell else { return nil }
-            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
-        } else {
-            guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? LargeUserCollectionViewCell else { return nil }
-            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
-        }
-        
         if let viewModel = viewModel as? UserDetailsViewModel {
-            return ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
+            if let collectionView = collectionView {
+                guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SimpleShotCollectionViewCell else { return nil }
+                previewingContext.sourceRect = cell.shotImageView.convertRect(cell.shotImageView.bounds, toView: view)
+            }
+            let controller = ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
+            controller.hideBlurViewFor3DTouch(true)
+            return controller
         } else if let viewModel = viewModel as? TeamDetailsViewModel {
+            if let collectionView = collectionView where
+                collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
+                guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SmallUserCollectionViewCell else { return nil }
+                previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+            } else {
+                guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? LargeUserCollectionViewCell else { return nil }
+                previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+            }
+            
             return ProfileViewController(user: viewModel.teamMembers[indexPath.item])
         } else {
             return nil
@@ -391,16 +396,19 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         if let _ = viewModel as? UserDetailsViewModel,
             let controller = viewControllerToCommit as? ShotDetailsViewController {
+            controller.hideBlurViewFor3DTouch(false)
             
             modalTransitionAnimator =
                 CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+            modalTransitionAnimator?.behindViewScale = 1
             
             controller.transitioningDelegate = modalTransitionAnimator
             controller.modalPresentationStyle = .Custom
             
             presentViewController(controller, animated: true, completion: nil)
         } else if (viewModel as? TeamDetailsViewModel) != nil {
-            navigationController?.pushViewController(viewControllerToCommit, animated: true)
+            navigationController?.pushViewController(viewControllerToCommit,
+                                                     animated: true)
         }
     }
 }
