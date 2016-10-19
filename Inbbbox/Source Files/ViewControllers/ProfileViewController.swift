@@ -97,9 +97,7 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
         }
 
         setupBackButton()
-
         viewModel.downloadInitialItems()
-        
         registerTo3DTouch()
     }
 
@@ -355,15 +353,12 @@ private extension ProfileViewController {
 
 extension ProfileViewController: UIViewControllerPreviewingDelegate {
     
-    // Mark: Configuration
-    
     func registerTo3DTouch() {
         if traitCollection.forceTouchCapability == .Available {
             registerForPreviewingWithDelegate(self, sourceView: view)
         }
     }
     
-    /// Create a previewing view controller to be shown at "Peek".
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
         guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)) else { return nil }
@@ -392,7 +387,6 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
         }
     }
     
-    /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         if let _ = viewModel as? UserDetailsViewModel,
             let controller = viewControllerToCommit as? ShotDetailsViewController {
@@ -407,8 +401,7 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
             
             presentViewController(controller, animated: true, completion: nil)
         } else if (viewModel as? TeamDetailsViewModel) != nil {
-            navigationController?.pushViewController(viewControllerToCommit,
-                                                     animated: true)
+            navigationController?.pushViewController(viewControllerToCommit, animated: true)
         }
     }
 }
