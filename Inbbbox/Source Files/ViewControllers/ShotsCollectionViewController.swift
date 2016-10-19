@@ -96,7 +96,7 @@ extension ShotsCollectionViewController {
     override func collectionView(collectionView: UICollectionView,
                                  cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = stateHandler.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
-        self.registerTo3DTouch(cell.contentView)
+        registerTo3DTouch(cell)
         return cell
     }
 }
@@ -230,9 +230,14 @@ private extension ShotsCollectionViewController {
 
 extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
     
-    private func registerTo3DTouch(view: UIView) {
+    private func registerTo3DTouch(cell: UICollectionViewCell) {
         if traitCollection.forceTouchCapability == .Available {
-            registerForPreviewingWithDelegate(self, sourceView: view)
+            if let shotCell = cell as? ShotCollectionViewCell {
+                if !shotCell.isRegisteredTo3DTouch {
+                    shotCell.isRegisteredTo3DTouch = true
+                    registerForPreviewingWithDelegate(self, sourceView: shotCell.contentView)
+                }
+            }
         }
     }
 

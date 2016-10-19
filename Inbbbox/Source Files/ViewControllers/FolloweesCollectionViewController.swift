@@ -66,7 +66,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                 cell.thirdShotImageView.loadImageFromURL(cellData.shotsImagesURLs![2])
                 cell.fourthShotImageView.loadImageFromURL(cellData.shotsImagesURLs![3])
             }
-            registerTo3DTouch(cell.contentView)
+            registerTo3DTouch(cell)
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeUserCollectionViewCell.self,
@@ -90,7 +90,10 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                     normalImageCompletion: imageLoadingCompletion
                 )
             }
-            registerTo3DTouch(cell.contentView)
+            if !cell.isRegisteredTo3DTouch {
+                cell.isRegisteredTo3DTouch = true
+                registerTo3DTouch(cell)
+            }
             return cell
         }
     }
@@ -176,9 +179,12 @@ extension FolloweesCollectionViewController: DZNEmptyDataSetSource {
 
 extension FolloweesCollectionViewController: UIViewControllerPreviewingDelegate {
     
-    private func registerTo3DTouch(view: UIView) {
+    private func registerTo3DTouch(cell: BaseInfoShotsCollectionViewCell) {
         if traitCollection.forceTouchCapability == .Available {
-            registerForPreviewingWithDelegate(self, sourceView: view)
+            if !cell.isRegisteredTo3DTouch {
+                cell.isRegisteredTo3DTouch = true
+                registerForPreviewingWithDelegate(self, sourceView: cell.contentView)
+            }
         }
     }
     
