@@ -24,6 +24,7 @@ class ShotBucketsViewController: UIViewController {
 
     var willDismissViewControllerClosure: (() -> Void)?
     var didDismissViewControllerClosure: (() -> Void)?
+    var alertView: UIAlertController?
 
     private var header: ShotBucketsHeaderView?
     private var footer: ShotBucketsFooterView?
@@ -227,11 +228,11 @@ extension ShotBucketsViewController {
 
     func addNewBucketButtonDidTap(_: UIButton) {
 
-        let alert = UIAlertController.provideBucketName { bucketName in
+        let alert = AlertViewController.provideBucketName { bucketName in
             self.createBucketAndAddShot(bucketName)
         }
-        self.presentViewController(alert, animated: true, completion: nil)
-        alert.view.tintColor = .pinkColor()
+        alert.show()
+        
     }
 
     func setRemoveFromSelectedBucketsButtonActive(active: Bool) {

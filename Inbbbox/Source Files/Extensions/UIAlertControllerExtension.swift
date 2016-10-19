@@ -30,12 +30,12 @@ extension UIAlertController {
     // MARK: Buckets
 
     class func provideBucketName(createHandler: (bucketName: String) -> Void)
-                    -> UIAlertController {
+                    -> AlertViewController {
         let alertTitle = NSLocalizedString("UIAlertControllerExtension.NewBucket",
                                   comment: "Allows user to create new bucket.")
         let alertMessage = NSLocalizedString("UIAlertControllerExtension.ProvideName",
                                     comment: "Provide name for new bucket")
-        let alert = UIAlertController(title: alertTitle,
+        let alert = AlertViewController(title: alertTitle,
                                     message: alertMessage,
                              preferredStyle: .Alert)
 
