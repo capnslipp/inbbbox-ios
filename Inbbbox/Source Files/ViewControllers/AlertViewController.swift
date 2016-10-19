@@ -12,8 +12,8 @@ import UIKit
 /// Also deals with a problem where UIActionItem handler was 
 /// not called because UIWindows problems
 public final class AlertViewController: UIAlertController {
-    private var alertWindow:UIWindow? = UIWindow()
-    private var rootViewController:UIViewController? = UIViewController()
+    private var alertWindow: UIWindow? = UIWindow()
+    private var rootViewController: UIViewController? = UIViewController()
     
     func show(animated:Bool = true) {
         guard let alertWindow = alertWindow, rootViewController = rootViewController else {
