@@ -98,7 +98,6 @@ class BucketsCollectionViewController: UICollectionViewController {
              didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let bucketContentCollectionViewController =
                 SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
-        print(indexPath)
         navigationController?.pushViewController(bucketContentCollectionViewController,
                 animated: true)
     }
