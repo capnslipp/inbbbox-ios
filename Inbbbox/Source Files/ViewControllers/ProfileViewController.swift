@@ -79,6 +79,8 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        registerTo3DTouch()
 
         guard let collectionView = collectionView else { return }
 
@@ -347,5 +349,58 @@ private extension ProfileViewController {
     dynamic func didTapLeftBarButtonItem() {
         dismissClosure?()
         dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
+// MARK: UIViewControllerPreviewingDelegate
+
+extension ProfileViewController: UIViewControllerPreviewingDelegate {
+    
+    // Mark: Configuration
+    
+    func registerTo3DTouch() {
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
+    }
+    
+    /// Create a previewing view controller to be shown at "Peek".
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)) else { return nil }
+        
+        if let collectionView = collectionView where
+            collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
+            guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SmallUserCollectionViewCell else { return nil }
+            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+        } else {
+            guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? LargeUserCollectionViewCell else { return nil }
+            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+        }
+        
+        if let viewModel = viewModel as? UserDetailsViewModel {
+            return ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
+        } else if let viewModel = viewModel as? TeamDetailsViewModel {
+            return ProfileViewController(user: viewModel.teamMembers[indexPath.item])
+        } else {
+            return nil
+        }
+    }
+    
+    /// Present the view controller for the "Pop" action.
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        if let _ = viewModel as? UserDetailsViewModel,
+            let controller = viewControllerToCommit as? ShotDetailsViewController {
+            
+            modalTransitionAnimator =
+                CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+            
+            controller.transitioningDelegate = modalTransitionAnimator
+            controller.modalPresentationStyle = .Custom
+            
+            presentViewController(controller, animated: true, completion: nil)
+        } else if (viewModel as? TeamDetailsViewModel) != nil {
+            navigationController?.pushViewController(viewControllerToCommit, animated: true)
+        }
     }
 }
