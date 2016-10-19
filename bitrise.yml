@@ -27,7 +27,9 @@ app:
 
 trigger_map:
 - push_branch: Inbbbox-v2
-  workflow: Inbbbox-v2
+  workflow: develop
+- push_branch: develop
+  workflow: develop
 - push_branch: task/*
   workflow: pull-requests
 - push_branch: bug/*
@@ -92,7 +94,7 @@ workflows:
 
   # The development workflow
 
-  Inbbbox-v2:
+  develop:
     steps:
     - set-xcode-build-number@1.0.3:
         inputs:
