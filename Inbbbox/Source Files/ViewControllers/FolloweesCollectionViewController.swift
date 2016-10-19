@@ -206,7 +206,6 @@ extension FolloweesCollectionViewController: UIViewControllerPreviewingDelegate 
     /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         
-        navigationController?.pushViewController(viewControllerToCommit,
-                                                 animated: true)
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }
