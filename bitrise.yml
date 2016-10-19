@@ -75,6 +75,7 @@ workflows:
         - channel: "#project-inbbbox"
     before_run: 
     after_run: 
+        - notify
 
   # The pull-requests workflow
 
@@ -91,6 +92,7 @@ workflows:
         - output_tool: xcodebuild
     before_run: 
     after_run: 
+        - notify
 
   # The development workflow
 
@@ -124,3 +126,14 @@ workflows:
         - channel: "#project-inbbbox"
     before_run: 
     after_run: 
+        - notify
+
+    # Slack Notify Workflow
+
+  notify:
+    steps:
+      - git::git@github.com:netguru/bitrise-step-slack.git@master:
+          title: Slack
+          inputs:
+          - webhook_url: $SLACK_WEBHOOK_URL
+          - channel: $SLACK_CHANNEL
