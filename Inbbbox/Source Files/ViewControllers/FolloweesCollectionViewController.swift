@@ -90,10 +90,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                     normalImageCompletion: imageLoadingCompletion
                 )
             }
-            if !cell.isRegisteredTo3DTouch {
-                cell.isRegisteredTo3DTouch = true
-                registerTo3DTouch(cell)
-            }
+            registerTo3DTouch(cell)
             return cell
         }
     }
