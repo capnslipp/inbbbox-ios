@@ -55,7 +55,6 @@ extension SimpleShotsCollectionViewController {
         collectionView.backgroundColor = UIColor.backgroundGrayColor()
         collectionView.registerClass(SimpleShotCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
-        registerTo3DTouch()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -73,31 +72,28 @@ extension SimpleShotsCollectionViewController {
 
 extension SimpleShotsCollectionViewController: UIViewControllerPreviewingDelegate {
     
-    func registerTo3DTouch() {
-        // Check for force touch feature, and add force touch/previewing capability.
+    func registerTo3DTouch(view: UIView) {
         if traitCollection.forceTouchCapability == .Available {
             registerForPreviewingWithDelegate(self, sourceView: view)
         }
     }
     
-    /// Create a previewing view controller to be shown at "Peek".
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
         guard
-            let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)),
-            let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? SimpleShotCollectionViewCell,
+            let indexPath = collectionView?.indexPathForItemAtPoint(previewingContext.sourceView.convertPoint(location, toView: collectionView)),
+            let cell = collectionView?.cellForItemAtIndexPath(indexPath),
             let viewModel = viewModel
         else { return nil }
         
-        let imageView = cell.shotImageView
-        previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view)
+        previewingContext.sourceRect = cell.contentView.bounds
+        
         let detailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
         detailsViewController.hideBlurViewFor3DTouch(true)
         
         return detailsViewController
     }
     
-    /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         
         if let controller = viewControllerToCommit as? ShotDetailsViewController {
@@ -129,6 +125,8 @@ extension SimpleShotsCollectionViewController {
 
         indexesToUpdateCellImage.append(indexPath.row)
         lazyLoadImage(cellData.shotImage, atIndexPath: indexPath)
+        
+        registerTo3DTouch(cell.contentView)
 
         cell.gifLabel.hidden = !cellData.animated
         return cell

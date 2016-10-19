@@ -31,7 +31,6 @@ class BucketsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBarButtons()
-        registerTo3DTouch()
         guard let collectionView = collectionView else {
             return
         }
@@ -81,6 +80,7 @@ class BucketsCollectionViewController: UICollectionViewController {
             cell.thirdShotImageView.loadImageFromURL(shotImagesURLs[2])
             cell.fourthShotImageView.loadImageFromURL(shotImagesURLs[3])
         }
+        registerTo3DTouch(cell.contentView)
         return cell
     }
 
@@ -98,6 +98,7 @@ class BucketsCollectionViewController: UICollectionViewController {
              didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let bucketContentCollectionViewController =
                 SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
+        print(indexPath)
         navigationController?.pushViewController(bucketContentCollectionViewController,
                 animated: true)
     }
@@ -109,12 +110,6 @@ class BucketsCollectionViewController: UICollectionViewController {
                 UIBarButtonItem(title: NSLocalizedString("BucketsCollectionView.AddNew",
                 comment: "Button for adding new bucket"), style: .Plain,
                 target: self, action: #selector(didTapAddNewBucketButton(_:)))
-    }
-    
-    func registerTo3DTouch() {
-        if traitCollection.forceTouchCapability == .Available {
-            registerForPreviewingWithDelegate(self, sourceView: view)
-        }
     }
 
     // MARK: Actions:
@@ -212,22 +207,25 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
 
 extension BucketsCollectionViewController: UIViewControllerPreviewingDelegate {
     
-    /// Create a previewing view controller to be shown at "Peek".
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)),
-            let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? BucketCollectionViewCell else { return nil }
-        previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
-        
-        let bucketContentCollectionViewController =
-            SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.row])
-        
-        return bucketContentCollectionViewController
+    private func registerTo3DTouch(view: UIView) {
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
     }
     
-    /// Present the view controller for the "Pop" action.
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard
+            let indexPath = collectionView?.indexPathForItemAtPoint(previewingContext.sourceView.convertPoint(location, toView: collectionView)),
+            let cell = collectionView?.cellForItemAtIndexPath(indexPath)
+        else { return nil }
+        
+        previewingContext.sourceRect = cell.contentView.bounds
+        
+        return SimpleShotsCollectionViewController(bucket: viewModel.buckets[indexPath.item])
+    }
+    
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit,
-                                                 animated: true)
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }

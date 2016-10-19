@@ -73,7 +73,6 @@ extension ShotsCollectionViewController {
         AnalyticsManager.trackScreen(.ShotsView)
 
         dispatch_once(&onceTokenForInitialShotsAnimation) {
-            self.registerTo3DTouch()
             firstly {
                 self.refreshShotsData()
             }.then {
@@ -96,7 +95,9 @@ extension ShotsCollectionViewController {
 
     override func collectionView(collectionView: UICollectionView,
                                  cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return stateHandler.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+        let cell = stateHandler.collectionView(collectionView, cellForItemAtIndexPath: indexPath)
+        self.registerTo3DTouch(cell.contentView)
+        return cell
     }
 }
 
@@ -202,13 +203,6 @@ private extension ShotsCollectionViewController {
         name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
     }
 
-    func registerTo3DTouch() {
-        // Check for force touch feature, and add force touch/previewing capability.
-        if traitCollection.forceTouchCapability == .Available {
-            registerForPreviewingWithDelegate(self, sourceView: view)
-        }
-    }
-
     dynamic func didChangeStreamSourceSettings(notification: NSNotification) {
         firstly {
             refreshShotsData()
@@ -235,23 +229,26 @@ private extension ShotsCollectionViewController {
 // MARK: UIViewControllerPreviewingDelegate
 
 extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
+    
+    private func registerTo3DTouch(view: UIView) {
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
+    }
 
-    /// Create a previewing view controller to be shown at "Peek".
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
         guard
-            let visibleCell = collectionView?.visibleCells().first as? ShotCollectionViewCell,
+            let visibleCell = collectionView?.visibleCells().first,
             let normalStateHandler = stateHandler as? ShotsNormalStateHandler,
             let indexPath = collectionView?.indexPathsForVisibleItems().first
         else { return nil }
         
-        let imageView = visibleCell.shotImageView
-        previewingContext.sourceRect = imageView.convertRect(imageView.bounds, toView:view)
+        previewingContext.sourceRect = visibleCell.contentView.bounds
         
         return normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath)
     }
     
-    /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         if let normalStateHandler = stateHandler as? ShotsNormalStateHandler {
             normalStateHandler.popViewController(viewControllerToCommit)

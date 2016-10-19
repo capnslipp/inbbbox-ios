@@ -20,7 +20,6 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerTo3DTouch()
         guard let collectionView = collectionView else {
             return
         }
@@ -67,6 +66,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                 cell.thirdShotImageView.loadImageFromURL(cellData.shotsImagesURLs![2])
                 cell.fourthShotImageView.loadImageFromURL(cellData.shotsImagesURLs![3])
             }
+            registerTo3DTouch(cell.contentView)
             return cell
         } else {
             let cell = collectionView.dequeueReusableClass(LargeUserCollectionViewCell.self,
@@ -90,6 +90,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                     normalImageCompletion: imageLoadingCompletion
                 )
             }
+            registerTo3DTouch(cell.contentView)
             return cell
         }
     }
@@ -113,14 +114,6 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
                                  forItemAtIndexPath indexPath: NSIndexPath) {
         if let index = indexPathsNeededImageUpdate.indexOf(indexPath) {
             indexPathsNeededImageUpdate.removeAtIndex(index)
-        }
-    }
-    
-    // Mark: Configuration
-    
-    func registerTo3DTouch() {
-        if traitCollection.forceTouchCapability == .Available {
-            registerForPreviewingWithDelegate(self, sourceView: view)
         }
     }
 }
@@ -183,19 +176,21 @@ extension FolloweesCollectionViewController: DZNEmptyDataSetSource {
 
 extension FolloweesCollectionViewController: UIViewControllerPreviewingDelegate {
     
-    /// Create a previewing view controller to be shown at "Peek".
+    private func registerTo3DTouch(view: UIView) {
+        if traitCollection.forceTouchCapability == .Available {
+            registerForPreviewingWithDelegate(self, sourceView: view)
+        }
+    }
+    
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)) else { return nil }
+        guard
+            let indexPath = collectionView?.indexPathForItemAtPoint(previewingContext.sourceView.convertPoint(location, toView: collectionView)),
+            let cell = collectionView?.cellForItemAtIndexPath(indexPath)
+        else { return nil }
         
-        if let collectionView = collectionView where
-            collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
-            guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SmallUserCollectionViewCell else { return nil }
-            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
-        } else {
-            guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? LargeUserCollectionViewCell else { return nil }
-            previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
-        }
+        previewingContext.sourceRect = cell.contentView.bounds
+        
         
         let profileViewController = ProfileViewController(user: viewModel.followees[indexPath.item])
         profileViewController.hidesBottomBarWhenPushed = true
@@ -203,7 +198,6 @@ extension FolloweesCollectionViewController: UIViewControllerPreviewingDelegate 
         return profileViewController
     }
     
-    /// Present the view controller for the "Pop" action.
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         
         navigationController?.pushViewController(viewControllerToCommit, animated: true)
