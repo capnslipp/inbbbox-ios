@@ -23,3 +23,15 @@ extension UIViewController {
         return (view as? T)!
     }
 }
+
+extension UIViewController {
+    func registerTo3DTouch(view: UIView) -> Bool {
+        if traitCollection.forceTouchCapability == .Available {
+            if let previewingSelf = self as? UIViewControllerPreviewingDelegate {
+                registerForPreviewingWithDelegate(previewingSelf, sourceView: view)
+                return true
+            }
+        }
+        return false
+    }
+}

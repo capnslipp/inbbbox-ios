@@ -159,7 +159,9 @@ extension ProfileViewController {
             lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
 
             cell.gifLabel.hidden = !cellData.animated
-            registerTo3DTouch(cell)
+            if !cell.isRegisteredTo3DTouch {
+                cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
+            }
             return cell
         }
 
@@ -181,7 +183,9 @@ extension ProfileViewController {
                     cell.thirdShotImageView.loadImageFromURL(cellData.shotsImagesURLs![2])
                     cell.fourthShotImageView.loadImageFromURL(cellData.shotsImagesURLs![3])
                 }
-                registerTo3DTouch(cell)
+                if !cell.isRegisteredTo3DTouch {
+                    cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
+                }
                 return cell
             } else {
                 let cell = collectionView.dequeueReusableClass(LargeUserCollectionViewCell.self,
@@ -205,7 +209,9 @@ extension ProfileViewController {
                         normalImageCompletion: imageLoadingCompletion
                     )
                 }
-                registerTo3DTouch(cell)
+                if !cell.isRegisteredTo3DTouch {
+                    cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
+                }
                 return cell
             }
         }
@@ -354,22 +360,6 @@ private extension ProfileViewController {
 // MARK: UIViewControllerPreviewingDelegate
 
 extension ProfileViewController: UIViewControllerPreviewingDelegate {
-    
-    func registerTo3DTouch(cell: UICollectionViewCell) {
-        if traitCollection.forceTouchCapability == .Available {
-            if let shotCell = cell as? SimpleShotCollectionViewCell {
-                if !shotCell.isRegisteredTo3DTouch {
-                    shotCell.isRegisteredTo3DTouch = true
-                    registerForPreviewingWithDelegate(self, sourceView: shotCell.contentView)
-                }
-            } else if let infoCell = cell as? BaseInfoShotsCollectionViewCell {
-                if !infoCell.isRegisteredTo3DTouch {
-                    infoCell.isRegisteredTo3DTouch = true
-                    registerForPreviewingWithDelegate(self, sourceView: infoCell.contentView)
-                }
-            }
-        }
-    }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         

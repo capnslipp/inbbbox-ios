@@ -72,15 +72,6 @@ extension SimpleShotsCollectionViewController {
 
 extension SimpleShotsCollectionViewController: UIViewControllerPreviewingDelegate {
     
-    func registerTo3DTouch(cell: SimpleShotCollectionViewCell) {
-        if traitCollection.forceTouchCapability == .Available {
-            if !cell.isRegisteredTo3DTouch {
-                cell.isRegisteredTo3DTouch = true
-                registerForPreviewingWithDelegate(self, sourceView: cell.contentView)
-            }
-        }
-    }
-    
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
         guard
@@ -129,7 +120,9 @@ extension SimpleShotsCollectionViewController {
         indexesToUpdateCellImage.append(indexPath.row)
         lazyLoadImage(cellData.shotImage, atIndexPath: indexPath)
         
-        registerTo3DTouch(cell)
+        if !cell.isRegisteredTo3DTouch {
+            cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
+        }
 
         cell.gifLabel.hidden = !cellData.animated
         return cell

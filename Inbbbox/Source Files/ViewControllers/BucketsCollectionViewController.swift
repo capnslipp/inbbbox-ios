@@ -80,7 +80,9 @@ class BucketsCollectionViewController: UICollectionViewController {
             cell.thirdShotImageView.loadImageFromURL(shotImagesURLs[2])
             cell.fourthShotImageView.loadImageFromURL(shotImagesURLs[3])
         }
-        registerTo3DTouch(cell)
+        if !cell.isRegisteredTo3DTouch {
+            cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
+        }
         return cell
     }
 
@@ -205,15 +207,6 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
 // MARK: UIViewControllerPreviewingDelegate
 
 extension BucketsCollectionViewController: UIViewControllerPreviewingDelegate {
-    
-    private func registerTo3DTouch(cell: BucketCollectionViewCell) {
-        if traitCollection.forceTouchCapability == .Available {
-            if !cell.isRegisteredTo3DTouch {
-                cell.isRegisteredTo3DTouch = true
-                registerForPreviewingWithDelegate(self, sourceView: cell.contentView)
-            }
-        }
-    }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
