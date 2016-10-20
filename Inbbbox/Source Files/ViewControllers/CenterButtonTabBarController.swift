@@ -64,8 +64,8 @@ class CenterButtonTabBarController: UITabBarController {
         let settingsViewController =
                 UINavigationController(rootViewController: self.settingsViewController)
         settingsViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Account", comment: "Main view, bottom bar"),
-            imageName: "ic-account"
+            NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar"),
+            imageName: "ic-settings"
         )
 
         viewControllers = [

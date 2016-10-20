@@ -49,7 +49,7 @@
 "CenterButtonTabBar.Following" = "Auteurs observés";
 
 /* Main view, bottom bar */
-"CenterButtonTabBar.Account" = "Compte";
+"CenterButtonTabBar.Settings" = "Paramètres";
 
 /********* AcknowledgementsViewController *********/
 
