@@ -13,6 +13,9 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
   envs:
+  - JIRA_DOMAIN: netguru
+  - JIRA_PROJECT_KEY: IOS
+  - SLACK_CHANNEL: "#notify-inbbbox"
   - BITRISE_PROJECT_PATH: "./Inbbbox.xcworkspace"
     opts:
       is_expand: false
@@ -68,13 +71,9 @@ workflows:
         inputs:
         - api_token: "$HOCKEY_APP_TOKEN_STAGING"
         - app_id: "$HOCKEY_APP_ID_STAGING"
-    - git::git@github.com:netguru/bitrise-step-slack.git@master:
-        title: slack
-        inputs:
-        - webhook_url: https://hooks.slack.com/services/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
-        - channel: "#project-inbbbox"
     before_run: 
     after_run: 
+        - notify
 
   # The pull-requests workflow
 
@@ -91,6 +90,7 @@ workflows:
         - output_tool: xcodebuild
     before_run: 
     after_run: 
+        - notify
 
   # The development workflow
 
@@ -117,10 +117,16 @@ workflows:
         inputs:
         - api_token: "$HOCKEY_APP_TOKEN_STAGING"
         - app_id: "$HOCKEY_APP_ID_STAGING"
-    - git::git@github.com:netguru/bitrise-step-slack.git@master:
-        title: slack
-        inputs:
-        - webhook_url: https://hooks.slack.com/services/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
-        - channel: "#project-inbbbox"
     before_run: 
     after_run: 
+        - notify
+
+    # Slack Notify Workflow
+
+  notify:
+    steps:
+      - git::git@github.com:netguru/bitrise-step-slack.git@master:
+          title: Slack
+          inputs:
+          - webhook_url: $SLACK_WEBHOOK_URL
+          - channel: $SLACK_CHANNEL
