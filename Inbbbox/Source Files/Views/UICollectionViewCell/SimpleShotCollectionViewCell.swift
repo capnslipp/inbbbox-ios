@@ -13,6 +13,7 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
     let shotImageView = UIImageView.newAutoLayoutView()
     let gifLabel = GifIndicatorView.newAutoLayoutView()
     private var didSetConstraints = false
+    var isRegisteredTo3DTouch = false
 
     // MARK: Life cycle
 

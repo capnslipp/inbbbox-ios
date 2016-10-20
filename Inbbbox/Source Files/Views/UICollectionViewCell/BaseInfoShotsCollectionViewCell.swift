@@ -19,6 +19,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
     }
     private var didSetConstraints = false
     private var shotsViewHeightConstraint: NSLayoutConstraint?
+    var isRegisteredTo3DTouch = false
 
     // MARK: Life cycle
 

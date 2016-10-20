@@ -289,6 +289,7 @@
 		C25B633C950E27D050F626AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CB7E060D9820A38D8C666 /* SettingsViewModel.swift */; };
 		C5B637080C01F1361978C423 /* ShotsRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8AD9B38470BFD150EFA80A /* ShotsRequester.swift */; };
 		C5E908902AC8BA43E65D294F /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3133716752F33A06B3C88CF /* DataDownloader.swift */; };
+		C6745B7D1DB74371004D3D8E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6745B7C1DB74371004D3D8E /* AlertViewController.swift */; };
 		C6B3E447E8EF8FFA08C91E08 /* ShotDetailsCollectionCollapsableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0001E808B13FB4F9C306EE /* ShotDetailsCollectionCollapsableHeader.swift */; };
 		C6FDB61ECCFC6DA18056E4C2 /* LikesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789EF40106C3C29A91C1C948 /* LikesViewModelSpec.swift */; };
 		C80E52C1908FF89849C7A19B /* ShotBucketsSeparatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD4539E933AECE3F87B5D8 /* ShotBucketsSeparatorCollectionViewCell.swift */; };
@@ -720,6 +721,7 @@
 		C293E57C35C383AA44755DAF /* ShotsNormalStateHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsNormalStateHandler.swift; sourceTree = "<group>"; };
 		C2ADCFFD5DDF3B47FC025E19 /* ShotDetailsViewModelSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewModelSpec.swift; sourceTree = "<group>"; };
 		C437ED8B92D2216DB959E197 /* ShotsQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsQuery.swift; sourceTree = "<group>"; };
+		C6745B7C1DB74371004D3D8E /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		C72204642A43E93EAEB5FF8F /* NSMutableAttributedStringExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedStringExtension.swift; sourceTree = "<group>"; };
 		C7269D528B2E07BF506FFFAD /* APIBucketsRequesterSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIBucketsRequesterSpec.swift; sourceTree = "<group>"; };
 		C792067FCEE699C375EE1A22 /* ShotCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1392,6 +1394,7 @@
 				06995610DDA33B7FE12B42B6 /* AcknowledgementsViewController.swift */,
 				F0FD0A831CBE496400735933 /* SimpleShotsCollectionViewController.swift */,
 				F0BEBDD41CD789C400AA391C /* ShotDetailsViewControllerExtension.swift */,
+				C6745B7C1DB74371004D3D8E /* AlertViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1985,6 +1988,7 @@
 				6D66543F9DAF26513D15AE96 /* AsyncWrapper.swift in Sources */,
 				079052F10F02EFE6D1B2BB7F /* CacheManager.swift in Sources */,
 				30D1ED34355F08C05F0B1DBC /* CollectionViewLayoutSpacings.swift in Sources */,
+				C6745B7D1DB74371004D3D8E /* AlertViewController.swift in Sources */,
 				6E8D5FE8671AAA3A7C33E707 /* CustomTransitions.swift in Sources */,
 				3D204104176856D9C446230B /* DefaultViewControllerPresenter.swift in Sources */,
 				74E256BD1D9E888000AA5941 /* DeviceInfo.swift in Sources */,

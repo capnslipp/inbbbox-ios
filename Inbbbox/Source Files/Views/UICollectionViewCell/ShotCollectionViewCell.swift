@@ -44,6 +44,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     var viewClass = UIView.self
     var swipeCompletion: (Action -> Void)?
     weak var delegate: ShotCollectionViewCellDelegate?
+    var isRegisteredTo3DTouch = false
 
     private let panGestureRecognizer = UIPanGestureRecognizer()
 
