@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic-account-active.png",
+      "filename" : "ic-settings-active.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic-account-active@2x.png",
+      "filename" : "ic-settings-active@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic-account-active@3x.png",
+      "filename" : "ic-settings-active@3x.png",
       "scale" : "3x"
     }
   ],

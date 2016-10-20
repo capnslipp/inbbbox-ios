@@ -40,8 +40,8 @@ class CenterButtonTabBarView: UITabBar {
         let bucketsName = NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar")
         bucketsItemView = CustomTabBarItemView(name: bucketsName, icon: UIImage(named: "ic-buckets"))
 
-        let accountName = NSLocalizedString("CenterButtonTabBar.Account", comment: "Main view, bottom bar")
-        accountItemView = CustomTabBarItemView(name: accountName, icon: UIImage(named: "ic-account"))
+        let accountName = NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar")
+        accountItemView = CustomTabBarItemView(name: accountName, icon: UIImage(named: "ic-settings"))
 
         let followingName = NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar")
         followingItemView = CustomTabBarItemView(name: followingName, icon: UIImage(named: "ic-following"))
