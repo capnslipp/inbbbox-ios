@@ -98,7 +98,6 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
 
         setupBackButton()
         viewModel.downloadInitialItems()
-        registerTo3DTouch()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -160,6 +159,9 @@ extension ProfileViewController {
             lazyLoadImage(cellData.shotImage, forCell: cell, atIndexPath: indexPath)
 
             cell.gifLabel.hidden = !cellData.animated
+            if !cell.isRegisteredTo3DTouch {
+                cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
+            }
             return cell
         }
 
@@ -180,6 +182,9 @@ extension ProfileViewController {
                     cell.secondShotImageView.loadImageFromURL(cellData.shotsImagesURLs![1])
                     cell.thirdShotImageView.loadImageFromURL(cellData.shotsImagesURLs![2])
                     cell.fourthShotImageView.loadImageFromURL(cellData.shotsImagesURLs![3])
+                }
+                if !cell.isRegisteredTo3DTouch {
+                    cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
                 }
                 return cell
             } else {
@@ -203,6 +208,9 @@ extension ProfileViewController {
                         teaserImageCompletion: imageLoadingCompletion,
                         normalImageCompletion: imageLoadingCompletion
                     )
+                }
+                if !cell.isRegisteredTo3DTouch {
+                    cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
                 }
                 return cell
             }
@@ -353,38 +361,33 @@ private extension ProfileViewController {
 
 extension ProfileViewController: UIViewControllerPreviewingDelegate {
     
-    func registerTo3DTouch() {
-        if traitCollection.forceTouchCapability == .Available {
-            registerForPreviewingWithDelegate(self, sourceView: view)
-        }
-    }
-    
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        guard let indexPath = collectionView?.indexPathForItemAtPoint(view.convertPoint(location, toView: collectionView)) else { return nil }
+        guard let indexPath = collectionView?.indexPathForItemAtPoint(previewingContext.sourceView.convertPoint(location, toView: collectionView)) else { return nil }
         
         if let viewModel = viewModel as? UserDetailsViewModel {
-            if let collectionView = collectionView {
-                guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SimpleShotCollectionViewCell else { return nil }
-                previewingContext.sourceRect = cell.shotImageView.convertRect(cell.shotImageView.bounds, toView: view)
-            }
+            guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) else { return nil }
+            
+            previewingContext.sourceRect = cell.contentView.bounds
+            
             let controller = ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
             controller.hideBlurViewFor3DTouch(true)
+            
             return controller
         } else if let viewModel = viewModel as? TeamDetailsViewModel {
             if let collectionView = collectionView where
                 collectionView.collectionViewLayout.isKindOfClass(TwoColumnsCollectionViewFlowLayout) {
-                guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SmallUserCollectionViewCell else { return nil }
-                previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+                guard let cell = collectionView.cellForItemAtIndexPath(indexPath) else { return nil }
+                previewingContext.sourceRect = cell.contentView.bounds
             } else {
-                guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) as? LargeUserCollectionViewCell else { return nil }
-                previewingContext.sourceRect = cell.shotsView.convertRect(cell.shotsView.bounds, toView: view)
+                guard let cell = collectionView?.cellForItemAtIndexPath(indexPath) else { return nil }
+                previewingContext.sourceRect = cell.contentView.bounds
             }
             
             return ProfileViewController(user: viewModel.teamMembers[indexPath.item])
-        } else {
-            return nil
         }
+        
+        return nil
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {

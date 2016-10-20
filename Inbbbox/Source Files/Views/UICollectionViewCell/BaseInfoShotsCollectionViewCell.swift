@@ -18,6 +18,7 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
         return 0.75
     }
     private var didSetConstraints = false
+    var isRegisteredTo3DTouch = false
 
     // MARK: Life cycle
 
