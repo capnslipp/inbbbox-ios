@@ -217,7 +217,11 @@ private extension SettingsViewController {
             header.usernameLabel.text = NSLocalizedString("SettingsViewController.Guest",
                     comment: "Is user a guest without account?")
         }
-        header.avatarView.imageView.loadImageFromURL(viewModel.loggedInUser?.avatarURL,
+        var avatarUrl: NSURL? = nil
+        if let url = viewModel.loggedInUser?.avatarURL where !url.absoluteString.containsString("avatar-default-") {
+            avatarUrl = url
+        }
+        header.avatarView.imageView.loadImageFromURL(avatarUrl,
                 placeholderImage: UIImage(named: "ic-guest-avatar"))
     }
 }
