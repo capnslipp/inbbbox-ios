@@ -29,7 +29,7 @@ class SettingsViewModelSpec: QuickSpec {
             }
 
             it("should have account title") {
-                expect(sut.title).to(equal("Account"))
+                expect(sut.title).to(equal("Account & Settings"))
             }
 
             it("should have 5 sections") {
@@ -141,7 +141,7 @@ class SettingsViewModelSpec: QuickSpec {
             }
 
             it("should have account title") {
-                expect(sut.title).to(equal("Account"))
+                expect(sut.title).to(equal("Account & Settings"))
             }
 
             it("should have 4 sections") {
