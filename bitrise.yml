@@ -122,7 +122,7 @@ workflows:
     - git::git@github.com:netguru/bitrise-step-slack.git@master:
         title: slack
         inputs:
-        - webhook_url: https://hooks.slack.com/services/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
+        - webhook_url: https://hooks.slack.com/services/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
         - channel: "#project-inbbbox"
     before_run: 
     after_run: 
