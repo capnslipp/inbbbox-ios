@@ -188,7 +188,7 @@
 /********* SettingsViewModel *********/
 
 /* Title for account screen */
-"SettingsViewModel.Account" = "Konto";
+"SettingsViewModel.Account" = "Konto & Ustawienia";
 
 /* Button text allowing user to create new account. */
 "SettingsViewModel.CreateAccount" = "Załóż konto Dribbble";
