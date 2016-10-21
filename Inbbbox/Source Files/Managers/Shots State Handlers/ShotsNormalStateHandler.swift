@@ -65,7 +65,23 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
         }
     }
 
-    func presentData() { /* empty by design */ }
+    func presentData() {
+        guard let collectionView = collectionViewLayout.collectionView else {
+            return
+        }
+        
+        // SnapView is needed because single collectionView.reloadSections(NSIndexSet(index: 0)) or collectionView.reloadData()
+        // is glitchy and we need to reload that collection.
+        
+        let snapedView = collectionView.snapshotViewAfterScreenUpdates(false)
+        collectionView.addSubview(snapedView)
+        collectionView.performBatchUpdates({ 
+            collectionView.reloadSections(NSIndexSet(index: 0))
+        }, completion:{ done in
+            snapedView.removeFromSuperview()
+        })
+        
+    }
 }
 
 // MARK: UICollecitonViewDataSource
