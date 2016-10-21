@@ -47,6 +47,11 @@ class SettingsViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         AnalyticsManager.trackScreen(.SettingsView)
+        setupFlashMessage()
+    }
+    
+    private func setupFlashMessage(){
+        FlashMessage.show(message: "test message")
     }
 }
 

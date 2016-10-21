@@ -75,6 +75,11 @@ extension UIColor {
         return RGBA(218, 219, 221, 1)
     }
 
+    /// Returns flash message gray background
+    class func flashMessageBackgroundColor() -> UIColor {
+        return RGBA(51, 51, 51, 1)
+    }
+
     /// Returns random color.
     class func randomColor() -> UIColor {
 

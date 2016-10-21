@@ -265,6 +265,8 @@
 		AB17875C3EFA397E72A61494 /* ShotDetailsDummySpaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5179E8BD8F5B06BE49C08362 /* ShotDetailsDummySpaceCollectionViewCell.swift */; };
 		ACE3BA66ECCB04566EBE5CCD /* QuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991BAC3A61AEB269455BDD9 /* QuerySpec.swift */; };
 		AD06F8E92197476566F01F4D /* BucketsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445891027133FA0667ED3806 /* BucketsRequesterMock.swift */; };
+		AD5AC5D1B8737F7049D029A1 /* FlashMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5ACA1C1DED61D022EDB33A /* FlashMessage.swift */; };
+		AD5ACB4830B360EA5513CE98 /* FlashMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5AC2021039B665774F0F38 /* FlashMessageView.swift */; };
 		AE909CB5FE0DCDBD3F3A400E /* ShotDetailsOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF48D628E0463224F78C42FB /* ShotDetailsOperationView.swift */; };
 		B0FA7ED3857415953587DEA9 /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29E21C5B0F92725CD71CA94 /* UserQuery.swift */; };
 		B1B57D6B3A17E953A5DC9FE1 /* AnimatableShotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1658ECEBC89C32269835BF40 /* AnimatableShotImageView.swift */; };
@@ -691,6 +693,8 @@
 		AB8C9726FD04D2E31DDEE96B /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		ACA6974C8BE793A70C2B7027 /* ShotCellLikeActionAnimationDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotCellLikeActionAnimationDescriptor.swift; sourceTree = "<group>"; };
 		ACC94AE83445C2C55CEA6B82 /* CreateBucketQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CreateBucketQuery.swift; sourceTree = "<group>"; };
+		AD5AC2021039B665774F0F38 /* FlashMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageView.swift; sourceTree = "<group>"; };
+		AD5ACA1C1DED61D022EDB33A /* FlashMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessage.swift; sourceTree = "<group>"; };
 		AD9BE60744F5D168D431BA89 /* CommentQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommentQuery.swift; sourceTree = "<group>"; };
 		B06CB7E060D9820A38D8C666 /* SettingsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B0FC067801DA8B3C4180E02E /* ResponsableSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ResponsableSpec.swift; sourceTree = "<group>"; };
@@ -1190,6 +1194,7 @@
 				3A6269AEF2F4AAAB03BCBF8A /* Animators */,
 				F86DC4F1BE7EA7B7F8BE850E /* Authentication */,
 				E3EB164F8DE3F3A6D3BBD4B1 /* Shots State Handlers */,
+				AD5ACA1C1DED61D022EDB33A /* FlashMessage.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1563,6 +1568,7 @@
 				6555960C38668047CA05A063 /* ProfileHeaderView.swift */,
 				300E4F7B1CC622A200DF9ABE /* BouncingView.swift */,
 				30586F341CF5E289003D4B06 /* ShotAuthorCompactView.swift */,
+				AD5AC2021039B665774F0F38 /* FlashMessageView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -2201,6 +2207,8 @@
 				D768B854B709B8275B1FC330 /* AcknowledgementsViewController.swift in Sources */,
 				65BA20E6F5AE0C128423A28B /* Numeric.swift in Sources */,
 				65BA26749BA1A3DCEF27F481 /* AppDelegateExtension.swift in Sources */,
+				AD5AC5D1B8737F7049D029A1 /* FlashMessage.swift in Sources */,
+				AD5ACB4830B360EA5513CE98 /* FlashMessageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
