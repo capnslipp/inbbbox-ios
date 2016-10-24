@@ -137,8 +137,8 @@ workflows:
   codecov_check:
     steps:
       - codecov:
-        inputs:
-        - CODECOV_TOKEN: $CODECOV_TOKEN
+          inputs:
+          - CODECOV_TOKEN: $CODECOV_TOKEN
       - script:
           inputs:
           - content: |-
