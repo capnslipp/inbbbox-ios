@@ -71,9 +71,9 @@ workflows:
         inputs:
         - api_token: "$HOCKEY_APP_TOKEN_STAGING"
         - app_id: "$HOCKEY_APP_ID_STAGING"
-    - codecov_check:
     before_run: 
     after_run: 
+        - codecov_check
         - notify
 
   # The pull-requests workflow
@@ -89,9 +89,9 @@ workflows:
         - simulator_device: iPhone 6s
         - is_clean_build: 'yes'
         - output_tool: xcodebuild
-    - codecov_check:
     before_run: 
     after_run: 
+        - codecov_check
         - notify
 
   # The development workflow
@@ -119,9 +119,9 @@ workflows:
         inputs:
         - api_token: "$HOCKEY_APP_TOKEN_STAGING"
         - app_id: "$HOCKEY_APP_ID_STAGING"
-    - codecov_check:
     before_run: 
     after_run: 
+        - codecov_check
         - notify
 
     # Slack Notify Workflow
