@@ -89,7 +89,7 @@ workflows:
         - is_clean_build: 'yes'
         - output_tool: xcodebuild
     - codecov:
-      inputs:
+        inputs:
         - CODECOV_TOKEN: $CODECOV_TOKEN
     before_run: 
     after_run: 
