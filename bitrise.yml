@@ -71,6 +71,7 @@ workflows:
         inputs:
         - api_token: "$HOCKEY_APP_TOKEN_STAGING"
         - app_id: "$HOCKEY_APP_ID_STAGING"
+    - codecov_check
     before_run: 
     after_run: 
         - notify
@@ -88,14 +89,7 @@ workflows:
         - simulator_device: iPhone 6s
         - is_clean_build: 'yes'
         - output_tool: xcodebuild
-    - codecov:
-        inputs:
-        - CODECOV_TOKEN: $CODECOV_TOKEN
-    - script:
-        inputs:
-        - content: |-
-            #!/bin/bash
-            bash <(curl -s https://codecov.io/bash)
+    - codecov_check
     before_run: 
     after_run: 
         - notify
@@ -125,6 +119,7 @@ workflows:
         inputs:
         - api_token: "$HOCKEY_APP_TOKEN_STAGING"
         - app_id: "$HOCKEY_APP_ID_STAGING"
+    - codecov_check
     before_run: 
     after_run: 
         - notify
@@ -138,3 +133,15 @@ workflows:
           inputs:
           - webhook_url: $SLACK_WEBHOOK_URL
           - channel: $SLACK_CHANNEL
+
+  codecov_check:
+    steps:
+      - codecov:
+        inputs:
+        - CODECOV_TOKEN: $CODECOV_TOKEN
+      - script:
+          inputs:
+          - content: |-
+              #!/bin/bash
+              bash <(curl -s https://codecov.io/bash)
+
