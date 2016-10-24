@@ -18,6 +18,10 @@ protocol AlertDisplayable: class {
     func displayAlert(alert: AOAlertController)
 }
 
+protocol FlashMessageDisplayable:class {
+    func displayFlashMessage(message:FlashMessageViewModel)
+}
+
 enum UserMode {
     case LoggedUser, DemoUser
 }
@@ -31,6 +35,7 @@ class SettingsViewModel: GroupedListViewModel {
     private(set) var userMode: UserMode
     private weak var delegate: ModelUpdatable?
     private weak var alertDelegate: AlertDisplayable?
+    private weak var flashMessageDelegate: FlashMessageDisplayable?
 
     private let createAccountTitle = NSLocalizedString("SettingsViewModel.CreateAccount",
                                                        comment: "Button text allowing user to create new account.")
@@ -69,6 +74,7 @@ class SettingsViewModel: GroupedListViewModel {
 
         self.delegate = delegate
         self.alertDelegate = delegate as? AlertDisplayable
+        self.flashMessageDelegate = delegate as? FlashMessageDisplayable
         self.userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
 
         // MARK: Create items
@@ -181,28 +187,46 @@ private extension SettingsViewModel {
 
         followingStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.Following = newValue
+            self.checkStreamsSource()
             AnalyticsManager.trackSettingChanged(.FollowingStreamSource, state: newValue)
         }
 
         newTodayStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.NewToday = newValue
+            self.checkStreamsSource()
             AnalyticsManager.trackSettingChanged(.NewTodayStreamSource, state: newValue)
         }
 
         popularTodayStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.PopularToday = newValue
+            self.checkStreamsSource()
             AnalyticsManager.trackSettingChanged(.PopularTodayStreamSource, state: newValue)
         }
 
         debutsStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.Debuts = newValue
+            self.checkStreamsSource()
             AnalyticsManager.trackSettingChanged(.DebutsStreamSource, state: newValue)
         }
 
         showAuthorItem.valueChanged = { newValue in
             Settings.Customization.ShowAuthor = newValue
+            self.checkStreamsSource()
             AnalyticsManager.trackSettingChanged(.AuthorOnHomeScreen, state: newValue)
         }
+    }
+    
+    func checkStreamsSource() {
+        if (allStreamsOff()) {
+            let title = NSLocalizedString("SettingsViewModel.AllSources",
+                                          comment: "Title of flash message, when user turn off all sources")
+            flashMessageDelegate?.displayFlashMessage(FlashMessageViewModel(title: title))
+        }
+    }
+    
+    func allStreamsOff() -> Bool{
+        return !Settings.StreamSource.Following && !Settings.StreamSource.NewToday && !Settings.StreamSource.PopularToday &&
+            !Settings.StreamSource.Debuts
     }
 
     func registerUserNotificationSettings() {

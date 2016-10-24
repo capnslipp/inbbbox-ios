@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import Haneke
+import SWMessages
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -44,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
-
+        setupFlashMessageStyle()
+        
         configureInitialSettings()
         CacheManager.setupCache()
 
@@ -182,5 +184,29 @@ extension AppDelegate {
         }
 
         return handled
+    }
+}
+
+// MARK: FlashMessage
+
+extension AppDelegate {
+    func setupFlashMessageStyle(){
+        SWMessageView.styleForMessageType = { type in
+            switch type {
+            default:
+                return SWMessageView.Style(
+                    image: nil,
+                    backgroundColor: UIColor.flashMessageBackgroundColor(),
+                    textColor: UIColor.whiteColor(),
+                    textShadowColor: nil,
+                    titleFont: UIFont.helveticaFont(.Neue,size:14),
+                    contentFont: UIFont.helveticaFont(.Neue,size:12),
+                    shadowOffset: nil,
+                    roundedCorners: [.BottomLeft,.BottomRight],
+                    roundSize: CGSizeMake(10, 10),
+                    padding: 25.0
+                )
+            }
+        }
     }
 }

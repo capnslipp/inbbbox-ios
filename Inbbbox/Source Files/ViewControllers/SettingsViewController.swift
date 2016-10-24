@@ -10,6 +10,7 @@ import UIKit
 import PromiseKit
 import AOAlertController
 import SafariServices
+import SWMessages
 
 class SettingsViewController: UITableViewController {
 
@@ -47,11 +48,6 @@ class SettingsViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         AnalyticsManager.trackScreen(.SettingsView)
-        setupFlashMessage()
-    }
-    
-    private func setupFlashMessage(){
-        FlashMessage.show(message: "test message")
     }
 }
 
@@ -76,6 +72,22 @@ extension SettingsViewController: AlertDisplayable {
     }
 }
 
+extension SettingsViewController: FlashMessageDisplayable {
+    func displayFlashMessage(message:FlashMessageViewModel) {
+        SWMessage.sharedInstance.showNotificationInViewController(self,
+              title: message.title,
+              subtitle: nil,
+              image: nil,
+              type: .Message,
+              duration: .Automatic,
+              callback: nil,
+              buttonTitle: nil,
+              buttonCallback: nil,
+              atPosition: .Top,
+              canBeDismissedByUser: false)
+    }
+}
+
 // MARK: UITableViewDataSource
 
 extension SettingsViewController {
@@ -83,7 +95,7 @@ extension SettingsViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return viewModel.sectionsCount()
     }
-
+ 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel[section].count
     }

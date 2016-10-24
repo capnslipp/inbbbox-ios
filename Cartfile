@@ -6,3 +6,4 @@
 
 # The latest version of configuration files
 github "jspahrsummers/xcconfigs"
+github "bwdowikowski/SWMessages" "swift-2.2"

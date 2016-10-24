@@ -265,8 +265,6 @@
 		AB17875C3EFA397E72A61494 /* ShotDetailsDummySpaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5179E8BD8F5B06BE49C08362 /* ShotDetailsDummySpaceCollectionViewCell.swift */; };
 		ACE3BA66ECCB04566EBE5CCD /* QuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991BAC3A61AEB269455BDD9 /* QuerySpec.swift */; };
 		AD06F8E92197476566F01F4D /* BucketsRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445891027133FA0667ED3806 /* BucketsRequesterMock.swift */; };
-		AD5AC5D1B8737F7049D029A1 /* FlashMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5ACA1C1DED61D022EDB33A /* FlashMessage.swift */; };
-		AD5ACB4830B360EA5513CE98 /* FlashMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5AC2021039B665774F0F38 /* FlashMessageView.swift */; };
 		AE909CB5FE0DCDBD3F3A400E /* ShotDetailsOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF48D628E0463224F78C42FB /* ShotDetailsOperationView.swift */; };
 		B0FA7ED3857415953587DEA9 /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29E21C5B0F92725CD71CA94 /* UserQuery.swift */; };
 		B1B57D6B3A17E953A5DC9FE1 /* AnimatableShotImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1658ECEBC89C32269835BF40 /* AnimatableShotImageView.swift */; };
@@ -282,7 +280,9 @@
 		BB3929FA6C490D4294DC0F3C /* ViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B389E42C7B69120ECC42034 /* ViewMock.swift */; };
 		BC6B3E84D5D992DAB1793695 /* AutoScrollableShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A52A23BA4741CF6B4E3F10A /* AutoScrollableShotsAnimatorSpec.swift */; };
 		BD7EF5D032FDB57425DDE1B5 /* CustomTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DFB3DA4E8203C9B66344BB /* CustomTabBarItemView.swift */; };
+		BE3B32591DBE3714005D522B /* FlashMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3B32581DBE3714005D522B /* FlashMessageViewModel.swift */; };
 		BE7A1741292D08D3D45BFAEF /* DeleteCommentQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C949299AFC25FEF29D2F7EF /* DeleteCommentQuerySpec.swift */; };
+		BED9F8111DBDF6D600EF5BA5 /* SWMessages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED9F8101DBDF6D600EF5BA5 /* SWMessages.framework */; };
 		BF48E9481F8839521F829A1F /* APITeamsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFFC0840E460B99F665C2C5 /* APITeamsProviderSpec.swift */; };
 		C0EE2D8640F65C4539FC86A1 /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED7991095A44326D902553 /* ShotBucketsFooterView.swift */; };
 		C11B3B8DECEEDFD228F6C0E6 /* GifIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B622AEA1C27A1940BA8A811 /* GifIndicatorView.swift */; };
@@ -693,8 +693,6 @@
 		AB8C9726FD04D2E31DDEE96B /* UnlikeQuerySpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		ACA6974C8BE793A70C2B7027 /* ShotCellLikeActionAnimationDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotCellLikeActionAnimationDescriptor.swift; sourceTree = "<group>"; };
 		ACC94AE83445C2C55CEA6B82 /* CreateBucketQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CreateBucketQuery.swift; sourceTree = "<group>"; };
-		AD5AC2021039B665774F0F38 /* FlashMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageView.swift; sourceTree = "<group>"; };
-		AD5ACA1C1DED61D022EDB33A /* FlashMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessage.swift; sourceTree = "<group>"; };
 		AD9BE60744F5D168D431BA89 /* CommentQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommentQuery.swift; sourceTree = "<group>"; };
 		B06CB7E060D9820A38D8C666 /* SettingsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		B0FC067801DA8B3C4180E02E /* ResponsableSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ResponsableSpec.swift; sourceTree = "<group>"; };
@@ -719,7 +717,9 @@
 		BC1CF5A698AB825C0DDAB242 /* AnimationDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationDescriptor.swift; sourceTree = "<group>"; };
 		BCD774838CC197571211DC4E /* APIProjectsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIProjectsProvider.swift; sourceTree = "<group>"; };
 		BD8DC1F4B61694B2EC222DEE /* APIBucketsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIBucketsProvider.swift; sourceTree = "<group>"; };
+		BE3B32581DBE3714005D522B /* FlashMessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageViewModel.swift; sourceTree = "<group>"; };
 		BE44284007590E9AE62066DA /* VerifiableSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VerifiableSpec.swift; sourceTree = "<group>"; };
+		BED9F8101DBDF6D600EF5BA5 /* SWMessages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWMessages.framework; path = Carthage/Build/iOS/SWMessages.framework; sourceTree = "<group>"; };
 		C26227A4CC4CB0D73BEEF058 /* FollowersQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FollowersQuery.swift; sourceTree = "<group>"; };
 		C28A7631D86F1074E2F49E9C /* ShotDetailsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewController.swift; sourceTree = "<group>"; };
 		C293E57C35C383AA44755DAF /* ShotsNormalStateHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsNormalStateHandler.swift; sourceTree = "<group>"; };
@@ -819,6 +819,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AC52CAE0D885025C186F3F2 /* Pods_Inbbbox.framework in Frameworks */,
+				BED9F8111DBDF6D600EF5BA5 /* SWMessages.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -893,6 +894,7 @@
 		303C9EE60D55FE95B1E4648B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BED9F8101DBDF6D600EF5BA5 /* SWMessages.framework */,
 				5E0759062D32339F0F1B138E /* Pods.framework */,
 				DD8A03E1986E72122B87A47A /* Pods_Unit_Tests.framework */,
 				90DEB8F844F7FD12799C9501 /* Pods_Inbbbox.framework */,
@@ -1194,7 +1196,6 @@
 				3A6269AEF2F4AAAB03BCBF8A /* Animators */,
 				F86DC4F1BE7EA7B7F8BE850E /* Authentication */,
 				E3EB164F8DE3F3A6D3BBD4B1 /* Shots State Handlers */,
-				AD5ACA1C1DED61D022EDB33A /* FlashMessage.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1345,6 +1346,7 @@
 				7CA78ED3E8C74C6041B3C6B7 /* SwitchItem.swift */,
 				3BEA03D83A79AA83801134F0 /* UserDetailsViewModel.swift */,
 				F0BEBDD61CDA24E200AA391C /* TeamDetailsViewModel.swift */,
+				BE3B32581DBE3714005D522B /* FlashMessageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1568,7 +1570,6 @@
 				6555960C38668047CA05A063 /* ProfileHeaderView.swift */,
 				300E4F7B1CC622A200DF9ABE /* BouncingView.swift */,
 				30586F341CF5E289003D4B06 /* ShotAuthorCompactView.swift */,
-				AD5AC2021039B665774F0F38 /* FlashMessageView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1638,6 +1639,7 @@
 				2E76AC9DB7A0ED5E56608A26 /* [CP] Copy Pods Resources */,
 				15EF03E0EA89343AD6F261E6 /* 📦 Embed Pods Frameworks */,
 				14A04A37DEAC52A7A53B6FCB /* 📦 Copy Pods Resources */,
+				BED9F8121DBDF7A600EF5BA5 /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1883,6 +1885,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unit Tests/Pods-Unit Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BED9F8121DBDF7A600EF5BA5 /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SWMessages.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		CD016289A2BC46D9DB544FF5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2081,6 +2098,7 @@
 				986616A08FD3757CC867D836 /* UpdateCommentQuery.swift in Sources */,
 				0CD72BFD1AE1C5F446B8CA39 /* UserFollowedByMeQuery.swift in Sources */,
 				B0FA7ED3857415953587DEA9 /* UserQuery.swift in Sources */,
+				BE3B32591DBE3714005D522B /* FlashMessageViewModel.swift in Sources */,
 				B4106314FAE6A26929E31986 /* AutoSizable.swift in Sources */,
 				EA0CFB1E1D95654700CFF21A /* CommentUnlikeQuery.swift in Sources */,
 				F0EE2870B58F0E2F0AEF5922 /* AvatarSettable.swift in Sources */,
@@ -2207,8 +2225,6 @@
 				D768B854B709B8275B1FC330 /* AcknowledgementsViewController.swift in Sources */,
 				65BA20E6F5AE0C128423A28B /* Numeric.swift in Sources */,
 				65BA26749BA1A3DCEF27F481 /* AppDelegateExtension.swift in Sources */,
-				AD5AC5D1B8737F7049D029A1 /* FlashMessage.swift in Sources */,
-				AD5ACB4830B360EA5513CE98 /* FlashMessageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2418,7 +2434,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
@@ -2534,7 +2553,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
@@ -2552,7 +2574,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSETCATALOG_COMPILER_APPICON_NAME)";
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
@@ -2656,7 +2681,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 9HJ69C5G9K;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
@@ -2735,7 +2763,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
