@@ -46,7 +46,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     var didLikeShotCompletionHandler: (() -> Void)?
     var didAddShotToBucketCompletionHandler: (() -> Void)?
 
-    private var indexPathsNeededImageUpdate = [UpdateableIndexPaths]()
+    private var indexPathsNeededImageUpdate = [UpdateableIndex]()
 
     func prepareForPresentingData() {
         if !UserStorage.isUserSignedIn {
@@ -192,7 +192,7 @@ extension ShotsNormalStateHandler {
     func collectionView(collectionView: UICollectionView,
             didEndDisplayingCell cell: UICollectionViewCell,
             forItemAtIndexPath indexPath: NSIndexPath) {
-        indexPathsNeededImageUpdate = indexPathsNeededImageUpdate.filter { $0.indexPath != indexPath }
+        indexPathsNeededImageUpdate = indexPathsNeededImageUpdate.filter { $0.index != indexPath.item }
     }
 }
 
@@ -398,7 +398,6 @@ private extension ShotsNormalStateHandler {
     }
 
     func load(image: ShotImageType, for indexPath: NSIndexPath) {
-        indexPathsNeededImageUpdate.append(UpdateableIndexPaths(indexPath: indexPath))
         lazyLoadImage(image, for: indexPath)
     }
 
@@ -425,11 +424,12 @@ private extension ShotsNormalStateHandler {
 
 private extension ShotsNormalStateHandler {
 
-    /// Returns UpdateableIndexPaths object that matches given NSIndexPath (if any)
+    /// Returns UpdateableIndex object that matches given NSIndexPath (if any)
     /// - parameter indexPath: indexPath to match.
-    /// - returns: Matched UpdateableIndexPaths object.
-    func updateableIndexPath(for indexPath: NSIndexPath) -> UpdateableIndexPaths? {
-        return indexPathsNeededImageUpdate.filter { $0.indexPath == indexPath }.first
+    /// - returns: Matched UpdateableIndexes object.
+    func updateableIndexPath(for indexPath: NSIndexPath) -> UpdateableIndex? {
+        let toCompare = indexPath.item
+        return indexPathsNeededImageUpdate.filter { $0.index == toCompare }.first
     }
 
     func lazyLoadImage(shotImage: ShotImageType, for indexPath: NSIndexPath) {
@@ -464,17 +464,16 @@ private extension ShotsNormalStateHandler {
             }
         }
 
-        guard var indexPathToUpdate = self.updateableIndexPath(for: indexPath) else { return }
-        if indexPathToUpdate.status == .NotStarted || indexPathToUpdate.status == .Updated {
-            if let index = indexPathsNeededImageUpdate.indexOf({$0 == indexPathToUpdate}) {
-                indexPathToUpdate.status = .InProgress
-                indexPathsNeededImageUpdate[index] = indexPathToUpdate
-            }
-            LazyImageProvider.lazyLoadImageFromURLs(
-                (shotImage.teaserURL, shotImage.normalURL, nil),
-                teaserImageCompletion: teaserImageLoadingCompletion,
-                normalImageCompletion: imageLoadingCompletion
-            )
+        if let indexPathToUpdate = updateableIndexPath(for: indexPath) where indexPathToUpdate.status == .InProgress {
+            return
+        } else {
+            indexPathsNeededImageUpdate.append(UpdateableIndex(index: indexPath.item, status: .InProgress))
         }
+
+        LazyImageProvider.lazyLoadImageFromURLs(
+            (shotImage.teaserURL, shotImage.normalURL, nil),
+            teaserImageCompletion: teaserImageLoadingCompletion,
+            normalImageCompletion: imageLoadingCompletion
+        )
     }
 }
