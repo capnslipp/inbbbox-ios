@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UpdateableIndexPaths {
+struct UpdateableIndex {
 
     enum UpdateStatus {
         case NotStarted
@@ -16,14 +16,15 @@ struct UpdateableIndexPaths {
         case Updated
     }
 
-    let indexPath: NSIndexPath
+    let index: Int
     var status: UpdateStatus = .NotStarted
 
-    init(indexPath: NSIndexPath) {
-        self.indexPath = indexPath
+    init(index: Int, status: UpdateStatus = .NotStarted) {
+        self.index = index
+        self.status = status
     }
 }
 
-func ==(lhs: UpdateableIndexPaths, rhs: UpdateableIndexPaths) -> Bool {
-    return lhs.indexPath == rhs.indexPath
+func ==(lhs: UpdateableIndex, rhs: UpdateableIndex) -> Bool {
+    return lhs.index == rhs.index
 }
