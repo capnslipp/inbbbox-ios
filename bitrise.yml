@@ -139,9 +139,4 @@ workflows:
       - codecov:
           inputs:
           - CODECOV_TOKEN: $CODECOV_TOKEN
-      - script:
-          inputs:
-          - content: |-
-              #!/bin/bash
-              bash <(curl -s https://codecov.io/bash)
 
