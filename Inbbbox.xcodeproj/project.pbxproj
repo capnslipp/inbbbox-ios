@@ -1663,6 +1663,7 @@
 				7F8B20BF686E95D549F0E274 /* [CP] Copy Pods Resources */,
 				F87DCDB9D40410FDFB2D2B7B /* 📦 Embed Pods Frameworks */,
 				999D0A7EE85661A110D711C5 /* 📦 Copy Pods Resources */,
+				BE3B325A1DBE4832005D522B /* Copy Carthage Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1884,6 +1885,21 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unit Tests/Pods-Unit Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		BE3B325A1DBE4832005D522B /* Copy Carthage Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SWMessages.framework",
+			);
+			name = "Copy Carthage Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		BED9F8121DBDF7A600EF5BA5 /* Copy Carthage Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
