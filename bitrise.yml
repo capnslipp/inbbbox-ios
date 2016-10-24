@@ -73,6 +73,7 @@ workflows:
         - app_id: "$HOCKEY_APP_ID_STAGING"
     before_run: 
     after_run: 
+        - codecov_check
         - notify
 
   # The pull-requests workflow
@@ -90,6 +91,7 @@ workflows:
         - output_tool: xcodebuild
     before_run: 
     after_run: 
+        - codecov_check
         - notify
 
   # The development workflow
@@ -119,6 +121,7 @@ workflows:
         - app_id: "$HOCKEY_APP_ID_STAGING"
     before_run: 
     after_run: 
+        - codecov_check
         - notify
 
     # Slack Notify Workflow
@@ -130,3 +133,10 @@ workflows:
           inputs:
           - webhook_url: $SLACK_WEBHOOK_URL
           - channel: $SLACK_CHANNEL
+
+  codecov_check:
+    steps:
+      - codecov:
+          inputs:
+          - CODECOV_TOKEN: $CODECOV_TOKEN
+
