@@ -88,6 +88,9 @@ workflows:
         - simulator_device: iPhone 6s
         - is_clean_build: 'yes'
         - output_tool: xcodebuild
+    - codecov:
+      inputs:
+        - CODECOV_TOKEN: $CODECOV_TOKEN
     before_run: 
     after_run: 
         - notify
