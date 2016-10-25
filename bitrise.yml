@@ -62,6 +62,7 @@ workflows:
         - archive_and_deploy
         - save_cache
         - codecov_check
+        - deploy-artifacts
         - notify
 
   # The pull-requests workflow
@@ -73,6 +74,7 @@ workflows:
         - test
         - save_cache
         - codecov_check
+        - deploy-artifacts
         - notify
 
   # The development workflow
@@ -85,6 +87,7 @@ workflows:
         - save_cache
         - archive_and_deploy
         - codecov_check
+        - deploy-artifacts
         - notify
 
   #
@@ -153,4 +156,12 @@ workflows:
       - codecov:
           inputs:
           - CODECOV_TOKEN: $CODECOV_TOKEN
+
+  # Deploy artifacts
+
+  deploy-artifacts:
+    steps:
+      - deploy-to-bitrise-io:
+          inputs:
+            - notify_user_groups: none
 
