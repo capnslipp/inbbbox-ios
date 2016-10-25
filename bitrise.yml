@@ -135,8 +135,8 @@ workflows:
       - cache-push:
           inputs:
             - cache_paths: |-
-                 "./Pods -> ./Podfile.lock"
-                 "./Carthage -> ./Cartfile.resolved"
+                 ./Pods -> ./Podfile.lock
+                 ./Carthage -> ./Cartfile.resolved
 
 
   # Slack Notify Workflow
