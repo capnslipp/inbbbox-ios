@@ -331,9 +331,9 @@ extension ShotDetailsViewController {
         presentViewController(navigationController, animated: true, completion: nil)
     }
     
-    func hideBlurViewFor3DTouch(hidden: Bool) {
+    /*func hideBlurViewFor3DTouch(hidden: Bool) {
         shotDetailsView.hideBlurViewFor3DTouch(hidden)
-    }
+    }*/
 }
 
 // MARK: Private extension

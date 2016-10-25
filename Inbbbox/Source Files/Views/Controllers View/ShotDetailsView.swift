@@ -22,7 +22,7 @@ class ShotDetailsView: UIView {
     var topLayoutGuideOffset = CGFloat(0)
 
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
-    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    //private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
     let keyboardResizableView = KeyboardResizableView.newAutoLayoutView()
     private var didSetConstraints = false
 
@@ -38,13 +38,13 @@ class ShotDetailsView: UIView {
 
         super.init(frame: frame)
 
-        if DeviceInfo.shouldDowngrade() {
+        /*if DeviceInfo.shouldDowngrade() {
             backgroundColor = .backgroundGrayColor()
-        } else {
+        } else {*/
             backgroundColor = .clearColor()
-            blurView.configureForAutoLayout()
+            /*blurView.configureForAutoLayout()
             addSubview(blurView)
-        }
+        }*/
 
         collectionViewCornerWrapperView.backgroundColor = .clearColor()
         collectionViewCornerWrapperView.clipsToBounds = true
@@ -66,9 +66,9 @@ class ShotDetailsView: UIView {
         if !didSetConstraints {
             didSetConstraints = true
 
-            if !DeviceInfo.shouldDowngrade() {
+            /*if !DeviceInfo.shouldDowngrade() {
                 blurView.autoPinEdgesToSuperviewEdges()
-            }
+            }*/
 
             let commentComposerViewHeight = CGFloat(61)
             keyboardResizableView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
@@ -101,10 +101,10 @@ class ShotDetailsView: UIView {
     
     // MARK: public
     
-    func hideBlurViewFor3DTouch(hidden: Bool) {
+    /*func hideBlurViewFor3DTouch(hidden: Bool) {
         if !DeviceInfo.shouldDowngrade() {
             backgroundColor = hidden ? .backgroundGrayColor() : .clearColor()
             blurView.hidden = hidden
         }
-    }
+    }*/
 }

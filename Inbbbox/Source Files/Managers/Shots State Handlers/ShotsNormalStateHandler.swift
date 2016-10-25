@@ -253,7 +253,7 @@ extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
     }
 }
 
-// Mark: 3DTouch
+// MARK: 3DTouch
 
 extension ShotsNormalStateHandler {
     
@@ -262,23 +262,20 @@ extension ShotsNormalStateHandler {
         
         let shot = shotsCollectionViewController.shots[indexPath.row]
         let shotDetailsViewController = ShotDetailsViewController(shot: shot)
-        shotDetailsViewController.hideBlurViewFor3DTouch(true)
         
         return shotDetailsViewController
     }
     
     func popViewController(controller: UIViewController) {
-        if let controller = controller as? ShotDetailsViewController {
-            controller.shouldScrollToMostRecentMessage = false
-            controller.hideBlurViewFor3DTouch(false)
-            
-            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+        if let detailsViewController = controller as? ShotDetailsViewController {
+            let pageViewController = ShotDetailsPageViewController(shotsNormalStateHander: self, initialViewController: detailsViewController)
+            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
             modalTransitionAnimator?.behindViewScale = 1
             
-            controller.transitioningDelegate = modalTransitionAnimator
-            controller.modalPresentationStyle = .Custom
+            pageViewController.transitioningDelegate = modalTransitionAnimator
+            pageViewController.modalPresentationStyle = .Custom
             
-            shotsCollectionViewController?.tabBarController?.presentViewController(controller, animated: true, completion: nil)
+            shotsCollectionViewController?.tabBarController?.presentViewController(pageViewController, animated: true, completion: nil)
         }
     }
 }
@@ -303,17 +300,17 @@ private extension ShotsNormalStateHandler {
     func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {
         shotsCollectionViewController?.definesPresentationContext = true
 
-        let shotDetailsViewController = ShotDetailsViewController(shot: shot)
-        shotDetailsViewController.shouldScrollToMostRecentMessage = scrollToMessages
+        let detailsViewController = ShotDetailsViewController(shot: shot)
+        let pageViewController = ShotDetailsPageViewController(shotsNormalStateHander: self, initialViewController: detailsViewController)
         
         modalTransitionAnimator =
-            CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+            CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
         
-        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
-        shotDetailsViewController.modalPresentationStyle = .Custom
+        pageViewController.transitioningDelegate = modalTransitionAnimator
+        pageViewController.modalPresentationStyle = .Custom
         
         shotsCollectionViewController?.tabBarController?.presentViewController(
-            shotDetailsViewController, animated: true, completion: nil)
+            pageViewController, animated: true, completion: nil)
     }
 
     func isShotLiked(shot: ShotType) -> Bool {

@@ -371,7 +371,7 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
             previewingContext.sourceRect = cell.contentView.bounds
             
             let controller = ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
-            controller.hideBlurViewFor3DTouch(true)
+            //controller.hideBlurViewFor3DTouch(true)
             
             return controller
         } else if let viewModel = viewModel as? TeamDetailsViewModel {
@@ -393,7 +393,7 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         if let _ = viewModel as? UserDetailsViewModel,
             let controller = viewControllerToCommit as? ShotDetailsViewController {
-            controller.hideBlurViewFor3DTouch(false)
+            //controller.hideBlurViewFor3DTouch(false)
             
             modalTransitionAnimator =
                 CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)

@@ -83,7 +83,7 @@ extension SimpleShotsCollectionViewController: UIViewControllerPreviewingDelegat
         previewingContext.sourceRect = cell.contentView.bounds
         
         let detailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
-        detailsViewController.hideBlurViewFor3DTouch(true)
+        //detailsViewController.hideBlurViewFor3DTouch(true)
         
         return detailsViewController
     }
@@ -96,7 +96,7 @@ extension SimpleShotsCollectionViewController: UIViewControllerPreviewingDelegat
             
             controller.transitioningDelegate = modalTransitionAnimator
             controller.modalPresentationStyle = .Custom
-            controller.hideBlurViewFor3DTouch(false)
+            //controller.hideBlurViewFor3DTouch(false)
             
             tabBarController?.presentViewController(controller, animated: true, completion: nil)
         }
