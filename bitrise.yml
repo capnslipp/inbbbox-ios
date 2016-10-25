@@ -96,9 +96,6 @@ workflows:
   prepare_to_run:
     steps:
     - cache-pull: {}
-    - set-xcode-build-number@1.0.4:
-        inputs:
-        - plist_path: "$BITRISE_INFO_PLIST_PATH"
     - cocoapods-install:
         inputs:
         - is_update_cocoapods: 'true'
