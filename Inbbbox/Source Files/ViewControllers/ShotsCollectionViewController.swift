@@ -244,7 +244,7 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
         
         previewingContext.sourceRect = visibleCell.contentView.bounds
         
-        return normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath)
+        return normalStateHandler.getShotDetailsViewController(atIndexPath: indexPath)
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {

@@ -101,10 +101,7 @@ class ShotDetailsView: UIView {
     
     // MARK: public
     
-    /*func hideBlurViewFor3DTouch(hidden: Bool) {
-        if !DeviceInfo.shouldDowngrade() {
-            backgroundColor = hidden ? .backgroundGrayColor() : .clearColor()
-            blurView.hidden = hidden
-        }
-    }*/
+    func customizeFor3DTouch(hidden: Bool) {
+        backgroundColor = hidden ? .backgroundGrayColor() : .clearColor()
+    }
 }

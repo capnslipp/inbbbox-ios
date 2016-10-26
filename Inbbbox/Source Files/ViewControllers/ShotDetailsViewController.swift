@@ -15,6 +15,7 @@ import MessageUI
 final class ShotDetailsViewController: UIViewController {
 
     var shouldScrollToMostRecentMessage = false
+    var shotIndex: Int = 0
 
     var shotDetailsView: ShotDetailsView! {
         return view as? ShotDetailsView
@@ -331,9 +332,9 @@ extension ShotDetailsViewController {
         presentViewController(navigationController, animated: true, completion: nil)
     }
     
-    /*func hideBlurViewFor3DTouch(hidden: Bool) {
-        shotDetailsView.hideBlurViewFor3DTouch(hidden)
-    }*/
+    func customizeFor3DTouch(hidden: Bool) {
+        shotDetailsView.customizeFor3DTouch(hidden)
+    }
 }
 
 // MARK: Private extension

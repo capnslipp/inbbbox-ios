@@ -241,16 +241,19 @@ extension ProfileViewController {
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 
         if let viewModel = viewModel as? UserDetailsViewModel {
-            let shotDetailsViewController =
-                ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
 
+            let detailsViewController = ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
+            detailsViewController.shotIndex = indexPath.item
+            let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: viewModel.userShots, initialViewController: detailsViewController)
+            let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
+            
             modalTransitionAnimator =
-                CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+                CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
+            
+            pageViewController.transitioningDelegate = modalTransitionAnimator
+            pageViewController.modalPresentationStyle = .Custom
 
-            shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
-            shotDetailsViewController.modalPresentationStyle = .Custom
-
-            presentViewController(shotDetailsViewController, animated: true, completion: nil)
+            presentViewController(pageViewController, animated: true, completion: nil)
         }
         if let viewModel = viewModel as? TeamDetailsViewModel {
 
@@ -371,7 +374,8 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
             previewingContext.sourceRect = cell.contentView.bounds
             
             let controller = ShotDetailsViewController(shot: viewModel.shotWithSwappedUser(viewModel.userShots[indexPath.item]))
-            //controller.hideBlurViewFor3DTouch(true)
+            controller.customizeFor3DTouch(true)
+            controller.shotIndex = indexPath.item
             
             return controller
         } else if let viewModel = viewModel as? TeamDetailsViewModel {
@@ -391,18 +395,18 @@ extension ProfileViewController: UIViewControllerPreviewingDelegate {
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        if let _ = viewModel as? UserDetailsViewModel,
-            let controller = viewControllerToCommit as? ShotDetailsViewController {
-            //controller.hideBlurViewFor3DTouch(false)
-            
-            modalTransitionAnimator =
-                CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+        if let viewModel = viewModel as? UserDetailsViewModel,
+            let detailsViewController = viewControllerToCommit as? ShotDetailsViewController {
+            detailsViewController.customizeFor3DTouch(false)
+            let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: viewModel.userShots, initialViewController: detailsViewController)
+            let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
+            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
             modalTransitionAnimator?.behindViewScale = 1
             
-            controller.transitioningDelegate = modalTransitionAnimator
-            controller.modalPresentationStyle = .Custom
+            pageViewController.transitioningDelegate = modalTransitionAnimator
+            pageViewController.modalPresentationStyle = .Custom
             
-            presentViewController(controller, animated: true, completion: nil)
+            presentViewController(pageViewController, animated: true, completion: nil)
         } else if (viewModel as? TeamDetailsViewModel) != nil {
             navigationController?.pushViewController(viewControllerToCommit, animated: true)
         }

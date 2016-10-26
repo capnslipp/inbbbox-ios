@@ -13,9 +13,8 @@ class ShotDetailsPageViewController: UIPageViewController {
     
     private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
-    var normalStateHandler: ShotsNormalStateHandler
+    var pageDataSource: ShotDetailsPageViewControllerDataSource
     private var didSetConstraints = false
-    private var firstViewController: UIViewController?
     
     // MARK: Life cycle
     
@@ -24,9 +23,8 @@ class ShotDetailsPageViewController: UIPageViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(shotsNormalStateHander: ShotsNormalStateHandler, initialViewController: UIViewController) {
-        normalStateHandler = shotsNormalStateHander
-        firstViewController = initialViewController
+    init(shotDetailsPageDataSource: ShotDetailsPageViewControllerDataSource) {
+        pageDataSource = shotDetailsPageDataSource
         
         super.init(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
     }
@@ -38,9 +36,9 @@ extension ShotDetailsPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = self
+        dataSource = pageDataSource
         
-        if let controller = firstViewController {
+        if let controller = pageDataSource.initialViewController {
             setViewControllers([controller],
                                    direction: .Forward,
                                    animated: true,
@@ -82,28 +80,4 @@ extension ShotDetailsPageViewController: ModalByDraggingClosable {
         }
         return UIScrollView()
     }
-}
-
-// MARK: UIPageViewControllerDataSource
-
-extension ShotDetailsPageViewController: UIPageViewControllerDataSource {
-    
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        if let controller = normalStateHandler.getViewControllerForPreviewing(atIndexPath: NSIndexPath(forItem: 0, inSection: 0)) as? ShotDetailsViewController {
-            //controller.hideBlurViewFor3DTouch(false)
-            return controller
-        }
-        else { return nil }
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController,
-                            viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        if let controller = normalStateHandler.getViewControllerForPreviewing(atIndexPath: NSIndexPath(forItem: 0, inSection: 0)) as? ShotDetailsViewController {
-            //controller.hideBlurViewFor3DTouch(false)
-            return controller
-        }
-        else { return nil }
-    }
-    
 }
