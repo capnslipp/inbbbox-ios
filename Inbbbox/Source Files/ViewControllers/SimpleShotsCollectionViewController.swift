@@ -156,8 +156,7 @@ extension SimpleShotsCollectionViewController {
         let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: viewModel.shots, initialViewController: detailsViewController)
         let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
         
-        modalTransitionAnimator =
-            CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
         
         pageViewController.transitioningDelegate = modalTransitionAnimator
         pageViewController.modalPresentationStyle = .Custom

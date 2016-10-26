@@ -199,6 +199,7 @@ private extension ShotsCollectionViewController {
             normalStateHandler.didAddShotToBucketCompletionHandler = {
                 centerButtonTabBarController.animateTabBarItem(.Buckets)
             }
+            normalStateHandler.willDismissDetailsCompletionHandler = scrollToShotAtIndex
         }
     }
 
@@ -227,6 +228,10 @@ private extension ShotsCollectionViewController {
                 self.shots = shots ?? []
             }.then(fulfill).error(reject)
         }
+    }
+    
+    private func scrollToShotAtIndex(index: Int) {
+        collectionView?.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredVertically, animated: true)
     }
 }
 

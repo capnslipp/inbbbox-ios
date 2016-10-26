@@ -45,6 +45,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
 
     var didLikeShotCompletionHandler: (() -> Void)?
     var didAddShotToBucketCompletionHandler: (() -> Void)?
+    var willDismissDetailsCompletionHandler: (Int -> Void)?
 
     private var indexPathsNeededImageUpdate = [UpdateableIndex]()
 
@@ -273,6 +274,7 @@ extension ShotsNormalStateHandler {
             let shotsCollectionViewController = shotsCollectionViewController {
             detailsViewController.customizeFor3DTouch(false)
             let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
+            shotDetailsPageDataSource.delegate = self
             let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
             modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
             modalTransitionAnimator?.behindViewScale = 1
@@ -309,6 +311,7 @@ private extension ShotsNormalStateHandler {
             let detailsViewController = ShotDetailsViewController(shot: shot)
             detailsViewController.shotIndex = index
             let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
+            shotDetailsPageDataSource.delegate = self
             let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
             
             modalTransitionAnimator =
@@ -497,5 +500,14 @@ private extension ShotsNormalStateHandler {
             teaserImageCompletion: teaserImageLoadingCompletion,
             normalImageCompletion: imageLoadingCompletion
         )
+    }
+}
+
+// MARK: ShotDetailsPageViewControllerDataSourceDelegate
+
+extension ShotsNormalStateHandler: ShotDetailsPageDelegate {
+    
+    func shotDetailsDismissed(atIndex index: Int) {
+        willDismissDetailsCompletionHandler?(index)
     }
 }

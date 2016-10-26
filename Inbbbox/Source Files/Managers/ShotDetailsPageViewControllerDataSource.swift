@@ -10,22 +10,25 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
     
     // MARK: Properties
     
+    weak var delegate: ShotDetailsPageDelegate?
+    
     var shots = [ShotType]()
-    var initialViewController: UIViewController?
+    var initialViewController: ShotDetailsViewController?
     private var shotDetailsViewControllersDictionary = [Int:ShotDetailsViewController]()
     
     // MARK: 
     
     init(shots: [ShotType], initialViewController: ShotDetailsViewController) {
-        self.shots = shots
-        self.initialViewController = initialViewController
-        
         super.init()
+        
+        self.shots = shots
+        initialViewController.willDismissDetailsCompletionHandler = willDismissWithIndex
+        self.initialViewController = initialViewController
     }
     
     // MARK: Private
     
-    func getShotDetailsViewController(atIndexPath indexPath: NSIndexPath) -> UIViewController? {
+    private func getShotDetailsViewController(atIndexPath indexPath: NSIndexPath) -> UIViewController? {
         
         if let controller = shotDetailsViewControllersDictionary[indexPath.row] { return controller }
         
@@ -37,6 +40,10 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
         return shotDetailsViewController
     }
     
+    private func willDismissWithIndex(index: Int) {
+        delegate?.shotDetailsDismissed(atIndex: index)
+    }
+    
     // MARK: UIPageViewControllerDataSource
     
     func pageViewController(pageViewController: UIPageViewController,
@@ -45,6 +52,7 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
             currentController.shotIndex > 0,
             let controller = getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex - 1, inSection: 0)) as? ShotDetailsViewController {
             controller.customizeFor3DTouch(false)
+            controller.willDismissDetailsCompletionHandler = willDismissWithIndex
             return controller
         }
         else { return nil }
@@ -56,8 +64,14 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
             currentController.shotIndex < shots.count - 1,
             let controller = getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex + 1, inSection: 0)) as? ShotDetailsViewController {
             controller.customizeFor3DTouch(false)
+            controller.willDismissDetailsCompletionHandler = willDismissWithIndex
             return controller
         }
         else { return nil }
     }
+}
+
+protocol ShotDetailsPageDelegate: class {
+    
+    func shotDetailsDismissed(atIndex index: Int)
 }

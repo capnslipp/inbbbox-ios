@@ -247,8 +247,7 @@ extension ProfileViewController {
             let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: viewModel.userShots, initialViewController: detailsViewController)
             let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
             
-            modalTransitionAnimator =
-                CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
+            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
             
             pageViewController.transitioningDelegate = modalTransitionAnimator
             pageViewController.modalPresentationStyle = .Custom

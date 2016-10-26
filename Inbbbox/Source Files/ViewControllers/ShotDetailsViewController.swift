@@ -29,6 +29,8 @@ final class ShotDetailsViewController: UIViewController {
     private(set) var operationalCell: ShotDetailsOperationCollectionViewCell?
     private var onceTokenForShouldScrollToMessagesOnOpen = dispatch_once_t(0)
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
+    
+    var willDismissDetailsCompletionHandler: (Int -> Void)?
 
     init(shot: ShotType) {
         self.viewModel = ShotDetailsViewModel(shot: shot)
@@ -557,6 +559,7 @@ private extension ShotDetailsViewController {
     }
 
     dynamic func closeButtonDidTap(_: UIButton) {
+        willDismissDetailsCompletionHandler?(shotIndex)
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
