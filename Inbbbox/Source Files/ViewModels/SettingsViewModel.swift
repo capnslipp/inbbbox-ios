@@ -202,6 +202,13 @@ private extension SettingsViewModel {
         showAuthorItem.valueChanged = { newValue in
             Settings.Customization.ShowAuthor = newValue
             AnalyticsManager.trackSettingChanged(.AuthorOnHomeScreen, state: newValue)
+
+            /// NGRTemp: for testing while developing IOS-481
+            if newValue {
+                ColorModeProvider.change(to: .NightMode)
+            } else {
+                ColorModeProvider.change(to: .DayMode)
+            }
         }
     }
 

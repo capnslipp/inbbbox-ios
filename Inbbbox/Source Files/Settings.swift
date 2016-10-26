@@ -76,6 +76,17 @@ class Settings {
             get { return Settings.boolForKey(.ShowAuthorOnHomeScreen) }
             set { Settings.setValue(newValue, forKey: .ShowAuthorOnHomeScreen) }
         }
+
+        /// Indicates what color mode is currently set.
+        /// - SeeAlso: `ColorMode`
+        static var CurrentColorMode: ColorMode {
+            get {
+                let savedSetting = Settings.stringForKey(.ColorMode)
+                let colorMode = ColorMode(rawValue: savedSetting)
+                return colorMode != nil ? colorMode! : .DayMode
+            }
+            set { Settings.setValue(newValue.rawValue, forKey: .ColorMode) }
+        }
     }
 }
 
@@ -115,6 +126,10 @@ private extension Settings {
         return boolForKey(key.rawValue)
     }
 
+    static func stringForKey(key: CustomizationKey) -> String {
+        return stringForKey(key.rawValue)
+    }
+
     static func setValue(value: AnyObject?, forKey key: CustomizationKey) {
         Defaults[key.rawValue] = value
     }
@@ -123,5 +138,9 @@ private extension Settings {
 
     static func boolForKey(key: String) -> Bool {
         return Defaults[key].bool ?? false
+    }
+
+    static func stringForKey(key: String) -> String {
+        return Defaults[key].string ?? ""
     }
 }
