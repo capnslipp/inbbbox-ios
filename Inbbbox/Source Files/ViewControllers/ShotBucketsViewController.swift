@@ -172,7 +172,6 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
             if footer == nil {
                 footer = collectionView.dequeueReusableClass(ShotBucketsFooterView.self, forIndexPath: indexPath,
                         type: .Footer)
-                footer?.backgroundColor = backgroundColorForFooter()
             }
             return footer!
         }
@@ -309,10 +308,6 @@ private extension ShotBucketsViewController {
             }
         }
         return CGSizeZero
-    }
-
-    func backgroundColorForFooter() -> UIColor {
-        return .RGBA(246, 248, 248, 1) // color same as header title background
     }
 
     func addShotToBucketAtIndex(index: Int) {

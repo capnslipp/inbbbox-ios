@@ -14,8 +14,6 @@ class ShotsCollectionBackgroundView: UIView {
     convenience init() {
         self.init(frame: CGRect.zero)
 
-        backgroundColor = UIColor.backgroundGrayColor()
-
         logoImageView.configureForAutoLayout()
         addSubview(logoImageView)
     }

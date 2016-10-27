@@ -39,14 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
         window!.backgroundColor = UIColor.backgroundGrayColor()
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().barTintColor = UIColor.pinkColor()
-        UINavigationBar.appearance().barStyle = .Black
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        UINavigationBar.appearance().translucent = false
 
         configureInitialSettings()
         CacheManager.setupCache()
+        ColorModeProvider.setup()
 
         var shouldPerformAdditionalDelegateHandling = true
         if let shortcut = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {

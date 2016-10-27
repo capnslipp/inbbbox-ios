@@ -32,7 +32,6 @@ class SettingsViewController: UITableViewController {
         tableView.registerClass(LabelCell.self)
 
         tableView?.hideSeparatorForEmptyCells()
-        tableView?.backgroundColor = UIColor.backgroundGrayColor()
         tableView?.tableHeaderView = SettingsTableHeaderView(size: CGSize (width: 0, height: 250))
 
         provideDataForHeader()

@@ -29,8 +29,6 @@ class ShotDetailsOperationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = .RGBA(246, 248, 248, 1)
-
         likeSelectableView.setImage(UIImage(named: "ic-like-details-active"), forState: .Selected)
         likeSelectableView.setImage(UIImage(named: "ic-like-details"), forState: .Deselected)
         addSubview(likeSelectableView)
