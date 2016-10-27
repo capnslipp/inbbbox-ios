@@ -65,7 +65,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
 
         contentView.configureForAutoLayout()
-        contentView.backgroundColor = UIColor.whiteColor()
 
         avatarView.configureForAutoLayout()
         avatarView.imageView.image = UIImage(named: "ic-comments-nopicture")

@@ -26,11 +26,51 @@ struct NightMode: ColorModeType {
         return .blackColor()
     }
 
+    var tableViewSeparator: UIColor {
+        return .blackColor()
+    }
+
     var tableViewCellBackground: UIColor {
         return .blackColor()
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
+        return .blackColor()
+    }
+
+    var shotBucketsHeaderViewBackground: UIColor {
+        return .blackColor()
+    }
+
+    var shotBucketsFooterViewBackground: UIColor {
+        return .blackColor()
+    }
+
+    var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
+        return .blackColor()
+    }
+
+    var shotDetailsHeaderViewBackground: UIColor {
+        return .blackColor()
+    }
+
+    var shotDetailsOperationViewBackground: UIColor {
+        return .blackColor()
+    }
+
+    var shotDetailsDescriptionCollectionViewCellBackground: UIColor {
+        return .blackColor()
+    }
+
+    var shotDetailsCommentCollectionViewCellBackground: UIColor {
+        return .blackColor()
+    }
+
+    var profileHeaderViewBackground: UIColor {
+        return .blackColor()
+    }
+
+    var twoLayoutsCollectionViewBackground: UIColor {
         return .blackColor()
     }
 }

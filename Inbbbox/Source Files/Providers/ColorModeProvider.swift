@@ -44,14 +44,25 @@ final class ColorModeProvider {
         }
     }
 
-    private class func adaptInterface(to color: ColorModeType) {
-        UITabBar.appearance().barTintColor = color.tabBarTint
-        UINavigationBar.appearance().barTintColor = color.navigationBarTint
-        UITableView.appearance().backgroundColor = color.tableViewBackground
-        UITableViewCell.appearance().backgroundColor = color.tableViewCellBackground
+    private class func adaptInterface(to mode: ColorModeType) {
+        UITabBar.appearance().barTintColor = mode.tabBarTint
+        UINavigationBar.appearance().barTintColor = mode.navigationBarTint
+        UITableView.appearance().backgroundColor = mode.tableViewBackground
+        UITableView.appearance().separatorColor = mode.tableViewSeparator
+        UITableViewCell.appearance().backgroundColor = mode.tableViewCellBackground
 
-        ShotsCollectionBackgroundView.appearance().backgroundColor = color.shotsCollectionBackground
-        ShotBucketsAddCollectionViewCell.appearance().backgroundColor = color.shotBucketsAddCollectionViewCellBackground
+        ShotsCollectionBackgroundView.appearance().backgroundColor = mode.shotsCollectionBackground
+        ShotBucketsAddCollectionViewCell.appearance().backgroundColor = mode.shotBucketsAddCollectionViewCellBackground
+        ShotBucketsSeparatorCollectionViewCell.appearance().backgroundColor = mode.shotBucketsSeparatorCollectionViewCellBackground
+        ShotBucketsHeaderView.appearance().backgroundColor = mode.shotBucketsHeaderViewBackground
+        ShotBucketsFooterView.appearance().backgroundColor = mode.shotBucketsFooterViewBackground
+        ShotDetailsHeaderView.appearance().backgroundColor = mode.shotDetailsHeaderViewBackground
+        ShotDetailsOperationView.appearance().backgroundColor = mode.shotDetailsOperationViewBackground
+        ShotDetailsDescriptionCollectionViewCell.appearance().backgroundColor = mode.shotDetailsDescriptionCollectionViewCellBackground
+        ShotDetailsCommentCollectionViewCell.appearance().backgroundColor = mode.shotDetailsCommentCollectionViewCellBackground
+        ProfileHeaderView.appearance().backgroundColor = mode.profileHeaderViewBackground
+
+        UICollectionView.appearanceWhenContainedInInstancesOfClasses([TwoLayoutsCollectionViewController.self]).backgroundColor = mode.twoLayoutsCollectionViewBackground
 
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barStyle = .Black
