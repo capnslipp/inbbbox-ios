@@ -22,7 +22,7 @@ PODS:
     - URITemplate (~> 1.3)
   - Mockingjay/XCTest (1.3.0):
     - Mockingjay/Core
-  - Nimble (3.2.0)
+  - Nimble (4.1.0)
   - OMGHTTPURLRQ (3.2.0):
     - OMGHTTPURLRQ/RQ (= 3.2.0)
   - OMGHTTPURLRQ/FormURLEncode (3.2.0)
@@ -67,10 +67,10 @@ DEPENDENCIES:
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
   - Mockingjay (~> 1.1)
-  - Nimble (~> 3.1)
+  - Nimble (~> 4.1)
   - PromiseKit (~> 3.2)
   - PureLayout (~> 3.0)
-  - Quick (~> 0.9.2)
+  - Quick (~> 0.9.3)
   - SwiftyJSON (~> 2.3)
   - SwiftyUserDefaults (~> 2.0)
   - TTTAttributedLabel (~> 2.0)
@@ -128,7 +128,7 @@ SPEC CHECKSUMS:
   KeychainAccess: c2a71459af5bddf720a51806046a598500976c04
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
   Mockingjay: 6d528689b0b42c5f62415acf0bf468ce9ebd7ad3
-  Nimble: 703854335d181df169bbca9c97117b5cf8c47c1d
+  Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
   OMGHTTPURLRQ: 1e54807cb7d5dbb506926e53498e1e9ac5720c79
   PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
@@ -140,6 +140,6 @@ SPEC CHECKSUMS:
   WatchdogInspector: 01bc3a992c2602c3090d0ae29e8ff284049515ca
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: 82d4af839da3764096cc3597a3628b30d110c70e
+PODFILE CHECKSUM: de8eeda6ba41414954d61fc5f0076d6b2cdc4009
 
 COCOAPODS: 1.0.0
