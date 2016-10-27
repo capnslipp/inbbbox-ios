@@ -42,6 +42,10 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     var collectionViewScrollEnabled: Bool {
         return true
     }
+    
+    var shouldShowNoShotsView: Bool {
+        return shotsCollectionViewController?.shots.count == 0 && Settings.areAllStreamSourcesOff()
+    }
 
     var didLikeShotCompletionHandler: (() -> Void)?
     var didAddShotToBucketCompletionHandler: (() -> Void)?
