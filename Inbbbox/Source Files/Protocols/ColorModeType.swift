@@ -44,3 +44,22 @@ protocol ColorModeType {
     // MARK: TwoLayoutCollectionViewController
     var twoLayoutsCollectionViewBackground: UIColor { get }
 }
+
+func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
+    return lhs.tabBarTint == rhs.tabBarTint &&
+    lhs.navigationBarTint == rhs.navigationBarTint &&
+    lhs.shotsCollectionBackground == rhs.shotsCollectionBackground &&
+    lhs.tableViewBackground == rhs.tableViewBackground &&
+    lhs.tableViewSeparator == rhs.tableViewSeparator &&
+    lhs.tableViewCellBackground == rhs.tableViewCellBackground &&
+    lhs.shotBucketsAddCollectionViewCellBackground == rhs.shotBucketsAddCollectionViewCellBackground &&
+    lhs.shotBucketsHeaderViewBackground == rhs.shotBucketsHeaderViewBackground &&
+    lhs.shotBucketsFooterViewBackground == rhs.shotBucketsFooterViewBackground &&
+    lhs.shotBucketsSeparatorCollectionViewCellBackground == rhs.shotBucketsSeparatorCollectionViewCellBackground &&
+    lhs.shotDetailsHeaderViewBackground == rhs.shotDetailsHeaderViewBackground &&
+    lhs.shotDetailsOperationViewBackground == rhs.shotDetailsOperationViewBackground &&
+    lhs.shotDetailsDescriptionCollectionViewCellBackground == rhs.shotDetailsDescriptionCollectionViewCellBackground &&
+    lhs.shotDetailsCommentCollectionViewCellBackground == rhs.shotDetailsCommentCollectionViewCellBackground &&
+    lhs.profileHeaderViewBackground == rhs.profileHeaderViewBackground &&
+    lhs.twoLayoutsCollectionViewBackground == rhs.twoLayoutsCollectionViewBackground
+}
