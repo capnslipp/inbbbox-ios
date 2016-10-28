@@ -129,6 +129,7 @@ private extension AppDelegate {
         if !Settings.StreamSource.IsSet {
             Settings.StreamSource.PopularToday = true
             Settings.StreamSource.IsSet = true
+            Settings.Customization.ShowAuthor = true
         }
     }
 }
