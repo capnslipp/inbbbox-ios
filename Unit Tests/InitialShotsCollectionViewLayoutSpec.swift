@@ -227,7 +227,7 @@ class InitialShotsCollectionViewLayoutSpec: QuickSpec {
                 context("when collection view has 2 items in first section") {
                     
                     beforeEach {
-                        collectionViewMock.numberOfItemsInSectionStub.on(equals(0), returnValue: 2)
+                        collectionViewMock.numberOfItemsInSectionStub.on(0, returnValue: 2)
                         layoutAttributes = sut.layoutAttributesForElementsInRect(CGRectZero)
                     }
                     
