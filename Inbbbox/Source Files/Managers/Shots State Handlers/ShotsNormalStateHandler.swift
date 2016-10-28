@@ -503,7 +503,7 @@ private extension ShotsNormalStateHandler {
     }
 }
 
-// MARK: ShotDetailsPageViewControllerDataSourceDelegate
+// MARK: ShotDetailsPageDelegate
 
 extension ShotsNormalStateHandler: ShotDetailsPageDelegate {
     

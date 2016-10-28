@@ -16,7 +16,7 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
     var initialViewController: ShotDetailsViewController?
     private var shotDetailsViewControllersDictionary = [Int:ShotDetailsViewController]()
     
-    // MARK: 
+    // MARK: Life cycle
     
     init(shots: [ShotType], initialViewController: ShotDetailsViewController) {
         super.init()
