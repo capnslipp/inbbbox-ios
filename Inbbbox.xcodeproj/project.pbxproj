@@ -351,6 +351,7 @@
 		EA93739F1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93739E1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift */; };
 		EA9373A11DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9373A01DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift */; };
 		EA9373A31DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9373A21DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift */; };
+		EAAA12901DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA128F1DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift */; };
 		EB8445BCBBBA89F623F082A5 /* APICommentsRequesterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232B42A3981C34A125C02AC /* APICommentsRequesterSpec.swift */; };
 		EC9FD454158035FD9C9D29A7 /* RequestableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5213E66AC3206BED462B88C /* RequestableSpec.swift */; };
 		ECFBA598DE6524F332283B52 /* ShotDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADCFFD5DDF3B47FC025E19 /* ShotDetailsViewModelSpec.swift */; };
@@ -783,6 +784,7 @@
 		EA9373A01DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentUnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		EA9373A21DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLikedQuerySpec.swift; sourceTree = "<group>"; };
 		EAA9A75F53B4797803D4FB49 /* APIConnectionsRequesterMock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIConnectionsRequesterMock.swift; sourceTree = "<group>"; };
+		EAAA128F1DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsPageViewControllerDataSourceSpec.swift; sourceTree = "<group>"; };
 		EB41D0A2DF7B02038309E194 /* CustomTransitions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
 		EBEA5EF5490AF23C82A7DC91 /* LoginViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginViewAnimator.swift; sourceTree = "<group>"; };
 		ECD3F1F5845FCCBCBC0CBC12 /* NSManagedObjectExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtension.swift; sourceTree = "<group>"; };
@@ -1164,6 +1166,7 @@
 				8C828B9015466FD67820FB81 /* SettingsViewModelSpec.swift */,
 				6F8B6CBED9FDA5771B70A3BB /* ShotBucketsViewModelSpec.swift */,
 				18646E2068B92E1E3ADD6D80 /* ShotCollectionViewCellSpec.swift */,
+				EAAA128F1DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift */,
 				C2ADCFFD5DDF3B47FC025E19 /* ShotDetailsViewModelSpec.swift */,
 				117C93561E4C58105633DFDA /* ShotsAnimatorSpec.swift */,
 				B7CCFCBF07387130864BB26C /* ShotsCollectionBackgroundViewSpec.swift */,
@@ -2238,6 +2241,7 @@
 				65212870D26F15043A7C0943 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
 				FD69E77A16D095C5C3DCF301 /* BucketCollectionViewCellSpec.swift in Sources */,
 				8E1019DBE20EA2A2DBDB8BEB /* BucketsViewModelSpec.swift in Sources */,
+				EAAA12901DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift in Sources */,
 				07B6EE5BFE5759158B916EB7 /* DefaultViewControllerPresenterSpec.swift in Sources */,
 				E8CC1B915CB2EB506D738D7B /* FolloweesViewModelSpec.swift in Sources */,
 				8F1ECF32CD4684F25AD631DF /* FormatterSpec.swift in Sources */,
