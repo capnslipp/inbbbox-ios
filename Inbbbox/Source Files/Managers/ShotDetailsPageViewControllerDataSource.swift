@@ -13,8 +13,10 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
     weak var delegate: ShotDetailsPageDelegate?
     
     var shots = [ShotType]()
-    var initialViewController: ShotDetailsViewController?
     private var shotDetailsViewControllersDictionary = [Int:ShotDetailsViewController]()
+    var initialViewController: ShotDetailsViewController? {
+        return shotDetailsViewControllersDictionary.values.first
+    }
     
     // MARK: Life cycle
     
@@ -23,12 +25,12 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
         
         self.shots = shots
         initialViewController.willDismissDetailsCompletionHandler = willDismissWithIndex
-        self.initialViewController = initialViewController
+        shotDetailsViewControllersDictionary[initialViewController.shotIndex] = initialViewController
     }
     
     // MARK: Private
     
-    private func getShotDetailsViewController(atIndexPath indexPath: NSIndexPath) -> UIViewController? {
+    private func getShotDetailsViewController(atIndexPath indexPath: NSIndexPath) -> UIViewController {
         
         if let controller = shotDetailsViewControllersDictionary[indexPath.row] { return controller }
         
@@ -36,6 +38,8 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
         let shotDetailsViewController = ShotDetailsViewController(shot: shot)
         shotDetailsViewController.shotIndex = indexPath.row
         shotDetailsViewControllersDictionary[indexPath.row] = shotDetailsViewController
+        shotDetailsViewController.customizeFor3DTouch(false)
+        shotDetailsViewController.willDismissDetailsCompletionHandler = willDismissWithIndex
         
         return shotDetailsViewController
     }
@@ -49,25 +53,19 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
     func pageViewController(pageViewController: UIPageViewController,
                             viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         if let currentController = viewController as? ShotDetailsViewController where
-            currentController.shotIndex > 0,
-            let controller = getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex - 1, inSection: 0)) as? ShotDetailsViewController {
-            controller.customizeFor3DTouch(false)
-            controller.willDismissDetailsCompletionHandler = willDismissWithIndex
-            return controller
+            currentController.shotIndex > 0 {
+            return getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex - 1, inSection: 0)) as? ShotDetailsViewController
         }
-        else { return nil }
+        return nil
     }
     
     func pageViewController(pageViewController: UIPageViewController,
                             viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         if let currentController = viewController as? ShotDetailsViewController where
-            currentController.shotIndex < shots.count - 1,
-            let controller = getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex + 1, inSection: 0)) as? ShotDetailsViewController {
-            controller.customizeFor3DTouch(false)
-            controller.willDismissDetailsCompletionHandler = willDismissWithIndex
-            return controller
+            currentController.shotIndex < shots.count - 1 {
+            return getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex + 1, inSection: 0)) 
         }
-        else { return nil }
+        return nil
     }
 }
 
