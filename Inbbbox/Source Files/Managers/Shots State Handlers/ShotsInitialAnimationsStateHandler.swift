@@ -43,6 +43,10 @@ class ShotsInitialAnimationsStateHandler: NSObject, ShotsStateHandler {
     var collectionViewScrollEnabled: Bool {
         return false
     }
+    
+    var shouldShowNoShotsView: Bool {
+        return shotsCollectionViewController?.shots.count == 0 && Settings.areAllStreamSourcesOff()
+    }
 
     private let emptyDataSetLoadingView = EmptyDataSetLoadingView.newAutoLayoutView()
 
