@@ -346,9 +346,12 @@
 		EA0CFB1A1D9564D200CFF21A /* CommentLikedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CFB191D9564D200CFF21A /* CommentLikedQuery.swift */; };
 		EA0CFB1C1D95652200CFF21A /* CommentLikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CFB1B1D95652200CFF21A /* CommentLikeQuery.swift */; };
 		EA0CFB1E1D95654700CFF21A /* CommentUnlikeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0CFB1D1D95654700CFF21A /* CommentUnlikeQuery.swift */; };
+		EA7520441DBF80EF006270EB /* ShotDetailsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA7520431DBF80EF006270EB /* ShotDetailsPageViewController.swift */; };
+		EA78076B1DC0A5960077B243 /* ShotDetailsPageViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA78076A1DC0A5960077B243 /* ShotDetailsPageViewControllerDataSource.swift */; };
 		EA93739F1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA93739E1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift */; };
 		EA9373A11DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9373A01DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift */; };
 		EA9373A31DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9373A21DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift */; };
+		EAAA12901DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAAA128F1DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift */; };
 		EB8445BCBBBA89F623F082A5 /* APICommentsRequesterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5232B42A3981C34A125C02AC /* APICommentsRequesterSpec.swift */; };
 		EC9FD454158035FD9C9D29A7 /* RequestableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5213E66AC3206BED462B88C /* RequestableSpec.swift */; };
 		ECFBA598DE6524F332283B52 /* ShotDetailsViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2ADCFFD5DDF3B47FC025E19 /* ShotDetailsViewModelSpec.swift */; };
@@ -775,10 +778,13 @@
 		EA0CFB1D1D95654700CFF21A /* CommentUnlikeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentUnlikeQuery.swift; sourceTree = "<group>"; };
 		EA25956B9FC4631945428870 /* ShotImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotImageView.swift; sourceTree = "<group>"; };
 		EA26B57AF334AAA327E47C15 /* AutoScrollableCollectionViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AutoScrollableCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA7520431DBF80EF006270EB /* ShotDetailsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsPageViewController.swift; sourceTree = "<group>"; };
+		EA78076A1DC0A5960077B243 /* ShotDetailsPageViewControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsPageViewControllerDataSource.swift; sourceTree = "<group>"; };
 		EA93739E1DA4D9EB00BB3DB5 /* CommentLikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLikeQuerySpec.swift; sourceTree = "<group>"; };
 		EA9373A01DA4EBDD00BB3DB5 /* CommentUnlikeQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentUnlikeQuerySpec.swift; sourceTree = "<group>"; };
 		EA9373A21DA4EC7800BB3DB5 /* CommentLikedQuerySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentLikedQuerySpec.swift; sourceTree = "<group>"; };
 		EAA9A75F53B4797803D4FB49 /* APIConnectionsRequesterMock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIConnectionsRequesterMock.swift; sourceTree = "<group>"; };
+		EAAA128F1DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsPageViewControllerDataSourceSpec.swift; sourceTree = "<group>"; };
 		EB41D0A2DF7B02038309E194 /* CustomTransitions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CustomTransitions.swift; sourceTree = "<group>"; };
 		EBEA5EF5490AF23C82A7DC91 /* LoginViewAnimator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LoginViewAnimator.swift; sourceTree = "<group>"; };
 		ECD3F1F5845FCCBCBC0CBC12 /* NSManagedObjectExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NSManagedObjectExtension.swift; sourceTree = "<group>"; };
@@ -1160,6 +1166,7 @@
 				8C828B9015466FD67820FB81 /* SettingsViewModelSpec.swift */,
 				6F8B6CBED9FDA5771B70A3BB /* ShotBucketsViewModelSpec.swift */,
 				18646E2068B92E1E3ADD6D80 /* ShotCollectionViewCellSpec.swift */,
+				EAAA128F1DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift */,
 				C2ADCFFD5DDF3B47FC025E19 /* ShotDetailsViewModelSpec.swift */,
 				117C93561E4C58105633DFDA /* ShotsAnimatorSpec.swift */,
 				B7CCFCBF07387130864BB26C /* ShotsCollectionBackgroundViewSpec.swift */,
@@ -1184,6 +1191,7 @@
 		610B18E7D8B8BFCFB0F4B1D9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				EA78076A1DC0A5960077B243 /* ShotDetailsPageViewControllerDataSource.swift */,
 				309EBC701CAD56860074FB8A /* CrashManager.swift */,
 				0EFEC93FA792EE2DD56CAFC8 /* AnalyticsManager.swift */,
 				DBA3546F95B6EF1A72DCC5F0 /* AutoScrollableShotsDataSource.swift */,
@@ -1382,21 +1390,22 @@
 		9A9500D7011CE6AAB185DB95 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				06995610DDA33B7FE12B42B6 /* AcknowledgementsViewController.swift */,
+				C6745B7C1DB74371004D3D8E /* AlertViewController.swift */,
 				998EDE49EC23AB5DE545D476 /* BucketsCollectionViewController.swift */,
 				5D7B7083F382B611F624C6F0 /* CenterButtonTabBarController.swift */,
 				7ACCA7C583E9356743812301 /* DatePickerViewController.swift */,
 				9A2AD339968A0D04623C79AF /* FolloweesCollectionViewController.swift */,
 				11D1CAFA114E8EF613D0EAD9 /* LoginViewController.swift */,
+				18A535155F4BCDF578B36FBB /* ProfileViewController.swift */,
 				7D8A0B57417D9F4D12B6A44B /* SettingsViewController.swift */,
 				4B62F7B43BFCE7EC50A7362B /* ShotBucketsViewController.swift */,
+				EA7520431DBF80EF006270EB /* ShotDetailsPageViewController.swift */,
 				C28A7631D86F1074E2F49E9C /* ShotDetailsViewController.swift */,
-				042944E7496B50A9D5E53F51 /* ShotsCollectionViewController.swift */,
-				246A6D1DD9042D6BF3B7DAFC /* TwoLayoutsCollectionViewController.swift */,
-				18A535155F4BCDF578B36FBB /* ProfileViewController.swift */,
-				06995610DDA33B7FE12B42B6 /* AcknowledgementsViewController.swift */,
-				F0FD0A831CBE496400735933 /* SimpleShotsCollectionViewController.swift */,
 				F0BEBDD41CD789C400AA391C /* ShotDetailsViewControllerExtension.swift */,
-				C6745B7C1DB74371004D3D8E /* AlertViewController.swift */,
+				042944E7496B50A9D5E53F51 /* ShotsCollectionViewController.swift */,
+				F0FD0A831CBE496400735933 /* SimpleShotsCollectionViewController.swift */,
+				246A6D1DD9042D6BF3B7DAFC /* TwoLayoutsCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2091,6 +2100,7 @@
 				5146E404DB743CC6C1BCAD27 /* WidthDependentHeight.swift in Sources */,
 				DF326C23DCDF58359FEE6D04 /* APIBucketsProvider.swift in Sources */,
 				EE0E02A622C07A1519088E48 /* APIBucketsRequester.swift in Sources */,
+				EA78076B1DC0A5960077B243 /* ShotDetailsPageViewControllerDataSource.swift in Sources */,
 				78CF4129EDD9A69F5249CC24 /* APICommentsProvider.swift in Sources */,
 				3D985BE766B44A002C3EE6FE /* APICommentsRequester.swift in Sources */,
 				22ABD9C1194FC1CB23A5C35F /* APIConnectionsProvider.swift in Sources */,
@@ -2192,6 +2202,7 @@
 				FBE9223A097A37929B950CB2 /* ShotBucketsAddCollectionViewCell.swift in Sources */,
 				DF3C8AC778E09291E38F6DFB /* ShotBucketsSelectCollectionViewCell.swift in Sources */,
 				C80E52C1908FF89849C7A19B /* ShotBucketsSeparatorCollectionViewCell.swift in Sources */,
+				EA7520441DBF80EF006270EB /* ShotDetailsPageViewController.swift in Sources */,
 				223E21EB43F45A4B00009BD7 /* ShotCollectionViewCell.swift in Sources */,
 				6B7F1C96EE97C8D4B184BFBA /* ShotDetailsCommentCollectionViewCell.swift in Sources */,
 				DBD7CC4537E8F704884A2B34 /* ShotDetailsDescriptionCollectionViewCell.swift in Sources */,
@@ -2230,6 +2241,7 @@
 				65212870D26F15043A7C0943 /* AutoScrollableShotsDataSourceSpec.swift in Sources */,
 				FD69E77A16D095C5C3DCF301 /* BucketCollectionViewCellSpec.swift in Sources */,
 				8E1019DBE20EA2A2DBDB8BEB /* BucketsViewModelSpec.swift in Sources */,
+				EAAA12901DC3733D00E8B576 /* ShotDetailsPageViewControllerDataSourceSpec.swift in Sources */,
 				07B6EE5BFE5759158B916EB7 /* DefaultViewControllerPresenterSpec.swift in Sources */,
 				E8CC1B915CB2EB506D738D7B /* FolloweesViewModelSpec.swift in Sources */,
 				8F1ECF32CD4684F25AD631DF /* FormatterSpec.swift in Sources */,

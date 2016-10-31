@@ -213,6 +213,7 @@ private extension ShotsCollectionViewController {
             normalStateHandler.didAddShotToBucketCompletionHandler = {
                 centerButtonTabBarController.animateTabBarItem(.Buckets)
             }
+            normalStateHandler.willDismissDetailsCompletionHandler = scrollToShotAtIndex
         }
     }
 
@@ -242,6 +243,10 @@ private extension ShotsCollectionViewController {
             }.then(fulfill).error(reject)
         }
     }
+    
+    private func scrollToShotAtIndex(index: Int) {
+        collectionView?.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredVertically, animated: true)
+    }
 }
 
 // MARK: UIViewControllerPreviewingDelegate
@@ -258,7 +263,7 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
         
         previewingContext.sourceRect = visibleCell.contentView.bounds
         
-        return normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath)
+        return normalStateHandler.getShotDetailsViewController(atIndexPath: indexPath)
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {

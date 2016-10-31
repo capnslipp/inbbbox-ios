@@ -83,22 +83,26 @@ extension SimpleShotsCollectionViewController: UIViewControllerPreviewingDelegat
         previewingContext.sourceRect = cell.contentView.bounds
         
         let detailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
-        detailsViewController.hideBlurViewFor3DTouch(true)
+        detailsViewController.customizeFor3DTouch(true)
+        detailsViewController.shotIndex = indexPath.item
         
         return detailsViewController
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         
-        if let controller = viewControllerToCommit as? ShotDetailsViewController {
-            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
+        if let detailsViewController = viewControllerToCommit as? ShotDetailsViewController,
+            let viewModel = viewModel {
+            detailsViewController.customizeFor3DTouch(false)
+            let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: viewModel.shots, initialViewController: detailsViewController)
+            let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
+            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
             modalTransitionAnimator?.behindViewScale = 1
             
-            controller.transitioningDelegate = modalTransitionAnimator
-            controller.modalPresentationStyle = .Custom
-            controller.hideBlurViewFor3DTouch(false)
+            pageViewController.transitioningDelegate = modalTransitionAnimator
+            pageViewController.modalPresentationStyle = .Custom
             
-            tabBarController?.presentViewController(controller, animated: true, completion: nil)
+            tabBarController?.presentViewController(pageViewController, animated: true, completion: nil)
         }
     }
 }
@@ -147,15 +151,17 @@ extension SimpleShotsCollectionViewController {
             return
         }
 
-        let shotDetailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
+        let detailsViewController = ShotDetailsViewController(shot: viewModel.shots[indexPath.item])
+        detailsViewController.shotIndex = indexPath.item
+        let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: viewModel.shots, initialViewController: detailsViewController)
+        let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
+        
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
+        
+        pageViewController.transitioningDelegate = modalTransitionAnimator
+        pageViewController.modalPresentationStyle = .Custom
 
-        modalTransitionAnimator =
-                CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
-
-        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
-        shotDetailsViewController.modalPresentationStyle = .Custom
-
-        tabBarController?.presentViewController(shotDetailsViewController, animated: true, completion: nil)
+        tabBarController?.presentViewController(pageViewController, animated: true, completion: nil)
     }
 
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell,

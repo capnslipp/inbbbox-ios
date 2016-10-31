@@ -49,6 +49,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
 
     var didLikeShotCompletionHandler: (() -> Void)?
     var didAddShotToBucketCompletionHandler: (() -> Void)?
+    var willDismissDetailsCompletionHandler: (Int -> Void)?
 
     private var indexPathsNeededImageUpdate = [UpdateableIndex]()
 
@@ -154,7 +155,7 @@ extension ShotsNormalStateHandler {
                 certainSelf.presentShotBucketsViewController(shot)
             case .Comment:
                 let shotUpdated = self?.shotDummyRecent(shot)
-                certainSelf.presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: true)
+                certainSelf.presentShotDetailsViewController(shotUpdated ?? shot, index: indexPath.item, scrollToMessages: true)
             case .DoNothing:
                 break
             }
@@ -184,16 +185,16 @@ extension ShotsNormalStateHandler: UICollectionViewDataSourcePrefetching {
 }
 #endif
 
-// MARK: UICollecitonViewDelegate
+// MARK: UICollectionViewDelegate
 extension ShotsNormalStateHandler {
 
     func collectionView(collectionView: UICollectionView,
             didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard let shotsCollectionViewController = shotsCollectionViewController else { return }
 
-        let shot = shotsCollectionViewController.shots[indexPath.row]
+        let shot = shotsCollectionViewController.shots[indexPath.item]
         let shotUpdated = self.shotDummyRecent(shot)
-        presentShotDetailsViewControllerWithShot(shotUpdated ?? shot, scrollToMessages: false)
+        presentShotDetailsViewController(shotUpdated ?? shot, index: indexPath.item, scrollToMessages: false)
     }
 
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
@@ -257,33 +258,36 @@ extension ShotsNormalStateHandler: ShotCollectionViewCellDelegate {
     }
 }
 
-// Mark: 3DTouch
+// MARK: 3DTouch
 
 extension ShotsNormalStateHandler {
     
-    func getViewControllerForPreviewing(atIndexPath indexPath: NSIndexPath) -> UIViewController? {
+    func getShotDetailsViewController(atIndexPath indexPath: NSIndexPath) -> UIViewController? {
         guard let shotsCollectionViewController = shotsCollectionViewController else { return nil }
         
-        let shot = shotsCollectionViewController.shots[indexPath.row]
+        let shot = shotsCollectionViewController.shots[indexPath.item]
         let shotDetailsViewController = ShotDetailsViewController(shot: shot)
-        shotDetailsViewController.hideBlurViewFor3DTouch(true)
+        shotDetailsViewController.customizeFor3DTouch(true)
+        shotDetailsViewController.shotIndex = indexPath.item
         
         return shotDetailsViewController
     }
     
     func popViewController(controller: UIViewController) {
-        if let controller = controller as? ShotDetailsViewController {
-            controller.shouldScrollToMostRecentMessage = false
-            controller.hideBlurViewFor3DTouch(false)
-            
-            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(controller)
-            modalTransitionAnimator?.behindViewScale = 1
-            
-            controller.transitioningDelegate = modalTransitionAnimator
-            controller.modalPresentationStyle = .Custom
-            
-            shotsCollectionViewController?.tabBarController?.presentViewController(controller, animated: true, completion: nil)
-        }
+        guard let detailsViewController = controller as? ShotDetailsViewController,
+            let shotsCollectionViewController = shotsCollectionViewController else { return }
+        
+        detailsViewController.customizeFor3DTouch(false)
+        let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
+        shotDetailsPageDataSource.delegate = self
+        let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
+        modalTransitionAnimator?.behindViewScale = 1
+        
+        pageViewController.transitioningDelegate = modalTransitionAnimator
+        pageViewController.modalPresentationStyle = .Custom
+        
+        shotsCollectionViewController.tabBarController?.presentViewController(pageViewController, animated: true, completion: nil)
     }
 }
 
@@ -304,20 +308,25 @@ private extension ShotsNormalStateHandler {
                 shotBucketsViewController, animated: true, completion: nil)
     }
 
-    func presentShotDetailsViewControllerWithShot(shot: ShotType, scrollToMessages: Bool) {
-        shotsCollectionViewController?.definesPresentationContext = true
-
-        let shotDetailsViewController = ShotDetailsViewController(shot: shot)
-        shotDetailsViewController.shouldScrollToMostRecentMessage = scrollToMessages
+    func presentShotDetailsViewController(shot: ShotType, index: Int, scrollToMessages: Bool) {
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return }
+        
+        shotsCollectionViewController.definesPresentationContext = true
+        
+        let detailsViewController = ShotDetailsViewController(shot: shot)
+        detailsViewController.shotIndex = index
+        let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
+        shotDetailsPageDataSource.delegate = self
+        let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
         
         modalTransitionAnimator =
-            CustomTransitions.pullDownToCloseTransitionForModalViewController(shotDetailsViewController)
+            CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
         
-        shotDetailsViewController.transitioningDelegate = modalTransitionAnimator
-        shotDetailsViewController.modalPresentationStyle = .Custom
+        pageViewController.transitioningDelegate = modalTransitionAnimator
+        pageViewController.modalPresentationStyle = .Custom
         
-        shotsCollectionViewController?.tabBarController?.presentViewController(
-            shotDetailsViewController, animated: true, completion: nil)
+        shotsCollectionViewController.tabBarController?.presentViewController(
+            pageViewController, animated: true, completion: nil)
     }
 
     func isShotLiked(shot: ShotType) -> Bool {
@@ -424,7 +433,7 @@ private extension ShotsNormalStateHandler {
     func downloadNextPageIfNeeded(for indexPath: NSIndexPath) {
         guard let shotsCollectionViewController = shotsCollectionViewController else { return }
 
-        if indexPath.row == shotsCollectionViewController.shots.count - 6 {
+        if indexPath.item == shotsCollectionViewController.shots.count - 6 {
 
             firstly {
                 shotsCollectionViewController.shotsProvider.nextPage()
@@ -495,5 +504,14 @@ private extension ShotsNormalStateHandler {
             teaserImageCompletion: teaserImageLoadingCompletion,
             normalImageCompletion: imageLoadingCompletion
         )
+    }
+}
+
+// MARK: ShotDetailsPageDelegate
+
+extension ShotsNormalStateHandler: ShotDetailsPageDelegate {
+    
+    func shotDetailsDismissed(atIndex index: Int) {
+        willDismissDetailsCompletionHandler?(index)
     }
 }
