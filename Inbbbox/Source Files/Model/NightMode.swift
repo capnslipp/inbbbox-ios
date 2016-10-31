@@ -74,6 +74,8 @@ struct NightMode: ColorModeType {
         return .blackColor()
     }
     
+    // MARK: Shot Detail
+    
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
         return .whiteColor()
     }
@@ -112,5 +114,15 @@ struct NightMode: ColorModeType {
     
     var shotDetailsCommentEditLabelTextColor: UIColor {
         return .followeeTextGrayNightModeColor()
+    }
+    
+    // MARK: Settings
+    
+    var settingsUsernameTextColor: UIColor {
+        return .RGBA(236, 237, 239, 1)
+    }
+    
+    var settingsCellTextColor: UIColor {
+        return .whiteColor()
     }
 }

@@ -24,7 +24,7 @@ class SwitchCell: UITableViewCell, Reusable {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         titleLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
-        titleLabel.textColor = .blackColor()
+        titleLabel.textColor = ColorModeProvider.current().settingsCellTextColor
         titleLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(titleLabel)
 

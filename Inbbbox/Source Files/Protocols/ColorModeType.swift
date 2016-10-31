@@ -47,6 +47,10 @@ protocol ColorModeType {
     var shotDetailsCommentDateTextColor: UIColor { get }
     var shotDetailsCommentLinkTextColor: UIColor { get }
     var shotDetailsCommentEditLabelTextColor: UIColor { get }
+    
+    // MARK: Settings
+    var settingsUsernameTextColor: UIColor { get }
+    var settingsCellTextColor: UIColor { get }
 
     /// ProfileHeaderView.
     var profileHeaderViewBackground: UIColor { get }

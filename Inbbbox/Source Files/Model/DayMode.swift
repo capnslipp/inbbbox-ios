@@ -74,6 +74,8 @@ struct DayMode: ColorModeType {
         return .backgroundGrayColor()
     }
     
+    // MARK: Shot Detail
+    
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
         return .blackColor()
     }
@@ -112,5 +114,15 @@ struct DayMode: ColorModeType {
     
     var shotDetailsCommentEditLabelTextColor: UIColor {
         return .followeeTextGrayColor()
+    }
+    
+    // MARK: Settings
+    
+    var settingsUsernameTextColor: UIColor {
+        return .textDarkColor()
+    }
+    
+    var settingsCellTextColor: UIColor {
+        return .blackColor()
     }
 }
