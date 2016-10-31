@@ -274,20 +274,20 @@ extension ShotsNormalStateHandler {
     }
     
     func popViewController(controller: UIViewController) {
-        if let detailsViewController = controller as? ShotDetailsViewController,
-            let shotsCollectionViewController = shotsCollectionViewController {
-            detailsViewController.customizeFor3DTouch(false)
-            let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
-            shotDetailsPageDataSource.delegate = self
-            let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
-            modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
-            modalTransitionAnimator?.behindViewScale = 1
-            
-            pageViewController.transitioningDelegate = modalTransitionAnimator
-            pageViewController.modalPresentationStyle = .Custom
-            
-            shotsCollectionViewController.tabBarController?.presentViewController(pageViewController, animated: true, completion: nil)
-        }
+        guard let detailsViewController = controller as? ShotDetailsViewController,
+            let shotsCollectionViewController = shotsCollectionViewController else { return }
+        
+        detailsViewController.customizeFor3DTouch(false)
+        let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
+        shotDetailsPageDataSource.delegate = self
+        let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
+        modalTransitionAnimator = CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
+        modalTransitionAnimator?.behindViewScale = 1
+        
+        pageViewController.transitioningDelegate = modalTransitionAnimator
+        pageViewController.modalPresentationStyle = .Custom
+        
+        shotsCollectionViewController.tabBarController?.presentViewController(pageViewController, animated: true, completion: nil)
     }
 }
 
@@ -309,24 +309,24 @@ private extension ShotsNormalStateHandler {
     }
 
     func presentShotDetailsViewController(shot: ShotType, index: Int, scrollToMessages: Bool) {
-        if let shotsCollectionViewController = shotsCollectionViewController {
-            shotsCollectionViewController.definesPresentationContext = true
-            
-            let detailsViewController = ShotDetailsViewController(shot: shot)
-            detailsViewController.shotIndex = index
-            let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
-            shotDetailsPageDataSource.delegate = self
-            let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
-            
-            modalTransitionAnimator =
-                CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
-            
-            pageViewController.transitioningDelegate = modalTransitionAnimator
-            pageViewController.modalPresentationStyle = .Custom
-            
-            shotsCollectionViewController.tabBarController?.presentViewController(
-                pageViewController, animated: true, completion: nil)
-        }
+        guard let shotsCollectionViewController = shotsCollectionViewController else { return }
+        
+        shotsCollectionViewController.definesPresentationContext = true
+        
+        let detailsViewController = ShotDetailsViewController(shot: shot)
+        detailsViewController.shotIndex = index
+        let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
+        shotDetailsPageDataSource.delegate = self
+        let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
+        
+        modalTransitionAnimator =
+            CustomTransitions.pullDownToCloseTransitionForModalViewController(pageViewController)
+        
+        pageViewController.transitioningDelegate = modalTransitionAnimator
+        pageViewController.modalPresentationStyle = .Custom
+        
+        shotsCollectionViewController.tabBarController?.presentViewController(
+            pageViewController, animated: true, completion: nil)
     }
 
     func isShotLiked(shot: ShotType) -> Bool {

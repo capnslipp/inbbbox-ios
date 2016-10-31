@@ -15,7 +15,7 @@ import MessageUI
 final class ShotDetailsViewController: UIViewController {
 
     var shouldScrollToMostRecentMessage = false
-    var shotIndex: Int = 0
+    var shotIndex = 0
 
     var shotDetailsView: ShotDetailsView! {
         return view as? ShotDetailsView
