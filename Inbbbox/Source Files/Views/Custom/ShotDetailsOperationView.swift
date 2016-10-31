@@ -40,7 +40,7 @@ class ShotDetailsOperationView: UIView {
         for label in [likeCounterLabel, bucketCounterLabel] {
             
             label.font = UIFont.helveticaFont(.Neue, size: 12)
-            label.textColor = .followeeTextGrayColor()
+            label.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
             
             addSubview(label)
         }

@@ -13,6 +13,14 @@ struct DayMode: ColorModeType {
     var tabBarTint: UIColor {
         return .whiteColor()
     }
+    
+    var tabBarNormalItemTextColor: UIColor {
+        return .tabBarGrayColor()
+    }
+    
+    var tabBarSelectedItemTextColor: UIColor {
+        return .pinkColor()
+    }
 
     var navigationBarTint: UIColor {
         return .pinkColor()
@@ -72,5 +80,65 @@ struct DayMode: ColorModeType {
 
     var twoLayoutsCollectionViewBackground: UIColor {
         return .backgroundGrayColor()
+    }
+    
+    // MARK: Shot Detail
+    
+    var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
+        return .blackColor()
+    }
+    
+    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotDetailsHeaderViewAuthorNotLinkColor: UIColor {
+        return .grayColor()
+    }
+    
+    var shotDetailsHeaderViewAuthorLinkColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotDetailsCommentContentTextColor: UIColor {
+        return .grayColor()
+    }
+    
+    var shotDetailsDescriptionViewColorTextColor: UIColor {
+        return .grayColor()
+    }
+    
+    var shotDetailsCommentAuthorTextColor: UIColor {
+        return .textDarkColor()
+    }
+    
+    var shotDetailsCommentLikesCountTextColor: UIColor {
+        return .followeeTextGrayColor()
+    }
+    
+    var shotDetailsCommentDateTextColor: UIColor {
+        return .followeeTextGrayColor()
+    }
+    
+    var shotDetailsCommentLinkTextColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotDetailsCommentEditLabelTextColor: UIColor {
+        return .followeeTextGrayColor()
+    }
+    
+    var shotDetailsBucketTextColor: UIColor {
+        return .RGBA(87, 98, 103, 1)
+    }
+    
+    // MARK: Settings
+    
+    var settingsUsernameTextColor: UIColor {
+        return .textDarkColor()
+    }
+    
+    var settingsCellTextColor: UIColor {
+        return .blackColor()
     }
 }

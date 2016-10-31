@@ -26,6 +26,8 @@ extension UIColor {
                      alpha: alpha)
     }
 
+    // MARK: Day Mode
+    
     /// Returns brand pink color.
     class func pinkColor() -> UIColor {
         return pinkColor(alpha: 1)
@@ -73,6 +75,23 @@ extension UIColor {
     /// Returns brand gray color used for separator in shot details.
     class func separatorGrayColor() -> UIColor {
         return RGBA(218, 219, 221, 1)
+    }
+    
+    /// Returns default white color.
+    class func defaultWhiteColor() -> UIColor {
+         return RGBA(249, 212, 226, 1)
+    }
+    
+    // MARK: Night Mode
+    
+    /// Returns brand text gray color used in followee cell in night mode.
+    class func followeeTextGrayNightModeColor() -> UIColor {
+        return RGBA(164, 180, 188, 1)
+    }
+    
+    /// Returns brand gray color used in various situations in night mode.
+    class func grayNightModeColor() -> UIColor {
+        return RGBA(223, 224, 226, 1)
     }
 
     /// Returns random color.

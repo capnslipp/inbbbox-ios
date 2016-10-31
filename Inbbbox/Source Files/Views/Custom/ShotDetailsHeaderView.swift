@@ -57,6 +57,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
 
         titleLabel.backgroundColor = .clearColor()
         titleLabel.numberOfLines = 0
+        titleLabel.textColor = ColorModeProvider.current().shotDetailsHeaderViewTitleLabelTextColor
         addSubview(titleLabel)
 
         imageViewCenterWrapperView.clipsToBounds = true
@@ -155,7 +156,9 @@ class ShotDetailsHeaderView: UICollectionReusableView {
 
             let mutableTitle = NSMutableAttributedString(attributedString: title)
             let range = NSRange(location: 0, length: title.length)
-            mutableTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: range)
+            mutableTitle.addAttribute(NSForegroundColorAttributeName,
+                                      value: ColorModeProvider.current().shotDetailsHeaderViewOverLapingTitleLabelTextColor,
+                                      range: range)
 
             return mutableTitle.copy() as? NSAttributedString
         }()

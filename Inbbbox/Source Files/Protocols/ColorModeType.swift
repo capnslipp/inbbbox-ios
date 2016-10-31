@@ -12,6 +12,8 @@ protocol ColorModeType {
 
     // MARK: UITabBar
     var tabBarTint: UIColor { get }
+    var tabBarNormalItemTextColor: UIColor { get }
+    var tabBarSelectedItemTextColor: UIColor { get }
 
     // MARK: UINavigationBar
     var navigationBarTint: UIColor { get }
@@ -37,12 +39,29 @@ protocol ColorModeType {
     var shotDetailsOperationViewBackground: UIColor { get }
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor { get }
     var shotDetailsCommentCollectionViewCellBackground: UIColor { get }
+    var shotDetailsHeaderViewTitleLabelTextColor: UIColor { get }
+    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor { get }
+    var shotDetailsHeaderViewAuthorNotLinkColor: UIColor { get }
+    var shotDetailsHeaderViewAuthorLinkColor: UIColor { get }
+    var shotDetailsDescriptionViewColorTextColor: UIColor { get }
+    var shotDetailsCommentAuthorTextColor: UIColor { get }
+    var shotDetailsCommentContentTextColor: UIColor { get }
+    var shotDetailsCommentLikesCountTextColor: UIColor { get }
+    var shotDetailsCommentDateTextColor: UIColor { get }
+    var shotDetailsCommentLinkTextColor: UIColor { get }
+    var shotDetailsCommentEditLabelTextColor: UIColor { get }
+    var shotDetailsBucketTextColor: UIColor { get }
+    
+    // MARK: Settings
+    var settingsUsernameTextColor: UIColor { get }
+    var settingsCellTextColor: UIColor { get }
 
     /// ProfileHeaderView.
     var profileHeaderViewBackground: UIColor { get }
 
     // MARK: TwoLayoutCollectionViewController
     var twoLayoutsCollectionViewBackground: UIColor { get }
+    
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
