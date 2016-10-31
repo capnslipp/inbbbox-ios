@@ -184,11 +184,11 @@ private extension CenterButtonTabBarController {
             selectedImage: selectedImage
         )
         tabBarItem.setTitleTextAttributes(
-            [NSForegroundColorAttributeName: UIColor.pinkColor()],
+            [NSForegroundColorAttributeName: ColorModeProvider.current().tabBarSelectedItemTextColor],
             forState: .Selected
         )
         tabBarItem.setTitleTextAttributes(
-            [NSForegroundColorAttributeName: UIColor.tabBarGrayColor()],
+            [NSForegroundColorAttributeName: ColorModeProvider.current().tabBarNormalItemTextColor],
             forState: .Normal
         )
         return tabBarItem

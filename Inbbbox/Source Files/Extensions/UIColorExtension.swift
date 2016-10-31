@@ -82,11 +82,6 @@ extension UIColor {
          return RGBA(249, 212, 226, 1)
     }
     
-    /// Returns gray for bucket name label.
-    class func bucketGray() -> UIColor {
-         return RGBA(87, 98, 103, 1)
-    }
-    
     // MARK: Night Mode
     
     /// Returns brand text gray color used in followee cell in night mode.
@@ -94,6 +89,10 @@ extension UIColor {
         return RGBA(164, 180, 188, 1)
     }
     
+    /// Returns brand text gray color used in followee cell in night mode.
+    class func grayNightModeColor() -> UIColor {
+        return RGBA(223, 224, 226, 1)
+    }
 
     /// Returns random color.
     class func randomColor() -> UIColor {

@@ -13,6 +13,14 @@ struct NightMode: ColorModeType {
     var tabBarTint: UIColor {
         return .blackColor()
     }
+    
+    var tabBarNormalItemTextColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var tabBarSelectedItemTextColor: UIColor {
+        return .pinkColor()
+    }
 
     var navigationBarTint: UIColor {
         return .blackColor()
@@ -85,7 +93,7 @@ struct NightMode: ColorModeType {
     }
     
     var shotDetailsHeaderViewAuthorNotLinkColor: UIColor {
-        return .whiteColor()
+        return .grayNightModeColor()
     }
     
     var shotDetailsHeaderViewAuthorLinkColor: UIColor {
@@ -93,11 +101,15 @@ struct NightMode: ColorModeType {
     }
 
     var shotDetailsDescriptionViewColorTextColor: UIColor {
-        return .RGBA(223, 224, 226, 1)
+        return .grayNightModeColor()
     }
     
     var shotDetailsCommentAuthorTextColor: UIColor {
-        return .whiteColor()
+        return .grayNightModeColor()
+    }
+    
+    var shotDetailsCommentContentTextColor: UIColor {
+        return .grayColor()
     }
     
     var shotDetailsCommentLikesCountTextColor: UIColor {
@@ -114,6 +126,10 @@ struct NightMode: ColorModeType {
     
     var shotDetailsCommentEditLabelTextColor: UIColor {
         return .followeeTextGrayNightModeColor()
+    }
+    
+    var shotDetailsBucketTextColor: UIColor {
+        return .whiteColor()
     }
     
     // MARK: Settings

@@ -31,7 +31,7 @@ class ShotBucketsAddCollectionViewCell: UICollectionViewCell {
 
         bucketNameLabel.configureForAutoLayout()
         bucketNameLabel.numberOfLines = 0
-        bucketNameLabel.textColor = UIColor.bucketGray()
+        bucketNameLabel.textColor = ColorModeProvider.current().shotDetailsBucketTextColor
         bucketNameLabel.font = UIFont.helveticaFont(.Neue, size: 17)
         contentView.addSubview(bucketNameLabel)
 

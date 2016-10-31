@@ -76,7 +76,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         commentLabel.numberOfLines = 0
         commentLabel.lineBreakMode = .ByWordWrapping
         commentLabel.userInteractionEnabled = true
-        commentLabel.linkAttributes = [NSForegroundColorAttributeName : ColorModeProvider.current().shotDetailsCommentLinkTextColor] //COLOR FIX
+        commentLabel.linkAttributes = [NSForegroundColorAttributeName : ColorModeProvider.current().shotDetailsCommentLinkTextColor]
         commentLabel.delegate = self
         contentView.addSubview(commentLabel)
 

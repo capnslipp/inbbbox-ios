@@ -12,6 +12,8 @@ protocol ColorModeType {
 
     // MARK: UITabBar
     var tabBarTint: UIColor { get }
+    var tabBarNormalItemTextColor: UIColor { get }
+    var tabBarSelectedItemTextColor: UIColor { get }
 
     // MARK: UINavigationBar
     var navigationBarTint: UIColor { get }
@@ -43,10 +45,12 @@ protocol ColorModeType {
     var shotDetailsHeaderViewAuthorLinkColor: UIColor { get }
     var shotDetailsDescriptionViewColorTextColor: UIColor { get }
     var shotDetailsCommentAuthorTextColor: UIColor { get }
+    var shotDetailsCommentContentTextColor: UIColor { get }
     var shotDetailsCommentLikesCountTextColor: UIColor { get }
     var shotDetailsCommentDateTextColor: UIColor { get }
     var shotDetailsCommentLinkTextColor: UIColor { get }
     var shotDetailsCommentEditLabelTextColor: UIColor { get }
+    var shotDetailsBucketTextColor: UIColor { get }
     
     // MARK: Settings
     var settingsUsernameTextColor: UIColor { get }

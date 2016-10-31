@@ -13,6 +13,14 @@ struct DayMode: ColorModeType {
     var tabBarTint: UIColor {
         return .whiteColor()
     }
+    
+    var tabBarNormalItemTextColor: UIColor {
+        return .tabBarGrayColor()
+    }
+    
+    var tabBarSelectedItemTextColor: UIColor {
+        return .pinkColor()
+    }
 
     var navigationBarTint: UIColor {
         return .pinkColor()
@@ -92,6 +100,10 @@ struct DayMode: ColorModeType {
         return .pinkColor()
     }
     
+    var shotDetailsCommentContentTextColor: UIColor {
+        return .grayColor()
+    }
+    
     var shotDetailsDescriptionViewColorTextColor: UIColor {
         return .grayColor()
     }
@@ -114,6 +126,10 @@ struct DayMode: ColorModeType {
     
     var shotDetailsCommentEditLabelTextColor: UIColor {
         return .followeeTextGrayColor()
+    }
+    
+    var shotDetailsBucketTextColor: UIColor {
+        return .RGBA(87, 98, 103, 1)
     }
     
     // MARK: Settings
