@@ -118,6 +118,7 @@ private extension ShotsOnboardingStateHandler {
         let cell = collectionView.dequeueReusableClass(ShotCollectionViewCell.self,
                 forIndexPath: indexPath, type: .Cell)
         cell.shotImageView.loadShotImageFromURL(shot.shotImage.normalURL)
+        cell.displayAuthor(Settings.Customization.ShowAuthor, animated: false)
         cell.gifLabel.hidden = !shot.animated
         return cell
     }
