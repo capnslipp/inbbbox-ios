@@ -89,7 +89,7 @@ extension UIColor {
         return RGBA(164, 180, 188, 1)
     }
     
-    /// Returns brand text gray color used in followee cell in night mode.
+    /// Returns brand gray color used in various situations in night mode.
     class func grayNightModeColor() -> UIColor {
         return RGBA(223, 224, 226, 1)
     }
