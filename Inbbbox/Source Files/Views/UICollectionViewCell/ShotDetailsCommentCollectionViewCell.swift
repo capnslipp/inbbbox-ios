@@ -76,7 +76,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         commentLabel.numberOfLines = 0
         commentLabel.lineBreakMode = .ByWordWrapping
         commentLabel.userInteractionEnabled = true
-        commentLabel.linkAttributes = [NSForegroundColorAttributeName : UIColor.pinkColor()]
+        commentLabel.linkAttributes = [NSForegroundColorAttributeName : ColorModeProvider.current().shotDetailsCommentLinkTextColor] //COLOR FIX
         commentLabel.delegate = self
         contentView.addSubview(commentLabel)
 
@@ -84,7 +84,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(dateLabel)
 
         likesCountLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        likesCountLabel.textColor = .followeeTextGrayColor()
+        likesCountLabel.textColor = ColorModeProvider.current().shotDetailsCommentLikesCountTextColor
 
         contentView.addSubview(likesImageView)
         contentView.addSubview(likesCountLabel)
@@ -209,7 +209,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
     func setLinkInAuthorLabel(URL: NSURL, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
-                NSForegroundColorAttributeName: UIColor.textDarkColor(),
+                NSForegroundColorAttributeName: ColorModeProvider.current().shotDetailsCommentAuthorTextColor,
                 NSFontAttributeName: UIFont.helveticaFont(.NeueMedium, size: 16)
         ]
         let authorText = authorLabel.text ?? ""

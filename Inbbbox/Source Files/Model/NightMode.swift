@@ -73,4 +73,44 @@ struct NightMode: ColorModeType {
     var twoLayoutsCollectionViewBackground: UIColor {
         return .blackColor()
     }
+    
+    var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var shotDetailsHeaderViewAuthorNotLinkColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var shotDetailsHeaderViewAuthorLinkColor: UIColor {
+        return .pinkColor()
+    }
+
+    var shotDetailsDescriptionViewColorTextColor: UIColor {
+        return .RGBA(223, 224, 226, 1)
+    }
+    
+    var shotDetailsCommentAuthorTextColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var shotDetailsCommentLikesCountTextColor: UIColor {
+        return .followeeTextGrayNightModeColor()
+    }
+    
+    var shotDetailsCommentDateTextColor: UIColor {
+        return .followeeTextGrayNightModeColor()
+    }
+    
+    var shotDetailsCommentLinkTextColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotDetailsCommentEditLabelTextColor: UIColor {
+        return .followeeTextGrayNightModeColor()
+    }
 }

@@ -168,26 +168,23 @@ class CommentEditView: UIView {
 
     private func setupCancelLabel() {
         cancelLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        cancelLabel.textColor = UIColor.textLightColor()
+        cancelLabel.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
         cancelLabel.text = NSLocalizedString("CommentEditView.Cancel", comment: "Cancel editing comment.")
-        cancelLabel.textColor = .followeeTextGrayColor()
         blurView.addSubview(cancelLabel)
     }
 
     private func setupDeleteLabel() {
         deleteLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        deleteLabel.textColor = UIColor.textLightColor()
+        deleteLabel.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
         deleteLabel.text = deleteLabelText
-        deleteLabel.textColor = .followeeTextGrayColor()
         blurView.addSubview(deleteLabel)
     }
 
     private func setupLikeLabel() {
         likeLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        likeLabel.textColor = UIColor.textLightColor()
+        likeLabel.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
         likeLabel.text = NSLocalizedString("CommentEditView.Like",
                                            comment: "Mark selected comment as liked.")
-        likeLabel.textColor = .followeeTextGrayColor()
         blurView.addSubview(likeLabel)
     }
 }

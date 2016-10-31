@@ -37,12 +37,23 @@ protocol ColorModeType {
     var shotDetailsOperationViewBackground: UIColor { get }
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor { get }
     var shotDetailsCommentCollectionViewCellBackground: UIColor { get }
+    var shotDetailsHeaderViewTitleLabelTextColor: UIColor { get }
+    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor { get }
+    var shotDetailsHeaderViewAuthorNotLinkColor: UIColor { get }
+    var shotDetailsHeaderViewAuthorLinkColor: UIColor { get }
+    var shotDetailsDescriptionViewColorTextColor: UIColor { get }
+    var shotDetailsCommentAuthorTextColor: UIColor { get }
+    var shotDetailsCommentLikesCountTextColor: UIColor { get }
+    var shotDetailsCommentDateTextColor: UIColor { get }
+    var shotDetailsCommentLinkTextColor: UIColor { get }
+    var shotDetailsCommentEditLabelTextColor: UIColor { get }
 
     /// ProfileHeaderView.
     var profileHeaderViewBackground: UIColor { get }
 
     // MARK: TwoLayoutCollectionViewController
     var twoLayoutsCollectionViewBackground: UIColor { get }
+    
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {

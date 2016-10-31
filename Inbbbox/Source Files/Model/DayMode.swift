@@ -73,4 +73,44 @@ struct DayMode: ColorModeType {
     var twoLayoutsCollectionViewBackground: UIColor {
         return .backgroundGrayColor()
     }
+    
+    var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
+        return .blackColor()
+    }
+    
+    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotDetailsHeaderViewAuthorNotLinkColor: UIColor {
+        return .grayColor()
+    }
+    
+    var shotDetailsHeaderViewAuthorLinkColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotDetailsDescriptionViewColorTextColor: UIColor {
+        return .grayColor()
+    }
+    
+    var shotDetailsCommentAuthorTextColor: UIColor {
+        return .textDarkColor()
+    }
+    
+    var shotDetailsCommentLikesCountTextColor: UIColor {
+        return .followeeTextGrayColor()
+    }
+    
+    var shotDetailsCommentDateTextColor: UIColor {
+        return .followeeTextGrayColor()
+    }
+    
+    var shotDetailsCommentLinkTextColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotDetailsCommentEditLabelTextColor: UIColor {
+        return .followeeTextGrayColor()
+    }
 }
