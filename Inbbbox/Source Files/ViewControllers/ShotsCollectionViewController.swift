@@ -294,6 +294,8 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
 private extension ShotsCollectionViewController {
     
     func setupStreamSourcesAnimators() {
+        // Invisible button on top of collection view is used to not block touch events 
+        // on collection view and simplify dealing with clicking on logo 
         let invisibleButton = UIButton()
         invisibleButton.addTarget(self, action: #selector(logoTapped), forControlEvents: .TouchUpInside)
         view.addSubview(invisibleButton)
