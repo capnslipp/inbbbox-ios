@@ -14,6 +14,7 @@ class ShotsCollectionViewController: UICollectionViewController {
 
     let initialState: State = Defaults[.onboardingPassed] ? .InitialAnimations : .Onboarding
     var stateHandler: ShotsStateHandler
+    var backgroundAnimator: MainScreenStreamSourcesAnimator?
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
@@ -55,13 +56,17 @@ extension ShotsCollectionViewController {
             collectionView?.prefetchDataSource = self
         }
         #endif
-        collectionView?.backgroundView = ShotsCollectionBackgroundView()
+        let backgroundView = ShotsCollectionBackgroundView()
+        collectionView?.backgroundView = backgroundView
+        backgroundAnimator = MainScreenStreamSourcesAnimator(view: backgroundView)
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
 
         configureForCurrentStateHandler()
         registerToSettingsNotifications()
+        setupStreamSourcesAnimators()
     }
-
+    
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         stateHandler.prepareForPresentingData()
@@ -74,6 +79,12 @@ extension ShotsCollectionViewController {
 
         AnalyticsManager.trackScreen(.ShotsView)
 
+        if(onceTokenForInitialShotsAnimation != 0) {
+            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+                self?.showStreamSources()
+            }
+        }
         dispatch_once(&onceTokenForInitialShotsAnimation) {
             firstly {
                 self.refreshShotsData()
@@ -84,6 +95,11 @@ extension ShotsCollectionViewController {
                 self.tabBarController?.presentViewController(alertController, animated: true, completion: nil)
             }
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideStreamSources()
     }
     
     private func handleEmptyShotsView() {
@@ -271,4 +287,41 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
             normalStateHandler.popViewController(viewControllerToCommit)
         }
     }
+}
+
+// MARK: Stream sources animations
+
+private extension ShotsCollectionViewController {
+    
+    func setupStreamSourcesAnimators() {
+        let invisibleButton = UIButton()
+        invisibleButton.addTarget(self, action: #selector(logoTapped), forControlEvents: .TouchUpInside)
+        view.addSubview(invisibleButton)
+        invisibleButton.autoPinEdgeToSuperviewEdge(.Top, withInset: ShotsCollectionBackgroundViewSpacing.logoDefaultVerticalInset)
+        invisibleButton.autoSetDimension(.Height, toSize: ShotsCollectionBackgroundViewSpacing.logoHeight)
+        invisibleButton.autoPinEdgeToSuperviewEdge(.Left)
+        invisibleButton.autoPinEdgeToSuperviewEdge(.Right)
+        
+    }
+    
+    func showStreamSources() {
+        backgroundAnimator?.startFadeInAnimation()
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
+            self?.backgroundAnimator?.startFadeOutAnimation()
+        }
+    }
+    
+    func hideStreamSources() {
+        backgroundAnimator?.startFadeOutAnimation()
+    }
+    
+    @objc func logoTapped() {
+        if let condition = backgroundAnimator?.areStreamSourcesShown where condition == true {
+            hideStreamSources()
+        } else {
+            showStreamSources()
+        }
+    }
+
 }
