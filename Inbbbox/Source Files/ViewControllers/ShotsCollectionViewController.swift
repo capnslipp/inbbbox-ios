@@ -17,6 +17,7 @@ class ShotsCollectionViewController: UICollectionViewController {
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
+    private var emptyShotsView: UIView?
 
     // MARK: Life cycle
 
@@ -65,6 +66,7 @@ extension ShotsCollectionViewController {
         super.viewWillAppear(animated)
         stateHandler.prepareForPresentingData()
         stateHandler.collectionViewLayout.prepareLayout()
+        handleEmptyShotsView()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -81,6 +83,18 @@ extension ShotsCollectionViewController {
                 let alertController = UIAlertController.willSignOutUser()
                 self.tabBarController?.presentViewController(alertController, animated: true, completion: nil)
             }
+        }
+    }
+    
+    private func handleEmptyShotsView() {
+        if (stateHandler.shouldShowNoShotsView) {
+            let empty = EmptyShotsCollectionView()
+            view.addSubview(empty)
+            empty.autoPinEdgesToSuperviewEdges()
+            emptyShotsView = empty
+        } else if let emptyShotsView = emptyShotsView {
+            emptyShotsView.removeFromSuperview()
+            self.emptyShotsView = nil
         }
     }
 }
@@ -199,6 +213,7 @@ private extension ShotsCollectionViewController {
             normalStateHandler.didAddShotToBucketCompletionHandler = {
                 centerButtonTabBarController.animateTabBarItem(.Buckets)
             }
+            normalStateHandler.willDismissDetailsCompletionHandler = scrollToShotAtIndex
         }
     }
 
@@ -228,6 +243,10 @@ private extension ShotsCollectionViewController {
             }.then(fulfill).error(reject)
         }
     }
+    
+    private func scrollToShotAtIndex(index: Int) {
+        collectionView?.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredVertically, animated: true)
+    }
 }
 
 // MARK: UIViewControllerPreviewingDelegate
@@ -244,7 +263,7 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
         
         previewingContext.sourceRect = visibleCell.contentView.bounds
         
-        return normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath)
+        return normalStateHandler.getShotDetailsViewController(atIndexPath: indexPath)
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {

@@ -260,6 +260,9 @@
 /* Dismiss error alert. */
 "ShotsCollectionViewController.Dismiss" = "Feche";
 
+/* Error shown when no stream sources were selected. */
+"ShotsCollectionViewController.NoShotsErrorLabel" = "$Select at least 1 \nstream source \nin the settings";
+
 /********** ProfileHeaderView *********/
 
 /* Allows user to follow another user. */
