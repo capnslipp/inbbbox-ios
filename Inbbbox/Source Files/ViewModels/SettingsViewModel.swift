@@ -19,7 +19,7 @@ protocol AlertDisplayable: class {
 }
 
 protocol FlashMessageDisplayable:class {
-    func displayFlashMessage(message:FlashMessageViewModel)
+    func displayFlashMessage(model:FlashMessageViewModel)
 }
 
 enum UserMode {
@@ -217,6 +217,7 @@ private extension SettingsViewModel {
     }
     
     func checkStreamsSource() {
+        //NGRTodo: cherry pick Marcin's extension for Settings  
         if (allStreamsOff()) {
             let title = NSLocalizedString("SettingsViewModel.AllSources",
                                           comment: "Title of flash message, when user turn off all sources")

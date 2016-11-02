@@ -10,7 +10,6 @@ import UIKit
 import PromiseKit
 import AOAlertController
 import SafariServices
-import SWMessages
 
 class SettingsViewController: UITableViewController {
 
@@ -73,18 +72,8 @@ extension SettingsViewController: AlertDisplayable {
 }
 
 extension SettingsViewController: FlashMessageDisplayable {
-    func displayFlashMessage(message:FlashMessageViewModel) {
-        SWMessage.sharedInstance.showNotificationInViewController(self,
-              title: message.title,
-              subtitle: nil,
-              image: nil,
-              type: .Message,
-              duration: .Automatic,
-              callback: nil,
-              buttonTitle: nil,
-              buttonCallback: nil,
-              atPosition: .Top,
-              canBeDismissedByUser: false)
+    func displayFlashMessage(model:FlashMessageViewModel) {
+        FlashMessage.sharedInstance.showNotification(inViewController:self, title: model.title)
     }
 }
 

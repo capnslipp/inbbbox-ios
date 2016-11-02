@@ -8,7 +8,6 @@
 import UIKit
 import CoreData
 import Haneke
-import SWMessages
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -191,22 +190,9 @@ extension AppDelegate {
 
 extension AppDelegate {
     func setupFlashMessageStyle(){
-        SWMessageView.styleForMessageType = { type in
-            switch type {
-            default:
-                return SWMessageView.Style(
-                    image: nil,
-                    backgroundColor: UIColor.flashMessageBackgroundColor(),
-                    textColor: UIColor.whiteColor(),
-                    textShadowColor: nil,
-                    titleFont: UIFont.helveticaFont(.Neue,size:14),
-                    contentFont: UIFont.helveticaFont(.Neue,size:12),
-                    shadowOffset: nil,
-                    roundedCorners: [.BottomLeft,.BottomRight],
-                    roundSize: CGSizeMake(10, 10),
-                    padding: 25.0
-                )
-            }
-        }
+        FlashMessageView.defaultStyle = FlashMessageView.Style(backgroundColor: UIColor.flashMessageBackgroundColor(),
+                                                               textColor: UIColor.whiteColor(),
+                                                               titleFont: UIFont.helveticaFont(.Neue,size:14),
+                                                               roundedCorners: [.BottomLeft, .BottomRight], roundSize: CGSizeMake(10, 10), padding: 25.0)
     }
 }
