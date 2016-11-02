@@ -35,11 +35,18 @@ class FlashMessage: NSObject {
     private(set) var notificationActive = false
     
     private var messages = [FlashMessageView]()
+
+    ///  The currently queued array of FlashMessageView
+    private var  queuedMessages: [FlashMessageView] {
+        return messages
+    }
     private weak var _defaultViewController :UIViewController?
     
     override init() {
         super.init()
     }
+    
+    // MARK: Lifecycle
     
     /// Shows a notification message in a specific view controller
     ///
@@ -54,9 +61,9 @@ class FlashMessage: NSObject {
                                            title: String,
                                            duration: FlashMessageDuration = .Automatic,
                                            atPosition messagePosition: FlashMessageNotificationPosition = .Top,
-                                                      overrideStyle: FlashMessageView.Style? = nil,
-                                                      canBeDismissedByUser dismissingEnabled: Bool = true,
-                                                                           callback: (() -> Void)? = nil) {
+                                           overrideStyle: FlashMessageView.Style? = nil,
+                                           canBeDismissedByUser dismissingEnabled: Bool = true,
+                                           callback: (() -> Void)? = nil) {
         
         let messageView  = FlashMessageView(
             viewController: viewController ?? defaultViewController,
@@ -75,24 +82,18 @@ class FlashMessage: NSObject {
         
         messages.append(messageView)
         
-        
         if !notificationActive {
             fadeInCurrentNotification()
         }
     }
     
-    /**
-     
-     Fades out the currently displayed notification. If another notification is in the queue,
-     the next one will be displayed automatically
-     
-     - Returns: true if the currently displayed notification was successfully dismissed. NO if no notification
-     was currently displayed.
-     */
+    /// Fades out the currently displayed notification. If another notification is in the queue,
+    /// the next one will be displayed automatically
+    ///
+    /// - Returns: true if the currently displayed notification was successfully dismissed. NO if no notification was currently displayed.
     func dismissActiveNotification() -> Bool {
         return dismissActiveNotificationWithCompletion(nil)
     }
-    
     
     func dismissActiveNotificationWithCompletion(completion: (() -> Void)?) -> Bool {
         if messages.count == 0 {
@@ -116,10 +117,7 @@ class FlashMessage: NSObject {
         return true
     }
     
-    ///  The currently queued array of FlashMessageView
-    var  queuedMessages: [FlashMessageView] {
-        return messages
-    }
+    // MARK: Animation
     
     private func fadeInCurrentNotification() {
         if messages.count == 0 {
@@ -139,9 +137,9 @@ class FlashMessage: NSObject {
             let currentNavigationController = currentView.viewController as? UINavigationController ?? currentView.viewController.parentViewController as! UINavigationController
             var isViewIsUnderStatusBar: Bool = (currentNavigationController.childViewControllers[0].edgesForExtendedLayout == .All)
             if !isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil {
-                isViewIsUnderStatusBar = !FlashMessage.isNavigationBarInNavigationControllerHidden(currentNavigationController)
+                isViewIsUnderStatusBar = !currentNavigationController.navigationBarHidden || !currentNavigationController.navigationBar.hidden
             }
-            if !FlashMessage.isNavigationBarInNavigationControllerHidden(currentNavigationController) && currentView.messagePosition != .NavBarOverlay {
+            if !(currentNavigationController.navigationBarHidden || currentNavigationController.navigationBar.hidden) && currentView.messagePosition != .NavBarOverlay {
                 currentNavigationController.view!.insertSubview(currentView, belowSubview: currentNavigationController.navigationBar)
                 verticalOffset = currentNavigationController.navigationBar.bounds.size.height
                 if isViewIsUnderStatusBar {
@@ -199,23 +197,13 @@ class FlashMessage: NSObject {
         }
     }
     
-    class func isNavigationBarInNavigationControllerHidden(navController: UINavigationController) -> Bool {
-        if navController.navigationBarHidden {
-            return true
-        }
-        else if navController.navigationBar.hidden {
-            return true
-        }
-        else {
-            return false
-        }
-    }
-    
-    func fadeOutNotification(currentView: FlashMessageView) {
+    @objc
+    private func fadeOutNotification(currentView: FlashMessageView) {
         fadeOutNotification(currentView, animationFinishedBlock: nil)
     }
     
-    func fadeOutNotification(currentView: FlashMessageView, animationFinishedBlock animationFinished: (() -> Void)?) {
+    @objc
+    private func fadeOutNotification(currentView: FlashMessageView, animationFinishedBlock animationFinished: (() -> Void)?) {
         currentView.messageIsFullyDisplayed = false
         NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: #selector(FlashMessage.fadeOutNotification(_:)), object: currentView)
         var fadeOutToPoint: CGPoint
