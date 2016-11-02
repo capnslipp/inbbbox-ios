@@ -218,16 +218,11 @@ private extension SettingsViewModel {
     
     func checkStreamsSource() {
         //NGRTodo: cherry pick Marcin's extension for Settings  
-        if (allStreamsOff()) {
+        if (Settings.areAllStreamSourcesOff()) {
             let title = NSLocalizedString("SettingsViewModel.AllSources",
                                           comment: "Title of flash message, when user turn off all sources")
             flashMessageDelegate?.displayFlashMessage(FlashMessageViewModel(title: title))
         }
-    }
-    
-    func allStreamsOff() -> Bool{
-        return !Settings.StreamSource.Following && !Settings.StreamSource.NewToday && !Settings.StreamSource.PopularToday &&
-            !Settings.StreamSource.Debuts
     }
 
     func registerUserNotificationSettings() {
