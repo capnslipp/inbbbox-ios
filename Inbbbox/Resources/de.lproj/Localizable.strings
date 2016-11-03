@@ -229,6 +229,9 @@
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Zeige den Autoren auf dem Hauptbildschirm an";
 
+/* Title of flash message, when user turn off all sources */
+"SettingsViewModel.AllSources" = "Placeholder for information about sources";
+
 /********* SettingsViewController *********/
 
 /* Title of group of buttons for stream source settings */
