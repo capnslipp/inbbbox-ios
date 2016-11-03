@@ -12,14 +12,29 @@ final class FlashMessageView: UIView {
     
     private let defaultPadding:CGFloat = 15.0
     
+    /// Struct for styling message
     struct Style {
+        /// background color of message view
         let backgroundColor: UIColor
+        /// text color of title in message view
         let textColor: UIColor
+        /// font used for title in messsage view
         let titleFont: UIFont?
+        /// array of corners that will be rounded, by default is nil
         let roundedCorners: UIRectCorner?
+        /// vartical and horizontal size for rouded corners
         let roundSize: CGSize?
+        /// padding for title in message view, by default is 15.0
         let padding: CGFloat
         
+        /// Initializer for sytle with default values for majority of parameters
+        ///
+        /// - parameter background:         background color of message view
+        /// - parameter textColor:          text color of title in message view
+        /// - parameter titleFont:          font used for title in messsage view
+        /// - parameter roundedCorners:     array of corners that will be rounded, by default is nil
+        /// - parameter roundSize:          vartical and horizontal size for rouded corners
+        /// - parameter padding:            padding for title in message view, by default is 15.0
         init (backgroundColor: UIColor, textColor: UIColor, titleFont: UIFont? = nil, roundedCorners: UIRectCorner? = nil, roundSize: CGSize? = nil, padding: CGFloat = 15.0){
             self.backgroundColor = backgroundColor
             self.textColor = textColor
@@ -55,6 +70,7 @@ final class FlashMessageView: UIView {
         )
     }()
     
+    /// Method called when user use gesture to dissmis message by himself
     var fadeOut: (() -> Void)?
     
     private let titleLabel = UILabel()
@@ -216,7 +232,6 @@ final class FlashMessageView: UIView {
         return currentHeight
     }
     
-    /// Method called when user use gesture to dissmis message by himself
     @objc private func fadeMeOut() {
         fadeOut?()
     }

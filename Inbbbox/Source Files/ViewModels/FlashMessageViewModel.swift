@@ -7,7 +7,10 @@
 //
 
 struct FlashMessageViewModel {
+    /// title for message
     let title: String
+    
+    /// amount of time with which message will be displayed
     let duration: FlashMessageDuration
     
     /// Initializer of FlashMessageViewModel
