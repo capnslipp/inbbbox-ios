@@ -84,7 +84,7 @@ extension SettingsViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return viewModel.sectionsCount()
     }
- 
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel[section].count
     }

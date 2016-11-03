@@ -28,9 +28,9 @@ final class FlashMessage {
         }
     }
     
-    private let DisplayTime = 1.5
-    private let ExtraDisplayTimePerPixel = 0.04
-    private let AnimationDuration = 0.3
+    private let displayTime = 1.5
+    private let extraDisplayTimePerPixel = 0.04
+    private let animationDuration = 0.3
     
     /// Indicates whether a notification is currently active.
     private(set) var notificationActive = false
@@ -38,7 +38,7 @@ final class FlashMessage {
     private var messages = [FlashMessageView]()
 
     ///  The currently queued array of FlashMessageView
-    private var  queuedMessages: [FlashMessageView] {
+    private var queuedMessages: [FlashMessageView] {
         return messages
     }
     private weak var _defaultViewController :UIViewController?
@@ -63,7 +63,8 @@ final class FlashMessage {
             position: messagePosition,
             style: overrideStyle,
             dismissingEnabled: dismissingEnabled,
-            callback: callback)
+            callback: callback
+        )
         
         messageView.fadeOut = { [weak messageView, weak self] in
             if let messageView = messageView {
@@ -98,7 +99,7 @@ final class FlashMessage {
                 self.fadeOutNotification(currentMessage, animationFinishedBlock: completion)
             } else {
                 
-                NSTimer.scheduledTimerWithTimeInterval(self.AnimationDuration + 0.1, target: NSBlockOperation(block: {
+                NSTimer.scheduledTimerWithTimeInterval(self.animationDuration + 0.1, target: NSBlockOperation(block: {
                     self.fadeOutNotification(currentMessage, animationFinishedBlock: completion)
                 }), selector: #selector(NSOperation.main), userInfo: nil, repeats: false)
                 
@@ -156,7 +157,7 @@ final class FlashMessage {
     }
     
     private func animateView(view: FlashMessageView, toPoint: CGPoint) {
-        UIView.animateWithDuration(self.AnimationDuration + 0.1, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.CurveEaseInOut, .BeginFromCurrentState, .AllowUserInteraction], animations: {
+        UIView.animateWithDuration(self.animationDuration + 0.1, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.CurveEaseInOut, .BeginFromCurrentState, .AllowUserInteraction], animations: {
             view.center = toPoint
             }, completion: { finished in
                 view.messageIsFullyDisplayed = true
@@ -195,7 +196,7 @@ final class FlashMessage {
         var durationToPresent: NSTimeInterval?
         switch(flashMessageView.duration) {
             case .Automatic:
-                durationToPresent = AnimationDuration + DisplayTime + NSTimeInterval(flashMessageView.frame.size.height) * ExtraDisplayTimePerPixel
+                durationToPresent = animationDuration + displayTime + NSTimeInterval(flashMessageView.frame.size.height) * extraDisplayTimePerPixel
             case .Custom(let timeInterval):
                 durationToPresent = timeInterval
             default:
@@ -232,7 +233,7 @@ final class FlashMessage {
         } else {
             fadeOutToPoint = CGPointMake(flashMessageView.center.x, viewController.view.bounds.size.height + CGRectGetHeight(flashMessageView.frame) / 2.0)
         }
-        UIView.animateWithDuration(AnimationDuration, animations: {
+        UIView.animateWithDuration(animationDuration, animations: {
                 flashMessageView.center = fadeOutToPoint
             }, completion: { finished in
                 flashMessageView.removeFromSuperview()
