@@ -217,7 +217,7 @@ private extension SettingsViewModel {
     }
     
     func checkStreamsSource() {
-        if (Settings.areAllStreamSourcesOff()) {
+        if Settings.areAllStreamSourcesOff() {
             let title = NSLocalizedString("SettingsViewModel.AllSources",
                                           comment: "Title of flash message, when user turn off all sources")
             flashMessageDelegate?.displayFlashMessage(FlashMessageViewModel(title: title))

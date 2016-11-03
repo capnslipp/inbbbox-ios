@@ -94,6 +94,7 @@ final class FlashMessageView: UIView {
         
     }
     
+    @available(*, unavailable, message="Use init(viewController:title:duration:position:style:dismissingEnabled:callback:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -102,7 +103,7 @@ final class FlashMessageView: UIView {
         super.drawRect(rect)
         
         guard let roundedCorners = style.roundedCorners, roundSize = style.roundSize else {
-                return
+            return
         }
         
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundedCorners, cornerRadii: roundSize)
@@ -215,8 +216,8 @@ final class FlashMessageView: UIView {
         return currentHeight
     }
     
-    
-    func fadeMeOut() {
+    /// Method called when user use gesture to dissmis message by himself
+    @objc private func fadeMeOut() {
         fadeOut?()
     }
 }
