@@ -32,16 +32,20 @@ final class MainScreenStreamSourcesAnimator {
         let options = UIViewAnimationOptions.CurveEaseInOut
 
         view.showingYouVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.showingYouDefaultVerticalSpacing
-        UIView.animate(duration: animationDuration, animations: { [unowned self] in
+        
+        UIView.animateWithDuration(animationDuration, delay: 0, options: options, animations: { [unowned self] in
+            
             self.view.showingYouLabel.alpha = 1
             self.view.layoutIfNeeded()
-        })
+        }, completion: nil)
         
         view.logoVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.logoAnimationVerticalInset
-        UIView.animate(duration: 2 * animationDuration, animations: { [unowned self] in
+        UIView.animateWithDuration(2 * animationDuration, delay: 0, options: options, animations: { [unowned self] in
+            
             self.view.logoImageView.alpha = 0
             self.view.layoutIfNeeded()
-        })
+            
+        }, completion: nil)
         let items = view.availableItems()
         for (index, item) in items.enumerate() {
             item.verticalSpacingConstraint?.constant = 0
@@ -65,15 +69,16 @@ final class MainScreenStreamSourcesAnimator {
             return
         }
         isAnimationInProgress = true
+        let options = UIViewAnimationOptions.CurveEaseInOut
         
         view.showingYouVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.showingYouHiddenVerticalSpacing
-        UIView.animateWithDuration(animationDuration, delay: 0.2, options: .CurveLinear, animations:    { [unowned self] in
+        UIView.animateWithDuration(animationDuration, delay: 0.2, options: options, animations:    { [unowned self] in
                 self.view.showingYouLabel.alpha = 0
                 self.view.layoutIfNeeded()
         }, completion: nil)
 
         view.logoVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.logoDefaultVerticalInset
-        UIView.animateWithDuration(2 * animationDuration, delay: 0.1, options: .CurveLinear, animations:{ [unowned self] in
+        UIView.animateWithDuration(2 * animationDuration, delay: 0.1, options: options, animations:{ [unowned self] in
             self.view.logoImageView.alpha = 1
             self.view.layoutIfNeeded()
         }, completion: nil)
@@ -81,7 +86,7 @@ final class MainScreenStreamSourcesAnimator {
         let items = view.availableItems()
         for (index, item) in items.reverse().enumerate() {
             item.verticalSpacingConstraint?.constant = -5
-            UIView.animateWithDuration(animationDuration, delay: Double(index) * 0.1, options: .CurveLinear, animations: {
+            UIView.animateWithDuration(animationDuration, delay: Double(index) * 0.1, options: options, animations: {
                     item.label.alpha = 0
                     item.label.superview?.layoutIfNeeded()
                 }, completion: { [unowned self] _ in
