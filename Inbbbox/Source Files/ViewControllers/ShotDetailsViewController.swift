@@ -15,6 +15,7 @@ import MessageUI
 final class ShotDetailsViewController: UIViewController {
 
     var shouldScrollToMostRecentMessage = false
+    var shotIndex = 0
 
     var shotDetailsView: ShotDetailsView! {
         return view as? ShotDetailsView
@@ -28,6 +29,8 @@ final class ShotDetailsViewController: UIViewController {
     private(set) var operationalCell: ShotDetailsOperationCollectionViewCell?
     private var onceTokenForShouldScrollToMessagesOnOpen = dispatch_once_t(0)
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
+    
+    var willDismissDetailsCompletionHandler: (Int -> Void)?
 
     init(shot: ShotType) {
         self.viewModel = ShotDetailsViewModel(shot: shot)
@@ -331,8 +334,8 @@ extension ShotDetailsViewController {
         presentViewController(navigationController, animated: true, completion: nil)
     }
     
-    func hideBlurViewFor3DTouch(hidden: Bool) {
-        shotDetailsView.hideBlurViewFor3DTouch(hidden)
+    func customizeFor3DTouch(hidden: Bool) {
+        shotDetailsView.customizeFor3DTouch(hidden)
     }
 }
 
@@ -556,6 +559,7 @@ private extension ShotDetailsViewController {
     }
 
     dynamic func closeButtonDidTap(_: UIButton) {
+        willDismissDetailsCompletionHandler?(shotIndex)
         dismissViewControllerAnimated(true, completion: nil)
     }
 }

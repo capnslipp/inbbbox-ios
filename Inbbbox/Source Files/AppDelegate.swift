@@ -39,7 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
         window!.backgroundColor = UIColor.backgroundGrayColor()
-
+        
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().barTintColor = UIColor.pinkColor()
+        UINavigationBar.appearance().barStyle = .Black
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        UINavigationBar.appearance().translucent = false
+        
+        setupFlashMessageStyle()
+        
         configureInitialSettings()
         CacheManager.setupCache()
         ColorModeProvider.setup()
@@ -125,6 +133,7 @@ private extension AppDelegate {
         if !Settings.StreamSource.IsSet {
             Settings.StreamSource.PopularToday = true
             Settings.StreamSource.IsSet = true
+            Settings.Customization.ShowAuthor = true
         }
     }
 }
@@ -178,5 +187,16 @@ extension AppDelegate {
         }
 
         return handled
+    }
+}
+
+// MARK: FlashMessage
+
+extension AppDelegate {
+    private func setupFlashMessageStyle(){
+        FlashMessageView.defaultStyle = FlashMessageView.Style(backgroundColor: UIColor.flashMessageBackgroundColor(),
+                                                               textColor: UIColor.whiteColor(),
+                                                               titleFont: UIFont.helveticaFont(.Neue, size:14),
+                                                               roundedCorners: [.BottomLeft, .BottomRight], roundSize: CGSizeMake(10, 10), padding: 25.0)
     }
 }

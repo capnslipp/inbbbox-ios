@@ -144,3 +144,16 @@ private extension Settings {
         return Defaults[key].string ?? ""
     }
 }
+
+extension Settings {
+    
+    /**
+     Returns information if all stream sources are turned off in Settings
+     */
+    static func areAllStreamSourcesOff() -> Bool {
+        return (!Settings.StreamSource.Following &&
+            !Settings.StreamSource.NewToday &&
+            !Settings.StreamSource.PopularToday &&
+            !Settings.StreamSource.Debuts)
+    }
+}

@@ -14,9 +14,11 @@ class ShotsCollectionViewController: UICollectionViewController {
 
     let initialState: State = Defaults[.onboardingPassed] ? .InitialAnimations : .Onboarding
     var stateHandler: ShotsStateHandler
+    var backgroundAnimator: MainScreenStreamSourcesAnimator?
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
+    private var emptyShotsView: UIView?
 
     // MARK: Life cycle
 
@@ -54,17 +56,22 @@ extension ShotsCollectionViewController {
             collectionView?.prefetchDataSource = self
         }
         #endif
-        collectionView?.backgroundView = ShotsCollectionBackgroundView()
+        let backgroundView = ShotsCollectionBackgroundView()
+        collectionView?.backgroundView = backgroundView
+        backgroundAnimator = MainScreenStreamSourcesAnimator(view: backgroundView)
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
 
         configureForCurrentStateHandler()
         registerToSettingsNotifications()
+        setupStreamSourcesAnimators()
     }
-
+    
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         stateHandler.prepareForPresentingData()
         stateHandler.collectionViewLayout.prepareLayout()
+        handleEmptyShotsView()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -72,6 +79,11 @@ extension ShotsCollectionViewController {
 
         AnalyticsManager.trackScreen(.ShotsView)
 
+        if(onceTokenForInitialShotsAnimation != 0) {
+            AsyncWrapper().main(after: 1) { [unowned self] in
+                self.showStreamSources()
+            }
+        }
         dispatch_once(&onceTokenForInitialShotsAnimation) {
             firstly {
                 self.refreshShotsData()
@@ -81,6 +93,23 @@ extension ShotsCollectionViewController {
                 let alertController = UIAlertController.willSignOutUser()
                 self.tabBarController?.presentViewController(alertController, animated: true, completion: nil)
             }
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        hideStreamSources()
+    }
+    
+    private func handleEmptyShotsView() {
+        if (stateHandler.shouldShowNoShotsView) {
+            let empty = EmptyShotsCollectionView()
+            view.addSubview(empty)
+            empty.autoPinEdgesToSuperviewEdges()
+            emptyShotsView = empty
+        } else if let emptyShotsView = emptyShotsView {
+            emptyShotsView.removeFromSuperview()
+            self.emptyShotsView = nil
         }
     }
 }
@@ -164,6 +193,11 @@ extension ShotsCollectionViewController {
 extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
+        if shotsStateHandler is ShotsInitialAnimationsStateHandler {
+            AsyncWrapper().main(after: 1) { [unowned self] in
+                self.showStreamSources()
+            }
+        }
         if let newState = shotsStateHandler.nextState {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(newState)
             configureForCurrentStateHandler()
@@ -199,6 +233,7 @@ private extension ShotsCollectionViewController {
             normalStateHandler.didAddShotToBucketCompletionHandler = {
                 centerButtonTabBarController.animateTabBarItem(.Buckets)
             }
+            normalStateHandler.willDismissDetailsCompletionHandler = scrollToShotAtIndex
         }
     }
 
@@ -228,6 +263,10 @@ private extension ShotsCollectionViewController {
             }.then(fulfill).error(reject)
         }
     }
+    
+    private func scrollToShotAtIndex(index: Int) {
+        collectionView?.scrollToItemAtIndexPath(NSIndexPath(forItem: index, inSection: 0), atScrollPosition: .CenteredVertically, animated: true)
+    }
 }
 
 // MARK: UIViewControllerPreviewingDelegate
@@ -244,7 +283,7 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
         
         previewingContext.sourceRect = visibleCell.contentView.bounds
         
-        return normalStateHandler.getViewControllerForPreviewing(atIndexPath: indexPath)
+        return normalStateHandler.getShotDetailsViewController(atIndexPath: indexPath)
     }
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
@@ -252,4 +291,42 @@ extension ShotsCollectionViewController: UIViewControllerPreviewingDelegate {
             normalStateHandler.popViewController(viewControllerToCommit)
         }
     }
+}
+
+// MARK: Stream sources animations
+
+private extension ShotsCollectionViewController {
+    
+    func setupStreamSourcesAnimators() {
+        // Invisible button on top of collection view is used to not block touch events 
+        // on collection view and simplify dealing with clicking on logo 
+        let invisibleButton = UIButton()
+        invisibleButton.addTarget(self, action: #selector(logoTapped), forControlEvents: .TouchUpInside)
+        view.addSubview(invisibleButton)
+        invisibleButton.autoPinEdgeToSuperviewEdge(.Top, withInset: ShotsCollectionBackgroundViewSpacing.logoDefaultVerticalInset)
+        invisibleButton.autoSetDimension(.Height, toSize: ShotsCollectionBackgroundViewSpacing.logoHeight)
+        invisibleButton.autoPinEdgeToSuperviewEdge(.Left)
+        invisibleButton.autoPinEdgeToSuperviewEdge(.Right)
+        
+    }
+    
+    func showStreamSources() {
+        backgroundAnimator?.startFadeInAnimation()
+        AsyncWrapper().main(after: 4) { [unowned self] in
+            self.backgroundAnimator?.startFadeOutAnimation()
+        }
+    }
+    
+    func hideStreamSources() {
+        backgroundAnimator?.startFadeOutAnimation()
+    }
+    
+    @objc func logoTapped() {
+        if let condition = backgroundAnimator?.areStreamSourcesShown where condition == true {
+            hideStreamSources()
+        } else {
+            showStreamSources()
+        }
+    }
+
 }

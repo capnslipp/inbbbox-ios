@@ -70,6 +70,12 @@ extension SettingsViewController: AlertDisplayable {
     }
 }
 
+extension SettingsViewController: FlashMessageDisplayable {
+    func displayFlashMessage(model: FlashMessageViewModel) {
+        FlashMessage.sharedInstance.showNotification(inViewController: self, title: model.title, canBeDismissedByUser: true)
+    }
+}
+
 // MARK: UITableViewDataSource
 
 extension SettingsViewController {

@@ -229,6 +229,9 @@
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor en la pantalla de inicio";
 
+/* Title of flash message, when user turn off all sources */
+"SettingsViewModel.AllSources" = "Placeholder for information about sources";
+
 /********* SettingsViewController *********/
 
 /* Title of group of buttons for stream source settings */
@@ -256,6 +259,9 @@
 
 /* Dismiss error alert. */
 "ShotsCollectionViewController.Dismiss" = "Cierra";
+
+/* Error shown when no stream sources were selected. */
+"ShotsCollectionViewController.NoShotsErrorLabel" = "$Select at least 1 \nstream source \nin the settings";
 
 /********** ProfileHeaderView *********/
 
@@ -313,3 +319,7 @@
 "ShotsOnboardingStateHandler.Onboarding-Step1" = "onboarding-step1-es";
 "ShotsOnboardingStateHandler.Onboarding-Step2" = "onboarding-step2-es";
 "ShotsOnboardingStateHandler.Onboarding-Step3" = "onboarding-step3-es";
+
+/********* ShotsCollectionBackgroundView *********/
+
+"BackgroundView.ShowingYou" = "$Showing you:";
