@@ -80,9 +80,9 @@ extension ShotsCollectionViewController {
         AnalyticsManager.trackScreen(.ShotsView)
 
         if(onceTokenForInitialShotsAnimation != 0) {
-            AsyncWrapper().main(after: 1, block: { [unowned self] in
+            AsyncWrapper().main(after: 1) { [unowned self] in
                 self.showStreamSources()
-            })
+            }
         }
         dispatch_once(&onceTokenForInitialShotsAnimation) {
             firstly {
@@ -194,9 +194,9 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
         if shotsStateHandler is ShotsInitialAnimationsStateHandler {
-            AsyncWrapper().main(after: 1, block: { [unowned self] in
+            AsyncWrapper().main(after: 1) { [unowned self] in
                 self.showStreamSources()
-            })
+            }
         }
         if let newState = shotsStateHandler.nextState {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(newState)
