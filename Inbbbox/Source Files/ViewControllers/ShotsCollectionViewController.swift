@@ -80,9 +80,8 @@ extension ShotsCollectionViewController {
         AnalyticsManager.trackScreen(.ShotsView)
 
         if(onceTokenForInitialShotsAnimation != 0) {
-            let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-            dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-                self?.showStreamSources()
+            AsyncWrapper().main(after: 1) { [unowned self] in
+                self.showStreamSources()
             }
         }
         dispatch_once(&onceTokenForInitialShotsAnimation) {
@@ -194,6 +193,11 @@ extension ShotsCollectionViewController {
 extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
+        if shotsStateHandler is ShotsInitialAnimationsStateHandler {
+            AsyncWrapper().main(after: 1) { [unowned self] in
+                self.showStreamSources()
+            }
+        }
         if let newState = shotsStateHandler.nextState {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(newState)
             configureForCurrentStateHandler()
@@ -308,9 +312,8 @@ private extension ShotsCollectionViewController {
     
     func showStreamSources() {
         backgroundAnimator?.startFadeInAnimation()
-        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(4 * Double(NSEC_PER_SEC)))
-        dispatch_after(delayTime, dispatch_get_main_queue()) { [weak self] in
-            self?.backgroundAnimator?.startFadeOutAnimation()
+        AsyncWrapper().main(after: 4) { [unowned self] in
+            self.backgroundAnimator?.startFadeOutAnimation()
         }
     }
     
