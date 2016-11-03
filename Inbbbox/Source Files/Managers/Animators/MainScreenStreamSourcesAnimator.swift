@@ -41,7 +41,7 @@ final class MainScreenStreamSourcesAnimator {
         UIView.animate(duration: 2 * animationDuration, animations: { [unowned self] in
             self.view.logoImageView.alpha = 0
             self.view.layoutIfNeeded()
-            })
+        })
         let items = view.availableItems()
         for (index, item) in items.enumerate() {
             item.verticalSpacingConstraint?.constant = 0
@@ -70,13 +70,13 @@ final class MainScreenStreamSourcesAnimator {
         UIView.animateWithDuration(animationDuration, delay: 0.2, options: .CurveLinear, animations:    { [unowned self] in
                 self.view.showingYouLabel.alpha = 0
                 self.view.layoutIfNeeded()
-            }, completion: nil)
+        }, completion: nil)
 
         view.logoVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.logoDefaultVerticalInset
         UIView.animateWithDuration(2 * animationDuration, delay: 0.1, options: .CurveLinear, animations:{ [unowned self] in
             self.view.logoImageView.alpha = 1
             self.view.layoutIfNeeded()
-            }, completion: nil)
+        }, completion: nil)
         
         let items = view.availableItems()
         for (index, item) in items.reverse().enumerate() {
@@ -89,7 +89,7 @@ final class MainScreenStreamSourcesAnimator {
                         self.areStreamSourcesShown = false
                         self.isAnimationInProgress = false
                     }
-                })
+            })
         }
     }
     
