@@ -18,7 +18,7 @@ protocol AlertDisplayable: class {
     func displayAlert(alert: AOAlertController)
 }
 
-protocol FlashMessageDisplayable:class {
+protocol FlashMessageDisplayable: class {
     func displayFlashMessage(model:FlashMessageViewModel)
 }
 
@@ -73,9 +73,9 @@ class SettingsViewModel: GroupedListViewModel {
         // MARK: Parameters
 
         self.delegate = delegate
-        self.alertDelegate = delegate as? AlertDisplayable
-        self.flashMessageDelegate = delegate as? FlashMessageDisplayable
-        self.userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
+        alertDelegate = delegate as? AlertDisplayable
+        flashMessageDelegate = delegate as? FlashMessageDisplayable
+        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
 
         // MARK: Create items
 
@@ -217,7 +217,6 @@ private extension SettingsViewModel {
     }
     
     func checkStreamsSource() {
-        //NGRTodo: cherry pick Marcin's extension for Settings  
         if (Settings.areAllStreamSourcesOff()) {
             let title = NSLocalizedString("SettingsViewModel.AllSources",
                                           comment: "Title of flash message, when user turn off all sources")

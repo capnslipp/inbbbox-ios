@@ -10,7 +10,7 @@ import UIKit
 
 public enum FlashMessageNotificationPosition {
     case Top
-    case NavBarOverlay
+    case NavigationBarOverlay
     case Bottom
 }
 
@@ -22,9 +22,9 @@ public enum FlashMessageDuration  {
 
 public func == (a: FlashMessageDuration, b: FlashMessageDuration) -> Bool {
     switch (a, b) {
-    case (.Automatic, .Automatic): return true
-    case (.Endless, .Endless): return true
-    case (.Custom(let a), .Custom(let b)): return a == b
-    default: return false
+        case (.Automatic, .Automatic): return true
+        case (.Endless, .Endless): return true
+        case (.Custom(let a), .Custom(let b)): return a == b
+        default: return false
     }
 }

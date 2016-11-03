@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FlashMessageView: UIView {
+final class FlashMessageView: UIView {
     
     private let defaultPadding:CGFloat = 15.0
     
@@ -20,7 +20,7 @@ class FlashMessageView: UIView {
         let roundSize: CGSize?
         let padding: CGFloat
         
-        init (backgroundColor: UIColor, textColor: UIColor, titleFont: UIFont? = nil, roundedCorners:UIRectCorner? = nil, roundSize:CGSize? = nil, padding: CGFloat = 15.0){
+        init (backgroundColor: UIColor, textColor: UIColor, titleFont: UIFont? = nil, roundedCorners: UIRectCorner? = nil, roundSize: CGSize? = nil, padding: CGFloat = 15.0){
             self.backgroundColor = backgroundColor
             self.textColor = textColor
             self.titleFont = titleFont
@@ -34,7 +34,7 @@ class FlashMessageView: UIView {
     let title: String
     
     /// The view controller this message is displayed in
-    let viewController: UIViewController
+    weak var viewController: UIViewController?
     
     /// The duration of the displayed message.
     var duration: FlashMessageDuration = .Automatic
@@ -76,13 +76,7 @@ class FlashMessageView: UIView {
     /// - parameter position:  The position of the message on the screen
     /// - parameter dismissingEnabled:  Should this message be dismissed when the user taps/swipes it?
     /// - parameter style:  Override default/global style
-    init(viewController: UIViewController,
-         title: String,
-         duration: FlashMessageDuration?,
-         position: FlashMessageNotificationPosition,
-         style customStyle: Style?,
-         dismissingEnabled: Bool,
-         callback: (()-> Void)?) {
+    init(viewController: UIViewController, title: String, duration: FlashMessageDuration?, position: FlashMessageNotificationPosition, style customStyle: Style?, dismissingEnabled: Bool, callback: (()-> Void)?) {
         
         self.style = customStyle ?? FlashMessageView.defaultStyle
         self.title = title
@@ -90,7 +84,7 @@ class FlashMessageView: UIView {
         self.viewController = viewController
         self.messagePosition = position
         self.callback = callback
-        self.padding = messagePosition == .NavBarOverlay ? style.padding + 10 : style.padding
+        self.padding = messagePosition == .NavigationBarOverlay ? style.padding + 10 : style.padding
         super.init(frame: CGRect.zero)
         
         setupBackground()
@@ -107,16 +101,15 @@ class FlashMessageView: UIView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
         
-        guard let roundedCorners = style.roundedCorners,
-            let roundSize = style.roundSize else {
+        guard let roundedCorners = style.roundedCorners, roundSize = style.roundSize else {
                 return
         }
         
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: roundedCorners, cornerRadii: roundSize)
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundedCorners, cornerRadii: roundSize)
         let mask = CAShapeLayer()
-        mask.frame = self.bounds
+        mask.frame = bounds
         mask.path = path.CGPath
-        self.layer.mask = mask
+        layer.mask = mask
     }
     
     override func layoutSubviews() {
@@ -142,7 +135,7 @@ class FlashMessageView: UIView {
     }
     
     private func setupTitle() {
-        let fontColor: UIColor = style.textColor
+        let fontColor = style.textColor
         textSpaceLeft = padding
         
         titleLabel.text = title
@@ -157,68 +150,73 @@ class FlashMessageView: UIView {
     }
     
     private func setupPosition() {
-        let screenWidth: CGFloat = viewController.view.bounds.size.width
-        let actualHeight: CGFloat = updateHeightOfMessageView()
+        guard let viewController = viewController else {
+            return
+        }
         
-        var topPosition: CGFloat = -actualHeight
+        let screenWidth = viewController.view.bounds.size.width
+        let actualHeight = updateHeightOfMessageView()
+        
+        var topPosition = -actualHeight
         if messagePosition == .Bottom {
             topPosition = viewController.view.bounds.size.height
         }
-        frame = CGRectMake(0.0, topPosition, screenWidth, actualHeight)
-        if messagePosition == .Top {
-            autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin, .FlexibleBottomMargin]
-        }
-        else {
-            autoresizingMask = ([.FlexibleWidth, .FlexibleTopMargin, .FlexibleBottomMargin])
-        }
+        
+        frame = CGRect(x: 0.0, y: topPosition, width: screenWidth, height: actualHeight)
+        autoresizingMask = [.FlexibleWidth, .FlexibleTopMargin, .FlexibleBottomMargin]
     }
     
     private func setupGestureForDismiss(ifNeeded dismissingEnabled: Bool) {
-        if dismissingEnabled {
-            let gestureRec: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FlashMessageView.fadeMeOut))
-            gestureRec.direction = (messagePosition == .Top ? .Up : .Down)
-            addGestureRecognizer(gestureRec)
-            let tapRec: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FlashMessageView.fadeMeOut))
-            addGestureRecognizer(tapRec)
+        guard dismissingEnabled else {
+            return
         }
+        
+        let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(fadeMeOut))
+        gestureRecognizer.direction = (messagePosition == .Top ? .Up : .Down)
+        addGestureRecognizer(gestureRecognizer)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(fadeMeOut))
+        addGestureRecognizer(tapGestureRecognizer)
     }
     
     // MARK: Private methods
     
     private func updateHeightOfMessageView() -> CGFloat {
+        guard let viewController = viewController else {
+            return 0
+        }
         
-        let screenWidth: CGFloat = viewController.view.bounds.size.width
-        titleLabel.frame = CGRectMake(textSpaceLeft, padding, screenWidth - padding - textSpaceLeft - textSpaceRight, 0.0)
+        let screenWidth = viewController.view.bounds.size.width
+        titleLabel.frame = CGRect(x: textSpaceLeft, y: padding, width: screenWidth - padding - textSpaceLeft - textSpaceRight, height: 0.0)
         titleLabel.sizeToFit()
+        
         var currentHeight = titleLabel.frame.origin.y + titleLabel.frame.size.height
         currentHeight += padding
         
-        frame = CGRectMake(0.0, frame.origin.y, frame.size.width, currentHeight)
+        frame = CGRect(x: 0.0, y: frame.origin.y, width: frame.size.width, height: currentHeight)
         
-        var backgroundFrame: CGRect = CGRectMake(0, 0, screenWidth, currentHeight)
+        var backgroundFrame = CGRect(x: 0, y: 0, width: screenWidth, height: currentHeight)
         // increase frame of background view because of the spring animation
         if messagePosition == .Top {
             var topOffset: CGFloat = 0.0
             let navigationController: UINavigationController? = viewController as? UINavigationController ?? viewController.navigationController
             
-            if let nav = navigationController {
-                let isNavBarIsHidden: Bool =  nav.navigationBarHidden || nav.navigationBar.hidden
-                let isNavBarIsOpaque: Bool = !nav.navigationBar.translucent && nav.navigationBar.alpha == 1
-                if isNavBarIsHidden || isNavBarIsOpaque {
+            if let navigationController = navigationController {
+                let isNavigationBarHidden =  navigationController.navigationBarHidden || navigationController.navigationBar.hidden
+                let isNavigationBarOpaque = !navigationController.navigationBar.translucent && navigationController.navigationBar.alpha == 1
+                if isNavigationBarHidden || isNavigationBarOpaque {
                     topOffset = -30.0
                 }
             }
             backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(topOffset, 0.0, 0.0, 0.0))
-        }
-        else if messagePosition == .Bottom {
+        } else if messagePosition == .Bottom {
             backgroundFrame = UIEdgeInsetsInsetRect(backgroundFrame, UIEdgeInsetsMake(0.0, 0.0, -30.0, 0.0))
         }
         backgroundView.frame = backgroundFrame
         return currentHeight
     }
     
-    @objc
-    private func fadeMeOut() {
+    
+    func fadeMeOut() {
         fadeOut?()
     }
 }

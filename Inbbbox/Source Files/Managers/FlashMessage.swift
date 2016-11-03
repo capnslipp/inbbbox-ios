@@ -8,13 +8,14 @@
 
 import UIKit
 
-class FlashMessage: NSObject {
+final class FlashMessage {
     
     static let sharedInstance = FlashMessage()
     
     /// Set a custom offset for the notification view
     var offsetHeightForMessage: CGFloat = 0.0
     
+    /// Set a custom view for the notification
     var customizeMessageView: ((FlashMessageView) -> Void)?
     
     /// Use this property to set a default view controller to display the messages in
@@ -42,10 +43,6 @@ class FlashMessage: NSObject {
     }
     private weak var _defaultViewController :UIViewController?
     
-    override init() {
-        super.init()
-    }
-    
     // MARK: Lifecycle
     
     /// Shows a notification message in a specific view controller
@@ -57,13 +54,7 @@ class FlashMessage: NSObject {
     /// - parameter overrideStyle:      Override default styles using this style struct, it has highest priority.
     /// - parameter dismissingEnabled:  Should the message be dismissed when the user taps/swipes it
     /// - parameter callback:           The block that should be executed, when the user tapped on the message/
-    func showNotification(inViewController viewController: UIViewController? = nil,
-                                           title: String,
-                                           duration: FlashMessageDuration = .Automatic,
-                                           atPosition messagePosition: FlashMessageNotificationPosition = .Top,
-                                           overrideStyle: FlashMessageView.Style? = nil,
-                                           canBeDismissedByUser dismissingEnabled: Bool = true,
-                                           callback: (() -> Void)? = nil) {
+    func showNotification(inViewController viewController: UIViewController? = nil, title: String, duration: FlashMessageDuration = .Automatic, atPosition messagePosition: FlashMessageNotificationPosition = .Top, overrideStyle: FlashMessageView.Style? = nil, canBeDismissedByUser dismissingEnabled: Bool = true, callback: (() -> Void)? = nil) {
         
         let messageView  = FlashMessageView(
             viewController: viewController ?? defaultViewController,
@@ -96,14 +87,13 @@ class FlashMessage: NSObject {
     }
     
     func dismissActiveNotificationWithCompletion(completion: (() -> Void)?) -> Bool {
-        if messages.count == 0 {
+        guard !messages.isEmpty else {
             return false
         }
-        dispatch_async(dispatch_get_main_queue(), {() -> Void in
-            if self.messages.count == 0 {
+        dispatch_async(dispatch_get_main_queue(), {
+            guard let currentMessage = self.messages.first else {
                 return
             }
-            let currentMessage = self.messages[0]
             if currentMessage.messageIsFullyDisplayed {
                 self.fadeOutNotification(currentMessage, animationFinishedBlock: completion)
             } else {
@@ -120,103 +110,132 @@ class FlashMessage: NSObject {
     // MARK: Animation
     
     private func fadeInCurrentNotification() {
-        if messages.count == 0 {
+        guard let currentView = messages.first, viewController = currentView.viewController else {
             return
         }
+        
         notificationActive = true
-        let currentView = messages[0]
         var verticalOffset: CGFloat = 0.0
-        let addStatusBarHeightToVerticalOffset = {() -> Void in
-            if currentView.messagePosition == .NavBarOverlay {
-                return
-            }
-            let statusBarSize: CGSize = UIApplication.sharedApplication().statusBarFrame.size
-            verticalOffset += min(statusBarSize.width, statusBarSize.height)
-        }
-        if (currentView.viewController is  UINavigationController) || (currentView.viewController.parentViewController is UINavigationController) {
-            let currentNavigationController = currentView.viewController as? UINavigationController ?? currentView.viewController.parentViewController as! UINavigationController
-            var isViewIsUnderStatusBar: Bool = (currentNavigationController.childViewControllers[0].edgesForExtendedLayout == .All)
-            if !isViewIsUnderStatusBar && currentNavigationController.parentViewController == nil {
-                isViewIsUnderStatusBar = !currentNavigationController.navigationBarHidden || !currentNavigationController.navigationBar.hidden
-            }
-            if !(currentNavigationController.navigationBarHidden || currentNavigationController.navigationBar.hidden) && currentView.messagePosition != .NavBarOverlay {
-                currentNavigationController.view!.insertSubview(currentView, belowSubview: currentNavigationController.navigationBar)
+
+        if let currentNavigationController = navigationControllerFrom(viewController) {
+            if !isNavigationBarHiddenIn(currentNavigationController) && currentView.messagePosition != .NavigationBarOverlay {
+                currentNavigationController.view?.insertSubview(currentView, belowSubview: currentNavigationController.navigationBar)
                 verticalOffset = currentNavigationController.navigationBar.bounds.size.height
-                if isViewIsUnderStatusBar {
-                    addStatusBarHeightToVerticalOffset()
-                }
+            } else {
+                viewController.view?.addSubview(currentView)
             }
-            else {
-                currentView.viewController.view!.addSubview(currentView)
-                if isViewIsUnderStatusBar {
-                    addStatusBarHeightToVerticalOffset()
-                }
+            
+            if checkIfViewIsUnderStatusBar(currentNavigationController) {
+                verticalOffset += barHeightBasedOnMessagePositionIn(currentView)
             }
-        }
-        else {
-            currentView.viewController.view!.addSubview(currentView)
-            addStatusBarHeightToVerticalOffset()
-        }
-        var toPoint: CGPoint
-        if currentView.messagePosition != .Bottom {
-            toPoint = CGPointMake(currentView.center.x, offsetHeightForMessage + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0)
-        }
-        else {
-            var y: CGFloat = currentView.viewController.view.bounds.size.height - CGRectGetHeight(currentView.frame) / 2.0
-            if let toolbarHidden = currentView.viewController.navigationController?.toolbarHidden where !toolbarHidden {
-                y -= CGRectGetHeight(currentView.viewController.navigationController!.toolbar.bounds)
-            }
-            toPoint = CGPointMake(currentView.center.x, y)
+        } else {
+            viewController.view?.addSubview(currentView)
+            verticalOffset += barHeightBasedOnMessagePositionIn(currentView)
         }
         
+        let endPoint = calculateEndPointForFadeInBasedOn(viewController, andVerticaOffset: verticalOffset)
         customizeMessageView?(currentView)
-        
-        let animationBlock = {
-            currentView.center = toPoint
+        animateView(currentView, toPoint: endPoint)
+        fadeOutNotificationWithDelay(currentView)
+    }
+    
+    private func calculateEndPointForFadeInBasedOn(viewController: UIViewController, andVerticaOffset verticalOffset: CGFloat) -> CGPoint {
+        guard let currentView = viewController.view as? FlashMessageView else {
+            return CGPoint.zero
         }
-        let completionBlock = {(finished :Bool)  in
-            currentView.messageIsFullyDisplayed = true
+        
+        if currentView.messagePosition != .Bottom {
+            return CGPoint(x: currentView.center.x, y: offsetHeightForMessage + verticalOffset + CGRectGetHeight(currentView.frame) / 2.0)
+        } else {
+            var y = viewController.view.bounds.size.height - CGRectGetHeight(currentView.frame) / 2.0
+            if let navigationController = viewController.navigationController where !navigationController.toolbarHidden {
+                y -= CGRectGetHeight(navigationController.toolbar.bounds)
+            }
+            return CGPoint(x: currentView.center.x, y: y)
+        }
+    }
+    
+    private func animateView(view: FlashMessageView, toPoint: CGPoint) {
+        UIView.animateWithDuration(self.AnimationDuration + 0.1, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.CurveEaseInOut, .BeginFromCurrentState, .AllowUserInteraction], animations: {
+            view.center = toPoint
+            }, completion: { finished in
+                view.messageIsFullyDisplayed = true
+        })
+    }
+    
+    private func barHeightBasedOnMessagePositionIn(currentView: FlashMessageView) -> CGFloat {
+        guard currentView.messagePosition != .NavigationBarOverlay else {
+            return 0.0
         }
         
-        UIView.animateWithDuration(self.AnimationDuration + 0.1, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.CurveEaseInOut, .BeginFromCurrentState, .AllowUserInteraction], animations: animationBlock, completion: completionBlock)
-        
+        let statusBarSize = UIApplication.sharedApplication().statusBarFrame.size
+        return min(statusBarSize.width, statusBarSize.height)
+    }
+    
+    private func navigationControllerFrom(viewController: UIViewController) -> UINavigationController? {
+        guard (viewController is UINavigationController) || (viewController.parentViewController is UINavigationController) else {
+            return nil
+        }
+        return viewController as? UINavigationController ?? viewController.parentViewController as! UINavigationController
+    }
+    
+    private func checkIfViewIsUnderStatusBar(navigationController: UINavigationController) -> Bool {
+        var isViewIsUnderStatusBar = (navigationController.childViewControllers[0].edgesForExtendedLayout == .All)
+        if !isViewIsUnderStatusBar && navigationController.parentViewController == nil {
+            isViewIsUnderStatusBar = !isNavigationBarHiddenIn(navigationController)
+        }
+        return isViewIsUnderStatusBar
+    }
+    
+    private func isNavigationBarHiddenIn(navigationController: UINavigationController) -> Bool {
+        return navigationController.navigationBarHidden || navigationController.navigationBar.hidden
+    }
+    
+    private func fadeOutNotificationWithDelay(flashMessageView: FlashMessageView) {
         var durationToPresent: NSTimeInterval?
-        switch(currentView.duration) {
-        case .Automatic:
-            durationToPresent = AnimationDuration + DisplayTime + NSTimeInterval(currentView.frame.size.height) * ExtraDisplayTimePerPixel
-        case .Custom(let timeInterval):
-            durationToPresent = timeInterval
-        default:
-            break
+        switch(flashMessageView.duration) {
+            case .Automatic:
+                durationToPresent = AnimationDuration + DisplayTime + NSTimeInterval(flashMessageView.frame.size.height) * ExtraDisplayTimePerPixel
+            case .Custom(let timeInterval):
+                durationToPresent = timeInterval
+            default:
+                break
         }
         
         if let durationToPresent = durationToPresent {
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                self.performSelector(#selector(FlashMessage.fadeOutNotification(_:)), withObject: currentView, afterDelay: durationToPresent)
+            delay(durationToPresent, closure: {
+                self.fadeOutNotification(flashMessageView)
             })
         }
     }
     
-    @objc
-    private func fadeOutNotification(currentView: FlashMessageView) {
-        fadeOutNotification(currentView, animationFinishedBlock: nil)
+    private func delay(delay:Double, closure:()->Void) {
+        dispatch_after( dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))),dispatch_get_main_queue(), closure)
     }
     
-    @objc
-    private func fadeOutNotification(currentView: FlashMessageView, animationFinishedBlock animationFinished: (() -> Void)?) {
-        currentView.messageIsFullyDisplayed = false
-        NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: #selector(FlashMessage.fadeOutNotification(_:)), object: currentView)
+    
+    @objc private func fadeOutNotification(flashMessageView: FlashMessageView) {
+        fadeOutNotification(flashMessageView, animationFinishedBlock: nil)
+    }
+    
+    
+    @objc private func fadeOutNotification(flashMessageView: FlashMessageView, animationFinishedBlock animationFinished: (() -> Void)?) {
+        guard let viewController = flashMessageView.viewController else {
+            return
+        }
+        
+        flashMessageView.messageIsFullyDisplayed = false
+        NSObject.cancelPreviousPerformRequestsWithTarget(self, selector: #selector(fadeOutNotification(_:)), object: flashMessageView)
         var fadeOutToPoint: CGPoint
-        if currentView.messagePosition != .Bottom {
-            fadeOutToPoint = CGPointMake(currentView.center.x, -CGRectGetHeight(currentView.frame) / 2.0)
+        if flashMessageView.messagePosition != .Bottom {
+            fadeOutToPoint = CGPointMake(flashMessageView.center.x, -CGRectGetHeight(flashMessageView.frame) / 2.0)
+        } else {
+            fadeOutToPoint = CGPointMake(flashMessageView.center.x, viewController.view.bounds.size.height + CGRectGetHeight(flashMessageView.frame) / 2.0)
         }
-        else {
-            fadeOutToPoint = CGPointMake(currentView.center.x, currentView.viewController.view.bounds.size.height + CGRectGetHeight(currentView.frame) / 2.0)
-        }
-        UIView.animateWithDuration(AnimationDuration, animations: {() -> Void in
-            currentView.center = fadeOutToPoint
-            }, completion: {(finished: Bool) -> Void in
-                currentView.removeFromSuperview()
+        UIView.animateWithDuration(AnimationDuration, animations: {
+                flashMessageView.center = fadeOutToPoint
+            }, completion: { finished in
+                flashMessageView.removeFromSuperview()
                 if self.messages.count > 0 {
                     self.messages.removeAtIndex(0)
                 }

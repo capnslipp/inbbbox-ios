@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
+        
         setupFlashMessageStyle()
         
         configureInitialSettings()
@@ -190,10 +191,10 @@ extension AppDelegate {
 // MARK: FlashMessage
 
 extension AppDelegate {
-    func setupFlashMessageStyle(){
+    private func setupFlashMessageStyle(){
         FlashMessageView.defaultStyle = FlashMessageView.Style(backgroundColor: UIColor.flashMessageBackgroundColor(),
                                                                textColor: UIColor.whiteColor(),
-                                                               titleFont: UIFont.helveticaFont(.Neue,size:14),
+                                                               titleFont: UIFont.helveticaFont(.Neue, size:14),
                                                                roundedCorners: [.BottomLeft, .BottomRight], roundSize: CGSizeMake(10, 10), padding: 25.0)
     }
 }
