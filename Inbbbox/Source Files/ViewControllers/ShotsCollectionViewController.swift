@@ -194,6 +194,11 @@ extension ShotsCollectionViewController {
 extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
 
     func shotsStateHandlerDidInvalidate(shotsStateHandler: ShotsStateHandler) {
+        if shotsStateHandler is ShotsInitialAnimationsStateHandler {
+            AsyncWrapper().main(after: 1, block: { [unowned self] in
+                self.showStreamSources()
+            })
+        }
         if let newState = shotsStateHandler.nextState {
             stateHandler = ShotsStateHandlersProvider().shotsStateHandlerForState(newState)
             configureForCurrentStateHandler()
