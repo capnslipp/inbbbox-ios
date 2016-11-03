@@ -13,12 +13,16 @@ final class MainScreenStreamSourcesAnimator {
     let view: ShotsCollectionBackgroundView
     var areStreamSourcesShown = false
     var isAnimationInProgress = false
-    private let animationDuration: NSTimeInterval = 0.2
+    private let animationDuration: NSTimeInterval
     
-    init(view: ShotsCollectionBackgroundView) {
+    init(view: ShotsCollectionBackgroundView, animationDuration: NSTimeInterval = 0.2) {
         self.view = view
+        self.animationDuration = animationDuration
     }
     
+    /**
+     Starts fade in animation of stream sources
+     */
     func startFadeInAnimation() {
         if isAnimationInProgress == true {
             return
@@ -34,14 +38,14 @@ final class MainScreenStreamSourcesAnimator {
         })
         
         view.logoVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.logoAnimationVerticalInset
-        UIView.animate(duration: 0.4, animations: { [unowned self] in
+        UIView.animate(duration: 2 * animationDuration, animations: { [unowned self] in
             self.view.logoImageView.alpha = 0
             self.view.layoutIfNeeded()
             })
         let items = view.availableItems()
         for (index, item) in items.enumerate() {
             item.verticalSpacingConstraint?.constant = 0
-            UIView.animateWithDuration(0.2, delay: Double(index + 1) * 0.1, options: options, animations: {
+            UIView.animateWithDuration(animationDuration, delay: Double(index + 1) * 0.1, options: options, animations: {
                     item.label.alpha = 1
                     item.label.layoutIfNeeded()
                 }, completion: { [unowned self] _ in
@@ -53,6 +57,9 @@ final class MainScreenStreamSourcesAnimator {
         }
     }
     
+    /**
+     Starts fade out animation of stream sources
+     */
     func startFadeOutAnimation() {
         if areStreamSourcesShown == false || isAnimationInProgress == true {
             return
@@ -66,7 +73,7 @@ final class MainScreenStreamSourcesAnimator {
             }, completion: nil)
 
         view.logoVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.logoDefaultVerticalInset
-        UIView.animateWithDuration(0.4, delay: 0.1, options: .CurveLinear, animations:{ [unowned self] in
+        UIView.animateWithDuration(2 * animationDuration, delay: 0.1, options: .CurveLinear, animations:{ [unowned self] in
             self.view.logoImageView.alpha = 1
             self.view.layoutIfNeeded()
             }, completion: nil)
@@ -84,5 +91,40 @@ final class MainScreenStreamSourcesAnimator {
                     }
                 })
         }
+    }
+    
+    /**
+     Shows stream sources without animation
+     */
+    func showStreamSources() {
+        view.prepareAnimatableContent()
+        view.showingYouVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.showingYouDefaultVerticalSpacing
+        view.showingYouLabel.alpha = 1
+        view.logoVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.logoAnimationVerticalInset
+        view.logoImageView.alpha = 0
+        let items = view.availableItems()
+        for item in items {
+            item.verticalSpacingConstraint?.constant = 0
+            item.label.alpha = 1
+        }
+        view.layoutIfNeeded()
+        areStreamSourcesShown = true
+    }
+    
+    /**
+     Hides stream sources without animation
+     */
+    func hideStreamSources() {
+        view.showingYouVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.showingYouHiddenVerticalSpacing
+        view.showingYouLabel.alpha = 0
+        view.logoVerticalConstraint?.constant = ShotsCollectionBackgroundViewSpacing.logoDefaultVerticalInset
+        view.logoImageView.alpha = 1
+        let items = view.availableItems()
+        for item in items {
+            item.verticalSpacingConstraint?.constant = -5
+            item.label.alpha = 0
+        }
+        view.layoutIfNeeded()
+        areStreamSourcesShown = false
     }
 }
