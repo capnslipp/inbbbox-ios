@@ -48,7 +48,6 @@ PODS:
   - SwiftyUserDefaults (2.2.1)
   - TTTAttributedLabel (2.0.0)
   - URITemplate (1.4.0)
-  - WatchdogInspector (1.0.0)
   - ZFDragableModalTransition (0.6)
 
 DEPENDENCIES:
@@ -74,7 +73,6 @@ DEPENDENCIES:
   - SwiftyJSON (~> 2.3)
   - SwiftyUserDefaults (~> 2.0)
   - TTTAttributedLabel (~> 2.0)
-  - WatchdogInspector (~> 1.0)
   - ZFDragableModalTransition (~> 0.6)
 
 EXTERNAL SOURCES:
@@ -137,9 +135,8 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 7abdba50a50ea0c18ee8903af3c88e4c1cb8448d
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   URITemplate: e2a2a0f9d398834fde67214b491c2c925c9baa06
-  WatchdogInspector: 01bc3a992c2602c3090d0ae29e8ff284049515ca
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: de8eeda6ba41414954d61fc5f0076d6b2cdc4009
+PODFILE CHECKSUM: fa72195f9b4a373af86b1f626e4ddc7088026780
 
 COCOAPODS: 1.0.0
