@@ -31,7 +31,6 @@ class CenterButtonTabBarController: UITabBarController {
     convenience init() {
         self.init(nibName: nil, bundle: nil)
 
-
         let likesViewController = UINavigationController(
             rootViewController: SimpleShotsCollectionViewController()
         )
@@ -94,8 +93,10 @@ class CenterButtonTabBarController: UITabBarController {
 
         tabBar.translucent = false
         centerButton.configureForAutoLayout()
+        
         centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Selected)
-        centerButton.setImage(UIImage(named: "ic-ball-inactive"), forState: .Normal)
+        let inactiveImageName = Settings.Customization.CurrentColorMode == .NightMode ? "ic-ball-inactive-night" : "ic-ball-inactive"
+        centerButton.setImage(UIImage(named: inactiveImageName), forState: .Normal)
         centerButton.backgroundColor = UIColor.whiteColor()
         centerButton.layer.zPosition = 1
         centerButton.addTarget(
@@ -172,8 +173,9 @@ extension CenterButtonTabBarController: UITabBarControllerDelegate {
 private extension CenterButtonTabBarController {
 
     func tabBarItemWithTitle(title: String, imageName: String) -> UITabBarItem {
-
-        let image = UIImage(named: imageName)?.imageWithRenderingMode(.AlwaysOriginal)
+        
+        let normalImageName = Settings.Customization.CurrentColorMode == .NightMode ? "\(imageName)-night" : imageName
+        let image = UIImage(named: normalImageName)?.imageWithRenderingMode(.AlwaysOriginal)
         let selectedImage = UIImage(
             named: imageName + "-active"
         )?.imageWithRenderingMode(.AlwaysOriginal)
