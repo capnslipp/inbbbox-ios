@@ -50,7 +50,6 @@ final class ColorModeProvider {
         UITableView.appearance().backgroundColor = mode.tableViewBackground
         UITableView.appearance().separatorColor = mode.tableViewSeparator
         UITableViewCell.appearance().backgroundColor = mode.tableViewCellBackground
-
         ShotsCollectionBackgroundView.appearance().backgroundColor = mode.shotsCollectionBackground
         ShotBucketsAddCollectionViewCell.appearance().backgroundColor = mode.shotBucketsAddCollectionViewCellBackground
         ShotBucketsSeparatorCollectionViewCell.appearance().backgroundColor = mode.shotBucketsSeparatorCollectionViewCellBackground
@@ -62,12 +61,13 @@ final class ColorModeProvider {
         ShotDetailsCommentCollectionViewCell.appearance().backgroundColor = mode.shotDetailsCommentCollectionViewCellBackground
         ProfileHeaderView.appearance().backgroundColor = mode.profileHeaderViewBackground
 
-        UICollectionView.appearanceWhenContainedInInstancesOfClasses([TwoLayoutsCollectionViewController.self]).backgroundColor = mode.twoLayoutsCollectionViewBackground
+        UICollectionView.appearance().backgroundColor = mode.twoLayoutsCollectionViewBackground
 
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
+        UIWindow.appearance().backgroundColor = .blackColor()
 
         ColorModeProvider.resetViews()
     }

@@ -16,10 +16,10 @@ class ShotDetailsDummySpaceCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        separatorView.backgroundColor = .separatorGrayColor()
+        separatorView.backgroundColor = ColorModeProvider.current().tableViewSeparator
         contentView.addSubview(separatorView)
 
-        contentView.backgroundColor = .whiteColor()
+        contentView.backgroundColor = ColorModeProvider.current().shotDetailsDummySeparatorColor
     }
 
     @available(*, unavailable, message="Use init(frame:) instead")

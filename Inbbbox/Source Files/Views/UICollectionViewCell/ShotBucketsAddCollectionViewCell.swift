@@ -44,7 +44,7 @@ class ShotBucketsAddCollectionViewCell: UICollectionViewCell {
         arrowImageView.image = UIImage(named: "ic-indicator-right")
         contentView.addSubview(arrowImageView)
 
-        separatorLine.backgroundColor = .RGBA(223, 224, 226, 1)
+        separatorLine.backgroundColor = ColorModeProvider.current().tableViewSeparator
         contentView.addSubview(separatorLine)
         separatorLine.hidden = true
 

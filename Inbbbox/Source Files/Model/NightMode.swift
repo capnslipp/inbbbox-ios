@@ -9,6 +9,10 @@
 import Foundation
 
 struct NightMode: ColorModeType {
+    
+    var windowBackgroundColor: UIColor {
+        return .backgroundNightModeGrayColor()
+    }
 
     var tabBarTint: UIColor {
         return .blackColor()
@@ -68,11 +72,11 @@ struct NightMode: ColorModeType {
     }
 
     var shotsCollectionBackground: UIColor {
-        return .blackColor()
+        return .backgroundNightModeGrayColor()
     }
 
     var tableViewBackground: UIColor {
-        return .blackColor()
+        return .backgroundNightModeGrayColor()
     }
 
     var tableViewSeparator: UIColor {
@@ -80,38 +84,58 @@ struct NightMode: ColorModeType {
     }
 
     var tableViewCellBackground: UIColor {
-        return .blackColor()
+        return lightGrayBackgroundColor
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return lightGrayBackgroundColor
     }
 
     var shotBucketsHeaderViewBackground: UIColor {
-        return .blackColor()
+        return bucketsDetailsBackgroundColor
     }
 
     var shotBucketsFooterViewBackground: UIColor {
-        return .blackColor()
+        return bucketsDetailsBackgroundColor
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return bucketsDetailsBackgroundColor
+    }
+    
+    var shotBucketsActionButtonColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotBucketsActionTextColor: UIColor {
+        return .whiteColor()
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
-        return .blackColor()
+        return bucketsDetailsBackgroundColor
     }
 
     var shotDetailsOperationViewBackground: UIColor {
-        return .blackColor()
+        return bucketsDetailsBackgroundColor
     }
 
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return lightGrayBackgroundColor
+    }
+    
+    var shotDetailsDescriptionSeparatorColor: UIColor {
+        return .clearColor()
+    }
+    
+    var shotDetailsDummySeparatorColor: UIColor {
+        return lightGrayBackgroundColor
     }
 
     var shotDetailsCommentCollectionViewCellBackground: UIColor {
+        return lightGrayBackgroundColor
+    }
+    
+    var shotDetailsCommentSeparatorColor: UIColor {
         return .blackColor()
     }
 
@@ -120,7 +144,7 @@ struct NightMode: ColorModeType {
     }
 
     var twoLayoutsCollectionViewBackground: UIColor {
-        return .blackColor()
+        return .backgroundNightModeGrayColor()
     }
     
     // MARK: Shot Detail
@@ -173,6 +197,14 @@ struct NightMode: ColorModeType {
         return .whiteColor()
     }
     
+    var shotDetailsFooterBackgroundColor: UIColor {
+        return lightGrayBackgroundColor
+    }
+    
+    var shotDetailsFooterBackgroundGrayedColor: UIColor {
+        return lightGrayBackgroundColor
+    }
+    
     // MARK: Settings
     
     var settingsUsernameTextColor: UIColor {
@@ -183,10 +215,31 @@ struct NightMode: ColorModeType {
         return .whiteColor()
     }
     
+    var settingsSwitchOnColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var settingsSwitchOffColor: UIColor {
+        return .blackColor()
+    }
+    
+    var visualEffectBlurType: UIBlurEffectStyle {
+        return .Dark
+    }
+    
+    private let lightGrayBackgroundColor: UIColor = .RGBA(87, 98, 103, 1)
+    
+    private let bucketsDetailsBackgroundColor: UIColor = .RGBA(43, 48, 51, 1)
+    
     // MARK: Logo
     
     var logoImageName: String {
         return "logo-type-home-night"
+    }
+    
+    func isEqualTo(other: ColorModeType) -> Bool {
+        if let _ = other as? NightMode { return true }
+        return false
     }
     
 }
