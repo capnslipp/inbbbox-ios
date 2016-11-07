@@ -22,6 +22,18 @@ struct DayMode: ColorModeType {
         return .pinkColor()
     }
     
+    var tabBarCenterButtonBackground: UIColor {
+        return .whiteColor()
+    }
+    
+    var tabBarCenterButtonShadowOffset: CGSize {
+        return CGSize(width: 0, height: 2)
+    }
+    
+    var tabBarCenterButtonShadowColor: UIColor {
+        return UIColor(white: 0, alpha: 0.1)
+    }
+    
     var tabBarLikesNormalImageName: String {
         return "ic-likes"
     }
@@ -80,6 +92,15 @@ struct DayMode: ColorModeType {
 
     var tableViewCellBackground: UIColor {
         return .whiteColor()
+    }
+    
+    var tableViewCellTextColor: UIColor {
+        return .blackColor()
+    }
+    
+    // MARK: SwichCell
+    var switchCellTintColor: UIColor {
+        return .blackColor()
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
@@ -176,10 +197,6 @@ struct DayMode: ColorModeType {
     
     var settingsUsernameTextColor: UIColor {
         return .textDarkColor()
-    }
-    
-    var settingsCellTextColor: UIColor {
-        return .blackColor()
     }
     
     // MARK: Logo

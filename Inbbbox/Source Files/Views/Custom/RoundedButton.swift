@@ -18,10 +18,11 @@ class RoundedButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
+        let currentMode = ColorModeProvider.current()
         layer.cornerRadius = diameter/2
-        layer.shadowColor = UIColor(white: 0, alpha: 0.1).CGColor
-        layer.shadowOffset = CGSize(width: 0, height: 2)
+        layer.shadowColor = currentMode.tabBarCenterButtonShadowColor.CGColor
+        layer.shadowOffset = currentMode.tabBarCenterButtonShadowOffset
         layer.shadowRadius = 3
         layer.shadowOpacity = 1
         layer.masksToBounds = false

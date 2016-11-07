@@ -35,20 +35,8 @@ class CenterButtonTabBarController: UITabBarController {
             rootViewController: SimpleShotsCollectionViewController()
         )
         
-        let currentColorMode = ColorModeProvider.current()
-        likesViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"),
-            normalImageName: currentColorMode.tabBarLikesNormalImageName,
-            selectedImageName: currentColorMode.tabBarLikesSelectedImageName
-        )
-        
         let bucketsViewController =
             UINavigationController(rootViewController: BucketsCollectionViewController())
-        bucketsViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"),
-            normalImageName: currentColorMode.tabBarBucketsNormalImageName,
-            selectedImageName: currentColorMode.tabBarBucketsSelectedImageName
-        )
         
         let followeesViewController = UINavigationController(
             rootViewController: FolloweesCollectionViewController(
@@ -59,19 +47,8 @@ class CenterButtonTabBarController: UITabBarController {
             )
         )
         
-        followeesViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"),
-            normalImageName: currentColorMode.tabBarFollowingNormalImageName,
-            selectedImageName: currentColorMode.tabBarFollowingSelectedImageName
-        )
-        
         let settingsViewController =
             UINavigationController(rootViewController: self.settingsViewController)
-        settingsViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar"),
-            normalImageName: currentColorMode.tabBarSettingsNormalImageName,
-            selectedImageName: currentColorMode.tabBarSettingsSelectedImageName
-        )
 
         viewControllers = [
             likesViewController,
@@ -80,6 +57,8 @@ class CenterButtonTabBarController: UITabBarController {
             followeesViewController,
             settingsViewController
         ]
+        
+        setupTabBarItem(forViewControllers: viewControllers, forColorMode: ColorModeProvider.current())
         selectedViewController = shotsCollectionViewController
     }
 
@@ -100,10 +79,8 @@ class CenterButtonTabBarController: UITabBarController {
         tabBar.translucent = false
         centerButton.configureForAutoLayout()
         
-        let currentColorMode = ColorModeProvider.current()
-        centerButton.setImage(UIImage(named: currentColorMode.tabBarCenterButtonNormalImageName), forState: .Normal)
-        centerButton.setImage(UIImage(named: currentColorMode.tabBarCenterButtonSelectedImageName), forState: .Selected)
-        centerButton.backgroundColor = UIColor.whiteColor()
+        setupCenterButton(forColorMode: ColorModeProvider.current())
+        centerButton.adjustsImageWhenHighlighted = false
         centerButton.layer.zPosition = 1
         centerButton.addTarget(
             self,
@@ -176,6 +153,13 @@ extension CenterButtonTabBarController: UITabBarControllerDelegate {
     }
 }
 
+extension CenterButtonTabBarController: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        setupTabBarItem(forViewControllers: viewControllers, forColorMode: mode)
+        setupCenterButton(forColorMode: mode)
+    }
+}
+
 private extension CenterButtonTabBarController {
 
     func tabBarItemWithTitle(title: String, normalImageName: String, selectedImageName:String) -> UITabBarItem {
@@ -188,6 +172,9 @@ private extension CenterButtonTabBarController {
             image: image,
             selectedImage: selectedImage
         )
+        
+        tabBarItem.accessibilityLabel = title
+        
         tabBarItem.setTitleTextAttributes(
             [NSForegroundColorAttributeName: ColorModeProvider.current().tabBarSelectedItemTextColor],
             forState: .Selected
@@ -205,5 +192,59 @@ private extension CenterButtonTabBarController {
         animatableLikesTabBarItem = tabBar.subviews[CenterButtonViewControllers.Likes.rawValue].subviews.first as? UIImageView
         animatableBucketsTabBarItem = tabBar.subviews[CenterButtonViewControllers.Buckets.rawValue].subviews.first as? UIImageView
         animatableLikesTabBarItem?.contentMode = .Center
+    }
+    
+    func setupTabBarItem(forViewControllers viewControllers: [UIViewController]?, forColorMode mode: ColorModeType) {
+        guard let viewControllers = viewControllers else {
+            return
+        }
+        
+        for viewController in viewControllers {
+            guard let firstViewController = (viewController as? UINavigationController)?.viewControllers.first else {
+                continue
+            }
+            
+            switch firstViewController {
+            case let likesViewController as SimpleShotsCollectionViewController:
+                print("likes")
+                likesViewController.tabBarItem = tabBarItemWithTitle(
+                    NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"),
+                    normalImageName: mode.tabBarLikesNormalImageName,
+                    selectedImageName: mode.tabBarLikesSelectedImageName
+                )
+            case let bucketsViewController as BucketsCollectionViewController:
+                print("buckets")
+                bucketsViewController.tabBarItem = tabBarItemWithTitle(
+                    NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"),
+                    normalImageName: mode.tabBarBucketsNormalImageName,
+                    selectedImageName: mode.tabBarBucketsSelectedImageName
+                )
+            case let followeesViewController as FolloweesCollectionViewController:
+                print("followees")
+                followeesViewController.tabBarItem = tabBarItemWithTitle(
+                    NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"),
+                    normalImageName: mode.tabBarFollowingNormalImageName,
+                    selectedImageName: mode.tabBarFollowingSelectedImageName
+                )
+            case let settingsViewController as SettingsViewController:
+                print("settings")
+                settingsViewController.tabBarItem = tabBarItemWithTitle(
+                    NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar"),
+                    normalImageName: mode.tabBarSettingsNormalImageName,
+                    selectedImageName: mode.tabBarSettingsSelectedImageName
+                )
+                settingsViewController.adaptColorMode(mode)
+            default:
+                break
+            }
+        }
+    }
+    
+    func setupCenterButton(forColorMode mode: ColorModeType) {
+        centerButton.setImage(UIImage(named: mode.tabBarCenterButtonNormalImageName), forState: .Normal)
+        centerButton.setImage(UIImage(named: mode.tabBarCenterButtonSelectedImageName), forState: .Selected)
+        centerButton.backgroundColor = mode.tabBarCenterButtonBackground
+        centerButton.layer.shadowColor = mode.tabBarCenterButtonShadowColor.CGColor
+        centerButton.layer.shadowOffset = mode.tabBarCenterButtonShadowOffset
     }
 }

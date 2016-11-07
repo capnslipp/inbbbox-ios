@@ -22,6 +22,18 @@ struct NightMode: ColorModeType {
         return .pinkColor()
     }
     
+    var tabBarCenterButtonBackground: UIColor {
+        return .blackColor()
+    }
+    
+    var tabBarCenterButtonShadowOffset: CGSize {
+        return CGSize(width: 0, height: 0)
+    }
+    
+    var tabBarCenterButtonShadowColor: UIColor {
+        return .whiteColor()
+    }
+    
     var tabBarLikesNormalImageName: String {
         return "ic-likes-night"
     }
@@ -72,7 +84,7 @@ struct NightMode: ColorModeType {
     }
 
     var tableViewBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 49, 51, 1.00)
     }
 
     var tableViewSeparator: UIColor {
@@ -80,6 +92,15 @@ struct NightMode: ColorModeType {
     }
 
     var tableViewCellBackground: UIColor {
+        return .RGBA(87, 98, 103, 1.00)
+    }
+    
+    var tableViewCellTextColor: UIColor {
+        return .whiteColor()
+    }
+    
+    // MARK: SwichCell
+    var switchCellTintColor: UIColor {
         return .blackColor()
     }
 
@@ -179,14 +200,9 @@ struct NightMode: ColorModeType {
         return .RGBA(236, 237, 239, 1)
     }
     
-    var settingsCellTextColor: UIColor {
-        return .whiteColor()
-    }
-    
     // MARK: Logo
     
     var logoImageName: String {
         return "logo-type-home-night"
     }
-    
 }

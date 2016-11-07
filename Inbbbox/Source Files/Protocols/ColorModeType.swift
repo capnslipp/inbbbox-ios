@@ -14,6 +14,9 @@ protocol ColorModeType {
     var tabBarTint: UIColor { get }
     var tabBarNormalItemTextColor: UIColor { get }
     var tabBarSelectedItemTextColor: UIColor { get }
+    var tabBarCenterButtonBackground: UIColor { get }
+    var tabBarCenterButtonShadowColor: UIColor { get }
+    var tabBarCenterButtonShadowOffset: CGSize { get }
     var tabBarLikesNormalImageName: String { get }
     var tabBarLikesSelectedImageName: String { get }
     var tabBarBucketsNormalImageName: String { get }
@@ -37,6 +40,10 @@ protocol ColorModeType {
 
     // MARK: UITableViewCell
     var tableViewCellBackground: UIColor { get }
+    var tableViewCellTextColor: UIColor { get }
+    
+    // MARK: SwichCell
+    var switchCellTintColor: UIColor { get }
 
     // MARK: ShotBuckets
     var shotBucketsAddCollectionViewCellBackground: UIColor { get }
@@ -64,7 +71,6 @@ protocol ColorModeType {
     
     // MARK: Settings
     var settingsUsernameTextColor: UIColor { get }
-    var settingsCellTextColor: UIColor { get }
 
     /// ProfileHeaderView.
     var profileHeaderViewBackground: UIColor { get }

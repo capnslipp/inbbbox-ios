@@ -75,6 +75,8 @@ final class ColorModeProvider {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
 
+        UIDatePicker.appearance().tintColor = UIColor.whiteColor()
+        
         ColorModeProvider.resetViews()
     }
 
@@ -90,14 +92,27 @@ final class ColorModeProvider {
     }
     
     private class func adaptInterfaceToCustomViews(to mode: ColorModeType) {
+        guard let centerButtonTabBarController = findCenterButtonTabControllerInWindows() else {
+            return
+        }
+        
+        centerButtonTabBarController.adaptColorMode(mode)
+        
+//        if let viewControllers = centerButtonTabBarController.viewControllers {
+//            for viewController in viewControllers where viewController is ColorModeAdaptable {
+//                (viewController as! ColorModeAdaptable).adaptColorMode(mode)
+//            }
+//        }
+    }
+    
+    private class func findCenterButtonTabControllerInWindows() -> CenterButtonTabBarController? {
         let windows = UIApplication.sharedApplication().windows as [UIWindow]
         for window in windows {
-            
-//            let subviews = window.subviews as [UIView]
-//            for view in subviews {
-//                print(view is ColorModeAdaptable)
-//            }
+            guard let centerButtonTabBarController = window.rootViewController as? CenterButtonTabBarController  else {
+                continue
+            }
+            return centerButtonTabBarController
         }
+        return nil
     }
-
 }
