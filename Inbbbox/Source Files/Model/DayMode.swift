@@ -233,7 +233,7 @@ struct DayMode: ColorModeType {
     }
     
     func isEqualTo(other: ColorModeType) -> Bool {
-        if let o = other as? DayMode { return self == o }
+        if let o = other as? DayMode { return true }
         return false
     }
 }

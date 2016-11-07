@@ -92,15 +92,15 @@ struct NightMode: ColorModeType {
     }
 
     var shotBucketsHeaderViewBackground: UIColor {
-        return .RGBA(43, 48, 51, 1)
+        return bucketsDetailsBackgroundColor
     }
 
     var shotBucketsFooterViewBackground: UIColor {
-        return .RGBA(43, 48, 51, 1)
+        return bucketsDetailsBackgroundColor
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
-        return .RGBA(43, 48, 51, 1)
+        return bucketsDetailsBackgroundColor
     }
     
     var shotBucketsActionButtonColor: UIColor {
@@ -112,11 +112,11 @@ struct NightMode: ColorModeType {
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
-        return .RGBA(43, 48, 51, 1)
+        return bucketsDetailsBackgroundColor
     }
 
     var shotDetailsOperationViewBackground: UIColor {
-        return .RGBA(43, 48, 51, 1)
+        return bucketsDetailsBackgroundColor
     }
 
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor {
@@ -228,6 +228,8 @@ struct NightMode: ColorModeType {
     }
     
     private let lightGrayBackgroundColor: UIColor = .RGBA(87, 98, 103, 1)
+    
+    private let bucketsDetailsBackgroundColor: UIColor = .RGBA(43, 48, 51, 1)
     
     // MARK: Logo
     
