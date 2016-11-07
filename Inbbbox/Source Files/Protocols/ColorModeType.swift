@@ -74,6 +74,8 @@ protocol ColorModeType {
 
     // MARK: TwoLayoutCollectionViewController
     var twoLayoutsCollectionViewBackground: UIColor { get }
+    
+    var visualEffectBlurType: UIBlurEffectStyle { get }
     func isEqualTo(other: ColorModeType) -> Bool
 }
 

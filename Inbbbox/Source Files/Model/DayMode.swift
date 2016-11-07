@@ -182,6 +182,10 @@ struct DayMode: ColorModeType {
         return .RGBA(143, 142, 148, 1)
     }
     
+    var visualEffectBlurType: UIBlurEffectStyle {
+        return .Light
+    }
+    
     func isEqualTo(other: ColorModeType) -> Bool {
         if let o = other as? DayMode { return self == o }
         return false

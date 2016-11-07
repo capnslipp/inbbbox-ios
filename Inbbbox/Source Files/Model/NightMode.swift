@@ -182,6 +182,10 @@ struct NightMode: ColorModeType {
         return .blackColor()
     }
     
+    var visualEffectBlurType: UIBlurEffectStyle {
+        return .Dark
+    }
+    
     private let lightGrayBackgroundColor: UIColor = .RGBA(87, 98, 103, 1)
     
     func isEqualTo(other: ColorModeType) -> Bool {
