@@ -65,7 +65,9 @@ class APIShotsProvider: PageableProvider {
     func provideLikedShots(max: UInt) -> Promise<[ShotType]?> {
         return Promise<[ShotType]?> {fulfill, reject in
             firstly {
-                fetchLikes(max)
+                prepareForFetchingLikes()
+            }.then {
+                self.fetchLikes(max)
             }.then {
                 fulfill(self.likes)
             }.error { error in
@@ -185,6 +187,16 @@ private extension APIShotsProvider {
             .unique
             .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
         fulfill(result.flatMap { $0.map { $0 as ShotType } })
+    }
+
+    private func prepareForFetchingLikes() -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            likes.removeAll()
+            likesFetched = 0
+            likesToFetch = 0
+            lastPageOfLikesReached = false
+            fulfill()
+        }
     }
 
     private func fetchLikes(max: UInt) -> Promise<Void> {
