@@ -22,7 +22,7 @@ class LabelCell: UITableViewCell, Reusable {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        titleLabel.textColor = UIColor.pinkColor()
+        titleLabel.textColor = ColorModeProvider.current().settingsCellTextColor
         titleLabel.textAlignment = .Center
         contentView.addSubview(titleLabel)
 

@@ -89,9 +89,8 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
         collectionView.registerClass(ProfileHeaderView.self, type: .Header)
 
         do { // hides bottom border of navigationBar
-            navigationController?.navigationBar.shadowImage = UIImage(color: .pinkColor())
             navigationController?.navigationBar.setBackgroundImage(
-				UIImage(color: .pinkColor()),
+				UIImage(color: ColorModeProvider.current().navigationBarTint),
                 forBarMetrics: .Default
 			)
         }

@@ -28,11 +28,11 @@ class SwitchCell: UITableViewCell, Reusable {
         titleLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(titleLabel)
 
-        switchControl.tintColor = UIColor.RGBA(143, 142, 148, 1)
+        switchControl.tintColor = ColorModeProvider.current().settingsSwitchOffColor
         switchControl.backgroundColor = switchControl.tintColor
         switchControl.layer.cornerRadius = 18.0
         switchControl.thumbTintColor = UIColor.whiteColor()
-        switchControl.onTintColor = UIColor.pinkColor()
+        switchControl.onTintColor = ColorModeProvider.current().settingsSwitchOnColor
         contentView.addSubview(switchControl)
 
         setNeedsUpdateConstraints()

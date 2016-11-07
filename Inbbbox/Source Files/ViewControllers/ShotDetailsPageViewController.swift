@@ -10,8 +10,7 @@ import Foundation
 import ZFDragableModalTransition
 
 class ShotDetailsPageViewController: UIPageViewController {
-    
-    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: ColorModeProvider.current() is DayMode ? .Light : .Dark))
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
     var pageDataSource: ShotDetailsPageViewControllerDataSource
     private var didSetConstraints = false

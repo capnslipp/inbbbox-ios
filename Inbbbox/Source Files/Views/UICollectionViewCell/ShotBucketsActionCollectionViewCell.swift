@@ -22,10 +22,10 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
 
         contentView.configureForAutoLayout()
-        contentView.backgroundColor = .whiteColor()
+        contentView.backgroundColor = ColorModeProvider.current().shotBucketsActionButtonColor
 
         button.configureForAutoLayout()
-        button.setTitleColor(.pinkColor(), forState: .Normal)
+        button.setTitleColor(ColorModeProvider.current().shotBucketsActionTextColor, forState: .Normal)
         button.setTitleColor(.textLightColor(), forState: .Disabled)
         button.setTitleColor(.pinkColor(alpha: 0.5), forState: .Highlighted)
         button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 16)

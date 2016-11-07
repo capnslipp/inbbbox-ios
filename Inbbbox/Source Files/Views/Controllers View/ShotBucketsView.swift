@@ -18,7 +18,7 @@ class ShotBucketsView: UIView {
     private let offsetToTopLayoutGuide = CGFloat(10)
 
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
-    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: ColorModeProvider.current() is DayMode ? .Light : .Dark))
     private var didSetConstraints = false
 
     override init(frame: CGRect) {
