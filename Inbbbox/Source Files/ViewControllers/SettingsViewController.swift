@@ -303,3 +303,9 @@ private extension UITableView {
         }
     }
 }
+
+extension SettingsViewController: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        print(self)
+    }
+}

@@ -289,6 +289,7 @@
 		BE5712591DCA2DEB00358745 /* FlashMessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5712581DCA2DEB00358745 /* FlashMessageTypes.swift */; };
 		BE57125B1DCA2E9200358745 /* FlashMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57125A1DCA2E9200358745 /* FlashMessage.swift */; };
 		BE7A1741292D08D3D45BFAEF /* DeleteCommentQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C949299AFC25FEF29D2F7EF /* DeleteCommentQuerySpec.swift */; };
+		BEDA834A1DD099A100D98921 /* ColorModeAdaptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDA83491DD099A100D98921 /* ColorModeAdaptable.swift */; };
 		BF48E9481F8839521F829A1F /* APITeamsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFFC0840E460B99F665C2C5 /* APITeamsProviderSpec.swift */; };
 		C0EE2D8640F65C4539FC86A1 /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED7991095A44326D902553 /* ShotBucketsFooterView.swift */; };
 		C11B3B8DECEEDFD228F6C0E6 /* GifIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B622AEA1C27A1940BA8A811 /* GifIndicatorView.swift */; };
@@ -738,6 +739,7 @@
 		BE5712561DCA2DE000358745 /* FlashMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageView.swift; sourceTree = "<group>"; };
 		BE5712581DCA2DEB00358745 /* FlashMessageTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageTypes.swift; sourceTree = "<group>"; };
 		BE57125A1DCA2E9200358745 /* FlashMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessage.swift; sourceTree = "<group>"; };
+		BEDA83491DD099A100D98921 /* ColorModeAdaptable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorModeAdaptable.swift; sourceTree = "<group>"; };
 		C26227A4CC4CB0D73BEEF058 /* FollowersQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FollowersQuery.swift; sourceTree = "<group>"; };
 		C28A7631D86F1074E2F49E9C /* ShotDetailsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewController.swift; sourceTree = "<group>"; };
 		C293E57C35C383AA44755DAF /* ShotsNormalStateHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsNormalStateHandler.swift; sourceTree = "<group>"; };
@@ -1283,6 +1285,7 @@
 				30C184641CC674920032798C /* DefaultImage.swift */,
 				F0BEBDD81CDB3E9800AA391C /* ProfileViewModel.swift */,
 				30C883411DC0A3A300BE98A3 /* ColorModeType.swift */,
+				BEDA83491DD099A100D98921 /* ColorModeAdaptable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -2173,6 +2176,7 @@
 				33977E1F7D72CF54CE2EB0F9 /* LoginViewController.swift in Sources */,
 				10E1AF5BA41914646163794B /* SettingsViewController.swift in Sources */,
 				1A8703E28D4A5355D7758DC0 /* ShotBucketsViewController.swift in Sources */,
+				BEDA834A1DD099A100D98921 /* ColorModeAdaptable.swift in Sources */,
 				F7F8A182D0AA61C8FCA2C9BF /* ShotDetailsViewController.swift in Sources */,
 				A7B3D3F746A094F24AA38C6C /* ShotsCollectionViewController.swift in Sources */,
 				7584EFD2730B01300585E5E8 /* TwoLayoutsCollectionViewController.swift in Sources */,

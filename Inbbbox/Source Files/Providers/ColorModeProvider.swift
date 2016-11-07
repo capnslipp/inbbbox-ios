@@ -39,8 +39,14 @@ final class ColorModeProvider {
 
     private class func select(mode: ColorMode) {
         switch mode {
-        case .DayMode: ColorModeProvider.adaptInterface(to: DayMode())
-        case .NightMode: ColorModeProvider.adaptInterface(to: NightMode())
+            case .DayMode:
+                let mode = DayMode()
+                ColorModeProvider.adaptInterface(to: mode)
+                ColorModeProvider.adaptInterfaceToCustomViews(to: mode)
+            case .NightMode:
+                let mode = NightMode()
+                ColorModeProvider.adaptInterface(to: mode)
+                ColorModeProvider.adaptInterfaceToCustomViews(to: mode)
         }
     }
 
@@ -82,4 +88,16 @@ final class ColorModeProvider {
             }
         }
     }
+    
+    private class func adaptInterfaceToCustomViews(to mode: ColorModeType) {
+        let windows = UIApplication.sharedApplication().windows as [UIWindow]
+        for window in windows {
+            
+//            let subviews = window.subviews as [UIView]
+//            for view in subviews {
+//                print(view is ColorModeAdaptable)
+//            }
+        }
+    }
+
 }
