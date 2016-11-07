@@ -229,6 +229,9 @@
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor en la pantalla de inicio";
 
+/* User Setting, night mode */
+"SettingsViewModel.NightMode" = "$Night Mode";
+
 /* Title of flash message, when user turn off all sources */
 "SettingsViewModel.AllSources" = "Placeholder for information about sources";
 
