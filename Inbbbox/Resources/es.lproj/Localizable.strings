@@ -230,7 +230,7 @@
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor en la pantalla de inicio";
 
 /* Title of flash message, when user turn off all sources */
-"SettingsViewModel.AllSources" = "Placeholder for information about sources";
+"SettingsViewModel.AllSources" = "$Placeholder for information about sources";
 
 /********* SettingsViewController *********/
 
