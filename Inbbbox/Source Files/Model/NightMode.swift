@@ -236,7 +236,7 @@ struct NightMode: ColorModeType {
     }
     
     func isEqualTo(other: ColorModeType) -> Bool {
-        if let o = other as? NightMode { return self == o }
+        if let _ = other as? NightMode { return true }
         return false
     }
     
