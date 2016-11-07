@@ -25,6 +25,47 @@ struct NightMode: ColorModeType {
     var tabBarSelectedItemTextColor: UIColor {
         return .pinkColor()
     }
+    
+    var tabBarLikesNormalImageName: String {
+        return "ic-likes-night"
+    }
+    
+    var tabBarLikesSelectedImageName: String {
+        return "ic-likes-active"
+    }
+    
+    var tabBarBucketsNormalImageName: String {
+        return "ic-buckets-night"
+    }
+    
+    var tabBarBucketsSelectedImageName: String {
+        return "ic-buckets-active"
+    }
+    
+    var tabBarCenterButtonNormalImageName: String {
+        return "ic-ball-inactive-night"
+    }
+    
+    var tabBarCenterButtonSelectedImageName: String {
+        return "ic-ball-active"
+    }
+    
+    var tabBarFollowingNormalImageName: String {
+        return "ic-following-night"
+    }
+    
+    var tabBarFollowingSelectedImageName: String {
+        return "ic-following-active"
+    }
+    
+    var tabBarSettingsNormalImageName: String {
+        return "ic-settings-night"
+    }
+    
+    var tabBarSettingsSelectedImageName: String { 
+        return "ic-settings-active"
+    }
+
 
     var navigationBarTint: UIColor {
         return .blackColor()
@@ -188,8 +229,15 @@ struct NightMode: ColorModeType {
     
     private let lightGrayBackgroundColor: UIColor = .RGBA(87, 98, 103, 1)
     
+    // MARK: Logo
+    
+    var logoImageName: String {
+        return "logo-type-home-night"
+    }
+    
     func isEqualTo(other: ColorModeType) -> Bool {
         if let o = other as? NightMode { return self == o }
         return false
     }
+    
 }

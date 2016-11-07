@@ -25,6 +25,46 @@ struct DayMode: ColorModeType {
     var tabBarSelectedItemTextColor: UIColor {
         return .pinkColor()
     }
+    
+    var tabBarLikesNormalImageName: String {
+        return "ic-likes"
+    }
+    
+    var tabBarLikesSelectedImageName: String {
+        return "ic-likes-active"
+    }
+    
+    var tabBarBucketsNormalImageName: String {
+        return "ic-buckets"
+    }
+    
+    var tabBarBucketsSelectedImageName: String {
+        return "ic-buckets-active"
+    }
+    
+    var tabBarCenterButtonNormalImageName: String {
+        return "ic-ball-inactive"
+    }
+    
+    var tabBarCenterButtonSelectedImageName: String {
+        return "ic-ball-active"
+    }
+    
+    var tabBarFollowingNormalImageName: String {
+        return "ic-following"
+    }
+    
+    var tabBarFollowingSelectedImageName: String {
+        return "ic-following-active"
+    }
+    
+    var tabBarSettingsNormalImageName: String {
+        return "ic-settings"
+    }
+    
+    var tabBarSettingsSelectedImageName: String { 
+        return "ic-settings-active"
+    }
 
     var navigationBarTint: UIColor {
         return .pinkColor()
@@ -184,6 +224,12 @@ struct DayMode: ColorModeType {
     
     var visualEffectBlurType: UIBlurEffectStyle {
         return .Light
+    }
+    
+    // MARK: Logo
+    
+    var logoImageName: String {
+        return "logo-type-home"
     }
     
     func isEqualTo(other: ColorModeType) -> Bool {
