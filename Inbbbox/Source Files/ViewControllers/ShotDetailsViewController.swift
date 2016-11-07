@@ -100,6 +100,11 @@ final class ShotDetailsViewController: UIViewController {
 
         AnalyticsManager.trackScreen(.ShotDetailsView)
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        willDismissDetailsCompletionHandler?(shotIndex)
+    }
 
     func scrollViewWillEndDragging(scrollView: UIScrollView,
                                    withVelocity velocity: CGPoint,
@@ -559,7 +564,6 @@ private extension ShotDetailsViewController {
     }
 
     dynamic func closeButtonDidTap(_: UIButton) {
-        willDismissDetailsCompletionHandler?(shotIndex)
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
