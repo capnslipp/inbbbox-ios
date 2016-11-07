@@ -181,9 +181,7 @@ private extension CenterButtonTabBarController {
     func tabBarItemWithTitle(title: String, normalImageName: String, selectedImageName:String) -> UITabBarItem {
         
         let image = UIImage(named: normalImageName)?.imageWithRenderingMode(.AlwaysOriginal)
-        let selectedImage = UIImage(
-            named: selectedImageName
-        )?.imageWithRenderingMode(.AlwaysOriginal)
+        let selectedImage = UIImage(named: selectedImageName)?.imageWithRenderingMode(.AlwaysOriginal)
 
         let tabBarItem = UITabBarItem(
             title: title,

@@ -72,6 +72,8 @@ protocol ColorModeType {
     // MARK: TwoLayoutCollectionViewController
     var twoLayoutsCollectionViewBackground: UIColor { get }
     
+    // MARK: Logo
+    var logoImageName: String { get }
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {

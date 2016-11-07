@@ -183,4 +183,10 @@ struct NightMode: ColorModeType {
         return .whiteColor()
     }
     
+    // MARK: Logo
+    
+    var logoImageName: String {
+        return "logo-type-home-night"
+    }
+    
 }

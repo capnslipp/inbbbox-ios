@@ -181,4 +181,10 @@ struct DayMode: ColorModeType {
     var settingsCellTextColor: UIColor {
         return .blackColor()
     }
+    
+    // MARK: Logo
+    
+    var logoImageName: String {
+        return "logo-type-home"
+    }
 }
