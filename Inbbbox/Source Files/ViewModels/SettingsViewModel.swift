@@ -188,7 +188,6 @@ private extension SettingsViewModel {
         followingStreamSourceItem.valueChanged = { newValue in
             Settings.StreamSource.Following = newValue
             self.checkStreamsSource()
-            ColorModeProvider.change(to: Settings.Customization.CurrentColorMode == .NightMode ? .DayMode : .NightMode)
             AnalyticsManager.trackSettingChanged(.FollowingStreamSource, state: newValue)
         }
 
