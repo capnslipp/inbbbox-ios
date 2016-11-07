@@ -28,7 +28,7 @@ enum AnalyticsUserActionEvent: String {
 enum SettingsValueChangedEvent: String {
     case DailyRemainderEnabled, FollowingStreamSource,
             NewTodayStreamSource, PopularTodayStreamSource, DebutsStreamSource,
-            AuthorOnHomeScreen
+            AuthorOnHomeScreen, NightMode
 }
 
 class AnalyticsManager {

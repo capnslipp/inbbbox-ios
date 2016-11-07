@@ -76,6 +76,12 @@ class Settings {
             get { return Settings.boolForKey(.ShowAuthorOnHomeScreen) }
             set { Settings.setValue(newValue, forKey: .ShowAuthorOnHomeScreen) }
         }
+        
+        /// Indicates if "showing author on homescreen" is enabled.
+        static var NightMode: Bool {
+            get { return Settings.boolForKey(.NightMode) }
+            set { Settings.setValue(newValue, forKey: .NightMode) }
+        }
 
         /// Indicates what color mode is currently set.
         /// - SeeAlso: `ColorMode`
