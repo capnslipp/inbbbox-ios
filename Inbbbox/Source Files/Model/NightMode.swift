@@ -9,6 +9,10 @@
 import Foundation
 
 struct NightMode: ColorModeType {
+    
+    var windowBackgroundColor: UIColor {
+        return .backgroundNightModeGrayColor()
+    }
 
     var tabBarTint: UIColor {
         return .blackColor()
@@ -27,11 +31,11 @@ struct NightMode: ColorModeType {
     }
 
     var shotsCollectionBackground: UIColor {
-        return .blackColor()
+        return .backgroundNightModeGrayColor()
     }
 
     var tableViewBackground: UIColor {
-        return .blackColor()
+        return .backgroundNightModeGrayColor()
     }
 
     var tableViewSeparator: UIColor {
@@ -39,38 +43,58 @@ struct NightMode: ColorModeType {
     }
 
     var tableViewCellBackground: UIColor {
-        return .blackColor()
+        return lightGrayBackgroundColor
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return lightGrayBackgroundColor
     }
 
     var shotBucketsHeaderViewBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 48, 51, 1)
     }
 
     var shotBucketsFooterViewBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 48, 51, 1)
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 48, 51, 1)
+    }
+    
+    var shotBucketsActionButtonColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var shotBucketsActionTextColor: UIColor {
+        return .whiteColor()
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 48, 51, 1)
     }
 
     var shotDetailsOperationViewBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 48, 51, 1)
     }
 
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return lightGrayBackgroundColor
+    }
+    
+    var shotDetailsDescriptionSeparatorColor: UIColor {
+        return .clearColor()
+    }
+    
+    var shotDetailsDummySeparatorColor: UIColor {
+        return lightGrayBackgroundColor
     }
 
     var shotDetailsCommentCollectionViewCellBackground: UIColor {
+        return lightGrayBackgroundColor
+    }
+    
+    var shotDetailsCommentSeparatorColor: UIColor {
         return .blackColor()
     }
 
@@ -79,7 +103,7 @@ struct NightMode: ColorModeType {
     }
 
     var twoLayoutsCollectionViewBackground: UIColor {
-        return .blackColor()
+        return .backgroundNightModeGrayColor()
     }
     
     // MARK: Shot Detail
@@ -132,6 +156,14 @@ struct NightMode: ColorModeType {
         return .whiteColor()
     }
     
+    var shotDetailsFooterBackgroundColor: UIColor {
+        return lightGrayBackgroundColor
+    }
+    
+    var shotDetailsFooterBackgroundGrayedColor: UIColor {
+        return lightGrayBackgroundColor
+    }
+    
     // MARK: Settings
     
     var settingsUsernameTextColor: UIColor {
@@ -140,5 +172,20 @@ struct NightMode: ColorModeType {
     
     var settingsCellTextColor: UIColor {
         return .whiteColor()
+    }
+    
+    var settingsSwitchOnColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var settingsSwitchOffColor: UIColor {
+        return .blackColor()
+    }
+    
+    private let lightGrayBackgroundColor: UIColor = .RGBA(87, 98, 103, 1)
+    
+    func isEqualTo(other: ColorModeType) -> Bool {
+        if let o = other as? NightMode { return self == o }
+        return false
     }
 }

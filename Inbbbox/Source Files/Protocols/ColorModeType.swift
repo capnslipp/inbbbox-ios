@@ -9,6 +9,10 @@
 import Foundation
 
 protocol ColorModeType {
+    
+    // MARK: UIWindow
+    
+    var windowBackgroundColor: UIColor { get }
 
     // MARK: UITabBar
     var tabBarTint: UIColor { get }
@@ -33,12 +37,17 @@ protocol ColorModeType {
     var shotBucketsHeaderViewBackground: UIColor { get }
     var shotBucketsFooterViewBackground: UIColor { get }
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor { get }
+    var shotBucketsActionButtonColor: UIColor { get }
+    var shotBucketsActionTextColor: UIColor { get }
 
     // MARK: ShotDetails
     var shotDetailsHeaderViewBackground: UIColor { get }
     var shotDetailsOperationViewBackground: UIColor { get }
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor { get }
+    var shotDetailsDescriptionSeparatorColor: UIColor { get }
+    var shotDetailsDummySeparatorColor: UIColor { get }
     var shotDetailsCommentCollectionViewCellBackground: UIColor { get }
+    var shotDetailsCommentSeparatorColor: UIColor { get }
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor { get }
     var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor { get }
     var shotDetailsHeaderViewAuthorNotLinkColor: UIColor { get }
@@ -51,34 +60,23 @@ protocol ColorModeType {
     var shotDetailsCommentLinkTextColor: UIColor { get }
     var shotDetailsCommentEditLabelTextColor: UIColor { get }
     var shotDetailsBucketTextColor: UIColor { get }
+    var shotDetailsFooterBackgroundColor: UIColor { get }
+    var shotDetailsFooterBackgroundGrayedColor: UIColor { get }
     
     // MARK: Settings
     var settingsUsernameTextColor: UIColor { get }
     var settingsCellTextColor: UIColor { get }
+    var settingsSwitchOnColor: UIColor { get }
+    var settingsSwitchOffColor: UIColor { get }
 
     /// ProfileHeaderView.
     var profileHeaderViewBackground: UIColor { get }
 
     // MARK: TwoLayoutCollectionViewController
     var twoLayoutsCollectionViewBackground: UIColor { get }
-    
+    func isEqualTo(other: ColorModeType) -> Bool
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
-    return lhs.tabBarTint == rhs.tabBarTint &&
-    lhs.navigationBarTint == rhs.navigationBarTint &&
-    lhs.shotsCollectionBackground == rhs.shotsCollectionBackground &&
-    lhs.tableViewBackground == rhs.tableViewBackground &&
-    lhs.tableViewSeparator == rhs.tableViewSeparator &&
-    lhs.tableViewCellBackground == rhs.tableViewCellBackground &&
-    lhs.shotBucketsAddCollectionViewCellBackground == rhs.shotBucketsAddCollectionViewCellBackground &&
-    lhs.shotBucketsHeaderViewBackground == rhs.shotBucketsHeaderViewBackground &&
-    lhs.shotBucketsFooterViewBackground == rhs.shotBucketsFooterViewBackground &&
-    lhs.shotBucketsSeparatorCollectionViewCellBackground == rhs.shotBucketsSeparatorCollectionViewCellBackground &&
-    lhs.shotDetailsHeaderViewBackground == rhs.shotDetailsHeaderViewBackground &&
-    lhs.shotDetailsOperationViewBackground == rhs.shotDetailsOperationViewBackground &&
-    lhs.shotDetailsDescriptionCollectionViewCellBackground == rhs.shotDetailsDescriptionCollectionViewCellBackground &&
-    lhs.shotDetailsCommentCollectionViewCellBackground == rhs.shotDetailsCommentCollectionViewCellBackground &&
-    lhs.profileHeaderViewBackground == rhs.profileHeaderViewBackground &&
-    lhs.twoLayoutsCollectionViewBackground == rhs.twoLayoutsCollectionViewBackground
+  return lhs.isEqualTo(rhs)
 }

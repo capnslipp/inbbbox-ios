@@ -9,6 +9,10 @@
 import Foundation
 
 struct DayMode: ColorModeType {
+    
+    var windowBackgroundColor: UIColor {
+        return .RGBA(246, 248, 248, 1)
+    }
 
     var tabBarTint: UIColor {
         return .whiteColor()
@@ -57,6 +61,14 @@ struct DayMode: ColorModeType {
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
         return UIColor.RGBA(246, 248, 248, 1)
     }
+    
+    var shotBucketsActionButtonColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var shotBucketsActionTextColor: UIColor {
+        return .pinkColor()
+    }
 
     var shotDetailsHeaderViewBackground: UIColor {
         return .RGBA(246, 248, 248, 1)
@@ -70,8 +82,20 @@ struct DayMode: ColorModeType {
         return .whiteColor()
     }
 
+    var shotDetailsDescriptionSeparatorColor: UIColor {
+        return .separatorGrayColor()
+    }
+    
+    var shotDetailsDummySeparatorColor: UIColor {
+        return .whiteColor()
+    }
+    
     var shotDetailsCommentCollectionViewCellBackground: UIColor {
         return .whiteColor()
+    }
+    
+    var shotDetailsCommentSeparatorColor: UIColor {
+        return .clearColor()
     }
 
     var profileHeaderViewBackground: UIColor {
@@ -132,6 +156,14 @@ struct DayMode: ColorModeType {
         return .RGBA(87, 98, 103, 1)
     }
     
+    var shotDetailsFooterBackgroundColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var shotDetailsFooterBackgroundGrayedColor: UIColor {
+        return .RGBA(246, 248, 248, 1)
+    }
+    
     // MARK: Settings
     
     var settingsUsernameTextColor: UIColor {
@@ -140,5 +172,18 @@ struct DayMode: ColorModeType {
     
     var settingsCellTextColor: UIColor {
         return .blackColor()
+    }
+    
+    var settingsSwitchOnColor: UIColor {
+        return .pinkColor()
+    }
+    
+    var settingsSwitchOffColor: UIColor {
+        return .RGBA(143, 142, 148, 1)
+    }
+    
+    func isEqualTo(other: ColorModeType) -> Bool {
+        if let o = other as? DayMode { return self == o }
+        return false
     }
 }
