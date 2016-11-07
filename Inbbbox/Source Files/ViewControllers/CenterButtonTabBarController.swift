@@ -30,42 +30,47 @@ class CenterButtonTabBarController: UITabBarController {
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
-
-
+        
         let likesViewController = UINavigationController(
             rootViewController: SimpleShotsCollectionViewController()
         )
+        
+        let currentColorMode = ColorModeProvider.current()
         likesViewController.tabBarItem = tabBarItemWithTitle(
             NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"),
-            imageName: "ic-likes"
+            normalImageName: currentColorMode.tabBarLikesNormalImageName,
+            selectedImageName: currentColorMode.tabBarLikesSelectedImageName
         )
-
+        
         let bucketsViewController =
-                UINavigationController(rootViewController: BucketsCollectionViewController())
+            UINavigationController(rootViewController: BucketsCollectionViewController())
         bucketsViewController.tabBarItem = tabBarItemWithTitle(
             NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"),
-            imageName: "ic-buckets"
+            normalImageName: currentColorMode.tabBarBucketsNormalImageName,
+            selectedImageName: currentColorMode.tabBarBucketsSelectedImageName
         )
-
+        
         let followeesViewController = UINavigationController(
             rootViewController: FolloweesCollectionViewController(
                 oneColumnLayoutCellHeightToWidthRatio:
-                    LargeUserCollectionViewCell.heightToWidthRatio,
+                LargeUserCollectionViewCell.heightToWidthRatio,
                 twoColumnsLayoutCellHeightToWidthRatio:
-                    SmallUserCollectionViewCell.heightToWidthRatio
+                SmallUserCollectionViewCell.heightToWidthRatio
             )
         )
-
+        
         followeesViewController.tabBarItem = tabBarItemWithTitle(
             NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"),
-            imageName: "ic-following"
+            normalImageName: currentColorMode.tabBarFollowingNormalImageName,
+            selectedImageName: currentColorMode.tabBarFollowingSelectedImageName
         )
-
+        
         let settingsViewController =
-                UINavigationController(rootViewController: self.settingsViewController)
+            UINavigationController(rootViewController: self.settingsViewController)
         settingsViewController.tabBarItem = tabBarItemWithTitle(
             NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar"),
-            imageName: "ic-settings"
+            normalImageName: currentColorMode.tabBarSettingsNormalImageName,
+            selectedImageName: currentColorMode.tabBarSettingsSelectedImageName
         )
 
         viewControllers = [
@@ -94,8 +99,10 @@ class CenterButtonTabBarController: UITabBarController {
 
         tabBar.translucent = false
         centerButton.configureForAutoLayout()
-        centerButton.setImage(UIImage(named: "ic-ball-active"), forState: .Selected)
-        centerButton.setImage(UIImage(named: "ic-ball-inactive"), forState: .Normal)
+        
+        let currentColorMode = ColorModeProvider.current()
+        centerButton.setImage(UIImage(named: currentColorMode.tabBarCenterButtonNormalImageName), forState: .Normal)
+        centerButton.setImage(UIImage(named: currentColorMode.tabBarCenterButtonSelectedImageName), forState: .Selected)
         centerButton.backgroundColor = UIColor.whiteColor()
         centerButton.layer.zPosition = 1
         centerButton.addTarget(
@@ -171,12 +178,10 @@ extension CenterButtonTabBarController: UITabBarControllerDelegate {
 
 private extension CenterButtonTabBarController {
 
-    func tabBarItemWithTitle(title: String, imageName: String) -> UITabBarItem {
-
-        let image = UIImage(named: imageName)?.imageWithRenderingMode(.AlwaysOriginal)
-        let selectedImage = UIImage(
-            named: imageName + "-active"
-        )?.imageWithRenderingMode(.AlwaysOriginal)
+    func tabBarItemWithTitle(title: String, normalImageName: String, selectedImageName:String) -> UITabBarItem {
+        
+        let image = UIImage(named: normalImageName)?.imageWithRenderingMode(.AlwaysOriginal)
+        let selectedImage = UIImage(named: selectedImageName)?.imageWithRenderingMode(.AlwaysOriginal)
 
         let tabBarItem = UITabBarItem(
             title: title,

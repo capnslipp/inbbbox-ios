@@ -14,6 +14,16 @@ protocol ColorModeType {
     var tabBarTint: UIColor { get }
     var tabBarNormalItemTextColor: UIColor { get }
     var tabBarSelectedItemTextColor: UIColor { get }
+    var tabBarLikesNormalImageName: String { get }
+    var tabBarLikesSelectedImageName: String { get }
+    var tabBarBucketsNormalImageName: String { get }
+    var tabBarBucketsSelectedImageName: String { get }
+    var tabBarCenterButtonNormalImageName: String { get }
+    var tabBarCenterButtonSelectedImageName: String { get }
+    var tabBarFollowingNormalImageName: String { get }
+    var tabBarFollowingSelectedImageName: String { get }
+    var tabBarSettingsNormalImageName: String { get }
+    var tabBarSettingsSelectedImageName: String { get }
 
     // MARK: UINavigationBar
     var navigationBarTint: UIColor { get }
@@ -62,6 +72,8 @@ protocol ColorModeType {
     // MARK: TwoLayoutCollectionViewController
     var twoLayoutsCollectionViewBackground: UIColor { get }
     
+    // MARK: Logo
+    var logoImageName: String { get }
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
