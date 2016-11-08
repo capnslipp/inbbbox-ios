@@ -315,6 +315,9 @@ private extension ShotsNormalStateHandler {
         
         let detailsViewController = ShotDetailsViewController(shot: shot)
         detailsViewController.shotIndex = index
+        detailsViewController.updatedShotInfo = { [weak self] shot in
+                self?.shotsCollectionViewController?.shots[index] = shot
+        }
         let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
         shotDetailsPageDataSource.delegate = self
         let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
