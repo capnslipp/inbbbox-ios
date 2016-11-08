@@ -71,6 +71,15 @@ protocol ColorModeType {
     
     // MARK: Settings
     var settingsUsernameTextColor: UIColor { get }
+    var settingsSelectedCellBackgound: UIColor { get }
+    
+    // MARK: DatePicker
+    var datePickerBackgroundColor: UIColor { get }
+    var datePickerTextColor: UIColor { get }
+    
+    // MARK: DatePickerView
+    var datePickerViewBackgroundColor: UIColor { get }
+    var datePickerViewSeparatorColor: UIColor { get }
 
     /// ProfileHeaderView.
     var profileHeaderViewBackground: UIColor { get }

@@ -23,14 +23,10 @@ class SwitchCell: UITableViewCell, Reusable {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        let currentMode = ColorModeProvider.current()
         titleLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
-        titleLabel.textColor = currentMode.tableViewCellTextColor
         titleLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(titleLabel)
 
-        switchControl.tintColor = currentMode.switchCellTintColor
-        switchControl.backgroundColor = switchControl.tintColor
         switchControl.layer.cornerRadius = 18.0
         switchControl.thumbTintColor = UIColor.whiteColor()
         switchControl.onTintColor = UIColor.pinkColor()

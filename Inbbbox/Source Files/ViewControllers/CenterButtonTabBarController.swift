@@ -206,28 +206,24 @@ private extension CenterButtonTabBarController {
             
             switch firstViewController {
             case let likesViewController as SimpleShotsCollectionViewController:
-                print("likes")
                 likesViewController.tabBarItem = tabBarItemWithTitle(
                     NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"),
                     normalImageName: mode.tabBarLikesNormalImageName,
                     selectedImageName: mode.tabBarLikesSelectedImageName
                 )
             case let bucketsViewController as BucketsCollectionViewController:
-                print("buckets")
                 bucketsViewController.tabBarItem = tabBarItemWithTitle(
                     NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"),
                     normalImageName: mode.tabBarBucketsNormalImageName,
                     selectedImageName: mode.tabBarBucketsSelectedImageName
                 )
             case let followeesViewController as FolloweesCollectionViewController:
-                print("followees")
                 followeesViewController.tabBarItem = tabBarItemWithTitle(
                     NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"),
                     normalImageName: mode.tabBarFollowingNormalImageName,
                     selectedImageName: mode.tabBarFollowingSelectedImageName
                 )
             case let settingsViewController as SettingsViewController:
-                print("settings")
                 settingsViewController.tabBarItem = tabBarItemWithTitle(
                     NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar"),
                     normalImageName: mode.tabBarSettingsNormalImageName,

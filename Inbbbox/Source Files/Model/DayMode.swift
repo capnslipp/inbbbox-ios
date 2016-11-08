@@ -100,7 +100,7 @@ struct DayMode: ColorModeType {
     
     // MARK: SwichCell
     var switchCellTintColor: UIColor {
-        return .blackColor()
+        return .RGBA(143, 142, 148, 1)
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
@@ -197,6 +197,28 @@ struct DayMode: ColorModeType {
     
     var settingsUsernameTextColor: UIColor {
         return .textDarkColor()
+    }
+    
+    var settingsSelectedCellBackgound: UIColor {
+        return .RGBA(217, 217, 217, 1)
+    }
+    
+    // MARK: DatePicker
+    var datePickerBackgroundColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var datePickerTextColor: UIColor {
+        return .blackColor()
+    }
+    
+    // MARK: DatePickerView
+    var datePickerViewBackgroundColor: UIColor {
+        return .backgroundGrayColor()
+    }
+    
+    var datePickerViewSeparatorColor: UIColor {
+        return .RGBA(224, 224, 224, 1)
     }
     
     // MARK: Logo

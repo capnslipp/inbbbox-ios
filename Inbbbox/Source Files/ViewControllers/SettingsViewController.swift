@@ -171,29 +171,36 @@ extension SettingsViewController {
 private extension SettingsViewController {
 
     func configureSettingCell(cell: UITableViewCell, forItem item: GroupItem) {
+        let currentMode =  ColorModeProvider.current()
         if let item = item as? SwitchItem, switchCell = cell as? SwitchCell {
-            configureSwitchCell(switchCell, forItem: item)
+            configureSwitchCell(switchCell, forItem: item, withMode: currentMode)
         } else if let item = item as? DateItem, dateCell = cell as? DateCell {
-            configureDateCell(dateCell, forItem: item)
+            configureDateCell(dateCell, forItem: item, withMode: currentMode)
         } else if let item = item as? LabelItem, labelCell = cell as? LabelCell {
-            configureLabelCell(labelCell, forItem: item)
+            configureLabelCell(labelCell, forItem: item, withMode: currentMode)
         }
     }
 
-    func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem) {
+    func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem, withMode mode:ColorModeType) {
         cell.titleLabel.text = item.title
+        cell.titleLabel.textColor = mode.tableViewCellTextColor
+        cell.switchControl.tintColor = mode.switchCellTintColor
+        cell.switchControl.backgroundColor = cell.switchControl.tintColor
         cell.switchControl.on = item.enabled
         cell.selectionStyle = .None
     }
 
-    func configureDateCell(cell: DateCell, forItem item: DateItem) {
+    func configureDateCell(cell: DateCell, forItem item: DateItem, withMode mode:ColorModeType) {
         cell.titleLabel.text = item.title
+        cell.titleLabel.textColor = mode.tableViewCellTextColor
         cell.setDateText(item.dateString)
+        cell.selectedBackgroundView = UIView.withColor(mode.settingsSelectedCellBackgound)
     }
 
-    func configureLabelCell(cell: LabelCell, forItem item: LabelItem) {
+    func configureLabelCell(cell: LabelCell, forItem item: LabelItem, withMode mode: ColorModeType) {
         cell.titleLabel.text = item.title
         cell.titleLabel.adjustsFontSizeToFitWidth = true
+        cell.selectedBackgroundView = UIView.withColor(mode.settingsSelectedCellBackgound)
     }
 
 }
@@ -306,6 +313,23 @@ private extension UITableView {
 
 extension SettingsViewController: ColorModeAdaptable {
     func adaptColorMode(mode: ColorModeType) {
-        print(self)
+        tableView.reloadData()
+        updateUsernameColorForMode(mode)
+    }
+    
+    private func updateUsernameColorForMode(mode: ColorModeType) {
+        guard let header = tableView?.tableHeaderView as? SettingsTableHeaderView else {
+            return
+        }
+        
+        header.usernameLabel.textColor = mode.settingsUsernameTextColor
+    }
+}
+
+private extension UIView {
+    static func withColor(color: UIColor) -> UIView {
+        let viewForReturn = UIView()
+        viewForReturn.backgroundColor = color
+        return viewForReturn
     }
 }

@@ -200,6 +200,28 @@ struct NightMode: ColorModeType {
         return .RGBA(236, 237, 239, 1)
     }
     
+    var settingsSelectedCellBackgound: UIColor {
+        return .RGBA(98, 113, 120, 1)
+    }
+    
+    // MARK: DatePicker
+    var datePickerBackgroundColor: UIColor {
+        return .RGBA(43, 49, 51, 1.00)
+    }
+    
+    var datePickerTextColor: UIColor {
+        return .whiteColor()
+    }
+    
+    // MARK: DatePickerView
+    var datePickerViewBackgroundColor: UIColor {
+        return .RGBA(43, 49, 51, 1.00)
+    }
+    
+    var datePickerViewSeparatorColor: UIColor {
+        return .RGBA(43, 49, 51, 1.00)
+    }
+    
     // MARK: Logo
     
     var logoImageName: String {

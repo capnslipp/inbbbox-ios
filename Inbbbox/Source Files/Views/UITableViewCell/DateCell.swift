@@ -26,7 +26,6 @@ class DateCell: UITableViewCell, Reusable {
         accessoryType = .DisclosureIndicator
 
         titleLabel.font = UIFont.systemFontOfSize(17, weight: UIFontWeightRegular)
-        titleLabel.textColor = ColorModeProvider.current().tableViewCellTextColor
         titleLabel.adjustsFontSizeToFitWidth = true
         contentView.addSubview(titleLabel)
 
