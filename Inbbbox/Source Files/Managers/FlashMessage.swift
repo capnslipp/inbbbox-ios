@@ -31,6 +31,7 @@ final class FlashMessage {
     private let displayTime = 1.5
     private let extraDisplayTimePerPixel = 0.04
     private let animationDuration = 0.3
+    private let minimalInset: CGFloat = 10
     private let asyncWrapper = AsyncWrapper()
     
     /// Indicates whether a notification is currently active.
@@ -143,7 +144,8 @@ final class FlashMessage {
     
     private func calculateEndPointForFadeInBasedOn(flashMessageView: FlashMessageView, andVerticaOffset verticalOffset: CGFloat) -> CGPoint {
         if flashMessageView.messagePosition != .Bottom {
-            return CGPoint(x: flashMessageView.center.x, y: offsetHeightForMessage + verticalOffset + CGRectGetHeight(flashMessageView.frame) / 2.0)
+            let height = CGRectGetHeight(flashMessageView.frame) - minimalInset
+            return CGPoint(x: flashMessageView.center.x, y: offsetHeightForMessage + verticalOffset + height / 2.0)
         } else {
             let height = flashMessageView.viewController?.view.bounds.size.height ?? 0.0
             var y = height - CGRectGetHeight(flashMessageView.frame) / 2.0
