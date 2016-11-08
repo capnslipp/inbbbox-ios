@@ -81,6 +81,11 @@ struct DayMode: ColorModeType {
     var shotsCollectionBackground: UIColor {
         return .backgroundGrayColor()
     }
+    
+    // MARK: ShotCell
+    var shotViewCellBackground: UIColor {
+        return .cellBackgroundColor()
+    }
 
     var tableViewBackground: UIColor {
         return .backgroundGrayColor()
@@ -117,6 +122,10 @@ struct DayMode: ColorModeType {
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
         return UIColor.RGBA(246, 248, 248, 1)
+    }
+    
+    var bucketsCollectionViewBackground: UIColor {
+        return .backgroundGrayColor()
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
@@ -194,7 +203,6 @@ struct DayMode: ColorModeType {
     }
     
     // MARK: Settings
-    
     var settingsUsernameTextColor: UIColor {
         return .textDarkColor()
     }
@@ -222,8 +230,13 @@ struct DayMode: ColorModeType {
     }
     
     // MARK: Logo
-    
     var logoImageName: String {
         return "logo-type-home"
     }
+
+    // MARK: StatusBar
+    var preferredStatusBarStyle: UIStatusBarStyle {
+        return .Default
+    }
+
 }

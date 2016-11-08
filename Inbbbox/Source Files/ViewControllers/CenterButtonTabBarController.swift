@@ -13,6 +13,8 @@ class CenterButtonTabBarController: UITabBarController {
     var didUpdateTabBarItems = false
     var animatableLikesTabBarItem: UIImageView?
     var animatableBucketsTabBarItem: UIImageView?
+    
+    private var currentColorMode = ColorModeProvider.current()
 
     enum CenterButtonViewControllers: Int {
         case Likes = 0
@@ -79,7 +81,7 @@ class CenterButtonTabBarController: UITabBarController {
         tabBar.translucent = false
         centerButton.configureForAutoLayout()
         
-        setupCenterButton(forColorMode: ColorModeProvider.current())
+        centerButton.adaptColorMode(currentColorMode)
         centerButton.adjustsImageWhenHighlighted = false
         centerButton.layer.zPosition = 1
         centerButton.addTarget(
@@ -155,8 +157,9 @@ extension CenterButtonTabBarController: UITabBarControllerDelegate {
 
 extension CenterButtonTabBarController: ColorModeAdaptable {
     func adaptColorMode(mode: ColorModeType) {
+        
         setupTabBarItem(forViewControllers: viewControllers, forColorMode: mode)
-        setupCenterButton(forColorMode: mode)
+        centerButton.adaptColorMode(mode)
     }
 }
 
@@ -217,6 +220,7 @@ private extension CenterButtonTabBarController {
                     normalImageName: mode.tabBarBucketsNormalImageName,
                     selectedImageName: mode.tabBarBucketsSelectedImageName
                 )
+                bucketsViewController.adaptColorMode(mode)
             case let followeesViewController as FolloweesCollectionViewController:
                 followeesViewController.tabBarItem = tabBarItemWithTitle(
                     NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"),
@@ -234,13 +238,5 @@ private extension CenterButtonTabBarController {
                 break
             }
         }
-    }
-    
-    func setupCenterButton(forColorMode mode: ColorModeType) {
-        centerButton.setImage(UIImage(named: mode.tabBarCenterButtonNormalImageName), forState: .Normal)
-        centerButton.setImage(UIImage(named: mode.tabBarCenterButtonSelectedImageName), forState: .Selected)
-        centerButton.backgroundColor = mode.tabBarCenterButtonBackground
-        centerButton.layer.shadowColor = mode.tabBarCenterButtonShadowColor.CGColor
-        centerButton.layer.shadowOffset = mode.tabBarCenterButtonShadowOffset
     }
 }

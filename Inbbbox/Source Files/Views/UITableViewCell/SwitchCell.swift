@@ -55,3 +55,11 @@ class SwitchCell: UITableViewCell, Reusable {
         super.updateConstraints()
     }
 }
+
+extension SwitchCell: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        titleLabel.textColor = mode.tableViewCellTextColor
+        switchControl.tintColor = mode.switchCellTintColor
+        switchControl.backgroundColor = switchControl.tintColor
+    }
+}

@@ -34,3 +34,13 @@ class RoundedButton: UIButton {
         return CGSize(width: diameter, height: diameter)
     }
 }
+
+extension RoundedButton: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        setImage(UIImage(named: mode.tabBarCenterButtonNormalImageName), forState: .Normal)
+        setImage(UIImage(named: mode.tabBarCenterButtonSelectedImageName), forState: .Selected)
+        backgroundColor = mode.tabBarCenterButtonBackground
+        layer.shadowColor = mode.tabBarCenterButtonShadowColor.CGColor
+        layer.shadowOffset = mode.tabBarCenterButtonShadowOffset
+    }
+}

@@ -60,3 +60,10 @@ class DateCell: UITableViewCell, Reusable {
         dateLabel.text = text
     }
 }
+
+extension DateCell: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        titleLabel.textColor = mode.tableViewCellTextColor
+        selectedBackgroundView = UIView.withColor(mode.settingsSelectedCellBackgound)
+    }
+}

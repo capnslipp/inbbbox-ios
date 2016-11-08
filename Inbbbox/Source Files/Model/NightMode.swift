@@ -74,13 +74,17 @@ struct NightMode: ColorModeType {
         return "ic-settings-active"
     }
 
-
     var navigationBarTint: UIColor {
         return .blackColor()
     }
 
     var shotsCollectionBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 49, 51, 1)
+    }
+    
+    // MARK: ShotCell
+    var shotViewCellBackground: UIColor {
+        return .RGBA(98, 113, 120, 1)
     }
 
     var tableViewBackground: UIColor {
@@ -119,6 +123,10 @@ struct NightMode: ColorModeType {
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
         return .blackColor()
     }
+    
+    var bucketsCollectionViewBackground: UIColor {
+        return .RGBA(43, 49, 51, 1)
+    }
 
     var shotDetailsHeaderViewBackground: UIColor {
         return .blackColor()
@@ -141,7 +149,7 @@ struct NightMode: ColorModeType {
     }
 
     var twoLayoutsCollectionViewBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 49, 51, 1)
     }
     
     // MARK: Shot Detail
@@ -195,7 +203,6 @@ struct NightMode: ColorModeType {
     }
     
     // MARK: Settings
-    
     var settingsUsernameTextColor: UIColor {
         return .RGBA(236, 237, 239, 1)
     }
@@ -223,8 +230,12 @@ struct NightMode: ColorModeType {
     }
     
     // MARK: Logo
-    
     var logoImageName: String {
         return "logo-type-home-night"
+    }
+    
+    // MARK: StatusBar
+    var preferredStatusBarStyle: UIStatusBarStyle {
+        return .LightContent
     }
 }

@@ -284,6 +284,7 @@
 		BB3929FA6C490D4294DC0F3C /* ViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B389E42C7B69120ECC42034 /* ViewMock.swift */; };
 		BC6B3E84D5D992DAB1793695 /* AutoScrollableShotsAnimatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A52A23BA4741CF6B4E3F10A /* AutoScrollableShotsAnimatorSpec.swift */; };
 		BD7EF5D032FDB57425DDE1B5 /* CustomTabBarItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DFB3DA4E8203C9B66344BB /* CustomTabBarItemView.swift */; };
+		BE3776091DD20FA000409590 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3776081DD20FA000409590 /* UIViewExtension.swift */; };
 		BE5712551DCA2DD200358745 /* FlashMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5712541DCA2DD200358745 /* FlashMessageViewModel.swift */; };
 		BE5712571DCA2DE000358745 /* FlashMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5712561DCA2DE000358745 /* FlashMessageView.swift */; };
 		BE5712591DCA2DEB00358745 /* FlashMessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5712581DCA2DEB00358745 /* FlashMessageTypes.swift */; };
@@ -734,6 +735,7 @@
 		BC1CF5A698AB825C0DDAB242 /* AnimationDescriptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnimationDescriptor.swift; sourceTree = "<group>"; };
 		BCD774838CC197571211DC4E /* APIProjectsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIProjectsProvider.swift; sourceTree = "<group>"; };
 		BD8DC1F4B61694B2EC222DEE /* APIBucketsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIBucketsProvider.swift; sourceTree = "<group>"; };
+		BE3776081DD20FA000409590 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		BE44284007590E9AE62066DA /* VerifiableSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VerifiableSpec.swift; sourceTree = "<group>"; };
 		BE5712541DCA2DD200358745 /* FlashMessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageViewModel.swift; sourceTree = "<group>"; };
 		BE5712561DCA2DE000358745 /* FlashMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageView.swift; sourceTree = "<group>"; };
@@ -953,6 +955,7 @@
 				300BDCA81CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift */,
 				65BA28208F809949B73B35D2 /* AppDelegateExtension.swift */,
 				F077D0951CD236AA008948A9 /* ImageProviderExtension.swift */,
+				BE3776081DD20FA000409590 /* UIViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2139,6 +2142,7 @@
 				EE0E02A622C07A1519088E48 /* APIBucketsRequester.swift in Sources */,
 				EA78076B1DC0A5960077B243 /* ShotDetailsPageViewControllerDataSource.swift in Sources */,
 				78CF4129EDD9A69F5249CC24 /* APICommentsProvider.swift in Sources */,
+				BE3776091DD20FA000409590 /* UIViewExtension.swift in Sources */,
 				3D985BE766B44A002C3EE6FE /* APICommentsRequester.swift in Sources */,
 				22ABD9C1194FC1CB23A5C35F /* APIConnectionsProvider.swift in Sources */,
 				30C883481DC0A79000BE98A3 /* ColorModeProvider.swift in Sources */,

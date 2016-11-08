@@ -18,6 +18,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     private var cellsAnimateTimer: NSTimer?
     private let animationCycleInterval = 6.0
 
+    private var currentColorMode = ColorModeProvider.current()
     // MARK: - Lifecycle
 
     convenience init() {
@@ -82,6 +83,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         if !cell.isRegisteredTo3DTouch {
             cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
         }
+        cell.adaptColorMode(currentColorMode)
         return cell
     }
 
@@ -221,5 +223,14 @@ extension BucketsCollectionViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+}
+
+// MARK: ColorModeAdaptable
+
+extension BucketsCollectionViewController: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        currentColorMode = mode
+        collectionView?.reloadData()
     }
 }

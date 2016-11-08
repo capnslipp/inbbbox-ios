@@ -33,6 +33,9 @@ protocol ColorModeType {
 
     // MARK: ShotsCollection
     var shotsCollectionBackground: UIColor { get }
+    
+    // MARK: ShotCell
+    var shotViewCellBackground: UIColor { get }
 
     // MARK: UITableView
     var tableViewBackground: UIColor { get }
@@ -50,6 +53,7 @@ protocol ColorModeType {
     var shotBucketsHeaderViewBackground: UIColor { get }
     var shotBucketsFooterViewBackground: UIColor { get }
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor { get }
+    var bucketsCollectionViewBackground: UIColor { get }
 
     // MARK: ShotDetails
     var shotDetailsHeaderViewBackground: UIColor { get }
@@ -89,6 +93,9 @@ protocol ColorModeType {
     
     // MARK: Logo
     var logoImageName: String { get }
+    
+    // MARK: StatusBar
+    var preferredStatusBarStyle: UIStatusBarStyle { get }
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {

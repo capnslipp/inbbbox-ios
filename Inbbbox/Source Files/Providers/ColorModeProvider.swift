@@ -69,6 +69,7 @@ final class ColorModeProvider {
         ProfileHeaderView.appearance().backgroundColor = mode.profileHeaderViewBackground
 
         UICollectionView.appearanceWhenContainedInInstancesOfClasses([TwoLayoutsCollectionViewController.self]).backgroundColor = mode.twoLayoutsCollectionViewBackground
+        UICollectionView.appearanceWhenContainedInInstancesOfClasses([BucketsCollectionViewController.self]).backgroundColor = mode.bucketsCollectionViewBackground
 
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barStyle = .Black
