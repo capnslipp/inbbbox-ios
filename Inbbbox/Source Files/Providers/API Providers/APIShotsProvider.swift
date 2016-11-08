@@ -190,13 +190,11 @@ private extension APIShotsProvider {
     }
 
     private func prepareForFetchingLikes() -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
-            likes.removeAll()
-            likesFetched = 0
-            likesToFetch = 0
-            lastPageOfLikesReached = false
-            fulfill()
-        }
+        likes.removeAll()
+        likesFetched = 0
+        likesToFetch = 0
+        lastPageOfLikesReached = false
+        return Promise<Void>()
     }
 
     private func fetchLikes(max: UInt) -> Promise<Void> {

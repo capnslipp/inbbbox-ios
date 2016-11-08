@@ -18,11 +18,11 @@ struct PageRequest: Requestable, Responsable {
     let query: Query
 
     // Session for page request.
-    var session: NSURLSession
+    let session: NSURLSession
 
-    init(query: Query) {
+    init(query: Query, urlSession: NSURLSession = NSURLSession.inbbboxDefaultSession()) {
         self.query = query
-        session = NSURLSession(configuration: NSURLSessionConfiguration.inbbboxDefaultSessionConfiguration())
+        session = urlSession
     }
 
     /// Invoke page request.
