@@ -86,6 +86,11 @@ struct DayMode: ColorModeType {
     var shotViewCellBackground: UIColor {
         return .cellBackgroundColor()
     }
+    
+    // MARK: UITableView
+    var tableViewBlurColor: UIColor {
+        return .clearColor()
+    }
 
     var tableViewBackground: UIColor {
         return .backgroundGrayColor()
@@ -117,7 +122,7 @@ struct DayMode: ColorModeType {
     }
 
     var shotBucketsFooterViewBackground: UIColor {
-        return .RGBA(246, 248, 248, 1)
+        return .whiteColor()
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
@@ -126,6 +131,10 @@ struct DayMode: ColorModeType {
     
     var bucketsCollectionViewBackground: UIColor {
         return .backgroundGrayColor()
+    }
+    
+    var emptyBucketImageName: String {
+        return "ic-bucket-emptystate-night"
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
@@ -156,6 +165,10 @@ struct DayMode: ColorModeType {
     
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
         return .blackColor()
+    }
+    
+    var shotDummySpaceBackground: UIColor {
+        return .whiteColor()
     }
     
     var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
@@ -200,6 +213,14 @@ struct DayMode: ColorModeType {
     
     var shotDetailsBucketTextColor: UIColor {
         return .RGBA(87, 98, 103, 1)
+    }
+    
+    var shotDetailsSeparatorColor: UIColor {
+        return .separatorGrayColor()
+    }
+    
+    var shotDetailsEditViewBackground: UIColor {
+        return .clearColor()
     }
     
     // MARK: Settings

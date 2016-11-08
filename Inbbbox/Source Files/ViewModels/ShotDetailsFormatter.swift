@@ -94,7 +94,7 @@ final class ShotDetailsFormatter {
         let range = NSRange(location: 0, length: mutableBody.length)
 
         mutableBody.addAttributes([
-                NSForegroundColorAttributeName: UIColor.grayColor(),
+                NSForegroundColorAttributeName: ColorModeProvider.current().shotDetailsCommentContentTextColor,
                 NSFontAttributeName: UIFont.systemFontOfSize(ShotDetailsFormatterBigFontSize)
         ], range: range)
 

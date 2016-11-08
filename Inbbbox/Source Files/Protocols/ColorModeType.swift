@@ -38,6 +38,7 @@ protocol ColorModeType {
     var shotViewCellBackground: UIColor { get }
 
     // MARK: UITableView
+    var tableViewBlurColor: UIColor { get }
     var tableViewBackground: UIColor { get }
     var tableViewSeparator: UIColor { get }
 
@@ -54,9 +55,11 @@ protocol ColorModeType {
     var shotBucketsFooterViewBackground: UIColor { get }
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor { get }
     var bucketsCollectionViewBackground: UIColor { get }
+    var emptyBucketImageName: String { get }
 
     // MARK: ShotDetails
     var shotDetailsHeaderViewBackground: UIColor { get }
+    var shotDummySpaceBackground: UIColor { get }
     var shotDetailsOperationViewBackground: UIColor { get }
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor { get }
     var shotDetailsCommentCollectionViewCellBackground: UIColor { get }
@@ -72,6 +75,8 @@ protocol ColorModeType {
     var shotDetailsCommentLinkTextColor: UIColor { get }
     var shotDetailsCommentEditLabelTextColor: UIColor { get }
     var shotDetailsBucketTextColor: UIColor { get }
+    var shotDetailsSeparatorColor: UIColor { get }
+    var shotDetailsEditViewBackground: UIColor { get }
     
     // MARK: Settings
     var settingsUsernameTextColor: UIColor { get }

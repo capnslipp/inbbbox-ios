@@ -45,10 +45,11 @@ extension ShotDetailsPageViewController {
                                    completion: nil)
         }
         
+        let currentColorMode = ColorModeProvider.current()
         if DeviceInfo.shouldDowngrade() {
-            view.backgroundColor = .backgroundGrayColor()
+            view.backgroundColor = currentColorMode.tableViewBackground
         } else {
-            view.backgroundColor = .clearColor()
+            view.backgroundColor = currentColorMode.tableViewBlurColor
             blurView.configureForAutoLayout()
             view.addSubview(blurView)
             view.sendSubviewToBack(blurView)

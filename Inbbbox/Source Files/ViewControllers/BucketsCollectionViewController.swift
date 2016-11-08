@@ -195,7 +195,7 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
                 firstLocalizedString:
                 NSLocalizedString("BucketsCollectionViewController.EmptyData.FirstLocalizedString",
                         comment: "Displayed when empty data in view"),
-                attachmentImage: UIImage(named: "ic-bucket-emptystate"),
+                attachmentImage: UIImage(named: currentColorMode.emptyBucketImageName),
                 imageOffset: CGPoint(x: 0, y: -4),
                 lastLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.LastLocalizedString",
                     comment: "Displayed when empty data in view")
