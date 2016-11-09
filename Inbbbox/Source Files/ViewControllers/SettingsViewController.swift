@@ -137,7 +137,7 @@ extension SettingsViewController {
         let customizationTitle = NSLocalizedString("SettingsViewController.Customization",
                                                    comment: "Title of group of buttons for customization settings")
         let feedbackTitle = NSLocalizedString("SettingsViewModel.Feedback",
-                                                   comment: "Title of group of buttons for customization settings")
+                                                   comment: "Title of group of buttons for sending feedback")
 
         switch section {
             case 0: return viewModel.userMode == .LoggedUser ? notificationsTitle : nil
