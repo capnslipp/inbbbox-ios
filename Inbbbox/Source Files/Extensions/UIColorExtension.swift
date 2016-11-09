@@ -88,7 +88,35 @@ extension UIColor {
     class func followeeTextGrayNightModeColor() -> UIColor {
         return RGBA(164, 180, 188, 1)
     }
+    
+    // Darker gray used in night mode
+    class func darkGrayNightMode() -> UIColor {
+        return .RGBA(43, 49, 51, 1)
+    }
+    
+    // Less darker gray used in night mode
+    class func lessDarkGrayNightMode() -> UIColor {
+        return .RGBA(87, 98, 103, 1)
+    }
+    
+    // Gray used in night mode
+    class func grayNightMode() -> UIColor {
+        return .RGBA(98, 113, 120, 1)
+    }
+    
+    // Less white used in night mode
+    class func lessWhiteNightMode() -> UIColor {
+        return .RGBA(223, 224, 226, 1)
+    }
+    
+    // Less white used in night mode
+    class func whiteNightMode() -> UIColor {
+        return .RGBA(236, 237, 239, 1)
+    }
+    
 
+    // MARK: Flash Message
+    
     /// Returns flash message gray background
     class func flashMessageBackgroundColor() -> UIColor {
         return RGBA(51, 51, 51, 1)

@@ -75,12 +75,12 @@ struct NightMode: ColorModeType {
     }
 
     var shotsCollectionBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     // MARK: ShotCell
     var shotViewCellBackground: UIColor {
-        return .RGBA(98, 113, 120, 1)
+        return .grayNightMode()
     }
     
     // MARK: UITableView
@@ -89,11 +89,11 @@ struct NightMode: ColorModeType {
     }
 
     var tableViewBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
 
     var tableViewCellBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .lessDarkGrayNightMode()
     }
     
     var tableViewCellTextColor: UIColor {
@@ -106,23 +106,23 @@ struct NightMode: ColorModeType {
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .lessDarkGrayNightMode()
     }
 
     var shotBucketsHeaderViewBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
 
     var shotBucketsFooterViewBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .lessDarkGrayNightMode()
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     var bucketsCollectionViewBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     var emptyBucketImageName: String {
@@ -130,19 +130,19 @@ struct NightMode: ColorModeType {
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
 
     var shotDetailsOperationViewBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
 
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .lessDarkGrayNightMode()
     }
 
     var shotDetailsCommentCollectionViewCellBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .lessDarkGrayNightMode()
     }
 
     var profileHeaderViewBackground: UIColor {
@@ -150,7 +150,7 @@ struct NightMode: ColorModeType {
     }
 
     var twoLayoutsCollectionViewBackground: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     // MARK: Shot Detail
@@ -160,7 +160,7 @@ struct NightMode: ColorModeType {
     }
     
     var shotDummySpaceBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .lessDarkGrayNightMode()
     }
     
     var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
@@ -168,7 +168,7 @@ struct NightMode: ColorModeType {
     }
     
     var shotDetailsHeaderViewAuthorNotLinkColor: UIColor {
-        return .RGBA(223, 224, 226, 1)
+        return  .lessWhiteNightMode()
     }
     
     var shotDetailsHeaderViewAuthorLinkColor: UIColor {
@@ -176,7 +176,7 @@ struct NightMode: ColorModeType {
     }
 
     var shotDetailsDescriptionViewColorTextColor: UIColor {
-        return .RGBA(223, 224, 226, 1)
+        return  .lessWhiteNightMode()
     }
     
     var shotDetailsCommentAuthorTextColor: UIColor {
@@ -184,7 +184,7 @@ struct NightMode: ColorModeType {
     }
     
     var shotDetailsCommentContentTextColor: UIColor {
-        return .RGBA(223, 224, 226, 1)
+        return  .lessWhiteNightMode()
     }
     
     var shotDetailsCommentLikesCountTextColor: UIColor {
@@ -208,7 +208,7 @@ struct NightMode: ColorModeType {
     }
     
     var shotDetailsSeparatorColor: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     var shotDetailsEditViewBackground: UIColor {
@@ -216,21 +216,21 @@ struct NightMode: ColorModeType {
     }
     
     var shotBucketsActionCellBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .lessDarkGrayNightMode()
     }
     
     // MARK: Settings
     var settingsUsernameTextColor: UIColor {
-        return .RGBA(236, 237, 239, 1)
+        return  .whiteNightMode()
     }
     
     var settingsSelectedCellBackgound: UIColor {
-        return .RGBA(98, 113, 120, 1)
+        return .grayNightMode()
     }
     
     // MARK: DatePicker
     var datePickerBackgroundColor: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     var datePickerTextColor: UIColor {
@@ -239,11 +239,11 @@ struct NightMode: ColorModeType {
     
     // MARK: DatePickerView
     var datePickerViewBackgroundColor: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     var datePickerViewSeparatorColor: UIColor {
-        return .RGBA(43, 49, 51, 1)
+        return .darkGrayNightMode()
     }
     
     // MARK: Logo
