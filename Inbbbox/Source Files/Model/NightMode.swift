@@ -9,6 +9,10 @@
 import Foundation
 
 struct NightMode: ColorModeType {
+    
+    var windowBackgroundColor: UIColor {
+        return .backgroundNightModeGrayColor()
+    }
 
     var tabBarTint: UIColor {
         return .blackColor()
@@ -273,4 +277,14 @@ struct NightMode: ColorModeType {
     var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
         return .White
     }
+    
+    var visualEffectBlurType: UIBlurEffectStyle {
+        return .Dark
+    }
+    
+    func isEqualTo(other: ColorModeType) -> Bool {
+        if let _ = other as? NightMode { return true }
+        return false
+    }
+    
 }

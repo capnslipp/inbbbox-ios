@@ -56,7 +56,6 @@ final class ColorModeProvider {
         UITableView.appearance().backgroundColor = mode.tableViewBackground
         UITableView.appearance().separatorColor = mode.cellSeparator
         UITableViewCell.appearance().backgroundColor = mode.tableViewCellBackground
-
         ShotsCollectionBackgroundView.appearance().backgroundColor = mode.shotsCollectionBackground
         ShotBucketsAddCollectionViewCell.appearance().backgroundColor = mode.shotBucketsAddCollectionViewCellBackground
         ShotBucketsSeparatorCollectionViewCell.appearance().backgroundColor = mode.shotBucketsSeparatorCollectionViewCellBackground
@@ -76,6 +75,7 @@ final class ColorModeProvider {
         UINavigationBar.appearance().barStyle = .Black
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
+        UIWindow.appearance().backgroundColor = .blackColor()
 
         UIDatePicker.appearance().backgroundColor = mode.tableViewBackground
         

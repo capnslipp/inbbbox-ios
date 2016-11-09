@@ -46,6 +46,11 @@ extension UIColor {
     class func backgroundGrayColor() -> UIColor {
         return RGBA(246, 248, 248, 1)
     }
+    
+    /// Returns brand background gray color for nigth mode.
+    class func backgroundNightModeGrayColor() -> UIColor {
+        return RGBA(43, 49, 51, 1)
+    }
 
     /// Returns brand text dark color.
     class func textDarkColor() -> UIColor {

@@ -9,6 +9,10 @@
 import Foundation
 
 struct DayMode: ColorModeType {
+    
+    var windowBackgroundColor: UIColor {
+        return .RGBA(246, 248, 248, 1)
+    }
 
     var tabBarTint: UIColor {
         return .whiteColor()
@@ -272,5 +276,14 @@ struct DayMode: ColorModeType {
     
     var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
         return .Gray
+    }
+    
+    var visualEffectBlurType: UIBlurEffectStyle {
+        return .Light
+    }
+    
+    func isEqualTo(other: ColorModeType) -> Bool {
+        if let _ = other as? DayMode { return true }
+        return false
     }
 }

@@ -9,6 +9,10 @@
 import Foundation
 
 protocol ColorModeType {
+    
+    // MARK: UIWindow
+    
+    var windowBackgroundColor: UIColor { get }
 
     // MARK: UITabBar
     var tabBarTint: UIColor { get }
@@ -108,61 +112,11 @@ protocol ColorModeType {
     var shadowColor: UIColor { get }
     var cellSeparator: UIColor { get }
     var activityIndicatorViewStyle: UIActivityIndicatorViewStyle { get }
+    var visualEffectBlurType: UIBlurEffectStyle { get }
+    
+    func isEqualTo(other: ColorModeType) -> Bool
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
-    return  lhs.tabBarTint == rhs.tabBarTint &&
-        lhs.tabBarNormalItemTextColor == rhs.tabBarNormalItemTextColor &&
-        lhs.tabBarSelectedItemTextColor == rhs.tabBarSelectedItemTextColor &&
-        lhs.tabBarCenterButtonBackground == rhs.tabBarCenterButtonBackground &&
-        lhs.tabBarCenterButtonShadowOffset == rhs.tabBarCenterButtonShadowOffset &&
-        lhs.tabBarLikesNormalImageName == rhs.tabBarLikesNormalImageName &&
-        lhs.tabBarLikesSelectedImageName == rhs.tabBarLikesSelectedImageName &&
-        lhs.tabBarBucketsNormalImageName == rhs.tabBarBucketsNormalImageName &&
-        lhs.tabBarBucketsSelectedImageName == rhs.tabBarBucketsSelectedImageName &&
-        lhs.tabBarCenterButtonNormalImageName == rhs.tabBarCenterButtonNormalImageName &&
-        lhs.tabBarCenterButtonSelectedImageName == rhs.tabBarCenterButtonSelectedImageName &&
-        lhs.tabBarFollowingNormalImageName == rhs.tabBarFollowingNormalImageName &&
-        lhs.tabBarFollowingSelectedImageName == rhs.tabBarFollowingSelectedImageName &&
-        lhs.tabBarSettingsNormalImageName == rhs.tabBarSettingsNormalImageName &&
-        lhs.tabBarSettingsSelectedImageName == rhs.tabBarSettingsSelectedImageName &&
-        lhs.navigationBarTint == rhs.navigationBarTint &&
-        lhs.shotsCollectionBackground == rhs.shotsCollectionBackground &&
-        lhs.shotViewCellBackground == rhs.shotViewCellBackground &&
-        lhs.tableViewBackground == rhs.tableViewBackground &&
-        lhs.cellSeparator == rhs.cellSeparator &&
-        lhs.tableViewCellBackground == rhs.tableViewCellBackground &&
-        lhs.tableViewCellTextColor == rhs.tableViewCellTextColor &&
-        lhs.switchCellTintColor == rhs.switchCellTintColor &&
-        lhs.shotBucketsAddCollectionViewCellBackground == rhs.shotBucketsAddCollectionViewCellBackground &&
-        lhs.shotBucketsHeaderViewBackground == rhs.shotBucketsHeaderViewBackground &&
-        lhs.shotBucketsFooterViewBackground == rhs.shotBucketsFooterViewBackground &&
-        lhs.shotBucketsSeparatorCollectionViewCellBackground == rhs.shotBucketsSeparatorCollectionViewCellBackground &&
-        lhs.bucketsCollectionViewBackground == rhs.bucketsCollectionViewBackground &&
-        lhs.shotDetailsHeaderViewBackground == rhs.shotDetailsHeaderViewBackground &&
-        lhs.shotDetailsOperationViewBackground == rhs.shotDetailsOperationViewBackground &&
-        lhs.shotDetailsDescriptionCollectionViewCellBackground == rhs.shotDetailsDescriptionCollectionViewCellBackground &&
-        lhs.shotDetailsCommentCollectionViewCellBackground == rhs.shotDetailsCommentCollectionViewCellBackground &&
-        lhs.shotDetailsHeaderViewTitleLabelTextColor == rhs.shotDetailsHeaderViewTitleLabelTextColor &&
-        lhs.shotDetailsHeaderViewOverLapingTitleLabelTextColor == rhs.shotDetailsHeaderViewOverLapingTitleLabelTextColor &&
-        lhs.shotDetailsHeaderViewAuthorNotLinkColor == rhs.shotDetailsHeaderViewAuthorNotLinkColor &&
-        lhs.shotDetailsHeaderViewAuthorLinkColor == rhs.shotDetailsHeaderViewAuthorLinkColor &&
-        lhs.shotDetailsDescriptionViewColorTextColor == rhs.shotDetailsDescriptionViewColorTextColor &&
-        lhs.shotDetailsCommentAuthorTextColor == rhs.shotDetailsCommentAuthorTextColor &&
-        lhs.shotDetailsCommentContentTextColor == rhs.shotDetailsCommentContentTextColor &&
-        lhs.shotDetailsCommentLikesCountTextColor == rhs.shotDetailsCommentLikesCountTextColor &&
-        lhs.shotDetailsCommentDateTextColor == rhs.shotDetailsCommentDateTextColor &&
-        lhs.shotDetailsCommentLinkTextColor == rhs.shotDetailsCommentLinkTextColor &&
-        lhs.shotDetailsCommentEditLabelTextColor == rhs.shotDetailsCommentEditLabelTextColor &&
-        lhs.shotDetailsBucketTextColor == rhs.shotDetailsBucketTextColor &&
-        lhs.settingsUsernameTextColor == rhs.settingsUsernameTextColor &&
-        lhs.settingsSelectedCellBackgound == rhs.settingsSelectedCellBackgound &&
-        lhs.datePickerBackgroundColor == rhs.datePickerBackgroundColor &&
-        lhs.datePickerTextColor == rhs.datePickerTextColor &&
-        lhs.datePickerViewBackgroundColor == rhs.datePickerViewBackgroundColor &&
-        lhs.datePickerViewSeparatorColor == rhs.datePickerViewSeparatorColor &&
-        lhs.profileHeaderViewBackground == rhs.profileHeaderViewBackground &&
-        lhs.twoLayoutsCollectionViewBackground == rhs.twoLayoutsCollectionViewBackground &&
-        lhs.logoImageName == rhs.logoImageName &&
-        lhs.preferredStatusBarStyle == rhs.preferredStatusBarStyle
+    return lhs.isEqualTo(rhs)
 }

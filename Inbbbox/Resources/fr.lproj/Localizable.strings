@@ -230,6 +230,9 @@
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Montrer Auteur à la page d'accueil";
 
+/* User Setting, night mode */
+"SettingsViewModel.NightMode" = "$Night Mode";
+
 /* Title of flash message, when user turn off all sources */
 "SettingsViewModel.AllSources" = "$Placeholder for information about sources";
 
