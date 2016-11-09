@@ -98,6 +98,10 @@ class ShotBucketsViewController: UIViewController {
             self.didDismissViewControllerClosure?()
         }
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return ColorModeProvider.current().preferredStatusBarStyle
+    }
 }
 
 // MARK: UICollectionViewDataSource

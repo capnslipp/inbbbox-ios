@@ -52,6 +52,7 @@ final class ColorModeProvider {
 
     private class func adaptInterface(to mode: ColorModeType) {
         UITabBar.appearance().barTintColor = mode.tabBarTint
+        UITabBar.appearance().backgroundColor = mode.windowBackgroundColor
         UINavigationBar.appearance().barTintColor = mode.navigationBarTint
         UITableView.appearance().backgroundColor = mode.tableViewBackground
         UITableView.appearance().separatorColor = mode.cellSeparator
@@ -99,12 +100,6 @@ final class ColorModeProvider {
         }
         
         centerButtonTabBarController.adaptColorMode(mode)
-        
-//        if let viewControllers = centerButtonTabBarController.viewControllers {
-//            for viewController in viewControllers where viewController is ColorModeAdaptable {
-//                (viewController as! ColorModeAdaptable).adaptColorMode(mode)
-//            }
-//        }
     }
     
     private class func findCenterButtonTabControllerInWindows() -> CenterButtonTabBarController? {
