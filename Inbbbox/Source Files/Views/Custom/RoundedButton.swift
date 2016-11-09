@@ -21,7 +21,7 @@ class RoundedButton: UIButton {
         
         let currentMode = ColorModeProvider.current()
         layer.cornerRadius = diameter/2
-        layer.shadowColor = currentMode.tabBarCenterButtonShadowColor.CGColor
+        layer.shadowColor = currentMode.shadowColor.CGColor
         layer.shadowOffset = currentMode.tabBarCenterButtonShadowOffset
         layer.shadowRadius = 3
         layer.shadowOpacity = 1
@@ -40,7 +40,7 @@ extension RoundedButton: ColorModeAdaptable {
         setImage(UIImage(named: mode.tabBarCenterButtonNormalImageName), forState: .Normal)
         setImage(UIImage(named: mode.tabBarCenterButtonSelectedImageName), forState: .Selected)
         backgroundColor = mode.tabBarCenterButtonBackground
-        layer.shadowColor = mode.tabBarCenterButtonShadowColor.CGColor
+        layer.shadowColor = mode.shadowColor.CGColor
         layer.shadowOffset = mode.tabBarCenterButtonShadowOffset
     }
 }

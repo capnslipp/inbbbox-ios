@@ -30,10 +30,6 @@ struct DayMode: ColorModeType {
         return CGSize(width: 0, height: 2)
     }
     
-    var tabBarCenterButtonShadowColor: UIColor {
-        return UIColor(white: 0, alpha: 0.1)
-    }
-    
     var tabBarLikesNormalImageName: String {
         return "ic-likes"
     }
@@ -94,10 +90,6 @@ struct DayMode: ColorModeType {
 
     var tableViewBackground: UIColor {
         return .backgroundGrayColor()
-    }
-
-    var tableViewSeparator: UIColor {
-        return .RGBA(200, 199, 204, 1)
     }
 
     var tableViewCellBackground: UIColor {
@@ -264,4 +256,21 @@ struct DayMode: ColorModeType {
         return .Default
     }
 
+    // MARK: CommentComposer
+    var commentComposerViewBackground: UIColor {
+        return .RGBA(246, 248, 248, 1)
+    }
+    
+    // MARK: Common
+    var shadowColor: UIColor {
+        return UIColor(white: 0, alpha: 0.1)
+    }
+    
+    var cellSeparator: UIColor {
+        return .RGBA(200, 199, 204, 1)
+    }
+    
+    var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
+        return .Gray
+    }
 }

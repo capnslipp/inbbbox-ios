@@ -15,7 +15,6 @@ protocol ColorModeType {
     var tabBarNormalItemTextColor: UIColor { get }
     var tabBarSelectedItemTextColor: UIColor { get }
     var tabBarCenterButtonBackground: UIColor { get }
-    var tabBarCenterButtonShadowColor: UIColor { get }
     var tabBarCenterButtonShadowOffset: CGSize { get }
     var tabBarLikesNormalImageName: String { get }
     var tabBarLikesSelectedImageName: String { get }
@@ -40,7 +39,6 @@ protocol ColorModeType {
     // MARK: UITableView
     var tableViewBlurColor: UIColor { get }
     var tableViewBackground: UIColor { get }
-    var tableViewSeparator: UIColor { get }
 
     // MARK: UITableViewCell
     var tableViewCellBackground: UIColor { get }
@@ -102,6 +100,14 @@ protocol ColorModeType {
     
     // MARK: StatusBar
     var preferredStatusBarStyle: UIStatusBarStyle { get }
+    
+    // MARK: CommentComposer
+    var commentComposerViewBackground: UIColor { get }
+    
+    // MARK: Common
+    var shadowColor: UIColor { get }
+    var cellSeparator: UIColor { get }
+    var activityIndicatorViewStyle: UIActivityIndicatorViewStyle { get }
 }
 
 func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
@@ -109,7 +115,6 @@ func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
         lhs.tabBarNormalItemTextColor == rhs.tabBarNormalItemTextColor &&
         lhs.tabBarSelectedItemTextColor == rhs.tabBarSelectedItemTextColor &&
         lhs.tabBarCenterButtonBackground == rhs.tabBarCenterButtonBackground &&
-        lhs.tabBarCenterButtonShadowColor == rhs.tabBarCenterButtonShadowColor &&
         lhs.tabBarCenterButtonShadowOffset == rhs.tabBarCenterButtonShadowOffset &&
         lhs.tabBarLikesNormalImageName == rhs.tabBarLikesNormalImageName &&
         lhs.tabBarLikesSelectedImageName == rhs.tabBarLikesSelectedImageName &&
@@ -125,7 +130,7 @@ func ==(lhs: ColorModeType, rhs: ColorModeType) -> Bool {
         lhs.shotsCollectionBackground == rhs.shotsCollectionBackground &&
         lhs.shotViewCellBackground == rhs.shotViewCellBackground &&
         lhs.tableViewBackground == rhs.tableViewBackground &&
-        lhs.tableViewSeparator == rhs.tableViewSeparator &&
+        lhs.cellSeparator == rhs.cellSeparator &&
         lhs.tableViewCellBackground == rhs.tableViewCellBackground &&
         lhs.tableViewCellTextColor == rhs.tableViewCellTextColor &&
         lhs.switchCellTintColor == rhs.switchCellTintColor &&

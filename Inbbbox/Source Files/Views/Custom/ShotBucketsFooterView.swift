@@ -20,7 +20,7 @@ class ShotBucketsFooterView: UICollectionReusableView {
         clipsToBounds = true
 
         separatorLine.configureForAutoLayout()
-        separatorLine.backgroundColor = ColorModeProvider.current().shotBucketsSeparatorLineColor
+        separatorLine.backgroundColor = ColorModeProvider.current().cellSeparator
         addSubview(separatorLine)
 
     }

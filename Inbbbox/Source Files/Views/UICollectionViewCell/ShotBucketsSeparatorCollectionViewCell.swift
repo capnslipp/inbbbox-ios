@@ -25,11 +25,11 @@ class ShotBucketsSeparatorCollectionViewCell: UICollectionViewCell {
         contentView.configureForAutoLayout()
         let currentMode = ColorModeProvider.current()
         topSeparatorLine.configureForAutoLayout()
-        topSeparatorLine.backgroundColor = currentMode.tableViewSeparator
+        topSeparatorLine.backgroundColor = currentMode.cellSeparator
         contentView.addSubview(topSeparatorLine)
 
         bottomSeparatorLine.configureForAutoLayout()
-        bottomSeparatorLine.backgroundColor = currentMode.tableViewSeparator
+        bottomSeparatorLine.backgroundColor = currentMode.cellSeparator
         contentView.addSubview(bottomSeparatorLine)
 
         setNeedsUpdateConstraints()

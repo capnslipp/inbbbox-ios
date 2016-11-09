@@ -30,10 +30,6 @@ struct NightMode: ColorModeType {
         return CGSize(width: 0, height: 2)
     }
     
-    var tabBarCenterButtonShadowColor: UIColor {
-        return UIColor(white: 1, alpha: 0.15)
-    }
-    
     var tabBarLikesNormalImageName: String {
         return "ic-likes-night"
     }
@@ -94,10 +90,6 @@ struct NightMode: ColorModeType {
 
     var tableViewBackground: UIColor {
         return .RGBA(43, 49, 51, 1)
-    }
-
-    var tableViewSeparator: UIColor {
-        return .blackColor()
     }
 
     var tableViewCellBackground: UIColor {
@@ -262,5 +254,23 @@ struct NightMode: ColorModeType {
     // MARK: StatusBar
     var preferredStatusBarStyle: UIStatusBarStyle {
         return .LightContent
+    }
+    
+    // MARK: CommentComposer
+    var commentComposerViewBackground: UIColor {
+        return .blackColor()
+    }
+    
+    // MARK: Common
+    var shadowColor: UIColor {
+        return UIColor(white: 0, alpha: 0.15)
+    }
+    
+    var cellSeparator: UIColor {
+        return .blackColor()
+    }
+    
+    var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
+        return .White
     }
 }

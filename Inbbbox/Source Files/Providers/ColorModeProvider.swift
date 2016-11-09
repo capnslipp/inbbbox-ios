@@ -54,7 +54,7 @@ final class ColorModeProvider {
         UITabBar.appearance().barTintColor = mode.tabBarTint
         UINavigationBar.appearance().barTintColor = mode.navigationBarTint
         UITableView.appearance().backgroundColor = mode.tableViewBackground
-        UITableView.appearance().separatorColor = mode.tableViewSeparator
+        UITableView.appearance().separatorColor = mode.cellSeparator
         UITableViewCell.appearance().backgroundColor = mode.tableViewCellBackground
 
         ShotsCollectionBackgroundView.appearance().backgroundColor = mode.shotsCollectionBackground
