@@ -139,6 +139,13 @@ extension UIAlertController {
 
         return alert
     }
+    
+    class func cantSendFeedback() -> AOAlertController {
+        let message = NSLocalizedString("UIAlertControllerExtension.CantSendFeedback",
+                                        comment: "Displayed when user device is not capable of/configured to send emails, shown when trying to send feedback.")
+        
+        return UIAlertController.createAlert(message)
+    }
 
     // MARK: Private
 

@@ -174,6 +174,9 @@
 /* Displayed when user device is not capable of/configured to send emails. */
 "UIAlertControllerExtension.EmailError" = "Não podemos enviar um e-mail com o seu aviso sobre o conteúdo proibido porque não foi configurada nenhuma conta de e-mail.";
 
+/* Displayed when user device is not capable of/configured to send emails, shown when trying to send feedback. */
+"UIAlertControllerExtension.CantSendFeedback" = "$Don't have email client - no worries use this address to send us feedback elsewhere: inbbbox@netguru.co";
+
 /* Informing user about problems with downloading items. */
 "UIAlertControllerExtension.UnableToDownload" = " ¡Ai! Não podemos baixar as fotos agora.";
 
@@ -228,6 +231,15 @@
 
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor na tela de inicio";
+
+/* User Settings, feedback section title. */
+"SettingsViewModel.Feedback" = "$FEEDBACK";
+
+/* User Settings, send your feedback button. */
+"SettingsViewModel.SendFeedback" = "$Send us your suggestions";
+
+/* User Settings, feedback sent. */
+"SettingsViewModel.FeedbackSent" = "$Thank you! Your Feedback has been sent!";
 
 /* Title of flash message, when user turn off all sources */
 "SettingsViewModel.AllSources" = "Placeholder for information about sources";
