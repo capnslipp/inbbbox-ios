@@ -114,11 +114,11 @@ struct NightMode: ColorModeType {
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return .RGBA(87, 98, 103, 1)
     }
 
     var shotBucketsHeaderViewBackground: UIColor {
-        return .RGBA(87, 98, 103, 1)
+        return .RGBA(43, 49, 51, 1)
     }
 
     var shotBucketsFooterViewBackground: UIColor {
@@ -126,7 +126,7 @@ struct NightMode: ColorModeType {
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
-        return .blackColor()
+        return .RGBA(43, 49, 51, 1)
     }
     
     var bucketsCollectionViewBackground: UIColor {
@@ -221,6 +221,10 @@ struct NightMode: ColorModeType {
     
     var shotDetailsEditViewBackground: UIColor {
         return .greenColor()
+    }
+    
+    var shotBucketsActionCellBackground: UIColor {
+        return .RGBA(87, 98, 103, 1)
     }
     
     // MARK: Settings

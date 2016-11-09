@@ -28,10 +28,10 @@ class ShotBucketsAddCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
 
         contentView.configureForAutoLayout()
-
+        let currentMode = ColorModeProvider.current()
         bucketNameLabel.configureForAutoLayout()
         bucketNameLabel.numberOfLines = 0
-        bucketNameLabel.textColor = ColorModeProvider.current().shotDetailsBucketTextColor
+        bucketNameLabel.textColor = currentMode.shotDetailsBucketTextColor
         bucketNameLabel.font = UIFont.helveticaFont(.Neue, size: 17)
         contentView.addSubview(bucketNameLabel)
 
@@ -44,7 +44,7 @@ class ShotBucketsAddCollectionViewCell: UICollectionViewCell {
         arrowImageView.image = UIImage(named: "ic-indicator-right")
         contentView.addSubview(arrowImageView)
 
-        separatorLine.backgroundColor = .RGBA(223, 224, 226, 1)
+        separatorLine.backgroundColor = currentMode.tableViewSeparator
         contentView.addSubview(separatorLine)
         separatorLine.hidden = true
 

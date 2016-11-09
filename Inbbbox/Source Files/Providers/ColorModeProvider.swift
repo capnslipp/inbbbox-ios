@@ -62,6 +62,7 @@ final class ColorModeProvider {
         ShotBucketsSeparatorCollectionViewCell.appearance().backgroundColor = mode.shotBucketsSeparatorCollectionViewCellBackground
         ShotBucketsHeaderView.appearance().backgroundColor = mode.shotBucketsHeaderViewBackground
         ShotBucketsFooterView.appearance().backgroundColor = mode.shotBucketsFooterViewBackground
+        ShotBucketsActionCollectionViewCell.appearance().backgroundColor = mode.shotBucketsActionCellBackground
         ShotDetailsHeaderView.appearance().backgroundColor = mode.shotDetailsHeaderViewBackground
         ShotDetailsOperationView.appearance().backgroundColor = mode.shotDetailsOperationViewBackground
         ShotDetailsDescriptionCollectionViewCell.appearance().backgroundColor = mode.shotDetailsDescriptionCollectionViewCellBackground

@@ -77,6 +77,7 @@ protocol ColorModeType {
     var shotDetailsBucketTextColor: UIColor { get }
     var shotDetailsSeparatorColor: UIColor { get }
     var shotDetailsEditViewBackground: UIColor { get }
+    var shotBucketsActionCellBackground: UIColor { get }
     
     // MARK: Settings
     var settingsUsernameTextColor: UIColor { get }

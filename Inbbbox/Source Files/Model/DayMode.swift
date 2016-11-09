@@ -223,6 +223,10 @@ struct DayMode: ColorModeType {
         return .clearColor()
     }
     
+    var shotBucketsActionCellBackground: UIColor {
+        return .whiteColor()
+    }
+    
     // MARK: Settings
     var settingsUsernameTextColor: UIColor {
         return .textDarkColor()

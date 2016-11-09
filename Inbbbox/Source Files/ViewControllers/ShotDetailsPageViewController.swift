@@ -58,6 +58,10 @@ extension ShotDetailsPageViewController {
         updateConstraints()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return ColorModeProvider.current().preferredStatusBarStyle
+    }
+    
     func updateConstraints() {
         
         if !didSetConstraints {

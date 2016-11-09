@@ -33,11 +33,11 @@ class ShotBucketsView: UIView {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
 
         super.init(frame: frame)
-
+        let currentColorMode = ColorModeProvider.current()
         if DeviceInfo.shouldDowngrade() {
-            backgroundColor = .backgroundGrayColor()
+            backgroundColor = currentColorMode.tableViewBackground
         } else {
-            backgroundColor = .clearColor()
+            backgroundColor = currentColorMode.tableViewBlurColor
             blurView.configureForAutoLayout()
             addSubview(blurView)
         }
