@@ -16,7 +16,9 @@ class ShotBucketsViewModel {
         var counter = Int(0)
 
         counter += buckets.count
-        counter += 2  // for action buttons and gap before
+        if buckets.count > 0 {
+            counter += 2  // for action buttons and gap before
+        }
 
         return counter
     }

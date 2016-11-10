@@ -10,6 +10,7 @@ import UIKit
 import PromiseKit
 import TTTAttributedLabel
 import ImageViewer
+import DZNEmptyDataSet
 
 enum ShotBucketsViewControllerMode {
     case AddToBucket
@@ -52,6 +53,8 @@ class ShotBucketsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        shotBucketsView.collectionView.emptyDataSetSource = self
+
         firstly {
             viewModel.loadBuckets()
         }.then {
@@ -79,16 +82,10 @@ class ShotBucketsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        
-        if let layout = shotBucketsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.estimatedItemSize = itemSizeFor(collectionView: shotBucketsView.collectionView)
-        }
-        
+        setEstimatedSizeIfNeeded()
         (shotBucketsView.collectionView.collectionViewLayout as?
                 ShotDetailsCollectionCollapsableHeader)?.collapsableHeight =
                 heightForCollapsedCollectionViewHeader
-        
-        shotBucketsView.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
@@ -297,18 +294,15 @@ private extension ShotBucketsViewController {
         )
     }
 
-    func itemSizeFor(collectionView collectionView: UICollectionView) -> CGSize {
+    func setEstimatedSizeIfNeeded() {
 
-        let width = collectionView.frame.size.width ?? 0
-        
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            if layout.estimatedItemSize.width != width {
-                return CGSize(width: width, height: 40)
-            } else {
-                return layout.estimatedItemSize
-            }
+        let width = shotBucketsView.collectionView.frame.size.width ?? 0
+
+        if let layout = shotBucketsView.collectionView.collectionViewLayout as?
+            UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
+            layout.estimatedItemSize = CGSize(width: width, height: 40)
+            layout.invalidateLayout()
         }
-        return CGSizeZero
     }
 
     func backgroundColorForFooter() -> UIColor {
@@ -443,4 +437,11 @@ extension ShotBucketsViewController: ImageProvider {
     }
 
     func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
+}
+
+extension ShotBucketsViewController: DZNEmptyDataSetSource {
+
+    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
+        return UIView.newAutoLayoutView()
+    }
 }
