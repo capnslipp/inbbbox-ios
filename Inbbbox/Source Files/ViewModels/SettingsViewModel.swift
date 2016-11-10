@@ -9,6 +9,7 @@
 import UIKit
 import Async
 import AOAlertController
+import MessageUI
 
 protocol ModelUpdatable: class {
     func didChangeItemsAtIndexPaths(indexPaths: [NSIndexPath])
@@ -54,6 +55,8 @@ class SettingsViewModel: GroupedListViewModel {
     private let shotAuthorTitle = NSLocalizedString("SettingsViewModel.DisplayAuthor",
                                                     comment: "User Settings, show author.")
     private let nightModeTitle = NSLocalizedString("SettingsViewModel.NightMode", comment: "User Settings, night mode.")
+    private let sendFeedbackTitle = NSLocalizedString("SettingsViewModel.SendFeedback",
+                                                    comment: "User Settings, send settings.")
 
     private let createAccountItem: LabelItem
     private let reminderItem: SwitchItem
@@ -65,7 +68,8 @@ class SettingsViewModel: GroupedListViewModel {
     private let showAuthorItem: SwitchItem
     private let nightModeItem: SwitchItem
     private let acknowledgementItem: LabelItem
-
+    private let sendFeedbackItem: LabelItem
+    
     var loggedInUser: User? {
         return UserStorage.currentUser
     }
@@ -97,6 +101,7 @@ class SettingsViewModel: GroupedListViewModel {
 
         showAuthorItem = SwitchItem(title: shotAuthorTitle, enabled: Settings.Customization.ShowAuthor)
         nightModeItem = SwitchItem(title: nightModeTitle, enabled: Settings.Customization.NightMode)
+        sendFeedbackItem = LabelItem(title: sendFeedbackTitle)
 
         let aTitle = NSLocalizedString("SettingsViewModel.AcknowledgementsButton", comment: "Acknowledgements button")
         acknowledgementItem = LabelItem(title: aTitle)
@@ -106,12 +111,14 @@ class SettingsViewModel: GroupedListViewModel {
                      [followingStreamSourceItem, newTodayStreamSourceItem,
                       popularTodayStreamSourceItem, debutsStreamSourceItem],
                      [showAuthorItem, nightModeItem],
+                     [sendFeedbackItem],
                      [acknowledgementItem]]
         } else {
             items = [[createAccountItem],
                      [reminderItem, reminderDateItem],
                      [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
                      [showAuthorItem, nightModeItem],
+                     [sendFeedbackItem],
                      [acknowledgementItem]]
         }
 
@@ -162,6 +169,22 @@ private extension SettingsViewModel {
         acknowledgementItem.onSelect = {
             [weak self] in
             self?.settingsViewController?.presentAcknowledgements()
+        }
+        
+        sendFeedbackItem.onSelect = {
+            [weak self] in
+            
+            let mailComposer = MFMailComposeViewController()
+            mailComposer.mailComposeDelegate = self?.settingsViewController
+            mailComposer.setToRecipients(["inbbbox@netguru.co"])
+            // Localization missing on purpose, so we will sugest user to write in English.
+            mailComposer.setSubject("Inbbbox Feedback")
+            mailComposer.navigationBar.tintColor = .whiteColor()
+            if MFMailComposeViewController.canSendMail() {
+                self?.settingsViewController?.presentViewController(mailComposer, animated: true, completion: nil)
+            } else {
+                self?.settingsViewController?.presentViewController(UIAlertController.cantSendFeedback(), animated: true, completion: nil)
+            }
         }
 
         // MARK: onValueChanged blocks

@@ -33,7 +33,7 @@ class SettingsViewModelSpec: QuickSpec {
             }
 
             it("should have 5 sections") {
-                expect(sut.sectionsCount()).to(equal(5))
+                expect(sut.sectionsCount()).to(equal(6))
             }
 
             describe("first section") {
@@ -133,6 +133,20 @@ class SettingsViewModelSpec: QuickSpec {
                     }
                 }
             }
+            
+            describe("sixth section") {
+                
+                it("should have 1 item") {
+                    expect(sut.sections[5].count).to(equal(1))
+                }
+                
+                describe("first item") {
+                    it("should be ? item") {
+                        let item = sut.sections[5][0]
+                        expect(item is LabelItem).to(beTrue())
+                    }
+                }
+            }
         }
 
         describe("when newly created as logged user") {
@@ -152,7 +166,7 @@ class SettingsViewModelSpec: QuickSpec {
             }
 
             it("should have 4 sections") {
-                expect(sut.sectionsCount()).to(equal(4))
+                expect(sut.sectionsCount()).to(equal(5))
             }
 
             describe("first section") {
@@ -241,6 +255,20 @@ class SettingsViewModelSpec: QuickSpec {
                 describe("first item") {
                     it("should be ? item") {
                         let item = sut.sections[3][0]
+                        expect(item is LabelItem).to(beTrue())
+                    }
+                }
+            }
+            
+            describe("fifth section") {
+                
+                it("should have 1 item") {
+                    expect(sut.sections[4].count).to(equal(1))
+                }
+                
+                describe("first item") {
+                    it("should be ? item") {
+                        let item = sut.sections[4][0]
                         expect(item is LabelItem).to(beTrue())
                     }
                 }

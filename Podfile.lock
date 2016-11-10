@@ -15,12 +15,12 @@ PODS:
   - ImageViewer (2.0)
   - KeychainAccess (2.4.0)
   - Keys (1.0.0)
-  - Mockingjay (1.3.0):
-    - Mockingjay/Core (= 1.3.0)
-    - Mockingjay/XCTest (= 1.3.0)
-  - Mockingjay/Core (1.3.0):
+  - Mockingjay (1.3.1):
+    - Mockingjay/Core (= 1.3.1)
+    - Mockingjay/XCTest (= 1.3.1)
+  - Mockingjay/Core (1.3.1):
     - URITemplate (~> 1.3)
-  - Mockingjay/XCTest (1.3.0):
+  - Mockingjay/XCTest (1.3.1):
     - Mockingjay/Core
   - Nimble (4.1.0)
   - OMGHTTPURLRQ (3.2.0):
@@ -65,7 +65,7 @@ DEPENDENCIES:
   - ImageViewer (from `https://github.com/twalenciak/ImageViewer.git`, branch `gif_loading`)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
-  - Mockingjay (~> 1.1)
+  - Mockingjay (~> 1.3.1)
   - Nimble (~> 4.1)
   - PromiseKit (~> 3.2)
   - PureLayout (~> 3.0)
@@ -125,7 +125,7 @@ SPEC CHECKSUMS:
   ImageViewer: 00eae024d0cb2eebb4b228f4669b6c4872afadb9
   KeychainAccess: c2a71459af5bddf720a51806046a598500976c04
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
-  Mockingjay: 6d528689b0b42c5f62415acf0bf468ce9ebd7ad3
+  Mockingjay: e6ffe6106591d2555025842b1b655decc124f0ca
   Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
   OMGHTTPURLRQ: 1e54807cb7d5dbb506926e53498e1e9ac5720c79
   PromiseKit: 99ea973444a4bff6c38ffb97fa1bb175e619bcf0
@@ -137,6 +137,6 @@ SPEC CHECKSUMS:
   URITemplate: e2a2a0f9d398834fde67214b491c2c925c9baa06
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: fa72195f9b4a373af86b1f626e4ddc7088026780
+PODFILE CHECKSUM: 53be1a79a90ba4f79c354bf465bc310ed1d0a44a
 
 COCOAPODS: 1.0.0

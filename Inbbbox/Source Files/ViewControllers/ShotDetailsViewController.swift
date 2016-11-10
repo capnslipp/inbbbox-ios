@@ -31,6 +31,7 @@ final class ShotDetailsViewController: UIViewController {
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
     
     var willDismissDetailsCompletionHandler: (Int -> Void)?
+    var updatedShotInfo: ((ShotType) -> ())?
 
     init(shot: ShotType) {
         self.viewModel = ShotDetailsViewModel(shot: shot)
@@ -99,6 +100,11 @@ final class ShotDetailsViewController: UIViewController {
         }
 
         AnalyticsManager.trackScreen(.ShotDetailsView)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        willDismissDetailsCompletionHandler?(shotIndex)
     }
 
     func scrollViewWillEndDragging(scrollView: UIScrollView,
@@ -349,6 +355,7 @@ private extension ShotDetailsViewController {
             operationalCell.operationView.likeCounterLabel.text = "\(shot.likesCount)"
             operationalCell.operationView.bucketCounterLabel.text = "\(shot.bucketsCount)"
         }
+        self.updatedShotInfo?(shot)
     }
 
     func refreshLikesBucketsCounter() {
@@ -357,14 +364,6 @@ private extension ShotDetailsViewController {
             self.viewModel.checkDetailOfShot()
         }.then { shot in
             self.refreshWithShot(shot)
-        }
-    }
-    
-    // Dribbble's API is not providing updated counters instantly,
-    // this 0.5sec delay gives us more chance to obtain more precise values
-    func delayedRefreshLikesBucketsCounter() {
-        after(0.5).then {
-            self.refreshLikesBucketsCounter()
         }
     }
 
@@ -410,7 +409,7 @@ private extension ShotDetailsViewController {
         }.then { isShotLikedByUser in
             view.selected = isShotLikedByUser
         }.always {
-            self.delayedRefreshLikesBucketsCounter()
+            self.refreshLikesBucketsCounter()
             view.stopAnimating()
         }
     }
@@ -425,10 +424,10 @@ private extension ShotDetailsViewController {
             if let bucketNumber = result.bucketsNumber where !result.removed {
                 let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
                 self.presentShotBucketsViewControllerWithMode(mode, onModalCompletion: {
-                    self.delayedRefreshLikesBucketsCounter()
+                    self.refreshLikesBucketsCounter()
                 })
             } else {
-                self.delayedRefreshLikesBucketsCounter()
+                self.refreshLikesBucketsCounter()
                 view.selected = false
             }
         }.always {
@@ -559,7 +558,6 @@ private extension ShotDetailsViewController {
     }
 
     dynamic func closeButtonDidTap(_: UIButton) {
-        willDismissDetailsCompletionHandler?(shotIndex)
         dismissViewControllerAnimated(true, completion: nil)
     }
 }

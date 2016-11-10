@@ -211,11 +211,6 @@ extension ShotsNormalStateHandler {
         downloadNextPageIfNeeded(for: indexPath)
     }
 
-    func collectionView(collectionView: UICollectionView,
-            didEndDisplayingCell cell: UICollectionViewCell,
-            forItemAtIndexPath indexPath: NSIndexPath) {
-        indexPathsNeededImageUpdate = indexPathsNeededImageUpdate.filter { $0.index != indexPath.item }
-    }
 }
 
 // MARK: UIScrollViewDelegate
@@ -316,6 +311,9 @@ private extension ShotsNormalStateHandler {
         
         let detailsViewController = ShotDetailsViewController(shot: shot)
         detailsViewController.shotIndex = index
+        detailsViewController.updatedShotInfo = { [weak self] shot in
+                self?.shotsCollectionViewController?.shots[index] = shot
+        }
         let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
         shotDetailsPageDataSource.delegate = self
         let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
@@ -464,7 +462,6 @@ private extension ShotsNormalStateHandler {
 
     func lazyLoadImage(shotImage: ShotImageType, for indexPath: NSIndexPath) {
         let teaserImageLoadingCompletion: UIImage -> Void = { [weak self] image in
-
             guard let certainSelf = self else { return }
             guard let _ = certainSelf.updateableIndexPath(for: indexPath) else { return }
 
@@ -477,7 +474,6 @@ private extension ShotsNormalStateHandler {
             }
         }
         let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
-
             guard let certainSelf = self else {return}
             guard var indexPathToUpdate = certainSelf.updateableIndexPath(for: indexPath) else { return }
 
@@ -488,6 +484,7 @@ private extension ShotsNormalStateHandler {
 
             if let collectionView = certainSelf.shotsCollectionViewController?.collectionView {
                 if let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ShotCollectionViewCell {
+                    cell.shotImageView.activityIndicatorView.stopAnimating()
                     cell.shotImageView.originalImage = image
                     cell.shotImageView.image = image
                 }

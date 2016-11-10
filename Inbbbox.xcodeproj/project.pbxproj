@@ -74,12 +74,14 @@
 		306F24901CBBBE8200D81B14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 306F24921CBBBE8200D81B14 /* Localizable.strings */; };
 		306F24A51CBBC6BC00D81B14 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 306F24A31CBBC6BC00D81B14 /* Localizable.stringsdict */; };
 		307C5FA71DAE715E007219F9 /* UpdateableIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307C5FA61DAE715E007219F9 /* UpdateableIndex.swift */; };
+		30872A8C1DD1DAA000330F8F /* NSURLSessionConfigurationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30872A8B1DD1DAA000330F8F /* NSURLSessionConfigurationExtension.swift */; };
 		309EBC711CAD56860074FB8A /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309EBC701CAD56860074FB8A /* CrashManager.swift */; };
 		30C184651CC674920032798C /* DefaultImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C184641CC674920032798C /* DefaultImage.swift */; };
 		30C883421DC0A3A300BE98A3 /* ColorModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C883411DC0A3A300BE98A3 /* ColorModeType.swift */; };
 		30C883441DC0A6C400BE98A3 /* DayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C883431DC0A6C400BE98A3 /* DayMode.swift */; };
 		30C883461DC0A6CF00BE98A3 /* NightMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C883451DC0A6CF00BE98A3 /* NightMode.swift */; };
 		30C883481DC0A79000BE98A3 /* ColorModeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C883471DC0A79000BE98A3 /* ColorModeProvider.swift */; };
+		30CE68941DD21C5200FF2BAA /* NSURLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CE68931DD21C5200FF2BAA /* NSURLSessionExtension.swift */; };
 		30D1ED34355F08C05F0B1DBC /* CollectionViewLayoutSpacings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486C8043ECC97F0591EA9579 /* CollectionViewLayoutSpacings.swift */; };
 		30D57BA91CF59AB0004C7D54 /* BaseCollectionViewViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D57BA81CF59AB0004C7D54 /* BaseCollectionViewViewModelSpec.swift */; };
 		30EFE8D21DC210AD00ACE200 /* ColorModeProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EFE8D11DC210AD00ACE200 /* ColorModeProviderSpec.swift */; };
@@ -487,6 +489,7 @@
 		306F24961CBBC0CD00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		306F24A41CBBC6BC00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		307C5FA61DAE715E007219F9 /* UpdateableIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateableIndex.swift; sourceTree = "<group>"; };
+		30872A8B1DD1DAA000330F8F /* NSURLSessionConfigurationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionConfigurationExtension.swift; sourceTree = "<group>"; };
 		309EBC701CAD56860074FB8A /* CrashManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
 		30A01B1E1D33629400BD9860 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		30A01B1F1D3363BC00BD9860 /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-PT"; path = "pt-PT.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
@@ -498,6 +501,7 @@
 		30C883431DC0A6C400BE98A3 /* DayMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayMode.swift; sourceTree = "<group>"; };
 		30C883451DC0A6CF00BE98A3 /* NightMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NightMode.swift; sourceTree = "<group>"; };
 		30C883471DC0A79000BE98A3 /* ColorModeProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorModeProvider.swift; sourceTree = "<group>"; };
+		30CE68931DD21C5200FF2BAA /* NSURLSessionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionExtension.swift; sourceTree = "<group>"; };
 		30D57BA81CF59AB0004C7D54 /* BaseCollectionViewViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewViewModelSpec.swift; sourceTree = "<group>"; };
 		30ED40221B9A46F946A93D9F /* ShotBucketsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotBucketsViewModel.swift; sourceTree = "<group>"; };
 		30EFE8D11DC210AD00ACE200 /* ColorModeProviderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorModeProviderSpec.swift; sourceTree = "<group>"; };
@@ -958,6 +962,8 @@
 				65BA28208F809949B73B35D2 /* AppDelegateExtension.swift */,
 				F077D0951CD236AA008948A9 /* ImageProviderExtension.swift */,
 				BE3776081DD20FA000409590 /* UIViewExtension.swift */,
+				30872A8B1DD1DAA000330F8F /* NSURLSessionConfigurationExtension.swift */,
+				30CE68931DD21C5200FF2BAA /* NSURLSessionExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1997,6 +2003,7 @@
 			files = (
 				B8B7382639BFA7CFBAEB9AF7 /* AppDelegate.swift in Sources */,
 				91CC54F94EE1DE79024A4940 /* Constants.swift in Sources */,
+				30872A8C1DD1DAA000330F8F /* NSURLSessionConfigurationExtension.swift in Sources */,
 				55B0D2257EC4ABFCA118F483 /* Defines.swift in Sources */,
 				07BB4BCA0300D81D1F853945 /* Settings.swift in Sources */,
 				C6F148831DBF926E0093FA24 /* EmptyShotsCollectionView.swift in Sources */,
@@ -2230,6 +2237,7 @@
 				C11B3B8DECEEDFD228F6C0E6 /* GifIndicatorView.swift in Sources */,
 				B8813ACAB3427465A361691A /* KeyboardResizableView.swift in Sources */,
 				8B71AA21B931EA155F2C7343 /* ORLoginLabel.swift in Sources */,
+				30CE68941DD21C5200FF2BAA /* NSURLSessionExtension.swift in Sources */,
 				CBC9D06A7E66307B90A087B9 /* RoundedButton.swift in Sources */,
 				9128C51D3BAD68EFC039C13B /* SettingsTableHeaderView.swift in Sources */,
 				C0EE2D8640F65C4539FC86A1 /* ShotBucketsFooterView.swift in Sources */,

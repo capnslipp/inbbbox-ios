@@ -10,6 +10,7 @@ import UIKit
 import PromiseKit
 import AOAlertController
 import SafariServices
+import MessageUI
 
 class SettingsViewController: UITableViewController {
 
@@ -135,12 +136,15 @@ extension SettingsViewController {
                                                    comment: "Title of group of buttons for stream source settings")
         let customizationTitle = NSLocalizedString("SettingsViewController.Customization",
                                                    comment: "Title of group of buttons for customization settings")
+        let feedbackTitle = NSLocalizedString("SettingsViewModel.Feedback",
+                                                   comment: "Title of group of buttons for sending feedback")
 
         switch section {
             case 0: return viewModel.userMode == .LoggedUser ? notificationsTitle : nil
             case 1: return viewModel.userMode == .LoggedUser ? streamSourcesTitle : notificationsTitle
             case 2: return viewModel.userMode == .LoggedUser ? customizationTitle : streamSourcesTitle
-            case 3: return viewModel.userMode == .LoggedUser ? nil : customizationTitle
+            case 3: return viewModel.userMode == .LoggedUser ? feedbackTitle : customizationTitle
+            case 4: return viewModel.userMode == .LoggedUser ? nil : feedbackTitle
             default: return nil
         }
     }
@@ -293,6 +297,20 @@ extension SettingsViewController {
         let acknowledgementsNavigationController =
         UINavigationController(rootViewController: AcknowledgementsViewController())
         presentViewController(acknowledgementsNavigationController, animated: true, completion: nil)
+    }
+}
+
+// MARK: Mail Composer Delegate
+
+extension SettingsViewController: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true) { [unowned self] in
+            if (result == MFMailComposeResultSent) {
+                let message = FlashMessageViewModel(title: NSLocalizedString("SettingsViewModel.FeedbackSent", comment: "User Settings, feedback sent."))
+                self.displayFlashMessage(message)
+            }
+        }
     }
 }
 
