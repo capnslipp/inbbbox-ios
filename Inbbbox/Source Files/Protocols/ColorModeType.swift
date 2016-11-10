@@ -10,8 +10,7 @@ import Foundation
 
 protocol ColorModeType {
     
-    // MARK: UIWindow
-    
+    // MARK: Window
     var windowBackgroundColor: UIColor { get }
 
     // MARK: UITabBar
@@ -31,27 +30,27 @@ protocol ColorModeType {
     var tabBarSettingsNormalImageName: String { get }
     var tabBarSettingsSelectedImageName: String { get }
 
-    // MARK: UINavigationBar
+    // MARK: Navigation Bar
     var navigationBarTint: UIColor { get }
 
-    // MARK: ShotsCollection
+    // MARK: Shots Collection
     var shotsCollectionBackground: UIColor { get }
     
-    // MARK: ShotCell
+    // MARK: Shot Cell
     var shotViewCellBackground: UIColor { get }
 
-    // MARK: UITableView
+    // MARK: Table View
     var tableViewBlurColor: UIColor { get }
     var tableViewBackground: UIColor { get }
 
-    // MARK: UITableViewCell
+    // MARK: Table View Cell
     var tableViewCellBackground: UIColor { get }
     var tableViewCellTextColor: UIColor { get }
     
-    // MARK: SwichCell
+    // MARK: Swich Cell
     var switchCellTintColor: UIColor { get }
 
-    // MARK: ShotBuckets
+    // MARK: Shot Buckets
     var shotBucketsAddCollectionViewCellBackground: UIColor { get }
     var shotBucketsHeaderViewBackground: UIColor { get }
     var shotBucketsFooterViewBackground: UIColor { get }
@@ -59,7 +58,7 @@ protocol ColorModeType {
     var bucketsCollectionViewBackground: UIColor { get }
     var emptyBucketImageName: String { get }
 
-    // MARK: ShotDetails
+    // MARK: Shot Details
     var shotDetailsHeaderViewBackground: UIColor { get }
     var shotDummySpaceBackground: UIColor { get }
     var shotDetailsOperationViewBackground: UIColor { get }
@@ -85,18 +84,18 @@ protocol ColorModeType {
     var settingsUsernameTextColor: UIColor { get }
     var settingsSelectedCellBackgound: UIColor { get }
     
-    // MARK: DatePicker
+    // MARK: Date Picker
     var datePickerBackgroundColor: UIColor { get }
     var datePickerTextColor: UIColor { get }
     
-    // MARK: DatePickerView
+    // MARK: Date Picker View
     var datePickerViewBackgroundColor: UIColor { get }
     var datePickerViewSeparatorColor: UIColor { get }
 
-    /// ProfileHeaderView.
+    /// Profile Header View
     var profileHeaderViewBackground: UIColor { get }
 
-    // MARK: TwoLayoutCollectionViewController
+    // MARK: TwoLayout Collection View Controller
     var twoLayoutsCollectionViewBackground: UIColor { get }
     
     // MARK: Logo
@@ -105,7 +104,7 @@ protocol ColorModeType {
     // MARK: StatusBar
     var preferredStatusBarStyle: UIStatusBarStyle { get }
     
-    // MARK: CommentComposer
+    // MARK: Comment Composer
     var commentComposerViewBackground: UIColor { get }
     
     // MARK: Common

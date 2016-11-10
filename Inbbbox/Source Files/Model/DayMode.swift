@@ -10,10 +10,12 @@ import Foundation
 
 struct DayMode: ColorModeType {
     
+    // MARK: Window
     var windowBackgroundColor: UIColor {
         return .RGBA(246, 248, 248, 1)
     }
 
+    // MARK: Tab Bar
     var tabBarTint: UIColor {
         return .whiteColor()
     }
@@ -74,20 +76,22 @@ struct DayMode: ColorModeType {
         return "ic-settings-active"
     }
 
+    // MARK: Navigation Bar
     var navigationBarTint: UIColor {
         return .pinkColor()
     }
 
+    // MARK: Shots Collection
     var shotsCollectionBackground: UIColor {
         return .backgroundGrayColor()
     }
     
-    // MARK: ShotCell
+    // MARK: Shot Cell
     var shotViewCellBackground: UIColor {
         return .cellBackgroundColor()
     }
     
-    // MARK: UITableView
+    // MARK: Table View
     var tableViewBlurColor: UIColor {
         return .clearColor()
     }
@@ -96,6 +100,7 @@ struct DayMode: ColorModeType {
         return .backgroundGrayColor()
     }
 
+    // MARK: Table View Cell
     var tableViewCellBackground: UIColor {
         return .whiteColor()
     }
@@ -104,7 +109,7 @@ struct DayMode: ColorModeType {
         return .blackColor()
     }
     
-    // MARK: SwichCell
+    // MARK: Swich Cell
     var switchCellTintColor: UIColor {
         return .RGBA(143, 142, 148, 1)
     }
@@ -153,12 +158,12 @@ struct DayMode: ColorModeType {
         return .pinkColor()
     }
 
+    // MARK: TwoLayout Collection View Controller
     var twoLayoutsCollectionViewBackground: UIColor {
         return .backgroundGrayColor()
     }
     
     // MARK: Shot Detail
-    
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
         return .blackColor()
     }
@@ -232,7 +237,7 @@ struct DayMode: ColorModeType {
         return .RGBA(217, 217, 217, 1)
     }
     
-    // MARK: DatePicker
+    // MARK: Date Picker
     var datePickerBackgroundColor: UIColor {
         return .whiteColor()
     }
@@ -241,7 +246,7 @@ struct DayMode: ColorModeType {
         return .blackColor()
     }
     
-    // MARK: DatePickerView
+    // MARK: Date Picker View
     var datePickerViewBackgroundColor: UIColor {
         return .backgroundGrayColor()
     }
@@ -255,12 +260,12 @@ struct DayMode: ColorModeType {
         return "logo-type-home"
     }
 
-    // MARK: StatusBar
+    // MARK: Status Bar
     var preferredStatusBarStyle: UIStatusBarStyle {
         return .Default
     }
 
-    // MARK: CommentComposer
+    // MARK: Comment Composer
     var commentComposerViewBackground: UIColor {
         return .RGBA(246, 248, 248, 1)
     }
@@ -283,7 +288,6 @@ struct DayMode: ColorModeType {
     }
     
     func isEqualTo(other: ColorModeType) -> Bool {
-        if let _ = other as? DayMode { return true }
-        return false
+        return other is DayMode
     }
 }

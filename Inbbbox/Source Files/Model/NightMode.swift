@@ -10,10 +10,12 @@ import Foundation
 
 struct NightMode: ColorModeType {
     
+    // MARK: Window
     var windowBackgroundColor: UIColor {
         return .backgroundNightModeGrayColor()
     }
 
+    // MARK: Tab Bar
     var tabBarTint: UIColor {
         return .blackColor()
     }
@@ -74,20 +76,22 @@ struct NightMode: ColorModeType {
         return "ic-settings-active"
     }
 
+    // MARK: Navigation Bar
     var navigationBarTint: UIColor {
         return .blackColor()
     }
 
+    // MARK: Shots Collection
     var shotsCollectionBackground: UIColor {
         return .darkGrayNightMode()
     }
     
-    // MARK: ShotCell
+    // MARK: Shot Cell
     var shotViewCellBackground: UIColor {
         return .grayNightMode()
     }
     
-    // MARK: UITableView
+    // MARK: Table View
     var tableViewBlurColor: UIColor {
         return .RGBA(71, 72, 72, 1)
     }
@@ -96,6 +100,7 @@ struct NightMode: ColorModeType {
         return .darkGrayNightMode()
     }
 
+    // MARK: Table View Cell
     var tableViewCellBackground: UIColor {
         return .lessDarkGrayNightMode()
     }
@@ -104,7 +109,7 @@ struct NightMode: ColorModeType {
         return .whiteColor()
     }
     
-    // MARK: SwichCell
+    // MARK: Swich Cell
     var switchCellTintColor: UIColor {
         return .blackColor()
     }
@@ -153,12 +158,12 @@ struct NightMode: ColorModeType {
         return .blackColor()
     }
 
+    // MARK: TwoLayout Collection View Controller
     var twoLayoutsCollectionViewBackground: UIColor {
         return .darkGrayNightMode()
     }
     
     // MARK: Shot Detail
-    
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
         return .whiteColor()
     }
@@ -232,7 +237,7 @@ struct NightMode: ColorModeType {
         return .grayNightMode()
     }
     
-    // MARK: DatePicker
+    // MARK: Date Picker
     var datePickerBackgroundColor: UIColor {
         return .darkGrayNightMode()
     }
@@ -241,7 +246,7 @@ struct NightMode: ColorModeType {
         return .whiteColor()
     }
     
-    // MARK: DatePickerView
+    // MARK: Date Picker View
     var datePickerViewBackgroundColor: UIColor {
         return .darkGrayNightMode()
     }
@@ -255,12 +260,12 @@ struct NightMode: ColorModeType {
         return "logo-type-home-night"
     }
     
-    // MARK: StatusBar
+    // MARK: Status Bar
     var preferredStatusBarStyle: UIStatusBarStyle {
         return .LightContent
     }
     
-    // MARK: CommentComposer
+    // MARK: Comment Composer
     var commentComposerViewBackground: UIColor {
         return .blackColor()
     }
@@ -283,8 +288,6 @@ struct NightMode: ColorModeType {
     }
     
     func isEqualTo(other: ColorModeType) -> Bool {
-        if let _ = other as? NightMode { return true }
-        return false
+        return other is NightMode
     }
-    
 }
