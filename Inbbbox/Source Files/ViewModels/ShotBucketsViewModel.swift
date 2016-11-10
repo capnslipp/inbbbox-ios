@@ -16,7 +16,7 @@ class ShotBucketsViewModel {
         var counter = Int(0)
 
         counter += buckets.count
-        if buckets.count > 0 {
+        if didDownloadBuckets {
             counter += 2  // for action buttons and gap before
         }
 
@@ -69,6 +69,7 @@ class ShotBucketsViewModel {
 
     private(set) var buckets = [BucketType]()
     private(set) var selectedBucketsIndexes = [Int]()
+    private var didDownloadBuckets = false
 
     init(shot: ShotType, mode: ShotBucketsViewControllerMode) {
         self.shot = shot
@@ -84,9 +85,10 @@ class ShotBucketsViewModel {
             case .AddToBucket:
                 firstly {
                     bucketsProvider.provideMyBuckets()
-                }.then {
-                    buckets in
+                }.then { buckets in
                     self.buckets = buckets ?? []
+                }.then {
+                    self.didDownloadBuckets = true
                 }.then(fulfill).error(reject)
 
             case .RemoveFromBucket:
@@ -95,6 +97,8 @@ class ShotBucketsViewModel {
                 }.then {
                     buckets in
                     self.buckets = buckets ?? []
+                }.then {_ in
+                    self.didDownloadBuckets = true
                 }.then(fulfill).error(reject)
             }
         }

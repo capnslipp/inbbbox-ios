@@ -59,6 +59,8 @@ class ShotBucketsViewController: UIViewController {
             viewModel.loadBuckets()
         }.then {
             self.shotBucketsView.collectionView.reloadData()
+        }.then {
+            self.setEstimatedSizeIfNeeded()
         }.error { error in
             let alert = UIAlertController.unableToDownloadItems()
             self.presentViewController(alert, animated: true, completion: nil)
@@ -82,7 +84,6 @@ class ShotBucketsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        setEstimatedSizeIfNeeded()
         (shotBucketsView.collectionView.collectionViewLayout as?
                 ShotDetailsCollectionCollapsableHeader)?.collapsableHeight =
                 heightForCollapsedCollectionViewHeader
