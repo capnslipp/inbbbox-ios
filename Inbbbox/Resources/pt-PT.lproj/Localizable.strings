@@ -233,7 +233,7 @@
 "SettingsViewModel.NightMode" = "$Night Mode";
 
 /* Title of flash message, when user turn off all sources */
-"SettingsViewModel.AllSources" = "Placeholder for information about sources";
+"SettingsViewModel.AllSources" = "$Placeholder for information about sources";
 
 /* Title of group of buttons for customization settings */
 "SettingsViewController.Customization" = "Personalização";

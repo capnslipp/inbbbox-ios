@@ -37,7 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
-        window!.backgroundColor = ColorModeProvider.current().windowBackgroundColor
+        let backgroudColor = ColorModeProvider.current().windowBackgroundColor
+        window!.backgroundColor = backgroudColor
+        UITabBar.appearance().backgroundColor = backgroudColor
         
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barTintColor = UIColor.pinkColor()

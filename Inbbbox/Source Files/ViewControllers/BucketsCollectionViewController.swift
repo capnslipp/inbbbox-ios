@@ -18,6 +18,7 @@ class BucketsCollectionViewController: UICollectionViewController {
     private var cellsAnimateTimer: NSTimer?
     private let animationCycleInterval = 6.0
 
+    private var currentColorMode = ColorModeProvider.current()
     // MARK: - Lifecycle
 
     convenience init() {
@@ -82,6 +83,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         if !cell.isRegisteredTo3DTouch {
             cell.isRegisteredTo3DTouch = registerTo3DTouch(cell.contentView)
         }
+        cell.adaptColorMode(currentColorMode)
         return cell
     }
 
@@ -193,7 +195,7 @@ extension BucketsCollectionViewController: DZNEmptyDataSetSource {
                 firstLocalizedString:
                 NSLocalizedString("BucketsCollectionViewController.EmptyData.FirstLocalizedString",
                         comment: "Displayed when empty data in view"),
-                attachmentImage: UIImage(named: "ic-bucket-emptystate"),
+                attachmentImage: UIImage(named: currentColorMode.emptyBucketImageName),
                 imageOffset: CGPoint(x: 0, y: -4),
                 lastLocalizedString: NSLocalizedString("BucketsCollectionViewController.EmptyData.LastLocalizedString",
                     comment: "Displayed when empty data in view")
@@ -221,5 +223,14 @@ extension BucketsCollectionViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
         navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+}
+
+// MARK: ColorModeAdaptable
+
+extension BucketsCollectionViewController: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        currentColorMode = mode
+        collectionView?.reloadData()
     }
 }

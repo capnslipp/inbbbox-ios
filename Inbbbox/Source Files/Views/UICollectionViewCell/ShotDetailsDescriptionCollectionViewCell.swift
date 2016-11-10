@@ -34,7 +34,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         descriptionLabel.linkAttributes = [NSForegroundColorAttributeName : UIColor.pinkColor()]
         contentView.addSubview(descriptionLabel)
 
-        separatorView.backgroundColor = ColorModeProvider.current().shotDetailsDescriptionSeparatorColor
+        separatorView.backgroundColor = ColorModeProvider.current().shotDetailsSeparatorColor
         contentView.addSubview(separatorView)
     }
 

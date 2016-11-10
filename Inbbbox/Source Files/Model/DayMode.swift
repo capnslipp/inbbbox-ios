@@ -10,10 +10,12 @@ import Foundation
 
 struct DayMode: ColorModeType {
     
+    // MARK: Window
     var windowBackgroundColor: UIColor {
         return .RGBA(246, 248, 248, 1)
     }
 
+    // MARK: Tab Bar
     var tabBarTint: UIColor {
         return .whiteColor()
     }
@@ -24,6 +26,14 @@ struct DayMode: ColorModeType {
     
     var tabBarSelectedItemTextColor: UIColor {
         return .pinkColor()
+    }
+    
+    var tabBarCenterButtonBackground: UIColor {
+        return .whiteColor()
+    }
+    
+    var tabBarCenterButtonShadowOffset: CGSize {
+        return CGSize(width: 0, height: 2)
     }
     
     var tabBarLikesNormalImageName: String {
@@ -66,24 +76,42 @@ struct DayMode: ColorModeType {
         return "ic-settings-active"
     }
 
+    // MARK: Navigation Bar
     var navigationBarTint: UIColor {
         return .pinkColor()
     }
 
+    // MARK: Shots Collection
     var shotsCollectionBackground: UIColor {
         return .backgroundGrayColor()
+    }
+    
+    // MARK: Shot Cell
+    var shotViewCellBackground: UIColor {
+        return .cellBackgroundColor()
+    }
+    
+    // MARK: Table View
+    var tableViewBlurColor: UIColor {
+        return .clearColor()
     }
 
     var tableViewBackground: UIColor {
         return .backgroundGrayColor()
     }
 
-    var tableViewSeparator: UIColor {
-        return .RGBA(200, 199, 204, 1)
-    }
-
+    // MARK: Table View Cell
     var tableViewCellBackground: UIColor {
         return .whiteColor()
+    }
+    
+    var tableViewCellTextColor: UIColor {
+        return .blackColor()
+    }
+    
+    // MARK: Swich Cell
+    var switchCellTintColor: UIColor {
+        return .RGBA(143, 142, 148, 1)
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
@@ -95,19 +123,19 @@ struct DayMode: ColorModeType {
     }
 
     var shotBucketsFooterViewBackground: UIColor {
-        return .RGBA(246, 248, 248, 1)
+        return .whiteColor()
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
         return UIColor.RGBA(246, 248, 248, 1)
     }
     
-    var shotBucketsActionButtonColor: UIColor {
-        return .whiteColor()
+    var bucketsCollectionViewBackground: UIColor {
+        return .backgroundGrayColor()
     }
     
-    var shotBucketsActionTextColor: UIColor {
-        return .pinkColor()
+    var emptyBucketImageName: String {
+        return "ic-bucket-emptystate-night"
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
@@ -122,34 +150,26 @@ struct DayMode: ColorModeType {
         return .whiteColor()
     }
 
-    var shotDetailsDescriptionSeparatorColor: UIColor {
-        return .separatorGrayColor()
-    }
-    
-    var shotDetailsDummySeparatorColor: UIColor {
-        return .whiteColor()
-    }
-    
     var shotDetailsCommentCollectionViewCellBackground: UIColor {
         return .whiteColor()
-    }
-    
-    var shotDetailsCommentSeparatorColor: UIColor {
-        return .clearColor()
     }
 
     var profileHeaderViewBackground: UIColor {
         return .pinkColor()
     }
 
+    // MARK: TwoLayout Collection View Controller
     var twoLayoutsCollectionViewBackground: UIColor {
         return .backgroundGrayColor()
     }
     
     // MARK: Shot Detail
-    
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
         return .blackColor()
+    }
+    
+    var shotDummySpaceBackground: UIColor {
+        return .whiteColor()
     }
     
     var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
@@ -196,44 +216,78 @@ struct DayMode: ColorModeType {
         return .RGBA(87, 98, 103, 1)
     }
     
-    var shotDetailsFooterBackgroundColor: UIColor {
+    var shotDetailsSeparatorColor: UIColor {
+        return .separatorGrayColor()
+    }
+    
+    var shotDetailsEditViewBackground: UIColor {
+        return .clearColor()
+    }
+    
+    var shotBucketsActionCellBackground: UIColor {
         return .whiteColor()
     }
     
-    var shotDetailsFooterBackgroundGrayedColor: UIColor {
-        return .RGBA(246, 248, 248, 1)
-    }
-    
     // MARK: Settings
-    
     var settingsUsernameTextColor: UIColor {
         return .textDarkColor()
     }
     
-    var settingsCellTextColor: UIColor {
+    var settingsSelectedCellBackgound: UIColor {
+        return .RGBA(217, 217, 217, 1)
+    }
+    
+    // MARK: Date Picker
+    var datePickerBackgroundColor: UIColor {
+        return .whiteColor()
+    }
+    
+    var datePickerTextColor: UIColor {
         return .blackColor()
     }
     
-    var settingsSwitchOnColor: UIColor {
-        return .pinkColor()
+    // MARK: Date Picker View
+    var datePickerViewBackgroundColor: UIColor {
+        return .backgroundGrayColor()
     }
     
-    var settingsSwitchOffColor: UIColor {
-        return .RGBA(143, 142, 148, 1)
+    var datePickerViewSeparatorColor: UIColor {
+        return .RGBA(224, 224, 224, 1)
+    }
+    
+    // MARK: Logo
+    var logoImageName: String {
+        return "logo-type-home"
+    }
+
+    // MARK: Status Bar
+    var preferredStatusBarStyle: UIStatusBarStyle {
+        return .Default
+    }
+
+    // MARK: Comment Composer
+    var commentComposerViewBackground: UIColor {
+        return .RGBA(246, 248, 248, 1)
+    }
+    
+    // MARK: Common
+    var shadowColor: UIColor {
+        return UIColor(white: 0, alpha: 0.1)
+    }
+    
+    var cellSeparator: UIColor {
+        return .RGBA(200, 199, 204, 1)
+    }
+    
+    var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
+        return .Gray
     }
     
     var visualEffectBlurType: UIBlurEffectStyle {
         return .Light
     }
     
-    // MARK: Logo
-    
-    var logoImageName: String {
-        return "logo-type-home"
-    }
-    
     func isEqualTo(other: ColorModeType) -> Bool {
-        if let o = other as? DayMode { return true }
-        return false
+        return other is DayMode
     }
 }

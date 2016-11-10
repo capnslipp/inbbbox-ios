@@ -15,7 +15,8 @@ class SettingsViewController: UITableViewController {
 
     private var viewModel: SettingsViewModel!
     private var authenticator: Authenticator?
-
+    private var currentColorMode =  ColorModeProvider.current()
+    
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
         viewModel = SettingsViewModel(delegate: self)
@@ -172,28 +173,31 @@ private extension SettingsViewController {
 
     func configureSettingCell(cell: UITableViewCell, forItem item: GroupItem) {
         if let item = item as? SwitchItem, switchCell = cell as? SwitchCell {
-            configureSwitchCell(switchCell, forItem: item)
+            configureSwitchCell(switchCell, forItem: item, withMode: currentColorMode)
         } else if let item = item as? DateItem, dateCell = cell as? DateCell {
-            configureDateCell(dateCell, forItem: item)
+            configureDateCell(dateCell, forItem: item, withMode: currentColorMode)
         } else if let item = item as? LabelItem, labelCell = cell as? LabelCell {
-            configureLabelCell(labelCell, forItem: item)
+            configureLabelCell(labelCell, forItem: item, withMode: currentColorMode)
         }
     }
 
-    func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem) {
+    func configureSwitchCell(cell: SwitchCell, forItem item: SwitchItem, withMode mode:ColorModeType) {
         cell.titleLabel.text = item.title
         cell.switchControl.on = item.enabled
         cell.selectionStyle = .None
+        cell.adaptColorMode(mode)
     }
 
-    func configureDateCell(cell: DateCell, forItem item: DateItem) {
+    func configureDateCell(cell: DateCell, forItem item: DateItem, withMode mode:ColorModeType) {
         cell.titleLabel.text = item.title
         cell.setDateText(item.dateString)
+        cell.adaptColorMode(mode)
     }
 
-    func configureLabelCell(cell: LabelCell, forItem item: LabelItem) {
+    func configureLabelCell(cell: LabelCell, forItem item: LabelItem, withMode mode: ColorModeType) {
         cell.titleLabel.text = item.title
         cell.titleLabel.adjustsFontSizeToFitWidth = true
+        cell.adaptColorMode(mode)
     }
 
 }
@@ -301,5 +305,21 @@ private extension UITableView {
             case .Boolean: return dequeueReusableCell(SwitchCell)
             case .String: return dequeueReusableCell(LabelCell)
         }
+    }
+}
+
+extension SettingsViewController: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        currentColorMode = mode
+        tableView.reloadData()
+        updateUsernameColorForMode(mode)
+    }
+    
+    private func updateUsernameColorForMode(mode: ColorModeType) {
+        guard let header = tableView?.tableHeaderView as? SettingsTableHeaderView else {
+            return
+        }
+        
+        header.adaptColorMode(mode)
     }
 }

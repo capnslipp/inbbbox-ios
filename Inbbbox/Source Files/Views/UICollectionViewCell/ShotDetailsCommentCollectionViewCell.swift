@@ -99,7 +99,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
                 action: #selector(likeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         contentView.addSubview(editView)
         
-        separatorView.backgroundColor = ColorModeProvider.current().shotDetailsCommentSeparatorColor
+        separatorView.backgroundColor = ColorModeProvider.current().cellSeparator
         contentView.addSubview(separatorView)
 
         setNeedsUpdateConstraints()

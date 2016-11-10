@@ -10,10 +10,12 @@ import Foundation
 
 struct NightMode: ColorModeType {
     
+    // MARK: Window
     var windowBackgroundColor: UIColor {
         return .backgroundNightModeGrayColor()
     }
 
+    // MARK: Tab Bar
     var tabBarTint: UIColor {
         return .blackColor()
     }
@@ -24,6 +26,14 @@ struct NightMode: ColorModeType {
     
     var tabBarSelectedItemTextColor: UIColor {
         return .pinkColor()
+    }
+    
+    var tabBarCenterButtonBackground: UIColor {
+        return .blackColor()
+    }
+    
+    var tabBarCenterButtonShadowOffset: CGSize {
+        return CGSize(width: 0, height: 2)
     }
     
     var tabBarLikesNormalImageName: String {
@@ -47,7 +57,7 @@ struct NightMode: ColorModeType {
     }
     
     var tabBarCenterButtonSelectedImageName: String {
-        return "ic-ball-active"
+        return "ic-ball-active-night"
     }
     
     var tabBarFollowingNormalImageName: String {
@@ -66,91 +76,100 @@ struct NightMode: ColorModeType {
         return "ic-settings-active"
     }
 
-
+    // MARK: Navigation Bar
     var navigationBarTint: UIColor {
         return .blackColor()
     }
 
+    // MARK: Shots Collection
     var shotsCollectionBackground: UIColor {
-        return .backgroundNightModeGrayColor()
+        return .darkGrayNightMode()
+    }
+    
+    // MARK: Shot Cell
+    var shotViewCellBackground: UIColor {
+        return .grayNightMode()
+    }
+    
+    // MARK: Table View
+    var tableViewBlurColor: UIColor {
+        return .RGBA(71, 72, 72, 1)
     }
 
     var tableViewBackground: UIColor {
-        return .backgroundNightModeGrayColor()
+        return .darkGrayNightMode()
     }
 
-    var tableViewSeparator: UIColor {
-        return .blackColor()
-    }
-
+    // MARK: Table View Cell
     var tableViewCellBackground: UIColor {
-        return lightGrayBackgroundColor
+        return .lessDarkGrayNightMode()
+    }
+    
+    var tableViewCellTextColor: UIColor {
+        return .whiteColor()
+    }
+    
+    // MARK: Swich Cell
+    var switchCellTintColor: UIColor {
+        return .blackColor()
     }
 
     var shotBucketsAddCollectionViewCellBackground: UIColor {
-        return lightGrayBackgroundColor
+        return .lessDarkGrayNightMode()
     }
 
     var shotBucketsHeaderViewBackground: UIColor {
-        return bucketsDetailsBackgroundColor
+        return .darkGrayNightMode()
     }
 
     var shotBucketsFooterViewBackground: UIColor {
-        return bucketsDetailsBackgroundColor
+        return .lessDarkGrayNightMode()
     }
 
     var shotBucketsSeparatorCollectionViewCellBackground: UIColor {
-        return bucketsDetailsBackgroundColor
+        return .darkGrayNightMode()
     }
     
-    var shotBucketsActionButtonColor: UIColor {
-        return .pinkColor()
+    var bucketsCollectionViewBackground: UIColor {
+        return .darkGrayNightMode()
     }
     
-    var shotBucketsActionTextColor: UIColor {
-        return .whiteColor()
+    var emptyBucketImageName: String {
+        return "ic-bucket-emptystate-night"
     }
 
     var shotDetailsHeaderViewBackground: UIColor {
-        return bucketsDetailsBackgroundColor
+        return .darkGrayNightMode()
     }
 
     var shotDetailsOperationViewBackground: UIColor {
-        return bucketsDetailsBackgroundColor
+        return .darkGrayNightMode()
     }
 
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor {
-        return lightGrayBackgroundColor
-    }
-    
-    var shotDetailsDescriptionSeparatorColor: UIColor {
-        return .clearColor()
-    }
-    
-    var shotDetailsDummySeparatorColor: UIColor {
-        return lightGrayBackgroundColor
+        return .lessDarkGrayNightMode()
     }
 
     var shotDetailsCommentCollectionViewCellBackground: UIColor {
-        return lightGrayBackgroundColor
-    }
-    
-    var shotDetailsCommentSeparatorColor: UIColor {
-        return .blackColor()
+        return .lessDarkGrayNightMode()
     }
 
     var profileHeaderViewBackground: UIColor {
         return .blackColor()
     }
 
+    // MARK: TwoLayout Collection View Controller
     var twoLayoutsCollectionViewBackground: UIColor {
-        return .backgroundNightModeGrayColor()
+        return .darkGrayNightMode()
     }
     
     // MARK: Shot Detail
-    
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor {
         return .whiteColor()
+    }
+    
+    var shotDummySpaceBackground: UIColor {
+        return .lessDarkGrayNightMode()
     }
     
     var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
@@ -158,7 +177,7 @@ struct NightMode: ColorModeType {
     }
     
     var shotDetailsHeaderViewAuthorNotLinkColor: UIColor {
-        return .grayNightModeColor()
+        return  .lessWhiteNightMode()
     }
     
     var shotDetailsHeaderViewAuthorLinkColor: UIColor {
@@ -166,15 +185,15 @@ struct NightMode: ColorModeType {
     }
 
     var shotDetailsDescriptionViewColorTextColor: UIColor {
-        return .grayNightModeColor()
+        return  .lessWhiteNightMode()
     }
     
     var shotDetailsCommentAuthorTextColor: UIColor {
-        return .grayNightModeColor()
+        return .whiteColor()
     }
     
     var shotDetailsCommentContentTextColor: UIColor {
-        return .grayColor()
+        return  .lessWhiteNightMode()
     }
     
     var shotDetailsCommentLikesCountTextColor: UIColor {
@@ -197,49 +216,78 @@ struct NightMode: ColorModeType {
         return .whiteColor()
     }
     
-    var shotDetailsFooterBackgroundColor: UIColor {
-        return lightGrayBackgroundColor
+    var shotDetailsSeparatorColor: UIColor {
+        return .darkGrayNightMode()
     }
     
-    var shotDetailsFooterBackgroundGrayedColor: UIColor {
-        return lightGrayBackgroundColor
+    var shotDetailsEditViewBackground: UIColor {
+        return .greenColor()
+    }
+    
+    var shotBucketsActionCellBackground: UIColor {
+        return .lessDarkGrayNightMode()
     }
     
     // MARK: Settings
-    
     var settingsUsernameTextColor: UIColor {
-        return .RGBA(236, 237, 239, 1)
+        return  .whiteNightMode()
     }
     
-    var settingsCellTextColor: UIColor {
+    var settingsSelectedCellBackgound: UIColor {
+        return .grayNightMode()
+    }
+    
+    // MARK: Date Picker
+    var datePickerBackgroundColor: UIColor {
+        return .darkGrayNightMode()
+    }
+    
+    var datePickerTextColor: UIColor {
         return .whiteColor()
     }
     
-    var settingsSwitchOnColor: UIColor {
-        return .pinkColor()
+    // MARK: Date Picker View
+    var datePickerViewBackgroundColor: UIColor {
+        return .darkGrayNightMode()
     }
     
-    var settingsSwitchOffColor: UIColor {
+    var datePickerViewSeparatorColor: UIColor {
+        return .darkGrayNightMode()
+    }
+    
+    // MARK: Logo
+    var logoImageName: String {
+        return "logo-type-home-night"
+    }
+    
+    // MARK: Status Bar
+    var preferredStatusBarStyle: UIStatusBarStyle {
+        return .LightContent
+    }
+    
+    // MARK: Comment Composer
+    var commentComposerViewBackground: UIColor {
         return .blackColor()
+    }
+    
+    // MARK: Common
+    var shadowColor: UIColor {
+        return UIColor(white: 0, alpha: 0.15)
+    }
+    
+    var cellSeparator: UIColor {
+        return .blackColor()
+    }
+    
+    var activityIndicatorViewStyle: UIActivityIndicatorViewStyle {
+        return .White
     }
     
     var visualEffectBlurType: UIBlurEffectStyle {
         return .Dark
     }
     
-    private let lightGrayBackgroundColor: UIColor = .RGBA(87, 98, 103, 1)
-    
-    private let bucketsDetailsBackgroundColor: UIColor = .RGBA(43, 48, 51, 1)
-    
-    // MARK: Logo
-    
-    var logoImageName: String {
-        return "logo-type-home-night"
-    }
-    
     func isEqualTo(other: ColorModeType) -> Bool {
-        if let _ = other as? NightMode { return true }
-        return false
+        return other is NightMode
     }
-    
 }

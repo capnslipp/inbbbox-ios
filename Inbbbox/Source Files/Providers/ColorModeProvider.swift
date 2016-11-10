@@ -39,29 +39,38 @@ final class ColorModeProvider {
 
     private class func select(mode: ColorMode) {
         switch mode {
-        case .DayMode: ColorModeProvider.adaptInterface(to: DayMode())
-        case .NightMode: ColorModeProvider.adaptInterface(to: NightMode())
+            case .DayMode:
+                let mode = DayMode()
+                ColorModeProvider.adaptInterface(to: mode)
+                ColorModeProvider.adaptInterfaceToCustomViews(to: mode)
+            case .NightMode:
+                let mode = NightMode()
+                ColorModeProvider.adaptInterface(to: mode)
+                ColorModeProvider.adaptInterfaceToCustomViews(to: mode)
         }
     }
 
     private class func adaptInterface(to mode: ColorModeType) {
         UITabBar.appearance().barTintColor = mode.tabBarTint
+        UITabBar.appearance().backgroundColor = mode.windowBackgroundColor
         UINavigationBar.appearance().barTintColor = mode.navigationBarTint
         UITableView.appearance().backgroundColor = mode.tableViewBackground
-        UITableView.appearance().separatorColor = mode.tableViewSeparator
+        UITableView.appearance().separatorColor = mode.cellSeparator
         UITableViewCell.appearance().backgroundColor = mode.tableViewCellBackground
         ShotsCollectionBackgroundView.appearance().backgroundColor = mode.shotsCollectionBackground
         ShotBucketsAddCollectionViewCell.appearance().backgroundColor = mode.shotBucketsAddCollectionViewCellBackground
         ShotBucketsSeparatorCollectionViewCell.appearance().backgroundColor = mode.shotBucketsSeparatorCollectionViewCellBackground
         ShotBucketsHeaderView.appearance().backgroundColor = mode.shotBucketsHeaderViewBackground
         ShotBucketsFooterView.appearance().backgroundColor = mode.shotBucketsFooterViewBackground
+        ShotBucketsActionCollectionViewCell.appearance().backgroundColor = mode.shotBucketsActionCellBackground
         ShotDetailsHeaderView.appearance().backgroundColor = mode.shotDetailsHeaderViewBackground
         ShotDetailsOperationView.appearance().backgroundColor = mode.shotDetailsOperationViewBackground
         ShotDetailsDescriptionCollectionViewCell.appearance().backgroundColor = mode.shotDetailsDescriptionCollectionViewCellBackground
         ShotDetailsCommentCollectionViewCell.appearance().backgroundColor = mode.shotDetailsCommentCollectionViewCellBackground
         ProfileHeaderView.appearance().backgroundColor = mode.profileHeaderViewBackground
 
-        UICollectionView.appearance().backgroundColor = mode.twoLayoutsCollectionViewBackground
+        UICollectionView.appearanceWhenContainedInInstancesOfClasses([TwoLayoutsCollectionViewController.self]).backgroundColor = mode.twoLayoutsCollectionViewBackground
+        UICollectionView.appearanceWhenContainedInInstancesOfClasses([BucketsCollectionViewController.self]).backgroundColor = mode.bucketsCollectionViewBackground
 
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         UINavigationBar.appearance().barStyle = .Black
@@ -69,6 +78,8 @@ final class ColorModeProvider {
         UINavigationBar.appearance().translucent = false
         UIWindow.appearance().backgroundColor = .blackColor()
 
+        UIDatePicker.appearance().backgroundColor = mode.tableViewBackground
+        
         ColorModeProvider.resetViews()
     }
 
@@ -81,5 +92,24 @@ final class ColorModeProvider {
                 window.addSubview(v)
             }
         }
+    }
+    
+    private class func adaptInterfaceToCustomViews(to mode: ColorModeType) {
+        guard let centerButtonTabBarController = findCenterButtonTabControllerInWindows() else {
+            return
+        }
+        
+        centerButtonTabBarController.adaptColorMode(mode)
+    }
+    
+    private class func findCenterButtonTabControllerInWindows() -> CenterButtonTabBarController? {
+        let windows = UIApplication.sharedApplication().windows as [UIWindow]
+        for window in windows {
+            guard let centerButtonTabBarController = window.rootViewController as? CenterButtonTabBarController  else {
+                continue
+            }
+            return centerButtonTabBarController
+        }
+        return nil
     }
 }

@@ -80,3 +80,9 @@ class SettingsTableHeaderView: UIView, Reusable, AvatarSettable {
         addSubview(usernameLabel)
     }
 }
+
+extension SettingsTableHeaderView: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        usernameLabel.textColor = mode.settingsUsernameTextColor
+    }
+}

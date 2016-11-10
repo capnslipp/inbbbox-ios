@@ -50,7 +50,13 @@ class CommentEditView: UIView {
     let cancelLabel = UILabel()
     let deleteButton = UIButton()
     let deleteLabel = UILabel()
-    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    let contentView: UIView = {
+        if Settings.Customization.CurrentColorMode == .NightMode {
+            return UIView.withColor(ColorModeProvider.current().shotDetailsCommentCollectionViewCellBackground)
+        } else {
+            return UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+        }
+    }()
 
     // MARK: Life Cycle
 
@@ -84,7 +90,7 @@ class CommentEditView: UIView {
 
         if !didUpdateConstraints {
 
-            blurView.autoPinEdgesToSuperviewEdges()
+            contentView.autoPinEdgesToSuperviewEdges()
 
             likeButton.autoAlignAxis(.Horizontal, toSameAxisOfView: likeButton.superview!,
                 withOffset: buttonsCenterOffset)
@@ -145,39 +151,39 @@ class CommentEditView: UIView {
 
     private func setupBlurView() {
 
-        addSubview(blurView)
+        addSubview(contentView)
     }
 
     private func setupCancelButton() {
         cancelButton.setImage(UIImage(named: "ic-cancel-comment"), forState: .Normal)
         cancelButton.contentMode = .ScaleAspectFit
-        blurView.addSubview(cancelButton)
+        contentView.addSubview(cancelButton)
     }
 
     private func setupDeleteButton() {
         deleteButton.setImage(UIImage(named: "ic-delete-comment"), forState: .Normal)
         deleteButton.contentMode = .ScaleAspectFit
-        blurView.addSubview(deleteButton)
+        contentView.addSubview(deleteButton)
     }
 
     private func setupLikeButton() {
         likeButton.setImage(UIImage(named: "ic-like-details"), forState: .Normal)
         likeButton.contentMode = .ScaleAspectFit
-        blurView.addSubview(likeButton)
+        contentView.addSubview(likeButton)
     }
 
     private func setupCancelLabel() {
         cancelLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         cancelLabel.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
         cancelLabel.text = NSLocalizedString("CommentEditView.Cancel", comment: "Cancel editing comment.")
-        blurView.addSubview(cancelLabel)
+        contentView.addSubview(cancelLabel)
     }
 
     private func setupDeleteLabel() {
         deleteLabel.font = UIFont.helveticaFont(.Neue, size: 10)
         deleteLabel.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
         deleteLabel.text = deleteLabelText
-        blurView.addSubview(deleteLabel)
+        contentView.addSubview(deleteLabel)
     }
 
     private func setupLikeLabel() {
@@ -185,6 +191,6 @@ class CommentEditView: UIView {
         likeLabel.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
         likeLabel.text = NSLocalizedString("CommentEditView.Like",
                                            comment: "Mark selected comment as liked.")
-        blurView.addSubview(likeLabel)
+        contentView.addSubview(likeLabel)
     }
 }

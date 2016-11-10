@@ -22,7 +22,7 @@ class LabelCell: UITableViewCell, Reusable {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        titleLabel.textColor = ColorModeProvider.current().settingsCellTextColor
+        titleLabel.textColor = UIColor.pinkColor()
         titleLabel.textAlignment = .Center
         contentView.addSubview(titleLabel)
 
@@ -41,5 +41,11 @@ class LabelCell: UITableViewCell, Reusable {
         }
 
         super.updateConstraints()
+    }
+}
+
+extension LabelCell: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        selectedBackgroundView = UIView.withColor(mode.settingsSelectedCellBackgound)
     }
 }
