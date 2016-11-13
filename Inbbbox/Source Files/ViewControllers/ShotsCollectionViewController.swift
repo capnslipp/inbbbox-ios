@@ -313,6 +313,9 @@ private extension ShotsCollectionViewController {
     }
     
     func showStreamSources() {
+        guard !stateHandler.shouldShowNoShotsView else {
+            return
+        }
         backgroundAnimator?.startFadeInAnimation()
         AsyncWrapper().main(after: 4) { [unowned self] in
             self.backgroundAnimator?.startFadeOutAnimation()
