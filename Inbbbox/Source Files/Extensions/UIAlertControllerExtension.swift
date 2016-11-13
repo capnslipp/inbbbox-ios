@@ -58,53 +58,7 @@ extension UIAlertController {
         return alert
     }
 
-    class func unableToCreateNewBucket() -> AOAlertController {
-        let message = NSLocalizedString("BucketsCollectionViewController.NewBucketFail",
-                                        comment: "Displayed when creating new bucket fails.")
-
-        return UIAlertController.createAlert(message)
-    }
-
-    class func addRemoveShotToBucketFail() -> AOAlertController {
-        let message = NSLocalizedString("ShotDetailsViewController.BucketError",
-                                        comment: "Error while adding/removing shot to bucket.")
-
-        return UIAlertController.createAlert(message)
-    }
-
-    // MARK: Comments
-
-    class func unableToDeleteComment() -> AOAlertController {
-        let message = NSLocalizedString("ShotDetailsViewController.RemovingCommentError",
-                                        comment: "Error while removing comment.")
-
-        return UIAlertController.createAlert(message)
-    }
-
-    class func unableToAddComment() -> AOAlertController {
-        let message = NSLocalizedString("ShotDetailsViewController.AddingCommentError",
-                                        comment: "Error while adding comment.")
-
-        return UIAlertController.createAlert(message)
-    }
-
-    // MARK: Downloads
-
-    class func unableToDownloadItems() -> AOAlertController {
-        let message = NSLocalizedString("UIAlertControllerExtension.UnableToDownload",
-                                        comment: "Informing user about problems with downloading items.")
-
-        return UIAlertController.createAlert(message)
-    }
-
     // MARK: Other
-
-    class func generalError() -> AOAlertController {
-        let message = NSLocalizedString("UIAlertControllerExtension.TryAgain",
-                comment: "Allows user to try again after error occurred.")
-
-        return UIAlertController.createAlert(message)
-    }
 
     class func inappropriateContentReported() -> AOAlertController {
         let message = NSLocalizedString("UIAlertControllerExtension.InappropriateContentReported", comment: "nil")
