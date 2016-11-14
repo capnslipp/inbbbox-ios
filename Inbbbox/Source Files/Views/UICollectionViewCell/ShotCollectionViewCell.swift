@@ -49,7 +49,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private(set) var plusImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var bucketImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var commentImageViewRightConstraint: NSLayoutConstraint?
-    private(set) var commentImageVerticalConstraint: NSLayoutConstraint?
     private(set) var commentImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var followImageViewWidthConstraint: NSLayoutConstraint?
     private var authorInfoHeightConstraint: NSLayoutConstraint?
@@ -300,7 +299,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
         
         followImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6),
                                                         followImageView.intrinsicContentSize().width)
-        
     }
 
     private func adjustActionImageViewForXTranslation(xTranslation: CGFloat) {
@@ -341,7 +339,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
             })
         }
     }
-    
     
     private func displayComment() {
         commentImageView.alpha = 1
