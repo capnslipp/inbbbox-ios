@@ -433,8 +433,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            let alert = UIAlertController.addRemoveShotToBucketFail()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketProcessingFailed, canBeDismissedByUser: true)
         }
     }
 
@@ -467,8 +466,7 @@ private extension ShotDetailsViewController {
             }
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths(indexPaths)
         }.error { error in
-            let alert = UIAlertController.unableToDeleteComment()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.deleteCommentFailed, canBeDismissedByUser: true)
         }
     }
 

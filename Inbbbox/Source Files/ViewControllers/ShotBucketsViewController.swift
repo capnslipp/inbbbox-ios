@@ -57,8 +57,7 @@ class ShotBucketsViewController: UIViewController {
         }.then {
             self.shotBucketsView.collectionView.reloadData()
         }.error { error in
-            let alert = UIAlertController.unableToDownloadItems()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
         }
         shotBucketsView.viewController = self
         shotBucketsView.collectionView.delegate = self
@@ -221,8 +220,7 @@ extension ShotBucketsViewController {
             self.willDismissViewControllerClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            let alert = UIAlertController.addRemoveShotToBucketFail()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketProcessingFailed, canBeDismissedByUser: true)
         }
     }
 
@@ -322,8 +320,7 @@ private extension ShotBucketsViewController {
             self.willDismissViewControllerClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            let alert = UIAlertController.addRemoveShotToBucketFail()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketProcessingFailed, canBeDismissedByUser: true)
         }
     }
 
@@ -333,8 +330,7 @@ private extension ShotBucketsViewController {
         }.then { () -> Void in
             self.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
         }.error { error in
-            let alert = UIAlertController.unableToCreateNewBucket()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketCreationFailed, canBeDismissedByUser: true)
         }
     }
 }

@@ -128,8 +128,7 @@ class BucketsCollectionViewController: UICollectionViewController {
                         [NSIndexPath(forItem: self.viewModel.buckets.count-1, inSection: 0)])
                 }
             }.error { error in
-                let alert = UIAlertController.unableToCreateNewBucket()
-                self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
+                FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketCreationFailed, canBeDismissedByUser: true)
                 return
             }
         }
@@ -159,14 +158,12 @@ extension BucketsCollectionViewController: BaseCollectionViewViewModelDelegate {
         collectionView?.reloadData()
 
         if viewModel.buckets.isEmpty {
-            let alert = UIAlertController.generalError()
-            tabBarController?.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
         }
     }
 
     func viewModelDidFailToLoadItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItems()
-        tabBarController?.presentViewController(alert, animated: true, completion: nil)
+        FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.downloadingShotsFailed, canBeDismissedByUser: true)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel,
