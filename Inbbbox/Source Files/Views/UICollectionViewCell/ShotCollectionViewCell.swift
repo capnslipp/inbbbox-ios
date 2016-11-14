@@ -301,41 +301,43 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func adjustActionImageViewForXTranslation(xTranslation: CGFloat) {
-        if xTranslation >= likeActionRange.min && xTranslation > previousXTranslation && likeImageView.isFirstImageVisible() && !liked {
+        switch xTranslation {
+        case likeActionRange.min ..< CGFloat.max where xTranslation > previousXTranslation && likeImageView.isFirstImageVisible && !liked:
             UIView.animate(animations: {
                 self.likeImageView.displaySecondImageView()
             })
-        } else if xTranslation < likeActionRange.min && xTranslation < previousXTranslation && likeImageView.isSecondImageVisible() && !liked {
+        case CGFloat(Int.min) ..< likeActionRange.min where xTranslation < previousXTranslation && likeImageView.isSecondImageVisible && !liked:
             UIView.animate(animations: {
                 self.likeImageView.displayFirstImageView()
             })
-        } else if xTranslation >= bucketActionRange.min && bucketImageView.isFirstImageVisible() {
+        case bucketActionRange.min ..< CGFloat.max where bucketImageView.isFirstImageVisible:
             UIView.animate(animations: {
                 self.bucketImageView.displaySecondImageView()
             })
-        } else if xTranslation < bucketActionRange.min && bucketImageView.isSecondImageVisible() {
+        case CGFloat(Int.min) ..< bucketActionRange.min where bucketImageView.isSecondImageVisible:
             UIView.animate(animations: {
                 self.bucketImageView.displayFirstImageView()
             })
-        } else if xTranslation > commentActionRange.mid && xTranslation <= commentActionRange.max && commentImageView.amIOrIsSecondImageVisible() {
+        case commentActionRange.mid ... commentActionRange.max where commentImageView.isSelfOrSecondImageVisible:
             UIView.animate(animations: {
                 self.displayComment()
                 self.commentImageView.displayFirstImageView()
             })
-        } else if xTranslation > commentActionRange.min && xTranslation <= commentActionRange.mid {
+        case commentActionRange.min...commentActionRange.mid:
             UIView.animate(animations: {
                 self.displayComment()
                 self.commentImageView.displaySecondImageView()
             })
-        } else if xTranslation > followActionRange.mid && xTranslation <= followActionRange.max  && followImageView.amIOrIsSecondImageVisible() {
+        case followActionRange.mid ... followActionRange.max where followImageView.isSelfOrSecondImageVisible:
             UIView.animate(animations: {
                 self.displayFollow()
                 self.followImageView.displayFirstImageView()
             })
-        } else if xTranslation <= followActionRange.mid {
+        case CGFloat(Int.min) ..< followActionRange.mid:
             UIView.animate(animations: {
                 self.followImageView.displaySecondImageView()
             })
+        default: break
         }
     }
     
@@ -350,15 +352,16 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
-        if likeActionRange.min ... likeActionRange.max ~= xTranslation {
+        switch xTranslation {
+        case likeActionRange.min ... likeActionRange.max:
             return .Like
-        } else if xTranslation > likeActionRange.max {
+        case likeActionRange.max ..< CGFloat.max:
             return .Bucket
-        } else if commentActionRange.min...commentActionRange.mid ~= xTranslation {
+        case commentActionRange.min ... commentActionRange.mid:
             return .Comment
-        } else if followActionRange.mid >= xTranslation {
+        case CGFloat(Int.min) ..< followActionRange.mid:
             return .Follow
-        } else {
+        default:
             return .DoNothing
         }
     }
