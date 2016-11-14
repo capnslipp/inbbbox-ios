@@ -21,20 +21,6 @@ final class LazyImageProvider {
                                      teaserImageCompletion: UIImage -> Void,
                                      normalImageCompletion: (UIImage -> Void)? = nil,
                                      hidpiImageCompletion: (UIImage -> Void)? = nil) {
-
-        loadImageFromURL(urls.normalURL).then { image -> Void in
-            if let image = image {
-                normalImageCompletion?(image)
-            }
-        }.error { error in
-            lazyLoadAllImagesFromURLs(urls, teaserImageCompletion: teaserImageCompletion, normalImageCompletion: normalImageCompletion, hidpiImageCompletion: hidpiImageCompletion)
-        }
-    }
-    
-    private class func lazyLoadAllImagesFromURLs(urls: (teaserURL: NSURL, normalURL: NSURL?, hidpiURL: NSURL?), teaserImageCompletion: UIImage -> Void,
-        normalImageCompletion: (UIImage -> Void)? = nil,
-        hidpiImageCompletion: (UIImage -> Void)? = nil) {
-        
         
         firstly {
             loadImageFromURL(urls.teaserURL)
@@ -55,7 +41,6 @@ final class LazyImageProvider {
                 hidpiImageCompletion?(image)
             }
         }
-        
     }
 }
 

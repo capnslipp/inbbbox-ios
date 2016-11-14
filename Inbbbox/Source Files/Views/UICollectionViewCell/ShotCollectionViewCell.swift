@@ -60,7 +60,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     private let panGestureRecognizer = UIPanGestureRecognizer()
 
-    // NGRTodo: !!!!!!!REPLACE THOSE MAGIC NUMBERS!!!!!!!
     private let likeActionRange = ActionRange(min: 40, max: 120)
     private let bucketActionRange = ActionRange(min: 120, max: 170)
     private let commentActionRange = ActionRange(min: -80, max: 0)

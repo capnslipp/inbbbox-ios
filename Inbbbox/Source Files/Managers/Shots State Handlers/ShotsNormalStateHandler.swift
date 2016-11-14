@@ -156,7 +156,7 @@ extension ShotsNormalStateHandler {
                 certainSelf.presentShotBucketsViewController(shot)
             case .Comment:
                 let shotUpdated = self?.shotDummyRecent(shot)
-                certainSelf.presentShotDetailsViewController(shotUpdated ?? shot, index: indexPath.item, scrollToMessages: true)
+                certainSelf.presentShotDetailsViewController(shotUpdated ?? shot, index: indexPath.item, scrollToMessages: true, focusOnInput: true)
             case .Follow:
                 firstly {
                     certainSelf.followAuthorOfShot(shot)
@@ -308,7 +308,7 @@ private extension ShotsNormalStateHandler {
                 shotBucketsViewController, animated: true, completion: nil)
     }
 
-    func presentShotDetailsViewController(shot: ShotType, index: Int, scrollToMessages: Bool) {
+    func presentShotDetailsViewController(shot: ShotType, index: Int, scrollToMessages: Bool, focusOnInput: Bool = false) {
         guard let shotsCollectionViewController = shotsCollectionViewController else { return }
         
         shotsCollectionViewController.definesPresentationContext = true
@@ -318,6 +318,7 @@ private extension ShotsNormalStateHandler {
         detailsViewController.updatedShotInfo = { [weak self] shot in
                 self?.shotsCollectionViewController?.shots[index] = shot
         }
+        detailsViewController.shouldShowKeyboardAtStart = focusOnInput
         let shotDetailsPageDataSource = ShotDetailsPageViewControllerDataSource(shots: shotsCollectionViewController.shots, initialViewController: detailsViewController)
         shotDetailsPageDataSource.delegate = self
         let pageViewController = ShotDetailsPageViewController(shotDetailsPageDataSource: shotDetailsPageDataSource)
