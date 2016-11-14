@@ -306,7 +306,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             UIView.animate(animations: {
                 self.likeImageView.displaySecondImageView()
             })
-        case CGFloat(Int.min) ..< likeActionRange.min where xTranslation < previousXTranslation && likeImageView.isSecondImageVisible && !liked:
+        case -CGFloat.infinity ..< likeActionRange.min where xTranslation < previousXTranslation && likeImageView.isSecondImageVisible && !liked:
             UIView.animate(animations: {
                 self.likeImageView.displayFirstImageView()
             })
@@ -314,7 +314,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             UIView.animate(animations: {
                 self.bucketImageView.displaySecondImageView()
             })
-        case CGFloat(Int.min) ..< bucketActionRange.min where bucketImageView.isSecondImageVisible:
+        case -CGFloat.infinity ..< bucketActionRange.min where bucketImageView.isSecondImageVisible:
             UIView.animate(animations: {
                 self.bucketImageView.displayFirstImageView()
             })
@@ -333,7 +333,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
                 self.displayFollow()
                 self.followImageView.displayFirstImageView()
             })
-        case CGFloat(Int.min) ..< followActionRange.mid:
+        case -CGFloat.infinity ..< followActionRange.mid:
             UIView.animate(animations: {
                 self.followImageView.displaySecondImageView()
             })
@@ -355,11 +355,11 @@ class ShotCollectionViewCell: UICollectionViewCell {
         switch xTranslation {
         case likeActionRange.min ... likeActionRange.max:
             return .Like
-        case likeActionRange.max ..< CGFloat.max:
+        case likeActionRange.max ..< CGFloat.infinity:
             return .Bucket
         case commentActionRange.min ... commentActionRange.mid:
             return .Comment
-        case CGFloat(Int.min) ..< followActionRange.mid:
+        case -CGFloat.infinity ..< followActionRange.mid:
             return .Follow
         default:
             return .DoNothing
