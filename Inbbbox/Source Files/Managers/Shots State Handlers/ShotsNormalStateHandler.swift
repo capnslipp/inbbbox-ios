@@ -52,6 +52,7 @@ class ShotsNormalStateHandler: NSObject, ShotsStateHandler {
     var willDismissDetailsCompletionHandler: (Int -> Void)?
 
     private var indexPathsNeededImageUpdate = [UpdateableIndex]()
+    private let connectionsRequester = APIConnectionsRequester()
 
     func prepareForPresentingData() {
         if !UserStorage.isUserSignedIn {
@@ -157,7 +158,9 @@ extension ShotsNormalStateHandler {
                 let shotUpdated = self?.shotDummyRecent(shot)
                 certainSelf.presentShotDetailsViewController(shotUpdated ?? shot, index: indexPath.item, scrollToMessages: true)
             case .Follow:
-                print("follow acction")
+                firstly {
+                    certainSelf.followAuthorOfShot(shot)
+                }
             case .DoNothing:
                 break
             }
@@ -445,6 +448,15 @@ private extension ShotsNormalStateHandler {
                 }.error { error in
                     self.delegate?.shotsStateHandlerDidFailToFetchItems(error)
             }
+        }
+    }
+    
+    func followAuthorOfShot(shot: ShotType) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            
+            firstly {
+                connectionsRequester.followUser(shot.user)
+            }.then(fulfill).error(reject)
         }
     }
 }

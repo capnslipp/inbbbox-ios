@@ -31,6 +31,14 @@ class ShotCollectionViewCell: UICollectionViewCell {
     let followImageView = DoubleImageView(firstImage: UIImage(named: "ic-follow-swipe"),
                                           secondImage: UIImage(named: "ic-follow-swipe-active"))
     let gifLabel = GifIndicatorView()
+    let messageLabel: UILabel = {
+        let l = UILabel()
+        l.font = UIFont.helveticaFont(.NeueBold, size: 15)
+        l.textColor = .whiteColor()
+        l.textAlignment = .Center
+        return l
+    }()
+    
 
     let shotContainer = UIView.newAutoLayoutView()
     let authorView = ShotAuthorCompactView.newAutoLayoutView()
@@ -54,11 +62,10 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private let panGestureRecognizer = UIPanGestureRecognizer()
 
     // NGRTodo: !!!!!!!REPLACE THOSE MAGIC NUMBERS!!!!!!!
-    private let doNothingActionRange = (min: CGFloat(-40), max: CGFloat(40))
-    private let likeActionRange = (min: CGFloat(40), max: CGFloat(120))
-    private let bucketActionRange = (min: CGFloat(120), max: CGFloat(170))
-    private let commentActionRange = ActionRange(min: -120, max: -40)
-    private let followActionRange = ActionRange(min: -170, max: -120)
+    private let likeActionRange = ActionRange(min: 40, max: 120)
+    private let bucketActionRange = ActionRange(min: 120, max: 170)
+    private let commentActionRange = ActionRange(min: -80, max: 0)
+    private let followActionRange = ActionRange(min: -170, max: -80)
     private let authorInfoHeight: CGFloat = 25
 
     private var didSetConstraints = false
@@ -109,6 +116,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
         followImageView.configureForAutoLayout()
         followImageView.alpha = 0
         shotContainer.addSubview(followImageView)
+        
+        messageLabel.configureForAutoLayout()
+        shotContainer.addSubview(messageLabel)
 
         shotContainer.addSubview(shotImageView)
 
@@ -185,6 +195,10 @@ class ShotCollectionViewCell: UICollectionViewCell {
             gifLabel.autoPinEdgeToSuperviewEdge(.Top, withInset: 10)
             gifLabel.autoPinEdgeToSuperviewEdge(.Right, withInset: 10)
 
+            messageLabel.autoAlignAxisToSuperviewAxis(.Vertical)
+            let messageHorizontalOffset = followImageView.intrinsicContentSize().height
+            messageLabel.autoAlignAxis(.Horizontal, toSameAxisOfView: shotContainer, withOffset: messageHorizontalOffset)
+            
             didSetConstraints = true
         }
 
@@ -233,6 +247,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             let xTranslation = adjustedXTranslation()
             let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
             panGestureRecognizer.enabled = false
+            displayMessageBasedOnAction(selectedAction)
             animateCellAction(selectedAction) { [unowned self] in
                 self.swipeCompletion?(selectedAction)
                 self.delegate?.shotCollectionViewCellDidEndSwiping(self)
@@ -289,7 +304,6 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func adjustActionImageViewForXTranslation(xTranslation: CGFloat) {
-        print("\(xTranslation)")
         if xTranslation >= likeActionRange.min && xTranslation > previousXTranslation && likeImageView.isFirstImageVisible() && !liked {
             UIView.animate(animations: {
                 self.likeImageView.displaySecondImageView()
@@ -340,17 +354,13 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
-        if doNothingActionRange.min ... doNothingActionRange.max ~= xTranslation {
-            return .DoNothing
-        } else if likeActionRange.min ... likeActionRange.max ~= xTranslation {
+        if likeActionRange.min ... likeActionRange.max ~= xTranslation {
             return .Like
         } else if xTranslation > likeActionRange.max {
             return .Bucket
         } else if commentActionRange.min...commentActionRange.mid ~= xTranslation {
-            print("comment")
             return .Comment
-        } else if followActionRange.min...followActionRange.mid ~= xTranslation {
-            print("follow")
+        } else if followActionRange.mid >= xTranslation {
             return .Follow
         } else {
             return .DoNothing
@@ -363,10 +373,12 @@ class ShotCollectionViewCell: UICollectionViewCell {
             bucketImageView.hidden = true
             plusImageView.hidden = true
             commentImageView.hidden = true
+            followImageView.hidden = true
             viewClass.animateWithDescriptor(ShotCellLikeActionAnimationDescriptor(shotCell: self,
                     swipeCompletion: completion))
         case .Bucket:
             commentImageView.hidden = true
+            followImageView.hidden = true
             viewClass.animateWithDescriptor(ShotCellBucketActionAnimationDescriptor(shotCell: self,
                     swipeCompletion: completion))
         case .Comment, .Follow:
@@ -378,6 +390,21 @@ class ShotCollectionViewCell: UICollectionViewCell {
         default:
             viewClass.animateWithDescriptor(ShotCellInitialStateAnimationDescriptor(shotCell: self,
                     swipeCompletion: completion))
+        }
+    }
+    
+    private func displayMessageBasedOnAction(action: Action) {
+        switch action {
+        case .Like:
+            messageLabel.text = "Added to Likes!"
+        case .Bucket:
+            messageLabel.text = "Liked & Added bucket!"
+        case .Comment:
+            messageLabel.text = "Opening…"
+        case .Follow:
+            messageLabel.text = "Following author!"
+        case .DoNothing:
+            messageLabel.text = ""
         }
     }
 
