@@ -55,7 +55,7 @@
 		237CCD37767599FA1EA8505A /* ViewControllerPresenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F988B5A54CE51BC6C7E55F72 /* ViewControllerPresenterMock.swift */; };
 		25FCDA8EDB592D7C547F294C /* OAuthAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D598E9BB4EDCE86ADD7BB0A3 /* OAuthAuthorizable.swift */; };
 		25FFF6B2C6ECB6C90B59E7F2 /* AutoScrollableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA26B57AF334AAA327E47C15 /* AutoScrollableCollectionViewCell.swift */; };
-		2670412B8802A0C735FBF283 /* SwitchableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397297ADA0D7B1F46850C1D2 /* SwitchableImageView.swift */; };
+		2670412B8802A0C735FBF283 /* DoubleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397297ADA0D7B1F46850C1D2 /* DoubleImageView.swift */; };
 		26B07C426DA7405138A0443C /* UserSpecExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373B43F4E99619491E96CE5F /* UserSpecExtension.swift */; };
 		275D1AB77EB97A28A78A1747 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACCA7C583E9356743812301 /* DatePickerViewController.swift */; };
 		284704749E949A561C5D7652 /* ShotDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEE14AEDBB81210947F5D /* ShotDetailsView.swift */; };
@@ -286,6 +286,7 @@
 		BE5712591DCA2DEB00358745 /* FlashMessageTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5712581DCA2DEB00358745 /* FlashMessageTypes.swift */; };
 		BE57125B1DCA2E9200358745 /* FlashMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE57125A1DCA2E9200358745 /* FlashMessage.swift */; };
 		BE7A1741292D08D3D45BFAEF /* DeleteCommentQuerySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C949299AFC25FEF29D2F7EF /* DeleteCommentQuerySpec.swift */; };
+		BEA70EFA1DD9C50C00868702 /* ActionRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA70EF91DD9C50C00868702 /* ActionRange.swift */; };
 		BF48E9481F8839521F829A1F /* APITeamsProviderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFFC0840E460B99F665C2C5 /* APITeamsProviderSpec.swift */; };
 		C0EE2D8640F65C4539FC86A1 /* ShotBucketsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73ED7991095A44326D902553 /* ShotBucketsFooterView.swift */; };
 		C11B3B8DECEEDFD228F6C0E6 /* GifIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B622AEA1C27A1940BA8A811 /* GifIndicatorView.swift */; };
@@ -505,7 +506,7 @@
 		38E0191B8D67413A4A701EB7 /* AppDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3944A2053BD9D078A27E91B1 /* UIFontExtension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		394D84B62CE78D2653A1DE8A /* Buckets.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; path = Buckets.json; sourceTree = "<group>"; };
-		397297ADA0D7B1F46850C1D2 /* SwitchableImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SwitchableImageView.swift; sourceTree = "<group>"; };
+		397297ADA0D7B1F46850C1D2 /* DoubleImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DoubleImageView.swift; sourceTree = "<group>"; };
 		3A188D9F1CB69C9000E5B011 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		3A188DA31CB69EC700E5B011 /* Tests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Tests-Release.xcconfig"; sourceTree = "<group>"; };
 		3A79B5042B929A92A53835D8 /* JSONSpecLoader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JSONSpecLoader.swift; sourceTree = "<group>"; };
@@ -733,6 +734,7 @@
 		BE5712561DCA2DE000358745 /* FlashMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageView.swift; sourceTree = "<group>"; };
 		BE5712581DCA2DEB00358745 /* FlashMessageTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageTypes.swift; sourceTree = "<group>"; };
 		BE57125A1DCA2E9200358745 /* FlashMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessage.swift; sourceTree = "<group>"; };
+		BEA70EF91DD9C50C00868702 /* ActionRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionRange.swift; sourceTree = "<group>"; };
 		C26227A4CC4CB0D73BEEF058 /* FollowersQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FollowersQuery.swift; sourceTree = "<group>"; };
 		C28A7631D86F1074E2F49E9C /* ShotDetailsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewController.swift; sourceTree = "<group>"; };
 		C293E57C35C383AA44755DAF /* ShotsNormalStateHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsNormalStateHandler.swift; sourceTree = "<group>"; };
@@ -900,6 +902,7 @@
 				E16930331CF5AD6900F192C4 /* ProgressAnimator.swift */,
 				74E256BC1D9E888000AA5941 /* DeviceInfo.swift */,
 				307C5FA61DAE715E007219F9 /* UpdateableIndex.swift */,
+				BEA70EF91DD9C50C00868702 /* ActionRange.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1595,7 +1598,7 @@
 				DF48D628E0463224F78C42FB /* ShotDetailsOperationView.swift */,
 				EA25956B9FC4631945428870 /* ShotImageView.swift */,
 				3ABC35EFB52C4F2370227A85 /* ShotsCollectionBackgroundView.swift */,
-				397297ADA0D7B1F46850C1D2 /* SwitchableImageView.swift */,
+				397297ADA0D7B1F46850C1D2 /* DoubleImageView.swift */,
 				6555960C38668047CA05A063 /* ProfileHeaderView.swift */,
 				300E4F7B1CC622A200DF9ABE /* BouncingView.swift */,
 				30586F341CF5E289003D4B06 /* ShotAuthorCompactView.swift */,
@@ -2163,6 +2166,7 @@
 				275D1AB77EB97A28A78A1747 /* DatePickerViewController.swift in Sources */,
 				46252C04D170CE5C5B7F1B1E /* FolloweesCollectionViewController.swift in Sources */,
 				33977E1F7D72CF54CE2EB0F9 /* LoginViewController.swift in Sources */,
+				BEA70EFA1DD9C50C00868702 /* ActionRange.swift in Sources */,
 				10E1AF5BA41914646163794B /* SettingsViewController.swift in Sources */,
 				1A8703E28D4A5355D7758DC0 /* ShotBucketsViewController.swift in Sources */,
 				F7F8A182D0AA61C8FCA2C9BF /* ShotDetailsViewController.swift in Sources */,
@@ -2220,7 +2224,7 @@
 				AE909CB5FE0DCDBD3F3A400E /* ShotDetailsOperationView.swift in Sources */,
 				378908C5510BB5541FB60D7C /* ShotImageView.swift in Sources */,
 				0CBCB5AB38C1413ACD226FD9 /* ShotsCollectionBackgroundView.swift in Sources */,
-				2670412B8802A0C735FBF283 /* SwitchableImageView.swift in Sources */,
+				2670412B8802A0C735FBF283 /* DoubleImageView.swift in Sources */,
 				993B955A86C797E40BF7D498 /* ProfileHeaderView.swift in Sources */,
 				300E4F7C1CC622A200DF9ABE /* BouncingView.swift in Sources */,
 				25FFF6B2C6ECB6C90B59E7F2 /* AutoScrollableCollectionViewCell.swift in Sources */,
