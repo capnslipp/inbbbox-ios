@@ -15,6 +15,7 @@ import MessageUI
 final class ShotDetailsViewController: UIViewController {
 
     var shouldScrollToMostRecentMessage = false
+    var shouldShowKeyboardAtStart = false
     var shotIndex = 0
 
     var shotDetailsView: ShotDetailsView! {
@@ -96,6 +97,11 @@ final class ShotDetailsViewController: UIViewController {
             if self.shouldScrollToMostRecentMessage {
                 self.viewModel.isCommentingAvailable ? self.shotDetailsView.commentComposerView.makeActive() :
                         self.scroller.scrollToBottomAnimated(true)
+            }
+            if self.shouldShowKeyboardAtStart && self.viewModel.isCommentingAvailable {
+                AsyncWrapper().main {
+                    self.shotDetailsView.commentComposerView.textField.becomeFirstResponder()
+                }
             }
         }
 
