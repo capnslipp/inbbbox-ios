@@ -129,6 +129,7 @@ private extension ShotsOnboardingStateHandler {
         let stepImage = onboardingSteps[indexPath.row].image
         cell.shotImageView.image = stepImage
         cell.gifLabel.hidden = true
+        cell.enabledActions = [self.onboardingSteps[indexPath.row].action]
         cell.swipeCompletion = { [weak self] action in
             if action == self?.onboardingSteps[indexPath.row].action {
                 var newContentOffset = collectionView.contentOffset

@@ -207,8 +207,7 @@ extension ShotsCollectionViewController: ShotsStateHandlerDelegate {
     }
 
     func shotsStateHandlerDidFailToFetchItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItems()
-        self.presentViewController(alert, animated: true, completion: nil)
+        FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.downloadingShotsFailed, canBeDismissedByUser: true)
     }
 }
 
@@ -251,8 +250,7 @@ private extension ShotsCollectionViewController {
             self.collectionView?.reloadData()
             self.collectionView?.setContentOffset(CGPointZero, animated: true)
         }.error { error in
-            let alert = UIAlertController.unableToDownloadItems()
-            self.tabBarController?.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.downloadingShotsFailed, canBeDismissedByUser: true)
         }
     }
 
@@ -313,6 +311,9 @@ private extension ShotsCollectionViewController {
     }
     
     func showStreamSources() {
+        guard !stateHandler.shouldShowNoShotsView else {
+            return
+        }
         backgroundAnimator?.startFadeInAnimation()
         AsyncWrapper().main(after: 4) { [unowned self] in
             self.backgroundAnimator?.startFadeOutAnimation()

@@ -72,6 +72,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             }
         }
     }
+    var enabledActions:[Action] = [.DoNothing, .Like, .Bucket, .Comment]
 
     // MARK: - Life cycle
 
@@ -83,8 +84,36 @@ class ShotCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setupSubViews()
-        
+        let cornerRadius: CGFloat = 5
+
+        contentView.layer.cornerRadius = cornerRadius
+        contentView.clipsToBounds = true
+
+        shotContainer.backgroundColor = .pinkColor()
+        shotContainer.layer.cornerRadius = cornerRadius
+        shotContainer.clipsToBounds = true
+
+        likeImageView.configureForAutoLayout()
+        shotContainer.addSubview(likeImageView)
+
+        plusImageView.configureForAutoLayout()
+        shotContainer.addSubview(plusImageView)
+
+        bucketImageView.configureForAutoLayout()
+        shotContainer.addSubview(bucketImageView)
+
+        commentImageView.configureForAutoLayout()
+        shotContainer.addSubview(commentImageView)
+
+        shotContainer.addSubview(shotImageView)
+
+        gifLabel.configureForAutoLayout()
+        shotContainer.addSubview(gifLabel)
+
+        contentView.addSubview(shotContainer)
+
+        authorView.alpha = 0
+        contentView.addSubview(authorView)
 
         panGestureRecognizer.addTarget(self, action: #selector(didSwipeCell(_:)))
         panGestureRecognizer.delegate = self
@@ -171,6 +200,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         shotImageView.image = nil
         shotImageView.originalImage = nil
         authorView.alpha = 0
+        enabledActions = [.DoNothing, .Like, .Bucket, .Comment]
     }
 
     // MARK: - Public
@@ -195,16 +225,16 @@ class ShotCollectionViewCell: UICollectionViewCell {
         case .Began:
             self.delegate?.shotCollectionViewCellDidStartSwiping(self)
         case .Ended, .Cancelled, .Failed:
-            let xTranslation = panGestureRecognizer.translationInView(self.contentView).x
+            let xTranslation = adjustedXTranslation()
             let selectedAction = self.selectedActionForSwipeXTranslation(xTranslation)
             panGestureRecognizer.enabled = false
-            animateCellAction(selectedAction) {
+            animateCellAction(selectedAction) { [unowned self] in
                 self.swipeCompletion?(selectedAction)
                 self.delegate?.shotCollectionViewCellDidEndSwiping(self)
                 panGestureRecognizer.enabled = true
             }
         default:
-            let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
+            let xTranslation = adjustedXTranslation()
             adjustConstraintsForSwipeXTranslation(xTranslation)
             adjustActionImageViewForXTranslation(xTranslation)
             previousXTranslation = xTranslation
@@ -213,40 +243,17 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Private Helpers
     
-    private func setupSubViews() {
-        let cornerRadius: CGFloat = 5
-        
-        contentView.layer.cornerRadius = cornerRadius
-        contentView.clipsToBounds = true
-        
-        shotContainer.backgroundColor = .pinkColor()
-        shotContainer.layer.cornerRadius = cornerRadius
-        shotContainer.clipsToBounds = true
-        
-        likeImageView.configureForAutoLayout()
-        shotContainer.addSubview(likeImageView)
-        
-        plusImageView.configureForAutoLayout()
-        shotContainer.addSubview(plusImageView)
-        
-        bucketImageView.configureForAutoLayout()
-        shotContainer.addSubview(bucketImageView)
-        
-        commentImageView.configureForAutoLayout()
-        shotContainer.addSubview(commentImageView)
-        
-        followImageView.configureForAutoLayout()
-        shotContainer.addSubview(followImageView)
-        
-        gifLabel.configureForAutoLayout()
-        shotContainer.addSubview(gifLabel)
-        
-        shotContainer.addSubview(shotImageView)
-        
-        contentView.addSubview(shotContainer)
-        
-        authorView.alpha = 0
-        contentView.addSubview(authorView)
+    private func adjustedXTranslation() -> CGFloat {
+        let likeOffset = likeActionRange.max - 40
+        let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
+        if xTranslation < 0 && !enabledActions.contains(.Comment) {
+            return 0
+        } else if xTranslation > 0 && !enabledActions.contains(.Like) && !enabledActions.contains(.Bucket) {
+            return 0
+        } else if xTranslation > 0 && !enabledActions.contains(.Bucket) && xTranslation >= likeOffset {
+            return likeOffset
+        }
+        return xTranslation
     }
 
     private func adjustConstraintsForSwipeXTranslation(xTranslation: CGFloat) {

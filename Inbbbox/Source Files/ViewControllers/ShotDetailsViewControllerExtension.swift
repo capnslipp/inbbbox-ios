@@ -71,8 +71,7 @@ extension ShotDetailsViewController: CommentComposerViewDelegate {
         }.always {
             view.stopAnimation()
         }.error { error in
-            let alert = UIAlertController.unableToAddComment()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.addingCommentFailed, canBeDismissedByUser: true)
         }
     }
 
