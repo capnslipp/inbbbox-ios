@@ -41,6 +41,10 @@ class DoubleImageView: UIView {
     func isSecondImageVisible() -> Bool {
         return secondImageView.alpha == 1
     }
+    
+    func amIOrIsSecondImageVisible() -> Bool {
+        return alpha == 0 || isSecondImageVisible()
+    }
 
 //     MARK: - UIView
 

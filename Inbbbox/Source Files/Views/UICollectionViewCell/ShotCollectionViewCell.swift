@@ -17,7 +17,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         case Like
         case Bucket
         case Comment
-//        case Follow
+        case Follow
     }
 
     let shotImageView = ShotImageView.newAutoLayoutView()
@@ -41,6 +41,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private(set) var plusImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var bucketImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var commentImageViewRightConstraint: NSLayoutConstraint?
+    private(set) var commentImageVerticalConstraint: NSLayoutConstraint?
     private(set) var commentImageViewWidthConstraint: NSLayoutConstraint?
     private(set) var followImageViewWidthConstraint: NSLayoutConstraint?
     private var authorInfoHeightConstraint: NSLayoutConstraint?
@@ -54,10 +55,10 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
     // NGRTodo: !!!!!!!REPLACE THOSE MAGIC NUMBERS!!!!!!!
     private let doNothingActionRange = (min: CGFloat(-40), max: CGFloat(40))
-    private let likeActionRange = (min: CGFloat(40), max: CGFloat(130))
-    private let bucketActionRange = (min: CGFloat(130), max: CGFloat(180))
-    private let commentActionRange = (min: CGFloat(-80), max: CGFloat(-40))
-    private let followActionRange = (min: CGFloat(-160), max: CGFloat(-80))
+    private let likeActionRange = (min: CGFloat(40), max: CGFloat(120))
+    private let bucketActionRange = (min: CGFloat(120), max: CGFloat(170))
+    private let commentActionRange = ActionRange(min: -120, max: -40)
+    private let followActionRange = ActionRange(min: -170, max: -120)
     private let authorInfoHeight: CGFloat = 25
 
     private var didSetConstraints = false
@@ -72,7 +73,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-    var enabledActions:[Action] = [.DoNothing, .Like, .Bucket, .Comment]
+    var enabledActions:[Action] = [.DoNothing, .Like, .Bucket, .Comment, .Follow]
 
     // MARK: - Life cycle
 
@@ -104,6 +105,10 @@ class ShotCollectionViewCell: UICollectionViewCell {
 
         commentImageView.configureForAutoLayout()
         shotContainer.addSubview(commentImageView)
+        
+        followImageView.configureForAutoLayout()
+        followImageView.alpha = 0
+        shotContainer.addSubview(followImageView)
 
         shotContainer.addSubview(shotImageView)
 
@@ -200,7 +205,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
         shotImageView.image = nil
         shotImageView.originalImage = nil
         authorView.alpha = 0
-        enabledActions = [.DoNothing, .Like, .Bucket, .Comment]
+        enabledActions = [.DoNothing, .Like, .Bucket, .Comment, .Follow]
     }
 
     // MARK: - Public
@@ -274,12 +279,9 @@ class ShotCollectionViewCell: UICollectionViewCell {
         bucketImageViewWidthConstraint?.constant = min(secondLeftActionWidthConstant,
                 bucketImageView.intrinsicContentSize().width)
 
-        commentImageViewRightConstraint?.constant = -abs(xTranslation) * 0.2
-        commentImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6),
-                commentImageView.intrinsicContentSize().width)
-        
-//        let secondRightActionWidthConstant = max(((abs(xTranslation * 0.6)) - commentActionRange.min), 0)
-//        followImageViewWidthConstraint?.constant = min(secondRightActionWidthConstant, followImageView.intrinsicContentSize().width)
+        let width = min(abs(xTranslation * 0.6), commentImageView.intrinsicContentSize().width)
+        commentImageViewWidthConstraint?.constant = width
+        commentImageViewRightConstraint?.constant = -((abs(xTranslation) * 0.5) - (width / 2))
         
         followImageViewWidthConstraint?.constant = min(abs(xTranslation * 0.6),
                                                         followImageView.intrinsicContentSize().width)
@@ -287,6 +289,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
     }
 
     private func adjustActionImageViewForXTranslation(xTranslation: CGFloat) {
+        print("\(xTranslation)")
         if xTranslation >= likeActionRange.min && xTranslation > previousXTranslation && likeImageView.isFirstImageVisible() && !liked {
             UIView.animate(animations: {
                 self.likeImageView.displaySecondImageView()
@@ -303,30 +306,37 @@ class ShotCollectionViewCell: UICollectionViewCell {
             UIView.animate(animations: {
                 self.bucketImageView.displayFirstImageView()
             })
-        } else if xTranslation <= commentActionRange.max && xTranslation < previousXTranslation && commentImageView.isFirstImageVisible() {
-            print("show Comment")
-            commentImageView.hidden = false
-            followImageView.hidden = true
+        } else if xTranslation > commentActionRange.mid && xTranslation <= commentActionRange.max && commentImageView.amIOrIsSecondImageVisible() {
             UIView.animate(animations: {
-                self.commentImageView.displaySecondImageView()
-            })
-        } else if xTranslation > commentActionRange.max && xTranslation > previousXTranslation && commentImageView.isSecondImageVisible() {
-            UIView.animate(animations: {
+                self.displayComment()
                 self.commentImageView.displayFirstImageView()
             })
-        } else if xTranslation <= followActionRange.max && xTranslation < previousXTranslation && followImageView.isFirstImageVisible() {
-            print("show Follow hide Comment")
-            commentImageView.hidden = true
-            followImageView.hidden = false
+        } else if xTranslation > commentActionRange.min && xTranslation <= commentActionRange.mid {
+            UIView.animate(animations: {
+                self.displayComment()
+                self.commentImageView.displaySecondImageView()
+            })
+        } else if xTranslation > followActionRange.mid && xTranslation <= followActionRange.max  && followImageView.amIOrIsSecondImageVisible() {
+            UIView.animate(animations: {
+                self.displayFollow()
+                self.followImageView.displayFirstImageView()
+            })
+        } else if xTranslation <= followActionRange.mid {
             UIView.animate(animations: {
                 self.followImageView.displaySecondImageView()
             })
-        } else if xTranslation > followActionRange.max && xTranslation > previousXTranslation && followImageView.isSecondImageVisible() {
-            print("hide Follow")
-            UIView.animate(animations: {
-                self.followImageView.displayFirstImageView()
-            })
         }
+    }
+    
+    
+    private func displayComment() {
+        commentImageView.alpha = 1
+        followImageView.alpha = 0
+    }
+    
+    private func displayFollow() {
+        commentImageView.alpha = 0
+        followImageView.alpha = 1
     }
 
     private func selectedActionForSwipeXTranslation(xTranslation: CGFloat) -> Action {
@@ -336,8 +346,14 @@ class ShotCollectionViewCell: UICollectionViewCell {
             return .Like
         } else if xTranslation > likeActionRange.max {
             return .Bucket
-        } else {
+        } else if commentActionRange.min...commentActionRange.mid ~= xTranslation {
+            print("comment")
             return .Comment
+        } else if followActionRange.min...followActionRange.mid ~= xTranslation {
+            print("follow")
+            return .Follow
+        } else {
+            return .DoNothing
         }
     }
 
@@ -353,7 +369,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             commentImageView.hidden = true
             viewClass.animateWithDescriptor(ShotCellBucketActionAnimationDescriptor(shotCell: self,
                     swipeCompletion: completion))
-        case .Comment:
+        case .Comment, .Follow:
             likeImageView.hidden = true
             plusImageView.hidden = true
             bucketImageView.hidden = true

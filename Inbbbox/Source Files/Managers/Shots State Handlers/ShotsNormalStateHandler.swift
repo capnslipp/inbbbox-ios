@@ -156,6 +156,8 @@ extension ShotsNormalStateHandler {
             case .Comment:
                 let shotUpdated = self?.shotDummyRecent(shot)
                 certainSelf.presentShotDetailsViewController(shotUpdated ?? shot, index: indexPath.item, scrollToMessages: true)
+            case .Follow:
+                print("follow acction")
             case .DoNothing:
                 break
             }
