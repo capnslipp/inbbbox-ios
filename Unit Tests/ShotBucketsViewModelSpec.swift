@@ -112,7 +112,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                 
                 it("should have correct number of items") {
                     waitUntil { done in
-                        sut.loadBuckets().then {_ in
+                        sut.loadBuckets().then { _ in
                             done()
                         }
                     }
@@ -256,7 +256,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                 
                 it("should have correct number of items") {
                     waitUntil { done in
-                        sut.loadBuckets().then {_ in
+                        sut.loadBuckets().then { _ in
                             done()
                         }
                     }

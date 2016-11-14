@@ -97,7 +97,7 @@ class ShotBucketsViewModel {
                 }.then {
                     buckets in
                     self.buckets = buckets ?? []
-                }.then {_ in
+                }.then { _ in
                     self.didDownloadBuckets = true
                 }.then(fulfill).error(reject)
             }
