@@ -48,7 +48,7 @@ extension SimpleShotsCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.delegate = self
-        self.title = viewModel?.title
+        navigationItem.title = viewModel?.title
         guard let collectionView = collectionView else {
             return
         }

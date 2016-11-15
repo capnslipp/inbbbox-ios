@@ -24,7 +24,7 @@ class BucketsCollectionViewController: UICollectionViewController {
         let flowLayout = TwoColumnsCollectionViewFlowLayout()
         flowLayout.itemHeightToWidthRatio = BucketCollectionViewCell.heightToWidthRatio
         self.init(collectionViewLayout: flowLayout)
-        title = viewModel.title
+        navigationItem.title = viewModel.title
         viewModel.delegate = self
     }
 
