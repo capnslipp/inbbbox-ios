@@ -27,7 +27,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         collectionView.registerClass(LargeUserCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
         viewModel.delegate = self
-        self.title = viewModel.title
+        navigationItem.title = viewModel.title
     }
 
     override func viewWillAppear(animated: Bool) {

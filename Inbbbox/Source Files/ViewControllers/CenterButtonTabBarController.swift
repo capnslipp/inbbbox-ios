@@ -32,20 +32,11 @@ class CenterButtonTabBarController: UITabBarController {
         self.init(nibName: nil, bundle: nil)
 
 
-        let likesViewController = UINavigationController(
-            rootViewController: SimpleShotsCollectionViewController()
-        )
-        likesViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"),
-            imageName: "ic-likes"
-        )
+        let likesViewController = UINavigationController(rootViewController: SimpleShotsCollectionViewController())
+        likesViewController.tabBarItem = tabBarItemWithTitle(nil, imageName: "ic-likes")
 
-        let bucketsViewController =
-                UINavigationController(rootViewController: BucketsCollectionViewController())
-        bucketsViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"),
-            imageName: "ic-buckets"
-        )
+        let bucketsViewController =  UINavigationController(rootViewController: BucketsCollectionViewController())
+        bucketsViewController.tabBarItem = tabBarItemWithTitle(nil, imageName: "ic-buckets")
 
         let followeesViewController = UINavigationController(
             rootViewController: FolloweesCollectionViewController(
@@ -56,17 +47,10 @@ class CenterButtonTabBarController: UITabBarController {
             )
         )
 
-        followeesViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"),
-            imageName: "ic-following"
-        )
+        followeesViewController.tabBarItem = tabBarItemWithTitle(nil, imageName: "ic-following")
 
-        let settingsViewController =
-                UINavigationController(rootViewController: self.settingsViewController)
-        settingsViewController.tabBarItem = tabBarItemWithTitle(
-            NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar"),
-            imageName: "ic-settings"
-        )
+        let settingsViewController = UINavigationController(rootViewController: self.settingsViewController)
+        settingsViewController.tabBarItem = tabBarItemWithTitle(nil, imageName: "ic-settings")
 
         viewControllers = [
             likesViewController,
@@ -171,7 +155,7 @@ extension CenterButtonTabBarController: UITabBarControllerDelegate {
 
 private extension CenterButtonTabBarController {
 
-    func tabBarItemWithTitle(title: String, imageName: String) -> UITabBarItem {
+    func tabBarItemWithTitle(title: String?, imageName: String) -> UITabBarItem {
 
         let image = UIImage(named: imageName)?.imageWithRenderingMode(.AlwaysOriginal)
         let selectedImage = UIImage(
@@ -191,6 +175,9 @@ private extension CenterButtonTabBarController {
             [NSForegroundColorAttributeName: UIColor.tabBarGrayColor()],
             forState: .Normal
         )
+
+        tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+
         return tabBarItem
     }
 
