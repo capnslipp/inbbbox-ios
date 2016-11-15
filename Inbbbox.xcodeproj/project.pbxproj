@@ -295,6 +295,10 @@
 		C25B633C950E27D050F626AF /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CB7E060D9820A38D8C666 /* SettingsViewModel.swift */; };
 		C5B637080C01F1361978C423 /* ShotsRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8AD9B38470BFD150EFA80A /* ShotsRequester.swift */; };
 		C5E908902AC8BA43E65D294F /* DataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3133716752F33A06B3C88CF /* DataDownloader.swift */; };
+		C61B8B911DDAE81500D94867 /* APIAttachementsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B8B901DDAE81500D94867 /* APIAttachementsProvider.swift */; };
+		C61B8B931DDAEA4600D94867 /* Attachement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B8B921DDAEA4600D94867 /* Attachement.swift */; };
+		C61B8B951DDAEAE600D94867 /* AttachementQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B8B941DDAEAE600D94867 /* AttachementQuery.swift */; };
+		C61B8B971DDB122C00D94867 /* AttachementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61B8B961DDB122C00D94867 /* AttachementCollectionViewCell.swift */; };
 		C66C8BE91DD48A20005D63E6 /* FlashMessageTitles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66C8BE81DD48A20005D63E6 /* FlashMessageTitles.swift */; };
 		C6745B7D1DB74371004D3D8E /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6745B7C1DB74371004D3D8E /* AlertViewController.swift */; };
 		C6B3E447E8EF8FFA08C91E08 /* ShotDetailsCollectionCollapsableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0001E808B13FB4F9C306EE /* ShotDetailsCollectionCollapsableHeader.swift */; };
@@ -740,6 +744,11 @@
 		C293E57C35C383AA44755DAF /* ShotsNormalStateHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsNormalStateHandler.swift; sourceTree = "<group>"; };
 		C2ADCFFD5DDF3B47FC025E19 /* ShotDetailsViewModelSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewModelSpec.swift; sourceTree = "<group>"; };
 		C437ED8B92D2216DB959E197 /* ShotsQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ShotsQuery.swift; sourceTree = "<group>"; };
+		C61B8B8F1DD9EA2700D94867 /* StoreData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "StoreData 2.xcdatamodel"; sourceTree = "<group>"; };
+		C61B8B901DDAE81500D94867 /* APIAttachementsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIAttachementsProvider.swift; sourceTree = "<group>"; };
+		C61B8B921DDAEA4600D94867 /* Attachement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachement.swift; sourceTree = "<group>"; };
+		C61B8B941DDAEAE600D94867 /* AttachementQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachementQuery.swift; sourceTree = "<group>"; };
+		C61B8B961DDB122C00D94867 /* AttachementCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachementCollectionViewCell.swift; sourceTree = "<group>"; };
 		C66C8BE81DD48A20005D63E6 /* FlashMessageTitles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashMessageTitles.swift; sourceTree = "<group>"; };
 		C6745B7C1DB74371004D3D8E /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		C6E9D8B01DCA4ACB005D9064 /* MainScreenStreamSourcesAnimatorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenStreamSourcesAnimatorSpec.swift; sourceTree = "<group>"; };
@@ -960,6 +969,7 @@
 		390DA9BD82B091E5DFAA621B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C61B8B921DDAEA4600D94867 /* Attachement.swift */,
 				9E435C15DC2AF2FF1C3B65B5 /* Bucket.swift */,
 				2B5A849C0DBA1EC4585AB6C5 /* Comment.swift */,
 				1D6C738B207AA4DFB0CAC98E /* Mappable.swift */,
@@ -1233,6 +1243,7 @@
 			isa = PBXGroup;
 			children = (
 				890AB91041C2988B60DEA6EF /* AddToBucketQuery.swift */,
+				C61B8B941DDAEAE600D94867 /* AttachementQuery.swift */,
 				A13107B198DD3D5A12AEBFDF /* BucketQuery.swift */,
 				15D3D063ADBE95ABBBC02E8A /* BucketsForShotQuery.swift */,
 				AD9BE60744F5D168D431BA89 /* CommentQuery.swift */,
@@ -1394,6 +1405,7 @@
 		97AEEC604A17006E419FFA26 /* UICollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				C61B8B961DDB122C00D94867 /* AttachementCollectionViewCell.swift */,
 				EA26B57AF334AAA327E47C15 /* AutoScrollableCollectionViewCell.swift */,
 				3FCAA599B79E5ED69E505718 /* BaseInfoShotsCollectionViewCell.swift */,
 				D94359D4CACC352F3394D6C1 /* BucketCollectionViewCell.swift */,
@@ -1636,6 +1648,7 @@
 		FE7E330B78DA7C4A63B8912D /* API Providers */ = {
 			isa = PBXGroup;
 			children = (
+				C61B8B901DDAE81500D94867 /* APIAttachementsProvider.swift */,
 				BD8DC1F4B61694B2EC222DEE /* APIBucketsProvider.swift */,
 				28B19DA6CA6DBF3C0CB72D1F /* APIBucketsRequester.swift */,
 				1F8B9843F99C8D90EA1015F6 /* APICommentsProvider.swift */,
@@ -1717,7 +1730,7 @@
 				TargetAttributes = {
 					5E3A97E71AA72F0A00CE2F20 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 9HJ69C5G9K;
+						DevelopmentTeam = SK8PDF7SG9;
 					};
 					5E3A98351AA73A6500CE2F20 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -2006,6 +2019,7 @@
 				CFF1C31F325FA63607E36263 /* NSManagedObjectExtension.swift in Sources */,
 				801A11B5141E2B6F9FDFB2DF /* NSMutableAttributedStringExtension.swift in Sources */,
 				DB2360C6CCA9ABC62653E7DC /* StringExtension.swift in Sources */,
+				C61B8B951DDAEAE600D94867 /* AttachementQuery.swift in Sources */,
 				9C8C715087F97CAF1CA2399D /* UIAlertControllerExtension.swift in Sources */,
 				B26A0E2EAE6E3A4CB7916482 /* UICollectionViewExtension.swift in Sources */,
 				EA0CFB1C1D95652200CFF21A /* CommentLikeQuery.swift in Sources */,
@@ -2040,6 +2054,7 @@
 				E408F0C1D6F845C2859813C8 /* AnalyticsManager.swift in Sources */,
 				164D72F4A0A2783801625241 /* AutoScrollableShotsDataSource.swift in Sources */,
 				C20FF7DE8259CD89BC892442 /* LocalNotificationRegistrator.swift in Sources */,
+				C61B8B971DDB122C00D94867 /* AttachementCollectionViewCell.swift in Sources */,
 				9083B2F6E97610F5EFD274FA /* ScrollViewAutoScroller.swift in Sources */,
 				4F908F6DAE245D541218377A /* AutoScrollableShotsAnimator.swift in Sources */,
 				41AABBA0B33554A52E064129 /* LoginViewAnimations.swift in Sources */,
@@ -2063,6 +2078,7 @@
 				21F5288D98600950DCDFE98D /* Team.swift in Sources */,
 				426C9C893103E0D0D9E92CEA /* User.swift in Sources */,
 				F9B5AA8896F72F2AA4AC8DFC /* ManagedBucket.swift in Sources */,
+				C61B8B931DDAEA4600D94867 /* Attachement.swift in Sources */,
 				F0B898D71CC0F189004A807C /* ImageViewerExtension.swift in Sources */,
 				DA618D628131746C346E13D8 /* ManagedProject.swift in Sources */,
 				8299D5B63CAEE6716B8E2E95 /* ManagedShot.swift in Sources */,
@@ -2174,6 +2190,7 @@
 				7584EFD2730B01300585E5E8 /* TwoLayoutsCollectionViewController.swift in Sources */,
 				D8C4CA83F356EB5AFB912AA4 /* ProfileViewController.swift in Sources */,
 				40D05F4E7045592D38F4BC6C /* BucketContentViewModel.swift in Sources */,
+				C61B8B911DDAE81500D94867 /* APIAttachementsProvider.swift in Sources */,
 				452D62F9AF926CC12B39B6E9 /* BucketsViewModel.swift in Sources */,
 				307C5FA71DAE715E007219F9 /* UpdateableIndex.swift in Sources */,
 				300BDCA91CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift in Sources */,
@@ -2461,6 +2478,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
@@ -2576,6 +2594,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -2595,6 +2614,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSETCATALOG_COMPILER_APPICON_NAME)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
@@ -2697,6 +2717,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "$(ASSETCATALOG_COMPILER_APPICON_NAME)";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = 9HJ69C5G9K;
@@ -2705,7 +2726,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = $PRODUCT_BUNDLE_IDENTIFIER;
 				PRODUCT_NAME = Inbbbox;
-				PROVISIONING_PROFILE = "12578a8b-2366-46b0-80c8-66e5bc1b862d";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Inbbbox Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Supporting Files/Inbbbox-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2778,6 +2799,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "Supporting Files/Inbbbox-Info.plist";
@@ -2852,9 +2874,10 @@
 		19A3E5B1B1A9AD6E5FBE2E43 /* StoreData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				C61B8B8F1DD9EA2700D94867 /* StoreData 2.xcdatamodel */,
 				6BF2D11C762B7A43AD0B9880 /* StoreData.xcdatamodel */,
 			);
-			currentVersion = 6BF2D11C762B7A43AD0B9880 /* StoreData.xcdatamodel */;
+			currentVersion = C61B8B8F1DD9EA2700D94867 /* StoreData 2.xcdatamodel */;
 			path = StoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
