@@ -33,12 +33,8 @@ class CenterButtonTabBarController: UITabBarController {
     convenience init() {
         self.init(nibName: nil, bundle: nil)
 
-
         let likesViewController = UINavigationController(rootViewController: SimpleShotsCollectionViewController())
-        likesViewController.tabBarItem = tabBarItemWithTitle(nil, normalImageName: "ic-likes", selectedImageName: "ic-likes-active")
-
         let bucketsViewController =  UINavigationController(rootViewController: BucketsCollectionViewController())
-        bucketsViewController.tabBarItem = tabBarItemWithTitle(nil, normalImageName: "ic-buckets", selectedImageName: "ic-buckets-active")
 
         let followeesViewController = UINavigationController(
             rootViewController: FolloweesCollectionViewController(
@@ -49,10 +45,7 @@ class CenterButtonTabBarController: UITabBarController {
             )
         )
 
-        followeesViewController.tabBarItem = tabBarItemWithTitle(nil, normalImageName: "ic-following", selectedImageName: "ic-following-active")
-
         let settingsViewController = UINavigationController(rootViewController: self.settingsViewController)
-        settingsViewController.tabBarItem = tabBarItemWithTitle(nil, normalImageName: "ic-settings", selectedImageName: "ic-settings-active")
 
         viewControllers = [
             likesViewController,
@@ -215,26 +208,26 @@ private extension CenterButtonTabBarController {
             switch firstViewController {
             case let likesViewController as SimpleShotsCollectionViewController:
                 likesViewController.tabBarItem = tabBarItemWithTitle(
-                    NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar"),
+                    nil,
                     normalImageName: mode.tabBarLikesNormalImageName,
                     selectedImageName: mode.tabBarLikesSelectedImageName
                 )
             case let bucketsViewController as BucketsCollectionViewController:
                 bucketsViewController.tabBarItem = tabBarItemWithTitle(
-                    NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar"),
+                    nil,
                     normalImageName: mode.tabBarBucketsNormalImageName,
                     selectedImageName: mode.tabBarBucketsSelectedImageName
                 )
                 bucketsViewController.adaptColorMode(mode)
             case let followeesViewController as FolloweesCollectionViewController:
                 followeesViewController.tabBarItem = tabBarItemWithTitle(
-                    NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar"),
+                    nil,
                     normalImageName: mode.tabBarFollowingNormalImageName,
                     selectedImageName: mode.tabBarFollowingSelectedImageName
                 )
             case let settingsViewController as SettingsViewController:
                 settingsViewController.tabBarItem = tabBarItemWithTitle(
-                    NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar"),
+                    nil,
                     normalImageName: mode.tabBarSettingsNormalImageName,
                     selectedImageName: mode.tabBarSettingsSelectedImageName
                 )
