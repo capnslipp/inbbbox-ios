@@ -72,7 +72,10 @@ final class ShotDetailsViewController: UIViewController {
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
 
         firstly {
-            viewModel.loadAllComments()
+            viewModel.loadAttachements()
+        }.then {
+            self.header?.setNeedsDisplay()
+            return self.viewModel.loadAllComments()
         }.then { () -> Void in
             self.grayOutFooterIfNeeded()
             self.shotDetailsView.collectionView.reloadData()
@@ -222,7 +225,7 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
             return footer!
         }
 
-        if header == nil && kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionElementKindSectionHeader {
             header = collectionView.dequeueReusableClass(ShotDetailsHeaderView.self, forIndexPath: indexPath,
                     type: .Header)
             if viewModel.shot.animated {
@@ -254,6 +257,13 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
 
             header?.imageDidTap = { [weak self] in
                 self?.presentShotFullscreen()
+            }
+            
+            header?.showAttachements = viewModel.shot.attachementsCount != 0
+            header?.attachements = self.viewModel.attachements
+            header?.attachementDidTap = { [weak self] cell, attachement in
+                self?.header?.selectedAttachement = attachement
+                self?.presentFullScreenAttachement(cell)
             }
         }
 
@@ -457,7 +467,7 @@ private extension ShotDetailsViewController {
         let dribbbleImageRatio = CGFloat(0.75)
         return CGSize(
             width: floor(collectionView.bounds.width),
-            height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader)
+            height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader) + viewModel.attachementContainerHeight()
         )
     }
 
@@ -553,6 +563,22 @@ private extension ShotDetailsViewController {
             }
         }
 
+        presentImageViewer(imageViewer)
+    }
+    
+    func presentFullScreenAttachement(displacedView: UIView) {
+        /* 
+         To prevent glitchy animation we are adding placeholder view
+         from where animation will start but without showing thumbnail 
+         image in show animation.
+         */
+        let view = UIView(frame: displacedView.frame)
+        view.backgroundColor = .clearColor()
+        displacedView.superview?.addSubview(view)
+        let imageViewer = ImageViewer(imageProvider: header!, displacedView: view)
+        imageViewer.dismissCompletionBlock = {
+            view.removeFromSuperview()
+        }
         presentImageViewer(imageViewer)
     }
 

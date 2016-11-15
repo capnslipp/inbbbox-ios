@@ -29,6 +29,7 @@ final class ShotDetailsViewModel {
     var userProvider = APIUsersProvider()
     var bucketsRequester = BucketsRequester()
     var shotsRequester = ShotsRequester()
+    var attachementsProvider = APIAttachementsProvider()
 
     var itemsCount: Int {
 
@@ -49,6 +50,7 @@ final class ShotDetailsViewModel {
     private var cachedFormattedDescription: NSAttributedString?
     
     var comments = [CommentType]()
+    var attachements = [Attachement]()
     private var userBucketsForShot = [BucketType]()
     private var isShotLikedByMe: Bool?
     private var userBucketsForShotCount: Int?
@@ -312,7 +314,7 @@ extension ShotDetailsViewModel {
     }
 
     func loadAllComments() -> Promise<Void> {
-
+        loadAttachements()
         return Promise<Void> { fulfill, reject in
 
             firstly {
@@ -472,4 +474,38 @@ extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
     func userForId(identifier: String) -> Promise<UserType> {
         return userProvider.provideUser(identifier)
     }
+}
+
+// MARK: Attachements handling
+
+extension ShotDetailsViewModel {
+    
+    /*
+     Returns height for attachement Container in shot details view.
+     0 is returned if there is no attachements.
+     */
+    func attachementContainerHeight() -> CGFloat {
+        return shot.attachementsCount == 0 ? 0 : 70
+    }
+    
+    /*
+     Downloads attachements for shot and saves them into attachement property.
+     */
+    func loadAttachements() -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            if (shot.attachementsCount == 0) {
+                fulfill()
+                return
+            }
+            firstly {
+                attachementsProvider.provideAttachementsForShot(shot)
+            }.then { attachements -> Void in
+                if let attachements = attachements {
+                    self.attachements = attachements
+                }
+                fulfill()
+            }.error(reject)
+        }
+    }
+    
 }
