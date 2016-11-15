@@ -38,6 +38,10 @@ class JSONSpecLoader {
         return array
     }
     
+    func fixtureAttachementsJSON(withCount count: Int) -> [JSON] {
+        return fixtureJSONArrayWithResourceName("Attachement", count: count)
+    }
+    
     func fixtureBucketsJSON(withCount count: Int) -> [JSON] {
         return fixtureJSONArrayWithResourceName("Bucket", count: count)
     }
