@@ -10,6 +10,7 @@ import UIKit
 import PromiseKit
 import TTTAttributedLabel
 import ImageViewer
+import DZNEmptyDataSet
 
 enum ShotBucketsViewControllerMode {
     case AddToBucket
@@ -52,13 +53,16 @@ class ShotBucketsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        shotBucketsView.collectionView.emptyDataSetSource = self
+
         firstly {
             viewModel.loadBuckets()
         }.then {
             self.shotBucketsView.collectionView.reloadData()
+        }.then {
+            self.setEstimatedSizeIfNeeded()
         }.error { error in
-            let alert = UIAlertController.unableToDownloadItems()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
         }
         shotBucketsView.viewController = self
         shotBucketsView.collectionView.delegate = self
@@ -79,16 +83,9 @@ class ShotBucketsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        
-        if let layout = shotBucketsView.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.estimatedItemSize = itemSizeFor(collectionView: shotBucketsView.collectionView)
-        }
-        
         (shotBucketsView.collectionView.collectionViewLayout as?
                 ShotDetailsCollectionCollapsableHeader)?.collapsableHeight =
                 heightForCollapsedCollectionViewHeader
-        
-        shotBucketsView.collectionView.collectionViewLayout.invalidateLayout()
     }
 
     override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
@@ -224,8 +221,7 @@ extension ShotBucketsViewController {
             self.willDismissViewControllerClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            let alert = UIAlertController.addRemoveShotToBucketFail()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketProcessingFailed, canBeDismissedByUser: true)
         }
     }
 
@@ -300,18 +296,15 @@ private extension ShotBucketsViewController {
         )
     }
 
-    func itemSizeFor(collectionView collectionView: UICollectionView) -> CGSize {
+    func setEstimatedSizeIfNeeded() {
 
-        let width = collectionView.frame.size.width ?? 0
-        
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            if layout.estimatedItemSize.width != width {
-                return CGSize(width: width, height: 40)
-            } else {
-                return layout.estimatedItemSize
-            }
+        let width = shotBucketsView.collectionView.frame.size.width ?? 0
+
+        if let layout = shotBucketsView.collectionView.collectionViewLayout as?
+            UICollectionViewFlowLayout where layout.estimatedItemSize.width != width {
+            layout.estimatedItemSize = CGSize(width: width, height: 40)
+            layout.invalidateLayout()
         }
-        return CGSizeZero
     }
 
     func addShotToBucketAtIndex(index: Int) {
@@ -321,8 +314,7 @@ private extension ShotBucketsViewController {
             self.willDismissViewControllerClosure?()
             self.dismissViewControllerAnimated(true, completion: nil)
         }.error { error in
-            let alert = UIAlertController.addRemoveShotToBucketFail()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketProcessingFailed, canBeDismissedByUser: true)
         }
     }
 
@@ -332,8 +324,7 @@ private extension ShotBucketsViewController {
         }.then { () -> Void in
             self.addShotToBucketAtIndex(self.viewModel.buckets.count-1)
         }.error { error in
-            let alert = UIAlertController.unableToCreateNewBucket()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketCreationFailed, canBeDismissedByUser: true)
         }
     }
 }
@@ -442,4 +433,11 @@ extension ShotBucketsViewController: ImageProvider {
     }
 
     func provideImage(atIndex index: Int, completion: UIImage? -> Void) { /* empty by design */ }
+}
+
+extension ShotBucketsViewController: DZNEmptyDataSetSource {
+
+    func customViewForEmptyDataSet(scrollView: UIScrollView!) -> UIView! {
+        return UIView.newAutoLayoutView()
+    }
 }

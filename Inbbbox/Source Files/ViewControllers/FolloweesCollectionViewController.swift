@@ -27,7 +27,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
         collectionView.registerClass(LargeUserCollectionViewCell.self, type: .Cell)
         collectionView.emptyDataSetSource = self
         viewModel.delegate = self
-        self.title = viewModel.title
+        navigationItem.title = viewModel.title
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -134,14 +134,12 @@ extension FolloweesCollectionViewController: BaseCollectionViewViewModelDelegate
         collectionView?.reloadData()
 
         if viewModel.followees.isEmpty {
-            let alert = UIAlertController.generalError()
-            tabBarController?.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
         }
     }
 
     func viewModelDidFailToLoadItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItems()
-        tabBarController?.presentViewController(alert, animated: true, completion: nil)
+        FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.downloadingShotsFailed, canBeDismissedByUser: true)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {

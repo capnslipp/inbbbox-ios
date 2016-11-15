@@ -15,6 +15,7 @@ import MessageUI
 final class ShotDetailsViewController: UIViewController {
 
     var shouldScrollToMostRecentMessage = false
+    var shouldShowKeyboardAtStart = false
     var shotIndex = 0
 
     var shotDetailsView: ShotDetailsView! {
@@ -96,6 +97,11 @@ final class ShotDetailsViewController: UIViewController {
             if self.shouldScrollToMostRecentMessage {
                 self.viewModel.isCommentingAvailable ? self.shotDetailsView.commentComposerView.makeActive() :
                         self.scroller.scrollToBottomAnimated(true)
+            }
+            if self.shouldShowKeyboardAtStart && self.viewModel.isCommentingAvailable {
+                AsyncWrapper().main {
+                    self.shotDetailsView.commentComposerView.textField.becomeFirstResponder()
+                }
             }
         }
 
@@ -433,8 +439,7 @@ private extension ShotDetailsViewController {
         }.always {
             view.stopAnimating()
         }.error { error in
-            let alert = UIAlertController.addRemoveShotToBucketFail()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketProcessingFailed, canBeDismissedByUser: true)
         }
     }
 
@@ -467,8 +472,7 @@ private extension ShotDetailsViewController {
             }
             self.shotDetailsView.collectionView.deleteItemsAtIndexPaths(indexPaths)
         }.error { error in
-            let alert = UIAlertController.unableToDeleteComment()
-            self.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.deleteCommentFailed, canBeDismissedByUser: true)
         }
     }
 

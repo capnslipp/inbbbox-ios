@@ -13,7 +13,7 @@ final class FlashMessage {
     static let sharedInstance = FlashMessage()
     
     /// Set a custom offset for the notification view
-    var offsetHeightForMessage: CGFloat = 0.0
+    var offsetHeightForMessage: CGFloat = -64.0
     
     /// Set a custom view for the notification
     var customizeMessageView: ((FlashMessageView) -> Void)?
@@ -58,6 +58,9 @@ final class FlashMessage {
     /// - parameter callback:           The block that should be executed, when the user tapped on the message/
     func showNotification(inViewController viewController: UIViewController? = nil, title: String, duration: FlashMessageDuration = .Automatic, atPosition messagePosition: FlashMessageNotificationPosition = .Top, overrideStyle: FlashMessageView.Style? = nil, canBeDismissedByUser dismissingEnabled: Bool = true, callback: (() -> Void)? = nil) {
         
+        if let messageTitle = messages.last?.title where title == messageTitle {
+            return
+        }
         let messageView  = FlashMessageView(
             viewController: viewController ?? defaultViewController,
             title: title,
@@ -113,6 +116,9 @@ final class FlashMessage {
     // MARK: Animation
     
     private func fadeInCurrentNotification() {
+        messages = messages.flatMap {
+            $0.viewController != nil ? $0 : nil
+        }
         guard let flashMessageView = messages.first, viewController = flashMessageView.viewController else {
             return
         }
@@ -122,7 +128,7 @@ final class FlashMessage {
 
         if let currentNavigationController = navigationControllerFrom(viewController) {
             if !isNavigationBarHiddenIn(currentNavigationController) && flashMessageView.messagePosition != .NavigationBarOverlay {
-                currentNavigationController.view?.insertSubview(flashMessageView, belowSubview: currentNavigationController.navigationBar)
+                viewController.view?.insertSubview(flashMessageView, belowSubview: currentNavigationController.navigationBar)
                 verticalOffset = currentNavigationController.navigationBar.bounds.size.height
             } else {
                 viewController.view?.addSubview(flashMessageView)
@@ -216,6 +222,10 @@ final class FlashMessage {
     
     @objc private func fadeOutNotification(flashMessageView: FlashMessageView, animationFinishedBlock animationFinished: (() -> Void)?) {
         guard let viewController = flashMessageView.viewController else {
+            if self.messages.count > 0 {
+                self.messages.removeAtIndex(0)
+            }
+            notificationActive = false
             return
         }
         

@@ -48,7 +48,7 @@ extension SimpleShotsCollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel?.delegate = self
-        self.title = viewModel?.title
+        navigationItem.title = viewModel?.title
         guard let collectionView = collectionView else {
             return
         }
@@ -183,14 +183,12 @@ extension SimpleShotsCollectionViewController: BaseCollectionViewViewModelDelega
         collectionView?.reloadData()
 
         if let viewModel = viewModel where viewModel.shots.isEmpty {
-            let alert = UIAlertController.generalError()
-            tabBarController?.presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
         }
     }
 
     func viewModelDidFailToLoadItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItems()
-        tabBarController?.presentViewController(alert, animated: true, completion: nil)
+        FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.downloadingShotsFailed, canBeDismissedByUser: true)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {

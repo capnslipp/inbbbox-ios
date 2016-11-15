@@ -18,8 +18,8 @@ class CommentComposerView: UIView {
 
     weak var delegate: CommentComposerViewDelegate?
 
+    let textField = UITextField.newAutoLayoutView()
     private let cornerWrapperView = UIView.newAutoLayoutView()
-    private let textField = UITextField.newAutoLayoutView()
     private var didUpdateConstraints = false
     private var sendButton: UIButton? {
         return textField.rightView as? UIButton

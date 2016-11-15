@@ -132,8 +132,7 @@ extension ProfileViewController {
             }.always {
                 self.header?.stopActivityIndicator()
             }.error { error in
-                let alert = UIAlertController.generalError()
-                self.presentViewController(alert, animated: true, completion: nil)
+                FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
             }
         }
     }
@@ -290,14 +289,12 @@ extension ProfileViewController: BaseCollectionViewViewModelDelegate {
         collectionView?.reloadData()
 
         if viewModel.collectionIsEmpty {
-            let alert = UIAlertController.generalError()
-            presentViewController(alert, animated: true, completion: nil)
+            FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
         }
     }
 
     func viewModelDidFailToLoadItems(error: ErrorType) {
-        let alert = UIAlertController.unableToDownloadItems()
-        tabBarController?.presentViewController(alert, animated: true, completion: nil)
+        FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.downloadingShotsFailed, canBeDismissedByUser: true)
     }
 
     func viewModel(viewModel: BaseCollectionViewViewModel, didLoadItemsAtIndexPaths indexPaths: [NSIndexPath]) {
