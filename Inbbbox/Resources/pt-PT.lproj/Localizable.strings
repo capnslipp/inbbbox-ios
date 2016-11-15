@@ -178,7 +178,7 @@
 "UIAlertControllerExtension.CantSendFeedback" = "$Don't have email client - no worries use this address to send us feedback elsewhere: inbbbox@netguru.co";
 
 /* Informing user about problems with downloading items. */
-"UIAlertControllerExtension.UnableToDownload" = "$Downloading new Dribble shots";
+"UIAlertControllerExtension.UnableToDownload" = "$Downloading new Dribbble shots";
 
 /********* LocalNotificationRegistrator *********/
 
