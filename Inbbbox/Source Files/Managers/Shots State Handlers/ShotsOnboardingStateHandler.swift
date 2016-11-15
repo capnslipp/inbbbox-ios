@@ -9,6 +9,9 @@ import PromiseKit
 class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
     private let connectionsRequester = APIConnectionsRequester()
+    private let userProvider = APIUsersProvider()
+    private let netguruIdentifier = "netguru"
+    
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
     let onboardingSteps: [(image: UIImage?, action: ShotCollectionViewCell.Action)]
@@ -60,7 +63,7 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         let step1 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step1", comment: "")
         let step2 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step2", comment: "")
         let step3 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step3", comment: "")
-        let step4 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step3", comment: "")
+        let step4 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step4", comment: "")
         onboardingSteps = [
             (image: UIImage(named: step1), action: ShotCollectionViewCell.Action.Like),
             (image: UIImage(named: step2), action: ShotCollectionViewCell.Action.Bucket),
@@ -141,19 +144,18 @@ private extension ShotsOnboardingStateHandler {
                 collectionView.setContentOffset(newContentOffset, animated: true)
                 
                 if action == .Follow {
-                    
+                    self?.followNetguru()
                 }
             }
         }
         return cell
     }
     
-    func followNetguruUser(user: UserType) -> Promise<Void> {
-        return Promise<Void> { fulfill, reject in
-            
-            firstly {
-                connectionsRequester.followUser(user)
-                }.then(fulfill).error(reject)
+    func followNetguru() {
+        firstly { _ in
+            userProvider.provideUser(netguruIdentifier)
+        }.then { user in
+            self.connectionsRequester.followUser(user)
         }
     }
 }
