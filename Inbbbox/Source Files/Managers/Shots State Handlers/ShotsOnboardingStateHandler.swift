@@ -64,11 +64,13 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         let step2 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step2", comment: "")
         let step3 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step3", comment: "")
         let step4 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step4", comment: "")
+        let step5 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step5", comment: "")
         onboardingSteps = [
             (image: UIImage(named: step1), action: ShotCollectionViewCell.Action.Like),
             (image: UIImage(named: step2), action: ShotCollectionViewCell.Action.Bucket),
             (image: UIImage(named: step3), action: ShotCollectionViewCell.Action.Comment),
             (image: UIImage(named: step4), action: ShotCollectionViewCell.Action.Follow),
+            (image: UIImage(named: step5), action: ShotCollectionViewCell.Action.DoNothing),
         ]
     }
 }
@@ -104,6 +106,13 @@ extension ShotsOnboardingStateHandler {
             }
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard indexPath.row == onboardingSteps.count else {
+            return
+        }
+        collectionView.animateToNextCell()
+    }
 }
 
 // MARK: UIScrollViewDelegate
@@ -138,15 +147,14 @@ private extension ShotsOnboardingStateHandler {
         cell.gifLabel.hidden = true
         cell.enabledActions = [self.onboardingSteps[indexPath.row].action]
         cell.swipeCompletion = { [weak self] action in
-            if action == self?.onboardingSteps[indexPath.row].action {
-                var newContentOffset = collectionView.contentOffset
-                newContentOffset.y += CGRectGetHeight(collectionView.bounds)
-                collectionView.setContentOffset(newContentOffset, animated: true)
-                
-                if action == .Follow {
-                    self?.followNetguru()
-                }
+            guard let certainSelf = self where action == certainSelf.onboardingSteps[indexPath.row].action else {
+                return
             }
+            collectionView.animateToNextCell()
+            if action == .Follow {
+                certainSelf.followNetguru()
+            }
+            
         }
         return cell
     }
@@ -157,5 +165,13 @@ private extension ShotsOnboardingStateHandler {
         }.then { user in
             self.connectionsRequester.followUser(user)
         }
+    }
+}
+
+private extension UICollectionView {
+    func animateToNextCell() {
+        var newContentOffset = contentOffset
+        newContentOffset.y += CGRectGetHeight(bounds)
+        setContentOffset(newContentOffset, animated: true)
     }
 }

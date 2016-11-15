@@ -332,6 +332,7 @@
 "ShotsOnboardingStateHandler.Onboarding-Step2" = "onboarding-step2-fr";
 "ShotsOnboardingStateHandler.Onboarding-Step3" = "onboarding-step3-fr";
 "ShotsOnboardingStateHandler.Onboarding-Step4" = "onboarding-step4-fr";
+"ShotsOnboardingStateHandler.Onboarding-Step5" = "onboarding-step5-fr";
 
 /********* ShotsCollectionBackgroundView *********/
 
