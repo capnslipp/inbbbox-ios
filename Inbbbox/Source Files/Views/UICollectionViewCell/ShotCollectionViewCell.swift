@@ -264,13 +264,16 @@ class ShotCollectionViewCell: UICollectionViewCell {
     private func adjustedXTranslation() -> CGFloat {
         let likeOffset = likeActionRange.max - 40
         let xTranslation = self.panGestureRecognizer.translationInView(self.contentView).x
-        if xTranslation < 0 && !enabledActions.contains(.Comment) {
+        if xTranslation < 0 && (!enabledActions.contains(.Comment) && !enabledActions.contains(.Follow)) {
             return 0
         } else if xTranslation > 0 && !enabledActions.contains(.Like) && !enabledActions.contains(.Bucket) {
             return 0
         } else if xTranslation > 0 && !enabledActions.contains(.Bucket) && xTranslation >= likeOffset {
             return likeOffset
+        } else if xTranslation < 0 && !enabledActions.contains(.Follow) && xTranslation <= commentActionRange.min {
+            return commentActionRange.min
         }
+        
         return xTranslation
     }
 
