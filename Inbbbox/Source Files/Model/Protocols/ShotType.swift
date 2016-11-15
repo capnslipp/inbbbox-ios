@@ -52,6 +52,9 @@ protocol ShotType {
     ///
     /// - returns: Team.
     var team: TeamType? { get }
+    
+    /// Attachements count
+    var attachementsCount: UInt { get }
 }
 
 func == (lhs: ShotType, rhs: ShotType) -> Bool {
