@@ -4,9 +4,11 @@
 
 import Foundation
 import SwiftyUserDefaults
+import PromiseKit
 
 class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
 
+    private let connectionsRequester = APIConnectionsRequester()
     weak var shotsCollectionViewController: ShotsCollectionViewController?
     weak var delegate: ShotsStateHandlerDelegate?
     let onboardingSteps: [(image: UIImage?, action: ShotCollectionViewCell.Action)]
@@ -58,10 +60,12 @@ class ShotsOnboardingStateHandler: NSObject, ShotsStateHandler {
         let step1 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step1", comment: "")
         let step2 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step2", comment: "")
         let step3 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step3", comment: "")
+        let step4 = NSLocalizedString("ShotsOnboardingStateHandler.Onboarding-Step3", comment: "")
         onboardingSteps = [
             (image: UIImage(named: step1), action: ShotCollectionViewCell.Action.Like),
             (image: UIImage(named: step2), action: ShotCollectionViewCell.Action.Bucket),
-            (image: UIImage(named: step3), action: ShotCollectionViewCell.Action.Comment)
+            (image: UIImage(named: step3), action: ShotCollectionViewCell.Action.Comment),
+            (image: UIImage(named: step4), action: ShotCollectionViewCell.Action.Follow),
         ]
     }
 }
@@ -90,7 +94,7 @@ extension ShotsOnboardingStateHandler {
 extension ShotsOnboardingStateHandler {
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell,
                         forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 3 {
+        if indexPath.row == onboardingSteps.count {
             scrollViewAnimationsCompletion = {
                 Defaults[.onboardingPassed] = true
                 self.delegate?.shotsStateHandlerDidInvalidate(self)
@@ -135,8 +139,21 @@ private extension ShotsOnboardingStateHandler {
                 var newContentOffset = collectionView.contentOffset
                 newContentOffset.y += CGRectGetHeight(collectionView.bounds)
                 collectionView.setContentOffset(newContentOffset, animated: true)
+                
+                if action == .Follow {
+                    
+                }
             }
         }
         return cell
+    }
+    
+    func followNetguruUser(user: UserType) -> Promise<Void> {
+        return Promise<Void> { fulfill, reject in
+            
+            firstly {
+                connectionsRequester.followUser(user)
+                }.then(fulfill).error(reject)
+        }
     }
 }
