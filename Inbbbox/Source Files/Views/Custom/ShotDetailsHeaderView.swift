@@ -136,7 +136,6 @@ class ShotDetailsHeaderView: UICollectionReusableView {
 
         let progress = collapseProgress
         let absoluteProgress = max(min(progress, 1), 0)
-        print("progress = \(String(progress)) absolute = \(String(absoluteProgress))")
 
         imageViewCenterWrapperBottomConstraint?.constant = -minHeight + minHeight * absoluteProgress
 
