@@ -160,7 +160,7 @@ private extension ShotsOnboardingStateHandler {
     }
     
     func followNetguru() {
-        firstly { _ in
+        firstly {
             userProvider.provideUser(netguruIdentifier)
         }.then { user in
             self.connectionsRequester.followUser(user)
