@@ -272,7 +272,7 @@ struct NightMode: ColorModeType {
     
     // MARK: Common
     var shadowColor: UIColor {
-        return UIColor(white: 0, alpha: 0.15)
+        return UIColor(white: 1, alpha: 0.15)
     }
     
     var cellSeparator: UIColor {

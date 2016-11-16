@@ -212,6 +212,7 @@ private extension CenterButtonTabBarController {
                     normalImageName: mode.tabBarLikesNormalImageName,
                     selectedImageName: mode.tabBarLikesSelectedImageName
                 )
+                likesViewController.adaptColorMode(mode)
             case let bucketsViewController as BucketsCollectionViewController:
                 bucketsViewController.tabBarItem = tabBarItemWithTitle(
                     nil,
@@ -225,6 +226,7 @@ private extension CenterButtonTabBarController {
                     normalImageName: mode.tabBarFollowingNormalImageName,
                     selectedImageName: mode.tabBarFollowingSelectedImageName
                 )
+                followeesViewController.adaptColorMode(mode)
             case let settingsViewController as SettingsViewController:
                 settingsViewController.tabBarItem = tabBarItemWithTitle(
                     nil,

@@ -119,6 +119,7 @@ extension SimpleShotsCollectionViewController {
         let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self, forIndexPath: indexPath,
                 type: .Cell)
         let cellData = viewModel!.shotCollectionViewCellViewData(indexPath)
+        cell.backgroundColor = ColorModeProvider.current().shotViewCellBackground
 
         indexesToUpdateCellImage.append(indexPath.row)
         lazyLoadImage(cellData.shotImage, atIndexPath: indexPath)
@@ -221,6 +222,12 @@ extension SimpleShotsCollectionViewController: DZNEmptyDataSetSource {
             )
             return emptyDataSetView
         }
+    }
+}
+
+extension SimpleShotsCollectionViewController: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        collectionView?.reloadData()
     }
 }
 

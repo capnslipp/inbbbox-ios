@@ -60,6 +60,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
             cell.nameLabel.text = cellData.name
             cell.numberOfShotsLabel.text = cellData.numberOfShots
+            cell.updateImageViewsWith(ColorModeProvider.current().shotViewCellBackground)
             if cellData.shotsImagesURLs?.count > 0 {
                 cell.firstShotImageView.loadImageFromURL(cellData.shotsImagesURLs![0])
                 cell.secondShotImageView.loadImageFromURL(cellData.shotsImagesURLs![1])
@@ -77,6 +78,7 @@ class FolloweesCollectionViewController: TwoLayoutsCollectionViewController {
             cell.avatarView.imageView.loadImageFromURL(cellData.avatarURL)
             cell.nameLabel.text = cellData.name
             cell.numberOfShotsLabel.text = cellData.numberOfShots
+            cell.shotImageView.backgroundColor = ColorModeProvider.current().shotViewCellBackground
             if let shotImage = cellData.firstShotImage {
 
                 let imageLoadingCompletion: UIImage -> Void = { [weak self] image in
@@ -171,6 +173,12 @@ extension FolloweesCollectionViewController: DZNEmptyDataSetSource {
             )
             return emptyDataSetView
         }
+    }
+}
+
+extension FolloweesCollectionViewController: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        collectionView?.reloadData()
     }
 }
 

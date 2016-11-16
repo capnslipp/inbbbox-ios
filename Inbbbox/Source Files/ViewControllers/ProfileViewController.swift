@@ -152,6 +152,8 @@ extension ProfileViewController {
         if let viewModel = viewModel as? UserDetailsViewModel {
             let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self,
                                                            forIndexPath: indexPath, type: .Cell)
+
+            cell.backgroundColor = ColorModeProvider.current().shotViewCellBackground
             cell.shotImageView.image = nil
             let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
 
