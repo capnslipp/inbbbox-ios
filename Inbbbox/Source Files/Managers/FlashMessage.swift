@@ -139,7 +139,7 @@ final class FlashMessage {
             }
         } else {
             viewController.view?.addSubview(flashMessageView)
-            verticalOffset += barHeightBasedOnMessagePositionIn(flashMessageView)
+            verticalOffset = CGRectGetHeight(flashMessageView.frame)
         }
         
         let endPoint = calculateEndPointForFadeInBasedOn(flashMessageView, andVerticaOffset: verticalOffset)
