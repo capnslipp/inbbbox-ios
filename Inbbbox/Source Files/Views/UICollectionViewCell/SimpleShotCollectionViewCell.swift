@@ -28,7 +28,6 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
     }
 
     func commonInit() {
-        contentView.backgroundColor = UIColor.cellBackgroundColor()
         contentView.addSubview(shotImageView)
         contentView.addSubview(gifLabel)
         contentView.layer.cornerRadius = 5

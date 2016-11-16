@@ -113,6 +113,7 @@ extension ShotsNormalStateHandler {
         let shot = shotsCollectionViewController.shots[indexPath.item]
 
         cell.shotImageView.activityIndicatorView.startAnimating()
+        cell.shotImageView.backgroundColor = ColorModeProvider.current().shotViewCellBackground
 
         load(shot.shotImage, for: indexPath)
 
