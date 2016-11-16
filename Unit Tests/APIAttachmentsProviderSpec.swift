@@ -1,5 +1,5 @@
 //
-//  APIAttachementsProviderSpec.swift
+//  APIAttachmentsProviderSpec.swift
 //  Inbbbox
 //
 //  Created by Marcin Siemaszko on 15.11.2016.
@@ -12,45 +12,45 @@ import PromiseKit
 
 @testable import Inbbbox
 
-class APIAttachementsProviderSpec: QuickSpec {
+class APIAttachmentsProviderSpec: QuickSpec {
     override func spec() {
         
-        var sut: APIAttachementsProviderPrivateMock!
+        var sut: APIAttachmentsProviderPrivateMock!
         
         beforeEach {
-            sut = APIAttachementsProviderPrivateMock()
+            sut = APIAttachmentsProviderPrivateMock()
         }
         
         afterEach {
             sut = nil
         }
         
-        describe("when providing attachements") {
+        describe("when providing attachments") {
             
             context("and they exist") {
                 
-                var attachements: [Attachement]?
+                var attachments: [Attachment]?
                 
                 afterEach {
-                    attachements = nil
+                    attachments = nil
                 }
                 
-                it("attachements should be properly returned") {
-                    sut.provideAttachementsForShot(Shot.fixtureShot()).then { _attachements -> Void in
-                        attachements = _attachements
+                it("attachments should be properly returned") {
+                    sut.provideAttachmentsForShot(Shot.fixtureShot()).then { _attachments -> Void in
+                        attachments = _attachments
                         }.error { _ in fail() }
                     
-                    expect(attachements).toNotEventually(beNil())
-                    expect(attachements).toEventually(haveCount(3))
-                    expect(attachements?.first?.identifier).toEventually(equal("1"))
+                    expect(attachments).toNotEventually(beNil())
+                    expect(attachments).toEventually(haveCount(3))
+                    expect(attachments?.first?.identifier).toEventually(equal("1"))
                 }
             }
         }
     }
 }
 
-//Explanation: Create APIAttachementsProviderPrivateMock to override methods from PageableProvider.
-private class APIAttachementsProviderPrivateMock: APIAttachementsProvider {
+//Explanation: Create APIAttachmentsProviderPrivateMock to override methods from PageableProvider.
+private class APIAttachmentsProviderPrivateMock: APIAttachmentsProvider {
     
     override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)
@@ -67,7 +67,7 @@ private class APIAttachementsProviderPrivateMock: APIAttachementsProvider {
     func mockResult<T: Mappable>(type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, _ in
             
-            let json = JSONSpecLoader.sharedInstance.fixtureAttachementsJSON(withCount: 3)
+            let json = JSONSpecLoader.sharedInstance.fixtureAttachmentsJSON(withCount: 3)
             let result = json.map { T.map($0) }
             
             fulfill(result)

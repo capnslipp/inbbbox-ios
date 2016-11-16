@@ -1,5 +1,5 @@
 //
-//  Attachement.swift
+//  Attachment.swift
 //  Inbbbox
 //
 //  Created by Marcin Siemaszko on 15.11.2016.
@@ -9,18 +9,18 @@
 import Foundation
 import SwiftyJSON
 
-struct Attachement {
+struct Attachment {
     let identifier: String
     let thumbnailURL: NSURL?
     let imageURL: NSURL?
 }
 
-extension Attachement: Mappable {
+extension Attachment: Mappable {
     
-    static var map: JSON -> Attachement {
+    static var map: JSON -> Attachment {
         return { json in
             
-            return Attachement(identifier: json[Key.Identifier.rawValue].stringValue,
+            return Attachment(identifier: json[Key.Identifier.rawValue].stringValue,
                                thumbnailURL: json[Key.ThumbnailURL.rawValue].URL,
                                imageURL: json[Key.ImageURL.rawValue].URL)
         }

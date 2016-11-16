@@ -22,7 +22,7 @@ struct Shot: ShotType {
     let commentsCount: UInt
     let bucketsCount: UInt
     let team: TeamType?
-    let attachementsCount: UInt
+    let attachmentsCount: UInt
 }
 
 extension Shot: Mappable {
@@ -57,7 +57,7 @@ extension Shot: Mappable {
                 commentsCount: json[Key.CommentsCount.rawValue].uIntValue,
                 bucketsCount: json[Key.BucketsCount.rawValue].uIntValue,
                 team: team,
-                attachementsCount: json[Key.AttachementsCount.rawValue].uIntValue
+                attachmentsCount: json[Key.AttachmentsCount.rawValue].uIntValue
             )
         }
     }
@@ -75,7 +75,7 @@ extension Shot: Mappable {
         case CommentsCount = "comments_count"
         case BucketsCount = "buckets_count"
         case Team = "team"
-        case AttachementsCount = "attachments_count"
+        case AttachmentsCount = "attachments_count"
     }
 }
 

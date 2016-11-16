@@ -1,5 +1,5 @@
 //
-//  AttachementCollectionViewCell.swift
+//  AttachmentCollectionViewCell.swift
 //  Inbbbox
 //
 //  Created by Marcin Siemaszko on 15.11.2016.
@@ -8,11 +8,10 @@
 
 import Foundation
 
-class AttachementCollectionViewCell: UICollectionViewCell {
+class AttachmentCollectionViewCell: UICollectionViewCell {
     
     let imageView = UIImageView.newAutoLayoutView()
-    private let attachementIconImageView = UIImageView.newAutoLayoutView()
-    
+    private let attachmentIconImageView = UIImageView.newAutoLayoutView()
     
     private var didUpdateConstraints = false
     
@@ -29,11 +28,11 @@ class AttachementCollectionViewCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 3
         contentView.addSubview(imageView)
         
-        attachementIconImageView.image = UIImage(named: "ic_attachement")
-        attachementIconImageView.contentMode = .Center
-        attachementIconImageView.layer.cornerRadius = 9
-        attachementIconImageView.backgroundColor = UIColor.RGBA(175, 175, 175, 0.26)
-        contentView.addSubview(attachementIconImageView)
+        attachmentIconImageView.image = UIImage(named: "ic_attachment")
+        attachmentIconImageView.contentMode = .Center
+        attachmentIconImageView.layer.cornerRadius = 9
+        attachmentIconImageView.backgroundColor = UIColor.RGBA(175, 175, 175, 0.26)
+        contentView.addSubview(attachmentIconImageView)
         
         setNeedsUpdateConstraints()
     }
@@ -49,9 +48,9 @@ class AttachementCollectionViewCell: UICollectionViewCell {
             didUpdateConstraints = true
             
             imageView.autoPinEdgesToSuperviewEdges()
-            attachementIconImageView.autoPinEdgeToSuperviewEdge(.Right, withInset: 3)
-            attachementIconImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: 3)
-            attachementIconImageView.autoSetDimensionsToSize(CGSizeMake(18, 18))
+            attachmentIconImageView.autoPinEdgeToSuperviewEdge(.Right, withInset: 3)
+            attachmentIconImageView.autoPinEdgeToSuperviewEdge(.Top, withInset: 3)
+            attachmentIconImageView.autoSetDimensionsToSize(CGSizeMake(18, 18))
             
             contentView.autoPinEdgesToSuperviewEdges()
         }
@@ -60,9 +59,9 @@ class AttachementCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension AttachementCollectionViewCell: Reusable {
+extension AttachmentCollectionViewCell: Reusable {
     
     class var reuseIdentifier: String {
-        return String(AttachementCollectionViewCell)
+        return String(AttachmentCollectionViewCell)
     }
 }

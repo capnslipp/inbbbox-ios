@@ -72,7 +72,7 @@ final class ShotDetailsViewController: UIViewController {
         shotDetailsView.shouldShowCommentComposerView = viewModel.isCommentingAvailable
 
         firstly {
-            viewModel.loadAttachements()
+            viewModel.loadAttachments()
         }.then {
             self.header?.setNeedsDisplay()
             return self.viewModel.loadAllComments()
@@ -259,11 +259,11 @@ extension ShotDetailsViewController: UICollectionViewDataSource {
                 self?.presentShotFullscreen()
             }
             
-            header?.showAttachements = viewModel.shot.attachementsCount != 0
-            header?.attachements = self.viewModel.attachements
-            header?.attachementDidTap = { [weak self] cell, attachement in
-                self?.header?.selectedAttachement = attachement
-                self?.presentFullScreenAttachement(cell)
+            header?.showAttachments = viewModel.shot.attachmentsCount != 0
+            header?.attachments = viewModel.attachments
+            header?.attachmentDidTap = { [weak self] cell, attachment in
+                self?.header?.selectedAttachment = attachment
+                self?.presentFullScreenAttachment(cell)
             }
         }
 
@@ -467,7 +467,7 @@ private extension ShotDetailsViewController {
         let dribbbleImageRatio = CGFloat(0.75)
         return CGSize(
             width: floor(collectionView.bounds.width),
-            height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader) + viewModel.attachementContainerHeight()
+            height: ceil(collectionView.bounds.width * dribbbleImageRatio + heightForCollapsedCollectionViewHeader) + viewModel.attachmentContainerHeight()
         )
     }
 
@@ -566,7 +566,7 @@ private extension ShotDetailsViewController {
         presentImageViewer(imageViewer)
     }
     
-    func presentFullScreenAttachement(displacedView: UIView) {
+    func presentFullScreenAttachment(displacedView: UIView) {
         /* 
          To prevent glitchy animation we are adding placeholder view
          from where animation will start but without showing thumbnail 

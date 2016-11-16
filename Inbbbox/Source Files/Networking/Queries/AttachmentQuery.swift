@@ -1,5 +1,5 @@
 //
-//  AttachementQuery.swift
+//  AttachmentQuery.swift
 //  Inbbbox
 //
 //  Created by Marcin Siemaszko on 15.11.2016.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct AttachementQuery: Query {
+struct AttachmentQuery: Query {
     
     let method = Method.GET
     var parameters = Parameters(encoding: .URL)
     private(set) var path: String
     
-    /// Initialize query for list of the given shots attachements.
+    /// Initialize query for list of the given shots attachments.
     ///
-    /// - parameter shot: Shot which attachements should be listed.
+    /// - parameter shot: Shot which attachments should be listed.
     init(shot: ShotType) {
         path = "/shots/\(shot.identifier)/attachments"
     }

@@ -20,7 +20,7 @@
     <entity name="ManagedShot" representedClassName=".ManagedShot" elementID="ManagedShot" syncable="YES">
         <attribute name="liked" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="mngd_animated" attributeType="Boolean" elementID="Animated" syncable="YES"/>
-        <attribute name="mngd_attachementsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="mngd_attachmentsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="mngd_bucketsCount" attributeType="Integer 32" defaultValueString="0" elementID="BucketsCount" syncable="YES"/>
         <attribute name="mngd_commentsCount" attributeType="Integer 32" defaultValueString="0" elementID="CommentsCount" syncable="YES"/>
         <attribute name="mngd_createdAt" attributeType="Date" elementID="CreatedAt" syncable="YES"/>
@@ -60,11 +60,11 @@
         <relationship name="shots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ManagedShot" inverseName="mngd_user" inverseEntity="ManagedShot" elementID="Shots" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ManagedBucket" positionX="-236" positionY="-157" width="128" height="150"/>
-        <element name="ManagedProject" positionX="-243" positionY="35" width="128" height="135"/>
-        <element name="ManagedShot" positionX="-9" positionY="-324" width="128" height="285"/>
-        <element name="ManagedShotImage" positionX="216" positionY="-288" width="128" height="105"/>
-        <element name="ManagedTeam" positionX="232" positionY="-126" width="128" height="135"/>
-        <element name="ManagedUser" positionX="216" positionY="35" width="128" height="165"/>
+        <element name="ManagedBucket" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ManagedProject" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ManagedShot" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ManagedShotImage" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ManagedTeam" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ManagedUser" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

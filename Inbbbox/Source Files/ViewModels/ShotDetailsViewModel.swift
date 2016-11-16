@@ -29,7 +29,7 @@ final class ShotDetailsViewModel {
     var userProvider = APIUsersProvider()
     var bucketsRequester = BucketsRequester()
     var shotsRequester = ShotsRequester()
-    var attachementsProvider = APIAttachementsProvider()
+    var attachmentsProvider = APIAttachmentsProvider()
 
     var itemsCount: Int {
 
@@ -50,7 +50,7 @@ final class ShotDetailsViewModel {
     private var cachedFormattedDescription: NSAttributedString?
     
     var comments = [CommentType]()
-    var attachements = [Attachement]()
+    var attachments = [Attachment]()
     private var userBucketsForShot = [BucketType]()
     private var isShotLikedByMe: Bool?
     private var userBucketsForShotCount: Int?
@@ -314,7 +314,7 @@ extension ShotDetailsViewModel {
     }
 
     func loadAllComments() -> Promise<Void> {
-        loadAttachements()
+        loadAttachments()
         return Promise<Void> { fulfill, reject in
 
             firstly {
@@ -476,32 +476,32 @@ extension ShotDetailsViewModel: URLToUserProvider, UserToURLProvider {
     }
 }
 
-// MARK: Attachements handling
+// MARK: Attachments handling
 
 extension ShotDetailsViewModel {
     
     /*
-     Returns height for attachement Container in shot details view.
-     0 is returned if there is no attachements.
+     Returns height for attachment Container in shot details view.
+     0 is returned if there is no attachments.
      */
-    func attachementContainerHeight() -> CGFloat {
-        return shot.attachementsCount == 0 ? 0 : 70
+    func attachmentContainerHeight() -> CGFloat {
+        return shot.attachmentsCount == 0 ? 0 : 70
     }
     
     /*
-     Downloads attachements for shot and saves them into attachement property.
+     Downloads attachments for shot and saves them into attachment property.
      */
-    func loadAttachements() -> Promise<Void> {
+    func loadAttachments() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
-            if (shot.attachementsCount == 0) {
+            if (shot.attachmentsCount == 0) {
                 fulfill()
                 return
             }
             firstly {
-                attachementsProvider.provideAttachementsForShot(shot)
-            }.then { attachements -> Void in
-                if let attachements = attachements {
-                    self.attachements = attachements
+                attachmentsProvider.provideAttachmentsForShot(shot)
+            }.then { attachments -> Void in
+                if let attachments = attachments {
+                    self.attachments = attachments
                 }
                 fulfill()
             }.error(reject)

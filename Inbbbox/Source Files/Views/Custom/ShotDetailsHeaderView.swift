@@ -22,18 +22,18 @@ private var margin: CGFloat {
 
 class ShotDetailsHeaderView: UICollectionReusableView {
     
-    var showAttachements: Bool = false {
+    var showAttachments: Bool = false {
         didSet {
-            attachementContainer.hidden = !showAttachements
+            attachmentContainer.hidden = !showAttachments
         }
     }
-    var attachements:[Attachement] = [Attachement]() {
+    var attachments:[Attachment] = [Attachment]() {
         didSet {
-            attachementsCollectionView.reloadData()
+            attachmentsCollectionView.reloadData()
         }
     }
-    var attachementDidTap: ((UICollectionViewCell, Attachement) -> Void)?
-    var selectedAttachement: Attachement?
+    var attachmentDidTap: ((UICollectionViewCell, Attachment) -> Void)?
+    var selectedAttachment: Attachment?
 
     var availableWidthForTitle: CGFloat {
         return avatarSize.width + 3 * margin
@@ -52,11 +52,11 @@ class ShotDetailsHeaderView: UICollectionReusableView {
     private let dimView = UIView.newAutoLayoutView()
     private let imageViewCenterWrapperView = UIView.newAutoLayoutView()
     private let shadowImageView = UIImageView.newAutoLayoutView()
-    private let attachementContainer = UIView.newAutoLayoutView()
-    private lazy var attachementsCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let attachmentContainer = UIView.newAutoLayoutView()
+    private lazy var attachmentsCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: UICollectionViewFlowLayout())
 
     private var imageViewCenterWrapperBottomConstraint: NSLayoutConstraint?
-    private var attachementContainerHeightConstraint: NSLayoutConstraint?
+    private var attachmentContainerHeightConstraint: NSLayoutConstraint?
 
     private var didUpdateConstraints = false
     private var collapseProgress: CGFloat {
@@ -101,21 +101,21 @@ class ShotDetailsHeaderView: UICollectionReusableView {
 
         setNeedsUpdateConstraints()
         
-        attachementContainer.backgroundColor = UIColor.RGBA(43, 49, 51, 1)
-        insertSubview(attachementContainer, aboveSubview: titleLabel)
+        attachmentContainer.backgroundColor = UIColor.RGBA(43, 49, 51, 1)
+        insertSubview(attachmentContainer, aboveSubview: titleLabel)
         
-        attachementsCollectionView.registerClass(AttachementCollectionViewCell.self, forCellWithReuseIdentifier: AttachementCollectionViewCell.reuseIdentifier)
-        attachementsCollectionView.backgroundColor = .clearColor()
-        attachementsCollectionView.dataSource = self
-        attachementsCollectionView.delegate = self
-        attachementsCollectionView.showsHorizontalScrollIndicator = false
-        if let layout = attachementsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        attachmentsCollectionView.registerClass(AttachmentCollectionViewCell.self, forCellWithReuseIdentifier: AttachmentCollectionViewCell.reuseIdentifier)
+        attachmentsCollectionView.backgroundColor = .clearColor()
+        attachmentsCollectionView.dataSource = self
+        attachmentsCollectionView.delegate = self
+        attachmentsCollectionView.showsHorizontalScrollIndicator = false
+        if let layout = attachmentsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSizeMake(80, 60)
             layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
             layout.scrollDirection = .Horizontal
         }
         
-        attachementContainer.addSubview(attachementsCollectionView)
+        attachmentContainer.addSubview(attachmentsCollectionView)
     }
 
     deinit {
@@ -165,15 +165,15 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             imageViewCenterWrapperView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             imageViewCenterWrapperView.autoMatchDimension(.Height, toDimension: .Width, ofView: imageViewCenterWrapperView, withMultiplier: 0.75)
 
-            attachementContainer.autoPinEdge(.Top, toEdge: .Bottom, ofView: imageViewCenterWrapperView)
-            attachementContainer.autoPinEdgeToSuperviewEdge(.Left)
-            attachementContainer.autoPinEdgeToSuperviewEdge(.Right)
-            attachementContainer.autoSetDimension(.Height, toSize: 70)
+            attachmentContainer.autoPinEdge(.Top, toEdge: .Bottom, ofView: imageViewCenterWrapperView)
+            attachmentContainer.autoPinEdgeToSuperviewEdge(.Left)
+            attachmentContainer.autoPinEdgeToSuperviewEdge(.Right)
+            attachmentContainer.autoSetDimension(.Height, toSize: 70)
             
-            attachementsCollectionView.autoSetDimension(.Height, toSize: 60)
-            attachementsCollectionView.autoAlignAxisToSuperviewAxis(.Horizontal)
-            attachementsCollectionView.autoPinEdgeToSuperviewEdge(.Left, withInset: 5)
-            attachementsCollectionView.autoPinEdgeToSuperviewEdge(.Right, withInset: 5)
+            attachmentsCollectionView.autoSetDimension(.Height, toSize: 60)
+            attachmentsCollectionView.autoAlignAxisToSuperviewAxis(.Horizontal)
+            attachmentsCollectionView.autoPinEdgeToSuperviewEdge(.Left, withInset: 5)
+            attachmentsCollectionView.autoPinEdgeToSuperviewEdge(.Right, withInset: 5)
 
             shadowImageView.autoPinEdge(.Top, toEdge: .Bottom, ofView: imageViewCenterWrapperView)
             shadowImageView.autoPinEdgeToSuperviewEdge(.Left)
@@ -266,30 +266,30 @@ extension ShotDetailsHeaderView: Reusable {
 extension ShotDetailsHeaderView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return attachements.count
+        return attachments.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AttachementCollectionViewCell.reuseIdentifier, forIndexPath: indexPath)
-        if let cell = cell as? AttachementCollectionViewCell, thumbnail = attachements[indexPath.row].thumbnailURL {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AttachmentCollectionViewCell.reuseIdentifier, forIndexPath: indexPath)
+        if let cell = cell as? AttachmentCollectionViewCell, thumbnail = attachments[indexPath.row].thumbnailURL {
             cell.imageView.loadImageFromURL(thumbnail)
         }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        attachementDidTap?(collectionView.cellForItemAtIndexPath(indexPath)!, attachements[indexPath.row])
+        attachmentDidTap?(collectionView.cellForItemAtIndexPath(indexPath)!, attachments[indexPath.row])
     }
 }
 
 extension ShotDetailsHeaderView: ImageProvider {
     
     func provideImage(completion: UIImage? -> Void) {
-        guard let selectedAttachementUrl = selectedAttachement?.imageURL else {
+        guard let selectedAttachmentUrl = selectedAttachment?.imageURL else {
             return
         }
         Shared.imageCache.fetch(
-            URL: selectedAttachementUrl,
+            URL: selectedAttachmentUrl,
             formatName: CacheManager.imageFormatName,
             failure: nil,
             success: { image in
