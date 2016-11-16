@@ -89,9 +89,10 @@ class ProfileViewController: TwoLayoutsCollectionViewController {
         collectionView.registerClass(ProfileHeaderView.self, type: .Header)
 
         do { // hides bottom border of navigationBar
-            navigationController?.navigationBar.shadowImage = UIImage(color: .pinkColor())
+            let currentColorMode = ColorModeProvider.current()
+            navigationController?.navigationBar.shadowImage = UIImage(color: currentColorMode.navigationBarTint)
             navigationController?.navigationBar.setBackgroundImage(
-				UIImage(color: .pinkColor()),
+				UIImage(color: currentColorMode.navigationBarTint),
                 forBarMetrics: .Default
 			)
         }
@@ -151,6 +152,8 @@ extension ProfileViewController {
         if let viewModel = viewModel as? UserDetailsViewModel {
             let cell = collectionView.dequeueReusableClass(SimpleShotCollectionViewCell.self,
                                                            forIndexPath: indexPath, type: .Cell)
+
+            cell.backgroundColor = ColorModeProvider.current().shotViewCellBackground
             cell.shotImageView.image = nil
             let cellData = viewModel.shotCollectionViewCellViewData(indexPath)
 

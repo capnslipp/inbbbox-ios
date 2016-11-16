@@ -29,8 +29,6 @@ class ShotDetailsOperationView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = .RGBA(246, 248, 248, 1)
-
         likeSelectableView.setImage(UIImage(named: "ic-like-details-active"), forState: .Selected)
         likeSelectableView.setImage(UIImage(named: "ic-like-details"), forState: .Deselected)
         addSubview(likeSelectableView)
@@ -42,7 +40,7 @@ class ShotDetailsOperationView: UIView {
         for label in [likeCounterLabel, bucketCounterLabel] {
             
             label.font = UIFont.helveticaFont(.Neue, size: 12)
-            label.textColor = .followeeTextGrayColor()
+            label.textColor = ColorModeProvider.current().shotDetailsCommentEditLabelTextColor
             
             addSubview(label)
         }

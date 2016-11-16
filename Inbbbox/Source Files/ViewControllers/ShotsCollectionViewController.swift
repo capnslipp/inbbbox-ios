@@ -101,6 +101,10 @@ extension ShotsCollectionViewController {
         hideStreamSources()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return ColorModeProvider.current().preferredStatusBarStyle
+    }
+    
     private func handleEmptyShotsView() {
         if (stateHandler.shouldShowNoShotsView) {
             let empty = EmptyShotsCollectionView()

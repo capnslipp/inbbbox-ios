@@ -71,6 +71,13 @@
 		303A578B1D0FE47A00D760A3 /* SafariAuthorizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303A578A1D0FE47A00D760A3 /* SafariAuthorizable.swift */; };
 		304F32521CCE3BDE002EE96B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 304F32541CCE3BDE002EE96B /* InfoPlist.strings */; };
 		30586F351CF5E289003D4B06 /* ShotAuthorCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30586F341CF5E289003D4B06 /* ShotAuthorCompactView.swift */; };
+		305A85041DDAFD6A008EF410 /* ColorModeAdaptable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A85031DDAFD6A008EF410 /* ColorModeAdaptable.swift */; };
+		305A85061DDAFD90008EF410 /* ColorModeProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A85051DDAFD90008EF410 /* ColorModeProvider.swift */; };
+		305A85081DDAFDBC008EF410 /* ColorModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A85071DDAFDBC008EF410 /* ColorModeType.swift */; };
+		305A850B1DDAFE7F008EF410 /* DayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A85091DDAFE7F008EF410 /* DayMode.swift */; };
+		305A850C1DDAFE7F008EF410 /* NightMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A850A1DDAFE7F008EF410 /* NightMode.swift */; };
+		305A850E1DDB00FC008EF410 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A850D1DDB00FC008EF410 /* UIViewExtension.swift */; };
+		305A85101DDB0343008EF410 /* CommentComposerFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305A850F1DDB0343008EF410 /* CommentComposerFormatter.swift */; };
 		306F24901CBBBE8200D81B14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 306F24921CBBBE8200D81B14 /* Localizable.strings */; };
 		306F24A51CBBC6BC00D81B14 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 306F24A31CBBC6BC00D81B14 /* Localizable.stringsdict */; };
 		307C5FA71DAE715E007219F9 /* UpdateableIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307C5FA61DAE715E007219F9 /* UpdateableIndex.swift */; };
@@ -486,6 +493,13 @@
 		304733CE1D1AA1D800667715 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = pl; path = pl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		304F32531CCE3BDE002EE96B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30586F341CF5E289003D4B06 /* ShotAuthorCompactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotAuthorCompactView.swift; sourceTree = "<group>"; };
+		305A85031DDAFD6A008EF410 /* ColorModeAdaptable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorModeAdaptable.swift; sourceTree = "<group>"; };
+		305A85051DDAFD90008EF410 /* ColorModeProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorModeProvider.swift; sourceTree = "<group>"; };
+		305A85071DDAFDBC008EF410 /* ColorModeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorModeType.swift; sourceTree = "<group>"; };
+		305A85091DDAFE7F008EF410 /* DayMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayMode.swift; sourceTree = "<group>"; };
+		305A850A1DDAFE7F008EF410 /* NightMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NightMode.swift; sourceTree = "<group>"; };
+		305A850D1DDB00FC008EF410 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		305A850F1DDB0343008EF410 /* CommentComposerFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentComposerFormatter.swift; sourceTree = "<group>"; };
 		306F24961CBBC0CD00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		306F24A41CBBC6BC00D81B14 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		307C5FA61DAE715E007219F9 /* UpdateableIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateableIndex.swift; sourceTree = "<group>"; };
@@ -958,6 +972,7 @@
 				09C508D276848A35528EA080 /* UITableViewExtension.swift */,
 				5474130630C7B825D2A02AC7 /* UITextFieldExtension.swift */,
 				472FDA9EBA0DF86EFAF923FC /* UIViewAnimationsExtension.swift */,
+				305A850D1DDB00FC008EF410 /* UIViewExtension.swift */,
 				24917648B4ED154568BCFB6D /* UIViewControllerExtension.swift */,
 				BBC5F88643B64405114F960D /* UIWindowExtension.swift */,
 				F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */,
@@ -982,6 +997,8 @@
 				6277131A1D737BFFF59916B8 /* ShotImage.swift */,
 				8E8652A935324181B11267B2 /* Team.swift */,
 				4B222CC35CA6914327AE4C01 /* User.swift */,
+				305A85091DDAFE7F008EF410 /* DayMode.swift */,
+				305A850A1DDAFE7F008EF410 /* NightMode.swift */,
 				7F4EB596A22469CD8E952645 /* ManagedObjects */,
 				7D92EA5C1F5A956915B1C43B /* Protocols */,
 			);
@@ -1285,6 +1302,8 @@
 				CD769AEEBDEAA16B127985CF /* AutoSizable.swift */,
 				3F93BA6AA99E90D52C6A09F6 /* AvatarSettable.swift */,
 				A2E5B60CC31149625D73BB73 /* BaseCollectionViewViewModel.swift */,
+				305A85071DDAFDBC008EF410 /* ColorModeType.swift */,
+				305A85031DDAFD6A008EF410 /* ColorModeAdaptable.swift */,
 				FC15C5259C324990D2ECE689 /* InfoShotsCellConfigurable.swift */,
 				0FE6DAF0C4E21417E84D4B6F /* Reusable.swift */,
 				ED14B7F90B5F3A56E09857D8 /* ShotsStateHandler.swift */,
@@ -1367,6 +1386,7 @@
 				45F343C4CB943320AD5A120D /* Core Data Providers */,
 				D8F0544E61AD405F9B646F0B /* Projects */,
 				BA57C80B7AE95FA33B4A16B6 /* Shots */,
+				305A85051DDAFD90008EF410 /* ColorModeProvider.swift */,
 				F03764FB1CBB9F81008183F3 /* LazyImageProvider.swift */,
 			);
 			path = Providers;
@@ -1375,6 +1395,7 @@
 		8EC2B46C6A16DD04500A713D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				305A850F1DDB0343008EF410 /* CommentComposerFormatter.swift */,
 				BE5712541DCA2DD200358745 /* FlashMessageViewModel.swift */,
 				A4963BE81B8CA389CA0D22EC /* BucketContentViewModel.swift */,
 				1826A155D5C1F16E3EBEDBAA /* BucketsViewModel.swift */,
@@ -2140,11 +2161,13 @@
 				D63C79AF85CE9034D19A63ED /* UnlikeQuery.swift in Sources */,
 				986616A08FD3757CC867D836 /* UpdateCommentQuery.swift in Sources */,
 				0CD72BFD1AE1C5F446B8CA39 /* UserFollowedByMeQuery.swift in Sources */,
+				305A850E1DDB00FC008EF410 /* UIViewExtension.swift in Sources */,
 				B0FA7ED3857415953587DEA9 /* UserQuery.swift in Sources */,
 				B4106314FAE6A26929E31986 /* AutoSizable.swift in Sources */,
 				EA0CFB1E1D95654700CFF21A /* CommentUnlikeQuery.swift in Sources */,
 				F0EE2870B58F0E2F0AEF5922 /* AvatarSettable.swift in Sources */,
 				4BF656476671DC5B75114E81 /* BaseCollectionViewViewModel.swift in Sources */,
+				305A85061DDAFD90008EF410 /* ColorModeProvider.swift in Sources */,
 				29DDC14156FF381F6D4084FC /* InfoShotsCellConfigurable.swift in Sources */,
 				D90ECD0529BF32CBA557BCE6 /* Reusable.swift in Sources */,
 				35A68BF604006389506EB210 /* ShotsStateHandler.swift in Sources */,
@@ -2160,6 +2183,7 @@
 				F29FD29A37539BEF427008EB /* APIConnectionsRequester.swift in Sources */,
 				3FA7FB71B61A6754AC2CA764 /* APIProjectsProvider.swift in Sources */,
 				6323E355E5134FAA6EB23C65 /* APIShotsProvider.swift in Sources */,
+				305A850B1DDAFE7F008EF410 /* DayMode.swift in Sources */,
 				8F8E54067F6F24644AF8B2B3 /* APIShotsProviderConfiguration.swift in Sources */,
 				9FE9B94F4EF53E804FF71D4B /* APIShotsRequester.swift in Sources */,
 				AA3A2942ED29B257AB5C596D /* APITeamsProvider.swift in Sources */,
@@ -2175,6 +2199,7 @@
 				0B7C096856A478ACEA0BB3F7 /* ManagedShotsRequester.swift in Sources */,
 				67C6C60823F2B2651EA5E5D9 /* ProjectsProvider.swift in Sources */,
 				354E7F4C012CA8A5F54C0FFB /* ShotsProvider.swift in Sources */,
+				305A850C1DDAFE7F008EF410 /* NightMode.swift in Sources */,
 				C5B637080C01F1361978C423 /* ShotsRequester.swift in Sources */,
 				8A9E412BFEF0131112E41E6B /* ShotsStorage.swift in Sources */,
 				09663A9AE62D56A19D61FD18 /* TokenStorage.swift in Sources */,
@@ -2193,6 +2218,7 @@
 				10E1AF5BA41914646163794B /* SettingsViewController.swift in Sources */,
 				1A8703E28D4A5355D7758DC0 /* ShotBucketsViewController.swift in Sources */,
 				F7F8A182D0AA61C8FCA2C9BF /* ShotDetailsViewController.swift in Sources */,
+				305A85041DDAFD6A008EF410 /* ColorModeAdaptable.swift in Sources */,
 				A7B3D3F746A094F24AA38C6C /* ShotsCollectionViewController.swift in Sources */,
 				7584EFD2730B01300585E5E8 /* TwoLayoutsCollectionViewController.swift in Sources */,
 				D8C4CA83F356EB5AFB912AA4 /* ProfileViewController.swift in Sources */,
@@ -2214,6 +2240,7 @@
 				B294B1595A334D797AE5FA45 /* ShotBucketsViewModel.swift in Sources */,
 				E15CC225A6EB56CA0FDE1867 /* ShotDetailsFormatter.swift in Sources */,
 				30C184651CC674920032798C /* DefaultImage.swift in Sources */,
+				305A85101DDB0343008EF410 /* CommentComposerFormatter.swift in Sources */,
 				FD5B662B964074F226A06035 /* ShotDetailsViewModel.swift in Sources */,
 				AAF3820647B62F0AE36A6205 /* SwitchItem.swift in Sources */,
 				30586F351CF5E289003D4B06 /* ShotAuthorCompactView.swift in Sources */,
@@ -2236,6 +2263,7 @@
 				D5E623A25BAE82D34C0FBF48 /* EmptyDataSetView.swift in Sources */,
 				C11B3B8DECEEDFD228F6C0E6 /* GifIndicatorView.swift in Sources */,
 				B8813ACAB3427465A361691A /* KeyboardResizableView.swift in Sources */,
+				305A85081DDAFDBC008EF410 /* ColorModeType.swift in Sources */,
 				8B71AA21B931EA155F2C7343 /* ORLoginLabel.swift in Sources */,
 				30CE68941DD21C5200FF2BAA /* NSURLSessionExtension.swift in Sources */,
 				CBC9D06A7E66307B90A087B9 /* RoundedButton.swift in Sources */,

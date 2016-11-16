@@ -33,7 +33,7 @@ trigger_map:
 - push_branch: develop
   workflow: develop
 
-- push_branch: epic
+- push_branch: epic/*
   workflow: develop
 
 - push_branch: task/*

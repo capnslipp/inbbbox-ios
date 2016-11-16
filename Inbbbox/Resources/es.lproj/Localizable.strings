@@ -232,6 +232,9 @@
 /* User Settings, show author. */
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor en la pantalla de inicio";
 
+/* User Setting, night mode */
+"SettingsViewModel.NightMode" = "$Night Mode";
+
 /* User Settings, feedback section title. */
 "SettingsViewModel.Feedback" = "$FEEDBACK";
 

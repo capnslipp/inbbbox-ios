@@ -42,6 +42,8 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
     let likesCountLabel = UILabel.newAutoLayoutView()
     private let commentLabel = TTTAttributedLabel.newAutoLayoutView()
     private let editView = CommentEditView.newAutoLayoutView()
+    private let separatorView = UIView.newAutoLayoutView()
+    
     var likedByMe: Bool = false {
         didSet {
             editView.setLiked(withValue: likedByMe)
@@ -65,7 +67,6 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         configureForAutoLayout()
 
         contentView.configureForAutoLayout()
-        contentView.backgroundColor = UIColor.whiteColor()
 
         avatarView.configureForAutoLayout()
         avatarView.imageView.image = UIImage(named: "ic-comments-nopicture")
@@ -77,7 +78,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         commentLabel.numberOfLines = 0
         commentLabel.lineBreakMode = .ByWordWrapping
         commentLabel.userInteractionEnabled = true
-        commentLabel.linkAttributes = [NSForegroundColorAttributeName : UIColor.pinkColor()]
+        commentLabel.linkAttributes = [NSForegroundColorAttributeName : ColorModeProvider.current().shotDetailsCommentLinkTextColor]
         commentLabel.delegate = self
         contentView.addSubview(commentLabel)
 
@@ -85,7 +86,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(dateLabel)
 
         likesCountLabel.font = UIFont.helveticaFont(.Neue, size: 10)
-        likesCountLabel.textColor = .followeeTextGrayColor()
+        likesCountLabel.textColor = ColorModeProvider.current().shotDetailsCommentLikesCountTextColor
 
         contentView.addSubview(likesImageView)
         contentView.addSubview(likesCountLabel)
@@ -97,6 +98,9 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         editView.likeButton.addTarget(self,
                 action: #selector(likeButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         contentView.addSubview(editView)
+        
+        separatorView.backgroundColor = ColorModeProvider.current().cellSeparator
+        contentView.addSubview(separatorView)
 
         setNeedsUpdateConstraints()
     }
@@ -124,7 +128,9 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
             let verticalSpacing = self.dynamicType.verticalInteritemSpacing
             let insets = self.dynamicType.contentInsets
-
+            
+            contentView.autoPinEdgesToSuperviewEdges()
+            
             avatarView.autoPinEdgeToSuperviewEdge(.Left, withInset: insets.left)
             avatarView.autoPinEdgeToSuperviewEdge(.Top, withInset: insets.top)
             avatarView.autoSetDimensionsToSize(avatarView.frame.size)
@@ -156,6 +162,11 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
             editView.autoPinEdge(.Left, toEdge: .Left, ofView: self)
             editView.autoPinEdge(.Top, toEdge: .Top, ofView: self)
             editView.autoPinEdge(.Bottom, toEdge: .Bottom, ofView: self)
+            
+            separatorView.autoPinEdge(.Left, toEdge: .Left, ofView: dateLabel)
+            separatorView.autoPinEdgeToSuperviewEdge(.Right)
+            separatorView.autoPinEdgeToSuperviewEdge(.Bottom)
+            separatorView.autoSetDimension(.Height, toSize: 1)
         }
 
         super.updateConstraints()
@@ -210,7 +221,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
 
     func setLinkInAuthorLabel(URL: NSURL, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
-                NSForegroundColorAttributeName: UIColor.textDarkColor(),
+                NSForegroundColorAttributeName: ColorModeProvider.current().shotDetailsCommentAuthorTextColor,
                 NSFontAttributeName: UIFont.helveticaFont(.NeueMedium, size: 16)
         ]
         let authorText = authorLabel.text ?? ""

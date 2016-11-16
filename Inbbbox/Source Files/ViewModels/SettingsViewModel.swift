@@ -54,6 +54,7 @@ class SettingsViewModel: GroupedListViewModel {
                                                             comment: "User settings, show debuts.")
     private let shotAuthorTitle = NSLocalizedString("SettingsViewModel.DisplayAuthor",
                                                     comment: "User Settings, show author.")
+    private let nightModeTitle = NSLocalizedString("SettingsViewModel.NightMode", comment: "User Settings, night mode.")
     private let sendFeedbackTitle = NSLocalizedString("SettingsViewModel.SendFeedback",
                                                     comment: "User Settings, send settings.")
 
@@ -65,6 +66,7 @@ class SettingsViewModel: GroupedListViewModel {
     private let popularTodayStreamSourceItem: SwitchItem
     private let debutsStreamSourceItem: SwitchItem
     private let showAuthorItem: SwitchItem
+    private let nightModeItem: SwitchItem
     private let acknowledgementItem: LabelItem
     private let sendFeedbackItem: LabelItem
     
@@ -98,6 +100,7 @@ class SettingsViewModel: GroupedListViewModel {
         debutsStreamSourceItem = SwitchItem(title: debutsStreamSourceTitle, enabled: Settings.StreamSource.Debuts)
 
         showAuthorItem = SwitchItem(title: shotAuthorTitle, enabled: Settings.Customization.ShowAuthor)
+        nightModeItem = SwitchItem(title: nightModeTitle, enabled: Settings.Customization.NightMode)
         sendFeedbackItem = LabelItem(title: sendFeedbackTitle)
 
         let aTitle = NSLocalizedString("SettingsViewModel.AcknowledgementsButton", comment: "Acknowledgements button")
@@ -107,14 +110,14 @@ class SettingsViewModel: GroupedListViewModel {
             items = [[reminderItem, reminderDateItem],
                      [followingStreamSourceItem, newTodayStreamSourceItem,
                       popularTodayStreamSourceItem, debutsStreamSourceItem],
-                     [showAuthorItem],
+                     [showAuthorItem, nightModeItem],
                      [sendFeedbackItem],
                      [acknowledgementItem]]
         } else {
             items = [[createAccountItem],
                      [reminderItem, reminderDateItem],
                      [newTodayStreamSourceItem, popularTodayStreamSourceItem, debutsStreamSourceItem],
-                     [showAuthorItem],
+                     [showAuthorItem, nightModeItem],
                      [sendFeedbackItem],
                      [acknowledgementItem]]
         }
@@ -236,6 +239,12 @@ private extension SettingsViewModel {
             Settings.Customization.ShowAuthor = newValue
             self.checkStreamsSource()
             AnalyticsManager.trackSettingChanged(.AuthorOnHomeScreen, state: newValue)
+        }
+        
+        nightModeItem.valueChanged = { newValue in
+            Settings.Customization.NightMode = newValue
+            ColorModeProvider.change(to: newValue ? .NightMode : .DayMode)
+            AnalyticsManager.trackSettingChanged(.NightMode, state: newValue)
         }
     }
     

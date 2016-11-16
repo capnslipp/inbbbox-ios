@@ -101,13 +101,20 @@ class SettingsViewModelSpec: QuickSpec {
 
             describe("fourth section") {
 
-                it("should have 1 item") {
-                    expect(sut.sections[3].count).to(equal(1))
+                it("should have 2 items") {
+                    expect(sut.sections[3].count).to(equal(2))
                 }
 
                 describe("first item") {
                     it("should be switch item") {
                         let item = sut.sections[3][0]
+                        expect(item is SwitchItem).to(beTrue())
+                    }
+                }
+                
+                describe("second item") {
+                    it("should be switch item") {
+                        let item = sut.sections[3][1]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }
@@ -219,14 +226,21 @@ class SettingsViewModelSpec: QuickSpec {
             }
 
             describe("third section") {
-
-                it("should have 1 item") {
-                    expect(sut.sections[2].count).to(equal(1))
+                
+                it("should have 2 items") {
+                    expect(sut.sections[2].count).to(equal(2))
                 }
 
                 describe("first item") {
                     it("should be switch item") {
                         let item = sut.sections[2][0]
+                        expect(item is SwitchItem).to(beTrue())
+                    }
+                }
+                
+                describe("second item") {
+                    it("should be switch item") {
+                        let item = sut.sections[2][1]
                         expect(item is SwitchItem).to(beTrue())
                     }
                 }

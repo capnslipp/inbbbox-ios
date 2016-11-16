@@ -18,7 +18,7 @@ class ShotBucketsView: UIView {
     private let offsetToTopLayoutGuide = CGFloat(10)
 
     private let collectionViewCornerWrapperView = UIView.newAutoLayoutView()
-    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: ColorModeProvider.current().visualEffectBlurType))
     private var didSetConstraints = false
 
     override init(frame: CGRect) {
@@ -33,11 +33,11 @@ class ShotBucketsView: UIView {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
 
         super.init(frame: frame)
-
+        let currentColorMode = ColorModeProvider.current()
         if DeviceInfo.shouldDowngrade() {
-            backgroundColor = .backgroundGrayColor()
+            backgroundColor = currentColorMode.tableViewBackground
         } else {
-            backgroundColor = .clearColor()
+            backgroundColor = currentColorMode.tableViewBlurColor
             blurView.configureForAutoLayout()
             addSubview(blurView)
         }

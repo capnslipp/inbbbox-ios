@@ -95,6 +95,10 @@ class ShotBucketsViewController: UIViewController {
             self.didDismissViewControllerClosure?()
         }
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return ColorModeProvider.current().preferredStatusBarStyle
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -169,7 +173,6 @@ extension ShotBucketsViewController: UICollectionViewDataSource {
             if footer == nil {
                 footer = collectionView.dequeueReusableClass(ShotBucketsFooterView.self, forIndexPath: indexPath,
                         type: .Footer)
-                footer?.backgroundColor = backgroundColorForFooter()
             }
             return footer!
         }
@@ -302,10 +305,6 @@ private extension ShotBucketsViewController {
             layout.estimatedItemSize = CGSize(width: width, height: 40)
             layout.invalidateLayout()
         }
-    }
-
-    func backgroundColorForFooter() -> UIColor {
-        return .RGBA(246, 248, 248, 1) // color same as header title background
     }
 
     func addShotToBucketAtIndex(index: Int) {

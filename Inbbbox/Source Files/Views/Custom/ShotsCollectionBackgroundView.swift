@@ -40,7 +40,7 @@ class ShotsCollectionBackgroundView: UIView {
 
     private var didSetConstraints = false
     
-    let logoImageView = UIImageView(image: UIImage(named: "logo-type-home"))
+    let logoImageView = UIImageView(image: UIImage(named: ColorModeProvider.current().logoImageName))
     let containerView = UIView()
     
     let showingYouLabel = UILabel()
@@ -57,8 +57,6 @@ class ShotsCollectionBackgroundView: UIView {
 
     convenience init() {
         self.init(frame: CGRect.zero)
-
-        backgroundColor = UIColor.backgroundGrayColor()
 
         logoImageView.configureForAutoLayout()
         addSubview(logoImageView)

@@ -113,6 +113,7 @@ extension ShotsNormalStateHandler {
         let shot = shotsCollectionViewController.shots[indexPath.item]
 
         cell.shotImageView.activityIndicatorView.startAnimating()
+        cell.shotImageView.backgroundColor = ColorModeProvider.current().shotViewCellBackground
 
         load(shot.shotImage, for: indexPath)
 
@@ -199,6 +200,7 @@ extension ShotsNormalStateHandler {
 
         let shot = shotsCollectionViewController.shots[indexPath.item]
         let shotUpdated = self.shotDummyRecent(shot)
+        shotsCollectionViewController.modalPresentationStyle = .OverFullScreen
         presentShotDetailsViewController(shotUpdated ?? shot, index: indexPath.item, scrollToMessages: false)
     }
 
@@ -328,7 +330,7 @@ private extension ShotsNormalStateHandler {
         
         pageViewController.transitioningDelegate = modalTransitionAnimator
         pageViewController.modalPresentationStyle = .Custom
-        
+        shotsCollectionViewController.tabBarController?.modalPresentationStyle = .OverCurrentContext
         shotsCollectionViewController.tabBarController?.presentViewController(
             pageViewController, animated: true, completion: nil)
     }

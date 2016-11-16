@@ -10,8 +10,7 @@ import Foundation
 import ZFDragableModalTransition
 
 class ShotDetailsPageViewController: UIPageViewController {
-    
-    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
+    private let blurView = UIVisualEffectView(effect: UIBlurEffect(style: ColorModeProvider.current().visualEffectBlurType))
     private var modalTransitionAnimator: ZFModalTransitionAnimator?
     var pageDataSource: ShotDetailsPageViewControllerDataSource
     private var didSetConstraints = false
@@ -45,16 +44,21 @@ extension ShotDetailsPageViewController {
                                    completion: nil)
         }
         
+        let currentColorMode = ColorModeProvider.current()
         if DeviceInfo.shouldDowngrade() {
-            view.backgroundColor = .backgroundGrayColor()
+            view.backgroundColor = currentColorMode.tableViewBackground
         } else {
-            view.backgroundColor = .clearColor()
+            view.backgroundColor = currentColorMode.tableViewBlurColor
             blurView.configureForAutoLayout()
             view.addSubview(blurView)
             view.sendSubviewToBack(blurView)
         }
         
         updateConstraints()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return ColorModeProvider.current().preferredStatusBarStyle
     }
     
     func updateConstraints() {

@@ -93,13 +93,13 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
 
     func setupShotsView() {
         for view in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView] {
-            view.backgroundColor = UIColor.cellBackgroundColor()
+            view.backgroundColor = ColorModeProvider.current().shotViewCellBackground
             shotsView.addSubview(view)
         }
     }
     
     func setupContainerShotView() {
-        self.shotsView.backgroundColor = UIColor.cellBackgroundColor()
+        self.shotsView.backgroundColor = ColorModeProvider.current().shotViewCellBackground
     }
 
     func setShotsViewConstraints() {
@@ -136,6 +136,18 @@ class BucketCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Width
     // MARK: - Width dependent height
     static var heightToWidthRatio: CGFloat {
         return CGFloat(1.25)
+    }
+}
+
+extension BucketCollectionViewCell: ColorModeAdaptable {
+    func adaptColorMode(mode: ColorModeType) {
+        updateBackgroundColorsForMode(mode)
+    }
+    
+    private func updateBackgroundColorsForMode(mode: ColorModeType) {
+        for view in [firstShotImageView, secondShotImageView, thirdShotImageView, fourthShotImageView, shotsView] {
+            view.backgroundColor = ColorModeProvider.current().shotViewCellBackground
+        }
     }
 }
 
