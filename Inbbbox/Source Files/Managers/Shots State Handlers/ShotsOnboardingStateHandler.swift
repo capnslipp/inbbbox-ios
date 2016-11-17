@@ -108,7 +108,7 @@ extension ShotsOnboardingStateHandler {
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard indexPath.row == onboardingSteps.count else {
+        guard indexPath.row == onboardingSteps.count - 1 else {
             return
         }
         collectionView.animateToNextCell()
