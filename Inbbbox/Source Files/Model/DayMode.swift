@@ -270,6 +270,10 @@ struct DayMode: ColorModeType {
         return .RGBA(246, 248, 248, 1)
     }
     
+    //MARK: Flash Message
+    var flashMessageTextColor: UIColor = .whiteColor()
+    var flashMessageBackgroundColor: UIColor = UIColor.flashMessageBackgroundColor()
+    
     // MARK: Common
     var shadowColor: UIColor {
         return UIColor(white: 0, alpha: 0.1)

@@ -80,6 +80,10 @@ final class ColorModeProvider {
 
         UIDatePicker.appearance().backgroundColor = mode.tableViewBackground
         
+        FlashMessageView.defaultStyle = FlashMessageView.Style(backgroundColor: mode.flashMessageBackgroundColor,
+                textColor: mode.flashMessageTextColor,
+                titleFont: UIFont.helveticaFont(.Neue, size:14),
+                roundedCorners: [.BottomLeft, .BottomRight], roundSize: CGSizeMake(10, 10), padding: 25.0)
         ColorModeProvider.resetViews()
     }
 

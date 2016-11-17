@@ -270,6 +270,10 @@ struct NightMode: ColorModeType {
         return .blackColor()
     }
     
+    //MARK: Flash Message
+    var flashMessageTextColor: UIColor = .blackColor()
+    var flashMessageBackgroundColor: UIColor = DayMode().windowBackgroundColor
+    
     // MARK: Common
     var shadowColor: UIColor {
         return UIColor(white: 1, alpha: 0.15)
