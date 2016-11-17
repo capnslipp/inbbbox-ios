@@ -276,6 +276,7 @@ extension SettingsViewController {
         let userMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
         if userMode != viewModel.userMode {
             viewModel = SettingsViewModel(delegate: self)
+            viewModel.settingsViewController = self
             provideDataForHeader()
             tableView.reloadData()
             configureLogoutButton()
