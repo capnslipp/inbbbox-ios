@@ -9,9 +9,9 @@ PODS:
   - GoogleAnalytics (3.17.0)
   - GPUImage (0.1.7)
   - HanekeSwift (0.10.1)
-  - HockeySDK (3.8.6):
-    - HockeySDK/AllFeaturesLib (= 3.8.6)
-  - HockeySDK/AllFeaturesLib (3.8.6)
+  - HockeySDK (4.1.2):
+    - HockeySDK/DefaultLib (= 4.1.2)
+  - HockeySDK/DefaultLib (4.1.2)
   - ImageViewer (2.0)
   - KeychainAccess (2.4.0)
   - Keys (1.0.0)
@@ -61,7 +61,7 @@ DEPENDENCIES:
   - GoogleAnalytics (~> 3.14)
   - GPUImage (~> 0.1)
   - HanekeSwift (from `https://github.com/pikor/HanekeSwift.git`)
-  - HockeySDK (~> 3.8)
+  - HockeySDK (~> 4.1)
   - ImageViewer (from `https://github.com/twalenciak/ImageViewer.git`, branch `gif_loading`)
   - KeychainAccess (~> 2.3)
   - Keys (from `Pods/CocoaPodsKeys`)
@@ -121,7 +121,7 @@ SPEC CHECKSUMS:
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
-  HockeySDK: ab68303eec6680f6b539de65d747742dd276e934
+  HockeySDK: c7523379550a4305cefc1cdfa7b5f9a5a3538180
   ImageViewer: 00eae024d0cb2eebb4b228f4669b6c4872afadb9
   KeychainAccess: c2a71459af5bddf720a51806046a598500976c04
   Keys: 9c35bf00f612ee1d48556f4a4b9b4551e224e90f
@@ -137,6 +137,6 @@ SPEC CHECKSUMS:
   URITemplate: e2a2a0f9d398834fde67214b491c2c925c9baa06
   ZFDragableModalTransition: 0d294eaaba6edfcb9839595de765f9ca06a4b524
 
-PODFILE CHECKSUM: 53be1a79a90ba4f79c354bf465bc310ed1d0a44a
+PODFILE CHECKSUM: f8f9e427662af53b7f664333894ef0476113219e
 
 COCOAPODS: 1.0.0

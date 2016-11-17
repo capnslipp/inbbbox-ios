@@ -27,7 +27,7 @@ target 'Inbbbox' do
   pod 'KeychainAccess', '~> 2.3'
   pod 'PromiseKit', '~> 3.2'
   pod 'SwiftyJSON', '~> 2.3'
-  pod 'HockeySDK', '~> 3.8'
+  pod 'HockeySDK', '~> 4.1'
   pod 'PureLayout', '~> 3.0'
   pod 'SwiftyUserDefaults', '~> 2.0'
   #for older swift version 
