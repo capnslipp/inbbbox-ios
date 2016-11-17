@@ -399,7 +399,7 @@ private extension ShotsNormalStateHandler {
     }
     
     func reloadFirstCell() {
-        guard let collectionView = collectionViewLayout.collectionView where shotsCollectionViewController!.shots.count != 0 else {
+        guard let collectionView = collectionViewLayout.collectionView where shotsCollectionViewController?.shots.count != 0 else {
             return
         }
         
