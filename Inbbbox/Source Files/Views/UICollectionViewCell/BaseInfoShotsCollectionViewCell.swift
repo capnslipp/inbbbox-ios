@@ -18,7 +18,6 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
         return 0.75
     }
     private var didSetConstraints = false
-    private var shotsViewHeightConstraint: NSLayoutConstraint?
     var isRegisteredTo3DTouch = false
 
     // MARK: Life cycle
@@ -60,16 +59,8 @@ class BaseInfoShotsCollectionViewCell: UICollectionViewCell {
 
     override func updateConstraints() {
 
-        let shotsViewHeight = shotsViewHeightToWidthRatio * frame.width
-
-        if let shotsViewHeightConstraint = shotsViewHeightConstraint {
-            shotsViewHeightConstraint.constant = shotsViewHeight
-        }
-
-
         if !didSetConstraints {
-            let shotsViewHeight = shotsViewHeightToWidthRatio * frame.width
-            shotsViewHeightConstraint = shotsView.autoSetDimension(.Height, toSize: shotsViewHeight)
+            shotsView.autoMatchDimension(.Height, toDimension: .Width, ofView: shotsView, withMultiplier: shotsViewHeightToWidthRatio)
             shotsView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
             infoView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Top)
             infoView.autoPinEdge(.Top, toEdge: .Bottom, ofView: shotsView)
