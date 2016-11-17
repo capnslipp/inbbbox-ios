@@ -107,6 +107,10 @@ protocol ColorModeType {
     // MARK: Comment Composer
     var commentComposerViewBackground: UIColor { get }
     
+    // MARK: Flash Message
+    var flashMessageTextColor: UIColor { get }
+    var flashMessageBackgroundColor: UIColor { get }
+    
     // MARK: Common
     var shadowColor: UIColor { get }
     var cellSeparator: UIColor { get }

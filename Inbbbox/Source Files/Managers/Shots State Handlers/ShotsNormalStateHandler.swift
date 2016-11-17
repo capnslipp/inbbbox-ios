@@ -399,9 +399,10 @@ private extension ShotsNormalStateHandler {
     }
     
     func reloadFirstCell() {
-        guard let collectionView = collectionViewLayout.collectionView else {
+        guard let collectionView = collectionViewLayout.collectionView where shotsCollectionViewController?.shots.count != 0 else {
             return
         }
+        
         collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)])
     }
 

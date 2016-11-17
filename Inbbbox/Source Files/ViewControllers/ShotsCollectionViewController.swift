@@ -106,12 +106,12 @@ extension ShotsCollectionViewController {
     }
     
     private func handleEmptyShotsView() {
-        if (stateHandler.shouldShowNoShotsView) {
+        if (stateHandler.shouldShowNoShotsView && emptyShotsView == nil) {
             let empty = EmptyShotsCollectionView()
             view.addSubview(empty)
             empty.autoPinEdgesToSuperviewEdges()
             emptyShotsView = empty
-        } else if let emptyShotsView = emptyShotsView {
+        } else if let emptyShotsView = emptyShotsView where !stateHandler.shouldShowNoShotsView {
             emptyShotsView.removeFromSuperview()
             self.emptyShotsView = nil
         }

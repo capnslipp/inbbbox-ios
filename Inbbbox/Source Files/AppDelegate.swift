@@ -37,17 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
-        let backgroudColor = ColorModeProvider.current().windowBackgroundColor
-        window!.backgroundColor = backgroudColor
-        UITabBar.appearance().backgroundColor = backgroudColor
-        
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-        UINavigationBar.appearance().barTintColor = UIColor.pinkColor()
-        UINavigationBar.appearance().barStyle = .Black
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        UINavigationBar.appearance().translucent = false
-        
-        setupFlashMessageStyle()
         
         configureInitialSettings()
         CacheManager.setupCache()
@@ -188,16 +177,5 @@ extension AppDelegate {
         }
 
         return handled
-    }
-}
-
-// MARK: FlashMessage
-
-extension AppDelegate {
-    private func setupFlashMessageStyle(){
-        FlashMessageView.defaultStyle = FlashMessageView.Style(backgroundColor: UIColor.flashMessageBackgroundColor(),
-                                                               textColor: UIColor.whiteColor(),
-                                                               titleFont: UIFont.helveticaFont(.Neue, size:14),
-                                                               roundedCorners: [.BottomLeft, .BottomRight], roundSize: CGSizeMake(10, 10), padding: 25.0)
     }
 }
