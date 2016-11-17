@@ -77,6 +77,7 @@ final class ColorModeProvider {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         UINavigationBar.appearance().translucent = false
         UIWindow.appearance().backgroundColor = mode.windowBackgroundColor
+        UITabBar.appearance().backgroundColor = mode.windowBackgroundColor
         UIApplication.sharedApplication().keyWindow?.backgroundColor = mode.windowBackgroundColor
 
         UIDatePicker.appearance().backgroundColor = mode.tableViewBackground
