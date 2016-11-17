@@ -34,17 +34,10 @@ class CenterButtonTabBarView: UITabBar {
     }
 
     override init(frame: CGRect) {
-        let likesName = NSLocalizedString("CenterButtonTabBar.Likes", comment: "Main view, bottom bar")
-        likesItemView = CustomTabBarItemView(name: likesName, icon: UIImage(named: "ic-likes"))
-
-        let bucketsName = NSLocalizedString("CenterButtonTabBar.Buckets", comment: "Main view, bottom bar")
-        bucketsItemView = CustomTabBarItemView(name: bucketsName, icon: UIImage(named: "ic-buckets"))
-
-        let accountName = NSLocalizedString("CenterButtonTabBar.Settings", comment: "Main view, bottom bar")
-        accountItemView = CustomTabBarItemView(name: accountName, icon: UIImage(named: "ic-settings"))
-
-        let followingName = NSLocalizedString("CenterButtonTabBar.Following", comment: "Main view, bottom bar")
-        followingItemView = CustomTabBarItemView(name: followingName, icon: UIImage(named: "ic-following"))
+        likesItemView = CustomTabBarItemView(name: nil, icon: UIImage(named: "ic-likes"))
+        bucketsItemView = CustomTabBarItemView(name: nil, icon: UIImage(named: "ic-buckets"))
+        accountItemView = CustomTabBarItemView(name: nil, icon: UIImage(named: "ic-settings"))
+        followingItemView = CustomTabBarItemView(name: nil, icon: UIImage(named: "ic-following"))
 
         super.init(frame: frame)
 
@@ -78,11 +71,11 @@ class CenterButtonTabBarView: UITabBar {
         if !didSetConstraints {
             didSetConstraints = true
 
-            likesItemViewVerticalConstraint = likesItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
+            likesItemViewVerticalConstraint = likesItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 14)
             likesItemView.autoPinEdgeToSuperviewEdge(.Left)
             likesItemView.autoPinEdge(.Right, toEdge: .Left, ofView: bucketsItemView)
 
-            bucketsItemViewVerticalConstraint = bucketsItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
+            bucketsItemViewVerticalConstraint = bucketsItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 14)
             bucketsItemView.autoPinEdge(.Right, toEdge: .Left, ofView: dummyItemView, withOffset: -3)
             bucketsItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: likesItemView)
 
@@ -91,11 +84,11 @@ class CenterButtonTabBarView: UITabBar {
             dummyItemView.autoAlignAxisToSuperviewAxis(.Vertical)
             dummyItemView.autoSetDimension(.Width, toSize: dummyItemScreenSizeDependentWidth)
 
-            followingItemViewVerticalConstraint = followingItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
+            followingItemViewVerticalConstraint = followingItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 14)
             followingItemView.autoPinEdge(.Left, toEdge: .Right, ofView: dummyItemView, withOffset: 2.5)
             followingItemView.autoMatchDimension(.Width, toDimension: .Width, ofView: accountItemView)
 
-            accountItemViewVerticalConstraint = accountItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 7)
+            accountItemViewVerticalConstraint = accountItemView.autoPinEdgeToSuperviewEdge(.Top, withInset: 14)
             accountItemView.autoPinEdge(.Left, toEdge: .Right, ofView: followingItemView)
             accountItemView.autoPinEdgeToSuperviewEdge(.Right)
         }
