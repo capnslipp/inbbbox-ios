@@ -172,7 +172,7 @@ struct NightMode: ColorModeType {
         return .lessDarkGrayNightMode()
     }
     
-    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
+    var shotDetailsHeaderViewOverlappingTitleLabelTextColor: UIColor {
         return .whiteColor()
     }
     

@@ -172,8 +172,8 @@ struct DayMode: ColorModeType {
         return .whiteColor()
     }
     
-    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor {
-        return .pinkColor()
+    var shotDetailsHeaderViewOverlappingTitleLabelTextColor: UIColor {
+        return .whiteColor()
     }
     
     var shotDetailsHeaderViewAuthorNotLinkColor: UIColor {
