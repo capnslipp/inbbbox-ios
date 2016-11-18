@@ -175,7 +175,7 @@
 "UIAlertControllerExtension.EmailError" = "Não podemos enviar um e-mail com o seu aviso sobre o conteúdo proibido porque não foi configurada nenhuma conta de e-mail.";
 
 /* Displayed when user device is not capable of/configured to send emails, shown when trying to send feedback. */
-"UIAlertControllerExtension.CantSendFeedback" = "$Don't have email client - no worries use this address to send us feedback elsewhere: inbbbox@netguru.co";
+"UIAlertControllerExtension.CantSendFeedback" = "A tua conta e-mail não está configurada. Envie uma mensagem para inbbbox@netguru.co";
 
 /* Informing user about problems with downloading items. */
 "UIAlertControllerExtension.UnableToDownload" = "Descarregar projetos de Dribble";
@@ -242,7 +242,7 @@
 "SettingsViewModel.SendFeedback" = "Envie-nos as suas sugestões";
 
 /* User Settings, feedback sent. */
-"SettingsViewModel.FeedbackSent" = "$Thank you! Your Feedback has been sent!";
+"SettingsViewModel.FeedbackSent" = "Obrigado, a tua opinião foi enviada.";
 
 /* Title of flash message, when user turn off all sources */
 "SettingsViewModel.AllSources" = "Espaço para as informações sobre as fontes.";
