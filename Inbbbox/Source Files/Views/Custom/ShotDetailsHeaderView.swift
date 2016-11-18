@@ -199,7 +199,7 @@ class ShotDetailsHeaderView: UICollectionReusableView {
             let mutableTitle = NSMutableAttributedString(attributedString: title)
             let range = NSRange(location: 0, length: title.length)
             mutableTitle.addAttribute(NSForegroundColorAttributeName,
-                                      value: ColorModeProvider.current().shotDetailsHeaderViewOverLapingTitleLabelTextColor,
+                                      value: ColorModeProvider.current().shotDetailsHeaderViewOverlappingTitleLabelTextColor,
                                       range: range)
 
             return mutableTitle.copy() as? NSAttributedString

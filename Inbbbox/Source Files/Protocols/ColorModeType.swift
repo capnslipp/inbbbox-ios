@@ -65,7 +65,7 @@ protocol ColorModeType {
     var shotDetailsDescriptionCollectionViewCellBackground: UIColor { get }
     var shotDetailsCommentCollectionViewCellBackground: UIColor { get }
     var shotDetailsHeaderViewTitleLabelTextColor: UIColor { get }
-    var shotDetailsHeaderViewOverLapingTitleLabelTextColor: UIColor { get }
+    var shotDetailsHeaderViewOverlappingTitleLabelTextColor: UIColor { get }
     var shotDetailsHeaderViewAuthorNotLinkColor: UIColor { get }
     var shotDetailsHeaderViewAuthorLinkColor: UIColor { get }
     var shotDetailsDescriptionViewColorTextColor: UIColor { get }
