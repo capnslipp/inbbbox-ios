@@ -124,7 +124,7 @@
 /********* CommentEditView *********/
 
 /* Mark selected comment as liked. */
-"CommentEditView.Like" = "$Like";
+"CommentEditView.Like" = "Aimes";
 
 /* Cancel editing comment. */
 "CommentEditView.Cancel" = "Annuler";
@@ -176,10 +176,10 @@
 "UIAlertControllerExtension.EmailError" = "Nous ne pouvons pas envoyer un e-mail avec votre signalement du contenu illicite car aucun compte e-mail n’a pas été configuré.";
 
 /* Displayed when user device is not capable of/configured to send emails, shown when trying to send feedback. */
-"UIAlertControllerExtension.CantSendFeedback" = "$Don't have email client - no worries use this address to send us feedback elsewhere: inbbbox@netguru.co";
+"UIAlertControllerExtension.CantSendFeedback" = "Vous n'avez pas de client de messagerie ? pas de soucis utilisez cette adresse pour nous envoyer des commentaires : inbbbox@netguru.co";
 
 /* Informing user about problems with downloading items. */
-"UIAlertControllerExtension.UnableToDownload" = "$Downloading new Dribbble shots";
+"UIAlertControllerExtension.UnableToDownload" = "Télécharger des projets de Dribble";
 
 /********* LocalNotificationRegistrator *********/
 
@@ -234,19 +234,19 @@
 "SettingsViewModel.DisplayAuthor" = "Montrer Auteur à la page d'accueil";
 
 /* User Setting, night mode */
-"SettingsViewModel.NightMode" = "$Night Mode";
+"SettingsViewModel.NightMode" = "Mode nuit";
 
 /* User Settings, feedback section title. */
-"SettingsViewModel.Feedback" = "$FEEDBACK";
+"SettingsViewModel.Feedback" = "FEEDBACK";
 
 /* User Settings, send your feedback button. */
-"SettingsViewModel.SendFeedback" = "$Send us your suggestions";
+"SettingsViewModel.SendFeedback" = "Envoyez-nous vos suggestions";
 
 /* User Settings, feedback sent. */
-"SettingsViewModel.FeedbackSent" = "$Thank you! Your Feedback has been sent!";
+"SettingsViewModel.FeedbackSent" = "Merci! Votre commentaire a été envoyé!";
 
 /* Title of flash message, when user turn off all sources */
-"SettingsViewModel.AllSources" = "$Placeholder for information about sources";
+"SettingsViewModel.AllSources" = "Avec les paramètres actuels, vous ne verrez aucune publication. Renseignez au moins une source.";
 
 /********* SettingsViewController *********/
 
@@ -277,7 +277,7 @@
 "ShotsCollectionViewController.Dismiss" = "Fermer";
 
 /* Error shown when no stream sources were selected. */
-"ShotsCollectionViewController.NoShotsErrorLabel" = "$Select at least 1 \nstream source \nin the settings";
+"ShotsCollectionViewController.NoShotsErrorLabel" = "Choisissez au moins\nune source dans\nles paramètres";
 
 /********** ProfileHeaderView *********/
 
@@ -339,4 +339,4 @@
 
 /********* ShotsCollectionBackgroundView *********/
 
-"BackgroundView.ShowingYou" = "$Showing you:";
+"BackgroundView.ShowingYou" = "Il est montré:";

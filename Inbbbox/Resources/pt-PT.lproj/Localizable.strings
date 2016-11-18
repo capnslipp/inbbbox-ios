@@ -123,7 +123,7 @@
 /********* CommentEditView *********/
 
 /* Mark selected comment as liked. */
-"CommentEditView.Like" = "$Like";
+"CommentEditView.Like" = "Curtir";
 
 /* Cancel editing comment. */
 "CommentEditView.Cancel" = "Anule";
@@ -178,7 +178,7 @@
 "UIAlertControllerExtension.CantSendFeedback" = "$Don't have email client - no worries use this address to send us feedback elsewhere: inbbbox@netguru.co";
 
 /* Informing user about problems with downloading items. */
-"UIAlertControllerExtension.UnableToDownload" = "$Downloading new Dribbble shots";
+"UIAlertControllerExtension.UnableToDownload" = "Descarregar projetos de Dribble";
 
 /********* LocalNotificationRegistrator *********/
 
@@ -233,19 +233,19 @@
 "SettingsViewModel.DisplayAuthor" = "Mostrar Autor na tela de inicio";
 
 /* User Setting, night mode */
-"SettingsViewModel.NightMode" = "$Night Mode";
+"SettingsViewModel.NightMode" = "Modo noturno";
 
 /* User Settings, feedback section title. */
-"SettingsViewModel.Feedback" = "$FEEDBACK";
+"SettingsViewModel.Feedback" = "FEEDBACK";
 
 /* User Settings, send your feedback button. */
-"SettingsViewModel.SendFeedback" = "$Send us your suggestions";
+"SettingsViewModel.SendFeedback" = "Envie-nos as suas sugestões";
 
 /* User Settings, feedback sent. */
 "SettingsViewModel.FeedbackSent" = "$Thank you! Your Feedback has been sent!";
 
 /* Title of flash message, when user turn off all sources */
-"SettingsViewModel.AllSources" = "$Placeholder for information about sources";
+"SettingsViewModel.AllSources" = "Espaço para as informações sobre as fontes.";
 
 /* Title of group of buttons for customization settings */
 "SettingsViewController.Customization" = "Personalização";
@@ -276,7 +276,7 @@
 "ShotsCollectionViewController.Dismiss" = "Feche";
 
 /* Error shown when no stream sources were selected. */
-"ShotsCollectionViewController.NoShotsErrorLabel" = "$Select at least 1 \nstream source \nin the settings";
+"ShotsCollectionViewController.NoShotsErrorLabel" = "Escolha pelo menos\numa fonte \nnas configurações";
 
 /********** ProfileHeaderView *********/
 
@@ -338,4 +338,4 @@
 
 /********* ShotsCollectionBackgroundView *********/
 
-"BackgroundView.ShowingYou" = "$Showing you:";
+"BackgroundView.ShowingYou" = "Mostrando:";
