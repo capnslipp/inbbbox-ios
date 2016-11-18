@@ -48,6 +48,9 @@ trigger_map:
 - push_branch: master
   workflow: master
 
+- push_branch: release/*
+  workflow: master
+
 # Workflow declarations
 
 workflows:
