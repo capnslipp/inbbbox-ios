@@ -178,7 +178,7 @@
 "UIAlertControllerExtension.CantSendFeedback" = "Du hast die E-Mail nicht konfiguriert - keine Sorgen, schreib einfach an inbbbox@netguru.co";
 
 /* Informing user about problems with downloading items. */
-"UIAlertControllerExtension.UnableToDownload" = "Projekt-Downloaden von Dribble";
+"UIAlertControllerExtension.UnableToDownload" = "Projekt-Downloaden von Dribbble";
 
 /********* LocalNotificationRegistrator *********/
 
@@ -276,7 +276,7 @@
 "ShotsCollectionViewController.Dismiss" = "Verwerfen";
 
 /* Error shown when no stream sources were selected. */
-"ShotsCollectionViewController.NoShotsErrorLabel" = "Wählen Sie zumindest eine Quelle bei den Eistellungen aus!";
+"ShotsCollectionViewController.NoShotsErrorLabel" = "Wählen Sie zumindest\neine Quelle\nbei den Eistellungen aus!";
 
 /********** ProfileHeaderView *********/
 
@@ -339,3 +339,9 @@
 /********* ShotsCollectionBackgroundView *********/
 
 "BackgroundView.ShowingYou" = "Momentan gelistet:";
+
+/********* ShotCollectionCell *********/
+"ShotCollectionCell.Like" = "Den Likes hinzugefügt!";
+"ShotCollectionCell.Bucket" = "Den Likes und Album hinzugefügt!";
+"ShotCollectionCell.Comment" = "Momentan kommentiert…";
+"ShotCollectionCell.Follow" = "Dem Autor folgen!";

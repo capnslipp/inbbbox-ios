@@ -178,7 +178,7 @@
 "UIAlertControllerExtension.CantSendFeedback" = "Nie masz skonfigurowanego maila - bez obaw po prostu napisz na inbbbox@netguru.co";
 
 /* Informing user about problems with downloading items. */
-"UIAlertControllerExtension.UnableToDownload" = "Pobieranie projektów z Dribble";
+"UIAlertControllerExtension.UnableToDownload" = "Pobieranie projektów z Dribbble";
 
 /********* LocalNotificationRegistrator *********/
 
@@ -338,4 +338,10 @@
 
 /********* ShotsCollectionBackgroundView *********/
 
-"BackgroundView.ShowingYou" = "Pokazuje";
+"BackgroundView.ShowingYou" = "Pokazuje:";
+
+/********* ShotCollectionCell *********/
+"ShotCollectionCell.Like" = "Dodano do ulubionych!";
+"ShotCollectionCell.Bucket" = "Dodano do polubień i wiaderka!";
+"ShotCollectionCell.Comment" = "Komentowanie…";
+"ShotCollectionCell.Follow" = "Obserwujesz autora!";

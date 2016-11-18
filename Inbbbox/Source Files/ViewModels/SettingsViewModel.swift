@@ -173,14 +173,13 @@ private extension SettingsViewModel {
         
         sendFeedbackItem.onSelect = {
             [weak self] in
-            
-            let mailComposer = MFMailComposeViewController()
-            mailComposer.mailComposeDelegate = self?.settingsViewController
-            mailComposer.setToRecipients(["inbbbox@netguru.co"])
-            // Localization missing on purpose, so we will sugest user to write in English.
-            mailComposer.setSubject("Inbbbox Feedback")
-            mailComposer.navigationBar.tintColor = .whiteColor()
             if MFMailComposeViewController.canSendMail() {
+                let mailComposer = MFMailComposeViewController()
+                mailComposer.mailComposeDelegate = self?.settingsViewController
+                mailComposer.setToRecipients(["inbbbox@netguru.co"])
+                // Localization missing on purpose, so we will sugest user to write in English.
+                mailComposer.setSubject("Inbbbox Feedback")
+                mailComposer.navigationBar.tintColor = .whiteColor()
                 self?.settingsViewController?.presentViewController(mailComposer, animated: true, completion: nil)
             } else {
                 self?.settingsViewController?.presentViewController(UIAlertController.cantSendFeedback(), animated: true, completion: nil)
