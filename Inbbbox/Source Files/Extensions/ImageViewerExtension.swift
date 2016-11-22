@@ -37,7 +37,7 @@ extension ImageViewer {
         let animatableImageView = AnimatableShotImageView(frame: CGRect.zero)
         animatableImageView.backgroundColor = .clearColor()
         animatableImageView.loadAnimatableShotFromUrl(animatedUrl)
-
+        animatableImageView.hiddenProgressView = true
         self.imageView = animatableImageView
     }
 }

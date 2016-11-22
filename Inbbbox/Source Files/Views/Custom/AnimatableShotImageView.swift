@@ -16,6 +16,15 @@ class AnimatableShotImageView: FLAnimatedImageView {
     let downloader = DataDownloader()
     private let progressAnimator = ProgressAnimator(imageBaseName: "loadgif_", imageCount: 59)
     private var didSetupConstraints = false
+    var hiddenProgressView: Bool {
+        get {
+            return progressAnimator.progressImageView.hidden
+        }
+        
+        set {
+            progressAnimator.progressImageView.hidden = newValue
+        }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,8 +86,10 @@ class AnimatableShotImageView: FLAnimatedImageView {
 
     private func setImageWithData(data: NSData) {
         Async.main {
-            self.progressAnimator.progressImageView.hidden = true
-            self.animatedImage = FLAnimatedImage(animatedGIFData: data)
+            self.progressAnimator.updateProgress(1.0) { [weak self] in
+                self?.progressAnimator.progressImageView.hidden = true
+                self?.animatedImage = FLAnimatedImage(animatedGIFData: data)
+            }
         }
     }
 
