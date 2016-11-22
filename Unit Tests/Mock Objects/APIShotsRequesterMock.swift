@@ -15,7 +15,7 @@ class APIShotsRequesterMock: APIShotsRequester {
     
     let userBucketsForShotStub = Stub<ShotType, Promise<[BucketType]!>>()
     
-    override func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
+    override func userBucketsForShot(_ shot: ShotType) -> Promise<[BucketType]?> {
         return try! userBucketsForShotStub.invoke(shot)
     }
 }

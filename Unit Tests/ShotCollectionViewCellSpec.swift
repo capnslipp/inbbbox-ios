@@ -14,7 +14,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
         var sut: ShotCollectionViewCell!
         
         beforeEach {
-            sut = ShotCollectionViewCell(frame: CGRectZero)
+            sut = ShotCollectionViewCell(frame: CGRect.zero)
         }
         
         afterEach {
@@ -166,9 +166,9 @@ class ShotCollectionViewCellSpec: QuickSpec {
                         sut.delegate = delegateMock
                         let panGestureRecognizerMock = PanGestureRecognizerMock()
                         panGestureRecognizerMock.stateStub.on(any()) {
-                            return .Began
+                            return .began
                         }
-                        panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
+                        panGestureRecognizer!.specRecognize(with: panGestureRecognizerMock)
                     }
                     
                     it("should inform delegate that cell did start swiping") {
@@ -181,8 +181,8 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     var panGestureRecognizerMock: PanGestureRecognizerMock!
                     var viewClassMock: ViewMock.Type!
                     
-                    var capturedRestoreInitialStateDuration: NSTimeInterval!
-                    var capturedRestoreInitialStateDelay: NSTimeInterval!
+                    var capturedRestoreInitialStateDuration: TimeInterval!
+                    var capturedRestoreInitialStateDelay: TimeInterval!
                     var capturedRestoreInitialStateDamping: CGFloat!
                     var capturedRestoreInitialStateVelocity: CGFloat!
                     var capturedRestoreInitialStateOptions: UIViewAnimationOptions!
@@ -203,18 +203,18 @@ class ShotCollectionViewCellSpec: QuickSpec {
                         sut.viewClass = viewClassMock
                         panGestureRecognizerMock = PanGestureRecognizerMock()
                         panGestureRecognizerMock.stateStub.on(any()) {
-                            return .Ended
+                            return .ended
                         }
                     }
                     
-                    sharedExamples("returning to initial cell state animation") { (sharedExampleContext: SharedExampleContext) in
+                    sharedExamples("returning to initial cell state animation") { (sharedExampleContext: @escaping SharedExampleContext) in
                         
                         it("should animate returning to initial cell state with duration 0.3") {
                             expect(capturedRestoreInitialStateDuration).to(equal(0.3))
                         }
                         
                         it("should animate returning to initial cell state without delay") {
-                            expect(capturedRestoreInitialStateDelay).to(equal(sharedExampleContext()["expectedDelay"] as? NSTimeInterval))
+                            expect(capturedRestoreInitialStateDelay).to(equal(sharedExampleContext()["expectedDelay"] as? TimeInterval))
                         }
                         
                         it("should animate returning to initial cell state with damping 0.6") {
@@ -226,13 +226,13 @@ class ShotCollectionViewCellSpec: QuickSpec {
                         }
                         
                         it("should animate returning to initial cell state with ease in out option") {
-                            expect(capturedRestoreInitialStateOptions == UIViewAnimationOptions.CurveEaseInOut).to(beTruthy())
+                            expect(capturedRestoreInitialStateOptions == UIViewAnimationOptions.curveEaseInOut).to(beTruthy())
                         }
                         
                         describe("restore initial state animations block") {
                             
                             beforeEach {
-                                sut.shotImageView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0)
+                                sut.shotImageView.transform = CGAffineTransformIdentity.translatedBy(x: 100, y: 0)
                                 capturedRestoreInitialStateAnimations()
                             }
                             
@@ -302,8 +302,8 @@ class ShotCollectionViewCellSpec: QuickSpec {
                     
                     context("when user swiped") {
                         
-                        var capturedActionDuration: NSTimeInterval!
-                        var capturedActionDelay: NSTimeInterval!
+                        var capturedActionDuration: TimeInterval!
+                        var capturedActionDelay: TimeInterval!
                         var capturedActionOptions: UIViewAnimationOptions!
                         var capturedActionAnimations: (() -> Void)!
                         var capturedActionCompletion: ((Bool) -> Void)!
@@ -324,7 +324,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 panGestureRecognizerMock.translationInViewStub.on(any()) { _ in
                                     return CGPoint(x: 50, y:0)
                                 }
-                                panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
+                                panGestureRecognizer!.specRecognize(with: panGestureRecognizerMock)
                             }
                             
                             it("should animate like action with duration 0.3") {
@@ -348,7 +348,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 }
                                 
                                 it("should set shot image view tranform") {
-                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0))).to(beTruthy())
+                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity.translatedBy(x: 100, y: 0))).to(beTruthy())
                                 }
                                 
                                 describe("like image view") {
@@ -392,7 +392,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 panGestureRecognizerMock.translationInViewStub.on(any()) { _ in
                                     return CGPoint(x: 150, y:0)
                                 }
-                                panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
+                                panGestureRecognizer!.specRecognize(with: panGestureRecognizerMock)
                             }
                             
                             it("should animate bucket action with duration 0.3") {
@@ -416,7 +416,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 }
                                 
                                 it("should set shot image view tranform") {
-                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformTranslate(CGAffineTransformIdentity, 100, 0))).to(beTruthy())
+                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity.translatedBy(x: 100, y: 0))).to(beTruthy())
                                 }
                             }
                             
@@ -439,7 +439,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 panGestureRecognizerMock.translationInViewStub.on(any()) { _ in
                                     return CGPoint(x: -50, y:0)
                                 }
-                                panGestureRecognizer!.specRecognizeWithGestureRecognizer(panGestureRecognizerMock)
+                                panGestureRecognizer!.specRecognize(with: panGestureRecognizerMock)
                             }
                             
                             it("should animate comment action with duration 0.3") {
@@ -463,7 +463,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 }
                                 
                                 it("should set shot image view tranform") {
-                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformTranslate(CGAffineTransformIdentity, -100, 0))).to(beTruthy())
+                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity.translatedBy(x: -100, y: 0))).to(beTruthy())
                                 }
                             }
                             

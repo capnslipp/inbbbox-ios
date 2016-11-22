@@ -29,7 +29,7 @@ class APIBucketsRequesterSpec: QuickSpec {
         
         describe("when posting new bucket") {
             
-            var error: ErrorType?
+            var error: Error?
             var bucket: BucketType?
             
             beforeEach {
@@ -62,7 +62,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                 }
                 
                 it("bucket should be created") {
@@ -77,7 +77,7 @@ class APIBucketsRequesterSpec: QuickSpec {
         
         describe("when adding shot to bucket") {
             
-            var error: ErrorType?
+            var error: Error?
             var didInvokePromise: Bool?
             
             beforeEach {
@@ -106,7 +106,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 204))
+                    self.stub(everything, json([], status: 204))
                 }
                 
                 it("should add shot to bucket") {
@@ -121,7 +121,7 @@ class APIBucketsRequesterSpec: QuickSpec {
         
         describe("when removing shot from bucket") {
             
-            var error: ErrorType?
+            var error: Error?
             var didInvokePromise: Bool?
             
             beforeEach {
@@ -150,7 +150,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 204))
+                    self.stub(everything, json([], status: 204))
                 }
                 
                 it("should remove shot from bucket") {

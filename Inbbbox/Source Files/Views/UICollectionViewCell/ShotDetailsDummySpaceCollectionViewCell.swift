@@ -10,20 +10,20 @@ import UIKit
 
 class ShotDetailsDummySpaceCollectionViewCell: UICollectionViewCell {
 
-    private let separatorView = UIView.newAutoLayoutView()
-    private var didUpdateConstraints = false
+    fileprivate let separatorView = UIView.newAutoLayout()
+    fileprivate var didUpdateConstraints = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message: "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override class func requiresConstraintBasedLayout() -> Bool {
+    override class var requiresConstraintBasedLayout : Bool {
         return true
     }
 
@@ -32,14 +32,14 @@ class ShotDetailsDummySpaceCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
 
-            separatorView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
-            separatorView.autoSetDimension(.Height, toSize: 1)
+            separatorView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: .bottom)
+            separatorView.autoSetDimension(.height, toSize: 1)
         }
 
         super.updateConstraints()
     }
     
-    private func setupSubviews() {
+    fileprivate func setupSubviews() {
         let currentColorMode = ColorModeProvider.current()
         separatorView.backgroundColor = currentColorMode.shotDetailsSeparatorColor
         contentView.addSubview(separatorView)
@@ -58,6 +58,6 @@ extension ShotDetailsDummySpaceCollectionViewCell: AutoSizable {
 extension ShotDetailsDummySpaceCollectionViewCell: Reusable {
 
     class var reuseIdentifier: String {
-        return String(ShotDetailsDummySpaceCollectionViewCell)
+        return String(describing: ShotDetailsDummySpaceCollectionViewCell)
     }
 }

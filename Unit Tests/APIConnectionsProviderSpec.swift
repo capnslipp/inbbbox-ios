@@ -37,7 +37,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             
             context("and token doesn't exist") {
                 
-                var error: ErrorType?
+                var error: Error?
                 
                 beforeEach {
                     TokenStorage.clear()
@@ -108,7 +108,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             
             context("and token doesn't exist") {
                 
-                var error: ErrorType?
+                var error: Error?
                 
                 beforeEach {
                     TokenStorage.clear()
@@ -205,22 +205,22 @@ private class APIConnectionsProviderMock: APIConnectionsProvider {
     var mockType: MockType!
     
     enum MockType {
-        case MockFollowee, MockFollower
+        case mockFollowee, mockFollower
     }
     
-    override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
+    override func firstPageForQueries<T: Mappable>(_ queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)
     }
     
-    override func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    override func nextPageFor<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return mockResult(T)
     }
     
-    override func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    override func previousPageFor<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return mockResult(T)
     }
     
-    func mockResult<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    func mockResult<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, _ in
             
             if mockType == nil {

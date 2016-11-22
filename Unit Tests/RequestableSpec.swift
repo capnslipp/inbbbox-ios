@@ -44,7 +44,7 @@ class RequestableSpec: QuickSpec {
             }
             
             it("request body should be properly set") {
-                let expectedData = try! NSJSONSerialization.dataWithJSONObject(["fixture.key" : "fixture.value"], options: .PrettyPrinted)
+                let expectedData = try! JSONSerialization.data(withJSONObject: ["fixture.key" : "fixture.value"], options: .prettyPrinted)
                 expect(sut.foundationRequest.HTTPBody).to(equal(expectedData))
             }
         }
@@ -109,7 +109,7 @@ private struct ServiceMock: SecureNetworkService {
     let host = "fixture.host"
     let version = "/v1"
     
-    func authorizeRequest(request: NSMutableURLRequest) {
+    func authorizeRequest(_ request: NSMutableURLRequest) {
         request.setValue("fixture.header", forHTTPHeaderField: "fixture.http.header.field")
     }
 }

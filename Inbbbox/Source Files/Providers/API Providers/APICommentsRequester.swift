@@ -23,7 +23,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with created comment.
      */
-    func postCommentForShot(shot: ShotType, withText text: String) -> Promise<CommentType> {
+    func postCommentForShot(_ shot: ShotType, withText text: String) -> Promise<CommentType> {
         AnalyticsManager.trackUserActionEvent(.Comment)
         let query = CreateCommentQuery(shot: shot, body: text)
         return sendCommentQuery(query, verifyTextLength: text)
@@ -41,7 +41,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with updated comment.
      */
-    func updateComment(comment: CommentType, forShot shot: ShotType, withText text: String) -> Promise<CommentType> {
+    func updateComment(_ comment: CommentType, forShot shot: ShotType, withText text: String) -> Promise<CommentType> {
 
         let query = UpdateCommentQuery(shot: shot, comment: comment, withBody: text)
         return sendCommentQuery(query, verifyTextLength: text)
@@ -58,7 +58,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with Void.
      */
-    func deleteComment(comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
+    func deleteComment(_ comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             let query = DeleteCommentQuery(shot: shot, comment: comment)
@@ -79,7 +79,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with Void.
      */
-    func likeComment(comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
+    func likeComment(_ comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             let query = CommentLikeQuery(shot: shot, comment: comment)
@@ -100,7 +100,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with Void.
      */
-    func unlikeComment(comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
+    func unlikeComment(_ comment: CommentType, forShot shot: ShotType) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             let query = CommentUnlikeQuery(shot: shot, comment: comment)
@@ -119,7 +119,7 @@ class APICommentsRequester: Verifiable {
 
      - returns: Promise which resolves with Bool.
      */
-    func checkIfLikeComment(comment: CommentType, forShot shot: ShotType) -> Promise<Bool> {
+    func checkIfLikeComment(_ comment: CommentType, forShot shot: ShotType) -> Promise<Bool> {
         return Promise<Bool> { fulfill, reject in
 
             let query = CommentLikedQuery(shot: shot, comment: comment)
@@ -135,7 +135,7 @@ class APICommentsRequester: Verifiable {
 
 private extension APICommentsRequester {
 
-    func sendCommentQuery(query: Query, verifyTextLength text: String) -> Promise<CommentType> {
+    func sendCommentQuery(_ query: Query, verifyTextLength text: String) -> Promise<CommentType> {
         return Promise<CommentType> { fulfill, reject in
 
             firstly {
@@ -146,7 +146,7 @@ private extension APICommentsRequester {
         }
     }
 
-    func sendCommentQuery(query: Query) -> Promise<CommentType> {
+    func sendCommentQuery(_ query: Query) -> Promise<CommentType> {
         return Promise<CommentType> { fulfill, reject in
 
             firstly {
@@ -166,7 +166,7 @@ private extension APICommentsRequester {
         }
     }
 
-    func sendCommentDeleteQuery(query: Query) -> Promise<Void> {
+    func sendCommentDeleteQuery(_ query: Query) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             firstly {
@@ -179,7 +179,7 @@ private extension APICommentsRequester {
         }
     }
 
-    func sendCommentLikeQuery(query: Query) -> Promise<Void> {
+    func sendCommentLikeQuery(_ query: Query) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             firstly {
@@ -190,7 +190,7 @@ private extension APICommentsRequester {
         }
     }
 
-    func sendCommentLikedQuery(query: Query) -> Promise<Bool> {
+    func sendCommentLikedQuery(_ query: Query) -> Promise<Bool> {
         return Promise<Bool> { fulfill, reject in
 
             firstly {

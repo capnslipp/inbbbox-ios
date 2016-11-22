@@ -17,19 +17,19 @@ class ManagedBucketsRequester {
     let managedObjectsProvider: ManagedObjectsProvider
 
     init() {
-        managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)!.managedObjectContext
+        managedObjectContext = (UIApplication.shared.delegate as? AppDelegate)!.managedObjectContext
         managedObjectsProvider = ManagedObjectsProvider(managedObjectContext: managedObjectContext)
     }
 
-    func addBucket(name: String, description: NSAttributedString?) -> Promise<BucketType> {
+    func addBucket(_ name: String, description: NSAttributedString?) -> Promise<BucketType> {
 
         let bucket = Bucket(
-            identifier: NSProcessInfo.processInfo().globallyUniqueString.stringByReplacingOccurrencesOfString("-",
+            identifier: ProcessInfo.processInfo.globallyUniqueString.stringByReplacingOccurrencesOfString("-",
                     withString: ""),
             name: name,
             attributedDescription: description,
             shotsCount: 0,
-            createdAt: NSDate(),
+            createdAt: Date(),
             owner: User(json: guestJSON)
         )
 
@@ -46,7 +46,7 @@ class ManagedBucketsRequester {
         }
     }
 
-    func addShot(shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
+    func addShot(_ shot: ShotType, toBucket bucket: BucketType) -> Promise<Void> {
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
         let managedShot = managedObjectsProvider.managedShot(shot)
         if let _ = managedBucket.shots {
@@ -64,7 +64,7 @@ class ManagedBucketsRequester {
         }
     }
 
-    func removeShot(shot: ShotType, fromBucket bucket: BucketType) -> Promise<Void> {
+    func removeShot(_ shot: ShotType, fromBucket bucket: BucketType) -> Promise<Void> {
 
         let managedBucket = managedObjectsProvider.managedBucket(bucket)
         let managedShot = managedObjectsProvider.managedShot(shot)
@@ -93,6 +93,6 @@ var guestJSON: JSON {
         "shots_count" : 0,
         "param_to_omit" : "guest.param",
         "type" : "User"
-    ]
+    ] as [String : Any]
     return JSON(guestDictionary)
 }

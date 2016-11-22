@@ -62,7 +62,7 @@ class PageableProviderSpec: QuickSpec {
             var result: [ModelMock]?
             
             beforeEach {
-                self.stub(everything, builder: json([self.fixtureJSON]))
+                self.stub(everything, json([self.fixtureJSON]))
             }
             
             afterEach {
@@ -83,7 +83,7 @@ class PageableProviderSpec: QuickSpec {
             
             context("then next/previous page with unavailable pageable") {
                 
-                var error: ErrorType!
+                var error: Error!
                 
                 afterEach {
                     error = nil
@@ -124,7 +124,7 @@ class PageableProviderSpec: QuickSpec {
                 
                 beforeEach {
                     self.removeAllStubs()
-                    self.stub(everything, builder: json([self.fixtureJSON], headers: self.fixtureHeader))
+                    self.stub(everything, json([self.fixtureJSON], headers: self.fixtureHeader))
                 }
                 
                 it("results from next page should be properly returned") {
@@ -159,10 +159,10 @@ class PageableProviderSpec: QuickSpec {
         
         describe("when providing first page with network error") {
             
-            var error: ErrorType!
+            var error: Error!
             
             beforeEach {
-                let error = NSError(domain: "", code: 0, message: "")
+                let error = NSError(domain: "", code: 0, userInfo: "")
                 self.stub(everything, builder: failure(error))
             }
             
@@ -185,7 +185,7 @@ class PageableProviderSpec: QuickSpec {
         
         describe("when providing next/previous page without using firstPage method first") {
             
-            var error: ErrorType?
+            var error: Error?
             
             afterEach {
                 error = nil
@@ -219,7 +219,7 @@ private struct ModelMock: Mappable {
     let identifier: String
     let title: String?
     
-    static var map: JSON -> ModelMock {
+    static var map: (JSON) -> ModelMock {
         return { json in
             return ModelMock(
                 identifier: json["identifier"].stringValue,
@@ -233,8 +233,8 @@ private extension PageableProviderSpec {
     
     var fixtureJSON: [String: AnyObject] {
         return [
-            "identifier" : "fixture.identifier",
-            "title" : "fixture.title"
+            "identifier" : "fixture.identifier" as AnyObject,
+            "title" : "fixture.title" as AnyObject
         ]
     }
     

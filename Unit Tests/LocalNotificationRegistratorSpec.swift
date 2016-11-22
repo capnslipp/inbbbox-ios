@@ -21,8 +21,8 @@ class LocalNotificationRegistratorSpec: QuickSpec {
         describe("when managing local notifications") {
             
             var localNotificationSettingsTypeFits: Bool {
-                if let localNotificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings() {
-                    return localNotificationSettings.types == [.Alert, .Sound]
+                if let localNotificationSettings = UIApplication.shared.currentUserNotificationSettings {
+                    return localNotificationSettings.types == [.alert, .sound]
                 }
                 return false
             }
@@ -73,7 +73,7 @@ class LocalNotificationRegistratorSpec: QuickSpec {
                 
                 it("notification should not exist") {
                     
-                    if let localNotification = localNotification, scheduledLocalNotifications = UIApplication.sharedApplication().scheduledLocalNotifications {
+                    if let localNotification = localNotification, let scheduledLocalNotifications = UIApplication.shared.scheduledLocalNotifications {
                         containsNotification = scheduledLocalNotifications.contains(localNotification)
                     }
                     

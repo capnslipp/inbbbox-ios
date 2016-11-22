@@ -143,10 +143,10 @@ private extension ShotsProviderConfigurationSpec {
         }
     }
     
-    var todayDate: NSDate {
-        let formatter = NSDateFormatter()
+    var todayDate: Date {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         
-        return formatter.dateFromString(formatter.stringFromDate(NSDate()))!
+        return formatter.date(from: formatter.string(from: Date()))!
     }
 }

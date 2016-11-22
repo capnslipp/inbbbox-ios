@@ -13,24 +13,24 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
 
     weak var delegate: UICollectionViewCellWithLabelContainingClickableLinksDelegate?
 
-    private let descriptionLabel = TTTAttributedLabel.newAutoLayoutView()
+    fileprivate let descriptionLabel = TTTAttributedLabel.newAutoLayout()
 
     // Regards clickable links in description label
-    private let layoutManager = NSLayoutManager()
-    private let textContainer = NSTextContainer(size: CGSize.zero)
-    lazy private var textStorage: NSTextStorage = {
+    fileprivate let layoutManager = NSLayoutManager()
+    fileprivate let textContainer = NSTextContainer(size: CGSize.zero)
+    lazy fileprivate var textStorage: NSTextStorage = {
         [unowned self] in
         return NSTextStorage(attributedString: self.descriptionLabel.attributedText ?? NSAttributedString())
     }()
 
-    private let separatorView = UIView.newAutoLayoutView()
-    private var didUpdateConstraints = false
+    fileprivate let separatorView = UIView.newAutoLayout()
+    fileprivate var didUpdateConstraints = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         descriptionLabel.numberOfLines = 0
-        descriptionLabel.userInteractionEnabled = true
+        descriptionLabel.isUserInteractionEnabled = true
         descriptionLabel.linkAttributes = [NSForegroundColorAttributeName : UIColor.pinkColor()]
         contentView.addSubview(descriptionLabel)
 
@@ -38,7 +38,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(separatorView)
     }
 
-    @available(*, unavailable, message = "Use init(frame:) instead")
+    @available(*, unavailable, message : "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,7 +46,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let insets = self.dynamicType.contentInsets
+        let insets = type(of: self).contentInsets
         descriptionLabel.preferredMaxLayoutWidth = frame.size.width - insets.left - insets.right
         textContainer.size = descriptionLabel.bounds.size
     }
@@ -56,11 +56,11 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
 
-            let insets = self.dynamicType.contentInsets
-            descriptionLabel.autoPinEdgesToSuperviewEdgesWithInsets(insets)
+            let insets = type(of: self).contentInsets
+            descriptionLabel.autoPinEdgesToSuperviewEdges(with: insets)
 
-            separatorView.autoSetDimension(.Height, toSize: 1)
-            separatorView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero, excludingEdge: .Bottom)
+            separatorView.autoSetDimension(.height, toSize: 1)
+            separatorView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: .bottom)
         }
 
         super.updateConstraints()
@@ -77,7 +77,7 @@ class ShotDetailsDescriptionCollectionViewCell: UICollectionViewCell {
 
 extension ShotDetailsDescriptionCollectionViewCell {
 
-    func setDescriptionLabelAttributedText(attributedText: NSAttributedString) {
+    func setDescriptionLabelAttributedText(_ attributedText: NSAttributedString) {
 
         descriptionLabel.setText(attributedText)
 
@@ -92,7 +92,7 @@ extension ShotDetailsDescriptionCollectionViewCell {
                 action: #selector(descriptionLabelDidTap(_:))))
     }
 
-    func descriptionLabelDidTap(tapGestureRecognizer: UITapGestureRecognizer) {
+    func descriptionLabelDidTap(_ tapGestureRecognizer: UITapGestureRecognizer) {
         delegate?.labelContainingClickableLinksDidTap(tapGestureRecognizer, textContainer: textContainer,
                 layoutManager: layoutManager)
     }
@@ -108,6 +108,6 @@ extension ShotDetailsDescriptionCollectionViewCell: AutoSizable {
 extension ShotDetailsDescriptionCollectionViewCell: Reusable {
 
     class var reuseIdentifier: String {
-        return String(ShotDetailsDescriptionCollectionViewCell)
+        return String(describing: ShotDetailsDescriptionCollectionViewCell)
     }
 }

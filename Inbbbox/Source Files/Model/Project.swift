@@ -14,13 +14,13 @@ struct Project: ProjectType {
     let identifier: String
     let name: String?
     let attributedDescription: NSAttributedString?
-    let createdAt: NSDate
+    let createdAt: Date
     let shotsCount: UInt
 
 }
 
 extension Project: Mappable {
-    static var map: JSON -> Project {
+    static var map: (JSON) -> Project {
         return { json in
 
             let stringDate = json[Key.CreatedAt.rawValue].stringValue
@@ -41,7 +41,7 @@ extension Project: Mappable {
         }
     }
 
-    private enum Key: String {
+    fileprivate enum Key: String {
         case Identifier = "id"
         case Name = "name"
         case Description = "description"

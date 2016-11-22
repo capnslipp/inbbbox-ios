@@ -20,7 +20,7 @@ class APIUsersProvider: PageableProvider {
 
      - returns: Promise which resolves with User or nil.
      */
-    func provideUser(identifier: String) -> Promise<UserType> {
+    func provideUser(_ identifier: String) -> Promise<UserType> {
 
         let query = UserQuery(identifier: identifier)
         return Promise<UserType> { fulfill, reject in

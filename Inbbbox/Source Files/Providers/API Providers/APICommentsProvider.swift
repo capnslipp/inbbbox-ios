@@ -20,7 +20,7 @@ class APICommentsProvider: PageableProvider {
 
      - returns: Promise which resolves with comments or nil.
      */
-    func provideCommentsForShot(shot: ShotType) -> Promise<[CommentType]?> {
+    func provideCommentsForShot(_ shot: ShotType) -> Promise<[CommentType]?> {
 
         let query = CommentQuery(shot: shot)
         return Promise<[CommentType]?> { fulfill, reject in

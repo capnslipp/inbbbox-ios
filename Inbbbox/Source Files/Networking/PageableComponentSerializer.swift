@@ -16,7 +16,7 @@ class PageableComponentSerializer {
     /// - parameter receivedHeader: Received response's header.
     ///
     /// - returns: Component for next page.
-    class func nextPageableComponentWithSentQuery(query: Query,
+    class func nextPageableComponentWithSentQuery(_ query: Query,
                                                   receivedHeader header: [String: AnyObject]) -> PageableComponent? {
         return stringComponentFromLinkHeader(header, withName: "next")?.url?.pageableComponentFromQuery(query)
     }
@@ -27,7 +27,7 @@ class PageableComponentSerializer {
     /// - parameter receivedHeader: Received response's header.
     ///
     /// - returns: Component for previous page.
-    class func previousPageableComponentWithSentQuery(query: Query, receivedHeader header: [String: AnyObject])
+    class func previousPageableComponentWithSentQuery(_ query: Query, receivedHeader header: [String: AnyObject])
                     -> PageableComponent? {
         return stringComponentFromLinkHeader(header, withName: "prev")?.url?.pageableComponentFromQuery(query)
     }
@@ -35,39 +35,39 @@ class PageableComponentSerializer {
 
 private extension PageableComponentSerializer {
 
-    class func stringComponentFromLinkHeader(header: [String: AnyObject], withName name: String) -> String? {
+    class func stringComponentFromLinkHeader(_ header: [String: AnyObject], withName name: String) -> String? {
         let link = header["Link"] as? String
-        let linkHeaderComponents = link?.componentsSeparatedByString(",")
+        let linkHeaderComponents = link?.components(separatedBy: ",")
 
-        return linkHeaderComponents?.filter { $0.rangeOfString(name) != nil }.first
+        return linkHeaderComponents?.filter { $0.range(of: name) != nil }.first
     }
 }
 
 private extension String {
 
-    var url: NSURL? {
+    var url: URL? {
 
-        guard let leftBracket = rangeOfString("<"), rightBracket = rangeOfString(">") else {
+        guard let leftBracket = self.range(of: "<"), let rightBracket = self.range(of: ">") else {
             return nil
         }
 
         let range: Range<String.Index> = leftBracket.startIndex.advancedBy(1) ..< rightBracket.endIndex.advancedBy(-1)
         let urlString = substringWithRange(range)
 
-        return  NSURL(string: urlString)
+        return  URL(string: urlString)
     }
 }
 
-private extension NSURL {
+private extension URL {
 
-    func pageableComponentFromQuery(requestQuery: Query) -> PageableComponent? {
+    func pageableComponentFromQuery(_ requestQuery: Query) -> PageableComponent? {
 
         guard var path = path else {
             return nil
         }
 
-        if let substringEndIndex = path.rangeOfString(requestQuery.service.version)?.endIndex {
-            path = path.substringFromIndex(substringEndIndex)
+        if let substringEndIndex = path.range(of: requestQuery.service.version)?.upperBound {
+            path = path.substring(from: substringEndIndex)
         }
 
         return PageableComponent(path: path, query: query)

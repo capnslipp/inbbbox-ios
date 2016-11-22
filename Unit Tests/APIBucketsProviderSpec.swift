@@ -29,7 +29,7 @@ class APIBucketsProviderSpec: QuickSpec {
             
             context("and token doesn't exist") {
                 
-                var error: ErrorType?
+                var error: Error?
                 
                 beforeEach {
                     TokenStorage.clear()
@@ -145,19 +145,19 @@ class APIBucketsProviderSpec: QuickSpec {
 //Explanation: Create BucketsProviderPrivateMock to override methods from PageableProvider.
 private class APIBucketsProviderPrivateMock: APIBucketsProvider {
     
-    override func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
+    override func firstPageForQueries<T: Mappable>(_ queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return mockResult(T)
     }
     
-    override func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    override func nextPageFor<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return mockResult(T)
     }
     
-    override func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    override func previousPageFor<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return mockResult(T)
     }
     
-    func mockResult<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    func mockResult<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, _ in
             
             let json = JSONSpecLoader.sharedInstance.fixtureBucketsJSON(withCount: 3)

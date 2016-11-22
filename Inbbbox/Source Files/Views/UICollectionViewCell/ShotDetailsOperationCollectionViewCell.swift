@@ -10,22 +10,22 @@ import UIKit
 
 class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
 
-    let operationView = ShotDetailsOperationView.newAutoLayoutView()
-    private var didUpdateConstraints = false
+    let operationView = ShotDetailsOperationView.newAutoLayout()
+    fileprivate var didUpdateConstraints = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        contentView.backgroundColor = UIColor.whiteColor()
+        contentView.backgroundColor = UIColor.white
         contentView.addSubview(operationView)
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message: "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override class func requiresConstraintBasedLayout() -> Bool {
+    override class var requiresConstraintBasedLayout : Bool {
         return true
     }
 
@@ -34,7 +34,7 @@ class ShotDetailsOperationCollectionViewCell: UICollectionViewCell {
         if !didUpdateConstraints {
             didUpdateConstraints = true
 
-            operationView.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsetsZero)
+            operationView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero)
         }
 
         super.updateConstraints()
@@ -51,6 +51,6 @@ extension ShotDetailsOperationCollectionViewCell: AutoSizable {
 extension ShotDetailsOperationCollectionViewCell: Reusable {
 
     class var reuseIdentifier: String {
-        return String(ShotDetailsOperationCollectionViewCell)
+        return String(describing: ShotDetailsOperationCollectionViewCell)
     }
 }

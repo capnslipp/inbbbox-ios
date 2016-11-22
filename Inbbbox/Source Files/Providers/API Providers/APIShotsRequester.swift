@@ -22,7 +22,7 @@ class APIShotsRequester: Verifiable {
 
      - returns: Promise which resolves with void.
      */
-    func likeShot(shot: ShotType) -> Promise<Void> {
+    func likeShot(_ shot: ShotType) -> Promise<Void> {
         let query = LikeQuery(shot: shot)
         return sendShotQuery(query)
     }
@@ -37,7 +37,7 @@ class APIShotsRequester: Verifiable {
 
      - returns: Promise which resolves with void.
      */
-    func unlikeShot(shot: ShotType) -> Promise<Void> {
+    func unlikeShot(_ shot: ShotType) -> Promise<Void> {
 
         let query = UnlikeQuery(shot: shot)
         return sendShotQuery(query)
@@ -52,7 +52,7 @@ class APIShotsRequester: Verifiable {
 
      - returns: Promise which resolves with true (if user likes shot) or false (if don't)
      */
-    func isShotLikedByMe(shot: ShotType) -> Promise<Bool> {
+    func isShotLikedByMe(_ shot: ShotType) -> Promise<Bool> {
 
         return Promise<Bool> { fulfill, reject in
 
@@ -79,7 +79,7 @@ class APIShotsRequester: Verifiable {
 
      - returns: Promise which resolves with collection of Buckets
      */
-    func userBucketsForShot(shot: ShotType) -> Promise<[BucketType]!> {
+    func userBucketsForShot(_ shot: ShotType) -> Promise<[BucketType]?> {
 
         return Promise<[BucketType]!> { fulfill, reject in
 
@@ -105,7 +105,7 @@ class APIShotsRequester: Verifiable {
 
      - returns: Updated shot details
      */
-    func fetchShotDetailsForShot(shot: ShotType) -> Promise<ShotType> {
+    func fetchShotDetailsForShot(_ shot: ShotType) -> Promise<ShotType> {
 
         return Promise<ShotType> { fulfill, reject in
 
@@ -126,7 +126,7 @@ class APIShotsRequester: Verifiable {
 
 private extension APIShotsRequester {
 
-    func sendShotQuery(query: Query) -> Promise<Void> {
+    func sendShotQuery(_ query: Query) -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
 
             firstly {
@@ -139,7 +139,7 @@ private extension APIShotsRequester {
         }
     }
 
-    func sendShotQueryForRespone(query: Query) -> Promise<JSON?> {
+    func sendShotQueryForRespone(_ query: Query) -> Promise<JSON?> {
         return Promise<JSON?> { fulfill, reject in
 
             firstly {

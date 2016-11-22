@@ -42,7 +42,7 @@ class RequestSpec: QuickSpec {
                 
                 beforeEach {
                     let body = ["fixture.key": "fixture.value"]
-                    self.stub(everything, builder: json(body))
+                    self.stub(everything, json(body))
                 }
                 
                 afterEach {
@@ -67,10 +67,10 @@ class RequestSpec: QuickSpec {
             
             context("when sending data with failure") {
                 
-                var error: ErrorType?
+                var error: Error?
                 
                 beforeEach {
-                    let error = NSError(domain: "fixture.domain", code: 0, message: "fixture.message")
+                    let error = NSError(domain: "fixture.domain", code: 0, userInfo: "fixture.message")
                     self.stub(everything, builder: failure(error))
                 }
                 

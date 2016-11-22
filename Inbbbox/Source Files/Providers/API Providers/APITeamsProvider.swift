@@ -19,7 +19,7 @@ class APITeamsProvider: PageableProvider {
 
      - returns: Promise which resolves with users or nil.
      */
-    func provideMembersForTeam(team: TeamType) -> Promise<[UserType]?> {
+    func provideMembersForTeam(_ team: TeamType) -> Promise<[UserType]?> {
 
         let query = TeamMembersQuery(team: team)
         return Promise<[UserType]?> { fulfill, reject in

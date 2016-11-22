@@ -12,7 +12,7 @@ struct PageableQuery: Query {
 
     let method = Method.GET
     let path: String
-    var parameters = Parameters(encoding: .URL)
+    var parameters = Parameters(encoding: .url)
 
     /// Initialize query used for paging based on given path.
     ///
@@ -26,7 +26,7 @@ struct PageableQuery: Query {
     ///
     /// - parameter path:       Query's path.
     /// - parameter queryItems: Query's items.
-    init(path: String, queryItems: [NSURLQueryItem]?) {
+    init(path: String, queryItems: [URLQueryItem]?) {
         self.path = path
         queryItems?.forEach {
             parameters[$0.name] = $0.value

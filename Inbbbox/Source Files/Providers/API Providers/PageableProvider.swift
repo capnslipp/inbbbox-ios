@@ -10,22 +10,22 @@ import Foundation
 import PromiseKit
 import SwiftyJSON
 
-enum PageableProviderError: ErrorType {
-    case BehaviourUndefined
-    case DidReachLastPage
-    case DidReachFirstPage
+enum PageableProviderError: Error {
+    case behaviourUndefined
+    case didReachLastPage
+    case didReachFirstPage
 }
 
 class PageableProvider: Verifiable {
 
-    private(set) var page = UInt(1)
-    private(set) var pagination = UInt(30)
+    fileprivate(set) var page = UInt(1)
+    fileprivate(set) var pagination = UInt(30)
 
-    private var nextPageableComponents: [PageableComponent]?
-    private var previousPageableComponents: [PageableComponent]?
+    fileprivate var nextPageableComponents: [PageableComponent]?
+    fileprivate var previousPageableComponents: [PageableComponent]?
 
-    private var serializationKey: String?
-    private var didDefineProviderMethodBefore = false
+    fileprivate var serializationKey: String?
+    fileprivate var didDefineProviderMethodBefore = false
 
      /**
      Initializer with customizable parameters.
@@ -44,7 +44,7 @@ class PageableProvider: Verifiable {
      */
     init() {}
 
-    func firstPageForQueries<T: Mappable>(queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
+    func firstPageForQueries<T: Mappable>(_ queries: [Query], withSerializationKey key: String?) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
 
             resetPages()
@@ -57,7 +57,7 @@ class PageableProvider: Verifiable {
         }
     }
 
-    func nextPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    func nextPageFor<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
 
             if !didDefineProviderMethodBefore {
@@ -76,7 +76,7 @@ class PageableProvider: Verifiable {
         }
     }
 
-    func previousPageFor<T: Mappable>(type: T.Type) -> Promise<[T]?> {
+    func previousPageFor<T: Mappable>(_ type: T.Type) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
 
             if !didDefineProviderMethodBefore {
@@ -104,7 +104,7 @@ class PageableProvider: Verifiable {
 
 private extension PageableProvider {
 
-    func pageWithQueries<T: Mappable>(queries: [Query]) -> Promise<[T]?> {
+    func pageWithQueries<T: Mappable>(_ queries: [Query]) -> Promise<[T]?> {
         return Promise<[T]?> { fulfill, reject in
 
             let requests = queries.map { PageRequest(query: $0) }
@@ -136,10 +136,10 @@ private extension PageableProvider {
         }
     }
 
-    func queryByPagingConfiguration(query: Query) -> Query {
+    func queryByPagingConfiguration(_ query: Query) -> Query {
         var resultQuery = query
-        resultQuery.parameters["page"] = page
-        resultQuery.parameters["per_page"] = pagination
+        resultQuery.parameters["page"] = page as AnyObject?
+        resultQuery.parameters["per_page"] = pagination as AnyObject?
 
         return resultQuery
     }

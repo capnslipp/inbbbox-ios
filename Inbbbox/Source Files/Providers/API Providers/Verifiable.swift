@@ -9,22 +9,22 @@
 import Foundation
 import PromiseKit
 
-enum VerifiableError: ErrorType {
-    case AuthenticationRequired
-    case WrongAccountType
-    case IncorrectTextLength(UInt)
+enum VerifiableError: Error {
+    case authenticationRequired
+    case wrongAccountType
+    case incorrectTextLength(UInt)
 }
 
 protocol Verifiable {
 
-    func verifyAuthenticationStatus(verify: Bool) -> Promise<Void>
+    func verifyAuthenticationStatus(_ verify: Bool) -> Promise<Void>
     func verifyAccountType() -> Promise<Void>
-    func verifyTextLength(text: String, min: UInt, max: UInt) -> Promise<Void>
+    func verifyTextLength(_ text: String, min: UInt, max: UInt) -> Promise<Void>
 }
 
 extension Verifiable {
 
-    func verifyAuthenticationStatus(verify: Bool) -> Promise<Void> {
+    func verifyAuthenticationStatus(_ verify: Bool) -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
 
             if verify {
@@ -40,7 +40,7 @@ extension Verifiable {
     func verifyAccountType() -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
 
-            guard let user = UserStorage.currentUser where user.accountType == .Team ||
+            guard let user = UserStorage.currentUser, user.accountType == .Team ||
                     user.accountType == .Player else {
                 throw VerifiableError.WrongAccountType
             }
@@ -49,7 +49,7 @@ extension Verifiable {
         }
     }
 
-    func verifyTextLength(text: String, min minUInt: UInt, max maxUInt: UInt) -> Promise<Void> {
+    func verifyTextLength(_ text: String, min minUInt: UInt, max maxUInt: UInt) -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
 
             let textWithoutWhitespaces = text.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())

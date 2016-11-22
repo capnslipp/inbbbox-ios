@@ -117,10 +117,10 @@ class ParametersSpec: QuickSpec {
                     }
                     
                     it("should have correct JSON by serializing body") {
-                        let json = try! NSJSONSerialization.JSONObjectWithData(sut.body!, options: .AllowFragments) as! [String: AnyObject]
+                        let json = try! JSONSerialization.JSONObjectWithData(sut.body!, options: .AllowFragments) as! [String: AnyObject]
                         let expectedJSON = [
-                            "fixture.key.1": "fixture.value.1",
-                            "fixture.key.2": 123
+                            "fixture.key.1": "fixture.value.1" as AnyObject,
+                            "fixture.key.2": 123 as AnyObject
                         ] as [String: AnyObject]
                         
                         expect(json == expectedJSON).to(beTrue())
@@ -132,5 +132,5 @@ class ParametersSpec: QuickSpec {
 }
 
 private func ==(lhs: [String: AnyObject], rhs: [String: AnyObject]) -> Bool {
-    return NSDictionary(dictionary: lhs).isEqualToDictionary(rhs)
+    return NSDictionary(dictionary: lhs).isEqual(to: rhs)
 }

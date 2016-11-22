@@ -17,7 +17,7 @@ class APIShotsRequesterSpec: QuickSpec {
     override func spec() {
         
         var sut: APIShotsRequester!
-        var error: ErrorType?
+        var error: Error?
         var didInvokePromise: Bool?
         
         beforeEach {
@@ -54,7 +54,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 201))
+                    self.stub(everything, json([], status: 201))
                 }
                 
                 it("should like shot") {
@@ -90,7 +90,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 204))
+                    self.stub(everything, json([], status: 204))
                 }
                 
                 it("should like shot") {
@@ -129,7 +129,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 200))
+                    self.stub(everything, json([], status: 200))
                 }
                 
                 afterEach {
@@ -153,7 +153,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
                     let error = NSError(domain: "fixture.domain", code: 404, userInfo: nil)
-                    self.stub(everything, builder: failure(error))
+                    self.stub(everything, failure(error))
                 }
                 
                 afterEach {
@@ -178,7 +178,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                     UserStorage.storeUser(User.fixtureUser())
                 }
                 

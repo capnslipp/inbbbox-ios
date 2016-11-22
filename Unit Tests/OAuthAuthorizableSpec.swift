@@ -13,7 +13,7 @@ import Nimble
 
 class OAuthAuthorizableSpec: QuickSpec {
     
-    private struct MockOAuthAuthorizableService : OAuthAuthorizable {
+    fileprivate struct MockOAuthAuthorizableService : OAuthAuthorizable {
         
         let requestTokenURLString = "https://fixturerequest/requesttokenurl"
         let accessTokenURLString = "https://fixturerequest/accesstokenurl"
@@ -53,11 +53,11 @@ class OAuthAuthorizableSpec: QuickSpec {
                     "&" +
                     "redirect_uri=https://redirecturi"
                 }()
-                expect(requestTokenURLRequest.URL?.absoluteString).to(equal(absoluteString))
+                expect(requestTokenURLRequest.url?.absoluteString).to(equal(absoluteString))
             }
             
             it("should use GET method") {
-                expect(requestTokenURLRequest.HTTPMethod).to(equal("GET"))
+                expect(requestTokenURLRequest.httpMethod).to(equal("GET"))
             }
         }
         
@@ -70,7 +70,7 @@ class OAuthAuthorizableSpec: QuickSpec {
             }
 
             it("should use POST method") {
-                expect(accessTokenURLRequest.HTTPMethod).to(equal("POST"))
+                expect(accessTokenURLRequest.httpMethod).to(equal("POST"))
             }
         }
         

@@ -14,7 +14,7 @@ import Nimble
 class FormatterSpec: QuickSpec {
     override func spec() {
         
-        var dateComponents: NSDateComponents!
+        var dateComponents: DateComponents!
         
         afterEach {
             dateComponents = nil
@@ -44,8 +44,8 @@ class FormatterSpec: QuickSpec {
             
             beforeEach {
                 let date = Formatter.Date.Timestamp.dateFromString("1970-01-01T08:19:14+00:00")!
-                let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-                calendar.timeZone = NSTimeZone(abbreviation: "GMT")!
+                let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+                calendar.timeZone = NSTimeZone(abbreviation: "GMT")! as TimeZone
                 dateComponents = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second], fromDate: date)
             }
             

@@ -189,7 +189,7 @@ class ShotsQuerySpec: QuickSpec {
                 
                 beforeEach {
                     let components = NSDateComponents()
-                    components.calendar = NSCalendar.currentCalendar()
+                    components.calendar = NSCalendar.current
                     components.day = 3
                     components.month = 3
                     components.year = 2015

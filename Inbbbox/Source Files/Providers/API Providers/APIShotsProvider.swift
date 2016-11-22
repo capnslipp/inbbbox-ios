@@ -16,15 +16,15 @@ class APIShotsProvider: PageableProvider {
     /// Used only when using provideShots() method.
     var configuration = APIShotsProviderConfiguration()
 
-    private var likesFetched: UInt = 0
-    private var likesToFetch: UInt = 0
-    private var likes = [ShotType]()
-    private var fetchingLikes = false
-    private var lastPageOfLikesReached = false
+    fileprivate var likesFetched: UInt = 0
+    fileprivate var likesToFetch: UInt = 0
+    fileprivate var likes = [ShotType]()
+    fileprivate var fetchingLikes = false
+    fileprivate var lastPageOfLikesReached = false
 
-    private var currentSourceType: SourceType?
-    private enum SourceType {
-        case General, Bucket, User, Liked
+    fileprivate var currentSourceType: SourceType?
+    fileprivate enum SourceType {
+        case general, bucket, user, liked
     }
 
     /**
@@ -33,7 +33,7 @@ class APIShotsProvider: PageableProvider {
      - returns: Promise which resolves with shots or nil.
      */
     func provideShots() -> Promise<[ShotType]?> {
-        resetAnUseSourceType(.General)
+        resetAnUseSourceType(.general)
         return provideShotsWithQueries(activeQueries)
     }
 
@@ -62,7 +62,7 @@ class APIShotsProvider: PageableProvider {
 
      - returns: Promise which resolves with liked shots or nil.
      */
-    func provideLikedShots(max: UInt) -> Promise<[ShotType]?> {
+    func provideLikedShots(_ max: UInt) -> Promise<[ShotType]?> {
         return Promise<[ShotType]?> {fulfill, reject in
             firstly {
                 prepareForFetchingLikes()
@@ -83,8 +83,8 @@ class APIShotsProvider: PageableProvider {
 
      - returns: Promise which resolves with shots or nil.
      */
-    func provideShotsForUser(user: UserType) -> Promise<[ShotType]?> {
-        resetAnUseSourceType(.User)
+    func provideShotsForUser(_ user: UserType) -> Promise<[ShotType]?> {
+        resetAnUseSourceType(.user)
 
         let query = ShotsQuery(type: .UserShots(user))
         return provideShotsWithQueries([query])
@@ -97,8 +97,8 @@ class APIShotsProvider: PageableProvider {
 
      - returns: Promise which resolves with shots or nil.
      */
-    func provideLikedShotsForUser(user: UserType) -> Promise<[ShotType]?> {
-        resetAnUseSourceType(.Liked)
+    func provideLikedShotsForUser(_ user: UserType) -> Promise<[ShotType]?> {
+        resetAnUseSourceType(.liked)
 
         let query = ShotsQuery(type: .UserLikedShots(user))
         return provideShotsWithQueries([query], serializationKey: "shot")
@@ -111,8 +111,8 @@ class APIShotsProvider: PageableProvider {
 
      - returns: Promise which resolves with shots or nil.
      */
-    func provideShotsForBucket(bucket: BucketType) -> Promise<[ShotType]?> {
-        resetAnUseSourceType(.Bucket)
+    func provideShotsForBucket(_ bucket: BucketType) -> Promise<[ShotType]?> {
+        resetAnUseSourceType(.bucket)
 
         let query = ShotsQuery(type: .BucketShots(bucket))
         return provideShotsWithQueries([query])
@@ -147,11 +147,11 @@ private extension APIShotsProvider {
 
     var activeQueries: [Query] {
         return configuration.sources.map {
-            configuration.queryByConfigurationForQuery(ShotsQuery(type: .List), source: $0)
+            configuration.queryByConfigurationForQuery(ShotsQuery(type: .list), source: $0)
         }
     }
 
-    func provideShotsWithQueries(queries: [Query], serializationKey key: String? = nil) -> Promise<[ShotType]?> {
+    func provideShotsWithQueries(_ queries: [Query], serializationKey key: String? = nil) -> Promise<[ShotType]?> {
         return Promise<[ShotType]?> { fulfill, reject in
 
             firstly {
@@ -162,12 +162,12 @@ private extension APIShotsProvider {
         }
     }
 
-    func resetAnUseSourceType(type: SourceType) {
+    func resetAnUseSourceType(_ type: SourceType) {
         currentSourceType = type
         resetPages()
     }
 
-    func fetchPage(promise: Promise<[Shot]?>) -> Promise<[ShotType]?> {
+    func fetchPage(_ promise: Promise<[Shot]?>) -> Promise<[ShotType]?> {
         return Promise<[ShotType]?> { fulfill, reject in
 
             if currentSourceType == nil {
@@ -182,14 +182,14 @@ private extension APIShotsProvider {
         }
     }
 
-    func serialize(shots: [Shot]?, _ fulfill: [ShotType]? -> Void) {
+    func serialize(_ shots: [Shot]?, _ fulfill: ([ShotType]?) -> Void) {
         let result = shots?
             .unique
-            .sort { $0.createdAt.compare($1.createdAt) == .OrderedDescending }
+            .sorted { $0.createdAt.compare($1.createdAt as Date) == .orderedDescending }
         fulfill(result.flatMap { $0.map { $0 as ShotType } })
     }
 
-    private func prepareForFetchingLikes() -> Promise<Void> {
+    func prepareForFetchingLikes() -> Promise<Void> {
         likes.removeAll()
         likesFetched = 0
         likesToFetch = 0
@@ -197,7 +197,7 @@ private extension APIShotsProvider {
         return Promise<Void>()
     }
 
-    private func fetchLikes(max: UInt) -> Promise<Void> {
+    func fetchLikes(_ max: UInt) -> Promise<Void> {
         likesToFetch = max
         return Promise<Void> { fulfill, reject in
             firstly {
@@ -213,7 +213,7 @@ private extension APIShotsProvider {
         }
     }
 
-    private func fetchSingleBatch() -> Promise<Void> {
+    func fetchSingleBatch() -> Promise<Void> {
         return Promise<Void> { fulfill, reject in
             firstly {
                 if !fetchingLikes {
@@ -229,7 +229,7 @@ private extension APIShotsProvider {
                     fulfill()
                 }
             }.error { error in
-                if let lastPage = error as? PageableProviderError where lastPage == .DidReachLastPage {
+                if let lastPage = error as? PageableProviderError, lastPage == .DidReachLastPage {
                     self.lastPageOfLikesReached = true
                     return fulfill()
                 }

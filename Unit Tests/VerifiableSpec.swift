@@ -17,7 +17,7 @@ class VerifiableSpec: QuickSpec {
         var sut: VerifiableMock!
         var savedTokenBeforeTestLaunch: String!
         var didInvokePromise: Bool!
-        var error: ErrorType?
+        var error: Error?
         
         beforeSuite {
             savedTokenBeforeTestLaunch = TokenStorage.currentToken

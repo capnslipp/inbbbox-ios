@@ -12,8 +12,8 @@ class ProgressAnimator {
 
     var progressImageView = UIImageView()
 
-    private var baseName: String
-    private var maximumImageCount: Int
+    fileprivate var baseName: String
+    fileprivate var maximumImageCount: Int
 
     // MARK: Public
 
@@ -32,23 +32,23 @@ class ProgressAnimator {
     ///
     /// - parameter progress:     Progress value between 0.0 - 1.0. If you pass higher value than 1.0 it will be
     //                            locked to 1.0 value
-    func updateProgress(progress: Float) {
+    func updateProgress(_ progress: Float) {
         progressImageView.image = image(min(1.0, progress))
     }
 
     //MARK: Private
 
-    private func interpolateProgress(progress: Float) -> Int {
+    fileprivate func interpolateProgress(_ progress: Float) -> Int {
         let maximum = Float(maximumImageCount)
         let animationFrameKey = maximum * progress
         return Int(animationFrameKey)
     }
 
-    private func imageName(progress: Float) -> String {
+    fileprivate func imageName(_ progress: Float) -> String {
         return baseName + String(interpolateProgress(progress))
     }
 
-    private func image(progress: Float) -> UIImage? {
+    fileprivate func image(_ progress: Float) -> UIImage? {
         return UIImage(named: imageName(progress))
     }
 }

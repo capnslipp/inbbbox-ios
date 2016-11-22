@@ -12,7 +12,7 @@ struct UpdateCommentQuery: Query {
 
     let method = Method.PUT
     let path: String
-    var parameters = Parameters(encoding: .JSON)
+    var parameters = Parameters(encoding: .json)
 
     /// Initialize query for updating comment.
     ///

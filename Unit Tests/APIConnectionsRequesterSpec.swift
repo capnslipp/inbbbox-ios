@@ -29,7 +29,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
         
         describe("when following user") {
             
-            var error: ErrorType?
+            var error: Error?
             var didInvokePromise: Bool?
             
             beforeEach {
@@ -58,7 +58,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 204))
+                    self.stub(everything, json([], status: 204))
                 }
                 
                 it("should follow user") {
@@ -73,7 +73,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
         
         describe("when unfollowing user") {
             
-            var error: ErrorType?
+            var error: Error?
             var didInvokePromise: Bool?
             
             beforeEach {
@@ -102,7 +102,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 204))
+                    self.stub(everything, json([], status: 204))
                 }
                 
                 it("should unfollow user") {
@@ -117,7 +117,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
         
         describe("when checking if current user follows an user") {
             
-            var error: ErrorType?
+            var error: Error?
             var didInvokePromise: Bool?
             
             beforeEach {
@@ -146,7 +146,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 
                 beforeEach {
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json([], status: 204))
+                    self.stub(everything, json([], status: 204))
                 }
                 
                 it("should unfollow user") {

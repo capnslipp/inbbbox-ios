@@ -17,7 +17,7 @@ class APICommentsRequesterSpec: QuickSpec {
     override func spec() {
         
         var sut: APICommentsRequester!
-        var error: ErrorType?
+        var error: Error?
         var comment: CommentType?
         
         beforeEach {
@@ -77,7 +77,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 beforeEach {
                     UserStorage.storeUser(User.fixtureUserForAccountType(.Player))
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                 }
                 
                 afterEach {
@@ -141,7 +141,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 beforeEach {
                     UserStorage.storeUser(User.fixtureUserForAccountType(.Player))
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                 }
                 
                 afterEach {
@@ -211,7 +211,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 beforeEach {
                     UserStorage.storeUser(User.fixtureUserForAccountType(.Player))
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                 }
                 
                 afterEach {
@@ -263,7 +263,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 beforeEach {
                     UserStorage.storeUser(User.fixtureUserForAccountType(.User))
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                 }
                 
                 afterEach {
@@ -315,7 +315,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 beforeEach {
                     UserStorage.storeUser(User.fixtureUserForAccountType(.User))
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                 }
                 
                 afterEach {
@@ -367,7 +367,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 beforeEach {
                     UserStorage.storeUser(User.fixtureUserForAccountType(.User))
                     TokenStorage.storeToken("fixture.token")
-                    self.stub(everything, builder: json(self.fixtureJSON))
+                    self.stub(everything, json(self.fixtureJSON))
                 }
                 
                 afterEach {
