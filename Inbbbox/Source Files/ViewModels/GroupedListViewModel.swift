@@ -24,10 +24,6 @@ class GroupedListViewModel: ListViewModel<GroupItem> {
         fatalError("init has not been implemented")
     }
 
-    required init<U : Equatable>(_ items: [T], readValue: (T) -> U) {
-        fatalError("init(_:readValue:) has not been implemented")
-    }
-
     required init(sections: [Section<T>]) {
         fatalError("init(sections:) has not been implemented")
     }

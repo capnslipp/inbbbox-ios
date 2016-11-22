@@ -24,8 +24,7 @@ class ManagedBucketsRequester {
     func addBucket(_ name: String, description: NSAttributedString?) -> Promise<BucketType> {
 
         let bucket = Bucket(
-            identifier: ProcessInfo.processInfo.globallyUniqueString.stringByReplacingOccurrencesOfString("-",
-                    withString: ""),
+            identifier: ProcessInfo.processInfo.globallyUniqueString.replacingOccurrences(of: "-", with: ""),
             name: name,
             attributedDescription: description,
             shotsCount: 0,
@@ -70,7 +69,7 @@ class ManagedBucketsRequester {
         let managedShot = managedObjectsProvider.managedShot(shot)
         if let managedShots = managedBucket.shots {
             let mutableShots = NSMutableSet(set: managedShots)
-            mutableShots.removeObject(managedShot)
+            mutableShots.remove(managedShot)
             managedBucket.shots = mutableShots.copy() as? NSSet
             managedBucket.mngd_shotsCount -= 1
         }

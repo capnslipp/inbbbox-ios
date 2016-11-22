@@ -21,6 +21,6 @@ struct UpdateCommentQuery: Query {
     /// - parameter withBody: New comment's body.
     init(shot: ShotType, comment: CommentType, withBody body: String) {
         path = "/shots/" + shot.identifier + "/comments/" + comment.identifier
-        parameters["body"] = body
+        parameters["body"] = body as AnyObject?
     }
 }

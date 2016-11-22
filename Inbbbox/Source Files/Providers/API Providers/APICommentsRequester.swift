@@ -65,7 +65,7 @@ class APICommentsRequester: Verifiable {
 
             firstly {
                 sendCommentDeleteQuery(query)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -86,7 +86,7 @@ class APICommentsRequester: Verifiable {
 
             firstly {
                 sendCommentLikeQuery(query)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -107,7 +107,7 @@ class APICommentsRequester: Verifiable {
 
             firstly {
                 sendCommentLikeQuery(query)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -128,7 +128,7 @@ class APICommentsRequester: Verifiable {
                 sendCommentLikedQuery(query)
             }.then { result in
                 fulfill(result)
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }
@@ -142,7 +142,7 @@ private extension APICommentsRequester {
                 verifyTextLength(text, min: 1, max: UInt.max)
             }.then {
                 self.sendCommentQuery(query)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -158,11 +158,11 @@ private extension APICommentsRequester {
             }.then { json -> Void in
 
                 guard let json = json else {
-                    throw ResponseError.UnexpectedResponse
+                    throw ResponseError.unexpectedResponse
                 }
                 fulfill(Comment.map(json))
 
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -175,7 +175,7 @@ private extension APICommentsRequester {
                 self.verifyAccountType()
             }.then {
                 Request(query: query).resume()
-            }.then { _ in fulfill() }.error(reject)
+            }.then { _ in fulfill() }.catch(execute: reject)
         }
     }
 
@@ -186,7 +186,7 @@ private extension APICommentsRequester {
                 verifyAuthenticationStatus(true)
             }.then {
                 Request(query: query).resume()
-            }.then { _ in fulfill() }.error(reject)
+            }.then { _ in fulfill() }.catch(execute: reject)
         }
     }
 
@@ -199,7 +199,7 @@ private extension APICommentsRequester {
                 Request(query: query).resume()
             }.then { _ in
                 fulfill(true)
-            }.error { error in
+            }.catch { error in
                 // According to API documentation, when response.code is 404,
                 // then comment is not liked by authenticated user.
                 (error as NSError).code == 404 ? fulfill(false) : reject(error)

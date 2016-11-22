@@ -30,7 +30,7 @@ class APIProjectsProvider: PageableProvider {
                 firstPageForQueries([query], withSerializationKey: nil)
             }.then { (projects: [Project]?) -> Void in
                 fulfill(projects.flatMap { $0.map { $0 as ProjectType } })
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }

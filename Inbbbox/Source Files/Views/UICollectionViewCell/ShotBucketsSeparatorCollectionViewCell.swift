@@ -76,7 +76,7 @@ class ShotBucketsSeparatorCollectionViewCell: UICollectionViewCell {
 
 extension ShotBucketsSeparatorCollectionViewCell: Reusable {
 
-    class var reuseIdentifier: String {
+    class var identifier: String {
         return String(describing: ShotBucketsSeparatorCollectionViewCell)
     }
 }

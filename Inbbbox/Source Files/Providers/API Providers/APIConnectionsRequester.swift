@@ -93,7 +93,7 @@ class APIConnectionsRequester: Verifiable {
                 sendConnectionQuery(query)
             }.then { _ in
                 fulfill(true)
-            }.error { error in
+            }.catch { error in
                 // According to API documentation, when response.code is 404,
                 // then user is not followed by authenticated user.
                 (error as NSError).code == 404 ? fulfill(false) : reject(error)
@@ -116,12 +116,12 @@ class APIConnectionsRequester: Verifiable {
 
             firstly {
                 sendConnectionQuery(query)
-                }.then { _ in
-                    fulfill(true)
-                }.error { error in
-                    // According to API documentation, when response.code is 404,
-                    // then team is not followed by authenticated user.
-                    (error as NSError).code == 404 ? fulfill(false) : reject(error)
+            }.then { _ in
+                fulfill(true)
+            }.catch { error in
+                // According to API documentation, when response.code is 404,
+                // then team is not followed by authenticated user.
+                (error as NSError).code == 404 ? fulfill(false) : reject(error)
             }
         }
     }
@@ -138,7 +138,7 @@ private extension APIConnectionsRequester {
                 Request(query: query).resume()
             }.then { _ -> Void in
                 fulfill()
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }

@@ -14,9 +14,9 @@ class BucketContentViewModel: SimpleShotsViewModel {
 
     weak var delegate: BaseCollectionViewViewModelDelegate?
     var shots = [ShotType]()
-    private let shotsProvider = ShotsProvider()
-    private var userMode: UserMode
-    private var bucket: BucketType
+    fileprivate let shotsProvider = ShotsProvider()
+    fileprivate var userMode: UserMode
+    fileprivate var bucket: BucketType
 
     var itemsCount: Int {
         return shots.count
@@ -27,7 +27,7 @@ class BucketContentViewModel: SimpleShotsViewModel {
     }
 
     init(bucket: BucketType) {
-        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
+        userMode = UserStorage.isUserSignedIn ? .loggedUser : .demoUser
         self.bucket = bucket
     }
 
@@ -35,7 +35,7 @@ class BucketContentViewModel: SimpleShotsViewModel {
         firstly {
             shotsProvider.provideShotsForBucket(self.bucket)
         }.then { shots -> Void in
-            if let shots = shots where shots != self.shots {
+            if let shots = shots, shots != self.shots {
                 self.shots = shots
             }
             self.delegate?.viewModelDidLoadInitialItems()
@@ -51,7 +51,7 @@ class BucketContentViewModel: SimpleShotsViewModel {
         firstly {
             shotsProvider.nextPage()
         }.then { shots -> Void in
-            if let shots = shots where shots.count > 0 {
+            if let shots = shots, shots.count > 0 {
                 let indexes = shots.enumerate().map { index, _ in
                     return index + self.shots.count
                 }
@@ -78,14 +78,14 @@ class BucketContentViewModel: SimpleShotsViewModel {
         return description
     }
 
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
-        let shotImage = shots[indexPath.row].shotImage
-        let animated = shots[indexPath.row].animated
+    func shotCollectionViewCellViewData(_ indexPath: IndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+        let shotImage = shots[(indexPath as NSIndexPath).row].shotImage
+        let animated = shots[(indexPath as NSIndexPath).row].animated
         return (shotImage, animated)
     }
 
     func clearViewModelIfNeeded() {
-        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.loggedUser : .demoUser
         if userMode != currentUserMode {
             shots = []
             userMode = currentUserMode

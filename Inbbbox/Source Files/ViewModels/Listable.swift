@@ -17,10 +17,10 @@ protocol Listable {
     init(_ items: [Type])
     subscript(index: Int) -> Type { get }
 
-    mutating func add(item: Type, atIndex index: Int)
-    mutating func remove(index: Int) -> Type
+    mutating func add(_ item: Type, atIndex index: Int)
+    mutating func remove(_ index: Int) -> Type
 
-    func itemize(closure: (index: Int, item: Type) -> ())
+    func itemize(_ closure: (_ index: Int, _ item: Type) -> ())
 }
 
 
@@ -40,17 +40,17 @@ class List<T> : Listable {
         return items[index]
     }
 
-    func add(item: T, atIndex index: Int) {
-        items.insert(item, atIndex: index)
+    func add(_ item: T, atIndex index: Int) {
+        items.insert(item, at: index)
     }
 
-    func remove(index: Int) -> T {
-        return items.removeAtIndex(index)
+    func remove(_ index: Int) -> T {
+        return items.remove(at: index)
     }
 
-    func itemize(closure: (index: Int, item: T) -> ()) {
-        for (index, item) in items.enumerate() {
-            closure(index: index, item: item)
+    func itemize(_ closure: (_ index: Int, _ item: T) -> ()) {
+        for (index, item) in items.enumerated() {
+            closure(index, item)
         }
     }
 }

@@ -43,11 +43,11 @@ class ManagedShotsRequester {
 
     func isShotLikedByMe(_ shot: ShotType) -> Promise<Bool> {
         let managedShot = managedObjectsProvider.managedShot(shot)
-        return Promise<Bool>(managedShot.liked)
+        return Promise<Bool>(value: managedShot.liked)
     }
 
     func userBucketsForShot(_ shot: ShotType) -> Promise<[BucketType]?> {
         let managedShot = managedObjectsProvider.managedShot(shot)
-        return Promise<[BucketType]!>((managedShot.buckets?.allObjects as? [ManagedBucket])?.map { $0 as BucketType })
+        return Promise<[BucketType]!>(value: (managedShot.buckets?.allObjects as? [ManagedBucket])?.map { $0 as BucketType })
     }
 }

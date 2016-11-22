@@ -35,7 +35,7 @@ extension Project: Mappable {
                 identifier: json[Key.Identifier.rawValue].stringValue,
                 name: json[Key.Name.rawValue].string,
                 attributedDescription: attributedDescription,
-                createdAt: Formatter.Date.Timestamp.dateFromString(stringDate)!,
+                createdAt: Formatter.Date.Timestamp.date(from: stringDate)!,
                 shotsCount: json[Key.ShotsCount.rawValue].uIntValue
             )
         }

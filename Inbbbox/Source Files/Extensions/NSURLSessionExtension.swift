@@ -8,9 +8,9 @@
 
 import Foundation
 
-extension NSURLSession {
+extension URLSession {
 
-    class func inbbboxDefaultSession() -> NSURLSession {
-        return NSURLSession(configuration: NSURLSessionConfiguration.inbbboxDefaultSessionConfiguration())
+    class func inbbboxDefaultSession() -> URLSession {
+        return URLSession(configuration: URLSessionConfiguration.inbbboxDefaultSessionConfiguration())
     }
 }

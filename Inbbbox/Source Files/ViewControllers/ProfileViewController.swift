@@ -151,7 +151,7 @@ extension ProfileViewController {
                 self.header?.userFollowed = !userFollowed
             }.always {
                 self.header?.stopActivityIndicator()
-            }.error { error in
+            }.catch { error in
                 FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.tryAgain, canBeDismissedByUser: true)
             }
         }

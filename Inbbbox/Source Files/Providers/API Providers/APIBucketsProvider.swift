@@ -63,7 +63,7 @@ class APIBucketsProvider: PageableProvider {
                 nextPageFor(Bucket)
             }.then { buckets -> Void in
                 fulfill(buckets.flatMap { $0.map { $0 as BucketType } })
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -81,7 +81,7 @@ class APIBucketsProvider: PageableProvider {
                 previousPageFor(Bucket)
             }.then { buckets -> Void in
                 fulfill(buckets.flatMap { $0.map { $0 as BucketType } })
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }
@@ -96,7 +96,7 @@ private extension APIBucketsProvider {
                 self.firstPageForQueries(queries, withSerializationKey: nil)
             }.then {  (buckets: [Bucket]?) -> Void in
                fulfill(buckets.flatMap { $0.map { $0 as BucketType } })
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }

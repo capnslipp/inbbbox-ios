@@ -17,8 +17,8 @@ class UserDetailsViewModel: ProfileViewModel {
         return user.name ?? user.username
     }
 
-    var avatarURL: NSURL? {
-        return user.avatarURL
+    var avatarURL: URL? {
+        return user.avatarURL as URL?
     }
 
     var collectionIsEmpty: Bool {
@@ -26,7 +26,7 @@ class UserDetailsViewModel: ProfileViewModel {
     }
 
     var shouldShowFollowButton: Bool {
-        if let currentUser = UserStorage.currentUser where currentUser.identifier != user.identifier {
+        if let currentUser = UserStorage.currentUser, currentUser.identifier != user.identifier {
             return true
         }
         return false
@@ -39,8 +39,8 @@ class UserDetailsViewModel: ProfileViewModel {
     var userShots = [ShotType]()
     var connectionsRequester = APIConnectionsRequester()
 
-    private(set) var user: UserType
-    private let shotsProvider = ShotsProvider()
+    fileprivate(set) var user: UserType
+    fileprivate let shotsProvider = ShotsProvider()
 
     init(user: UserType) {
         self.user = user
@@ -52,7 +52,7 @@ class UserDetailsViewModel: ProfileViewModel {
         firstly {
             shotsProvider.provideShotsForUser(user)
         }.then { shots -> Void in
-            if let shots = shots where shots != self.userShots {
+            if let shots = shots, shots != self.userShots {
                 self.userShots = shots
                 self.delegate?.viewModelDidLoadInitialItems()
             }
@@ -65,7 +65,7 @@ class UserDetailsViewModel: ProfileViewModel {
         firstly {
             shotsProvider.nextPage()
         }.then { shots -> Void in
-            if let shots = shots where shots.count > 0 {
+            if let shots = shots, shots.count > 0 {
                 let indexes = shots.enumerate().map { index, _ in
                     return index + self.userShots.count
                 }
@@ -116,9 +116,9 @@ class UserDetailsViewModel: ProfileViewModel {
 
     // MARK: Cell data section
 
-    func shotCollectionViewCellViewData(indexPath: NSIndexPath) -> (shotImage: ShotImageType, animated: Bool) {
-        let shotImage = userShots[indexPath.row].shotImage
-        let animated = userShots[indexPath.row].animated
+    func shotCollectionViewCellViewData(_ indexPath: IndexPath) -> (shotImage: ShotImageType, animated: Bool) {
+        let shotImage = userShots[(indexPath as NSIndexPath).row].shotImage
+        let animated = userShots[(indexPath as NSIndexPath).row].animated
         return (shotImage, animated)
     }
 }
@@ -127,7 +127,7 @@ class UserDetailsViewModel: ProfileViewModel {
 
 extension UserDetailsViewModel {
 
-    func shotWithSwappedUser(shot: ShotType) -> ShotType {
+    func shotWithSwappedUser(_ shot: ShotType) -> ShotType {
         return Shot(
             identifier: shot.identifier,
             title: shot.title,

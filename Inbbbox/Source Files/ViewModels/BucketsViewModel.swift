@@ -16,17 +16,17 @@ class BucketsViewModel: BaseCollectionViewViewModel {
     let title = NSLocalizedString("CenterButtonTabBar.Buckets", comment:"Main view, bottom bar & view title")
     var buckets = [BucketType]()
     var bucketsIndexedShots = [Int: [ShotType]]()
-    private let bucketsProvider = BucketsProvider()
-    private let bucketsRequester = BucketsRequester()
-    private let shotsProvider = ShotsProvider()
-    private var userMode: UserMode
+    fileprivate let bucketsProvider = BucketsProvider()
+    fileprivate let bucketsRequester = BucketsRequester()
+    fileprivate let shotsProvider = ShotsProvider()
+    fileprivate var userMode: UserMode
 
     var itemsCount: Int {
         return buckets.count
     }
 
     init() {
-        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
+        userMode = UserStorage.isUserSignedIn ? .loggedUser : .demoUser
     }
 
     func downloadInitialItems() {
@@ -59,7 +59,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             bucketsProvider.nextPage()
         }.then {
             buckets -> Void in
-            if let buckets = buckets where buckets.count > 0 {
+            if let buckets = buckets, buckets.count > 0 {
                 let indexes = buckets.enumerate().map {
                     index, _ in
                     return index + self.buckets.count
@@ -76,7 +76,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         }
     }
 
-    func downloadShots(buckets: [BucketType]) {
+    func downloadShots(_ buckets: [BucketType]) {
         for bucket in buckets {
             firstly {
                 shotsProvider.provideShotsForBucket(bucket)
@@ -94,7 +94,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                     return
                 }
 
-                if let oldShots = self.bucketsIndexedShots[index], newShots = shots {
+                if let oldShots = self.bucketsIndexedShots[index], let newShots = shots {
                     bucketShotsShouldBeReloaded = oldShots != newShots
                 }
 
@@ -114,7 +114,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         }
     }
 
-    func createBucket(name: String, description: NSAttributedString? = nil) -> Promise<Void> {
+    func createBucket(_ name: String, description: NSAttributedString? = nil) -> Promise<Void> {
         return Promise<Void> {
             fulfill, reject in
             firstly {
@@ -126,13 +126,13 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         }
     }
 
-    func bucketCollectionViewCellViewData(indexPath: NSIndexPath) -> BucketCollectionViewCellViewData {
-        return BucketCollectionViewCellViewData(bucket: buckets[indexPath.row],
-                shots: bucketsIndexedShots[indexPath.row])
+    func bucketCollectionViewCellViewData(_ indexPath: IndexPath) -> BucketCollectionViewCellViewData {
+        return BucketCollectionViewCellViewData(bucket: buckets[(indexPath as NSIndexPath).row],
+                shots: bucketsIndexedShots[(indexPath as NSIndexPath).row])
     }
 
     func clearViewModelIfNeeded() {
-        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.loggedUser : .demoUser
         if userMode != currentUserMode {
             buckets = []
             userMode = currentUserMode
@@ -146,18 +146,18 @@ extension BucketsViewModel {
     struct BucketCollectionViewCellViewData {
         let name: String
         let numberOfShots: String
-        let shotsImagesURLs: [NSURL]?
+        let shotsImagesURLs: [URL]?
 
         init(bucket: BucketType, shots: [ShotType]?) {
             self.name = bucket.name
             self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots",
                     comment: "How many shots in collection?"), bucket.shotsCount)
-            if let shots = shots where shots.count > 0 {
+            if let shots = shots, shots.count > 0 {
                 let allShotsImagesURLs = shots.map {
                     $0.shotImage.teaserURL
                 }
-                self.shotsImagesURLs = Array(Array(Array(count: 4,
-                        repeatedValue: allShotsImagesURLs).flatten())[0 ... 3])
+                self.shotsImagesURLs = Array(Array(Array(repeating: allShotsImagesURLs,
+                        count: 4).joined())[0 ... 3]) as [URL]?
             } else {
                 self.shotsImagesURLs = nil
             }

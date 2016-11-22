@@ -13,11 +13,11 @@ class TwoColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
     var itemHeightToWidthRatio = CGFloat(1)
     var containsHeader = false
 
-    override func prepareLayout() {
+    override func prepare() {
 
         if let collectionView = collectionView {
             let spacings = CollectionViewLayoutSpacings()
-            let calculatedItemWidth = (round(CGRectGetWidth(collectionView.bounds)) -
+            let calculatedItemWidth = (round(collectionView.bounds.width) -
                     3 * spacings.twoColumnsItemMargin) / 2
             let calculatedItemHeight = calculatedItemWidth * itemHeightToWidthRatio
             itemSize = CGSize(width: calculatedItemWidth, height: calculatedItemHeight)
@@ -28,20 +28,20 @@ class TwoColumnsCollectionViewFlowLayout: UICollectionViewFlowLayout {
                                      bottom: spacings.twoColumnsSectionMarginHorizontal,
                                       right: spacings.twoColumnsSectionMarginVertical)
             if containsHeader {
-                headerReferenceSize = CGSize(width: CGRectGetWidth(collectionView.bounds),
+                headerReferenceSize = CGSize(width: collectionView.bounds.width,
                                             height: 150)
             }
         }
     }
 
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
 
-    override func layoutAttributesForElementsInRect(rect: CGRect)
+    override func layoutAttributesForElements(in rect: CGRect)
                     -> [UICollectionViewLayoutAttributes]? {
 
-        let attributes = super.layoutAttributesForElementsInRect(rect)
+        let attributes = super.layoutAttributesForElements(in: rect)
 
         guard let collectionView = collectionView else {
             return attributes

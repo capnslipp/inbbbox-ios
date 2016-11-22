@@ -133,7 +133,7 @@ private extension APIConnectionsProvider {
                 self.firstPageForQueries(queries, withSerializationKey: key)
             }.then { (users: [User]?) -> Void in
                 fulfill(users.flatMap { $0.map { $0 as UserType } })
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -144,7 +144,7 @@ private extension APIConnectionsProvider {
                 promise
             }.then { (users: [User]?) -> Void in
                 fulfill(users.flatMap { $0.map { $0 as UserType } })
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }

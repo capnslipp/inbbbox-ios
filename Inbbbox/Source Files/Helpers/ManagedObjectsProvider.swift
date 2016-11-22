@@ -93,7 +93,7 @@ struct ManagedObjectsProvider {
     func managedShotImage(_ shotImage: ShotImageType) -> ManagedShotImage {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: ManagedShotImage.entityName)
         fetchRequest.predicate = NSPredicate(format: "mngd_normalURL == %@",
-                shotImage.normalURL.absoluteString!)
+                shotImage.normalURL.absoluteString)
 
         let firstFetchedObject = try? managedObjectContext.fetch(fetchRequest).first
         if let managedShotImage = firstFetchedObject as? ManagedShotImage {
@@ -104,8 +104,8 @@ struct ManagedObjectsProvider {
         let managedShotImage = ManagedShotImage(entity: managedShotImageEntity,
                         insertInto: managedObjectContext)
         managedShotImage.mngd_hidpiURL = shotImage.hidpiURL?.absoluteString
-        managedShotImage.mngd_normalURL = shotImage.normalURL.absoluteString!
-        managedShotImage.mngd_teaserURL = shotImage.teaserURL.absoluteString!
+        managedShotImage.mngd_normalURL = shotImage.normalURL.absoluteString
+        managedShotImage.mngd_teaserURL = shotImage.teaserURL.absoluteString
         return managedShotImage
     }
 

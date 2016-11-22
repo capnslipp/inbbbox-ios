@@ -23,9 +23,9 @@ struct ShotCellLikeActionAnimationDescriptor: AnimationDescriptor {
             let contentViewWidht = shotCell.contentView.bounds.width
             shotCell.likeImageViewLeftConstraint?.constant =
                     round(contentViewWidht / 2 -
-                    shotCell.likeImageView.intrinsicContentSize().width / 2)
+                    shotCell.likeImageView.intrinsicContentSize.width / 2)
             shotCell.likeImageViewWidthConstraint?.constant =
-                    shotCell.likeImageView.intrinsicContentSize().width
+                    shotCell.likeImageView.intrinsicContentSize.width
             shotCell.contentView.layoutIfNeeded()
             shotCell.likeImageView.alpha = 1.0
             shotCell.shotImageView.transform =

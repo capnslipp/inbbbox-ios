@@ -57,7 +57,7 @@ class SimpleShotCollectionViewCell: UICollectionViewCell, Reusable, WidthDepende
     }
 
     // MARK: - Reusable
-    static var reuseIdentifier: String {
+    static var identifier: String {
         return "SimpleShotCollectionViewCellIdentifier"
     }
 

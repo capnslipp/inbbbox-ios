@@ -29,7 +29,7 @@ extension Verifiable {
 
             if verify {
                 guard let _ = TokenStorage.currentToken else {
-                    throw VerifiableError.AuthenticationRequired
+                    throw VerifiableError.authenticationRequired
                 }
             }
 
@@ -42,7 +42,7 @@ extension Verifiable {
 
             guard let user = UserStorage.currentUser, user.accountType == .Team ||
                     user.accountType == .Player else {
-                throw VerifiableError.WrongAccountType
+                throw VerifiableError.wrongAccountType
             }
 
             fulfill()
@@ -52,16 +52,16 @@ extension Verifiable {
     func verifyTextLength(_ text: String, min minUInt: UInt, max maxUInt: UInt) -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
 
-            let textWithoutWhitespaces = text.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
+            let textWithoutWhitespaces = text.trimmingCharacters(in: .whitespaceCharacterSet())
             let trueMin = min(minUInt, maxUInt)
             let trueMax = max(minUInt, maxUInt)
 
             if textWithoutWhitespaces.characters.count < Int(trueMin) {
-                throw VerifiableError.IncorrectTextLength(trueMin)
+                throw VerifiableError.incorrectTextLength(trueMin)
 
             } else if maxUInt != UInt.max {
                 if textWithoutWhitespaces.characters.count > Int(trueMax) {
-                    throw VerifiableError.IncorrectTextLength(trueMax)
+                    throw VerifiableError.incorrectTextLength(trueMax)
                 }
             }
 

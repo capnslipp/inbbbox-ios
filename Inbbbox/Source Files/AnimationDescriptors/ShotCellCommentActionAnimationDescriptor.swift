@@ -23,9 +23,9 @@ struct ShotCellCommentActionAnimationDescriptor: AnimationDescriptor {
             let contentViewWidht = shotCell.contentView.bounds.width
             shotCell.commentImageViewRightConstraint?.constant =
                     -round(contentViewWidht / 2 -
-                    shotCell.commentImageView.intrinsicContentSize().width / 2)
+                    shotCell.commentImageView.intrinsicContentSize.width / 2)
             shotCell.commentImageViewWidthConstraint?.constant =
-                    shotCell.commentImageView.intrinsicContentSize().width
+                    shotCell.commentImageView.intrinsicContentSize.width
             shotCell.contentView.layoutIfNeeded()
             shotCell.shotImageView.transform =
                     CGAffineTransform.identity.translatedBy(x: -contentViewWidht, y: 0)

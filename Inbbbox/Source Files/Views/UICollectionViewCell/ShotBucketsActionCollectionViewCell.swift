@@ -10,11 +10,11 @@ import UIKit
 
 class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
 
-    let button = UIButton.newAutoLayoutView()
+    let button = UIButton.newAutoLayout()
 
-    private let cellHeight = CGFloat(44)
+    fileprivate let cellHeight = CGFloat(44)
 
-    private var didUpdateConstraints = false
+    fileprivate var didUpdateConstraints = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,16 +24,16 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
         contentView.configureForAutoLayout()
         
         button.configureForAutoLayout()
-        button.setTitleColor(.pinkColor(), forState: .Normal)
-        button.setTitleColor(.textLightColor(), forState: .Disabled)
-        button.setTitleColor(.pinkColor(alpha: 0.5), forState: .Highlighted)
-        button.titleLabel?.font = UIFont.helveticaFont(.Neue, size: 16)
+        button.setTitleColor(.pinkColor(), for: UIControlState())
+        button.setTitleColor(.textLightColor(), for: .disabled)
+        button.setTitleColor(.pinkColor(alpha: 0.5), for: .highlighted)
+        button.titleLabel?.font = UIFont.helveticaFont(.neue, size: 16)
         contentView.addSubview(button)
 
         setNeedsUpdateConstraints()
     }
 
-    @available(*, unavailable, message = "Use init(frame:) instead")
+    @available(*, unavailable, message : "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -51,7 +51,7 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
         super.updateConstraints()
     }
 
-    override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes)
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes)
                     -> UICollectionViewLayoutAttributes {
 
         layoutAttributes.frame = {
@@ -59,7 +59,7 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
             var frame = layoutAttributes.frame
             frame.size.height = cellHeight
 
-            return CGRectIntegral(frame)
+            return frame.integral
         }()
 
         return layoutAttributes
@@ -68,7 +68,7 @@ class ShotBucketsActionCollectionViewCell: UICollectionViewCell {
 
 extension ShotBucketsActionCollectionViewCell: Reusable {
 
-    class var reuseIdentifier: String {
-        return String(ShotBucketsActionCollectionViewCell)
+    class var identifier: String {
+        return String(describing: ShotBucketsActionCollectionViewCell)
     }
 }

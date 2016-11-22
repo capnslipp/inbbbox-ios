@@ -15,19 +15,19 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
     let title = NSLocalizedString("FolloweesViewModel.Title", comment:"Title of Following screen")
     var followees = [Followee]()
     var followeesIndexedShots = [Int: [ShotType]]()
-    private let teamsProvider = APITeamsProvider()
-    private let connectionsProvider = APIConnectionsProvider()
-    private let shotsProvider = ShotsProvider()
-    private var userMode: UserMode
+    fileprivate let teamsProvider = APITeamsProvider()
+    fileprivate let connectionsProvider = APIConnectionsProvider()
+    fileprivate let shotsProvider = ShotsProvider()
+    fileprivate var userMode: UserMode
 
-    private let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarURL: nil, createdAt: NSDate())
+    fileprivate let netguruTeam = Team(identifier: "653174", name: "", username: "", avatarURL: nil, createdAt: Date())
 
     var itemsCount: Int {
         return followees.count
     }
 
     init() {
-        userMode = UserStorage.isUserSignedIn ? .LoggedUser : .DemoUser
+        userMode = UserStorage.isUserSignedIn ? .loggedUser : .demoUser
     }
 
     func downloadInitialItems() {
@@ -36,7 +36,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             UserStorage.isUserSignedIn ?
                     connectionsProvider.provideMyFollowees() : teamsProvider.provideMembersForTeam(netguruTeam)
         }.then { followees -> Void in
-            if let followees = followees where followees != self.followees || followees.count == 0 {
+            if let followees = followees, followees != self.followees || followees.count == 0 {
                 self.followees = followees
                 self.downloadShots(followees)
                 self.delegate?.viewModelDidLoadInitialItems()
@@ -53,7 +53,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             UserStorage.isUserSignedIn ? connectionsProvider.nextPage() : teamsProvider.nextPage()
         }.then {
             followees -> Void in
-            if let followees = followees where followees.count > 0 {
+            if let followees = followees, followees.count > 0 {
                 let indexes = followees.enumerate().map {
                     index, _ in
                     return index + self.followees.count
@@ -70,7 +70,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
         }
     }
 
-    func downloadShots(followees: [Followee]) {
+    func downloadShots(_ followees: [Followee]) {
         for followee in followees {
             firstly {
                 shotsProvider.provideShotsForUser(followee)
@@ -99,13 +99,13 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
         }
     }
 
-    func followeeCollectionViewCellViewData(indexPath: NSIndexPath) -> FolloweeCollectionViewCellViewData {
-        return FolloweeCollectionViewCellViewData(followee: followees[indexPath.row],
-                shots: followeesIndexedShots[indexPath.row])
+    func followeeCollectionViewCellViewData(_ indexPath: IndexPath) -> FolloweeCollectionViewCellViewData {
+        return FolloweeCollectionViewCellViewData(followee: followees[(indexPath as NSIndexPath).row],
+                shots: followeesIndexedShots[(indexPath as NSIndexPath).row])
     }
 
     func clearViewModelIfNeeded() {
-        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.LoggedUser : .DemoUser
+        let currentUserMode = UserStorage.isUserSignedIn ? UserMode.loggedUser : .demoUser
         if userMode != currentUserMode {
             followees = []
             userMode = currentUserMode
@@ -118,33 +118,33 @@ extension FolloweesViewModel {
 
     struct FolloweeCollectionViewCellViewData {
         let name: String?
-        let avatarURL: NSURL?
+        let avatarURL: URL?
         let numberOfShots: String
-        let shotsImagesURLs: [NSURL]?
+        let shotsImagesURLs: [URL]?
         let firstShotImage: ShotImageType?
 
         init(followee: Followee, shots: [ShotType]?) {
             self.name = followee.name
-            self.avatarURL = followee.avatarURL
+            self.avatarURL = followee.avatarURL as URL?
             self.numberOfShots = String.localizedStringWithFormat(NSLocalizedString("%d shots",
                     comment: "How many shots in collection?"), followee.shotsCount)
-            if let shots = shots where shots.count > 0 {
+            if let shots = shots, shots.count > 0 {
                 let allShotsImagesURLs = shots.map {
                     $0.shotImage.teaserURL
                 }
                 switch allShotsImagesURLs.count {
                 case 1:
-                    shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[0],
-                                       allShotsImagesURLs[0], allShotsImagesURLs[0]]
+                    shotsImagesURLs = [allShotsImagesURLs[0] as URL, allShotsImagesURLs[0] as URL,
+                                       allShotsImagesURLs[0] as URL, allShotsImagesURLs[0] as URL]
                 case 2:
-                    shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[1],
-                                       allShotsImagesURLs[1], allShotsImagesURLs[0]]
+                    shotsImagesURLs = [allShotsImagesURLs[0] as URL, allShotsImagesURLs[1] as URL,
+                                       allShotsImagesURLs[1] as URL, allShotsImagesURLs[0] as URL]
                 case 3:
-                    shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[1],
-                                       allShotsImagesURLs[2], allShotsImagesURLs[0]]
+                    shotsImagesURLs = [allShotsImagesURLs[0] as URL, allShotsImagesURLs[1] as URL,
+                                       allShotsImagesURLs[2] as URL, allShotsImagesURLs[0] as URL]
                 default:
-                    shotsImagesURLs = [allShotsImagesURLs[0], allShotsImagesURLs[1],
-                                       allShotsImagesURLs[2], allShotsImagesURLs[3]]
+                    shotsImagesURLs = [allShotsImagesURLs[0] as URL, allShotsImagesURLs[1] as URL,
+                                       allShotsImagesURLs[2] as URL, allShotsImagesURLs[3] as URL]
                 }
                 firstShotImage = shots[0].shotImage
             } else {

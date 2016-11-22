@@ -50,9 +50,9 @@ private extension String {
         guard let leftBracket = self.range(of: "<"), let rightBracket = self.range(of: ">") else {
             return nil
         }
-
-        let range: Range<String.Index> = leftBracket.startIndex.advancedBy(1) ..< rightBracket.endIndex.advancedBy(-1)
-        let urlString = substringWithRange(range)
+        
+        let range: Range<String.Index> = self.index(leftBracket.lowerBound, offsetBy: 1) ..< self.index(rightBracket.upperBound, offsetBy: -1)
+        let urlString = substring(with: range)
 
         return  URL(string: urlString)
     }
@@ -61,15 +61,10 @@ private extension String {
 private extension URL {
 
     func pageableComponentFromQuery(_ requestQuery: Query) -> PageableComponent? {
-
-        guard var path = path else {
-            return nil
-        }
-
         if let substringEndIndex = path.range(of: requestQuery.service.version)?.upperBound {
-            path = path.substring(from: substringEndIndex)
+            let subPath = path.substring(from: substringEndIndex)
+            return PageableComponent(path: subPath, query: query)
         }
-
-        return PageableComponent(path: path, query: query)
+        return nil
     }
 }

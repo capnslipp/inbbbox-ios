@@ -53,7 +53,7 @@ class PageableProvider: Verifiable {
 
             let mappedQueries = queries.map { queryByPagingConfiguration($0) }
 
-            pageWithQueries(mappedQueries).then(fulfill).error(reject)
+            pageWithQueries(mappedQueries).then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -61,18 +61,18 @@ class PageableProvider: Verifiable {
         return Promise<[T]?> { fulfill, reject in
 
             if !didDefineProviderMethodBefore {
-                throw PageableProviderError.BehaviourUndefined
+                throw PageableProviderError.behaviourUndefined
             }
 
             guard let nextPageableComponents = nextPageableComponents else {
-                throw PageableProviderError.DidReachLastPage
+                throw PageableProviderError.didReachLastPage
             }
 
             let queries = nextPageableComponents.map {
                 PageableQuery(path: $0.path, queryItems: $0.queryItems)
             } as [Query]
 
-            pageWithQueries(queries).then(fulfill).error(reject)
+            pageWithQueries(queries).then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -80,18 +80,18 @@ class PageableProvider: Verifiable {
         return Promise<[T]?> { fulfill, reject in
 
             if !didDefineProviderMethodBefore {
-                throw PageableProviderError.BehaviourUndefined
+                throw PageableProviderError.behaviourUndefined
             }
 
             guard let previousPageableComponents = previousPageableComponents else {
-                throw PageableProviderError.DidReachFirstPage
+                throw PageableProviderError.didReachFirstPage
             }
 
             let queries = previousPageableComponents.map {
                 PageableQuery(path: $0.path, queryItems: $0.queryItems)
             } as [Query]
 
-            pageWithQueries(queries).then(fulfill).error(reject)
+            pageWithQueries(queries).then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -110,7 +110,7 @@ private extension PageableProvider {
             let requests = queries.map { PageRequest(query: $0) }
 
             firstly {
-                when(requests.map { $0.resume() })
+                when(fulfilled: requests.map { $0.resume() })
             }.then { responses -> Void in
 
                 self.nextPageableComponents = {
@@ -132,7 +132,7 @@ private extension PageableProvider {
 
                 fulfill(result)
 
-            }.error(reject)
+                }.catch(execute: reject)
         }
     }
 

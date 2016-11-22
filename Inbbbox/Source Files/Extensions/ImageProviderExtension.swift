@@ -7,7 +7,7 @@
 //
 
 import ImageViewer
-
+/*
 extension ImageProvider {
     func provideImage(atIndex index: Int, completion: (UIImage?) -> Void) { }
-}
+}*/

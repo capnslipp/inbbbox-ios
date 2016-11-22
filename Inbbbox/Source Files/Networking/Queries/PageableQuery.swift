@@ -28,8 +28,10 @@ struct PageableQuery: Query {
     /// - parameter queryItems: Query's items.
     init(path: String, queryItems: [URLQueryItem]?) {
         self.path = path
+        var params = Parameters(encoding: .url)
         queryItems?.forEach {
-            parameters[$0.name] = $0.value
+            params[$0.name] = $0.value as AnyObject?
         }
+        parameters = params
     }
 }

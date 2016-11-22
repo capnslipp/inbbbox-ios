@@ -62,7 +62,7 @@ class APIShotsRequester: Verifiable {
                 sendShotQuery(query)
             }.then { _ in
                 fulfill(true)
-            }.error { error in
+            }.catch { error in
                 // According to API documentation, when response.code is 404,
                 // then shot is not liked by authenticated user.
                 (error as NSError).code == 404 ? fulfill(false) : reject(error)
@@ -81,7 +81,7 @@ class APIShotsRequester: Verifiable {
      */
     func userBucketsForShot(_ shot: ShotType) -> Promise<[BucketType]?> {
 
-        return Promise<[BucketType]!> { fulfill, reject in
+        return Promise<[BucketType]?> { fulfill, reject in
 
             let query = BucketsForShotQuery(shot: shot)
 
@@ -92,7 +92,7 @@ class APIShotsRequester: Verifiable {
                     return bucket.owner.identifier == (UserStorage.currentUser?.identifier)!
                 })
                 fulfill(values)
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -115,11 +115,11 @@ class APIShotsRequester: Verifiable {
             }.then { json -> Void in
 
                 guard let json = json else {
-                    throw AuthenticatorError.UnableToFetchUser
+                    throw AuthenticatorError.unableToFetchUser
                 }
                 fulfill(Shot.map(json) as ShotType)
 
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }
@@ -135,7 +135,7 @@ private extension APIShotsRequester {
                 Request(query: query).resume()
             }.then { _ -> Void in
                 fulfill()
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -148,7 +148,7 @@ private extension APIShotsRequester {
                 Request(query: query).resume()
             }.then { json -> Void in
                 fulfill(json)
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }

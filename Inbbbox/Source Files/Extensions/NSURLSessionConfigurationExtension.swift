@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension NSURLSessionConfiguration {
+extension URLSessionConfiguration {
 
-    class func inbbboxDefaultSessionConfiguration() -> NSURLSessionConfiguration {
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.requestCachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+    class func inbbboxDefaultSessionConfiguration() -> URLSessionConfiguration {
+        let configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData
         return configuration
     }
 }

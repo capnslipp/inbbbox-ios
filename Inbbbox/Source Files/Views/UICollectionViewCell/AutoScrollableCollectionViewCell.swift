@@ -11,8 +11,8 @@ import PureLayout
 
 class AutoScrollableCollectionViewCell: UICollectionViewCell {
 
-    let imageView = UIImageView.newAutoLayoutView()
-    private var didSetConstraints = false
+    let imageView = UIImageView.newAutoLayout()
+    fileprivate var didSetConstraints = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,7 @@ class AutoScrollableCollectionViewCell: UICollectionViewCell {
         setNeedsUpdateConstraints()
     }
 
-    @available(*, unavailable, message="Use init(frame:) instead")
+    @available(*, unavailable, message: "Use init(frame:) instead")
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -47,7 +47,7 @@ class AutoScrollableCollectionViewCell: UICollectionViewCell {
 
 extension AutoScrollableCollectionViewCell: Reusable {
 
-    class var reuseIdentifier: String {
+    class var identifier: String {
         return "AutoScrollableCollectionViewCellReuseIdentifier"
     }
 }

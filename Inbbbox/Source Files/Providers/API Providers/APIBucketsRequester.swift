@@ -73,7 +73,7 @@ private extension APIBucketsRequester {
                 Request(query: query).resume()
             }.then { _ -> Void in
                 fulfill()
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -89,11 +89,11 @@ private extension APIBucketsRequester {
             }.then { json -> Void in
 
                 guard let json = json else {
-                    throw ResponseError.UnexpectedResponse
+                    throw ResponseError.unexpectedResponse
                 }
                 fulfill(Bucket.map(json))
 
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }

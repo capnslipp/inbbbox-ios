@@ -67,7 +67,7 @@ struct PageRequest: Requestable, Responsable {
                             previous: previous)
                     ))
 
-                }.error(reject)
+                }.catch(execute: reject)
             }
 
             dataTask.resume()
