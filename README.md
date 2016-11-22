@@ -63,6 +63,7 @@ You're more than welcome to contribute. Just try to follow our [coding style gui
     * [Łukasz Wolańczyk](https://github.com/lukwol)
     * [Robert Abramczyk](https://github.com/Malibris)
     * [Tomasz Walenciak](https://github.com/twalenciak)
+    * [Błażej Wdowikowski](https://github.com/bwdowikowski)
 
 Copyright © 2016 [Netguru](http://netguru.co).
 
