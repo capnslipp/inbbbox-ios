@@ -108,7 +108,7 @@ extension ShotDetailsViewController: UIScrollViewDelegate {
 
             if index >= 0 && index < viewModel.comments.count {
                 firstly {
-                    viewModel.checkLikeStatusForComment(atIndexPath: indexPath as NSIndexPath, force: false)
+                    viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: false)
                 }.then { isLiked -> Void in
                     self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
                     if isLiked {

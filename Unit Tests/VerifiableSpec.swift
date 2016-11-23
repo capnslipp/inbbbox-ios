@@ -53,7 +53,7 @@ class VerifiableSpec: QuickSpec {
                         sut.verifyAuthenticationStatus(false).then { _ -> Void in
                             didInvokePromise = true
                             done()
-                        }.error { _ in fail() }
+                        }.catch { _ in fail() }
                     }
                     
                     expect(didInvokePromise).to(beTruthy())
@@ -68,7 +68,7 @@ class VerifiableSpec: QuickSpec {
                     waitUntil { done in
                         sut.verifyAuthenticationStatus(true).then { _ -> Void in
                             fail()
-                        }.error { _error in
+                        }.catch { _error in
                             didInvokePromise = true
                             error = _error
                             done()
@@ -95,7 +95,7 @@ class VerifiableSpec: QuickSpec {
                         sut.verifyAuthenticationStatus(false).then { _ -> Void in
                             didInvokePromise = true
                             done()
-                        }.error { _ in fail() }
+                        }.catch { _ in fail() }
                     }
                     
                     expect(didInvokePromise).to(beTruthy())
@@ -111,7 +111,7 @@ class VerifiableSpec: QuickSpec {
                         sut.verifyAuthenticationStatus(true).then { _ -> Void in
                             didInvokePromise = true
                             done()
-                        }.error { _ in fail() }
+                        }.catch { _ in fail() }
                     }
                     
                     expect(didInvokePromise).to(beTruthy())
@@ -131,7 +131,7 @@ class VerifiableSpec: QuickSpec {
                 it("error should occur") {
                     sut.verifyAccountType().then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -150,7 +150,7 @@ class VerifiableSpec: QuickSpec {
                     
                     sut.verifyAccountType().then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -169,7 +169,7 @@ class VerifiableSpec: QuickSpec {
                     
                     sut.verifyAccountType().then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy())
                 }
@@ -183,7 +183,7 @@ class VerifiableSpec: QuickSpec {
                 it("should not pass validation") {
                     sut.verifyTextLength("foo", min: 0, max: 2).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -196,7 +196,7 @@ class VerifiableSpec: QuickSpec {
                 it("should not pass validation") {
                     sut.verifyTextLength("foobar", min: 0, max: 2).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -209,7 +209,7 @@ class VerifiableSpec: QuickSpec {
                 it("should not pass validation") {
                     sut.verifyTextLength("foobar", min: 2, max: 0).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     

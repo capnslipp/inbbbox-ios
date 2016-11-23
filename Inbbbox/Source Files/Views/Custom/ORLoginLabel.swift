@@ -38,9 +38,9 @@ class ORLoginLabel: UILabel {
         context?.setLineWidth(1)
 
         context?.move(to: CGPoint(x: 0, y: y))
-        context.addLine(to: CGPoint(x: rect.midX - boundingTextRect.width * 0.5 - space, y: y))
+        context?.addLine(to: CGPoint(x: rect.midX - boundingTextRect.width * 0.5 - space, y: y))
 
-        context.move(to: CGPoint(x: rect.midX + boundingTextRect.width * 0.5 + space, y: y))
+        context?.move(to: CGPoint(x: rect.midX + boundingTextRect.width * 0.5 + space, y: y))
         context?.addLine(to: CGPoint(x: rect.maxX, y: y))
 
         context?.strokePath()

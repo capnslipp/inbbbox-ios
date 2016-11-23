@@ -50,7 +50,7 @@ class APIConnectionsProviderSpec: QuickSpec {
                 it("error should appear") {
                     sut.provideMyFollowees().then { _ -> Void in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -67,7 +67,7 @@ class APIConnectionsProviderSpec: QuickSpec {
                 it("buckets should be properly returned") {
                     sut.provideMyFollowees().then { _followees -> Void in
                         followees = _followees
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(followees).toNotEventually(beNil())
                     expect(followees).toEventually(haveCount(3))
@@ -84,7 +84,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             it("from next page, followers should be properly returned") {
                 sut.nextPage().then { _followers -> Void in
                     followers = _followers
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(followers).toNotEventually(beNil())
                 expect(followers).toEventually(haveCount(3))
@@ -93,7 +93,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             it("from previous page, followers be properly returned") {
                 sut.previousPage().then { _followers -> Void in
                     followers = _followers
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(followers).toNotEventually(beNil())
                 expect(followers).toEventually(haveCount(3))
@@ -121,7 +121,7 @@ class APIConnectionsProviderSpec: QuickSpec {
                 it("error should appear") {
                     sut.provideMyFollowers().then { _ -> Void in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -139,7 +139,7 @@ class APIConnectionsProviderSpec: QuickSpec {
                 it("buckets should be properly returned") {
                     sut.provideMyFollowers().then { _followeers -> Void in
                         followers = _followeers
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(followers).toNotEventually(beNil())
                     expect(followers).toEventually(haveCount(3))
@@ -156,7 +156,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             it("for user, followees should be properly returned") {
                 sut.provideFolloweesForUser(User.fixtureUser()).then { _followees -> Void in
                     followees = _followees
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(followees).toNotEventually(beNil())
                 expect(followees).toEventually(haveCount(3))
@@ -165,7 +165,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             it("for users, followees should be properly returned") {
                 sut.provideFolloweesForUsers([User.fixtureUser(), User.fixtureUser()]).then { _followees -> Void in
                     followees = _followees
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                 
                 expect(followees).toNotEventually(beNil())
                 expect(followees).toEventually(haveCount(3))
@@ -181,7 +181,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             it("for user, followers should be properly returned") {
                 sut.provideFollowersForUser(User.fixtureUser()).then { _followers -> Void in
                     followers = _followers
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                 
                 expect(followers).toNotEventually(beNil())
                 expect(followers).toEventually(haveCount(3))
@@ -190,7 +190,7 @@ class APIConnectionsProviderSpec: QuickSpec {
             it("for users, followers should be properly returned") {
                 sut.provideFollowersForUsers([User.fixtureUser(), User.fixtureUser()]).then { _followers -> Void in
                     followers = _followers
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(followers).toNotEventually(beNil())
                 expect(followers).toEventually(haveCount(3))

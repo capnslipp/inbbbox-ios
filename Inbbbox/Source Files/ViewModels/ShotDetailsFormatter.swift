@@ -90,15 +90,17 @@ final class ShotDetailsFormatter {
             return nil
         }
 
-        let mutableBody = body.attributedStringByTrimingTrailingNewLine().mutableCopy()
-        let range = NSRange(location: 0, length: (mutableBody as AnyObject).length)
+        if let mutableBody = body.attributedStringByTrimingTrailingNewLine().mutableCopy() as? NSMutableAttributedString {
+            let range = NSRange(location: 0, length: (mutableBody as AnyObject).length)
 
-        (mutableBody as AnyObject).addAttributes([
-                NSForegroundColorAttributeName: ColorModeProvider.current().shotDetailsCommentContentTextColor,
-                NSFontAttributeName: UIFont.systemFont(ofSize: ShotDetailsFormatterBigFontSize)
-        ], range: range)
+            (mutableBody as AnyObject).addAttributes([
+                    NSForegroundColorAttributeName: ColorModeProvider.current().shotDetailsCommentContentTextColor,
+                    NSFontAttributeName: UIFont.systemFont(ofSize: ShotDetailsFormatterBigFontSize)
+            ], range: range)
 
-        return (mutableBody as AnyObject).copy() as? NSAttributedString
+            return mutableBody.copy() as? NSAttributedString
+        }
+        return nil
     }
 
     class func commentDateForComment(_ comment: CommentType) -> NSAttributedString {

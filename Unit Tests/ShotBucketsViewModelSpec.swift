@@ -131,7 +131,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                         sut.loadBuckets().then { result -> Void in
                             didReceiveResponse = true
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                 }
                 
@@ -163,14 +163,14 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                     
                     waitUntil { done in
                         sut.addShotToBucketAtIndex(0).then { result -> Void in
                             didReceiveResponse = true
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                 }
                 
@@ -196,21 +196,21 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                     
                     waitUntil { done in
                         sut.createBucket("fixture.name").then { result -> Void in
                             didCreateBucket = true
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                     
                     waitUntil { done in
                         sut.addShotToBucketAtIndex(2).then { result -> Void in
                             didReceiveResponse = true
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                 }
                 
@@ -275,7 +275,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                         sut.loadBuckets().then { result -> Void in
                             didReceiveResponse = true
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                 }
                 
@@ -307,7 +307,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     waitUntil { done in
                         sut.loadBuckets().then { result -> Void in
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                     
                     sut.selectBucketAtIndex(0)
@@ -317,7 +317,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
                         sut.removeShotFromSelectedBuckets().then { result -> Void in
                             didReceiveResponse = true
                             done()
-                        }.error { _ in fail("This should not be invoked") }
+                        }.catch { _ in fail("This should not be invoked") }
                     }
                 }
                 

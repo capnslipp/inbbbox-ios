@@ -57,7 +57,7 @@ class RequestSpec: QuickSpec {
                         sut.resume().then { _response -> Void in
                             response = _response
                             done()
-                        }.error { _ in fail() }
+                        }.catch { _ in fail() }
                     }
                     
                     expect(response).toNot(beNil())
@@ -85,7 +85,7 @@ class RequestSpec: QuickSpec {
                         
                         sut.resume().then { _ -> Void in
                             fail()
-                        }.error { _error in
+                        }.catch { _error in
                             error = _error
                             done()
                         }

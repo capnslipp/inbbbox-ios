@@ -75,7 +75,7 @@ class LargeUserCollectionViewCell: BaseInfoShotsCollectionViewCell, Reusable, Wi
     // MARK: - Reusable
 
     static var identifier: String {
-        return String(describing: LargeUserCollectionViewCell)
+        return String(describing: LargeUserCollectionViewCell.self)
     }
 
     // MARK: - Width dependent height

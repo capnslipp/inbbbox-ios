@@ -45,7 +45,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             if bucketsShouldBeReloaded {
                 self.delegate?.viewModelDidLoadInitialItems()
             }
-        }.error {
+        }.catch {
             error in
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
@@ -60,18 +60,18 @@ class BucketsViewModel: BaseCollectionViewViewModel {
         }.then {
             buckets -> Void in
             if let buckets = buckets, buckets.count > 0 {
-                let indexes = buckets.enumerate().map {
+                let indexes = buckets.enumerated().map {
                     index, _ in
                     return index + self.buckets.count
                 }
-                self.buckets.appendContentsOf(buckets)
+                self.buckets.append(contentsOf: buckets)
                 let indexPaths = indexes.map {
-                    NSIndexPath(forRow: ($0), inSection: 0)
+                    IndexPath(row: ($0), section: 0)
                 }
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
                 self.downloadShots(buckets)
             }
-        }.error { error in
+        }.catch { error in
             self.notifyDelegateAboutFailure(error)
         }
     }
@@ -84,7 +84,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 shots -> Void in
                 var bucketShotsShouldBeReloaded = true
                 var indexOfBucket: Int?
-                for (index, item) in self.buckets.enumerate() {
+                for (index, item) in self.buckets.enumerated() {
                     if item.identifier == bucket.identifier {
                         indexOfBucket = index
                         break
@@ -105,10 +105,10 @@ class BucketsViewModel: BaseCollectionViewViewModel {
                 }
 
                 if bucketShotsShouldBeReloaded {
-                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                    let indexPath = IndexPath(row: index, section: 0)
                     self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
                 }
-            }.error { error in
+            }.catch { error in
                 self.notifyDelegateAboutFailure(error)
             }
         }
@@ -122,7 +122,7 @@ class BucketsViewModel: BaseCollectionViewViewModel {
             }.then {
                 bucket in
                 self.buckets.append(bucket)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 

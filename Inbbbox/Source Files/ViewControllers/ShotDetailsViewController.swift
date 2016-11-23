@@ -15,13 +15,13 @@ import MessageUI
 final class ShotDetailsViewController: UIViewController {
 
     private lazy var __once: () = {
-            if ShotDetailsViewController.shouldScrollToMostRecentMessage {
-                ShotDetailsViewController.viewModel.isCommentingAvailable ? ShotDetailsViewController.shotDetailsView.commentComposerView.makeActive() :
-                        ShotDetailsViewController.scroller.scrollToBottomAnimated(true)
+            if self.shouldScrollToMostRecentMessage {
+                self.viewModel.isCommentingAvailable ? self.shotDetailsView.commentComposerView.makeActive() :
+                        self.scroller.scrollToBottomAnimated(true)
             }
-            if ShotDetailsViewController.shouldShowKeyboardAtStart && ShotDetailsViewController.viewModel.isCommentingAvailable {
+            if self.shouldShowKeyboardAtStart && self.viewModel.isCommentingAvailable {
                 AsyncWrapper().main {
-                    ShotDetailsViewController.shotDetailsView.commentComposerView.textField.becomeFirstResponder()
+                    self.shotDetailsView.commentComposerView.textField.becomeFirstResponder()
                 }
             }
         }()
@@ -440,7 +440,7 @@ private extension ShotDetailsViewController {
             viewModel.removeShotFromBucketIfExistsInExactlyOneBucket()
         }.then { result -> Void in
             if let bucketNumber = result.bucketsNumber, !result.removed {
-                let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .AddToBucket : .RemoveFromBucket
+                let mode: ShotBucketsViewControllerMode = bucketNumber == 0 ? .addToBucket : .removeFromBucket
                 self.presentShotBucketsViewControllerWithMode(mode, onModalCompletion: {
                     self.refreshLikesBucketsCounter()
                 })
@@ -450,7 +450,7 @@ private extension ShotDetailsViewController {
             }
         }.always {
             view.stopAnimating()
-        }.error { error in
+        }.catch { error in
             FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.bucketProcessingFailed, canBeDismissedByUser: true)
         }
     }
@@ -480,10 +480,10 @@ private extension ShotDetailsViewController {
         }.then { () -> Void in
             var indexPaths = [indexPath]
             if isAllowedToDisplaySeparator != self.viewModel.isAllowedToDisplaySeparator {
-                indexPaths.append(NSIndexPath(forItem: indexPath.item - 1, inSection: 0))
+                indexPaths.append(IndexPath(item: indexPath.item - 1, section: 0))
             }
-            self.shotDetailsView.collectionView.deleteItemsAtIndexPaths(indexPaths)
-        }.error { error in
+            self.shotDetailsView.collectionView.deleteItems(at: indexPaths)
+        }.catch { error in
             FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.deleteCommentFailed, canBeDismissedByUser: true)
         }
     }
@@ -517,7 +517,7 @@ private extension ShotDetailsViewController {
             self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
         }.then { isLiked -> Void in
             self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
-            self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+            self.shotDetailsView.collectionView.reloadItems(at: [indexPath])
         }
     }
 
@@ -528,7 +528,7 @@ private extension ShotDetailsViewController {
             self.viewModel.checkLikeStatusForComment(atIndexPath: indexPath, force: true)
         }.then { isLiked -> Void in
             self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
-            self.shotDetailsView.collectionView.reloadItemsAtIndexPaths([indexPath])
+            self.shotDetailsView.collectionView.reloadItems(at: [indexPath])
         }
     }
 
@@ -554,7 +554,7 @@ private extension ShotDetailsViewController {
 
     func presentShotFullscreen() {
 
-        guard let header = header else { return }
+        /*guard let header = header else { return }
 
         var imageViewer: ImageViewer {
             if viewModel.shot.animated {
@@ -565,7 +565,7 @@ private extension ShotDetailsViewController {
             }
         }
 
-        presentImageViewer(imageViewer)
+        presentImageViewer(imageViewer)*/
     }
     
     func presentFullScreenAttachment(_ displacedView: UIView) {
@@ -574,14 +574,14 @@ private extension ShotDetailsViewController {
          from where animation will start but without showing thumbnail 
          image in show animation.
          */
-        let view = UIView(frame: displacedView.frame)
+        /*let view = UIView(frame: displacedView.frame)
         view.backgroundColor = .clear
         displacedView.superview?.addSubview(view)
         let imageViewer = ImageViewer(imageProvider: header!, displacedView: view)
         imageViewer.dismissCompletionBlock = {
             view.removeFromSuperview()
         }
-        presentImageViewer(imageViewer)
+        presentImageViewer(imageViewer)*/
     }
 
     func grayOutFooterIfNeeded() {

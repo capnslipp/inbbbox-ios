@@ -88,7 +88,7 @@ class ShotDetailsFooterView: UICollectionReusableView {
 
 extension ShotDetailsFooterView: Reusable {
 
-    class var reuseIdentifier: String {
-        return String(describing: ShotDetailsFooterView)
+    class var identifier: String {
+        return String(describing: ShotDetailsFooterView.self)
     }
 }

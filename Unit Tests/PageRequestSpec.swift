@@ -42,7 +42,7 @@ class PageRequestSpec: QuickSpec {
                 
                 sut.resume().then { _ -> Void in
                     didInvokeSuccess = true
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(didInvokeSuccess).toEventuallyNot(beNil())
                 expect(didInvokeSuccess!).toEventually(beTruthy())
@@ -66,7 +66,7 @@ class PageRequestSpec: QuickSpec {
                 
                 sut.resume().then { _ -> Void in
                     fail()
-                }.error { _error in
+                }.catch { _error in
                     error = _error
                 }
                 

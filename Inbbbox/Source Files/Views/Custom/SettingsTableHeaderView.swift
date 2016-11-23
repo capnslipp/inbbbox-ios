@@ -11,7 +11,7 @@ import Async
 
 class SettingsTableHeaderView: UIView, Reusable, AvatarSettable {
 
-    class var reuseIdentifier: String {
+    class var identifier: String {
         return "SettingsTableHeaderViewReuseIdentifier"
     }
 

@@ -82,16 +82,16 @@ class ShotBucketsViewModel {
 
             switch shotBucketsViewControllerMode {
 
-            case .AddToBucket:
+            case .addToBucket:
                 firstly {
                     bucketsProvider.provideMyBuckets()
                 }.then { buckets in
                     self.buckets = buckets ?? []
                 }.then {
                     self.didDownloadBuckets = true
-                }.then(fulfill).error(reject)
+                }.then(execute: fulfill).catch(execute: reject)
 
-            case .RemoveFromBucket:
+            case .removeFromBucket:
                 firstly {
                     shotsRequester.userBucketsForShot(shot)
                 }.then {
@@ -99,7 +99,7 @@ class ShotBucketsViewModel {
                     self.buckets = buckets ?? []
                 }.then { _ in
                     self.didDownloadBuckets = true
-                }.then(fulfill).error(reject)
+                }.then(execute: fulfill).catch(execute: reject)
             }
         }
     }
@@ -112,7 +112,7 @@ class ShotBucketsViewModel {
             }.then {
                 bucket in
                 self.buckets.append(bucket)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -122,7 +122,7 @@ class ShotBucketsViewModel {
 
             firstly {
                 bucketsRequester.addShot(shot, toBucket: buckets[index])
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -135,9 +135,9 @@ class ShotBucketsViewModel {
                 bucketsToRemoveShot.append(buckets[$0])
             }
 
-            when(bucketsToRemoveShot.map {
+            when(fulfilled: bucketsToRemoveShot.map {
                 bucketsRequester.removeShot(shot, fromBucket: $0)
-            }).then(fulfill).error(reject)
+            }).then(execute: fulfill).catch(execute: reject)
         }
     }
 

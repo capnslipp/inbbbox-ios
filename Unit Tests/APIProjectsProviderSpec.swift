@@ -33,7 +33,7 @@ class APIProjectsProviderSpec: QuickSpec {
             it("comments should be properly returned") {
                 sut.provideProjectsForShot(Shot.fixtureShot()).then { _projects -> Void in
                     projects = _projects
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(projects).toNotEventually(beNil())
                 expect(projects).toEventually(haveCount(3))

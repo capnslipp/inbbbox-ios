@@ -56,7 +56,7 @@ class UserDetailsViewModel: ProfileViewModel {
                 self.userShots = shots
                 self.delegate?.viewModelDidLoadInitialItems()
             }
-        }.error { error in
+        }.catch { error in
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
@@ -66,16 +66,16 @@ class UserDetailsViewModel: ProfileViewModel {
             shotsProvider.nextPage()
         }.then { shots -> Void in
             if let shots = shots, shots.count > 0 {
-                let indexes = shots.enumerate().map { index, _ in
+                let indexes = shots.enumerated().map { index, _ in
                     return index + self.userShots.count
                 }
-                self.userShots.appendContentsOf(shots)
+                self.userShots.append(contentsOf: shots)
                 let indexPaths = indexes.map {
-                    NSIndexPath(forRow:($0), inSection: 0)
+                    IndexPath(row:($0), section: 0)
                 }
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
             }
-        }.error { error in
+        }.catch { error in
             self.notifyDelegateAboutFailure(error)
         }
     }
@@ -90,7 +90,7 @@ class UserDetailsViewModel: ProfileViewModel {
                 connectionsRequester.isUserFollowedByMe(user)
             }.then { followed in
                 fulfill(followed)
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -100,7 +100,7 @@ class UserDetailsViewModel: ProfileViewModel {
 
             firstly {
                 connectionsRequester.followUser(user)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -110,7 +110,7 @@ class UserDetailsViewModel: ProfileViewModel {
 
             firstly {
                 connectionsRequester.unfollowUser(user)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 

@@ -56,6 +56,6 @@ class ShotBucketsFooterView: UICollectionReusableView {
 extension ShotBucketsFooterView: Reusable {
 
     class var identifier: String {
-        return String(describing: ShotBucketsFooterView)
+        return String(describing: ShotBucketsFooterView.self)
     }
 }

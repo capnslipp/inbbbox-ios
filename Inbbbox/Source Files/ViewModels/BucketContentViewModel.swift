@@ -39,7 +39,7 @@ class BucketContentViewModel: SimpleShotsViewModel {
                 self.shots = shots
             }
             self.delegate?.viewModelDidLoadInitialItems()
-        }.error { error in
+        }.catch { error in
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
@@ -52,16 +52,16 @@ class BucketContentViewModel: SimpleShotsViewModel {
             shotsProvider.nextPage()
         }.then { shots -> Void in
             if let shots = shots, shots.count > 0 {
-                let indexes = shots.enumerate().map { index, _ in
+                let indexes = shots.enumerated().map { index, _ in
                     return index + self.shots.count
                 }
-                self.shots.appendContentsOf(shots)
+                self.shots.append(contentsOf: shots)
                 let indexPaths = indexes.map {
-                    NSIndexPath(forRow:($0), inSection: 0)
+                    IndexPath(row:($0), section: 0)
                 }
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
             }
-        }.error { error in
+        }.catch { error in
             self.notifyDelegateAboutFailure(error)
         }
     }

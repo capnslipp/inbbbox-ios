@@ -12,13 +12,13 @@ class ShotsCollectionViewController: UICollectionViewController {
         case onboarding, initialAnimations, normal
     }
 
-    let initialState: State = Defaults[.onboardingPassed] ? .InitialAnimations : .Onboarding
+    let initialState: State = Defaults[.onboardingPassed] ? .initialAnimations : .onboarding
     var stateHandler: ShotsStateHandler
     var backgroundAnimator: MainScreenStreamSourcesAnimator?
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
-    fileprivate var onceTokenForInitialShotsAnimation = Int(0)
     fileprivate var emptyShotsView: UIView?
+    fileprivate var didSetupAnimation = false
 
     // MARK: Life cycle
 
@@ -79,19 +79,18 @@ extension ShotsCollectionViewController {
 
         AnalyticsManager.trackScreen(.ShotsView)
 
-        if(onceTokenForInitialShotsAnimation != 0) {
-            AsyncWrapper().main(after: 1) { [unowned self] in
-                self.showStreamSources()
-            }
-        }
-        dispatch_once(&onceTokenForInitialShotsAnimation) {
+        if (!didSetupAnimation) {
             firstly {
                 self.refreshShotsData()
             }.then {
                 self.stateHandler.presentData()
-            }.error { error in
+            }.catch { error in
                 let alertController = UIAlertController.willSignOutUser()
-                self.tabBarController?.presentViewController(alertController, animated: true, completion: nil)
+                self.tabBarController?.present(alertController, animated: true, completion: nil)
+            }
+        } else {
+            AsyncWrapper().main(after: 1) { [unowned self] in
+                self.showStreamSources()
             }
         }
     }
@@ -164,15 +163,16 @@ extension ShotsCollectionViewController {
 // NGRTodo: iOS 10 only API. Remove after updating project.
 #if swift(>=2.3)
 extension ShotsCollectionViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(collectionView: UICollectionView, prefetchItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+    @available(iOS 10.0, *)
+    public func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         if let stateHandler = stateHandler as? ShotsNormalStateHandler {
-            stateHandler.collectionView(collectionView, prefetchItemsAtIndexPaths: indexPaths)
+            stateHandler.collectionView(collectionView, prefetchItemsAt: indexPaths)
         }
     }
-
-    func collectionView(collectionView: UICollectionView, cancelPrefetchingForItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+    @available(iOS 10.0, *)
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         if let stateHandler = stateHandler as? ShotsNormalStateHandler {
-            stateHandler.collectionView(collectionView, cancelPrefetchingForItemsAtIndexPaths: indexPaths)
+            stateHandler.collectionView(collectionView: collectionView, cancelPrefetchingForItemsAtIndexPaths: indexPaths)
         }
     }
 }
@@ -252,8 +252,8 @@ private extension ShotsCollectionViewController {
             refreshShotsData()
         }.then { () -> Void in
             self.collectionView?.reloadData()
-            self.collectionView?.setContentOffset(CGPointZero, animated: true)
-        }.error { error in
+            self.collectionView?.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+        }.catch { error in
             FlashMessage.sharedInstance.showNotification(inViewController: self, title: FlashMessageTitles.downloadingShotsFailed, canBeDismissedByUser: true)
         }
     }
@@ -264,7 +264,7 @@ private extension ShotsCollectionViewController {
                 self.shotsProvider.provideShots()
             }.then { shots -> Void in
                 self.shots = shots ?? []
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
     

@@ -171,8 +171,9 @@ extension ShotsNormalStateHandler: UICollectionViewDataSourcePrefetching {
             load(shot.shotImage, for: $0 as IndexPath)
         }
     }
-
-    public func collectionView(collectionView: UICollectionView, cancelPrefetchingForItemsAtIndexPaths indexPaths: [NSIndexPath]) {
+    
+    @available(iOS 10.0, *)
+    public func collectionView(collectionView: UICollectionView, cancelPrefetchingForItemsAtIndexPaths indexPaths: [IndexPath]) {
         indexPathsNeededImageUpdate.removeAll()
     }
 }

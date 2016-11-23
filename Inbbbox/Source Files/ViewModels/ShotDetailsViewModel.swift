@@ -176,7 +176,7 @@ extension ShotDetailsViewModel {
                 }.then { _ -> Void in
                     self.isShotLikedByMe = !shotLiked
                     fulfill(!shotLiked)
-                }.error(reject)
+                }.catch(execute: reject)
             }
         }
     }
@@ -194,7 +194,7 @@ extension ShotDetailsViewModel {
             }.then { isShotLikedByMe -> Void in
                 self.isShotLikedByMe = isShotLikedByMe
                 fulfill(isShotLikedByMe)
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -213,8 +213,8 @@ extension ShotDetailsViewModel {
             firstly {
                 checkNumberOfUserBucketsForShot()
             }.then { number -> Void in
-                fulfill(Bool(number))
-            }.error(reject)
+                fulfill(number != 0)
+            }.catch(execute: reject)
         }
     }
 
@@ -229,10 +229,12 @@ extension ShotDetailsViewModel {
             firstly {
                 shotsRequester.userBucketsForShot(shot)
             }.then { buckets -> Void in
-                self.userBucketsForShot = buckets
-                self.userBucketsForShotCount = self.userBucketsForShot.count
+                if let buckets = buckets {
+                    self.userBucketsForShot = buckets
+                    self.userBucketsForShotCount = self.userBucketsForShot.count
+                }
                 fulfill(self.userBucketsForShotCount!)
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -260,7 +262,7 @@ extension ShotDetailsViewModel {
                 } else {
                     fulfill((removed: false, bucketsNumber: numberOfBuckets))
                 }
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 }
@@ -296,7 +298,7 @@ extension ShotDetailsViewModel {
                     self.comments = comments ?? []
                 }.always {
                     self.isFetchingComments = false
-                }.then(fulfill).error(reject)
+                }.then(execute: fulfill).catch(execute: reject)
 
             } else {
 
@@ -304,11 +306,11 @@ extension ShotDetailsViewModel {
                     commentsProvider.nextPage()
                 }.then { comments -> Void in
                     if let comments = comments {
-                        self.comments.appendContentsOf(comments)
+                        self.comments.append(contentsOf: comments)
                     }
                 }.always {
                     self.isFetchingComments = false
-                }.then(fulfill).error(reject)
+                }.then(execute: fulfill).catch(execute: reject)
             }
         }
     }
@@ -322,10 +324,10 @@ extension ShotDetailsViewModel {
             }.then {
                 if !self.hasMoreCommentsToFetch {
                     fulfill()
-                    return Promise()
+                    return Promise<Void>(value: Void())
                 }
                 return self.loadAllComments()
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -336,7 +338,7 @@ extension ShotDetailsViewModel {
                 commentsRequester.postCommentForShot(shot, withText: message)
             }.then { comment in
                 self.comments.append(comment)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
@@ -349,11 +351,11 @@ extension ShotDetailsViewModel {
                 commentsRequester.deleteComment(comment, forShot: shot)
             }.then { comment -> Void in
                 let indexOfCommentToRemove = self.indexInCommentArrayBasedOnItemIndex(index)
-                self.comments.removeAtIndex(indexOfCommentToRemove)
-                self.cachedFormattedComments.removeAtIndex(indexOfCommentToRemove)
+                self.comments.remove(at: indexOfCommentToRemove)
+                self.cachedFormattedComments.remove(at: indexOfCommentToRemove)
 
                 fulfill()
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
 
@@ -375,7 +377,7 @@ extension ShotDetailsViewModel {
         return report
     }
 
-    func performLikeOperationForComment(atIndexPath indexPath: NSIndexPath) -> Promise<Void> {
+    func performLikeOperationForComment(atIndexPath indexPath: IndexPath) -> Promise<Void> {
 
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
         let comment = comments[index]
@@ -384,11 +386,11 @@ extension ShotDetailsViewModel {
 
             firstly {
                 commentsRequester.likeComment(comment, forShot: shot)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
-    func performUnlikeOperationForComment(atIndexPath indexPath: NSIndexPath) -> Promise<Void> {
+    func performUnlikeOperationForComment(atIndexPath indexPath: IndexPath) -> Promise<Void> {
 
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
         let comment = comments[index]
@@ -397,11 +399,11 @@ extension ShotDetailsViewModel {
 
             firstly {
                 commentsRequester.unlikeComment(comment, forShot: shot)
-            }.then(fulfill).error(reject)
+            }.then(execute: fulfill).catch(execute: reject)
         }
     }
 
-    func checkLikeStatusForComment(atIndexPath indexPath: NSIndexPath, force: Bool) -> Promise<Bool> {
+    func checkLikeStatusForComment(atIndexPath indexPath: IndexPath, force: Bool) -> Promise<Bool> {
 
         let index = indexInCommentArrayBasedOnItemIndex(indexPath.row)
         let comment = comments[index]
@@ -411,7 +413,7 @@ extension ShotDetailsViewModel {
 
                 firstly {
                     commentsRequester.checkIfLikeComment(comment, forShot: shot)
-                }.then(fulfill).error(reject)
+                    }.then(execute: fulfill).catch(execute: reject)
             }
         }
 
@@ -504,7 +506,7 @@ extension ShotDetailsViewModel {
                     self.attachments = attachments
                 }
                 fulfill()
-            }.error(reject)
+            }.catch(execute: reject)
         }
     }
     

@@ -41,8 +41,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
                 self.downloadShots(followees)
                 self.delegate?.viewModelDidLoadInitialItems()
             }
-        }.error {
-            error in
+        }.catch { error in
             self.delegate?.viewModelDidFailToLoadInitialItems(error)
         }
     }
@@ -54,18 +53,18 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
         }.then {
             followees -> Void in
             if let followees = followees, followees.count > 0 {
-                let indexes = followees.enumerate().map {
+                let indexes = followees.enumerated().map {
                     index, _ in
                     return index + self.followees.count
                 }
-                self.followees.appendContentsOf(followees)
+                self.followees.append(contentsOf: followees)
                 let indexPaths = indexes.map {
-                    NSIndexPath(forRow: ($0), inSection: 0)
+                    IndexPath(row: ($0), section: 0)
                 }
                 self.delegate?.viewModel(self, didLoadItemsAtIndexPaths: indexPaths)
                 self.downloadShots(followees)
             }
-        }.error { error in
+        }.catch { error in
             self.notifyDelegateAboutFailure(error)
         }
     }
@@ -77,7 +76,7 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
             }.then {
                 shots -> Void in
                 var indexOfFollowee: Int?
-                for (index, item) in self.followees.enumerate() {
+                for (index, item) in self.followees.enumerated() {
                     if item.identifier == followee.identifier {
                         indexOfFollowee = index
                         break
@@ -91,9 +90,9 @@ class FolloweesViewModel: BaseCollectionViewViewModel {
                 } else {
                     self.followeesIndexedShots[index] = [ShotType]()
                 }
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                let indexPath = IndexPath(row: index, section: 0)
                 self.delegate?.viewModel(self, didLoadShotsForItemAtIndexPath: indexPath)
-            }.error { error in
+            }.catch { error in
                 self.notifyDelegateAboutFailure(error)
             }
         }

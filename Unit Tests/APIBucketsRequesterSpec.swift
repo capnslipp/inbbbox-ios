@@ -50,7 +50,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.postBucket("fixture.name", description: nil).then { _ in
                         fail("This should not be invoked")
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -68,7 +68,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 it("bucket should be created") {
                     sut.postBucket("fixture.name", description: nil).then { _bucket in
                     bucket = _bucket
-                    }.error { _ in fail("This should not be invoked") }
+                    }.catch { _ in fail("This should not be invoked") }
                     
                     expect(bucket).toNotEventually(beNil())
                 }
@@ -94,7 +94,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -112,7 +112,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 it("should add shot to bucket") {
                     sut.addShot(Shot.fixtureShot(), toBucket: Bucket.fixtureBucket()).then {
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -138,7 +138,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -156,7 +156,7 @@ class APIBucketsRequesterSpec: QuickSpec {
                 it("should remove shot from bucket") {
                     sut.removeShot(Shot.fixtureShot(), fromBucket: Bucket.fixtureBucket()).then {
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }

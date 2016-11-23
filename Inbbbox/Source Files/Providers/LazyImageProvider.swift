@@ -46,13 +46,13 @@ final class LazyImageProvider {
 
 private extension LazyImageProvider {
 
-    class func loadImageFromURL(_ url: NSURL?) -> Promise<UIImage?> {
+    class func loadImageFromURL(_ url: URL?) -> Promise<UIImage?> {
 
         guard let url = url else { return Promise<UIImage?>(value: nil) }
 
         return Promise<UIImage?> { fulfill, reject in
             Shared.imageCache.fetch(
-                URL: url as URL,
+                URL: url,
                 formatName: CacheManager.imageFormatName,
                 failure: { error in
                     if let error = error {

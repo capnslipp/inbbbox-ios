@@ -51,8 +51,7 @@ extension Verifiable {
 
     func verifyTextLength(_ text: String, min minUInt: UInt, max maxUInt: UInt) -> Promise<Void> {
         return Promise<Void> { fulfill, _ in
-
-            let textWithoutWhitespaces = text.trimmingCharacters(in: .whitespaceCharacterSet())
+            let textWithoutWhitespaces = text.trimmingCharacters(in: .whitespaces)
             let trueMin = min(minUInt, maxUInt)
             let trueMax = max(minUInt, maxUInt)
 

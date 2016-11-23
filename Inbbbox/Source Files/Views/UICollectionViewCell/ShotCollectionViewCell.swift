@@ -169,21 +169,21 @@ class ShotCollectionViewCell: UICollectionViewCell {
             bucketImageViewWidthConstraint = bucketImageView.autoSetDimension(.width, toSize: 0)
             bucketImageView.autoConstrainAttribute(.height, to: .width, of: bucketImageView,
                     withMultiplier: bucketImageView.intrinsicContentSize.height /
-                            bucketImageView.intrinsicContentSize().width)
+                            bucketImageView.intrinsicContentSize.width)
             bucketImageView.autoPinEdge(.left, to: .right, of: plusImageView, withOffset: 15)
             bucketImageView.autoAlignAxis(toSuperviewAxis: .horizontal)
 
             commentImageViewWidthConstraint = commentImageView.autoSetDimension(.width, toSize: 0)
             commentImageView.autoConstrainAttribute(.height, to: .width, of: commentImageView,
                     withMultiplier: commentImageView.intrinsicContentSize.height /
-                            commentImageView.intrinsicContentSize().width)
+                            commentImageView.intrinsicContentSize.width)
             commentImageViewRightConstraint = commentImageView.autoPinEdge(toSuperviewEdge: .right)
             commentImageView.autoAlignAxis(toSuperviewAxis: .horizontal)
             
             followImageViewWidthConstraint = followImageView.autoSetDimension(.width, toSize: 0)
             followImageView.autoConstrainAttribute(.height, to: .width, of: followImageView,
                     withMultiplier: followImageView.intrinsicContentSize.height /
-                            followImageView.intrinsicContentSize().width)
+                            followImageView.intrinsicContentSize.width)
             followImageView.autoAlignAxis(.vertical, toSameAxisOf: commentImageView)
             followImageView.autoAlignAxis(toSuperviewAxis: .horizontal)
             
@@ -191,7 +191,7 @@ class ShotCollectionViewCell: UICollectionViewCell {
             gifLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
 
             messageLabel.autoAlignAxis(toSuperviewAxis: .vertical)
-            let messageHorizontalOffset = followImageView.intrinsicContentSize().height
+            let messageHorizontalOffset = followImageView.intrinsicContentSize.height
             messageLabel.autoAlignAxis(.horizontal, toSameAxisOf: shotContainer, withOffset: messageHorizontalOffset)
             
             didSetConstraints = true
@@ -427,5 +427,14 @@ extension ShotCollectionViewCell: UIGestureRecognizerDelegate {
                            shouldRecognizeSimultaneouslyWith
                            otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
+    }
+}
+
+fileprivate extension UIView {
+    
+    class func animate(animations: @escaping () -> Void) {
+        UIView.animate(withDuration: 0.3) {
+            animations()
+        }
     }
 }

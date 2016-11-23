@@ -38,7 +38,7 @@ class APIAttachmentsProviderSpec: QuickSpec {
                 it("attachments should be properly returned") {
                     sut.provideAttachmentsForShot(Shot.fixtureShot()).then { _attachments -> Void in
                         attachments = _attachments
-                        }.error { _ in fail() }
+                        }.catch { _ in fail() }
                     
                     expect(attachments).toNotEventually(beNil())
                     expect(attachments).toEventually(haveCount(3))

@@ -32,7 +32,7 @@ class APIShotsProviderSpec: QuickSpec {
             it("shots should be properly returned") {
                 sut.provideShots().then { _shots -> Void in
                     shots = _shots
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
                 expect(shots).toEventually(haveCount(3))
@@ -56,7 +56,7 @@ class APIShotsProviderSpec: QuickSpec {
                 it("error should appear") {
                     sut.provideMyLikedShots().then { _ -> Void in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
 
@@ -77,7 +77,7 @@ class APIShotsProviderSpec: QuickSpec {
                 it("shots should be properly returned") {
                     sut.provideMyLikedShots().then { _shots -> Void in
                         shots = _shots
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(shots).toNotEventually(beNil())
                     expect(shots).toEventually(haveCount(3))
@@ -90,7 +90,7 @@ class APIShotsProviderSpec: QuickSpec {
             it("shots should be properly returned") {
                 sut.provideShotsForUser(User.fixtureUser()).then { _shots -> Void in
                     shots = _shots
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
                 expect(shots).toEventually(haveCount(3))
@@ -102,7 +102,7 @@ class APIShotsProviderSpec: QuickSpec {
             it("shots should be properly returned") {
                 sut.provideLikedShotsForUser(User.fixtureUser()).then { _shots -> Void in
                     shots = _shots
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
                 expect(shots).toEventually(haveCount(3))
@@ -114,7 +114,7 @@ class APIShotsProviderSpec: QuickSpec {
             it("shots should be properly returned") {
                 sut.provideShotsForBucket(Bucket.fixtureBucket()).then { _shots -> Void in
                     shots = _shots
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(shots).toNotEventually(beNil())
                 expect(shots).toEventually(haveCount(3))
@@ -134,7 +134,7 @@ class APIShotsProviderSpec: QuickSpec {
                 it("should raise an error") {
                     sut.nextPage().then { _ -> Void in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -144,7 +144,7 @@ class APIShotsProviderSpec: QuickSpec {
                 it("should raise an error") {
                     sut.previousPage().then { _ -> Void in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -161,7 +161,7 @@ class APIShotsProviderSpec: QuickSpec {
                 it("shots should be properly returned") {
                     sut.nextPage().then { _shots -> Void in
                         shots = _shots
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(shots).toNotEventually(beNil())
                     expect(shots).toEventually(haveCount(3))
@@ -171,7 +171,7 @@ class APIShotsProviderSpec: QuickSpec {
                 it("shots should be properly returned") {
                     sut.previousPage().then { _shots -> Void in
                         shots = _shots
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(shots).toNotEventually(beNil())
                     expect(shots).toEventually(haveCount(3))

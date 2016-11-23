@@ -13,7 +13,7 @@ import SafariServices
 class LoginViewController: UIViewController {
 
     fileprivate lazy var __once: () = {
-            LoginViewController.shotsAnimator.scrollToMiddleInstantly()
+            self.shotsAnimator.scrollToMiddleInstantly()
         }()
 
     var centerButtonTabBarController: CenterButtonTabBarController

@@ -33,7 +33,7 @@ class APICommentsProviderSpec: QuickSpec {
             it("comments should be properly returned") {
                 sut.provideCommentsForShot(Shot.fixtureShot()).then { _comments -> Void in
                     comments = _comments
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(comments).toNotEventually(beNil())
                 expect(comments).toEventually(haveCount(3))
@@ -46,7 +46,7 @@ class APICommentsProviderSpec: QuickSpec {
             it("comments should be properly returned") {
                 sut.nextPage().then { _comments -> Void in
                     comments = _comments
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(comments).toNotEventually(beNil())
                 expect(comments).toEventually(haveCount(3))
@@ -58,7 +58,7 @@ class APICommentsProviderSpec: QuickSpec {
             it("comments should be properly returned") {
                 sut.previousPage().then { _comments -> Void in
                     comments = _comments
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
                 
                 expect(comments).toNotEventually(beNil())
                 expect(comments).toEventually(haveCount(3))

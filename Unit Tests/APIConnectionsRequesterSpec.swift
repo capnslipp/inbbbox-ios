@@ -46,7 +46,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.followUser(User.fixtureUser()).then {
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -64,7 +64,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 it("should follow user") {
                     sut.followUser(User.fixtureUser()).then {
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -90,7 +90,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.unfollowUser(User.fixtureUser()).then {
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -108,7 +108,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 it("should unfollow user") {
                     sut.followUser(User.fixtureUser()).then {
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -134,7 +134,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.isUserFollowedByMe(User.fixtureUser()).then { _ in
                         fail("This should not be invoked")
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -152,7 +152,7 @@ class APIConnectionsRequesterSpec: QuickSpec {
                 it("should unfollow user") {
                     sut.isUserFollowedByMe(User.fixtureUser()).then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail("This should not be invoked") }
+                    }.catch { _ in fail("This should not be invoked") }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }

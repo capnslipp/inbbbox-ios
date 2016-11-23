@@ -34,7 +34,7 @@ class ResponsableSpec: QuickSpec {
                 let data = try! JSONSerialization.data(withJSONObject: ["fixture.key" : "fixture.value"], options: .prettyPrinted)
                 sut.responseWithData(data, response: self.mockResponse(200)).then { _response in
                     response = _response
-                }.error { _ in fail() }
+                }.catch { _ in fail() }
             }
             
             afterEach {
@@ -75,7 +75,7 @@ class ResponsableSpec: QuickSpec {
             beforeEach {
                 sut.responseWithData(nil, response: self.mockResponse(422)).then { _ -> Void in
                     fail()
-                }.error { _error in
+                }.catch { _error in
                     error = _error
                 }
             }
@@ -108,7 +108,7 @@ class ResponsableSpec: QuickSpec {
                 let data = try! JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
                 sut.responseWithData(data, response: self.mockResponse(422)).then { _ -> Void in
                     fail()
-                }.error { _error in
+                }.catch { _error in
                     error = _error
                 }
             }

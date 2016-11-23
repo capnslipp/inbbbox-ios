@@ -42,7 +42,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.likeShot(Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -60,7 +60,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 it("should like shot") {
                     sut.likeShot(Shot.fixtureShot()).then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -78,7 +78,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.unlikeShot(Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -96,7 +96,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 it("should like shot") {
                     sut.unlikeShot(Shot.fixtureShot()).then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -115,7 +115,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 it("error should appear") {
                     sut.isShotLikedByMe(Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -139,7 +139,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 it("shot should be liked by authenticated user") {
                     sut.isShotLikedByMe(Shot.fixtureShot()).then { _isLikedByMe in
                         isLikedByMe = _isLikedByMe
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(isLikedByMe).toNotEventually(beNil())
                     expect(isLikedByMe).toEventually(beTruthy())
@@ -163,7 +163,7 @@ class APIShotsRequesterSpec: QuickSpec {
                 it("shot should not be liked by authenticated user") {
                     sut.isShotLikedByMe(Shot.fixtureShot()).then { _isLikedByMe in
                         isLikedByMe = _isLikedByMe
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(isLikedByMe).toNotEventually(beNil())
                     expect(isLikedByMe).toEventually(beFalsy())

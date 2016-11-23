@@ -57,7 +57,7 @@ extension ShotDetailsDummySpaceCollectionViewCell: AutoSizable {
 
 extension ShotDetailsDummySpaceCollectionViewCell: Reusable {
 
-    class var reuseIdentifier: String {
-        return String(describing: ShotDetailsDummySpaceCollectionViewCell)
+    class var identifier: String {
+        return String(describing: ShotDetailsDummySpaceCollectionViewCell.self)
     }
 }

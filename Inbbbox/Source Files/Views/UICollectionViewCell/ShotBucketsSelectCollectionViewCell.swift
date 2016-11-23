@@ -126,6 +126,6 @@ class ShotBucketsSelectCollectionViewCell: UICollectionViewCell {
 extension ShotBucketsSelectCollectionViewCell: Reusable {
 
     class var identifier: String {
-        return String(describing: ShotBucketsSelectCollectionViewCell)
+        return String(describing: ShotBucketsSelectCollectionViewCell.self)
     }
 }

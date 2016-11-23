@@ -108,7 +108,7 @@ class UserDetailsViewModelSpec: QuickSpec {
                     sut.isProfileFollowedByMe().then { result -> Void in
                         didReceiveResponse = true
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                    }.catch { _ in fail("This should not be invoked") }
                 }
             }
             
@@ -133,7 +133,7 @@ class UserDetailsViewModelSpec: QuickSpec {
                     sut.followProfile().then { result -> Void in
                         didReceiveResponse = true
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                    }.catch { _ in fail("This should not be invoked") }
                 }
             }
             
@@ -158,7 +158,7 @@ class UserDetailsViewModelSpec: QuickSpec {
                     sut.unfollowProfile().then { result -> Void in
                         didReceiveResponse = true
                         done()
-                    }.error { _ in fail("This should not be invoked") }
+                    }.catch { _ in fail("This should not be invoked") }
                 }
             }
             

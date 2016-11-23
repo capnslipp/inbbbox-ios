@@ -91,6 +91,6 @@ class ShotDetailsView: UIView {
     // MARK: public
     
     func customizeFor3DTouch(_ hidden: Bool) {
-        backgroundColor = hidden ? .backgroundGrayColor() : .clear()
+        backgroundColor = hidden ? .backgroundGrayColor() : .clear
     }
 }

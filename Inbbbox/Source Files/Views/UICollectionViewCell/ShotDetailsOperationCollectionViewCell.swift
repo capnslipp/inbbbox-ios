@@ -50,7 +50,7 @@ extension ShotDetailsOperationCollectionViewCell: AutoSizable {
 
 extension ShotDetailsOperationCollectionViewCell: Reusable {
 
-    class var reuseIdentifier: String {
-        return String(describing: ShotDetailsOperationCollectionViewCell)
+    class var identifier: String {
+        return String(describing: ShotDetailsOperationCollectionViewCell.self)
     }
 }

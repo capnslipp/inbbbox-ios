@@ -42,7 +42,7 @@ class APIBucketsProviderSpec: QuickSpec {
                 it("error should appear") {
                     sut.provideMyBuckets().then { _ -> Void in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -65,7 +65,7 @@ class APIBucketsProviderSpec: QuickSpec {
                 it("buckets should be properly returned") {
                     sut.provideMyBuckets().then { _buckets -> Void in
                         buckets = _buckets
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(buckets).toNotEventually(beNil(), timeout: 5)
                     expect(buckets).toEventually(haveCount(3))
@@ -92,7 +92,7 @@ class APIBucketsProviderSpec: QuickSpec {
                 it("buckets should be properly returned") {
                     sut.provideBucketsForUser(User.fixtureUser()).then { _buckets -> Void in
                         buckets = _buckets
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(buckets).toNotEventually(beNil())
                     expect(buckets).toEventually(haveCount(3))
@@ -105,7 +105,7 @@ class APIBucketsProviderSpec: QuickSpec {
                 it("buckets should be properly returned") {
                     sut.provideBucketsForUsers([User.fixtureUser(), User.fixtureUser()]).then { _buckets -> Void in
                         buckets = _buckets
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(buckets).toNotEventually(beNil())
                     expect(buckets).toEventually(haveCount(3))
@@ -118,7 +118,7 @@ class APIBucketsProviderSpec: QuickSpec {
                 it("buckets should be properly returned") {
                     sut.nextPage().then { _buckets -> Void in
                         buckets = _buckets
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(buckets).toNotEventually(beNil())
                     expect(buckets).toEventually(haveCount(3))
@@ -131,7 +131,7 @@ class APIBucketsProviderSpec: QuickSpec {
                 it("buckets should be properly returned") {
                     sut.previousPage().then { _buckets -> Void in
                         buckets = _buckets
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(buckets).toNotEventually(beNil())
                     expect(buckets).toEventually(haveCount(3))

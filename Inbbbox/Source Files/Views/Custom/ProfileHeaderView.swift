@@ -100,7 +100,7 @@ class ProfileHeaderView: UICollectionReusableView {
 
 extension ProfileHeaderView: Reusable {
 
-    class var reuseIdentifier: String {
-        return String(describing: ProfileHeaderView)
+    class var identifier: String {
+        return String(describing: ProfileHeaderView.self)
     }
 }

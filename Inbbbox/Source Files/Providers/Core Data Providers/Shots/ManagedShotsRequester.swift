@@ -48,6 +48,7 @@ class ManagedShotsRequester {
 
     func userBucketsForShot(_ shot: ShotType) -> Promise<[BucketType]?> {
         let managedShot = managedObjectsProvider.managedShot(shot)
-        return Promise<[BucketType]!>(value: (managedShot.buckets?.allObjects as? [ManagedBucket])?.map { $0 as BucketType })
+        let buckets = managedShot.buckets?.allObjects as? [BucketType]
+        return Promise<[BucketType]?>(value: buckets)
     }
 }

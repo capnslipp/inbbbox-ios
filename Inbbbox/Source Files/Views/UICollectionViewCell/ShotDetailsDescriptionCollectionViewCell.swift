@@ -107,7 +107,7 @@ extension ShotDetailsDescriptionCollectionViewCell: AutoSizable {
 
 extension ShotDetailsDescriptionCollectionViewCell: Reusable {
 
-    class var reuseIdentifier: String {
-        return String(describing: ShotDetailsDescriptionCollectionViewCell)
+    class var identifier: String {
+        return String(describing: ShotDetailsDescriptionCollectionViewCell.self)
     }
 }

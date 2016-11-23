@@ -282,7 +282,7 @@ extension ShotDetailsCommentCollectionViewCell: AutoSizable {
 
 extension ShotDetailsCommentCollectionViewCell: Reusable {
 
-    class var reuseIdentifier: String {
-        return String(describing: ShotDetailsCommentCollectionViewCell)
+    class var identifier: String {
+        return String(describing: ShotDetailsCommentCollectionViewCell.self)
     }
 }

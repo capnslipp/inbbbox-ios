@@ -10,17 +10,17 @@ import Foundation
 
 protocol Listable {
 
-    associatedtype Type
+    associatedtype ListType
 
     var count: Int { get }
 
-    init(_ items: [Type])
-    subscript(index: Int) -> Type { get }
+    init(_ items: [ListType])
+    subscript(index: Int) -> ListType { get }
 
-    mutating func add(_ item: Type, atIndex index: Int)
-    mutating func remove(_ index: Int) -> Type
+    mutating func add(_ item: ListType, atIndex index: Int)
+    mutating func remove(_ index: Int) -> ListType
 
-    func itemize(_ closure: (_ index: Int, _ item: Type) -> ())
+    func itemize(_ closure: (_ index: Int, _ item: ListType) -> ())
 }
 
 

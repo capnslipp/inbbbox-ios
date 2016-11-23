@@ -46,7 +46,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.postCommentForShot(Shot.fixtureShot(), withText: "fixture.text").then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -64,7 +64,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.postCommentForShot(Shot.fixtureShot(), withText: "fixture.text").then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -87,7 +87,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("comment should be posted") {
                     sut.postCommentForShot(Shot.fixtureShot(), withText: "fixture.text").then { _comment in
                         comment = _comment
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(comment).toNotEventually(beNil())
                 }
@@ -110,7 +110,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.updateComment(Comment.fixtureComment(), forShot: Shot.fixtureShot(), withText: "fixture.text").then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -128,7 +128,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.updateComment(Comment.fixtureComment(), forShot: Shot.fixtureShot(), withText: "fixture.text").then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -151,7 +151,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("comment should be posted") {
                     sut.updateComment(Comment.fixtureComment(), forShot: Shot.fixtureShot(), withText: "fixture.text").then { _comment in
                         comment = _comment
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(comment).toNotEventually(beNil())
                 }
@@ -180,7 +180,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.deleteComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -198,7 +198,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.deleteComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -221,7 +221,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("comment should be posted") {
                     sut.deleteComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -250,7 +250,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.likeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -273,7 +273,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("comment should be marked as liked") {
                     sut.likeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -302,7 +302,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.unlikeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -325,7 +325,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("comment should be marked as unliked") {
                     sut.unlikeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }
@@ -354,7 +354,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("error should occur") {
                     sut.checkIfLikeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         fail()
-                    }.error { _error in
+                    }.catch { _error in
                         error = _error
                     }
                     
@@ -377,7 +377,7 @@ class APICommentsRequesterSpec: QuickSpec {
                 it("comment should be checked for like") {
                     sut.checkIfLikeComment(Comment.fixtureComment(), forShot: Shot.fixtureShot()).then { _ in
                         didInvokePromise = true
-                    }.error { _ in fail() }
+                    }.catch { _ in fail() }
                     
                     expect(didInvokePromise).toEventually(beTruthy(), timeout: 3)
                 }

@@ -220,6 +220,6 @@ private extension ShotBucketsHeaderView {
 extension ShotBucketsHeaderView: Reusable {
 
     class var identifier: String {
-        return String(describing: ShotBucketsHeaderView)
+        return String(describing: ShotBucketsHeaderView.self)
     }
 }
