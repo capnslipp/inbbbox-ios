@@ -8,7 +8,7 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
 
 //    MARK: - UICollectionViewLayout
 
-    override var collectionViewContentSize : CGSize {
+    override var collectionViewContentSize: CGSize {
         return collectionView!.bounds.size
     }
 
@@ -26,7 +26,7 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
             let spacings = CollectionViewLayoutSpacings()
             let fixedLeftMargin = CGFloat(28)
             let fixedRightMargin = CGFloat(27)
-            let indexMultiplier = CGFloat((indexPath as NSIndexPath).item)
+            let indexMultiplier = CGFloat(indexPath.item)
             let calculatedItemWidth = round(collectionView.bounds.width) -
                     (fixedLeftMargin + fixedRightMargin) * (indexMultiplier + 1)
 
@@ -41,7 +41,7 @@ class InitialShotsCollectionViewLayout: UICollectionViewLayout {
             layoutAttributes.center = CGPoint(x: collectionView.center.x,
                     y: collectionView.center.y +
                     spacings.initialShotsLayoutBottomCellOffset * indexMultiplier)
-            layoutAttributes.zIndex = -(indexPath as NSIndexPath).row
+            layoutAttributes.zIndex = -indexPath.row
         }
 
         return layoutAttributes

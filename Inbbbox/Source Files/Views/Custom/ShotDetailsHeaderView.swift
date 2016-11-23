@@ -261,7 +261,7 @@ extension ShotDetailsHeaderView {
 extension ShotDetailsHeaderView: Reusable {
     
     class var identifier: String {
-        return String(describing: ShotDetailsHeaderView())
+        return String(describing: ShotDetailsHeaderView.self)
     }
 }
 
