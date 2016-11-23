@@ -12,13 +12,19 @@ class ProgressAnimator {
 
     var progressImageView = UIImageView()
 
+    /// Base name of image file
     private let baseName: String!
+    /// Maximum count of images in animation
     private let maximumImageCount: Int!
-    private var currentFrameLimit = 0
-    private var currentFrame = 0
-    private var frameDuration = 0.01
-    private var firstFireToken = 0
-    private var onDidCompleateAnimation: (()->Void)?
+    /// Current limit of frames to animate
+    private var maximumFrameIndex = 0
+    /// Current frame index
+    private var currentFrameIndex = 0
+    /// Time span between frame updates
+    private var timeTick = 0.01
+    /// Completion handler when currentFrameIndex reach maximumFrameIndex
+    private var onDidCompleteAnimation: (()->Void)?
+    /// Timer that swaps images
     private var timer: NSTimer!
     // MARK: Public
 
@@ -31,51 +37,47 @@ class ProgressAnimator {
     init(imageBaseName: String, imageCount: Int) {
         baseName = imageBaseName
         maximumImageCount = imageCount
-        timer = NSTimer.scheduledTimerWithTimeInterval(frameDuration, target: self, selector: #selector(self.updateFrame), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(timeTick, target: self, selector: #selector(self.updateFrame), userInfo: nil, repeats: true)
     }
 
     /// Updates progress of animation according to passed value
     ///
-    /// - parameter progress:     Progress value between 0.0 - 1.0. If you pass higher value than 1.0 it will be
-    //                            locked to 1.0 value
+    /// - parameter progress:   Progress value between 0.0 - 1.0. If you pass higher value than 1.0 it will be
+    ///                         locked to 1.0 value
+    /// - parameter complete:   Block that is called when currentFrameIndex reache maximumFrameIndex
     func updateProgress(progress: Float, onComplete complete: (()->Void)? = nil) {
         
-        
         let newFrameLimit = interpolateProgress(min(1.0, progress))
-        guard currentFrameLimit < newFrameLimit  else {
+        guard maximumFrameIndex < newFrameLimit  else {
             return
         }
         
-        currentFrameLimit = newFrameLimit
-        onDidCompleateAnimation = complete
-        if !timer.valid && currentFrame < maximumImageCount  {
-            timer = NSTimer.scheduledTimerWithTimeInterval(frameDuration, target: self, selector: #selector(self.updateFrame), userInfo: nil, repeats: true)
+        maximumFrameIndex = newFrameLimit
+        onDidCompleteAnimation = complete
+        if !timer.valid && currentFrameIndex < maximumImageCount  {
+            timer = NSTimer.scheduledTimerWithTimeInterval(timeTick, target: self, selector: #selector(self.updateFrame(_:)), userInfo: nil, repeats: true)
         }
-    }
-    
-    deinit {
-        timer?.invalidate()
     }
 }
 
 private extension ProgressAnimator {
     
-    @objc func updateFrame() {
-        guard currentFrame <= currentFrameLimit && isFrameInBounds() else {
+    @objc func updateFrame(timer: NSTimer) {
+        guard currentFrameIndex <= maximumFrameIndex && isFrameInBounds() else {
             timer.invalidate()
             return
         }
         
-        progressImageView.image = image(currentFrame)
-        currentFrame += 1
+        progressImageView.image = image(currentFrameIndex)
+        currentFrameIndex += 1
         
         if !isFrameInBounds() {
-            onDidCompleateAnimation?()
+            onDidCompleteAnimation?()
         }
     }
     
     func isFrameInBounds() -> Bool {
-        return currentFrame <= maximumImageCount
+        return currentFrameIndex <= maximumImageCount
     }
     
     func interpolateProgress(progress: Float) -> Int {
