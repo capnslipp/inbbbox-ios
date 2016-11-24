@@ -54,7 +54,7 @@ class ShotDetailsPageViewControllerDataSource: NSObject, UIPageViewControllerDat
                             viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         if let currentController = viewController as? ShotDetailsViewController where
             currentController.shotIndex > 0 {
-            return getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex - 1, inSection: 0)) as? ShotDetailsViewController
+            return getShotDetailsViewController(atIndexPath: NSIndexPath(forItem: currentController.shotIndex - 1, inSection: 0))
         }
         return nil
     }
