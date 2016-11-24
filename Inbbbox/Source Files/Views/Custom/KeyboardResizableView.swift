@@ -69,7 +69,7 @@ class KeyboardResizableView: UIView {
     private var initialBottomConstraintConstant = CGFloat(0)
     private var bottomConstraint: NSLayoutConstraint?
     private var snapOffset = CGFloat(0)
-    
+
     init() {
         super.init(frame: CGRect.zero)
 
@@ -144,7 +144,7 @@ private extension KeyboardResizableView {
         
         let state: KeyboardState = keyboardPresence ? .WillAppear : .WillDisappear
         delegate?.keyboardResizableView(self, willRelayoutSubviewsWithState: state)
-        
+
         UIView.animateWithDuration(animationDuration.doubleValue, animations: {
             self.layoutIfNeeded()
         }) {
