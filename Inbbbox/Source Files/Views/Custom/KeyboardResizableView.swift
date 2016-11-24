@@ -67,18 +67,16 @@ class KeyboardResizableView: UIView {
 
     // Private variables:
     private var initialBottomConstraintConstant = CGFloat(0)
-    private var bottomConstraint: NSLayoutConstraint!
+    private var bottomConstraint: NSLayoutConstraint?
     private var snapOffset = CGFloat(0)
-
+    
     init() {
         super.init(frame: CGRect.zero)
 
         clipsToBounds = true
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear(_:)),
-        name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear(_:)),
-        name: UIKeyboardWillHideNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillDisappear(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     @available(*, unavailable, message = "Use init() instead")
@@ -135,37 +133,18 @@ private extension KeyboardResizableView {
     }
 
     func relayoutViewWithParameters(parameters: NSDictionary, keyboardPresence: Bool) {
-
-        let properlyRotatedCoords = calculateCorrectKeyboardRectWithParameters(parameters)
-
-        let height = properlyRotatedCoords.size.height
-
-        guard let animationDuration = parameters[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else {
+        
+        guard let
+            bottomConstraint = bottomConstraint,
+            animationDuration = parameters[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber else {
             return
         }
 
-        if automaticallySnapToKeyboardTopEdge && !isKeyboardPresent {
-
-            let rectInSuperviewCoordinateSpace = superview!.convertRect(bounds, toView: self)
-            let keyboardTopEdgeAndSelfBottomEdgeOffsetY = CGRectGetHeight(superview!.frame) -
-                    CGRectGetHeight(rectInSuperviewCoordinateSpace) + CGRectGetMinY(rectInSuperviewCoordinateSpace)
-
-            snapOffset = keyboardTopEdgeAndSelfBottomEdgeOffsetY
-        }
-
-        var addition = height - snapOffset
-
-        if !automaticallySnapToKeyboardTopEdge {
-            addition += bottomEdgeOffset
-        }
-
-        let constant = keyboardPresence ? initialBottomConstraintConstant - addition :
-                bottomConstraint.constant + addition
-        bottomConstraint.constant = constant
-
+        bottomConstraint.constant = calculateConstantIn(bottomConstraint, basedOnParameters: parameters, andKeyboardPresence: keyboardPresence)
+        
         let state: KeyboardState = keyboardPresence ? .WillAppear : .WillDisappear
         delegate?.keyboardResizableView(self, willRelayoutSubviewsWithState: state)
-
+        
         UIView.animateWithDuration(animationDuration.doubleValue, animations: {
             self.layoutIfNeeded()
         }) {
@@ -173,5 +152,29 @@ private extension KeyboardResizableView {
             let state: KeyboardState = keyboardPresence ? .DidAppear : .DidDisappear
             self.delegate?.keyboardResizableView(self, didRelayoutSubviewsWithState: state)
         }
+    }
+    
+    func calculateConstantIn(bottomConstraint: NSLayoutConstraint, basedOnParameters parameters: NSDictionary, andKeyboardPresence keyboardPresence: Bool) -> CGFloat {
+        
+        if automaticallySnapToKeyboardTopEdge && !isKeyboardPresent {
+            let rectInSuperviewCoordinateSpace = superview!.convertRect(bounds, toView: self)
+            let keyboardTopEdgeAndSelfBottomEdgeOffsetY = CGRectGetHeight(superview!.frame) - CGRectGetHeight(rectInSuperviewCoordinateSpace) + CGRectGetMinY(rectInSuperviewCoordinateSpace)
+            
+            snapOffset = keyboardTopEdgeAndSelfBottomEdgeOffsetY
+        }
+        
+        let properlyRotatedCoords = calculateCorrectKeyboardRectWithParameters(parameters)
+        
+        let height = properlyRotatedCoords.size.height
+        
+        var addition = height - snapOffset
+        
+        if !automaticallySnapToKeyboardTopEdge {
+            addition += bottomEdgeOffset
+        }
+        
+        let constant = keyboardPresence ? initialBottomConstraintConstant - addition : bottomConstraint.constant + addition
+
+        return min(0.0, constant)
     }
 }

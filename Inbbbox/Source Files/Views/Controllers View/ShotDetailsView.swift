@@ -93,4 +93,8 @@ class ShotDetailsView: UIView {
     func customizeFor3DTouch(hidden: Bool) {
         backgroundColor = hidden ? .backgroundGrayColor() : .clearColor()
     }
+    
+    func hideKeyboard() {
+        commentComposerView.makeInactive()
+    }
 }
