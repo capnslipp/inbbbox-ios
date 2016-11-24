@@ -11,7 +11,7 @@ import UIKit
 extension NSAttributedString {
 
     convenience init?(htmlString: String) {
-
+        return nil
         guard let encodedData = htmlString.data(using: String.Encoding.utf8) else {
             return nil
         }

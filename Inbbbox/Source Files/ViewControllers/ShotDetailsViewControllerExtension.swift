@@ -12,19 +12,6 @@ import MessageUI
 import TTTAttributedLabel
 import PromiseKit
 
-// MARK: ImageProvider
-/*
-extension ShotDetailsViewController: ImageProvider {
-
-    func provideImage(_ completion: (UIImage?) -> Void) {
-        if !viewModel.shot.animated {
-            if let image = header?.imageView.image {
-                completion(image)
-            }
-        }
-    }
-}*/
-
 // MARK: KeyboardResizableViewDelegate
 
 extension ShotDetailsViewController: KeyboardResizableViewDelegate {

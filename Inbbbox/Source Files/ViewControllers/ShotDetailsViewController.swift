@@ -518,7 +518,7 @@ private extension ShotDetailsViewController {
         }.then { isLiked -> Void in
             self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
             self.shotDetailsView.collectionView.reloadItems(at: [indexPath])
-        }
+        }.catch { _ in }
     }
 
     func unlikeComment(atIndexPath indexPath: IndexPath) {
@@ -529,7 +529,7 @@ private extension ShotDetailsViewController {
         }.then { isLiked -> Void in
             self.viewModel.setLikeStatusForComment(atIndexPath: indexPath, withValue: isLiked)
             self.shotDetailsView.collectionView.reloadItems(at: [indexPath])
-        }
+        }.catch { _ in }
     }
 
     func presentShotBucketsViewControllerWithMode(_ mode: ShotBucketsViewControllerMode, onModalCompletion completion:(() -> Void)? = nil) {
@@ -553,19 +553,17 @@ private extension ShotDetailsViewController {
     }
 
     func presentShotFullscreen() {
-
-        /*guard let header = header else { return }
-
-        var imageViewer: ImageViewer {
-            if viewModel.shot.animated {
-                let url = viewModel.shot.shotImage.hidpiURL ?? viewModel.shot.shotImage.normalURL
-                return ImageViewer(imageProvider: self, displacedView: header.imageView, animatedUrl: url)
-            } else {
-                return ImageViewer(imageProvider: self, displacedView: header.imageView)
-            }
+        guard let header = header else { return }
+        
+        let url = viewModel.shot.shotImage.hidpiURL ?? viewModel.shot.shotImage.normalURL
+        if viewModel.shot.animated {
+            let galleryProvider = GalleryViewProvider(animatedUrl: url, displacedView: header.imageView)
+            presentImageGallery(galleryProvider.galleryViewController)
+            
+        } else {
+            let galleryProvider = GalleryViewProvider(imageUrls: [url], displacedView: header.imageView)
+            presentImageGallery(galleryProvider.galleryViewController)
         }
-
-        presentImageViewer(imageViewer)*/
     }
     
     func presentFullScreenAttachment(_ displacedView: UIView) {
@@ -574,14 +572,18 @@ private extension ShotDetailsViewController {
          from where animation will start but without showing thumbnail 
          image in show animation.
          */
-        /*let view = UIView(frame: displacedView.frame)
-        view.backgroundColor = .clear
-        displacedView.superview?.addSubview(view)
-        let imageViewer = ImageViewer(imageProvider: header!, displacedView: view)
-        imageViewer.dismissCompletionBlock = {
-            view.removeFromSuperview()
+        guard let url = header?.selectedAttachment?.imageURL else {
+            return
         }
-        presentImageViewer(imageViewer)*/
+        let placeholderView = UIImageView(frame: displacedView.frame)
+        placeholderView.backgroundColor = .clear
+        displacedView.superview?.addSubview(placeholderView)
+        let galleryProvider = GalleryViewProvider(imageUrls: [url], displacedView: placeholderView)
+        galleryProvider.galleryViewController.closedCompletion = {
+            placeholderView.removeFromSuperview()
+        }
+
+        presentImageGallery(galleryProvider.galleryViewController)
     }
 
     func grayOutFooterIfNeeded() {

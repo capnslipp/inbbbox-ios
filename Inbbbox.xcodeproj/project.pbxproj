@@ -386,7 +386,7 @@
 		F03764FC1CBB9F81008183F3 /* LazyImageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03764FB1CBB9F81008183F3 /* LazyImageProvider.swift */; };
 		F077D0941CD23457008948A9 /* URLDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F077D0931CD23457008948A9 /* URLDetector.swift */; };
 		F077D0961CD236AA008948A9 /* ImageProviderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F077D0951CD236AA008948A9 /* ImageProviderExtension.swift */; };
-		F0B898D71CC0F189004A807C /* ImageViewerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */; };
+		F0B898D71CC0F189004A807C /* GalleryViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B898D61CC0F189004A807C /* GalleryViewProvider.swift */; };
 		F0BEBDD51CD789C400AA391C /* ShotDetailsViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BEBDD41CD789C400AA391C /* ShotDetailsViewControllerExtension.swift */; };
 		F0BEBDD71CDA24E200AA391C /* TeamDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BEBDD61CDA24E200AA391C /* TeamDetailsViewModel.swift */; };
 		F0BEBDD91CDB3E9800AA391C /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BEBDD81CDB3E9800AA391C /* ProfileViewModel.swift */; };
@@ -843,7 +843,7 @@
 		F049C867F1FCCDB672E8597F /* CoreDataHelper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		F077D0931CD23457008948A9 /* URLDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLDetector.swift; sourceTree = "<group>"; };
 		F077D0951CD236AA008948A9 /* ImageProviderExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProviderExtension.swift; sourceTree = "<group>"; };
-		F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerExtension.swift; sourceTree = "<group>"; };
+		F0B898D61CC0F189004A807C /* GalleryViewProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewProvider.swift; sourceTree = "<group>"; };
 		F0BEBDD41CD789C400AA391C /* ShotDetailsViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotDetailsViewControllerExtension.swift; sourceTree = "<group>"; };
 		F0BEBDD61CDA24E200AA391C /* TeamDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewModel.swift; sourceTree = "<group>"; };
 		F0BEBDD81CDB3E9800AA391C /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -977,7 +977,7 @@
 				305A850D1DDB00FC008EF410 /* UIViewExtension.swift */,
 				24917648B4ED154568BCFB6D /* UIViewControllerExtension.swift */,
 				BBC5F88643B64405114F960D /* UIWindowExtension.swift */,
-				F0B898D61CC0F189004A807C /* ImageViewerExtension.swift */,
+				F0B898D61CC0F189004A807C /* GalleryViewProvider.swift */,
 				300BDCA81CC7B15E002A6A1B /* MFMailComposeViewControllerExtension.swift */,
 				65BA28208F809949B73B35D2 /* AppDelegateExtension.swift */,
 				F077D0951CD236AA008948A9 /* ImageProviderExtension.swift */,
@@ -2113,7 +2113,7 @@
 				426C9C893103E0D0D9E92CEA /* User.swift in Sources */,
 				F9B5AA8896F72F2AA4AC8DFC /* ManagedBucket.swift in Sources */,
 				C61B8B931DDAEA4600D94867 /* Attachment.swift in Sources */,
-				F0B898D71CC0F189004A807C /* ImageViewerExtension.swift in Sources */,
+				F0B898D71CC0F189004A807C /* GalleryViewProvider.swift in Sources */,
 				DA618D628131746C346E13D8 /* ManagedProject.swift in Sources */,
 				8299D5B63CAEE6716B8E2E95 /* ManagedShot.swift in Sources */,
 				E4FBE300D48D18EDF5CB255F /* ManagedShotImage.swift in Sources */,

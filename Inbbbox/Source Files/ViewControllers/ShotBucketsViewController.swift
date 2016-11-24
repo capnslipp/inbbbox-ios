@@ -261,17 +261,16 @@ private extension ShotBucketsViewController {
     func presentShotFullscreen() {
 
         guard let header = header else { return }
-
-       /* var imageViewer: ImageViewer {
-            if viewModel.shot.animated {
-                let url = viewModel.shot.shotImage.hidpiURL ?? viewModel.shot.shotImage.normalURL
-                return ImageViewer(imageProvider: self, displacedView: header.imageView, animatedUrl: url)
-            } else {
-                return ImageViewer(imageProvider: self, displacedView: header.imageView)
-            }
+        
+        let url = viewModel.shot.shotImage.hidpiURL ?? viewModel.shot.shotImage.normalURL
+        if viewModel.shot.animated {
+            let galleryProvider = GalleryViewProvider(animatedUrl: url, displacedView: header.imageView)
+            presentImageGallery(galleryProvider.galleryViewController)
+            
+        } else {
+            let galleryProvider = GalleryViewProvider(imageUrls: [url], displacedView: header.imageView)
+            presentImageGallery(galleryProvider.galleryViewController)
         }
-
-        presentImageGallery(imageViewer)*/
     }
 
     func animateHeader(start: Bool) {

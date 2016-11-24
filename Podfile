@@ -41,7 +41,8 @@ target 'Inbbbox' do
   pod 'DZNEmptyDataSet', '~> 1.7'
   pod 'GoogleAnalytics', '~> 3.14'
   pod 'TTTAttributedLabel', '~> 2.0'
-  pod 'ImageViewer', '~> 4.0'
+  #fork until this will be merged: https://github.com/MailOnline/ImageViewer/pull/91
+  pod 'ImageViewer', :git => 'https://github.com/Siemian/ImageViewer'
   #fork because of styling private properties
   pod 'AOAlertController', :git => 'https://github.com/0legAdamov/AOAlertController', :tag => 'v1.2.1'
 

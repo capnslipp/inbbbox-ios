@@ -147,7 +147,7 @@ extension ShotsNormalStateHandler {
             case .follow:
                 firstly {
                     certainSelf.followAuthorOfShot(shot)
-                }
+                }.catch { _ in }
             case .doNothing:
                 break
             }
@@ -157,9 +157,6 @@ extension ShotsNormalStateHandler {
 }
 
 // MARK: UICollectionViewDataSourcePrefetching
-
-// NGRTodo: iOS 10 only API. Remove after updating project.
-#if swift(>=2.3)
 extension ShotsNormalStateHandler: UICollectionViewDataSourcePrefetching {
     
     @available(iOS 10.0, *)
@@ -173,11 +170,10 @@ extension ShotsNormalStateHandler: UICollectionViewDataSourcePrefetching {
     }
     
     @available(iOS 10.0, *)
-    public func collectionView(collectionView: UICollectionView, cancelPrefetchingForItemsAtIndexPaths indexPaths: [IndexPath]) {
+    public func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         indexPathsNeededImageUpdate.removeAll()
     }
 }
-#endif
 
 // MARK: UICollectionViewDelegate
 extension ShotsNormalStateHandler {

@@ -172,7 +172,7 @@ extension ShotsCollectionViewController: UICollectionViewDataSourcePrefetching {
     @available(iOS 10.0, *)
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         if let stateHandler = stateHandler as? ShotsNormalStateHandler {
-            stateHandler.collectionView(collectionView: collectionView, cancelPrefetchingForItemsAtIndexPaths: indexPaths)
+            stateHandler.collectionView(collectionView, cancelPrefetchingForItemsAt: indexPaths)
         }
     }
 }

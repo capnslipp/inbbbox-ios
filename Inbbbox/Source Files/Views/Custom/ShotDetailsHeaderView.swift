@@ -10,8 +10,6 @@ import UIKit
 import PureLayout
 import Haneke
 import TTTAttributedLabel
-import ImageViewer
-
 
 private var avatarSize: CGSize {
     return CGSize(width: 48, height: 48)
@@ -283,22 +281,6 @@ extension ShotDetailsHeaderView: UICollectionViewDataSource, UICollectionViewDel
         attachmentDidTap?(collectionView.cellForItem(at: indexPath)!, attachments[(indexPath as NSIndexPath).row])
     }
 }
-/*
-extension ShotDetailsHeaderView: ImageProvider {
-    
-    func provideImage(_ completion: @escaping (UIImage?) -> Void) {
-        guard let selectedAttachmentUrl = selectedAttachment?.imageURL else {
-            return
-        }
-        Shared.imageCache.fetch(
-            URL: selectedAttachmentUrl as URL,
-            formatName: CacheManager.imageFormatName,
-            failure: nil,
-            success: { image in
-                completion(image)
-        })
-    }
-}*/
 
 private extension ShotDetailsHeaderView {
     
