@@ -158,7 +158,7 @@ class ShotBucketsHeaderView: UICollectionReusableView {
         headerTitleLabel.text = title
     }
 
-    func setLinkInTitle(_ URL: Foundation.URL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
+    func setLinkInTitle(_ URL: URL, range: NSRange, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
                 NSForegroundColorAttributeName: UIColor.pinkColor(),
                 NSFontAttributeName: UIFont.systemFont(ofSize: 14)

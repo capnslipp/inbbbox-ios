@@ -47,7 +47,7 @@ class BucketsViewModelSpec: QuickSpec {
             }
             
             it("should return proper cell data for index path") {
-                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                let indexPath = IndexPath(row: 0, section: 0)
                 let cellData = sut.bucketCollectionViewCellViewData(indexPath)
                 expect(cellData.name).to(equal(fixtureBucketName))
                 expect(cellData.numberOfShots).to(equal(fixtureNumberOfShots))
@@ -66,7 +66,7 @@ class BucketsViewModelSpec: QuickSpec {
             }
             
             it("should return proper shot data for index path") {
-                let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+                let indexPath = IndexPath(row: 1, section: 0)
                 let cellData = sut.bucketCollectionViewCellViewData(indexPath)
                 expect(cellData.name).to(equal(fixtureBucketName))
                 expect(cellData.numberOfShots).to(equal(fixtureNumberOfShots))

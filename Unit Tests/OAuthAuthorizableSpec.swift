@@ -37,7 +37,7 @@ class OAuthAuthorizableSpec: QuickSpec {
         
         describe("when creating request token url request") {
             
-            var requestTokenURLRequest: NSURLRequest!
+            var requestTokenURLRequest: URLRequest!
             
             beforeEach {
                 requestTokenURLRequest = sut?.requestTokenURLRequest()
@@ -63,7 +63,7 @@ class OAuthAuthorizableSpec: QuickSpec {
         
         describe("when creating access token url request") {
             
-            var accessTokenURLRequest: NSURLRequest!
+            var accessTokenURLRequest: URLRequest!
             
             beforeEach {
                 accessTokenURLRequest = sut?.accessTokenURLRequestWithRequestToken("fixture.request.token")
@@ -81,7 +81,7 @@ class OAuthAuthorizableSpec: QuickSpec {
             describe("with wrong url") {
                 
                 beforeEach {
-                    let url = NSURL(string: "https://wrongredirecturi")
+                    let url = URL(string: "https://wrongredirecturi")
                     isRedirectionURL = sut?.isRedirectionURL(url)
                 }
                 
@@ -93,7 +93,7 @@ class OAuthAuthorizableSpec: QuickSpec {
             describe("with correct url") {
                 
                 beforeEach {
-                    let url = NSURL(string: "https://redirecturi")
+                    let url = URL(string: "https://redirecturi")
                     isRedirectionURL = sut?.isRedirectionURL(url)
                 }
                 
@@ -110,7 +110,7 @@ class OAuthAuthorizableSpec: QuickSpec {
             describe("with wrong url") {
                 
                 beforeEach {
-                    let url = NSURL(string: "https://anyurl/")
+                    let url = URL(string: "https://anyurl/")
                     isSilentAuthenticationURL = sut?.isSilentAuthenticationURL(url)
                 }
                 
@@ -122,7 +122,7 @@ class OAuthAuthorizableSpec: QuickSpec {
             describe("with correct url") {
                 
                 beforeEach {
-                    let url = NSURL(string: "https://anyurl/login?")
+                    let url = URL(string: "https://anyurl/login?")
                     isSilentAuthenticationURL = sut?.isSilentAuthenticationURL(url)
                 }
                 

@@ -32,7 +32,7 @@ class LocalNotificationRegistratorSpec: QuickSpec {
             describe("when local notification registered") {
                 
                 beforeEach {
-                    localNotification = LocalNotificationRegistrator.registerNotification(forUserID: fixtureUserID, time: NSDate())
+                    localNotification = LocalNotificationRegistrator.registerNotification(forUserID: fixtureUserID, time: Date())
                 }
                 
                 afterEach {
@@ -63,7 +63,7 @@ class LocalNotificationRegistratorSpec: QuickSpec {
                 var containsNotification = false
                 
                 beforeEach {
-                    localNotification = LocalNotificationRegistrator.registerNotification(forUserID: fixtureUserID, time: NSDate())
+                    localNotification = LocalNotificationRegistrator.registerNotification(forUserID: fixtureUserID, time: Date())
                     LocalNotificationRegistrator.unregisterNotification(forUserID: fixtureUserID)
                 }
                 

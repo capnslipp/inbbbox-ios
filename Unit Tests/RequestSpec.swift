@@ -33,7 +33,7 @@ class RequestSpec: QuickSpec {
             }
             
             it("should use NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData") {
-                expect(sut.session.configuration.requestCachePolicy == NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData).to(beTruthy())
+                expect(sut.session.configuration.requestCachePolicy == NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData).to(beTruthy())
             }
 
             context("when sending data with success") {
@@ -70,8 +70,8 @@ class RequestSpec: QuickSpec {
                 var error: Error?
                 
                 beforeEach {
-                    let error = NSError(domain: "fixture.domain", code: 0, userInfo: "fixture.message")
-                    self.stub(everything, builder: failure(error))
+                    let error = NSError(domain: "fixture.domain", code: 0, userInfo: nil)
+                    self.stub(everything, failure(error))
                 }
                 
                 afterEach {
@@ -101,6 +101,6 @@ class RequestSpec: QuickSpec {
 
 private struct QueryMock: Query {
     let path = "/fixture/path"
-    var parameters = Parameters(encoding: .JSON)
+    var parameters = Parameters(encoding: .json)
     let method = Method.POST
 }

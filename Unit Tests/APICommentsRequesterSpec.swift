@@ -389,6 +389,6 @@ class APICommentsRequesterSpec: QuickSpec {
 private extension APICommentsRequesterSpec {
     
     var fixtureJSON: [String: AnyObject] {
-        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Comment").dictionaryObject!
+        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Comment").dictionaryObject! as [String : AnyObject]
     }
 }

@@ -11,14 +11,13 @@ import UIKit
 extension NSAttributedString {
 
     convenience init?(htmlString: String) {
-        return nil
         guard let encodedData = htmlString.data(using: String.Encoding.utf8) else {
             return nil
         }
 
         let attributedOptions: [String:AnyObject] = [
                 NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType as AnyObject,
-                NSCharacterEncodingDocumentAttribute: String.Encoding.utf8 as AnyObject
+                NSCharacterEncodingDocumentAttribute: NSNumber(value: String.Encoding.utf8.rawValue)
         ]
 
         var attributedString: NSAttributedString?

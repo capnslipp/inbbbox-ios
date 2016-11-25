@@ -18,9 +18,9 @@ class JSONSpecLoader {
 
     func jsonWithResourceName(_ name: String) -> JSON {
         
-        let file = Bundle(for: type(of: self)).path(forResource: name, ofType:"json")
-        let data = Data(contentsOfFile: file!)
-        return JSON(data: data!)
+        let fileURL = URL(fileURLWithPath: Bundle(for: type(of: self)).path(forResource: name, ofType:"json")!)
+        let data = try! Data(contentsOf: fileURL)
+        return JSON(data: data)
     }
     
     func fixtureShotJSON(_ configuration: [(identifier: Int, animated: Bool)]) -> [JSON] {

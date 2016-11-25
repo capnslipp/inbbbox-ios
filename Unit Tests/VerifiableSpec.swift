@@ -220,7 +220,7 @@ class VerifiableSpec: QuickSpec {
             context("when text contains whitespaces") {
                 
                 it("should pass validation") {
-                    sut.verifyTextLength("   foo    ", min: 1, max: 3).error { _error in
+                    sut.verifyTextLength("   foo    ", min: 1, max: 3).catch { _error in
                         error = _error
                     }
                     
@@ -231,7 +231,7 @@ class VerifiableSpec: QuickSpec {
             context("when text is correct") {
                 
                 it("should pass validation") {
-                    sut.verifyTextLength("foo", min: 0, max: 10).error { _error in
+                    sut.verifyTextLength("foo", min: 0, max: 10).catch { _error in
                         error = _error
                     }
                     

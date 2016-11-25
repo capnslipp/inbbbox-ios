@@ -17,8 +17,8 @@ class SettingsSpec: QuickSpec {
     var didReceiveNotificationsNotification = false
     
     override func spec() {
-        NotificationCenter.defaultCenter().addObserver(self, selector: #selector(streamNotification(_:)), name: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue, object: nil)
-        NotificationCenter.defaultCenter().addObserver(self, selector: #selector(notificationsNotification(_:)), name: InbbboxNotificationKey.UserDidChangeNotificationsSettings.rawValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(streamNotification(_:)), name: NSNotification.Name(rawValue: InbbboxNotificationKey.UserDidChangeStreamSourceSettings.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationsNotification(_:)), name: NSNotification.Name(rawValue: InbbboxNotificationKey.UserDidChangeNotificationsSettings.rawValue), object: nil)
         
         describe("when changing settings") {
             Settings.StreamSource.Debuts = true

@@ -219,7 +219,7 @@ class ShotDetailsCommentCollectionViewCell: UICollectionViewCell {
         textContainer.maximumNumberOfLines = commentLabel.numberOfLines
     }
 
-    func setLinkInAuthorLabel(_ URL: Foundation.URL, delegate: TTTAttributedLabelDelegate) {
+    func setLinkInAuthorLabel(_ URL: URL, delegate: TTTAttributedLabelDelegate) {
         let linkAttributes = [
                 NSForegroundColorAttributeName: ColorModeProvider.current().shotDetailsCommentAuthorTextColor,
                 NSFontAttributeName: UIFont.helveticaFont(.neueMedium, size: 16)

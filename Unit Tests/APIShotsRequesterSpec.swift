@@ -183,9 +183,9 @@ class APIShotsRequesterSpec: QuickSpec {
                 }
                 
                 it("should return 1 user bucket") {
-                    sut.userBucketsForShot(Shot.fixtureShot()).then({ _buckets in
+                    sut.userBucketsForShot(Shot.fixtureShot()).then{ _buckets in
                         buckets = _buckets
-                    }).error { _ in fail() }
+                    }.catch { _ in fail() }
                     expect(buckets).toEventually(haveCount(1), timeout: 3)
                 }
             }
@@ -196,7 +196,7 @@ class APIShotsRequesterSpec: QuickSpec {
 private extension APIShotsRequesterSpec {
     
     var fixtureJSON: [AnyObject] {
-        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Buckets").arrayObject!
+        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Buckets").arrayObject! as [AnyObject]
     }
 }
 

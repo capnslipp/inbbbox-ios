@@ -14,7 +14,7 @@ class DataDownloader: NSObject {
     fileprivate var totalSize = Float(0)
     fileprivate var progress: ((Float) -> Void)?
     fileprivate var completion: ((Data) -> Void)?
-    fileprivate var session: Foundation.URLSession?
+    fileprivate var session: URLSession?
 
     /// Fetches data from given URL and gives information about progress and completion of operation.
     ///
@@ -25,7 +25,7 @@ class DataDownloader: NSObject {
     func fetchData(_ url: URL, progress:@escaping (_ progress: Float) -> Void, completion:@escaping (_ data: Data) -> Void) {
         self.progress = progress
         self.completion = completion
-        self.session = Foundation.URLSession.init(configuration: URLSessionConfiguration.default,
+        self.session = URLSession.init(configuration: URLSessionConfiguration.default,
                                          delegate: self,
                                          delegateQueue: nil)
         let task = session!.dataTask(with: url)

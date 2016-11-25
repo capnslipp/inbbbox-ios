@@ -17,9 +17,9 @@ class AutoScrollableShotsAnimatorSpec: QuickSpec {
         var sut: AutoScrollableShotsAnimator!
         var collectionViews: [UICollectionView]! // keep reference to be able to check expectation
         let content =  [
-            UIImage.referenceImageWithColor(.green()),
-            UIImage.referenceImageWithColor(.yellow()),
-            UIImage.referenceImageWithColor(.red())
+            UIImage.referenceImageWithColor(.green),
+            UIImage.referenceImageWithColor(.yellow),
+            UIImage.referenceImageWithColor(.red)
         ]
         var mockSuperview: UIView!
         

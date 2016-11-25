@@ -32,7 +32,7 @@ class APIConnectionsProviderSpec: QuickSpec {
         describe("when providing my folowees") {
             
             beforeEach {
-                sut.mockType = .MockFollowee
+                sut.mockType = .mockFollowee
             }
             
             context("and token doesn't exist") {
@@ -78,7 +78,7 @@ class APIConnectionsProviderSpec: QuickSpec {
         describe("when providing followees/followers from") {
             
             beforeEach {
-                sut.mockType = .MockFollower
+                sut.mockType = .mockFollower
             }
             
             it("from next page, followers should be properly returned") {
@@ -103,7 +103,7 @@ class APIConnectionsProviderSpec: QuickSpec {
         describe("when providing my followers") {
             
             beforeEach {
-                sut.mockType = .MockFollower
+                sut.mockType = .mockFollower
             }
             
             context("and token doesn't exist") {
@@ -150,7 +150,7 @@ class APIConnectionsProviderSpec: QuickSpec {
         describe("when providing followees") {
             
             beforeEach {
-                sut.mockType = .MockFollowee
+                sut.mockType = .mockFollowee
             }
             
             it("for user, followees should be properly returned") {
@@ -175,7 +175,7 @@ class APIConnectionsProviderSpec: QuickSpec {
         describe("when providing followers") {
             
             beforeEach {
-                sut.mockType = .MockFollower
+                sut.mockType = .mockFollower
             }
             
             it("for user, followers should be properly returned") {
@@ -227,7 +227,7 @@ private class APIConnectionsProviderMock: APIConnectionsProvider {
                 fatalError("No mock type has been set up! Did you forget to do so?")
             }
             
-            let json = mockType == .MockFollowee ?
+            let json = mockType == .mockFollowee ?
                 JSONSpecLoader.sharedInstance.fixtureFolloweeConnectionsJSON(withCount: 3) :
                 JSONSpecLoader.sharedInstance.fixtureFollowerConnectionsJSON(withCount: 3)
             let result = json.map { T.map($0) }

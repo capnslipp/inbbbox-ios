@@ -54,8 +54,8 @@ class PageRequestSpec: QuickSpec {
             var error: Error?
             
             beforeEach {
-                let error = NSError(domain: "fixture.domain", code: 0, userInfo: "fixture.message")
-                self.stub(everything, builder: failure(error))
+                let error = NSError(domain: "fixture.domain", code: 0, userInfo: nil)
+                self.stub(everything, failure(error))
             }
             
             afterEach {
@@ -79,6 +79,6 @@ class PageRequestSpec: QuickSpec {
 
 private struct QueryMock: Query {
     let path = "/fixture/path"
-    var parameters = Parameters(encoding: .JSON)
+    var parameters = Parameters(encoding: .json)
     let method = Method.POST
 }

@@ -11,7 +11,7 @@ class AsyncWrapperMock: AsyncWrapper {
 
     let mainStub = Stub<(Double?, ()->()), AsyncWrapper>()
 
-    override func main(after: Double?, block: dispatch_block_t) -> AsyncWrapper {
+    override func main(after: Double?, block: @escaping () -> ()) -> AsyncWrapper {
         return try! mainStub.invoke(after, block)
     }
 }

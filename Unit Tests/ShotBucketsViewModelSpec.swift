@@ -52,16 +52,16 @@ class ShotBucketsViewModelSpec: QuickSpec {
                     resultBucketTypes.append(bucket)
                 }
                 
-                return Promise(resultBucketTypes.first!)
+                return Promise(value: resultBucketTypes.first!)
                 
             }
             
             bucketsRequesterMock.addShotStub.on(any()) { _ in
-                return Promise()
+                return Promise<Void>(value: Void())
             }
             
             bucketsRequesterMock.removeShotStub.on(any()) { _ in
-                return Promise()
+                return Promise<Void>(value: Void())
             }
             
             shotsRequesterMock.userBucketsForShotStub.on(any()) { _ in
@@ -89,11 +89,11 @@ class ShotBucketsViewModelSpec: QuickSpec {
         context("adding shot to bucket") {
             
             beforeEach {
-                sut = ShotBucketsViewModel(shot: shot, mode: .AddToBucket)
+                sut = ShotBucketsViewModel(shot: shot, mode: .addToBucket)
                 
                 sut.bucketsProvider = bucketsProviderMock
                 sut.bucketsRequester = bucketsRequesterMock
-                sut.bucketsProvider.provideMyBuckets()
+                _ = sut.bucketsProvider.provideMyBuckets()
             }
             
             afterEach {
@@ -234,7 +234,7 @@ class ShotBucketsViewModelSpec: QuickSpec {
         context("removing shot from buckets") {
             
             beforeEach {
-                sut = ShotBucketsViewModel(shot: shot, mode: .RemoveFromBucket)
+                sut = ShotBucketsViewModel(shot: shot, mode: .removeFromBucket)
                 
                 sut.shotsRequester = shotsRequesterMock
                 sut.bucketsRequester = bucketsRequesterMock

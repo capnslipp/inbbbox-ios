@@ -169,6 +169,6 @@ class APIBucketsRequesterSpec: QuickSpec {
 private extension APIBucketsRequesterSpec {
     
     var fixtureJSON: [String: AnyObject] {
-        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Bucket").dictionaryObject!
+        return JSONSpecLoader.sharedInstance.jsonWithResourceName("Bucket").dictionaryObject! as [String : AnyObject]
     }
 }

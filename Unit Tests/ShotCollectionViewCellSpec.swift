@@ -135,7 +135,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
             var requiresConstraintBasedLayout: Bool!
             
             beforeEach {
-                requiresConstraintBasedLayout = ShotCollectionViewCell.requiresConstraintBasedLayout()
+                requiresConstraintBasedLayout = ShotCollectionViewCell.requiresConstraintBasedLayout
             }
             
             it("should require constraint based layout") {
@@ -149,7 +149,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                 var panGestureRecognizer: UIPanGestureRecognizer!
                 
                 beforeEach {
-                    panGestureRecognizer = sut.contentView.gestureRecognizers!.filter{$0.isKindOfClass(UIPanGestureRecognizer)}.first as! UIPanGestureRecognizer!
+                    panGestureRecognizer = sut.contentView.gestureRecognizers!.filter{ $0 is UIPanGestureRecognizer }.first as! UIPanGestureRecognizer!
                 }
                 
                 context("when swipe began") {
@@ -232,12 +232,14 @@ class ShotCollectionViewCellSpec: QuickSpec {
                         describe("restore initial state animations block") {
                             
                             beforeEach {
-                                sut.shotImageView.transform = CGAffineTransformIdentity.translatedBy(x: 100, y: 0)
+                                sut.shotImageView.transform = CGAffineTransform.identity.translatedBy(x: 100, y: 0)
                                 capturedRestoreInitialStateAnimations()
                             }
                             
                             it("should restore shot image view identity tranform") {
-                                expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity)).to(beTruthy())
+                                
+                                
+                                expect(sut.shotImageView.transform).to(equal(CGAffineTransform.identity))
                             }
                         }
                         
@@ -257,8 +259,8 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                     didInformDelegateCellDidEndSwiping = true
                                 }
                                 sut.delegate = delegateMock
-                                sut.bucketImageView.hidden = true
-                                sut.commentImageView.hidden = true
+                                sut.bucketImageView.isHidden = true
+                                sut.commentImageView.isHidden = true
                                 sut.likeImageView.firstImageView.alpha = 0
                                 sut.likeImageView.secondImageView.alpha = 1
                                 capturedRestoreInitialStateCompletion(true)
@@ -274,11 +276,11 @@ class ShotCollectionViewCellSpec: QuickSpec {
                             }
                             
                             it("show bucket image view") {
-                                expect(sut.bucketImageView.hidden).to(beFalsy())
+                                expect(sut.bucketImageView.isHidden).to(beFalsy())
                             }
                             
                             it("show comment image view") {
-                                expect(sut.commentImageView.hidden).to(beFalsy())
+                                expect(sut.commentImageView.isHidden).to(beFalsy())
                             }
                             
                             describe("like image view") {
@@ -348,7 +350,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 }
                                 
                                 it("should set shot image view tranform") {
-                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity.translatedBy(x: 100, y: 0))).to(beTruthy())
+                                    expect(sut.shotImageView.transform).to(equal(CGAffineTransform.identity.translatedBy(x: 100, y: 0)))
                                 }
                                 
                                 describe("like image view") {
@@ -381,7 +383,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 
                                 itBehavesLike("returning to initial cell state animation") {
                                     ["expectedDelay": 0.2,
-                                     "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Like)]
+                                     "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.like)]
                                 }
                             }
                         }
@@ -416,7 +418,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 }
                                 
                                 it("should set shot image view tranform") {
-                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity.translatedBy(x: 100, y: 0))).to(beTruthy())
+                                    expect(sut.shotImageView.transform).to(equal(CGAffineTransform.identity.translatedBy(x: 100, y: 0)))
                                 }
                             }
                             
@@ -428,7 +430,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 
                                 itBehavesLike("returning to initial cell state animation") {
                                     ["expectedDelay": 0.2,
-                                     "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Bucket)]
+                                     "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.bucket)]
                                 }
                             }
                         }
@@ -463,7 +465,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 }
                                 
                                 it("should set shot image view tranform") {
-                                    expect(CGAffineTransformEqualToTransform(sut.shotImageView.transform, CGAffineTransformIdentity.translatedBy(x: -100, y: 0))).to(beTruthy())
+                                    expect(sut.shotImageView.transform).to(equal(CGAffineTransform.identity.translatedBy(x: -100, y: 0)))
                                 }
                             }
                             
@@ -475,7 +477,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                                 
                                 itBehavesLike("returning to initial cell state animation") {
                                     ["expectedDelay": 0.2,
-                                     "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.Comment)]
+                                     "expectedAction": ShotCollectionViewCellActionWrapper(action: ShotCollectionViewCell.Action.comment)]
                                 }
                             }
                         }
@@ -531,7 +533,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                 var reuseIdentifier: String?
                 
                 beforeEach {
-                    reuseIdentifier = ShotCollectionViewCell.reuseIdentifier
+                    reuseIdentifier = ShotCollectionViewCell.identifier
                 }
                 
                 it("should have proper reuse identifier") {
@@ -547,7 +549,7 @@ class ShotCollectionViewCellSpec: QuickSpec {
                 var shouldRecognizeSimultaneously: Bool!
                 
                 beforeEach {
-                    shouldRecognizeSimultaneously = sut.gestureRecognizer(UIGestureRecognizer(), shouldRecognizeSimultaneouslyWithGestureRecognizer: UIGestureRecognizer())
+                    shouldRecognizeSimultaneously = sut.gestureRecognizer(UIGestureRecognizer(), shouldRecognizeSimultaneouslyWith: UIGestureRecognizer())
                 }
                 
                 it("should alwawys block other gesture recognizers") {

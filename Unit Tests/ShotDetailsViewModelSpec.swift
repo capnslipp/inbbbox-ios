@@ -66,7 +66,7 @@ class ShotDetailsViewModelSpec: QuickSpec {
             }
             
             commentsRequesterMock.deleteCommentStub.on(any()) { _, _ in
-                return Promise()
+                return Promise<Void>(value: Void())
             }
         }
         

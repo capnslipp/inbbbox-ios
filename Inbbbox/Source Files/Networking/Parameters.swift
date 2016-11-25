@@ -58,7 +58,7 @@ extension Parameters {
 
     /// Maps Parameters values conforming to URLQueryItemStringConvertible, to NSURLQueryItem.
     ///
-    /// This computed property will return empty array for parameters encoding different then .URL
+    /// This computed property will return empty array for parameters encoding different then .url
     ///
     /// If parameter's value is valid JSON object, it will be converted to NSData and then to String with UTF8 encoding,
     /// So you don't need to implement it on your JSON-valid types.
@@ -85,7 +85,7 @@ extension Parameters {
 // MARK: - Convert parameters into optional NSData
 extension Parameters {
 
-    /// Checks if encoding is .JSON and parameters are valid JSON object, then uses NSJSONSerialization
+    /// Checks if encoding is .json and parameters are valid JSON object, then uses NSJSONSerialization
     /// Otherwise returns nil
     var body: Data? {
         guard encoding == .json && JSONSerialization.isValidJSONObject(underlyingDictionary) else { return nil }

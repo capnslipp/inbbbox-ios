@@ -29,19 +29,19 @@ class BaseCollectionViewViewModelSpec: QuickSpec {
             }
 
             it("should be able to call delegate for PageableProviderError errors") {
-                sut.mockDownloadItemsFailure(PageableProviderError.BehaviourUndefined)
+                sut.mockDownloadItemsFailure(PageableProviderError.behaviourUndefined)
 
                 expect(fakeDelegate.didCallDelegate).toEventually(beTrue())
             }
 
             it("should not be able to call delegate if error = DidReachLastPage") {
-                sut.mockDownloadItemsFailure(PageableProviderError.DidReachLastPage)
+                sut.mockDownloadItemsFailure(PageableProviderError.didReachLastPage)
 
                 expect(fakeDelegate.didCallDelegate).toEventually(beFalse())
             }
 
             it("should be able to call delegate for other errors") {
-                sut.mockDownloadItemsFailure(APIRateLimitKeeperError.DidExceedRateLimitPerDay(1))
+                sut.mockDownloadItemsFailure(APIRateLimitKeeperError.didExceedRateLimitPerDay(1))
 
                 expect(fakeDelegate.didCallDelegate).toEventually(beTrue())
             }

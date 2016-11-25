@@ -162,8 +162,8 @@ class PageableProviderSpec: QuickSpec {
             var error: Error!
             
             beforeEach {
-                let error = NSError(domain: "", code: 0, userInfo: "")
-                self.stub(everything, builder: failure(error))
+                let error = NSError(domain: "", code: 0, userInfo: nil)
+                self.stub(everything, failure(error))
             }
             
             afterEach {
@@ -249,6 +249,6 @@ private extension PageableProviderSpec {
 
 private struct QueryMock: Query {
     let path = "/fixture/path"
-    var parameters = Parameters(encoding: .JSON)
+    var parameters = Parameters(encoding: .json)
     let method = Method.POST
 }
