@@ -14,7 +14,8 @@ class ShotsCollectionViewController: UICollectionViewController {
 
     let initialState: State = Defaults[.onboardingPassed] ? .InitialAnimations : .Onboarding
     var stateHandler: ShotsStateHandler
-    var backgroundAnimator: MainScreenStreamSourcesAnimator?
+    var backgroundStreamSourcesAnimator: MainScreenStreamSourcesAnimator?
+    var skipButtonAnimator: OnboardingSkipButtonAnimator?
     let shotsProvider = ShotsProvider()
     var shots = [ShotType]()
     private var onceTokenForInitialShotsAnimation = dispatch_once_t(0)
@@ -58,12 +59,14 @@ extension ShotsCollectionViewController {
         #endif
         let backgroundView = ShotsCollectionBackgroundView()
         collectionView?.backgroundView = backgroundView
-        backgroundAnimator = MainScreenStreamSourcesAnimator(view: backgroundView)
+        backgroundStreamSourcesAnimator = MainScreenStreamSourcesAnimator(view: backgroundView)
+        skipButtonAnimator = OnboardingSkipButtonAnimator(view: backgroundView)
         collectionView?.registerClass(ShotCollectionViewCell.self, type: .Cell)
 
         configureForCurrentStateHandler()
         registerToSettingsNotifications()
         setupStreamSourcesAnimators()
+        setupSkipButton()
     }
     
     
@@ -239,7 +242,10 @@ private extension ShotsCollectionViewController {
             normalStateHandler.willDismissDetailsCompletionHandler = { [unowned self] index in
                 self.scrollToShotAtIndex(index, animated: false)
             }
+        } else if let onboardingStateHandler = stateHandler as? ShotsOnboardingStateHandler {
+            onboardingStateHandler.skipDelegate = self
         }
+        
     }
 
     func registerToSettingsNotifications() {
@@ -318,22 +324,47 @@ private extension ShotsCollectionViewController {
         guard !stateHandler.shouldShowNoShotsView else {
             return
         }
-        backgroundAnimator?.startFadeInAnimation()
+        backgroundStreamSourcesAnimator?.startFadeInAnimation()
         AsyncWrapper().main(after: 4) { [unowned self] in
-            self.backgroundAnimator?.startFadeOutAnimation()
+            self.backgroundStreamSourcesAnimator?.startFadeOutAnimation()
         }
     }
     
     func hideStreamSources() {
-        backgroundAnimator?.startFadeOutAnimation()
+        backgroundStreamSourcesAnimator?.startFadeOutAnimation()
     }
     
     @objc func logoTapped() {
-        if let condition = backgroundAnimator?.areStreamSourcesShown where condition == true {
+        if let condition = backgroundStreamSourcesAnimator?.areStreamSourcesShown where condition == true {
             hideStreamSources()
         } else {
             showStreamSources()
         }
     }
+}
 
+// MARK: OnboardingSkipable
+
+extension ShotsCollectionViewController: OnboardingSkipButtonHandlerDelegate {
+    
+    func shouldSkipButtonAppear() {
+        skipButtonAnimator?.showButton()
+    }
+    
+    func shouldSkipButtonDisappear() {
+        skipButtonAnimator?.hideButton()
+    }
+}
+
+private extension ShotsCollectionViewController {
+    
+    func setupSkipButton() {
+        guard let background = collectionView?.backgroundView as? ShotsCollectionBackgroundView else { return }
+        background.skipButton.addTarget(self, action: #selector(skipStep), forControlEvents: .TouchUpInside)
+    }
+    
+    @objc func skipStep() {
+        guard let onboardingHandler = stateHandler as? ShotsOnboardingStateHandler else { return }
+        onboardingHandler.skipOnboardingStep()
+    }
 }
